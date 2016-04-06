@@ -22,7 +22,6 @@ function Logger.new(mod_name, log_name, debug_mode)
 	-- @param msg a string, the message to log
 	-- @return true if the message was written, false if it was queued for a later write
 	function Logger.log(msg)
-		local game_exists = _G["game"]
 		if _G["game"] then
 			local time_s = math.floor(game.tick/60)
 			local time_minutes = math.floor(run_time_s/60)

@@ -2,26 +2,17 @@ OUTPUT_DIR := build
 
 PKG_COPY := stdlib/
 
-SED_FILES := $(shell find . -iname '*.json' -type f -not -path "./build/*") $(shell find . -iname '*.lua' -type f -not -path "./build/*")
-OUT_FILES := $(SED_FILES:%=$(OUTPUT_DIR)/%)
+FILES := $(shell find . -iname '*.lua' -type f -not -path "./build/*")
 
 all: clean package
 
-package-copy: $(PKG_DIRS) $(PKG_FILES)
+package-copy: $(FILES)
 	mkdir -p $(OUTPUT_DIR)
-ifneq ($(PKG_COPY),)
-	cp -r $(PKG_COPY) build/$(OUTPUT_NAME)
-endif
+	cp -r $(PKG_COPY) build/$(PKG_COPY)
+	set -e; for file in $$(find . -iname '*.lua' -type f -not -path "./build/*"); do echo "Checking syntax: $$file" ; luac -p $$file; done;
 
-$(OUTPUT_DIR)/%.lua: %.lua
-	@mkdir -p $(@D)
-	luac -p $@
-
-$(OUTPUT_DIR)/%: %
-	mkdir -p $(@D)
-
-package: package-copy $(OUT_FILES)
-	cd build && ldoc stdlib
+package: package-copy $(FILES)
+	cd build && ldoc stdlib/*
 
 clean:
 	rm -rf build/

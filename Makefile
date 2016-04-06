@@ -1,6 +1,6 @@
 OUTPUT_DIR := build
 
-PKG_COPY := src/
+PKG_COPY := stdlib/
 
 SED_FILES := $(shell find . -iname '*.json' -type f -not -path "./build/*") $(shell find . -iname '*.lua' -type f -not -path "./build/*")
 OUT_FILES := $(SED_FILES:%=$(OUTPUT_DIR)/%)
@@ -21,7 +21,7 @@ $(OUTPUT_DIR)/%: %
 	mkdir -p $(@D)
 
 package: package-copy $(OUT_FILES)
-	cd build && ldoc src/*
+	cd build && ldoc stdlib/*
 
 clean:
 	rm -rf build/

@@ -11,7 +11,7 @@ function Game.print_all(msg, condition)
     local num = 0
 	for _, player in ipairs(game.players) do
 		if player.valid and player.connected then
-            if condition and pcall(condition, player) then
+            if condition == nil or pcall(condition, player) then
 			    player.print(msg)
                 num = num + 1
             end

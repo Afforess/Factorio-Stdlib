@@ -21,7 +21,7 @@ $(OUTPUT_DIR)/%: %
 	mkdir -p $(@D)
 
 package: package-copy $(OUT_FILES)
-	cd build && ldoc stdlib/*
+	cd build && ldoc stdlib
 
 clean:
 	rm -rf build/

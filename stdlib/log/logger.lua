@@ -25,7 +25,7 @@ function Logger.new(mod_name, log_name, debug_mode)
 		if _G["game"] then
 			local time_s = math.floor(game.tick/60)
 			local time_minutes = math.floor(time_s/60)
-			local time_hours = math.floor(time_hours/60)
+			local time_hours = math.floor(time_minutes/60)
 			table.insert(Logger.buffer, string.format("%02d:%02d:%02d: %s\n", time_hours, time_minutes % 60, time_s % 60, str))
 
 			-- write the log every minute

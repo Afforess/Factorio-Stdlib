@@ -20,13 +20,9 @@ end
 -- @param pos1 the first position
 -- @param pos2 the second position
 -- @return a new position
-function Position.add(pos1,pos2)
-    if #pos1 == 2 then
-        pos1 = { x = pos1[1], y = pos1[2] }
-    end
-    if #pos2 == 2 then
-        pos2 = { x = pos2[1], y = pos2[2] }
-    end
+function Position.add(pos1, pos2)
+    if #pos1 == 2 then pos1 = Position.to_table(pos1) end
+    if #pos2 == 2 then pos2 = Position.to_table(pos2) end
     return { x = pos1.x + pos2.x, y = pos1.y + pos2.y}
 end
 
@@ -34,13 +30,9 @@ end
 -- @param pos1 the first position
 -- @param pos2 the second position
 -- @return a new position
-function Position.subtract(pos1,pos2)
-    if #pos1 == 2 then
-        pos1 = { x = pos1[1], y = pos1[2] }
-    end
-    if #pos2 == 2 then
-        pos2 = { x = pos2[1], y = pos2[2] }
-    end
+function Position.subtract(pos1, pos2)
+    if #pos1 == 2 then pos1 = Position.to_table(pos1) end
+    if #pos2 == 2 then pos2 = Position.to_table(pos2) end
     return { x = pos1.x - pos2.x, y = pos1.y - pos2.y }
 end
 
@@ -50,6 +42,8 @@ end
 -- @param distance distance of the translation
 -- @return the translated position
 function Position.translate(pos, direction, distance)
+    if #pos == 2 then pos = Position.to_table(pos) end
+
     if direction == defines.direction.north then
         return { x = pos.x, y = pos.y - distance }
     elseif direction == defines.direction.northeast then
@@ -69,9 +63,9 @@ function Position.translate(pos, direction, distance)
     end
 end
 
---- Expands a position to a square area usable in surface.find_entities*
+--- Expands a position to a square area
 -- @param pos the position to expand into an area
--- @param radius half the side length of the area 
+-- @param radius half the side length of the area
 -- @return a bounding box
 function Position.expand_to_area(pos, radius)
     if #pos == 2 then
@@ -80,13 +74,20 @@ function Position.expand_to_area(pos, radius)
     return { left_top = {pos.x - radius, pos.y - radius}, right_bottom = { pos.x + radius, pos.y + radius } }
 end
 
+--- Converts a position in the array format to a position in the table format
+-- @param pos_arr the position to convert
+-- @return a converted position, { x = pos_arr[1], y = pos_arr[2] }
+function Position.to_table(pos_arr)
+    return { x = pos_arr[1], y = pos_arr[2] }
+end
+
 --- Converts a position to a string
 -- @param pos the position to convert
 -- @return string representation of pos
 function Position.tostring(pos)
     if #pos == 2 then
-        return util.positiontostr({x = pos[1], y = pos[2] })
+        return "Position {x = " .. pos[1] .. ", y = " .. pos[2] .. "}"
     else
-        return util.positiontostr(pos)
+        return "Position {x = " .. pos.x .. ", y = " .. pos.y .. "}"
     end
 end

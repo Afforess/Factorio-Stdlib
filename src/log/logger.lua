@@ -4,9 +4,9 @@
 Logger = {}
 
 --- Creates a new logger object
--- @param [required] the name of the mod to create the logger for
--- @param (optional, default: 'main') the name of the logger
--- @param (optional, default: false) toggles the debug state of logger.
+-- @param mod_name [required] the name of the mod to create the logger for
+-- @param log_name (optional, default: 'main') the name of the logger
+-- @param debug_mode (optional, default: false) toggles the debug state of logger.
 -- In debug mode, the logger writes immediately. Otherwise it buffers lines and writes every 60 seconds.
 -- @return the logger instance
 function Logger.new(mod_name, log_name, debug_mode)
@@ -19,7 +19,7 @@ function Logger.new(mod_name, log_name, debug_mode)
 	local Logger = {mod_name = mod_name, log_name = log_name, debug_mode = debug_mode, buffer = {}, last_written = 0, ever_written = false}
 
 	--- Logs a message
-	-- @param a string, the message to log
+	-- @param msg a string, the message to log
 	-- @return true if the message was written, false if it was queued for a later write
 	function Logger.log(msg)
 		local game_exists = _G["game"]

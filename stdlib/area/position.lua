@@ -69,9 +69,9 @@ end
 -- @return a bounding box
 function Position.expand_to_area(pos, radius)
     if #pos == 2 then
-        return { left_top = { pos[1] - radius, pos[2] - radius }, right_bottom = { pos[1] + radius, pos[2] + radius } }
+        return { left_top = { x = pos[1] - radius, y = pos[2] - radius }, right_bottom = { x = pos[1] + radius, y = pos[2] + radius } }
     end
-    return { left_top = {pos.x - radius, pos.y - radius}, right_bottom = { pos.x + radius, pos.y + radius } }
+    return { left_top = { x = pos.x - radius, y = pos.y - radius}, right_bottom = { x = pos.x + radius, y = pos.y + radius } }
 end
 
 --- Converts a position in the array format to a position in the table format

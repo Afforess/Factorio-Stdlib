@@ -1,0 +1,6 @@
+dependencies:
+    pre:
+        - sudo apt-get update; sudo apt-get install lua5.2 luarocks -y; sudo luarocks install busted
+test:
+    override:
+        - make

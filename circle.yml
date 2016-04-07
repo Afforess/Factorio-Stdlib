@@ -1,6 +1,6 @@
 dependencies:
     pre:
-        - sudo apt-get update; sudo apt-get install lua5.2 luarocks -y; sudo luarocks install busted
+        - sudo apt-get update; sudo apt-get install unzip openssl lua5.1 luarocks libev-dev -y; sudo luarocks install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu; sudo luarocks install copas; sudo luarocks install moonscript; sudo luarocks install lua-ev; sudo luarocks install busted; sudo luarocks install ldoc
 test:
     override:
         - make

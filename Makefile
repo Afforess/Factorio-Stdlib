@@ -4,7 +4,7 @@ PKG_COPY := stdlib/
 
 FILES := $(shell find . -iname '*.lua' -type f -not -path "./build/*")
 
-all: clean package
+all: clean test package
 
 package-copy: $(FILES)
 	mkdir -p $(OUTPUT_DIR)
@@ -13,6 +13,9 @@ package-copy: $(FILES)
 
 package: package-copy $(FILES)
 	cd build && ldoc stdlib/
+
+test:
+	busted
 
 clean:
 	rm -rf build/

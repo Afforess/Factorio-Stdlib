@@ -11,3 +11,5 @@ See the [github pages](http://afforess.github.io/Factorio-Stdlib/) for the lates
 
 # Contributing
 Contributions are welcome! Please follow general lua coding standards and include ldoc-compatible comments.
+
+[![Circle CI](https://circleci.com/gh/Afforess/Factorio-Stdlib/tree/master.svg?style=svg)](https://circleci.com/gh/Afforess/Factorio-Stdlib/tree/master)

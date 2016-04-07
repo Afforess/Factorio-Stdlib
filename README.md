@@ -9,6 +9,9 @@ See the [github pages](http://afforess.github.io/Factorio-Stdlib/) for the lates
 
 2. Generate the docs with `ldoc src/*`. Documentation will be placed in `docs/`
 
+# Unit Tests
+The codebase is tested with [`busted`](http://olivinelabs.com/busted). Test specifications are located under `spec/`
+
 # Contributing
 Contributions are welcome! Please follow general lua coding standards and include ldoc-compatible comments.
 

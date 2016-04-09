@@ -7,10 +7,10 @@ require 'stdlib/area/position'
 Area = {}
 
 --- Tests if a position is inside (inclusive) of area
--- @param pos the position to check
 -- @param area the area
+-- @param pos the position to check
 -- @return true if the position is inside of the area
-function Area.inside_area(pos, area)
+function Area.inside(area, pos)
     fail_if_missing(pos, "missing pos value")
     fail_if_missing(area, "missing area value")
     pos = Position.to_table(pos)
@@ -25,7 +25,7 @@ end
 -- @param pos the position to check
 -- @param area the area
 -- @return offset area by the position values
-function Area.offset_area(area, pos)
+function Area.offset(area, pos)
     fail_if_missing(area, "missing area value")
     fail_if_missing(pos, "missing pos value")
     area = Area.to_table(area)

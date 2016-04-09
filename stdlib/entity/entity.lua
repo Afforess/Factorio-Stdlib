@@ -14,7 +14,7 @@ function Entity.to_selection_area(entity)
 
     local pos = entity.position
     local bb = entity.prototype.selection_box
-    return Area.offset_area(bb, pos)
+    return Area.offset(bb, pos)
 end
 
 --- Converts an entity and its selection_box to the area around it
@@ -25,5 +25,5 @@ function Entity.to_collision_area(entity)
 
     local pos = entity.position
     local bb = entity.prototype.collision_box
-    return Area.offset_area(bb, pos)
+    return Area.offset(bb, pos)
 end

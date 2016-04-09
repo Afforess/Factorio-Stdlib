@@ -45,6 +45,7 @@ describe('Position Spec', function()
     it('should validate position to_table conversion', function()
         local pos = {1, -4}
         assert.same({x = 1, y = -4}, Position.to_table(pos, 0, 0))
+        assert.has_error(function() Position.to_table() end)
     end)
 
     it('should validate the distance squared between two positions', function()
@@ -76,6 +77,7 @@ describe('Position Spec', function()
     it('should validate position strings', function()
         local pos = {1, -4}
         assert.same("Position {x = 1, y = -4}", Position.tostring(pos))
+        assert.has_error(function() Position.tostring() end)
     end)
 
 end)

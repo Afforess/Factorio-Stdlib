@@ -47,6 +47,32 @@ describe('Position Spec', function()
         assert.same({x = 1, y = -4}, Position.to_table(pos, 0, 0))
     end)
 
+    it('should validate the distance squared between two positions', function()
+        local pos_a = {1, -4}
+        local pos_b = {3, -2}
+        assert.same(8, Position.distance_squared(pos_a, pos_b))
+        assert.same(8, Position.distance_squared(pos_b, pos_a))
+    end)
+
+    it('should validate the distance between two positions', function()
+        local pos_a = {5, -5}
+        local pos_b = {10, 0}
+        assert.same(math.sqrt(50), Position.distance(pos_a, pos_b))
+        assert.same(math.sqrt(50), Position.distance(pos_b, pos_a))
+    end)
+
+    it('should validate the manhatten distance between two positions', function()
+        local pos_a = {5, -5}
+        local pos_b = {10, 0}
+        assert.same(10, Position.manhattan_distance(pos_a, pos_b))
+        assert.same(10, Position.manhattan_distance(pos_b, pos_a))
+
+        local pos_a = {1, -4}
+        local pos_b = {3, -2}
+        assert.same(4, Position.manhattan_distance(pos_a, pos_b))
+        assert.same(4, Position.manhattan_distance(pos_b, pos_a))
+    end)
+
     it('should validate position strings', function()
         local pos = {1, -4}
         assert.same("Position {x = 1, y = -4}", Position.tostring(pos))

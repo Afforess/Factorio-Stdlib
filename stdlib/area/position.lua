@@ -74,6 +74,36 @@ function Position.expand_to_area(pos, radius)
     return { left_top = { x = pos.x - radius, y = pos.y - radius}, right_bottom = { x = pos.x + radius, y = pos.y + radius } }
 end
 
+--- Calculates the Euclidean distance squared between two positions, useful when sqrt is not needed
+-- @param pos1 the first position
+-- @param pos2 the second position
+-- @return the square of the Euclidean distance
+function Position.distance_squared(pos1, pos2)
+    if #pos1 == 2 then pos1 = Position.to_table(pos1) end
+    if #pos2 == 2 then pos2 = Position.to_table(pos2) end
+    local axbx = pos1.x - pos2.x
+    local ayby = pos1.y - pos2.y
+    return axbx * axbx + ayby * ayby
+end
+
+--- Calculates the Euclidean distance between two positions
+-- @param pos1 the first position
+-- @param pos2 the second position
+-- @return the square of the Euclidean distance
+function Position.distance(pos1, pos2)
+    return math.sqrt(Position.distance_squared(pos1, pos2))
+end
+
+--- Calculates the manhatten distance between two positions
+-- @param pos1 the first position
+-- @param pos2 the second position
+-- @return the square of the Euclidean distance
+function Position.manhattan_distance(pos1, pos2)
+    if #pos1 == 2 then pos1 = Position.to_table(pos1) end
+    if #pos2 == 2 then pos2 = Position.to_table(pos2) end
+    return math.abs(pos2.x - pos1.x) + math.abs(pos2.y - pos1.y)
+end
+
 --- Converts a position in the array format to a position in the table format
 -- @param pos_arr the position to convert
 -- @return a converted position, { x = pos_arr[1], y = pos_arr[2] }

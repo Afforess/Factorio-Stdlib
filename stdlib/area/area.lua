@@ -22,8 +22,8 @@ function Area.inside(area, pos)
 end
 
 --- Offsets the area by the position x,y values to the area
--- @param pos the position to check
 -- @param area the area
+-- @param pos the position to check
 -- @return offset area by the position values
 function Area.offset(area, pos)
     fail_if_missing(area, "missing area value")

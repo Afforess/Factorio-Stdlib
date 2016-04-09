@@ -2,7 +2,7 @@
 -- @module core
 
 --- Errors if the variable evaluates to false, with an optional msg
--- @param variable to evaluate
+-- @param var variable to evaluate
 -- @param msg (optional) message
 function fail_if_missing(var, msg)
     if not var then

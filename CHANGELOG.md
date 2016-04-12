@@ -1,3 +1,13 @@
+## Factorio-Stdlib 0.2.1 (April 12, 2016)
+
+Features:
+
+  - Add Area.expand function, expands an area by a given amount
+  - Add Area.shrink function, shrinks an area by a given amount
+
+Bugfixes:
+  - Correct documentation for Area.offset
+
 ## Factorio-Stdlib 0.2.0 (April 6, 2016)
 
 Features:

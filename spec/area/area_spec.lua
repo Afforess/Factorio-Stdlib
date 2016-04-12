@@ -23,6 +23,22 @@ describe('Area Spec', function()
         assert.same({x = 2.5, y = -0.5}, Area.offset(area, pos).right_bottom)
     end)
 
+    it('should validate area shrinks accurately', function()
+        local area = {{0, -2}, {x = 3, y = 2}}
+        assert.same({x = 1, y = -1}, Area.shrink(area, 1).left_top)
+        assert.same({x = 2, y = 1}, Area.shrink(area, 1).right_bottom)
+
+        assert.has_error(function() Area.shrink(area, -1) end)
+    end)
+
+    it('should validate area expands accurately', function()
+        local area = {{0, -2}, {x = 3, y = 2}}
+        assert.same({x = -1, y = -3}, Area.expand(area, 1).left_top)
+        assert.same({x = 4, y = 3}, Area.expand(area, 1).right_bottom)
+
+        assert.has_error(function() Area.expand(area, -1) end)
+    end)
+
     it('should validate area to table conversation', function()
         local area = {{0, -5}, {x = 3, y = -3}}
         assert.same({x = 0, y = -5}, Area.to_table(area).left_top)

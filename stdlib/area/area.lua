@@ -6,7 +6,7 @@ require 'stdlib/area/position'
 
 Area = {}
 
---- Tests if a position is inside (inclusive) of area
+--- Tests if a position {x, y} is inside (inclusive) of area
 -- @param area the area
 -- @param pos the position to check
 -- @return true if the position is inside of the area
@@ -21,9 +21,39 @@ function Area.inside(area, pos)
     return pos.x >= left_top.x and pos.y >= left_top.y and pos.x <= right_bottom.x and pos.y <= right_bottom.y
 end
 
---- Offsets the area by the position x,y values to the area
+--- Shrinks the size of an area by the given amount
 -- @param area the area
--- @param pos the position to check
+-- @param amount to shrink each edge of the area inwards by
+-- @return the shrunk area
+function Area.shrink(area, amount)
+    fail_if_missing(area, "missing area value")
+    fail_if_missing(amount, "missing amount value")
+    if amount < 0 then error("Can not shrunk area by a negative amount (see Area.expand)!", 2) end
+    area = Area.to_table(area)
+
+    local left_top = Position.to_table(area.left_top)
+    local right_bottom = Position.to_table(area.right_bottom)
+    return {left_top = {x = left_top.x + amount, y = left_top.y + amount}, right_bottom = {x = right_bottom.x - amount, y = right_bottom.y - amount}}
+end
+
+--- Expands the size of an area by the given amount
+-- @param area the area
+-- @param amount to expand each edge of the area outwards by
+-- @return the expanded area
+function Area.expand(area, amount)
+    fail_if_missing(area, "missing area value")
+    fail_if_missing(amount, "missing amount value")
+    if amount < 0 then error("Can not expand area by a negative amount (see Area.shrink)!", 2) end
+    area = Area.to_table(area)
+
+    local left_top = Position.to_table(area.left_top)
+    local right_bottom = Position.to_table(area.right_bottom)
+    return {left_top = {x = left_top.x - amount, y = left_top.y - amount}, right_bottom = {x = right_bottom.x + amount, y = right_bottom.y + amount}}
+end
+
+--- Offsets the area by the {x, y} values
+-- @param area the area
+-- @param pos the {x, y} amount to offset the area
 -- @return offset area by the position values
 function Area.offset(area, pos)
     fail_if_missing(area, "missing area value")
@@ -45,7 +75,6 @@ function Area.round_to_integer(area)
     return {left_top = {x = math.floor(left_top.x), y = math.floor(left_top.y)},
             right_bottom = {x = math.ceil(right_bottom.x), y = math.ceil(right_bottom.y)}}
 end
-
 
 --- Converts an area in the array format to an array in the table format
 -- @param area_arr the area to convert

@@ -86,3 +86,5 @@ function Area.to_table(area_arr)
     end
     return area_arr
 end
+
+return Area

@@ -54,3 +54,5 @@ function Logger.new(mod_name, log_name, debug_mode)
 
 	return Logger
 end
+
+return Logger

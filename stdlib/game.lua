@@ -51,3 +51,5 @@ function Game.print_surface(surface, msg)
         return player.surface.name == surface_name
     end)
 end
+
+return Game

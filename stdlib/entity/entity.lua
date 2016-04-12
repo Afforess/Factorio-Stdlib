@@ -27,3 +27,5 @@ function Entity.to_collision_area(entity)
     local bb = entity.prototype.collision_box
     return Area.offset(bb, pos)
 end
+
+return Entity

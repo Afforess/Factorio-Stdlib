@@ -24,3 +24,5 @@ function Inventory.copy_inventory(src, dest)
     end
     return left_over
 end
+
+return Inventory

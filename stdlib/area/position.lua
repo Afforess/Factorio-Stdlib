@@ -155,3 +155,5 @@ function Position.tostring(pos)
         return "Position {x = " .. pos.x .. ", y = " .. pos.y .. "}"
     end
 end
+
+return Position

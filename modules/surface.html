@@ -42,26 +42,31 @@
   <li><a href="../modules/position.html">position</a></li>
   <li><a href="../modules/core.html">core</a></li>
   <li><a href="../modules/entity.html">entity</a></li>
-  <li><strong>inventory</strong></li>
+  <li><a href="../modules/inventory.html">inventory</a></li>
   <li><a href="../modules/game.html">game</a></li>
   <li><a href="../modules/log.html">log</a></li>
-  <li><a href="../modules/surface.html">surface</a></li>
+  <li><strong>surface</strong></li>
 </ul>
 
 </div>
 
 <div id="content">
 
-<h1>Module <code>inventory</code></h1>
-<p>Inventory module</p>
+<h1>Module <code>surface</code></h1>
+<p>Surface module</p>
 <p></p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Inventory.copy_inventory">Inventory.copy_inventory (src, dest)</a></td>
-	<td class="summary">Copies an inventory contents to a destination inventory</td>
+	<td class="name" nowrap><a href="#Surface.lookup">Surface.lookup (msg, condition)</a></td>
+	<td class="summary">Flexible, safe lookup function for surfaces
+  May be given a string, the name of a surface, or
+  may be given a table with surface names,
+  may be given the a surface object, or
+  may be given a table of surface objects, or
+  may be given nil.</td>
 	</tr>
 </table>
 
@@ -73,27 +78,35 @@
 
     <dl class="function">
     <dt>
-    <a name = "Inventory.copy_inventory"></a>
-    <strong>Inventory.copy_inventory (src, dest)</strong>
+    <a name = "Surface.lookup"></a>
+    <strong>Surface.lookup (msg, condition)</strong>
     </dt>
     <dd>
-    Copies an inventory contents to a destination inventory
+    Flexible, safe lookup function for surfaces
+  May be given a string, the name of a surface, or
+  may be given a table with surface names,
+  may be given the a surface object, or
+  may be given a table of surface objects, or
+  may be given nil.
+  Returns an array of surface objects of all valid, existing surfaces
+  If a surface does not exist for the surface, it is ignored, if no surfaces
+  are given, an empty array is returned.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">src</span>
-         source inventory to copy from
+        <li><span class="parameter">msg</span>
+         message to send to players
         </li>
-        <li><span class="parameter">dest</span>
-         destination inventory, to copy to
+        <li><span class="parameter">condition</span>
+         (optional) optional condition to be true for the player to be messaged
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        an array of SimpleItemStacks of left over items that could not be copied.
+        the number of players who received the message
     </ol>
 
 

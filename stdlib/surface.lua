@@ -5,18 +5,15 @@ require 'stdlib/core'
 
 Surface = {}
 
---- Flexible, safe lookup function for surfaces
---  May be given a string, the name of a surface, or
---  may be given a table with surface names,
---  may be given the a surface object, or
---  may be given a table of surface objects, or
---  may be given nil.
+--- Flexible, safe lookup function for surfaces. <p>
+--  May be given a string, the name of a surface, or may be given a table with surface names,
+--  may be given the a surface object, or may be given a table of surface objects, or
+--  may be given nil. <p>
 --  Returns an array of surface objects of all valid, existing surfaces
 --  If a surface does not exist for the surface, it is ignored, if no surfaces
 --  are given, an empty array is returned.
--- @param msg message to send to players
--- @param condition (optional) optional condition to be true for the player to be messaged
--- @return the number of players who received the message
+-- @param surface to lookup
+-- @return the list of surfaces looked up
 function Surface.lookup(surface)
     if not surface then
         return {}
@@ -42,10 +39,11 @@ end
 
 --- Given search criteria, a table that contains a name or type of entity to search for,
 --  and optionally surface or force, searches all loaded chunks for the entities that
---  match the critera. Ex:
---   Entity.final_all_entities({ type = 'unit', surface = 'nauvis' })
---   Will return all units on the nauvis surface.
--- @param search_criteria a table of criteria. Must contain either the name or type of an entity. May contain surface or force.
+--  match the critera.
+--  <p> Ex: <pre>
+--   Surface.final_all_entities({ type = 'unit', surface = 'nauvis' }) </pre> <p>
+--  Will return all units on the nauvis surface.
+-- @param search_criteria a table of criteria. Must contain either the name or type or force of an entity. May contain surface or force.
 -- @return an array of all entities that matched the criteria
 function Surface.find_all_entities(search_criteria)
     fail_if_missing(search_criteria, "missing search_criteria argument")

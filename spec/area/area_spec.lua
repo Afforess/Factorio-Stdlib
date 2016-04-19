@@ -46,4 +46,12 @@ describe('Area Spec', function()
 
         assert.has_error(function() Area.to_table(nil) end)
     end)
+
+    it('should validate area iteration', function()
+        local area = {{0, -5}, {x = 3, y = -3}}
+        --print()
+        for _, x, y in Area.iterate(area) do
+        --    print("(" .. x .. ", " .. y .. ")")
+        end
+    end)
 end)

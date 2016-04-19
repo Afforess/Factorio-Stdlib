@@ -76,6 +76,23 @@ function Area.round_to_integer(area)
             right_bottom = {x = math.ceil(right_bottom.x), y = math.ceil(right_bottom.y)}}
 end
 
+--- Early implemenation of an area iterator. Work in progress.
+function Area.iterate(area)
+    fail_if_missing(area, "missing area value")
+
+    local function _iterate(area, idx)
+        idx = idx + 1
+        local rx = area.right_bottom.x - area.left_top.x + 1
+        local dx = idx % rx
+        local dy = math.floor(idx / rx)
+        if (area.left_top.y + dy) > area.right_bottom.y  then
+            return
+        end
+        return idx, (area.left_top.x + dx), (area.left_top.y + dy)
+    end
+    return _iterate, Area.to_table(area), 0
+end
+
 --- Converts an area in the array format to an array in the table format
 -- @param area_arr the area to convert
 -- @return a converted position, { x = pos_arr[1], y = pos_arr[2] }

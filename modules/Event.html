@@ -42,8 +42,8 @@
   <li><a href="../modules/position.html">position</a></li>
   <li><a href="../modules/core.html">core</a></li>
   <li><a href="../modules/entity.html">entity</a></li>
-  <li><strong>inventory</strong></li>
-  <li><a href="../modules/Event.html">Event</a></li>
+  <li><a href="../modules/inventory.html">inventory</a></li>
+  <li><strong>Event</strong></li>
   <li><a href="../modules/game.html">game</a></li>
   <li><a href="../modules/log.html">log</a></li>
   <li><a href="../modules/surface.html">surface</a></li>
@@ -53,16 +53,20 @@
 
 <div id="content">
 
-<h1>Module <code>inventory</code></h1>
-<p>Inventory module</p>
+<h1>Module <code>Event</code></h1>
+<p>Event module</p>
 <p></p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Inventory.copy_inventory">Inventory.copy_inventory (src, dest)</a></td>
-	<td class="summary">Copies an inventory contents to a destination inventory</td>
+	<td class="name" nowrap><a href="#register">register (event, callback)</a></td>
+	<td class="summary">Registers a function for a given event</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dispatch">dispatch (event)</a></td>
+	<td class="summary">Calls the registerd handlers</td>
 	</tr>
 </table>
 
@@ -74,28 +78,43 @@
 
     <dl class="function">
     <dt>
-    <a name = "Inventory.copy_inventory"></a>
-    <strong>Inventory.copy_inventory (src, dest)</strong>
+    <a name = "register"></a>
+    <strong>register (event, callback)</strong>
     </dt>
     <dd>
-    Copies an inventory contents to a destination inventory
+    Registers a function for a given event
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">src</span>
-         source inventory to copy from
+        <li><span class="parameter">event</span>
+         to register
         </li>
-        <li><span class="parameter">dest</span>
-         destination inventory, to copy to
+        <li><span class="parameter">callback</span>
+         Function to call when event is triggered
         </li>
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
 
-        an array of SimpleItemStacks of left over items that could not be copied.
-    </ol>
+
+
+
+</dd>
+    <dt>
+    <a name = "dispatch"></a>
+    <strong>dispatch (event)</strong>
+    </dt>
+    <dd>
+    Calls the registerd handlers
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">event</span>
+         LuaEvent as created by game.raise_event
+        </li>
+    </ul>
+
 
 
 

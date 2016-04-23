@@ -1,5 +1,4 @@
 require 'stdlib/event/event'
-require 'spec/util'
 
 test_function = {f=function(x) someVariable = x end}
 local function_a = function(arg) test_function.f(arg.tick) end

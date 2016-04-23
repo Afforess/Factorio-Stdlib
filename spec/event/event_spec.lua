@@ -1,14 +1,15 @@
 require 'stdlib/event/event'
+require 'spec/util'
 
 test_function = {f=function(x) someVariable = x end}
 local function_a = function(arg) test_function.f(arg.tick) end
 local function_b = function(arg) test_function.f(arg.player_index) end
 local function_c = function() return true end
 
-
 describe('Event', function()
     before_each(function()
         _G.someVariable = false
+        _G.script = {on_event = function(id, callback) return end}
     end)
 
     after_each(function()
@@ -20,6 +21,12 @@ describe('Event', function()
         Event.register( 0, function_b )
         assert.equals( function_a, Event._registry[0][1] )
         assert.equals( function_b, Event._registry[0][2] )
+    end)
+
+    it('.register should hook the event to script.on_event', function()
+        local s = spy.on(script, "on_event")
+        Event.register( 0, function_a )
+        assert.spy(s).was_called_with(0, Event.dispatch)
     end)
 
     it('.register should return itself', function()

@@ -16,6 +16,7 @@ function Event.register(event, handler)
 
     if not Event._registry[event] then
         Event._registry[event] = {}
+        script.on_event(event, Event.dispatch)
     end
     table.insert(Event._registry[event], handler)
     return Event

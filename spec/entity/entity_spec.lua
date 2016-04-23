@@ -31,7 +31,9 @@ describe('Entity Spec', function()
     it('sets the backer name', function()
         local valid_entity = { backer_name = "I am valid" }
 
-        assert.is_true(Entity.set_backer_name(valid_entity,"My shiny new name"))
+        local old = Entity.set_backer_name(valid_entity,"My shiny new name")
+        assert.is.truthy(old)
+        assert.same("I am valid", old)
         assert.same("My shiny new name", Entity.get_backer_name(valid_entity))
     end)
 

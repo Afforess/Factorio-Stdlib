@@ -42,14 +42,15 @@ end
 --- Sets the backer name of the entity
 -- @param entity to set the backer name
 -- @param name new backer name for the entity
--- @return true if renaming was successful
+-- @return old backer name if successful, false otherwise
 function Entity.set_backer_name(entity, name)
     fail_if_missing(entity, "missing entity argument")
     fail_if_missing(name, "missing name argument")
-
-    if Entity.get_backer_name(entity) then
+    
+    local old = Entity.get_backer_name(entity) 
+    if old then
         entity.backer_name = name
-        return true
+        return old
     end
     return false
 end

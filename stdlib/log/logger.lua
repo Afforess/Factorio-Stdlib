@@ -7,7 +7,8 @@ Logger = {}
 -- @param mod_name [required] the name of the mod to create the logger for
 -- @param log_name (optional, default: 'main') the name of the logger
 -- @param debug_mode (optional, default: false) toggles the debug state of logger.
--- In debug mode, the logger writes immediately. Otherwise it buffers lines and writes every 60 seconds.
+-- In debug mode, the logger writes immediately. Otherwise it buffers lines.
+-- Logger flushes after 60 seconds has elapsed since the last message.
 -- @return the logger instance
 function Logger.new(mod_name, log_name, debug_mode)
 	if not mod_name then

@@ -29,4 +29,16 @@ function Entity.to_collision_area(entity)
     return Area.offset(bb, pos)
 end
 
+--- Tests whether an entity has access to the field
+-- @param entity to test field access
+-- @param field_name that should be tested for
+-- @return true if the entity has access to the field, false if the entity threw an exception accessing the field
+function Entity.has(entity, field_name)
+  fail_if_missing(entity, "missing entity argument")
+  fail_if_missing(field_name, "missing field name argument")
+
+  local status = pcall(function() return entity[field_name]; end)
+  return status
+end
+
 return Entity

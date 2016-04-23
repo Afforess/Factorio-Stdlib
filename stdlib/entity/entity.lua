@@ -29,4 +29,30 @@ function Entity.to_collision_area(entity)
     return Area.offset(bb, pos)
 end
 
+--- Returns the backer name of the entity
+-- @param entity to get the backer name from
+-- @return backer name or false if the entity can't have a backer name
+function Entity.get_backer_name(entity)
+    fail_if_missing(entity, "missing entity argument")
+
+    local s, backer_name = pcall(function() return entity.backer_name end)
+    return s and backer_name
+end
+
+--- Sets the backer name of the entity
+-- @param entity to set the backer name
+-- @param name new backer name for the entity
+-- @return old backer name if successful, false otherwise
+function Entity.set_backer_name(entity, name)
+    fail_if_missing(entity, "missing entity argument")
+    fail_if_missing(name, "missing name argument")
+    
+    local old = Entity.get_backer_name(entity) 
+    if old then
+        entity.backer_name = name
+        return old
+    end
+    return false
+end
+
 return Entity

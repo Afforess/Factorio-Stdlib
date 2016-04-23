@@ -49,9 +49,25 @@ describe('Area Spec', function()
 
     it('should validate area iteration', function()
         local area = {{0, -5}, {x = 3, y = -3}}
-        --print()
-        for _, x, y in Area.iterate(area) do
-        --    print("(" .. x .. ", " .. y .. ")")
+        local expected_iteration = {
+          {0, -5},
+          {1, -5},
+          {2, -5},
+          {3, -5},
+          {0, -4},
+          {1, -4},
+          {2, -4},
+          {3, -4},
+          {0, -3},
+          {1, -3},
+          {2, -3},
+          {3, -3}
+        }
+        local idx = 1
+        for x, y in Area.iterate(area) do
+            assert.same(expected_iteration[idx][1], x, "Idx: " .. idx)
+            assert.same(expected_iteration[idx][2], y, "Idx: " .. idx)
+            idx = idx + 1
         end
     end)
 end)

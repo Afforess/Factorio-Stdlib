@@ -1,3 +1,20 @@
+## Factorio-Stdlib 0.3.0 (April 24, 2016)
+
+Features:
+
+  - Add Area.iterate function, allows iteration of the positions inside an area
+  - Add Entity.has function, can safely test if an entity has read access to a field
+  - Add Surface.lookup function, capable of converting strings, tables, or arrays to LuaSurface factorio object
+  - Add Surface.find_all_entities function, searches all loaded chunks on surface(s) for all entities that match criteria
+  - Add Event Registry, provides alternate Event registration from script.on_event.
+    - Event.register allows multiple event handlers to be registered for the same event
+    - Events that cause an error will not abort the game but print a warning to all players
+    - Events handlers cascade and can be aborted. Returning true in an event handler prevents any later handers from being executed.
+
+Bugfixes:
+
+  - Clarified documentation for Logger.log
+
 ## Factorio-Stdlib 0.2.1 (April 12, 2016)
 
 Features:

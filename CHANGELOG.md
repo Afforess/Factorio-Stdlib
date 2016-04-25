@@ -9,7 +9,7 @@ Features:
   - Add Event Registry, provides alternate Event registration from script.on_event.
     - Event.register allows multiple event handlers to be registered for the same event
     - Events that cause an error will not abort the game but print a warning to all players
-    - Events handlers cascade and can be aborted. Returning true in an event handler prevents any later handers from being executed.
+    - Events handlers cascade and can be aborted. Returning true in an event handler prevents any later handlers from being executed.
 
 Bugfixes:
 

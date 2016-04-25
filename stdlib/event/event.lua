@@ -4,28 +4,38 @@
 require 'stdlib/core'
 require 'stdlib/game'
 
-Event = {}
-Event._registry = {}
+Event = {_registry = {}}
 
 --- Registers a function for a given event
--- @param event to register
--- @param callback Function to call when event is triggered
+-- @param event or array containing events to register
+-- @param handler Function to call when event is triggered
 function Event.register(event, handler)
-    fail_if_missing(event,"missing event argument")
-    fail_if_missing(handler,"missing handler argument")
+    fail_if_missing(event, "missing event argument")
 
-    if not Event._registry[event] then
-        Event._registry[event] = {}
-        script.on_event(event, Event.dispatch)
+    if type(event) == "number" then
+        event = {event}
     end
-    table.insert(Event._registry[event], handler)
+
+    for _, event_id in pairs(event) do
+      fail_if_missing(event_id, "missing event id")
+      if handler == nil then
+        Event._registry[event_id] = nil
+        script.on_event(event_id, nil)
+      else
+        if not Event._registry[event_id] then
+            Event._registry[event_id] = {}
+            script.on_event(event_id, Event.dispatch)
+        end
+        table.insert(Event._registry[event_id], handler)
+      end
+    end
     return Event
 end
 
 --- Calls the registerd handlers
 -- @param event LuaEvent as created by game.raise_event
 function Event.dispatch(event)
-    fail_if_missing(event,"missing event argument")
+    fail_if_missing(event, "missing event argument")
 
     if Event._registry[event.name] then
         for _, handler in pairs(Event._registry[event.name]) do

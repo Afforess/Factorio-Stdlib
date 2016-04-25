@@ -21,6 +21,29 @@ describe('Event', function()
         assert.equals( function_a, Event._registry[0][1] )
         assert.equals( function_b, Event._registry[0][2] )
     end)
+    
+    it('.register should fail if a nil/false event id is passed', function()
+      assert.has.errors(function() Event.register( false, function_a ) end)
+      assert.has.errors(function() Event.register( { 0, false }, function_a ) end)
+    end)
+    
+    it('.register should remove all handlers if nil is passed as a handler', function()
+      Event.register( 0, function_a )
+      Event.register( 0, function_b )
+      Event.register( 0, nil)
+      
+      assert.is_nil( Event._registry[0] )
+    end)
+    
+    it('.register should add a handler for multiple events', function()
+      Event.register( { 0, 2 }, function_a ).register( {0, 2 }, function_b )
+      
+      assert.equals( function_a, Event._registry[0][1])
+      assert.equals( function_b, Event._registry[0][2])
+      assert.is_nil( Event._registry[1])
+      assert.equals( function_a, Event._registry[2][1])
+      assert.equals( function_b, Event._registry[2][2])    
+    end)
 
     it('.register should hook the event to script.on_event', function()
         local s = spy.on(script, "on_event")

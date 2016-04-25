@@ -94,18 +94,20 @@ describe('Event', function()
         assert.equals( function_a, Event._registry[0][1] )
         assert.equals( function_b, Event._registry[0][2] )
         assert.is_true( #Event._registry[0] == 2)
-        
+
         Event.register( { 0, 2, 1}, function_c )
-        
+
         assert.equals( function_c, Event._registry[0][3])
         assert.equals( function_c, Event._registry[2][1])
         assert.equals( function_c, Event._registry[1][1])
-        
+
+        local s = spy.on(script, "on_event")
         Event.remove( { 0 , 2 }, function_c)
-        
+
         assert.equals( function_c, Event._registry[1][1])
         assert.is_nil( Event._registry[0][3])
         assert.is_true( #Event._registry[1] == 1)
         assert.is_nil( Event._registry[2])
+        assert.spy(s).was_called_with(2, nil)
     end)
 end)

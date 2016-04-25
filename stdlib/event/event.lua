@@ -9,6 +9,7 @@ Event = {_registry = {}}
 --- Registers a function for a given event
 -- @param event or array containing events to register
 -- @param handler Function to call when event is triggered
+-- @return #Event
 function Event.register(event, handler)
     fail_if_missing(event, "missing event argument")
 
@@ -54,6 +55,7 @@ end
 --- Removes the handler from the event
 -- @param event event or array containing events to remove the handler
 -- @param handler to remove
+-- @return #Event
 function Event.remove(event, handler)
     fail_if_missing(event, "missing event argument")
     fail_if_missing(handler, "missing handler argument")
@@ -72,6 +74,7 @@ function Event.remove(event, handler)
             end
             if #Event._registry[event_id] == 0 then
                 Event._registry[event_id] = nil
+                script.on_event(event_id, nil)
             end
         end
     end

@@ -62,7 +62,7 @@ function Surface.find_all_entities(search_criteria)
         for chunk in surface.get_chunks() do
             local entities = surface.find_entities_filtered(
             {
-                area = { left_top = { x = chunk.x * 32, y = chunk.y * 32 }, right_bottom = {x = (chunk.x + 1) * 32, (chunk.y + 1) * 32}},
+                area = { left_top = { x = chunk.x * 32, y = chunk.y * 32 }, right_bottom = {x = (chunk.x + 1) * 32, y = (chunk.y + 1) * 32}},
                 name = search_criteria.name,
                 type = search_criteria.type,
                 force = search_criteria.force

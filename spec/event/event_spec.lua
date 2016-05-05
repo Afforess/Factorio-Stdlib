@@ -110,4 +110,14 @@ describe('Event', function()
         assert.is_nil( Event._registry[2])
         assert.spy(s).was_called_with(2, nil)
     end)
+
+    it('.remove(_, event._handler) remove the handler itself if called inside event callback', function()
+        Event.register( 0, function(event) if event._handler then Event.remove(0, event._handler) end end )
+        assert.is_true( #Event._registry[0] == 1)
+
+        local event = {name = 0, tick = 9001, player_index = 1}
+        Event.dispatch(event)
+
+        assert.is_nil(Event._registry[0])
+    end)
 end)

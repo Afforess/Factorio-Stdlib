@@ -40,6 +40,8 @@ function Event.dispatch(event)
 
     if Event._registry[event.name] then
         for _, handler in pairs(Event._registry[event.name]) do
+            local metatbl = { __index = function(tbl, key) if key == '_handler' then return handler else return rawget(tbl, key) end end }
+            setmetatable(event, metatbl)
             local success, err = pcall(handler, event)
             if not success then
                 Game.print_all(err)

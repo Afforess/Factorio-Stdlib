@@ -26,6 +26,18 @@ describe('Table Spec', function()
         end)
     end)
 
+    describe('table.each', function()
+        it('should apply the function to each value', function()
+            local obj = { foo = function() end }
+            local s = spy.on(obj, 'foo')
+            table.each({1}, obj.foo)
+            assert.spy(s).was_called_with(1)
+
+            table.each({1, 2, 3, 4, 5, 6, 7, 8, 9}, obj.foo)
+            assert.spy(s).was.called(10)
+        end)
+    end)
+
     describe('table.first', function()
         it('should return the first element of a table', function()
             assert.same(3, table.first({3, 2, 1}))

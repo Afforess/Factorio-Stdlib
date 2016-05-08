@@ -39,6 +39,17 @@ function table.filter(tbl, func)
     return newtbl
 end
 
+--- Given a function, apply it to each element in the table
+-- @param tbl to be iterated
+-- @param func to apply to values
+-- @return the given table
+function table.each(tbl, func)
+    for _, v in pairs(tbl) do
+        func(v)
+    end
+    return tbl
+end
+
 --- Given an array, returns the first element or nil if no element exists
 -- @param tbl the array
 -- @return the first element

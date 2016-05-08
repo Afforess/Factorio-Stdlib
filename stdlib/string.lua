@@ -1,3 +1,5 @@
+--- String module
+-- @module string
 
 --- Returns a copy of the string with any leading or trailing whitespace from the string removed.
 -- @param s the string to remove leading or trailing whitespace from

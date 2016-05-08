@@ -41,4 +41,60 @@ function Entity.has(entity, field_name)
   return status
 end
 
+--- Gets user data from the entity, stored in a mod's global data.
+--- <p> The data will persist between loads, and will be removed for an entity when it becomes invalid</p>
+-- @param the entity to look up data for
+-- @return the data, or nil if no data exists for the entity
+function Entity.get_data(entity)
+    fail_if_missing(entity, "missing entity argument")
+    if not global._entity_data then return nil end
+
+    local entity_name = entity.name
+    if not global._entity_data[entity_name] then return nil end
+    local entity_category = global._entity_data[entity_name]
+    for _, entity_data in pairs(entity_category) do
+        if entity_data.entity == entity then
+            return entity_data.data
+        end
+    end
+    return nil
+end
+
+--- Sets user data on the entity, stored in a mod's global data.
+--- <p> The data will persist between loads, and will be removed for an entity when it becomes invalid</p>
+-- @param the entity to set data for
+-- @param the data to set, or nil to delete the data associated with the entity
+-- @return the previous data associated with the entity, or nil if the entity had no previous data
+function Entity.set_data(entity, data)
+    fail_if_missing(entity, "missing entity argument")
+
+    if not global._entity_data then global._entity_data = {} end
+
+    local entity_name = entity.name
+    if not global._entity_data[entity_name] then
+        global._entity_data[entity_name] = { pos_data = {}, data = {} }
+     end
+
+    local entity_category = global._entity_data[entity_name]
+
+    for i = #entity_category, 1, -1 do
+        local entity_data = entity_category[i]
+        if not entity_data.entity.valid then
+            table.remove(entity_category, i)
+        end
+        if entity_data.entity == entity then
+            local prev = entity_data.data
+            if data then
+                entity_data.data = data
+            else
+                table.remove(entity_category, i)
+            end
+            return prev
+        end
+    end
+
+    table.insert(entity_category, { entity = entity, data = data })
+    return nil
+end
+
 return Entity

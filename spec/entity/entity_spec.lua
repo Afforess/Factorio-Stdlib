@@ -24,4 +24,40 @@ describe('Entity Spec', function()
         assert.truthy(Entity.has(entity, 'backer_name'))
         assert.falsy(Entity.has(entity, 'health'))
     end)
+
+    it('should verify getting and setting data', function()
+        _G['global'] = {}
+        local entity = { name = 'fast-inserter', valid = true }
+        assert.is_nil(Entity.get_data(entity))
+
+        local data = { foo = 'bar' }
+        assert.is_nil(Entity.set_data(entity, data))
+        assert.same(data, Entity.get_data(entity))
+
+        -- Verify mutated data is not lost
+        data.foo = 'baz'
+        assert.same(data, Entity.get_data(entity))
+
+        --Verify multiple entities can have data
+        for i = 1, 10 do
+            local entity = { name = 'fast-inserter', valid = true }
+            local data = { count = i }
+            Entity.set_data(entity, data)
+            assert.same(data, Entity.get_data(entity))
+        end
+        assert.same(data, Entity.get_data(entity))
+    end)
+
+    it('should verify data can be deleted', function()
+        _G['global'] = {}
+        local entity = { name = 'fast-inserter', valid = true }
+        assert.is_nil(Entity.get_data(entity))
+
+        local data = { foo = 'bar' }
+        assert.is_nil(Entity.set_data(entity, data))
+        assert.same(data, Entity.get_data(entity))
+
+        assert.same(data, Entity.set_data(entity, nil))
+        assert.is_nil(Entity.get_data(entity))
+    end)
 end)

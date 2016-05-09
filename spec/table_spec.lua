@@ -57,4 +57,35 @@ describe('Table Spec', function()
             assert.is_nil(table.last({}))
         end)
     end)
+    
+    describe('table.merge', function()
+      it('should change the first table', function()
+        local tblA = {option1=1, [2] = "foo"}
+        local tblB = {option2=2, [3] = "bar"}
+        
+        local r = table.merge(tblA, tblB)
+        assert.equals(r, tblA)
+        assert.equals(1, tblA.option1)
+        assert.equals("foo", tblA[2])
+        assert.equals("bar", tblA[3])
+        assert.equals(2, tblA.option2)
+      end)
+      
+      it('should overwrite same keys with value from table B', function()
+        local defaults = {todo = 'all the things', due = 'asap', when='weekdays', 3}
+        local lazy = {due = '10 years'}
+        local super_lazy = {todo = 'nothing', when = 'always'}
+        
+        local r = table.merge(defaults, lazy)
+        assert.truthy(r.when)
+        assert.truthy(r[1])
+        assert.equals('10 years', r.due)
+        assert.equals('all the things', r.todo)
+        
+        r = table.merge(defaults, super_lazy)
+        assert.equals('nothing', r.todo)
+        assert.equals('always', r.when)
+        assert.equals(3, r[1])
+      end)
+    end)
 end)

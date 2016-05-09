@@ -43,7 +43,7 @@ end
 
 --- Gets user data from the entity, stored in a mod's global data.
 --- <p> The data will persist between loads, and will be removed for an entity when it becomes invalid</p>
--- @param the entity to look up data for
+-- @param entity the entity to look up data for
 -- @return the data, or nil if no data exists for the entity
 function Entity.get_data(entity)
     fail_if_missing(entity, "missing entity argument")
@@ -62,8 +62,8 @@ end
 
 --- Sets user data on the entity, stored in a mod's global data.
 --- <p> The data will persist between loads, and will be removed for an entity when it becomes invalid</p>
--- @param the entity to set data for
--- @param the data to set, or nil to delete the data associated with the entity
+-- @param entity the entity to set data for
+-- @param data the data to set, or nil to delete the data associated with the entity
 -- @return the previous data associated with the entity, or nil if the entity had no previous data
 function Entity.set_data(entity, data)
     fail_if_missing(entity, "missing entity argument")

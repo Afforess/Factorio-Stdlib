@@ -30,7 +30,7 @@ function Logger.new(mod_name, log_name, debug_mode)
 			table.insert(Logger.buffer, string.format("%02d:%02d:%02d: %s\n", time_hours, time_minutes % 60, time_s % 60, msg))
 
 			-- write the log every minute
-			if (Logger.debug_mode or (game.tick - Logger.last_written) > 216000) then
+			if (Logger.debug_mode or (game.tick - Logger.last_written) > 3600) then
 				return Logger.write()
 			end
 		else

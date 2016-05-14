@@ -4,7 +4,24 @@
 require 'stdlib/core'
 require 'stdlib/game'
 
+core_events = { init = -1, load = -2, configuration_changed= -3 }
+
 Event = {_registry = {}}
+
+script.on_init(function()
+    debug("Event.on_init")
+    Event.dispatch(core_events.init)
+end)
+
+script.on_load(function()
+    debug("Event.on_load")
+    Event.dispatch(core_events.load)
+end)
+
+script.on_configuration_changed(function()
+    debug("Event.on_load")
+    Event.dispatch(core_events.configuration_changed)
+end)
 
 --- Registers a function for a given event
 -- @param event or array containing events to register
@@ -25,7 +42,10 @@ function Event.register(event, handler)
         else
             if not Event._registry[event_id] then
                 Event._registry[event_id] = {}
-                script.on_event(event_id, Event.dispatch)
+
+                if event_id >= 0 then
+                    script.on_event(event_id, Event.dispatch)
+                end
             end
             table.insert(Event._registry[event_id], handler)
         end
@@ -37,6 +57,13 @@ end
 -- @param event LuaEvent as created by game.raise_event
 function Event.dispatch(event)
     fail_if_missing(event, "missing event argument")
+    
+    -- hack for other core_events
+    if type(event) == "number" then
+        local event_id = event
+        event = {event}
+        event.name = event_id
+    end
 
     if Event._registry[event.name] then
         for _, handler in pairs(Event._registry[event.name]) do

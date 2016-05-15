@@ -4,20 +4,26 @@
 require 'stdlib/core'
 require 'stdlib/game'
 
-core_events = { init = -1, load = -2, configuration_changed= -3 }
 
-Event = {_registry = {}}
+Event = {
+    _registry = {},
+    core_events = { 
+        init = -1,
+        load = -2,
+        configuration_changed= -3 
+    }
+}
 
 script.on_init(function()
-    Event.dispatch(core_events.init)
+    Event.dispatch(Event.core_events.init)
 end)
 
 script.on_load(function()
-    Event.dispatch(core_events.load)
+    Event.dispatch(Event.core_events.load)
 end)
 
 script.on_configuration_changed(function()
-    Event.dispatch(core_events.configuration_changed)
+    Event.dispatch(Event.core_events.configuration_changed)
 end)
 
 --- Registers a function for a given event

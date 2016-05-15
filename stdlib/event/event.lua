@@ -9,17 +9,14 @@ core_events = { init = -1, load = -2, configuration_changed= -3 }
 Event = {_registry = {}}
 
 script.on_init(function()
-    debug("Event.on_init")
     Event.dispatch(core_events.init)
 end)
 
 script.on_load(function()
-    debug("Event.on_load")
     Event.dispatch(core_events.load)
 end)
 
 script.on_configuration_changed(function()
-    debug("Event.on_load")
     Event.dispatch(core_events.configuration_changed)
 end)
 

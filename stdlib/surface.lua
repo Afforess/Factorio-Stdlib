@@ -67,7 +67,7 @@ function Surface.find_all_entities(search_criteria)
                 type = search_criteria.type,
                 force = search_criteria.force
             })
-            for _, entity in ipairs(entities) do
+            for _, entity in pairs(entities) do
                 table.insert(result, entity)
             end
         end

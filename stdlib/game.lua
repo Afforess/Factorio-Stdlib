@@ -12,7 +12,7 @@ end
 -- @return the number of players who received the message
 function Game.print_all(msg, condition)
     local num = 0
-	for _, player in ipairs(game.players) do
+	for _, player in pairs(game.players) do
 		if player.valid and player.connected then
             if condition == nil or select(2, pcall(condition, player)) then
 			    player.print(msg)

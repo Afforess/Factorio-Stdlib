@@ -5,7 +5,7 @@ describe('Game Spec', function()
         function make_get_contents(inv)
             inv.get_contents = function()
                 local contents = {}
-                for _, item in ipairs(inv.contents) do
+                for _, item in pairs(inv.contents) do
                     contents[item.name] = item.count
                 end
                 return contents

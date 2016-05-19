@@ -4,11 +4,11 @@ require 'serpent'
 
 describe('Chunk Spec', function()
     it('should give the correct chunk coordinates for a position', function()
-        assert.same(0, Chunk.get({0, 34}).x)
-        assert.same(1, Chunk.get({0, 34}).y)
+        assert.same(0, Chunk.from_position({0, 34}).x)
+        assert.same(1, Chunk.from_position({0, 34}).y)
 
-        assert.same(-3, Chunk.get({-66, 255}).x)
-        assert.same(7, Chunk.get({-66, 255}).y)
+        assert.same(-3, Chunk.from_position({-66, 255}).x)
+        assert.same(7, Chunk.from_position({-66, 255}).y)
     end)
 
     it('should give the correct chunk area for a chunk position', function()

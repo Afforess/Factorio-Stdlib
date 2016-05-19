@@ -1,4 +1,5 @@
 --- Chunk module
+--- <p>A chunk represents a 32x32 area of a surface in factorio.</p>
 -- @module chunk
 
 require 'stdlib/core'
@@ -10,7 +11,7 @@ MAX_UINT = 4294967296
 --- Calculates the chunk coordinates for the tile position given
 --  @param position to calculate the chunk for
 --  @return the chunk position as a table (ex: <pre>local chunk_x = Chunk.get(pos).x</pre>)
-function Chunk.get(position)
+function Chunk.from_position(position)
     position = Position.to_table(position)
     local x = math.floor(position.x)
     local y = math.floor(position.y)

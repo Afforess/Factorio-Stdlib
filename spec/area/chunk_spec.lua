@@ -1,6 +1,5 @@
 require 'spec/defines'
 require 'stdlib/area/chunk'
-require 'serpent'
 
 describe('Chunk Spec', function()
     it('should give the correct chunk coordinates for a position', function()

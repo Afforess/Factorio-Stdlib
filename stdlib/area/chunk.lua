@@ -10,7 +10,7 @@ MAX_UINT = 4294967296
 
 --- Calculates the chunk coordinates for the tile position given
 --  @param position to calculate the chunk for
---  @return the chunk position as a table (ex: <pre>local chunk_x = Chunk.get(pos).x</pre>)
+--  @return the chunk position as a table ex: <pre>local chunk_x = Chunk.from_position(pos).x</pre>
 function Chunk.from_position(position)
     position = Position.to_table(position)
     local x = math.floor(position.x)
@@ -69,7 +69,7 @@ function Chunk.set_data(surface, chunk_pos, data)
 end
 
 --- Calculates and returns a stable, deterministic, unique integer id for the given chunk_pos
---- <p> The id will not change once calculated once</p>
+--- <p> The id will not change once calculated</p>
 --  @param surface the chunk is on
 --  @param chunk_pos of the chunk
 function Chunk.get_index(surface, chunk_pos)

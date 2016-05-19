@@ -39,6 +39,7 @@
 <h2>Modules</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><strong>area</strong></li>
+  <li><strong>area</strong></li>
   <li><a href="../modules/position.html">position</a></li>
   <li><a href="../modules/core.html">core</a></li>
   <li><a href="../modules/entity.html">entity</a></li>
@@ -56,39 +57,28 @@
 <div id="content">
 
 <h1>Module <code>area</code></h1>
-<p>Area module</p>
+<p>Chunk module</p>
 <p></p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Area.inside">Area.inside (area, pos)</a></td>
-	<td class="summary">Tests if a position {x, y} is inside (inclusive) of area</td>
+	<td class="name" nowrap><a href="#Chunk.get">Chunk.get (position)</a></td>
+	<td class="summary">Calculates the chunk coordinates for the tile position given</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Area.shrink">Area.shrink (area, amount)</a></td>
-	<td class="summary">Shrinks the size of an area by the given amount</td>
+	<td class="name" nowrap><a href="#Chunk.get_data">Chunk.get_data (surface, chunk_pos)</a></td>
+	<td class="summary">Gets user data from the chunk, stored in a mod's global data.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Area.expand">Area.expand (area, amount)</a></td>
-	<td class="summary">Expands the size of an area by the given amount</td>
+	<td class="name" nowrap><a href="#Chunk.set_data">Chunk.set_data (surface, chunk_pos, data)</a></td>
+	<td class="summary">Sets user data on the chunk, stored in a mod's global data.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Area.offset">Area.offset (area, pos)</a></td>
-	<td class="summary">Offsets the area by the {x, y} values</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#Area.round_to_integer">Area.round_to_integer (area)</a></td>
-	<td class="summary">Converts an area to the integer representation, by taking the floor of the left_top and the ceiling of the right_bottom</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#Area.iterate">Area.iterate (area)</a></td>
-	<td class="summary">Iterates an area.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#Area.to_table">Area.to_table (area_arr)</a></td>
-	<td class="summary">Converts an area in the array format to an array in the table format</td>
+	<td class="name" nowrap><a href="#Chunk.get_index">Chunk.get_index (surface, chunk_pos)</a></td>
+	<td class="summary">Calculates and returns a stable, deterministic, unique integer id for the given chunk_pos
+  <p> The id will not change once calculated once</p></td>
 	</tr>
 </table>
 
@@ -100,27 +90,24 @@
 
     <dl class="function">
     <dt>
-    <a name = "Area.inside"></a>
-    <strong>Area.inside (area, pos)</strong>
+    <a name = "Chunk.get"></a>
+    <strong>Chunk.get (position)</strong>
     </dt>
     <dd>
-    Tests if a position {x, y} is inside (inclusive) of area
+    Calculates the chunk coordinates for the tile position given
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">area</span>
-         the area
-        </li>
-        <li><span class="parameter">pos</span>
-         the position to check
+        <li><span class="parameter">position</span>
+         to calculate the chunk for
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        true if the position is inside of the area
+        the chunk position as a table (ex: <pre>local chunk_x = Chunk.get(pos).x</pre>)
     </ol>
 
 
@@ -128,27 +115,28 @@
 
 </dd>
     <dt>
-    <a name = "Area.shrink"></a>
-    <strong>Area.shrink (area, amount)</strong>
+    <a name = "Chunk.get_data"></a>
+    <strong>Chunk.get_data (surface, chunk_pos)</strong>
     </dt>
     <dd>
-    Shrinks the size of an area by the given amount
+    Gets user data from the chunk, stored in a mod's global data.
+ <p> The data will persist between loads</p>
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">area</span>
-         the area
+        <li><span class="parameter">surface</span>
+         the surface to look up data for
         </li>
-        <li><span class="parameter">amount</span>
-         to shrink each edge of the area inwards by
+        <li><span class="parameter">chunk_pos</span>
+         the chunk coordinates to look up data for
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the shrunk area
+        the data, or nil if no data exists for the chunk
     </ol>
 
 
@@ -156,27 +144,31 @@
 
 </dd>
     <dt>
-    <a name = "Area.expand"></a>
-    <strong>Area.expand (area, amount)</strong>
+    <a name = "Chunk.set_data"></a>
+    <strong>Chunk.set_data (surface, chunk_pos, data)</strong>
     </dt>
     <dd>
-    Expands the size of an area by the given amount
+    Sets user data on the chunk, stored in a mod's global data.
+ <p> The data will persist between loads</p>
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">area</span>
-         the area
+        <li><span class="parameter">surface</span>
+         the surface to look up data for
         </li>
-        <li><span class="parameter">amount</span>
-         to expand each edge of the area outwards by
+        <li><span class="parameter">chunk_pos</span>
+         the chunk coordinates to look up data for
+        </li>
+        <li><span class="parameter">data</span>
+         the data to set (or nil to erase the data for the chunk)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the expanded area
+        the previous data associated with the chunk, or nil if the chunk had no previous data
     </ol>
 
 
@@ -184,107 +176,24 @@
 
 </dd>
     <dt>
-    <a name = "Area.offset"></a>
-    <strong>Area.offset (area, pos)</strong>
+    <a name = "Chunk.get_index"></a>
+    <strong>Chunk.get_index (surface, chunk_pos)</strong>
     </dt>
     <dd>
-    Offsets the area by the {x, y} values
+    Calculates and returns a stable, deterministic, unique integer id for the given chunk_pos
+  <p> The id will not change once calculated once</p>
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">area</span>
-         the area
+        <li><span class="parameter">surface</span>
+         the chunk is on
         </li>
-        <li><span class="parameter">pos</span>
-         the {x, y} amount to offset the area
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        offset area by the position values
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Area.round_to_integer"></a>
-    <strong>Area.round_to_integer (area)</strong>
-    </dt>
-    <dd>
-    Converts an area to the integer representation, by taking the floor of the left_top and the ceiling of the right_bottom
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">area</span>
-         the area
+        <li><span class="parameter">chunk_pos</span>
+         of the chunk
         </li>
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
-
-        the rounded integer representation
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Area.iterate"></a>
-    <strong>Area.iterate (area)</strong>
-    </dt>
-    <dd>
-    Iterates an area.  Example:
- <pre>
-   for x,y in Area.iterate({{0, -5}, {3, -3}}) do
-     ...
-   end </pre>
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">area</span>
-         the area
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        iterator
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Area.to_table"></a>
-    <strong>Area.to_table (area_arr)</strong>
-    </dt>
-    <dd>
-    Converts an area in the array format to an array in the table format
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">area_arr</span>
-         the area to convert
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        a converted position, { x = pos_arr[1], y = pos_arr[2] }
-    </ol>
 
 
 
@@ -297,7 +206,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-05-19 01:47:59 </i>
+<i style="float:right;">Last updated 2016-05-19 01:51:23 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

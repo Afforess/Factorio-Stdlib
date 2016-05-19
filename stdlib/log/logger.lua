@@ -33,19 +33,20 @@ function Logger.new(mod_name, log_name, debug_mode, options)
     function Logger.log(msg)
         local format = string.format
         if _G["game"] then
+            local tick = game.tick
             local floor = math.floor
-            local time_s = floor(game.tick/60)
+            local time_s = floor(tick/60)
             local time_minutes = floor(time_s/60)
             local time_hours = floor(time_minutes/60)
 
             if Logger.options.log_ticks then
-                table.insert(Logger.buffer, format("%02d:%02d:%02d\.%02d: %s\n", time_hours, time_minutes % 60, time_s % 60, game.tick - time_s*60, msg))
+                table.insert(Logger.buffer, format("%02d:%02d:%02d.%02d: %s\n", time_hours, time_minutes % 60, time_s % 60, tick - time_s*60, msg))
             else
                 table.insert(Logger.buffer, format("%02d:%02d:%02d: %s\n", time_hours, time_minutes % 60, time_s % 60, msg))
             end
 
             -- write the log every minute
-            if (Logger.debug_mode or (game.tick - Logger.last_written) > 3600) then
+            if (Logger.debug_mode or (tick - Logger.last_written) > 3600) then
                 return Logger.write()
             end
         else

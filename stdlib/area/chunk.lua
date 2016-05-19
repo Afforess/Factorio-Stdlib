@@ -25,6 +25,17 @@ function Chunk.get(position)
     return {x = chunk_x, y = chunk_y}
 end
 
+--- Converts a chunk to the area it contains
+-- @param chunk_pos to convert to an area
+-- @return area that chunk is valid for
+function Chunk.to_area(chunk_pos)
+    fail_if_missing(chunk_pos, "missing chunk_pos argument")
+    chunk_pos = Position.to_table(chunk_pos)
+
+    local left_top = { x = chunk_pos.x * 32, y = chunk_pos.y * 32 }
+    return { left_top = left_top, right_bottom = Position.offset(left_top, 32, 32) }
+end
+
 --- Gets user data from the chunk, stored in a mod's global data.
 --- <p> The data will persist between loads</p>
 --  @param surface the surface to look up data for

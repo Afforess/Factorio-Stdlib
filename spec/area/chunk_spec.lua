@@ -11,6 +11,13 @@ describe('Chunk Spec', function()
         assert.same(7, Chunk.get({-66, 255}).y)
     end)
 
+    it('should give the correct chunk area for a chunk position', function()
+        assert.same(32, Chunk.to_area({1, 2}).left_top.x)
+        assert.same(64, Chunk.to_area({1, 2}).left_top.y)
+        assert.same(64, Chunk.to_area({1, 2}).right_bottom.x)
+        assert.same(96, Chunk.to_area({1, 2}).right_bottom.y)
+    end)
+
     it('should ensure indexes are stable and deterministic', function()
         _G.global = {}
         _G.game = { surfaces = { nauvis = { index = 0 }, foo = { index = 1 } } }

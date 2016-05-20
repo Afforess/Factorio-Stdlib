@@ -4,7 +4,38 @@
 require 'stdlib/core'
 require 'stdlib/game'
 
-Event = {_registry = {}}
+
+Event = {
+    _registry = {},
+    core_events = {
+        init = -1,
+        load = -2,
+        configuration_changed = -3,
+        _lookup_name = function(lookup_id)
+            for name, id in pairs(Event.core_events) do
+                if lookup_id == id then
+                    return name
+                end
+            end
+            return lookup_id
+        end,
+        _register = function(id)
+            if id == Event.core_events.init then
+                script.on_init(function()
+                    Event.dispatch({name = Event.core_events.init, tick = game.tick})
+                end)
+            elseif id == Event.core_events.load then
+                script.on_load(function()
+                    Event.dispatch({name = Event.core_events.load, tick = -1})
+                end)
+            elseif id == Event.core_events.configuration_changed then
+                script.on_configuration_changed(function(data)
+                    Event.dispatch({name = Event.core_events.configuration_changed, tick = game.tick, data = data})
+                end)
+            end
+        end
+    }
+}
 
 --- Registers a function for a given event
 -- @param event or array containing events to register
@@ -25,7 +56,12 @@ function Event.register(event, handler)
         else
             if not Event._registry[event_id] then
                 Event._registry[event_id] = {}
-                script.on_event(event_id, Event.dispatch)
+
+                if event_id >= 0 then
+                    script.on_event(event_id, Event.dispatch)
+                else
+                    Event.core_events._register(event_id)
+                end
             end
             table.insert(Event._registry[event_id], handler)
         end
@@ -44,7 +80,10 @@ function Event.dispatch(event)
             setmetatable(event, metatbl)
             local success, err = pcall(handler, event)
             if not success then
-                Game.print_all(err)
+                -- may be nil in on_load
+                if _G['game'] then
+                    Game.print_all(err)
+                end
                 return
             end
             if err then

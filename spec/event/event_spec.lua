@@ -8,7 +8,11 @@ local function_c = function() return true end
 describe('Event', function()
     before_each(function()
         _G.someVariable = false
-        _G.script = {on_event = function(id, callback) return end}
+        _G.script = {on_event = function(id, callback) return end,
+                     on_init = function(callback) _G.on_init = callback end,
+                     on_load = function(callback) _G.on_load = callback end,
+                     on_configuration_changed = function(callback) _G.on_configuration_changed = callback end}
+        _G.game = {tick = 1}
     end)
 
     after_each(function()
@@ -119,5 +123,44 @@ describe('Event', function()
         Event.dispatch(event)
 
         assert.is_nil(Event._registry[0])
+    end)
+
+    it('.register with core_events.on_init should register callbacks and dispatch events', function()
+        control = { on_init = function(event) assert.same(-1, event.name) assert.same(1, event.tick) end }
+        local s = spy.on(control, "on_init")
+
+        Event.register( Event.core_events.init, control.on_init )
+        assert.is_true( #Event._registry[-1] == 1)
+
+        -- trigger on_init as if we were the game engine
+        _G.on_init()
+        assert.spy(s).was.called()
+    end)
+
+    it('.register with core_events.on_load should register callbacks and dispatch events', function()
+        control = { on_load = function(event) assert.same(-2, event.name) assert.same(-1, event.tick) end }
+        local s = spy.on(control, "on_load")
+
+        Event.register( Event.core_events.load, control.on_load )
+        assert.is_true( #Event._registry[-2] == 1)
+
+        -- trigger on_load as if we were the game engine
+        _G.on_load()
+        assert.spy(s).was.called()
+    end)
+
+    it('.register with core_events.on_configuration_changed should register callbacks and dispatch events', function()
+        -- mock configuration change data
+        data = { }
+
+        control = { on_configuration_changed = function(event) assert.same(-3, event.name) assert.same(1, event.tick) assert.same(data, event.data) end }
+        local s = spy.on(control, "on_configuration_changed")
+
+        Event.register( Event.core_events.configuration_changed, control.on_configuration_changed )
+        assert.is_true( #Event._registry[-3] == 1)
+
+        -- trigger on_load as if we were the game engine
+        _G.on_configuration_changed(data)
+        assert.spy(s).was.called()
     end)
 end)

@@ -40,6 +40,11 @@ describe('Tile Spec', function()
         local surface = "nauvis"
         assert.is_nil(Tile.get_data(surface, tile_pos))
 
+        -- verify Tile.get_data sets the default_value
+        assert.is_nil(Tile.get_data(surface, { x = 256, y = -256 }))
+        assert.same({}, Tile.get_data(surface, { x = 256, y = -256 }, {}))
+        assert.same({}, Tile.get_data(surface, { x = 256, y = -256 }))
+
         local data = { foo = 'bar' }
         assert.is_nil(Tile.set_data(surface, tile_pos, data))
         assert.same(data, Tile.get_data(surface, tile_pos))

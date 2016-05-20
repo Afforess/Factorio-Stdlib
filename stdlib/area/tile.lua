@@ -31,17 +31,32 @@ end
 --- <p> The data will persist between loads</p>
 --  @param surface the surface to look up data for
 --  @param tile_pos the tile coordinates to look up data for
+--  @param default_value (optional) to set and return if no data exists
 --  @return the data, or nil if no data exists for the chunk
-function Tile.get_data(surface, tile_pos)
+function Tile.get_data(surface, tile_pos, default_value)
     fail_if_missing(surface, "missing surface argument")
     fail_if_missing(tile_pos, "missing tile_pos argument")
-    if not global._tile_data then return nil end
-
-    local chunk_tiles = global._tile_data[Chunk.get_index(surface, Chunk.from_position(tile_pos))]
-    if chunk_tiles then
-        return chunk_tiles[Tile.get_index(tile_pos)]
+    if not global._tile_data then
+        if not default_value then return nil end
+        global._tile_data = {}
     end
-    return nil
+    local chunk_idx = Chunk.get_index(surface, Chunk.from_position(tile_pos))
+    if not global._tile_data[chunk_idx] then
+        if not default_value then return nil end
+        global._tile_data[chunk_idx] = {}
+    end
+
+    local chunk_tiles = global._tile_data[chunk_idx]
+    if not chunk_tiles then return nil end
+
+    local idx = Tile.get_index(tile_pos)
+    local val = chunk_tiles[idx]
+    if not val then
+        chunk_tiles[idx] = default_value
+        val = default_value
+    end
+
+    return val
 end
 
 --- Sets user data on the tile, stored in a mod's global data.

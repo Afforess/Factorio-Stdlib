@@ -41,13 +41,24 @@ end
 --- <p> The data will persist between loads</p>
 --  @param surface the surface to look up data for
 --  @param chunk_pos the chunk coordinates to look up data for
+--  @param default_value (optional) to set and return if no data exists
 --  @return the data, or nil if no data exists for the chunk
-function Chunk.get_data(surface, chunk_pos)
+function Chunk.get_data(surface, chunk_pos, default_value)
     fail_if_missing(surface, "missing surface argument")
     fail_if_missing(chunk_pos, "missing chunk_pos argument")
-    if not global._chunk_data then return nil end
+    if not global._chunk_data then
+        if not default_value then return nil end
+        global._chunk_data = {}
+    end
 
-    return global._chunk_data[Chunk.get_index(surface, chunk_pos)]
+    local idx = Chunk.get_index(surface, chunk_pos)
+    local val = global._chunk_data[idx]
+    if not val then
+        global._chunk_data[idx] = default_value
+        val = default_value
+    end
+
+    return val
 end
 
 --- Sets user data on the chunk, stored in a mod's global data.

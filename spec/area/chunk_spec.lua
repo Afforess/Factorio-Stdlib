@@ -44,6 +44,11 @@ describe('Chunk Spec', function()
         local surface = "nauvis"
         assert.is_nil(Chunk.get_data(surface, chunk_pos))
 
+        -- verify Chunk.get_data sets the default_value
+        assert.is_nil(Chunk.get_data(surface, { x = 256, y = -256 }))
+        assert.same({}, Chunk.get_data(surface, { x = 256, y = -256 }, {}))
+        assert.same({}, Chunk.get_data(surface, { x = 256, y = -256 }))
+
         local data = { foo = 'bar' }
         assert.is_nil(Chunk.set_data(surface, chunk_pos, data))
         assert.same(data, Chunk.get_data(surface, chunk_pos))
@@ -60,5 +65,6 @@ describe('Chunk Spec', function()
             assert.same(data, Chunk.get_data(surface, chunk_pos))
         end
         assert.same(data, Chunk.get_data(surface, chunk_pos))
+
     end)
 end)

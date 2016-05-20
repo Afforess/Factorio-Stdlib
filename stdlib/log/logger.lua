@@ -18,6 +18,9 @@ function Logger.new(mod_name, log_name, debug_mode, options)
     if not log_name then
         log_name = "main"
     end
+    if not options then
+        options = {}
+    end
     local Logger = {mod_name = mod_name, log_name = log_name, debug_mode = debug_mode, buffer = {}, last_written = 0, ever_written = false}
 
     --- Logger options

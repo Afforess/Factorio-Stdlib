@@ -1,0 +1,180 @@
+
+body {
+    margin-left: 8em;
+    margin-right: 8em;
+    background-color: #262626;
+    color: #C8C8C8;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+code, tt { font-family: "Consolas", "Ubuntu Mono", monospace; font-size: 1.1em; }
+span.parameter { font-family: "Consolas", "Ubuntu Mono", monospace; }
+span.parameter:after { content:":"; }
+span.types:before { content:"("; }
+span.types:after { content:")"; }
+.type { font-weight: bold; font-style:italic }
+body, p, td, th { font-size: .95em; line-height: 1.2em;}
+p, ul { margin: 10px 0 0 0px;}
+strong { font-weight: bold;}
+em { font-style: italic;}
+h1 {
+    font-size: 1.5em;
+    margin: 0 0 20px 0;
+}
+h2, h3, h4 { margin: 15px 0 10px 0; }
+h2 { font-size: 1.25em; }
+h3 { font-size: 1.15em; }
+h4 { font-size: 1.06em; }
+
+a {
+    color: #FF7200;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FFFFFF;
+}
+hr {
+    color:#cccccc;
+    background: #00007f;
+    height: 1px;
+}
+blockquote { margin-left: 3em; }
+ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+p.name {
+    font-family: "Consolas", "Ubuntu Mono", monospace;
+    padding-top: 1em;
+}
+pre {
+    background-color: #181818;
+    padding: 1em;
+    margin: 10px 0 10px 0;
+    overflow: auto;
+    font-family: "Consolas", "Ubuntu Mono", monospace;
+}
+pre.example {
+    font-size: .85em;
+}
+table.index { border: 1px #00007f; }
+table.index td { text-align: left; vertical-align: top; }
+#container {
+    margin-left: 1em;
+    margin-right: 1em;
+    background-color: #ffffff;
+}
+
+#main {
+    background-color: #181818;
+}
+#navigation {
+    display: inline;
+    width: 175px;
+    float: left;
+    background-color: #181818;
+    padding-right: 0.5em;
+}
+#navigation h1 {
+    text-align: left;
+    padding:0.2em;
+    margin-left:0.2em
+}
+#navigation h2 {
+    color: #FF7200;
+    text-align: left;
+    padding:0.2em;
+    margin-left:0.2em
+}
+#navigation ul
+{
+    font-size:1em;
+    list-style-type: none;
+    margin: 1px 1px 10px 1px;
+}
+#navigation li {
+    text-indent: -1em;
+    display: block;
+    margin: 3px 0px 0px 22px;
+}
+#navigation li li a {
+    margin: 0px 3px 0px -1em;
+}
+#content {
+    margin-left: 14em;
+    padding: 1em;
+    background-color: #262626;
+}
+#about {
+    display: none;
+}
+
+table.module_list {
+    margin-left: 2em;
+    list-style-type: none;
+    border-collapse: collapse;
+}
+table.module_list td {
+    padding-bottom: 3px;
+    border-top: 1px dotted #363636;
+    border-bottom: 1px dotted #363636;
+}
+table.module_list td.name {
+    padding-bottom: 3px;
+    border-top: 1px dotted #363636;
+    border-bottom: 1px dotted #363636;
+    padding-right: 1em;
+ }
+table.module_list td.summary { width: 100%; }
+table.function_list {
+
+    margin-left: 2em;
+    list-style-type: none;
+    border-collapse: collapse;
+}
+table.function_list td {
+    padding-bottom: 3px;
+    border-top: 1px dotted #363636;
+    border-bottom: 1px dotted #363636;
+}
+table.function_list td.name {
+    padding-bottom: 3px;
+    border-top: 1px dotted #363636;
+    border-bottom: 1px dotted #363636;
+    padding-right: 1em;
+}
+table.function_list td.summary { width: 100%; }
+dl.table dt, dl.function dt {border-top: 1px solid #ccc; padding-top: 1em;}
+dl.table dd, dl.function dd {padding-bottom: 1em; margin: 10px 0 0 20px;}
+dl.table h3, dl.function h3 {font-size: .95em;}
+ul.nowrap {
+    overflow:auto;
+    whitespace:nowrap;
+}
+/* stop sublists from having initial vertical space */
+ul ul { margin-top: 0px; }
+ol ul { margin-top: 0px; }
+ol ol { margin-top: 0px; }
+ul ol { margin-top: 0px; }
+/* make the target distinct; helps when we're navigating to a function */
+a:target + * {
+  background-color: #FF7200;
+}
+]]
+
+/* styles for prettification of source */
+pre .comment { color: #558817; }
+pre .constant { color: #a8660d; }
+pre .escape { color: #844631; }
+pre .keyword { color: #aa5050; font-weight: bold; }
+pre .library { color: #0e7c6b; }
+pre .marker { color: #512b1e; background: #fedc56; font-weight: bold; }
+pre .string { color: #8080ff; }
+pre .number { color: #f8660d; }
+pre .operator { color: #2239a8; font-weight: bold; }
+pre .preprocessor, pre .prepro { color: #a33243; }
+pre .global { color: #800080; }
+pre .user-keyword { color: #800080; }
+pre .prompt { color: #558817; }
+pre .url { color: #272fc2; text-decoration: underline; }

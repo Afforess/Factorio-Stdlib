@@ -76,11 +76,11 @@ function Area.round_to_integer(area)
             right_bottom = {x = math.ceil(right_bottom.x), y = math.ceil(right_bottom.y)}}
 end
 
---- Iterates an area. Example:
--- <pre>
---   for x,y in Area.iterate({{0, -5}, {3, -3}}) do
---     ...
---   end </pre>
+--- Iterates an area.
+-- @usage
+---for x,y in Area.iterate({{0, -5}, {3, -3}}) do
+-----...
+---end
 -- @param area the area
 -- @return iterator
 function Area.iterate(area)
@@ -100,19 +100,16 @@ function Area.iterate(area)
     return iterator.iterate, Area.to_table(area), 0
 end
 
---- Iterates an area in a spiral inner-most to outer-most fashion. Example:
---  <pre>
---   for x,y in Area.spiral_iterate({{0, 3}, {3, -3}}) do
---     ...
---   end </pre>
---   <p>Example output:</p>
---   <pre>
---   for x, y in Area.spiral_iterate({{-2, -1}, {x = 2, y = 1}}) do
---     print("(" .. x .. ", " .. y .. ")")
---   end
---   </pre>
---  <p>will generate the following output: <pre>(0, 0) (1, 0) (1, 1) (0, 1) (-1, 1) (-1, 0) (-1, -1) (0, -1) (1, -1) (2, -1) (2, 0) (2, 1) (-2, 1) (-2, 0) (-2, -1)</pre>
---  <img>http://i.imgur.com/EwfO0Es.png</img>
+--- Iterates an area in a spiral inner-most to outer-most fashion.
+---<p><i>Example:</i></p>
+---<pre>
+---for x, y in Area.spiral_iterate({{-2, -1}, {2, 1}}) do
+----  print("(" .. x .. ", " .. y .. ")")
+---end
+--- prints: (0, 0) (1, 0) (1, 1) (0, 1) (-1, 1) (-1, 0) (-1, -1) (0, -1) (1, -1) (2, -1) (2, 0) (2, 1) (-2, 1) (-2, 0) (-2, -1)
+---</pre>
+-- iterates in the order depicted:<br/>
+-- ![](http://i.imgur.com/EwfO0Es.png)
 -- @param area the area
 -- @return iterator
 function Area.spiral_iterate(area)

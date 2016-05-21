@@ -12,7 +12,7 @@ package-copy: $(FILES)
 	set -e; for file in $$(find . -iname '*.lua' -type f -not -path "./build/*"); do echo "Checking syntax: $$file" ; luac -p $$file; done;
 
 package: package-copy $(FILES)
-	cd build && ldoc stdlib/
+	cd build && ldoc -p "Factorio Stdlib" -t "Factorio Stdlib" -c ../doc/config.ld -X -s ../doc stdlib/
 
 test:
 	busted

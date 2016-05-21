@@ -40,9 +40,8 @@ end
 --- Given search criteria, a table that contains a name or type of entity to search for,
 --  and optionally surface or force, searches all loaded chunks for the entities that
 --  match the critera.
---  <p> Ex: <pre>
---   Surface.final_all_entities({ type = 'unit', surface = 'nauvis' }) </pre> <p>
---  Will return all units on the nauvis surface.
+--  @usage
+----Surface.final_all_entities({ type = 'unit', surface = 'nauvis' }) --returns a list containing all unit entities on the nauvis surface
 -- @param search_criteria a table of criteria. Must contain either the name or type or force of an entity. May contain surface or force.
 -- @return an array of all entities that matched the criteria
 function Surface.find_all_entities(search_criteria)

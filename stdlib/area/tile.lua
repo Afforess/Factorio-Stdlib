@@ -84,8 +84,8 @@ end
 --- Calculates and returns a stable, deterministic integer id for the given tile_pos
 --- <p> Tile id will not change once calculated</p>
 --- <p> Tile ids are only unique for the chunk they are in, they may repeat across a surface.<p>
---  @param surface the chunk is on
---  @param tile_pos of the chunk
+--  @param tile_pos
+--  @return the tile index
 function Tile.get_index(tile_pos)
     fail_if_missing(tile_pos, "missing tile_pos argument")
     return bit32.band(bit32.bor(bit32.lshift(bit32.band(tile_pos.x, 0x1F), 5), bit32.band(tile_pos.y, 0x1F)), 0x3FF)

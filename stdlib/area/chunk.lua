@@ -10,7 +10,9 @@ MAX_UINT = 4294967296
 
 --- Calculates the chunk coordinates for the tile position given
 --  @param position to calculate the chunk for
---  @return the chunk position as a table ex: <pre>local chunk_x = Chunk.from_position(pos).x</pre>
+--  @return the chunk position as a table
+--  @usage
+----local chunk_x = Chunk.from_position(pos).x
 function Chunk.from_position(position)
     position = Position.to_table(position)
     local x = math.floor(position.x)

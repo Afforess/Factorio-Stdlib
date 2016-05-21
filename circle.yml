@@ -10,6 +10,7 @@ dependencies:
         - sudo luarocks install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu
         - sudo luarocks install serpent
         - sudo luarocks install busted
+        - sudo luarocks install markdown
         - sudo luarocks install ldoc
 test:
     override:

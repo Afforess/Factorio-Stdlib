@@ -70,4 +70,31 @@ describe('Area Spec', function()
             idx = idx + 1
         end
     end)
+
+
+    it('should validate area spiral iteration', function()
+        local expected_iteration = {
+          { 0,  0},
+          { 1,  0},
+          { 1,  1},
+          { 0,  1},
+          {-1,  1},
+          {-1,  0},
+          {-1, -1},
+          { 0, -1},
+          { 1, -1},
+          { 2, -1},
+          { 2,  0},
+          { 2,  1},
+          {-2,  1},
+          {-2,  0},
+          {-2, -1}
+        }
+        local idx = 1
+        for x, y in Area.spiral_iterate({{-2, -1}, {x = 2, y = 1}}) do
+            assert.same(expected_iteration[idx][1], x, "Idx: " .. idx)
+            assert.same(expected_iteration[idx][2], y, "Idx: " .. idx)
+            idx = idx + 1
+        end
+    end)
 end)

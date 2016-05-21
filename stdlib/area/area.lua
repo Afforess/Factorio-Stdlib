@@ -100,6 +100,60 @@ function Area.iterate(area)
     return iterator.iterate, Area.to_table(area), 0
 end
 
+--- Iterates an area in a spiral inner-most to outer-most fashion. Example:
+--  <pre>
+--   for x,y in Area.spiral_iterate({{0, 3}, {3, -3}}) do
+--     ...
+--   end </pre>
+--   <p>Example output:</p>
+--   <pre>
+--   for x, y in Area.spiral_iterate({{-2, -1}, {x = 2, y = 1}}) do
+--     print("(" .. x .. ", " .. y .. ")")
+--   end
+--   </pre>
+--  <p>will generate the following output: <pre>(0, 0) (1, 0) (1, 1) (0, 1) (-1, 1) (-1, 0) (-1, -1) (0, -1) (1, -1) (2, -1) (2, 0) (2, 1) (-2, 1) (-2, 0) (-2, -1)</pre>
+--  <img>http://i.imgur.com/EwfO0Es.png</img>
+-- @param area the area
+-- @return iterator
+function Area.spiral_iterate(area)
+    fail_if_missing(area, "missing area value")
+    area = Area.to_table(area)
+
+    local rx = area.right_bottom.x - area.left_top.x + 1
+    local ry = area.right_bottom.y - area.left_top.y + 1
+    local half_x = math.floor(rx / 2)
+    local half_y = math.floor(ry / 2)
+    local center_x = area.left_top.x + half_x
+    local center_y = area.left_top.y + half_y
+
+    local x = 0
+    local y = 0
+    local dx = 0
+    local dy = -1
+    local iterator = {list = {}, idx = 1}
+    for i = 1, math.max(rx, ry) * math.max(rx, ry) do
+        if -(half_x) <= x and x <= half_x and -(half_y) <= y and y <= half_y then
+            table.insert(iterator.list, {x, y})
+        end
+        if x == y or (x < 0 and x == -y) or (x > 0 and x == 1 - y) then
+            local temp = dx
+            dx = -(dy)
+            dy = temp
+        end
+        x = x + dx
+        y = y + dy
+    end
+
+    function iterator.iterate(area)
+        if #iterator.list < iterator.idx then return end
+        local x, y = unpack(iterator.list[iterator.idx])
+        iterator.idx = iterator.idx + 1
+
+        return (center_x + x), (center_y + y)
+    end
+    return iterator.iterate, Area.to_table(area), 0
+end
+
 --- Converts an area in the array format to an array in the table format
 -- @param area_arr the area to convert
 -- @return a converted position, { x = pos_arr[1], y = pos_arr[2] }

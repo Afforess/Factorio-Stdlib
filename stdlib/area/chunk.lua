@@ -60,7 +60,7 @@ function Chunk.get_data(surface, chunk_pos, default_value)
         val = default_value
     end
 
-    return val
+    return val, idx
 end
 
 --- Sets user data on the chunk, stored in a mod's global data.

@@ -51,6 +51,19 @@ function Area.expand(area, amount)
     return {left_top = {x = left_top.x - amount, y = left_top.y - amount}, right_bottom = {x = right_bottom.x + amount, y = right_bottom.y + amount}}
 end
 
+--- Calculates the center of the area and returns the position
+-- @param area the area
+-- @return area to find the center for
+function Area.center(area)
+    fail_if_missing(area, "missing area value")
+    area = Area.to_table(area)
+
+    local dist_x = area.right_bottom.x - area.left_top.x
+    local dist_y = area.right_bottom.y - area.left_top.y
+
+    return {x = area.left_top.x + (dist_x / 2), y = area.left_top.y + (dist_y / 2)}
+end
+
 --- Offsets the area by the {x, y} values
 -- @param area the area
 -- @param pos the {x, y} amount to offset the area

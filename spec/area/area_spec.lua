@@ -16,6 +16,14 @@ describe('Area Spec', function()
         assert.same({x = 4, y = 3}, Area.round_to_integer(area).right_bottom)
     end)
 
+    it('should validate the center of an area', function()
+        local area = {{0, -5}, {x = 3, y = -3}}
+        assert.same({x = 1.5, y = -4}, Area.center(area))
+
+        area = {{2, 3}, {x = 4, y = 13}}
+        assert.same({x = 3, y = 8}, Area.center(area))
+    end)
+
     it('should validate area offsets', function()
         local area = {{0, -5}, {x = 3, y = -3}}
         local pos = {-0.5, 2.5}

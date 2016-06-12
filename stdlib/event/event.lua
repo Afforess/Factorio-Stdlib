@@ -81,8 +81,11 @@ function Event.dispatch(event)
             local success, err = pcall(handler, event)
             if not success then
                 -- may be nil in on_load
-                if _G['game'] then
+                if _G.game then
                     Game.print_all(err)
+                else
+                    -- no way to handle errors cleanly when the game is not up
+                    error(err)
                 end
                 return
             end

@@ -159,6 +159,15 @@ describe('Table Spec', function()
         end)
     end)
 
+    describe('table.keys', function()
+        it('creates a copy of all of the table keys', function()
+
+            assert.same(table.keys({foo = 'bar'}), {'foo'})
+            assert.same({1}, table.keys({3}))
+            assert.same({'1'}, table.keys({3}, true))
+        end)
+    end)
+
     describe('table.remove_keys', function()
         it('sets keys to nil', function()
             local a = {1, 2, 3, 4, 5}

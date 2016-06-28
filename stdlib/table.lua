@@ -117,6 +117,20 @@ function table.deepcopy(object)
     return _copy(object)
 end
 
+--- Returns a copy of all of the keys in the table
+-- @param tbl the table to copy the keys from
+-- @param as_string (optional) whether to try and parse the keys as strings, or leave them as their existing type
+-- @return an array with a copy of all the keys in the table
+function table.keys(tbl, as_string)
+  local keyset={}
+  local n = 0
+  for k, _ in pairs(tbl) do
+    n = n + 1
+    keyset[n] = as_string and tostring(k) or k
+  end
+  return keyset
+end
+
 --- Removes keys from a table (sets them to nil)
 -- @usage local a = {1, 2, 3, 4}
 --table.remove_keys(a, {1,3} --returns {nil, 2, nil, 4}

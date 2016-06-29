@@ -122,8 +122,8 @@ end
 -- @param sorted (optional) whether to sort the keys or keep the random order from pairs()
 -- @param as_string (optional) whether to try and parse the keys as strings, or leave them as their existing type
 -- @return an array with a copy of all the keys in the table
-function table.keys(tbl,sorted,as_string)
-  local keyset={}
+function table.keys(tbl,sorted,as_string) --@ http://stackoverflow.com/questions/12674345/lua-retrieve-list-of-keys-in-a-table
+  local keyset = {}
   local n = 0
   if as_string == true then --checking as_string /before/ looping is faster
     for k,_ in pairs(tbl) do n = n+1 ; keyset[n] = tostring(k) end
@@ -135,8 +135,12 @@ function table.keys(tbl,sorted,as_string)
       local tx = type(x) == 'number'
       local ty = type(y) == 'number'
       if tx == ty then
-        return x < y and true or false --similar type can be compared
-      elseif tx == 'number' then
+        if tx == 'number' then
+          return x < y and true or false --similar type can be compared
+        else
+          return x < y and true or false --similar type can be compared
+        end
+      elseif tx == true then
         return true --only x is a number and goes first
       else
         return false --only y is a number and goes first

@@ -123,7 +123,6 @@ end
 -- @param as_string (optional) whether to try and parse the keys as strings, or leave them as their existing type
 -- @return an array with a copy of all the keys in the table
 function table.keys(tbl,sorted,as_string) --@ http://stackoverflow.com/questions/12674345/lua-retrieve-list-of-keys-in-a-table
-  --returns all keys of a table as a table of keys
   local keyset = {}
   local n = 0
   if as_string == true then --checking as_string /before/ looping is faster

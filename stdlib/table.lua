@@ -124,11 +124,11 @@ end
 -- @return an array with a copy of all the keys in the table
 function table.keys(tbl,sorted,as_string)
   local keyset={}
-  local n=0
+  local n = 0
   if as_string == true then --checking as_string /before/ looping is faster
-    for k,_ in pairs(tbl) do n=n+1 ; keyset[n]=tostring(k) end
+    for k,_ in pairs(tbl) do n = n+1 ; keyset[n] = tostring(k) end
   else
-    for k,_ in pairs(tbl) do n=n+1 ; keyset[n]=k           end
+    for k,_ in pairs(tbl) do n = n+1 ; keyset[n] = k           end
   end
   if sorted == true then
     table.sort(keyset, function(x,y) --sorts tables with mixed index types.

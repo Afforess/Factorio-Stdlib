@@ -119,7 +119,7 @@ end
 
 --- Returns a copy of all of the keys in the table
 -- @param tbl the table to copy the keys from
--- @param sorted (optional) whether to sort the keys or keep the random order from pairs()
+-- @param sorted (optional) whether to sort the keys (slower) or keep the random order from pairs()
 -- @param as_string (optional) whether to try and parse the keys as strings, or leave them as their existing type
 -- @return an array with a copy of all the keys in the table
 function table.keys(tbl,sorted,as_string)

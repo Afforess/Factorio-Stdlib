@@ -122,14 +122,14 @@ end
 -- @param sorted (optional) whether to sort the keys or keep the random order from pairs()
 -- @param as_string (optional) whether to try and parse the keys as strings, or leave them as their existing type
 -- @return an array with a copy of all the keys in the table
-function table.keys(self,sorted,as_string) --@ http://stackoverflow.com/questions/12674345/lua-retrieve-list-of-keys-in-a-table
+function table.keys(tbl,sorted,as_string) --@ http://stackoverflow.com/questions/12674345/lua-retrieve-list-of-keys-in-a-table
   --returns all keys of a table as a table of keys
   local keyset = {}
   local n = 0
   if as_string == true then --checking as_string /before/ looping is faster
-    for k,_ in pairs(self) do n = n+1 ; keyset[n] = tostring(k) end
+    for k,_ in pairs(tbl) do n = n+1 ; keyset[n] = tostring(k) end
   else
-    for k,_ in pairs(self) do n = n+1 ; keyset[n] = k           end
+    for k,_ in pairs(tbl) do n = n+1 ; keyset[n] = k           end
   end
   if sorted == true then
     table.sort(keyset, function(x,y) --sorts tables with mixed index types.

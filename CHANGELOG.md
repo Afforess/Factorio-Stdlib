@@ -1,3 +1,9 @@
+## Factorio-Stdlib 0.5.1 (July 4, 2016)
+
+Bugfixes:
+
+  - Fixed Event registry not notifying of an error in an event handler when the game was loaded, but no players were connected to the game
+
 ## Factorio-Stdlib 0.5.0 (June 12, 2016)
 
 Features:

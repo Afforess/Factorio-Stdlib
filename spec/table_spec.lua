@@ -164,7 +164,8 @@ describe('Table Spec', function()
 
             assert.same(table.keys({foo = 'bar'}), {'foo'})
             assert.same({1}, table.keys({3}))
-            assert.same({'1'}, table.keys({3}, true))
+            assert.same({'1'}, table.keys({3}, false, true))
+            assert.same({1,2,'a','b'}, table.keys({b='',1,a='',2},true))
         end)
     end)
 

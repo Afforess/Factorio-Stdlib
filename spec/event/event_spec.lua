@@ -125,6 +125,28 @@ describe('Event', function()
         assert.is_nil(Event._registry[0])
     end)
 
+    it('.dispatch should print an error to connected players if a handler throws an error', function()
+        _G.game.players = { { name = 'test_player', valid = true, connected = true, print = function(msg) end } }
+        local s = spy.on(_G.game.players[1], "print")
+
+        Event.register( 0, function() error("should error") end)
+        Event.dispatch({name = 0, tick = 9001, player_index = 1})
+        assert.spy(s).was_called()
+    end)
+
+    it('.dispatch should error when there are no connected players if a handler throws an error', function()
+        _G.game.players = { { name = 'test_player', valid = true, connected = false, print = function(msg) end } }
+        local s = spy.on(_G.game.players[1], "print")
+
+        Event.register( 0, function() error("should error") end)
+
+        -- verify error was raised
+        local success, err = pcall(Event.dispatch, {name = 0, tick = 9001, player_index = 1})
+        assert.spy(s).was_not_called()
+        assert.is_false(success)
+        assert.is_true(err:contains("should error"))
+    end)
+
     it('.register with core_events.on_init should register callbacks and dispatch events', function()
         control = { on_init = function(event) assert.same(-1, event.name) assert.same(1, event.tick) end }
         local s = spy.on(control, "on_init")

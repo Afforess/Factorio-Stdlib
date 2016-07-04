@@ -119,16 +119,31 @@ end
 
 --- Returns a copy of all of the keys in the table
 -- @param tbl the table to copy the keys from
+-- @param sorted (optional) whether to sort the keys (slower) or keep the random order from pairs()
 -- @param as_string (optional) whether to try and parse the keys as strings, or leave them as their existing type
 -- @return an array with a copy of all the keys in the table
-function table.keys(tbl, as_string)
-  local keyset={}
-  local n = 0
-  for k, _ in pairs(tbl) do
-    n = n + 1
-    keyset[n] = as_string and tostring(k) or k
-  end
-  return keyset
+function table.keys(tbl,sorted,as_string)
+    local keyset = {}
+    local n = 0
+    if as_string == true then --checking as_string /before/ looping is faster
+        for k,_ in pairs(tbl) do n = n+1 ; keyset[n] = tostring(k) end
+    else
+        for k,_ in pairs(tbl) do n = n+1 ; keyset[n] = k           end
+    end
+    if sorted == true then
+        table.sort(keyset, function(x,y) --sorts tables with mixed index types.
+            local tx = type(x) == 'number'
+            local ty = type(y) == 'number'
+            if tx == ty then
+                return x < y and true or false --similar type can be compared
+            elseif tx == true then
+                return true --only x is a number and goes first
+            else
+                return false --only y is a number and goes first
+            end
+        end)
+    end
+    return keyset
 end
 
 --- Removes keys from a table (sets them to nil)

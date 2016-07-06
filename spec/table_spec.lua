@@ -109,9 +109,7 @@ describe('Table Spec', function()
 
     describe('table.deepcopy', function()
         it('copies tables in tables', function()
-            local t = { a = { "foo" },
-                b = { { bar = 0 } }
-            }
+            local t = { a = { "foo" },b = { { bar = 0 } }}
             local copy = table.deepcopy(t)
             assert.same(t, copy)
             t.a[1] = "bar"
@@ -120,10 +118,7 @@ describe('Table Spec', function()
 
         it('does not copy tables with key __self or metatables', function()
             local mt = {}
-            local t = { a = { "foo" },
-                b = { { bar = 0 } },
-                entity = {__self = "something", position={x=0,y=1}}
-            }
+            local t = { a = { "foo" }, b = { { bar = 0 } }, entity = {__self = "something", position={x=0,y=1}}}
             setmetatable(t,mt)
             local copy = table.deepcopy(t)
             assert.equals(t.entity, copy.entity)
@@ -156,6 +151,15 @@ describe('Table Spec', function()
             t.a[2] = 'something new'
             assert.equals('something new', t.mt[2])
             assert.falsy(copy.a[2])
+        end)
+    end)
+
+    describe('table.keys', function()
+        it('creates a copy of all of the table keys', function()
+            assert.same(table.keys({foo = 'bar'}), {'foo'})
+            assert.same({1}, table.keys({3}))
+            assert.same({'1'}, table.keys({3}, false, true))
+            assert.same({1,2,'a','b'}, table.keys({b='',1,a='',2},true))
         end)
     end)
 

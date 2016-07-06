@@ -3,17 +3,17 @@
 
 Time = {}
 
--- @field the number of factorio ticks in a second
+--- @field the number of factorio ticks in a second
 Time.SECOND = 60
 
--- @field the number of factorio ticks in a minute
+--- @field the number of factorio ticks in a minute
 Time.MINUTE = Time.SECOND * 60
 
--- @field the number of factorio ticks in an hour
+--- @field the number of factorio ticks in an hour
 Time.HOUR = Time.MINUTE * 60
 
--- @field the number of factorio ticks in a day
+--- @field the number of factorio ticks in a day
 Time.DAY = Time.MINUTE * 60
 
--- @field the number of factorio ticks in a week
+--- @field the number of factorio ticks in a week
 Time.WEEK = Time.DAY * 7

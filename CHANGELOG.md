@@ -1,3 +1,34 @@
+## Factorio-Stdlib 0.5.1 (July 4, 2016)
+
+Bugfixes:
+
+  - Fixed Event registry not notifying of an error in an event handler when the game was loaded, but no players were connected to the game
+
+## Factorio-Stdlib 0.5.0 (June 12, 2016)
+
+Features:
+
+  - Improved table.map, filter, and each to also include additional arguments and index.
+  - Added Event.core_events, allows registering Events for on_init, on_load, and on_configuration_changed
+  - Added options to Logger.new, adds option to modify the file extension and alter the timestamp format
+  - Added Chunk.get to calculate the chunk coordinates for a given tile position
+  - Added Chunk.get_data, retrieves mod data stored on a chunk position
+  - Added Chunk.set_data sets mod data on a chunk position
+  - Added Tile.from_position, calculates tile coordinates from a position
+  - Added Tile.to_area, returns the area that a single tile occupies
+  - Added Tile.get_data, retrieves mod data stored on a tile position
+  - Added Tile.set_data, sets mod data on a tile position
+  - Added Area.spiral_iterate, is an alternate iterator (compared to Area.iterate) that iterates the Area in an inside-out spiral fashion
+  - Added Area.center, returns the center position of an Area
+  - Added string.contains, tests if a string contains a substring
+  - Added Time contants, provides easy reference for Time.SECOND, Time.MINUTE, Time.HOUR, Time.DAY, and Time.WEEK in factorio tick time
+  - Improved the lua docs, so they share the same look and feel as the factorio lua docs
+
+Bugfixes:
+
+  - Fixed Logger writing after one hour instead of one minute
+  - Fixed Event registry with Event.core_events.init not raising errors correctly
+
 ## Factorio-Stdlib 0.4.0 (May 9, 2016)
 
 Features:

@@ -17,6 +17,20 @@ describe('Tile Spec', function()
         assert.same(3, Tile.to_area({1, 2}).right_bottom.y)
     end)
 
+    it('should ensure adjacent tiles are found correctly', function()
+        local surface = { get_tile = function(x, y) if x % 2 == 0 then return { name = 'water' } end return { name = 'sand' } end }
+        assert.same(4, #Tile.adjacent(surface, {1, 1}))
+        assert.same(4, #Tile.adjacent(surface, {1, 1}, false))
+        assert.same(8, #Tile.adjacent(surface, {1, 1}, true))
+
+        local adj = Tile.adjacent(surface, {1, 1})
+        assert.same(adj[1], {x = 1, y = 2})
+        assert.same(adj[2], {x = 2, y = 1})
+        assert.same(adj[3], {x = 1, y = 0})
+        assert.same(adj[4], {x = 0, y = 1})
+
+        assert.same(2, #Tile.adjacent(surface, {1, 1}, false, 'water'))
+    end)
     it('should ensure indexes are stable and deterministic', function()
 
         assert.same(0, Tile.get_index({x = 0, y = 0}))

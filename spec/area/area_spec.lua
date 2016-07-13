@@ -1,6 +1,12 @@
 require 'stdlib/area/area'
 
 describe('Area Spec', function()
+    it('should validate the size of an area', function()
+        assert.same(25, Area.area({{0,0}, {5,5}}))
+        assert.same(100, Area.area({{-5,-5}, {5,5}}))
+        assert.same(25, Area.area({{-2.5,2.5}, {2.5,7.5}}))
+    end)
+
     it('should validate whether positions are inside of an area', function()
         local pos = {1, -4}
         local area = {left_top = {0, -5}, right_bottom = {x = 3, y = -3}}

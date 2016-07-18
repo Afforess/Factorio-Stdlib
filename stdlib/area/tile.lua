@@ -27,6 +27,35 @@ function Tile.to_area(tile_pos)
     return { left_top = tile_pos, right_bottom = Position.offset(tile_pos, 1, 1) }
 end
 
+--- Creates a list of tile positions for all adjacent tiles (N, E, S, W) or (N, NE, E, SE, S, SW, W, NW) if diagonal is true
+-- @param surface to examine for adjacent tiles
+-- @param position the center tile position, to search around
+-- @param diagonal (optional: defaults to false) whether to include diagonal tiles
+-- @param tile_name (optional) whether to restrict adjacent tiles to one particular tile name (e.g 'water-tile')
+-- @return list of tile positions adjacent to the given position
+function Tile.adjacent(surface, position, diagonal, tile_name)
+    fail_if_missing(surface, "missing surface argument")
+    fail_if_missing(position, "missing position argument")
+
+    local offsets = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
+    if diagonal then
+        offsets = {{0, 1}, {1, 1}, {1, 0}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}
+    end
+    local adjacent_tiles = {}
+    for _, offset in pairs(offsets) do
+        local adj_pos = Position.add(position, offset)
+        if tile_name then
+            local tile = surface.get_tile(adj_pos.x, adj_pos.y)
+            if tile and tile.name == tile_name then
+                table.insert(adjacent_tiles, adj_pos)
+            end
+        else
+            table.insert(adjacent_tiles, adj_pos)
+        end
+    end
+    return adjacent_tiles
+end
+
 --- Gets user data from the tile, stored in a mod's global data.
 --- <p> The data will persist between loads</p>
 --  @param surface the surface to look up data for

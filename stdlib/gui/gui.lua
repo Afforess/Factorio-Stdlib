@@ -30,7 +30,7 @@ function Gui.Event.register(event, gui_element_pattern, handler)
 
     -- Use custom Gui event dispatcher to pass off the event to the correct sub-handler
     Event.register(event, Gui.Event.dispatch)
-    end
+
     return Gui.Event
 end
 

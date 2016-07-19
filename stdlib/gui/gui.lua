@@ -64,11 +64,17 @@ function Gui.Event.remove(event, gui_element_pattern)
     fail_if_missing(event, "missing event argument")
     fail_if_missing(gui_element_pattern, "missing gui_element_pattern argument")
 
+    local function tablelength(T)
+        local count = 0
+        for _ in pairs(T) do count = count + 1 end
+        return count
+    end
+
     if Gui.Event._registry[event] then
         if Gui.Event._registry[event][gui_element_pattern] then
-            table.remove(Gui.Event._registry[event], gui_element_pattern)
+            Gui.Event._registry[event][gui_element_pattern] = nil
         end
-        if #Gui.Event._registry[event] == 0 then
+        if tablelength(Gui.Event._registry[event]) == 0 then
             Gui.Event._registry[event] = nil
             script.on_event(event, nil)
         end

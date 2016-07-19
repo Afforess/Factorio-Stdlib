@@ -50,10 +50,7 @@ function Gui.Event.dispatch(event)
                 local success, err = pcall(handler, new_event)
                 if not success then
                     Game.print_all(err)
-                    return err
                 end
-                -- if success, err is the std return result
-                return err
             end
         end
     end

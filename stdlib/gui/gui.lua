@@ -17,16 +17,20 @@ Gui.Event = {
 function Gui.Event.register(event, gui_element_pattern, handler)
     fail_if_missing(event, "missing event name argument")
     fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
-    fail_if_missing(handler, "missing function handler argument")
 
-    if type(gui_element_pattern) == "string" then
+    if handler == nil then
+        Gui.Event.remove(event, gui_element_pattern)
+        return Gui.Event
+    end
+
+    if type(gui_element_pattern) ~= "string" then
         gui_element_pattern = tostring(gui_element_pattern)
     end
 
     if not Gui.Event._registry[event] then
         Gui.Event._registry[event] = {}
     end
-    Gui.Event._registry[event][gui_element_pattern] = handler;
+    Gui.Event._registry[event][gui_element_pattern] = handler
 
     -- Use custom Gui event dispatcher to pass off the event to the correct sub-handler
     Event.register(event, Gui.Event.dispatch)
@@ -59,7 +63,7 @@ end
 --- Removes the handler with matching gui element pattern from the event
 -- @param event Valid values are defines.event.on_gui_*
 -- @param gui_element_pattern the name or string regular expression to remove the handler for
--- @return #Gui
+-- @return #Gui.Event
 function Gui.Event.remove(event, gui_element_pattern)
     fail_if_missing(event, "missing event argument")
     fail_if_missing(gui_element_pattern, "missing gui_element_pattern argument")
@@ -79,7 +83,7 @@ function Gui.Event.remove(event, gui_element_pattern)
             script.on_event(event, nil)
         end
     end
-    return Gui
+    return Gui.Event
 end
 
 
@@ -89,7 +93,6 @@ end
 -- @return #Gui
 function Gui.on_click(gui_element_pattern, handler)
     fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
-    fail_if_missing(handler, "missing function handler argument")
 
     Gui.Event.register(defines.events.on_gui_click, gui_element_pattern, handler)
 
@@ -102,7 +105,6 @@ end
 -- @return #Gui
 function Gui.on_checked_state_changed(gui_element_pattern, handler)
     fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
-    fail_if_missing(handler, "missing function handler argument")
 
     Gui.Event.register(defines.events.on_gui_checked_state_changed, gui_element_pattern, handler)
 
@@ -115,7 +117,6 @@ end
 -- @return #Gui
 function Gui.on_text_changed(gui_element_pattern, handler)
     fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
-    fail_if_missing(handler, "missing function handler argument")
 
     Gui.Event.register(defines.events.on_gui_text_changed, gui_element_pattern, handler)
 

@@ -53,10 +53,7 @@ function Gui.Event.dispatch(event)
                 if event.name == defines.events.on_gui_text_changed then new_event.text = gui_element.text end
                 local success, err = pcall(handler, new_event)
                 if not success then
-                    if Game.print_all(err) == 0 then
-                        -- no players received the message, force a real error so someone notices
-                        error(err)
-                    end
+                    Game.print_all(err)
                 end
             end
         end

@@ -18,13 +18,13 @@ function Gui.Event.register(event, gui_element_pattern, handler)
     fail_if_missing(event, "missing event name argument")
     fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
 
+    if type(gui_element_pattern) ~= "string" then
+        error("gui_element_pattern argument must be a string")
+    end
+
     if handler == nil then
         Gui.Event.remove(event, gui_element_pattern)
         return Gui.Event
-    end
-
-    if type(gui_element_pattern) ~= "string" then
-        gui_element_pattern = tostring(gui_element_pattern)
     end
 
     if not Gui.Event._registry[event] then
@@ -68,6 +68,11 @@ function Gui.Event.remove(event, gui_element_pattern)
     fail_if_missing(event, "missing event argument")
     fail_if_missing(gui_element_pattern, "missing gui_element_pattern argument")
 
+    if type(gui_element_pattern) ~= "string" then
+        error("gui_element_pattern argument must be a string")
+    end
+
+
     local function tablelength(T)
         local count = 0
         for _ in pairs(T) do count = count + 1 end
@@ -92,10 +97,7 @@ end
 -- @param handler Function to call when gui element is clicked
 -- @return #Gui
 function Gui.on_click(gui_element_pattern, handler)
-    fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
-
     Gui.Event.register(defines.events.on_gui_click, gui_element_pattern, handler)
-
     return Gui
 end
 
@@ -104,10 +106,7 @@ end
 -- @param handler Function to call when gui element checked state changes
 -- @return #Gui
 function Gui.on_checked_state_changed(gui_element_pattern, handler)
-    fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
-
     Gui.Event.register(defines.events.on_gui_checked_state_changed, gui_element_pattern, handler)
-
     return Gui
 end
 
@@ -116,9 +115,6 @@ end
 -- @param handler Function to call when gui element text changes
 -- @return #Gui
 function Gui.on_text_changed(gui_element_pattern, handler)
-    fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
-
     Gui.Event.register(defines.events.on_gui_text_changed, gui_element_pattern, handler)
-
     return Gui
 end

@@ -1,3 +1,4 @@
+require 'stdlib/string'
 require 'stdlib/event/event'
 
 test_function = {f=function(x) someVariable = x end}
@@ -144,7 +145,7 @@ describe('Event', function()
         local success, err = pcall(Event.dispatch, {name = 0, tick = 9001, player_index = 1})
         assert.spy(s).was_not_called()
         assert.is_false(success)
-        assert.is_true(err:contains("should error"))
+        assert.is_true(string.contains(err, "should error"))
     end)
 
     it('.register with core_events.on_init should register callbacks and dispatch events', function()

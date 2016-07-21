@@ -43,4 +43,27 @@ describe('String Spec', function()
         assert.is_false(string.contains('Hello World!', 'foo'))
         assert.is_false(string.contains('Hello World!', 'hello'))
     end)
+
+    describe('string.split', function()
+        it('should split a version string into a table', function()
+            local version = "0.1.3"
+            local result = version:split('.')
+            local expected = { '0', '1', '3' }
+            assert.same(expected, result)
+
+            local version2 = "1.01.2"
+            assert.same({'1', '01', '2'}, version2:split('.'))
+        end)
+
+        it('should work with spaces as separator', function()
+            local s = "Hello World, how are you?"
+            assert.same({"Hello", "World,", "how", "are", "you?"}, s:split(" "))
+        end)
+
+        it('should work with lua patterns?', function()
+            local s = "I want1 the numbers in2 this text3"
+            assert.same({'1', '2', '3'}, s:split("%s%a", true))
+        end)
+
+    end)
 end)

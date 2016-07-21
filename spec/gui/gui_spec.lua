@@ -122,6 +122,24 @@ describe('Gui', function()
         assert.spy(s2).was_called_with(1)
     end)
 
+    it('.dispatch should called once per event', function()
+        Gui.Event.register( 1, "test_pattern", function_a )
+        Gui.Event.register( 1, "test_pattern1", function_a )
+        Gui.Event.register( 1, "test_pattern12", function_a )
+        Gui.Event.register( 1, "test_pattern123", function_a )
+        Gui.Event.register( 1, "test_pattern1234", function_a )
+        Gui.Event.register( 1, "test_pattern4", function_d )
+        Gui.Event.register( 1, "test_pattern5", function_d )
+        Gui.Event.register( 1, "test_pattern6", function_d )
+        Gui.Event.register( 1, "test_pattern7", function_d )
+        local event = {name = 1, tick = 9001, element={name="test_pattern1234",valid=true}, player_index = 1}
+        local s = spy.on(Gui.Event, "dispatch")
+        local s2 = spy.on(test_function, "f")
+        Event.dispatch(event)
+--        assert.spy(s).was_called(1) --This is failing to spy on Gui.Event.dispatch?
+        assert.spy(s2).was_called(5) --Backup plan. multiple Gui.Event.dispatch calls results in 135 calls here.
+    end)
+
     it('.dispatch should not call handlers for non-matching patterns', function()
         Gui.Event.register( 1, "test-pattern", function_a )
         Gui.Event.register( 1, "%asd$", function_a )

@@ -6,7 +6,8 @@ require 'stdlib/event/event'
 Gui = {}
 -- Factorio's gui events are so monolithic we need a special event system for it.
 Gui.Event = {
-    _registry = {}
+    _registry = {},
+    _dispatch = {}
 }
 
 --- Registers a function for a given event and matching gui element pattern
@@ -33,9 +34,10 @@ function Gui.Event.register(event, gui_element_pattern, handler)
     Gui.Event._registry[event][gui_element_pattern] = handler
 
     -- Use custom Gui event dispatcher to pass off the event to the correct sub-handler
-    -- Remove our existing handler if it exists to prevent multiple event handlers.
-    Event.remove(event, Gui.Event.dispatch)
-    Event.register(event, Gui.Event.dispatch)
+    if not Gui.Event._dispatch[event] then
+        Event.register(event, Gui.Event.dispatch)
+        Gui.Event._dispatch[event] = true
+    end
 
     return Gui.Event
 end
@@ -95,8 +97,9 @@ function Gui.Event.remove(event, gui_element_pattern)
             Gui.Event._registry[event][gui_element_pattern] = nil
         end
         if tablelength(Gui.Event._registry[event]) == 0 then
+            Event.remove(event, Gui.Event.dispatch)
             Gui.Event._registry[event] = nil
-            script.on_event(event, nil)
+            Gui.Event._dispatch[event] = false
         end
     end
     return Gui.Event

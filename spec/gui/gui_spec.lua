@@ -22,6 +22,7 @@ describe('Gui', function()
     after_each(function()
         Event._registry = {}
         Gui.Event._registry = {}
+        Gui.Event._dispatch = {}
     end)
 
     --[[

@@ -132,6 +132,14 @@ function Position.manhattan_distance(pos1, pos2)
     return math.abs(pos2.x - pos1.x) + math.abs(pos2.y - pos1.y)
 end
 
+--- Whether 2 positions are equal
+-- @param pos1 the first position
+-- @param pos2 the second position
+-- @return true if positions are equal
+function Position.equals(pos1, pos2)
+    return (Position.distance_squared(pos1,pos2) == 0)
+end
+
 --- Converts a position in the array format to a position in the table format
 -- @param pos_arr the position to convert
 -- @return a converted position, { x = pos_arr[1], y = pos_arr[2] }

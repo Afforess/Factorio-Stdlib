@@ -80,4 +80,15 @@ describe('Position Spec', function()
         assert.has_error(function() Position.tostring() end)
     end)
 
+    it('compares positions', function()
+        local pos1 = {1, -4}
+        local pos2 = {3, -2}
+        local pos3 = {-1, -4}
+        local pos4 = {1, -4}
+
+        assert.is_false(Position.equals(pos1, pos2))
+        assert.is_false(Position.equals(pos1, pos3))
+        assert.is_true(Position.equals(pos1, pos4))
+    end)
+
 end)

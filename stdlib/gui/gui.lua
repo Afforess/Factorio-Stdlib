@@ -33,6 +33,8 @@ function Gui.Event.register(event, gui_element_pattern, handler)
     Gui.Event._registry[event][gui_element_pattern] = handler
 
     -- Use custom Gui event dispatcher to pass off the event to the correct sub-handler
+    -- Remove our existing handler if it exists to prevent multiple event handlers.
+    Event.remove(event, Gui.Event.dispatch)
     Event.register(event, Gui.Event.dispatch)
 
     return Gui.Event

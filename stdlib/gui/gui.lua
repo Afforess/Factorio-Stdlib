@@ -45,12 +45,22 @@ function Gui.Event.dispatch(event)
 
     local gui_element = event.element
     if gui_element and gui_element.valid then
+        local gui_element_name = gui_element.name;
+        local gui_element_state = nil;
+        local gui_element_text = nil;
+
+        if event.name == defines.events.on_gui_checked_state_changed then
+            gui_element_state = gui_element.state
+        end
+
+        if event.name == defines.events.on_gui_text_changed then
+            gui_element_text = gui_element.text
+        end
+
         for gui_element_pattern, handler in pairs(Gui.Event._registry[event.name]) do
-            local match_str = string.match(gui_element.name, gui_element_pattern)
+            local match_str = string.match(gui_element_name, gui_element_pattern)
             if match_str ~= nil then
-                local new_event = { tick = event.tick, name = event.name, _handler = handler, match = match_str, element = gui_element, player_index = event.player_index , _event = event}
-                if event.name == defines.events.on_gui_checked_state_changed then new_event.state = gui_element.state end
-                if event.name == defines.events.on_gui_text_changed then new_event.text = gui_element.text end
+                local new_event = { tick = event.tick, name = event.name, _handler = handler, match = match_str, element = gui_element, state=gui_element_state, text=gui_element_text, player_index = event.player_index , _event = event}
                 local success, err = pcall(handler, new_event)
                 if not success then
                     Game.print_all(err)
@@ -72,7 +82,6 @@ function Gui.Event.remove(event, gui_element_pattern)
         error("gui_element_pattern argument must be a string")
     end
 
-
     local function tablelength(T)
         local count = 0
         for _ in pairs(T) do count = count + 1 end
@@ -90,7 +99,6 @@ function Gui.Event.remove(event, gui_element_pattern)
     end
     return Gui.Event
 end
-
 
 --- Registers a function for a given gui element name or pattern when the element is clicked
 -- @param gui_element_pattern the name or string regular expression to match the gui element

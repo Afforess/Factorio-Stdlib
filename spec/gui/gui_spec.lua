@@ -20,6 +20,7 @@ describe('Gui', function()
     end)
 
     after_each(function()
+        Event._registry = {}
         Gui.Event._registry = {}
     end)
 

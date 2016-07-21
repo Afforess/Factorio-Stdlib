@@ -43,6 +43,14 @@ describe('String Spec', function()
         assert.is_false(string.contains('Hello World!', 'foo'))
         assert.is_false(string.contains('Hello World!', 'hello'))
     end)
+    
+    it('should test for empty strings', function()
+      assert.is_true(string.is_empty())
+      assert.is_true(string.is_empty(""))
+      
+      assert.is_false(string.is_empty(" "))
+      assert.is_false(string.is_empty(" Something in it"))
+    end)
 
     describe('string.split', function()
         it('should split a version string into a table', function()

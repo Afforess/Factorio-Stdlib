@@ -32,6 +32,12 @@ function string.contains(s, ends)
     return s and string.find(s, ends) ~= nil
 end
 
+--- Tests whether a string is empty
+-- @param s the string to test
+function string.is_empty(s)
+    return s == nil or s == ''
+end
+
 
 --- Splits a string into a table
 -- @param s the string to split

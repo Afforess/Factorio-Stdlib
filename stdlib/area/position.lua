@@ -137,7 +137,9 @@ end
 -- @param pos2 the second position
 -- @return true if positions are equal
 function Position.equals(pos1, pos2)
-    return (Position.distance_squared(pos1,pos2) == 0)
+    pos1 = Position.to_table(pos1)
+    pos2 = Position.to_table(pos2)
+    return pos1.x == pos2.x and pos1.y == pos2.y
 end
 
 --- Converts a position in the array format to a position in the table format

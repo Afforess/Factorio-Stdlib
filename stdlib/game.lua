@@ -1,5 +1,5 @@
 --- Game module
--- @module game
+-- @module Game
 
 Game = {}
 Game.VALID_FILTER = function(v)

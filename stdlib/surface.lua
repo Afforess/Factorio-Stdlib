@@ -1,5 +1,5 @@
 --- Surface module
--- @module surface
+-- @module Surface
 
 require 'stdlib/core'
 

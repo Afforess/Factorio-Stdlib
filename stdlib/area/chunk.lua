@@ -1,6 +1,6 @@
 --- Chunk module
 --- <p>A chunk represents a 32x32 area of a surface in factorio.</p>
--- @module chunk
+-- @module Chunk
 
 require 'stdlib/core'
 require 'stdlib/area/position'

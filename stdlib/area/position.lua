@@ -1,5 +1,5 @@
 --- Position module
--- @module position
+-- @module Position
 
 Position = {}
 

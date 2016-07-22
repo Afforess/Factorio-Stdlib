@@ -1,5 +1,5 @@
 --- Logger module
--- @module log
+-- @module Logger
 
 Logger = {}
 

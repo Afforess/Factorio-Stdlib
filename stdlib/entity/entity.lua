@@ -1,5 +1,5 @@
 --- Entity module
--- @module entity
+-- @module Entity
 
 require 'stdlib/core'
 require 'stdlib/surface'

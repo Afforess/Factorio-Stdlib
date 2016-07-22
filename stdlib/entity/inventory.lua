@@ -1,5 +1,5 @@
 --- Inventory module
--- @module inventory
+-- @module Inventory
 
 Inventory = {}
 

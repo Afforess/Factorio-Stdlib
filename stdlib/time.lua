@@ -1,5 +1,5 @@
 --- Time module
--- @module time
+-- @module Time
 
 Time = {}
 

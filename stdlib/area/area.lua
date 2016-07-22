@@ -1,5 +1,5 @@
 --- Area module
--- @module area
+-- @module Area
 
 require 'stdlib/core'
 require 'stdlib/area/position'

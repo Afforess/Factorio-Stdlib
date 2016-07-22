@@ -1,5 +1,5 @@
 --- Core module
--- @module core
+-- @module Core
 
 --- Errors if the variable evaluates to false, with an optional msg
 -- @param var variable to evaluate

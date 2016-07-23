@@ -52,3 +52,41 @@ function string.split(s, sep, pattern)
     s:gsub(pattern, function(c) fields[#fields+1] = c end)
     return fields
 end
+
+--- Splits a string by another string
+-- @param s the string to split
+-- @param sep the boundary string
+-- @param limit If limit is set and positive, the returned array will contain a maximum of limit elements with the last element containing the rest of string. If the limit parameter is negative, all components except the last -limit are returned. If the limit parameter is zero, then this is treated as 1.
+-- @return table
+function string.explode(s, sep, limit)
+    if not sep or sep == "" then return false end
+    if not s then return false end
+    limit = limit or math.huge
+    if limit == 0 or limit == 1 then return {s},1 end
+
+    local r = {}
+    local n, init = 0, 1
+
+    while true do
+        local str, e = string.find(s, sep, init, true)
+        if not str then break end
+        r[#r+1] = string.sub(s, init, str - 1)
+        init = e + 1
+        n = n + 1
+        if n == limit - 1 then break end
+    end
+
+    if init <= string.len(s) then
+        r[#r+1] = string.sub(s, init)
+    else
+        r[#r+1] = ""
+    end
+    n = n + 1
+
+    if limit < 0 then
+        for i=n, n + limit + 1, -1 do r[i] = nil end
+        n = n + limit
+    end
+
+    return r, n
+end

@@ -74,4 +74,26 @@ describe('String Spec', function()
         end)
 
     end)
+
+    describe('string.explode', function()
+        it('should split a version string into a table', function()
+            local version = "0.1.3"
+            local result = version:explode('.')
+            local expected = { '0', '1', '3' }
+            assert.same(expected, result)
+
+            local version2 = "1.01.2"
+            assert.same({'1', '01', '2'}, version2:explode('.'))
+        end)
+
+        it('should work with multi-characters separators', function()
+            local s = "This is a test[!]str[!丏]ing with spec[!]al characters mixed in."
+            assert.same({"Th", " ", " a test[!]str[!丏]ing with spec[!]al characters mixed in."}, s:explode("is"))
+            assert.same({"This is a test", "str[!丏]ing with spec", "al characters mixed in."}, s:explode("[!]"))
+            assert.same({"This is a test[!]str[!", "]ing with spec[!]al characters mixed in."}, s:explode("丏"))
+            assert.same({"This is", " test[!]str[!丏]ing with spec[!]al characters mixed in."}, s:explode(" a"))
+            assert.same({"This is", "test[!]str[!丏]ing with spec[!]al characters mixed in."}, s:explode(" a "))
+            assert.same({"This is ", "test[!]str[!丏]ing with spec[!]al characters mixed in."}, s:explode("a "))
+        end)
+    end)
 end)

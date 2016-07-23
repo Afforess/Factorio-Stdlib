@@ -44,13 +44,16 @@ function table.filter(tbl, func, ...)
 end
 
 --- Given a function, apply it to each element in the table. Passes the index as second argument to the function.
+-- <p>Iteration is aborted if the applied function returns true for any element during iteration.
 -- @param tbl to be iterated
 -- @param func to apply to values
 -- @param[opt] ... additional arguments passed to the function
 -- @return the given table
 function table.each(tbl, func, ...)
     for k, v in pairs(tbl) do
-        func(v, k, ...)
+        if func(v, k, ...) then
+            break
+        end
     end
     return tbl
 end
@@ -117,12 +120,43 @@ function table.deepcopy(object)
     return _copy(object)
 end
 
+--- Returns a copy of all of the values in the table
+-- @param tbl the table to copy the keys from, or an empty table if the tbl is nil
+-- @param sorted (optional) whether to sort the keys (slower) or keep the random order from pairs()
+-- @param as_string (optional) whether to try and parse the values as strings, or leave them as their existing type
+-- @return an array with a copy of all the values in the table
+function table.values(tbl,sorted,as_string)
+    if not tbl then return {} end
+    local valueset = {}
+    local n = 0
+    if as_string == true then --checking as_string /before/ looping is faster
+        for _,v in pairs(tbl) do n = n+1 ; valueset[n] = tostring(v) end
+    else
+        for _,v in pairs(tbl) do n = n+1 ; valueset[n] = v           end
+    end
+    if sorted == true then
+        table.sort(valueset, function(x,y) --sorts tables with mixed index types.
+            local tx = type(x) == 'number'
+            local ty = type(y) == 'number'
+            if tx == ty then
+                return x < y and true or false --similar type can be compared
+            elseif tx == true then
+                return true --only x is a number and goes first
+            else
+                return false --only y is a number and goes first
+            end
+        end)
+    end
+    return valueset
+end
+
 --- Returns a copy of all of the keys in the table
--- @param tbl the table to copy the keys from
+-- @param tbl the table to copy the keys from, or an empty table if the tbl is nil
 -- @param sorted (optional) whether to sort the keys (slower) or keep the random order from pairs()
 -- @param as_string (optional) whether to try and parse the keys as strings, or leave them as their existing type
 -- @return an array with a copy of all the keys in the table
 function table.keys(tbl,sorted,as_string)
+    if not tbl then return {} end
     local keyset = {}
     local n = 0
     if as_string == true then --checking as_string /before/ looping is faster

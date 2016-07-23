@@ -48,6 +48,14 @@ describe('Table Spec', function()
             assert.spy(s).was.called(10)
         end)
 
+        it('should abort if the function returns true', function()
+            local obj = { foo = function(v) return v >= 7 end }
+            local s = spy.on(obj, 'foo')
+
+            table.each({1, 2, 3, 4, 5, 6, 7, 8, 9}, obj.foo)
+            assert.spy(s).was.called(7)
+        end)
+
         it('should pass the key and additional arguments', function()
             local obj = { foo = function() end }
             local s = spy.on(obj, 'foo')
@@ -154,12 +162,29 @@ describe('Table Spec', function()
         end)
     end)
 
-    describe('table.keys', function()
+    describe('table.keys should return all of the keys in a table', function()
         it('creates a copy of all of the table keys', function()
             assert.same(table.keys({foo = 'bar'}), {'foo'})
             assert.same({1}, table.keys({3}))
             assert.same({'1'}, table.keys({3}, false, true))
-            assert.same({1,2,'a','b'}, table.keys({b='',1,a='',2},true))
+            assert.same({1, 2, 'a', 'b'}, table.keys({b='', 1, a='', 2}, true))
+        end)
+
+        it('returns an empty table for a nil table', function()
+            assert.same(table.keys(nil), {})
+        end)
+    end)
+
+    describe('table.values should return all of the values in a table', function()
+        it('creates a copy of all of the table values', function()
+            assert.same(table.values({foo = 'bar'}), {'bar'})
+            assert.same({3}, table.values({3}))
+            assert.same({'3'}, table.values({3}, false, true))
+            assert.same({1, 2, '', ''}, table.values({b='', 1, a='', 2}, true))
+        end)
+
+        it('returns an empty table for a nil table', function()
+            assert.same(table.values(nil), {})
         end)
     end)
 

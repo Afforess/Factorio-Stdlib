@@ -132,14 +132,28 @@ function Position.manhattan_distance(pos1, pos2)
     return math.abs(pos2.x - pos1.x) + math.abs(pos2.y - pos1.y)
 end
 
+-- see: https://en.wikipedia.org/wiki/Machine_epsilon
+Position._epsilon = 1.19e-07
+
 --- Whether 2 positions are equal
 -- @param pos1 the first position
 -- @param pos2 the second position
 -- @return true if positions are equal
 function Position.equals(pos1, pos2)
-    pos1 = Position.to_table(pos1)
-    pos2 = Position.to_table(pos2)
-    return pos1.x == pos2.x and pos1.y == pos2.y
+    -- optimize for a shallow equality check first
+    if pos1 == pos2 then return true end
+
+    local epsilon = Position._epsilon
+    local abs = math.abs
+    if #pos1 == 2 and #pos2 == 2 then
+        return abs(pos1[1] - pos2[1]) < epsilon and abs(pos1[2] - pos2[2]) < epsilon
+    elseif #pos1 == 2 and #pos2 == 0 then
+        return abs(pos1[1] - pos2.x) < epsilon and abs(pos1[2] - pos2.y) < epsilon
+    elseif #pos1 == 0 and #pos2 == 2 then
+        return abs(pos1.x - pos2[1]) < epsilon and abs(pos1.y - pos2[2]) < epsilon
+    elseif #pos1 == 0 and #pos2 == 0 then
+        return abs(pos1.x - pos2.x) < epsilon and abs(pos1.y - pos2.y) < epsilon
+    end
 end
 
 --- Converts a position in the array format to a position in the table format

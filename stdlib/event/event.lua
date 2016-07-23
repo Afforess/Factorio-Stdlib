@@ -4,21 +4,12 @@
 require 'stdlib/core'
 require 'stdlib/game'
 
-
 Event = {
     _registry = {},
     core_events = {
         init = -1,
         load = -2,
         configuration_changed = -3,
-        _lookup_name = function(lookup_id)
-            for name, id in pairs(Event.core_events) do
-                if lookup_id == id then
-                    return name
-                end
-            end
-            return lookup_id
-        end,
         _register = function(id)
             if id == Event.core_events.init then
                 script.on_init(function()

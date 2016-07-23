@@ -1,6 +1,8 @@
 --- String module
 -- @module string
 
+require "stdlib/core"
+
 --- Returns a copy of the string with any leading or trailing whitespace from the string removed.
 -- @param s the string to remove leading or trailing whitespace from
 -- @return a copy of the string without leading or trailing whitespace
@@ -59,8 +61,14 @@ end
 -- @param limit If limit is set and positive, the returned array will contain a maximum of limit elements with the last element containing the rest of string. If the limit parameter is negative, all components except the last -limit are returned. If the limit parameter is zero, then this is treated as 1.
 -- @return table
 function string.explode(s, sep, limit)
-    if not sep or sep == "" then return false end
-    if not s then return false end
+    fail_if_missing(s, "missing string argument")
+    fail_if_missing(sep, "missing separator string")
+    if type(s) ~= "string" then error("string argument must be a string") end
+    if type(sep) ~= "string" then error("separator argument must be a string") end
+    if string.is_empty(s) then error("string argument cannot be empty") end
+    if string.is_empty(sep) then error("separator argument cannot be empty") end
+    if limit and type(limit) ~= "number" then error("limit argument must be a number") end
+
     limit = limit or math.huge
     if limit == 0 or limit == 1 then return {s},1 end
 

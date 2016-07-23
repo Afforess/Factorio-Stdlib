@@ -43,11 +43,11 @@ describe('String Spec', function()
         assert.is_false(string.contains('Hello World!', 'foo'))
         assert.is_false(string.contains('Hello World!', 'hello'))
     end)
-    
+
     it('should test for empty strings', function()
       assert.is_true(string.is_empty())
       assert.is_true(string.is_empty(""))
-      
+
       assert.is_false(string.is_empty(" "))
       assert.is_false(string.is_empty(" Something in it"))
     end)
@@ -70,7 +70,17 @@ describe('String Spec', function()
 
         it('should work with lua patterns?', function()
             local s = "I want1 the numbers in2 this text3"
-            assert.same({'1', '2', '3'}, s:split("%s%a", true))
+            assert.same({'1', '2', '3'}, s:split("[%s|%a]", true))
+        end)
+
+        it('should work with empty substrings', function()
+            local s = "foo.bar..."
+            assert.same({'foo', 'bar'}, s:split())
+        end)
+
+        it('should work with multicharacter duplicate separators', function()
+            local s = string.split("Test the bees knees", "ee")
+            assert.same({"Test the b", "s kn", "s"}, s)
         end)
 
     end)

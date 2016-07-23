@@ -38,17 +38,34 @@ function string.is_empty(s)
     return s == nil or s == ''
 end
 
-
 --- Splits a string into a table
+-- <p>
+-- <b>Note:</b> Empty split substrings are not included in the resulting table.
+-- For example, string.split('foo.bar...', '.', false) results in the table {'foo', 'bar'}
 -- @param s the string to split
--- @param sep the separator to use
--- @param pattern whether to use lua patterns
+-- @param (optional) sep the separator to use. The period character, `.`, is the default separator.
+-- @param pattern whether to interpret the separator as a lua pattern or plaintext for the string split
 -- @return the table
 function string.split(s, sep, pattern)
     local sep, fields = sep or ".", {}
     sep = sep ~= "" and sep or "."
     sep = not pattern and string.gsub(sep, "([^%w])", "%%%1") or sep
-    local pattern = string.format("([^%s]+)", sep)
-    s:gsub(pattern, function(c) fields[#fields+1] = c end)
+
+    local fields = {}
+    local start_idx, end_idx = string.find(s, sep)
+    local last_find = 1
+    local len = string.len(sep)
+    while start_idx do
+        local substr = string.sub(s, last_find, start_idx - 1)
+        if string.len(substr) > 0 then
+            table.insert(fields, string.sub(s, last_find, start_idx - 1))
+        end
+        last_find = end_idx + 1
+        start_idx, end_idx = string.find(s, sep, end_idx + 1)
+    end
+    local substr = string.sub(s, last_find)
+    if string.len(substr) > 0 then
+        table.insert(fields, string.sub(s, last_find))
+    end
     return fields
 end

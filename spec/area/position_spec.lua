@@ -85,6 +85,9 @@ describe('Position Spec', function()
         local pos2 = pos1
 
         assert.is_true(Position.equals(pos1, pos2))
+        assert.is_false(Position.equals(pos1, nil))
+        assert.is_false(Position.equals(nil, pos2))
+        assert.is_false(Position.equals(nil, nil))
     end)
 
     it('compares positions', function()

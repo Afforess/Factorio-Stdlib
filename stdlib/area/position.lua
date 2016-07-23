@@ -140,6 +140,7 @@ Position._epsilon = 1.19e-07
 -- @param pos2 the second position
 -- @return true if positions are equal
 function Position.equals(pos1, pos2)
+    if not pos1 or not pos2 then return false end
     -- optimize for a shallow equality check first
     if pos1 == pos2 then return true end
 
@@ -154,6 +155,8 @@ function Position.equals(pos1, pos2)
     elseif #pos1 == 0 and #pos2 == 0 then
         return abs(pos1.x - pos2.x) < epsilon and abs(pos1.y - pos2.y) < epsilon
     end
+
+    return false
 end
 
 --- Converts a position in the array format to a position in the table format

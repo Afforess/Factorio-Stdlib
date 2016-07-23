@@ -58,6 +58,8 @@ function Surface.find_all_entities(search_criteria)
     local result = {}
 
     for _, surface in pairs(surface_list) do
+        -- TODO: this chunk iteration is no longer nessecary in Factorio 13.10+
+        -- see https://forums.factorio.com/viewtopic.php?f=3&t=29612 for details
         for chunk in surface.get_chunks() do
             local entities = surface.find_entities_filtered(
             {

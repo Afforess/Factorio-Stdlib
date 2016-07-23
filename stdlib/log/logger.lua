@@ -3,9 +3,9 @@
 
 Logger = {}
 
---- Creates a new logger object
--- In debug mode, the logger writes immediately. Otherwise it buffers lines.
--- Logger flushes after 60 seconds has elapsed since the last message.
+--- Creates a new logger object.<p>
+-- In debug mode, the logger writes immediately. Otherwise the loggers buffers lines.
+-- The logger flushes after 60 seconds has elapsed since the last message.
 -- @param mod_name [required] the name of the mod to create the logger for
 -- @param log_name (optional, default: 'main') the name of the logger
 -- @param debug_mode (optional, default: false) toggles the debug state of logger.

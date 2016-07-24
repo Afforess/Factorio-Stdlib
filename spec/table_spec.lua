@@ -64,6 +64,17 @@ describe('Table Spec', function()
         end)
     end)
 
+    describe('table.flatten', function()
+        it('should flatten a table ', function()
+            assert.same({1,2,3,4,5,6,7,8,9}, table.flatten({1, {2, {3, {4, 5}, 6}, 7, {{{8}}, 9}}}))
+        end)
+
+        it('should flatten with a recursive limit ', function()
+            assert.same({1,2,3,4,5,6,7,8,9}, table.flatten({1, {2, {3, 4, 5, 6}, 7, 8, 9}}, 2))
+            assert.same({1, 2, {3, 4, 5, 6}, 7, 8, 9}, table.flatten({1, {2, {3, 4, 5, 6}, 7, 8, 9}}, 1))
+        end)
+    end)
+
     describe('table.first', function()
         it('should return the first element of a table', function()
             assert.same(3, table.first({3, 2, 1}))
@@ -95,6 +106,19 @@ describe('Table Spec', function()
             assert.equals("foo", tblA[2])
             assert.equals("bar", tblA[3])
             assert.equals(2, tblA.option2)
+        end)
+
+        it('should merge arrays', function()
+            local tblA = {'foo', 'bar', 'baz'}
+            local tblB = {'quz', 'buz'}
+
+            local r = table.merge(tblA, tblB, true)
+            assert.equals(r, tblA)
+            assert.equals('foo', tblA[1])
+            assert.equals('bar', tblA[2])
+            assert.equals('baz', tblA[3])
+            assert.equals('quz', tblA[4])
+            assert.equals('buz', tblA[5])
         end)
 
         it('should overwrite same keys with value from table B', function()

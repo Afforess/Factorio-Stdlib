@@ -58,6 +58,33 @@ function table.each(tbl, func, ...)
     return tbl
 end
 
+--- Returns a new table that is a one-dimensional flattening of this array (recursively).
+-- For every element that is an table, extract its elements into the new array.
+-- The optional level argument determines the level of recursion to flatten.
+-- <p>Note: does not flatten associative elements, only arrays
+-- @param tbl to be flattened
+-- @param level (optional) recursive levels, or no limit to recursion if not supplied
+-- @return a new table that represents the flattened contents of the given table
+function table.flatten(tbl, level)
+    local flattened = {}
+    table.each(tbl, function(value)
+        if type(value) == "table" and #value > 0 then
+            if level then
+                if level > 0 then
+                    table.merge(flattened, table.flatten(value, level - 1), true)
+                else
+                    table.insert(flattened, value)
+                end
+            else
+                table.merge(flattened, table.flatten(value), true)
+            end
+        else
+            table.insert(flattened, value)
+        end
+    end)
+    return flattened
+end
+
 --- Given an array, returns the first element or nil if no element exists
 -- @param tbl the array
 -- @return the first element
@@ -74,7 +101,6 @@ function table.last(tbl)
     return tbl[size]
 end
 
-
 --- Merges 2 tables, values from first get overwritten by second
 --- @usage function some_func(x, y, args)
 --  args = table.merge({option1=false}, args)
@@ -84,13 +110,21 @@ end
 -- some_func(1,2,{option1=true}) --returns 1
 -- @param tblA first table
 -- @param tblB second table
+-- @param array_merge (optional: false) whether to merge the tables as arrays, or associatively
 -- @return tblA with merged values from tblB
-function table.merge(tblA, tblB)
+function table.merge(tblA, tblB, array_merge)
     if not tblB then
         return tblA
     end
-    for k, v in pairs(tblB) do
-        tblA[k] = v
+    if array_merge then
+        for _, v in pairs(tblB) do
+            table.insert(tblA, v)
+        end
+
+    else
+        for k, v in pairs(tblB) do
+            tblA[k] = v
+        end
     end
     return tblA
 end

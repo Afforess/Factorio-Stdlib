@@ -17,6 +17,9 @@ describe('Data Spec', function()
         for _, recipe in pairs(data.raw.recipe) do
             assert.same(10, recipe.energy_required)
         end
+
+        -- should be safe when no fields are returned
+        Data.select("recipe:null").energy_required = 10
     end)
 
     it('should be able to chain writing fields with the selector function "apply"', function()
@@ -25,5 +28,8 @@ describe('Data Spec', function()
             assert.same(5, recipe.energy_required)
             assert.same('fluid', recipe.category)
         end
+
+        -- should be safe when no fields are returned
+        Data.select("recipe:null").apply('energy_required', 5).apply('category', 'fluid')
     end)
 end)

@@ -20,6 +20,28 @@ describe('Recipe Spec', function()
         for _, recipe in pairs(data.raw.recipe) do
             assert.same(5, recipe.energy_required)
         end
+
+        -- should be safe when no fields are returned
+        Recipe.select("null").energy_required = 10
+    end)
+
+    it('should be able to chain writing fields with the selector function "apply"', function()
+        Recipe.select(".*").apply('energy_required', 5).apply('category', 'fluid')
+        for _, recipe in pairs(data.raw.recipe) do
+            assert.same(5, recipe.energy_required)
+            assert.same('fluid', recipe.category)
+        end
+
+        -- should be safe when no fields are returned
+        Recipe.select("null").apply('energy_required', 5).apply('category', 'fluid')
+
+        -- should also be able to apply into fields, like ingredients
+        Recipe.select("copper.*:ingredients:copper.*").apply('amount', 100)
+        assert.same(1, #data.raw.recipe['copper-plate'].ingredients)
+        for _, item in pairs(data.raw.recipe['copper-plate'].ingredients) do
+            assert.same(100, item.amount)
+            assert.same(100, item[2])
+        end
     end)
 
     describe('should standardize access to recipe ingredients and results', function()

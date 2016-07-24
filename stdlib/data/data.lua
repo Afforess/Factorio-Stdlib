@@ -14,7 +14,7 @@ Data = {}
 -- <p> For more granular selectors, see other modules, such as Recipe.select.
 -- @usage Data.select('recipe') -- returns a table with all recipes
 -- @usage Data.select('recipe:steel.*') -- returns a table with all recipes whose name matches 'steel.*'
--- @param the pattern to search with
+-- @param pattern to search with
 -- @return table containing the elements matching the selector pattern, or an empty table if there was no matches
 function Data.select(pattern)
     fail_if_missing(pattern, "missing pattern argument")

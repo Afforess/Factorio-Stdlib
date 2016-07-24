@@ -6,6 +6,27 @@ Logger = {}
 --- Creates a new logger object.<p>
 -- In debug mode, the logger writes immediately. Otherwise the loggers buffers lines.
 -- The logger flushes after 60 seconds has elapsed since the last message.
+-- <p>
+-- When loggers are created, a table of options may be specified. The valid options are:
+-- <code>
+--    log_ticks      -- whether to include the game tick timestamp in logs. Defaults to false.
+--    file_extension -- a string that overides the default 'log' file extension.
+--    force_append   -- each time a logger is created, it will always append, instead of
+--                   --   the default behavior, which is to write out a new file, then append
+-- </code>
+--
+-- @usage
+--LOGGER = Logger.new('cool_mod_name')
+--LOGGER.log("this msg will be logged!")
+--
+-- @usage
+--Logger.new('cool_mod_name', 'test', true)
+--LOGGER.log("this msg will be logged and written immediately in test.log!")
+--
+-- @usage
+--LOGGER = Logger.new('cool_mod_name', 'test', true, { file_extension = data })
+--LOGGER.log("this msg will be logged and written immediately in test.data!")
+--
 -- @param mod_name [required] the name of the mod to create the logger for
 -- @param log_name (optional, default: 'main') the name of the logger
 -- @param debug_mode (optional, default: false) toggles the debug state of logger.
@@ -27,8 +48,10 @@ function Logger.new(mod_name, log_name, debug_mode, options)
     Logger.options = {
         log_ticks = options.log_ticks or false, -- whether to add the ticks in the timestamp, default false
         file_extension = options.file_extension or 'log', -- extension of the file, default: log
+        force_append = options.force_append or false, -- append the file on first write, default: false
     }
     Logger.file_name = 'logs/' .. Logger.mod_name .. '/' .. Logger.log_name .. '.' .. Logger.options.file_extension
+    Logger.ever_written = Logger.options.force_append
 
     --- Logs a message
     -- @param msg a string, the message to log

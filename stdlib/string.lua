@@ -43,7 +43,7 @@ end
 -- <b>Note:</b> Empty split substrings are not included in the resulting table.
 -- For example, string.split('foo.bar...', '.', false) results in the table {'foo', 'bar'}
 -- @param s the string to split
--- @param (optional) sep the separator to use. The period character, `.`, is the default separator.
+-- @param sep (optional) the separator to use. The period character, `.`, is the default separator.
 -- @param pattern whether to interpret the separator as a lua pattern or plaintext for the string split
 -- @return the table
 function string.split(s, sep, pattern)

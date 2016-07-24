@@ -15,7 +15,7 @@ Recipe = {}
 -- @usage Data.select('steel.*') -- returns a table with all recipes whose name matches 'steel.*'
 -- @usage Data.select('steel.*:ingredients') -- returns a table with all ingredients from all recipes whose name matches 'steel.*'
 -- @usage Data.select('steel.*:ingredients:iron-plate') -- returns a table with all iron-plate ingredient objects, from all recipes whose name matches 'steel.*'
--- @param the pattern to search with
+-- @param pattern to search with
 -- @return table containing the elements matching the selector pattern, or an empty table if there was no matches
 function Recipe.select(pattern)
     fail_if_missing(pattern, "missing pattern argument")

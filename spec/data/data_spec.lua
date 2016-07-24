@@ -18,4 +18,12 @@ describe('Data Spec', function()
             assert.same(10, recipe.energy_required)
         end
     end)
+
+    it('should be able to chain writing fields with the selector function "apply"', function()
+        Data.select("recipe:.*").apply('energy_required', 5).apply('category', 'fluid')
+        for _, recipe in pairs(data.raw.recipe) do
+            assert.same(5, recipe.energy_required)
+            assert.same('fluid', recipe.category)
+        end
+    end)
 end)

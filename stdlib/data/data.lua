@@ -40,6 +40,16 @@ end
 Data._select_metatable = {}
 Data._select_metatable.new = function(selection)
     local self = { }
+    self.__index = function(tbl, key)
+        if key == 'apply' then
+            return function(k, v)
+                table.each(tbl, function(obj)
+                    obj[k] = v
+                end)
+                return tbl
+            end
+        end
+    end
     self.__newindex = function(tbl, key, value)
         table.each(tbl, function(obj)
             obj[key] = value

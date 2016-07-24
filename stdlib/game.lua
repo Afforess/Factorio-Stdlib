@@ -12,14 +12,14 @@ end
 -- @return the number of players who received the message
 function Game.print_all(msg, condition)
     local num = 0
-	for _, player in pairs(game.players) do
-		if player.valid and player.connected then
+    for _, player in pairs(game.players) do
+        if player.valid and player.connected then
             if condition == nil or select(2, pcall(condition, player)) then
-			    player.print(msg)
+                player.print(msg)
                 num = num + 1
             end
-		end
-	end
+        end
+    end
     return num
 end
 
@@ -34,7 +34,7 @@ function Game.print_force(force, msg)
     else
         force_name = force.name
     end
-	return Game.print_all(msg, function(player)
+    return Game.print_all(msg, function(player)
         return player.force.name == force_name
     end)
 end
@@ -50,7 +50,7 @@ function Game.print_surface(surface, msg)
     else
         surface_name = surface.name
     end
-	return Game.print_all(msg, function(player)
+    return Game.print_all(msg, function(player)
         return player.surface.name == surface_name
     end)
 end

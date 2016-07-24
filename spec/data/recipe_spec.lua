@@ -25,6 +25,10 @@ describe('Recipe Spec', function()
         Recipe.select("null").energy_required = 10
     end)
 
+    it('should escape the hypen in selections', function()
+        assert.same(1, #Recipe.select("copper-plate*:ingredients:copper.*"))
+    end)
+
     it('should be able to write into nested fields', function()
         Recipe.select("copper.*:ingredients:copper.*").name = 'unobtainium-ore'
         assert.same(1, #data.raw.recipe['copper-plate'].ingredients)

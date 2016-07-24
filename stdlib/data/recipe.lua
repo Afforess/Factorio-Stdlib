@@ -32,6 +32,9 @@ function Recipe.select(pattern)
                 if string.match(field_key, inner_field_pattern) then
                     local contents_field_pattern = #parts > 2 and parts[3] or nil
                     if contents_field_pattern then
+                        -- escape the '-' in names
+                        contents_field_pattern = string.gsub(contents_field_pattern, "%-", "%%-")
+
                         -- ex: field_value --> { { 'copper-ore', 1} }
                         for _, content_value in pairs(field_value) do
                             -- ex: content_value --> { 'copper-ore', 1}

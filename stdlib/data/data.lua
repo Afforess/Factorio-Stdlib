@@ -25,6 +25,8 @@ function Data.select(pattern)
     for category, values in pairs(data.raw) do
         if string.match(category, category_pattern) then
             local element_pattern = #parts > 1 and parts[2] or '.*'
+            -- escape the '-' in names
+            element_pattern = string.gsub(element_pattern, "%-", "%%-")
             for element_name, element in pairs(values) do
                 if string.match(element_name, element_pattern) then
                     table.insert(results, element)

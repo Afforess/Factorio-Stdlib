@@ -53,6 +53,7 @@ function Recipe.select(pattern)
     else
         return Recipe.format_items(Data.select('recipe:' .. pattern))
     end
+    setmetatable(results, Data._select_metatable.new(results))
     return results
 end
 

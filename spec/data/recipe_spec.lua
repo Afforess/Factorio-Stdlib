@@ -15,6 +15,13 @@ describe('Recipe Spec', function()
         assert.same({'copper-ore', 1}, table.first(Recipe.select("copper.*:ingredients:copper.*")))
     end)
 
+    it('should have write access to all elements from the selection', function()
+        Recipe.select(".*").energy_required = 5
+        for _, recipe in pairs(data.raw.recipe) do
+            assert.same(5, recipe.energy_required)
+        end
+    end)
+
     describe('should standardize access to recipe ingredients and results', function()
         it('verify that the metatables work', function()
             assert.same('copper-ore', table.first(Recipe.select("copper.*:ingredients:copper.*"))[1])

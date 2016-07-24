@@ -32,5 +32,19 @@ function Data.select(pattern)
             end
         end
     end
+    setmetatable(results, Data._select_metatable.new(results))
     return results
+end
+
+-- this metatable is set on recipes, to control access to ingredients and results
+Data._select_metatable = {}
+Data._select_metatable.new = function(selection)
+    local self = { }
+    self.__newindex = function(tbl, key, value)
+        table.each(tbl, function(obj)
+            obj[key] = value
+        end)
+    end
+
+    return self
 end

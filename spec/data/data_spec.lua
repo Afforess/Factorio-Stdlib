@@ -11,4 +11,11 @@ describe('Data Spec', function()
         assert.same(3, #Data.select("recipe"))
         assert.same(1, #Data.select("recipe:copper.*"))
     end)
+
+    it('should have write access to all elements from the selection', function()
+        Data.select("recipe:.*").energy_required = 10
+        for _, recipe in pairs(data.raw.recipe) do
+            assert.same(10, recipe.energy_required)
+        end
+    end)
 end)

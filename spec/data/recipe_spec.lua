@@ -25,6 +25,18 @@ describe('Recipe Spec', function()
         Recipe.select("null").energy_required = 10
     end)
 
+    it('should be able to write into nested fields', function()
+        Recipe.select("copper.*:ingredients:copper.*").name = 'unobtainium-ore'
+        assert.same(1, #data.raw.recipe['copper-plate'].ingredients)
+        for _, item in pairs(data.raw.recipe['copper-plate'].ingredients) do
+            assert.same('unobtainium-ore', item.name)
+            assert.same('unobtainium-ore', item[1])
+        end
+
+        -- should not error even though no copper ingredients exist now
+        Recipe.select("copper.*:ingredients:copper.*").name = 'unobtainium-ore'
+    end)
+
     it('should be able to chain writing fields with the selector function "apply"', function()
         Recipe.select(".*").apply('energy_required', 5).apply('category', 'fluid')
         for _, recipe in pairs(data.raw.recipe) do

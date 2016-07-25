@@ -101,6 +101,51 @@ function table.last(tbl)
     return tbl[size]
 end
 
+--- Given an array of only numeric values, returns the minimum or nil if no element exists
+-- @param tbl the array
+-- @return the minimum value
+function table.min(tbl)
+    if #tbl == 0 then return nil end
+
+    local min = tbl[1]
+    for _, num in pairs(tbl) do
+        min = num < min and num or min
+    end
+    return min
+end
+
+--- Given an array of only numeric values, returns the maximum or nil if no element exists
+-- @param tbl the array
+-- @return the maximum value
+function table.max(tbl)
+    if #tbl == 0 then return nil end
+
+    local max = tbl[1]
+    for _, num in pairs(tbl) do
+        max = num > max and num or max
+    end
+    return max
+end
+
+--- Given an array of only numeric values, return the sum of all values, or 0 for empty arrays
+-- @param tbl the array
+-- @return the sum
+function table.sum(tbl)
+    local sum = 0
+    for _, num in pairs(tbl) do
+        sum = sum + num
+    end
+    return sum
+end
+
+--- Given an array of only numeric values, returns the average or nil if no element exists
+-- @param tbl the array
+-- @return the average value
+function table.avg(tbl)
+    local cnt = #tbl
+    return cnt ~= 0 and table.sum(tbl) / cnt or nil
+end
+
 --- Merges 2 tables, values from first get overwritten by second
 --- @usage function some_func(x, y, args)
 --  args = table.merge({option1=false}, args)

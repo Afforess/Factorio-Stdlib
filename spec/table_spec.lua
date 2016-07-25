@@ -95,6 +95,48 @@ describe('Table Spec', function()
         end)
     end)
 
+    describe('table.min', function()
+        it('should return the minimum value of a table', function()
+            assert.same(1, table.min({3, 1, 2, 5, 7}))
+            assert.same(-1.5, table.min({5, -1.5, 7, 8.676}))
+        end)
+
+        it('should return nil for an empty table', function()
+            assert.is_nil(table.min({}))
+        end)
+    end)
+
+    describe('table.max', function()
+        it('should return the maximum value of a table', function()
+            assert.same(7, table.max({3, 1, 2, 5, 7}))
+            assert.same(8.676, table.max({5, -1.5, 7, 8.676}))
+        end)
+
+        it('should return nil for an empty table', function()
+            assert.is_nil(table.max({}))
+        end)
+    end)
+
+    describe('table.sum', function()
+        it('should return the sum of all values of a table', function()
+            assert.same(6, table.sum({1, 2, 3}))
+        end)
+
+        it('should return 0 for an empty table', function()
+            assert.same(0, table.sum({}))
+        end)
+    end)
+
+    describe('table.avg', function()
+        it('should return the average value of a table', function()
+            assert.same(2.5, table.avg({1,2,3,4}))
+        end)
+
+        it('should return nil for an empty table', function()
+            assert.is_nil(table.avg({}))
+        end)
+    end)
+
     describe('table.merge', function()
         it('should change the first table', function()
             local tblA = {option1=1, [2] = "foo"}

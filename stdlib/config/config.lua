@@ -7,58 +7,58 @@ require 'stdlib/table'
 
 Config = {}
 
---- Options table
---[[
-    local config_options = {
-        pathSeparator = '.';
-    }
---]]
-
 --- Creates a new Config object
--- get/set/delete variables with easy to use paths.
+-- to ease the management of a config table.
 -- @param config_table [required] The table to be managed.
--- @param options (optional) table with optional arguments
--- @return the Config instance
-function Config.new(config_table, options)
+-- @return the Config instance for managing config_table
+function Config.new(config_table)
     if not config_table then
         error("config_table is a required parameter.")
     elseif type(config_table) ~= "table" then
         error("config_table must be a table. Was given [" .. type(options) .. "]")
+    elseif type(config_table.get) == "function" then
+        error("Config can't manage another Config object")
     end
 
-    if options == nil then
-        options = {}
-    elseif type(options) ~= "table" then
-        error("options must be a table. Was given [" .. type(options) .. "]")
-    end
-
-    -- options checks.
-    if options.pathSeparator ~= nil then
-        if type(options.pathSeparator) ~= "string" then
-            error("options.pathSeparator must be a string. Was given [" .. type(options.pathSeparator) .. "]")
-        elseif string.is_empty(options.pathSeparator) then
-            error("options.pathSeparator cannot be an empty string.")
+    -----------------------------------------------------------------------
+    --Setup repeated code for use in sub functions here
+    -----------------------------------------------------------------------
+    local reservedCharacters = '`~!@#$%^&*+=|;:/\\\'",?()[]{}<>'
+    local testReservedCharacters = function(path)
+        local reservedCharacters = reservedCharacters
+        for c in reservedCharacters:gmatch('.') do
+            if path:find(c, 1, true) then
+                return c
+            end
         end
+        return nil
     end
 
-    local Config = {_config = config_table}
-    Config.options = {
-        pathSeparator = options.pathSeparator or '.'
-    }
+    -----------------------------------------------------------------------
+    --Setup the Config object
+    -----------------------------------------------------------------------
+    local Config = {}
 
     --- Get a stored config value.
-    -- @param path a string, config variable to get
-    -- @param default a variable, value to be used if path isn't set
-    -- @return stored value, nil if not found and no default specified
+    -- @param path [required] a string representing the variable to retrieve
+    -- @param default (optional) value to be used if path is nil
+    -- @return value at path or nil if not found and no default given
     function Config.get(path, default)
-        local pathParts = string.split(path, Config.options.pathSeparator);
+        if type(path) ~= "string" or path:is_empty() then error("path is invalid") end
 
-        -- Only do something if we get at least one key.
-        if (string.is_empty(pathParts[1]) or not Config._config[pathParts[1]]) then
-            return nil;
+        local config = config_table
+        local testReservedCharacters = testReservedCharacters
+
+        if path:starts_with("$") then
+            error("JsonPath detected. This is not yet implemented")
+            --return JsonPath()
         end
 
-        local part = Config._config;
+        local c = testReservedCharacters(path)
+        if c ~= nil then error("path '" .. path .. "' contains the reserved character '" .. c .. "'") end
+
+        local pathParts = path:split('.')
+        local part = config;
         local value = nil;
 
         for key = 1, #pathParts, 1 do
@@ -82,24 +82,33 @@ function Config.new(config_table, options)
     end
 
     --- Set a stored config value.
-    -- @param path a string, config variable to set
-    -- @param data a variable, value to set path as
-    -- @return boolean, true on success. false on failure...who am I kidding this function brute forces success.
+    -- @param path [required] a string, config variable to set
+    -- @param data (optional) to set path to. If nil it behaves identical to Config.delete()
+    -- @return boolean true on success; false on failure.
     function Config.set(path, data)
-        local pathParts = string.split(path, Config.options.pathSeparator);
+        if type(path) ~= "string" or path:is_empty() then error("path is invalid") end
 
-        -- Only do something if we get at least one key.
-        if (string.is_empty(pathParts[1])) then
-            error("path is invalid");
+        local config = config_table
+        local testReservedCharacters = testReservedCharacters
+
+        if path:starts_with("$") then
+            error("JsonPath detected. This is not yet implemented")
+            --return JsonPath()
         end
 
-        local part = Config._config;
+        local c = testReservedCharacters(path)
+        if c ~= nil then error("path contains the reserved character '" .. c .. "'") end
 
-        for key=1, #pathParts - 1, 1 do
+        local pathParts = path:split('.')
+        local part = config;
+        local value = nil;
+
+        for key = 1, #pathParts - 1, 1 do
             if (type(part[pathParts[key]]) ~= "table") then
                 part[pathParts[key]] = {};
             end
 
+            value = part[pathParts[key]];
             part = part[pathParts[key]];
         end
 
@@ -112,14 +121,22 @@ function Config.new(config_table, options)
     -- @param path a string, config variable to set
     -- @return boolean, true on success, false on failure.
     function Config.delete(path)
-        local pathParts = string.split(path, Config.options.pathSeparator);
+        if type(path) ~= "string" or path:is_empty() then error("path is invalid") end
 
-        -- Only do something if we get at least one key.
-        if (string.is_empty(pathParts[1])) then
-            error("path is invalid");
+        local config = config_table
+        local testReservedCharacters = testReservedCharacters
+
+        if path:starts_with("$") then
+            error("JsonPath detected. This is not yet implemented")
+            --return JsonPath()
         end
 
-        local part = Config._config;
+        local c = testReservedCharacters(path)
+        if c ~= nil then error("path contains the reserved character '" .. c .. "'") end
+
+        local pathParts = path:split('.')
+        local part = config;
+        local value = nil;
 
         for key = 1, #pathParts - 1, 1 do
             if (type(part[pathParts[key]]) ~= "table") then

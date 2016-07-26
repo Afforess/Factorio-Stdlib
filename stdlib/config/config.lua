@@ -5,6 +5,24 @@ require 'stdlib/core'
 require 'stdlib/string'
 require 'stdlib/table'
 
+-----------------------------------------------------------------------
+--Setup repeated code for use in sub functions here
+-----------------------------------------------------------------------
+--Optional dependencies to enable JsonPath query support
+local haslpeg, lpeg = pcall(require, "stdlib-dep/lulpeg/lulpeg")
+local hasjsonpath, jsonpath = pcall(require, "stdlib-dep/jsonpath/jsonpath")
+
+local reservedCharacters = '`~!@#$%^&*+=|;:/\\\'",?()[]{}<>'
+local testReservedCharacters = function(path)
+    local reservedCharacters = reservedCharacters
+    for c in reservedCharacters:gmatch('.') do
+        if path:find(c, 1, true) then
+            return c
+        end
+    end
+    return nil
+end
+
 Config = {}
 
 --- Creates a new Config object
@@ -21,20 +39,6 @@ function Config.new(config_table)
     end
 
     -----------------------------------------------------------------------
-    --Setup repeated code for use in sub functions here
-    -----------------------------------------------------------------------
-    local reservedCharacters = '`~!@#$%^&*+=|;:/\\\'",?()[]{}<>'
-    local testReservedCharacters = function(path)
-        local reservedCharacters = reservedCharacters
-        for c in reservedCharacters:gmatch('.') do
-            if path:find(c, 1, true) then
-                return c
-            end
-        end
-        return nil
-    end
-
-    -----------------------------------------------------------------------
     --Setup the Config object
     -----------------------------------------------------------------------
     local Config = {}
@@ -47,11 +51,22 @@ function Config.new(config_table)
         if type(path) ~= "string" or path:is_empty() then error("path is invalid") end
 
         local config = config_table
-        local testReservedCharacters = testReservedCharacters
 
         if path:starts_with("$") then
-            error("JsonPath detected. This is not yet implemented")
-            --return JsonPath()
+            if not hasjsonpath then
+                error("JsonPath query string detected but external dependency is missing.")
+            end
+            local matches = jsonpath.nodes(config, path)
+            if #matches == 0 then
+                return nil
+            end
+
+            local i
+            for i=1, #matches, 1 do
+                table.remove(matches[i].path, 1) --Remove $ from path
+                matches[i].path = table.concat(matches[i].path, ".")
+            end
+            return matches
         end
 
         local c = testReservedCharacters(path)
@@ -89,11 +104,22 @@ function Config.new(config_table)
         if type(path) ~= "string" or path:is_empty() then error("path is invalid") end
 
         local config = config_table
-        local testReservedCharacters = testReservedCharacters
 
         if path:starts_with("$") then
-            error("JsonPath detected. This is not yet implemented")
-            --return JsonPath()
+            if not hasjsonpath then
+                error("JsonPath query string detected but external dependency is missing.")
+            end
+            local matches = jsonpath.nodes(config, path)
+            if #matches == 0 then
+                return false
+            end
+
+            local i
+            for i=1, #matches, 1 do
+                table.remove(matches[i].path, 1) --Remove $ from path
+                Config.set(table.concat(matches[i].path, "."), data)
+            end
+            return #matches
         end
 
         local c = testReservedCharacters(path)
@@ -124,11 +150,22 @@ function Config.new(config_table)
         if type(path) ~= "string" or path:is_empty() then error("path is invalid") end
 
         local config = config_table
-        local testReservedCharacters = testReservedCharacters
 
         if path:starts_with("$") then
-            error("JsonPath detected. This is not yet implemented")
-            --return JsonPath()
+            if not hasjsonpath then
+                error("JsonPath query string detected but external dependency is missing.")
+            end
+            local matches = jsonpath.nodes(config, path)
+            if #matches == 0 then
+                return false
+            end
+
+            local i
+            for i=1, #matches, 1 do
+                table.remove(matches[i].path, 1) --Remove $ from path
+                Config.delete(table.concat(matches[i].path, "."), data)
+            end
+            return #matches
         end
 
         local c = testReservedCharacters(path)
@@ -153,7 +190,22 @@ function Config.new(config_table)
     --- Test the existence of a stored config value.
     -- @param path a string, config variable to test
     -- @return boolean, true on success, false otherwise
-    function Config.isset(path)
+    function Config.is_set(path)
+        if type(path) ~= "string" or path:is_empty() then error("path is invalid") end
+
+        local config = config_table
+
+        if path:starts_with("$") then
+            if not hasjsonpath then
+                error("JsonPath query string detected but external dependency is missing.")
+            end
+            local matches = jsonpath.nodes(config, path)
+            if #matches == 0 then
+                return false
+            end
+            return #matches
+        end
+
         return Config.get(path) ~= nil
     end
 

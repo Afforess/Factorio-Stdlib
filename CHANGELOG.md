@@ -5,6 +5,10 @@ Features:
   - Added table.keys, when passed a table, returns a copy of all the keys in the table
   - Added table.values, when passed a table, returns a copy of all of the values in the table
   - Added table.flatten, when passed a table, creates a copy of the table where inner nested tables were flattened into the outer table
+  - Added table.min, when passed an array, returns the minimum value
+  - Added table.max, when passed an array, returns the maximum value
+  - Added table.sum, when passed an array, adds up all the values and returns the sum
+  - Added table.avg, when passed an array, calculates the average value
   - Added Area.area, calculates the size an area occupies
   - Added Tile.adjacent, given a tile, returns a list of adjacent tile positions  (N, E, S, W) or (N, NE, E, SE, S, SW, W, NW), depending if diagonal tiles are specified.
   - Added Position.equals method, to test whether two positions are at the same x,y coordinate positions

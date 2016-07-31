@@ -1,3 +1,37 @@
+## Factorio-Stdlib 0.6.0 (July 30, 2016)
+
+Features:
+
+  - Added table.keys, when passed a table, returns a copy of all the keys in the table
+  - Added table.values, when passed a table, returns a copy of all of the values in the table
+  - Added table.flatten, when passed a table, creates a copy of the table where inner nested tables were flattened into the outer table
+  - Added Area.area, calculates the size an area occupies
+  - Added Tile.adjacent, given a tile, returns a list of adjacent tile positions  (N, E, S, W) or (N, NE, E, SE, S, SW, W, NW), depending if diagonal tiles are specified.
+  - Added Position.equals method, to test whether two positions are at the same x,y coordinate positions
+  - Added string.split, which when given a separator, will split a string apart on the separator, returning a list of substrings
+  - Added string.is_empty, to test if a string is nil or the empty string
+  - Added a GUI event handler system. Multiple handlers for each event can be registered, using regex patterns to match element names.
+    - Gui.on_click(pattern, callback) fires a click event to the callback for any gui element whose name that matches the pattern
+    - Gui.on_checked_state_changed(pattern, callback) fires a on_checked_state_change event to the callback for any gui element whose name that matches the pattern
+    - Gui.on_text_changed(pattern, callback) fires a on_text_changed event to the callback for any gui element whose name that matches the pattern
+  - Added a Data module, which allows for easier search and manipulation of data structures
+    - Data.select, when given a selection string, returns a list of all data.raw elements that matched the selection. The returned list is backed by the real data.raw and changes to it are reflected in the data.raw and therefore the game.
+      - `Data.select('recipe') -- returns a table with all recipes`
+      - `Data.select('recipe:steel.*') -- returns a table with all recipes whose name matches 'steel.*'``
+      - `Data.select('recipe:steel.*').energy_required = 1 -- sets all recipes whose name matches 'steel.*' to require 1 energy to produce`
+      - `Data.select('recipe:steel.*').apply('energy_required', 1) = 1 -- sets all recipes whose name matches 'steel.*' to require 1 energy to produce. Apply returns itself, so apply function calls can be chained.`
+    - Recipe.select, when given a selection string, returns a list of all recipe elements in data.raw that matched the selection. The returned list is backed by the real data.raw and changes to it are reflected in the data.raw and therefore the game.
+      - `Recipe.select('steel.*:ingredients') -- returns a table with all ingredients from all recipes whose name matches 'steel.*'`
+      - `Recipe.select('steel.*:ingredients:iron-plate') -- returns a table with all iron-plate ingredient objects, from all recipes whose name matches 'steel.*'`
+
+Changes:
+  - Changed table.each to abort iteration if the callback returns true. Iteration continues for false, nil, or missing return values.
+
+Bugfixes:
+
+  - Fixed documentation for the Time module
+  - Fixed missing newline in the documentation for the Logger.new function
+
 ## Factorio-Stdlib 0.5.1 (July 4, 2016)
 
 Bugfixes:

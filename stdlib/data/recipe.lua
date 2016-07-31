@@ -12,9 +12,9 @@ Recipe = {}
 -- <br/>The third group is for the name of values inside of the recipe element, and is optional. If missing, all elements matching prior groups are returned.
 -- <p> Selectors without a colon `:` separator are assumed to select all values in the first group.
 -- @usage Recipe.select('.*') -- returns a table with all recipes, equivalent to Data.select('recipe:.*')
--- @usage Data.select('steel.*') -- returns a table with all recipes whose name matches 'steel.*'
--- @usage Data.select('steel.*:ingredients') -- returns a table with all ingredients from all recipes whose name matches 'steel.*'
--- @usage Data.select('steel.*:ingredients:iron-plate') -- returns a table with all iron-plate ingredient objects, from all recipes whose name matches 'steel.*'
+-- @usage Recipe.select('steel.*') -- returns a table with all recipes whose name matches 'steel.*'
+-- @usage Recipe.select('steel.*:ingredients') -- returns a table with all ingredients from all recipes whose name matches 'steel.*'
+-- @usage Recipe.select('steel.*:ingredients:iron-plate') -- returns a table with all iron-plate ingredient objects, from all recipes whose name matches 'steel.*'
 -- @param pattern to search with
 -- @return table containing the elements matching the selector pattern, or an empty table if there was no matches
 function Recipe.select(pattern)

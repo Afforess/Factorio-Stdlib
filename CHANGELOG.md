@@ -1,6 +1,6 @@
 ## Factorio-Stdlib 0.6.0 (July 30, 2016)
 
-Features:
+#### Features:
 
   - Added table.keys, when passed a table, returns a copy of all the keys in the table
   - Added table.values, when passed a table, returns a copy of all of the values in the table
@@ -28,23 +28,23 @@ Features:
       - `Recipe.select('steel.*:ingredients') -- returns a table with all ingredients from all recipes whose name matches 'steel.*'`
       - `Recipe.select('steel.*:ingredients:iron-plate') -- returns a table with all iron-plate ingredient objects, from all recipes whose name matches 'steel.*'`
 
-Changes:
+#### Changes:
   - Changed table.each to abort iteration if the callback returns true. Iteration continues for false, nil, or missing return values.
 
-Bugfixes:
+#### Bugfixes:
 
   - Fixed documentation for the Time module
   - Fixed missing newline in the documentation for the Logger.new function
 
 ## Factorio-Stdlib 0.5.1 (July 4, 2016)
 
-Bugfixes:
+#### Bugfixes:
 
   - Fixed Event registry not notifying of an error in an event handler when the game was loaded, but no players were connected to the game
 
 ## Factorio-Stdlib 0.5.0 (June 12, 2016)
 
-Features:
+#### Features:
 
   - Improved table.map, filter, and each to also include additional arguments and index.
   - Added Event.core_events, allows registering Events for on_init, on_load, and on_configuration_changed
@@ -62,14 +62,14 @@ Features:
   - Added Time contants, provides easy reference for Time.SECOND, Time.MINUTE, Time.HOUR, Time.DAY, and Time.WEEK in factorio tick time
   - Improved the lua docs, so they share the same look and feel as the factorio lua docs
 
-Bugfixes:
+#### Bugfixes:
 
   - Fixed Logger writing after one hour instead of one minute
   - Fixed Event registry with Event.core_events.init not raising errors correctly
 
 ## Factorio-Stdlib 0.4.0 (May 9, 2016)
 
-Features:
+#### Features:
 
   - Added string.trim(), which can remove leading and trailing whitespace from a string
   - Added string.starts_with(...), tests if a string starts with a given substring
@@ -86,14 +86,13 @@ Features:
     - Added access to the event handler reference (the function handling the event) in event._handler
     - Added Event.remove, allows events to be de-registered
 
-Bugfixes:
+#### Bugfixes:
 
   - Fixed incorrect parameters in Surface.find_all_entities
 
-
 ## Factorio-Stdlib 0.3.0 (April 24, 2016)
 
-Features:
+#### Features:
 
   - Added Area.iterate function, allows iteration of the positions inside an area
   - Added Entity.has function, can safely test if an entity has read access to a field
@@ -104,23 +103,23 @@ Features:
     - Events that cause an error will not abort the game but print a warning to all players
     - Events handlers cascade and can be aborted. Returning true in an event handler prevents any later handlers from being executed.
 
-Bugfixes:
+#### Bugfixes:
 
   - Clarified documentation for Logger.log
 
 ## Factorio-Stdlib 0.2.1 (April 12, 2016)
 
-Features:
+#### Features:
 
   - Added Area.expand function, expands an area by a given amount
   - Added Area.shrink function, shrinks an area by a given amount
 
-Bugfixes:
+#### Bugfixes:
   - Correct documentation for Area.offset
 
 ## Factorio-Stdlib 0.2.0 (April 6, 2016)
 
-Features:
+#### Features:
 
   - Added Position.distance_squared for Euclidean distances between two points
   - Added Position.distance for Euclidean distances between two points
@@ -135,7 +134,7 @@ Features:
 
 ## Factorio-Stdlib 0.1.0 (April 6, 2016)
 
-Features:
+#### Features:
 
   - Added Inventory.copy_inventory function
   - Added Position.add function
@@ -146,6 +145,6 @@ Features:
 
 ## Factorio-Stdlib 0.0.6 (April 6, 2016)
 
-Features:
+#### Features:
 
   - Initial release

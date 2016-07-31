@@ -128,7 +128,15 @@ describe('Config', function()
             assert.no.errors(function() cfg.get("e.a") end)
             assert.no.errors(function() cfg.get("f.a") end)
             assert.no.errors(function() cfg.get("g.z") end)
-            end)
+
+            assert.same(nil, cfg.get("a.a"))
+            assert.same(nil, cfg.get("b.a"))
+            assert.same(nil, cfg.get("c.a"))
+            assert.same(nil, cfg.get("d.a"))
+            assert.same(nil, cfg.get("e.a"))
+            assert.same(nil, cfg.get("f.a"))
+            assert.same(nil, cfg.get("g.z"))
+        end)
     end)
 
     describe('.set', function()
@@ -313,7 +321,6 @@ describe('Config', function()
 
             assert.same(1, cfg.delete("g"))
             assert.same(nil, config_table.g)
-
         end)
 
         it('Round 3/3: Deleting data from invalid paths', function()

@@ -20,7 +20,7 @@ Logger = {}
 --LOGGER.log("this msg will be logged!")
 --
 -- @usage
---Logger.new('cool_mod_name', 'test', true)
+--LOGGER = Logger.new('cool_mod_name', 'test', true)
 --LOGGER.log("this msg will be logged and written immediately in test.log!")
 --
 -- @usage

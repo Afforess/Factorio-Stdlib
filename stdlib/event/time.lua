@@ -1,7 +1,5 @@
 --- Time Event module
 -- @module Event.Time
-serpent = require "stdlib/serpent"
-local myfile = io.open("this.is.time.log", "w")
 
 require 'stdlib/event/event'
 

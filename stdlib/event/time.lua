@@ -18,9 +18,6 @@ else
     function Event.Time.get_day_time(surface_name_or_index) return game.surfaces[surface_name_or_index].daytime + 0.5 end
 end
 
---These are Surface only events
---- @field Gets around ldoc V1.4.3 eating the first field. :(
-Event.Time.ldoc_V1_4_3_eats_this   = nil
 --- @field Fires whenever it becomes midday/noon on a surface
 Event.Time.midday   = script.generate_event_name()
 --- @field Fires whenever it becomes midnight on a surface

@@ -32,7 +32,7 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
 </ul>
 
 
@@ -49,8 +49,8 @@
   <li><a href="../modules/Entity.html">Entity</a></li>
   <li><a href="../modules/Inventory.html">Inventory</a></li>
   <li><a href="../modules/Event.html">Event</a></li>
-  <li><a href="../modules/Event.Time.html">Event.Time</a></li>
-  <li><strong>Game</strong></li>
+  <li><strong>Event.Time</strong></li>
+  <li><a href="../modules/Game.html">Game</a></li>
   <li><a href="../modules/Gui.html">Gui</a></li>
   <li><a href="../modules/Logger.html">Logger</a></li>
   <li><a href="../modules/string.html">string</a></li>
@@ -63,26 +63,50 @@
 
 <div id="content">
 
-<h1>Module <code>Game</code></h1>
-<p>Game module</p>
+<h1>Module <code>Event.Time</code></h1>
+<p>Time Event module</p>
 <p>
 
 </p>
 
 
-<h2><a href="#Functions">Functions</a></h2>
+<h2><a href="#Fields">Fields</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#print_all">print_all (msg, condition)</a></td>
-	<td class="summary">Messages all players currently connected to the game</td>
+	<td class="name" nowrap><a href="#Event.Time.midday">Event.Time.midday</a></td>
+	<td class="summary">
+
+</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#print_force">print_force (force, msg)</a></td>
-	<td class="summary">Messages all players with the given force connected to the game</td>
+	<td class="name" nowrap><a href="#Event.Time.midnight">Event.Time.midnight</a></td>
+	<td class="summary">
+
+</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#print_surface">print_surface (surface, msg)</a></td>
-	<td class="summary">Messages all players with the given surface connected to the game</td>
+	<td class="name" nowrap><a href="#Event.Time.sunrise">Event.Time.sunrise</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Event.Time.sunset">Event.Time.sunset</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Event.Time.hourly">Event.Time.hourly</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Event.Time.daily">Event.Time.daily</a></td>
+	<td class="summary">
+
+</td>
 	</tr>
 </table>
 
@@ -90,88 +114,130 @@
 <br/>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
 
     <dl class="function">
     <dt>
-    <a name = "print_all"></a>
-    <strong>print_all (msg, condition)</strong>
+    <a name = "Event.Time.midday"></a>
+    <strong>Event.Time.midday</strong>
     </dt>
     <dd>
-    Messages all players currently connected to the game
 
 
-    <h3>Parameters:</h3>
+
+
+
     <ul>
-        <li><span class="parameter">msg</span>
-         message to send to players
-        </li>
-        <li><span class="parameter">condition</span>
-         (optional) optional condition to be true for the player to be messaged
+        <li><span class="parameter">Fires</span>
+         whenever it becomes midday/noon on a surface
         </li>
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
-
-        the number of players who received the message
-    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "print_force"></a>
-    <strong>print_force (force, msg)</strong>
+    <a name = "Event.Time.midnight"></a>
+    <strong>Event.Time.midnight</strong>
     </dt>
     <dd>
-    Messages all players with the given force connected to the game
 
 
-    <h3>Parameters:</h3>
+
+
+
     <ul>
-        <li><span class="parameter">force</span>
-         (may be force name string, or force object) the players with the given force to message
-        </li>
-        <li><span class="parameter">msg</span>
-         message to send to players
+        <li><span class="parameter">Fires</span>
+         whenever it becomes midnight on a surface
         </li>
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
-
-        the number of players who received the message
-    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "print_surface"></a>
-    <strong>print_surface (surface, msg)</strong>
+    <a name = "Event.Time.sunrise"></a>
+    <strong>Event.Time.sunrise</strong>
     </dt>
     <dd>
-    Messages all players with the given surface connected to the game
 
 
-    <h3>Parameters:</h3>
+
+
+
     <ul>
-        <li><span class="parameter">surface</span>
-         the players with the given surface to message
-        </li>
-        <li><span class="parameter">msg</span>
-         message to send to players
+        <li><span class="parameter">Fires</span>
+         whenever the sunrises on a surface
         </li>
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
 
-        the number of players who received the message
-    </ol>
+
+
+
+</dd>
+    <dt>
+    <a name = "Event.Time.sunset"></a>
+    <strong>Event.Time.sunset</strong>
+    </dt>
+    <dd>
+
+
+
+
+
+    <ul>
+        <li><span class="parameter">Fires</span>
+         whenever the sunsets on a surface
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Event.Time.hourly"></a>
+    <strong>Event.Time.hourly</strong>
+    </dt>
+    <dd>
+
+
+
+
+
+    <ul>
+        <li><span class="parameter">Fires</span>
+         every hour for a surface
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Event.Time.daily"></a>
+    <strong>Event.Time.daily</strong>
+    </dt>
+    <dd>
+
+
+
+
+
+    <ul>
+        <li><span class="parameter">Fires</span>
+         every day for a surface
+        </li>
+    </ul>
+
 
 
 

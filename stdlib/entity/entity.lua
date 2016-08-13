@@ -18,9 +18,9 @@ function Entity.to_selection_area(entity)
     return Area.offset(bb, pos)
 end
 
---- Converts an entity and its selection_box to the area around it
+--- Converts an entity and its collision_box to the area around it
 -- @param entity to convert to an area
--- @return area that entity selection_box is valid for
+-- @return area that entity collision_box is valid for
 function Entity.to_collision_area(entity)
     fail_if_missing(entity, "missing entity argument")
 

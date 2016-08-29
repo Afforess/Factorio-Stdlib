@@ -64,7 +64,6 @@ end
 -- @param event LuaEvent as created by game.raise_event
 function Event.dispatch(event)
     fail_if_missing(event, "missing event argument")
-
     if Event._registry[event.name] then
         for _, handler in pairs(Event._registry[event.name]) do
             local metatbl = { __index = function(tbl, key) if key == '_handler' then return handler else return rawget(tbl, key) end end }

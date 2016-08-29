@@ -2,6 +2,7 @@
 -- @module Event.Time
 
 require 'stdlib/event/event'
+require 'stdlib/time'
 
 Event.Time = {}
 Event.Time._last_change = {}
@@ -28,16 +29,19 @@ Event.Time.sunrise  = script.generate_event_name()
 Event.Time.sunset   = script.generate_event_name()
 --- @field Fires every hour for a surface
 Event.Time.hourly   = script.generate_event_name()
+--- @field Fires every minute for a surface
+Event.Time.minutely = script.generate_event_name()
 --- @field Fires every day for a surface
 Event.Time.daily    = script.generate_event_name()
 
 Event.register(defines.events.on_tick, function(event)
-    for _, surface in pairs(game.surfaces) do
-        local day_time = math.fmod(Event.Time.get_day_time(surface.index), 1)
+    for idx, surface in pairs(game.surfaces) do
+        local day_time = math.fmod(Event.Time.get_day_time(idx), 1)
         local day_time_minutes = math.floor(day_time * 24 * 60)
 
-        if day_time_minutes ~= Event.Time._last_change[surface.name] then
-            Event.Time._last_change[surface.name] = day_time_minutes
+        if day_time_minutes ~= Event.Time._last_change[idx] then
+            Event.Time._last_change[idx] = day_time_minutes
+            game.raise_event(Event.Time.minutely, {surface = surface})
 
             if day_time_minutes % 60 == 0 then
                 game.raise_event(Event.Time.hourly, {surface = surface})

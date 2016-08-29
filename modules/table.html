@@ -37,7 +37,7 @@
 
 
 <h2>Modules</h2>
-<ul class="$(kind=='Topics' and '' or 'nowrap'">
+<ul class="nowrap">
   <li><a href="../modules/Area.html">Area</a></li>
   <li><a href="../modules/Chunk.html">Chunk</a></li>
   <li><a href="../modules/Position.html">Position</a></li>
@@ -180,9 +180,9 @@
     <h3>Usage:</h3>
     <ul>
         <li><pre class="example">a= { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
-<span class="global">table</span>.map(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v * <span class="number">10</span> <span class="keyword">end</span>) --produces: { <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span> }</pre></li>
+<span class="global">table</span>.map(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v * <span class="number">10</span> <span class="keyword">end</span>) <span class="comment">--produces: { 10, 20, 30, 40, 50 }</span></pre></li>
         <li><pre class="example">a = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
-<span class="global">table</span>.map(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> v * k + x <span class="keyword">end</span>, <span class="number">100</span>) --produces { <span class="number">101</span>, <span class="number">104</span>, <span class="number">109</span>, <span class="number">116</span>, <span class="number">125</span>}</pre></li>
+<span class="global">table</span>.map(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> v * k + x <span class="keyword">end</span>, <span class="number">100</span>) <span class="comment">--produces { 101, 104, 109, 116, 125}</span></pre></li>
     </ul>
 
 </dd>
@@ -221,9 +221,9 @@
     <h3>Usage:</h3>
     <ul>
         <li><pre class="example">a= { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
-<span class="global">table</span>.filter(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) --produces: { <span class="number">2</span>, <span class="number">4</span> }</pre></li>
+<span class="global">table</span>.filter(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">--produces: { 2, 4 }</span></pre></li>
         <li><pre class="example">a = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
-<span class="global">table</span>.filter(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> k % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">end</span>) --produces: { <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span> }</pre></li>
+<span class="global">table</span>.filter(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> k % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">end</span>) <span class="comment">--produces: { 1, 3, 5 }</span></pre></li>
     </ul>
 
 </dd>
@@ -472,12 +472,12 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"> <span class="keyword">function</span> some_func(x, y, args)
-  args = <span class="global">table</span>.merge({option1=<span class="keyword">false</span>}, args)
-  <span class="keyword">if</span> opts.option1 == <span class="keyword">true</span> <span class="keyword">then</span> <span class="keyword">return</span> x <span class="keyword">else</span> <span class="keyword">return</span> y <span class="keyword">end</span>
- <span class="keyword">end</span>
- some_func(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">--returns 2
-</span> some_func(<span class="number">1</span>,<span class="number">2</span>,{option1=<span class="keyword">true</span>}) --returns <span class="number">1</span></pre>
+        <pre class="example"><span class="keyword">function</span> some_func(x, y, args)
+ args = <span class="global">table</span>.merge({option1=<span class="keyword">false</span>}, args)
+ <span class="keyword">if</span> opts.option1 == <span class="keyword">true</span> <span class="keyword">then</span> <span class="keyword">return</span> x <span class="keyword">else</span> <span class="keyword">return</span> y <span class="keyword">end</span>
+<span class="keyword">end</span>
+some_func(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">--returns 2
+</span>some_func(<span class="number">1</span>,<span class="number">2</span>,{option1=<span class="keyword">true</span>}) <span class="comment">--returns 1</span></pre>
     </ul>
 
 </dd>
@@ -597,9 +597,9 @@
     <h3>Usage:</h3>
     <ul>
         <li><pre class="example"><span class="keyword">local</span> a = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>}
-<span class="global">table</span>.remove_keys(a, {<span class="number">1</span>,<span class="number">3</span>} --returns {<span class="keyword">nil</span>, <span class="number">2</span>, <span class="keyword">nil</span>, <span class="number">4</span>}</pre></li>
+<span class="global">table</span>.remove_keys(a, {<span class="number">1</span>,<span class="number">3</span>} <span class="comment">--returns {nil, 2, nil, 4}</span></pre></li>
         <li><pre class="example"><span class="keyword">local</span> b = {k1 = <span class="number">1</span>, k2 = <span class="string">'foo'</span>, old_key = <span class="string">'bar'</span>}
-<span class="global">table</span>.remove_keys(b, {<span class="string">'old_key'</span>}) --returns {k1 = <span class="number">1</span>, k2 = <span class="string">'foo'</span>}</pre></li>
+<span class="global">table</span>.remove_keys(b, {<span class="string">'old_key'</span>}) <span class="comment">--returns {k1 = 1, k2 = 'foo'}</span></pre></li>
     </ul>
 
 </dd>
@@ -609,8 +609,8 @@
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-08-19 22:29:25 </i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.5</a></i>
+<i style="float:right;">Last updated 2016-08-29 02:08:04 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

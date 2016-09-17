@@ -5,6 +5,17 @@ Position = {}
 
 require 'stdlib/core'
 
+
+--- returns a tabled position from x and y
+-- @param x x-position
+-- @param y y-position
+-- @return Position
+function Position.construct(x, y)
+    fail_if_missing(x, "missing x position argument")
+    fail_if_missing(y, "missing y position argument")
+    return { x = x, y = y }
+end
+
 --- Creates a position that is offset by x,y coordinate pair
 -- @param pos the position to offset
 -- @param x the amount to offset the position in the x direction

@@ -6,7 +6,7 @@ Position = {}
 require 'stdlib/core'
 
 
---- returns a tabled position from x and y
+--- Creates a table representing the position from x and y
 -- @param x x-position
 -- @param y y-position
 -- @return Position
@@ -14,6 +14,15 @@ function Position.construct(x, y)
     fail_if_missing(x, "missing x position argument")
     fail_if_missing(y, "missing y position argument")
     return { x = x, y = y }
+end
+
+--- Creates a position that is a copy of the given position
+-- @param pos the position to copy
+-- @return Position
+function Position.copy(pos)
+    fail_if_missing(pos, "missing position argument")
+    pos = Position.to_table(pos)
+    return { x = pos.x, y = pos.y }
 end
 
 --- Creates a position that is offset by x,y coordinate pair

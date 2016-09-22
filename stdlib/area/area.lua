@@ -16,10 +16,10 @@ function Area.construct(x1, y1, x2, y2)
     return { left_top = Position.construct(x1, y1), right_bottom = Position.construct(x2, y2) }
 end
 
---- Returns the size of the space contained in the 2d area
+--- Returns the size of the space contained in the 2d area </br>
+-- <b>Deprecated</b>, Area.area is misleading. See: Area.size
 -- @param area the area
 -- @return size of the area
--- @deprecated Area.area is misleading
 function Area.area(area)
     return Area.size(area)
 end
@@ -197,16 +197,15 @@ function Area.spiral_iterate(area)
     return iterator.iterate, Area.to_table(area), 0
 end
 
---- Returns area so, that left and right x, up and down y are in the right order
---- This is the case if your points are not left_top/right_bottom, but e.g. left_bottom/right_top...
---- This allows to ignore direction of point calculations.
--- @param area the area to convert
--- @return a converted area, always { left_top = {x = ..., y = ...}, right_bottom = {x = ..., y = ...} }
+--- Creates a new area, a modified copy of the original, such that left and right x, up and down y are normalized, where left.x < right.x, left.y < right.y order
+-- @param area the area to adjust
+-- @return a adjusted area, always { left_top = {x = ..., y = ...}, right_bottom = {x = ..., y = ...} }
 function Area.adjust(area)
+    fail_if_missing(area, "missing area value")
     area = Area.to_table(area)
 
-    local left_top = Position.to_table(area.left_top)
-    local right_bottom = Position.to_table(area.right_bottom)
+    local left_top = Position.copy(area.left_top)
+    local right_bottom = Position.copy(area.right_bottom)
 
     if right_bottom.x < left_top.x then
         local x = left_top.x

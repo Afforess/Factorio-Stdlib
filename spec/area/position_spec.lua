@@ -2,6 +2,20 @@ require 'spec/defines'
 require 'stdlib/area/position'
 
 describe('Position Spec', function()
+    it('should validate position construction', function()
+        assert.same({x = -4, y = 21}, Position.construct(-4, 21))
+    end)
+
+    it('should validate position copies', function()
+        local pos = { x = -4, y = 5 }
+        local copy = Position.copy(pos)
+        assert.same(pos, copy)
+
+        -- Verify that the copy does not match the original, after the original is modified
+        pos.y = 10
+        assert.is_not.same(pos, copy)
+    end)
+
     it('should validate position offsets', function()
         local pos = {1, -4}
         assert.same({x = 5, y = 5}, Position.offset(pos, 4, 9))

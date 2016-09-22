@@ -2,9 +2,18 @@ require 'stdlib/area/area'
 
 describe('Area Spec', function()
     it('should validate the size of an area', function()
-        assert.same(25, Area.area({{0,0}, {5,5}}))
-        assert.same(100, Area.area({{-5,-5}, {5,5}}))
-        assert.same(25, Area.area({{-2.5,2.5}, {2.5,7.5}}))
+        assert.same(25, Area.size({{0,0}, {5,5}}))
+        assert.same(100, Area.size({{-5,-5}, {5,5}}))
+        assert.same(25, Area.size({{-2.5,2.5}, {2.5,7.5}}))
+    end)
+
+    it('should validate the area is adjusted correctly', function()
+        local unnormal_area = { { 50, -25 }, { 0, 40 } }
+        local adjusted_area = Area.adjust(unnormal_area)
+        assert.same(0, adjusted_area.left_top.x)
+        assert.same(-25, adjusted_area.left_top.y)
+        assert.same(50, adjusted_area.right_bottom.x)
+        assert.same(40, adjusted_area.right_bottom.y)
     end)
 
     it('should validate whether positions are inside of an area', function()

@@ -68,6 +68,7 @@ describe('when the train module loads', function()
 
         -- Act
         require('stdlib/trains/trains')
+        local match = require("luassert.match")
 
         -- assert
         assert.spy(register_spy).was_called_with(defines.events.on_entity_died, match.is_function())
@@ -88,6 +89,7 @@ describe('when the train module loads', function()
 
         -- Act
         require('stdlib/trains/trains')
+        local match = require("luassert.match")
 
         -- assert
         assert.spy(register_spy).was_called_with(defines.events.on_built_entity, match.is_function())

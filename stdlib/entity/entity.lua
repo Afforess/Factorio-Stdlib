@@ -53,7 +53,7 @@ function Entity.get_data(entity)
     if not global._entity_data[entity_name] then return nil end
     local entity_category = global._entity_data[entity_name]
     for _, entity_data in pairs(entity_category) do
-        if entity_data.entity == entity then
+        if Entity._are_equal(entity_data.entity, entity) then
             return entity_data.data
         end
     end
@@ -82,7 +82,7 @@ function Entity.set_data(entity, data)
         if not entity_data.entity.valid then
             table.remove(entity_category, i)
         end
-        if entity_data.entity == entity then
+        if Entity._are_equal(entity_data.entity, entity) then
             local prev = entity_data.data
             if data then
                 entity_data.data = data
@@ -95,6 +95,24 @@ function Entity.set_data(entity, data)
 
     table.insert(entity_category, { entity = entity, data = data })
     return nil
+end
+
+--- Tests if two entities are equal
+-- <p>If they don't have reference equality and entity_a has an 'equals' function,
+-- it will be called with entity_b as the first argument</p>
+-- @tparam table entity_a
+-- @tparam table entity_b
+-- @treturn bool
+function Entity._are_equal(entity_a, entity_b)
+  if entity_a == nil then
+    return entity_a == entity_b
+  elseif entity_a == entity_b then
+    return true
+  elseif entity_a.equals ~= nil then
+    return entity_a.equals(entity_b)
+  else
+    return false
+  end
 end
 
 return Entity

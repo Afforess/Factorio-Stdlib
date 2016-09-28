@@ -60,4 +60,49 @@ describe('Entity Spec', function()
         assert.same(data, Entity.set_data(entity, nil))
         assert.is_nil(Entity.get_data(entity))
     end)
+
+    it('should verify two entities are the same when they share the same reference', function()
+      local entity_a = {
+        name = "ent",
+        valid = true
+      }
+
+      local entity_b = entity_a
+
+      assert.is_true(Entity._are_equal(entity_a, entity_b))
+    end)
+
+    it('should verify two entities are the same by calling the firsts equals method when they dont have the same reference', function()
+      local entity_a = {
+        name = "ent",
+        valid = true,
+        equals = function(ent) return true end
+      }
+
+      local entity_b = {
+        name = "ent",
+        valid = true
+      }
+
+      equals_spy = spy.on(entity_a, 'equals')
+      local actual = Entity._are_equal(entity_a, entity_b)
+
+      assert.is_true(actual)
+      assert.spy(equals_spy).was_called_with(entity_b)
+    end)
+
+    it('should verify that two entities are not equal when they dont have the same reference and the first does not have an equals method', function()
+      local entity_a = {
+        name = "ent",
+        valid = true,
+      }
+
+      local entity_b = {
+        name = "ent",
+        valid = true
+      }
+
+      local actual = Entity._are_equal(entity_a, entity_b)
+      assert.is_false(actual)
+    end)
 end)

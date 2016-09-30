@@ -137,6 +137,38 @@ describe('Table Spec', function()
         end)
     end)
 
+    describe('table.find', function()
+        it('should return nil for always false filters', function()
+            assert.same(nil, table.find({1, 2, 3, 4, 5}, function(v) return false end))
+        end)
+
+        it('should find an even value', function()
+            assert.same(2, table.find({1, 2, 3, 4, 5}, function(v) return v % 2 == 0 end))
+        end)
+
+        it('should pass the key and additional arguments', function()
+            local func = function(v, k, arg1) return k % 2 == arg1 end
+
+            assert.same(2, table.find({1, 2, 3, 4}, func, 0))
+        end)
+    end)
+
+    describe('table.any', function()
+        it('should return false for always false filters', function()
+            assert.is_false(table.any({1, 2, 3, 4, 5}, function(v) return false end))
+        end)
+
+        it('should find an even value', function()
+            assert.is_true(table.any({1, 2, 3, 4, 5}, function(v) return v % 2 == 0 end))
+        end)
+
+        it('should pass the key and additional arguments', function()
+            local func = function(v, k, arg1) return k % 2 == arg1 end
+
+            assert.is_true(table.any({1, 2, 3, 4}, func, 0))
+        end)
+    end)
+
     describe('table.merge', function()
         it('should change the first table', function()
             local tblA = {option1=1, [2] = "foo"}

@@ -43,6 +43,42 @@ function table.filter(tbl, func, ...)
     return newtbl
 end
 
+--- Given a candidate search function, iterates over the table, calling the function
+--- for each element in the table, and returns the first element the search function returned true.
+--- Passes the index as second argument to the function.
+--- @usage a= { 1, 2, 3, 4, 5}
+---table.find(a, function(v) return v % 2 == 0 end) --produces: 2
+--- @usage a = {1, 2, 3, 4, 5}
+---table.find(a, function(v, k, x) return k % 2 == 1 end) --produces: 1
+-- @param tbl to be searched
+-- @param func to use to search for any matching element
+-- @param[opt] ... additional arguments passed to the function
+-- @return the first found value, or nil if none was found
+function table.find(tbl, func, ...)
+    for k, v in pairs(tbl) do
+        if func(v, k, ...) then
+            return v, k
+        end
+    end
+    return nil
+end
+
+--- Given a candidate search function, iterates over the table, calling the function
+--- for each element in the table, and returns true if search function returned true.
+--- Passes the index as second argument to the function.
+--- <br/> See also: table.find(...)
+--- @usage a= { 1, 2, 3, 4, 5}
+---table.any(a, function(v) return v % 2 == 0 end) --produces: true
+--- @usage a = {1, 2, 3, 4, 5}
+---table.any(a, function(v, k, x) return k % 2 == 1 end) --produces: true
+-- @param tbl to be searched
+-- @param func to use to search for any matching element
+-- @param[opt] ... additional arguments passed to the function
+-- @return true if an element was found, false if none was found
+function table.any(tbl, func, ...)
+    return table.find(tbl, func, ...) ~= nil
+end
+
 --- Given a function, apply it to each element in the table. Passes the index as second argument to the function.
 -- <p>Iteration is aborted if the applied function returns true for any element during iteration.
 -- @param tbl to be iterated

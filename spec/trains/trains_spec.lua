@@ -98,7 +98,7 @@ describe('when the train module loads', function()
 end)
 
 
-describe('Trains spec', function()
+describe('Trains module', function()
 
     setup(function()
         Trains = require 'stdlib/trains/trains'
@@ -353,5 +353,45 @@ describe('Trains spec', function()
             assert.are_not_equal(nil, Trains._registry[1000])
             assert.are_not_equal(nil, Trains._registry[2000])
         end)
+    end)
+
+    describe('to_entity', function()
+      it('returns a table that looks like a LuaEntity', function()
+        -- Arrange
+        train = Train_Spec_Fixtures.Single_Train_With_Single_Locomotive[1].train
+
+        -- Act
+        entity = Trains.to_entity(train)
+
+        -- Assert
+        assert.are_equal('train-1000', entity.name)
+        assert.are_equal(train.valid, entity.valid)
+      end)
+
+      it('has an equals function', function()
+        -- Arrange
+        train = Train_Spec_Fixtures.Single_Train_With_Single_Locomotive[1].train
+
+        -- Act
+        entity = Trains.to_entity(train)
+
+        -- Assert
+        assert.are_equal("function", type(entity.equals))
+      end)
+
+      it('equals function returns true when compared entitiys name value is the same', function()
+        -- Arrange
+        train = Train_Spec_Fixtures.Single_Train_With_Single_Locomotive[1].train
+        arg = {
+          name = "train-1000",
+          valid = true
+        }
+
+        -- Act
+        entity = Trains.to_entity(train)
+
+        -- Assert
+        assert.is_true(entity.equals(arg))
+      end)
     end)
 end)

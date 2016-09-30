@@ -161,6 +161,37 @@ function Trains.get_main_locomotive(train)
     end
 end
 
+--- Creates an Entity module-compatible entity from a train
+-- @tparam LuaTrain train
+-- @treturn table
+function Trains.to_entity(train)
+  local name = "train-" .. Trains.get_train_id(train)
+  return {
+    name = name,
+    valid = train.valid,
+    equals = function(entity)
+      return name == entity.name
+    end
+  }
+end
+
+--- Set user data on a train
+-- <p>This is a helper method around <a href="Entity.html#set_data">Entity.set_data</a></p>
+-- @tparam LuaTrain train
+-- @tparam mixed data
+-- @return mixed
+function Trains.set_data(train, data)
+  return Entity.set_data(Trains.to_entity(train), data)
+end
+
+--- Get user data on a train
+-- <p>This is a helper method around <a href="Entity.html#get_data">Entity.get_data</a></p>
+-- @tparam LuaTrain train
+-- @return mixed
+function Trains.get_data(train)
+  return Entity.get_data(Trains.to_entity(train))
+end
+
 -- Creates a registry of known trains
 -- @return table A mapping of train id to LuaTrain object
 local function create_train_registry()

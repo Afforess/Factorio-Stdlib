@@ -86,6 +86,16 @@
  filtering out any key-value pairs for non-true results.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#find">find (tbl, func[, ...])</a></td>
+	<td class="summary">Given a candidate search function, iterates over the table, calling the function
+ for each element in the table, and returns the first element the search function returned true.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#any">any (tbl, func[, ...])</a></td>
+	<td class="summary">Given a candidate search function, iterates over the table, calling the function
+ for each element in the table, and returns true if search function returned true.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#each">each (tbl, func[, ...])</a></td>
 	<td class="summary">Given a function, apply it to each element in the table.</td>
 	</tr>
@@ -225,6 +235,89 @@
 <span class="global">table</span>.filter(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">--produces: { 2, 4 }</span></pre></li>
         <li><pre class="example">a = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
 <span class="global">table</span>.filter(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> k % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">end</span>) <span class="comment">--produces: { 1, 3, 5 }</span></pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "find"></a>
+    <strong>find (tbl, func[, ...])</strong>
+    </dt>
+    <dd>
+    Given a candidate search function, iterates over the table, calling the function
+ for each element in the table, and returns the first element the search function returned true.
+ Passes the index as second argument to the function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         to be searched
+        </li>
+        <li><span class="parameter">func</span>
+         to use to search for any matching element
+        </li>
+        <li><span class="parameter">...</span>
+         additional arguments passed to the function
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the first found value, or nil if none was found
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">a= { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
+<span class="global">table</span>.find(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">--produces: 2</span></pre></li>
+        <li><pre class="example">a = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
+<span class="global">table</span>.find(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> k % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">end</span>) <span class="comment">--produces: 1</span></pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "any"></a>
+    <strong>any (tbl, func[, ...])</strong>
+    </dt>
+    <dd>
+    Given a candidate search function, iterates over the table, calling the function
+ for each element in the table, and returns true if search function returned true.
+ Passes the index as second argument to the function.
+ <br/> See also: table.find(...)
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         to be searched
+        </li>
+        <li><span class="parameter">func</span>
+         to use to search for any matching element
+        </li>
+        <li><span class="parameter">...</span>
+         additional arguments passed to the function
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        true if an element was found, false if none was found
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">a= { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
+<span class="global">table</span>.any(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">--produces: true</span></pre></li>
+        <li><pre class="example">a = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
+<span class="global">table</span>.any(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> k % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">end</span>) <span class="comment">--produces: true</span></pre></li>
     </ul>
 
 </dd>
@@ -611,7 +704,7 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.5</a></i>
-<i style="float:right;">Last updated 2016-09-22 22:01:31 </i>
+<i style="float:right;">Last updated 2016-09-30 22:43:07 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

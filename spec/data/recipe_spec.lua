@@ -11,7 +11,7 @@ describe('Recipe Spec', function()
         assert.same(3, #Recipe.select(".*"))
         assert.same(1, #Recipe.select("copper.*"))
 
-        assert.same({{'copper-ore', 1}}, table.first(Recipe.select("copper.*:ingredients")))
+        assert.same({'copper-ore', 1}, table.first(Recipe.select("copper.*:ingredients")))
         assert.same({'copper-ore', 1}, table.first(Recipe.select("copper.*:ingredients:copper.*")))
     end)
 
@@ -64,6 +64,9 @@ describe('Recipe Spec', function()
         it('verify that the metatables work', function()
             assert.same('copper-ore', table.first(Recipe.select("copper.*:ingredients:copper.*"))[1])
             assert.same('copper-ore', table.first(Recipe.select("copper.*:ingredients:copper.*")).name)
+
+            assert.same('copper-ore', table.first(Recipe.select("copper.*:ingredients")).name)
+            assert.same(1, table.first(Recipe.select("copper.*:ingredients*")).amount)
         end)
 
         it('replace the ingredients and verify access to the metatable fields work', function()

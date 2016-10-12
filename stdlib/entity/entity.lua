@@ -107,6 +107,19 @@ function Entity.set_data(entity, data)
     return nil
 end
 
+--- Freezes an entity, by making it inactive, inoperable, and non-rotatable, or unfreezes by doing the reverse.
+-- @param entity the entity to freeze or unfreeze
+-- @param mode (optional) if true, freezes the entity, if false, unfreezes the entity. If not specified, is true.
+-- @return entity passed into it
+function Entity.set_frozen(entity, mode)
+    fail_if_missing(entity, "missing entity argument")
+    mode = mode == false and true or false
+    entity.active    = mode
+    entity.operable  = mode
+    entity.rotatable = mode
+    return entity
+end
+
 --- Tests if two entities are equal
 -- <p>If they don't have reference equality and entity_a has an 'equals' function,
 -- it will be called with entity_b as the first argument</p>

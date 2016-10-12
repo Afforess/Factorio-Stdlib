@@ -15,6 +15,27 @@ describe('Entity Spec', function()
         assert.same({ x = 3, y = -1.5 }, Entity.to_collision_area(entity).right_bottom)
     end)
 
+    it('an entity should be frozen', function()
+        local entity = { active = true, operable = true, rotatable = true }
+        Entity.set_frozen(entity)
+
+        assert.is_false(entity.active)
+        assert.is_false(entity.operable)
+        assert.is_false(entity.rotatable)
+
+        Entity.set_frozen(entity, false)
+
+        assert.is_true(entity.active)
+        assert.is_true(entity.operable)
+        assert.is_true(entity.rotatable)
+
+        Entity.set_frozen(entity, true)
+
+        assert.is_false(entity.active)
+        assert.is_false(entity.operable)
+        assert.is_false(entity.rotatable)
+    end)
+
     it('should verify Entity.has identifies fields the entity can read from', function()
         local entity = { backer_name = 'foo' }
         -- create a metatable to error on key 'health', but allow all other field access

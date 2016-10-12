@@ -2,6 +2,8 @@
 Factorio Standard Library Project
 
 # Documentation
+See [the wiki](https://github.com/Afforess/Factorio-Stdlib/wiki) for an introduction and usage/examples.
+
 See the [github pages](http://afforess.github.io/Factorio-Stdlib/) for the latest generated documentation of the Factorio-stdlib
 
 # Generating the documentation from source

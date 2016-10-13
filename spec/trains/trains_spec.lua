@@ -68,7 +68,6 @@ describe('when the train module loads', function()
 
         -- Act
         require('stdlib/trains/trains')
-        local match = require("luassert.match")
 
         -- assert
         assert.spy(register_spy).was_called_with(defines.events.on_entity_died, match.is_function())
@@ -89,7 +88,6 @@ describe('when the train module loads', function()
 
         -- Act
         require('stdlib/trains/trains')
-        local match = require("luassert.match")
 
         -- assert
         assert.spy(register_spy).was_called_with(defines.events.on_built_entity, match.is_function())
@@ -110,7 +108,7 @@ describe('Trains module', function()
 
     describe('can find trains with a filter', function()
         describe('when applying filters', function()
-            it('only finds diesel locomotives by default', function()
+            it('only finds locomotives type entities by default', function()
                 -- Arrange
                 surface = {
                     find_all_entities = function(criteria)
@@ -127,12 +125,12 @@ describe('Trains module', function()
                 -- Act
                 expected_params = {
                     surface = "nauvis",
-                    name = 'diesel-locomotive'
+                    type = 'locomotive'
                 }
                 assert.spy(surface_spy).was_called_with(expected_params)
             end)
 
-            it('allows the locomotive type to be overridden by supplying the name key', function()
+            it('allows the locomotive type to be further filtered overridden by supplying the name key', function()
                 -- Arrange
                 criteria = {
                     name = 'some-locomotive'
@@ -153,7 +151,8 @@ describe('Trains module', function()
                 -- Act
                 expected_params = {
                     surface = "nauvis",
-                    name = 'some-locomotive'
+                    name = 'some-locomotive',
+                    type = 'locomotive'
                 }
                 assert.spy(surface_spy).was_called_with(expected_params)
             end)
@@ -175,7 +174,7 @@ describe('Trains module', function()
               -- Act
               expected_params = {
                   surface = "nauvis",
-                  name = 'diesel-locomotive'
+                  type = 'locomotive'
               }
               assert.spy(surface_spy).was_called_with(expected_params)
             end)
@@ -201,7 +200,7 @@ describe('Trains module', function()
                 -- Act
                 expected_params = {
                     surface = 'surface',
-                    name = 'diesel-locomotive'
+                    type = 'locomotive'
                 }
                 assert.spy(surface_spy).was_called_with(expected_params)
             end)

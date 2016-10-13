@@ -82,8 +82,8 @@ function Trains.find_filtered(criteria)
     -- Ensuure surface is set
     criteria.surface =  criteria.surface or 'nauvis'
 
-    -- Make sure 'diesel-locomotive' is specified by default
-    criteria.name = criteria.name or 'diesel-locomotive'
+    -- Make sure 'locomotive' is specified as the type by default
+    criteria.type = criteria.type or 'locomotive'
 
     -- Get locomotives by filter
     local locomotives = Surface.find_all_entities(criteria)

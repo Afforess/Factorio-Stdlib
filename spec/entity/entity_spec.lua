@@ -15,6 +15,27 @@ describe('Entity Spec', function()
         assert.same({ x = 3, y = -1.5 }, Entity.to_collision_area(entity).right_bottom)
     end)
 
+    it('an entity should be frozen', function()
+        local entity = { active = true, operable = true, rotatable = true }
+        Entity.set_frozen(entity)
+
+        assert.is_false(entity.active)
+        assert.is_false(entity.operable)
+        assert.is_false(entity.rotatable)
+
+        Entity.set_frozen(entity, false)
+
+        assert.is_true(entity.active)
+        assert.is_true(entity.operable)
+        assert.is_true(entity.rotatable)
+
+        Entity.set_frozen(entity, true)
+
+        assert.is_false(entity.active)
+        assert.is_false(entity.operable)
+        assert.is_false(entity.rotatable)
+    end)
+
     it('should verify Entity.has identifies fields the entity can read from', function()
         local entity = { backer_name = 'foo' }
         -- create a metatable to error on key 'health', but allow all other field access
@@ -41,6 +62,29 @@ describe('Entity Spec', function()
         --Verify multiple entities can have data
         for i = 1, 10 do
             local entity = { name = 'fast-inserter', valid = true }
+            local data = { count = i }
+            Entity.set_data(entity, data)
+            assert.same(data, Entity.get_data(entity))
+        end
+        assert.same(data, Entity.get_data(entity))
+    end)
+
+    it('should verify getting and setting data with unit_numbers', function()
+        _G['global'] = {}
+        local entity = { name = 'fast-inserter', valid = true, unit_number = 13}
+        assert.is_nil(Entity.get_data(entity))
+
+        local data = { foo = 'bar' }
+        assert.is_nil(Entity.set_data(entity, data))
+        assert.same(data, Entity.get_data(entity))
+
+        -- Verify mutated data is not lost
+        data.foo = 'baz'
+        assert.same(data, Entity.get_data(entity))
+
+        --Verify multiple entities can have data
+        for i = 1, 10 do
+            local entity = { name = 'fast-inserter', valid = true, unit_number = (i - 1) }
             local data = { count = i }
             Entity.set_data(entity, data)
             assert.same(data, Entity.get_data(entity))

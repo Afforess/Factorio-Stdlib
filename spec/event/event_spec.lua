@@ -137,13 +137,11 @@ describe('Event', function()
 
     it('.dispatch should error when there are no connected players if a handler throws an error', function()
         _G.game.players = { { name = 'test_player', valid = true, connected = false, print = function(msg) end } }
-        local s = spy.on(_G.game.players[1], "print")
 
         Event.register( 0, function() error("should error") end)
 
         -- verify error was raised
         local success, err = pcall(Event.dispatch, {name = 0, tick = 9001, player_index = 1})
-        assert.spy(s).was_not_called()
         assert.is_false(success)
         assert.is_true(string.contains(err, "should error"))
     end)

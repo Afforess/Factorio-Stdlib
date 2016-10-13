@@ -47,8 +47,10 @@ function Recipe.select(pattern)
                             end
                         end
                     else
-                        Recipe.format_items({recipe})
-                        table.insert(results, field_value)
+                        for _, value in pairs(field_value) do
+                            setmetatable(value, Recipe._item_metatable.new(value))
+                            table.insert(results, value)
+                        end
                     end
                 end
             end

@@ -1,3 +1,49 @@
+## Factorio-Stdlib 0.7.0 (September 30, 2016)
+
+#### Features:
+
+  - Added Area.adjust, modifies area to ensure x,y coordinate values are normalized
+  - Added Area.construct, creates an area from two pairs of x,y coordinates
+  - Added Area.size, replaces the deprecated function, Area.area.
+  - Added Position.copy, creates a copy of a position
+  - Added Position.construct, creates a position from an x,y pair
+  - Added table.find, searches a table for the first element that matches the function
+  - Added table.any, searches a table and returns true if any elements matches the function
+  - Added Trains module, providing train utility methods and events:
+      - Added Trains.set_data, sets persistent mod data on a train
+      - Added Trains.get_data, gets mod data on a train
+      - Added Trains.on_train_id_changed event, contains the old and new id of the train, and fires when a train id changes (e.g. locomotives are added to an existing train)
+      - Added Trains.find_filtered, searches and returns a table of trains on surface(s) for trains that match the area, name, or state criteria
+      - Added Trains.get_train_id, returns the train id of a train
+      - Added Trains.get_main_locomotive, finds and returns the main locomotive entity of any train
+  - Added Time-based events, require 'stdlib/event/time' to enable them, then register the events to script them.
+    - Event.Time.sunset, fires an event when sunset occurs for a surface
+    - Event.Time.sunrise, fires an event when sunrise occurs for a surface
+    - Event.Time.midday, fires an event noon occurs for a surface
+    - Event.Time.midnight, fires an event when midnight occurs for a surface
+    - Event.Time.minutely, fires an event when an in-game minute passes
+    - Event.Time.hourly, fires an event when an in-game hour passes
+    - Event.Time.daily, fires an event when an in-game day passes
+  - Added Config system, for easier management of persistent mod configuration
+    - Added Config.new, ex: Config.new(global.config) creates a new configuration, stored at global.config
+    - Added config.set, allows setting a value at nested paths, ex: (Config.new(global.config).set("your.path.here", foo)
+    - Added config.get, allows getting nested values, ex: (Config.new(global.config).get("your.path.here")
+    - Added config.delete, deletes a value at a config path, ex: (Config.new(global.config).delete("your.path.here")
+    - Added config.is_set, tests whether a config value is set or not, ex: (Config.new(global.config).is_set("your.path.here")
+
+#### Changes:
+  - Changed Game.print_all to print to offline players (fixes https://github.com/Afforess/Factorio-Stdlib/issues/49)
+
+#### Deprecations:
+  - Deprecated Game.print_force (use force.print instead)
+  - Deprecated Game.print_surface (use surface.print instead)
+  - Deprecated Area.area, due to misleading name. (use Area.size instead)
+
+#### Bugfixes:
+
+  - Fixed documentation for the Entity.to_collision_area
+  - Fixed documentation for the Area.to_table
+
 ## Factorio-Stdlib 0.6.0 (July 30, 2016)
 
 #### Features:

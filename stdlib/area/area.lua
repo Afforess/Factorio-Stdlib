@@ -6,10 +6,28 @@ require 'stdlib/area/position'
 
 Area = {}
 
---- Returns the size of the space contained in the 2d area
+--- Creates an area from the 2 positions p1 and p2
+-- @param x1 x-position of left_top, first point
+-- @param y1 y-position of left_top, first point
+-- @param x2 x-position of right_bottom, second point
+-- @param y2 y-position of right_bottom, second point
+-- @return Area tabled area
+function Area.construct(x1, y1, x2, y2)
+    return { left_top = Position.construct(x1, y1), right_bottom = Position.construct(x2, y2) }
+end
+
+--- Returns the size of the space contained in the 2d area </br>
+-- <b>Deprecated</b>, Area.area is misleading. See: Area.size
 -- @param area the area
 -- @return size of the area
 function Area.area(area)
+    return Area.size(area)
+end
+
+--- Returns the size of the space contained in the 2d area
+-- @param area the area
+-- @return size of the area
+function Area.size(area)
     fail_if_missing(area, "missing area value")
     area = Area.to_table(area)
 
@@ -179,9 +197,33 @@ function Area.spiral_iterate(area)
     return iterator.iterate, Area.to_table(area), 0
 end
 
+--- Creates a new area, a modified copy of the original, such that left and right x, up and down y are normalized, where left.x < right.x, left.y < right.y order
+-- @param area the area to adjust
+-- @return a adjusted area, always { left_top = {x = ..., y = ...}, right_bottom = {x = ..., y = ...} }
+function Area.adjust(area)
+    fail_if_missing(area, "missing area value")
+    area = Area.to_table(area)
+
+    local left_top = Position.copy(area.left_top)
+    local right_bottom = Position.copy(area.right_bottom)
+
+    if right_bottom.x < left_top.x then
+        local x = left_top.x
+        left_top.x = right_bottom.x
+        right_bottom.x = x
+    end
+    if right_bottom.y < left_top.y then
+        local y = left_top.y
+        left_top.y = right_bottom.y
+        right_bottom.y = y
+    end
+
+    return Area.construct(left_top.x, left_top.y, right_bottom.x, right_bottom.y)
+end
+
 --- Converts an area in the array format to an array in the table format
 -- @param area_arr the area to convert
--- @return a converted position, { x = pos_arr[1], y = pos_arr[2] }
+-- @return a converted area, { left_top = area_arr[1], right_bottom = area_arr[2] }
 function Area.to_table(area_arr)
     fail_if_missing(area_arr, "missing area value")
     if #area_arr == 2 then
@@ -189,5 +231,6 @@ function Area.to_table(area_arr)
     end
     return area_arr
 end
+
 
 return Area

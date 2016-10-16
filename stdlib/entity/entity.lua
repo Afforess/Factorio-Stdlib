@@ -120,6 +120,18 @@ function Entity.set_frozen(entity, mode)
     return entity
 end
 
+--- Makes an entity indestructible, so that it can not be damaged or mined by the player or enemy factions
+-- @param entity the entity to set indestructible
+-- @param mode (optional) if true, makes the entity indestructible, if false, makes the entity destructable. If not specified, is true.
+-- @return entity passed into it
+function Entity.set_indestructible(entity, mode)
+    fail_if_missing(entity, "missing entity argument")
+    mode = mode == false and true or false
+    entity.minable       = mode
+    entity.destructible  = mode
+    return entity
+end
+
 --- Tests if two entities are equal
 -- <p>If they don't have reference equality and entity_a has an 'equals' function,
 -- it will be called with entity_b as the first argument</p>

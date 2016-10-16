@@ -36,6 +36,24 @@ describe('Entity Spec', function()
         assert.is_false(entity.rotatable)
     end)
 
+    it('an entity should be indestructible', function()
+        local entity = { minable = true, destructible = true }
+        Entity.set_indestructible(entity)
+
+        assert.is_false(entity.minable)
+        assert.is_false(entity.destructible)
+
+        Entity.set_indestructible(entity, false)
+
+        assert.is_true(entity.minable)
+        assert.is_true(entity.destructible)
+
+        Entity.set_indestructible(entity, true)
+
+        assert.is_false(entity.minable)
+        assert.is_false(entity.destructible)
+    end)
+
     it('should verify Entity.has identifies fields the entity can read from', function()
         local entity = { backer_name = 'foo' }
         -- create a metatable to error on key 'health', but allow all other field access

@@ -199,8 +199,8 @@ end
 
 --- Creates a new area, a modified copy of the original, such that left and right x, up and down y are normalized, where left.x < right.x, left.y < right.y order
 -- @param area the area to adjust
--- @return a adjusted area, always { left_top = {x = ..., y = ...}, right_bottom = {x = ..., y = ...} }
-function Area.adjust(area)
+-- @return a normalized area, always { left_top = {x = ..., y = ...}, right_bottom = {x = ..., y = ...} }
+function Area.normalize(area)
     fail_if_missing(area, "missing area value")
     area = Area.to_table(area)
 
@@ -219,6 +219,14 @@ function Area.adjust(area)
     end
 
     return Area.construct(left_top.x, left_top.y, right_bottom.x, right_bottom.y)
+end
+
+--- Creates a new area, a modified copy of the original, such that left and right x, up and down y are normalized, where left.x < right.x, left.y < right.y order
+-- <b>Deprecated</b>, Area.adjust is ambigious. See: Area.normalize
+-- @param area the area to adjust
+-- @return a adjusted area, always { left_top = {x = ..., y = ...}, right_bottom = {x = ..., y = ...} }
+function Area.adjust(area)
+    return Area.normalize(area)
 end
 
 --- Converts an area in the array format to an array in the table format

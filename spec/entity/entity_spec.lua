@@ -107,6 +107,11 @@ describe('Entity Spec', function()
             Entity.set_data(entity, data)
             assert.same(data, Entity.get_data(entity))
         end
+        -- Verify set_data(entity, nil) returns the previous data held
+        for i = 1, 10 do
+            local entity = { name = 'fast-inserter', valid = true, unit_number = (i - 1) }
+            assert.same(Entity.get_data(entity), Entity.set_data(entity, nil))
+        end
         assert.same(data, Entity.get_data(entity))
     end)
 

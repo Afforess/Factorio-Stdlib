@@ -78,7 +78,9 @@ function Entity.set_data(entity, data)
 
     local unit_number = entity.unit_number
     if unit_number then
+        local prev = global._entity_data[unit_number]
          global._entity_data[unit_number] = data
+         return prev
     else
         local entity_name = entity.name
         if not global._entity_data[entity_name] then

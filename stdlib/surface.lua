@@ -42,7 +42,7 @@ end
 --  and optionally surface or force, searches all loaded chunks for the entities that
 --  match the critera.
 --  @usage
-----Surface.final_all_entities({ type = 'unit', surface = 'nauvis', area = {{-1000,20},{-153,2214}}) --returns a list containing all unit entities on the nauvis surface in the given area
+----Surface.find_all_entities({ type = 'unit', surface = 'nauvis', area = {{-1000,20},{-153,2214}}) --returns a list containing all unit entities on the nauvis surface in the given area
 -- @param search_criteria a table of criteria. Must contain either the *name* or *type* or *force* of an entity. May contain *surface* or *force* or *area*.
 -- @return an array of all entities that matched the criteria
 function Surface.find_all_entities(search_criteria)

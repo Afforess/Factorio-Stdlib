@@ -49,7 +49,8 @@ function Iterator.map(self, func, ...)
     fail_if_missing(type(self) == "table", "Iterator.map is missing reference to itself")
     fail_if_missing(func, "Iterator.map is missing a function parameter")
 
-    table.insert(self._operations, { func = func, args = {...}, transform = 1})
+    local operations = self._operations
+    operations[#operations + 1] = { func = func, args = {...}, transform = 1}
     return self
 end
 
@@ -57,7 +58,8 @@ function Iterator.filter(self, func, ...)
     fail_if_missing(type(self) == "table", "Iterator.filter is missing reference to itself")
     fail_if_missing(func, "Iterator.filter is missing a function parameter")
 
-    table.insert(self._operations, { func = func, args = {...}, transform = 2})
+    local operations = self._operations
+    operations[#operations + 1] = { func = func, args = {...}, transform = 2}
     return self
 end
 
@@ -65,6 +67,7 @@ function Iterator.each(self, func, ...)
     fail_if_missing(type(self) == "table", "Iterator.each is missing reference to itself")
     fail_if_missing(func, "Iterator.each is missing a function parameter")
 
-    table.insert(self._operations, { func = func, args = {...}, transform = 3})
+    local operations = self._operations
+    operations[#operations + 1] = { func = func, args = {...}, transform = 3}
     return self
 end

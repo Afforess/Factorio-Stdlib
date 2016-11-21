@@ -20,16 +20,16 @@ function Iterator.new(list, compact)
         for key, value in pairs(self._list) do
             local new_value = value
             for _, operation in ipairs(operations) do
-                new_value, break_iter = operation.transform(new_value, key, operation.func, unpack(operation.args))
-
-                -- break iteration if requested
-                if break_iter then
+                local transform = operation.transform
+                if transform == 1 then
+                    new_value = operation.func(new_value, key, unpack(operation.args))
+                elseif transform == 2 then
+                    if not operation.func(new_value, key, unpack(operation.args)) then
+                        -- I apologize in advance, lua has no continue stmt
+                        goto continue
+                    end
+                elseif transform == 3 and operation.func(new_value, key, unpack(operation.args)) then
                     return result
-                end
-                -- do not continue iteration on chain once the value has been filtered out
-                if not new_value then
-                    -- I apologize in advance, lua has no continue stmt
-                    goto continue
                 end
             end
             if compact then
@@ -49,11 +49,7 @@ function Iterator.map(self, func, ...)
     fail_if_missing(type(self) == "table", "Iterator.map is missing reference to itself")
     fail_if_missing(func, "Iterator.map is missing a function parameter")
 
-    table.insert(self._operations, { func = func, args = {...}, transform =
-        function(value, key, func, ...)
-            return func(value, key, ...)
-        end
-    })
+    table.insert(self._operations, { func = func, args = {...}, transform = 1})
     return self
 end
 
@@ -61,16 +57,7 @@ function Iterator.filter(self, func, ...)
     fail_if_missing(type(self) == "table", "Iterator.filter is missing reference to itself")
     fail_if_missing(func, "Iterator.filter is missing a function parameter")
 
-    table.insert(self._operations, { func = func, args = {...}, transform =
-        function(value, key, func, ...)
-            local result = func(value, key, ...)
-            -- coerce false results to nil
-            if not result then
-                return nil
-            end
-            return value
-        end
-    })
+    table.insert(self._operations, { func = func, args = {...}, transform = 2})
     return self
 end
 
@@ -78,14 +65,6 @@ function Iterator.each(self, func, ...)
     fail_if_missing(type(self) == "table", "Iterator.each is missing reference to itself")
     fail_if_missing(func, "Iterator.each is missing a function parameter")
 
-    table.insert(self._operations, { func = func, args = {...}, transform =
-        function(value, key, func, ...)
-            -- abort iteration if .each returns true
-            if func(value, key, ...) then
-                return value, true
-            end
-            return value
-        end
-    })
+    table.insert(self._operations, { func = func, args = {...}, transform = 3})
     return self
 end

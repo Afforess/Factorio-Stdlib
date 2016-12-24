@@ -145,7 +145,7 @@ function Entity._are_equal(entity_a, entity_b)
     return entity_a == entity_b
   elseif entity_a == entity_b then
     return true
-  elseif entity_a.equals ~= nil then
+  elseif Entity.has(entity_a, "equals") and entity_a.equals ~= nil then
     return entity_a.equals(entity_b)
   else
     return false

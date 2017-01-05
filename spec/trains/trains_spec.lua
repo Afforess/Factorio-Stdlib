@@ -4,38 +4,22 @@
 require 'stdlib/event/event'
 require 'stdlib/surface'
 require 'spec/defines'
-_G.Event = {
-    register = function(evt, fun) end
-}
-
-_G.Surface = {
-    find_all_entities = function(criteria)
-        return Train_Spec_Fixtures.Two_Trains_With_Single_Locomotive
-    end
-}
-
 _G.script = {
     generate_event_name = function() return 99 end
 }
+_G.Event = { register = function(evt, fn) end }
 require 'spec/trains/fixtures'
 
 describe('when the train module loads', function()
-
-    setup(function()
-        require 'stdlib/event/event'
-        require 'stdlib/surface'
-    end)
-
-    before_each(function()
-        _G.defines = defines
-        _G.Event = { register = function(evt, fn) end }
-        _G.Surface = { find_all_entities = function(criteria) return {} end}
-    end)
 
     after_each(function()
         -- Unload the module after each test
         -- so that initialization code will be run
         package.loaded['stdlib/trains/trains'] = nil
+    end)
+
+    it('it should allow the train module to be loaded at startup time', function()
+        require('stdlib/trains/trains')
     end)
 
     it('it should load all trains in to the registry', function()

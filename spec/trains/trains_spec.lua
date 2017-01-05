@@ -4,13 +4,17 @@
 require 'stdlib/event/event'
 require 'stdlib/surface'
 require 'spec/defines'
-_G.script = {
-    generate_event_name = function() return 99 end
-}
-_G.Event = { register = function(evt, fn) end }
 require 'spec/trains/fixtures'
 
 describe('when the train module loads', function()
+    before_each(function()
+        _G.script = {on_event = function(id, callback) return end,
+                     on_init = function(callback) _G.on_init = callback end,
+                     on_load = function(callback) _G.on_load = callback end,
+                     on_configuration_changed = function(callback) _G.on_configuration_changed = callback end,
+                     generate_event_name = function() return 999 end}
+        _G.game = {tick = 1}
+    end)
 
     after_each(function()
         -- Unload the module after each test
@@ -34,6 +38,7 @@ describe('when the train module loads', function()
 
         -- Act
         Trains = require('stdlib/trains/trains')
+        _G.on_init()
 
         -- Assert
         assert.are_not_equal(nil, Trains._registry[1000])
@@ -42,13 +47,7 @@ describe('when the train module loads', function()
 
     it('it should register handlers for destruction events', function()
         -- Arrange
-        events = {
-            register = function(event, handler) end
-        }
-
-        _G.Event = events
-
-        register_spy = spy.on(events, 'register')
+        register_spy = spy.on(_G.Event, 'register')
 
         -- Act
         require('stdlib/trains/trains')
@@ -63,13 +62,7 @@ describe('when the train module loads', function()
 
     it('it should register handlers for creation events', function()
         -- Arrange
-        events = {
-            register = function(event, handler) end
-        }
-
-        _G.Event = events
-
-        register_spy = spy.on(events, 'register')
+        register_spy = spy.on(_G.Event, 'register')
 
         -- Act
         require('stdlib/trains/trains')
@@ -86,6 +79,7 @@ describe('Trains module', function()
 
     setup(function()
         Trains = require 'stdlib/trains/trains'
+        _G.on_init()
     end)
 
     after_each(function()
@@ -270,15 +264,11 @@ describe('Trains module', function()
             end
 
             -- Get ready to spy on events being dispatched
-            events = {
-               register = function(evt, fun) end,
-               dispatch = function(evt) end
-            }
-            dispatch_spy = spy.on(events, 'dispatch')
-            _G.Event = events
+            dispatch_spy = spy.on(_G.Event, 'dispatch')
 
             -- Import the library
             Trains = require('stdlib/trains/trains')
+            _G.on_init()
 
             event_data = {
                 entity = {
@@ -295,10 +285,10 @@ describe('Trains module', function()
 
             -- Assert
             assert.spy(dispatch_spy).was_called_with(
-                Trains.on_train_id_changed,
                 {
                     old_id = 1000,
-                    new_id = 2000
+                    new_id = 2000,
+                    name = Trains.on_train_id_changed
                 })
         end)
 
@@ -326,6 +316,7 @@ describe('Trains module', function()
 
             -- Import the library
             Trains = require('stdlib/trains/trains')
+            _G.on_init()
 
             -- Check the state of the registry first
             assert.are_not_equal(nil, Trains._registry[1000])

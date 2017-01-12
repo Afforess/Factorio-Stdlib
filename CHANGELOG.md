@@ -7,7 +7,7 @@
   - Added Surface.get_surface_bounds, creates an area that represents the generated boundaries of a surface
 
 #### Changes:
-  - Changed Surface.final_all_entities to support area search criteria
+  - Changed Surface.find_all_entities to support area search criteria
   - Changed Inventory.copy_inventory to support itemstacks with durability, health or ammo
   - Changed Trains.find_filtered to support the entity type in the search criteria. Defaults to 'locomotive'
   - Changed Entity.set_data/Entity.get_data to use a unit's unit_number as a key for data, enhancing performance for entities who have unit_numbers
@@ -16,7 +16,6 @@
   - Deprecated Area.adjust, due to misleading name. (use Area.normalize instead)
 
 #### Bugfixes:
-  - Fixed entity comparison in Entity.equals when no equals method is present
   - Fixed loading error when train module was loaded before the game object existed
   - Fixed Trains.on_train_id_changed event not firing correctly
 

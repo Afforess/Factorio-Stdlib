@@ -69,13 +69,7 @@ end
 -- @tparam Table criteria Table with any keys supported by the <a href="Surface.html#find_all_entities">Surface</a> module.</p>
 --  <p>If the name key isn't supplied, this will default to 'diesel-locomotive'</p>
 --  <p>If the surface key isn't supplied, this will default to 1</p>
--- @return A list of train details tables, if any are found matching the criteria. Otherwise the empty list.
--- <p>
---  <table>
---      <tr><td>train (LuaTrain)</td><td>The LuaTrain instance</td></tr>
---      <tr><td>id (int)</td><td>The id of the train</td></tr>
---  </table>
--- </p>
+-- @return A list of train details tables, if any are found matching the criteria. Otherwise the empty list. <table><tr><td>train (LuaTrain)</td><td>The LuaTrain instance</td></tr><tr><td>id (int)</td><td>The id of the train</td></tr></table>
 function Trains.find_filtered(criteria)
     criteria = criteria or {}
 

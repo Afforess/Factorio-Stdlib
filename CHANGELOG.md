@@ -1,3 +1,25 @@
+## Factorio-Stdlib 0.8.0 (January 12, 2017)
+
+#### Features:
+
+  - Added Entity.set_industructible, toggles an entity so that it can not be damaged or mined by either the player or other forces
+  - Added Entity.set_frozen, toggles an entity as inactive, making it inoperable and non-rotatable
+  - Added Surface.get_surface_bounds, creates an area that represents the generated boundaries of a surface
+
+#### Changes:
+  - Changed Surface.final_all_entities to support area search criteria
+  - Changed Inventory.copy_inventory to support itemstacks with durability, health or ammo
+  - Changed Trains.find_filtered to support the entity type in the search criteria. Defaults to 'locomotive'
+  - Changed Entity.set_data/Entity.get_data to use a unit's unit_number as a key for data, enhancing performance for entities who have unit_numbers
+
+#### Deprecations:
+  - Deprecated Area.adjust, due to misleading name. (use Area.normalize instead)
+
+#### Bugfixes:
+  - Fixed entity comparison in Entity.equals when no equals method is present
+  - Fixed loading error when train module was loaded before the game object existed
+  - Fixed Trains.on_train_id_changed event not firing correctly
+
 ## Factorio-Stdlib 0.7.0 (September 30, 2016)
 
 #### Features:

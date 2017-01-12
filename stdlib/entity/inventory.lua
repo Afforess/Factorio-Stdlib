@@ -4,6 +4,7 @@
 Inventory = {}
 
 require 'stdlib/core'
+require 'stdlib/entity/entity'
 
 --- Copies an inventory contents to a destination inventory
 -- @param src source inventory to copy from
@@ -13,16 +14,19 @@ function Inventory.copy_inventory(src, dest)
     fail_if_missing(src, "missing source inventory")
     fail_if_missing(dest, "missing destination inventory")
 
-    local contents = src.get_contents()
     local left_over = {}
-    for n, c in pairs(contents) do
-        local inserted = dest.insert({name=n, count=c})
-        local amt_not_inserted = c - inserted
-        if amt_not_inserted > 0 then
-            table.insert(left_over, { name = n, count = amt_not_inserted })
+    for i = 1, #src do
+        local stack = src[i]
+        if stack and stack.valid_for_read then
+            local cur_stack = {name=stack.name, count=stack.count, health=stack.health or 1}
+            cur_stack.ammo = Entity.has(stack, "ammo") and stack.ammo or nil
+            cur_stack.durability = Entity.has(stack, "durability") and stack.durability or nil
+            local inserted = dest.insert(cur_stack)
+            local amt_not_inserted = stack.count - inserted
+            if amt_not_inserted > 0 then
+              left_over[#left_over+1] = cur_stack
+            end
         end
     end
     return left_over
 end
-
-return Inventory

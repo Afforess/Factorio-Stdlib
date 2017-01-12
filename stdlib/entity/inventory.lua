@@ -17,24 +17,15 @@ function Inventory.copy_inventory(src, dest)
     local left_over = {}
     for i = 1, #src do
         local stack = src[i]
-        if stack and stack.valid and stack.valid_for_read then
-            local copy_of_item_stack = { name = stack.name, count = stack.count, health = stack.health or nil, durability = stack.durability or nil }
-            -- allow valid/valid_for_read calls, without setting the real fields
-            setmetatable(copy_of_item_stack, { __index = { valid = true, valid_for_read = true }})
-
-            -- ammo is a special case field, accessing it on non-ammo itemstacks causes an exception
-            if stack.prototype.ammo_type then
-                copy_of_item_stack.ammo = stack.ammo or nil
-            end
-
-            local inserted = dest.insert(copy_of_item_stack)
-            local amt_not_inserted = stack.count - inserted
-            if amt_not_inserted > 0 then
-              table.insert(left_over, cur_stack)
+        if stack and stack.valid_for_read then
+            local cur_stack = {name=stack.name, count=stack.count, health=stack.health or 1}
+            cur_stack.ammo = Entity.has(stack, "ammo") and stack.ammo or nil
+            cur_stack.durability = Entity.has(stack, "durability") and stack.durability or nil
+            cur_stack.count = cur_stack.count - dest.insert(cur_stack)
+            if cur_stack.count > 0 then
+              left_over[#left_over+1] = cur_stack
             end
         end
     end
     return left_over
 end
-
-return Inventory

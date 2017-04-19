@@ -1,12 +1,13 @@
 --- Inventory module
+-- <b>Deprecated</b>, refer to https://github.com/Afforess/Factorio-Stdlib/issues/66 for details.
 -- @module Inventory
 
 Inventory = {}
 
 require 'stdlib/core'
-require 'stdlib/entity/entity'
 
 --- Copies an inventory contents to a destination inventory
+-- <b>Deprecated</b>, refer to https://github.com/Afforess/Factorio-Stdlib/issues/66 for details.
 -- @param src source inventory to copy from
 -- @param dest destination inventory, to copy to
 -- @return an array of SimpleItemStacks of left over items that could not be copied.

@@ -212,7 +212,7 @@ end
 
 -- copied from factorio/data/core/luablib/util.lua
 
---- Creates a deep copy of table, not coyping Factorio objects
+--- Creates a deep copy of table, not copying Factorio objects
 -- @param object the table to copy
 -- @return a copy of the table
 function table.deepcopy(object)

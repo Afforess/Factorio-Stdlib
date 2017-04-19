@@ -2,6 +2,7 @@ Train_Spec_Fixtures = {
     Single_Train_With_Single_Locomotive = {
         [1] = {
             name = 'diesel-locomotive',
+            type = 'locomotive',
             unit_number = 1000,
             train = {
                 valid = true,
@@ -32,12 +33,14 @@ Train_Spec_Fixtures = {
 
         loco_1 = {
             name = 'diesel-locomotive',
+            type = 'locomotive',
             unit_number = 1000,
             train = train
         }
 
         loco_2 = {
             name = 'diesel-locomotive',
+            type = 'locomotive',
             unit_number = 2000,
             train = train
         }
@@ -51,6 +54,7 @@ Train_Spec_Fixtures = {
     Two_Trains_With_Single_Locomotive = {
         [1] = {
             name = 'diesel-locomotive',
+            type = 'locomotive',
             unit_number = 1000,
             train = {
                 valid = true,
@@ -66,6 +70,7 @@ Train_Spec_Fixtures = {
 
         [2] = {
             name = 'diesel-locomotive',
+            type = 'locomotive',
             unit_number = 2000,
             train = {
                 valid = true,
@@ -83,6 +88,7 @@ Train_Spec_Fixtures = {
     Trains_In_Different_States = {
           [1] = {
             name = 'diesel-locomotive',
+            type = 'locomotive',
             unit_number = 1000,
             train = {
                 valid = true,
@@ -98,6 +104,7 @@ Train_Spec_Fixtures = {
 
         [2] = {
             name = 'diesel-locomotive',
+            type = 'locomotive',
             unit_number = 2000,
             train = {
                 valid = true,
@@ -128,12 +135,14 @@ Train_Spec_Fixtures = {
 
         loco_1 = {
             name = 'diesel-locomotive',
+            type = 'locomotive',
             unit_number = 1000,
             train = train
         }
 
         loco_2 = {
             name = 'diesel-locomotive',
+            type = 'locomotive',
             unit_number = 2000,
             train = train
         }
@@ -160,12 +169,14 @@ Train_Spec_Fixtures = {
 
         loco_1 = {
             name = 'diesel-locomotive',
+            type = 'locomotive',
             unit_number = 1000,
             train = train
         }
 
         loco_2 = {
             name = 'diesel-locomotive',
+            type = 'locomotive',
             unit_number = 2000,
             train = train
         }

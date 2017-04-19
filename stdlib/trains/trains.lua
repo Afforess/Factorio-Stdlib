@@ -12,9 +12,7 @@ require 'stdlib/event/event'
 require 'stdlib/surface'
 require 'stdlib/table'
 
-Trains = {
-    _registry = {}
-}
+Trains = {}
 
 --- This event is fired when a train's id has changed.
 -- <p>Train id's are dervied from a property of the train's main locomotive.
@@ -108,7 +106,7 @@ end
 function Trains._on_locomotive_changed()
     -- For all the known trains
     local renames = {}
-    for id, train in pairs(Trains._registry) do
+    for id, train in pairs(global._registry) do
         -- Check if their known ID is the same as the LuaTrain's dervied id
         local derived_id = Trains.get_train_id(train)
         -- If it's not
@@ -122,8 +120,8 @@ function Trains._on_locomotive_changed()
     for _, renaming in pairs(renames) do
         -- Rename it in the registry
         -- and dispatch a renamed event
-        Trains._registry[renaming.new_id] = renaming.train
-        table.remove_keys(Trains._registry, {renaming.old_id})
+        global._registry[renaming.new_id] = renaming.train
+        table.remove_keys(global._registry, {renaming.old_id})
 
         local event_data = {
             old_id = renaming.old_id,
@@ -138,8 +136,8 @@ end
 -- @return void
 function Trains._on_locomotive_created(new_locomotive)
     local train_id = Trains.get_train_id(new_locomotive.train)
-    if (Trains._registry[train_id] == nil) then
-        Trains._registry[train_id] = new_locomotive.train
+    if (global._registry[train_id] == nil) then
+        global._registry[train_id] = new_locomotive.train
     end
 end
 
@@ -209,23 +207,23 @@ end
 -- @tparam callable callback The callback to invoke if the filter passes. The object defined in the event parameter is passed.
 local function filter_event(event_parameter, entity_type, callback)
     return function(evt)
-        if(evt[event_parameter].name == entity_type) then
+        if(evt[event_parameter].type == entity_type) then
             callback(evt[event_parameter])
         end
     end
 end
 
 -- When a locomotive is removed ..
-Event.register(defines.events.on_entity_died, filter_event('entity', 'diesel-locomotive', Trains._on_locomotive_changed))
-Event.register(defines.events.on_picked_up_item, filter_event('item_stack', 'diesel-locomotive', Trains._on_locomotive_changed))
-Event.register(defines.events.on_player_mined_item, filter_event('item_stack', 'diesel-locomotive', Trains._on_locomotive_changed))
-Event.register(defines.events.on_robot_mined, filter_event('item_stack', 'diesel-locomotive', Trains._on_locomotive_changed))
+Event.register(defines.events.on_entity_died, filter_event('entity', 'locomotive', Trains._on_locomotive_changed))
+Event.register(defines.events.on_picked_up_item, filter_event('item_stack', 'locomotive', Trains._on_locomotive_changed))
+Event.register(defines.events.on_player_mined_item, filter_event('item_stack', 'locomotive', Trains._on_locomotive_changed))
+Event.register(defines.events.on_robot_mined, filter_event('item_stack', 'locomotive', Trains._on_locomotive_changed))
 
 -- When a locomotive is added ..
-Event.register(defines.events.on_built_entity, filter_event('created_entity', 'diesel-locomotive', Trains._on_locomotive_created))
-Event.register(defines.events.on_robot_built_entity, filter_event('created_entity', 'diesel-locomotive', Trains._on_locomotive_created))
+Event.register(defines.events.on_built_entity, filter_event('created_entity', 'locomotive', Trains._on_locomotive_created))
+Event.register(defines.events.on_robot_built_entity, filter_event('created_entity', 'locomotive', Trains._on_locomotive_created))
 
 -- When the mod is initialized the first time
-Event.register(Event.core_events.init, function() Trains._registry = create_train_registry() end)
+Event.register(Event.core_events.init, function() global._registry = create_train_registry() end)
 
 return Trains

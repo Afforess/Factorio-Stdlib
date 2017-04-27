@@ -106,7 +106,7 @@ end
 function Trains._on_locomotive_changed()
     -- For all the known trains
     local renames = {}
-    for id, train in pairs(global._registry) do
+    for id, train in pairs(global._train_registry) do
         -- Check if their known ID is the same as the LuaTrain's dervied id
         local derived_id = Trains.get_train_id(train)
         -- If it's not
@@ -120,8 +120,8 @@ function Trains._on_locomotive_changed()
     for _, renaming in pairs(renames) do
         -- Rename it in the registry
         -- and dispatch a renamed event
-        global._registry[renaming.new_id] = renaming.train
-        table.remove_keys(global._registry, {renaming.old_id})
+        global._train_registry[renaming.new_id] = renaming.train
+        table.remove_keys(global._train_registry, {renaming.old_id})
 
         local event_data = {
             old_id = renaming.old_id,
@@ -136,8 +136,8 @@ end
 -- @return void
 function Trains._on_locomotive_created(new_locomotive)
     local train_id = Trains.get_train_id(new_locomotive.train)
-    if (global._registry[train_id] == nil) then
-        global._registry[train_id] = new_locomotive.train
+    if (global._train_registry[train_id] == nil) then
+        global._train_registry[train_id] = new_locomotive.train
     end
 end
 
@@ -224,6 +224,6 @@ Event.register(defines.events.on_built_entity, filter_event('created_entity', 'l
 Event.register(defines.events.on_robot_built_entity, filter_event('created_entity', 'locomotive', Trains._on_locomotive_created))
 
 -- When the mod is initialized the first time
-Event.register(Event.core_events.init, function() global._registry = create_train_registry() end)
+Event.register(Event.core_events.init, function() global._train_registry = create_train_registry() end)
 
 return Trains

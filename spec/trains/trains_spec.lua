@@ -42,8 +42,8 @@ describe('when the train module loads', function()
         _G.on_init()
 
         -- Assert
-        assert.are_not_equal(nil, global._registry[1000])
-        assert.are_not_equal(nil, global._registry[2000])
+        assert.are_not_equal(nil, global._train_registry[1000])
+        assert.are_not_equal(nil, global._train_registry[2000])
     end)
 
     it('it should register handlers for destruction events', function()
@@ -279,7 +279,7 @@ describe('Trains module', function()
 
             -- Simulate the game changing the state of the train
             -- referenced in the registry
-            global._registry[1000] = Train_Spec_Fixtures.Train_With_Front_And_Back_Locomotives_B()[1].train
+            global._train_registry[1000] = Train_Spec_Fixtures.Train_With_Front_And_Back_Locomotives_B()[1].train
 
             -- Act
             Trains._on_locomotive_changed(event_data)
@@ -320,15 +320,15 @@ describe('Trains module', function()
             _G.on_init()
 
             -- Check the state of the registry first
-            assert.are_not_equal(nil, global._registry[1000])
-            assert.are_equal(nil, global._registry[2000])
+            assert.are_not_equal(nil, global._train_registry[1000])
+            assert.are_equal(nil, global._train_registry[2000])
 
             -- Act
             Trains._on_locomotive_created(new_locomotive)
 
             -- Assert
-            assert.are_not_equal(nil, global._registry[1000])
-            assert.are_not_equal(nil, global._registry[2000])
+            assert.are_not_equal(nil, global._train_registry[1000])
+            assert.are_not_equal(nil, global._train_registry[2000])
         end)
     end)
 

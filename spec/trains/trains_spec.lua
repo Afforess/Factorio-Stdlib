@@ -12,7 +12,11 @@ describe('when the train module loads', function()
                      on_init = function(callback) _G.on_init = callback end,
                      on_load = function(callback) _G.on_load = callback end,
                      on_configuration_changed = function(callback) _G.on_configuration_changed = callback end,
-                     generate_event_name = function() return 999 end}
+                     generate_event_name = function() return 999 end,
+                     raise_event = function(event_id, event_tbl)
+                         event_tbl.name = event_id
+                         Event.dispatch(event_tbl)
+                     end}
         _G.game = {tick = 1, players = {}}
         _G.global = {}
     end)
@@ -70,8 +74,7 @@ describe('when the train module loads', function()
         local match = require("luassert.match")
 
         -- assert
-        assert.spy(register_spy).was_called_with(defines.events.on_built_entity, match.is_function())
-        assert.spy(register_spy).was_called_with(defines.events.on_robot_built_entity, match.is_function())
+        assert.spy(register_spy).was_called_with(defines.events.on_train_created, match.is_function())
     end)
 end)
 
@@ -321,7 +324,7 @@ describe('Trains module', function()
             assert.are_equal(nil, global._train_registry[2000])
 
             -- Act
-            Trains._on_locomotive_created(new_locomotive)
+            script.raise_event(defines.events.on_train_created, { train = new_locomotive.train })
 
             -- Assert
             assert.are_not_equal(nil, global._train_registry[1000])

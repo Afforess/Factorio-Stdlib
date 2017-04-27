@@ -128,15 +128,6 @@ function Trains._on_locomotive_changed()
         Event.dispatch(event_data)
     end
 end
---- Event fired when a new locomotive has been created
--- @tparam LuaEntity new_locomotive The new entity
--- @return void
-function Trains._on_locomotive_created(new_locomotive)
-    local train_id = Trains.get_train_id(new_locomotive.train)
-    if (global._train_registry[train_id] == nil) then
-        global._train_registry[train_id] = new_locomotive.train
-    end
-end
 
 --- Determines which locomotive in a train is the main one
 -- @tparam LuaTrain train
@@ -217,8 +208,12 @@ Event.register(defines.events.on_player_mined_item, filter_event('item_stack', '
 Event.register(defines.events.on_robot_mined, filter_event('item_stack', 'locomotive', Trains._on_locomotive_changed))
 
 -- When a locomotive is added ..
-Event.register(defines.events.on_built_entity, filter_event('created_entity', 'locomotive', Trains._on_locomotive_created))
-Event.register(defines.events.on_robot_built_entity, filter_event('created_entity', 'locomotive', Trains._on_locomotive_created))
+Event.register(defines.events.on_train_created, function(event)
+    local train_id = Trains.get_train_id(event.train)
+    if (global._train_registry[train_id] == nil) then
+        global._train_registry[train_id] = event.train
+    end
+end)
 
 -- When the mod is initialized the first time
 Event.register(Event.core_events.init, function() global._train_registry = create_train_registry() end)

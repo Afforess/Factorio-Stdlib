@@ -61,7 +61,7 @@ function Event.register(event, handler)
 end
 
 --- Calls the registerd handlers
--- @param event LuaEvent as created by game.raise_event
+-- @param event LuaEvent as created by script.raise_event
 function Event.dispatch(event)
     fail_if_missing(event, "missing event argument")
     if Event._registry[event.name] then

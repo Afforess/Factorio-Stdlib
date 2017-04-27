@@ -43,7 +43,7 @@ function Gui.Event.register(event, gui_element_pattern, handler)
 end
 
 --- Calls the registered handlers
--- @param event LuaEvent as created by game.raise_event
+-- @param event LuaEvent as created by script.raise_event
 function Gui.Event.dispatch(event)
     fail_if_missing(event, "missing event argument")
 

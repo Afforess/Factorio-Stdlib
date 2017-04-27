@@ -9,7 +9,11 @@ _G.script = {
         _G.script.next_event_id = _G.script.next_event_id + 1
         return _G.script.next_event_id
     end,
-    on_event = function(id, callback) return end
+    on_event = function(id, callback) return end,
+    raise_event = function(event_id, event_tbl)
+        event_tbl.name = event_id
+        Event.dispatch(event_tbl)
+    end
 }
 
 _G.global = { }
@@ -23,10 +27,6 @@ describe('Event.time', function()
             players = {{valid=false}},
             surfaces = {},
             tick = 0,
-            raise_event = function(event_id, event_tbl)
-                event_tbl.name = event_id
-                Event.dispatch(event_tbl)
-            end
         }
 
         _G.game.surfaces.nauvis = {
@@ -108,7 +108,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hour, day, and midnight events at at 12pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.5           -- hourly, daily, midnight
         _G.game.surfaces.testsur.daytime = 0.5416666667 -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -122,7 +122,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 1am & 2am', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.5416666667  -- hourly
         _G.game.surfaces.testsur.daytime = 0.584        -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -134,7 +134,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 2am & 3am', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.584         -- hourly
         _G.game.surfaces.testsur.daytime = 0.625        -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -146,7 +146,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 3am & 4am', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.625         -- hourly
         _G.game.surfaces.testsur.daytime = 0.6666666667 -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -158,7 +158,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 4am & sunrise', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.6666666667  -- hourly
         _G.game.surfaces.testsur.daytime = 0.6840277778 -- sunrise
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -170,7 +170,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at sunrise & 5am', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.6840277778  -- sunrise
         _G.game.surfaces.testsur.daytime = 0.709        -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -182,7 +182,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 5am & 6am', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.709         -- hourly
         _G.game.surfaces.testsur.daytime = 0.75         -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -194,7 +194,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 6am & 7am', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.75          -- hourly
         _G.game.surfaces.testsur.daytime = 0.7916666667 -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -206,7 +206,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 7am & 8am', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.7916666667  -- hourly
         _G.game.surfaces.testsur.daytime = 0.834        -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -218,7 +218,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 8am & 9am', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.834         -- hourly
         _G.game.surfaces.testsur.daytime = 0.875        -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -230,7 +230,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 9am & 10am', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.875         -- hourly
         _G.game.surfaces.testsur.daytime = 0.9166666667 -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -242,7 +242,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 10am & 11am', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.9166666667  -- hourly
         _G.game.surfaces.testsur.daytime = 0.959        -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -254,7 +254,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly and midday events at 11am & noon', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.959         -- hourly
         _G.game.surfaces.testsur.daytime = 0            -- hourly, midday
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -267,7 +267,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly and midday events at noon & 1pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0             -- hourly, midday
         _G.game.surfaces.testsur.daytime = 0.0416666667 -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -280,7 +280,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 1pm & 2pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.0416666667  -- hourly
         _G.game.surfaces.testsur.daytime = 0.084        -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -292,7 +292,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 2pm & 3pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.084         -- hourly
         _G.game.surfaces.testsur.daytime = 0.125        -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -304,7 +304,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 3pm & 4pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.125         -- hourly
         _G.game.surfaces.testsur.daytime = 0.1666666667 -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -316,7 +316,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 4pm & 5pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.1666666667  -- hourly
         _G.game.surfaces.testsur.daytime = 0.209        -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -328,7 +328,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 5pm & 6pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.209         -- hourly
         _G.game.surfaces.testsur.daytime = 0.25         -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -340,7 +340,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 6pm & 7pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.25          -- hourly
         _G.game.surfaces.testsur.daytime = 0.2916666667 -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -352,7 +352,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly and sunset events at 7pm & sunset', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.2916666667  -- hourly
         _G.game.surfaces.testsur.daytime = 0.3055555556 -- sunset
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -364,7 +364,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly and sunset events at sunset & 8pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.3055555556  -- sunset
         _G.game.surfaces.testsur.daytime = 0.334         -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -376,7 +376,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 8pm & 9pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.334         -- hourly
         _G.game.surfaces.testsur.daytime = 0.375        -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -388,7 +388,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 9pm & 10pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.375         -- hourly
         _G.game.surfaces.testsur.daytime = 0.4166666667 -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -400,7 +400,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly events at 10pm & 11pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.4166666667  -- hourly
         _G.game.surfaces.testsur.daytime = 0.459        -- hourly
         Event.dispatch({name = defines.events.on_tick, tick = 0})
@@ -412,7 +412,7 @@ describe('Event.time', function()
     end)
 
     it('should dispatch hourly, daily and a midnight event at 11pm & 12pm', function()
-        local s = spy.on(game, "raise_event")
+        local s = spy.on(script, "raise_event")
         _G.game.surfaces.nauvis.daytime = 0.459         -- hourly
         _G.game.surfaces.testsur.daytime = 0.5          -- hourly, daily, midnight
         Event.dispatch({name = defines.events.on_tick, tick = 0})

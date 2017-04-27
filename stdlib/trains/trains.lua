@@ -66,13 +66,10 @@ end
 ----Trains.find_filtered({ surface_name = "nauvis", state = defines.train_state.wait_station })
 -- @tparam Table criteria Table with any keys supported by the <a href="Surface.html#find_all_entities">Surface</a> module.</p>
 --  <p>If the name key isn't supplied, this will default to 'diesel-locomotive'</p>
---  <p>If the surface key isn't supplied, this will default to 1</p>
+--  <p>If the surface key isn't supplied, this will search all surfaces that currently exist</p>
 -- @return A list of train details tables, if any are found matching the criteria. Otherwise the empty list. <table><tr><td>train (LuaTrain)</td><td>The LuaTrain instance</td></tr><tr><td>id (int)</td><td>The id of the train</td></tr></table>
 function Trains.find_filtered(criteria)
     criteria = criteria or {}
-
-    -- Ensuure surface is set
-    criteria.surface = criteria.surface or 'nauvis'
 
     -- Make sure 'locomotive' is specified as the type by default
     criteria.type = criteria.type or 'locomotive'
@@ -189,7 +186,7 @@ end
 local function create_train_registry()
     local registry = {}
 
-    local all_trains = Trains.find_filtered({surface_name = 1})
+    local all_trains = Trains.find_filtered()
     for _, trainInfo in pairs(all_trains) do
         registry[tonumber(trainInfo.id)] = trainInfo.train
     end

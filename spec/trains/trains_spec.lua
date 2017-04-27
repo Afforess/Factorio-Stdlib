@@ -105,7 +105,6 @@ describe('Trains module', function()
 
                 -- Act
                 expected_params = {
-                    surface = "nauvis",
                     type = 'locomotive'
                 }
                 assert.spy(surface_spy).was_called_with(expected_params)
@@ -131,7 +130,6 @@ describe('Trains module', function()
 
                 -- Act
                 expected_params = {
-                    surface = "nauvis",
                     name = 'some-locomotive',
                     type = 'locomotive'
                 }
@@ -154,7 +152,6 @@ describe('Trains module', function()
 
               -- Act
               expected_params = {
-                  surface = "nauvis",
                   type = 'locomotive'
               }
               assert.spy(surface_spy).was_called_with(expected_params)

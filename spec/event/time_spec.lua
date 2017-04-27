@@ -12,6 +12,8 @@ _G.script = {
     on_event = function(id, callback) return end
 }
 
+_G.global = { }
+
 require 'spec/defines'
 require 'stdlib/event/time'
 
@@ -39,10 +41,9 @@ describe('Event.time', function()
             name = "testsur"
         }
 
+        _G.global._surface_time = {}
         _G.nauvis_event_table = {surface = _G.game.surfaces.nauvis}
         _G.testsur_event_table = {surface = _G.game.surfaces.testsur}
-
-        Event.Time._last_change = {}
 
         _G.simulate_time = function(ticks)
             local daytime_per_tick = 1 / Time.DAY

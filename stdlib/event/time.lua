@@ -5,7 +5,7 @@ require 'stdlib/event/event'
 require 'stdlib/time'
 
 Event.Time = {}
-Event.Time._last_change = {}
+global._surface_time = {}
 
 --All times are offset by 0.5
 --This is because both EvoGUI and MoWeather already apply that offset.
@@ -39,8 +39,8 @@ Event.register(defines.events.on_tick, function(event)
         local day_time = math.fmod(Event.Time.get_day_time(idx), 1)
         local day_time_minutes = math.floor(day_time * 24 * 60)
 
-        if day_time_minutes ~= Event.Time._last_change[idx] then
-            Event.Time._last_change[idx] = day_time_minutes
+        if day_time_minutes ~= global._surface_time[idx] then
+            global._surface_time[idx] = day_time_minutes
             game.raise_event(Event.Time.minutely, {surface = surface})
 
             if day_time_minutes % 60 == 0 then

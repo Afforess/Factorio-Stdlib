@@ -1,4 +1,4 @@
-require 'stdlib/entity/inventory'
+local Inventory = require 'stdlib/entity/inventory'
 
 describe('Game Spec', function()
     function make_get_contents(inv)
@@ -24,7 +24,7 @@ describe('Game Spec', function()
         make_get_contents(src_inventory)
         local dest_inventory = {}
         make_get_contents(dest_inventory)
-        dest_inventory.insert = spy(function(stack) table.insert(dest_inventory, stack); return stack.count end)
+        dest_inventory.insert = spy(function(stack) table.insert(dest_inventory, stack); print(stack.name) return stack.count end)
 
         assert.same(0, #Inventory.copy_inventory(src_inventory, dest_inventory))
         assert.spy(dest_inventory.insert).was_called()

@@ -1,4 +1,4 @@
-require 'stdlib/data/recipe'
+local Recipe = require 'stdlib/data/recipe'
 
 describe('Recipe Spec', function()
     before_each(function()

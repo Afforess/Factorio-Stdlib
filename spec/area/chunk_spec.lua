@@ -1,6 +1,5 @@
 require 'spec/defines'
-require 'stdlib/area/chunk'
-
+local Chunk = require 'stdlib/area/chunk'
 describe('Chunk Spec', function()
     it('should give the correct chunk coordinates for a position', function()
         assert.same(0, Chunk.from_position({0, 34}).x)

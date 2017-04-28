@@ -1,4 +1,4 @@
-require 'stdlib/area/area'
+local Area = require 'stdlib/area/area'
 
 describe('Area Spec', function()
     it('should validate the size of an area', function()

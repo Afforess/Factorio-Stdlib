@@ -1,4 +1,4 @@
-require 'stdlib/surface'
+local Surface = require 'stdlib/surface'
 
 describe('Surface Spec', function()
     describe('Surface lookups', function()

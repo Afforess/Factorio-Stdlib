@@ -1,5 +1,5 @@
 require 'spec/defines'
-require 'stdlib/area/position'
+local Position = require 'stdlib/area/position'
 
 describe('Position Spec', function()
     it('should validate position construction', function()

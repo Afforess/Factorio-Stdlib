@@ -1,4 +1,4 @@
-require 'stdlib/entity/entity'
+local Entity = require 'stdlib/entity/entity'
 
 describe('Entity Spec', function()
     it('an entity should have the correct selection area', function()

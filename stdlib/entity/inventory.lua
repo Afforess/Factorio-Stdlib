@@ -1,10 +1,9 @@
 --- Inventory module
--- <b>Deprecated</b>, refer to https://github.com/Afforess/Factorio-Stdlib/issues/66 for details.
 -- @module Inventory
 
-Inventory = {}
+local fail_if_missing = require 'stdlib/core'["fail_if_missing"]
 
-require 'stdlib/core'
+local Inventory = {}
 
 --- Copies an inventory contents to a destination inventory
 -- <b>Deprecated</b>, refer to https://github.com/Afforess/Factorio-Stdlib/issues/66 for details.
@@ -19,19 +18,23 @@ function Inventory.copy_inventory(src, dest)
     for i = 1, #src do
         local stack = src[i]
         if stack and stack.valid and stack.valid_for_read then
-            local copy_of_item_stack = { name = stack.name, count = stack.count, health = stack.health or nil, durability = stack.durability or nil }
-            -- allow valid/valid_for_read calls, without setting the real fields
-            setmetatable(copy_of_item_stack, { __index = { valid = true, valid_for_read = true }})
+            local simple_stack = {
+                name = stack.name,
+                count = stack.count,
+                health = stack.health or 1,
+                durability = stack.durability or nil
+            }
+            --Valid metatable is not needed. SimpleItemStack is and unrefrenced tables.
 
             -- ammo is a special case field, accessing it on non-ammo itemstacks causes an exception
             if stack.prototype.ammo_type then
-                copy_of_item_stack.ammo = stack.ammo or nil
+                simple_stack.ammo = stack.ammo or nil
             end
 
-            local inserted = dest.insert(copy_of_item_stack)
-            local amt_not_inserted = stack.count - inserted
-            if amt_not_inserted > 0 then
-              table.insert(left_over, cur_stack)
+            --Insert simple stack into inventory, add to left_over if not all were inserted.
+            simple_stack.count = simple_stack.count - dest.insert(simple_stack)
+            if simple_stack.count > 0 then
+                table.insert(left_over, simple_stack)
             end
         end
     end

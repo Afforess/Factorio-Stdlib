@@ -9,10 +9,10 @@ Logger = {}
 -- <p>
 -- When loggers are created, a table of options may be specified. The valid options are:
 -- <code>
---    log_ticks      -- whether to include the game tick timestamp in logs. Defaults to false.
---    file_extension -- a string that overides the default 'log' file extension.
---    force_append   -- each time a logger is created, it will always append, instead of
---                   --   the default behavior, which is to write out a new file, then append
+-- log_ticks -- whether to include the game tick timestamp in logs. Defaults to false.
+-- file_extension -- a string that overides the default 'log' file extension.
+-- force_append -- each time a logger is created, it will always append, instead of
+-- -- the default behavior, which is to write out a new file, then append
 -- </code>
 --
 -- @usage

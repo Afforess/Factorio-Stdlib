@@ -1,7 +1,7 @@
 --- Time module
 -- @module Time
 
-Time = {}
+local Time = {}
 
 --- @field the number of factorio ticks in a second
 Time.SECOND = 60
@@ -17,3 +17,5 @@ Time.DAY = Time.MINUTE * 60
 
 --- @field the number of factorio ticks in a week
 Time.WEEK = Time.DAY * 7
+
+return Time

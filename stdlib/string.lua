@@ -47,14 +47,13 @@ end
 -- @param pattern whether to interpret the separator as a lua pattern or plaintext for the string split
 -- @return the table
 function string.split(s, sep, pattern)
-    local sep, fields = sep or ".", {}
+    sep = sep or "."
     sep = sep ~= "" and sep or "."
     sep = not pattern and string.gsub(sep, "([^%w])", "%%%1") or sep
 
     local fields = {}
     local start_idx, end_idx = string.find(s, sep)
     local last_find = 1
-    local len = string.len(sep)
     while start_idx do
         local substr = string.sub(s, last_find, start_idx - 1)
         if string.len(substr) > 0 then

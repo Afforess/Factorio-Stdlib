@@ -9,7 +9,7 @@
 local SECOND = 60
 local MINUTE = SECOND * 60
 local HOUR = MINUTE * 60
-local DAY = HOUR * 12
+local DAY = HOUR * 24
 local WEEK = DAY * 7
 local MONTH = DAY * 30
 local YEAR = DAY * 365

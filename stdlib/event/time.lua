@@ -2,6 +2,7 @@
 -- @module Event.Time
 
 require 'stdlib/event/event'
+require 'stdlib/defines/time'
 
 Event.Time = {}
 

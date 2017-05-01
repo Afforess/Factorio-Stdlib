@@ -19,7 +19,7 @@ local testReservedCharacters = function(path)
     return nil
 end
 
-Config = {}
+Config = {} --luacheck: allow defined top
 
 --- Creates a new Config object
 -- to ease the management of a config table.

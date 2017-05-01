@@ -1,7 +1,7 @@
 --- Logger module
 -- @module Logger
 
-Logger = {}
+Logger = {} --luacheck: allow defined top
 
 --- Creates a new logger object.<p>
 -- In debug mode, the logger writes immediately. Otherwise the loggers buffers lines.

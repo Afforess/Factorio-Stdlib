@@ -1,7 +1,7 @@
 --- Game module
 -- @module Game
 
-local Game = {}
+Game = {} --luacheck: allow defined top
 
 Game.VALID_FILTER = function(v)
     return v.valid

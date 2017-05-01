@@ -1,10 +1,10 @@
 --- Entity module
 -- @module Entity
 
-local fail_if_missing = require 'stdlib/core'["fail_if_missing"]
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 local Area = require 'stdlib/area/area'
 
-local Entity = {}
+Entity = {} --luacheck: allow defined top
 
 --- Converts an entity and its selection_box to the area around it
 -- @param entity to convert to an area

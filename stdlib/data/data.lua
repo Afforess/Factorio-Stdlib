@@ -1,11 +1,11 @@
 --- Data module
 -- @module Data
 
-local fail_if_missing = require 'stdlib/core'["fail_if_missing"]
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 require 'stdlib/string'
 require 'stdlib/table'
 
-local Data = {}
+Data = {} --luacheck: allow defined top
 
 --- Selects all data values where the key matches the selector pattern.
 -- The selector pattern is divided into groups. The pattern should have a colon character `:` to denote the selection for each group.

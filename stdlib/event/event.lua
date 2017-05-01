@@ -4,7 +4,7 @@
 local Core = require 'stdlib/core'
 local Game = require 'stdlib/game'
 
-Event = {
+Event = { --luacheck: allow defined top
     _registry = {},
     core_events = {
         init = -1,

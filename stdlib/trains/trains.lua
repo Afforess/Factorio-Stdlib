@@ -13,7 +13,7 @@ require 'stdlib/table'
 local Surface = require 'stdlib/surface'
 local Entity = require 'stdlib/entity/entity'
 
-local Trains = {}
+Trains = {} --luacheck: allow defined top
 --- This event is fired when a train's id has changed.
 -- <p>Train id's are dervied from a property of the train's main locomotive.
 -- That means when locomotives are attached/detached from carriages or other

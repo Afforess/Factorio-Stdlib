@@ -1,10 +1,10 @@
 --- Area module
 -- @module Area
 
-local fail_if_missing = require 'stdlib/core'["fail_if_missing"]
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 local Position = require 'stdlib/area/position'
 
-local Area = {}
+Area = {} --luacheck: allow defined top
 
 --- Creates an area from the 2 positions p1 and p2
 -- @param x1 x-position of left_top, first point
@@ -14,14 +14,6 @@ local Area = {}
 -- @return Area tabled area
 function Area.construct(x1, y1, x2, y2)
     return { left_top = Position.construct(x1, y1), right_bottom = Position.construct(x2, y2) }
-end
-
---- Returns the size of the space contained in the 2d area </br>
--- <b>Deprecated</b>, Area.area is misleading. See: Area.size
--- @param area the area
--- @return size of the area
-function Area.area(area)
-    return Area.size(area)
 end
 
 --- Returns the size of the space contained in the 2d area

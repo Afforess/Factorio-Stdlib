@@ -1,8 +1,9 @@
 --- Position module
 -- @module Position
 
-local fail_if_missing = require 'stdlib/core'["fail_if_missing"]
-local Position = {}
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+
+Position = {} --luacheck: allow defined top
 
 --- Creates a table representing the position from x and y
 -- @param x x-position

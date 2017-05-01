@@ -1,10 +1,10 @@
 --- Surface module
 -- @module Surface
 
-local fail_if_missing = require 'stdlib/core'["fail_if_missing"]
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 local Area = require 'stdlib/area/area'
 
-local Surface = {}
+Surface = {} --luacheck: allow defined top
 
 --- Flexible, safe lookup function for surfaces. <p>
 -- May be given a string, the name of a surface, or may be given a table with surface names,

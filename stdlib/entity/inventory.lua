@@ -1,9 +1,9 @@
 --- Inventory module
 -- @module Inventory
 
-local fail_if_missing = require 'stdlib/core'["fail_if_missing"]
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 
-local Inventory = {}
+Inventory = {} --luacheck: allow defined top
 
 --- Copies an inventory contents to a destination inventory
 -- <b>Deprecated</b>, refer to https://github.com/Afforess/Factorio-Stdlib/issues/66 for details.

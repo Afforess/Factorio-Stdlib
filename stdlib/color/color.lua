@@ -3,7 +3,7 @@
 
 require 'stdlib/defines/colors'
 
-local Color = {}
+Color = {} --luacheck: allow defined top
 
 --- Return a color table with alpha added. Usefull when using defines.colors.color
 -- @param color (optional) table conforming to http://lua-api.factorio.com/latest/Concepts.html#Color, defaults to white if no table passed

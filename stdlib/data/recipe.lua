@@ -2,10 +2,10 @@
 -- @module Recipe
 -- luacheck: ignore item
 
-local fail_if_missing = require 'stdlib/core'["fail_if_missing"]
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 local Data = require 'stdlib/data/data'
 
-local Recipe = {}
+Recipe = {} --luacheck: allow defined top
 
 --- Selects all recipe values where the key matches the selector pattern.
 -- The selector pattern is divided into groups. The pattern should have a colon character `:` to denote the selection for each group.

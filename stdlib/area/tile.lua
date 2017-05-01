@@ -2,11 +2,11 @@
 --- <p>A tile represents a 1x1 area on a surface in factorio
 -- @module Tile
 
-local fail_if_missing = require 'stdlib/core'["fail_if_missing"]
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 local Position = require 'stdlib/area/position'
 local Chunk = require 'stdlib/area/chunk'
 
-local Tile = {}
+Tile = {} --luacheck: allow defined top
 --local MAX_UINT = 4294967296
 
 --- Calculates the tile coordinates for the position given

@@ -2,9 +2,10 @@
 -- @module Gui
 
 require 'stdlib/event/event'
-local fail_if_missing = require 'stdlib/core'["fail_if_missing"]
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 
-Gui = {}
+Gui = {} --luacheck: allow defined top
+
 -- Factorio's gui events are so monolithic we need a special event system for it.
 Gui.Event = {
     _registry = {},

@@ -3,7 +3,7 @@
 
 -- defines table is automatically required in all mod loading stages.
 -- luacheck: ignore 122/defines
--- Ignore assinging to read only defines table. Table is not ready only, however
+-- Ignore assinging to read only defines table. defines table is not ready only, however
 -- marking it this way allows warnings to be generated when trying to assign values
 
 defines.colors = {

@@ -25,7 +25,7 @@ function Inventory.copy_as_simple_stacks(src, dest, clear)
                 durability = stack.durability
             }
             -- ammo is a special case field, accessing it on non-ammo itemstacks causes an exception
-            simple_stack.ammo = stack.prototype.ammo_type and stack.ammo
+            simple_stack.ammo = stack.prototype.magazine_size and stack.ammo
 
             --Insert simple stack into inventory, add to left_over if not all were inserted.
             simple_stack.count = simple_stack.count - dest.insert(simple_stack)

@@ -43,7 +43,7 @@ describe('Game Spec', function()
 
     it('should copy ammo inventory', function()
         local src_inventory = {
-            { name = "bullets", count = 100, ammo = 345, valid = true, valid_for_read = true, prototype = { ammo_type = {}} },
+            { name = "bullets", count = 100, ammo = 345, valid = true, valid_for_read = true, prototype = { magazine_size = 20} },
             { name = "foobar", count = 35, valid = true, valid_for_read = true, prototype = {} }
         }
         -- emulate error on accessing 'ammo' field on non-ammo items

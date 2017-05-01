@@ -3,6 +3,7 @@
 
 require 'stdlib/event/event'
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local Game = require('stdlib/game')
 
 Gui = {} --luacheck: allow defined top
 
@@ -79,7 +80,7 @@ function Gui.Event.dispatch(event)
                 }
                 local success, err = pcall(handler, new_event)
                 if not success then
-                    game.print(err)
+                    Game.print_all(err)
                 end
             end
         end

@@ -76,4 +76,4 @@ Event.register(defines.events.on_tick,
 
 -- When the mod is initialized the first time
 Event.register(Event.core_events.init, function() global._surface_time = {} end)
-Event.register(Event.core_events.configuration_change, function() global._surface_time = global._surface_time or {} end)
+Event.register(Event.core_events.configuration_changed, function() global._surface_time = global._surface_time or {} end)

@@ -219,6 +219,6 @@ Event.register(defines.events.on_train_created,
 
 -- When the mod is initialized the first time
 Event.register(Event.core_events.init, create_train_registry)
-Event.register(Event.core_events.configuration_change, create_train_registry)
+Event.register(Event.core_events.configuration_changed, create_train_registry)
 
 return Trains

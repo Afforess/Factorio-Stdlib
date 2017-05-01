@@ -1,4 +1,4 @@
-local Game = require 'stdlib/game'
+require 'stdlib/game'
 
 describe('Game Spec', function()
     it('should message no players', function()

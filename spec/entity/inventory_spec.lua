@@ -1,4 +1,4 @@
-local Inventory = require 'stdlib/entity/inventory'
+require 'stdlib/entity/inventory'
 
 describe('Game Spec', function()
     function make_get_contents(inv)

@@ -2,7 +2,7 @@
 -- when it's loaded, in order to isolate our tests we must include
 -- the things it includes, then override them.
 require 'stdlib/event/event'
-local Surface = require 'stdlib/surface'
+require 'stdlib/surface'
 require 'spec/defines'
 require 'spec/trains/fixtures'
 

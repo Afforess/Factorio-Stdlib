@@ -20,7 +20,6 @@ _G.global = { }
 
 require 'spec/defines'
 require 'stdlib/event/time'
-local Time = require 'stdlib/time'
 
 describe('Event.time', function()
     before_each(function()

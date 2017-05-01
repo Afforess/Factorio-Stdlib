@@ -1,4 +1,4 @@
-local Data = require 'stdlib/data/data'
+require 'stdlib/data/data'
 
 describe('Data Spec', function()
     before_each(function()

@@ -155,6 +155,9 @@ describe('Gui', function()
 
     it('.dispatch should print an error to connected players if a handler throws an error', function()
         _G.game.players = { { name = 'test_player', valid = true, connected = true, print = function(msg) end } }
+        require('stdlib/table')
+        _G.game.connected_players = table.filter(_G.game.players, function(p) return p.connected end)
+
         local s = spy.on(_G.game.players[1], "print")
 
         Gui.Event.register( 1, "test_pattern", function() error("should error") end)

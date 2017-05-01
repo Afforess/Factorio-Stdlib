@@ -1,4 +1,3 @@
-
 _G.remote = {
     interfaces={}
 }
@@ -13,7 +12,9 @@ _G.script = {
     raise_event = function(event_id, event_tbl)
         event_tbl.name = event_id
         Event.dispatch(event_tbl)
-    end
+    end,
+    on_init = function() _G.global._surface_time = {} end,
+    on_configuration_changed = function() _G.global._surface_time = _G.global._surface_time or {} end
 }
 
 _G.global = { }
@@ -21,7 +22,7 @@ _G.global = { }
 require 'spec/defines'
 require 'stdlib/event/time'
 
-describe('Event.time', function()
+describe('Event.Time', function()
     before_each(function()
         _G.game = {
             players = {{valid=false}},
@@ -46,21 +47,23 @@ describe('Event.time', function()
         _G.testsur_event_table = {surface = _G.game.surfaces.testsur}
 
         _G.simulate_time = function(ticks)
-            local daytime_per_tick = 1 / Time.DAY
+            local daytime_per_tick = 1 / defines.time.day
+            local original_daytime = {}
+            for _, surface in pairs(game.surfaces) do
+                original_daytime[surface] = surface.daytime
+            end
             for i = 1, ticks do
                 -- advance daytime for each day
                 for _, surface in pairs(game.surfaces) do
-                    surface.daytime = surface.daytime + daytime_per_tick
-                    -- wrap the day
-                    if surface.daytime > 1 then
-                        surface.daytime = surface.daytime - 1
-                    end
+                    -- Set daytime based on new number of ticks, in the interval [0,1)
+                    surface.daytime = (original_daytime[surface] + i * daytime_per_tick) % 1
                 end
                 game.tick = game.tick + 1
                 Event.dispatch({name = defines.events.on_tick, tick = game.tick})
             end
         end
-    end)
+end)
+
 
     it('should dispatch 3600 minutely events and 24 hourly events per day', function()
         --initialize the first tick of the day
@@ -74,7 +77,7 @@ describe('Event.time', function()
         Event.register(Event.Time.hourly, function() counter.hourly() end )
         local hour_spy = spy.on(counter, "hourly")
 
-        simulate_time(Time.DAY)
+        simulate_time(defines.time.day)
 
         -- 2 surfaces!
         assert.spy(minute_spy).was_called(1440 * 2)
@@ -99,7 +102,7 @@ describe('Event.time', function()
         Event.register(Event.Time.midday, function() counter.midday() end )
         local midday_spy = spy.on(counter, "midday")
 
-        simulate_time(Time.DAY)
+        simulate_time(defines.time.day)
 
         assert.spy(sunset_spy).was_called(2)
         assert.spy(sunrise_spy).was_called(2)

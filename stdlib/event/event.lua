@@ -1,10 +1,10 @@
 --- Event module
 -- @module Event
 
-require 'stdlib/core'
-require 'stdlib/game'
+local Core = require 'stdlib/core'
+local Game = require 'stdlib/game'
 
-Event = {
+Event = { --luacheck: allow defined top
     _registry = {},
     core_events = {
         init = -1,
@@ -12,17 +12,23 @@ Event = {
         configuration_changed = -3,
         _register = function(id)
             if id == Event.core_events.init then
-                script.on_init(function()
-                    Event.dispatch({name = Event.core_events.init, tick = game.tick})
-                end)
+                script.on_init(
+                    function()
+                        Event.dispatch({name = Event.core_events.init, tick = game.tick})
+                    end
+                )
             elseif id == Event.core_events.load then
-                script.on_load(function()
-                    Event.dispatch({name = Event.core_events.load, tick = -1})
-                end)
+                script.on_load(
+                    function()
+                        Event.dispatch({name = Event.core_events.load, tick = -1})
+                    end
+                )
             elseif id == Event.core_events.configuration_changed then
-                script.on_configuration_changed(function(data)
-                    Event.dispatch({name = Event.core_events.configuration_changed, tick = game.tick, data = data})
-                end)
+                script.on_configuration_changed(
+                    function(data)
+                        Event.dispatch({name = Event.core_events.configuration_changed, tick = game.tick, data = data})
+                    end
+                )
             end
         end
     }
@@ -33,14 +39,14 @@ Event = {
 -- @param handler Function to call when event is triggered
 -- @return #Event
 function Event.register(event, handler)
-    fail_if_missing(event, "missing event argument")
+    Core.fail_if_missing(event, "missing event argument")
 
     if type(event) == "number" then
         event = {event}
     end
 
     for _, event_id in pairs(event) do
-        fail_if_missing(event_id, "missing event id")
+        Core.fail_if_missing(event_id, "missing event id")
         if handler == nil then
             Event._registry[event_id] = nil
             script.on_event(event_id, nil)
@@ -63,7 +69,7 @@ end
 --- Calls the registerd handlers
 -- @param event LuaEvent as created by script.raise_event
 function Event.dispatch(event)
-    fail_if_missing(event, "missing event argument")
+    Core.fail_if_missing(event, "missing event argument")
     if Event._registry[event.name] then
         for _, handler in pairs(Event._registry[event.name]) do
             local metatbl = { __index = function(tbl, key) if key == '_handler' then return handler else return rawget(tbl, key) end end }
@@ -94,15 +100,15 @@ end
 -- @param handler to remove
 -- @return #Event
 function Event.remove(event, handler)
-    fail_if_missing(event, "missing event argument")
-    fail_if_missing(handler, "missing handler argument")
+    Core.fail_if_missing(event, "missing event argument")
+    Core.fail_if_missing(handler, "missing handler argument")
 
     if type(event) == "number" then
         event = {event}
     end
 
     for _, event_id in pairs(event) do
-        fail_if_missing(event_id, "missing event id")
+        Core.fail_if_missing(event_id, "missing event id")
         if Event._registry[event_id] then
             for i=#Event._registry[event_id], 1, -1 do
                 if Event._registry[event_id][i] == handler then

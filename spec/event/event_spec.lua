@@ -127,8 +127,8 @@ describe('Event', function()
     end)
 
     it('.dispatch should print an error to connected players if a handler throws an error', function()
-        _G.game.players = { { name = 'test_player', valid = true, connected = true, print = function(msg) end } }
-        local s = spy.on(_G.game.players[1], "print")
+        _G.game.connected_players = { { name = 'test_player', valid = true, connected = true, print = function(msg) end } }
+        local s = spy.on(_G.game.connected_players[1], "print")
 
         Event.register( 0, function() error("should error") end)
         Event.dispatch({name = 0, tick = 9001, player_index = 1})
@@ -137,7 +137,7 @@ describe('Event', function()
 
     it('.dispatch should error when there are no connected players if a handler throws an error', function()
         _G.game.players = { { name = 'test_player', valid = true, connected = false, print = function(msg) end } }
-
+        _G.game.connected_players = {}
         Event.register( 0, function() error("should error") end)
 
         -- verify error was raised

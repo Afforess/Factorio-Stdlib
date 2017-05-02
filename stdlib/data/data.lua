@@ -1,11 +1,11 @@
 --- Data module
 -- @module Data
 
-require 'stdlib/core'
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 require 'stdlib/string'
 require 'stdlib/table'
 
-Data = {}
+Data = {} --luacheck: allow defined top
 
 --- Selects all data values where the key matches the selector pattern.
 -- The selector pattern is divided into groups. The pattern should have a colon character `:` to denote the selection for each group.
@@ -40,23 +40,25 @@ end
 
 -- this metatable is set on recipes, to control access to ingredients and results
 Data._select_metatable = {}
-Data._select_metatable.new = function(selection)
+Data._select_metatable.new = function()
     local self = { }
     self.__index = function(tbl, key)
         if key == 'apply' then
             return function(k, v)
                 table.each(tbl, function(obj)
-                    obj[k] = v
-                end)
+                        obj[k] = v
+                    end)
                 return tbl
             end
         end
     end
     self.__newindex = function(tbl, key, value)
         table.each(tbl, function(obj)
-            obj[key] = value
-        end)
+                obj[key] = value
+            end)
     end
 
     return self
 end
+
+return Data

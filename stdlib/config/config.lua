@@ -1,17 +1,17 @@
 --- Config module
 -- @module Config
 
-require 'stdlib/core'
 require 'stdlib/string'
 require 'stdlib/table'
 
+--luacheck: ignore value
 -----------------------------------------------------------------------
 --Setup repeated code for use in sub functions here
 -----------------------------------------------------------------------
 local reservedCharacters = '`~!@#$%^&*+=|;:/\\\'",?()[]{}<>'
 local testReservedCharacters = function(path)
-    local reservedCharacters = reservedCharacters
-    for c in reservedCharacters:gmatch('.') do
+    local reserved = reservedCharacters
+    for c in reserved:gmatch('.') do
         if path:find(c, 1, true) then
             return c
         end
@@ -19,7 +19,7 @@ local testReservedCharacters = function(path)
     return nil
 end
 
-Config = {}
+Config = {} --luacheck: allow defined top
 
 --- Creates a new Config object
 -- to ease the management of a config table.
@@ -55,7 +55,7 @@ function Config.new(config_table)
     if not config_table then
         error("config_table is a required parameter.", 2)
     elseif type(config_table) ~= "table" then
-        error("config_table must be a table. Was given [" .. type(options) .. "]", 2)
+        error("config_table must be a table. Was given [" .. type(config_table) .. "]", 2)
     elseif type(config_table.get) == "function" then
         error("Config can't manage another Config object", 2)
     end
@@ -78,27 +78,27 @@ function Config.new(config_table)
         if c ~= nil then error("path '" .. path .. "' contains the reserved character '" .. c .. "'", 2) end
 
         local pathParts = path:split('.')
-        local part = config;
-        local value = nil;
+        local part = config
+        local value = nil
 
         for key = 1, #pathParts, 1 do
             local partKey = pathParts[key]
             if (type(part) ~= "table") then
-                value = nil;
-                break;
+                value = nil
+                break
             end
 
-            value = part[partKey];
-            part = part[partKey];
+            value = part[partKey]
+            part = part[partKey]
         end
 
         if (type(value) == "table") then
             --Force break references.
-            return table.deepcopy(value);
+            return table.deepcopy(value)
         elseif (value ~= nil) then
-            return value;
+            return value
         else
-            return default;
+            return default
         end
     end
 
@@ -115,22 +115,22 @@ function Config.new(config_table)
         if c ~= nil then error("path contains the reserved character '" .. c .. "'", 2) end
 
         local pathParts = path:split('.')
-        local part = config;
-        local value = nil;
+        local part = config
+        local value = nil
 
         for key = 1, #pathParts - 1, 1 do
             local partKey = pathParts[key]
             if (type(part[partKey]) ~= "table") then
-                part[partKey] = {};
+                part[partKey] = {}
             end
 
-            value = part[partKey];
-            part = part[partKey];
+            value = part[partKey]
+            part = part[partKey]
         end
 
-        part[pathParts[#pathParts]] = data;
+        part[pathParts[#pathParts]] = data
 
-        return 1;
+        return 1
     end
 
     --- Delete a stored config value.

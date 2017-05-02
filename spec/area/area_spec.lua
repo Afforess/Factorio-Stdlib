@@ -9,12 +9,6 @@ describe('Area Spec', function()
 
     it('should validate the area is normalized correctly', function()
         local unnormal_area = { { 50, -25 }, { 0, 40 } }
-        local adjusted_area = Area.adjust(unnormal_area)
-        assert.same(0, adjusted_area.left_top.x)
-        assert.same(-25, adjusted_area.left_top.y)
-        assert.same(50, adjusted_area.right_bottom.x)
-        assert.same(40, adjusted_area.right_bottom.y)
-
         local normalized_area = Area.normalize(unnormal_area)
         assert.same(0, normalized_area.left_top.x)
         assert.same(-25, normalized_area.left_top.y)

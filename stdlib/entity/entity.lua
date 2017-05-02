@@ -1,11 +1,10 @@
 --- Entity module
 -- @module Entity
 
-require 'stdlib/core'
-require 'stdlib/surface'
-require 'stdlib/area/area'
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local Area = require 'stdlib/area/area'
 
-Entity = {}
+Entity = {} --luacheck: allow defined top
 
 --- Converts an entity and its selection_box to the area around it
 -- @param entity to convert to an area
@@ -34,11 +33,11 @@ end
 -- @param field_name that should be tested for
 -- @return true if the entity has access to the field, false if the entity threw an exception accessing the field
 function Entity.has(entity, field_name)
-  fail_if_missing(entity, "missing entity argument")
-  fail_if_missing(field_name, "missing field name argument")
+    fail_if_missing(entity, "missing entity argument")
+    fail_if_missing(field_name, "missing field name argument")
 
-  local status = pcall(function() return entity[field_name]; end)
-  return status
+    local status = pcall(function() return entity[field_name]; end)
+    return status
 end
 
 --- Gets user data from the entity, stored in a mod's global data.
@@ -51,8 +50,8 @@ function Entity.get_data(entity)
 
     local unit_number = entity.unit_number
     if unit_number then
-         return global._entity_data[unit_number]
-     else
+        return global._entity_data[unit_number]
+    else
         local entity_name = entity.name
         if not global._entity_data[entity_name] then return nil end
 
@@ -79,13 +78,13 @@ function Entity.set_data(entity, data)
     local unit_number = entity.unit_number
     if unit_number then
         local prev = global._entity_data[unit_number]
-         global._entity_data[unit_number] = data
-         return prev
+        global._entity_data[unit_number] = data
+        return prev
     else
         local entity_name = entity.name
         if not global._entity_data[entity_name] then
             global._entity_data[entity_name] = {}
-         end
+        end
 
         local entity_category = global._entity_data[entity_name]
 
@@ -116,8 +115,8 @@ end
 function Entity.set_frozen(entity, mode)
     fail_if_missing(entity, "missing entity argument")
     mode = mode == false and true or false
-    entity.active    = mode
-    entity.operable  = mode
+    entity.active = mode
+    entity.operable = mode
     entity.rotatable = mode
     return entity
 end
@@ -129,8 +128,8 @@ end
 function Entity.set_indestructible(entity, mode)
     fail_if_missing(entity, "missing entity argument")
     mode = mode == false and true or false
-    entity.minable       = mode
-    entity.destructible  = mode
+    entity.minable = mode
+    entity.destructible = mode
     return entity
 end
 
@@ -141,15 +140,15 @@ end
 -- @tparam table entity_b
 -- @treturn bool
 function Entity._are_equal(entity_a, entity_b)
-  if entity_a == nil then
-    return entity_a == entity_b
-  elseif entity_a == entity_b then
-    return true
-  elseif Entity.has(entity_a, "equals") and entity_a.equals ~= nil then
-    return entity_a.equals(entity_b)
-  else
-    return false
-  end
+    if entity_a == nil then
+        return entity_a == entity_b
+    elseif entity_a == entity_b then
+        return true
+    elseif Entity.has(entity_a, "equals") and entity_a.equals ~= nil then
+        return entity_a.equals(entity_b)
+    else
+        return false
+    end
 end
 
 return Entity

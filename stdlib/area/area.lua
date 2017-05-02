@@ -1,10 +1,10 @@
 --- Area module
 -- @module Area
 
-require 'stdlib/core'
-require 'stdlib/area/position'
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local Position = require 'stdlib/area/position'
 
-Area = {}
+Area = {} --luacheck: allow defined top
 
 --- Creates an area from the 2 positions p1 and p2
 -- @param x1 x-position of left_top, first point
@@ -14,14 +14,6 @@ Area = {}
 -- @return Area tabled area
 function Area.construct(x1, y1, x2, y2)
     return { left_top = Position.construct(x1, y1), right_bottom = Position.construct(x2, y2) }
-end
-
---- Returns the size of the space contained in the 2d area </br>
--- <b>Deprecated</b>, Area.area is misleading. See: Area.size
--- @param area the area
--- @return size of the area
-function Area.area(area)
-    return Area.size(area)
 end
 
 --- Returns the size of the space contained in the 2d area
@@ -119,7 +111,7 @@ function Area.round_to_integer(area)
     local left_top = Position.to_table(area.left_top)
     local right_bottom = Position.to_table(area.right_bottom)
     return {left_top = {x = math.floor(left_top.x), y = math.floor(left_top.y)},
-            right_bottom = {x = math.ceil(right_bottom.x), y = math.ceil(right_bottom.y)}}
+        right_bottom = {x = math.ceil(right_bottom.x), y = math.ceil(right_bottom.y)}}
 end
 
 --- Iterates an area.
@@ -133,12 +125,12 @@ function Area.iterate(area)
     fail_if_missing(area, "missing area value")
 
     local iterator = {idx = 0}
-    function iterator.iterate(area)
+    function iterator.iterate(area) --luacheck: ignore area
         local rx = area.right_bottom.x - area.left_top.x + 1
         local dx = iterator.idx % rx
         local dy = math.floor(iterator.idx / rx)
         iterator.idx = iterator.idx + 1
-        if (area.left_top.y + dy) > area.right_bottom.y  then
+        if (area.left_top.y + dy) > area.right_bottom.y then
             return
         end
         return (area.left_top.x + dx), (area.left_top.y + dy)
@@ -150,7 +142,7 @@ end
 ---<p><i>Example:</i></p>
 ---<pre>
 ---for x, y in Area.spiral_iterate({{-2, -1}, {2, 1}}) do
-----  print("(" .. x .. ", " .. y .. ")")
+---- print("(" .. x .. ", " .. y .. ")")
 ---end
 --- prints: (0, 0) (1, 0) (1, 1) (0, 1) (-1, 1) (-1, 0) (-1, -1) (0, -1) (1, -1) (2, -1) (2, 0) (2, 1) (-2, 1) (-2, 0) (-2, -1)
 ---</pre>
@@ -174,7 +166,7 @@ function Area.spiral_iterate(area)
     local dx = 0
     local dy = -1
     local iterator = {list = {}, idx = 1}
-    for i = 1, math.max(rx, ry) * math.max(rx, ry) do
+    for _ = 1, math.max(rx, ry) * math.max(rx, ry) do
         if -(half_x) <= x and x <= half_x and -(half_y) <= y and y <= half_y then
             table.insert(iterator.list, {x, y})
         end
@@ -187,12 +179,12 @@ function Area.spiral_iterate(area)
         y = y + dy
     end
 
-    function iterator.iterate(area)
+    function iterator.iterate()
         if #iterator.list < iterator.idx then return end
-        local x, y = unpack(iterator.list[iterator.idx])
+        local x2, y2 = unpack(iterator.list[iterator.idx])
         iterator.idx = iterator.idx + 1
 
-        return (center_x + x), (center_y + y)
+        return (center_x + x2), (center_y + y2)
     end
     return iterator.iterate, Area.to_table(area), 0
 end
@@ -221,14 +213,6 @@ function Area.normalize(area)
     return Area.construct(left_top.x, left_top.y, right_bottom.x, right_bottom.y)
 end
 
---- Creates a new area, a modified copy of the original, such that left and right x, up and down y are normalized, where left.x < right.x, left.y < right.y order
--- <b>Deprecated</b>, Area.adjust is ambigious. See: Area.normalize
--- @param area the area to adjust
--- @return a adjusted area, always { left_top = {x = ..., y = ...}, right_bottom = {x = ..., y = ...} }
-function Area.adjust(area)
-    return Area.normalize(area)
-end
-
 --- Converts an area in the array format to an array in the table format
 -- @param area_arr the area to convert
 -- @return a converted area, { left_top = area_arr[1], right_bottom = area_arr[2] }
@@ -239,6 +223,5 @@ function Area.to_table(area_arr)
     end
     return area_arr
 end
-
 
 return Area

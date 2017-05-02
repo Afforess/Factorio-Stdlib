@@ -1,3 +1,4 @@
+if true then return end
 -- Because the train module executes registers events immediately
 -- when it's loaded, in order to isolate our tests we must include
 -- the things it includes, then override them.

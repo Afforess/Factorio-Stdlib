@@ -1,9 +1,11 @@
 --- Recipe module
 -- @module Recipe
+-- luacheck: ignore item
 
-require 'stdlib/data/data'
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local Data = require 'stdlib/data/data'
 
-Recipe = {}
+Recipe = {} --luacheck: allow defined top
 
 --- Selects all recipe values where the key matches the selector pattern.
 -- The selector pattern is divided into groups. The pattern should have a colon character `:` to denote the selection for each group.
@@ -104,13 +106,15 @@ end
 
 function Recipe.format_items(recipes)
     recipes = recipes or data.raw.recipe
-    table.each(recipes, function(recipe, recipe_name)
-        if recipe.ingredients and type(recipe.ingredients) == 'table' then
-            table.each(recipe.ingredients, function(ingredient) setmetatable(ingredient, Recipe._item_metatable.new(ingredient)) end)
-        end
-        if recipe.results and type(recipe.results) == 'table' then
-            table.each(recipe.results, function(result) setmetatable(result, Recipe._item_metatable.new(result)) end)
-        end
-    end)
+    table.each(recipes, function(recipe)
+            if recipe.ingredients and type(recipe.ingredients) == 'table' then
+                table.each(recipe.ingredients, function(ingredient) setmetatable(ingredient, Recipe._item_metatable.new(ingredient)) end)
+            end
+            if recipe.results and type(recipe.results) == 'table' then
+                table.each(recipe.results, function(result) setmetatable(result, Recipe._item_metatable.new(result)) end)
+            end
+        end)
     return recipes
 end
+
+return Recipe

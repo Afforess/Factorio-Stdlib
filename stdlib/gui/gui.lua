@@ -2,8 +2,11 @@
 -- @module Gui
 
 require 'stdlib/event/event'
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local Game = require('stdlib/game')
 
-Gui = {}
+Gui = {} --luacheck: allow defined top
+
 -- Factorio's gui events are so monolithic we need a special event system for it.
 Gui.Event = {
     _registry = {},
@@ -64,7 +67,17 @@ function Gui.Event.dispatch(event)
         for gui_element_pattern, handler in pairs(Gui.Event._registry[event.name]) do
             local match_str = string.match(gui_element_name, gui_element_pattern)
             if match_str ~= nil then
-                local new_event = { tick = event.tick, name = event.name, _handler = handler, match = match_str, element = gui_element, state=gui_element_state, text=gui_element_text, player_index = event.player_index , _event = event}
+                local new_event = {
+                    tick = event.tick,
+                    name = event.name,
+                    _handler = handler,
+                    match = match_str,
+                    element = gui_element,
+                    state = gui_element_state,
+                    text = gui_element_text,
+                    player_index = event.player_index ,
+                    _event = event
+                }
                 local success, err = pcall(handler, new_event)
                 if not success then
                     Game.print_all(err)

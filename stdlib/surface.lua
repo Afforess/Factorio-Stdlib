@@ -1,18 +1,18 @@
 --- Surface module
 -- @module Surface
 
-require 'stdlib/core'
-require 'stdlib/area/area'
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local Area = require 'stdlib/area/area'
 
-Surface = {}
+Surface = {} --luacheck: allow defined top
 
 --- Flexible, safe lookup function for surfaces. <p>
---  May be given a string, the name of a surface, or may be given a table with surface names,
---  may be given the a surface object, or may be given a table of surface objects, or
---  may be given nil. <p>
---  Returns an array of surface objects of all valid, existing surfaces
---  If a surface does not exist for the surface, it is ignored, if no surfaces
---  are given, an empty array is returned.
+-- May be given a string, the name of a surface, or may be given a table with surface names,
+-- may be given the a surface object, or may be given a table of surface objects, or
+-- may be given nil. <p>
+-- Returns an array of surface objects of all valid, existing surfaces
+-- If a surface does not exist for the surface, it is ignored, if no surfaces
+-- are given, an empty array is returned.
 -- @param surface to lookup
 -- @treturn LuaSurface[] the list of surfaces looked up
 function Surface.lookup(surface)
@@ -39,9 +39,9 @@ function Surface.lookup(surface)
 end
 
 --- Given search criteria, a table that contains a name or type of entity to search for,
---  and optionally surface or force, searches all loaded chunks for the entities that
---  match the critera.
---  @usage
+-- and optionally surface or force, searches all loaded chunks for the entities that
+-- match the critera.
+-- @usage
 ----Surface.find_all_entities({ type = 'unit', surface = 'nauvis', area = {{-1000,20},{-153,2214}}) --returns a list containing all unit entities on the nauvis surface in the given area
 -- @tparam table search_criteria a table of criteria. Must contain either the *name* or *type* or *force* of an entity. May contain *surface* or *force* or *area*.
 -- @treturn table an array of all entities that matched the criteria
@@ -98,6 +98,5 @@ function Surface.get_surface_bounds(surface)
 
     return Area.construct(x1*32, y1*32, x2*32, y2*32)
 end
-
 
 return Surface

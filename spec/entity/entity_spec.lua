@@ -1,3 +1,4 @@
+require 'spec/defines'
 require 'stdlib/entity/entity'
 
 describe('Entity Spec', function()

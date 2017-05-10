@@ -1,6 +1,5 @@
 --- Recipe module
 -- @module Recipe
--- luacheck: ignore item
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 local Data = require 'stdlib/data/data'
@@ -66,7 +65,7 @@ end
 
 -- this metatable is set on recipes, to control access to ingredients and results
 Recipe._item_metatable = {}
-Recipe._item_metatable.new = function(item)
+Recipe._item_metatable.new = function(item)  --luacheck: ignore item
     local self = { }
     self.__index = function(tbl, key)
         if type(key) == 'number' then

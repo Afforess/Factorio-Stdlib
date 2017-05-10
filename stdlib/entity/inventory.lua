@@ -1,4 +1,5 @@
 --- Inventory module
+-- <p> For working with inventories
 -- @module Inventory
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
@@ -36,6 +37,24 @@ function Inventory.copy_as_simple_stacks(src, dest, clear)
     end
     if clear then src.clear() end
     return left_over
+end
+
+
+--- Given a function, apply it to each slot in the inventory. Passes the slot index as second argument to the function.
+-- <p>Iteration is aborted if the applied function returns true for any element during iteration.
+-- @param inventory to be iterated
+-- @param func to apply to values
+-- @param[opt] ... additional arguments passed to the function
+-- @return the slot index found or nil
+function Inventory.each(inventory, func, ...)
+    local index
+    for i=1, #inventory do
+        if func(inventory[i], i, ...) then
+            index = i
+            break
+        end
+    end
+    return index and inventory[index]
 end
 
 return Inventory

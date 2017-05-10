@@ -2,9 +2,9 @@ if true then return end
 -- Because the train module executes registers events immediately
 -- when it's loaded, in order to isolate our tests we must include
 -- the things it includes, then override them.
+require 'spec/defines'
 require 'stdlib/event/event'
 require 'stdlib/surface'
-require 'spec/defines'
 require 'spec/trains/fixtures'
 
 describe('when the train module loads', function()

@@ -1,4 +1,5 @@
 --- Area module
+-- <p>For working with bounding boxes.
 -- @module Area
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']

@@ -1,5 +1,5 @@
 --- Tile module
---- <p>A tile represents a 1x1 area on a surface in factorio
+--- <p>A tile represents a 1x1 area on a surface in factorio.
 -- @module Tile
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']

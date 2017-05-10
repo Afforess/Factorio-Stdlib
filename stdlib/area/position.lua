@@ -1,4 +1,5 @@
 --- Position module
+-- <p>For working with x, y coordinates.
 -- @module Position
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']

@@ -1,3 +1,4 @@
+require 'spec/defines'
 require 'stdlib/surface'
 
 describe('Surface Spec', function()

@@ -1,3 +1,4 @@
+require 'spec/defines'
 require 'stdlib/area/area'
 
 describe('Area Spec', function()

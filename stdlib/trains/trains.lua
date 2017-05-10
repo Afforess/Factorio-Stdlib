@@ -82,7 +82,7 @@ function Trains.find_filtered(criteria)
     -- Distinguish trains
     local train_data = find_distinct_trains(locomotives)
 
-    --- Apply state filters
+    -- Apply state filters
     if criteria.state then
         train_data = table.filter(train_data,
             function(data)

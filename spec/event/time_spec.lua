@@ -62,10 +62,10 @@ describe('Event.Time', function()
                 Event.dispatch({name = defines.events.on_tick, tick = game.tick})
             end
         end
-end)
+    end)
 
 
-    it('should dispatch 3600 minutely events and 24 hourly events per day', function()
+    it('should dispatch 60 minutely events and 1 hourly events per hour', function()
         --initialize the first tick of the day
         Event.dispatch({name = defines.events.on_tick, tick = 0})
 
@@ -77,11 +77,11 @@ end)
         Event.register(Event.Time.hourly, function() counter.hourly() end )
         local hour_spy = spy.on(counter, "hourly")
 
-        simulate_time(defines.time.day)
+        simulate_time(defines.time.hour * 1 + 1)
 
         -- 2 surfaces!
-        assert.spy(minute_spy).was_called(1440 * 2)
-        assert.spy(hour_spy).was_called(24 * 2)
+        assert.spy(minute_spy).was_called(60 * 2)
+        assert.spy(hour_spy).was_called(1 * 2)
     end)
 
     it('should dispatch sunset, sunrise, midnight and midday events once per day', function()

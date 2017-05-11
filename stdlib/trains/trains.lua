@@ -34,33 +34,6 @@ Trains = {} --luacheck: allow defined top
 ----Event.register(Trains.on_train_id_changed, my_handler)
 Trains.on_train_id_changed = script.generate_event_name()
 
--- Finds the distinct trains from an array of locomotive entities
--- @tparam LuaEntity[] locomotives
--- @return List of train details tables for the distinct trains
-local function find_distinct_trains(locomotives)
-    local train_data = {}
-    for _, engine in pairs(locomotives) do
-        local t = engine.train
-        local id = Trains.get_train_id(t)
-
-        local equals_id = function(x)
-            return x.id == id
-        end
-
-        local existing = table.filter(train_data, equals_id)
-
-        if #existing == 0 then
-            table.insert(train_data, {
-                    train = t,
-                    id = id
-                }
-            )
-        end
-    end
-
-    return train_data
-end
-
 --- Given search criteria (a table that contains at least a surface_name)
 -- searches the given surface for trains that match the criteria
 -- @usage
@@ -68,30 +41,39 @@ end
 -- @tparam Table criteria Table with any keys supported by the <a href="Surface.html#find_all_entities">Surface</a> module.</p>
 -- <p>If the name key isn't supplied, this will default to 'diesel-locomotive'</p>
 -- <p>If the surface key isn't supplied, this will default to 1</p>
--- @return A list of train details tables, if any are found matching the criteria. Otherwise the empty list. <table><tr><td>train (LuaTrain)</td><td>The LuaTrain instance
--- </td></tr><tr><td>id (int)</td><td>The id of the train</td></tr></table>
+-- <p>If the surface key isn't supplied, this will search all surfaces that currently exist</p>
+-- <p>Criteria may also include the 'state' field, which will filter the state of the train results</p>
+-- @return A list of train details tables, if any are found matching the criteria. Otherwise the empty list. <table><tr><td>train (LuaTrain)</td><td>The LuaTrain instance</td></tr><tr><td>id (int)</td><td>The id of the train</td></tr></table>
 function Trains.find_filtered(criteria)
     criteria = criteria or {}
 
-    -- Make sure 'locomotive' is specified as the type by default
-    criteria.type = criteria.type or 'locomotive'
+    local surface_list = Surface.lookup(criteria.surface)
+    if criteria.surface == nil then
+        surface_list = game.surfaces
+    end
 
-    -- Get locomotives by filter
-    local locomotives = Surface.find_all_entities(criteria)
+    local results = {}
 
-    -- Distinguish trains
-    local train_data = find_distinct_trains(locomotives)
+    for _, surface in pairs(surface_list) do
+        local trains = surface.get_trains(criteria.force)
+        for _, train in pairs(trains) do
+            table.insert(results, train)
+        end
+    end
 
     -- Apply state filters
     if criteria.state then
-        train_data = table.filter(train_data,
-            function(data)
-                return data.train.state == criteria.state
-            end
-        )
+        results = table.filter(results, function(train)
+            return train.state == criteria.state
+        end)
     end
 
-    return train_data
+    -- Lastly, look up the train ids
+    results = table.map(results, function(train)
+        return { train = train, id = Trains.get_main_locomotive(train).unit_number }
+    end)
+
+    return results
 end
 
 --- Find the id of a LuaTrain instance
@@ -137,10 +119,7 @@ end
 -- @tparam LuaTrain train
 -- @treturn LuaEntity the main locomotive
 function Trains.get_main_locomotive(train)
-    if train.valid
-    and train.locomotives
-    and (#train.locomotives.front_movers > 0 or #train.locomotives.back_movers > 0)
-    then
+    if train and train.valid and train.locomotives and (#train.locomotives.front_movers > 0 or #train.locomotives.back_movers > 0) then
         return train.locomotives.front_movers and train.locomotives.front_movers[1] or train.locomotives.back_movers[1]
     end
 end

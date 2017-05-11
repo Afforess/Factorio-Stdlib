@@ -7,6 +7,8 @@ require 'stdlib/event/event'
 require 'stdlib/surface'
 require 'spec/trains/fixtures'
 
+entity_to_trains = function(tbl) return table.map(tbl, function(entity) return entity.train end) end
+
 describe('when the train module loads', function()
     before_each(function()
         _G.script = {on_event = function(id, callback) return end,
@@ -18,7 +20,8 @@ describe('when the train module loads', function()
                          event_tbl.name = event_id
                          Event.dispatch(event_tbl)
                      end}
-        _G.game = {tick = 1, players = {}}
+        _G.game = {tick = 1, players = {}, surfaces = { [1] = { name = 'nauvis', get_trains = function() return {} end }}}
+        setmetatable(_G.game.surfaces, { __index = function(tbl, key) for _, surface in pairs(tbl) do if surface['name'] == key then return surface end end return rawget(tbl, key) end })
         _G.global = {}
     end)
 
@@ -34,13 +37,7 @@ describe('when the train module loads', function()
 
     it('it should load all trains in to the registry', function()
         -- Arrange
-        surface = {
-            find_all_entities = function(criteria)
-                return Train_Spec_Fixtures.Two_Trains_With_Single_Locomotive
-            end
-        }
-
-        _G.Surface = surface
+        _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Two_Trains_With_Single_Locomotive) end
 
         -- Act
         Trains = require('stdlib/trains/trains')
@@ -94,106 +91,30 @@ describe('Trains module', function()
     describe('can find trains with a filter', function()
         describe('when applying filters', function()
             it('only finds locomotive type entities by default', function()
-                -- Arrange
-                surface = {
-                    find_all_entities = function(criteria)
-                        return Train_Spec_Fixtures.Single_Train_With_Single_Locomotive
-                    end
-                }
+                _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Single_Train_With_Single_Locomotive) end
+                surface_spy = spy.on(_G.game.surfaces[1], 'get_trains')
 
-                _G.Surface = surface
-                surface_spy = spy.on(surface, 'find_all_entities')
+                assert.are_equal(1, #Trains.find_filtered())
 
-                -- Act
-                Trains.find_filtered()
-
-                -- Act
-                expected_params = {
-                    type = 'locomotive'
-                }
-                assert.spy(surface_spy).was_called_with(expected_params)
-            end)
-
-            it('allows the locomotives to be further filtered by supplying the name key', function()
-                -- Arrange
-                criteria = {
-                    name = 'some-locomotive'
-                }
-
-                surface = {
-                    find_all_entities = function(criteria)
-                        return Train_Spec_Fixtures.Single_Train_With_Single_Locomotive
-                    end
-                }
-
-                _G.Surface = surface
-                surface_spy = spy.on(surface, 'find_all_entities')
-
-                -- Act
-                Trains.find_filtered(criteria)
-
-                -- Act
-                expected_params = {
-                    name = 'some-locomotive',
-                    type = 'locomotive'
-                }
-                assert.spy(surface_spy).was_called_with(expected_params)
-            end)
-
-            it('only looks on the nauvis surface by default', function()
-              -- Arrange
-              surface = {
-                  find_all_entities = function(criteria)
-                      return Train_Spec_Fixtures.Single_Train_With_Single_Locomotive
-                  end
-              }
-
-              _G.Surface = surface
-              surface_spy = spy.on(surface, 'find_all_entities')
-
-              -- Act
-              Trains.find_filtered()
-
-              -- Act
-              expected_params = {
-                  type = 'locomotive'
-              }
-              assert.spy(surface_spy).was_called_with(expected_params)
+                assert.spy(surface_spy).was_called()
             end)
 
             it('passes surface name filter to Surface lookup', function()
-                -- Arrange
-                criteria = {
-                    surface = 'surface'
-                }
+                _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Single_Train_With_Single_Locomotive) end
+                surface_spy = spy.on(_G.game.surfaces[1], 'get_trains')
 
-                surface = {
-                    find_all_entities = function(criteria)
-                        return Train_Spec_Fixtures.Single_Train_With_Single_Locomotive
-                    end
-                }
+                assert.are_equal(1, #Trains.find_filtered({surface = 'nauvis'}))
+                assert.are_equal(0, #Trains.find_filtered({surface = 'other'}))
 
-                _G.Surface = surface
-                surface_spy = spy.on(surface, 'find_all_entities')
-
-                -- Act
-                Trains.find_filtered(criteria)
-
-                -- Act
-                expected_params = {
-                    surface = 'surface',
-                    type = 'locomotive'
-                }
-                assert.spy(surface_spy).was_called_with(expected_params)
+                assert.spy(surface_spy).was_called()
             end)
 
             it('applies state filter to individual trains', function()
                 -- Arrange
-                _G.Surface.find_all_entities = function(criteria)
-                    return Train_Spec_Fixtures.Trains_In_Different_States
-                end
+                _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Trains_In_Different_States) end
 
                 expected_id = 2000
+                require 'spec/serpent'
 
                 -- Act
                 local filtered = Trains.find_filtered({ state = 9 })
@@ -206,64 +127,11 @@ describe('Trains module', function()
         end)
     end)
 
-    describe('can distinguish individual trains', function()
-        setup(function()
-            -- Replace Surface with something we can spy on
-            _G.Surface = {
-                find_all_entities = function(criteria) end
-            }
-        end)
-
-        it('can find a single train with a single locomotive', function()
-            -- Arrange
-            _G.Surface.find_all_entities = function(criteria)
-                return Train_Spec_Fixtures.Single_Train_With_Single_Locomotive
-            end
-
-            -- Act
-            local all_trains = Trains.find_filtered({ surface_name = 'nauvis'})
-
-            -- Assert
-            assert.are_equal(1, #all_trains)
-        end)
-
-        it('can find two trains with single locomotives', function()
-            -- Arrange
-            _G.Surface.find_all_entities = function(criteria)
-                return Train_Spec_Fixtures.Two_Trains_With_Single_Locomotive
-            end
-
-            -- Act
-            local all_trains = Trains.find_filtered({ surface_name = 'nauvis' })
-
-            -- Assert
-            assert.are_equal(2, #all_trains)
-            t1 = all_trains[1].train
-            t2 = all_trains[2].train
-            assert.are_not_equal(t1, t2)
-        end)
-
-        it('can find a train with two locomotives', function()
-            -- Arrange
-            _G.Surface.find_all_entities = function(criteria)
-                return Train_Spec_Fixtures.Single_Train_With_Two_Locomotives()
-            end
-
-            -- Act
-            local all_trains = Trains.find_filtered({ surface_name = 'nauvis'})
-
-            -- Assert
-            assert.are_equal(1, #all_trains)
-        end)
-    end)
-
     describe('when an engine is built/destroyed/connected/disconnected', function()
         it('it can detect that a trains id has changed', function()
             -- Arrange
             -- Set the initial state of trains
-            _G.Surface.find_all_entities = function(criteria)
-                return Train_Spec_Fixtures.Train_With_Front_And_Back_Locomotives_A()
-            end
+            _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Train_With_Front_And_Back_Locomotives_A()) end
 
             -- Get ready to spy on events being dispatched
             dispatch_spy = spy.on(_G.Event, 'dispatch')
@@ -297,9 +165,7 @@ describe('Trains module', function()
         it('only adds new trains to the registry', function()
             -- Arrange
             -- Set the initial state of trains
-            _G.Surface.find_all_entities = function(criteria)
-                return Train_Spec_Fixtures.Single_Train_With_Single_Locomotive
-            end
+            _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Single_Train_With_Single_Locomotive) end
 
             new_locomotive = {
                 name = 'diesel-locomotive',

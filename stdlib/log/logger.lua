@@ -13,6 +13,8 @@ Logger = {} --luacheck: allow defined top
 -- file_extension -- a string that overides the default 'log' file extension.
 -- force_append -- each time a logger is created, it will always append, instead of
 -- -- the default behavior, which is to write out a new file, then append
+-- use_log -- whether to use log() if game.write_file isn't available, ignores other
+-- -- options in that case. Once game.write_file is available it stops writing to log().
 -- </code>
 --
 -- @usage
@@ -49,6 +51,7 @@ function Logger.new(mod_name, log_name, debug_mode, options)
         log_ticks = options.log_ticks or false, -- whether to add the ticks in the timestamp, default false
         file_extension = options.file_extension or 'log', -- extension of the file, default: log
         force_append = options.force_append or false, -- append the file on first write, default: false
+        use_log = options.use_log or false, -- use log() if game.write_file isn't available, ignores other options in that case, default: false
     }
     Logger.file_name = 'logs/' .. Logger.mod_name .. '/' .. Logger.log_name .. '.' .. Logger.options.file_extension
     Logger.ever_written = Logger.options.force_append
@@ -76,6 +79,9 @@ function Logger.new(mod_name, log_name, debug_mode, options)
                 return Logger.write()
             end
         else
+            if Logger.options.use_log then
+                log(format("%s/%s: %s", Logger.mod_name, Logger.log_name, msg))
+            end
             table.insert(Logger.buffer, format("00:00:00: %s\n", msg))
         end
         return false

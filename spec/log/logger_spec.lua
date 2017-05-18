@@ -60,6 +60,21 @@ describe('Logger Spec', function()
             l.log('foo3')
             assert.spy(s).was_called_with('logs/spec/test.log', '00:01:01: foo3\n', true)
         end)
+        
+        it('uses log() if _G.game is not available', function()
+          _G["game"] = nil
+          _G["log"] = function() end
+          local s = spy.on(_G, 'log')
+          
+          local l = Logger.new('spec', 'test', true, { use_log = true })
+          l.log('foo')
+          assert.spy(s).was_called_with('spec/test: foo')
+          assert.equals('00:00:00: foo\n', l.buffer[1])
+          _G["game"] = { tick = 0, write_file = function() end }
+          local s2 = spy.on(_G["game"], 'write_file')
+          l.log('foo2')
+          assert.spy(s2).was_called_with('logs/spec/test.log', '00:00:00: foo\n00:00:00: foo2\n', false)
+        end)
     end)
 
     describe('Logger.write', function()

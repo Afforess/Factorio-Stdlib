@@ -57,4 +57,22 @@ function Inventory.each(inventory, func, ...)
     return index and inventory[index]
 end
 
+--- Given a function, apply it to each slot in the inventory. Passes the slot index as second argument to the function.
+-- <p>Iteration is aborted if the applied function returns true for any element during iteration. Iteration is performed from
+-- last to first in order to support dynamically sized inventories.</p>
+-- @param inventory to be iterated
+-- @param func to apply to values
+-- @param[opt] ... additional arguments passed to the function
+-- @return the slot index found or nil
+function Inventory.each_reverse(inventory, func, ...)
+    local index
+    for i=#inventory, 1, -1 do
+        if func(inventory[i], i, ...) then
+            index = i
+            break
+        end
+    end
+    return index and inventory[index]
+end
+
 return Inventory

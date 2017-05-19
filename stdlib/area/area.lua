@@ -20,6 +20,9 @@ end
 --- Returns the size of the space contained in the 2d area
 -- @param area the area
 -- @return size of the area
+-- @return the width of the area
+-- @return the height of the area
+-- @return the perimeter of the area
 function Area.size(area)
     fail_if_missing(area, "missing area value")
     area = Area.to_table(area)
@@ -29,7 +32,8 @@ function Area.size(area)
 
     local dx = math.abs(left_top.x - right_bottom.x)
     local dy = math.abs(left_top.y - right_bottom.y)
-    return dx * dy
+    local perimeter = dx + dx + dy + dy
+    return dx * dy, dx, dy, perimeter
 end
 
 --- Tests if a position {x, y} is inside (inclusive) of area
@@ -221,8 +225,32 @@ function Area.to_table(area_arr)
     fail_if_missing(area_arr, "missing area value")
     if #area_arr == 2 then
         return { left_top = Position.to_table(area_arr[1]), right_bottom = Position.to_table(area_arr[2]) }
+    elseif area_arr["left_top"] and #area_arr["left_top"] == 2 then
+        return { left_top = Position.to_table(area_arr.left_top), right_bottom = Position.to_table(area_arr.right_bottom) }
     end
     return area_arr
+end
+
+--- Converts area bounding box points to center of their tiles
+-- @param area the area
+-- @treturn an area bounding box on tile center points
+function Area.tile_center_points(area)
+    fail_if_missing(area, "missing area value")
+    area = Area.to_table(area)
+
+    return {left_top = Position.center(area.left_top), right_bottom = Position.center(area.right_bottom)}
+end
+
+--- Converts an area to a string
+-- @tparam area the area to convert
+-- @return string representation of area
+function Area.tostring(area)
+    fail_if_missing(area, "missing area argument")
+    area = Area.to_table(area)
+
+    local left_top = "left_top = {x = "..area.left_top.x..", y = "..area.left_top.y.."}"
+    local right_bottom = "right_bottom = {x = "..area.right_bottom.x..", y = "..area.right_bottom.y.."}"
+    return "Area {"..left_top..", "..right_bottom .."}"
 end
 
 return Area

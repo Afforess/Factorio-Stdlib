@@ -209,6 +209,7 @@ end
 -- @param inc_y optional increment y by this amount
 -- @return a function closure that returns an incrememnted position
 function Position.increment(position, inc_x, inc_y)
+    position = Position.to_table(position)
     local x, y = position.x, position.y
     inc_x, inc_y = inc_x or 0, inc_y or 0
 

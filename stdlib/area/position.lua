@@ -203,6 +203,39 @@ function Position.tostring(pos)
     end
 end
 
+--- Increment a position each time it is called
+-- @param position the position to start with
+-- @param inc_x optional increment x by this amount
+-- @param inc_y optional increment y by this amount
+-- @return a function closure that returns an incrememnted position
+function Position.increment(position, inc_x, inc_y)
+    local x, y = position.x, position.y
+    inc_x, inc_y = inc_x or 0, inc_y or 0
+
+    return function(new_inc_x, new_inc_y)
+        x = x + (new_inc_x or inc_x)
+        y = y + (new_inc_y or inc_y)
+        return {x = x, y = y}
+    end
+end
+
+--- Returns a position centered on the tile
+-- @param pos the position to center
+-- @treturn a centered position table
+function Position.center(pos)
+    fail_if_missing(pos, "missing position argument")
+
+    local x, y
+    if #pos == 2 then
+         x, y = pos[1], pos[2]
+    else
+        x, y = pos.x, pos.y
+    end
+    x = x >= 0 and math.floor(x) + 0.5 or math.ceil(x) - 0.5
+    y = y >= 0 and math.floor(y) + 0.5 or math.ceil(y) - 0.5
+    return {x = x, y = y}
+end
+
 local opposites = {
     [defines.direction.north] = defines.direction.south,
     [defines.direction.south] = defines.direction.north,

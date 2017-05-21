@@ -22,7 +22,7 @@ describe('Area Spec', function()
         local area = {left_top = {0, -5}, right_bottom = {x = 3, y = -3}}
         assert.truthy(Area.inside(area, pos))
 
-        local area = {left_top = {100, 100}, right_bottom = {95, 95}}
+        area = {left_top = {100, 100}, right_bottom = {95, 95}}
         assert.falsy(Area.inside(area, pos))
     end)
 
@@ -68,7 +68,26 @@ describe('Area Spec', function()
         assert.same({x = 0, y = -5}, Area.to_table(area).left_top)
         assert.same({x = 3, y = -3}, Area.to_table(area).right_bottom)
 
+        area = {left_top = {0, -5}, right_bottom = {x = 3, y = -3}}
+        assert.same({x = 0, y = -5}, Area.to_table(area).left_top)
+        assert.same({x = 3, y = -3}, Area.to_table(area).right_bottom)
+
         assert.has_error(function() Area.to_table(nil) end)
+    end)
+
+    it('should return an area with the points centered on the tile', function()
+        local area = {{0, -5}, {x = 3, y = -3}}
+        local center = Area.to_table({{0.5, -5.5}, {3.5, -3.5}})
+        assert.same(center, Area.tile_center_points(area))
+        area = {{0.642, -5.123}, {x = 3.243, y = -3.6435}}
+        assert.same(center, Area.tile_center_points(area))
+    end)
+
+
+    it('should return a string representation of an area', function()
+        local area = {{0, -5}, {x = 3, y = -3}}
+        local s = "Area {left_top = {x = 0, y = -5}, right_bottom = {x = 3, y = -3}}"
+        assert.same(s, Area.tostring(area))
     end)
 
     it('should validate area iteration', function()

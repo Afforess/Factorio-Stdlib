@@ -1,7 +1,7 @@
 require 'spec/defines'
 require 'stdlib/area/position'
 
-describe('Position Spec', function()
+describe('Position', function()
     it('should validate position construction', function()
         assert.same({x = -4, y = 21}, Position.construct(-4, 21))
     end)
@@ -82,8 +82,8 @@ describe('Position Spec', function()
         assert.same(10, Position.manhattan_distance(pos_a, pos_b))
         assert.same(10, Position.manhattan_distance(pos_b, pos_a))
 
-        local pos_a = {1, -4}
-        local pos_b = {3, -2}
+        pos_a = {1, -4}
+        pos_b = {3, -2}
         assert.same(4, Position.manhattan_distance(pos_a, pos_b))
         assert.same(4, Position.manhattan_distance(pos_b, pos_a))
     end)
@@ -114,6 +114,104 @@ describe('Position Spec', function()
         assert.is_false(Position.equals(pos1, pos2))
         assert.is_false(Position.equals(pos1, pos3))
         assert.is_true(Position.equals(pos1, pos4))
+    end)
+
+    describe('increment', function()
+        local pos = {0, 0}
+
+        it('should error with no position argument', function()
+            assert.has_error(function() return Position.incremement() end)
+        end)
+
+        it('should return a function closure', function()
+            local f = Position.increment(pos)
+            assert.is_true(type(f)=="function")
+        end)
+
+        it('should return the same position', function()
+            local f = Position.increment(pos)
+            assert.same({x=0, y=0}, f())
+            assert.same({x=0, y=0}, f())
+        end)
+
+        it('should increment using the defaults', function()
+            local f = Position.increment(pos, 0, -1)
+            assert.same({x=0, y=-1}, f())
+            assert.same({x=0, y=-2}, f())
+        end)
+
+        it('should increment using passed values', function()
+            local f = Position.increment(pos)
+            assert.same({x=0, y=-1}, f(0, -1))
+            assert.same({x=0, y=-3}, f(0, -2))
+        end)
+
+        it('should increment using passed values with defaults set', function()
+            local f = Position.increment(pos, -1, -1)
+            assert.same({x=-1, y=-1}, f())
+            assert.same({x=0, y=1}, f(1, 2))
+            assert.same({x=1, y=4}, f(1, 3))
+        end)
+    end)
+
+    describe('center', function()
+        it('returns the position centered on the tile', function()
+            local pos = {
+                {23, -54.64},
+                {23.12, -54.95},
+                {-23.76, 54.12},
+                {-23.31543265, 54}
+            }
+            assert.same({x = 23.5, y = -54.5}, Position.center(pos[1]))
+            assert.same({x = 23.5, y = -54.5}, Position.center(pos[2]))
+            assert.same({x = -23.5, y = 54.5}, Position.center(pos[3]))
+            assert.same({x = -23.5, y = 54.5}, Position.center(pos[4]))
+        end)
+    end)
+
+    describe('opposite_direction', function()
+        local d = defines.direction
+
+        it ('returns the opposite direction', function ()
+            assert.same(d.west, Position.opposite_direction(d.east))
+            assert.same(d.southwest, Position.opposite_direction(d.northeast))
+        end)
+
+        it('retuns the opposite of north when not given a direction', function()
+            assert.same(d.south, Position.opposite_direction())
+        end)
+    end)
+
+    describe('next_direction', function()
+        local d = defines.direction
+
+        it('returns the next 4way direction clockwise', function()
+            for i=0, 7, 2 do
+                assert.same(i, Position.next_direction(i-2))
+            end
+            assert.same(d.north, Position.next_direction(d.west))
+        end)
+
+        it('returns the next 8way direction clockwise', function()
+            for i=0, 7, 1 do
+                assert.same(i, Position.next_direction(i-1, false, true))
+            end
+            assert.same(d.north, Position.next_direction(d.northwest, false, true))
+        end)
+
+        it('returns the next 4way direction counter-clockwise', function()
+            for i=7, 0, 2 do
+                assert.same(i, Position.next_direction(i+2))
+            end
+            assert.same(d.west, Position.next_direction(d.north, true))
+        end)
+
+        it('returns the next 8way direction counter-clockwise', function()
+            for i=7, 0, 1 do
+                assert.same(i, Position.next_direction(i+1), true, true)
+            end
+            assert.same(d.northwest, Position.next_direction(d.north, true, true))
+        end)
     end)
 
 end)

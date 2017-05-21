@@ -45,7 +45,7 @@ end
 -- @param inventory to be iterated
 -- @param func to apply to values
 -- @param[opt] ... additional arguments passed to the function
--- @return the slot index found or nil
+-- @return the slot interation was aborted at or nil
 function Inventory.each(inventory, func, ...)
     local index
     for i=1, #inventory do
@@ -63,7 +63,7 @@ end
 -- @param inventory to be iterated
 -- @param func to apply to values
 -- @param[opt] ... additional arguments passed to the function
--- @return the slot index found or nil
+-- @return the slot index iteration was aborted at or nil
 function Inventory.each_reverse(inventory, func, ...)
     local index
     for i=#inventory, 1, -1 do

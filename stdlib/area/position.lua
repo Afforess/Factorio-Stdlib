@@ -196,6 +196,7 @@ end
 -- @return string representation of pos
 function Position.tostring(pos)
     fail_if_missing(pos, "missing position argument")
+
     if #pos == 2 then
         return "Position {x = " .. pos[1] .. ", y = " .. pos[2] .. "}"
     else
@@ -209,6 +210,8 @@ end
 -- @param inc_y optional increment y by this amount
 -- @return a function closure that returns an incrememnted position
 function Position.increment(position, inc_x, inc_y)
+    fail_if_missing(position, "missing position argument")
+
     position = Position.to_table(position)
     local x, y = position.x, position.y
     inc_x, inc_y = inc_x or 0, inc_y or 0
@@ -228,7 +231,7 @@ function Position.center(pos)
 
     local x, y
     if #pos == 2 then
-         x, y = pos[1], pos[2]
+        x, y = pos[1], pos[2]
     else
         x, y = pos.x, pos.y
     end
@@ -253,6 +256,17 @@ local opposites = {
 -- @return the opposite direction
 function Position.opposite_direction(direction)
     return opposites[direction or defines.direction.north]
+end
+
+-- Returns the next direction, for entities that only support 2 directions see Position.opposite_direction
+-- @param direction defines.direction the starting direction
+-- @param reverse bool get the counter-clockwise direction
+-- @param eight_way bool the next direction can be eight_way
+function Position.next_direction(direction, reverse, eight_way)
+    fail_if_missing(direction, "missing starting direction")
+
+    local next_dir = direction + (eight_way and ((reverse and -1) or 1) or ((reverse and -2) or 2))
+    return (next_dir > 7 and next_dir-next_dir) or (reverse and next_dir < 0 and 8 + next_dir) or next_dir
 end
 
 return Position

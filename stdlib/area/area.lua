@@ -27,8 +27,8 @@ function Area.size(area)
     fail_if_missing(area, "missing area value")
     area = Area.to_table(area)
 
-    local left_top = Position.to_table(area.left_top)
-    local right_bottom = Position.to_table(area.right_bottom)
+    local left_top = area.left_top
+    local right_bottom = area.right_bottom
 
     local dx = math.abs(left_top.x - right_bottom.x)
     local dy = math.abs(left_top.y - right_bottom.y)
@@ -46,8 +46,8 @@ function Area.inside(area, pos)
     pos = Position.to_table(pos)
     area = Area.to_table(area)
 
-    local left_top = Position.to_table(area.left_top)
-    local right_bottom = Position.to_table(area.right_bottom)
+    local left_top = area.left_top
+    local right_bottom = area.right_bottom
     return pos.x >= left_top.x and pos.y >= left_top.y and pos.x <= right_bottom.x and pos.y <= right_bottom.y
 end
 
@@ -61,8 +61,8 @@ function Area.shrink(area, amount)
     if amount < 0 then error("Can not shrunk area by a negative amount (see Area.expand)!", 2) end
     area = Area.to_table(area)
 
-    local left_top = Position.to_table(area.left_top)
-    local right_bottom = Position.to_table(area.right_bottom)
+    local left_top = area.left_top
+    local right_bottom = area.right_bottom
     return {left_top = {x = left_top.x + amount, y = left_top.y + amount}, right_bottom = {x = right_bottom.x - amount, y = right_bottom.y - amount}}
 end
 
@@ -76,8 +76,8 @@ function Area.expand(area, amount)
     if amount < 0 then error("Can not expand area by a negative amount (see Area.shrink)!", 2) end
     area = Area.to_table(area)
 
-    local left_top = Position.to_table(area.left_top)
-    local right_bottom = Position.to_table(area.right_bottom)
+    local left_top = area.left_top
+    local right_bottom = area.right_bottom
     return {left_top = {x = left_top.x - amount, y = left_top.y - amount}, right_bottom = {x = right_bottom.x + amount, y = right_bottom.y + amount}}
 end
 
@@ -113,8 +113,8 @@ function Area.round_to_integer(area)
     fail_if_missing(area, "missing area value")
     area = Area.to_table(area)
 
-    local left_top = Position.to_table(area.left_top)
-    local right_bottom = Position.to_table(area.right_bottom)
+    local left_top = area.left_top
+    local right_bottom = area.right_bottom
     return {left_top = {x = math.floor(left_top.x), y = math.floor(left_top.y)},
         right_bottom = {x = math.ceil(right_bottom.x), y = math.ceil(right_bottom.y)}}
 end

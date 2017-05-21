@@ -1,4 +1,4 @@
 --- Deprecated see Event.Gui
 -- @module Gui
 
-require 'stdlib.event.gui'
+return require 'stdlib.event.gui'

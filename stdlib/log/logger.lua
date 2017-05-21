@@ -76,7 +76,11 @@ function Logger.new(mod_name, log_name, debug_mode, options)
                 return Logger.write()
             end
         else
-            table.insert(Logger.buffer, format("00:00:00: %s\n", msg))
+            if _G.script then --buffer when a save is loaded but _G.game isn't available
+                table.insert(Logger.buffer, format("00:00:00: %s\n", msg))
+            else --log in data stage
+                log(format("%s/%s: %s", Logger.mod_name, Logger.log_name, msg))
+            end
         end
         return false
     end

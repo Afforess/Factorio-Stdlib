@@ -242,7 +242,7 @@ function Area.tile_center_points(area)
 end
 
 --- Converts an area to a string
--- @tparam area the area to convert
+-- @param area the area to convert
 -- @return string representation of area
 function Area.tostring(area)
     fail_if_missing(area, "missing area argument")

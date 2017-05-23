@@ -41,25 +41,33 @@
   <li><a href="../modules/Area.html">Area</a></li>
   <li><a href="../modules/Chunk.html">Chunk</a></li>
   <li><a href="../modules/Position.html">Position</a></li>
+  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/Tile.html">Tile</a></li>
   <li><a href="../modules/Color.html">Color</a></li>
   <li><a href="../modules/Config.html">Config</a></li>
   <li><a href="../modules/Core.html">Core</a></li>
   <li><a href="../modules/Data.html">Data</a></li>
   <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/Time.html">Time</a></li>
+  <li><a href="../modules/defines.color.html">defines.color</a></li>
+  <li><a href="../modules/defines.time.html">defines.time</a></li>
   <li><strong>Entity</strong></li>
   <li><a href="../modules/Inventory.html">Inventory</a></li>
   <li><a href="../modules/Event.html">Event</a></li>
   <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
   <li><a href="../modules/Event.Time.html">Event.Time</a></li>
   <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Gui.html">Gui</a></li>
   <li><a href="../modules/Logger.html">Logger</a></li>
   <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/table.html">table</a></li>
   <li><a href="../modules/Trains.html">Trains</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
 </ul>
 
 </div>
@@ -71,6 +79,11 @@
 <p>
 
 </p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local Entity = require(&apos;stdlib/entity/entity&apos;)
+</pre>
+    </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
@@ -96,11 +109,11 @@
 	<td class="summary">Sets user data on the entity, stored in a mod's global data.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#set_frozen">set_frozen (entity, mode)</a></td>
+	<td class="name" nowrap><a href="#set_frozen">set_frozen (entity[, mode=true])</a></td>
 	<td class="summary">Freezes an entity, by making it inactive, inoperable, and non-rotatable, or unfreezes by doing the reverse.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#set_indestructible">set_indestructible (entity, mode)</a></td>
+	<td class="name" nowrap><a href="#set_indestructible">set_indestructible (entity[, mode=true])</a></td>
 	<td class="summary">Makes an entity indestructible, so that it can not be damaged or mined by the player or enemy factions</td>
 	</tr>
 	<tr>
@@ -129,6 +142,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">entity</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
          to convert to an area
         </li>
     </ul>
@@ -136,6 +150,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
         area that entity selection_box is valid for
     </ol>
 
@@ -154,6 +169,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">entity</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
          to convert to an area
         </li>
     </ul>
@@ -161,7 +177,7 @@
     <h3>Returns:</h3>
     <ol>
 
-        area that entity collision_box is valid for
+        LuaBoundingBox area that entity collision_box is valid for
     </ol>
 
 
@@ -179,9 +195,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">entity</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
          to test field access
         </li>
         <li><span class="parameter">field_name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          that should be tested for
         </li>
     </ul>
@@ -189,6 +207,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">boolean</span></span>
         true if the entity has access to the field, false if the entity threw an exception accessing the field
     </ol>
 
@@ -208,6 +227,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">entity</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
          the entity to look up data for
         </li>
     </ul>
@@ -234,6 +254,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">entity</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
          the entity to set data for
         </li>
         <li><span class="parameter">data</span>
@@ -253,7 +274,7 @@
 </dd>
     <dt>
     <a name = "set_frozen"></a>
-    <strong>set_frozen (entity, mode)</strong>
+    <strong>set_frozen (entity[, mode=true])</strong>
     </dt>
     <dd>
     Freezes an entity, by making it inactive, inoperable, and non-rotatable, or unfreezes by doing the reverse.
@@ -262,16 +283,20 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">entity</span>
-         the entity to freeze or unfreeze
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
+         to freeze or unfreeze
         </li>
         <li><span class="parameter">mode</span>
-         (optional) if true, freezes the entity, if false, unfreezes the entity. If not specified, is true.
+            <span class="types"><span class="type">boolean</span></span>
+         if true, freezes the entity, if false, unfreezes the entity. If not specified, is true.
+         (<em>default</em> true)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
         entity passed into it
     </ol>
 
@@ -281,7 +306,7 @@
 </dd>
     <dt>
     <a name = "set_indestructible"></a>
-    <strong>set_indestructible (entity, mode)</strong>
+    <strong>set_indestructible (entity[, mode=true])</strong>
     </dt>
     <dd>
     Makes an entity indestructible, so that it can not be damaged or mined by the player or enemy factions
@@ -290,16 +315,20 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">entity</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
          the entity to set indestructible
         </li>
         <li><span class="parameter">mode</span>
-         (optional) if true, makes the entity indestructible, if false, makes the entity destructable. If not specified, is true.
+            <span class="types"><span class="type">boolean</span></span>
+         if true, makes the entity indestructible, if false, makes the entity destructable.
+         (<em>default</em> true)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
         entity passed into it
     </ol>
 
@@ -320,13 +349,13 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">entity_a</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
 
 
 
         </li>
         <li><span class="parameter">entity_b</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
 
 
 
@@ -336,7 +365,7 @@
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><span class="type">bool</span></span>
+           <span class="types"><span class="type">boolean</span></span>
 
 
 
@@ -353,7 +382,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-05-21 18:35:24 </i>
+<i style="float:right;">Last updated 2017-05-23 16:58:19 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

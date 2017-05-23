@@ -41,25 +41,33 @@
   <li><a href="../modules/Area.html">Area</a></li>
   <li><a href="../modules/Chunk.html">Chunk</a></li>
   <li><a href="../modules/Position.html">Position</a></li>
+  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/Tile.html">Tile</a></li>
   <li><strong>Color</strong></li>
   <li><a href="../modules/Config.html">Config</a></li>
   <li><a href="../modules/Core.html">Core</a></li>
   <li><a href="../modules/Data.html">Data</a></li>
   <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/Time.html">Time</a></li>
+  <li><a href="../modules/defines.color.html">defines.color</a></li>
+  <li><a href="../modules/defines.time.html">defines.time</a></li>
   <li><a href="../modules/Entity.html">Entity</a></li>
   <li><a href="../modules/Inventory.html">Inventory</a></li>
   <li><a href="../modules/Event.html">Event</a></li>
   <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
   <li><a href="../modules/Event.Time.html">Event.Time</a></li>
   <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Gui.html">Gui</a></li>
   <li><a href="../modules/Logger.html">Logger</a></li>
   <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/table.html">table</a></li>
   <li><a href="../modules/Trains.html">Trains</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
 </ul>
 
 </div>
@@ -67,17 +75,30 @@
 <div id="content">
 
 <h1>Module <code>Color</code></h1>
-<p>Color module</p>
+<p>For playing with colors</p>
 <p>
 
 </p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local Color = require(&apos;stdlib/color/color&apos;)
+</pre>
+    </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#set">set (color, alpha)</a></td>
+	<td class="name" nowrap><a href="#set">set ([color=white][, alpha=1])</a></td>
 	<td class="summary">Return a color table with alpha added.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#to_table">to_table (c_arr)</a></td>
+	<td class="summary">Converts a color in the array format to a color in the table format</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#from_hex">from_hex (hex[, alpha=1])</a></td>
+	<td class="summary">Return a color table with alpha added from a hexadecimal string.</td>
 	</tr>
 </table>
 
@@ -90,26 +111,92 @@
     <dl class="function">
     <dt>
     <a name = "set"></a>
-    <strong>set (color, alpha)</strong>
+    <strong>set ([color=white][, alpha=1])</strong>
     </dt>
     <dd>
-    Return a color table with alpha added.  Usefull when using defines.colors.color
+    Return a color table with alpha added.
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">color</span>
-         (optional) table conforming to http://lua-api.factorio.com/latest/Concepts.html#Color, defaults to white if no table passed
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.color">defines.color</a> or <span class="type">luaColor</span></span>
+         to set
+         (<em>default</em> white)
         </li>
         <li><span class="parameter">alpha</span>
-         (optional) the alpha to set on the color, or the existing alpha, or full alpha
+            <span class="types"><span class="type">number</span></span>
+         the alpha to set on the color, or the existing alpha, or full alpha
+         (<em>default</em> 1)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>
         a color table with alpha added.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "to_table"></a>
+    <strong>to_table (c_arr)</strong>
+    </dt>
+    <dd>
+    Converts a color in the array format to a color in the table format
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">c_arr</span>
+            <span class="types"><span class="type">array</span></span>
+         the color to convert
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>
+        a converted color, { [r=c<em>arr[1]][, g=c</em>arr[2]][, b=c<em>arr[3]][, a=c</em>arr[4]] }
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "from_hex"></a>
+    <strong>from_hex (hex[, alpha=1])</strong>
+    </dt>
+    <dd>
+    Return a color table with alpha added from a hexadecimal string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">hex</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         hexadecimal colour string (#ffffff, not #fff)
+        </li>
+        <li><span class="parameter">alpha</span>
+            <span class="types"><span class="type">number</span></span>
+         alpha value, from 0 to 1]
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>
+
+
+
     </ol>
 
 
@@ -123,7 +210,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-05-21 18:35:24 </i>
+<i style="float:right;">Last updated 2017-05-23 16:58:19 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

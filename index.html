@@ -34,25 +34,33 @@
   <li><a href="modules/Area.html">Area</a></li>
   <li><a href="modules/Chunk.html">Chunk</a></li>
   <li><a href="modules/Position.html">Position</a></li>
+  <li><a href="modules/Surface.html">Surface</a></li>
   <li><a href="modules/Tile.html">Tile</a></li>
   <li><a href="modules/Color.html">Color</a></li>
   <li><a href="modules/Config.html">Config</a></li>
   <li><a href="modules/Core.html">Core</a></li>
   <li><a href="modules/Data.html">Data</a></li>
   <li><a href="modules/Recipe.html">Recipe</a></li>
-  <li><a href="modules/Time.html">Time</a></li>
+  <li><a href="modules/defines.color.html">defines.color</a></li>
+  <li><a href="modules/defines.time.html">defines.time</a></li>
   <li><a href="modules/Entity.html">Entity</a></li>
   <li><a href="modules/Inventory.html">Inventory</a></li>
   <li><a href="modules/Event.html">Event</a></li>
   <li><a href="modules/Event.Gui.html">Event.Gui</a></li>
   <li><a href="modules/Event.Time.html">Event.Time</a></li>
   <li><a href="modules/Game.html">Game</a></li>
-  <li><a href="modules/Gui.html">Gui</a></li>
   <li><a href="modules/Logger.html">Logger</a></li>
   <li><a href="modules/string.html">string</a></li>
-  <li><a href="modules/Surface.html">Surface</a></li>
   <li><a href="modules/table.html">table</a></li>
   <li><a href="modules/Trains.html">Trains</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="topics/readme.md.html">readme</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="examples/event.time.lua.html">event.time.lua</a></li>
 </ul>
 
 </div>
@@ -67,27 +75,29 @@
 <table class="module_list">
 	<tr>
 		<td class="name"  nowrap><a href="modules/Area.html">Area</a></td>
-		<td class="summary">Area module
- <p>For working with bounding boxes.</td>
+		<td class="summary">For working with bounding boxes.</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/Chunk.html">Chunk</a></td>
-		<td class="summary">Chunk module
- <p>A chunk represents a 32x32 area of a surface in factorio.</p></td>
+		<td class="summary">A chunk represents a 32x32 area of a surface in factorio.</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/Position.html">Position</a></td>
-		<td class="summary">Position module
- <p>For working with x, y coordinates.</td>
+		<td class="summary">For working with x, y coordinates.</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/Surface.html">Surface</a></td>
+		<td class="summary">
+
+</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/Tile.html">Tile</a></td>
-		<td class="summary">Tile module
- <p>A tile represents a 1x1 area on a surface in factorio.</td>
+		<td class="summary">A tile represents a 1x1 area on a surface in factorio.</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/Color.html">Color</a></td>
-		<td class="summary">Color module</td>
+		<td class="summary">For playing with colors</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/Config.html">Config</a></td>
@@ -106,8 +116,13 @@
 		<td class="summary">Recipe module</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="modules/Time.html">Time</a></td>
-		<td class="summary">Time module</td>
+		<td class="name"  nowrap><a href="modules/defines.color.html">defines.color</a></td>
+		<td class="summary">A defines module for retrieving colors by name
+ Extends the Factorio defines table</td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="modules/defines.time.html">defines.time</a></td>
+		<td class="summary">A defines module for retrieving the number of ticks in 1 unit of time.</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/Entity.html">Entity</a></td>
@@ -115,8 +130,7 @@
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/Inventory.html">Inventory</a></td>
-		<td class="summary">Inventory module
- <p> For working with inventories</td>
+		<td class="summary">For working with inventories</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/Event.html">Event</a></td>
@@ -136,24 +150,16 @@
 		<td class="summary">Game module</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="modules/Gui.html">Gui</a></td>
-		<td class="summary">Deprecated see Event.Gui</td>
-	</tr>
-	<tr>
 		<td class="name"  nowrap><a href="modules/Logger.html">Logger</a></td>
 		<td class="summary">Logger module</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/string.html">string</a></td>
-		<td class="summary">String module</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Surface.html">Surface</a></td>
-		<td class="summary">Surface module</td>
+		<td class="summary">Extends Lua 5.2 string</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/table.html">table</a></td>
-		<td class="summary">Table module</td>
+		<td class="summary">Extends lua 5.2 table</td>
 	</tr>
 	<tr>
 		<td class="name"  nowrap><a href="modules/Trains.html">Trains</a></td>
@@ -163,12 +169,26 @@
  carriages are moved around.</td>
 	</tr>
 </table>
+<h2>Topics</h2>
+<table class="module_list">
+	<tr>
+		<td class="name"  nowrap><a href="topics/readme.md.html">readme.md</a></td>
+		<td class="summary"></td>
+	</tr>
+</table>
+<h2>Examples</h2>
+<table class="module_list">
+	<tr>
+		<td class="name"  nowrap><a href="examples/event.time.lua.html">event.time.lua</a></td>
+		<td class="summary"></td>
+	</tr>
+</table>
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-05-21 18:35:24 </i>
+<i style="float:right;">Last updated 2017-05-23 16:58:19 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

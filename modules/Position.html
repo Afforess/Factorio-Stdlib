@@ -33,6 +33,7 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
 </ul>
 
 
@@ -41,25 +42,33 @@
   <li><a href="../modules/Area.html">Area</a></li>
   <li><a href="../modules/Chunk.html">Chunk</a></li>
   <li><strong>Position</strong></li>
+  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/Tile.html">Tile</a></li>
   <li><a href="../modules/Color.html">Color</a></li>
   <li><a href="../modules/Config.html">Config</a></li>
   <li><a href="../modules/Core.html">Core</a></li>
   <li><a href="../modules/Data.html">Data</a></li>
   <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/Time.html">Time</a></li>
+  <li><a href="../modules/defines.color.html">defines.color</a></li>
+  <li><a href="../modules/defines.time.html">defines.time</a></li>
   <li><a href="../modules/Entity.html">Entity</a></li>
   <li><a href="../modules/Inventory.html">Inventory</a></li>
   <li><a href="../modules/Event.html">Event</a></li>
   <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
   <li><a href="../modules/Event.Time.html">Event.Time</a></li>
   <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Gui.html">Gui</a></li>
   <li><a href="../modules/Logger.html">Logger</a></li>
   <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/table.html">table</a></li>
   <li><a href="../modules/Trains.html">Trains</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
 </ul>
 
 </div>
@@ -67,11 +76,21 @@
 <div id="content">
 
 <h1>Module <code>Position</code></h1>
-<p>Position module
- <p>For working with x, y coordinates.</p>
+<p>For working with x, y coordinates.</p>
 <p>
 
 </p>
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../modules/Area.html#">Area</a></li>
+         <li><a href="http://lua-api.factorio.com/latest/Concepts.html#Position">Concepts Position</a></li>
+         <li><a href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></li>
+    </ul>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local Position = require(&apos;stdlib/area/position&apos;)
+</pre>
+    </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
@@ -129,8 +148,29 @@
 	<td class="summary">Converts a position to a string</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#increment">increment (position[, inc_x=0][, inc_y=0])</a></td>
+	<td class="summary">Increment a position each time it is called.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#increment_closure">increment_closure ([new_inc_x=0][, new_inc_y=0])</a></td>
+	<td class="summary">
+
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#center">center (pos)</a></td>
+	<td class="summary">Returns a position centered on the tile</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#opposite_direction">opposite_direction (direction)</a></td>
 	<td class="summary">Returns the opposite direction - Adapted from Factorio util.lua</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#epsilon">epsilon</a></td>
+	<td class="summary">Machine Epsilon</td>
 	</tr>
 </table>
 
@@ -152,9 +192,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
          x-position
         </li>
         <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
          y-position
         </li>
     </ul>
@@ -162,7 +204,10 @@
     <h3>Returns:</h3>
     <ol>
 
-        Position
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
+
+
+
     </ol>
 
 
@@ -180,6 +225,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">pos</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the position to copy
         </li>
     </ul>
@@ -187,7 +233,10 @@
     <h3>Returns:</h3>
     <ol>
 
-        Position
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
+
+
+
     </ol>
 
 
@@ -205,12 +254,15 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">pos</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the position to offset
         </li>
         <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
          the amount to offset the position in the x direction
         </li>
         <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
          the amount to offset the position in the y direction
         </li>
     </ul>
@@ -218,6 +270,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
         a new position, offset by the x,y coordinates
     </ol>
 
@@ -236,9 +289,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">pos1</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the first position
         </li>
         <li><span class="parameter">pos2</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the second position
         </li>
     </ul>
@@ -246,6 +301,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
         a new position
     </ol>
 
@@ -264,9 +320,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">pos1</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the first position
         </li>
         <li><span class="parameter">pos2</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the second position
         </li>
     </ul>
@@ -274,6 +332,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
         a new position
     </ol>
 
@@ -292,12 +351,15 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">pos</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the position to translate
         </li>
         <li><span class="parameter">direction</span>
-         in which direction to translate (see defines.direction)
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>
+         in which to translate
         </li>
         <li><span class="parameter">distance</span>
+            <span class="types"><span class="type">number</span></span>
          distance of the translation
         </li>
     </ul>
@@ -305,7 +367,8 @@
     <h3>Returns:</h3>
     <ol>
 
-        the translated position
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
+        a new translated position
     </ol>
 
 
@@ -323,9 +386,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">pos</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the position to expand into an area
         </li>
         <li><span class="parameter">radius</span>
+            <span class="types"><span class="type">number</span></span>
          half the side length of the area
         </li>
     </ul>
@@ -333,6 +398,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
         a bounding box
     </ol>
 
@@ -351,9 +417,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">pos1</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the first position
         </li>
         <li><span class="parameter">pos2</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the second position
         </li>
     </ul>
@@ -361,6 +429,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">number</span></span>
         the square of the Euclidean distance
     </ol>
 
@@ -379,9 +448,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">pos1</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the first position
         </li>
         <li><span class="parameter">pos2</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the second position
         </li>
     </ul>
@@ -389,6 +460,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">number</span></span>
         the square of the Euclidean distance
     </ol>
 
@@ -407,9 +479,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">pos1</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the first position
         </li>
         <li><span class="parameter">pos2</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the second position
         </li>
     </ul>
@@ -417,6 +491,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">number</span></span>
         the square of the Euclidean distance
     </ol>
 
@@ -435,9 +510,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">pos1</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the first position
         </li>
         <li><span class="parameter">pos2</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the second position
         </li>
     </ul>
@@ -445,6 +522,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">boolean</span></span>
         true if positions are equal
     </ol>
 
@@ -463,6 +541,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">pos_arr</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the position to convert
         </li>
     </ul>
@@ -470,11 +549,16 @@
     <h3>Returns:</h3>
     <ol>
 
-        a converted position, { x = pos<em>arr[1], y = pos</em>arr[2] }
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
+        the converted position
     </ol>
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">Position.to_table({<span class="number">0</span>, <span class="number">0</span>}) <span class="comment">-- returns {x = 0, y = 0}</span></pre>
+    </ul>
 
 </dd>
     <dt>
@@ -488,6 +572,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">pos</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the position to convert
         </li>
     </ul>
@@ -495,7 +580,127 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
         string representation of pos
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "increment"></a>
+    <strong>increment (position[, inc_x=0][, inc_y=0])</strong>
+    </dt>
+    <dd>
+    Increment a position each time it is called.
+ <p>can be used to increment(or decrement) a position quickly.
+ Do not store function closures in global use them in the current tick.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">position</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
+         the position to start with
+        </li>
+        <li><span class="parameter">inc_x</span>
+            <span class="types"><span class="type">number</span></span>
+         optional increment x by this amount
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">inc_y</span>
+            <span class="types"><span class="type">number</span></span>
+         optional increment y by this amount
+         (<em>default</em> 0)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../modules/Position.html#increment">increment_closure</a></span>
+        a function closure that returns an incremented position
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example"><span class="keyword">local</span> next_pos = Position.increment({<span class="number">0</span>,<span class="number">0</span>})
+ <span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span> next_pos(<span class="number">0</span>,<span class="number">1</span>) <span class="comment">-- returns {x = 0, y = 1} {x = 0, y = 2} {x = 0, y = 3} {x = 0, y = 4} {x = 0, y = 5}</span></pre></li>
+        <li><pre class="example"><span class="keyword">local</span> next_pos = Position.increment({<span class="number">0</span>, <span class="number">0</span>}, <span class="number">1</span>)
+next_pos() <span class="comment">-- returns {1, 0}
+</span>next_pos(<span class="number">0</span>, <span class="number">5</span>) <span class="comment">-- returns {1, 5}
+</span>next_pos(<span class="keyword">nil</span>, <span class="number">5</span>) <span class="comment">-- returns {2, 10}</span></pre></li>
+        <li><pre class="example"><span class="keyword">local</span> next_pos = Position.increment({<span class="number">0</span>, <span class="number">0</span>}, <span class="number">0</span>, <span class="number">1</span>)
+surface.create_entity{name = <span class="string">'flying-text'</span>, text = <span class="string">'text'</span>, position = next_pos()}
+surface.create_entity{name = <span class="string">'flying-text'</span>, text = <span class="string">'text'</span>, position = next_pos()} <span class="comment">-- creates 2 flying text entities 1 tile apart</span></pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "increment_closure"></a>
+    <strong>increment_closure ([new_inc_x=0][, new_inc_y=0])</strong>
+    </dt>
+    <dd>
+     closure, do not call directly
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">new_inc_x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">new_inc_y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+         (<em>default</em> 0)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
+        the incremented position
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/Position.html#increment">increment</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "center"></a>
+    <strong>center (pos)</strong>
+    </dt>
+    <dd>
+    Returns a position centered on the tile
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">pos</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
+         the position to center
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
+        a centered position table
     </ol>
 
 
@@ -513,17 +718,41 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">direction</span>
-         the defines.direction to get the opposite of
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>
+         to get the opposite of
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>
         the opposite direction
     </ol>
 
 
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "epsilon"></a>
+    <strong>epsilon</strong>
+    </dt>
+    <dd>
+    Machine Epsilon
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://en.wikipedia.org/wiki/Machine_epsilon">Machine_epsilon</a>
+    </ul>
 
 
 </dd>
@@ -534,7 +763,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-05-21 18:35:24 </i>
+<i style="float:right;">Last updated 2017-05-23 16:58:19 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

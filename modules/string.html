@@ -41,25 +41,33 @@
   <li><a href="../modules/Area.html">Area</a></li>
   <li><a href="../modules/Chunk.html">Chunk</a></li>
   <li><a href="../modules/Position.html">Position</a></li>
+  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/Tile.html">Tile</a></li>
   <li><a href="../modules/Color.html">Color</a></li>
   <li><a href="../modules/Config.html">Config</a></li>
   <li><a href="../modules/Core.html">Core</a></li>
   <li><a href="../modules/Data.html">Data</a></li>
   <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/Time.html">Time</a></li>
+  <li><a href="../modules/defines.color.html">defines.color</a></li>
+  <li><a href="../modules/defines.time.html">defines.time</a></li>
   <li><a href="../modules/Entity.html">Entity</a></li>
   <li><a href="../modules/Inventory.html">Inventory</a></li>
   <li><a href="../modules/Event.html">Event</a></li>
   <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
   <li><a href="../modules/Event.Time.html">Event.Time</a></li>
   <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Gui.html">Gui</a></li>
   <li><a href="../modules/Logger.html">Logger</a></li>
   <li><strong>string</strong></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/table.html">table</a></li>
   <li><a href="../modules/Trains.html">Trains</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
 </ul>
 
 </div>
@@ -67,10 +75,14 @@
 <div id="content">
 
 <h1>Module <code>string</code></h1>
-<p>String module</p>
+<p>Extends Lua 5.2 string</p>
 <p>
 
 </p>
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/string.html#">string</a>
+    </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
@@ -88,7 +100,7 @@
 	<td class="summary">Tests if a string ends with a given substring</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#contains">contains (s, ends)</a></td>
+	<td class="name" nowrap><a href="#contains">contains (s, contains)</a></td>
 	<td class="summary">Tests if a string contains a given substring</td>
 	</tr>
 	<tr>
@@ -96,8 +108,8 @@
 	<td class="summary">Tests whether a string is empty</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#split">split (s, sep, pattern)</a></td>
-	<td class="summary">Splits a string into a table
+	<td class="name" nowrap><a href="#split">split (s[, sep='.'][, pattern=false])</a></td>
+	<td class="summary">Splits a string into an array
  <p>
  <b>Note:</b> Empty split substrings are not included in the resulting table.</td>
 	</tr>
@@ -121,6 +133,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the string to remove leading or trailing whitespace from
         </li>
     </ul>
@@ -128,6 +141,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
         a copy of the string without leading or trailing whitespace
     </ol>
 
@@ -146,9 +160,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the string to check for the start substring
         </li>
         <li><span class="parameter">start</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the substring to test for
         </li>
     </ul>
@@ -156,6 +172,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">boolean</span></span>
         true if the start substring was found in the string
     </ol>
 
@@ -174,9 +191,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the string to check for the end substring
         </li>
         <li><span class="parameter">ends</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the substring to test for
         </li>
     </ul>
@@ -184,6 +203,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">boolean</span></span>
         true if the end substring was found in the string
     </ol>
 
@@ -193,7 +213,7 @@
 </dd>
     <dt>
     <a name = "contains"></a>
-    <strong>contains (s, ends)</strong>
+    <strong>contains (s, contains)</strong>
     </dt>
     <dd>
     Tests if a string contains a given substring
@@ -202,9 +222,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the string to check for the substring
         </li>
-        <li><span class="parameter">ends</span>
+        <li><span class="parameter">contains</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the substring to test for
         </li>
     </ul>
@@ -212,6 +234,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">boolean</span></span>
         true if the substring was found in the string
     </ol>
 
@@ -230,10 +253,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the string to test
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        true if the string is empty
+    </ol>
 
 
 
@@ -241,10 +271,10 @@
 </dd>
     <dt>
     <a name = "split"></a>
-    <strong>split (s, sep, pattern)</strong>
+    <strong>split (s[, sep='.'][, pattern=false])</strong>
     </dt>
     <dd>
-    Splits a string into a table
+    Splits a string into an array
  <p>
  <b>Note:</b> Empty split substrings are not included in the resulting table.
  For example, string.split('foo.bar...', '.', false) results in the table {'foo', 'bar'}
@@ -253,20 +283,26 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the string to split
         </li>
         <li><span class="parameter">sep</span>
-         (optional) the separator to use. The period character, <code>.</code>, is the default separator.
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         the separator to use.
+         (<em>default</em> '.')
         </li>
         <li><span class="parameter">pattern</span>
+            <span class="types"><span class="type">boolean</span></span>
          whether to interpret the separator as a lua pattern or plaintext for the string split
+         (<em>default</em> false)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the table
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">{string,...}</a></span>
+        an array of strings
     </ol>
 
 
@@ -280,7 +316,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-05-21 18:35:24 </i>
+<i style="float:right;">Last updated 2017-05-23 16:58:19 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

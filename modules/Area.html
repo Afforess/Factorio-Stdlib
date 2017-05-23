@@ -41,25 +41,33 @@
   <li><strong>Area</strong></li>
   <li><a href="../modules/Chunk.html">Chunk</a></li>
   <li><a href="../modules/Position.html">Position</a></li>
+  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/Tile.html">Tile</a></li>
   <li><a href="../modules/Color.html">Color</a></li>
   <li><a href="../modules/Config.html">Config</a></li>
   <li><a href="../modules/Core.html">Core</a></li>
   <li><a href="../modules/Data.html">Data</a></li>
   <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/Time.html">Time</a></li>
+  <li><a href="../modules/defines.color.html">defines.color</a></li>
+  <li><a href="../modules/defines.time.html">defines.time</a></li>
   <li><a href="../modules/Entity.html">Entity</a></li>
   <li><a href="../modules/Inventory.html">Inventory</a></li>
   <li><a href="../modules/Event.html">Event</a></li>
   <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
   <li><a href="../modules/Event.Time.html">Event.Time</a></li>
   <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Gui.html">Gui</a></li>
   <li><a href="../modules/Logger.html">Logger</a></li>
   <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/table.html">table</a></li>
   <li><a href="../modules/Trains.html">Trains</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
 </ul>
 
 </div>
@@ -67,11 +75,21 @@
 <div id="content">
 
 <h1>Module <code>Area</code></h1>
-<p>Area module
- <p>For working with bounding boxes.</p>
+<p>For working with bounding boxes.</p>
 <p>
 
 </p>
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../modules/Position.html#">Position</a></li>
+         <li><a href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">Concepts BoundingBox</a></li>
+         <li><a href="http://lua-api.factorio.com/latest/Concepts.html#Position">Concepts Position</a></li>
+    </ul>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local Area = require(&apos;stdlib/area/area&apos;)
+</pre>
+    </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
@@ -95,6 +113,14 @@
 	<tr>
 	<td class="name" nowrap><a href="#expand">expand (area, amount)</a></td>
 	<td class="summary">Expands the size of an area by the given amount</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#adjust">adjust (area, vector)</a></td>
+	<td class="summary">Adjust an area by shrinking or expanding</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#rotate">rotate (area)</a></td>
+	<td class="summary">Rotate an area such that its width becomes it height, and its height becomes it width.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#center">center (area)</a></td>
@@ -124,6 +150,14 @@
 	<td class="name" nowrap><a href="#to_table">to_table (area_arr)</a></td>
 	<td class="summary">Converts an area in the array format to an array in the table format</td>
 	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#tile_center_points">tile_center_points (area)</a></td>
+	<td class="summary">Converts area bounding box points to center of their tiles</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#tostring">tostring (area)</a></td>
+	<td class="summary">Converts an area to a string</td>
+	</tr>
 </table>
 
 <br/>
@@ -144,15 +178,19 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">x1</span>
+            <span class="types"><span class="type">number</span></span>
          x-position of left_top, first point
         </li>
         <li><span class="parameter">y1</span>
+            <span class="types"><span class="type">number</span></span>
          y-position of left_top, first point
         </li>
         <li><span class="parameter">x2</span>
+            <span class="types"><span class="type">number</span></span>
          x-position of right_bottom, second point
         </li>
         <li><span class="parameter">y2</span>
+            <span class="types"><span class="type">number</span></span>
          y-position of right_bottom, second point
         </li>
     </ul>
@@ -160,7 +198,8 @@
     <h3>Returns:</h3>
     <ol>
 
-        Area tabled area
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+        tabled area
     </ol>
 
 
@@ -178,14 +217,25 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
          the area
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
-
-        size of the area
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        the size of the area</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        the width of the area</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        the height of the area</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        the perimeter of the area</li>
     </ol>
 
 
@@ -203,9 +253,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
          the area
         </li>
         <li><span class="parameter">pos</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
          the position to check
         </li>
     </ul>
@@ -213,6 +265,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">boolean</span></span>
         true if the position is inside of the area
     </ol>
 
@@ -231,9 +284,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
          the area
         </li>
         <li><span class="parameter">amount</span>
+            <span class="types"><span class="type">number</span> or <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Vector">Vector</a></span>
          to shrink each edge of the area inwards by
         </li>
     </ul>
@@ -241,7 +296,8 @@
     <h3>Returns:</h3>
     <ol>
 
-        the shrunk area
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+        the new shrunken area
     </ol>
 
 
@@ -259,9 +315,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
          the area
         </li>
         <li><span class="parameter">amount</span>
+            <span class="types"><span class="type">number</span> or <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Vector">Vector</a></span>
          to expand each edge of the area outwards by
         </li>
     </ul>
@@ -269,7 +327,75 @@
     <h3>Returns:</h3>
     <ol>
 
-        the expanded area
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+        the new expanded area
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/Area.html#shrink">Area.shrink</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "adjust"></a>
+    <strong>adjust (area, vector)</strong>
+    </dt>
+    <dd>
+    Adjust an area by shrinking or expanding
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+         the area
+        </li>
+        <li><span class="parameter">vector</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Vector">Vector</a></span>
+         the vectors to use
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+        the adjusted bounding box
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> area = Area.adjust({{-<span class="number">2</span>, -<span class="number">2</span>}, {<span class="number">2</span>, <span class="number">2</span>}}, {<span class="number">4</span>, -<span class="number">1</span>})
+ <span class="comment">-- returns {left_top = {x = -6, y = -1}, right_bottom = {x = 6, y = 1}}</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "rotate"></a>
+    <strong>rotate (area)</strong>
+    </dt>
+    <dd>
+    Rotate an area such that its width becomes it height, and its height becomes it width.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+         the area to rotate
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+        the rotated area
     </ol>
 
 
@@ -287,6 +413,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
          the area
         </li>
     </ul>
@@ -294,7 +421,8 @@
     <h3>Returns:</h3>
     <ol>
 
-        area to find the center for
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
+        the center of the area
     </ol>
 
 
@@ -312,17 +440,20 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
          the area
         </li>
         <li><span class="parameter">pos</span>
-         the {x, y} amount to offset the area
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
+         the position to offset the area to
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        offset area by the position values
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+        new area offset by the position
     </ol>
 
 
@@ -340,6 +471,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
          the area
         </li>
     </ul>
@@ -347,6 +479,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">int</span></span>
         the rounded integer representation
     </ol>
 
@@ -365,6 +498,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
          the area
         </li>
     </ul>
@@ -390,25 +524,13 @@
     <strong>spiral_iterate (area)</strong>
     </dt>
     <dd>
-    Iterates an area in a spiral inner-most to outer-most fashion. </p>
-
-<p><i>Example:</i></p>
-
-
-<pre>
-for x, y in Area.spiral_iterate({{-2, -1}, {2, 1}}) do
- print("(" .. x .. ", " .. y .. ")")
-end
- prints: (0, 0) (1, 0) (1, 1) (0, 1) (-1, 1) (-1, 0) (-1, -1) (0, -1) (1, -1) (2, -1) (2, 0) (2, 1) (-2, 1) (-2, 0) (-2, -1)
-</pre>
-
-<p> iterates in the order depicted:<br/>
- <img src="http://i.imgur.com/EwfO0Es.png" alt=""/>
+    Iterates an area in a spiral inner-most to outer-most fashion.
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
          the area
         </li>
     </ul>
@@ -416,11 +538,20 @@ end
     <h3>Returns:</h3>
     <ol>
 
-        iterator
+           <span class="types"><span class="type">iterator</span></span>
+         <pre>iterates in the order depicted:<br/>
+ <img src="http://i.imgur.com/EwfO0Es.png" alt=""/></pre>
     </ol>
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> x, y <span class="keyword">in</span> Area.spiral_iterate({{-<span class="number">2</span>, -<span class="number">1</span>}, {<span class="number">2</span>, <span class="number">1</span>}}) <span class="keyword">do</span>
+  <span class="global">print</span>(<span class="string">'('</span> .. x .. <span class="string">', '</span> .. y .. <span class="string">')'</span>)
+<span class="keyword">end</span>
+prints: (<span class="number">0</span>, <span class="number">0</span>) (<span class="number">1</span>, <span class="number">0</span>) (<span class="number">1</span>, <span class="number">1</span>) (<span class="number">0</span>, <span class="number">1</span>) (-<span class="number">1</span>, <span class="number">1</span>) (-<span class="number">1</span>, <span class="number">0</span>) (-<span class="number">1</span>, -<span class="number">1</span>) (<span class="number">0</span>, -<span class="number">1</span>) (<span class="number">1</span>, -<span class="number">1</span>) (<span class="number">2</span>, -<span class="number">1</span>) (<span class="number">2</span>, <span class="number">0</span>) (<span class="number">2</span>, <span class="number">1</span>) (-<span class="number">2</span>, <span class="number">1</span>) (-<span class="number">2</span>, <span class="number">0</span>) (-<span class="number">2</span>, -<span class="number">1</span>)</pre>
+    </ul>
 
 </dd>
     <dt>
@@ -434,6 +565,7 @@ end
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
          the area to adjust
         </li>
     </ul>
@@ -441,6 +573,7 @@ end
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
         a normalized area, always { left<em>top = {x = ..., y = ...}, right</em>bottom = {x = ..., y = ...} }
     </ol>
 
@@ -459,6 +592,7 @@ end
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">area_arr</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
          the area to convert
         </li>
     </ul>
@@ -466,7 +600,62 @@ end
     <h3>Returns:</h3>
     <ol>
 
-        a converted area, { left<em>top = area</em>arr[1], right<em>bottom = area</em>arr[2] }
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+        a converted area
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "tile_center_points"></a>
+    <strong>tile_center_points (area)</strong>
+    </dt>
+    <dd>
+    Converts area bounding box points to center of their tiles
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+         the area
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+        an area bounding box on tile center points
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "tostring"></a>
+    <strong>tostring (area)</strong>
+    </dt>
+    <dd>
+    Converts an area to a string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">area</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+         the area to convert
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        representation of area
     </ol>
 
 
@@ -480,7 +669,7 @@ end
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-05-21 18:35:24 </i>
+<i style="float:right;">Last updated 2017-05-23 16:58:19 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

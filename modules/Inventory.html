@@ -41,25 +41,33 @@
   <li><a href="../modules/Area.html">Area</a></li>
   <li><a href="../modules/Chunk.html">Chunk</a></li>
   <li><a href="../modules/Position.html">Position</a></li>
+  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/Tile.html">Tile</a></li>
   <li><a href="../modules/Color.html">Color</a></li>
   <li><a href="../modules/Config.html">Config</a></li>
   <li><a href="../modules/Core.html">Core</a></li>
   <li><a href="../modules/Data.html">Data</a></li>
   <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/Time.html">Time</a></li>
+  <li><a href="../modules/defines.color.html">defines.color</a></li>
+  <li><a href="../modules/defines.time.html">defines.time</a></li>
   <li><a href="../modules/Entity.html">Entity</a></li>
   <li><strong>Inventory</strong></li>
   <li><a href="../modules/Event.html">Event</a></li>
   <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
   <li><a href="../modules/Event.Time.html">Event.Time</a></li>
   <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Gui.html">Gui</a></li>
   <li><a href="../modules/Logger.html">Logger</a></li>
   <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/table.html">table</a></li>
   <li><a href="../modules/Trains.html">Trains</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
 </ul>
 
 </div>
@@ -67,21 +75,29 @@
 <div id="content">
 
 <h1>Module <code>Inventory</code></h1>
-<p>Inventory module
- <p> For working with inventories</p>
+<p>For working with inventories</p>
 <p>
 
 </p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local Inventory = require(&apos;stdlib/entity/inventory&apos;)
+</pre>
+    </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#copy_as_simple_stacks">copy_as_simple_stacks (src, dest, clear)</a></td>
+	<td class="name" nowrap><a href="#copy_as_simple_stacks">copy_as_simple_stacks (src, dest[, clear=false])</a></td>
 	<td class="summary">Copies an inventory contents to a destination inventory using simple item stacks.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#each">each (inventory, func[, ...])</a></td>
+	<td class="summary">Given a function, apply it to each slot in the inventory.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#each_reverse">each_reverse (inventory, func[, ...])</a></td>
 	<td class="summary">Given a function, apply it to each slot in the inventory.</td>
 	</tr>
 </table>
@@ -95,7 +111,7 @@
     <dl class="function">
     <dt>
     <a name = "copy_as_simple_stacks"></a>
-    <strong>copy_as_simple_stacks (src, dest, clear)</strong>
+    <strong>copy_as_simple_stacks (src, dest[, clear=false])</strong>
     </dt>
     <dd>
     Copies an inventory contents to a destination inventory using simple item stacks.
@@ -104,20 +120,25 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">src</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">Inventory</a></span>
          source inventory to copy from
         </li>
         <li><span class="parameter">dest</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">Inventory</a></span>
          destination inventory, to copy to
         </li>
         <li><span class="parameter">clear</span>
+            <span class="types"><span class="type">boolean</span></span>
          clear the contents of the source inventory
+         (<em>default</em> false)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        an array of SimpleItemStacks of left over items that could not be inserted into dest.
+           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#SimpleItemStack">{LuaSimpleItemStack,...}</a></span>
+        an array of left over items that could not be inserted into dest.
     </ol>
 
 
@@ -136,9 +157,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">inventory</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">Inventory</a></span>
          to be iterated
         </li>
         <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
          to apply to values
         </li>
         <li><span class="parameter">...</span>
@@ -150,7 +173,45 @@
     <h3>Returns:</h3>
     <ol>
 
-        the slot index found or nil
+           <span class="types">optional <a class="type" href="http://lua-api.factorio.com/latest/LuaItemStack.html">ItemStack</a></span>
+        the slot interation was aborted at or nil
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "each_reverse"></a>
+    <strong>each_reverse (inventory, func[, ...])</strong>
+    </dt>
+    <dd>
+    Given a function, apply it to each slot in the inventory.  Passes the slot index as second argument to the function.
+ <p>Iteration is aborted if the applied function returns true for any element during iteration. Iteration is performed from
+ last to first in order to support dynamically sized inventories.</p>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">inventory</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">Inventory</a></span>
+         to be iterated
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         to apply to values
+        </li>
+        <li><span class="parameter">...</span>
+         additional arguments passed to the function
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types">optional <a class="type" href="http://lua-api.factorio.com/latest/LuaItemStack.html">ItemStack</a></span>
+        the slot iteration was aborted at or nil
     </ol>
 
 
@@ -164,7 +225,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-05-21 18:35:24 </i>
+<i style="float:right;">Last updated 2017-05-23 16:58:19 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

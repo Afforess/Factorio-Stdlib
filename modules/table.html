@@ -41,25 +41,33 @@
   <li><a href="../modules/Area.html">Area</a></li>
   <li><a href="../modules/Chunk.html">Chunk</a></li>
   <li><a href="../modules/Position.html">Position</a></li>
+  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><a href="../modules/Tile.html">Tile</a></li>
   <li><a href="../modules/Color.html">Color</a></li>
   <li><a href="../modules/Config.html">Config</a></li>
   <li><a href="../modules/Core.html">Core</a></li>
   <li><a href="../modules/Data.html">Data</a></li>
   <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/Time.html">Time</a></li>
+  <li><a href="../modules/defines.color.html">defines.color</a></li>
+  <li><a href="../modules/defines.time.html">defines.time</a></li>
   <li><a href="../modules/Entity.html">Entity</a></li>
   <li><a href="../modules/Inventory.html">Inventory</a></li>
   <li><a href="../modules/Event.html">Event</a></li>
   <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
   <li><a href="../modules/Event.Time.html">Event.Time</a></li>
   <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Gui.html">Gui</a></li>
   <li><a href="../modules/Logger.html">Logger</a></li>
   <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
   <li><strong>table</strong></li>
   <li><a href="../modules/Trains.html">Trains</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
 </ul>
 
 </div>
@@ -67,10 +75,14 @@
 <div id="content">
 
 <h1>Module <code>table</code></h1>
-<p>Table module</p>
+<p>Extends lua 5.2 table</p>
 <p>
 
 </p>
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/table.html#">table</a>
+    </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
@@ -102,7 +114,7 @@
 	<td class="summary">Given a function, apply it to each element in the table.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#flatten">flatten (tbl, level)</a></td>
+	<td class="name" nowrap><a href="#flatten">flatten (tbl[, level])</a></td>
 	<td class="summary">Returns a new table that is a one-dimensional flattening of this array (recursively).</td>
 	</tr>
 	<tr>
@@ -130,7 +142,7 @@
 	<td class="summary">Given an array of only numeric values, returns the average or nil if no element exists</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#merge">merge (tblA, tblB, array_merge)</a></td>
+	<td class="name" nowrap><a href="#merge">merge (tblA, tblB[, array_merge=false])</a></td>
 	<td class="summary">Merges 2 tables, values from first get overwritten by second</td>
 	</tr>
 	<tr>
@@ -138,11 +150,11 @@
 	<td class="summary">Creates a deep copy of table, not copying Factorio objects</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#values">values (tbl, sorted, as_string)</a></td>
+	<td class="name" nowrap><a href="#values">values (tbl[, sorted][, as_string])</a></td>
 	<td class="summary">Returns a copy of all of the values in the table</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#keys">keys (tbl, sorted, as_string)</a></td>
+	<td class="name" nowrap><a href="#keys">keys (tbl[, sorted][, as_string])</a></td>
 	<td class="summary">Returns a copy of all of the keys in the table</td>
 	</tr>
 	<tr>
@@ -171,9 +183,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          to be mapped to the transform
         </li>
         <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
          to transform values
         </li>
         <li><span class="parameter">...</span>
@@ -185,6 +199,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         a new table containing the keys and mapped values
     </ol>
 
@@ -212,9 +227,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          to be filtered
         </li>
         <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
          to filter values
         </li>
         <li><span class="parameter">...</span>
@@ -226,6 +243,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         a new table containing the filtered key-value pairs
     </ol>
 
@@ -253,9 +271,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          to be searched
         </li>
         <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
          to use to search for any matching element
         </li>
         <li><span class="parameter">...</span>
@@ -295,9 +315,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          to be searched
         </li>
         <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
          to use to search for any matching element
         </li>
         <li><span class="parameter">...</span>
@@ -309,6 +331,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">boolean</span></span>
         true if an element was found, false if none was found
     </ol>
 
@@ -335,9 +358,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          to be iterated
         </li>
         <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
          to apply to values
         </li>
         <li><span class="parameter">...</span>
@@ -349,16 +374,22 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         the given table
     </ol>
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">a = {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>}
+ <span class="global">table</span>.each(a, <span class="keyword">function</span>(v) game.<span class="global">print</span>(v) <span class="keyword">end</span>) <span class="comment">--prints 10, 20, 30, 40, 50</span></pre>
+    </ul>
 
 </dd>
     <dt>
     <a name = "flatten"></a>
-    <strong>flatten (tbl, level)</strong>
+    <strong>flatten (tbl[, level])</strong>
     </dt>
     <dd>
     Returns a new table that is a one-dimensional flattening of this array (recursively).
@@ -370,16 +401,20 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><span class="type">array</span></span>
          to be flattened
         </li>
         <li><span class="parameter">level</span>
-         (optional) recursive levels, or no limit to recursion if not supplied
+            <span class="types"><span class="type">int</span></span>
+         recursive levels, or no limit to recursion if not supplied
+         (<em>optional</em>)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         a new table that represents the flattened contents of the given table
     </ol>
 
@@ -398,6 +433,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><span class="type">array</span></span>
          the array
         </li>
     </ul>
@@ -423,6 +459,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><span class="type">array</span></span>
          the array
         </li>
     </ul>
@@ -430,7 +467,7 @@
     <h3>Returns:</h3>
     <ol>
 
-        the last element
+        the last element or nil
     </ol>
 
 
@@ -448,6 +485,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><span class="type">array</span></span>
          the array
         </li>
     </ul>
@@ -455,6 +493,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types">optional <span class="type">int</span></span>
         the minimum value
     </ol>
 
@@ -473,6 +512,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><span class="type">array</span></span>
          the array
         </li>
     </ul>
@@ -480,6 +520,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types">optional <span class="type">int</span></span>
         the maximum value
     </ol>
 
@@ -498,13 +539,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
-         the array
+            <span class="types"><span class="type">array</span></span>
+
+
+
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">int</span></span>
         the sum
     </ol>
 
@@ -523,6 +568,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><span class="type">array</span></span>
          the array
         </li>
     </ul>
@@ -530,6 +576,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types">optional <span class="type">int</span></span>
         the average value
     </ol>
 
@@ -539,7 +586,7 @@
 </dd>
     <dt>
     <a name = "merge"></a>
-    <strong>merge (tblA, tblB, array_merge)</strong>
+    <strong>merge (tblA, tblB[, array_merge=false])</strong>
     </dt>
     <dd>
     Merges 2 tables, values from first get overwritten by second
@@ -548,19 +595,24 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tblA</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          first table
         </li>
         <li><span class="parameter">tblB</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          second table
         </li>
         <li><span class="parameter">array_merge</span>
-         (optional: false) whether to merge the tables as arrays, or associatively
+            <span class="types"><span class="type">boolean</span></span>
+         whether to merge the tables as arrays, or associatively
+         (<em>default</em> false)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">array</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         tblA with merged values from tblB
     </ol>
 
@@ -588,6 +640,7 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">object</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          the table to copy
         </li>
     </ul>
@@ -595,16 +648,21 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         a copy of the table
     </ol>
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> copy = <span class="global">table</span>.deepcopy[data.raw.[<span class="string">"stone-furnace"</span>][<span class="string">"stone-furnace"</span>]] <span class="comment">--returns a copy of the stone furnace entity</span></pre>
+    </ul>
 
 </dd>
     <dt>
     <a name = "values"></a>
-    <strong>values (tbl, sorted, as_string)</strong>
+    <strong>values (tbl[, sorted][, as_string])</strong>
     </dt>
     <dd>
     Returns a copy of all of the values in the table
@@ -613,20 +671,26 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          the table to copy the keys from, or an empty table if the tbl is nil
         </li>
         <li><span class="parameter">sorted</span>
+            <span class="types"><span class="type">boolean</span></span>
          (optional) whether to sort the keys (slower) or keep the random order from pairs()
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">as_string</span>
+            <span class="types"><span class="type">boolean</span></span>
          (optional) whether to try and parse the values as strings, or leave them as their existing type
+         (<em>optional</em>)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        an array with a copy of all the values in the table
+           <span class="types"><span class="type">array</span></span>
+        with a copy of all the values in the table
     </ol>
 
 
@@ -635,7 +699,7 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
 </dd>
     <dt>
     <a name = "keys"></a>
-    <strong>keys (tbl, sorted, as_string)</strong>
+    <strong>keys (tbl[, sorted][, as_string])</strong>
     </dt>
     <dd>
     Returns a copy of all of the keys in the table
@@ -644,19 +708,25 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          the table to copy the keys from, or an empty table if the tbl is nil
         </li>
         <li><span class="parameter">sorted</span>
+            <span class="types"><span class="type">boolean</span></span>
          (optional) whether to sort the keys (slower) or keep the random order from pairs()
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">as_string</span>
+            <span class="types"><span class="type">boolean</span></span>
          (optional) whether to try and parse the keys as strings, or leave them as their existing type
+         (<em>optional</em>)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">array</span></span>
         an array with a copy of all the keys in the table
     </ol>
 
@@ -675,16 +745,19 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          the table to remove the keys from
         </li>
         <li><span class="parameter">keys</span>
-         array with the keys to remove
+            <span class="types"><span class="type">array</span></span>
+         the keys to remove
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         tbl without the specified keys
     </ol>
 
@@ -706,7 +779,7 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-05-21 18:35:24 </i>
+<i style="float:right;">Last updated 2017-05-23 16:58:19 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

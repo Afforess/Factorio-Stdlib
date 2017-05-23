@@ -12,6 +12,7 @@ dependencies:
         - sudo luarocks install busted
         - sudo luarocks install markdown
         - sudo luarocks install ldoc
+        - sudo luarocks install luacheck
 test:
     override:
         - make

@@ -1,5 +1,5 @@
 require 'spec/defines'
-require 'stdlib/surface'
+require 'stdlib/area/surface'
 
 describe('Surface Spec', function()
     describe('Surface lookups', function()

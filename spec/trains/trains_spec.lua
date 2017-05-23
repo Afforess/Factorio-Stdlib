@@ -4,7 +4,7 @@ if true then return end
 -- the things it includes, then override them.
 require 'spec/defines'
 require 'stdlib/event/event'
-require 'stdlib/surface'
+require 'stdlib/area/surface'
 require 'spec/trains/fixtures'
 
 entity_to_trains = function(tbl) return table.map(tbl, function(entity) return entity.train end) end

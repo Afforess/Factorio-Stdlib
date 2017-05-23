@@ -1,6 +1,7 @@
---- Chunk module
---- <p>A chunk represents a 32x32 area of a surface in factorio.</p>
+--- A chunk represents a 32x32 area of a surface in factorio.
 -- @module Chunk
+-- @usage local Chunk = require('stdlib/area/chunk')
+-- @see Concepts.ChunkPosition
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 local Position = require 'stdlib/area/position'
@@ -12,8 +13,7 @@ local MAX_UINT = 4294967296
 --- Calculates the chunk coordinates for the tile position given
 -- @param position to calculate the chunk for
 -- @return the chunk position as a table
--- @usage
-----local chunk_x = Chunk.from_position(pos).x
+-- @usage local chunk_x = Chunk.from_position(pos).x
 function Chunk.from_position(position)
     position = Position.to_table(position)
     local x = math.floor(position.x)

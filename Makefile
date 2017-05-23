@@ -4,7 +4,7 @@ PKG_COPY := stdlib/
 
 FILES := $(shell find . -iname '*.lua' -type f -not -path "./build/*")
 
-all: clean test package
+all: clean test package check
 
 doc: clean package
 
@@ -14,8 +14,9 @@ package-copy: $(FILES)
 	set -e; for file in $$(find . -iname '*.lua' -type f -not -path "./build/*"); do echo "Checking syntax: $$file" ; luac -p $$file; done;
 
 package: package-copy $(FILES)
-	cp README.md build/readme.md
-	cp -r examples/ build/examples/
+	mkdir -p build/doc
+	cp -v README.md build/doc/readme.md
+	cp -rv examples/ build/doc/examples/
 	cd build && ldoc -p "Factorio Stdlib" -t "Factorio Stdlib" -c ../doc/config.ld -X -s ../doc stdlib/
 
 test:

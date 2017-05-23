@@ -3,8 +3,10 @@ description = 'Factorio Standard Library'
 full_description = [[
 The Factorio Standard Library aims to extend the Factorio Lua api with well-tested, documented, and easy-to-use functions to make modding easier.
 ]]
+
+--will pay for
 format = 'markdown'
-readme = '../readme.md'
+readme = '../build/doc/readme.md'
 
 convert_opt = true
 merge = false
@@ -12,7 +14,7 @@ merge = false
 alias('p','tparam')
 alias('r','treturn')
 
-examples = {'../examples'}
+examples = {'../build/doc/examples'}
 
 --Shortcut for referring to concept targets in tparam and treturn
 local Concepts = {

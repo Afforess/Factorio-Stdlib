@@ -20,7 +20,7 @@ end
 
 --- Converts an entity and its collision_box to the area around it
 -- @tparam LuaEntity entity to convert to an area
--- @return LuaBoundingBox area that entity collision_box is valid for
+-- @treturn LuaBoundingBox area that entity collision_box is valid for
 function Entity.to_collision_area(entity)
     fail_if_missing(entity, "missing entity argument")
 

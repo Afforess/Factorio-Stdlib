@@ -1,5 +1,7 @@
---- Time Event module
+--- Raise events at certain times throughout a surfaces day, This module uses the stdlib Event system
+-- See also @{event.time.lua}
 -- @module Event.Time
+-- @usage require('stdlib/event/time')
 
 require 'stdlib/event/event'
 require 'stdlib/defines/time'

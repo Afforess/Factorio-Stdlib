@@ -27,30 +27,30 @@ Config = {} --luacheck: allow defined top
 -- @return the Config instance for managing config_table
 --
 -- @usage --[Use a global table for config that persists across game save/loads]
---CONFIG = Config.new(global.testtable)
+-- CONFIG = Config.new(global.testtable)
 --
 -- @usage --[You can also create a temporary scratch pad config]
---CONFIG = Config.new({}) -- Temporary scratch pad
+-- CONFIG = Config.new({}) -- Temporary scratch pad
 --
 -- @usage --[Setting data in Config]
---CONFIG = Config.new(global.testtable)
---CONFIG.set("your.path.here", "myvalue")
+-- CONFIG = Config.new(global.testtable)
+-- CONFIG.set("your.path.here", "myvalue")
 --
 -- @usage --[Getting data out of Config]
---CONFIG = Config.new(global.testtable)
---my_data = CONFIG.get("your.path.here")
+-- CONFIG = Config.new(global.testtable)
+-- my_data = CONFIG.get("your.path.here")
 --
 -- @usage --[Getting data out of Config with a default to use if path is not found in Config]
---CONFIG = Config.new(global.testtable)
---my_data = CONFIG.get("your.path.here", "Your Default here")
+-- CONFIG = Config.new(global.testtable)
+-- my_data = CONFIG.get("your.path.here", "Your Default here")
 --
 -- @usage --[Deleting a path from Config]
---CONFIG = Config.new(global.testtable)
---CONFIG.delete("your.path.here")
+-- CONFIG = Config.new(global.testtable)
+-- CONFIG.delete("your.path.here")
 --
 -- @usage --[Checking if a path exists in Config]
---CONFIG = Config.new(global.testtable)
---CONFIG.is_set("your.path.here")
+-- CONFIG = Config.new(global.testtable)
+-- CONFIG.is_set("your.path.here")
 function Config.new(config_table)
     if not config_table then
         error("config_table is a required parameter.", 2)

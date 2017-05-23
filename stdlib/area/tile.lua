@@ -1,6 +1,7 @@
---- Tile module
---- <p>A tile represents a 1x1 area on a surface in factorio.
+--- A tile represents a 1x1 area on a surface in factorio.
 -- @module Tile
+-- @usage local Tile = require('stdlib/area/tile')
+-- @see LuaTile
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 local Position = require 'stdlib/area/position'

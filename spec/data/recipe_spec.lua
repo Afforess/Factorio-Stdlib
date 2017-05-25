@@ -4,7 +4,34 @@ describe('Recipe Spec', function()
     before_each(function()
         _G.data = {}
         _G.data.raw = {}
-        _G.data.raw.recipe = {["copper-plate"]={type="recipe",name="copper-plate",category="smelting",energy_required=6.33,ingredients={[1]={[1]="copper-ore",[2]=1}},result="copper-plate",result_count=5},["iron-plate"]={type="recipe",name="iron-plate",category="smelting",energy_required=7,ingredients={[1]={[1]="iron-ore",[2]=2}},result="iron-plate",result_count=5},["stone-brick"]={type="recipe",name="stone-brick",category="smelting",energy_required=7,ingredients={[1]={[1]="stone",[2]=5}},result="stone-brick"}}
+        _G.data.raw.recipe = {
+            ["copper-plate"] = {
+                type = "recipe",
+                name = "copper-plate",
+                category = "smelting",
+                energy_required = 6.33,
+                ingredients = { [1] = { [1] = "copper-ore", [2] = 1 } },
+                result = "copper-plate",
+                result_count = 5
+            },
+            ["iron-plate"] = {
+                type = "recipe",
+                name = "iron-plate",
+                category = "smelting",
+                energy_required = 7,
+                ingredients = { [1] = { [1] = "iron-ore", [2] = 2} },
+                result = "iron-plate",
+                result_count = 5
+            },
+            ["stone-brick"] = {
+                type = "recipe",
+                name = "stone-brick",
+                category = "smelting",
+                energy_required = 7,
+                ingredients={ [1] = { [1] = "stone", [2] = 5 } },
+                result = "stone-brick"
+            }
+        }
     end)
 
     it('should select recipe correctly', function()
@@ -17,7 +44,7 @@ describe('Recipe Spec', function()
 
     it('should have write access to all elements from the selection', function()
         Recipe.select(".*").energy_required = 5
-        for _, recipe in pairs(data.raw.recipe) do
+        for _, recipe in pairs(_G.data.raw.recipe) do
             assert.same(5, recipe.energy_required)
         end
 
@@ -31,8 +58,8 @@ describe('Recipe Spec', function()
 
     it('should be able to write into nested fields', function()
         Recipe.select("copper.*:ingredients:copper.*").name = 'unobtainium-ore'
-        assert.same(1, #data.raw.recipe['copper-plate'].ingredients)
-        for _, item in pairs(data.raw.recipe['copper-plate'].ingredients) do
+        assert.same(1, #_G.data.raw.recipe['copper-plate'].ingredients)
+        for _, item in pairs(_G.data.raw.recipe['copper-plate'].ingredients) do
             assert.same('unobtainium-ore', item.name)
             assert.same('unobtainium-ore', item[1])
         end
@@ -43,7 +70,7 @@ describe('Recipe Spec', function()
 
     it('should be able to chain writing fields with the selector function "apply"', function()
         Recipe.select(".*").apply('energy_required', 5).apply('category', 'fluid')
-        for _, recipe in pairs(data.raw.recipe) do
+        for _, recipe in pairs(_G.data.raw.recipe) do
             assert.same(5, recipe.energy_required)
             assert.same('fluid', recipe.category)
         end
@@ -53,8 +80,8 @@ describe('Recipe Spec', function()
 
         -- should also be able to apply into fields, like ingredients
         Recipe.select("copper.*:ingredients:copper.*").apply('amount', 100)
-        assert.same(1, #data.raw.recipe['copper-plate'].ingredients)
-        for _, item in pairs(data.raw.recipe['copper-plate'].ingredients) do
+        assert.same(1, #_G.data.raw.recipe['copper-plate'].ingredients)
+        for _, item in pairs(_G.data.raw.recipe['copper-plate'].ingredients) do
             assert.same(100, item.amount)
             assert.same(100, item[2])
         end

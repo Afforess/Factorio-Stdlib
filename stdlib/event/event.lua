@@ -1,7 +1,11 @@
---- Event module
+--- Makes working with events in factorio a lot more simple.
+-- <p>Factorio can only have one handler registered per event. This module
+-- allows you to easily register multiple handlers for each event.
+-- Using this module is as simple as replacing script.on_event(...) with Event.register(...)</p>
 -- @module Event
+-- @usage require('stdlib/event/event')
 
-local Core = require 'stdlib/core'
+local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 local Game = require 'stdlib/game'
 
 Event = { --luacheck: allow defined top
@@ -25,8 +29,10 @@ Event = { --luacheck: allow defined top
                 )
             elseif id == Event.core_events.configuration_changed then
                 script.on_configuration_changed(
-                    function(data)
-                        Event.dispatch({name = Event.core_events.configuration_changed, tick = game.tick, data = data})
+                    function(event)
+                        event.name = Event.core_events.configuration_changed
+                        event.data = event -- for backwards compatibilty
+                        Event.dispatch(event)
                     end
                 )
             end
@@ -34,19 +40,22 @@ Event = { --luacheck: allow defined top
     }
 }
 
---- Registers a function for a given event
--- @param event or array containing events to register
--- @param handler Function to call when event is triggered
--- @return #Event
+--- Registers a function for a given event.
+-- Events are dispatched in the order they are registered.
+-- @usage Event.register(defines.events.on_tick, function(event) print event.tick end)
+-- -- creates an event that prints the current tick every tick.
+-- @tparam defines.events|{defines.events,...} event events to register
+-- @tparam function handler Function to call when event is triggered
+-- @treturn Event
 function Event.register(event, handler)
-    Core.fail_if_missing(event, "missing event argument")
+    fail_if_missing(event, "missing event argument")
 
-    if type(event) == "number" then
+    if type(event) == "number" or type(event) == "string" then
         event = {event}
     end
 
     for _, event_id in pairs(event) do
-        Core.fail_if_missing(event_id, "missing event id")
+        fail_if_missing(event_id, "missing event id")
         if handler == nil then
             Event._registry[event_id] = nil
             script.on_event(event_id, nil)
@@ -54,7 +63,7 @@ function Event.register(event, handler)
             if not Event._registry[event_id] then
                 Event._registry[event_id] = {}
 
-                if event_id >= 0 then
+                if type(event_id) == "string" or event_id >= 0 then
                     script.on_event(event_id, Event.dispatch)
                 else
                     Event.core_events._register(event_id)
@@ -67,48 +76,75 @@ function Event.register(event, handler)
 end
 
 --- Calls the registerd handlers
--- @param event LuaEvent as created by script.raise_event
+-- Will stop dispatching remaning handlers if any handler passes invalid event data.
+-- Handlers are dispatched in the order they were created
+-- @tparam table event LuaEvent as created by script.raise_event
+-- @see https://forums.factorio.com/viewtopic.php?t=32039#p202158 Invalid Event Objects
 function Event.dispatch(event)
-    Core.fail_if_missing(event, "missing event argument")
-    if Event._registry[event.name] then
-        for _, handler in pairs(Event._registry[event.name]) do
-            local metatbl = { __index = function(tbl, key) if key == '_handler' then return handler else return rawget(tbl, key) end end }
-            setmetatable(event, metatbl)
-            local success, err = pcall(handler, event)
-            if not success then
-                -- may be nil in on_load
-                if _G.game then
-                    if Game.print_all(err) == 0 then
-                        -- no players received the message, force a real error so someone notices
-                        error(err)
+    if event then
+        local name = event.input_name or event.name
+
+        if Event._registry[name] then
+            local force_crc = Event.force_crc
+
+            for idx, handler in ipairs(Event._registry[name]) do
+
+                -- Check for userdata and stop processing further handlers if not valid
+                for _, val in pairs(event) do
+                    if type(val) == "table" and val.__self == "userdata" and not val.valid then
+                        return
                     end
-                else
-                    -- no way to handle errors cleanly when the game is not up
-                    error(err)
                 end
-                return
-            end
-            if err then
-                return
+
+                event._handler = handler
+
+                -- Call the handler
+                local success, err = pcall(handler, event)
+
+                -- If the handler errors lets make sure someone notices
+                if not success then
+                    if _G.game then -- may be nil in on_load
+                        if Game.print_all(err) == 0 then
+                            error(err) -- no players received the message, force a real error so someone notices
+                        end
+                    else
+                        error(err) -- no way to handle errors cleanly when the game is not up
+                    end
+                    -- continue processing the remaning handlers. In most cases they won't be related to the failed code.
+                end
+
+                -- force a crc check if option is enabled. This is a debug option and will hamper perfomance if enabled
+                if (force_crc or event.force_crc) and _G.game then
+                    local msg = 'CRC check called for event '..event.name..' handler #'..idx
+                    log(msg)  -- log the message to factorio-current.log
+                    game.force_crc()
+                end
+
+                -- if present stop further handlers for this event
+                if event.stop_processing then --#87
+                    return
+                end
             end
         end
+    else
+        error('missing event argument')
     end
 end
 
 --- Removes the handler from the event
--- @param event event or array containing events to remove the handler
--- @param handler to remove
--- @return #Event
+-- @tparam defines.events|{defines.events,...} event events to remove the handler for
+-- @tparam function handler to remove
+-- @return Event
 function Event.remove(event, handler)
-    Core.fail_if_missing(event, "missing event argument")
-    Core.fail_if_missing(handler, "missing handler argument")
+    fail_if_missing(event, "missing event argument")
+    fail_if_missing(handler, "missing handler argument")
 
-    if type(event) == "number" then
+    if type(event) == "number" or type(event) == "string" then
         event = {event}
     end
 
     for _, event_id in pairs(event) do
-        Core.fail_if_missing(event_id, "missing event id")
+        fail_if_missing(event_id, "missing event id")
         if Event._registry[event_id] then
             for i=#Event._registry[event_id], 1, -1 do
                 if Event._registry[event_id][i] == handler then

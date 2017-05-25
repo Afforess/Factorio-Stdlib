@@ -1,6 +1,7 @@
 --- Gui Event module
 -- <p>Makes monolithic Factorio gui events more manageable.
 -- @module Event.Gui
+-- @usage local Gui = require('stdlib/event/gui')
 
 require 'stdlib/event/event'
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
@@ -12,10 +13,10 @@ Event.Gui = {
 }
 
 --- Registers a function for a given event and matching gui element pattern
--- @param event Valid values are defines.event.on_gui_*
--- @param gui_element_pattern the name or string regular expression to match the gui element
--- @param handler Function to call when event is triggered
--- @return #Event.Gui
+-- @tparam defines.events event Valid values are defines.event.on_gui_*
+-- @tparam string gui_element_pattern the name or string regular expression to match the gui element
+-- @tparam function handler Function to call when event is triggered
+-- @treturn Event.Gui
 function Event.Gui.register(event, gui_element_pattern, handler)
     fail_if_missing(event, "missing event name argument")
     fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
@@ -44,7 +45,7 @@ function Event.Gui.register(event, gui_element_pattern, handler)
 end
 
 --- Calls the registered handlers
--- @param event LuaEvent as created by script.raise_event
+-- @tparam table event LuaEvent as created by script.raise_event
 function Event.Gui.dispatch(event)
     fail_if_missing(event, "missing event argument")
 
@@ -79,9 +80,9 @@ function Event.Gui.dispatch(event)
 end
 
 --- Removes the handler with matching gui element pattern from the event
--- @param event Valid values are defines.event.on_gui_*
--- @param gui_element_pattern the name or string regular expression to remove the handler for
--- @return #Event.Gui
+-- @tparam defines.events event Valid values are defines.event.on_gui_*
+-- @tparam string gui_element_pattern the name or string regular expression to remove the handler for
+-- @treturn Event.Gui
 function Event.Gui.remove(event, gui_element_pattern)
     fail_if_missing(event, "missing event argument")
     fail_if_missing(gui_element_pattern, "missing gui_element_pattern argument")
@@ -112,45 +113,45 @@ end
 Gui = {} --luacheck: ignore defined top
 
 --- Registers a function for a given gui element name or pattern when the element is clicked
--- @param gui_element_pattern the name or string regular expression to match the gui element
--- @param handler Function to call when gui element is clicked
--- @return #Gui
+-- @tparam string gui_element_pattern the name or string regular expression to match the gui element
+-- @tparam function handler Function to call when gui element is clicked
+-- @treturn Gui
 function Gui.on_click(gui_element_pattern, handler)
     Event.Gui.register(defines.events.on_gui_click, gui_element_pattern, handler)
     return Gui
 end
 
 --- Registers a function for a given gui element name or pattern when the element checked state changes
--- @param gui_element_pattern the name or string regular expression to match the gui element
--- @param handler Function to call when gui element checked state changes
--- @return #Gui
+-- @tparam string gui_element_pattern the name or string regular expression to match the gui element
+-- @tparam function handler Function to call when gui element checked state changes
+-- @treturn #Gui
 function Gui.on_checked_state_changed(gui_element_pattern, handler)
     Event.Gui.register(defines.events.on_gui_checked_state_changed, gui_element_pattern, handler)
     return Gui
 end
 
 --- Registers a function for a given gui element name or pattern when the element text changes
--- @param gui_element_pattern the name or string regular expression to match the gui element
--- @param handler Function to call when gui element text changes
--- @return #Gui
+-- @tparam string gui_element_pattern the name or string regular expression to match the gui element
+-- @tparam function handler Function to call when gui element text changes
+-- @treturn Gui
 function Gui.on_text_changed(gui_element_pattern, handler)
     Event.Gui.register(defines.events.on_gui_text_changed, gui_element_pattern, handler)
     return Gui
 end
 
 --- Registers a function for a given gui element name or pattern when the element selection changes
--- @param gui_element_pattern the name or string regular expression to match the gui element
--- @param handler Function to call when gui element selection changes
--- @return #Gui
+-- @tparam string gui_element_pattern the name or string regular expression to match the gui element
+-- @tparam function handler Function to call when gui element selection changes
+-- @treturn Gui
 function Gui.on_elem_changed(gui_element_pattern, handler)
     Event.Gui.register(defines.events.on_gui_elem_changed, gui_element_pattern, handler)
     return Gui
 end
 
 --- Registers a function for a given gui element name or pattern when the element state changes (dropdown)
--- @param gui_element_pattern the name or string regular expression to match the gui element
--- @param handler Function to call when gui element state changes
--- @return #Gui
+-- @tparam string gui_element_pattern the name or string regular expression to match the gui element
+-- @tparam function handler Function to call when gui element state changes
+-- @treturn Gui
 function Gui.on_selection_state_changed(gui_element_pattern, handler)
     Event.Gui.register(defines.events.on_gui_selection_state_changed, gui_element_pattern, handler)
     return Gui

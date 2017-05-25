@@ -2,29 +2,38 @@ OUTPUT_DIR := build
 
 PKG_COPY := stdlib/
 
-FILES := $(shell find . -iname '*.lua' -type f -not -path "./build/*")
+FILES := $(shell find . -iname '*.lua' -type f -not -path "./$(OUTPUT_DIR)/*")
 
-all: clean test package check
+all: clean check test package ldoc luacheck
 
-doc: clean package
+doc: clean package ldoc
 
 package-copy: $(FILES)
-	mkdir -p $(OUTPUT_DIR)
-	cp -r $(PKG_COPY) build/$(PKG_COPY)
-	set -e; for file in $$(find . -iname '*.lua' -type f -not -path "./build/*"); do echo "Checking syntax: $$file" ; luac -p $$file; done;
+	@echo 'Copying Files'
+	@mkdir -p $(OUTPUT_DIR)
+	@cp -r $(PKG_COPY) $(OUTPUT_DIR)/$(PKG_COPY)
 
 package: package-copy $(FILES)
-	mkdir -p build/doc
-	cp -v README.md build/doc/readme.md
-	cp -rv examples/ build/doc/examples/
-	cd build && ldoc -p "Factorio Stdlib" -t "Factorio Stdlib" -c ../doc/config.ld -X -s ../doc stdlib/
+
+check:
+	@echo 'Checking lua files for errors'
+	@set -e; for file in $$(find . -iname '*.lua' -type f -not -path "./$(OUTPUT_DIR)/*"); do echo "Checking syntax: $$file" ; luac -p $$file; done;
+
+ldoc:
+	@echo 'Auto Generating with ldoc'
+	@mkdir -p $(OUTPUT_DIR)/doc
+	@cp README.md $(OUTPUT_DIR)/doc/readme.md
+	@cp -r examples/ $(OUTPUT_DIR)/doc/examples/
+	@cd $(OUTPUT_DIR) && ldoc -p "Factorio Stdlib" -t "Factorio Stdlib" -c ../doc/config.ld -X -s ../doc $(PKG_COPY)/
+
 
 test:
 	busted
 
-check:
-	@wget -q --no-check-certificate -O build/.luacheckrc https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/master/.luacheckrc
-	cd build/stdlib && luacheck .
+luacheck:
+	@echo 'Running luacheck on build directory'
+	@wget -q --no-check-certificate -O $(OUTPUT_DIR)/.luacheckrc https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/master/.luacheckrc
+	@cd $(OUTPUT_DIR)/$(PKG_COPY) && luacheck .
 
 clean:
-	rm -rf build/
+	@rm -rf $(OUTPUT_DIR)/

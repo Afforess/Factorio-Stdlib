@@ -18,7 +18,7 @@ describe('Tile Spec', function()
     end)
 
     it('should ensure adjacent tiles are found correctly', function()
-        local surface = { get_tile = function(x, y) if x % 2 == 0 then return { name = 'water' } end return { name = 'sand' } end }
+        local surface = { get_tile = function(x, _) if x % 2 == 0 then return { name = 'water' } end return { name = 'sand' } end }
         assert.same(4, #Tile.adjacent(surface, {1, 1}))
         assert.same(4, #Tile.adjacent(surface, {1, 1}, false))
         assert.same(8, #Tile.adjacent(surface, {1, 1}, true))
@@ -69,8 +69,8 @@ describe('Tile Spec', function()
 
         --Verify multiple tiles can store data
         for i = 1, 64 do
-            local tile_pos = { x = 4 - i, y = -6 + i }
-            local data = { count = i }
+            tile_pos = { x = 4 - i, y = -6 + i }
+            data = { count = i }
             Tile.set_data(surface, tile_pos, data)
             assert.same(data, Tile.get_data(surface, tile_pos))
         end

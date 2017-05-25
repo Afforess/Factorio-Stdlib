@@ -105,7 +105,7 @@ function Trains._on_locomotive_changed()
         -- Rename it in the registry
         -- and dispatch a renamed event
         global._train_registry[renaming.new_id] = renaming.train
-        global._train_register[renaming.old_id] = nil
+        global._train_registry[renaming.old_id] = nil
 
         local event_data = {
             old_id = renaming.old_id,

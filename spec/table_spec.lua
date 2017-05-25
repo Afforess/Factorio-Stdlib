@@ -18,7 +18,7 @@ describe('Table Spec', function()
 
     describe('table.filter', function()
         it('should return an empty table for always false filters', function()
-            assert.same({}, table.filter({1, 2, 3, 4, 5}, function(v) return false end))
+            assert.same({}, table.filter({1, 2, 3, 4, 5}, function() return false end))
         end)
 
         it('should filter even values', function()
@@ -31,7 +31,7 @@ describe('Table Spec', function()
         end)
 
         it('should pass the key and additional arguments', function()
-            local fun = function(v, k, arg1) return k % 2 == arg1 end
+            local fun = function(_, k, arg1) return k % 2 == arg1 end
 
             assert.same({2, 4}, table.filter({1, 2, 3, 4}, fun, 0))
         end)
@@ -139,7 +139,7 @@ describe('Table Spec', function()
 
     describe('table.find', function()
         it('should return nil for always false filters', function()
-            assert.same(nil, table.find({1, 2, 3, 4, 5}, function(v) return false end))
+            assert.same(nil, table.find({1, 2, 3, 4, 5}, function() return false end))
         end)
 
         it('should find an even value', function()
@@ -147,7 +147,7 @@ describe('Table Spec', function()
         end)
 
         it('should pass the key and additional arguments', function()
-            local func = function(v, k, arg1) return k % 2 == arg1 end
+            local func = function(_, k, arg1) return k % 2 == arg1 end
 
             assert.same(2, table.find({1, 2, 3, 4}, func, 0))
         end)
@@ -155,7 +155,7 @@ describe('Table Spec', function()
 
     describe('table.any', function()
         it('should return false for always false filters', function()
-            assert.is_false(table.any({1, 2, 3, 4, 5}, function(v) return false end))
+            assert.is_false(table.any({1, 2, 3, 4, 5}, function(_) return false end))
         end)
 
         it('should find an even value', function()
@@ -163,7 +163,7 @@ describe('Table Spec', function()
         end)
 
         it('should pass the key and additional arguments', function()
-            local func = function(v, k, arg1) return k % 2 == arg1 end
+            local func = function(_, k, arg1) return k % 2 == arg1 end
 
             assert.is_true(table.any({1, 2, 3, 4}, func, 0))
         end)

@@ -1,4 +1,5 @@
---- @module Surface For working with surfaces
+--- A "domain" of the world.
+-- @module Surface For working with surfaces
 -- @usage local Surface = require('stdlib/area/surface')
 -- @see LuaSurface
 
@@ -14,7 +15,7 @@ Surface = {} --luacheck: allow defined top
 -- Returns an array of surface objects of all valid, existing surfaces
 -- If a surface does not exist for the surface, it is ignored, if no surfaces
 -- are given, an empty array is returned.
--- @tparam ?|string|{string,...}|{LuaSurface,...} surface to lookup
+-- @tparam ?|string|{string,...}|LuaSurface|{LuaSurface,...} surface to lookup
 -- @treturn {nil|LuaSurface,..} the list of valid surfaces looked up
 function Surface.lookup(surface)
     if not surface then

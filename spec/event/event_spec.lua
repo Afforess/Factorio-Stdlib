@@ -1,7 +1,7 @@
 require 'stdlib/string'
 require 'stdlib/event/event'
 
-test_function = {f=function(x) someVariable = x end}
+local test_function = {f=function(x) _G.someVariable = x end}
 local function_a = function(arg) test_function.f(arg.tick) end
 local function_b = function(arg) test_function.f(arg.player_index) end
 local function_c = function() return true end
@@ -9,7 +9,7 @@ local function_c = function() return true end
 describe('Event', function()
     before_each(function()
         _G.someVariable = false
-        _G.script = {on_event = function(id, callback) return end,
+        _G.script = {on_event = function(_, _) return end,
                      on_init = function(callback) _G.on_init = callback end,
                      on_load = function(callback) _G.on_load = callback end,
                      on_configuration_changed = function(callback) _G.on_configuration_changed = callback end}
@@ -73,19 +73,19 @@ describe('Event', function()
         Event.dispatch(event)
         assert.spy(s).was_called_with(9001)
         assert.spy(s).was_called_with(1)
-        assert.equals(1, someVariable)
+        assert.equals(1, _G.someVariable)
     end)
 
-    it('.dispatch should abort if a handler returns true', function()
+    it('.dispatch should abort if a handler event passes stop_processing', function()
         Event.register( 0, function_a )
         Event.register( 0, function_c )
         Event.register( 0, function_b )
-        local event = {name = 0, tick = 9001, player_index = 1}
+        local event = {name = 0, tick = 9001, player_index = 1, stop_processing = true}
         local s = spy.on(test_function, "f")
         Event.dispatch(event)
         assert.spy(s).was_called_with(9001)
         assert.spy(s).was_not_called_with(1)
-        assert.equals(9001, someVariable)
+        assert.equals(9001, _G.someVariable)
     end)
 
     it('.remove should remove the given handler from the event', function()
@@ -127,7 +127,7 @@ describe('Event', function()
     end)
 
     it('.dispatch should print an error to connected players if a handler throws an error', function()
-        _G.game.connected_players = { { name = 'test_player', valid = true, connected = true, print = function(msg) end } }
+        _G.game.connected_players = { { name = 'test_player', valid = true, connected = true, print = function() end } }
         local s = spy.on(_G.game.connected_players[1], "print")
 
         Event.register( 0, function() error("should error") end)
@@ -136,7 +136,7 @@ describe('Event', function()
     end)
 
     it('.dispatch should error when there are no connected players if a handler throws an error', function()
-        _G.game.players = { { name = 'test_player', valid = true, connected = false, print = function(msg) end } }
+        _G.game.players = { { name = 'test_player', valid = true, connected = false, print = function() end } }
         _G.game.connected_players = {}
         Event.register( 0, function() error("should error") end)
 
@@ -147,7 +147,7 @@ describe('Event', function()
     end)
 
     it('.register with core_events.on_init should register callbacks and dispatch events', function()
-        control = { on_init = function(event) assert.same(-1, event.name) assert.same(1, event.tick) end }
+        local control = { on_init = function(event) assert.same(-1, event.name) assert.same(1, event.tick) end }
         local s = spy.on(control, "on_init")
 
         Event.register( Event.core_events.init, control.on_init )
@@ -159,7 +159,7 @@ describe('Event', function()
     end)
 
     it('.register with core_events.on_load should register callbacks and dispatch events', function()
-        control = { on_load = function(event) assert.same(-2, event.name) assert.same(-1, event.tick) end }
+        local control = { on_load = function(event) assert.same(-2, event.name) assert.same(-1, event.tick) end }
         local s = spy.on(control, "on_load")
 
         Event.register( Event.core_events.load, control.on_load )
@@ -172,9 +172,10 @@ describe('Event', function()
 
     it('.register with core_events.on_configuration_changed should register callbacks and dispatch events', function()
         -- mock configuration change data
-        data = { }
+        _G.game.connected_players = { { name = 'test_player', valid = true, connected = true, print = function() end } }
+        local data = { }
 
-        control = { on_configuration_changed = function(event) assert.same(-3, event.name) assert.same(1, event.tick) assert.same(data, event.data) end }
+        local control = { on_configuration_changed = function(event) assert.same(-3, event.name) assert.same(1, event.tick) assert.same(data, event.data) end }
         local s = spy.on(control, "on_configuration_changed")
 
         Event.register( Event.core_events.configuration_changed, control.on_configuration_changed )

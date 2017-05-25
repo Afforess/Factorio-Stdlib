@@ -24,13 +24,13 @@ describe('Chunk Spec', function()
         local chunk_pos = { x = 4, y = -6 }
         local surface = "nauvis"
         assert.same(0, Chunk.get_index(surface, chunk_pos))
-        for i = 1, 10 do
+        for _ = 1, 10 do
             assert.same(0, Chunk.get_index(surface, chunk_pos))
         end
 
         for i = 1, 100 do
-            local chunk_pos = { x = 4 - i, y = -6 + i }
-            assert.same(i, Chunk.get_index(surface, chunk_pos))
+            local this_chunk_pos = { x = 4 - i, y = -6 + i }
+            assert.same(i, Chunk.get_index(surface, this_chunk_pos))
         end
         assert.same(0, Chunk.get_index(surface, chunk_pos))
         assert.same(101, Chunk.get_index("foo", chunk_pos))
@@ -59,8 +59,8 @@ describe('Chunk Spec', function()
 
         --Verify multiple chunks can have data
         for i = 1, 10 do
-            local chunk_pos = { x = 4 - i, y = -6 + i }
-            local data = { count = i }
+            chunk_pos = { x = 4 - i, y = -6 + i }
+            data = { count = i }
             Chunk.set_data(surface, chunk_pos, data)
             assert.same(data, Chunk.get_data(surface, chunk_pos))
         end

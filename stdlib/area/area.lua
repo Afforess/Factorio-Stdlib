@@ -170,6 +170,22 @@ function Area.offset(area, pos)
     return {left_top = Position.add(area.left_top, pos), right_bottom = Position.add(area.right_bottom, pos)}
 end
 
+--- Translates an area in the given direction
+-- @tparam LuaBoundingBox area the area to translate
+-- @tparam defines.direction direction in which to translate
+-- @tparam number distance distance of the translation
+-- @treturn LuaBoundingBox a new translated area
+function Area.translate(area, direction, distance)
+    fail_if_missing(area, 'missing area argument')
+    fail_if_missing(direction, 'missing direction argument')
+    distance = distance or 1
+    area = Area.to_table(area)
+
+    local left_top = Position.translate(area.left_top, direction, distance)
+    local right_bottom = Position.translate(area.right_bottom, direction, distance)
+    return {left_top = left_top, right_bottom = right_bottom}
+end
+
 --- Converts an area to the integer representation, by taking the floor of the left_top and the ceiling of the right_bottom
 -- @tparam LuaBoundingBox area the area
 -- @treturn int the rounded integer representation
@@ -312,6 +328,28 @@ function Area.tostring(area)
     local left_top = 'left_top = {x = '..area.left_top.x..', y = '..area.left_top.y..'}'
     local right_bottom = 'right_bottom = {x = '..area.right_bottom.x..', y = '..area.right_bottom.y..'}'
     return 'Area {'..left_top..', '..right_bottom ..'}'
+end
+
+--- Converts an entity and its collision_box to the area around it
+-- @tparam LuaEntity entity to convert to an area
+-- @treturn LuaBoundingBox
+function Area.to_collision_area(entity)
+    fail_if_missing(entity, "missing entity argument")
+
+    local pos = entity.position
+    local bb = entity.prototype.collision_box
+    return Area.offset(bb, pos)
+end
+
+--- Converts an entity and its selection_box to the area around it
+-- @tparam LuaEntity entity to convert to an area
+-- @treturn LuaBoundingBox
+function Area.to_selection_area(entity)
+    fail_if_missing(entity, "missing entity argument")
+
+    local pos = entity.position
+    local bb = entity.prototype.selection_box
+    return Area.offset(bb, pos)
 end
 
 return Area

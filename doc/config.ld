@@ -1,3 +1,4 @@
+--luacheck: ignore
 project = 'Factorio Stdlib'
 description = 'Factorio Standard Library'
 full_description = [[
@@ -65,6 +66,13 @@ local wikipat = 'https://en.wikipedia.org/wiki/%s'
 custom_see_handler('^wiki (.+)',
     function(name)
         local url = wikipat:format(name)
+        return name, url
+    end
+)
+
+--https://forums.factorio.com/viewtopic.php?t=32039#p202158
+custom_see_handler('^(http[s]?%:%/%/.-) (.+)$',
+    function(url, name)
         return name, url
     end
 )

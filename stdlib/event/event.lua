@@ -80,21 +80,25 @@ end
 -- Handlers are dispatched in the order they were created
 -- @tparam table event LuaEvent as created by script.raise_event
 -- @see https://forums.factorio.com/viewtopic.php?t=32039#p202158 Invalid Event Objects
-function Event.dispatch(event) --#70
+function Event.dispatch(event)
     if event then
-        local name = event.input_name or event.name  --#76
+        local name = event.input_name or event.name
+
         if Event._registry[name] then
-            local force_crc = Event.force_crc --#74
+            local force_crc = Event.force_crc
+
             for idx, handler in ipairs(Event._registry[name]) do
+
                 -- Check for userdata and stop processing further handlers if not valid
-                for _, val in pairs(event) do --#78
+                for _, val in pairs(event) do
                     if type(val) == "table" and val.__self == "userdata" and not val.valid then
                         return
                     end
                 end
 
-                local metatbl = { __index = function(tbl, key) if key == '_handler' then return handler else return rawget(tbl, key) end end }
-                setmetatable(event, metatbl)
+                event._handler = handler
+
+                -- Call the handler
                 local success, err = pcall(handler, event)
 
                 -- If the handler errors lets make sure someone notices
@@ -109,10 +113,10 @@ function Event.dispatch(event) --#70
                     -- continue processing the remaning handlers. In most cases they won't be related to the failed code.
                 end
 
-                -- force a crc check if option is enabled. This is a debug option and will hamper perfomance
+                -- force a crc check if option is enabled. This is a debug option and will hamper perfomance if enabled
                 if (force_crc or event.force_crc) and _G.game then
                     local msg = 'CRC check called for event '..event.name..' handler #'..idx
-                    log(msg)
+                    log(msg)  -- log the message to factorio-current.log
                     game.force_crc()
                 end
 

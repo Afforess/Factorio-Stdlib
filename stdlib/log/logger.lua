@@ -75,7 +75,7 @@ function Logger.new(mod_name, log_name, debug_mode, options)
             local time_minutes = floor(time_s/60)
             local time_hours = floor(time_minutes/60)
 
-            if type(msg) == 'table' then
+            if type(msg) ~= 'string' then
                 msg = serpent.block(msg, {comment = false, nocode = true, sparse = true})
             end
 

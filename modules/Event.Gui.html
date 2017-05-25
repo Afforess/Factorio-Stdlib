@@ -80,6 +80,11 @@
 <p>
 
 </p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local Gui = require(&apos;stdlib/event/gui&apos;)
+</pre>
+    </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
@@ -136,12 +141,15 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">event</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a></span>
          Valid values are defines.event.on<em>gui</em>*
         </li>
         <li><span class="parameter">gui_element_pattern</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the name or string regular expression to match the gui element
         </li>
         <li><span class="parameter">handler</span>
+            <span class="types"><span class="type">function</span></span>
          Function to call when event is triggered
         </li>
     </ul>
@@ -149,8 +157,9 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">Event.Gui</span></span>
 
-<h1>Event.Gui</h1>
+
 
     </ol>
 
@@ -169,6 +178,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">event</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          LuaEvent as created by script.raise_event
         </li>
     </ul>
@@ -189,9 +199,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">event</span>
+            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a></span>
          Valid values are defines.event.on<em>gui</em>*
         </li>
         <li><span class="parameter">gui_element_pattern</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the name or string regular expression to remove the handler for
         </li>
     </ul>
@@ -199,8 +211,9 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">Event.Gui</span></span>
 
-<h1>Event.Gui</h1>
+
 
     </ol>
 
@@ -219,9 +232,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">gui_element_pattern</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the name or string regular expression to match the gui element
         </li>
         <li><span class="parameter">handler</span>
+            <span class="types"><span class="type">function</span></span>
          Function to call when gui element is clicked
         </li>
     </ul>
@@ -229,8 +244,9 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">Gui</span></span>
 
-<h1>Gui</h1>
+
 
     </ol>
 
@@ -249,9 +265,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">gui_element_pattern</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the name or string regular expression to match the gui element
         </li>
         <li><span class="parameter">handler</span>
+            <span class="types"><span class="type">function</span></span>
          Function to call when gui element checked state changes
         </li>
     </ul>
@@ -259,8 +277,9 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">#Gui</span></span>
 
-<h1>Gui</h1>
+
 
     </ol>
 
@@ -279,9 +298,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">gui_element_pattern</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the name or string regular expression to match the gui element
         </li>
         <li><span class="parameter">handler</span>
+            <span class="types"><span class="type">function</span></span>
          Function to call when gui element text changes
         </li>
     </ul>
@@ -289,8 +310,9 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">Gui</span></span>
 
-<h1>Gui</h1>
+
 
     </ol>
 
@@ -309,9 +331,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">gui_element_pattern</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the name or string regular expression to match the gui element
         </li>
         <li><span class="parameter">handler</span>
+            <span class="types"><span class="type">function</span></span>
          Function to call when gui element selection changes
         </li>
     </ul>
@@ -319,8 +343,9 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">Gui</span></span>
 
-<h1>Gui</h1>
+
 
     </ol>
 
@@ -339,9 +364,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">gui_element_pattern</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          the name or string regular expression to match the gui element
         </li>
         <li><span class="parameter">handler</span>
+            <span class="types"><span class="type">function</span></span>
          Function to call when gui element state changes
         </li>
     </ul>
@@ -349,8 +376,9 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><span class="type">Gui</span></span>
 
-<h1>Gui</h1>
+
 
     </ol>
 
@@ -365,7 +393,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-05-23 20:31:24 </i>
+<i style="float:right;">Last updated 2017-05-25 21:51:36 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

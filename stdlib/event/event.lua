@@ -96,7 +96,8 @@ function Event.dispatch(event)
                     end
                 end
 
-                event._handler = handler
+                local metatbl = { __index = function(tbl, key) if key == '_handler' then return handler else return rawget(tbl, key) end end }
+                setmetatable(event, metatbl)
 
                 -- Call the handler
                 local success, err = pcall(handler, event)
@@ -121,7 +122,7 @@ function Event.dispatch(event)
                 end
 
                 -- if present stop further handlers for this event
-                if event.stop_processing then --#87
+                if event.stop_processing then
                     return
                 end
             end

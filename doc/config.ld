@@ -76,3 +76,13 @@ custom_see_handler('^(http[s]?%:%/%/.-) (.+)$',
         return name, url
     end
 )
+
+-- -- define a @callback tag:
+-- custom_tags = { { 'callback', hidden = true } }
+-- -- show a label beside functions tagged with @callback.
+-- custom_display_name_handler = function(item, default_handler)
+--   if item.tags.callback then
+--     return item.name .. ' [callback]'
+--   end
+--   return default_handler(item)
+-- end

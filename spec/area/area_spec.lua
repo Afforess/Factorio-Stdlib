@@ -92,6 +92,16 @@ describe('Area', function()
         assert.has_error(function() Area.adjust(area, {x = 1, y = 1}) end)
     end)
 
+    it('should validate area translates correctly', function()
+        local area = Area.to_table({{-12, 12}, {-10, 8}})
+        local same = Area.to_table({{-14, 14}, {-12, 10}})
+        local nodir = Area.to_table({{-11, 11}, {-9, 7}})
+
+        assert.same(same, Area.translate(area, defines.direction.southwest, 2))
+        assert.same(nodir, Area.translate(area, defines.direction.northeast))
+        assert.has_error(function() Area.translate(area) end)
+    end)
+
     it('should validate area rotates accurately', function()
         local area = {left_top = {x = -1, y = -1.5}, right_bottom = {x = 1, y = 1.5}}
         local same = {left_top = {x = -1.5, y = -1}, right_bottom = {x = 1.5, y = 1}}
@@ -182,5 +192,21 @@ describe('Area', function()
             assert.same(expected_iteration[idx][2], y, "Idx: " .. idx)
             idx = idx + 1
         end
+    end)
+
+    describe('Entity wrappers', function()
+        it('an entity should have the correct selection area', function()
+            local entity = { position = { 1, -0.5 }, prototype = { selection_box = { left_top = { x = -1, y = -1 }, right_bottom = { x = 1, y = 1 }}}}
+
+            assert.same({ x = 0, y = -1.5 }, Area.to_selection_area(entity).left_top)
+            assert.same({ x = 2, y = 0.5 }, Area.to_selection_area(entity).right_bottom)
+        end)
+
+        it('an entity should have the correct collision area', function()
+            local entity = { position = { 2, -2.5 }, prototype = { collision_box = { left_top = { x = -1, y = -1 }, right_bottom = { x = 1, y = 1 }}}}
+
+            assert.same({ x = 1, y = -3.5 }, Area.to_collision_area(entity).left_top)
+            assert.same({ x = 3, y = -1.5 }, Area.to_collision_area(entity).right_bottom)
+        end)
     end)
 end)

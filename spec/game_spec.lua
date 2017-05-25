@@ -10,7 +10,7 @@ describe('Game Spec', function()
 
     it('should message all connected players', function()
         _G["game"] = { players = { } }
-        for i = 1, 10 do
+        for _ = 1, 10 do
             table.insert(game.players, { valid = true, connected = true, print = spy.new(function() end) })
         end
         _G.game.connected_players = table.filter(_G.game.players, function(p) return p.connected end)

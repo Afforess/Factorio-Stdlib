@@ -1,7 +1,7 @@
 require 'stdlib/event/gui'
 require 'spec/defines'
 
-test_function = {f=function(x) someVariable = x end, g=function(x) someVariable = x end}
+local test_function = {f=function(x) _G.someVariable = x end, g=function(x) _G.someVariable = x end}
 local function_a = function(arg) test_function.f(arg.tick) end
 local function_b = function(arg) test_function.f(arg.player_index) end
 local function_c = function() return true end
@@ -16,7 +16,7 @@ end
 describe('Gui', function()
     before_each(function()
         _G.game = {tick = 1}
-        _G.script = {on_event = function(id, callback) return end}
+        _G.script = {on_event = function(_, _) return end}
     end)
 
     after_each(function()
@@ -135,7 +135,7 @@ describe('Gui', function()
         Event.Gui.register( 1, "test_pattern6", function_d )
         Event.Gui.register( 1, "test_pattern7", function_d )
         local event = {name = 1, tick = 9001, element={name="test_pattern1234",valid=true}, player_index = 1}
-        local s = spy.on(Event.Gui, "dispatch")
+        --local s = spy.on(Event.Gui, "dispatch")
         local s2 = spy.on(test_function, "f")
         Event.dispatch(event)
 --        assert.spy(s).was_called(1) --This is failing to spy on Event.Gui.dispatch?
@@ -154,7 +154,7 @@ describe('Gui', function()
     end)
 
     it('.dispatch should print an error to connected players if a handler throws an error', function()
-        _G.game.players = { { name = 'test_player', valid = true, connected = true, print = function(msg) end } }
+        _G.game.players = { { name = 'test_player', valid = true, connected = true, print = function() end } }
         require('stdlib/table')
         _G.game.connected_players = table.filter(_G.game.players, function(p) return p.connected end)
 

@@ -1,5 +1,7 @@
---- Recipe module
+--- For working with raw recipes.
+-- Only useable in the mod data stage.
 -- @module Recipe
+-- @usage local Data = require('stdlib/data/data')
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 local Data = require 'stdlib/data/data'

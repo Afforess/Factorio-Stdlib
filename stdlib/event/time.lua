@@ -45,33 +45,33 @@ Event.register(defines.events.on_tick,
 
                 if day_time_minutes ~= global._surface_time[idx] then
                     global._surface_time[idx] = day_time_minutes
-                    script.raise_event(Event.Time.minutely, {surface = surface, day_time = day_time, minute = day_time_minutes})
+                    script.raise_event(Event.Time.minutely, {surface = surface})
 
                     if day_time_minutes % 60 == 0 then
-                        script.raise_event(Event.Time.hourly, {surface = surface, day_time = day_time, minute = day_time_minutes})
+                        script.raise_event(Event.Time.hourly, {surface = surface})
                     end
 
                     if day_time_minutes == 0 then
-                        script.raise_event(Event.Time.daily, {surface = surface, day_time = day_time, minute = day_time_minutes})
-                        script.raise_event(Event.Time.midnight, {surface = surface, day_time = day_time, minute = day_time_minutes})
+                        script.raise_event(Event.Time.daily, {surface = surface})
+                        script.raise_event(Event.Time.midnight, {surface = surface})
                     end
 
                     -- These are not 100% accurate but within 5-10 Nauvis minutes of the real thing.
                     -- 105 (1:45AM) Brightness starts to increase
                     -- 265 (4:25AM) Flashlight clicks off
                     if day_time_minutes == 265 then
-                        script.raise_event(Event.Time.sunrise, {surface = surface, day_time = day_time, minute = day_time_minutes})
+                        script.raise_event(Event.Time.sunrise, {surface = surface})
                     end
 
                     if day_time_minutes == 720 then
-                        script.raise_event(Event.Time.midday, {surface = surface, day_time = day_time, minute = day_time_minutes})
+                        script.raise_event(Event.Time.midday, {surface = surface})
                     end
 
                     -- These are not 100% accurate but within 5-10 Nauvis minutes of the real thing.
                     -- 1070 (5:50PM) Brightness starts to decrease
                     -- 1160 (7:20PM) Flashlight clicks on
                     if day_time_minutes == 1160 then
-                        script.raise_event(Event.Time.sunset, {surface = surface, day_time = day_time, minute = day_time_minutes})
+                        script.raise_event(Event.Time.sunset, {surface = surface})
                     end
                 end
             end

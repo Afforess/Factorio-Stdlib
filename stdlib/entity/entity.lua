@@ -8,26 +8,18 @@ local Area = require 'stdlib/area/area'
 Entity = {} --luacheck: allow defined top
 
 --- Converts an entity and its selection_box to the area around it
+-- @function to_selection_area
 -- @tparam LuaEntity entity to convert to an area
 -- @treturn LuaBoundingBox area that entity selection_box is valid for
-function Entity.to_selection_area(entity)
-    fail_if_missing(entity, "missing entity argument")
-
-    local pos = entity.position
-    local bb = entity.prototype.selection_box
-    return Area.offset(bb, pos)
-end
+-- @see Area.to_selection_area
+Entity.to_selection_area = Area.to_selection_area
 
 --- Converts an entity and its collision_box to the area around it
+-- @function to_collision_area
 -- @tparam LuaEntity entity to convert to an area
 -- @treturn LuaBoundingBox area that entity collision_box is valid for
-function Entity.to_collision_area(entity)
-    fail_if_missing(entity, "missing entity argument")
-
-    local pos = entity.position
-    local bb = entity.prototype.collision_box
-    return Area.offset(bb, pos)
-end
+-- @see Area.to_collision_area
+Entity.to_collision_area = Area.to_collision_area
 
 --- Tests whether an entity has access to the field
 -- @tparam LuaEntity entity to test field access

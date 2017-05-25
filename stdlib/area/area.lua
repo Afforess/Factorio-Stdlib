@@ -331,8 +331,7 @@ function Area.tostring(area)
 end
 
 --- Converts an entity and its collision_box to the area around it
--- @see Entity.to_collision_area
--- @tparam LuaEntity entity
+-- @tparam LuaEntity entity to convert to an area
 -- @treturn LuaBoundingBox
 function Area.to_collision_area(entity)
     fail_if_missing(entity, "missing entity argument")
@@ -343,8 +342,7 @@ function Area.to_collision_area(entity)
 end
 
 --- Converts an entity and its selection_box to the area around it
--- @see Entity.to_selection_area
--- @tparam LuaEntity entity
+-- @tparam LuaEntity entity to convert to an area
 -- @treturn LuaBoundingBox
 function Area.to_selection_area(entity)
     fail_if_missing(entity, "missing entity argument")

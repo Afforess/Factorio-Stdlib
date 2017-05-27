@@ -1,6 +1,6 @@
 build
 build/*
 factorio_mods
-control.lua
-data.lua
-info.json
+/control.lua
+/data.lua
+/info.json

@@ -42,25 +42,18 @@ function Resources.get_resource_patch_at(surface, position)
     end
 
     -- then search around it and expand it to the whole resource patch
-    local resource_patch = {initial_resource_entity}
+    local resource_patch = {}
+    local resource_type = initial_resource_entity.name
     local initial_tile = Tile.from_position(initial_resource_entity.position)
 
-    -- keep a table of visited tiles so we do not inspect tiles twice
-    local resource_type = initial_resource_entity.name
-    local visited_tiles = {Tile.get_index(initial_tile)}
+    -- do a BFS starting from the initial tile
+    local visited_tiles = {}
 
     local search_queue = Queue.new()
     Queue.push_right(search_queue, initial_tile)
 
     while not Queue.is_empty(search_queue) do
         local current_tile = Queue.pop_left(search_queue)
-        local current_tile_index = Tile.get_index(current_tile)
-
-        -- we already got this tile, skip it
-        if visited_tiles[current_tile_index] then
-            continue
-        end
-
         local current_entity = Resources.get_resource_at(surface, current_tile)
 
         -- no resource at this tile or it is of another resource type, skip this tile
@@ -68,12 +61,17 @@ function Resources.get_resource_patch_at(surface, position)
             continue
         end
 
-        -- this tile belongs to the ore patch, now add all tiles around it to the search queue
+        local current_tile_index = Tile.get_index(current_tile)
+
+        -- this tile belongs to the ore patch
         table.insert(resource_patch, current_entity)
         table.insert(visited_tiles, current_tile_index)
 
+        -- add all tiles around this one that we did not visit yet
         for adjacent_tile in Tiles.adjacent(surface=surface, position=current_tile, diagonal=true) do
-            Queue.push_right(search_queue, adjacent_tile)
+            if not visited_tiles[Tile.get_index(adjacent_tile)] then
+                Queue.push_right(search_queue, adjacent_tile)
+            end
         end
     end
 

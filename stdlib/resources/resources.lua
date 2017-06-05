@@ -55,17 +55,17 @@ function Resources.get_resource_patch_at(surface, position)
     while not Queue.is_empty(search_queue) do
         local current_tile = Queue.pop_left(search_queue)
         local current_entity = Resources.get_resource_at(surface, current_tile)
+        local current_tile_index = Tile.get_index(current_tile)
+
+        table.insert(visited_tiles, current_tile_index)
 
         -- no resource at this tile or it is of another resource type, skip this tile
         if (not current_entity) or (current_entity.name != resource_type) then
             continue
         end
 
-        local current_tile_index = Tile.get_index(current_tile)
-
         -- this tile belongs to the ore patch
         table.insert(resource_patch, current_entity)
-        table.insert(visited_tiles, current_tile_index)
 
         -- add all tiles around this one that we did not visit yet
         for adjacent_tile in Tiles.adjacent(surface=surface, position=current_tile, diagonal=true) do

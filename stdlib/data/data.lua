@@ -1,5 +1,7 @@
---- Data module
+--- For working with raw data.
+-- Only useable in the data stage.
 -- @module Data
+-- @usage local Data = require('stdlib/data/data')
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 require 'stdlib/string'
@@ -14,8 +16,8 @@ Data = {} --luacheck: allow defined top
 -- <p> For more granular selectors, see other modules, such as Recipe.select.
 -- @usage Data.select('recipe') -- returns a table with all recipes
 -- @usage Data.select('recipe:steel.*') -- returns a table with all recipes whose name matches 'steel.*'
--- @param pattern to search with
--- @return table containing the elements matching the selector pattern, or an empty table if there was no matches
+-- @tparam string pattern to search for
+-- @treturn table containing the elements matching the selector pattern, or an empty table if there was no matches
 function Data.select(pattern)
     fail_if_missing(pattern, "missing pattern argument")
 

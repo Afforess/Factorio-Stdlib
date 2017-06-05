@@ -1,7 +1,7 @@
 require 'spec/defines'
 require 'stdlib/entity/entity'
 
-describe('Entity Spec', function()
+describe('Entity', function()
     it('an entity should have the correct selection area', function()
         local entity = { position = { 1, -0.5 }, prototype = { selection_box = { left_top = { x = -1, y = -1 }, right_bottom = { x = 1, y = 1 }}}}
 
@@ -80,8 +80,8 @@ describe('Entity Spec', function()
 
         --Verify multiple entities can have data
         for i = 1, 10 do
-            local entity = { name = 'fast-inserter', valid = true }
-            local data = { count = i }
+            entity = { name = 'fast-inserter', valid = true }
+            data = { count = i }
             Entity.set_data(entity, data)
             assert.same(data, Entity.get_data(entity))
         end
@@ -103,15 +103,15 @@ describe('Entity Spec', function()
 
         --Verify multiple entities can have data
         for i = 1, 10 do
-            local entity = { name = 'fast-inserter', valid = true, unit_number = (i - 1) }
-            local data = { count = i }
-            Entity.set_data(entity, data)
-            assert.same(data, Entity.get_data(entity))
+            local this_entity = { name = 'fast-inserter', valid = true, unit_number = (i - 1) }
+            local this_data = { count = i }
+            Entity.set_data(this_entity, this_data)
+            assert.same(this_data, Entity.get_data(this_entity))
         end
         -- Verify set_data(entity, nil) returns the previous data held
         for i = 1, 10 do
-            local entity = { name = 'fast-inserter', valid = true, unit_number = (i - 1) }
-            assert.same(Entity.get_data(entity), Entity.set_data(entity, nil))
+            local this_entity = { name = 'fast-inserter', valid = true, unit_number = (i - 1) }
+            assert.same(Entity.get_data(this_entity), Entity.set_data(this_entity, nil))
         end
         assert.same(data, Entity.get_data(entity))
     end)
@@ -144,7 +144,7 @@ describe('Entity Spec', function()
       local entity_a = {
         name = "ent",
         valid = true,
-        equals = function(ent) return true end
+        equals = function() return true end
       }
 
       local entity_b = {
@@ -152,7 +152,7 @@ describe('Entity Spec', function()
         valid = true
       }
 
-      equals_spy = spy.on(entity_a, 'equals')
+      local equals_spy = spy.on(entity_a, 'equals')
       local actual = Entity._are_equal(entity_a, entity_b)
 
       assert.is_true(actual)

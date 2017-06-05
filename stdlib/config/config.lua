@@ -1,5 +1,6 @@
 --- Config module
 -- @module Config
+-- @usage require('stdlib/config/config')
 
 require 'stdlib/string'
 require 'stdlib/table'
@@ -23,34 +24,34 @@ Config = {} --luacheck: allow defined top
 
 --- Creates a new Config object
 -- to ease the management of a config table.
--- @param config_table [required] The table to be managed.
--- @return the Config instance for managing config_table
+-- @tparam table config_table [required] The table to be managed.
+-- @treturn Config the Config instance for managing config_table
 --
 -- @usage --[Use a global table for config that persists across game save/loads]
---CONFIG = Config.new(global.testtable)
+-- CONFIG = Config.new(global.testtable)
 --
 -- @usage --[You can also create a temporary scratch pad config]
---CONFIG = Config.new({}) -- Temporary scratch pad
+-- CONFIG = Config.new({}) -- Temporary scratch pad
 --
 -- @usage --[Setting data in Config]
---CONFIG = Config.new(global.testtable)
---CONFIG.set("your.path.here", "myvalue")
+-- CONFIG = Config.new(global.testtable)
+-- CONFIG.set("your.path.here", "myvalue")
 --
 -- @usage --[Getting data out of Config]
---CONFIG = Config.new(global.testtable)
---my_data = CONFIG.get("your.path.here")
+-- CONFIG = Config.new(global.testtable)
+-- my_data = CONFIG.get("your.path.here")
 --
 -- @usage --[Getting data out of Config with a default to use if path is not found in Config]
---CONFIG = Config.new(global.testtable)
---my_data = CONFIG.get("your.path.here", "Your Default here")
+-- CONFIG = Config.new(global.testtable)
+-- my_data = CONFIG.get("your.path.here", "Your Default here")
 --
 -- @usage --[Deleting a path from Config]
---CONFIG = Config.new(global.testtable)
---CONFIG.delete("your.path.here")
+-- CONFIG = Config.new(global.testtable)
+-- CONFIG.delete("your.path.here")
 --
 -- @usage --[Checking if a path exists in Config]
---CONFIG = Config.new(global.testtable)
---CONFIG.is_set("your.path.here")
+-- CONFIG = Config.new(global.testtable)
+-- CONFIG.is_set("your.path.here")
 function Config.new(config_table)
     if not config_table then
         error("config_table is a required parameter.", 2)
@@ -66,8 +67,8 @@ function Config.new(config_table)
     local Config = {}
 
     --- Get a stored config value.
-    -- @param path [required] a string representing the variable to retrieve
-    -- @param default (optional) value to be used if path is nil
+    -- @tparam string path the variable to retrieve
+    -- @param[opt] default value to be used if path is nil
     -- @return value at path or nil if not found and no default given
     function Config.get(path, default)
         if type(path) ~= "string" or path:is_empty() then error("path is invalid", 2) end
@@ -103,9 +104,9 @@ function Config.new(config_table)
     end
 
     --- Set a stored config value.
-    -- @param path [required] a string, config path to set
-    -- @param data (optional) Value to set path to. If nil it behaves identical to Config.delete()
-    -- @return number 0 on failure; number of affected paths on success
+    -- @tparam string path a string, config path to set
+    -- @param[opt] data Value to set path to. If nil it behaves identical to Config.delete()
+    -- @treturn number 0 on failure; number of affected paths on success
     function Config.set(path, data)
         if type(path) ~= "string" or path:is_empty() then error("path is invalid", 2) end
 
@@ -134,8 +135,8 @@ function Config.new(config_table)
     end
 
     --- Delete a stored config value.
-    -- @param path a string, config path to delete
-    -- @return number 0 on failure; number of affected paths on success
+    -- @tparam string path config path to delete
+    -- @treturn number 0 on failure; number of affected paths on success
     function Config.delete(path)
         if type(path) ~= "string" or path:is_empty() then error("path is invalid", 2) end
 
@@ -166,8 +167,8 @@ function Config.new(config_table)
     end
 
     --- Test the existence of a stored config value.
-    -- @param path a string, config path to test
-    -- @return boolean, true on success, false otherwise
+    -- @tparam string path config path to test
+    -- @treturn boolean true on success, false otherwise
     function Config.is_set(path)
         if type(path) ~= "string" or path:is_empty() then error("path is invalid", 2) end
 

@@ -10,7 +10,7 @@
 
 require 'stdlib/event/event'
 require 'stdlib/table'
-local Surface = require 'stdlib/surface'
+local Surface = require 'stdlib/area/surface'
 local Entity = require 'stdlib/entity/entity'
 
 Trains = {} --luacheck: allow defined top
@@ -43,7 +43,8 @@ Trains.on_train_id_changed = script.generate_event_name()
 -- <p>If the surface key isn't supplied, this will default to 1</p>
 -- <p>If the surface key isn't supplied, this will search all surfaces that currently exist</p>
 -- <p>Criteria may also include the 'state' field, which will filter the state of the train results</p>
--- @return A list of train details tables, if any are found matching the criteria. Otherwise the empty list. <table><tr><td>train (LuaTrain)</td><td>The LuaTrain instance</td></tr><tr><td>id (int)</td><td>The id of the train</td></tr></table>
+-- @return A list of train details tables, if any are found matching the criteria. Otherwise the empty list.
+-- <table><tr><td>train (LuaTrain)</td><td>The LuaTrain instance</td></tr><tr><td>id (int)</td><td>The id of the train</td></tr></table>
 function Trains.find_filtered(criteria)
     criteria = criteria or {}
 
@@ -104,7 +105,7 @@ function Trains._on_locomotive_changed()
         -- Rename it in the registry
         -- and dispatch a renamed event
         global._train_registry[renaming.new_id] = renaming.train
-        global._train_register[renaming.old_id] = nil
+        global._train_registry[renaming.old_id] = nil
 
         local event_data = {
             old_id = renaming.old_id,

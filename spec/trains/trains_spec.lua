@@ -1,17 +1,16 @@
-if true then return end
 -- Because the train module executes registers events immediately
 -- when it's loaded, in order to isolate our tests we must include
 -- the things it includes, then override them.
 require 'spec/defines'
 require 'stdlib/event/event'
-require 'stdlib/surface'
-require 'spec/trains/fixtures'
+require 'stdlib/area/surface'
+local Train_Spec_Fixtures = require 'spec/trains/fixtures'
 
-entity_to_trains = function(tbl) return table.map(tbl, function(entity) return entity.train end) end
+local entity_to_trains = function(tbl) return table.map(tbl, function(entity) return entity.train end) end
 
 describe('when the train module loads', function()
     before_each(function()
-        _G.script = {on_event = function(id, callback) return end,
+        _G.script = {on_event = function(_, _) return end,
                      on_init = function(callback) _G.on_init = callback end,
                      on_load = function(callback) _G.on_load = callback end,
                      on_configuration_changed = function(callback) _G.on_configuration_changed = callback end,
@@ -50,7 +49,7 @@ describe('when the train module loads', function()
 
     it('it should register handlers for destruction events', function()
         -- Arrange
-        register_spy = spy.on(_G.Event, 'register')
+        local register_spy = spy.on(_G.Event, 'register')
 
         -- Act
         require('stdlib/trains/trains')
@@ -58,14 +57,13 @@ describe('when the train module loads', function()
 
         -- assert
         assert.spy(register_spy).was_called_with(defines.events.on_entity_died, match.is_function())
-        assert.spy(register_spy).was_called_with(defines.events.on_picked_up_item, match.is_function())
-        assert.spy(register_spy).was_called_with(defines.events.on_player_mined_item, match.is_function())
-        assert.spy(register_spy).was_called_with(defines.events.on_robot_mined, match.is_function())
+        assert.spy(register_spy).was_called_with(defines.events.on_preplayer_mined_item, match.is_function())
+        assert.spy(register_spy).was_called_with(defines.events.on_robot_pre_mined, match.is_function())
     end)
 
     it('it should register handlers for creation events', function()
         -- Arrange
-        register_spy = spy.on(_G.Event, 'register')
+        local register_spy = spy.on(_G.Event, 'register')
 
         -- Act
         require('stdlib/trains/trains')
@@ -92,7 +90,7 @@ describe('Trains module', function()
         describe('when applying filters', function()
             it('only finds locomotive type entities by default', function()
                 _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Single_Train_With_Single_Locomotive) end
-                surface_spy = spy.on(_G.game.surfaces[1], 'get_trains')
+                local surface_spy = spy.on(_G.game.surfaces[1], 'get_trains')
 
                 assert.are_equal(1, #Trains.find_filtered())
 
@@ -101,7 +99,7 @@ describe('Trains module', function()
 
             it('passes surface name filter to Surface lookup', function()
                 _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Single_Train_With_Single_Locomotive) end
-                surface_spy = spy.on(_G.game.surfaces[1], 'get_trains')
+                local surface_spy = spy.on(_G.game.surfaces[1], 'get_trains')
 
                 assert.are_equal(1, #Trains.find_filtered({surface = 'nauvis'}))
                 assert.are_equal(0, #Trains.find_filtered({surface = 'other'}))
@@ -113,8 +111,7 @@ describe('Trains module', function()
                 -- Arrange
                 _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Trains_In_Different_States) end
 
-                expected_id = 2000
-                require 'spec/serpent'
+                local expected_id = 2000
 
                 -- Act
                 local filtered = Trains.find_filtered({ state = 9 })
@@ -134,13 +131,13 @@ describe('Trains module', function()
             _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Train_With_Front_And_Back_Locomotives_A()) end
 
             -- Get ready to spy on events being dispatched
-            dispatch_spy = spy.on(_G.Event, 'dispatch')
+            local dispatch_spy = spy.on(_G.Event, 'dispatch')
 
             -- Import the library
             Trains = require('stdlib/trains/trains')
             _G.on_init()
 
-            event_data = {
+            local event_data = {
                 entity = {
                     name = "diesel-locomotive"
                 }
@@ -163,11 +160,16 @@ describe('Trains module', function()
         end)
 
         it('only adds new trains to the registry', function()
+
+            -- Will let you deal with it but your train registry was not
+            -- getting cleared from the preceding function before calling the function so
+            _G.global._train_registry = nil
+
             -- Arrange
             -- Set the initial state of trains
             _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Single_Train_With_Single_Locomotive) end
 
-            new_locomotive = {
+            local new_locomotive = {
                 name = 'diesel-locomotive',
                 unit_number = 2000,
                 train = {
@@ -202,10 +204,10 @@ describe('Trains module', function()
     describe('to_entity', function()
       it('returns a table that looks like a LuaEntity', function()
         -- Arrange
-        train = Train_Spec_Fixtures.Single_Train_With_Single_Locomotive[1].train
+        local train = Train_Spec_Fixtures.Single_Train_With_Single_Locomotive[1].train
 
         -- Act
-        entity = Trains.to_entity(train)
+        local entity = Trains.to_entity(train)
 
         -- Assert
         assert.are_equal('train-1000', entity.name)
@@ -214,10 +216,10 @@ describe('Trains module', function()
 
       it('has an equals function', function()
         -- Arrange
-        train = Train_Spec_Fixtures.Single_Train_With_Single_Locomotive[1].train
+        local train = Train_Spec_Fixtures.Single_Train_With_Single_Locomotive[1].train
 
         -- Act
-        entity = Trains.to_entity(train)
+        local entity = Trains.to_entity(train)
 
         -- Assert
         assert.are_equal("function", type(entity.equals))
@@ -225,14 +227,14 @@ describe('Trains module', function()
 
       it('equals function returns true when compared entitiys name value is the same', function()
         -- Arrange
-        train = Train_Spec_Fixtures.Single_Train_With_Single_Locomotive[1].train
-        arg = {
+        local train = Train_Spec_Fixtures.Single_Train_With_Single_Locomotive[1].train
+        local arg = {
           name = "train-1000",
           valid = true
         }
 
         -- Act
-        entity = Trains.to_entity(train)
+        local entity = Trains.to_entity(train)
 
         -- Assert
         assert.is_true(entity.equals(arg))

@@ -1,8 +1,8 @@
 require 'stdlib/entity/inventory'
-require('stdlib.table')
+require 'stdlib/table'
 
-describe('Game Spec', function()
-    function make_get_contents(inv)
+describe('Inventory Spec', function()
+    local function make_get_contents(inv)
         local get_contents = function()
             local contents = {}
             for _, item in pairs(inv) do
@@ -72,7 +72,7 @@ describe('Game Spec', function()
     it('should clear the source inventory', function()
         local src_inventory = {
             { name = "foo", count = 100, valid = true, valid_for_read = true, prototype = {} },
-            { name = "bar", count = 33, durability = 84, valid = true, valid_for_read = true, prototype = {}  },
+            { name = "bar", count = 33, durability = 84, valid = true, valid_for_read = true, prototype = {} },
             { name = "bar", count = 67, valid = true, valid_for_read = true, prototype = {} } }
         make_get_contents(src_inventory)
         local dest_inventory = {}
@@ -100,7 +100,7 @@ describe('Game Spec', function()
     it('should return item stacks not inserted', function()
         local src_inventory = {
             { name = "foo", count = 100, valid = true, valid_for_read = true, prototype = {} },
-            { name = "bar", count = 33, durability = 84, valid = true, valid_for_read = true, prototype = {}  },
+            { name = "bar", count = 33, durability = 84, valid = true, valid_for_read = true, prototype = {} },
             { name = "bar", count = 67, valid = true, valid_for_read = true, prototype = {} } }
         make_get_contents(src_inventory)
         local dest_inventory = {}
@@ -126,5 +126,48 @@ describe('Game Spec', function()
         assert.same(80, dest_inventory.get_contents()['foo'])
         assert.falsy(src_inventory.get_contents()['bar'])
         assert.falsy(dest_inventory.get_contents()['bar'])
+    end)
+
+    describe('Inventory.each', function()
+        local make_inventory = function ()
+            local t = {
+                { name = "foo", count = 100, valid = true, valid_for_read = true, prototype = {} },
+                { name = "bar", count = 33, durability = 84, valid = true, valid_for_read = true, prototype = {} },
+                { name = "cap", count = 10, valid = true, valid_for_read = true, prototype = {} },
+                { name = "bar", count = 67, valid = true, valid_for_read = true, prototype = {} }
+            }
+            for i in ipairs(t) do
+                setmetatable(t[i], {__index = {clear = function() table.remove(t, i)  end}})
+            end
+            return t
+        end
+
+        it('shoud return nothing if if the function does not return true', function()
+            assert.falsy(Inventory.each(make_inventory(), function() end))
+        end)
+
+        it('should apply the same action to everything', function()
+            local inv = make_inventory()
+            Inventory.each(inv, function(stack) stack.count = 50 end)
+            assert.same(inv[1].count, 50)
+            assert.same(inv[4].count, 50)
+        end)
+
+        it('should return the slot where the iteration is aborted', function()
+            local inv = make_inventory()
+            local stack = Inventory.each(inv, function(i) return i.count == 10 end)
+            assert.truthy(stack)
+            assert.same(inv[3].name, stack.name)
+        end)
+
+        it('should iterate backwards and remove items', function()
+            local inv = make_inventory()
+            Inventory.each_reverse(inv, function(i) if i.name == "bar" then i.clear() end end)
+            assert.same(2, #inv)
+
+            inv = make_inventory()
+            Inventory.each_reverse(inv, function(i) i.clear() end)
+            assert.same(0, #inv)
+        end)
     end)
 end)

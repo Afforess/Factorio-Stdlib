@@ -59,3 +59,4 @@ function Queue.is_empty(queue)
     fail_if_missing(queue)
 
     return queue.first > queue.last
+end

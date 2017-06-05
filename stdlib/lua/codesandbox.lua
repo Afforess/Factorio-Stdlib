@@ -6,7 +6,7 @@ Sandbox._ENV = {}
 function Sandbox.SetEnvironmentVariables(self, env)
   self._ENV = env
 end
-function Sandbox.ExecuteCode(code, isByteCode) --code: string, isByteCode: bool // If you don't know what this is just don't pass it
+function Sandbox.ExecuteCode(self, code, isByteCode) --code: string, isByteCode: bool // If you don't know what this is just don't pass it
   local code_Func, message = load(code, nil, isByteCode and "b" or "t", self._ENV)
   if not code_Func then return nil, message end
   local ret, err = xpcall(function()
@@ -18,7 +18,7 @@ function Sandbox.ExecuteCode(code, isByteCode) --code: string, isByteCode: bool 
   return ret, err
 end
 
-function CodeSandbox.NewSandbox(self, EnvironmentVariables)
+function CodeSandbox.NewSandbox(EnvironmentVariables)
   local newSandbox = {}
   setmetatable(newSandbox, Sandbox)
   newSandbox:SetEnvironmentVariables(EnvironmentVariables or {})

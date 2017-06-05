@@ -1,4 +1,4 @@
-local CodeSandbox = {}
+CodeSandbox = {}
 
 local Sandbox = {}
 Sandbox.__index = Sandbox

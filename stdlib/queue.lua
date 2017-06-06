@@ -6,7 +6,7 @@
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 
-Queue = {}
+Queue = {} --luacheck: allow defined top
 
 --- Constructs a new Queue object.
 -- @treturn Queue A new, empty queue
@@ -44,7 +44,7 @@ end
 function Queue.pop_left(queue)
     fail_if_missing(queue)
 
-    if Queue.is_empty(queue) then 
+    if Queue.is_empty(queue) then
         return nil
     end
 
@@ -61,7 +61,7 @@ end
 function Queue.pop_right(queue)
     fail_if_missing(queue)
 
-    if Queue.is_empty(queue) then 
+    if Queue.is_empty(queue) then
         return nil
     end
 

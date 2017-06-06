@@ -7,11 +7,11 @@ local Surface = require 'stdlib/area/surface'
 local Tile = require 'stdlib/area/tile'
 local Queue = require 'stdlib/queue'
 
-Resource = {}
+Resource = {} --luacheck: allow defined top
 
 --- Get the resource entity at the specified position and surface.
 -- Adapted from YARM/resmon.lua -> find_resource_at
--- @tparam LuaSurface surface the surface of the position
+-- @tparam ?|string|LuaSurface surface the surface of the position
 -- @tparam LuaPosition position the position to check
 -- @treturn LuaEntity|nil the resource entity or nil if there is no resource there
 function Resource.get_resource_at(surface, position)
@@ -25,7 +25,7 @@ function Resource.get_resource_at(surface, position)
     local tile_area = Tile.to_area(tile_at_position)
 
     local resource_at_tile = surface.find_entities_filtered{area=tile_area, type='resource'}
-    
+
     if #resource_at_tile < 1 then
         return nil
     end

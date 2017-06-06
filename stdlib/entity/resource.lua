@@ -2,7 +2,6 @@
 -- @module Resource
 -- @usage local Resource = require('stdlib/entity/resource')
 
-local Position = require 'stdlib/area/position'
 local Surface = require 'stdlib/area/surface'
 local Tile = require 'stdlib/area/tile'
 local Queue = require 'stdlib/queue'

@@ -30,6 +30,7 @@ describe('Event', function()
     it('.register should fail if a nil/false event id is passed', function()
         assert.has.errors(function() Event.register( false, function_a ) end)
         assert.has.errors(function() Event.register( { 0, false }, function_a ) end)
+        assert.has.errors(function() Event.register( { 0, {} } ) end)
     end)
 
     it('.register should remove all handlers if nil is passed as a handler', function()

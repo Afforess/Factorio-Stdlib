@@ -338,6 +338,10 @@ function Area.to_collision_area(entity)
 
     local pos = entity.position
     local bb = entity.prototype.collision_box
+    if entity.direction and (entity.direction == defines.direction.west or entity.direction == defines.direction.east) then
+        --Let area.rotate determine if the box is rotatable, no point in duplicated code for it.
+        return Area.rotate(Area.offset(bb, pos))
+    end
     return Area.offset(bb, pos)
 end
 
@@ -346,9 +350,13 @@ end
 -- @treturn LuaBoundingBox
 function Area.to_selection_area(entity)
     fail_if_missing(entity, "missing entity argument")
-
     local pos = entity.position
     local bb = entity.prototype.selection_box
+
+    if entity.direction and (entity.direction == defines.direction.west or entity.direction == defines.direction.east) then
+        --Let area.rotate determine if the box is rotatable, no point in duplicated code for it.
+        return Area.rotate(Area.offset(bb, pos))
+    end
     return Area.offset(bb, pos)
 end
 

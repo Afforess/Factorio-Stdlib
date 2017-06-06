@@ -36,7 +36,7 @@ end
 -- (For now, just ore patches. Problems arise when a single resource entity spans multiple tiles).
 -- @tparam LuaSurface surface the surface of the position
 -- @tparam LuaPosition position the position to check
--- @treturn {LuaEntity*} a table containing the resource entity at the given position and all connected resource entities of the same type or an empty table if there is no resource there
+-- @treturn {nil|LuaEntity,...} a table containing the resource entity at the given position and all connected resource entities of the same type or an empty table if there is no resource there
 function Resource.get_resource_patch_at(surface, position)
     -- get the initial resource tile if there is one at the given position
     local initial_resource_entity = Resource.get_resource_at(surface, position)
@@ -60,16 +60,19 @@ function Resource.get_resource_patch_at(surface, position)
         local current_entity = Resource.get_resource_at(surface, current_tile)
         local current_tile_index = Tile.get_index(current_tile)
 
-        table.insert(visited_tiles, current_tile_index)
+        visited_tiles[current_tile_index] = true
 
         if current_entity and current_entity.name == resource_type then
             -- this tile belongs to the ore patch
             table.insert(resource_patch, current_entity)
 
             -- add all tiles around this one that we did not visit yet
-            for adjacent_tile in Tile.adjacent{surface=surface, position=current_tile, diagonal=true} do
-                if not visited_tiles[Tile.get_index(adjacent_tile)] then
+            for _,adjacent_tile in pairs(Tile.adjacent(surface, current_tile, true)) do
+                adj_tile_index = Tile.get_index(adjacent_tile)
+
+                if not visited_tiles[adj_tile_index] then
                     Queue.push_right(search_queue, adjacent_tile)
+                    visited_tiles[adj_tile_index] = true
                 end
             end
         end

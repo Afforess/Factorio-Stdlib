@@ -68,7 +68,7 @@ function Resource.get_resource_patch_at(surface, position)
             table.insert(resource_patch, current_entity)
 
             -- add all tiles around this one that we did not visit yet
-            for adjacent_tile in Tile.adjacent(surface=surface, position=current_tile, diagonal=true) do
+            for adjacent_tile in Tile.adjacent{surface=surface, position=current_tile, diagonal=true} do
                 if not visited_tiles[Tile.get_index(adjacent_tile)] then
                     Queue.push_right(search_queue, adjacent_tile)
                 end

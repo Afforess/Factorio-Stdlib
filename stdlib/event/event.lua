@@ -40,7 +40,7 @@ Event = { --luacheck: allow defined top
     }
 }
 
---- Registers a function for a given event.
+--- Registers a function for a given event. If a nil handler is passed remove all events and stop listening for that event.
 -- Events are dispatched in the order they are registered.
 -- @usage Event.register(defines.events.on_tick, function(event) print event.tick end)
 -- -- creates an event that prints the current tick every tick.
@@ -50,12 +50,12 @@ Event = { --luacheck: allow defined top
 function Event.register(event, handler)
     fail_if_missing(event, "missing event argument")
 
-    if type(event) == "number" or type(event) == "string" then
-        event = {event}
-    end
+    event = (type(event) == "table" and event) or {event}
 
     for _, event_id in pairs(event) do
-        fail_if_missing(event_id, "missing event id")
+        if not (type(event_id) == "number" or type(event_id) == "string") then
+            error("Invalid Event Id, Must be string or int, or array of strings and/or ints", 2)
+        end
         if handler == nil then
             Event._registry[event_id] = nil
             script.on_event(event_id, nil)
@@ -65,7 +65,7 @@ function Event.register(event, handler)
 
                 if type(event_id) == "string" or event_id >= 0 then
                     script.on_event(event_id, Event.dispatch)
-                else
+                elseif event_id < 0 then
                     Event.core_events._register(event_id)
                 end
             end
@@ -76,18 +76,16 @@ function Event.register(event, handler)
 end
 
 --- Calls the registerd handlers
--- Will stop dispatching remaning handlers if any handler passes invalid event data.
+-- Will stop dispatching remaning handlers if any handler passes invalid event userdata.
 -- Handlers are dispatched in the order they were created
 -- @tparam table event LuaEvent as created by script.raise_event
 -- @see https://forums.factorio.com/viewtopic.php?t=32039#p202158 Invalid Event Objects
 function Event.dispatch(event)
     if event then
-        local name = event.input_name or event.name
-
-        if Event._registry[name] then
+        local _registry = event.name and Event._registry[event.name] or event.input_name and Event._registry[event.input_name]
+        if _registry then
             local force_crc = Event.force_crc
-
-            for idx, handler in ipairs(Event._registry[name]) do
+            for idx, handler in ipairs(_registry) do
 
                 -- Check for userdata and stop processing further handlers if not valid
                 for _, val in pairs(event) do
@@ -131,7 +129,7 @@ function Event.dispatch(event)
     end
 end
 
---- Removes the handler from the event
+--- Removes the handler from the event. If it removes the last handler for an event stop listening for that event.
 -- @tparam defines.events|{defines.events,...} event events to remove the handler for
 -- @tparam function handler to remove
 -- @return Event
@@ -139,12 +137,12 @@ function Event.remove(event, handler)
     fail_if_missing(event, "missing event argument")
     fail_if_missing(handler, "missing handler argument")
 
-    if type(event) == "number" or type(event) == "string" then
-        event = {event}
-    end
+    event = (type(event) == "table" and event) or {event}
 
     for _, event_id in pairs(event) do
-        fail_if_missing(event_id, "missing event id")
+        if not (type(event_id) == "number" or type(event_id) == "string") then
+            error("Invalid Event Id, Must be string or int,  or array of strings and/or ints", 2)
+        end
         if Event._registry[event_id] then
             for i=#Event._registry[event_id], 1, -1 do
                 if Event._registry[event_id][i] == handler then

@@ -331,3 +331,18 @@ function table.remove_keys(tbl, keys)
     end
     return tbl
 end
+
+--- Returns an inverted (value = key) copy of the given table. If the values are not unique, the assigned key depends on the order of pairs().
+-- @usage local a = {k1 = 'foo', k2 = 'bar'}
+--table.invert(a) --returns {'foo' = k1, 'bar' = k2}
+-- @usage local b = {k1 = 'foo', k2 = 'bar', k3 = 'bar'}
+--table.invert(b) --returns {'foo' = k1, 'bar' = ?}
+-- @tparam table tbl the table to invert
+-- @treturn table a new table with inverted mapping
+function table.invert(tbl)
+    local inverted = {}
+    for k,v in pairs(tbl) do
+        inverted[v] = k
+    end
+    return inverted
+end

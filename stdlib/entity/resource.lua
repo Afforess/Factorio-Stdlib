@@ -63,7 +63,7 @@ end
 -- @tparam LuaSurface surface the surface of the position
 -- @tparam LuaPosition position the position to check
 -- @tparam string type the resource type, i.e. "iron-ore"
--- @treturn {nil|LuaEntity, ...} an array containing all resources in the resource patch, or an empty array if there are no resources there
+-- @treturn {nil|LuaEntity,...} an array containing all resources in the resource patch, or an empty array if there are no resources there
 function Resource.get_resource_patch_at(surface, position, type)
     fail_if_missing(surface, "missing surface")
     fail_if_missing(position, "missing position")
@@ -119,8 +119,8 @@ function Resource.get_resource_patch_at(surface, position, type)
 end
 
 --- Given a list of resource entities, return a list of the different resource names.
--- @tparam {LuaEntity, ...} resources a list of resource entities
--- @treturn {nil|string, ...} a new list containing the names of the resources, can be empty
+-- @tparam {LuaEntity,...} resources a list of resource entities
+-- @treturn {nil|string,...} a new list containing the names of the resources, can be empty
 function Resource.get_resource_types(resources)
     local result = {}
 
@@ -138,9 +138,9 @@ function Resource.get_resource_types(resources)
 end
 
 --- Given a list of resource entities, return all resource entities with the given resource name.
--- @tparam {LuaEntity, ...} resources a list of ore entities
--- @tparam {string, ...} resource_names the name of the ore
--- @treturn {nil|LuaEntity, ...} a new list containing the ores matching the given resource names, can be empty
+-- @tparam {LuaEntity,...} resources a list of ore entities
+-- @tparam {string,...} resource_names the name of the ore
+-- @treturn {nil|LuaEntity,...} a new list containing the ores matching the given resource names, can be empty
 function Resource.filter_resources(resources, resource_names)
     fail_if_missing(resources, "missing resource entities list")
 
@@ -157,9 +157,9 @@ function Resource.filter_resources(resources, resource_names)
 end
 
 --- Given a resource patch, return the bounding box of the resource patch.
--- @see Resource.get_resource_patch_at to obtain a resource patch
+-- @see Resource.get_resource_patch_at
 -- @see Concepts.BoundingBox
--- @tparam {LuaEntity, ...} resource_patch the resource patch
+-- @tparam {LuaEntity,...} resource_patch the resource patch
 -- @treturn LuaBoundingBox the bounding box of the resource patch
 function Resource.get_resource_patch_bounds(resource_patch)
     fail_if_missing(resource_patch, "missing resource patch")

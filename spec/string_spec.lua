@@ -84,4 +84,57 @@ describe('String Spec', function()
         end)
 
     end)
+
+    describe('string.explode', function()
+        it('None of these should throw errors', function()
+            local s = "This is a test"
+            assert.has.no.errors(function() string.explode(s, " ") end)
+            assert.has.no.errors(function() s:explode(" ") end)
+            assert.has.no.errors(function() string.explode(s, " ", 2) end)
+            assert.has.no.errors(function() s:explode(" ", 2) end)
+        end)
+
+        it('All of these should throw errors', function()
+            assert.has.errors(function() string.explode() end) --string arg is missing
+            assert.has.errors(function() string.explode("ok") end) --sep arg is missing
+            assert.has.errors(function() string.explode("","ok") end) --string arg cannot be empty
+            assert.has.errors(function() string.explode("Test","") end) --sep arg cannot be empty
+            assert.has.errors(function() string.explode(1,"good") end) -- string arg must be a string
+            assert.has.errors(function() string.explode("1",1) end) -- sep arg must be a string
+            assert.has.errors(function() string.explode("Test","string","") end) --limit must be number
+        end)
+
+        it('test limit arg', function()
+            local s = "This is a test"
+            assert.same({}, s:explode(" ", 0-4))
+            assert.same({"This"}, s:explode(" ", -3))
+            assert.same({"This","is"}, s:explode(" ", -2))
+            assert.same({"This","is","a"}, s:explode(" ", -1))
+            assert.same({s}, s:explode(" ", 0))
+            assert.same({s}, s:explode(" ", 1))
+            assert.same({"This","is a test"}, s:explode(" ", 2))
+            assert.same({"This","is","a test"}, s:explode(" ", 3))
+            assert.same({"This","is","a","test"}, s:explode(" ", 4))
+        end)
+
+        it('should explode a version string into a table', function()
+            local version = "0.1.3"
+            local result = version:explode('.')
+            local expected = { '0', '1', '3' }
+            assert.same(expected, result)
+
+            local version2 = "1.01.2"
+            assert.same({'1', '01', '2'}, version2:explode('.'))
+        end)
+
+        it('should work with multi-characters separators', function()
+            local s = "This is a test[!]str[!丏]ing with spec[!]al characters mixed in."
+            assert.same({"Th", " ", " a test[!]str[!丏]ing with spec[!]al characters mixed in."}, s:explode("is"))
+            assert.same({"This is a test", "str[!丏]ing with spec", "al characters mixed in."}, s:explode("[!]"))
+            assert.same({"This is a test[!]str[!", "]ing with spec[!]al characters mixed in."}, s:explode("丏"))
+            assert.same({"This is", " test[!]str[!丏]ing with spec[!]al characters mixed in."}, s:explode(" a"))
+            assert.same({"This is", "test[!]str[!丏]ing with spec[!]al characters mixed in."}, s:explode(" a "))
+            assert.same({"This is ", "test[!]str[!丏]ing with spec[!]al characters mixed in."}, s:explode("a "))
+        end)
+    end)
 end)

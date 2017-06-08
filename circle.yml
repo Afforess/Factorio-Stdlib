@@ -26,5 +26,5 @@ deployment:
         - git add .
         - git config user.email "bot@circleci.com"
         - git config user.name "circleci"
-        - git commit -am "Automatic Github Page generation"
+        - git commit -am "Automatic Github Page generation [ci skip]"
         - git push

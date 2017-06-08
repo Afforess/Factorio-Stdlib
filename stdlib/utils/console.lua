@@ -4,7 +4,7 @@
 -- @module console
 -- @usage remote.add_interface("my_interface", {show=require('stdlib/utils/console')})
 -- /c remote.call("my_interface", "show", game.player)
--- Creates a textfield allowing you to run commands directly in your mods enviorment
+-- --In the window that appears you can run lua code directly on your mod, including global, any globals, and the ability to require files.
 
 require("stdlib.event.gui")
 

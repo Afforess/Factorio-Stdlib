@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Factorio Stdlib</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Factorio Stdlib</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/Area.html">Area</a></li>
+  <li><a href="../modules/Chunk.html">Chunk</a></li>
+  <li><a href="../modules/Position.html">Position</a></li>
+  <li><a href="../modules/Surface.html">Surface</a></li>
+  <li><a href="../modules/Tile.html">Tile</a></li>
+  <li><a href="../modules/Color.html">Color</a></li>
+  <li><a href="../modules/Config.html">Config</a></li>
+  <li><a href="../modules/Core.html">Core</a></li>
+  <li><a href="../modules/Data.html">Data</a></li>
+  <li><a href="../modules/Recipe.html">Recipe</a></li>
+  <li><a href="../modules/defines.color.html">defines.color</a></li>
+  <li><a href="../modules/defines.time.html">defines.time</a></li>
+  <li><a href="../modules/Entity.html">Entity</a></li>
+  <li><a href="../modules/Inventory.html">Inventory</a></li>
+  <li><a href="../modules/Resource.html">Resource</a></li>
+  <li><a href="../modules/Event.html">Event</a></li>
+  <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
+  <li><a href="../modules/Event.Time.html">Event.Time</a></li>
+  <li><a href="../modules/Game.html">Game</a></li>
+  <li><a href="../modules/Logger.html">Logger</a></li>
+  <li><strong>Queue</strong></li>
+  <li><a href="../modules/string.html">string</a></li>
+  <li><a href="../modules/table.html">table</a></li>
+  <li><a href="../modules/Trains.html">Trains</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/event.lua.html">event.lua</a></li>
+  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>Queue</code></h1>
+<p>A double queue.</p>
+<p> Taken from "Programming in Lua" (http://www.lua.org/pil/11.4.html)
+ Modified to not allow nil values, and returns nil if pop<em>left or pop</em>right is used when the queue is empty.</p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local Queue = require(&apos;stdlib/queue&apos;)
+</pre>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#new">new ()</a></td>
+	<td class="summary">Constructs a new Queue object.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#push_left">push_left (queue, value)</a></td>
+	<td class="summary">Push a new element to the front of the queue.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#push_right">push_right (queue, value)</a></td>
+	<td class="summary">Push a new element to the back of the queue.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#pop_left">pop_left (queue)</a></td>
+	<td class="summary">Retrieve the element at the front of the queue.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#pop_right">pop_right (queue)</a></td>
+	<td class="summary">Retrieve the element at the back of the queue.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#is_empty">is_empty (queue)</a></td>
+	<td class="summary">Returns true if the given queue is empty.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new ()</strong>
+    </dt>
+    <dd>
+    Constructs a new Queue object.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Queue</span></span>
+        A new, empty queue
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "push_left"></a>
+    <strong>push_left (queue, value)</strong>
+    </dt>
+    <dd>
+    Push a new element to the front of the queue.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">queue</span>
+            <span class="types"><span class="type">Queue</span></span>
+         the queue to push an element to
+        </li>
+        <li><span class="parameter">value</span>
+            <span class="types"><span class="type">T</span></span>
+         the element to push
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "push_right"></a>
+    <strong>push_right (queue, value)</strong>
+    </dt>
+    <dd>
+    Push a new element to the back of the queue.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">queue</span>
+            <span class="types"><span class="type">Queue</span></span>
+         the queue to push an element to
+        </li>
+        <li><span class="parameter">value</span>
+            <span class="types"><span class="type">T</span></span>
+         the element to push
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "pop_left"></a>
+    <strong>pop_left (queue)</strong>
+    </dt>
+    <dd>
+    Retrieve the element at the front of the queue.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">queue</span>
+            <span class="types"><span class="type">Queue</span></span>
+         the queue to retrieve the element from
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">T</span></span>
+        the element at the front of the queue
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "pop_right"></a>
+    <strong>pop_right (queue)</strong>
+    </dt>
+    <dd>
+    Retrieve the element at the back of the queue.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">queue</span>
+            <span class="types"><span class="type">Queue</span></span>
+         the queue to retrieve the element from
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">T</span></span>
+        the element at the back of the queue
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "is_empty"></a>
+    <strong>is_empty (queue)</strong>
+    </dt>
+    <dd>
+    Returns true if the given queue is empty.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">queue</span>
+            <span class="types"><span class="type">Queue</span></span>
+         the queue to check
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        true|false depending on whether the queue is empty or not
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-06-08 01:42:20 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

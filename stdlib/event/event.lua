@@ -6,7 +6,6 @@
 -- @usage require('stdlib/event/event')
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
-local Game = require 'stdlib/game'
 
 Event = { --luacheck: allow defined top
     _registry = {},
@@ -40,7 +39,7 @@ Event = { --luacheck: allow defined top
     }
 }
 
---- Registers a function for a given event. If a nil handler is passed remove all events and stop listening for that event.
+--- Registers a function for a given event. If a nil handler is passed, remove all events and stop listening for that event.
 -- Events are dispatched in the order they are registered.
 -- @usage Event.register(defines.events.on_tick, function(event) print event.tick end)
 -- -- creates an event that prints the current tick every tick.
@@ -101,10 +100,8 @@ function Event.dispatch(event)
 
                 -- If the handler errors lets make sure someone notices
                 if not success then
-                    if _G.game then -- may be nil in on_load
-                        if Game.print_all(err) == 0 then
-                            error(err) -- no players received the message, force a real error so someone notices
-                        end
+                    if _G.game and #game.connected_players > 0 then -- may be nil in on_load
+                        game.print(err) -- no players received the message, force a real error so someone notices
                     else
                         error(err) -- no way to handle errors cleanly when the game is not up
                     end

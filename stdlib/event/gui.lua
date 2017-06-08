@@ -5,7 +5,6 @@
 
 require 'stdlib/event/event'
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
-local Game = require('stdlib/game')
 
 Event.Gui = {
     _registry = {},
@@ -72,7 +71,7 @@ function Event.Gui.dispatch(event)
                     event.text = gui_element_text
                 local success, err = pcall(handler, event)
                 if not success then
-                    Game.print_all(err)
+                    game.print(err)
                 end
             end
         end

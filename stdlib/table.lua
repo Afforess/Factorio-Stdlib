@@ -331,3 +331,29 @@ function table.remove_keys(tbl, keys)
     end
     return tbl
 end
+
+--- Returns the number of keys in a table, if func is passed only count keys when the function is true.
+-- @tparam table tbl to be filtered
+-- @tparam[opt] function func to filter values
+-- @param[optchain] ... additional arguments passed to the function
+-- @treturn number The number of keys matching the function or the number of all keys if func isn't passed
+-- @treturn number The total number of keys
+-- @usage a = { 1, 2, 3, 4, 5}
+-- table.count_keys(a) -- produces: 5, 5
+-- @usage a = {1, 2, 3, 4, 5}
+-- table.count_keys(a, function(v, k) return k % 2 == 1 end) -- produces: 3, 5
+function table.count_keys(tbl, func, ...)
+    if type(tbl) ~= 'table' then return 0, 0 end
+    local count, total = 0, 0
+    for k, v in pairs(tbl) do
+        total = total + 1
+        if func then
+            if func(v, k, ...) then
+                count = count + 1
+            end
+        else
+            count = count + 1
+        end
+    end
+    return count, total
+end

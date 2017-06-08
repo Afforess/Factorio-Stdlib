@@ -18,17 +18,15 @@ Resource = {}--luacheck: allow defined top
 function Resource.get_resources_at(surface, position)
     fail_if_missing(surface, "missing surface")
     fail_if_missing(position, "missing position")
-
     local surfaces = Surface.lookup(surface)
-
-    if #surfaces == 0 then
-        return nil
+    if #surfaces ~= 1 then
+        fail_if_missing(surface, "invalid surface")
     end
 
     local tile_at_position = Tile.from_position(position)
     local tile_area = Tile.to_area(tile_at_position)
 
-    local resources_at_tile = surface.find_entities_filtered{area = tile_area, type = 'resource'} or {}
+    local resources_at_tile = table.first(surfaces).find_entities_filtered{area = tile_area, type = 'resource'} or {}
 
     return resources_at_tile
 end
@@ -67,6 +65,11 @@ function Resource.get_resource_patch_at(surface, position, type)
     fail_if_missing(surface, "missing surface")
     fail_if_missing(position, "missing position")
     fail_if_missing(position, "missing ore name")
+    local surfaces = Surface.lookup(surface)
+    if #surfaces ~= 1 then
+        fail_if_missing(surface, "invalid surface")
+    end
+    surface = table.first(surfaces)
 
     -- get the initial resource tile if there is one at the given position
     local all_resource_entities = Resource.get_resources_at(surface, position)
@@ -81,6 +84,11 @@ function Resource.get_resource_patch_at(surface, position, type)
     local resource_patch = {}
     local visited_tiles = {}
 
+    -- local cache of bitwise functions, because they are called in a tight loop
+    local bitwise_or = bit32.bor
+    local bitwise_and = bit32.band
+    local bitwise_lshift = bit32.lshift
+
     local initial_tile = Tile.from_position(filtered_resource_entities[1].position)
 
     -- do a BFS starting from the initial tile
@@ -89,8 +97,8 @@ function Resource.get_resource_patch_at(surface, position, type)
 
     while not Queue.is_empty(search_queue) do
         local current_tile = Queue.pop_left(search_queue)
-        local current_entities = Resource.get_resources_at(surface, current_tile)
-        local current_tile_index = Tile.get_index(current_tile)
+        local current_entities = surface.find_entities_filtered{area = Tile.to_area(current_tile), type = 'resource'}
+        local current_tile_index = bitwise_or(bitwise_lshift(bitwise_and(current_tile.x, 0xFFFF), 16), bitwise_and(current_tile.y, 0xFFFF))
         visited_tiles[current_tile_index] = true
 
         local filtered_current_entities = Resource.filter_resources(current_entities, {type})
@@ -101,7 +109,7 @@ function Resource.get_resource_patch_at(surface, position, type)
 
             -- queue all tiles around this one that we did not visit yet
             for _, adjacent_tile in pairs(Tile.adjacent(surface, current_tile, true)) do
-                local adj_tile_index = Tile.get_index(adjacent_tile)
+                local adj_tile_index = bitwise_or(bitwise_lshift(bitwise_and(adjacent_tile.x, 0xFFFF), 16), bitwise_and(adjacent_tile.y, 0xFFFF))
 
                 if not visited_tiles[adj_tile_index] then
                     Queue.push_right(search_queue, adjacent_tile)

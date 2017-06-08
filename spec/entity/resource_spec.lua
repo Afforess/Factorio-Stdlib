@@ -1,5 +1,6 @@
 require 'spec/defines'
 local Resource = require 'stdlib/entity/resource'
+local Area = require 'stdlib/area/area'
 
 describe('Resource filtering', function()
     local resources = {}
@@ -29,9 +30,39 @@ describe('Resource filtering', function()
         assert.is_nil(result[4])
     end)
 
+    it('should return a resource patch given a surface containing one', function()
+        _G.game = { surfaces = { nauvis = { name = 'nauvis', __self = 0 } } }
+        local resources = { }
+        local fast_lookup = { }
+        for x = -49, 50 do
+            for y = -14, 5 do
+                table.insert(resources, { name = 'coal', type = 'resource', position = { x = x - 0.5, y = y - 0.5 }, surface = _G.game.surfaces.nauvis, __self = 0})
+            end
+        end
+        local find_entities_filtered = function(tbl)
+            local results = {}
+            -- intentionally optimized version of Area.inside to make the test faster
+            local area = Area.to_table(tbl.area)
+            local left_top = area.left_top
+            local right_bottom = area.right_bottom
+
+            for _, resource_entity in pairs(resources) do
+                local pos = resource_entity.position
+                if pos.x >= left_top.x and pos.y >= left_top.y and pos.x <= right_bottom.x and pos.y <= right_bottom.y then
+                    table.insert(results, resource_entity)
+                end
+            end
+            return results
+        end
+        setmetatable(_G.game.surfaces.nauvis, { __index = { find_entities_filtered = find_entities_filtered } })
+
+        assert.same(2000, #Resource.get_resource_patch_at(_G.game.surfaces.nauvis, {0, 0}, 'coal'))
+        assert.same(0, #Resource.get_resource_patch_at(_G.game.surfaces.nauvis, {100, 100}, 'coal'))
+    end)
+
     it('should return the correct entities if random resource names are given using a random resource list', function()
         local ore_types = {'iron-ore', 'copper-ore', 'coal-ore', 'stone', 'uranium-ore'}
-        math.randomseed(os.time())
+        math.randomseed(42) -- deterministic seed is important to keep tests deterministic
 
         -- fill rand_resources with random resources from the ore_types list
         local rand_resources = {}

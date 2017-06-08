@@ -13,7 +13,7 @@ describe('Event', function()
                      on_init = function(callback) _G.on_init = callback end,
                      on_load = function(callback) _G.on_load = callback end,
                      on_configuration_changed = function(callback) _G.on_configuration_changed = callback end}
-        _G.game = {tick = 1}
+        _G.game = {tick = 1, print = function() end}
     end)
 
     after_each(function()
@@ -129,7 +129,7 @@ describe('Event', function()
 
     it('.dispatch should print an error to connected players if a handler throws an error', function()
         _G.game.connected_players = { { name = 'test_player', valid = true, connected = true, print = function() end } }
-        local s = spy.on(_G.game.connected_players[1], "print")
+        local s = spy.on(_G.game, "print")
 
         Event.register( 0, function() error("should error") end)
         Event.dispatch({name = 0, tick = 9001, player_index = 1})

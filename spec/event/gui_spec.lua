@@ -15,7 +15,7 @@ end
 
 describe('Gui', function()
     before_each(function()
-        _G.game = {tick = 1}
+        _G.game = {tick = 1, print = function() end}
         _G.script = {on_event = function(_, _) return end}
     end)
 
@@ -158,7 +158,7 @@ describe('Gui', function()
         require('stdlib/table')
         _G.game.connected_players = table.filter(_G.game.players, function(p) return p.connected end)
 
-        local s = spy.on(_G.game.players[1], "print")
+        local s = spy.on(_G.game, "print")
 
         Event.Gui.register( 1, "test_pattern", function() error("should error") end)
         assert.is_not_nil( Event.Gui._registry[1]["test_pattern"] )

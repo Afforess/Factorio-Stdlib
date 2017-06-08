@@ -32,7 +32,7 @@ describe('Resource filtering', function()
 
     it('should return a resource patch given a surface containing one', function()
         _G.game = { surfaces = { nauvis = { name = 'nauvis', __self = 0 } } }
-        local resources = { }
+        resources = { }
         for x = -49, 50 do
             for y = -14, 5 do
                 table.insert(resources, { name = 'coal', type = 'resource', position = { x = x - 0.5, y = y - 0.5 }, surface = _G.game.surfaces.nauvis, __self = 0})
@@ -75,7 +75,7 @@ describe('Resource filtering', function()
 
         -- pick random ore types to filter with
         local rand_types = {}
-        for i = 1, math.random(#ore_types) do
+        for _ = 1, math.random(#ore_types) do
             table.insert(rand_types, ore_types[math.random(#ore_types)])
         end
 

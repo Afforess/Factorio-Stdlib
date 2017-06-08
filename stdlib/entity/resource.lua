@@ -1,7 +1,6 @@
 --- Resource utilities.
 -- @module Resource
 -- @usage local Resource = require('stdlib/entity/resource')
-
 local Surface = require 'stdlib/area/surface'
 local Tile = require 'stdlib/area/tile'
 local Queue = require 'stdlib/queue'
@@ -9,7 +8,7 @@ local Area = require 'stdlib/area/area'
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 require 'stdlib/table'
 
-Resource = {} --luacheck: allow defined top
+Resource = {}--luacheck: allow defined top
 
 --- Gets all resource entities at the specified position and surface.
 -- Adapted from YARM/resmon.lua -> find_resource_at
@@ -29,7 +28,7 @@ function Resource.get_resources_at(surface, position)
     local tile_at_position = Tile.from_position(position)
     local tile_area = Tile.to_area(tile_at_position)
 
-    local resources_at_tile = surface.find_entities_filtered{area=tile_area, type='resource'} or {}
+    local resources_at_tile = surface.find_entities_filtered{area = tile_area, type = 'resource'} or {}
 
     return resources_at_tile
 end
@@ -49,7 +48,7 @@ function Resource.get_resource_patches_at(surface, position)
     local all_resource_types = Resource.get_resource_types(all_resource_entities)
     local resource_patches = {}
 
-    for _,type in pairs(all_resource_types) do
+    for _, type in pairs(all_resource_types) do
         local resource_patch = Resource.get_resource_patch_at(surface, position, type)
         resource_patches[type] = resource_patch
     end
@@ -101,7 +100,7 @@ function Resource.get_resource_patch_at(surface, position, type)
             table.merge(resource_patch, table.invert(filtered_current_entities))
 
             -- queue all tiles around this one that we did not visit yet
-            for _,adjacent_tile in pairs(Tile.adjacent(surface, current_tile, true)) do
+            for _, adjacent_tile in pairs(Tile.adjacent(surface, current_tile, true)) do
                 local adj_tile_index = Tile.get_index(adjacent_tile)
 
                 if not visited_tiles[adj_tile_index] then
@@ -127,7 +126,7 @@ function Resource.get_resource_types(resources)
     if resources then
         local resource_names = {}
 
-        for _,resource in pairs(resources) do
+        for _, resource in pairs(resources) do
             resource_names[resource.name] = true
         end
 
@@ -168,7 +167,7 @@ function Resource.get_resource_patch_bounds(resource_patch)
     local max_x = -math.huge
     local max_y = -math.huge
 
-    for _,entity in pairs(resource_patch) do
+    for _, entity in pairs(resource_patch) do
         local pos = entity.position
         min_x = math.min(min_x, pos.x)
         min_y = math.min(min_y, pos.y)

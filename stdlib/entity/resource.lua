@@ -1,10 +1,11 @@
 --- Resource utilities.
 -- @module Resource
 -- @usage local Resource = require('stdlib/entity/resource')
+
 local Surface = require 'stdlib/area/surface'
-local Tile = require 'stdlib/area/tile'
-local Queue = require 'stdlib/queue'
 local Area = require 'stdlib/area/area'
+local Tile = require 'stdlib/area/tile'
+local Queue = require 'stdlib/utils/queue'
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 require 'stdlib/table'
 
@@ -36,7 +37,7 @@ end
 -- (Note that the implementation is not stable: If a resource entity reference changes during the search, the old and the new version of the entity might be included)
 -- @tparam LuaSurface surface the surface of the position
 -- @tparam LuaPosition position the position to check
--- @treturn {nil|"resource_type" = {LuaEntity,...}, ...} a map of all resource types to their connected resource entities, or an empty array if there are no resources there
+-- @treturn {nil}|{[resource_name]={LuaEntity,...},...} a map of all resource types to their connected resource entities, or an empty array if there are no resources there
 function Resource.get_resource_patches_at(surface, position)
     fail_if_missing(surface, "missing surface")
     fail_if_missing(position, "missing position")
@@ -93,10 +94,10 @@ function Resource.get_resource_patch_at(surface, position, type)
 
     -- do a BFS starting from the initial tile
     local search_queue = Queue.new()
-    Queue.push_right(search_queue, initial_tile)
+    Queue.push_last(search_queue, initial_tile)
 
     while not Queue.is_empty(search_queue) do
-        local current_tile = Queue.pop_left(search_queue)
+        local current_tile = Queue.pop_first(search_queue)
         local current_entities = surface.find_entities_filtered{area = Tile.to_area(current_tile), type = 'resource'}
         local current_tile_index = bitwise_or(bitwise_lshift(bitwise_and(current_tile.x, 0xFFFF), 16), bitwise_and(current_tile.y, 0xFFFF))
         visited_tiles[current_tile_index] = true
@@ -112,7 +113,7 @@ function Resource.get_resource_patch_at(surface, position, type)
                 local adj_tile_index = bitwise_or(bitwise_lshift(bitwise_and(adjacent_tile.x, 0xFFFF), 16), bitwise_and(adjacent_tile.y, 0xFFFF))
 
                 if not visited_tiles[adj_tile_index] then
-                    Queue.push_right(search_queue, adjacent_tile)
+                    Queue.push_last(search_queue, adjacent_tile)
                     visited_tiles[adj_tile_index] = true
                 end
             end

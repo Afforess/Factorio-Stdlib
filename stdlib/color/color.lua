@@ -2,6 +2,7 @@
 -- @module Color
 -- @usage local Color = require('stdlib/color/color')
 
+require 'stdlib/defines/color'
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 
 Color = {} --luacheck: allow defined top

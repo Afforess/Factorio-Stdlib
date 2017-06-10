@@ -121,6 +121,15 @@ local _mt = {
             return colors[c]
             and { r = colors[c]['r'], g=colors[c]['g'], b=colors[c]['b'], a = colors[c]['a'] }
             or { r = 1, g = 1, b = 1, a = 1 }
+        end,
+        __pairs = function()
+            local k = nil
+            local c = colors
+            return function()
+                local v
+                k, v = next(c, k)
+                return k, (v and {r = v['r'], g = v['g'], b = v['b'], a = v['a']}) or nil
+            end
         end
     },
     anticolor = {
@@ -128,6 +137,15 @@ local _mt = {
             return anticolors[c]
             and { r = anticolors[c]['r'], g=anticolors[c]['g'], b=anticolors[c]['b'], a = anticolors[c]['a'] }
             or { r = 1, g = 1, b = 1, a = 1 }
+        end,
+        __pairs = function()
+            local k = nil
+            local c = anticolors
+            return function()
+                local v
+                k, v = next(c, k)
+                return k, (v and {r = v['r'], g = v['g'], b = v['b'], a = v['a']}) or nil
+            end
         end
     },
     lightcolor = {
@@ -135,6 +153,15 @@ local _mt = {
             return lightcolors[c]
             and { r = lightcolors[c]['r'], g=lightcolors[c]['g'], b=lightcolors[c]['b'], a = lightcolors[c]['a'] }
             or { r = 1, g = 1, b = 1, a = 1 }
+        end,
+        __pairs = function()
+            local k = nil
+            local c = lightcolors
+            return function()
+                local v
+                k, v = next(c, k)
+                return k, (v and {r = v['r'], g = v['g'], b = v['b'], a = v['a']}) or nil
+            end
         end
     }
 }

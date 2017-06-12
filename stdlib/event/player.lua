@@ -10,7 +10,7 @@ local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 
 local Player = {}
 
---Default data for the player
+-- Return new default player object
 local function new(player_index)
     local obj = {
         index = player_index,
@@ -19,7 +19,7 @@ local function new(player_index)
     return obj
 end
 
---Print any messages in the queue.
+-- Print any messages in the queue.
 local function check_message_queue(player_index)
     if global._mess_queue then
         for _, msg in pairs(global._mess_queue) do

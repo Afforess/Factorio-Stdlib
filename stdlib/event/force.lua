@@ -4,12 +4,13 @@
 -- @usage local Force = require 'stdlib/event/force'
 -- -- The fist time this is required it will register force creation events
 
-require("stdlib/event/event")
+require('stdlib/event/event')
+require('stdlib/table')
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 
 local Force = {}
 
--- create new force data
+-- return new default force object
 local function new(force_name)
     local obj = {
         index = force_name,
@@ -23,7 +24,8 @@ end
 -- @treturn LuaForce
 -- @treturn table The forces global data
 -- @usage local Force = require 'stdlib/event/force'
--- local force, force_data = Player.get(event.player_index)
+-- local force1, force2_data = Force.get(event.force.name)
+-- local force2, force2_data = Force.get("Player") --returns data for the force named "Player"
 function Force.get(name)
     fail_if_missing(name, 'force name is missing')
     return game.forces[name], global.forces[name] or Force.init(name) and global.forces[name]
@@ -38,7 +40,7 @@ function Force.add_data_all(data)
 end
 
 --- Init or re-init a force or forces,
--- @tparam[opt] string|table event table or a number containing player_index
+-- @tparam[opt] string|table event table or a string containing force name
 -- @tparam[opt=false] boolean overwrite the force data
 function Force.init(event, overwrite)
     event = event and type(event) == "string" and {force = {name = event}, name = 99999} or event

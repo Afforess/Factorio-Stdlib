@@ -8,13 +8,17 @@ local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 
 Queue = {} --luacheck: allow defined top
 
-Queue.mt = {__index = Queue}
+Queue._mt = {
+    __index = Queue,
+    __len = function(t) return Queue.count(t) end,
+    --TODO custom __pairs metatable
+}
 
 --- Constructs a new Queue object.
 -- @treturn Queue A new, empty queue
 function Queue.new()
     local queue = {first = 0, last = -1}
-    setmetatable(queue, Queue.mt)
+    setmetatable(queue, Queue._mt)
     return queue
 end
 
@@ -28,7 +32,7 @@ function Queue.load(...)
     if not ... then return end
     for _, queue in pairs({...}) do
         if queue.first then
-            setmetatable(queue, Queue.mt)
+            setmetatable(queue, Queue._mt)
         end
     end
 end
@@ -42,6 +46,7 @@ function Queue.push_first(queue, value)
     local first = queue.first - 1
     queue.first = first
     queue[first] = value
+    return queue
 end
 
 --- Push a new element to the back of the queue.
@@ -53,6 +58,7 @@ function Queue.push_last(queue, value)
     local last = queue.last + 1
     queue.last = last
     queue[last] = value
+    return queue
 end
 
 --- Remove and Return the element at the front of the queue.
@@ -97,6 +103,27 @@ end
 function Queue.peek_last (queue)
     return queue[queue.last]
 end
+
+--- Push a new element to the end of the queue, shortcut for push_last
+-- @function push
+-- @tparam Queue queue the queue to push an element to
+-- @param value the element to push
+-- @see Queue.push_last
+Queue.push = Queue.push_last
+
+--- Pop a the element to the head of the queue, shortcut for pop_first
+-- @function pop
+-- @tparam Queue queue the queue to retrieve the element from
+-- @return the element at the front of the queue
+-- @see Queue.pop_first
+Queue.pop = Queue.pop_first
+
+--- Pop a the element to the head of the queue, shortcut for peek_first
+-- @function peek
+-- @tparam Queue queue the queue to retrieve the element from
+-- @return the element at the front of the queue
+-- @see Queue.peek_first
+Queue.peek = Queue.peek_fist
 
 --- Returns true if the given queue is empty.
 -- @tparam Queue queue the queue to check

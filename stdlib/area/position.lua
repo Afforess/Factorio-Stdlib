@@ -9,13 +9,10 @@ local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 
 Position = {} --luacheck: allow defined top
 
-Position._mt = {
-    __index = Position,
-    __add = function(a, b) return Position.add(a, b) end,
-    __sub = function(a, b) return Position.subtract(a, b) end,
-    __tostring = function(a) return Position.tostring(a) end,
-    __eq = function(a, b) return Position.equals(a, b) end,
-}
+--- Machine Epsilon
+-- @see wiki Machine_epsilon
+-- @return epsilon
+Position.epsilon = 1.19e-07
 
 --- Returns a correctly formated position object
 -- @usage Position.to_table({0, 0}) -- returns {x = 0, y = 0}
@@ -38,6 +35,15 @@ function Position.new(pos_arr)
     return setmetatable(pos, Position._mt)
 end
 
+--- Creates a position that is a copy of the given position
+-- @tparam LuaPosition pos the position to copy
+-- @treturn LuaPosition a new position that is a new copy of the passed position
+function Position.copy(pos)
+    pos = Position.new(pos)
+
+    return Position.new({ x = pos.x, y = pos.y })
+end
+
 --- Deprecated
 --@function to_table
 --@see Position.new
@@ -54,28 +60,12 @@ function Position.construct(x, y)
     return Position.new({ x = x, y = y })
 end
 
---- Creates a position that is a copy of the given position
--- @tparam LuaPosition pos the position to copy
--- @treturn LuaPosition a new position that is a new copy of the passed position
-function Position.copy(pos)
+--- Converts a position to a string
+-- @tparam LuaPosition pos the position to convert
+-- @treturn string string representation of pos
+function Position.tostring(pos)
     pos = Position.new(pos)
-
-    return Position.new({ x = pos.x, y = pos.y })
-end
-
---- Creates a position that is offset by x,y coordinate pair
--- @tparam LuaPosition pos the position to offset
--- @tparam number x the amount to offset the position in the x direction
--- @tparam number y the amount to offset the position in the y direction
--- @treturn LuaPosition position, offset by the x,y coordinates
-function Position.offset(pos, x, y)
-    fail_if_missing(x, 'missing x-coordinate value')
-    fail_if_missing(y, 'missing y-coordinate value')
-    pos = Position.new(pos)
-
-    pos.x = pos.x + x
-    pos.y = pos.y + y
-    return pos
+    return '{x = ' .. pos.x .. ', y = ' .. pos.y .. '}'
 end
 
 --- Adds 2 positions
@@ -98,6 +88,49 @@ function Position.subtract(pos1, pos2)
     pos2 = Position.new(pos2)
 
     return Position.new({x = pos1.x - pos2.x, y = pos1.y - pos2.y})
+end
+
+--- Whether 2 positions are equal
+-- @tparam LuaPosition pos1 the first position
+-- @tparam LuaPosition pos2 the second position
+-- @treturn boolean true if positions are equal
+function Position.equals(pos1, pos2)
+    if not pos1 or not pos2 then return false end
+    pos1 = Position.new(pos1)
+    pos2 = Position.new(pos2)
+
+    local epsilon = Position.epsilon
+    local abs = math.abs
+    return abs(pos1.x - pos2.x) < epsilon and abs(pos1.y - pos2.y) < epsilon
+end
+
+function Position.less_than(pos1, pos2)
+    pos1 = Position.new(pos1)
+    pos2 = Position.new(pos2)
+
+    return pos1.x < pos2.x and pos1.y < pos2.y
+end
+
+function Position.less_than_eq(pos1, pos2)
+    pos1 = Position.new(pos1)
+    pos2 = Position.new(pos2)
+
+    return pos1.x <= pos2.x and pos1.y <= pos2.y
+end
+
+--- Creates a position that is offset by x,y coordinate pair
+-- @tparam LuaPosition pos the position to offset
+-- @tparam number x the amount to offset the position in the x direction
+-- @tparam number y the amount to offset the position in the y direction
+-- @treturn LuaPosition position, offset by the x,y coordinates
+function Position.offset(pos, x, y)
+    fail_if_missing(x, 'missing x-coordinate value')
+    fail_if_missing(y, 'missing y-coordinate value')
+    pos = Position.new(pos)
+
+    pos.x = pos.x + x
+    pos.y = pos.y + y
+    return pos
 end
 
 --- Translates a position in the given direction
@@ -187,33 +220,6 @@ function Position.manhattan_distance(pos1, pos2)
     return math.abs(pos2.x - pos1.x) + math.abs(pos2.y - pos1.y)
 end
 
---- Machine Epsilon
--- @see wiki Machine_epsilon
--- @return epsilon
-Position.epsilon = 1.19e-07
-
---- Whether 2 positions are equal
--- @tparam LuaPosition pos1 the first position
--- @tparam LuaPosition pos2 the second position
--- @treturn boolean true if positions are equal
-function Position.equals(pos1, pos2)
-    if not pos1 or not pos2 then return false end
-    pos1 = Position.new(pos1)
-    pos2 = Position.new(pos2)
-
-    local epsilon = Position.epsilon
-    local abs = math.abs
-    return abs(pos1.x - pos2.x) < epsilon and abs(pos1.y - pos2.y) < epsilon
-end
-
---- Converts a position to a string
--- @tparam LuaPosition pos the position to convert
--- @treturn string string representation of pos
-function Position.tostring(pos)
-    pos = Position.new(pos)
-    return '{x = ' .. pos.x .. ', y = ' .. pos.y .. '}'
-end
-
 --- Increment a position each time it is called.
 -- <p>can be used to increment(or decrement) a position quickly.
 -- Do not store function closures in global use them in the current tick.
@@ -282,8 +288,9 @@ function Position.opposite_direction(direction)
     return opposites[direction or defines.direction.north]
 end
 
--- Returns the next direction, for entities that only support 2 directions see Position.opposite_direction
--- @tparam defines.direction the starting direction
+--- Returns the next direction, for entities that only support 2 directions
+-- see @{opposite_direction}
+-- @tparam defines.direction direction the starting direction
 -- @tparam[opt=false] boolean reverse get the counter-clockwise direction
 -- @tparam[opt=false] boolean eight_way next direction can be 8 way, (not many prototypes support 8way)
 -- @treturn defines.direction the next direction
@@ -293,5 +300,15 @@ function Position.next_direction(direction, reverse, eight_way)
     local next_dir = direction + (eight_way and ((reverse and -1) or 1) or ((reverse and -2) or 2))
     return (next_dir > 7 and next_dir-next_dir) or (reverse and next_dir < 0 and 8 + next_dir) or next_dir
 end
+
+Position._mt = {
+    __index = Position,
+    __tostring = Position.tostring,
+    __add = Position.add,
+    __sub = Position.subtract,
+    __eq = Position.equals,
+    __lt = Position.less_than,
+    __le = Position.less_than_eq,
+}
 
 return setmetatable(Position, {__newindex = function() error("Attempt to mutatate read-only Position") end})

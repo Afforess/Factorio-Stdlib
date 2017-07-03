@@ -29,7 +29,7 @@ function Entity.has(entity, field_name)
     fail_if_missing(entity, "missing entity argument")
     fail_if_missing(field_name, "missing field name argument")
 
-    local status = pcall(function() return entity[field_name]; end)
+    local status = pcall(function() return entity[field_name] end)
     return status
 end
 
@@ -141,6 +141,75 @@ function Entity._are_equal(entity_a, entity_b)
         return entity_a.equals(entity_b)
     else
         return false
+    end
+end
+
+--- Functions that raise events
+-- @section Raise-Events
+-- from @{https://github.com/aubergine10/lifecycle-events lifecycle-events}
+-- <br>Used for raising `on_built and on_died` events for other mods
+
+--- Destroy an entity by first raising the event. Some entities can't be destroyed 'rails with trains on them'
+-- <p>In these cases the event will be still be raised as there is no way to find out if something is indestructible temporarily
+-- @tparam LuaEntity entity The entity to be destroyed
+-- @tparam[opt] table event additional data to pass to the event handler
+-- @treturn boolean Was the entity destroyed?
+function Entity.destroy_entity( entity, event )
+    if entity and entity.valid then
+        event = event or {}
+        -- If no event name is passed, assume on_died, otherwise raise the event with the passed event name. ie. defines.events.on_preplayer_mined_item
+        event.name = (not event.name and defines.events.on_entity_died) or event.name
+        event.entity = entity
+        event.script = true
+        event.modname = "stdlib"
+        script.raise_event(event.name, event)
+        return entity.destroy()
+    end
+end
+
+--- Create an entity and raise the on_built or on_robot_built event
+-- @tparam LuaSurface surface the surface to create the entity on
+-- @tparam table settings settings to pass to create_entity  see @{LuaSurface.create_entity}
+-- @tparam[opt] LuaPlayer player If present raise `on_built_entity` with players index, if not present raise `on_robot_built_entity`
+-- @treturn LuaEntity the created entity
+function Entity.create_entity( surface, settings, player )
+    surface = game.surfaces[surface]
+    local entity = surface.create_entity( settings )
+    if entity then
+        local event = {created_entity = entity, script = true, modname = "stdlib"}
+        if player then
+            player = game.players[player] and game.players[player].index or nil
+            event.player_index = player
+            script.raise_event(defines.events.on_built_entity, event)
+        else
+            event.robot = {valid = false}
+            script.raise_event(defines.events.on_robot_built_entity, event)
+        end
+        return entity
+    end
+end
+
+--- Revivie an entity ghost and raise the on_built or on_robot_built event
+-- @tparam LuaEntity ghost the ghost entity to revivie
+-- @tparam[opt] LuaPlayer player If present raise `on_built_entity` with players index, if not present raise `on_robot_built_entity`
+-- @treturn table Item stacks this entity collided with
+-- @treturn LuaEntity the new revived entity
+-- @treturn LuaEntity the item request proxy if present
+function Entity.revive(ghost, player)
+    if ghost and ghost.valid then
+        local collided, revived, proxy = ghost.revive(true)
+        if revived then
+            local event = {created_entity = revived, revived = true, modname = "stdlib"}
+            if player then
+                player = game.players[player] and game.players[player].index or nil
+                event.player_index = player
+                script.raise_event(defines.events.on_built_entity, event)
+            else
+                event.robot = {valid = false}
+                script.raise_event(defines.events.on_robot_built_entity, event)
+            end
+            return collided, revived, proxy
+        end
     end
 end
 

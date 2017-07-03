@@ -10,15 +10,6 @@ local Position = require 'stdlib/area/position'
 
 Area = {} --luacheck: allow defined top
 
-Area._mt = {
-    __index = Area,
-    __newindex = function() end,
-    --__add = function(a, b) return Area.add(a, b) end,
-    --__sub = function(a, b) return Area.subtract(a, b) end,
-    __tostring = function(a) return Area.tostring(a) end,
-    __eq = function(a, b) return Area.equals(a, b) end,
-}
-
 --- Converts an area in the array format to an array in the table format
 -- @tparam LuaBoundingBox area_arr the area to convert
 -- @treturn LuaBoundingBox a converted area
@@ -55,7 +46,7 @@ function Area.construct(x1, y1, x2, y2)
 end
 
 --- Creates an area that is a copy of the given area
--- @tparam LuaBoundingBox pos the position to copy
+-- @tparam LuaBoundingBox area the position to copy
 -- @treturn LuaBoundingBox a new area that is a new copy of the passed area
 function Area.copy(area)
     area = Area.new(area)
@@ -393,5 +384,14 @@ end
 function Area.to_selection_area(entity)
     return to_bounding_box_area(entity, "selection_box")
 end
+
+Area._mt = {
+    __index = Area,
+    __newindex = function() end,
+    __add = Area.expand,
+    __sub = Area.shrink,
+    __tostring = Area.tostring,
+    __eq = Area.equals,
+}
 
 return setmetatable(Area, {__newindex = function() error("Attempt to mutatate read-only Area") end})

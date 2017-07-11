@@ -372,3 +372,9 @@ function table.invert(tbl)
     end
     return inverted
 end
+
+--- Return the size of a table using built in table_size function
+-- @function size
+-- @tparam table table to use
+-- @treturn int size of the table
+table.size = _G.table_size

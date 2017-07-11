@@ -39,6 +39,47 @@ function Inventory.copy_as_simple_stacks(src, dest, clear)
     return left_over
 end
 
+-- Remove all items inside an entity and return an array of SimpleItemStacks removed
+-- @param entity: The entity object to remove items from
+-- @return table: a table of SimpleItemStacks or nil if empty
+-- local function get_all_items_inside(entity, existing_stacks)
+--     local item_stacks = existing_stacks or {}
+--     --Inserters need to check held_stack
+--     if entity.type == "inserter" then
+--         local stack = entity.held_stack
+--         if stack.valid_for_read then
+--             item_stacks[#item_stacks+1] = {name=stack.name, count=stack.count, health=stack.health}
+--             stack.clear()
+--         end
+--         --Entities with transport lines only need to check each line individually
+--     elseif transport_types[entity.type] then
+--         for i=1, transport_types[entity.type] do
+--             local lane = entity.get_transport_line(i)
+--             for name, count in pairs(lane.get_contents()) do
+--                 local cur_stack = {name=name, count=count, health=1}
+--                 item_stacks[#item_stacks+1] = cur_stack
+--                 lane.remove_item(cur_stack)
+--             end
+--         end
+--     else
+--         --Loop through regular inventories
+--         for _, inv in pairs(defines.inventory) do
+--             local inventory = entity.get_inventory(inv)
+--             if inventory and inventory.valid then
+--                 if inventory.get_item_count() > 0 then
+--                     for i=1, #inventory do
+--                         if inventory[i].valid_for_read then
+--                             local stack = inventory[i]
+--                             item_stacks[#item_stacks+1] = {name=stack.name, count=stack.count, health=stack.health or 1}
+--                             stack.clear()
+--                         end
+--                     end
+--                 end
+--             end
+--         end
+--     end
+--     return (item_stacks[1] and item_stacks) or {}
+-- end
 
 --- Given a function, apply it to each slot in the inventory. Passes the slot index as second argument to the function.
 -- <p>Iteration is aborted if the applied function returns true for any element during iteration.

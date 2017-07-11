@@ -378,3 +378,18 @@ end
 -- @tparam table table to use
 -- @treturn int size of the table
 table.size = _G.table_size
+
+--- For all string or number values in an array map them to a key = true table
+-- @usage local a = {"v1", "v2"}
+-- table.array_to_dict_bool(a) -- return {["v1"] = true, ["v2"]= true}
+-- @tparam table tbl the table to convert
+-- @treturn table the converted table
+function table.arr_to_bool(tbl)
+    local newtbl = {}
+    for _, v in pairs(tbl) do
+        if type(v) == "string" or type(v) == "number" then
+            newtbl[v] = true
+        end
+    end
+    return newtbl
+end

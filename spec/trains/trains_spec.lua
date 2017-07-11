@@ -77,7 +77,7 @@ end)
 
 describe('Trains module', function()
 
-    setup(function()
+    before_each(function()
         Trains = require 'stdlib/trains/trains'
         _G.on_init()
     end)

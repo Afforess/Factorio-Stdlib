@@ -1,5 +1,5 @@
 require 'stdlib/table'
-require 'stdlib/game'
+local Game = require 'stdlib/game'
 
 describe('Game Spec', function()
     it('should message no players', function()

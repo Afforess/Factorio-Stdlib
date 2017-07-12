@@ -3,7 +3,9 @@
 -- the things it includes, then override them.
 require 'spec/defines'
 require 'stdlib/event/event'
-require 'stdlib/area/surface'
+
+local Trains
+--local Surface = require 'stdlib/area/surface'
 local Train_Spec_Fixtures = require 'spec/trains/fixtures'
 
 local entity_to_trains = function(tbl) return table.map(tbl, function(entity) return entity.train end) end

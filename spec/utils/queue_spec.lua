@@ -1,4 +1,5 @@
 local Queue = require 'stdlib/utils/queue'
+
 describe('Queue', function()
     local queue1
     local queue2

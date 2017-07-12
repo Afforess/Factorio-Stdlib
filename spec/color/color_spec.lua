@@ -1,9 +1,11 @@
+local Color
+
 describe('Color',  function ()
     local say = require("say")
 
     setup(function()
             _G.defines = {}
-            require 'stdlib/color/color'
+            Color = require 'stdlib/color/color'
         end
     )
 

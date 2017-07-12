@@ -1,4 +1,4 @@
-require 'stdlib/entity/inventory'
+local Inventory = require 'stdlib/entity/inventory'
 require 'stdlib/table'
 
 describe('Inventory Spec', function()

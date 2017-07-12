@@ -3,7 +3,6 @@
 
 require 'stdlib/event/event'
 
-local events = {}
 Event.on_player_opened = script.generate_event_name()
 Event.on_player_closed = script.generate_event_name()
 
@@ -53,5 +52,3 @@ Event.register(defines.events.on_tick, raise_opened_closed_events)
 
 Event.register(Event.core_events.init, function() global._opened_guis = global._opened_guis or {} end)
 Event.register(Event.core_events.configuration_changed, function() global._opened_guis = global._opened_guis or {} end)
-
-return events

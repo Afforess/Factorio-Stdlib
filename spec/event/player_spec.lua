@@ -1,5 +1,6 @@
-require 'stdlib.event.event'
-local Player = require 'stdlib.event.force'
+require 'spec/defines'
+require 'stdlib/event/event'
+--local Player = require 'stdlib.event.force'
 
 describe('event.player', function()
 

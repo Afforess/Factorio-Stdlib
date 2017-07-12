@@ -377,7 +377,7 @@ end
 -- @function size
 -- @tparam table table to use
 -- @treturn int size of the table
-table.size = _G.table_size
+table.size = table_size
 
 --- For all string or number values in an array map them to a key = true table
 -- @usage local a = {"v1", "v2"}

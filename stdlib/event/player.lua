@@ -50,6 +50,15 @@ function Player.add_data_all(data)
     table.each(pdata, function(v) table.merge(v, table.deepcopy(data)) end)
 end
 
+--- Remove data for a player when they are deleted
+-- @tparam table event event table containing the player_index
+function Player.remove(event)
+    if event.player_index then
+        global.players[event.player_index] = nil
+    end
+end
+Event.register(defines.events.on_player_removed, Player.remove)
+
 --- Init or re-init a player or players,
 -- @tparam[opt] number|table event table or a number containing player_index
 -- @tparam[opt=false] boolean overwrite the player data

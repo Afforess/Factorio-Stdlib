@@ -1,26 +1,19 @@
---- Logger module
+--- For logging debug information to files.
 -- @module Logger
--- @usage local Logger = require('stdlib/log/logger')
---  -- Or create a logger directly
+-- @usage
+-- local Logger = require('stdlib/log/logger')
+-- -- or to create a logger directly:
 -- local LOGGER = require('stdlib/log/logger').new(...)
--- -- to use the same LOGGER in multiple require files make it global by removing 'local'
+-- -- and to use the same LOGGER in multiple require files make it global by removing 'local'.
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 
 Logger = {} --luacheck: allow defined top
 
---- Creates a new logger object.<p>
--- In debug mode, the logger writes immediately. Otherwise the loggers buffers lines.
--- The logger flushes after 60 seconds has elapsed since the last message.
--- <p>
--- When loggers are created, a table of options may be specified. The valid options are:
--- <code>
--- log_ticks -- whether to include the game tick timestamp in logs. Defaults to false.
--- file_extension -- a string that overides the default 'log' file extension.
--- force_append -- each time a logger is created, it will always append, instead of
--- -- the default behavior, which is to write out a new file, then append
--- </code>
---
+--- Creates a new logger object.
+-- In debug mode, the logger writes to file immediately, otherwise the logger buffers the lines.
+-- <p>The logger flushes the logged messages every 60 seconds since the last message.
+-- <p>A table of @{options} may be specified when creating a logger.
 -- @usage
 --LOGGER = Logger.new('cool_mod_name')
 --LOGGER.log("this msg will be logged!")
@@ -35,9 +28,9 @@ Logger = {} --luacheck: allow defined top
 --
 -- @tparam string mod_name [required] the name of the mod to create the logger for
 -- @tparam[opt='main'] string log_name the name of the logger
--- @tparam[opt=false] boolean debug_mode toggles the debug state of logger.
--- @tparam[opt={...}] table options table with optional arguments
--- @treturn Logger the logger instance
+-- @tparam[opt=false] boolean debug_mode toggles the debug state of logger
+-- @tparam[opt={...}] options options a table with optional arguments
+-- @return (<span class="types">@{Logger}</span>) the logger instance
 function Logger.new(mod_name, log_name, debug_mode, options)
     fail_if_missing(mod_name, "Logger must be given a mod_name as the first argument")
 
@@ -53,19 +46,25 @@ function Logger.new(mod_name, log_name, debug_mode, options)
         ever_written = false
     }
 
-    --- Logger options
+    ---
+    -- Used in the @{new} function for logging game ticks, specifying logfile extension, or forcing the logs to append to the end of the logfile.
+    -- @tfield[opt=false] boolean log_ticks whether to include the game tick timestamp in the logs
+    -- @tfield[opt="log"] string file_extension a string that overrides the default logfile extension
+    -- @tfield[opt=false] boolean force_append if true, every new message appends to the current logfile instead of creating a new one
+    -- @table Logger.options
     Logger.options = {
-        log_ticks = options.log_ticks or false, --     -- @field log_ticks boolean add ticks in the timestamp default=false
-        file_extension = options.file_extension or 'log', -- @field file_extension string file extension default='log'
-        force_append = options.force_append or false, -- @field force_append boolean append the file on first write default=false
+        log_ticks = options.log_ticks or false,
+        file_extension = options.file_extension or 'log',
+        force_append = options.force_append or false,
     }
 
     Logger.file_name = Logger.mod_name .. '/' .. Logger.log_name .. '.' .. Logger.options.file_extension
     Logger.ever_written = Logger.options.force_append
 
-    --- Logs a message
-    -- @tparam string|table msg the message to log, Tables will be dumped using serpent
+    --- Logs a message.
+    -- @tparam string|table msg the message to log. @{table}s will be dumped using [serpent](https://github.com/pkulchenko/serpent) which is included in the official Factorio Lualib
     -- @treturn boolean true if the message was written, false if it was queued for a later write
+    -- @see https://forums.factorio.com/viewtopic.php?f=25&t=23844 Debugging utilities built in to Factorio
     function Logger.log(msg)
         local format = string.format
         if _G.game then
@@ -103,8 +102,8 @@ function Logger.new(mod_name, log_name, debug_mode, options)
         return false
     end
 
-    --- Writes out all buffered messages immediately
-    -- @treturn boolean true if there any messages were written, false if not
+    --- Writes out all buffered messages immediately.
+    -- @treturn boolean true if write was successful, false otherwise
     function Logger.write()
         if _G.game then
             Logger.last_written = game.tick

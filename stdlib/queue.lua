@@ -1,6 +1,6 @@
 --- A double queue.
--- Taken from "Programming in Lua" (http://www.lua.org/pil/11.4.html)
--- Modified to not allow nil values, and returns nil if pop_left or pop_right is used when the queue is empty.
+-- Taken from ***Programming in Lua*** [Queues and Double Queues](http://www.lua.org/pil/11.4.html)
+-- and modified to not allow nil values, and returns nil if @{pop_left} or @{pop_right} is used when the queue is empty.
 -- @module Queue
 -- @usage local Queue = require('stdlib/queue')
 
@@ -9,14 +9,14 @@ local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 Queue = {} --luacheck: allow defined top
 
 --- Constructs a new Queue object.
--- @treturn Queue A new, empty queue
+-- @return (<span class="types">@{Queue}</span>) a new, empty queue
 function Queue.new ()
   return {first = 0, last = -1}
 end
 
 --- Push a new element to the front of the queue.
--- @tparam Queue queue the queue to push an element to
--- @tparam T value the element to push
+-- @param queue (<span class="types">@{Queue}</span>) the queue to push an element to
+-- @tparam Mixed value the element to push
 function Queue.push_left(queue, value)
     fail_if_missing(queue)
     fail_if_missing(value)
@@ -27,8 +27,8 @@ function Queue.push_left(queue, value)
 end
 
 --- Push a new element to the back of the queue.
--- @tparam Queue queue the queue to push an element to
--- @tparam T value the element to push
+-- @param queue (<span class="types">@{Queue}</span>) the queue to push an element to
+-- @tparam Mixed value the element to push
 function Queue.push_right(queue, value)
     fail_if_missing(queue)
     fail_if_missing(value)
@@ -39,8 +39,8 @@ function Queue.push_right(queue, value)
 end
 
 --- Retrieve the element at the front of the queue.
--- @tparam Queue queue the queue to retrieve the element from
--- @treturn T the element at the front of the queue
+-- @param queue (<span class="types">@{Queue}</span>) the queue to retrieve the element from
+-- @treturn Mixed the element at the front of the queue
 function Queue.pop_left(queue)
     fail_if_missing(queue)
 
@@ -56,8 +56,8 @@ function Queue.pop_left(queue)
 end
 
 --- Retrieve the element at the back of the queue.
--- @tparam Queue queue the queue to retrieve the element from
--- @treturn T the element at the back of the queue
+-- @param queue (<span class="types">@{Queue}</span>) the queue to retrieve the element from
+-- @treturn Mixed the element at the back of the queue
 function Queue.pop_right(queue)
     fail_if_missing(queue)
 
@@ -73,8 +73,8 @@ function Queue.pop_right(queue)
 end
 
 --- Returns true if the given queue is empty.
--- @tparam Queue queue the queue to check
--- @treturn boolean true|false depending on whether the queue is empty or not
+-- @param queue (<span class="types">@{Queue}</span>) the queue to check
+-- @treturn boolean true if empty, false otherwise
 function Queue.is_empty(queue)
     fail_if_missing(queue)
 

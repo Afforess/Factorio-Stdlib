@@ -4,6 +4,7 @@
 -- @see LuaTile
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local Area = require 'stdlib/area/area'
 local Position = require 'stdlib/area/position'
 local Chunk = require 'stdlib/area/chunk'
 
@@ -14,8 +15,8 @@ Tile = {} --luacheck: allow defined top
 -- @param position to calculate the tile for
 -- @return the tile position
 function Tile.from_position(position)
-    position = Position.to_table(position)
-    return {x = math.floor(position.x), y = math.floor(position.y)}
+    position = Position.new(position)
+    return Position.new({x = math.floor(position.x), y = math.floor(position.y)}) --Is this correct? Tile position should be the center?
 end
 
 --- Converts a tile position to the area it contains
@@ -23,9 +24,10 @@ end
 -- @return area that tile is valid for
 function Tile.to_area(tile_pos)
     fail_if_missing(tile_pos, "missing tile_pos argument")
-    tile_pos = Tile.from_position(tile_pos)
+    local left_top = Tile.from_position(tile_pos)
+    local right_bottom = Position.offset(Position.copy(tile_pos), 1, 1)
 
-    return { left_top = tile_pos, right_bottom = Position.offset(tile_pos, 1, 1) }
+    return Area.new({ left_top = left_top, right_bottom = right_bottom })
 end
 
 --- Creates a list of tile positions for all adjacent tiles (N, E, S, W) or (N, NE, E, SE, S, SW, W, NW) if diagonal is true
@@ -121,4 +123,9 @@ function Tile.get_index(tile_pos)
     return bit32.band(bit32.bor(bit32.lshift(bit32.band(tile_pos.x, 0x1F), 5), bit32.band(tile_pos.y, 0x1F)), 0x3FF)
 end
 
-return Tile
+local _return_mt = {
+    __newindex = function() error("Attempt to mutatate read-only Tile Module") end,
+    __metatable = true
+}
+
+return setmetatable(Tile, _return_mt)

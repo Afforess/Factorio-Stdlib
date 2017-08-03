@@ -4,6 +4,7 @@
 -- @see Concepts.ChunkPosition
 
 local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local Area = require 'stdlib/area/area'
 local Position = require 'stdlib/area/position'
 
 Chunk = {} --luacheck: allow defined top
@@ -15,7 +16,7 @@ local MAX_UINT = 4294967296
 -- @return the chunk position as a table
 -- @usage local chunk_x = Chunk.from_position(pos).x
 function Chunk.from_position(position)
-    position = Position.to_table(position)
+    position = Position.new(position)
     local x = math.floor(position.x)
     local y = math.floor(position.y)
     local chunk_x = bit32.arshift(x, 5)
@@ -26,7 +27,7 @@ function Chunk.from_position(position)
     if y < 0 then
         chunk_y = chunk_y - MAX_UINT
     end
-    return {x = chunk_x, y = chunk_y}
+    return Position.new({x = chunk_x, y = chunk_y})
 end
 
 --- Converts a chunk to the area it contains
@@ -34,10 +35,14 @@ end
 -- @return area that chunk is valid for
 function Chunk.to_area(chunk_pos)
     fail_if_missing(chunk_pos, "missing chunk_pos argument")
-    chunk_pos = Position.to_table(chunk_pos)
+    chunk_pos = Position.new(chunk_pos)
 
-    local left_top = { x = chunk_pos.x * 32, y = chunk_pos.y * 32 }
-    return { left_top = left_top, right_bottom = Position.offset(left_top, 32, 32) }
+    local left_top = Position.new({ x = chunk_pos.x * 32, y = chunk_pos.y * 32 })
+
+    local right_bottom = Position.offset(Position.copy(left_top), 32, 32)
+
+
+    return Area.new({ left_top = left_top, right_bottom = right_bottom })
 end
 
 --- Gets user data from the chunk, stored in a mod's global data.
@@ -92,7 +97,7 @@ function Chunk.get_index(surface, chunk_pos)
     if not global._next_chunk_index then global._next_chunk_index = 0 end
     if not global._chunk_indexes then global._chunk_indexes = {} end
 
-    if type(surface) == "string" then
+    if type(surface) ~= table then
         surface = game.surfaces[surface]
     end
     local surface_idx = surface.index
@@ -108,4 +113,9 @@ function Chunk.get_index(surface, chunk_pos)
     return surface_chunks[chunk_pos.x][chunk_pos.y]
 end
 
-return Chunk
+local _return_mt = {
+    __newindex = function() error("Attempt to mutatate read-only Chunk Module") end,
+    __metatable = true
+}
+
+return setmetatable(Chunk, _return_mt)

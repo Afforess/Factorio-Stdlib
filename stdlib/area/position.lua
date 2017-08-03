@@ -311,4 +311,9 @@ Position._mt = {
     __le = Position.less_than_eq,
 }
 
-return setmetatable(Position, {__newindex = function() error("Attempt to mutatate read-only Position") end})
+local _return_mt = {
+    __newindex = function() error("Attempt to mutatate read-only Position Module") end,
+    __metatable = true
+}
+
+return setmetatable(Position, _return_mt)

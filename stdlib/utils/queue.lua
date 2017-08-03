@@ -8,12 +8,6 @@ local fail_if_missing = require 'stdlib/core'['fail_if_missing']
 
 Queue = {} --luacheck: allow defined top
 
-Queue._mt = {
-    __index = Queue,
-    __len = function(t) return Queue.count(t) end,
-    --TODO custom __pairs metatable
-}
-
 --- Constructs a new Queue object.
 -- @treturn Queue A new, empty queue
 function Queue.new()
@@ -143,4 +137,15 @@ function Queue.count(queue)
     end
 end
 
-return Queue
+Queue._mt = {
+    __index = Queue,
+    __len = function(t) return Queue.count(t) end,
+    --TODO custom __ipairs metatable
+}
+
+local _return_mt = {
+    __newindex = function() error("Attempt to mutatate read-only Queue Module") end,
+    __metatable = true
+}
+
+return setmetatable(Queue, _return_mt)

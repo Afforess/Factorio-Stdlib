@@ -14,6 +14,7 @@ describe('Event', function()
                      on_load = function(callback) _G.on_load = callback end,
                      on_configuration_changed = function(callback) _G.on_configuration_changed = callback end}
         _G.game = {tick = 1, print = function() end}
+        _G.log = function() end
     end)
 
     after_each(function()

@@ -32,12 +32,14 @@ end
 -- @tparam[opt=0] int r 0-255 red
 -- @tparam[opt=0] int g 0-255 green
 -- @tparam[opt=0] int b 0-255 blue
+-- @tparam[opt=255] int a o-255 alpha
 -- @treturn LuaColor
-function Color.from_rgb(r, g, b)
+function Color.from_rgb(r, g, b, a)
     r = r or 0
     g = g or 0
     b = b or 0
-    return {r = r/255, g = g/255, b = b/255}
+    a = a or 255
+    return {r = r/255, g = g/255, b = b/255, a = a/255}
 end
 
 --- Return a color table with alpha added from a hexadecimal string.

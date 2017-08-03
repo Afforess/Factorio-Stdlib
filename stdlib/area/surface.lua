@@ -21,7 +21,7 @@ function Surface.lookup(surface)
     if not surface then
         return {}
     end
-    if type(surface) == 'string' then
+    if type(surface) == 'string' or type(surface) == 'number' then
         local lookup = game.surfaces[surface]
         if lookup then
             return { lookup }
@@ -62,7 +62,7 @@ function Surface.find_all_entities(search_criteria)
         surface_list = game.surfaces
     end
 
-    local result = {}
+    local results = {}
 
     for _, surface in pairs(surface_list) do
         local entities = surface.find_entities_filtered(
@@ -73,14 +73,14 @@ function Surface.find_all_entities(search_criteria)
                 force = search_criteria.force
             })
         for _, entity in pairs(entities) do
-            table.insert(result, entity)
+            table.insert(results, entity)
         end
     end
 
-    return result
+    return results
 end
 
---- determine surface extension
+--- Determine surface extension
 -- returns Area covering entire extension of this surface
 -- useful, if you compare total number of chunks with number of chunks of this area
 -- @tparam LuaSurface surface
@@ -105,4 +105,9 @@ function Surface.get_surface_bounds(surface)
     return Area.construct(x1*32, y1*32, x2*32, y2*32)
 end
 
-return Surface
+local _return_mt = {
+    __newindex = function() error("Attempt to mutatate read-only Surface Module") end,
+    __metatable = true
+}
+
+return setmetatable(Surface, _return_mt)

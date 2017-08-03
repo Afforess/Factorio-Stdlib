@@ -10,7 +10,8 @@ local Position = require 'stdlib/area/position'
 
 Area = {} --luacheck: allow defined top
 
---- Converts an area in the array format to an array in the table format
+--- Converts an area in either array or table format to an area with a metatable.
+-- Returns itself if it already has a metatable
 -- @tparam LuaBoundingBox area_arr the area to convert
 -- @treturn LuaBoundingBox a converted area
 function Area.new(area_arr)
@@ -394,4 +395,9 @@ Area._mt = {
     __eq = Area.equals,
 }
 
-return setmetatable(Area, {__newindex = function() error("Attempt to mutatate read-only Area") end})
+local _return_mt = {
+    __newindex = function() error("Attempt to mutatate read-only Area Module") end,
+    __metatable = true
+}
+
+return setmetatable(Area, _return_mt)

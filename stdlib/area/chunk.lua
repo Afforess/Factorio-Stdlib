@@ -1,4 +1,5 @@
---- A chunk represents a 32x32 area of a surface in factorio.
+--- For working with chunks.
+-- A chunk represents a 32 tile<sup>2</sup> on a surface in Factorio.
 -- @module Chunk
 -- @usage local Chunk = require('stdlib/area/chunk')
 -- @see Concepts.ChunkPosition
@@ -10,9 +11,9 @@ Chunk = {} --luacheck: allow defined top
 
 local MAX_UINT = 4294967296
 
---- Calculates the chunk coordinates for the tile position given
--- @param position to calculate the chunk for
--- @return the chunk position as a table
+--- Gets the chunk position of a chunk where the specified position resides.
+-- @tparam Concepts.Position position a position residing somewhere in a chunk
+-- @treturn Concepts.ChunkPosition the chunk position
 -- @usage local chunk_x = Chunk.from_position(pos).x
 function Chunk.from_position(position)
     position = Position.to_table(position)
@@ -29,9 +30,9 @@ function Chunk.from_position(position)
     return {x = chunk_x, y = chunk_y}
 end
 
---- Converts a chunk to the area it contains
--- @param chunk_pos to convert to an area
--- @return area that chunk is valid for
+--- Gets the area of a chunk from the specified chunk position.
+-- @tparam Concepts.ChunkPosition chunk_pos the chunk position
+-- @treturn Concepts.BoundingBox the chunk's area
 function Chunk.to_area(chunk_pos)
     fail_if_missing(chunk_pos, "missing chunk_pos argument")
     chunk_pos = Position.to_table(chunk_pos)
@@ -40,12 +41,12 @@ function Chunk.to_area(chunk_pos)
     return { left_top = left_top, right_bottom = Position.offset(left_top, 32, 32) }
 end
 
---- Gets user data from the chunk, stored in a mod's global data.
---- <p> The data will persist between loads</p>
--- @param surface the surface to look up data for
--- @param chunk_pos the chunk coordinates to look up data for
--- @param default_value (optional) to set and return if no data exists
--- @return the data, or nil if no data exists for the chunk
+--- Gets the user data that is associated with a chunk.
+-- The user data is stored in the global object and it persists between loads.
+-- @tparam LuaSurface surface the surface on which the user data is looked up
+-- @tparam Concepts.ChunkPosition chunk_pos the chunk position on which the user data is looked up
+-- @tparam[opt] Mixed default_value the user data to set for the chunk and returned if the chunk had no user data
+-- @treturn ?|nil|Mixed the user data **OR** *nil* if it does not exist for the chunk and if no default_value was set
 function Chunk.get_data(surface, chunk_pos, default_value)
     fail_if_missing(surface, "missing surface argument")
     fail_if_missing(chunk_pos, "missing chunk_pos argument")
@@ -64,12 +65,12 @@ function Chunk.get_data(surface, chunk_pos, default_value)
     return val, idx
 end
 
---- Sets user data on the chunk, stored in a mod's global data.
---- <p> The data will persist between loads</p>
--- @param surface the surface to look up data for
--- @param chunk_pos the chunk coordinates to look up data for
--- @param data the data to set (or nil to erase the data for the chunk)
--- @return the previous data associated with the chunk, or nil if the chunk had no previous data
+--- Associates the user data to a chunk.
+-- The user data will be stored in the global object and it will persist between loads.
+-- @tparam LuaSurface surface the surface on which the user data will reside
+-- @tparam Concepts.ChunkPosition chunk_pos the chunk position to associate with the user data
+-- @tparam ?|nil|Mixed data the user data to set **OR** *nil* to erase the existing user data for the chunk
+-- @treturn ?|nil|Mixed the previous user data associated with the chunk **OR** *nil* if the chunk had no previous user data
 function Chunk.set_data(surface, chunk_pos, data)
     fail_if_missing(surface, "missing surface argument")
     fail_if_missing(chunk_pos, "missing chunk_pos argument")
@@ -82,10 +83,11 @@ function Chunk.set_data(surface, chunk_pos, data)
     return prev
 end
 
---- Calculates and returns a stable, deterministic, unique integer id for the given chunk_pos
---- <p> The id will not change once calculated</p>
--- @param surface the chunk is on
--- @param chunk_pos of the chunk
+--- Calculates and returns a stable and deterministic integer ID of a chunk from a given chunk position.
+-- The chunk ID will not change once it is calculated.
+-- @tparam LuaSurface surface the surface the chunk is on
+-- @tparam Concepts.ChunkPosition chunk_pos
+-- @treturn int the chunk ID
 function Chunk.get_index(surface, chunk_pos)
     fail_if_missing(surface, "missing surface argument")
     fail_if_missing(chunk_pos, "missing chunk_pos argument")

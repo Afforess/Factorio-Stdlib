@@ -1,8 +1,6 @@
---- Trains module
--- <p>When this module is loaded, it registers new
--- events in order to track trains as locomotives and
--- carriages are moved around. For this reason, you should use
--- this library's <a href="Event.html">Event</a> module</p>
+--- Tools for working with trains.
+-- When this module is loaded into a mod, it automatically registers a number of new events in order to keep track of the trains as their locomotives and wagons are moved around.
+-- <p>To handle the events, you should use the @{Event} module.
 -- @module Trains
 
 -- Event registration is performed at the bottom of this file,
@@ -14,37 +12,27 @@ local Surface = require 'stdlib/area/surface'
 local Entity = require 'stdlib/entity/entity'
 
 Trains = {} --luacheck: allow defined top
---- This event is fired when a train's id has changed.
--- <p>Train id's are dervied from a property of the train's main locomotive.
--- That means when locomotives are attached/detached from carriages or other
--- locomotives, the locomotive considered the main one can change, leading to a changed
--- in train id.</p>
--- <p>For example: a train with a front and back locomotive will get its id
--- from the front locomotive. If that is disconnected, the back locomotive will become
--- the main one and the train's id will change</p>
--- <p>
--- <strong>Event parameters</strong> <br />
--- A table with the following properties:
--- <ul>
--- <li>old_id (int) The id of the train before the change</li>
--- <li>new_id (int) The id of the train after the change</li>
--- </ul>
--- </p>
+
+--- This event fires when a train's ID changes.
+-- <p>The train ID is a property of the main locomotive,
+-- which means that when locomotives are attached or detached from their wagons or from other locomotives, the ID of the train changes.
+-- <p>For example: A train with a front and rear locomotives will get its ID
+-- from the front locomotive. If the front locomotive gets disconnected, the rear locomotive becomes the main one and the train's ID changes.
+-- @event on_train_id_changed
+-- @tparam uint old_id the ID of the train before the change
+-- @tparam uint new_id the ID of the train after the change
 -- @usage
-----Event.register(Trains.on_train_id_changed, my_handler)
+---- Event.register(Trains.on_train_id_changed, my_handler)
 Trains.on_train_id_changed = script.generate_event_name()
 
---- Given search criteria (a table that contains at least a surface_name)
--- searches the given surface for trains that match the criteria
+--- Given a @{criteria|search criteria}, search for trains that match the criteria.
+-- * If ***criteria.surface*** is not supplied, this function searches through all existing surfaces.
+-- * If ***criteria.force*** is not supplied, this function searches through all existing forces.
+-- * If ***criteria.state*** is not supplied, this function gets trains in any @{defines.train_state|state}.
+-- @tparam criteria criteria a table used to search for trains
+-- @return (<span class="types">{@{train_details},...}</span>) an array of train IDs and LuaTrain instances
 -- @usage
-----Trains.find_filtered({ surface_name = "nauvis", state = defines.train_state.wait_station })
--- @tparam Table criteria Table with any keys supported by the <a href="Surface.html#find_all_entities">Surface</a> module.</p>
--- <p>If the name key isn't supplied, this will default to 'diesel-locomotive'</p>
--- <p>If the surface key isn't supplied, this will default to 1</p>
--- <p>If the surface key isn't supplied, this will search all surfaces that currently exist</p>
--- <p>Criteria may also include the 'state' field, which will filter the state of the train results</p>
--- @return A list of train details tables, if any are found matching the criteria. Otherwise the empty list.
--- <table><tr><td>train (LuaTrain)</td><td>The LuaTrain instance</td></tr><tr><td>id (int)</td><td>The id of the train</td></tr></table>
+-- Trains.find_filtered({ surface = "nauvis", state = defines.train_state.wait_station })
 function Trains.find_filtered(criteria)
     criteria = criteria or {}
 
@@ -77,16 +65,29 @@ function Trains.find_filtered(criteria)
     return results
 end
 
---- Find the id of a LuaTrain instance
+---
+-- This table should be passed into @{find_filtered} to find trains that match the criteria.
+-- @tfield[opt] ?|nil|string|{string,...}|LuaSurface|{LuaSurface,...} surface the surfaces to look up for the trains
+-- @tfield[opt] ?|nil|string|LuaForce force the force of the trains to search
+-- @tfield[opt] ?|nil|defines.train_state state the state of the trains to search
+-- @table criteria
+
+---
+-- @{find_filtered} returns an array with one or more of ***this*** table based on the @{criteria|search criteria}.
+-- @tfield LuaTrain train an instance of the train
+-- @tfield uint id the ID of the train
+-- @table train_details
+
+--- Find the ID of a LuaTrain instance.
 -- @tparam LuaTrain train
--- @treturn int
+-- @treturn uint the ID of the train
 function Trains.get_train_id(train)
     local loco = Trains.get_main_locomotive(train)
     return loco and loco.unit_number
 end
 
---- Event fired when some change has happened to a locomotive
--- @return void
+--- Event fired when some change happens to a locomotive.
+-- @lfunction
 function Trains._on_locomotive_changed()
     -- For all the known trains
     local renames = {}
@@ -116,7 +117,8 @@ function Trains._on_locomotive_changed()
     end
 end
 
---- Determines which locomotive in a train is the main one
+
+--- Get the main locomotive of a train.
 -- @tparam LuaTrain train
 -- @treturn LuaEntity the main locomotive
 function Trains.get_main_locomotive(train)
@@ -125,9 +127,9 @@ function Trains.get_main_locomotive(train)
     end
 end
 
---- Creates an Entity module-compatible entity from a train
+--- Creates an entity from a train that is compatible with the @{Entity} module.
 -- @tparam LuaTrain train
--- @treturn table
+-- @return (<span class="types">@{train_entity}</span>)
 function Trains.to_entity(train)
     local name = "train-" .. Trains.get_train_id(train)
     return {
@@ -139,25 +141,36 @@ function Trains.to_entity(train)
     }
 end
 
---- Set user data on a train
--- <p>This is a helper method around <a href="Entity.html#set_data">Entity.set_data</a></p>
--- @tparam LuaTrain train
--- @tparam mixed data
--- @return mixed
+------
+-- @{to_entity} returns ***this*** table.
+-- @tfield string name the name of the train entity with the train ID as its suffix
+-- @tfield boolean valid whether or not if the train is in a valid state in the game
+-- @tfield function equals &mdash; *function(entity)* &mdash; a function to check if another entity is equal to the train that ***this*** table represents
+-- @table train_entity
+
+--- Associates the user data to a train.
+-- This is a helper around @{Entity.set_data}.
+-- <p>The user data will be stored in the global object and it will persist between loads.
+--> The user data will be removed from a train when the train becomes invalid.
+-- @tparam LuaTrain train the train to set the user data for
+-- @tparam ?|nil|Mixed data the user data to set, or nil to delete the user data associated with the train
+-- @treturn ?|nil|Mixed the previous user data or nil if the train had no previous user data
 function Trains.set_data(train, data)
     return Entity.set_data(Trains.to_entity(train), data)
 end
 
---- Get user data on a train
--- <p>This is a helper method around <a href="Entity.html#get_data">Entity.get_data</a></p>
--- @tparam LuaTrain train
--- @return mixed
+--- Gets the user data that is associated with a train.
+-- This is a helper around @{Entity.get_data}.
+-- <p>The user data is stored in the global object and it persists between loads.
+--> The user data will be removed from a train when the train becomes invalid.
+-- @tparam LuaTrain train the train to look up user data for
+-- @treturn ?|nil|Mixed the user data, or nil if no user data exists for the train
 function Trains.get_data(train)
     return Entity.get_data(Trains.to_entity(train))
 end
 
--- Creates a registry of known trains
--- @return table A mapping of train id to LuaTrain object
+-- Creates a registry of known trains.
+-- @return table a mapping of train id to LuaTrain object
 local function create_train_registry()
     global._train_registry = global._train_registry or {}
 
@@ -169,13 +182,12 @@ local function create_train_registry()
     --return registry
 end
 
--- When developers load this module, we need to
--- attach some new events
+-- When developers load this module, we need to attach some new events.
 
--- Filters events related to entity_type
+--- Filters events related to entity_type.
 -- @tparam string event_parameter The event parameter to look inside to find the entity type
 -- @tparam string entity_type The entity type to filter events for
--- @tparam callable callback The callback to invoke if the filter passes. The object defined in the event parameter is passed.
+-- @tparam callable callback The callback to invoke if the filter passes. The object defined in the event parameter is passed
 local function filter_event(event_parameter, entity_type, callback)
     return function(evt)
         if(evt[event_parameter].type == entity_type) then
@@ -184,12 +196,12 @@ local function filter_event(event_parameter, entity_type, callback)
     end
 end
 
--- When a locomotive is removed ..
+-- When a locomotive is removed ...
 Event.register(defines.events.on_entity_died, filter_event('entity', 'locomotive', Trains._on_locomotive_changed))
 Event.register(defines.events.on_preplayer_mined_item, filter_event('entity', 'locomotive', Trains._on_locomotive_changed))
 Event.register(defines.events.on_robot_pre_mined, filter_event('entity', 'locomotive', Trains._on_locomotive_changed))
 
--- When a locomotive is added ..
+-- When a locomotive is added ...
 Event.register(defines.events.on_train_created,
     function(event)
         local train_id = Trains.get_train_id(event.train)

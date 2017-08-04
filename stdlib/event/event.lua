@@ -1,7 +1,7 @@
---- Makes working with events in factorio a lot more simple.
--- <p>Factorio can only have one handler registered per event. This module
+--- Makes working with events in Factorio a lot more simple.
+-- Factorio can only have one handler registered per event. This module
 -- allows you to easily register multiple handlers for each event.
--- Using this module is as simple as replacing script.on_event(...) with Event.register(...)</p>
+-- Using this module is as simple as replacing @{LuaBootstrap.on_event|script.on_event(...)} with @{register|Event.register(...)}.
 -- @module Event
 -- @usage require('stdlib/event/event')
 
@@ -40,13 +40,14 @@ Event = { --luacheck: allow defined top
     }
 }
 
---- Registers a function for a given event. If a nil handler is passed remove all events and stop listening for that event.
--- Events are dispatched in the order they are registered.
+--- Registers a function for a given event.
+-- If a nil handler is passed, remove all events and stop listening for that event.
+-- <p>Events are dispatched in the order they are registered.
 -- @usage Event.register(defines.events.on_tick, function(event) print event.tick end)
 -- -- creates an event that prints the current tick every tick.
 -- @tparam defines.events|{defines.events,...} event events to register
--- @tparam function handler Function to call when event is triggered
--- @treturn Event
+-- @tparam function handler function to call when event is triggered
+-- @return (<span class="types">@{Event}</span>)
 function Event.register(event, handler)
     fail_if_missing(event, "missing event argument")
 
@@ -75,10 +76,10 @@ function Event.register(event, handler)
     return Event
 end
 
---- Calls the registerd handlers
--- Will stop dispatching remaning handlers if any handler passes invalid event userdata.
--- Handlers are dispatched in the order they were created
--- @tparam table event LuaEvent as created by script.raise_event
+--- Calls the registerd handlers.
+-- This will stop dispatching the remaining handlers if any handler passes an invalid event object.
+-- <p>Handlers are dispatched in the order they are created.
+-- @tparam {defines.events,...} event an array of @{defines.events} as raised by @{LuaBootstrap.raise_event|script.raise_event}
 -- @see https://forums.factorio.com/viewtopic.php?t=32039#p202158 Invalid Event Objects
 function Event.dispatch(event)
     if event then
@@ -129,10 +130,10 @@ function Event.dispatch(event)
     end
 end
 
---- Removes the handler from the event. If it removes the last handler for an event stop listening for that event.
--- @tparam defines.events|{defines.events,...} event events to remove the handler for
--- @tparam function handler to remove
--- @return Event
+--- Removes a handler from events. If it removes the last handler for an event, stop listening for that event.
+-- @tparam defines.events|{defines.events,...} event events for which to remove a handler
+-- @tparam function handler a handler that should be removed
+-- @return (<span class="types">@{Event}</span>)
 function Event.remove(event, handler)
     fail_if_missing(event, "missing event argument")
     fail_if_missing(handler, "missing handler argument")

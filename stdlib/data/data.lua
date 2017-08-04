@@ -1,5 +1,7 @@
---- For working with raw data.
--- Only useable in the data stage.
+--- Tools for working with raw data.
+-- Only usable in the mod data stage.
+-- @see https://wiki.factorio.com/Data.raw Internal object names
+-- @see http://lua-api.factorio.com/latest/Data-Lifecycle.html Factorio data lifecycle
 -- @module Data
 -- @usage local Data = require('stdlib/data/data')
 
@@ -11,13 +13,13 @@ Data = {} --luacheck: allow defined top
 
 --- Selects all data values where the key matches the selector pattern.
 -- The selector pattern is divided into groups. The pattern should have a colon character `:` to denote the selection for each group.
--- <br/>The first group is for the class of the data type (item, recipe, entity-type, etc)
--- <br/>The second group is for the name of the data element, and is optional. If missing, all elements matching prior groups are returned.
--- <p> For more granular selectors, see other modules, such as Recipe.select.
--- @usage Data.select('recipe') -- returns a table with all recipes
--- @usage Data.select('recipe:steel.*') -- returns a table with all recipes whose name matches 'steel.*'
--- @tparam string pattern to search for
--- @treturn table containing the elements matching the selector pattern, or an empty table if there was no matches
+-- <p>The first group is for the class of the data type (item, recipe, entity-type, etc).
+-- <p>The second group is for the name of the data element, and is optional. If missing, all elements matching prior groups are returned.
+-- <p>For more granular selectors, see other modules, such as @{Recipe.select}.
+-- @usage Data.select('recipe') -- returns an array with all recipes
+-- @usage Data.select('recipe:steel.*') -- returns an array with all recipes whose name matches 'steel.*'
+-- @tparam string pattern a pattern used for the search
+-- @treturn {nil|Mixed,...} an array containing the elements matching the selector pattern, or an empty array if there were no matches
 function Data.select(pattern)
     fail_if_missing(pattern, "missing pattern argument")
 

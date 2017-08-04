@@ -203,7 +203,7 @@
 > for kind, items in module.kinds() do
     <table class="section-content-list">
     <thead>
-    <h3><a href="#$(kind)">$(kind)</a></h3>
+    <h3><a href="#$(no_spaces(kind))">$(kind)</a></h3>
     <span>$(M(module.kinds:get_section_description(kind)))</span>
     </thead>
     <tbody>
@@ -226,7 +226,7 @@
     <!-- section start -->
 > if module and module.type ~= "topic" then
 > for kind, items in module.kinds() do
-    <h3><span id="$(kind)" class="section-title"><a href="#$(kind)">$(kind)</a></span></h3>
+    <h3><span id="$(no_spaces(kind))" class="section-title"><a href="#$(no_spaces(kind))">$(kind)</a></span></h3>
     <dl class="section-body-container">
 > for item in items() do
     <dt>

@@ -1,5 +1,5 @@
---- Player global creation
---  Requiring this module will automatically create a global.players[index] for all new players using stdlib's Event system
+--- Player global creation.
+-- Requiring this module will automatically create a global.players[index] for all new players using stdlib's Event system
 -- @module Player
 -- @usage local Player = require 'stdlib/event/player'
 -- -- The fist time this is required it will register player creation events

@@ -1,4 +1,4 @@
---- For working with bounding boxes.
+--- Tools for working with bounding boxes.
 -- @module Area
 -- @usage local Area = require('stdlib/area/area')
 -- @see Position
@@ -12,8 +12,8 @@ Area = {} --luacheck: allow defined top
 
 --- Converts an area in either array or table format to an area with a metatable.
 -- Returns itself if it already has a metatable
--- @tparam LuaBoundingBox area_arr the area to convert
--- @treturn LuaBoundingBox a converted area
+-- @tparam Concepts.BoundingBox area_arr the area to convert
+-- @treturn Concepts.BoundingBox a converted area
 function Area.new(area_arr)
     fail_if_missing(area_arr, 'missing area value')
 
@@ -36,28 +36,28 @@ end
 -- @see Area.new
 Area.to_table = Area.new
 
---- Creates an area from the 2 positions p1 and p2
--- @tparam number x1 x-position of left_top, first point
--- @tparam number y1 y-position of left_top, first point
--- @tparam number x2 x-position of right_bottom, second point
--- @tparam number y2 y-position of right_bottom, second point
--- @treturn LuaBoundingBox tabled area
+--- Creates an area from the 2 positions p1 and p2.
+-- @tparam number x1 x-position of left_top, first position
+-- @tparam number y1 y-position of left_top, first position
+-- @tparam number x2 x-position of right_bottom, second position
+-- @tparam number y2 y-position of right_bottom, second position
+-- @treturn Concepts.BoundingBox the area in a table format
 function Area.construct(x1, y1, x2, y2)
     return Area.new{ left_top = Position.construct(x1, y1), right_bottom = Position.construct(x2, y2) }
 end
 
---- Creates an area that is a copy of the given area
--- @tparam LuaBoundingBox area the position to copy
--- @treturn LuaBoundingBox a new area that is a new copy of the passed area
+--- Creates an area that is a copy of the given area.
+-- @tparam Concepts.BoundingBox area the position to copy
+-- @treturn Concepts.BoundingBox a new area that is a new copy of the passed area
 function Area.copy(area)
     area = Area.new(area)
 
     return Area.new({Position.copy(area.left_top), Position.copy(area.right_bottom)})
 end
 
---- Returns true if 2 areas are the same
--- @tparam LuaBoundingBox area1
--- @tparam LuaBoundingBox area2
+--- Returns true if 2 areas are the same.
+-- @tparam Concepts.BoundingBox area1
+-- @tparam Concepts.BoundingBox area2
 -- @treturn boolean true if areas are equal
 function Area.equals(area1, area2)
     if not area1 or not area2 then return false end
@@ -67,12 +67,12 @@ function Area.equals(area1, area2)
     return area1.left_top == area2.left_top and area1.right_bottom == area2.right_bottom
 end
 
---- Returns the size of the space contained in the 2d area
--- @tparam LuaBoundingBox area the area
--- @treturn number the size of the area
+--- Returns the size of the space contained in the 2D area.
+-- @tparam Concepts.BoundingBox area the area from which to get the size
+-- @treturn number the size of the area &mdash; (width &times; height)
 -- @treturn number the width of the area
 -- @treturn number the height of the area
--- @treturn number the perimeter of the area
+-- @treturn number the perimeter of the area &mdash; (2 &times; (width + height))
 function Area.size(area)
     area = Area.new(area)
 
@@ -85,10 +85,10 @@ function Area.size(area)
     return dx * dy, dx, dy, perimeter
 end
 
---- Tests if a position {x, y} is inside (inclusive) of area
--- @tparam LuaBoundingBox area the area
--- @tparam LuaPosition pos the position to check
--- @treturn boolean true if the position is inside of the area
+--- Tests if a position {x, y} is located in an area (including the border).
+-- @tparam Concepts.BoundingBox area the search area
+-- @tparam Concepts.Position pos the position to check
+-- @treturn boolean true if the position is located in the area
 function Area.inside(area, pos)
     area = Area.new(area)
     pos = Position.new(pos)
@@ -112,10 +112,10 @@ local function validate_vector(amount)
     end
 end
 
---- Shrinks the size of an area by the given amount
--- @tparam LuaBoundingBox area the area
--- @tparam number|LuaVector amount to shrink each edge of the area inwards by
--- @treturn LuaBoundingBox the new shrunken area
+--- Shrinks the size of an area by the given amount.
+-- @tparam Concepts.BoundingBox area the area to shrink
+-- @tparam number|Concepts.Vector amount the amount to shrink each edge of the area inwards by
+-- @treturn Concepts.BoundingBox the new shrunken area
 function Area.shrink(area, amount)
     area = Area.new(area)
     local x, y = validate_vector(amount)
@@ -129,10 +129,10 @@ function Area.shrink(area, amount)
     return area
 end
 
---- Expands the size of an area by the given amount
--- @tparam LuaBoundingBox area the area
--- @tparam number|LuaVector amount to expand each edge of the area outwards by
--- @treturn LuaBoundingBox the expanded area
+--- Expands the size of an area by the given amount.
+-- @tparam Concepts.BoundingBox area the area
+-- @tparam number|Concepts.Vector amount to expand each edge of the area outwards by
+-- @treturn Concepts.BoundingBox the new expanded area
 -- @see Area.shrink
 function Area.expand(area, amount)
     area = Area.new(area)
@@ -147,12 +147,13 @@ function Area.expand(area, amount)
     return area
 end
 
---- Adjust an area by shrinking or expanding
+--- Adjust an area by shrinking or expanding.
+-- Imagine pinching & holding with fingers the top-left & bottom-right corners of a 2D box and pulling outwards to expand and pushing inwards to shrink the box.
 -- @usage local area = Area.adjust({{-2, -2}, {2, 2}}, {4, -1})
 -- -- returns {left_top = {x = -6, y = -1}, right_bottom = {x = 6, y = 1}}
--- @tparam LuaBoundingBox area the area
--- @tparam LuaVector vector the vectors to use
--- @treturn LuaBoundingBox the adjusted bounding box
+-- @tparam Concepts.BoundingBox area the area to adjust
+-- @tparam Concepts.Vector vector the vectors to use
+-- @treturn Concepts.BoundingBox the adjusted bounding box
 function Area.adjust(area, vector)
     area = Area.new(area)
     fail_if_missing(vector, 'missing vector value')
@@ -174,9 +175,9 @@ function Area.adjust(area, vector)
     return area
 end
 
---- Rotate an area such that its width becomes it height, and its height becomes it width.
--- @tparam LuaBoundingBox area the area to rotate
--- @treturn LuaBoundingBox the rotated area
+--- Rotate an area such that its value of the width becomes the height, and its value of the height becomes the width.
+-- @tparam Concepts.BoundingBox area the area to rotate
+-- @treturn Concepts.BoundingBox the rotated area
 function Area.rotate(area)
     area = Area.new(area)
     local _, w, h = Area.size(area)
@@ -191,9 +192,9 @@ function Area.rotate(area)
     end
 end
 
---- Calculates the center of the area and returns the position
--- @tparam LuaBoundingBox area the area
--- @treturn LuaPosition the center of the area
+--- Calculates the center of the area and returns the position.
+-- @tparam Concepts.BoundingBox area the area
+-- @treturn Concepts.Position the center of the area
 function Area.center(area)
     area = Area.new(area)
 
@@ -203,10 +204,10 @@ function Area.center(area)
     return Position.new{area.left_top.x + (dist_x / 2), area.left_top.y + (dist_y / 2)}
 end
 
---- Offsets the area by the {x, y} values
--- @tparam LuaBoundingBox area the area
--- @tparam LuaPosition pos the position to offset the area to
--- @treturn LuaBoundingBox area offset by the position
+--- Offsets the area by the {x, y} values.
+-- @tparam Concepts.BoundingBox area the area to offset
+-- @tparam Concepts.Position pos the position to which the area will offset
+-- @treturn Concepts.BoundingBox new area offset by the position
 function Area.offset(area, pos)
     area = Area.new(area)
     pos = Position.new(pos)
@@ -217,11 +218,11 @@ function Area.offset(area, pos)
     return area
 end
 
---- Translates an area in the given direction
--- @tparam LuaBoundingBox area the area to translate
--- @tparam defines.direction direction in which to translate
--- @tparam number distance distance of the translation
--- @treturn LuaBoundingBox a new translated area
+--- Translates an area in the given direction.
+-- @tparam Concepts.BoundingBox area the area to translate
+-- @tparam defines.direction direction the direction of translation
+-- @tparam number distance the distance of the translation
+-- @treturn Concepts.BoundingBox a new translated area
 function Area.translate(area, direction, distance)
     area = Area.new(area)
     fail_if_missing(direction, 'missing direction argument')
@@ -232,8 +233,8 @@ function Area.translate(area, direction, distance)
     return area
 end
 
---- Converts an area to the integer representation, by taking the floor of the left_top and the ceiling of the right_bottom
--- @tparam LuaBoundingBox area the area
+--- Converts an area to the integer representation, by taking the floor of the left\_top and the ceiling of the right\_bottom.
+-- @tparam Concepts.BoundingBox area the area to round
 -- @treturn int the rounded integer representation
 function Area.round_to_integer(area)
     area = Area.new(area)
@@ -245,11 +246,11 @@ end
 
 --- Iterates an area.
 -- @usage
----for x,y in Area.iterate({{0, -5}, {3, -3}}) do
------...
----end
--- @tparam LuaBoundingBox area the area
--- @return iterator
+-- for x,y in Area.iterate({{0, -5}, {3, -3}}) do
+--     ...
+-- end
+-- @tparam Concepts.BoundingBox area the area to iterate
+-- @treturn function an iterator
 function Area.iterate(area)
     area = Area.new(area)
 
@@ -267,15 +268,14 @@ function Area.iterate(area)
     return iterator.iterate, area, 0
 end
 
---- Iterates an area in a spiral inner-most to outer-most fashion.
+--- Iterates an area in a spiral as depicted below, from innermost to the outermost location.
+-- <p>![](http://i.imgur.com/EwfO0Es.png)
 -- @usage for x, y in Area.spiral_iterate({{-2, -1}, {2, 1}}) do
 --   print('(' .. x .. ', ' .. y .. ')')
 -- end
 -- prints: (0, 0) (1, 0) (1, 1) (0, 1) (-1, 1) (-1, 0) (-1, -1) (0, -1) (1, -1) (2, -1) (2, 0) (2, 1) (-2, 1) (-2, 0) (-2, -1)
--- @tparam LuaBoundingBox area the area
--- @treturn iterator
---- <pre>iterates in the order depicted:<br/>
--- ![](http://i.imgur.com/EwfO0Es.png)</pre>
+-- @tparam Concepts.BoundingBox area the area on which to perform a spiral iteration
+-- @treturn function an iterator
 function Area.spiral_iterate(area)
     area = Area.new(area)
 
@@ -314,9 +314,9 @@ function Area.spiral_iterate(area)
     return iterator.iterate, area, 0
 end
 
---- Creates a new area, a modified copy of the original, such that left and right x, up and down y are normalized, where left.x < right.x, left.y < right.y order
--- @tparam LuaBoundingBox area the area to adjust
--- @treturn LuaBoundingBox a normalized area, always { left_top = {x = ..., y = ...}, right_bottom = {x = ..., y = ...} }
+--- Creates a new area, a modified copy of the original, such that left and right x, up and down y are normalized, where left.x < right.x, left.y < right.y order.
+-- @tparam Concepts.BoundingBox area the area to adjust
+-- @treturn Concepts.BoundingBox a normalized area
 function Area.normalize(area)
     area = Area.new(area)
 
@@ -337,9 +337,9 @@ function Area.normalize(area)
     return Area.construct(left_top.x, left_top.y, right_bottom.x, right_bottom.y)
 end
 
---- Converts area bounding box points to center of their tiles
--- @tparam LuaBoundingBox area the area
--- @treturn LuaBoundingBox the area bounding box on tile center points
+--- Converts the given area's two BoundingBox positions to the center positions of the tiles in which they reside.
+-- @tparam Concepts.BoundingBox area the area to convert
+-- @treturn Concepts.BoundingBox an area where its two BoundingBox positions are at the center of the tiles in which they reside
 function Area.tile_center_points(area)
     area = Area.new(area)
 
@@ -348,9 +348,9 @@ function Area.tile_center_points(area)
     return area
 end
 
---- Converts an area to a string
--- @tparam LuaBoundingBox area the area to convert
--- @treturn string representation of area
+--- Converts an area to a string.
+-- @tparam Concepts.BoundingBox area the area to convert
+-- @treturn string the string representation of the area
 function Area.tostring(area)
     area = Area.new(area)
 
@@ -372,16 +372,16 @@ local function to_bounding_box_area(entity, box)
     return Area.offset(bb, pos)
 end
 
---- Converts an entity and its collision_box to the area around it
--- @tparam LuaEntity entity to convert to an area
--- @treturn LuaBoundingBox
+--- Converts an entity and its @{LuaEntityPrototype.collision_box|collision_box} to the area around it.
+-- @tparam LuaEntity entity the entity to convert to an area
+-- @treturn Concepts.BoundingBox
 function Area.to_collision_area(entity)
     return to_bounding_box_area(entity, "collision_box")
 end
 
---- Converts an entity and its selection_box to the area around it
+--- Converts an entity and its @{LuaEntityPrototype.selection_box|selection_box} to the area around it.
 -- @tparam LuaEntity entity to convert to an area
--- @treturn LuaBoundingBox
+-- @treturn Concepts.BoundingBox
 function Area.to_selection_area(entity)
     return to_bounding_box_area(entity, "selection_box")
 end

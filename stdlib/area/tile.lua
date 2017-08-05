@@ -1,4 +1,5 @@
---- A tile represents a 1x1 area on a surface in factorio.
+--- Tools for working with tiles.
+-- A tile represents a 1 unit<sup>2</sup> on a surface in Factorio.
 -- @module Tile
 -- @usage local Tile = require('stdlib/area/tile')
 -- @see LuaTile
@@ -11,17 +12,17 @@ local Chunk = require 'stdlib/area/chunk'
 Tile = {} --luacheck: allow defined top
 --local MAX_UINT = 4294967296
 
---- Calculates the tile coordinates for the position given
--- @param position to calculate the tile for
--- @return the tile position
+--- Get the @{LuaTile.position|tile position} of a tile where the given position resides.
+-- @tparam Concepts.Position position the position that resides somewhere in a tile
+-- @treturn LuaTile.position the tile position
 function Tile.from_position(position)
     position = Position.new(position)
     return Position.new({x = math.floor(position.x), y = math.floor(position.y)}) --Is this correct? Tile position should be the center?
 end
 
---- Converts a tile position to the area it contains
--- @param tile_pos to convert to an area
--- @return area that tile is valid for
+--- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
+-- @tparam LuaTile.position tile_pos the tile position
+-- @treturn Concepts.BoundingBox the area of the tile
 function Tile.to_area(tile_pos)
     fail_if_missing(tile_pos, "missing tile_pos argument")
     local left_top = Tile.from_position(tile_pos)
@@ -30,12 +31,12 @@ function Tile.to_area(tile_pos)
     return Area.new({ left_top = left_top, right_bottom = right_bottom })
 end
 
---- Creates a list of tile positions for all adjacent tiles (N, E, S, W) or (N, NE, E, SE, S, SW, W, NW) if diagonal is true
--- @param surface to examine for adjacent tiles
--- @param position the center tile position, to search around
--- @param diagonal (optional: defaults to false) whether to include diagonal tiles
--- @param tile_name (optional) whether to restrict adjacent tiles to one particular tile name (e.g 'water-tile')
--- @return list of tile positions adjacent to the given position
+--- Creates an array of tile positions for all adjacent tiles (N, E, S, W) **OR** (N, NE, E, SE, S, SW, W, NW) if diagonal is set to true.
+-- @tparam LuaSurface surface the surface to examine for adjacent tiles
+-- @tparam LuaTile.position position the tile position of the origin tile
+-- @tparam[opt=false] boolean diagonal whether to include diagonal tiles
+-- @tparam[opt] string tile_name whether to restrict adjacent tiles to a particular tile name (example: "water-tile")
+-- @treturn {LuaTile.position,...} an array of tile positions of the tiles that are adjacent to the origin tile
 function Tile.adjacent(surface, position, diagonal, tile_name)
     fail_if_missing(surface, "missing surface argument")
     fail_if_missing(position, "missing position argument")
@@ -59,12 +60,12 @@ function Tile.adjacent(surface, position, diagonal, tile_name)
     return adjacent_tiles
 end
 
---- Gets user data from the tile, stored in a mod's global data.
---- <p> The data will persist between loads</p>
--- @param surface the surface to look up data for
--- @param tile_pos the tile coordinates to look up data for
--- @param default_value (optional) to set and return if no data exists
--- @return the data, or nil if no data exists for the chunk
+--- Gets the user data that is associated with a tile.
+-- The user data is stored in the global object and it persists between loads.
+-- @tparam LuaSurface surface the surface on which the user data is looked up
+-- @tparam LuaTile.position tile_pos the tile position on which the user data is looked up
+-- @tparam[opt] Mixed default_value the user data to set for the tile and returned if it did not have user data
+-- @treturn ?|nil|Mixed the user data **OR** *nil* if it does not exist for the tile and no default_value was set
 function Tile.get_data(surface, tile_pos, default_value)
     fail_if_missing(surface, "missing surface argument")
     fail_if_missing(tile_pos, "missing tile_pos argument")
@@ -91,12 +92,12 @@ function Tile.get_data(surface, tile_pos, default_value)
     return val
 end
 
---- Sets user data on the tile, stored in a mod's global data.
---- <p> The data will persist between loads</p>
--- @param surface the surface to look up data for
--- @param tile_pos the chunk coordinates to look up data for
--- @param data the data to set (or nil to erase the data for the tile)
--- @return the previous data associated with the tile, or nil if the tile had no previous data
+--- Associates the user data to a tile.
+-- The user data will be stored in the global object and it will persist between loads.
+-- @tparam LuaSurface surface the surface on which the user data will reside
+-- @tparam LuaTile.position tile_pos the tile position of a tile that will be associated with the user data
+-- @tparam ?|nil|Mixed data the user data to set **OR** *nil* to erase the existing user data for the tile
+-- @treturn ?|nil|Mixed the previous user data associated with the tile **OR** *nil* if the tile had no previous user data
 function Tile.set_data(surface, tile_pos, data)
     fail_if_missing(surface, "missing surface argument")
     fail_if_missing(tile_pos, "missing tile_pos argument")
@@ -113,11 +114,10 @@ function Tile.set_data(surface, tile_pos, data)
     return prev
 end
 
---- Calculates and returns a stable, deterministic integer id for the given tile_pos
---- <p> Tile id will not change once calculated</p>
---- <p> Tile ids are only unique for the chunk they are in, they may repeat across a surface.<p>
--- @param tile_pos
--- @return the tile index
+--- Calculates and returns a stable and deterministic integer ID of a tile from a given tile position.
+-- The tile ID will not change once it is calculated, and every tile ID is unique to the chunk they are in and they may repeat across a surface.
+-- @tparam LuaTile.position tile_pos
+-- @treturn int the tile ID
 function Tile.get_index(tile_pos)
     fail_if_missing(tile_pos, "missing tile_pos argument")
     return bit32.band(bit32.bor(bit32.lshift(bit32.band(tile_pos.x, 0x1F), 5), bit32.band(tile_pos.y, 0x1F)), 0x3FF)

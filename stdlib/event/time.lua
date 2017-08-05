@@ -1,17 +1,18 @@
---- Raise events at certain times throughout a surfaces day, This module uses the stdlib Event system
--- See also @{event.time.lua}
+--- Raise events for surfaces at certain time intervals.
+-- This module uses the @{Event} module.
 -- @module Event.Time
 -- @usage require('stdlib/event/time')
+-- @see event.time.lua
 
 require 'stdlib/event/event'
 require 'stdlib/defines/time'
 
 Event.Time = {}
 
---All times are offset by 0.5
---This is because both EvoGUI and MoWeather already apply that offset.
---Following the precedent to remain consistent.
---Actually, this little snippet is even borrowed from EvoGUI.
+-- All times are offset by 0.5
+-- This is because both EvoGUI and MoWeather already apply that offset.
+-- Following the precedent to remain consistent.
+-- Actually, this little snippet is even borrowed from EvoGUI.
 local get_day_time
 if remote.interfaces.MoWeather then
     -- assume MoWeather's getdaytime is sane
@@ -21,19 +22,19 @@ else
     get_day_time = function (surface_name_or_index) return game.surfaces[surface_name_or_index].daytime + 0.5 end
 end
 
---- @field Fires whenever it becomes midday/noon on a surface
+--- @field midday Fires whenever it becomes midday/noon on a surface
 Event.Time.midday = script.generate_event_name()
---- @field Fires whenever it becomes midnight on a surface
+--- @field midnight Fires whenever it becomes midnight on a surface
 Event.Time.midnight = script.generate_event_name()
---- @field Fires whenever the sunrises on a surface
+--- @field sunrise Fires whenever the sunrises on a surface
 Event.Time.sunrise = script.generate_event_name()
---- @field Fires whenever the sunsets on a surface
+--- @field sunset Fires whenever the sunsets on a surface
 Event.Time.sunset = script.generate_event_name()
---- @field Fires every hour for a surface
+--- @field hourly Fires every hour for a surface
 Event.Time.hourly = script.generate_event_name()
---- @field Fires every minute for a surface
+--- @field minutely Fires every minute for a surface
 Event.Time.minutely = script.generate_event_name()
---- @field Fires every day for a surface
+--- @field daily Fires every day for a surface
 Event.Time.daily = script.generate_event_name()
 
 Event.register(defines.events.on_tick,
@@ -79,10 +80,10 @@ Event.register(defines.events.on_tick,
     end
 )
 
---- Get the current surface time adjusted
+--- Get the current time of a given surface.
 -- @function get_day_time
 -- @tparam LuaSurface surface
--- @treturn double [0-1] the current surface time
+-- @treturn double the current surface time such that 0.0 ⋜ surface time ⋜ 1.0
 Event.Time.get_day_time = get_day_time
 
 -- When the mod is initialized the first time

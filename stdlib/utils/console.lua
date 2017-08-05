@@ -1,4 +1,4 @@
---- Debug console
+--- Debug console.
 -- Creates a textfield allowing you to run commands directly in your mods enviorment. Requires use of the stdlib Event system
 -- Console Code from adil modified for use with stdlib
 -- @module console

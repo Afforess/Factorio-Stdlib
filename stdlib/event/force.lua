@@ -1,5 +1,5 @@
---- Force global creation
---  Requiring this module will automatically create a global.forces[index] for all new forces using stdlib's Event system
+--- Force global creation.
+-- Requiring this module will automatically create a global.forces[index] for all new forces using stdlib's Event system
 -- @module Force
 -- @usage local Force = require 'stdlib/event/force'
 -- -- The fist time this is required it will register force creation events

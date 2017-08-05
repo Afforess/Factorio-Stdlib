@@ -1,4 +1,4 @@
---- For working with x, y coordinates.
+--- Tools for working with `<x,y>` coordinates.
 -- @module Position
 -- @usage local Position = require('stdlib/area/position')
 -- @see Area
@@ -14,10 +14,10 @@ Position = {} --luacheck: allow defined top
 -- @return epsilon
 Position.epsilon = 1.19e-07
 
---- Returns a correctly formated position object
--- @usage Position.to_table({0, 0}) -- returns {x = 0, y = 0}
--- @tparam LuaPosition pos_arr the position to convert
--- @treturn LuaPosition a new correctly formated position with metatable
+--- Returns a correctly formated position object.
+-- @usage Position.new({0, 0}) -- returns {x = 0, y = 0}
+-- @tparam array pos_arr the position to convert
+-- @treturn Concepts.Position a new correctly formated position with metatable
 function Position.new(pos_arr)
     fail_if_missing(pos_arr, 'missing position argument')
 
@@ -35,9 +35,9 @@ function Position.new(pos_arr)
     return setmetatable(pos, Position._mt)
 end
 
---- Creates a position that is a copy of the given position
--- @tparam LuaPosition pos the position to copy
--- @treturn LuaPosition a new position that is a new copy of the passed position
+--- Creates a position that is a copy of the given position.
+-- @tparam Concepts.Position pos the position to copy
+-- @treturn Concepts.Position a new position with values identical to the given position
 function Position.copy(pos)
     pos = Position.new(pos)
 
@@ -49,10 +49,10 @@ end
 --@see Position.new
 Position.to_table = Position.new
 
---- Creates a table representing the position from x and y
+--- Creates a table representing the position from x and y.
 -- @tparam number x x-position
 -- @tparam number y y-position
--- @treturn LuaPosition
+-- @treturn Concepts.Position
 function Position.construct(x, y)
     fail_if_missing(x, 'missing x position argument')
     fail_if_missing(y, 'missing y position argument')
@@ -60,18 +60,18 @@ function Position.construct(x, y)
     return Position.new({ x = x, y = y })
 end
 
---- Converts a position to a string
--- @tparam LuaPosition pos the position to convert
--- @treturn string string representation of pos
+--- Converts a position to a string.
+-- @tparam Concepts.Position pos the position to convert
+-- @treturn string string representation of the position
 function Position.tostring(pos)
     pos = Position.new(pos)
     return '{x = ' .. pos.x .. ', y = ' .. pos.y .. '}'
 end
 
---- Adds 2 positions
--- @tparam LuaPosition pos1 the first position
--- @tparam LuaPosition pos2 the second position
--- @treturn LuaPosition a new position
+--- Adds two positions.
+-- @tparam Concepts.Position pos1 the first position
+-- @tparam Concepts.Position pos2 the second position
+-- @treturn Concepts.Position a new position &rarr; { x = pos1.x + pos2.x, y = pos1.y + pos2.y}
 function Position.add(pos1, pos2)
     pos1 = Position.new(pos1)
     pos2 = Position.new(pos2)
@@ -79,10 +79,10 @@ function Position.add(pos1, pos2)
     return Position.new({x = pos1.x + pos2.x, y = pos1.y + pos2.y})
 end
 
---- Subtracts 2 positions
--- @tparam LuaPosition pos1 the first position
--- @tparam LuaPosition pos2 the second position
--- @treturn LuaPosition a new position
+--- Subtracts two positions.
+-- @tparam Concepts.Position pos1 the first position
+-- @tparam Concepts.Position pos2 the second position
+-- @treturn Concepts.Position a new position &rarr; { x = pos1.x - pos2.x, y = pos1.y - pos2.y }
 function Position.subtract(pos1, pos2)
     pos1 = Position.new(pos1)
     pos2 = Position.new(pos2)
@@ -90,9 +90,9 @@ function Position.subtract(pos1, pos2)
     return Position.new({x = pos1.x - pos2.x, y = pos1.y - pos2.y})
 end
 
---- Whether 2 positions are equal
--- @tparam LuaPosition pos1 the first position
--- @tparam LuaPosition pos2 the second position
+--- Tests whether or not the two given positions are equal.
+-- @tparam Concepts.Position pos1 the first position
+-- @tparam Concepts.Position pos2 the second position
 -- @treturn boolean true if positions are equal
 function Position.equals(pos1, pos2)
     if not pos1 or not pos2 then return false end
@@ -118,11 +118,11 @@ function Position.less_than_eq(pos1, pos2)
     return pos1.x <= pos2.x and pos1.y <= pos2.y
 end
 
---- Creates a position that is offset by x,y coordinate pair
--- @tparam LuaPosition pos the position to offset
--- @tparam number x the amount to offset the position in the x direction
--- @tparam number y the amount to offset the position in the y direction
--- @treturn LuaPosition position, offset by the x,y coordinates
+--- Creates a position that is offset by x,y coordinates.
+-- @tparam Concepts.Position pos the position to offset
+-- @tparam number x the amount to offset the position on the x-axis
+-- @tparam number y the amount to offset the position on the y-axis
+-- @treturn Concepts.Position a new position, offset by the x,y coordinates
 function Position.offset(pos, x, y)
     fail_if_missing(x, 'missing x-coordinate value')
     fail_if_missing(y, 'missing y-coordinate value')
@@ -133,11 +133,11 @@ function Position.offset(pos, x, y)
     return pos
 end
 
---- Translates a position in the given direction
--- @tparam LuaPosition pos the position to translate
--- @tparam defines.direction direction in which to translate
+--- Translates a position in the given direction.
+-- @tparam Concepts.Position pos the position to translate
+-- @tparam defines.direction direction the direction of translation
 -- @tparam number distance distance of the translation
--- @treturn LuaPosition the position translated
+-- @treturn Concepts.Position a new translated position
 function Position.translate(pos, direction, distance)
     fail_if_missing(direction, 'missing direction argument')
     fail_if_missing(distance, 'missing distance argument')
@@ -171,10 +171,10 @@ function Position.translate(pos, direction, distance)
     return pos
 end
 
---- Expands a position to a square area
--- @tparam LuaPosition pos the position to expand into an area
--- @tparam number radius half the side length of the area
--- @treturn LuaBoundingBox a new bounding box
+--- Expands a position to a square area.
+-- @tparam Concepts.Position pos the position to expand into an area
+-- @tparam number radius half of the side length of the area
+-- @treturn Concepts.BoundingBox the area
 function Position.expand_to_area(pos, radius)
     pos = Position.new(pos)
     fail_if_missing(radius, 'missing radius argument')
@@ -185,10 +185,10 @@ function Position.expand_to_area(pos, radius)
     return { left_top = left_top, right_bottom = right_bottom }
 end
 
---- Calculates the Euclidean distance squared between two positions, useful when sqrt is not needed
--- @tparam LuaPosition pos1 the first position
--- @tparam LuaPosition pos2 the second position
--- @treturn number the square of the Euclidean distance
+--- Calculates the Euclidean distance squared between two positions, useful when sqrt is not needed.
+-- @tparam Concepts.Position pos1 the first position
+-- @tparam Concepts.Position pos2 the second position
+-- @treturn number the square of the euclidean distance
 function Position.distance_squared(pos1, pos2)
     pos1 = Position.new(pos1)
     pos2 = Position.new(pos2)
@@ -198,10 +198,10 @@ function Position.distance_squared(pos1, pos2)
     return axbx * axbx + ayby * ayby
 end
 
---- Calculates the Euclidean distance between two positions
--- @tparam LuaPosition pos1 the first position
--- @tparam LuaPosition pos2 the second position
--- @treturn number the square of the Euclidean distance
+--- Calculates the Euclidean distance between two positions.
+-- @tparam Concepts.Position pos1 the first position
+-- @tparam Concepts.Position pos2 the second position
+-- @treturn number the euclidean distance
 function Position.distance(pos1, pos2)
     pos1 = Position.new(pos1)
     pos2 = Position.new(pos2)
@@ -209,10 +209,11 @@ function Position.distance(pos1, pos2)
     return math.sqrt(Position.distance_squared(pos1, pos2))
 end
 
---- Calculates the manhatten distance between two positions
--- @tparam LuaPosition pos1 the first position
--- @tparam LuaPosition pos2 the second position
--- @treturn number the square of the Euclidean distance
+--- Calculates the manhatten distance between two positions.
+-- @tparam Concepts.Position pos1 the first position
+-- @tparam Concepts.Position pos2 the second position
+-- @treturn number the manhatten distance
+-- @see https://en.wikipedia.org/wiki/Taxicab_geometry Taxicab geometry (manhatten distance)
 function Position.manhattan_distance(pos1, pos2)
     pos1 = Position.new(pos1)
     pos2 = Position.new(pos2)
@@ -221,33 +222,37 @@ function Position.manhattan_distance(pos1, pos2)
 end
 
 --- Increment a position each time it is called.
--- <p>can be used to increment(or decrement) a position quickly.
--- Do not store function closures in global use them in the current tick.
--- @usage local next_pos = Position.increment({0,0})
+-- This can be used to increment or even decrement a position quickly.
+-- <p>Do not store function closures in the global object; use them in the current tick.
+-- @usage
+-- local next_pos = Position.increment({0,0})
 -- for i = 1, 5 do next_pos(0,1) -- returns {x = 0, y = 1} {x = 0, y = 2} {x = 0, y = 3} {x = 0, y = 4} {x = 0, y = 5}
--- @usage local next_pos = Position.increment({0, 0}, 1)
+-- @usage
+-- local next_pos = Position.increment({0, 0}, 1)
 -- next_pos() -- returns {1, 0}
 -- next_pos(0, 5) -- returns {1, 5}
 -- next_pos(nil, 5) -- returns {2, 10}
--- @usage local next_pos = Position.increment({0, 0}, 0, 1)
+-- @usage
+-- local next_pos = Position.increment({0, 0}, 0, 1)
 -- surface.create_entity{name = 'flying-text', text = 'text', position = next_pos()}
 -- surface.create_entity{name = 'flying-text', text = 'text', position = next_pos()} -- creates 2 flying text entities 1 tile apart
--- @tparam LuaPosition pos the position to start with
+-- @tparam Concepts.Position pos the position to start with
 -- @tparam[opt=0] number inc_x optional increment x by this amount
 -- @tparam[opt=0] number inc_y optional increment y by this amount
--- @treturn increment_closure a function closure that returns a new incremented position
+-- @treturn function @{increment_closure} a function closure that returns an incremented position
 function Position.increment(pos, inc_x, inc_y)
     pos = Position.new(pos)
 
     local x, y = pos.x, pos.y
     inc_x, inc_y = inc_x or 0, inc_y or 0
 
-    --- @name increment_closure closure, do not call directly
-    -- @class function
+    ---
+    -- @function increment_closure A closure which the @{increment} function returns.
+    --> Do not call this directly and do not store this in the global object.
     -- @see increment
     -- @tparam[opt=0] number new_inc_x
     -- @tparam[opt=0] number new_inc_y
-    -- @treturn LuaPosition the incremented position
+    -- @treturn Concepts.Position the incremented position
     return function(new_inc_x, new_inc_y)
         x = x + (new_inc_x or inc_x)
         y = y + (new_inc_y or inc_y)
@@ -255,9 +260,9 @@ function Position.increment(pos, inc_x, inc_y)
     end
 end
 
---- Returns a position centered on the tile
--- @tparam LuaPosition pos the position to center
--- @treturn LuaPosition a centered position table
+--- Gets the center position of a tile where the given position resides.
+-- @tparam Concepts.Position pos the position which resides somewhere on a tile
+-- @treturn Concepts.Position the position at the center of the tile
 function Position.center(pos)
     pos = Position.new(pos)
 
@@ -280,19 +285,19 @@ local opposites = defines and {
     [defines.direction.southeast] = defines.direction.northwest,
 } or {[0]=4, [1]=5, [2]=6, [3]=7, [4]=0, [5]=1, [6]=2, [7]=3}
 
---- Returns the opposite direction - Adapted from Factorio util.lua
+--- Returns the opposite direction &mdash; adapted from Factorio util.lua.
 -- @release 0.8.1
--- @tparam defines.direction direction to get the opposite of
+-- @tparam defines.direction direction the direction
 -- @treturn defines.direction the opposite direction
 function Position.opposite_direction(direction)
     return opposites[direction or defines.direction.north]
 end
 
---- Returns the next direction, for entities that only support 2 directions
--- see @{opposite_direction}
+--- Returns the next direction.
+--> For entities that only support two directions, see @{opposite_direction}.
 -- @tparam defines.direction direction the starting direction
--- @tparam[opt=false] boolean reverse get the counter-clockwise direction
--- @tparam[opt=false] boolean eight_way next direction can be 8 way, (not many prototypes support 8way)
+-- @tparam[opt=false] boolean reverse true to get the next direction in counter-clockwise fashion, false otherwise
+-- @tparam[opt=false] boolean eight_way true to get the next direction in 8-way (note: not many prototypes support 8-way)
 -- @treturn defines.direction the next direction
 function Position.next_direction(direction, reverse, eight_way)
     fail_if_missing(direction, 'missing starting direction')

@@ -23,9 +23,10 @@ ldoc:
 	@echo 'Auto Generating with ldoc'
 	@mkdir -p $(OUTPUT_DIR)/doc
 	@cp README.md $(OUTPUT_DIR)/doc/readme.md
+	@cp doc/spectre.min.css $(OUTPUT_DIR)/doc/spectre.min.css
+	@cp doc/spectre-icons.min.css $(OUTPUT_DIR)/doc/spectre-icons.min.css
 	@cp -r examples/ $(OUTPUT_DIR)/doc/examples/
-	@cd $(OUTPUT_DIR) && ldoc -p "Factorio Stdlib" -t "Factorio Stdlib" -c ../doc/config.ld -X -s ../doc $(PKG_COPY)/
-
+	@cd $(OUTPUT_DIR) && ldoc -c ../doc/config.ld -l ../doc -s ../doc $(PKG_COPY)
 
 test:
 	busted

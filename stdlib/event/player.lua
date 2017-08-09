@@ -20,14 +20,17 @@ local function new(player_index)
     }
 end
 
--- Return a valid player object from event, index, string, or userdata
-local function parse_player(player)
-    if player and type(player) == "table" then
-        player = player.player_index and game.players[player.player_index]
-    elseif type(player) ~= "userdata" then
-        player = game.players[player]
+-- Return a valid player object from event, index, string, or userdata returns nil if not valid
+local function parse_player(mixed)
+    local player
+    if type(mixed) == "table" then
+        player = mixed.player_index and game.players[mixed.player_index]
+    elseif type(mixed) == "userdata" then
+        player = mixed
+    else
+        player = mixed and game.players[mixed]
     end
-    return player and player.valid and player or error("Invalid Player")
+    return player and player.valid and player
 end
 
 --- Get the game.players[index] and global.players[index] objects, create the global.players[index] object if it doesn't exist.
@@ -38,7 +41,7 @@ end
 -- local player, player_data = Player.get(event.player_index)
 function Player.get(index)
     fail_if_missing(index, 'Missing index to retrieve')
-    return game.players[index], global.players[index] or Player.init(index) and global.players[index]
+    return game.players[index], global.players[index] or Player.init(index)
 end
 
 --- Merge a copy of the passed data to all players in global.players
@@ -54,7 +57,9 @@ end
 -- @tparam table event event table containing the player_index
 function Player.remove(event)
     local player = parse_player(event)
-    global.players[player.index] = nil
+    if player then
+        global.players[player.index] = nil
+    end
 end
 Event.register(defines.events.on_player_removed, Player.remove)
 
@@ -65,12 +70,14 @@ function Player.init(event, overwrite)
     -- Create the global.players table if it doesn't exisit
     global.players = global.players or {}
 
+    --get a valid player object or nil
     local player = parse_player(event)
 
     if player then --If player is not nil then we are working with a valid player.
-        if not global.players[event.player_index] or (global.players[event.player_index] and overwrite) then
+        if not global.players[player.index] or (global.players[player.index] and overwrite) then
             global.players[player.index] = new(player.index)
         end
+        return global.players[player.index]
     else --Check all players
         for index in pairs(game.players) do
             if not global.players[index] or (global.players[index] and overwrite) then

@@ -2,14 +2,20 @@ require 'stdlib/table'
 local Game = require 'stdlib/game'
 
 describe('Game Spec', function()
+
+    before_each(
+        function()
+            _G.game = { players = { }, connected_players = { }}
+            _G.global = { }
+        end
+    )
+
     it('should message no players', function()
-        _G["game"] = { players = {} }
         _G.game.connected_players = table.filter(_G.game.players, function(p) return p.connected end)
         Game.print_all('Hello World')
     end)
 
     it('should message all connected players', function()
-        _G["game"] = { players = { } }
         for _ = 1, 10 do
             table.insert(game.players, { valid = true, connected = true, print = spy.new(function() end) })
         end
@@ -22,7 +28,6 @@ describe('Game Spec', function()
     end)
 
     it('should message connected players on nauvis surface', function()
-        _G["game"] = { players = { } }
         for i = 1, 10 do
             if i == 5 or i == 7 then
                 table.insert(game.players, { surface = { name = 'nauvis' }, valid = true, connected = true, print = spy.new(function() end) })
@@ -40,7 +45,6 @@ describe('Game Spec', function()
     end)
 
     it('should message connected players on player force', function()
-        _G["game"] = { players = { } }
         for i = 1, 10 do
             if i == 5 or i == 7 then
                 table.insert(game.players, { force = { name = 'enemy' }, valid = true, connected = true, print = spy.new(function() end) })

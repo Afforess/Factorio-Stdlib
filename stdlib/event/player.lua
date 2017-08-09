@@ -64,7 +64,7 @@ end
 Event.register(defines.events.on_player_removed, Player.remove)
 
 --- Init or re-init a player or players, Passing a nil event will iterate all existing players
--- @tparam[opt] number|table|string|LuaPlayer table containing player_index or name, index or player object
+-- @tparam[opt] number|table|string|LuaPlayer event
 -- @tparam[opt=false] boolean overwrite the player data
 function Player.init(event, overwrite)
     -- Create the global.players table if it doesn't exisit

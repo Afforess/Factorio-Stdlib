@@ -6,7 +6,7 @@
 -- local LOGGER = require('stdlib/log/logger').new(...)
 -- -- and to use the same LOGGER in multiple require files make it global by removing 'local'.
 
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 
 Logger = {} --luacheck: allow defined top
 

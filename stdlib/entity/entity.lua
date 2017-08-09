@@ -2,7 +2,7 @@
 -- @module Entity
 -- @usage local Entity = require('stdlib/entity/entity')
 
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 local Area = require 'stdlib/area/area'
 
 Entity = {} --luacheck: allow defined top

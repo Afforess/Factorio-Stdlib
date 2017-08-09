@@ -4,7 +4,7 @@
 -- @module Queue
 -- @usage local Queue = require('stdlib/queue')
 
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 
 Queue = {} --luacheck: allow defined top
 

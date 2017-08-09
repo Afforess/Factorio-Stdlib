@@ -6,7 +6,7 @@
 
 require('stdlib/event/event')
 require('stdlib/table')
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 
 local Force = {}
 

@@ -3,7 +3,7 @@
 -- @usage local Gui = require('stdlib/event/gui')
 
 require 'stdlib/event/event'
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 
 ---
 -- @tfield function register

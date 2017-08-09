@@ -5,7 +5,7 @@
 -- @see Concepts.BoundingBox
 -- @see Concepts.Position
 
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 local Position = require 'stdlib/area/position'
 
 Area = {} --luacheck: allow defined top

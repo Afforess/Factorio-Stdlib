@@ -5,7 +5,7 @@
 -- @module Event
 -- @usage require('stdlib/event/event')
 
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 
 Event = { --luacheck: allow defined top
     _registry = {},

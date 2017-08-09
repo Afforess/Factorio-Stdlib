@@ -4,7 +4,7 @@
 -- @usage local Tile = require('stdlib/area/tile')
 -- @see LuaTile
 
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 local Area = require 'stdlib/area/area'
 local Position = require 'stdlib/area/position'
 local Chunk = require 'stdlib/area/chunk'

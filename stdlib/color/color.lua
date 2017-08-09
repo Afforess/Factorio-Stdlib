@@ -3,7 +3,7 @@
 -- @usage local Color = require('stdlib/color/color')
 
 require 'stdlib/defines/color'
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 
 Color = {} --luacheck: allow defined top
 
@@ -38,7 +38,7 @@ end
 -- @tparam[opt=0] int r 0-255 red
 -- @tparam[opt=0] int g 0-255 green
 -- @tparam[opt=0] int b 0-255 blue
--- @tparam[opt=255] int a o-255 alpha
+-- @tparam[opt=255] int a 0-255 alpha
 -- @treturn Concepts.Color
 function Color.from_rgb(r, g, b, a)
     r = r or 0

@@ -5,7 +5,7 @@
 -- @module Recipe
 -- @usage local Data = require('stdlib/data/data')
 
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 local Data = require 'stdlib/data/data'
 
 Recipe = {} --luacheck: allow defined top

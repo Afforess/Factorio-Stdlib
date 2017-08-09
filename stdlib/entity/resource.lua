@@ -6,7 +6,7 @@ local Surface = require 'stdlib/area/surface'
 local Area = require 'stdlib/area/area'
 local Tile = require 'stdlib/area/tile'
 local Queue = require 'stdlib/utils/queue'
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 require 'stdlib/table'
 
 Resource = {}--luacheck: allow defined top

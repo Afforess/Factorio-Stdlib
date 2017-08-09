@@ -2,7 +2,7 @@
 -- @module Inventory
 -- @usage local Inventory = require('stdlib/entity/inventory')
 
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 
 Inventory = {} --luacheck: allow defined top
 

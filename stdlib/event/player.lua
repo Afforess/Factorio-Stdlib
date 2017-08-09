@@ -1,32 +1,33 @@
 --- Player global creation.
--- Requiring this module will automatically create a global.players[index] for all new players using stdlib's Event system
+-- Requiring this module will register init and player creation events using the stdlib Event module.
+-- All existing and new players will be added to the global.players table.
+-- <br>This module should be first required after any other Init functions but before any scripts needing global.players
 -- @module Player
 -- @usage local Player = require 'stdlib/event/player'
--- -- The fist time this is required it will register player creation events
+-- -- The fist time this module is required it will register player creation events
 
 require('stdlib/event/event')
 require('stdlib/table')
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 
 local Player = {}
 
--- Return new default player object
+-- Return new default player object consiting of index and name
 local function new(player_index)
-    local obj = {
+    return {
         index = player_index,
         name = game.players[player_index].name,
     }
-    return obj
 end
 
--- Print any messages in the queue.
-local function check_message_queue(player_index)
-    if global._mess_queue then
-        for _, msg in pairs(global._mess_queue) do
-            game.players[player_index].print(msg)
-        end
-        global._mess_queue = nil
+-- Return a valid player object from event, index, string, or userdata
+local function parse_player(player)
+    if player and type(player) == "table" then
+        player = player.player_index and game.players[player.player_index]
+    elseif type(player) ~= "userdata" then
+        player = game.players[player]
     end
+    return player and player.valid and player or error("Invalid Player")
 end
 
 --- Get the game.players[index] and global.players[index] objects, create the global.players[index] object if it doesn't exist.
@@ -37,7 +38,6 @@ end
 -- local player, player_data = Player.get(event.player_index)
 function Player.get(index)
     fail_if_missing(index, 'Missing index to retrieve')
-
     return game.players[index], global.players[index] or Player.init(index) and global.players[index]
 end
 
@@ -53,37 +53,42 @@ end
 --- Remove data for a player when they are deleted
 -- @tparam table event event table containing the player_index
 function Player.remove(event)
-    if event.player_index then
-        global.players[event.player_index] = nil
-    end
+    local player = parse_player(event)
+    global.players[player.index] = nil
 end
 Event.register(defines.events.on_player_removed, Player.remove)
 
---- Init or re-init a player or players,
--- @tparam[opt] number|table event table or a number containing player_index
+--- Init or re-init a player or players, Passing a nil event will iterate all existing players
+-- @tparam[opt] number|table|string|LuaPlayer table containing player_index or name, index or player object
 -- @tparam[opt=false] boolean overwrite the player data
 function Player.init(event, overwrite)
-    -- Turn it into a valid event table
-    event = event and type(event) == "number" and {player_index = event, name = 99999} or event
+    -- Create the global.players table if it doesn't exisit
     global.players = global.players or {}
 
-    -- If event is not nil than we are working with a single player
-    if event and event.name >= 0 and event.player_index then
-        if not game.players[event.player_index] then error("Invalid Player") end
+    local player = parse_player(event)
+
+    if player then --If player is not nil then we are working with a valid player.
         if not global.players[event.player_index] or (global.players[event.player_index] and overwrite) then
-            global.players[event.player_index] = new(event.player_index)
-            -- Does this player have any messages queued up?
-            check_message_queue(event.player_index)
+            global.players[player.index] = new(player.index)
         end
-    else
+    else --Check all players
         for index in pairs(game.players) do
             if not global.players[index] or (global.players[index] and overwrite) then
                 global.players[index] = new(index)
             end
         end
     end
+
+    if global._print_queue then
+        table.each(global._print_queue, function(msg) game.print(tostring(msg)) end)
+        global._print_queue = nil
+    end
 end
 Event.register(defines.events.on_player_created, Player.init)
+-- On a new map this won't register any players, on an existing map it will
 Event.register(Event.core_events.init, Player.init)
+-- If the mod has already done Init before adding this module we need to make sure we init players
+-- Calling this on every configuration_changed event has no harm.
+Event.register(Event.core_events.configuration_changed, Player.init)
 
 return Player

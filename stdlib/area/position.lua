@@ -5,7 +5,7 @@
 -- @see Concepts.Position
 -- @see defines.direction
 
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 
 Position = {} --luacheck: allow defined top
 

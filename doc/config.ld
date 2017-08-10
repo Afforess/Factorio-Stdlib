@@ -7,6 +7,7 @@ full_description = [[
 ]]
 no_lua_ref = true
 convert_opt = true
+sort = true
 no_return_or_parms = false
 not_luadoc = true
 merge = false

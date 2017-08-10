@@ -36,7 +36,7 @@ end
 
 --- Return a valid force object from event, string, or userdata
 -- @tparam string|LuaForce|event mixed
--- @treturn LuaPlayer a valid force or nil
+-- @treturn LuaForce a valid force or nil
 function Game.get_force(mixed)
     if type(mixed) == "userdata" then
         return mixed and mixed.valid and mixed

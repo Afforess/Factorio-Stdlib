@@ -2,6 +2,10 @@
 -- Factorio can only have one handler registered per event. This module
 -- allows you to easily register multiple handlers for each event.
 -- Using this module is as simple as replacing @{LuaBootstrap.on_event|script.on_event(...)} with @{register|Event.register(...)}.
+-- <br>Due to the way the event system works it is not recommended to intermingle `script.on_event` and `Event.register`. Stdlib's Event module
+-- hooks into the event system and using `script.on_event` for the same event will change which events are registered.
+-- <br>Additionaly the Event system doesn't have many of the multiplayer protections that `script.on_event` does.
+-- due to this great care must be taking when registering events conditionally.
 -- @module Event
 -- @usage require('stdlib/event/event')
 

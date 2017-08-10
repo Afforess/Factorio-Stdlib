@@ -52,7 +52,7 @@ end
 
 --- Messages all players currently connected to the game.
 --> Offline players are not counted as having received the message.
--- If no players exist msg is stored in the global._print_queue table.
+-- If no players exist msg is stored in the `global._print_queue` table.
 -- @tparam string msg the message to send to players
 -- @tparam[opt] ?|nil|boolean condition the condition to be true for a player to be messaged
 -- @treturn uint the number of players who received the message.

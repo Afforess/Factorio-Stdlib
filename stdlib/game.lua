@@ -18,6 +18,38 @@ function Game.fail_if_missing(var, msg)
     return false
 end
 
+--- Return a valid player object from event, index, string, or userdata
+-- @tparam string|number|LuaPlayer|event mixed
+-- @treturn LuaPlayer a valid player or nil
+function Game.get_player(mixed)
+    if type(mixed) == "userdata" then
+        return mixed and mixed.valid and mixed
+    elseif type(mixed) ~= nil then
+        if type(mixed) == "table" then
+            return mixed.player_index and game.players[mixed.player_index]
+        else
+            local player = game.players[mixed]
+            return player and player.valid and player
+        end
+    end
+end
+
+--- Return a valid force object from event, string, or userdata
+-- @tparam string|LuaForce|event mixed
+-- @treturn LuaPlayer a valid force or nil
+function Game.get_force(mixed)
+    if type(mixed) == "userdata" then
+        return mixed and mixed.valid and mixed
+    elseif type(mixed) ~= "nil" then
+        if type(mixed) == "table" then
+            Game.parse_force(mixed.force)
+        elseif type(mixed == "string") then
+            local force = game.forces[mixed]
+            return force and force.valid and force
+        end
+    end
+end
+
 --- Messages all players currently connected to the game.
 --> Offline players are not counted as having received the message.
 -- If no players exist msg is stored in the global._print_queue table.

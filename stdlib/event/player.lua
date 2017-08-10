@@ -2,13 +2,14 @@
 -- Requiring this module will register init and player creation events using the stdlib Event module.
 -- All existing and new players will be added to the global.players table.
 -- <br>This module should be first required after any other Init functions but before any scripts needing global.players
+-- <br>Registers on_init, on_configuration_changed, on_player_created, on_player_removed
 -- @module Player
 -- @usage local Player = require 'stdlib/event/player'
 -- -- The fist time this module is required it will register player creation events
 
 require('stdlib/event/event')
 require('stdlib/table')
-local fail_if_missing = require 'stdlib/game'['fail_if_missing']
+local Game = require 'stdlib/game'
 
 local Player = {}
 
@@ -20,28 +21,16 @@ local function new(player_index)
     }
 end
 
--- Return a valid player object from event, index, string, or userdata returns nil if not valid
-local function parse_player(mixed)
-    local player
-    if type(mixed) == "table" then
-        player = mixed.player_index and game.players[mixed.player_index]
-    elseif type(mixed) == "userdata" then
-        player = mixed
-    else
-        player = mixed and game.players[mixed]
-    end
-    return player and player.valid and player
-end
-
 --- Get the game.players[index] and global.players[index] objects, create the global.players[index] object if it doesn't exist.
--- @tparam number index the player index to get data for
+-- @tparam number|string|LuaPlayer player the player index to get data for
 -- @treturn LuaPlayer
 -- @treturn table The players global data
 -- @usage local Player = require 'stdlib/event/player'
 -- local player, player_data = Player.get(event.player_index)
-function Player.get(index)
-    fail_if_missing(index, 'Missing index to retrieve')
-    return game.players[index], global.players[index] or Player.init(index)
+function Player.get(player)
+    player = Game.get_player(player)
+    Game.fail_if_missing(player, 'Missing player to retrieve')
+    return game.players[player.index], global.players[player.index] or Player.init(player.index)
 end
 
 --- Merge a copy of the passed data to all players in global.players
@@ -56,7 +45,7 @@ end
 --- Remove data for a player when they are deleted
 -- @tparam table event event table containing the player_index
 function Player.remove(event)
-    local player = parse_player(event)
+    local player = Game.get_player(event)
     if player then
         global.players[player.index] = nil
     end
@@ -71,7 +60,7 @@ function Player.init(event, overwrite)
     global.players = global.players or {}
 
     --get a valid player object or nil
-    local player = parse_player(event)
+    local player = Game.get_player(event)
 
     if player then --If player is not nil then we are working with a valid player.
         if not global.players[player.index] or (global.players[player.index] and overwrite) then

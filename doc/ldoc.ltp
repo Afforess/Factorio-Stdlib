@@ -116,7 +116,7 @@
     <h4>Contents of <strong>$(display_name(module))</strong></h4>
     <ul class="nav">
 > for kind,items in module.kinds() do
-    <li class="nav-item"><a href="#$(kind)"><span class="fragment-hashtag">#</span> $(kind)</a></li>
+    <li class="nav-item"><a href="#$(no_spaces(kind))"><span class="fragment-hashtag">#</span> $(kind)</a></li>
 > end
     </ul>
     </li>

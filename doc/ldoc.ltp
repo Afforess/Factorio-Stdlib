@@ -15,7 +15,11 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+> if module then
+    <title>$(module.name) $(module.type)</title>
+> else
     <title>$(ldoc.title)</title>
+> end
     <meta name="viewport" content="width=device-width, initial-scale=1">
 > if module then
     <link rel="stylesheet" href="../spectre.min.css" type="text/css" />

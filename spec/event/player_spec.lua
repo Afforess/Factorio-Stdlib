@@ -42,6 +42,7 @@ describe('Player',
                 local match = require("luassert.match")
                 assert.spy(register_spy).was_called_with(defines.events.on_player_created, match.is_function())
                 assert.spy(register_spy).was_called_with(Event.core_events.init, match.is_function())
+                assert.spy(register_spy).was_called_with(Event.core_events.configuration_changed, match.is_function())
             end
         )
 
@@ -62,6 +63,20 @@ describe('Player',
                 end
                 require('stdlib/event/player')
                 Event.dispatch({name = Event.core_events.init})
+                for player_index in ipairs(global.players) do
+                    assert.same(game.players[player_index].name, global.players[player_index].name)
+                end
+            end
+        )
+
+        it('should load players into the global object on configuration changed',
+            function()
+                local player_names = {'PlayerOne', 'PlayerTwo', 'PlayerThree'}
+                for player_index, player_name in ipairs(player_names) do
+                    table.insert(game.players, { index = player_index, name = player_name, valid = true })
+                end
+                require('stdlib/event/player')
+                Event.dispatch({name = Event.core_events.configuration_changed})
                 for player_index in ipairs(global.players) do
                     assert.same(game.players[player_index].name, global.players[player_index].name)
                 end
@@ -132,16 +147,118 @@ describe('Player',
 
         it('.add_data_all should merge a copy of the passed data to all players in global.players',
             function()
+                local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
+                for player_index, player_name in ipairs(player_names) do
+                    table.insert(global.players, { index = player_index, name = player_name, data = "Data" .. player_index })
+                end
+                local Player = require('stdlib/event/player')
+                local data = {a = 'abc', b = 'def'}
+                Player.add_data_all(data)
+                for player_index, _ in ipairs(player_names) do
+                    assert.equal(data.a, global.players[player_index].a)
+                    assert.equal(data.b, global.players[player_index].b)
+                end
             end
         )
 
-        it('.remove should remove data for a player when the player is deleted',
+        it('.remove should remove data for players when an event is passed',
             function()
+                local Player = require('stdlib/event/player')
+                local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
+                for player_index, player_name in ipairs(player_names) do
+                    table.insert(game.players, { index = player_index, name = player_name, valid = true })
+                    table.insert(global.players, { index = player_index, name = player_name, data = "Data" .. player_index })
+                end
+                for player_index, _ in ipairs(player_names) do
+                    Player.remove({player_index = player_index})
+                    assert.is_nil(global.players[player_index])
+                end
             end
         )
 
-        it('.init should re-init a player',
+        it('.init should initialize global.players',
             function()
+                local Player = require('stdlib/event/player')
+                local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
+                for player_index, player_name in ipairs(player_names) do
+                    table.insert(game.players, { index = player_index, name = player_name, valid = true })
+                end
+                assert.is_not_equal(#game.players, #global.players)
+                assert.is_same({}, global.players)
+                for player_index, _ in ipairs(player_names) do
+                    Player.init({player_index = player_index})
+                    assert.same({index = player_index, name = game.players[player_index].name}, global.players[player_index])
+                end
+                assert.is_equal(#game.players, #global.players)
+            end
+        )
+
+        it('.init should re-init players',
+            function()
+                local Player = require('stdlib/event/player')
+                local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
+                for player_index, player_name in ipairs(player_names) do
+                    table.insert(game.players, { index = player_index, name = player_name, valid = true })
+                    table.insert(global.players, { index = player_index, name = player_name, data = "Data" .. player_index })
+                end
+                for player_index, _ in ipairs(player_names) do
+                    assert.is_not_nil(global.players[player_index].data)
+                    Player.init({player_index = player_index}, true)
+                    assert.is_nil(global.players[player_index].data)
+                    assert.same({index = player_index, name = game.players[player_index].name}, global.players[player_index])
+                end
+            end
+        )
+
+        it('.init should iterate all game.players[index] and initialize global.players[index] when nil is passed',
+            function()
+                local Player = require('stdlib/event/player')
+                local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
+                for player_index, player_name in ipairs(player_names) do
+                    table.insert(game.players, { index = player_index, name = player_name, valid = true })
+                end
+                assert.same({}, global.players)
+                Player.init(nil)
+                assert.equal(#game.players, #global.players)
+                for player_index, _ in ipairs(player_names) do
+                    assert.same({index = game.players[player_index].index, name = game.players[player_index].name}, global.players[player_index])
+                end
+            end
+        )
+
+        it('.init should iterate all game.players[index] and re-init global.players[index] when event is nil and overwrite is true',
+            function()
+                local Player = require('stdlib/event/player')
+                local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
+                for player_index, player_name in ipairs(player_names) do
+                    table.insert(game.players, { index = player_index, name = player_name, valid = true })
+                    table.insert(global.players, { index = player_index, name = player_name, data = "Data" .. player_index })
+                end
+                assert.equal(#game.players, #global.players)
+                for player_index, _ in ipairs(player_names) do
+                    assert.is_not_nil(global.players[player_index].data)
+                end
+                Player.init(nil, true)
+                assert.equal(#game.players, #global.players)
+                for player_index, _ in ipairs(player_names) do
+                    assert.is_nil(global.players[player_index].data)
+                    assert.same({index = player_index, name = game.players[player_index].name}, global.players[player_index])
+                end
+            end
+        )
+
+        it('.init should initialize global.players for all existing game.players even if a single game.players[index] is not a valid player',
+            function()
+                local Player = require('stdlib/event/player')
+                local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
+                for player_index, player_name in ipairs(player_names) do
+                    table.insert(game.players, { index = player_index, name = player_name, valid = false })
+                end
+                Player.init({player_index = 1})
+                for player_index, _ in ipairs(player_names) do
+                    assert.is_not_nil(global.players[player_index])
+                    assert.same({index = player_index, name = game.players[player_index].name}, global.players[player_index])
+                end
             end
         )
 

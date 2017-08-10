@@ -22,15 +22,16 @@ end
 -- @tparam string|number|LuaPlayer|event mixed
 -- @treturn LuaPlayer a valid player or nil
 function Game.get_player(mixed)
-    if type(mixed) == "userdata" then
-        return mixed and mixed.valid and mixed
-    elseif type(mixed) ~= nil then
-        if type(mixed) == "table" then
-            return mixed.player_index and game.players[mixed.player_index]
-        else
-            local player = game.players[mixed]
+    if type(mixed) == "table" then
+        if mixed.__self then
+            return mixed and mixed.valid and mixed
+        elseif mixed.player_index then
+            local player = game.players[mixed.player_index]
             return player and player.valid and player
         end
+    elseif mixed then
+        local player = game.players[mixed]
+        return player and player.valid and player
     end
 end
 
@@ -38,15 +39,15 @@ end
 -- @tparam string|LuaForce|event mixed
 -- @treturn LuaForce a valid force or nil
 function Game.get_force(mixed)
-    if type(mixed) == "userdata" then
-        return mixed and mixed.valid and mixed
-    elseif type(mixed) ~= "nil" then
-        if type(mixed) == "table" then
+    if type(mixed) == "table" then
+        if mixed.__self then
+            return mixed and mixed.valid and mixed
+        elseif mixed.force then
             Game.parse_force(mixed.force)
-        elseif type(mixed == "string") then
-            local force = game.forces[mixed]
-            return force and force.valid and force
         end
+    elseif type(mixed) == "string" then
+        local force = game.forces[mixed]
+        return force and force.valid and force
     end
 end
 

@@ -93,7 +93,7 @@ function Event.dispatch(event)
 
                 -- Check for userdata and stop processing further handlers if not valid
                 for _, val in pairs(event) do
-                    if type(val) == "table" and val.__self == "userdata" and not val.valid then
+                    if type(val) == "table" and val.__self and not val.valid then
                         return
                     end
                 end

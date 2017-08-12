@@ -43,11 +43,11 @@ function Game.get_force(mixed)
         if mixed.__self then
             return mixed and mixed.valid and mixed
         elseif mixed.force then
-            Game.parse_force(mixed.force)
+            return Game.get_force(mixed.force)
         end
     elseif type(mixed) == "string" then
         local force = game.forces[mixed]
-        return force and force.valid and force
+        return (force and force.valid) and force
     end
 end
 

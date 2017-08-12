@@ -7,6 +7,7 @@ describe('Force',
 
         setup(
             function()
+                --_G.serpent = require('serpent')
                 _G.script = {
                     on_event = function(_, _) return end,
                     on_init = function(callback) _G.on_init = callback end,
@@ -29,6 +30,7 @@ describe('Force',
                 _G.global = { forces = { }}
 
                 setmetatable(game.forces, _mt)
+                setmetatable(global.forces, _mt)
             end
         )
 
@@ -167,14 +169,25 @@ describe('Force',
         it('.init should re-init forces',
             function()
                 local Force = require('stdlib/event/force')
-                local force_names = {"ForceOne", "ForceTwo", "ForceThree"}
+                local force_names = {"ForceOne", "ForceTwo", "ForceThree", "ForceFour"}
                 for _, force_name in ipairs(force_names) do
                     game.forces[force_name] = { index = force_name, name = force_name }
                     global.forces[force_name] = { index = force_name, name = force_name, data = "Data" .. force_name }
                 end
-                for _, force_name in ipairs(force_names) do
+
+                for i, force_name in ipairs(force_names) do
                     assert.is_not_nil(global.forces[force_name].data)
-                    Force.init({name = force_name}, true)
+
+                    if i == 1 then
+                        Force.init(game.forces[force_name], true)
+                    elseif i == 2 then
+                        Force.init({force = game.forces[force_name]}, true)
+                    elseif i == 3 then
+                        Force.init({force=force_name}, true)
+                    else
+                        Force.init(force_name, true)
+                    end
+
                     assert.is_nil(global.forces[force_name].data)
                     assert.same({index = force_name, name = game.forces[force_name].name}, global.forces[force_name])
                 end
@@ -227,13 +240,12 @@ describe('Force',
                 for _, force_name in ipairs(force_names) do
                     game.forces[force_name] = { index = force_name, name = force_name}
                 end
-                Force.init({index = 4})
+                Force.init({force = "fake"})
                 for _, force_name in ipairs(force_names) do
                     assert.is_not_nil(global.forces[force_name])
                     assert.same({index = force_name, name = game.forces[force_name].name}, global.forces[force_name])
                 end
             end
         )
-
     end
 )

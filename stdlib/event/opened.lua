@@ -29,7 +29,7 @@ local function raise_opened_closed_events(event)
                 Event.Closed( player, 'entity', was.opened )
             end
 
-            -- Note: Should get 2 events...
+            -- Note: Should get two events...
             -- if something was open (closed event),
             -- but now something else is open (open event),
             -- ...hence no else/elseif at this point.

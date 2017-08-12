@@ -235,7 +235,7 @@ end
 -- @usage
 -- local next_pos = Position.increment({0, 0}, 0, 1)
 -- surface.create_entity{name = 'flying-text', text = 'text', position = next_pos()}
--- surface.create_entity{name = 'flying-text', text = 'text', position = next_pos()} -- creates 2 flying text entities 1 tile apart
+-- surface.create_entity{name = 'flying-text', text = 'text', position = next_pos()} -- creates two flying text entities 1 tile apart
 -- @tparam Concepts.Position pos the position to start with
 -- @tparam[opt=0] number inc_x optional increment x by this amount
 -- @tparam[opt=0] number inc_y optional increment y by this amount

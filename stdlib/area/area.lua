@@ -36,7 +36,7 @@ end
 -- @see Area.new
 Area.to_table = Area.new
 
---- Creates an area from the 2 positions p1 and p2.
+--- Creates an area from the two positions p1 and p2.
 -- @tparam number x1 x-position of left_top, first position
 -- @tparam number y1 y-position of left_top, first position
 -- @tparam number x2 x-position of right_bottom, second position
@@ -55,7 +55,7 @@ function Area.copy(area)
     return Area.new({Position.copy(area.left_top), Position.copy(area.right_bottom)})
 end
 
---- Returns true if 2 areas are the same.
+--- Returns true if two areas are the same.
 -- @tparam Concepts.BoundingBox area1
 -- @tparam Concepts.BoundingBox area2
 -- @treturn boolean true if areas are equal
@@ -67,7 +67,8 @@ function Area.equals(area1, area2)
     return area1.left_top == area2.left_top and area1.right_bottom == area2.right_bottom
 end
 
---- Returns the size of the space contained in the 2D area.
+--- Gets the properties of the given area.
+-- This function returns a total of four values that represent the properties of the given area.
 -- @tparam Concepts.BoundingBox area the area from which to get the size
 -- @treturn number the size of the area &mdash; (width &times; height)
 -- @treturn number the width of the area
@@ -112,9 +113,10 @@ local function validate_vector(amount)
     end
 end
 
---- Shrinks the size of an area by the given amount.
+--- Shrinks the area by the given amount.
+-- The area shrinks inwards from top-left towards the bottom-right, and from bottom-right towards the top-left.
 -- @tparam Concepts.BoundingBox area the area to shrink
--- @tparam number|Concepts.Vector amount the amount to shrink each edge of the area inwards by
+-- @tparam number|Concepts.Vector amount the amount to shrink
 -- @treturn Concepts.BoundingBox the new shrunken area
 function Area.shrink(area, amount)
     area = Area.new(area)
@@ -204,7 +206,7 @@ function Area.center(area)
     return Position.new{area.left_top.x + (dist_x / 2), area.left_top.y + (dist_y / 2)}
 end
 
---- Offsets the area by the {x, y} values.
+--- Offsets the area by the `{x, y}` values.
 -- @tparam Concepts.BoundingBox area the area to offset
 -- @tparam Concepts.Position pos the position to which the area will offset
 -- @treturn Concepts.BoundingBox new area offset by the position
@@ -233,9 +235,14 @@ function Area.translate(area, direction, distance)
     return area
 end
 
---- Converts an area to the integer representation, by taking the floor of the left\_top and the ceiling of the right\_bottom.
+--- Rounds down the xy-values in `area.left_top` and rounds up the xy-values in `area.right_bottom`.
+-- @usage
+-- local position1 = {x = 1.5, y = 1.5}
+-- local position2 = {x = 1.5, y = 1.5}
+-- local area = {left_top = position1, right_bottom = position2}
+-- Area.round_to_integer(area) --> {left_top = {x = 1, y = 1}, right_bottom = {x = 2, y = 2}}
 -- @tparam Concepts.BoundingBox area the area to round
--- @treturn int the rounded integer representation
+-- @treturn Concepts.BoundingBox the area with rounded positions
 function Area.round_to_integer(area)
     area = Area.new(area)
 
@@ -268,7 +275,7 @@ function Area.iterate(area)
     return iterator.iterate, area, 0
 end
 
---- Iterates an area in a spiral as depicted below, from innermost to the outermost location.
+--- Iterates the given area in a spiral as depicted below, from innermost to the outermost location.
 -- <p>![](http://i.imgur.com/EwfO0Es.png)
 -- @usage for x, y in Area.spiral_iterate({{-2, -1}, {2, 1}}) do
 --   print('(' .. x .. ', ' .. y .. ')')
@@ -314,9 +321,14 @@ function Area.spiral_iterate(area)
     return iterator.iterate, area, 0
 end
 
---- Creates a new area, a modified copy of the original, such that left and right x, up and down y are normalized, where left.x < right.x, left.y < right.y order.
--- @tparam Concepts.BoundingBox area the area to adjust
--- @treturn Concepts.BoundingBox a normalized area
+--- Normalizes the given area.
+-- <ul>
+-- <li>Swaps the values between `right_bottom.x` & `left_top.x` **IF** `right_bottom.x` < `left_top.x`
+-- <li>Swaps the values between `right_bottom.y` & `left_top.y` **IF** `right_bottom.y` < `left_top.y`
+-- </ul>
+-- Essentially, the normalization process constructs a new area out of the swapped coordinates.
+-- @tparam Concepts.BoundingBox area the area to normalize
+-- @treturn Concepts.BoundingBox the normalized area
 function Area.normalize(area)
     area = Area.new(area)
 
@@ -337,9 +349,9 @@ function Area.normalize(area)
     return Area.construct(left_top.x, left_top.y, right_bottom.x, right_bottom.y)
 end
 
---- Converts the given area's two BoundingBox positions to the center positions of the tiles in which they reside.
--- @tparam Concepts.BoundingBox area the area to convert
--- @treturn Concepts.BoundingBox an area where its two BoundingBox positions are at the center of the tiles in which they reside
+--- Gets the center positions of the tiles where the given area's two positions reside.
+-- @tparam Concepts.BoundingBox area the area to examine
+-- @treturn Concepts.BoundingBox a new area where its two positions are at the center of the tiles in which they reside
 function Area.tile_center_points(area)
     area = Area.new(area)
 

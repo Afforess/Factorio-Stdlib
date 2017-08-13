@@ -1,7 +1,7 @@
 dependencies:
     pre:
         - sudo apt-get update
-        - sudo apt-get install build-essential curl wget unzip git openssl lua5.2 lua5.2-dev libev-dev -y
+        - sudo apt-get install build-essential curl wget unzip git openssl lua5.2 lua5.2-dev libev-dev jquery -y
         - wget -O /tmp/luarocks.zip https://github.com/keplerproject/luarocks/archive/v2.3.0.zip
         - unzip /tmp/luarocks.zip -d /tmp
         - (cd /tmp/luarocks-2.3.0 && ./configure --prefix=/usr --lua-version=5.2)

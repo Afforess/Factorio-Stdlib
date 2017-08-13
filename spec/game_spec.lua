@@ -117,7 +117,7 @@ describe("Game Spec",
                 for _, force_name in ipairs(force_names) do
                     game.forces[force_name] = { index = force_name, name = force_name}
                 end
-                for index, force in ipairs(game.forces) do
+                for _, force in pairs(game.forces) do
                     assert.equal(force, Game.get_force(force))
                     assert.same(force, Game.get_force(force))
                 end
@@ -131,7 +131,7 @@ describe("Game Spec",
                     game.forces[force_name] = { index = force_name, force = force_name}
                     game.forces[force_name].__self = false
                 end
-                for force_name, force in pairs(game.forces) do
+                for _, force in pairs(game.forces) do
                     assert.equal(force, Game.get_force(force))
                     assert.same(force, Game.get_force(force))
                 end
@@ -187,7 +187,7 @@ describe("Game Spec",
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { player_index = player_index, name = player_name}
                 end
-                for player_index, player in ipairs(game.players) do
+                for _, player in ipairs(game.players) do
                     assert.equal(player, Game.get_player(player))
                     assert.same(player, Game.get_player(player))
                 end
@@ -201,7 +201,7 @@ describe("Game Spec",
                     game.players[player_index] = { player_index = player_index, name = player_name}
                     game.players[player_index].__self = false
                 end
-                for player_index, player in ipairs(game.players) do
+                for _, player in ipairs(game.players) do
                     assert.equal(player, Game.get_player(player))
                     assert.same(player, Game.get_player(player))
                 end
@@ -234,7 +234,7 @@ describe("Game Spec",
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { player_index = player_index, name = player_name, valid = false}
                 end
-                for player_index, player in ipairs(game.players) do
+                for _, player in ipairs(game.players) do
                     assert.is_false(Game.get_player(player))
                 end
             end
@@ -246,7 +246,7 @@ describe("Game Spec",
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { player_index = nil, name = player_name, valid = false, __self = false}
                 end
-                for player_index, player in ipairs(game.players) do
+                for _, player in ipairs(game.players) do
                     assert.is_nil(Game.get_player(player))
                 end
             end
@@ -258,7 +258,7 @@ describe("Game Spec",
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { player_index = player_index, name = player_name, valid = false, __self = false}
                 end
-                for player_index, player in ipairs(game.players) do
+                for _, player in ipairs(game.players) do
                     assert.is_false(Game.get_player(player))
                 end
             end

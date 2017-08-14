@@ -1,15 +1,19 @@
 --- Makes working with events in Factorio a lot more simple.
--- Factorio can only have one handler registered per event. This module
--- allows you to easily register multiple handlers for each event.
--- Using this module is as simple as replacing @{LuaBootstrap.on_event|script.on_event(...)} with @{register|Event.register(...)}.
--- <br>Due to the way the event system works it is not recommended to intermingle `script.on_event` and `Event.register`. Stdlib's Event module
--- hooks into the event system and using `script.on_event` for the same event will change which events are registered.
--- <br>Additionaly the Event system doesn't have many of the multiplayer protections that `script.on_event` does.
--- due to this great care must be taking when registering events conditionally.
+-- <p>By default, Factorio allows you to register **only one handler** to an event.
+-- <p>This module lets you easily register **multiple handlers** to an event.
+-- <p>Using this module is as simple as replacing @{LuaBootstrap.on_event|script.on_event} with @{Event.register}.
+-- <blockquote>
+-- Due to the way that Factorio's event system works, it is not recommended to intermingle `script.on_event` and `Event.register` in a mod.
+-- <br>This module hooks into Factorio's event system, and using `script.on_event` for the same event will change which events are registered.
+-- </blockquote>
+-- <blockquote>
+-- This module does not have many of the multiplayer protections that `script.on_event` does.
+-- <br>Due to this, great care should be taken when registering events conditionally.
+-- </blockquote>
 -- @module Event
--- @usage require('stdlib/event/event')
+-- @usage require("stdlib/event/event")
 
-local fail_if_missing = require 'stdlib/game'['fail_if_missing']
+local fail_if_missing = require "stdlib/game"["fail_if_missing"]
 
 Event = { --luacheck: allow defined top
     _registry = {},
@@ -43,14 +47,19 @@ Event = { --luacheck: allow defined top
     }
 }
 
---- Registers a function for a given event.
--- If a nil handler is passed, remove all events and stop listening for that event.
+--- Registers a handler for a given events.
+-- If a nil handler is passed, remove the given events and stop listening to them.
 -- <p>Events are dispatched in the order they are registered.
--- @usage Event.register(defines.events.on_tick, function(event) print event.tick end)
--- -- creates an event that prints the current tick every tick.
--- @tparam defines.events|{defines.events,...} event events to register
--- @tparam function handler function to call when event is triggered
--- @return (<span class="types">@{Event}</span>)
+-- @usage
+-- -- Create an event that prints the current tick every tick.
+-- Event.register(defines.events.on_tick, function(event) print event.tick end)
+-- -- Create an event that prints the new ID of a train.
+-- Event.register(Trains.on_train_id_changed, function(event) print(event.new_id) end)
+-- -- Function call chaining
+-- Event.register(event1, handler1).register(event2, handler2)
+-- @tparam defines.events|{defines.events,...} event
+-- @tparam function handler function to call when the given events are triggered
+-- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.register(event, handler)
     fail_if_missing(event, "missing event argument")
 
@@ -79,10 +88,28 @@ function Event.register(event, handler)
     return Event
 end
 
---- Calls the registerd handlers.
--- This will stop dispatching the remaining handlers if any handler passes an invalid event object.
+---
+-- <p>***Note***: This is a description of the structure of a table that the user should create &mdash;
+-- the user should create a table in this format, for a table that will be passed into @{Event.dispatch}.
+--> The table **MUST** have either `name` or `input_name`.
+-- @tfield[opt] uint|defines.events name unique event ID generated with @{LuaBootstrap.generate_event_name|script.generate_event_name} ***OR*** @{defines.events}
+-- @tfield[opt] string input_name custom input name of an event
+-- @field[opt] ... any # of additional fields with extra data, which are passed into the handler registered to an event that this table represents
+-- @usage
+-- -- below code is from Trains module.
+-- -- old_id & new_id are additional fields passed into the handler that's registered to Trains.on_train_id_changed event.
+-- local event_data = {
+--     old_id = renaming.old_id,
+--     new_id = renaming.new_id,
+--     name = Trains.on_train_id_changed
+-- }
+-- Event.dispatch(event_data)
+-- @table event_data
+
+--- Calls the handlers that are registered to the given event.
+-- <p>Stop calling the handlers if any one of them has an invalid userdata.
 -- <p>Handlers are dispatched in the order they are created.
--- @tparam {defines.events,...} event an array of @{defines.events} as raised by @{LuaBootstrap.raise_event|script.raise_event}
+-- @param event (<span class="types">@{event_data}</span>)
 -- @see https://forums.factorio.com/viewtopic.php?t=32039#p202158 Invalid Event Objects
 function Event.dispatch(event)
     if event then
@@ -111,13 +138,13 @@ function Event.dispatch(event)
                     else -- no players received the message, force a real error so someone notices
                         error(err) -- no way to handle errors cleanly when the game is not up
                     end
-                    -- continue processing the remaining handlers. In most cases they won't be related to the failed code.
+                    -- continue processing the remaning handlers. In most cases they won"t be related to the failed code.
                 end
 
                 -- force a crc check if option is enabled. This is a debug option and will hamper perfomance if enabled
                 if (force_crc or event.force_crc) and _G.game then
-                    local msg = 'CRC check called for event '..event.name..' handler #'..idx
-                    log(msg)  -- log the message to factorio-current.log
+                    local msg = "CRC check called for event "..event.name.." handler #"..idx
+                    log(msg) -- log the message to factorio-current.log
                     game.force_crc()
                 end
 
@@ -128,14 +155,15 @@ function Event.dispatch(event)
             end
         end
     else
-        error('missing event argument')
+        error("missing event argument")
     end
 end
 
---- Removes a handler from events. If it removes the last handler for an event, stop listening for that event.
--- @tparam defines.events|{defines.events,...} event events for which to remove a handler
+--- Removes a handler from events.
+-- When the last handler for an event is removed, stop listening to that event.
+-- @tparam defines.events|{defines.events,...}|uint|{uint,...}|string|{string,...} event events for which to remove a handler
 -- @tparam function handler a handler that should be removed
--- @return (<span class="types">@{Event}</span>)
+-- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.remove(event, handler)
     fail_if_missing(event, "missing event argument")
     fail_if_missing(handler, "missing handler argument")
@@ -147,7 +175,7 @@ function Event.remove(event, handler)
             error("Invalid Event Id, Must be string or int,  or array of strings and/or ints", 2)
         end
         if Event._registry[event_id] then
-            for i=#Event._registry[event_id], 1, -1 do
+            for i = #Event._registry[event_id], 1, - 1 do
                 if Event._registry[event_id][i] == handler then
                     table.remove(Event._registry[event_id], i)
                 end

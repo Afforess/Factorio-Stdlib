@@ -7,9 +7,9 @@
 -- @usage local Force = require 'stdlib/event/force'
 -- -- The fist time this is required it will register force creation events
 
-require('stdlib/event/event')
-require('stdlib/utils/table')
 local Game = require 'stdlib/game'
+require 'stdlib/utils/table'
+require 'stdlib/event/event'
 
 local Force = {}
 

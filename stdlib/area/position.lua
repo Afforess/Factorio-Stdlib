@@ -5,7 +5,7 @@
 -- @see Concepts.Position
 -- @see defines.direction
 
-local fail_if_missing = require 'stdlib/game'['fail_if_missing']
+local Game = require 'stdlib/game'
 
 Position = {} --luacheck: allow defined top
 
@@ -19,7 +19,7 @@ Position.epsilon = 1.19e-07
 -- @tparam array pos_arr the position to convert
 -- @treturn Concepts.Position a new correctly formated position with metatable
 function Position.new(pos_arr)
-    fail_if_missing(pos_arr, 'missing position argument')
+    Game.fail_if_missing(pos_arr, 'missing position argument')
 
     if getmetatable(pos_arr) == Position._mt then
         return pos_arr
@@ -54,8 +54,8 @@ Position.to_table = Position.new
 -- @tparam number y y-position
 -- @treturn Concepts.Position
 function Position.construct(x, y)
-    fail_if_missing(x, 'missing x position argument')
-    fail_if_missing(y, 'missing y position argument')
+    Game.fail_if_missing(x, 'missing x position argument')
+    Game.fail_if_missing(y, 'missing y position argument')
 
     return Position.new({ x = x, y = y })
 end
@@ -124,8 +124,8 @@ end
 -- @tparam number y the amount to offset the position on the y-axis
 -- @treturn Concepts.Position a new position, offset by the x,y coordinates
 function Position.offset(pos, x, y)
-    fail_if_missing(x, 'missing x-coordinate value')
-    fail_if_missing(y, 'missing y-coordinate value')
+    Game.fail_if_missing(x, 'missing x-coordinate value')
+    Game.fail_if_missing(y, 'missing y-coordinate value')
     pos = Position.new(pos)
 
     pos.x = pos.x + x
@@ -139,8 +139,8 @@ end
 -- @tparam number distance distance of the translation
 -- @treturn Concepts.Position a new translated position
 function Position.translate(pos, direction, distance)
-    fail_if_missing(direction, 'missing direction argument')
-    fail_if_missing(distance, 'missing distance argument')
+    Game.fail_if_missing(direction, 'missing direction argument')
+    Game.fail_if_missing(distance, 'missing distance argument')
     pos = Position.new(pos)
 
     if direction == defines.direction.north then
@@ -177,7 +177,7 @@ end
 -- @treturn Concepts.BoundingBox the area
 function Position.expand_to_area(pos, radius)
     pos = Position.new(pos)
-    fail_if_missing(radius, 'missing radius argument')
+    Game.fail_if_missing(radius, 'missing radius argument')
 
     local left_top = Position.new({pos.x - radius, pos.y - radius})
     local right_bottom = Position.new({pos.x + radius, pos.y + radius})
@@ -300,7 +300,7 @@ end
 -- @tparam[opt=false] boolean eight_way true to get the next direction in 8-way (note: not many prototypes support 8-way)
 -- @treturn defines.direction the next direction
 function Position.next_direction(direction, reverse, eight_way)
-    fail_if_missing(direction, 'missing starting direction')
+    Game.fail_if_missing(direction, 'missing starting direction')
 
     local next_dir = direction + (eight_way and ((reverse and -1) or 1) or ((reverse and -2) or 2))
     return (next_dir > 7 and next_dir-next_dir) or (reverse and next_dir < 0 and 8 + next_dir) or next_dir
@@ -316,9 +316,4 @@ Position._mt = {
     __le = Position.less_than_eq,
 }
 
-local _return_mt = {
-    __newindex = function() error("Attempt to mutatate read-only Position Module") end,
-    __metatable = true
-}
-
-return setmetatable(Position, _return_mt)
+return setmetatable(Position, Game._protect("Position"))

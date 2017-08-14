@@ -169,7 +169,6 @@ describe('Area', function()
         end
     end)
 
-
     it('should validate area spiral iteration', function()
         local expected_iteration = {
           { 0,  0},
@@ -194,6 +193,21 @@ describe('Area', function()
             assert.same(expected_iteration[idx][2], y, "Idx: " .. idx)
             idx = idx + 1
         end
+    end)
+
+    --Only describing these here as they will be the same for all
+    describe('Area Metatable Protections', function()
+        it('Should not allow adding new keys', function()
+            assert.has_error(function() Area["fake"] = true end)
+        end)
+
+        it('Should not allow setting a new metatable', function()
+            assert.has_error(function() setmetatable(Area, {}) end)
+        end)
+
+        it('Should not getting the metatable', function()
+            assert.same(true, getmetatable(Area))
+        end)
     end)
 
     describe('Entity wrappers', function()

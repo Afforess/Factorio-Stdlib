@@ -4,7 +4,7 @@
 -- @module Queue
 -- @usage local Queue = require('stdlib/queue')
 
-local fail_if_missing = require 'stdlib/game'['fail_if_missing']
+local Game = require 'stdlib/game'
 
 Queue = {} --luacheck: allow defined top
 
@@ -35,7 +35,7 @@ end
 -- @param queue (<span class="types">@{Queue}</span>) the queue to push an element to
 -- @tparam Mixed value the element to push
 function Queue.push_first(queue, value)
-    fail_if_missing(value)
+    Game.fail_if_missing(value)
 
     local first = queue.first - 1
     queue.first = first
@@ -47,7 +47,7 @@ end
 -- @param queue (<span class="types">@{Queue}</span>) the queue to push an element to
 -- @tparam Mixed value the element to push
 function Queue.push_last(queue, value)
-    fail_if_missing(value)
+    Game.fail_if_missing(value)
 
     local last = queue.last + 1
     queue.last = last
@@ -143,9 +143,4 @@ Queue._mt = {
     --TODO custom __ipairs metatable
 }
 
-local _return_mt = {
-    __newindex = function() error("Attempt to mutatate read-only Queue Module") end,
-    __metatable = true
-}
-
-return setmetatable(Queue, _return_mt)
+return setmetatable(Queue, Game._protect("Queue"))

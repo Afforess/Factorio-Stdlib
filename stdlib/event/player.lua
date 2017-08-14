@@ -7,9 +7,9 @@
 -- @usage local Player = require 'stdlib/event/player'
 -- -- The fist time this module is required it will register player creation events
 
-require('stdlib/event/event')
-require('stdlib/utils/table')
 local Game = require 'stdlib/game'
+require 'stdlib/utils/table'
+require 'stdlib/event/event'
 
 local Player = {}
 

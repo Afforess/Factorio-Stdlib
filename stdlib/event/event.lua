@@ -13,7 +13,17 @@
 -- @module Event
 -- @usage require("stdlib/event/event")
 
+require 'stdlib/utils/table'
 local fail_if_missing = require "stdlib/game"["fail_if_missing"]
+
+local function is_valid_id(event_id)
+    if not (type(event_id) == "number" or type(event_id) == "string") then
+        error("Invalid Event Id, Must be string or int, or array of strings and/or ints, Passed in :"..event_id, 3)
+    end
+    if (type(event_id) == "number" and event_id <-3) then
+        error("event_id must be greater than -3, Passed in: "..event_id, 3)
+    end
+end
 
 Event = { --luacheck: allow defined top
     _registry = {},
@@ -66,9 +76,8 @@ function Event.register(event, handler)
     event = (type(event) == "table" and event) or {event}
 
     for _, event_id in pairs(event) do
-        if not (type(event_id) == "number" or type(event_id) == "string") then
-            error("Invalid Event Id, Must be string or int, or array of strings and/or ints", 2)
-        end
+        is_valid_id(event_id)
+
         if handler == nil then
             Event._registry[event_id] = nil
             script.on_event(event_id, nil)
@@ -82,7 +91,10 @@ function Event.register(event, handler)
                     Event.core_events._register(event_id)
                 end
             end
-            table.insert(Event._registry[event_id], handler)
+            --Only insert the handler if the handler isn't already registered
+            if not table.any(Event._registry[event_id], function(v) return v == handler end) then
+                table.insert(Event._registry[event_id], handler)
+            end
         end
     end
     return Event
@@ -99,9 +111,9 @@ end
 -- -- below code is from Trains module.
 -- -- old_id & new_id are additional fields passed into the handler that's registered to Trains.on_train_id_changed event.
 -- local event_data = {
---     old_id = renaming.old_id,
---     new_id = renaming.new_id,
---     name = Trains.on_train_id_changed
+-- old_id = renaming.old_id,
+-- new_id = renaming.new_id,
+-- name = Trains.on_train_id_changed
 -- }
 -- Event.dispatch(event_data)
 -- @table event_data
@@ -171,16 +183,15 @@ function Event.remove(event, handler)
     event = (type(event) == "table" and event) or {event}
 
     for _, event_id in pairs(event) do
-        if not (type(event_id) == "number" or type(event_id) == "string") then
-            error("Invalid Event Id, Must be string or int,  or array of strings and/or ints", 2)
-        end
+        is_valid_id(event_id)
+
         if Event._registry[event_id] then
             for i = #Event._registry[event_id], 1, - 1 do
                 if Event._registry[event_id][i] == handler then
                     table.remove(Event._registry[event_id], i)
                 end
             end
-            if #Event._registry[event_id] == 0 then
+            if table.size(Event._registry[event_id]) == 0 then
                 Event._registry[event_id] = nil
                 script.on_event(event_id, nil)
             end

@@ -202,12 +202,11 @@ Event.register(defines.events.on_preplayer_mined_item, filter_event('entity', 'l
 Event.register(defines.events.on_robot_pre_mined, filter_event('entity', 'locomotive', Trains._on_locomotive_changed))
 
 -- When a locomotive is added ...
-Event.register(defines.events.on_train_created,
-    function(event)
-        local train_id = Trains.get_train_id(event.train)
-        global._train_registry[train_id] = event.train
-    end
-)
+local function on_train_created(event)
+    local train_id = Trains.get_train_id(event.train)
+    global._train_registry[train_id] = event.train
+end
+Event.register(defines.events.on_train_created, on_train_created)
 
 -- When the mod is initialized the first time
 Event.register(Event.core_events.init, create_train_registry)

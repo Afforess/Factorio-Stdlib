@@ -2,11 +2,17 @@
 -- @module Game
 -- @usage local Game = require('stdlib/game')
 
-Game = {} --luacheck: allow defined top
-
-Game.VALID_FILTER = function(v)
-    return v.valid
-end
+Game = { --luacheck: allow defined top
+    VALID_FILTER = function(v)
+        return v and v.valid
+    end,
+    _protect = function(module_name)
+        return {
+            __newindex = function() error("Attempt to mutatate read-only "..module_name.." Module") end,
+            __metatable = true
+        }
+    end
+}
 
 --- Print msg if specified var evaluates to false.
 -- @tparam Mixed var variable to evaluate

@@ -1,23 +1,25 @@
 require "stdlib/utils/string"
+require 'stdlib/utils/table'
 require "stdlib/event/event"
 
-local test_function = {f = function(x) _G.someVariable = x end}
+local test_function = {f = function(x) _G.someVariable = x end, g = function(event) event.entity.valid = false end}
 local function_a = function (arg) test_function.f(arg.tick) end
 local function_b = function (arg) test_function.f(arg.player_index) end
 local function_c = function () return true end
+local function_d = function (arg) test_function.g(arg) end
 
 describe("Event",
     function()
 
         setup(
             function()
-                -- _G.serpent = require("serpent")
                 _G.script = {
                     on_event = function(_, _) return end,
                     on_init = function(callback) _G.on_init = callback end,
                     on_load = function(callback) _G.on_load = callback end,
                     on_configuration_changed = function(callback) _G.on_configuration_changed = callback end
                 }
+                _G.table.size = table.count_keys
             end
         )
 
@@ -31,7 +33,7 @@ describe("Event",
 
         after_each(
             function()
-                Event._registry = {}
+                _G.Event._registry = {}
             end
         )
 
@@ -90,6 +92,13 @@ describe("Event",
             end
         )
 
+        it(".register should not add duplicate handers to a single event",
+            function()
+                Event.register(0, function_a).register(0, function_a)
+                assert.same(1, table.size(Event._registry[0]))
+            end
+        )
+
         it(".dispatch should cascade through registered handlers",
             function()
                 Event.register(0, function_a)
@@ -125,16 +134,16 @@ describe("Event",
                 Event.register(0, function_c)
 
                 Event.remove(0, function_c)
-
                 assert.equals(function_a, Event._registry[0][1])
                 assert.equals(function_b, Event._registry[0][2])
                 assert.is_true(#Event._registry[0] == 2)
 
-                Event.register({ 0, 2, 1}, function_c)
+                Event.register({ 0, 2, 1, "test"}, function_c)
 
                 assert.equals(function_c, Event._registry[0][3])
                 assert.equals(function_c, Event._registry[2][1])
                 assert.equals(function_c, Event._registry[1][1])
+                assert.equals(function_c, Event._registry["test"][1])
 
                 local s = spy.on(script, "on_event")
                 Event.remove({0, 2}, function_c)
@@ -144,6 +153,10 @@ describe("Event",
                 assert.is_true(#Event._registry[1] == 1)
                 assert.is_nil(Event._registry[2])
                 assert.spy(s).was_called_with(2, nil)
+
+                Event.remove("test", function_c)
+                assert.spy(s).was_called_with("test", nil)
+
             end
         )
 
@@ -185,10 +198,14 @@ describe("Event",
 
         it(".dispatch should return nil if an event has a table where table.__self exists but table.valid is false",
             function()
-                Event.register(1, function_a).register(2, function_b).register(3, function_c)
-                assert.is_nil(Event.dispatch({name = 1, {__self = "userdata", valid = false}}))
-                assert.is_nil(Event.dispatch({name = 2, {__self = "userdata", valid = false}}))
-                assert.is_nil(Event.dispatch({name = 3, {__self = "userdata", valid = false}}))
+                Event.register(1, function_d).register(1, function_b)
+
+                local s = spy.on(test_function, "g")
+                local s2 = spy.on(test_function, "f")
+
+                Event.dispatch({tick = 23, name = 1, entity = {__self = "userdata", valid = true}})
+                assert.spy(s).was_called(1)
+                assert.spy(s2).was_called(0)
             end
         )
 

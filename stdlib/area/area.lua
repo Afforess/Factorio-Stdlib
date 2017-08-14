@@ -5,7 +5,7 @@
 -- @see Concepts.BoundingBox
 -- @see Concepts.Position
 
-local fail_if_missing = require 'stdlib/game'['fail_if_missing']
+local Game = require 'stdlib/game'
 local Position = require 'stdlib/area/position'
 
 Area = {} --luacheck: allow defined top
@@ -15,7 +15,7 @@ Area = {} --luacheck: allow defined top
 -- @tparam Concepts.BoundingBox area_arr the area to convert
 -- @treturn Concepts.BoundingBox a converted area
 function Area.new(area_arr)
-    fail_if_missing(area_arr, 'missing area value')
+    Game.fail_if_missing(area_arr, 'missing area value')
 
     if getmetatable(area_arr) then
         return area_arr
@@ -27,6 +27,7 @@ function Area.new(area_arr)
     elseif area_arr['left_top'] then
         area = {left_top = Position.new(area_arr.left_top), right_bottom = Position.new(area_arr.right_bottom)}
     end
+    area.orientation = area_arr.orientation
 
     return setmetatable(area, Area._mt)
 end
@@ -100,8 +101,7 @@ function Area.inside(area, pos)
 end
 
 local function validate_vector(amount)
-    --Validate amount
-    fail_if_missing(amount, 'Missing amount to shrink by')
+    Game.fail_if_missing(amount, 'Missing amount to shrink by')
 
     if type(amount) == 'number' then
         if amount < 0 then error('Can not shrink or expand area by a negative amount!', 2) end
@@ -158,7 +158,7 @@ end
 -- @treturn Concepts.BoundingBox the adjusted bounding box
 function Area.adjust(area, vector)
     area = Area.new(area)
-    fail_if_missing(vector, 'missing vector value')
+    Game.fail_if_missing(vector, 'missing vector value')
 
     --shrink or expand on x vector
     if assert(vector[1], 'x vector missing') > 0 then
@@ -227,7 +227,7 @@ end
 -- @treturn Concepts.BoundingBox a new translated area
 function Area.translate(area, direction, distance)
     area = Area.new(area)
-    fail_if_missing(direction, 'missing direction argument')
+    Game.fail_if_missing(direction, 'missing direction argument')
     distance = distance or 1
 
     area.left_top = Position.translate(area.left_top, direction, distance)
@@ -368,12 +368,14 @@ function Area.tostring(area)
 
     local left_top = 'left_top = '..Position.tostring(area.left_top)
     local right_bottom = 'right_bottom = '..Position.tostring(area.right_bottom)
-    return '{'..left_top..', '..right_bottom ..'}'
+    local orientation = area.orientation and ', '..area.orientation or ''
+
+    return '{'..left_top..', '..right_bottom..orientation..'}'
 end
 
 
 local function to_bounding_box_area(entity, box)
-    fail_if_missing(entity, "missing entity argument")
+    Game.fail_if_missing(entity, "missing entity argument")
 
     local pos = entity.position
     local bb = entity.prototype[box]
@@ -401,16 +403,10 @@ end
 
 Area._mt = {
     __index = Area,
-    __newindex = function() end,
     __add = Area.expand,
     __sub = Area.shrink,
     __tostring = Area.tostring,
     __eq = Area.equals,
 }
 
-local _return_mt = {
-    __newindex = function() error("Attempt to mutatate read-only Area Module") end,
-    __metatable = true
-}
-
-return setmetatable(Area, _return_mt)
+return setmetatable(Area, Game._protect("Area"))

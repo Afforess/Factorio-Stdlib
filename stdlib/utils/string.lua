@@ -2,6 +2,10 @@
 -- @module string
 -- @see string
 
+-- Allowing mutating read only string
+-- luacheck: globals string
+
+
 --- Returns a copy of the string with any leading or trailing whitespace from the string removed.
 -- @tparam string s the string to remove leading or trailing whitespace from
 -- @treturn string a copy of the string without leading or trailing whitespace

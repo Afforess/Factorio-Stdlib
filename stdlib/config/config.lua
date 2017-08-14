@@ -2,8 +2,8 @@
 -- @module Config
 -- @usage require('stdlib/config/config')
 
-require 'stdlib/string'
-require 'stdlib/table'
+require 'stdlib/utils/string'
+require 'stdlib/utils/table'
 
 --luacheck: ignore value
 -----------------------------------------------------------------------

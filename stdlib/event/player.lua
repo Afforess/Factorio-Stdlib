@@ -8,7 +8,7 @@
 -- -- The fist time this module is required it will register player creation events
 
 require('stdlib/event/event')
-require('stdlib/table')
+require('stdlib/utils/table')
 local Game = require 'stdlib/game'
 
 local Player = {}

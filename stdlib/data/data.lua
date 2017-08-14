@@ -6,8 +6,8 @@
 -- @usage local Data = require('stdlib/data/data')
 
 local fail_if_missing = require 'stdlib/game'['fail_if_missing']
-require 'stdlib/string'
-require 'stdlib/table'
+require 'stdlib/utils/string'
+require 'stdlib/utils/table'
 
 Data = {} --luacheck: allow defined top
 

@@ -1,4 +1,4 @@
-require 'stdlib/table'
+require 'stdlib/utils/table'
 
 describe('Table Spec', function()
     describe('table.map', function()

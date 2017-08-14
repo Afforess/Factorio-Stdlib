@@ -1,4 +1,4 @@
-require "stdlib/table"
+require "stdlib/utils/table"
 local Game = require "stdlib/game"
 
 describe("Game Spec",

@@ -1,6 +1,6 @@
 --- Raise events for surfaces at certain time intervals.
 -- This module uses the @{Event} module.
--- @module Event.Time
+-- @module Time
 -- @usage require('stdlib/event/time')
 -- @see event.time.lua
 

@@ -384,11 +384,12 @@ local function to_bounding_box_area(entity, box)
     return Area.offset(bb, pos)
 end
 
---- Converts an entity and its @{LuaEntityPrototype.collision_box|collision_box} to the area around it.
+--- Deprecated see @{LuaEntity.bounding_box}
+-- Converts an entity and its @{LuaEntityPrototype.collision_box|collision_box} to the area around it.
 -- @tparam LuaEntity entity the entity to convert to an area
 -- @treturn Concepts.BoundingBox
 function Area.to_collision_area(entity)
-    return to_bounding_box_area(entity, "collision_box")
+    return entity.bounding_box
 end
 
 --- Converts an entity and its @{LuaEntityPrototype.selection_box|selection_box} to the area around it.

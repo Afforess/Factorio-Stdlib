@@ -1,4 +1,4 @@
-require "stdlib/table"
+require "stdlib/utils/table"
 require "spec/defines"
 require "stdlib/event/event"
 

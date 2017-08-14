@@ -1,4 +1,4 @@
-require 'stdlib/string'
+require 'stdlib/utils/string'
 require 'stdlib/event/event'
 
 local test_function = {f=function(x) _G.someVariable = x end}

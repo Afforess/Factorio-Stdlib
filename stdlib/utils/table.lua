@@ -2,6 +2,9 @@
 -- @module table
 -- @see table
 
+-- Allowing mutating table
+-- luacheck: globals table
+
 --- Given a mapping function, creates a transformed copy of the table
 --- by calling the function for each element in the table, and using
 --- the result as the new value for the key. Passes the index as second argument to the function.

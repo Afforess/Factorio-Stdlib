@@ -197,9 +197,8 @@ local function filter_event(event_parameter, entity_type, callback)
 end
 
 -- When a locomotive is removed ...
-Event.register(defines.events.on_entity_died, filter_event('entity', 'locomotive', Trains._on_locomotive_changed))
-Event.register(defines.events.on_preplayer_mined_item, filter_event('entity', 'locomotive', Trains._on_locomotive_changed))
-Event.register(defines.events.on_robot_pre_mined, filter_event('entity', 'locomotive', Trains._on_locomotive_changed))
+local train_remove_events = {defines.events.on_entity_died, defines.events.on_preplayer_mined_item, defines.events.on_robot_pre_mined}
+Event.register(train_remove_events, filter_event('entity', 'locomotive', Trains._on_locomotive_changed))
 
 -- When a locomotive is added ...
 local function on_train_created(event)
@@ -209,7 +208,6 @@ end
 Event.register(defines.events.on_train_created, on_train_created)
 
 -- When the mod is initialized the first time
-Event.register(Event.core_events.init, create_train_registry)
-Event.register(Event.core_events.configuration_changed, create_train_registry)
+Event.register(Event.core_events.init_and_config, create_train_registry)
 
 return Trains

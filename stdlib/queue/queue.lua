@@ -2,7 +2,7 @@
 -- Taken from ***Programming in Lua*** [Queues and Double Queues](http://www.lua.org/pil/11.4.html)
 -- and modified to not allow nil values, and returns nil if @{pop_first} or @{pop_last} is used when the queue is empty.
 -- @module Queue
--- @usage local Queue = require('stdlib/queue')
+-- @usage local Queue = require('stdlib/queue/queue')
 
 local Game = require 'stdlib/game'
 

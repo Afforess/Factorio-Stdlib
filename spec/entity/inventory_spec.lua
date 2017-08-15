@@ -1,3 +1,4 @@
+require 'spec/defines'
 local Inventory = require 'stdlib/entity/inventory'
 require 'stdlib/utils/table'
 

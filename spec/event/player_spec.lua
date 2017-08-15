@@ -1,5 +1,5 @@
-require "stdlib/utils/table"
 require "spec/defines"
+require "stdlib/utils/table"
 require "stdlib/event/event"
 
 describe("Player",
@@ -50,9 +50,11 @@ describe("Player",
                 local register_spy = spy.on(_G.Event, "register")
                 require("stdlib/event/player")
                 local match = require("luassert.match")
-                assert.spy(register_spy).was_called_with(defines.events.on_player_created, match.is_function())
-                assert.spy(register_spy).was_called_with(Event.core_events.init, match.is_function())
-                assert.spy(register_spy).was_called_with(Event.core_events.configuration_changed, match.is_function())
+                local events = {defines.events.on_player_created, Event.core_events.init, Event.core_events.configuration_changed}
+                assert.spy(register_spy).was_called_with(events, match.is_function())
+                assert.is_same(4, table.count_keys(Event._registry))
+                assert.is_truthy(Event._registry[defines.events.on_player_created])
+                assert.is_truthy(Event._registry[defines.events.on_player_removed])
             end
         )
 

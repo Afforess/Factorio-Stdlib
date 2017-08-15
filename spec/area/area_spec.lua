@@ -195,21 +195,6 @@ describe('Area', function()
         end
     end)
 
-    --Only describing these here as they will be the same for all
-    describe('Area Metatable Protections', function()
-        it('Should not allow adding new keys', function()
-            assert.has_error(function() Area["fake"] = true end)
-        end)
-
-        it('Should not allow setting a new metatable', function()
-            assert.has_error(function() setmetatable(Area, {}) end)
-        end)
-
-        it('Should not getting the metatable', function()
-            assert.same(true, getmetatable(Area))
-        end)
-    end)
-
     describe('Entity wrappers', function()
         it('an entity should have the correct selection area', function()
             local entity = { position = { 1, -0.5 }, prototype = { selection_box = { left_top = { x = -1, y = -1 }, right_bottom = { x = 1, y = 1 }}}}

@@ -1,5 +1,5 @@
-require 'stdlib/event/gui'
 require 'spec/defines'
+require 'stdlib/event/gui'
 require 'stdlib/utils/table'
 --local serpent = require("serpent")
 --local ps = function(tab) print(serpent.block(tab, {comment=false, nocode=true})) end

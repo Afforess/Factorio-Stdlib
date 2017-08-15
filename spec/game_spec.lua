@@ -1,3 +1,4 @@
+require "spec/defines"
 require "stdlib/utils/table"
 local Game = require "stdlib/game"
 
@@ -276,5 +277,28 @@ describe("Game Spec",
             end
         )
 
+        --Only describing these here as they will be the same for all
+        describe('Area Metatable Protections',
+            function()
+                local Area = require 'stdlib/area/area'
+                it('Should not allow adding new keys',
+                    function()
+                        assert.has_error(function() Area["fake"] = true end)
+                    end
+                )
+
+                it('Should not allow setting a new metatable',
+                    function()
+                        assert.has_error(function() setmetatable(Area, {}) end)
+                    end
+                )
+
+                it('Should not allow getting the metatable',
+                    function()
+                        assert.is_true(getmetatable(Area))
+                    end
+                )
+            end
+        )
     end
 )

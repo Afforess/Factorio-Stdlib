@@ -1,15 +1,18 @@
-PACKAGE_NAME := $(shell cat 'stdlib/info.json'|jq -r .name)
-VERSION_STRING := $(shell cat 'stdlib/info.json'|jq -r .version)
+PACKAGE_NAME := $(shell cat 'mod/info.json'|jq -r .name)
+VERSION_STRING := $(shell cat 'mod/info.json'|jq -r .version)
+OUTPUT_DIR := $(PACKAGE_NAME)
 OUTPUT_NAME := $(PACKAGE_NAME)_$(VERSION_STRING)
 BUILD_DIR := build
 
-#FILES := $(shell find . -iname '*.lua' -type f -not -path "./$(BUILD_DIR)/*")
 FILES := $(shell find . -iname '*.json' -type f -path "./stdlib/*") $(shell find . -iname '*.lua' -type f -path "./stdlib/*")
 DEP_FILES := $(shell find . -iname '*.lua' -type f -path "./deprecated/*")
+MOD_FILES := $(shell find . -iname '*' -type f -path "./mod/*" | grep -v stdlib)
 
-all: clean test package deprecated ldoc luacheck release
+all: clean check test package mod-files deprecated ldoc luacheck release
 
-nodep: clean test package ldoc luacheck release
+nodeps: clean check test package mod-files ldoc luacheck release
+
+mod: clean test package mod-files
 
 nochecks: clean package deprecated release
 
@@ -23,19 +26,24 @@ check:
 	@set -e; for file in $$(find . -iname '*.lua' -type f -not -path "./$(BUILD_DIR)/*"); do echo "Checking syntax: $$file" ; luac -p $$file; done;
 
 test:
-	busted
+	@echo 'Running tests'
+	@busted
 
 package: $(FILES)
 	@echo 'Copying files'
-	@mkdir -p $(BUILD_DIR)
-	@cp -r $(PACKAGE_NAME) $(BUILD_DIR)/$(PACKAGE_NAME)
-	@cp README.md $(BUILD_DIR)/$(PACKAGE_NAME)/README.md
-	@cp LICENSE $(BUILD_DIR)/$(PACKAGE_NAME)/LICENSE.md
-	@cp CHANGELOG.md $(BUILD_DIR)/$(PACKAGE_NAME)/CHANGELOG.md
+	@mkdir -p $(BUILD_DIR)/$(OUTPUT_NAME)
+	@cp -r $(PACKAGE_NAME) $(BUILD_DIR)/$(OUTPUT_NAME)/$(PACKAGE_NAME)
+	@cp README.md $(BUILD_DIR)/$(OUTPUT_NAME)/README.md
+	@cp LICENSE $(BUILD_DIR)/$(OUTPUT_NAME)/LICENSE.md
+	@cp CHANGELOG.md $(BUILD_DIR)/$(OUTPUT_NAME)/CHANGELOG.md
 
 deprecated: $(DEP_FILES)
 	@echo 'Copying deprecated files'
-	@cp -r deprecated/* $(BUILD_DIR)/$(PACKAGE_NAME)
+	@cp -r ./deprecated/* $(BUILD_DIR)/$(OUTPUT_NAME)/$(PACKAGE_NAME)
+
+mod-files: $(MOD_FILES)
+	@echo 'Copying test mod files'
+	@cp -rP ./mod/* $(BUILD_DIR)/$(OUTPUT_NAME)/
 
 ldoc:
 	@echo 'Auto Generating with ldoc'
@@ -44,14 +52,14 @@ ldoc:
 	@cp doc/spectre.min.css $(BUILD_DIR)/doc/spectre.min.css
 	@cp doc/spectre-icons.min.css $(BUILD_DIR)/doc/spectre-icons.min.css
 	@cp -r examples/ $(BUILD_DIR)/doc/examples/
-	@cd $(BUILD_DIR) && ldoc -c ../doc/config.ld -l ../doc -s ../doc $(PACKAGE_NAME)
+	@cd $(BUILD_DIR) && ldoc -c ../doc/config.ld -l ../doc -s ../doc $(OUTPUT_NAME)/$(PACKAGE_NAME)
 
 luacheck:
 	@echo 'Running luacheck on build directory'
 	@wget -q --no-check-certificate -O $(BUILD_DIR)/.luacheckrc https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/master/.luacheckrc
-	@cd $(BUILD_DIR)/$(PACKAGE_NAME) && luacheck .
+	@cd $(BUILD_DIR)/$(OUTPUT_NAME) && luacheck .
 
 release:
 	@echo 'Making Release'
-	@cd $(BUILD_DIR) && zip -rq $(OUTPUT_NAME).zip $(PACKAGE_NAME)
+	@cd $(BUILD_DIR) && zip -rq $(OUTPUT_NAME).zip $(OUTPUT_NAME)
 	@echo $(OUTPUT_NAME).zip ready

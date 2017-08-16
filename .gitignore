@@ -6,7 +6,6 @@ build/*
 # Temporarily Exclude mod file changes
 mod/*
 !mod/info.json
-mod/stdlib
 
 # Exlude my symlink mess for inplace testing
 # mod/stdlib

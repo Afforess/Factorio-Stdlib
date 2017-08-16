@@ -6,7 +6,7 @@ BUILD_DIR := build
 
 FILES := $(shell find . -iname '*.json' -type f -path "./stdlib/*") $(shell find . -iname '*.lua' -type f -path "./stdlib/*")
 DEP_FILES := $(shell find . -iname '*.lua' -type f -path "./deprecated/*")
-MOD_FILES := $(shell find . -iname '*' -type f -path "./mod/*" | grep -v stdlib)
+MOD_FILES := $(shell find . -iname '*' -type f -path "./mod/*")
 
 all: clean check test package mod-files deprecated ldoc luacheck release
 
@@ -39,11 +39,11 @@ package: $(FILES)
 
 deprecated: $(DEP_FILES)
 	@echo 'Copying deprecated files'
-	@cp -r ./deprecated/* $(BUILD_DIR)/$(OUTPUT_NAME)/$(PACKAGE_NAME)
+	@cp -rPn ./deprecated/* $(BUILD_DIR)/$(OUTPUT_NAME)/$(PACKAGE_NAME)
 
 mod-files: $(MOD_FILES)
 	@echo 'Copying test mod files'
-	@cp -rP ./mod/* $(BUILD_DIR)/$(OUTPUT_NAME)/
+	@cp -PRn ./mod/* $(BUILD_DIR)/$(OUTPUT_NAME)/
 
 ldoc:
 	@echo 'Auto Generating with ldoc'

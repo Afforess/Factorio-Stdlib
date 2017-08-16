@@ -1,4 +1,9 @@
 --luacheck: ignore script TEST
+
+MOD = {
+    name = "stdlib",
+    console_prefix = "stdlib"
+}
 remote.add_interface("stdlib", {console = require("stdlib/utils/console")})
 commands.add_command("stdlib-console","", require("stdlib/utils/console"))
 

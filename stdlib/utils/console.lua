@@ -18,9 +18,9 @@ for _, req in pairs (make_globals_for_use_in_console) do
     require('stdlib.'..req)
 end
 
---luacheck: ignore script
-local prefix = (MOD and MOD.console_prefix) or (script.get_mod_name and script.get_mod_name()) or ""
-local wf_prefix = (MOD and MOD.console_log_prefix) or (script.get_mod_name and script.get_mod_name()) or "console"
+--TODO fix for .16 when script.mod_name is implemented
+local mod_name = pcall(function() return script.mod_name end)
+local prefix = mod_name or (MOD and MOD.console_prefix) or "console"
 local names = {
     frame = prefix..'_console',
     scroll = prefix..'_console_scroll',
@@ -31,7 +31,7 @@ local names = {
 }
 
 local function create_gui_player(player)
-    if player.gui.left.console then player.gui.left.console.destroy() end
+    if player.gui.left[names.frame] then player.gui.left[names.frame].destroy() end
 
     local c = player.gui.left.add{type='frame', name = names.frame, direction = 'horizontal'}
 
@@ -70,7 +70,7 @@ local function enter(event)
     local ok, err = pcall(function() return loadstring(s)() end )
     if not ok then p.print(err) end
     --pcall(loadstring("return function(a, b, c) ".. chunkstring .. " end"))
-    game.write_file(wf_prefix..'/console.log', s..'\n', true, p.index)
+    game.write_file(prefix..'/console.log', s..'\n', true, p.index)
 end
 Gui.on_click('^'..names.enter..'$', enter)
 

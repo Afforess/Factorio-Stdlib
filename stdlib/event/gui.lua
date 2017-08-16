@@ -50,6 +50,7 @@ function Gui.dispatch(event)
     fail_if_missing(event, "missing event argument")
 
     if event.element and event.element.valid then
+        event.tick = event.tick or game.tick
         for gui_element_pattern, handler in pairs(Event._registry[event.name]) do
             if event.element and event.element.valid then
                 local match_str = event.element.name:match(gui_element_pattern)

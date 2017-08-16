@@ -128,6 +128,10 @@ function Event.dispatch(event)
     if event then
         local _registry = event.name and Event._registry[event.name] or event.input_name and Event._registry[event.input_name]
         if _registry then
+            --add the tick if it is not present, this only affects calling Event.dispatch manually
+            --doing the check up here as it should be faster than checking every iteration for a constant value
+            event.tick = event.tick or _G.game and game.tick or 0
+
             local force_crc = Event.force_crc
             for idx, handler in ipairs(_registry) do
 

@@ -3,7 +3,9 @@
 -- the things it includes, then override them.
 require 'spec/defines'
 require 'stdlib/event/event'
-require 'stdlib/area/surface'
+
+local Trains
+--local Surface = require 'stdlib/area/surface'
 local Train_Spec_Fixtures = require 'spec/trains/fixtures'
 
 local entity_to_trains = function(tbl) return table.map(tbl, function(entity) return entity.train end) end
@@ -27,11 +29,11 @@ describe('when the train module loads', function()
     after_each(function()
         -- Unload the module after each test
         -- so that initialization code will be run
-        package.loaded['stdlib/trains/trains'] = nil
+        package.loaded['stdlib/event/trains'] = nil
     end)
 
     it('it should allow the train module to be loaded at startup time', function()
-        require('stdlib/trains/trains')
+        require('stdlib/event/trains')
     end)
 
     it('it should load all trains in to the registry', function()
@@ -39,7 +41,7 @@ describe('when the train module loads', function()
         _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Two_Trains_With_Single_Locomotive) end
 
         -- Act
-        Trains = require('stdlib/trains/trains')
+        Trains = require('stdlib/event/trains')
         _G.on_init()
 
         -- Assert
@@ -52,13 +54,13 @@ describe('when the train module loads', function()
         local register_spy = spy.on(_G.Event, 'register')
 
         -- Act
-        require('stdlib/trains/trains')
+        require('stdlib/event/trains')
         local match = require("luassert.match")
 
         -- assert
-        assert.spy(register_spy).was_called_with(defines.events.on_entity_died, match.is_function())
-        assert.spy(register_spy).was_called_with(defines.events.on_preplayer_mined_item, match.is_function())
-        assert.spy(register_spy).was_called_with(defines.events.on_robot_pre_mined, match.is_function())
+        local train_remove_events = {defines.events.on_entity_died, defines.events.on_preplayer_mined_item, defines.events.on_robot_pre_mined}
+        assert.spy(register_spy).was_called_with(train_remove_events, match.is_function())
+        assert.same(6, table.count_keys(Event._registry))
     end)
 
     it('it should register handlers for creation events', function()
@@ -66,7 +68,7 @@ describe('when the train module loads', function()
         local register_spy = spy.on(_G.Event, 'register')
 
         -- Act
-        require('stdlib/trains/trains')
+        require('stdlib/event/trains')
         local match = require("luassert.match")
 
         -- assert
@@ -77,13 +79,13 @@ end)
 
 describe('Trains module', function()
 
-    setup(function()
-        Trains = require 'stdlib/trains/trains'
+    before_each(function()
+        Trains = require 'stdlib/event/trains'
         _G.on_init()
     end)
 
     after_each(function()
-        package.loaded["stdlib/trains/trains"] = nil
+        package.loaded["stdlib/event/trains"] = nil
     end)
 
     describe('can find trains with a filter', function()
@@ -134,7 +136,7 @@ describe('Trains module', function()
             local dispatch_spy = spy.on(_G.Event, 'dispatch')
 
             -- Import the library
-            Trains = require('stdlib/trains/trains')
+            Trains = require('stdlib/event/trains')
             _G.on_init()
 
             local event_data = {
@@ -185,7 +187,7 @@ describe('Trains module', function()
             }
 
             -- Import the library
-            Trains = require('stdlib/trains/trains')
+            Trains = require('stdlib/event/trains')
             _G.on_init()
 
             -- Check the state of the registry first

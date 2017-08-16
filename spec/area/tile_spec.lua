@@ -1,5 +1,5 @@
 require 'spec/defines'
-require 'stdlib/area/tile'
+local Tile = require 'stdlib/area/tile'
 
 describe('Tile Spec', function()
     it('should give the correct tile coordinates for a position', function()

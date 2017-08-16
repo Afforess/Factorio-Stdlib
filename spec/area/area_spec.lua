@@ -1,5 +1,5 @@
 require 'spec/defines'
-require 'stdlib/area/area'
+local Area = require 'stdlib/area/area'
 
 describe('Area', function()
     it('should validate the size of an area', function()
@@ -92,14 +92,16 @@ describe('Area', function()
         assert.has_error(function() Area.adjust(area, {x = 1, y = 1}) end)
     end)
 
-    it('should validate area translates correctly', function()
+    describe('area.translate', function()
         local area = Area.to_table({{-12, 12}, {-10, 8}})
         local same = Area.to_table({{-14, 14}, {-12, 10}})
-        local nodir = Area.to_table({{-11, 11}, {-9, 7}})
+        local nodir = Area.to_table({{-13, 13}, {-11, 9}})
 
-        assert.same(same, Area.translate(area, defines.direction.southwest, 2))
-        assert.same(nodir, Area.translate(area, defines.direction.northeast))
-        assert.has_error(function() Area.translate(area) end)
+        it('should validate area translates correctly', function()
+            assert.same(same, Area.translate(area, defines.direction.southwest, 2))
+            assert.same(nodir, Area.translate(area, defines.direction.northeast))
+            assert.has_error(function() Area.translate(area) end)
+        end)
     end)
 
     it('should validate area rotates accurately', function()
@@ -139,7 +141,7 @@ describe('Area', function()
 
     it('should return a string representation of an area', function()
         local area = {{0, -5}, {x = 3, y = -3}}
-        local s = "Area {left_top = {x = 0, y = -5}, right_bottom = {x = 3, y = -3}}"
+        local s = "{left_top = {x = 0, y = -5}, right_bottom = {x = 3, y = -3}}"
         assert.same(s, Area.tostring(area))
     end)
 
@@ -166,7 +168,6 @@ describe('Area', function()
             idx = idx + 1
         end
     end)
-
 
     it('should validate area spiral iteration', function()
         local expected_iteration = {
@@ -200,13 +201,6 @@ describe('Area', function()
 
             assert.same({ x = 0, y = -1.5 }, Area.to_selection_area(entity).left_top)
             assert.same({ x = 2, y = 0.5 }, Area.to_selection_area(entity).right_bottom)
-        end)
-
-        it('an entity should have the correct collision area', function()
-            local entity = { position = { 2, -2.5 }, prototype = { collision_box = { left_top = { x = -1, y = -1 }, right_bottom = { x = 1, y = 1 }}}}
-
-            assert.same({ x = 1, y = -3.5 }, Area.to_collision_area(entity).left_top)
-            assert.same({ x = 3, y = -1.5 }, Area.to_collision_area(entity).right_bottom)
         end)
     end)
 end)

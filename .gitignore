@@ -1,3 +1,11 @@
+# Exclude the build directories
 build
 build/*
-factorio_mods
+.build
+
+# Temporarily Exclude mod file changes
+mod/*
+!mod/info.json
+
+# Exlude my symlink mess for inplace testing
+# mod/stdlib

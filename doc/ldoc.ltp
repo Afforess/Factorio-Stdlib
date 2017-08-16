@@ -1,0 +1,402 @@
+> local iter = ldoc.modules.iter
+> local M = ldoc.markup
+> local use_li = ldoc.use_li
+> local no_spaces = ldoc.no_spaces
+> local display_name = ldoc.display_name
+
+> local function remove_parent_obj(obj)
+> obj = obj:gsub(">Concepts%.(.*)<", ">%1<"):gsub(">Common%.(.*)<", ">%1<")
+> obj = obj:gsub(">{Concepts%.(.*)}<", ">{%1}<"):gsub(">{Common%.(.*)}<", ">{%1}<")
+> return obj
+> end
+
+    <!doctype html>
+    <html class="no-js" lang="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+> if module then
+    <title>$(module.name) $(module.type)</title>
+> else
+    <title>$(ldoc.title)</title>
+> end
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+> if module then
+    <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
+> else
+    <link rel="stylesheet" href="spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="spectre-icons.min.css" type="text/css" />
+> end
+    <link rel="stylesheet" href="$(ldoc.css)" type="text/css" />
+    </head>
+    <body>
+
+    <div class="container grid-1280">
+    <div class="columns">
+
+    <!-- sidebar start -->
+
+    <div id="sidebar" class="column col-3 col-sm-12">
+
+    <div class="sidebar-custom">
+
+    <div class="project-infobox">
+
+    <!-- project title -->
+> if module and ldoc.single then
+> if module == ldoc.single then
+    <a href="$(ldoc.output).html"><h1>$(ldoc.project)</h1></a>
+> else
+    <a href="../$(ldoc.output).html"><h1>$(ldoc.project)</h1></a>
+> end
+> end
+
+> if not ldoc.single then
+> if module then
+    <a href="../$(ldoc.output).html"><h1>$(ldoc.project)</h1></a>
+> else
+    <a href="$(ldoc.output).html"><h1>$(ldoc.project)</h1></a>
+> end
+> end
+
+    <!-- project description -->
+> if ldoc.description then
+    <p class="project-desc">$(ldoc.description)</p>
+> end
+
+    <!-- project full description -->
+> if ldoc.full_description then
+    <span>$(M(ldoc.full_description,nil))</span>
+> end
+    </div>
+
+> if module then
+
+    <!-- sidebar navigation -->
+> if not ldoc.no_summary then
+> local this_mod = module and module.name
+> for kind, mods, type in ldoc.kinds() do
+> if not ldoc.kinds_allowed or ldoc.kinds_allowed[type] then
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>$(kind)</h2>
+    <ul class="nav">
+> for mod in mods() do
+> if mod.name == this_mod then
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="$(ldoc.ref_to_module(mod))"><span class="module-name-item">$(mod.name)</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+> else
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="$(ldoc.ref_to_module(mod))"><span class="module-name-item">$(mod.name)</span></a></div></li>
+> end
+> end
+    </ul>
+    </li>
+    </ul>
+> end
+> end
+
+> else
+    <ul class="nav nav-modules">
+> for kind, items in module.kinds() do
+    <li class="nav-item">
+    <h2>$(kind)</h2>
+    <ul class="nav">
+> for item in items() do
+    <li class="nav-item"><a href="#$(item.name)">$(display_name(item))</a></li>
+> end
+    </ul>
+    </li>
+> end
+    </ul>
+> end
+
+> end
+
+    <!-- list of items in a module -->
+> if module and module.type ~= "topic" then
+> if module and not ldoc.no_summary and #module.items > 0 then
+    <ul class="nav nav-module-contents">
+    <li class="nav-item">
+    <h4>Contents of <strong>$(display_name(module))</strong></h4>
+    <ul class="nav">
+> for kind,items in module.kinds() do
+    <li class="nav-item"><a href="#$(no_spaces(kind))"><span class="fragment-hashtag">#</span> $(kind)</a></li>
+> end
+    </ul>
+    </li>
+    </ul>
+> end
+> end
+    </div>
+> if module and module.type ~= "topic" then
+    <div class="up-to-top">
+    <a href="#">Top <i class="icon icon-upward"></i></a>
+    </div>
+> end
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content body start -->
+    <div class="column col-9 col-sm-12">
+
+    <!-- module list on the main page start -->
+> if not module then
+> for kind, mods in ldoc.kinds() do
+    <h2>$(kind)</h2>
+> kind = kind:lower()
+    <table class="module_list">
+> for m in mods() do
+    <tr>
+    <td class="name"><a href="$(kind)/$(m.name).html">$(m.name)</a></td>
+> if M(ldoc.strip_header(m.summary),m) ~= "" then
+    <td class="summary"><span>$(M(ldoc.strip_header(m.summary),m))</span></td>
+> end
+    </tr>
+> end -- for modules
+    </table>
+> end -- for kinds
+> end
+    <!-- module list on the main page end -->
+
+    <!-- module contents -->
+> if module then
+
+    <!-- module content header start -->
+
+    <h2><span class="body-module-name"><strong><em>$(module.name)</em></strong></span> $(module.type)</h2>
+    <p>$(M(module.summary))</p>
+    <p>$(M(module.description))</p>
+
+> if ldoc.body and module.type == "example" then
+    <pre class="code" data-lang="Lua"><code>$(ldoc.body:gsub("^<h2>(.*%.lua)</h2>(.*)$", "%2"):gsub("<pre>(.*)</pre>", "%1"):gsub("^%s*(.-)%s*$", "%1"))</code></pre>
+> elseif ldoc.body and module.type == "topic" then
+    $(M(ldoc.body))
+> end
+
+    <!-- module info start -->
+> if module.info then
+    <ul>
+> for tag, value in module.info:iter() do
+    <li><strong>$(tag)</strong>: $(M(value,module))</li>
+> end
+    </ul>
+> end
+    <!-- module info end -->
+
+    <!-- module usage start -->
+> if module.see then
+    <h3>See also</h3>
+    <ul class="module-see-also">
+> for see in iter(module.see) do
+    <li><a href="$(ldoc.href(see))">$(see.label)</a></li>
+> end
+    </ul>
+> end
+> if module.usage then
+    <h3>Usage</h3>
+> for usage in iter(module.usage) do
+    <pre class="code" data-lang="Lua"><code>$(ldoc.prettify(usage))</code></pre>
+> end
+> end
+    <!-- module usage end -->
+
+    <!-- module content header end -->
+
+    <!-- module section list start -->
+> if module and module.type ~= "topic" then
+> for kind, items in module.kinds() do
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#$(no_spaces(kind))">$(kind)</a></h3>
+    <span>$(M(module.kinds:get_section_description(kind)))</span>
+    </thead>
+    <tbody>
+> for item in items() do
+    <tr>
+    <td class="name"><a href="#$(item.name)">$(display_name(item))</a></td>
+> if item.summary ~= "" then
+    <td class="summary">$(M(item.summary,item))</td>
+> end
+    </tr>
+> end
+    </tbody>
+    </table>
+> end
+> end
+    <!-- module section list end -->
+
+    <br />
+
+    <!-- section start -->
+> if module and module.type ~= "topic" then
+> for kind, items in module.kinds() do
+    <h3><span id="$(no_spaces(kind))" class="section-title"><a href="#$(no_spaces(kind))">$(kind)</a></span></h3>
+    <dl class="section-body-container">
+> for item in items() do
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#$(item.name)" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="$(item.name)">$(display_name(item))</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+> if item.summary ~= "" or item.description ~= "" then
+    <p class="section-item-summary">$(M(item.summary))</p>
+    <p class="section-item-description">$(M(item.description))</p>
+> end
+
+    <!-- parameters start -->
+> if not ldoc.no_return_or_parms and item.params and #item.params > 0 then
+> local module_item_subnames = module.kinds:type_of(item).subnames
+> if module_item_subnames then
+    <strong>$(module_item_subnames):</strong>
+> end
+
+    <ul>
+
+> for param in iter(item.params) do
+> local param, sublist = item:subparam(param)
+
+> if sublist then
+    <li>
+    <strong><em>$(sublist)</em> : </strong> $(M(item.params.map[sublist], item))
+    <ul>
+> end
+
+> for p in iter(param) do
+
+> local name, tp, def = item:display_name_of(p), ldoc.typename(item:type_of_param(p)), item:default_of_param(p)
+
+> if not module_item_subnames then
+    <li class="section-subitem-module-field-li">
+> else
+    <li class="section-subitem-li">
+> end
+
+    <strong><em>$(name)</em></strong>
+
+> if tp ~= "" or item.params.map[p] ~= "" then
+    <strong> : </strong>
+> end
+
+> if tp ~= "" then
+    (<span class="types">$(remove_parent_obj(tp))</span>)
+> end
+
+    $(remove_parent_obj(M(item.params.map[p], item)))
+
+> if def == true then
+    (<em>optional</em>)
+> elseif def then
+    (<em>default</em>: $(def))
+> end
+> if item:readonly(p) then
+    (<em>readonly</em>)
+> end
+    </li>
+> end
+
+> if sublist then
+    </ul>
+    </li>
+> end
+> end
+
+    </ul>
+
+> end
+    <!-- parameters end -->
+
+    <!-- returns start -->
+> if item.retgroups then
+> local groups = item.retgroups
+    <strong>Returns:</strong>
+> for i, group in ldoc.ipairs(groups) do
+    <ul>
+> for r in group:iter() do
+> local type, ctypes = item:return_type(r)
+> local rt = ldoc.typename(type)
+    <li>
+> if rt ~= '' then
+    (<span class="types">$(remove_parent_obj(rt))</span>)
+> end
+> if r.text ~= '' then
+    <span class="return-text">$(remove_parent_obj(M(r.text, item)))</span>
+> end
+> if ctypes then
+    <ul>
+> for c in ctypes:iter() do
+    <li>
+    <code class="parameter">$(c.name)</code>
+    (<span class="types">$(ldoc.typename(c.type))</span>)
+    <span class="return-comment">: $(M(c.comment, item))</span>
+    </li>
+> end
+    </ul>
+> end
+    </li>
+> end
+    </ul>
+> if i < #groups then
+    <h5>Or</h5>
+> end
+> end
+> end
+    <!-- returns end -->
+
+> if item.raise then
+    <h5>Raises</h5> $(M(item.raise, item))
+> end
+
+    <!-- see also start -->
+> if item.see then
+    <strong>See also:</strong>
+    <ul>
+> for see in iter(item.see) do
+    <li><a href="$(ldoc.href(see))">$(see.label)</a></li>
+> end
+    </ul>
+> end
+    <!-- see also end -->
+
+    <!-- usage start -->
+> if item.usage then
+    <strong>Usage:</strong>
+> for usage in iter(item.usage) do
+    <pre class="code" data-lang="Lua"><code>$(ldoc.prettify(usage))</code></pre>
+> end
+> end
+    <!-- usage end -->
+
+    </dd>
+> end
+    </dl>
+> end
+> else
+
+    </div>
+> end
+> end
+
+    <!-- section end -->
+
+    </div>
+    </div>
+    </div>
+
+    <div class="footer container grid-1280">
+    <div class="divider divider-custom"></div>
+    <div class="footer-columns columns">
+    <div class="sidebar-footer column col-3 col-sm-12">
+    <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc $(ldoc.version)</a></i>
+    </div>
+    <div class="content-footer column col-9 col-sm-12">
+    <i>Last updated $(ldoc.updatetime) UTC</i>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

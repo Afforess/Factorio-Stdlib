@@ -1,9 +1,9 @@
---- Config module
+--- For working with mod configurations.
 -- @module Config
 -- @usage require('stdlib/config/config')
 
-require 'stdlib/string'
-require 'stdlib/table'
+require 'stdlib/utils/string'
+require 'stdlib/utils/table'
 
 --luacheck: ignore value
 -----------------------------------------------------------------------
@@ -20,12 +20,17 @@ local testReservedCharacters = function(path)
     return nil
 end
 
+---
+-- @tfield function new
+-- @tfield function get
+-- @tfield function set
+-- @tfield function delete
+-- @tfield function is_set
 Config = {} --luacheck: allow defined top
 
---- Creates a new Config object
--- to ease the management of a config table.
--- @tparam table config_table [required] The table to be managed.
--- @treturn Config the Config instance for managing config_table
+--- Creates a new Config object to ease the management of a config table.
+-- @tparam table config_table the config table to manage
+-- @treturn Config the Config object to manage the config table
 --
 -- @usage --[Use a global table for config that persists across game save/loads]
 -- CONFIG = Config.new(global.testtable)
@@ -68,8 +73,8 @@ function Config.new(config_table)
 
     --- Get a stored config value.
     -- @tparam string path the variable to retrieve
-    -- @param[opt] default value to be used if path is nil
-    -- @return value at path or nil if not found and no default given
+    -- @tparam[opt] Mixed default value to be used if path is nil
+    -- @treturn Mixed value at path or nil if not found and no default given
     function Config.get(path, default)
         if type(path) ~= "string" or path:is_empty() then error("path is invalid", 2) end
 
@@ -104,9 +109,9 @@ function Config.new(config_table)
     end
 
     --- Set a stored config value.
-    -- @tparam string path a string, config path to set
-    -- @param[opt] data Value to set path to. If nil it behaves identical to Config.delete()
-    -- @treturn number 0 on failure; number of affected paths on success
+    -- @tparam string path the config path to set
+    -- @tparam ?|nil|Mixed data the value to set the path to. If *nil*, it behaves identical to @{delete|Config.delete()}
+    -- @treturn uint 0 on failure or the number of affected paths on success
     function Config.set(path, data)
         if type(path) ~= "string" or path:is_empty() then error("path is invalid", 2) end
 
@@ -135,8 +140,8 @@ function Config.new(config_table)
     end
 
     --- Delete a stored config value.
-    -- @tparam string path config path to delete
-    -- @treturn number 0 on failure; number of affected paths on success
+    -- @tparam string path the config path to delete
+    -- @treturn uint 0 on failure or the number of affected paths on success
     function Config.delete(path)
         if type(path) ~= "string" or path:is_empty() then error("path is invalid", 2) end
 
@@ -167,8 +172,8 @@ function Config.new(config_table)
     end
 
     --- Test the existence of a stored config value.
-    -- @tparam string path config path to test
-    -- @treturn boolean true on success, false otherwise
+    -- @tparam string path the config path to test
+    -- @treturn boolean true if the value exists, false otherwise
     function Config.is_set(path)
         if type(path) ~= "string" or path:is_empty() then error("path is invalid", 2) end
 

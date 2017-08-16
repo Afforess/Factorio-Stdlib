@@ -1,4 +1,4 @@
---- Core module
+--- Deprecated see @{Game}
 -- @module Core
 
 Core = {} --luacheck: allow defined top

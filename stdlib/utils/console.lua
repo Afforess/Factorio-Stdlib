@@ -19,8 +19,8 @@ for _, req in pairs (make_globals_for_use_in_console) do
 end
 
 --TODO fix for .16 when script.mod_name is implemented
-local mod_name = pcall(function() return script.mod_name end)
-local prefix = mod_name or (MOD and MOD.console_prefix) or "console"
+local ok, mod_name = pcall(function() return script.mod_name end)
+local prefix = (ok and mod_name) or (MOD and MOD.console_prefix) or "console"
 local names = {
     frame = prefix..'_console',
     scroll = prefix..'_console_scroll',

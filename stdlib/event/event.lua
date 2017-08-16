@@ -13,14 +13,14 @@
 -- @module Event
 -- @usage require("stdlib/event/event")
 
-require 'stdlib/utils/table'
+require "stdlib/utils/table"
 local fail_if_missing = require "stdlib/game"["fail_if_missing"]
 
 local function is_valid_id(event_id)
     if not (type(event_id) == "number" or type(event_id) == "string") then
         error("Invalid Event Id, Must be string or int, or array of strings and/or ints, Passed in :"..event_id, 3)
     end
-    if (type(event_id) == "number" and event_id <-3) then
+    if (type(event_id) == "number" and event_id < -3) then
         error("event_id must be greater than -3, Passed in: "..event_id, 3)
     end
 end
@@ -58,9 +58,13 @@ Event = { --luacheck: allow defined top
     }
 }
 
---- Registers a handler for a given events.
--- If a nil handler is passed, remove the given events and stop listening to them.
--- <p>Events are dispatched in the order they are registered.
+--- Registers a handler for the given events.
+-- If a `nil` handler is passed, remove the given events and stop listening to them.
+-- <p>Events dispatch in the order they are registered.
+-- <p>An *event ID* can be obtained via @{defines.events},
+-- @{LuaBootstrap.generate_event_name|script.generate_event_name} which is in <span class="types">@{int}</span>,
+-- and can be a custom input name which is in <span class="types">@{string}</span>.
+-- <p>The `event_ids` parameter takes in either a single, multiple, or mixture of @{defines.events}, @{int}, and @{string}.
 -- @usage
 -- -- Create an event that prints the current tick every tick.
 -- Event.register(defines.events.on_tick, function(event) print event.tick end)
@@ -68,15 +72,15 @@ Event = { --luacheck: allow defined top
 -- Event.register(Trains.on_train_id_changed, function(event) print(event.new_id) end)
 -- -- Function call chaining
 -- Event.register(event1, handler1).register(event2, handler2)
--- @tparam defines.events|{defines.events,...} event
--- @tparam function handler function to call when the given events are triggered
+-- @param event_ids (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
+-- @tparam function handler the function to call when the given events are triggered
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
-function Event.register(event, handler)
-    fail_if_missing(event, "missing event argument")
+function Event.register(event_ids, handler)
+    fail_if_missing(event_ids, "missing event_ids argument")
 
-    event = (type(event) == "table" and event) or {event}
+    event_ids = (type(event_ids) == "table" and event_ids) or {event_ids}
 
-    for _, event_id in pairs(event) do
+    for _, event_id in pairs(event_ids) do
         is_valid_id(event_id)
 
         if handler == nil then
@@ -101,11 +105,10 @@ function Event.register(event, handler)
     return Event
 end
 
----
--- <p>***Note***: This is a description of the structure of a table that the user should create &mdash;
--- the user should create a table in this format, for a table that will be passed into @{Event.dispatch}.
---> The table **MUST** have either `name` or `input_name`.
--- @tfield[opt] uint|defines.events name unique event ID generated with @{LuaBootstrap.generate_event_name|script.generate_event_name} ***OR*** @{defines.events}
+--- The user should create a table in this format, for a table that will be passed into @{Event.dispatch}.
+-- <p>In general, the user should create an event data table that is in a similar format as the one that Factorio returns.
+--> The event data table **MUST** have either `name` or `input_name`.
+-- @tfield[opt] int|defines.events name unique event ID generated with @{LuaBootstrap.generate_event_name|script.generate_event_name} ***OR*** @{defines.events}
 -- @tfield[opt] string input_name custom input name of an event
 -- @field[opt] ... any # of additional fields with extra data, which are passed into the handler registered to an event that this table represents
 -- @usage
@@ -120,9 +123,9 @@ end
 -- @table event_data
 
 --- Calls the handlers that are registered to the given event.
--- <p>Stop calling the handlers if any one of them has an invalid userdata.
--- <p>Handlers are dispatched in the order they are created.
--- @param event (<span class="types">@{event_data}</span>)
+-- <p>Abort calling remaining handlers if any one of them has invalid userdata.
+-- <p>Handlers are dispatched in the order they were created.
+-- @param event (<span class="types">@{event_data}</span>) the event data table
 -- @see https://forums.factorio.com/viewtopic.php?t=32039#p202158 Invalid Event Objects
 function Event.dispatch(event)
     if event then
@@ -160,7 +163,7 @@ function Event.dispatch(event)
 
                 -- force a crc check if option is enabled. This is a debug option and will hamper perfomance if enabled
                 if (force_crc or event.force_crc) and _G.game then
-                    local msg = "CRC check called for event "..event.name.." handler #"..idx
+                    local msg = "CRC check called for event " .. event.name .. " handler #" .. idx
                     log(msg) -- log the message to factorio-current.log
                     game.force_crc()
                 end
@@ -176,22 +179,26 @@ function Event.dispatch(event)
     end
 end
 
---- Removes a handler from events.
--- When the last handler for an event is removed, stop listening to that event.
--- @tparam defines.events|{defines.events,...}|uint|{uint,...}|string|{string,...} event events for which to remove a handler
--- @tparam function handler a handler that should be removed
+--- Removes a handler from the given events.
+-- <p>When the last handler for an event is removed, stop listening to that event.
+-- <p>An *event ID* can be obtained via @{defines.events},
+-- @{LuaBootstrap.generate_event_name|script.generate_event_name} which is in <span class="types">@{int}</span>,
+-- and can be a custom input name which is in <span class="types">@{string}</span>.
+-- <p>The `event_ids` parameter takes in either a single, multiple, or mixture of @{defines.events}, @{int}, and @{string}.
+-- @param event_ids (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
+-- @tparam function handler the handler to remove
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
-function Event.remove(event, handler)
-    fail_if_missing(event, "missing event argument")
+function Event.remove(event_ids, handler)
+    fail_if_missing(event_ids, "missing event_ids argument")
     fail_if_missing(handler, "missing handler argument")
 
-    event = (type(event) == "table" and event) or {event}
+    event_ids = (type(event_ids) == "table" and event_ids) or {event_ids}
 
-    for _, event_id in pairs(event) do
+    for _, event_id in pairs(event_ids) do
         is_valid_id(event_id)
 
         if Event._registry[event_id] then
-            for i = #Event._registry[event_id], 1, - 1 do
+            for i = #Event._registry[event_id], 1, -1 do
                 if Event._registry[event_id][i] == handler then
                     table.remove(Event._registry[event_id], i)
                 end

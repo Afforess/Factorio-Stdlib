@@ -95,8 +95,9 @@ describe("Event",
 
         it(".register should not add duplicate handers to a single event",
             function()
-                Event.register(0, function_a).register(0, function_a)
-                assert.same(1, table.size(Event._registry[0]))
+                Event.register(0, function_a).register(0, function_b).register(0, function_a)
+                assert.same(2, table.size(Event._registry[0]))
+                assert.same(Event._registry[0][2], function_a)
             end
         )
 

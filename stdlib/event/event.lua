@@ -96,10 +96,13 @@ function Event.register(event_ids, handler)
                     Event.core_events._register(event_id)
                 end
             end
-            --Only insert the handler if the handler isn't already registered
-            if not table.any(Event._registry[event_id], function(v) return v == handler end) then
-                table.insert(Event._registry[event_id], handler)
+            --If the handler is already registered for this event: remove and insert it to the end.
+            local _, reg_index = table.find(Event._registry[event_id], function(v) return v == handler end)
+            if reg_index then
+                table.remove(Event._registry[event_id], reg_index)
+                log("Same handler already registered for event "..event_id..", moving it the bottom")
             end
+            table.insert(Event._registry[event_id], handler)
         end
     end
     return Event

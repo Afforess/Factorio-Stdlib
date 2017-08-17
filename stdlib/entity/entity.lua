@@ -9,16 +9,14 @@ Entity = {} --luacheck: allow defined top
 
 --- Converts an entity and its @{LuaEntityPrototype.selection_box|selection_box} to the area around it.
 -- @function to_selection_area
--- @tparam LuaEntity entity the entity to convert to an area
--- @treturn Concepts.BoundingBox the area that entity @{LuaEntityPrototype.selection_box|selection_box} is valid for
 -- @see Area.to_selection_area
 Entity.to_selection_area = Area.to_selection_area
 
---- Converts an entity and its @{LuaEntityPrototype.collision_box|collision_box} to the area around it.
+--- Deprecated see @{LuaEntity.bounding_box}
+-- <br>Converts an entity and its @{LuaEntityPrototype.collision_box|collision_box} to the area around it.
 -- @function to_collision_area
--- @tparam LuaEntity entity the entity to convert to an area
--- @treturn Concepts.BoundingBox the area that entity @{LuaEntityPrototype.collision_box|collision_box} is valid for
 -- @see Area.to_collision_area
+-- @see LuaEntity.bounding_box
 Entity.to_collision_area = Area.to_collision_area
 
 --- Tests whether an entity has access to a given field.

@@ -4,6 +4,7 @@
 
 require 'stdlib/utils/table'
 require 'stdlib/utils/string'
+
 require 'stdlib/defines/color'
 require 'stdlib/defines/time'
 
@@ -14,9 +15,20 @@ Game = { --luacheck: allow defined top
     _protect = function(module_name)
         return {
             __newindex = function() error("Attempt to mutatate read-only "..module_name.." Module") end,
-            --__metatable = error("Attempt to mutatate read-only metatable for "..module_name.." Module")
             __metatable = true
         }
+    end,
+    _concat = function(lhs, rhs)
+        --Sanatize to remove address
+        return tostring(lhs):gsub("(%w+)%: %x+", "%1: (ADDR)") .. tostring(rhs):gsub("(%w+)%: %x+", "%1: (ADDR)")
+    end,
+    _rawstring = function (t)
+        local m = getmetatable(t)
+        local f = m.__tostring
+        m.__tostring = nil
+        local s = tostring(t)
+        m.__tostring = f
+        return s
     end
 }
 

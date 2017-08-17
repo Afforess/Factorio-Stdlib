@@ -9,6 +9,8 @@
 -- Ignore assigning to read only defines table. defines table is not ready only, however
 -- marking it this way allows warnings to be generated when trying to assign values
 
+defines = defines or {} --luacheck: ignore defines (This is used for testing locally)
+
 --- A table of colors allowing retrieval by color name.
 -- @usage color = defines.color.red
 -- @tfield Concepts.Color white

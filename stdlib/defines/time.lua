@@ -8,6 +8,8 @@
 -- Ignore assigning to read only defines table. defines table is not read only, however
 -- marking it this way allows warnings to be generated when trying to assign values.
 
+defines = defines or {} --luacheck: ignore defines (This is used for testing locally)
+
 local SECOND = 60
 local MINUTE = SECOND * 60
 local HOUR = MINUTE * 60

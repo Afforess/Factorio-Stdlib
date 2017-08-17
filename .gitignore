@@ -7,5 +7,4 @@ build/*
 mod/*
 !mod/info.json
 
-# Exlude my symlink mess for inplace testing
-# mod/stdlib
+.luacompleterc

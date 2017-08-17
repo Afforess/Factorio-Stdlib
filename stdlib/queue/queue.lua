@@ -55,7 +55,7 @@ function Queue.push_last(queue, value)
     return queue
 end
 
---- Retrieve the element at the front of the queue.
+--- Retrieve the element at the front of the queue and remove it from the queue.
 -- @param queue (<span class="types">@{Queue}</span>) the queue to retrieve the element from
 -- @treturn Mixed value the element at the front of the queue
 function Queue.pop_first(queue)
@@ -69,14 +69,14 @@ function Queue.pop_first(queue)
     return value
 end
 
---- Return the element at the front of the queue.
+--- Return the element at the front of the queue and remove it from the queue.
 -- @param queue (<span class="types">@{Queue}</span>) the queue to retrieve the element from
 -- @treturn Mixed the element at the front of the queue
 function Queue.peek_first (queue)
     return queue[queue.first]
 end
 
---- Retrieve the element at the back of the queue.
+--- Retrieve the element at the back of the queue and remove it from the queue.
 -- @param queue (<span class="types">@{Queue}</span>) the queue to retrieve the element from
 -- @treturn Mixed the element at the back of the queue
 function Queue.pop_last(queue)
@@ -98,25 +98,16 @@ function Queue.peek_last (queue)
     return queue[queue.last]
 end
 
---- Push a new element to the end of the queue, shortcut for @{push_last}.
--- @function push
--- @param queue (<span class="types">@{Queue}</span>) the queue to push an element to
--- @tparam Mixed value the element to push
--- @see Queue.push_last
+--- Shortcut for @{Queue.push_last}
+-- @function Queue.push
 Queue.push = Queue.push_last
 
---- Pop an element from the head of the queue, shortcut for @{pop_first}.
--- @function pop
--- @param queue (<span class="types">@{Queue}</span>) the queue to retrieve the element from
--- @treturn Mixed the element at the front of the queue
--- @see Queue.pop_first
+--- Shortcut for @{Queue.pop_first}
+-- @function Queue.pop
 Queue.pop = Queue.pop_first
 
---- Peek into the element at the head of the queue, shortcut for @{peek_first}.
--- @function peek
--- @param queue (<span class="types">@{Queue}</span>) the queue to peek into
--- @treturn Mixed the element at the front of the queue
--- @see Queue.peek_first
+--- Shortcut for @{Queue.peek_first}
+-- @function Queue.peek
 Queue.peek = Queue.peek_fist
 
 --- Returns true if the given queue is empty.
@@ -139,8 +130,7 @@ end
 
 Queue._mt = {
     __index = Queue,
-    __len = function(t) return Queue.count(t) end,
-    --TODO custom __ipairs metatable
+    __len = Queue.count,
 }
 
 return setmetatable(Queue, Game._protect("Queue"))

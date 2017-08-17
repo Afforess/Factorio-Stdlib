@@ -2,8 +2,7 @@
 -- @module table
 -- @see table
 
--- Allowing mutating table
--- luacheck: globals table
+-- luacheck: globals table (Allow mutating global table)
 
 --- Given a mapping function, creates a transformed copy of the table
 --- by calling the function for each element in the table, and using

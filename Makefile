@@ -56,6 +56,7 @@ ldoc:
 
 luacheck:
 	@echo 'Running luacheck on build directory'
+	@luacheck --version
 	@wget -q --no-check-certificate -O $(BUILD_DIR)/.luacheckrc https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/master/.luacheckrc
 	@cd $(BUILD_DIR)/$(OUTPUT_NAME) && luacheck .
 

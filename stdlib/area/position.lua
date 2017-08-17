@@ -17,11 +17,12 @@ Position.epsilon = 1.19e-07
 --- Returns a correctly formated position object.
 -- @usage Position.new({0, 0}) -- returns {x = 0, y = 0}
 -- @tparam array pos_arr the position to convert
--- @treturn Concepts.Position a new correctly formated position with metatable
-function Position.new(pos_arr)
+-- @tparam[opt=false] boolean copy return a new copy
+-- @treturn Concepts.Position itself or a new correctly formated position with metatable
+function Position.new(pos_arr, copy)
     Game.fail_if_missing(pos_arr, 'missing position argument')
 
-    if getmetatable(pos_arr) == Position._mt then
+    if not copy and getmetatable(pos_arr) == Position._mt then
         return pos_arr
     end
 
@@ -274,7 +275,7 @@ function Position.center(pos)
     return pos
 end
 
-local opposites = defines and {
+local opposites = (defines and defines.direction) and {
     [defines.direction.north] = defines.direction.south,
     [defines.direction.south] = defines.direction.north,
     [defines.direction.east] = defines.direction.west,
@@ -314,6 +315,7 @@ Position._mt = {
     __eq = Position.equals,
     __lt = Position.less_than,
     __le = Position.less_than_eq,
+    __concat = Game._concat
 }
 
 return setmetatable(Position, Game._protect("Position"))

@@ -289,17 +289,17 @@ end
 -- @tparam[opt] boolean sorted whether to sort the keys (slower) or keep the random order from pairs()
 -- @tparam[opt] boolean as_string whether to try and parse the keys as strings, or leave them as their existing type
 -- @treturn array an array with a copy of all the keys in the table
-function table.keys(tbl, sorted,as_string)
+function table.keys(tbl, sorted, as_string)
     if not tbl then return {} end
     local keyset = {}
     local n = 0
     if as_string then --checking as_string /before/ looping is faster
-        for k,_ in pairs(tbl) do
-            n = n+1
+        for k, _ in pairs(tbl) do
+            n = n + 1
             keyset[n] = tostring(k)
         end
     else
-        for k,_ in pairs(tbl) do
+        for k, _ in pairs(tbl) do
             n = n + 1
             keyset[n] = k
         end
@@ -331,7 +331,7 @@ end
 -- @tparam {Mixed,...} keys an array of keys that exist in the given table
 -- @treturn table tbl without the specified keys
 function table.remove_keys(tbl, keys)
-    for i=1, #keys do
+    for i = 1, #keys do
         tbl[keys[i]] = nil
     end
     return tbl
@@ -372,7 +372,7 @@ end
 -- @treturn table a new table with inverted mapping
 function table.invert(tbl)
     local inverted = {}
-    for k,v in pairs(tbl) do
+    for k, v in pairs(tbl) do
         inverted[v] = k
     end
     return inverted

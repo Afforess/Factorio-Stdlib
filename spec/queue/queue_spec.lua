@@ -1,4 +1,4 @@
-require 'spec/defines'
+require 'spec/setup/defines'
 local Queue = require 'stdlib/queue/queue'
 
 describe('Queue', function()

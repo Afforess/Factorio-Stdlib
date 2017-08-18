@@ -1,4 +1,4 @@
-require 'spec/defines'
+require 'spec/setup/defines'
 local Chunk = require 'stdlib/area/chunk'
 
 describe('Chunk Spec', function()

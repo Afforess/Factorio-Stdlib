@@ -1,4 +1,4 @@
-require 'spec/defines'
+require 'spec/setup/defines'
 local Recipe = require 'stdlib/data/recipe'
 
 describe('Recipe Spec', function()

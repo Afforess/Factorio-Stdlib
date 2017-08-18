@@ -1,4 +1,4 @@
-require 'spec/defines'
+require 'spec/setup/defines'
 require 'stdlib/event/gui'
 require 'stdlib/utils/table'
 --local serpent = require("serpent")

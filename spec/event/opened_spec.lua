@@ -1,4 +1,4 @@
-require 'spec/defines'
+require 'spec/setup/defines'
 require 'stdlib/event/event'
 --require 'stdlib.event.opened'
 

@@ -1,4 +1,4 @@
-require 'spec/defines'
+require 'spec/setup/defines'
 local Surface = require 'stdlib/area/surface'
 
 describe('Surface Spec', function()

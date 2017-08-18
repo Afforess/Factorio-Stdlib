@@ -1,4 +1,4 @@
-require 'spec/defines'
+require 'spec/setup/defines'
 local Color
 
 describe('Color',  function ()

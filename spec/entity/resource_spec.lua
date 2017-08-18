@@ -1,4 +1,4 @@
-require 'spec/defines'
+require 'spec/setup/defines'
 local Resource = require 'stdlib/entity/resource'
 local Area = require 'stdlib/area/area'
 

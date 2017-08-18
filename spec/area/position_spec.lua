@@ -1,4 +1,4 @@
-require 'spec/defines'
+require 'spec/setup/defines'
 local Position = require 'stdlib/area/position'
 
 describe('Position', function()

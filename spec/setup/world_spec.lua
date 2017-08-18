@@ -1,23 +1,30 @@
-require 'spec/defines'
+local World = require ("spec/setup/world")
+local Debug = World.Debug
+Debug.allow_print = false
+Debug.disable_test = false -- turn to true to skip this test
 
-local World = require ("spec/world")
+if Debug.disable_test then return end
 
 describe('World',
     function()
 
-        after_each(
-            function()
-                package.loaded["stdlib/event/opened"] = nil
-                Event._registry = {}
-            end
-        )
+        --Simulate restarting
+        before_each(function() World.open() end)
 
-        it('it should load!', function()
+        --Cleanup!
+        --after_each(function() World.close("event", "opened", "game") end)
+        after_each(function() World.close() end)
+
+        it('should load!', function()
             require("stdlib.event.opened")
             assert.same(1, #Event._registry[-1])
+            World.Debug.new_globs(true)
+            World.Debug.watched_packages(true)
+            World.Debug.packages()
+            World.Debug.block(Event._registry, "Event registry")
         end)
 
-        it('it should init and create some players', function()
+        it('should init and create some players', function()
             require("stdlib.event.opened")
 
             assert.is_nil(game)
@@ -46,7 +53,6 @@ describe('World',
             local s = spy.on(script, "raise_event")
             World.update(60)
             assert.spy(s).was_called(60)
-
         end)
     end
 )

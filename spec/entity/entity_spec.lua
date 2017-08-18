@@ -1,4 +1,4 @@
-require 'spec/defines'
+require 'spec/setup/defines'
 local Entity = require 'stdlib/entity/entity'
 
 describe('Entity', function()

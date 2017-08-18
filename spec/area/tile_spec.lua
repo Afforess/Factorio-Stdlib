@@ -1,4 +1,4 @@
-require 'spec/defines'
+require 'spec/setup/defines'
 local Tile = require 'stdlib/area/tile'
 
 describe('Tile Spec', function()

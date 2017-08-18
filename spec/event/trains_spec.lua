@@ -1,12 +1,12 @@
 -- Because the train module executes registers events immediately
 -- when it's loaded, in order to isolate our tests we must include
 -- the things it includes, then override them.
-require 'spec/defines'
+require 'spec/setup/defines'
 require 'stdlib/event/event'
 
 local Trains
 --local Surface = require 'stdlib/area/surface'
-local Train_Spec_Fixtures = require 'spec/trains/fixtures'
+local Train_Spec_Fixtures = require 'spec/setup/train_fixtures'
 
 local entity_to_trains = function(tbl) return table.map(tbl, function(entity) return entity.train end) end
 

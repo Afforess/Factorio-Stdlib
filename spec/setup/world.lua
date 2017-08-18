@@ -2,11 +2,19 @@
 --[[World]]-- World creator for making tests easier!
 -------------------------------------------------------------------------------
 --[[
-World.open - Simulates opening a world by clicking generate
+World.open - Simulates opening a world by clicking generate but stopping before init (script loading phase)
 
-World.init - Simulates on_init/on_load/ and configuration changed
+World.init - Simulates on_init/on_load/ and configuration changed, calls open if needed
 
-World.close - Closes the world
+World.save - saves the world to _G.saved_global and _G.saved_game
+
+World.load - Simulates a world load, can only be called if world is closed
+
+World.reload - perfoms a save and calls world.close and world.load using the saves
+
+World.close - Closes the world simulator
+
+note: save/load/reload havn't been tested yet.
 
 --]]
 
@@ -48,6 +56,22 @@ local function count_keys(tbl)
 end
 _G.table_size = count_keys
 _G.table.size = count_keys
+
+local override_require = function(replace)
+    if replace and not _G._require then
+        --print("require ovverride on")
+        _G._require = _G.require
+        _G.require = function(path) --luacheck: ignore require
+            local p = World.Debug._watched_packages
+            p[#p + 1] = path
+            return _G._require(path)
+        end
+    elseif not replace and _G._require then
+        --print("require override off")
+        _G.require = _G._require
+        _G._require = nil
+    end
+end
 
 -------------------------------------------------------------------------------
 --[[Setup metatables]]--
@@ -108,21 +132,7 @@ meta._G = {
 -------------------------------------------------------------------------------
 --[[World Functions]]--
 -------------------------------------------------------------------------------
-local override_require = function(replace)
-    if replace and not _G._require then
-        --print("require ovverride on")
-        _G._require = _G.require
-        _G.require = function(path) --luacheck: ignore require
-            local p = World.Debug._watched_packages
-            p[#p + 1] = path
-            return _G._require(path)
-        end
-    elseif not replace and _G._require then
-        --print("require override off")
-        _G.require = _G._require
-        _G._require = nil
-    end
-end
+
 
 World.open = function()
     if _G.script then error("Cannot Open, simulation already running") end
@@ -158,11 +168,12 @@ World.data_stage = function()
 end
 
 --If using events make sure to require and register events before calling World.init
-World.init = function(tick, load_only, saved_global_data, saved_game_data, config_changed_data)
+World.init = function(tick, load_only, saved_global, saved_game, config_changed_data)
+    if not _G.script then World.init() end
     if _G.game then error("Can't Init, simulation already running") end
 
-    _G.global = saved_global_data or {}
-    _G.game = saved_game_data or {
+    _G.global = saved_global or {}
+    _G.game = saved_game or {
         tick = tick or 0,
         players = {},
 
@@ -234,41 +245,52 @@ World.create_players = function(how_many, pdata)
     end
 end
 
+-- performs a load
+World.load = function(config_changed_data, saved_global, saved_game)
+    World.init(nil, false, saved_global, saved_game, config_changed_data)
+end
+
+--Performs a quit and load
+World.reload = function (save_and_reload)
+    local saved_global, saved_game = World.close(save_and_reload)
+    World.load(nil, save_and_reload, saved_global, saved_game)
+end
+
 World.save = function()
     --requiring table here just in case it isn't loaded
     require("stdlib/utils/table")
 
-    local saved_global, saved_game
-
     if _G.global then
         local global_meta = getmetatable(_G.global)
-        saved_global = table.deepcopy(setmetatable(_G.global, nil))
+        _G.saved_global = table.deepcopy(setmetatable(_G.global, nil))
         setmetatable(_G.global, global_meta)
     end
 
     if _G.game then
         local game_meta = getmetatable(_G.game)
-        saved_game = table.deepcopy(setmetatable(_G.game, nil))
+        _G.saved_game = table.deepcopy(setmetatable(_G.game, nil))
         setmetatable(_G.game, game_meta)
     end
-    return saved_global, saved_game
+    return _G.saved_global, _G.saved_game
 end
 
-World.close = function(...)
-    local dont_unload = {...}
-    local ignore = {}
+World.close = function(save, skip_unloading_these)
 
-    local saved_global, saved_game = World.save()
+    if save then
+        World.save()
+    end
 
     _G.global = nil
     _G.game = nil
+
     _G.script = nil
     _G.Game = nil
     _G.Event = nil
     _G.on_init = nil
     _G.on_configuration_changed = nil
 
-    for _, pack_name in pairs(dont_unload) do
+    local ignore = {}
+    for _, pack_name in pairs(skip_unloading_these or {}) do
         ignore[pack_name] = true
     end
     for pack in pairs(package.loaded) do
@@ -281,7 +303,10 @@ World.close = function(...)
     override_require(false)
 
     World.Debug.close()
-    return saved_global, saved_game
+
+    if save then
+        return _G.saved_global, _G.saved_game
+    end
 end
 
 return World

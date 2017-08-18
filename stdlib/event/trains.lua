@@ -7,7 +7,6 @@
 -- once all other functions have been defined
 
 require 'stdlib/event/event'
-require 'stdlib/utils/table'
 local Surface = require 'stdlib/area/surface'
 local Entity = require 'stdlib/entity/entity'
 

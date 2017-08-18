@@ -1,5 +1,5 @@
 require 'spec/setup/defines'
-require 'stdlib/event/gui'
+local Gui = require 'stdlib/event/gui'
 require 'stdlib/utils/table'
 --local serpent = require("serpent")
 --local ps = function(tab) print(serpent.block(tab, {comment=false, nocode=true})) end
@@ -15,6 +15,7 @@ describe('Gui', function()
 
     setup(
         function()
+            _G.log = function () end
             _G.script = {
                 on_event = function(_, _) return end,
                 on_init = function(callback) _G.on_init = callback end,
@@ -205,7 +206,7 @@ describe('Gui', function()
 
     it('.on_click should return itself', function()
         assert.equals(Gui, Gui.on_click("test_pattern", function() end))
-        assert.equals(Gui, Gui.on_click("test_pattern", function() end).on_click("test_pattern", function() end))
+        assert.equals(Gui, Gui.on_click("test_pattern2", function() end).on_click("test_pattern3", function() end))
     end)
 
     it('.on_click should pass the event to Gui.register for registration', function()

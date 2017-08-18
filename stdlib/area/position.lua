@@ -9,6 +9,9 @@ local Game = require 'stdlib/game'
 
 Position = {} --luacheck: allow defined top
 
+--- By default position tables are mutated in place set this to true to make the tables immutable.
+Position.immutable = false
+
 --- Machine Epsilon
 -- @see wiki Machine_epsilon
 -- @return epsilon
@@ -307,15 +310,17 @@ function Position.next_direction(direction, reverse, eight_way)
     return (next_dir > 7 and next_dir-next_dir) or (reverse and next_dir < 0 and 8 + next_dir) or next_dir
 end
 
+--- Position tables are returned with these metamethods attached
+-- @table Metamethods
 Position._mt = {
-    __index = Position,
-    __tostring = Position.tostring,
-    __add = Position.add,
-    __sub = Position.subtract,
-    __eq = Position.equals,
-    __lt = Position.less_than,
-    __le = Position.less_than_eq,
-    __concat = Game._concat
+    __index = Position, -- If key is not found, see if there is one availble in the Position module.
+    __tostring = Position.tostring, -- Returns a string representation of the position
+    __add = Position.add, -- Adds two position together.
+    __sub = Position.subtract, -- Subtracts one position from another.
+    __eq = Position.equals, -- Are two positions the same.
+    __lt = Position.less_than, -- Is position1 less than position2.
+    __le = Position.less_than_eq, -- Is position1 less than or equal to position2.
+    __concat = Game._concat -- calls tostring on both sides of concact.
 }
 
 return setmetatable(Position, Game._protect("Position"))

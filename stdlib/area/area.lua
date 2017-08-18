@@ -10,6 +10,9 @@ local Position = require 'stdlib/area/position'
 
 Area = {} --luacheck: allow defined top
 
+--- By default area tables are mutated in place set this to true to make the tables immutable.
+Area.immutable = false
+
 --- Converts an area in either array or table format to an area with a metatable.
 -- Returns itself if it already has a metatable
 -- @tparam Concepts.BoundingBox area_arr the area to convert
@@ -18,7 +21,7 @@ Area = {} --luacheck: allow defined top
 function Area.new(area_arr, copy)
     Game.fail_if_missing(area_arr, 'missing area value')
 
-    if not copy and getmetatable(area_arr) == Area._mt then
+    if not (copy or Area.immutable) and getmetatable(area_arr) == Area._mt then
         return area_arr
     end
 
@@ -300,7 +303,7 @@ function Area.equals(area1, area2)
     return Area.size(area1) == Area.size(area2)
 end
 
---- Is one area less than another
+--- Is area1 smaller in size than area2
 -- @tparam Concepts.BoundingBox area1
 -- @tparam Concepts.BoundingBox area2
 -- @treturn boolean is area1 less than area2 in size
@@ -444,15 +447,17 @@ function Area.to_selection_area(entity)
     return to_bounding_box_area(entity, "selection_box")
 end
 
+--- Area tables are returned with these Metamethods attached.
+-- @table Metamethods
 Area._mt = {
-    __index = Area,
-    __add = Area.expand,
-    __sub = Area.shrink,
-    __tostring = Area.tostring,
-    __eq = Area.equals,
-    __lt = Area.less_than,
-    __len = Area.size,
-    __concat = Game._concat,
+    __index = Area, -- If key is not found, see if there is one availble in the Area module.
+    __add = Area.expand, -- Will expand the area by the number or vector on the RHS.
+    __sub = Area.shrink, -- Will shrink the area by the number or vector on the RHS.
+    __tostring = Area.tostring, -- Will print a string representation of the area.
+    __eq = Area.equals, -- Is the size of area1 the same as area2.
+    __lt = Area.less_than, --is the size of area1 less than area2.
+    __len = Area.size, -- The size of the area.
+    __concat = Game._concat, -- calls tostring on both sides of concact.
 }
 
 return setmetatable(Area, Game._protect("Area"))

@@ -2,29 +2,19 @@
 -- @module Gui
 -- @usage local Gui = require('stdlib/event/gui')
 
--- luacheck: globals Event._registry
-require 'stdlib/event/event'
+-- luacheck: globals Event
 local fail_if_missing = require 'stdlib/game'['fail_if_missing']
+require 'stdlib/event/event'
 
----
--- @tfield function register
--- @tfield function dispatch
--- @tfield function remove
--- @tfield function on_click
--- @tfield function on_checked_state_changed
--- @tfield function on_text_changed
--- @tfield function on_elem_changed
--- @tfield function on_selection_state_changed
--- @table Gui
 Gui = {} --luacheck: allow defined top
 
 --- Registers a function for a given event and matching gui element pattern.
--- @tparam defines.events event valid values are `defines.events.on_gui_*` from @{defines.events}
+-- @tparam defines.events event_id valid values are `defines.events.on_gui_*` from @{defines.events}
 -- @tparam string gui_element_pattern the name or string regular expression to match the gui element
 -- @tparam function handler the function to call when the event is triggered
--- @treturn Event.Gui
-function Gui.register(event, gui_element_pattern, handler)
-    fail_if_missing(event, "missing event name argument")
+-- @treturn Gui
+function Gui.register(event_id, gui_element_pattern, handler)
+    fail_if_missing(event_id, "missing event name argument")
     fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
 
     if type(gui_element_pattern) ~= "string" then
@@ -32,14 +22,18 @@ function Gui.register(event, gui_element_pattern, handler)
     end
 
     if handler == nil then
-        return Gui.remove(event, gui_element_pattern)
+        return Gui.remove(event_id, gui_element_pattern)
     end
 
-    if not Event._registry[event] then
-        Event._registry[event] = {}
-        script.on_event(event, Gui.dispatch)
+    if not Event._registry[event_id] then
+        Event._registry[event_id] = {}
+        script.on_event(event_id, Event.Gui.dispatch)
     end
-    Event._registry[event][gui_element_pattern] = handler
+
+    if Event._registry[event_id][gui_element_pattern] then
+        log("Same handler already registered for Gui event "..event_id..".")
+    end
+    Event._registry[event_id][gui_element_pattern] = handler
 
     return Gui
 end
@@ -69,28 +63,30 @@ function Gui.dispatch(event)
     end
 end
 
+
 --- Removes the handler with matching gui element pattern from the event.
--- @tparam defines.events event valid values are `defines.events.on_gui_*` from @{defines.events}
+-- @tparam defines.events event_id valid values are `defines.events.on_gui_*` from @{defines.events}
 -- @tparam string gui_element_pattern the name or string regular expression for a handler to remove
--- @treturn Event.Gui
-function Gui.remove(event, gui_element_pattern)
-    fail_if_missing(event, "missing event argument")
+-- @treturn Gui
+function Gui.remove(event_id, gui_element_pattern)
+    fail_if_missing(event_id, "missing event argument")
 
     if type(gui_element_pattern) ~= "string" then
         error("gui_element_pattern argument must be a string")
     end
 
-    if Event._registry[event] then
-        if Event._registry[event][gui_element_pattern] then
-            Event._registry[event][gui_element_pattern] = nil
+    if Event._registry[event_id] then
+        if Event._registry[event_id][gui_element_pattern] then
+            Event._registry[event_id][gui_element_pattern] = nil
         end
-        if table.size(Event._registry[event]) == 0 then
-            Event._registry[event] = nil
-            script.on_event(event, nil)
+        if table.size(Event._registry[event_id]) == 0 then
+            Event._registry[event_id] = nil
+            script.on_event(event_id, nil)
         end
     end
     return Gui
 end
+
 
 --- Registers a function for a given gui element name or pattern when the element is clicked.
 -- @tparam string gui_element_pattern the name or string regular expression to match the gui element
@@ -131,5 +127,7 @@ end
 function Gui.on_selection_state_changed(gui_element_pattern, handler)
     return Gui.register(defines.events.on_gui_selection_state_changed, gui_element_pattern, handler)
 end
+
+Event.Gui = Gui
 
 return Gui

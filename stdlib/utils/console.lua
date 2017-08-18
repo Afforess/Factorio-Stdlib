@@ -5,7 +5,7 @@
 -- @module Console
 -- @usage remote.add_interface("my_interface", {show=require('stdlib/utils/console')})
 -- /c remote.call("my_interface", "show", game.player)
--- --In the window that appears you can run lua code directly on your mod, including global, any globals.
+-- --In the window that appears you can run lua code directly on your mod, including globals.
 
 require("stdlib.event.gui")
 

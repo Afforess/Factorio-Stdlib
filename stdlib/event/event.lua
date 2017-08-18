@@ -13,7 +13,6 @@
 -- @module Event
 -- @usage require("stdlib/event/event")
 
-require "stdlib/utils/table"
 local fail_if_missing = require "stdlib/game"["fail_if_missing"]
 
 local function is_valid_id(event_id)
@@ -100,7 +99,7 @@ function Event.register(event_ids, handler)
             local _, reg_index = table.find(Event._registry[event_id], function(v) return v == handler end)
             if reg_index then
                 table.remove(Event._registry[event_id], reg_index)
-                log("Same handler already registered for event "..event_id..", moving it the bottom")
+                log("Same handler already registered for event "..event_id..", reording it to the bottom")
             end
             table.insert(Event._registry[event_id], handler)
         end

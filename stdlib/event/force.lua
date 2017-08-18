@@ -8,7 +8,6 @@
 -- -- The fist time this is required it will register force creation events
 
 local Game = require 'stdlib/game'
-require 'stdlib/utils/table'
 require 'stdlib/event/event'
 
 local Force = {}

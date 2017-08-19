@@ -1,3 +1,4 @@
+require 'spec/setup/defines'
 _G.remote = {
     interfaces={}
 }
@@ -19,8 +20,9 @@ _G.script = {
 
 _G.global = { }
 
-require 'spec/defines'
 require 'stdlib/event/time'
+
+local long_tests = false
 
 describe('Event.Time', function()
     before_each(function()
@@ -64,51 +66,52 @@ describe('Event.Time', function()
         end
     end)
 
+    if long_tests then
+        it('should dispatch 60 minutely events and 1 hourly events per hour', function()
+            --initialize the first tick of the day
+            Event.dispatch({name = defines.events.on_tick, tick = 0})
 
-    it('should dispatch 60 minutely events and 1 hourly events per hour', function()
-        --initialize the first tick of the day
-        Event.dispatch({name = defines.events.on_tick, tick = 0})
+            local counter = { minutely = function() end, hourly = function() end }
 
-        local counter = { minutely = function() end, hourly = function() end }
+            Event.register(Event.Time.minutely, function() counter.minutely() end )
+            local minute_spy = spy.on(counter, "minutely")
 
-        Event.register(Event.Time.minutely, function() counter.minutely() end )
-        local minute_spy = spy.on(counter, "minutely")
+            Event.register(Event.Time.hourly, function() counter.hourly() end )
+            local hour_spy = spy.on(counter, "hourly")
 
-        Event.register(Event.Time.hourly, function() counter.hourly() end )
-        local hour_spy = spy.on(counter, "hourly")
+            _G.simulate_time(defines.time.hour * 1 + 1)
 
-        _G.simulate_time(defines.time.hour * 1 + 1)
+            -- 2 surfaces!
+            assert.spy(minute_spy).was_called(60 * 2)
+            assert.spy(hour_spy).was_called(1 * 2)
+        end)
 
-        -- 2 surfaces!
-        assert.spy(minute_spy).was_called(60 * 2)
-        assert.spy(hour_spy).was_called(1 * 2)
-    end)
+        it('should dispatch sunset, sunrise, midnight and midday events once per day', function()
+            --initialize the first tick of the day
+            Event.dispatch({name = defines.events.on_tick, tick = 0})
 
-    it('should dispatch sunset, sunrise, midnight and midday events once per day', function()
-        --initialize the first tick of the day
-        Event.dispatch({name = defines.events.on_tick, tick = 0})
+            local counter = { sunrise = function() end, sunset = function() end, midnight = function() end, midday = function() end }
 
-        local counter = { sunrise = function() end, sunset = function() end, midnight = function() end, midday = function() end }
+            Event.register(Event.Time.sunset, function() counter.sunset() end )
+            local sunset_spy = spy.on(counter, "sunset")
 
-        Event.register(Event.Time.sunset, function() counter.sunset() end )
-        local sunset_spy = spy.on(counter, "sunset")
+            Event.register(Event.Time.sunrise, function() counter.sunrise() end )
+            local sunrise_spy = spy.on(counter, "sunrise")
 
-        Event.register(Event.Time.sunrise, function() counter.sunrise() end )
-        local sunrise_spy = spy.on(counter, "sunrise")
+            Event.register(Event.Time.midnight, function() counter.midnight() end )
+            local midnight_spy = spy.on(counter, "midnight")
 
-        Event.register(Event.Time.midnight, function() counter.midnight() end )
-        local midnight_spy = spy.on(counter, "midnight")
+            Event.register(Event.Time.midday, function() counter.midday() end )
+            local midday_spy = spy.on(counter, "midday")
 
-        Event.register(Event.Time.midday, function() counter.midday() end )
-        local midday_spy = spy.on(counter, "midday")
+            _G.simulate_time(defines.time.day)
 
-        _G.simulate_time(defines.time.day)
-
-        assert.spy(sunset_spy).was_called(2)
-        assert.spy(sunrise_spy).was_called(2)
-        assert.spy(midnight_spy).was_called(2)
-        assert.spy(midday_spy).was_called(2)
-    end)
+            assert.spy(sunset_spy).was_called(2)
+            assert.spy(sunrise_spy).was_called(2)
+            assert.spy(midnight_spy).was_called(2)
+            assert.spy(midday_spy).was_called(2)
+        end)
+    end
 
     it('should dispatch hour, day, and midnight events at at 12pm', function()
         local s = spy.on(script, "raise_event")

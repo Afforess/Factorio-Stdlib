@@ -1,3 +1,4 @@
+require 'spec/setup/defines'
 require 'stdlib/log/logger'
 
 describe('Logger', function()

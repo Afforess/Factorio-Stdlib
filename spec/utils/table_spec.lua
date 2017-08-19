@@ -1,4 +1,4 @@
-require 'stdlib/table'
+require 'stdlib/utils/table'
 
 describe('Table Spec', function()
     describe('table.map', function()
@@ -295,6 +295,28 @@ describe('Table Spec', function()
             local b = {k1 = 1, k2 = 'foo', old_key = 'bar'}
             table.remove_keys(b, {'old_key'})
             assert.same({ k1 = 1, k2 = 'foo' }, b)
+        end)
+    end)
+
+    describe('table.count_keys', function()
+        local a = {1, 2, 3, 4, 5}
+
+        it('counts keys', function()
+            local count, total = table.count_keys(a)
+            assert.same(count, total)
+            assert.same(5, count)
+        end)
+
+        it ('counts keys that are true', function()
+            local count, total = table.count_keys(a, function(_, k) return k % 2 == 1  end)
+            assert.same(3, count)
+            assert.same(5, total)
+        end)
+
+        it('returns 0 if empty or not a table', function()
+            assert.same(0, table.count_keys(nil))
+            assert.same(0, table.count_keys({}))
+            assert.same(0, table.count_keys("string"))
         end)
     end)
 end)

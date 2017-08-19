@@ -1,16 +1,16 @@
---- For working with inventories
+--- For working with inventories.
 -- @module Inventory
 -- @usage local Inventory = require('stdlib/entity/inventory')
 
-local fail_if_missing = require 'stdlib/core'['fail_if_missing']
+local fail_if_missing = require 'stdlib/game'['fail_if_missing']
 
 Inventory = {} --luacheck: allow defined top
 
---- Copies an inventory contents to a destination inventory using simple item stacks.
--- @tparam LuaInventory src source inventory to copy from
--- @tparam LuaInventory dest destination inventory, to copy to
+--- Copies the contents of source inventory to destination inventory by using @{Concepts.SimpleItemStack}.
+-- @tparam LuaInventory src the source inventory
+-- @tparam LuaInventory dest the destination inventory
 -- @tparam[opt=false] boolean clear clear the contents of the source inventory
--- @treturn {LuaSimpleItemStack,...} an array of left over items that could not be inserted into dest.
+-- @treturn {Concepts.SimpleItemStack,...} an array of left over items that could not be inserted into the destination
 function Inventory.copy_as_simple_stacks(src, dest, clear)
     fail_if_missing(src, "missing source inventory")
     fail_if_missing(dest, "missing destination inventory")
@@ -39,13 +39,55 @@ function Inventory.copy_as_simple_stacks(src, dest, clear)
     return left_over
 end
 
+-- Remove all items inside an entity and return an array of SimpleItemStacks removed
+-- @param entity: The entity object to remove items from
+-- @return table: a table of SimpleItemStacks or nil if empty
+-- local function get_all_items_inside(entity, existing_stacks)
+--     local item_stacks = existing_stacks or {}
+--     --Inserters need to check held_stack
+--     if entity.type == "inserter" then
+--         local stack = entity.held_stack
+--         if stack.valid_for_read then
+--             item_stacks[#item_stacks+1] = {name=stack.name, count=stack.count, health=stack.health}
+--             stack.clear()
+--         end
+--         --Entities with transport lines only need to check each line individually
+--     elseif transport_types[entity.type] then
+--         for i=1, transport_types[entity.type] do
+--             local lane = entity.get_transport_line(i)
+--             for name, count in pairs(lane.get_contents()) do
+--                 local cur_stack = {name=name, count=count, health=1}
+--                 item_stacks[#item_stacks+1] = cur_stack
+--                 lane.remove_item(cur_stack)
+--             end
+--         end
+--     else
+--         --Loop through regular inventories
+--         for _, inv in pairs(defines.inventory) do
+--             local inventory = entity.get_inventory(inv)
+--             if inventory and inventory.valid then
+--                 if inventory.get_item_count() > 0 then
+--                     for i=1, #inventory do
+--                         if inventory[i].valid_for_read then
+--                             local stack = inventory[i]
+--                             item_stacks[#item_stacks+1] = {name=stack.name, count=stack.count, health=stack.health or 1}
+--                             stack.clear()
+--                         end
+--                     end
+--                 end
+--             end
+--         end
+--     end
+--     return (item_stacks[1] and item_stacks) or {}
+-- end
 
---- Given a function, apply it to each slot in the inventory. Passes the slot index as second argument to the function.
+--- Given a function, apply it to each slot in the given inventory.
+-- Passes the index of a slot as the second argument to the given function.
 -- <p>Iteration is aborted if the applied function returns true for any element during iteration.
--- @tparam LuaInventory inventory to be iterated
--- @tparam function func to apply to values
+-- @tparam LuaInventory inventory the inventory to iterate
+-- @tparam function func the function to apply to values
 -- @param[opt] ... additional arguments passed to the function
--- @treturn ?|LuaItemStack the slot interation was aborted at or nil
+-- @treturn ?|nil|LuaItemStack the slot where the iteration was aborted **OR** nil if not aborted
 function Inventory.each(inventory, func, ...)
     local index
     for i=1, #inventory do
@@ -57,13 +99,14 @@ function Inventory.each(inventory, func, ...)
     return index and inventory[index]
 end
 
---- Given a function, apply it to each slot in the inventory. Passes the slot index as second argument to the function.
--- <p>Iteration is aborted if the applied function returns true for any element during iteration. Iteration is performed from
--- last to first in order to support dynamically sized inventories.</p>
--- @tparam LuaInventory inventory to be iterated
--- @tparam function func to apply to values
+--- Given a function, apply it to each slot in the given inventory.
+-- Passes the index of a slot as the second argument to the given function.
+-- <p>Iteration is aborted if the applied function returns true for any element during iteration.
+-- <p>Iteration is performed from last to first in order to support dynamically sized inventories.
+-- @tparam LuaInventory inventory the inventory to iterate
+-- @tparam function func the function to apply to values
 -- @param[opt] ... additional arguments passed to the function
--- @treturn ?|LuaItemStack the slot iteration was aborted at or nil
+-- @treturn ?|nil|LuaItemStack the slot where the iteration was aborted **OR** nil if not aborted
 function Inventory.each_reverse(inventory, func, ...)
     local index
     for i=#inventory, 1, -1 do

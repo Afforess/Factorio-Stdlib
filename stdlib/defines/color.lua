@@ -1,5 +1,5 @@
---- A defines module for retrieving colors by name
--- Extends the Factorio defines table
+--- A defines module for retrieving colors by name.
+-- Extends the Factorio defines table.
 -- @usage require('stdlib/defines/color')
 -- @module defines.color
 -- @see Concepts.Color
@@ -9,27 +9,29 @@
 -- Ignore assigning to read only defines table. defines table is not ready only, however
 -- marking it this way allows warnings to be generated when trying to assign values
 
---- A table of colors retrived by color name
+defines = defines or {} --luacheck: ignore defines (This is used for testing locally)
+
+--- A table of colors allowing retrieval by color name.
 -- @usage color = defines.color.red
--- @field white @{LuaColor}
--- @field black @{LuaColor}
--- @field darkgrey @{LuaColor}
--- @field grey @{LuaColor}
--- @field lightgrey @{LuaColor}
--- @field red @{LuaColor}
--- @field darkred @{LuaColor}
--- @field lightred @{LuaColor}
--- @field green @{LuaColor}
--- @field darkgreen @{LuaColor}
--- @field lightgreen @{LuaColor}
--- @field blue @{LuaColor}
--- @field darkblue @{LuaColor}
--- @field lightblue @{LuaColor}
--- @field orange @{LuaColor}
--- @field yellow @{LuaColor}
--- @field pink @{LuaColor}
--- @field purple @{LuaColor}
--- @field brown @{LuaColor}
+-- @tfield Concepts.Color white
+-- @tfield Concepts.Color black
+-- @tfield Concepts.Color darkgrey
+-- @tfield Concepts.Color grey
+-- @tfield Concepts.Color lightgrey
+-- @tfield Concepts.Color red
+-- @tfield Concepts.Color darkred
+-- @tfield Concepts.Color lightred
+-- @tfield Concepts.Color green
+-- @tfield Concepts.Color darkgreen
+-- @tfield Concepts.Color lightgreen
+-- @tfield Concepts.Color blue
+-- @tfield Concepts.Color darkblue
+-- @tfield Concepts.Color lightblue
+-- @tfield Concepts.Color orange
+-- @tfield Concepts.Color yellow
+-- @tfield Concepts.Color pink
+-- @tfield Concepts.Color purple
+-- @tfield Concepts.Color brown
 defines.color = {}
 
 local colors = {
@@ -54,27 +56,26 @@ local colors = {
     brown = {r = 0.60, g = 0.40, b = 0.10},
 }
 
---- Return white for dark colors or black for lighter colors
--- @field defines.anticolor
--- @field green returns @{LuaColor} defines.color.black
--- @field grey returns @{LuaColor} defines.color.black
--- @field lightblue returns @{LuaColor} defines.color.black
--- @field lightgreen returns @{LuaColor} defines.color.black
--- @field lightgrey returns @{LuaColor} defines.color.black
--- @field lightred returns @{LuaColor} defines.color.black
--- @field orange returns @{LuaColor} defines.color.black
--- @field white returns @{LuaColor} defines.color.black
--- @field yellow returns @{LuaColor} defines.color.black
--- @field black returns @{LuaColor} defines.color.white
--- @field blue returns @{LuaColor} defines.color.white
--- @field brown returns @{LuaColor} defines.color.white
--- @field darkblue returns @{LuaColor} defines.color.white
--- @field darkgreen returns @{LuaColor} defines.color.white
--- @field darkgrey returns @{LuaColor} defines.color.white
--- @field darkred returns @{LuaColor} defines.color.white
--- @field pink returns @{LuaColor} defines.color.white
--- @field purple returns @{LuaColor} defines.color.white
--- @field red returns @{LuaColor} defines.color.white
+--- Returns white for dark colors or black for lighter colors.
+-- @tfield Concepts.Color green defines.color.black
+-- @tfield Concepts.Color grey defines.color.black
+-- @tfield Concepts.Color lightblue defines.color.black
+-- @tfield Concepts.Color lightgreen defines.color.black
+-- @tfield Concepts.Color lightgrey defines.color.black
+-- @tfield Concepts.Color lightred defines.color.black
+-- @tfield Concepts.Color orange defines.color.black
+-- @tfield Concepts.Color white defines.color.black
+-- @tfield Concepts.Color yellow defines.color.black
+-- @tfield Concepts.Color black defines.color.white
+-- @tfield Concepts.Color blue defines.color.white
+-- @tfield Concepts.Color brown defines.color.white
+-- @tfield Concepts.Color darkblue defines.color.white
+-- @tfield Concepts.Color darkgreen defines.color.white
+-- @tfield Concepts.Color darkgrey defines.color.white
+-- @tfield Concepts.Color darkred defines.color.white
+-- @tfield Concepts.Color pink defines.color.white
+-- @tfield Concepts.Color purple defines.color.white
+-- @tfield Concepts.Color red defines.color.white
 defines.anticolor = {}
 
 local anticolors = {
@@ -99,15 +100,15 @@ local anticolors = {
     red = colors.white,
 }
 
---- Return a lighter color of the named color passed
--- @field white return @{LuaColor} defines.color.lightgrey
--- @field grey return @{LuaColor} defines.color.darkgrey
--- @field lightgrey return @{LuaColor} defines.color.grey
--- @field red return @{LuaColor} defines.color.lightred
--- @field green return @{LuaColor} defines.color.lightgreen
--- @field blue return @{LuaColor} defines.color.lightblue
--- @field yellow return @{LuaColor} defines.color.orange
--- @field pink return @{LuaColor} defines.color.purple
+--- Returns a lighter color of a named color.
+-- @tfield Concepts.Color white defines.color.lightgrey
+-- @tfield Concepts.Color grey defines.color.darkgrey
+-- @tfield Concepts.Color lightgrey defines.color.grey
+-- @tfield Concepts.Color red defines.color.lightred
+-- @tfield Concepts.Color green defines.color.lightgreen
+-- @tfield Concepts.Color blue defines.color.lightblue
+-- @tfield Concepts.Color yellow defines.color.orange
+-- @tfield Concepts.Color pink defines.color.purple
 defines.lightcolor = {}
 local lightcolors = {
     white = colors.lightgrey, grey = colors.darkgrey, lightgrey = colors.grey,
@@ -121,6 +122,15 @@ local _mt = {
             return colors[c]
             and { r = colors[c]['r'], g=colors[c]['g'], b=colors[c]['b'], a = colors[c]['a'] }
             or { r = 1, g = 1, b = 1, a = 1 }
+        end,
+        __pairs = function()
+            local k = nil
+            local c = colors
+            return function()
+                local v
+                k, v = next(c, k)
+                return k, (v and {r = v['r'], g = v['g'], b = v['b'], a = v['a']}) or nil
+            end
         end
     },
     anticolor = {
@@ -128,6 +138,15 @@ local _mt = {
             return anticolors[c]
             and { r = anticolors[c]['r'], g=anticolors[c]['g'], b=anticolors[c]['b'], a = anticolors[c]['a'] }
             or { r = 1, g = 1, b = 1, a = 1 }
+        end,
+        __pairs = function()
+            local k = nil
+            local c = anticolors
+            return function()
+                local v
+                k, v = next(c, k)
+                return k, (v and {r = v['r'], g = v['g'], b = v['b'], a = v['a']}) or nil
+            end
         end
     },
     lightcolor = {
@@ -135,6 +154,15 @@ local _mt = {
             return lightcolors[c]
             and { r = lightcolors[c]['r'], g=lightcolors[c]['g'], b=lightcolors[c]['b'], a = lightcolors[c]['a'] }
             or { r = 1, g = 1, b = 1, a = 1 }
+        end,
+        __pairs = function()
+            local k = nil
+            local c = lightcolors
+            return function()
+                local v
+                k, v = next(c, k)
+                return k, (v and {r = v['r'], g = v['g'], b = v['b'], a = v['a']}) or nil
+            end
         end
     }
 }

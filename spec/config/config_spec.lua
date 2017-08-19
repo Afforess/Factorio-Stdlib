@@ -1,3 +1,4 @@
+require 'spec/setup/defines'
 require 'stdlib/config/config'
 
 --[[ the table to be duplicated for all tests. ]]--

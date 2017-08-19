@@ -1,3 +1,10 @@
+# Exclude the build directories
 build
 build/*
-factorio_mods
+.build
+
+# Temporarily Exclude mod file changes
+mod/*
+!mod/info.json
+
+.luacompleterc

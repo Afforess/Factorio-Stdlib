@@ -1,5 +1,5 @@
-require 'spec/defines'
-require 'stdlib/area/position'
+require 'spec/setup/defines'
+local Position = require 'stdlib/area/position'
 
 describe('Position', function()
     it('should validate position construction', function()
@@ -90,7 +90,7 @@ describe('Position', function()
 
     it('should validate position strings', function()
         local pos = {1, -4}
-        assert.same("Position {x = 1, y = -4}", Position.tostring(pos))
+        assert.same("{x = 1, y = -4}", Position.tostring(pos))
         assert.has_error(function() Position.tostring() end)
     end)
 
@@ -154,18 +154,17 @@ describe('Position', function()
         end)
     end)
 
-    describe('center', function()
+    describe('position.center', function()
         it('returns the position centered on the tile', function()
-            local pos = {
-                {23, -54.64},
-                {23.12, -54.95},
-                {-23.76, 54.12},
-                {-23.31543265, 54}
-            }
-            assert.same({x = 23.5, y = -54.5}, Position.center(pos[1]))
-            assert.same({x = 23.5, y = -54.5}, Position.center(pos[2]))
-            assert.same({x = -23.5, y = 54.5}, Position.center(pos[3]))
-            assert.same({x = -23.5, y = 54.5}, Position.center(pos[4]))
+            local pos1 = {23, -54.64}
+            local pos2 = {23.12, -54.95}
+            local pos3 = {-23.76, 54.12}
+            local pos4 = Position.new{-23.31543265, 54}
+
+            assert.same({x = 23.5, y = -54.5}, Position.center(pos1))
+            assert.same({x = 23.5, y = -54.5}, Position.center(pos2))
+            assert.same({x = -23.5, y = 54.5}, Position.center(pos3))
+            assert.same({x = -23.5, y = 54.5}, pos4:center())
         end)
     end)
 

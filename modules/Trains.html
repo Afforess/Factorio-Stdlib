@@ -1,352 +1,934 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<head>
-    <title>Factorio Stdlib</title>
+
+
+    <!doctype html>
+    <html class="no-js" lang="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Trains module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
-</head>
-<body>
+    </head>
+    <body>
 
-<div id="container">
+    <div class="container grid-1280">
+    <div class="columns">
 
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
+    <!-- sidebar start -->
+
+    <div id="sidebar" class="column col-3 col-sm-12">
+
+    <div class="sidebar-custom">
+
+    <div class="project-infobox">
+
+    <!-- project title -->
+
+    <a href="../index.html"><h1>Factorio Stdlib</h1></a>
+
+    <!-- project description -->
+    <p class="project-desc">Factorio Standard Library</p>
+
+    <!-- project full description -->
+    <span>  The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.</span>
+    </div>
 
 
-<div id="main">
+    <!-- sidebar navigation -->
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Modules</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.html"><span class="module-name-item">Area</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Chunk.html"><span class="module-name-item">Chunk</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Color.html"><span class="module-name-item">Color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Config.html"><span class="module-name-item">Config</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Console.html"><span class="module-name-item">Console</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.html"><span class="module-name-item">Data</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.html"><span class="module-name-item">Entity</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.html"><span class="module-name-item">Event</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Force.html"><span class="module-name-item">Force</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Game.html"><span class="module-name-item">Game</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Gui.html"><span class="module-name-item">Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Inventory.html"><span class="module-name-item">Inventory</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Logger.html"><span class="module-name-item">Logger</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Player.html"><span class="module-name-item">Player</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Position.html"><span class="module-name-item">Position</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Queue.html"><span class="module-name-item">Queue</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Recipe.html"><span class="module-name-item">Recipe</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Resource.html"><span class="module-name-item">Resource</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Surface.html"><span class="module-name-item">Surface</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Tile.html"><span class="module-name-item">Tile</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Time.html"><span class="module-name-item">Time</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Trains.html"><span class="module-name-item">Trains</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/string.html"><span class="module-name-item">string</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/table.html"><span class="module-name-item">table</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Topics</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/readme.md.html"><span class="module-name-item">readme.md</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Examples</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.time.lua.html"><span class="module-name-item">event.time.lua</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
 
 
-<!-- Menu -->
 
-<div id="navigation">
-<br/>
-<h1>Factorio Stdlib</h1>
+    <!-- list of items in a module -->
+    <ul class="nav nav-module-contents">
+    <li class="nav-item">
+    <h4>Contents of <strong>Trains</strong></h4>
+    <ul class="nav">
+    <li class="nav-item"><a href="#Events"><span class="fragment-hashtag">#</span> Events</a></li>
+    <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    <li class="nav-item"><a href="#Tables"><span class="fragment-hashtag">#</span> Tables</a></li>
+    </ul>
+    </li>
+    </ul>
+    </div>
+    <div class="up-to-top">
+    <a href="#">Top <i class="icon icon-upward"></i></a>
+    </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content body start -->
+    <div class="column col-9 col-sm-12">
+
+    <!-- module list on the main page start -->
+    <!-- module list on the main page end -->
+
+    <!-- module contents -->
+
+    <!-- module content header start -->
+
+    <h2><span class="body-module-name"><strong><em>Trains</em></strong></span> module</h2>
+    <p>Tools for working with trains.</p>
+    <p> When this module is loaded into a mod, it automatically registers a number of new events in order to keep track of the trains as their locomotives and wagons are moved around.
+ <p>To handle the events, you should use the <a href="../modules/Event.html#">Event</a> module.</p>
+
+
+    <!-- module info start -->
+    <!-- module info end -->
+
+    <!-- module usage start -->
+    <!-- module usage end -->
+
+    <!-- module content header end -->
+
+    <!-- module section list start -->
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Events">Events</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#on_train_id_changed">on_train_id_changed</a></td>
+    <td class="summary">This event fires when a train's ID changes.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Functions">Functions</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#find_filtered">find_filtered (criteria)</a></td>
+    <td class="summary">Given a <a href="../modules/Trains.html#criteria">search criteria</a>, search for trains that match the criteria.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_data">get_data (train)</a></td>
+    <td class="summary">Gets the user data that is associated with a train.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_main_locomotive">get_main_locomotive (train)</a></td>
+    <td class="summary">Get the main locomotive of a train.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_train_id">get_train_id (train)</a></td>
+    <td class="summary">Find the ID of a LuaTrain instance.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#set_data">set_data (train, data)</a></td>
+    <td class="summary">Associates the user data to a train.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#to_entity">to_entity (train)</a></td>
+    <td class="summary">Creates an entity from a train that is compatible with the <a href="../modules/Entity.html#">Entity</a> module.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Tables">Tables</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#criteria">criteria</a></td>
+    <td class="summary">This table should be passed into <a href="../modules/Trains.html#find_filtered">find_filtered</a> to find trains that match the criteria.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#train_details">train_details</a></td>
+    <td class="summary"><a href="../modules/Trains.html#find_filtered">find_filtered</a> returns an array with one or more of <strong><em>this</em></strong> table based on the <a href="../modules/Trains.html#criteria">search criteria</a>.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#train_entity">train_entity</a></td>
+    <td class="summary"><a href="../modules/Trains.html#to_entity">to_entity</a> returns <strong><em>this</em></strong> table.</td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- module section list end -->
+
+    <br />
+
+    <!-- section start -->
+    <h3><span id="Events" class="section-title"><a href="#Events">Events</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#on_train_id_changed" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_train_id_changed">on_train_id_changed</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">This event fires when a train's ID changes.</p>
+    <p class="section-item-description"> <p>The train ID is a property of the main locomotive,
+ which means that when locomotives are attached or detached from their wagons or from other locomotives, the ID of the train changes.
+ <p>For example: A train with a front and rear locomotives will get its ID
+ from the front locomotive. If the front locomotive gets disconnected, the rear locomotive becomes the main one and the train's ID changes.</p>
+
+    <!-- parameters start -->
+    <strong>Event Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>old_id</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#uint">uint</a></span>)
+
+     the ID of the train before the change
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>new_id</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#uint">uint</a></span>)
+
+     the ID of the train after the change
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code>Event.register(Trains.on_train_id_changed, my_handler)</code></pre>
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#find_filtered" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="find_filtered">find_filtered (criteria)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Given a <a href="../modules/Trains.html#criteria">search criteria</a>, search for trains that match the criteria.</p>
+    <p class="section-item-description">
 
 <ul>
-  <li><a href="../index.html">Index</a></li>
+    <li>If <strong><em>criteria.surface</em></strong> is not supplied, this function searches through all existing surfaces.</li>
+    <li>If <strong><em>criteria.force</em></strong> is not supplied, this function searches through all existing forces.</li>
+    <li>If <strong><em>criteria.state</em></strong> is not supplied, this function gets trains in any <a href="http://lua-api.factorio.com/latest/defines.html#defines.train_state">state</a>.</li>
 </ul>
+</p>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Functions">Functions</a></li>
-</ul>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
 
-
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><a href="../modules/Area.html">Area</a></li>
-  <li><a href="../modules/Chunk.html">Chunk</a></li>
-  <li><a href="../modules/Position.html">Position</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
-  <li><a href="../modules/Tile.html">Tile</a></li>
-  <li><a href="../modules/Color.html">Color</a></li>
-  <li><a href="../modules/Config.html">Config</a></li>
-  <li><a href="../modules/Core.html">Core</a></li>
-  <li><a href="../modules/Data.html">Data</a></li>
-  <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/defines.color.html">defines.color</a></li>
-  <li><a href="../modules/defines.time.html">defines.time</a></li>
-  <li><a href="../modules/Entity.html">Entity</a></li>
-  <li><a href="../modules/Inventory.html">Inventory</a></li>
-  <li><a href="../modules/Resource.html">Resource</a></li>
-  <li><a href="../modules/Event.html">Event</a></li>
-  <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
-  <li><a href="../modules/Event.Time.html">Event.Time</a></li>
-  <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Logger.html">Logger</a></li>
-  <li><a href="../modules/Queue.html">Queue</a></li>
-  <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/table.html">table</a></li>
-  <li><strong>Trains</strong></li>
-</ul>
-<h2>Topics</h2>
-<ul class="">
-  <li><a href="../topics/readme.md.html">readme</a></li>
-</ul>
-<h2>Examples</h2>
-<ul class="nowrap">
-  <li><a href="../examples/event.lua.html">event.lua</a></li>
-  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
-</ul>
-
-</div>
-
-<div id="content">
-
-<h1>Module <code>Trains</code></h1>
-<p>Trains module
- <p>When this module is loaded, it registers new
- events in order to track trains as locomotives and
- carriages are moved around.</p>
-<p> For this reason, you should use
- this library's <a href="Event.html">Event</a> module</p></p>
-
-
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" nowrap><a href="#find_filtered">find_filtered (criteria)</a></td>
-	<td class="summary">Given search criteria (a table that contains at least a surface_name)
- searches the given surface for trains that match the criteria</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#get_train_id">get_train_id (train)</a></td>
-	<td class="summary">Find the id of a LuaTrain instance</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#_on_locomotive_changed">_on_locomotive_changed ()</a></td>
-	<td class="summary">Event fired when some change has happened to a locomotive</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#get_main_locomotive">get_main_locomotive (train)</a></td>
-	<td class="summary">Determines which locomotive in a train is the main one</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#to_entity">to_entity (train)</a></td>
-	<td class="summary">Creates an Entity module-compatible entity from a train</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#set_data">set_data (train, data)</a></td>
-	<td class="summary">Set user data on a train
- <p>This is a helper method around <a href="Entity.html#set_data">Entity.set_data</a></p></td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#get_data">get_data (train)</a></td>
-	<td class="summary">Get user data on a train
- <p>This is a helper method around <a href="Entity.html#get_data">Entity.get_data</a></p></td>
-	</tr>
-</table>
-
-<br/>
-<br/>
-
-
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "find_filtered"></a>
-    <strong>find_filtered (criteria)</strong>
-    </dt>
-    <dd>
-    Given search criteria (a table that contains at least a surface_name)
- searches the given surface for trains that match the criteria
- <table><tr><td>train (LuaTrain)</td><td>The LuaTrain instance</td></tr><tr><td>id (int)</td><td>The id of the train</td></tr></table>
-
-
-    <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">criteria</span>
-            <span class="types"><span class="type">Table</span></span>
-         Table with any keys supported by the <a href="Surface.html#find_all_entities">Surface</a> module.</p>
- <p>If the name key isn't supplied, this will default to 'diesel-locomotive'</p>
- <p>If the surface key isn't supplied, this will default to 1</p>
- <p>If the surface key isn't supplied, this will search all surfaces that currently exist</p>
- <p>Criteria may also include the 'state' field, which will filter the state of the train results</p>
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>criteria</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="../modules/Trains.html#criteria">criteria</a></span>)
+
+     a table used to search for trains
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-        A list of train details tables, if any are found matching the criteria. Otherwise the empty list.
-    </ol>
-
-
-
-    <h3>Usage:</h3>
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-        <pre class="example">Trains.find_filtered({ surface_name = <span class="string">"nauvis"</span>, state = defines.train_state.wait_station })</pre>
+    <li>
+    <span class="return-text">(<span class="types">{<a href="../modules/Trains.html#train_details">train_details</a>,...}</span>) an array of train IDs and LuaTrain instances</span>
+    </li>
     </ul>
+    <!-- returns end -->
 
-</dd>
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code>Trains.find_filtered({ surface = <span class="string">"nauvis"</span>, state = defines.train_state.wait_station })</code></pre>
+    <!-- usage end -->
+
+    </dd>
     <dt>
-    <a name = "get_train_id"></a>
-    <strong>get_train_id (train)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_data" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_data">get_data (train)</span>
+    </div>
     </dt>
     <dd>
-    Find the id of a LuaTrain instance
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Gets the user data that is associated with a train.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+<p> This is a helper around <a href="../modules/Entity.html#get_data">Entity.get_data</a>.
+ <p>The user data is stored in the global object and it persists between loads.</p>
+<blockquote>
+    <p>The user data will be removed from a train when the train becomes invalid.</p>
+</blockquote>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">train</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTrain.html">Train</a></span>
 
 
 
-        </li>
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>train</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTrain.html">LuaTrain</a></span>)
+
+     the train to look up user data for
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">int</span></span>
-
-
-
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "_on_locomotive_changed"></a>
-    <strong>_on_locomotive_changed ()</strong>
-    </dt>
-    <dd>
-    Event fired when some change has happened to a locomotive
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-        void
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "get_main_locomotive"></a>
-    <strong>get_main_locomotive (train)</strong>
-    </dt>
-    <dd>
-    Determines which locomotive in a train is the main one
-
-
-    <h3>Parameters:</h3>
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-        <li><span class="parameter">train</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTrain.html">Train</a></span>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a> or <span class="type">Mixed</span></span>)
+    <span class="return-text">the user data, or nil if no user data exists for the train</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_main_locomotive" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_main_locomotive">get_main_locomotive (train)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Get the main locomotive of a train.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
 
 
 
-        </li>
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>train</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTrain.html">LuaTrain</a></span>)
+
+
+
+
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
-        the main locomotive
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+    <span class="return-text">the main locomotive</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "to_entity"></a>
-    <strong>to_entity (train)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_train_id" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_train_id">get_train_id (train)</span>
+    </div>
     </dt>
     <dd>
-    Creates an Entity module-compatible entity from a train
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Find the ID of a LuaTrain instance.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">train</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTrain.html">Train</a></span>
 
 
 
-        </li>
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>train</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTrain.html">LuaTrain</a></span>)
+
+
+
+
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#uint">uint</a></span>)
+    <span class="return-text">the ID of the train</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
-    </ol>
+    <!-- usage start -->
+    <!-- usage end -->
 
-
-
-
-</dd>
+    </dd>
     <dt>
-    <a name = "set_data"></a>
-    <strong>set_data (train, data)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#set_data" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="set_data">set_data (train, data)</span>
+    </div>
     </dt>
     <dd>
-    Set user data on a train
- <p>This is a helper method around <a href="Entity.html#set_data">Entity.set_data</a></p>
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Associates the user data to a train.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+<p> This is a helper around <a href="../modules/Entity.html#set_data">Entity.set_data</a>.
+ <p>The user data will be stored in the global object and it will persist between loads.</p>
+<blockquote>
+    <p>The user data will be removed from a train when the train becomes invalid.</p>
+</blockquote>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">train</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTrain.html">Train</a></span>
 
 
 
-        </li>
-        <li><span class="parameter">data</span>
-            <span class="types"><span class="type">mixed</span></span>
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>train</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTrain.html">LuaTrain</a></span>)
+
+     the train to set the user data for
+
+    </li>
 
 
 
-        </li>
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>data</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a> or <span class="type">Mixed</span></span>)
+
+     the user data to set, or nil to delete the user data associated with the train
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-        mixed
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a> or <span class="type">Mixed</span></span>)
+    <span class="return-text">the previous user data or nil if the train had no previous user data</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "get_data"></a>
-    <strong>get_data (train)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#to_entity" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="to_entity">to_entity (train)</span>
+    </div>
     </dt>
     <dd>
-    Get user data on a train
- <p>This is a helper method around <a href="Entity.html#get_data">Entity.get_data</a></p>
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Creates an entity from a train that is compatible with the <a href="../modules/Entity.html#">Entity</a> module.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">train</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTrain.html">Train</a></span>
 
 
 
-        </li>
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>train</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTrain.html">LuaTrain</a></span>)
+
+
+
+
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-        mixed
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Trains.html#train_entity">train_entity</a></span>)</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Tables" class="section-title"><a href="#Tables">Tables</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#criteria" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="criteria">criteria</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">This table should be passed into <a href="../modules/Trains.html#find_filtered">find_filtered</a> to find trains that match the criteria.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
+    <ul>
 
 
 
 
-</dd>
-</dl>
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a>, <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">{LuaSurface,...}</a></span>)
+
+     the surfaces to look up for the trains
+
+    (<em>optional</em>)
+    </li>
 
 
-</div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-06-08 03:50:13 </i>
-</div> <!-- id="about" -->
-</div> <!-- id="container" -->
-</body>
-</html>
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>force</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaForce.html">LuaForce</a></span>)
+
+     the force of the trains to search
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>state</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a> or <a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.train">defines.train_state</a></span>)
+
+     the state of the trains to search
+
+    (<em>optional</em>)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#train_details" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="train_details">train_details</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary"><a href="../modules/Trains.html#find_filtered">find_filtered</a> returns an array with one or more of <strong><em>this</em></strong> table based on the <a href="../modules/Trains.html#criteria">search criteria</a>.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>train</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTrain.html">LuaTrain</a></span>)
+
+     an instance of the train
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>id</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#uint">uint</a></span>)
+
+     the ID of the train
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#train_entity" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="train_entity">train_entity</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary"><a href="../modules/Trains.html#to_entity">to_entity</a> returns <strong><em>this</em></strong> table.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>name</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     the name of the train entity with the train ID as its suffix
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>valid</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     whether or not if the train is in a valid state in the game
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>equals</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+     &mdash; <em>function(entity)</em> &mdash; a function to check if another entity is equal to the train that <strong><em>this</em></strong> table represents
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+
+    <!-- section end -->
+
+    </div>
+    </div>
+    </div>
+
+    <div class="footer container grid-1280">
+    <div class="divider divider-custom"></div>
+    <div class="footer-columns columns">
+    <div class="sidebar-footer column col-3 col-sm-12">
+    <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+    </div>
+    <div class="content-footer column col-9 col-sm-12">
+    <i>Last updated 2017-08-19 05:47:06 UTC</i>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

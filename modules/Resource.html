@@ -1,330 +1,639 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<head>
-    <title>Factorio Stdlib</title>
+
+
+    <!doctype html>
+    <html class="no-js" lang="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Resource module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
-</head>
-<body>
+    </head>
+    <body>
 
-<div id="container">
+    <div class="container grid-1280">
+    <div class="columns">
 
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
+    <!-- sidebar start -->
 
+    <div id="sidebar" class="column col-3 col-sm-12">
 
-<div id="main">
+    <div class="sidebar-custom">
 
+    <div class="project-infobox">
 
-<!-- Menu -->
+    <!-- project title -->
 
-<div id="navigation">
-<br/>
-<h1>Factorio Stdlib</h1>
+    <a href="../index.html"><h1>Factorio Stdlib</h1></a>
 
-<ul>
-  <li><a href="../index.html">Index</a></li>
-</ul>
+    <!-- project description -->
+    <p class="project-desc">Factorio Standard Library</p>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Functions">Functions</a></li>
-</ul>
+    <!-- project full description -->
+    <span>  The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.</span>
+    </div>
 
 
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><a href="../modules/Area.html">Area</a></li>
-  <li><a href="../modules/Chunk.html">Chunk</a></li>
-  <li><a href="../modules/Position.html">Position</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
-  <li><a href="../modules/Tile.html">Tile</a></li>
-  <li><a href="../modules/Color.html">Color</a></li>
-  <li><a href="../modules/Config.html">Config</a></li>
-  <li><a href="../modules/Core.html">Core</a></li>
-  <li><a href="../modules/Data.html">Data</a></li>
-  <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/defines.color.html">defines.color</a></li>
-  <li><a href="../modules/defines.time.html">defines.time</a></li>
-  <li><a href="../modules/Entity.html">Entity</a></li>
-  <li><a href="../modules/Inventory.html">Inventory</a></li>
-  <li><strong>Resource</strong></li>
-  <li><a href="../modules/Event.html">Event</a></li>
-  <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
-  <li><a href="../modules/Event.Time.html">Event.Time</a></li>
-  <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Logger.html">Logger</a></li>
-  <li><a href="../modules/Queue.html">Queue</a></li>
-  <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/table.html">table</a></li>
-  <li><a href="../modules/Trains.html">Trains</a></li>
-</ul>
-<h2>Topics</h2>
-<ul class="">
-  <li><a href="../topics/readme.md.html">readme</a></li>
-</ul>
-<h2>Examples</h2>
-<ul class="nowrap">
-  <li><a href="../examples/event.lua.html">event.lua</a></li>
-  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
-</ul>
+    <!-- sidebar navigation -->
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Modules</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.html"><span class="module-name-item">Area</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Chunk.html"><span class="module-name-item">Chunk</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Color.html"><span class="module-name-item">Color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Config.html"><span class="module-name-item">Config</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Console.html"><span class="module-name-item">Console</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.html"><span class="module-name-item">Data</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.html"><span class="module-name-item">Entity</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.html"><span class="module-name-item">Event</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Force.html"><span class="module-name-item">Force</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Game.html"><span class="module-name-item">Game</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Gui.html"><span class="module-name-item">Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Inventory.html"><span class="module-name-item">Inventory</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Logger.html"><span class="module-name-item">Logger</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Player.html"><span class="module-name-item">Player</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Position.html"><span class="module-name-item">Position</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Queue.html"><span class="module-name-item">Queue</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Recipe.html"><span class="module-name-item">Recipe</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Resource.html"><span class="module-name-item">Resource</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Surface.html"><span class="module-name-item">Surface</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Tile.html"><span class="module-name-item">Tile</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Time.html"><span class="module-name-item">Time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Trains.html"><span class="module-name-item">Trains</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/string.html"><span class="module-name-item">string</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/table.html"><span class="module-name-item">table</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Topics</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/readme.md.html"><span class="module-name-item">readme.md</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Examples</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.time.lua.html"><span class="module-name-item">event.time.lua</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
 
-</div>
 
-<div id="content">
 
-<h1>Module <code>Resource</code></h1>
-<p>Resource utilities.</p>
-<p>
+    <!-- list of items in a module -->
+    <ul class="nav nav-module-contents">
+    <li class="nav-item">
+    <h4>Contents of <strong>Resource</strong></h4>
+    <ul class="nav">
+    <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    </ul>
+    </li>
+    </ul>
+    </div>
+    <div class="up-to-top">
+    <a href="#">Top <i class="icon icon-upward"></i></a>
+    </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content body start -->
+    <div class="column col-9 col-sm-12">
+
+    <!-- module list on the main page start -->
+    <!-- module list on the main page end -->
+
+    <!-- module contents -->
+
+    <!-- module content header start -->
+
+    <h2><span class="body-module-name"><strong><em>Resource</em></strong></span> module</h2>
+    <p>Resource utilities.</p>
+    <p>
 
 </p>
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">local Resource = require(&apos;stdlib/entity/resource&apos;)
-</pre>
-    </ul>
 
 
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" nowrap><a href="#get_resources_at">get_resources_at (surface, position)</a></td>
-	<td class="summary">Gets all resource entities at the specified position and surface.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#get_resource_patches_at">get_resource_patches_at (surface, position)</a></td>
-	<td class="summary">From the resources at the given surface and position, return all connected (horizontally, vertically and diagonally) resource entities.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#get_resource_patch_at">get_resource_patch_at (surface, position, type)</a></td>
-	<td class="summary">From the resources at the given surface and position, return all connected (horizontally, vertically and diagonally) resource entities of the specified type.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#get_resource_types">get_resource_types (resources)</a></td>
-	<td class="summary">Given a list of resource entities, return a list of the different resource names.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#filter_resources">filter_resources (resources, resource_names)</a></td>
-	<td class="summary">Given a list of resource entities, return all resource entities with the given resource name.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#get_resource_patch_bounds">get_resource_patch_bounds (resource_patch)</a></td>
-	<td class="summary">Given a resource patch, return the bounding box of the resource patch.</td>
-	</tr>
-</table>
+    <!-- module info start -->
+    <!-- module info end -->
 
-<br/>
-<br/>
+    <!-- module usage start -->
+    <h3>Usage</h3>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Resource = <span class="global">require</span>(<span class="string">'stdlib/entity/resource'</span>)</code></pre>
+    <!-- module usage end -->
 
+    <!-- module content header end -->
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <!-- module section list start -->
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Functions">Functions</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#filter_resources">filter_resources (resources, resource_names)</a></td>
+    <td class="summary">Given an array of resource entities, return the ones that have the given resource names.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_resource_patch_at">get_resource_patch_at (surface, position, type)</a></td>
+    <td class="summary">From the resources at the given surface and position, return all connected (horizontally, vertically and diagonally) resource entities of specified type.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_resource_patch_bounds">get_resource_patch_bounds (resource_patch)</a></td>
+    <td class="summary">Given a resource patch, return its area.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_resource_patches_at">get_resource_patches_at (surface, position)</a></td>
+    <td class="summary">From the resources at the given surface and position, return all connected (horizontally, vertically and diagonally) resource entities.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_resource_types">get_resource_types (resources)</a></td>
+    <td class="summary">Given an array of resource entities, get an array containing their names.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_resources_at">get_resources_at (surface, position)</a></td>
+    <td class="summary">Gets all resource entities at the specified position and surface.</td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- module section list end -->
 
-    <dl class="function">
+    <br />
+
+    <!-- section start -->
+    <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
+    <dl class="section-body-container">
     <dt>
-    <a name = "get_resources_at"></a>
-    <strong>get_resources_at (surface, position)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#filter_resources" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="filter_resources">filter_resources (resources, resource_names)</span>
+    </div>
     </dt>
     <dd>
-    Gets all resource entities at the specified position and surface.
- Adapted from YARM/resmon.lua -> find<em>resource</em>at
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Given an array of resource entities, return the ones that have the given resource names.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">surface</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">Surface</a></span>
-         the surface of the position
-        </li>
-        <li><span class="parameter">position</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
-         the position to check
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>resources</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">{LuaEntity,...}</a></span>)
+
+     an array of resource entities
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>resource_names</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
+
+     the names of the resource entities
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">{nil</span> or <a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity,...}</a></span>
-        the resource entities, can be empty if there are no resources there
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">{nil</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity,...}</a></span>)
+    <span class="return-text">a new array containing the entities matching the given resource names or nil if no matches were found</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "get_resource_patches_at"></a>
-    <strong>get_resource_patches_at (surface, position)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_resource_patch_at" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_resource_patch_at">get_resource_patch_at (surface, position, type)</span>
+    </div>
     </dt>
     <dd>
-    From the resources at the given surface and position, return all connected (horizontally, vertically and diagonally) resource entities.
- (For now, just ore patches. Problems arise when a single resource entity spans multiple tiles).
- (Note that the implementation is not stable: If a resource entity reference changes during the search, the old and the new version of the entity might be included)
+    <div class="section-item-body">
 
+    <p class="section-item-summary">From the resources at the given surface and position, return all connected (horizontally, vertically and diagonally) resource entities of specified type.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+<p> <p>For now, this function gets just the ore patches, since problems arise when a single resource entity spans multiple tiles.</p>
+<blockquote>
+    <p>This implementation is unstable; if a resource entity reference changes during the search, <em>both the old and the new version</em> of the entity might be included.</p>
+</blockquote>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">surface</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">Surface</a></span>
-         the surface of the position
-        </li>
-        <li><span class="parameter">position</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
-         the position to check
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a></span>)
+
+     the surface to look up
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>position</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+     the position to check
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>type</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     the resource type (example: "iron-ore")
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">{nil</span> or <span class="type">"resource_type"</span></span>
-        = {LuaEntity,...}, ...} a map of all resource types to their connected resource entities, or an empty array if there are no resources there
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">{nil</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity,...}</a></span>)
+    <span class="return-text">an array containing all resources in the resource patch, or an empty array if there are no resources there</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "get_resource_patch_at"></a>
-    <strong>get_resource_patch_at (surface, position, type)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_resource_patch_bounds" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_resource_patch_bounds">get_resource_patch_bounds (resource_patch)</span>
+    </div>
     </dt>
     <dd>
-    From the resources at the given surface and position, return all connected (horizontally, vertically and diagonally) resource entities of the specified type.
- (For now, just ore patches. Problems arise when a single resource entity spans multiple tiles).
- (Note that the implementation is not stable: If a resource entity reference changes during the search, the old and the new version of the entity might be included)
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Given a resource patch, return its area.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">surface</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">Surface</a></span>
-         the surface of the position
-        </li>
-        <li><span class="parameter">position</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
-         the position to check
-        </li>
-        <li><span class="parameter">type</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         the resource type, i.e. "iron-ore"
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>resource_patch</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">{LuaEntity,...}</a></span>)
+
+     the resource patch
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">{nil</span> or <a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity,...}</a></span>
-        an array containing all resources in the resource patch, or an empty array if there are no resources there
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the area of the resource patch</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <strong>See also:</strong>
+    <ul>
+    <li><a href="../modules/Resource.html#get_resource_patch_at">Resource.get_resource_patch_at</a></li>
+    </ul>
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "get_resource_types"></a>
-    <strong>get_resource_types (resources)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_resource_patches_at" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_resource_patches_at">get_resource_patches_at (surface, position)</span>
+    </div>
     </dt>
     <dd>
-    Given a list of resource entities, return a list of the different resource names.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">From the resources at the given surface and position, return all connected (horizontally, vertically and diagonally) resource entities.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+<p> <p>When the resource patches are found, the returned object will be an associative array where the key is the
+ resource-type string and the value is an array of entities that correspond to the resource-type.
+ <p>For now, this function gets just the ore patches, since problems arise when a single resource entity spans multiple tiles.</p>
+<blockquote>
+    <p>This implementation is unstable; if a resource entity reference changes during the search, <em>both the old and the new version</em> of the entity might be included.</p>
+</blockquote>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">resources</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">{LuaEntity,...}</a></span>
-         a list of resource entities
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a></span>)
+
+     the surface to look up
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>position</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+     the position to check
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">{nil</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string,...}</a></span>
-        a new list containing the names of the resources, can be empty
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types">{<a href="https://www.lua.org/pil/2.1.html">nil</a>} or {[<a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> &lt;resource-type&gt;] = {<a href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a>,...},...}</span>) a map of resource types to resource entities or empty array if they don't exist</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "filter_resources"></a>
-    <strong>filter_resources (resources, resource_names)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_resource_types" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_resource_types">get_resource_types (resources)</span>
+    </div>
     </dt>
     <dd>
-    Given a list of resource entities, return all resource entities with the given resource name.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Given an array of resource entities, get an array containing their names.</p>
+    <p class="section-item-description"> Every element within the new array is unique and is the name of a resource entity.</p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">resources</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">{LuaEntity,...}</a></span>
-         a list of ore entities
-        </li>
-        <li><span class="parameter">resource_names</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">{string,...}</a></span>
-         the name of the ore
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>resources</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">{LuaEntity,...}</a></span>)
+
+     an array of resource entities
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">{nil</span> or <a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity,...}</a></span>
-        a new list containing the ores matching the given resource names, can be empty
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">{nil</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string,...}</a></span>)
+    <span class="return-text">a new array with the names of the resources or nil if no resource entities are given</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "get_resource_patch_bounds"></a>
-    <strong>get_resource_patch_bounds (resource_patch)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_resources_at" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_resources_at">get_resources_at (surface, position)</span>
+    </div>
     </dt>
     <dd>
-    Given a resource patch, return the bounding box of the resource patch.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Gets all resource entities at the specified position and surface.</p>
+    <p class="section-item-description"> Adapted from <em>YARM/resmon.lua &rarr; find_resource_at</em></p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">resource_patch</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">{LuaEntity,...}</a></span>
-         the resource patch
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a></span>)
+
+     the surface to look up
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>position</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+     the position to check
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        the bounding box of the resource patch
-    </ol>
-
-
-    <h3>See also:</h3>
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-         <li><a href="../modules/Resource.html#get_resource_patch_at">Resource.get_resource_patch_at</a></li>
-         <li><a href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">Concepts BoundingBox</a></li>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">{nil</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity,...}</a></span>)
+    <span class="return-text">an array of resource entities or nil if none found</span>
+    </li>
     </ul>
+    <!-- returns end -->
 
 
-</dd>
-</dl>
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-06-08 03:50:13 </i>
-</div> <!-- id="about" -->
-</div> <!-- id="container" -->
-</body>
-</html>
+    </dd>
+    </dl>
+
+    <!-- section end -->
+
+    </div>
+    </div>
+    </div>
+
+    <div class="footer container grid-1280">
+    <div class="divider divider-custom"></div>
+    <div class="footer-columns columns">
+    <div class="sidebar-footer column col-3 col-sm-12">
+    <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+    </div>
+    <div class="content-footer column col-9 col-sm-12">
+    <i>Last updated 2017-08-19 05:47:06 UTC</i>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

@@ -1,230 +1,508 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<head>
-    <title>Factorio Stdlib</title>
+
+
+    <!doctype html>
+    <html class="no-js" lang="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Surface module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
-</head>
-<body>
+    </head>
+    <body>
 
-<div id="container">
+    <div class="container grid-1280">
+    <div class="columns">
 
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
+    <!-- sidebar start -->
 
+    <div id="sidebar" class="column col-3 col-sm-12">
 
-<div id="main">
+    <div class="sidebar-custom">
 
+    <div class="project-infobox">
 
-<!-- Menu -->
+    <!-- project title -->
 
-<div id="navigation">
-<br/>
-<h1>Factorio Stdlib</h1>
+    <a href="../index.html"><h1>Factorio Stdlib</h1></a>
 
-<ul>
-  <li><a href="../index.html">Index</a></li>
-</ul>
+    <!-- project description -->
+    <p class="project-desc">Factorio Standard Library</p>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Functions">Functions</a></li>
-</ul>
+    <!-- project full description -->
+    <span>  The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.</span>
+    </div>
 
 
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><a href="../modules/Area.html">Area</a></li>
-  <li><a href="../modules/Chunk.html">Chunk</a></li>
-  <li><a href="../modules/Position.html">Position</a></li>
-  <li><strong>Surface</strong></li>
-  <li><a href="../modules/Tile.html">Tile</a></li>
-  <li><a href="../modules/Color.html">Color</a></li>
-  <li><a href="../modules/Config.html">Config</a></li>
-  <li><a href="../modules/Core.html">Core</a></li>
-  <li><a href="../modules/Data.html">Data</a></li>
-  <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/defines.color.html">defines.color</a></li>
-  <li><a href="../modules/defines.time.html">defines.time</a></li>
-  <li><a href="../modules/Entity.html">Entity</a></li>
-  <li><a href="../modules/Inventory.html">Inventory</a></li>
-  <li><a href="../modules/Resource.html">Resource</a></li>
-  <li><a href="../modules/Event.html">Event</a></li>
-  <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
-  <li><a href="../modules/Event.Time.html">Event.Time</a></li>
-  <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Logger.html">Logger</a></li>
-  <li><a href="../modules/Queue.html">Queue</a></li>
-  <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/table.html">table</a></li>
-  <li><a href="../modules/Trains.html">Trains</a></li>
-</ul>
-<h2>Topics</h2>
-<ul class="">
-  <li><a href="../topics/readme.md.html">readme</a></li>
-</ul>
-<h2>Examples</h2>
-<ul class="nowrap">
-  <li><a href="../examples/event.lua.html">event.lua</a></li>
-  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
-</ul>
-
-</div>
-
-<div id="content">
-
-<h1>Module <code>Surface</code></h1>
-<p>A "domain" of the world.</p>
-<p> For working with surfaces</p>
-    <h3>See also:</h3>
-    <ul>
-         <a href="http://lua-api.factorio.com/latest/LuaSurface.html">Surface</a>
+    <!-- sidebar navigation -->
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Modules</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.html"><span class="module-name-item">Area</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Chunk.html"><span class="module-name-item">Chunk</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Color.html"><span class="module-name-item">Color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Config.html"><span class="module-name-item">Config</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Console.html"><span class="module-name-item">Console</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.html"><span class="module-name-item">Data</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.html"><span class="module-name-item">Entity</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.html"><span class="module-name-item">Event</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Force.html"><span class="module-name-item">Force</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Game.html"><span class="module-name-item">Game</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Gui.html"><span class="module-name-item">Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Inventory.html"><span class="module-name-item">Inventory</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Logger.html"><span class="module-name-item">Logger</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Player.html"><span class="module-name-item">Player</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Position.html"><span class="module-name-item">Position</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Queue.html"><span class="module-name-item">Queue</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Recipe.html"><span class="module-name-item">Recipe</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Resource.html"><span class="module-name-item">Resource</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Surface.html"><span class="module-name-item">Surface</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Tile.html"><span class="module-name-item">Tile</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Time.html"><span class="module-name-item">Time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Trains.html"><span class="module-name-item">Trains</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/string.html"><span class="module-name-item">string</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/table.html"><span class="module-name-item">table</span></a></div></li>
     </ul>
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">local Surface = require(&apos;stdlib/area/surface&apos;)
-</pre>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Topics</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/readme.md.html"><span class="module-name-item">readme.md</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Examples</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.time.lua.html"><span class="module-name-item">event.time.lua</span></a></div></li>
+    </ul>
+    </li>
     </ul>
 
 
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" nowrap><a href="#lookup">lookup (surface)</a></td>
-	<td class="summary">Flexible, safe lookup function for surfaces.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#find_all_entities">find_all_entities (search_criteria)</a></td>
-	<td class="summary">Given search criteria, a table that contains a name or type of entity to search for,
- and optionally surface or force, searches all loaded chunks for the entities that
- match the critera.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#get_surface_bounds">get_surface_bounds (surface)</a></td>
-	<td class="summary">determine surface extension
- returns Area covering entire extension of this surface
- useful, if you compare total number of chunks with number of chunks of this area</td>
-	</tr>
-</table>
 
-<br/>
-<br/>
+    <!-- list of items in a module -->
+    <ul class="nav nav-module-contents">
+    <li class="nav-item">
+    <h4>Contents of <strong>Surface</strong></h4>
+    <ul class="nav">
+    <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    <li class="nav-item"><a href="#Tables"><span class="fragment-hashtag">#</span> Tables</a></li>
+    </ul>
+    </li>
+    </ul>
+    </div>
+    <div class="up-to-top">
+    <a href="#">Top <i class="icon icon-upward"></i></a>
+    </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content body start -->
+    <div class="column col-9 col-sm-12">
+
+    <!-- module list on the main page start -->
+    <!-- module list on the main page end -->
+
+    <!-- module contents -->
+
+    <!-- module content header start -->
+
+    <h2><span class="body-module-name"><strong><em>Surface</em></strong></span> module</h2>
+    <p>For working with surfaces.</p>
+    <p> Surfaces are the "domain" of the world.</p>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <!-- module info start -->
+    <!-- module info end -->
 
-    <dl class="function">
+    <!-- module usage start -->
+    <h3>See also</h3>
+    <ul class="module-see-also">
+    <li><a href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a></li>
+    </ul>
+    <h3>Usage</h3>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Surface = <span class="global">require</span>(<span class="string">'stdlib/area/surface'</span>)</code></pre>
+    <!-- module usage end -->
+
+    <!-- module content header end -->
+
+    <!-- module section list start -->
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Functions">Functions</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#find_all_entities">find_all_entities (search_criteria)</a></td>
+    <td class="summary">Given a <a href="../modules/Surface.html#search_criteria">search criteria</a>, find all entities that match the criteria.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_surface_bounds">get_surface_bounds (surface)</a></td>
+    <td class="summary">Gets the area which covers the entirety of a given surface.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#lookup">lookup (surface)</a></td>
+    <td class="summary">Flexible and safe lookup function for surfaces.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Tables">Tables</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#search_criteria">search_criteria</a></td>
+    <td class="summary">This table should be passed into <a href="../modules/Surface.html#find_all_entities">find_all_entities</a> function to find entities that match the criteria.</td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- module section list end -->
+
+    <br />
+
+    <!-- section start -->
+    <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
+    <dl class="section-body-container">
     <dt>
-    <a name = "lookup"></a>
-    <strong>lookup (surface)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#find_all_entities" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="find_all_entities">find_all_entities (search_criteria)</span>
+    </div>
     </dt>
     <dd>
-    Flexible, safe lookup function for surfaces.  <p>
- May be given a string, the name of a surface, or may be given a table with surface names,
- may be given the a surface object, or may be given a table of surface objects, or
- may be given nil. <p>
- Returns an array of surface objects of all valid, existing surfaces
- If a surface does not exist for the surface, it is ignored, if no surfaces
- are given, an empty array is returned.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Given a <a href="../modules/Surface.html#search_criteria">search criteria</a>, find all entities that match the criteria.</p>
+    <p class="section-item-description"> <ul>
+ <li>If <strong><em>search_criteria.name</em></strong> is not supplied, search for entities with any name.
+ <li>If <strong><em>search_criteria.type</em></strong> is not supplied, search for entities of any type.
+ <li>If <strong><em>search_criteria.force</em></strong> is not supplied, search for entities owned by any force.
+ <li>If <strong><em>search_criteria.surface</em></strong> is not supplied, search for entities on all surfaces.
+ <li>If <strong><em>search_criteria.area</em></strong> is not supplied, search the entire specified surface.
+ </ul></p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">surface</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a>, <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">{string,...}</a>, <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">Surface</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">{LuaSurface,...}</a></span>
-         to lookup
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>search_criteria</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="../modules/Surface.html#search_criteria">search_criteria</a></span>) a table used to search for entities
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">{nil</span> or <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface,..}</a></span>
-        the list of valid surfaces looked up
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">{nil</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity,...}</a></span>)
+    <span class="return-text">an array of all entities that matched the criteria <strong>OR</strong> <em>nil</em> if there were no matches</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code>surface.find_all_entities({ <span class="global">type</span> = <span class="string">'unit'</span>, surface = <span class="string">'nauvis'</span>, area = {{-<span class="number">1000</span>,<span class="number">20</span>},{-<span class="number">153</span>,<span class="number">2214</span>}})
+<span class="comment">-- returns a list containing all unit entities on the nauvis surface in the given area</span></code></pre>
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "find_all_entities"></a>
-    <strong>find_all_entities (search_criteria)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_surface_bounds" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_surface_bounds">get_surface_bounds (surface)</span>
+    </div>
     </dt>
     <dd>
-    Given search criteria, a table that contains a name or type of entity to search for,
- and optionally surface or force, searches all loaded chunks for the entities that
- match the critera.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Gets the area which covers the entirety of a given surface.</p>
+    <p class="section-item-description"> This function is useful if you wish to compare the total number of chunks against the number of chunks within the entire area of a given surface.</p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">search_criteria</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         a table of criteria. Must contain either the <em>name</em> or <em>type</em> or <em>force</em> of an entity. May contain <em>surface</em> or <em>force</em> or <em>area</em>.
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a></span>)
+
+     the surface for which to get the area
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">{nil</span> or <a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity,...}</a></span>
-        an array of all entities that matched the criteria
-    </ol>
-
-
-
-    <h3>Usage:</h3>
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-        <pre class="example">surface.find_all_entities({ <span class="global">type</span> = <span class="string">'unit'</span>, surface = <span class="string">'nauvis'</span>, area = {{-<span class="number">1000</span>,<span class="number">20</span>},{-<span class="number">153</span>,<span class="number">2214</span>}})
- <span class="comment">--returns a list containing all unit entities on the nauvis surface in the given area</span></pre>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the area of a given surface</span>
+    </li>
     </ul>
+    <!-- returns end -->
 
-</dd>
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
     <dt>
-    <a name = "get_surface_bounds"></a>
-    <strong>get_surface_bounds (surface)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#lookup" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="lookup">lookup (surface)</span>
+    </div>
     </dt>
     <dd>
-    determine surface extension
- returns Area covering entire extension of this surface
- useful, if you compare total number of chunks with number of chunks of this area
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Flexible and safe lookup function for surfaces.</p>
+    <p class="section-item-description"> <ul>
+ <li>May be given a single surface name or an array of surface names in <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>.
+ <li>May be given a single surface object or an array of surface objects in <a href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a>.
+ <li>May also be given a <a href="https://www.lua.org/pil/2.1.html">nil</a>.
+ <li>Returns an array of surface objects of all valid and existing surfaces.
+ <li>Returns an empty array if no surfaces are given or if they are not found.
+ </ul></p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">surface</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">Surface</a></span>
 
 
 
-        </li>
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a>, <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">{LuaSurface,...}</a></span>)
+
+     the surfaces to look up
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        Area
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">{nil</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface,...}</a></span>)
+    <span class="return-text">an array of all valid surfaces or nil otherwise</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Tables" class="section-title"><a href="#Tables">Tables</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#search_criteria" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="search_criteria">search_criteria</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">This table should be passed into <a href="../modules/Surface.html#find_all_entities">find_all_entities</a> function to find entities that match the criteria.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
+    <ul>
 
 
 
 
-</dd>
-</dl>
+
+    <li class="section-subitem-li">
+
+    <strong><em>name</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     internal name of an entity &mdash; (example: "locomotive")
+
+    (<em>optional</em>)
+    </li>
 
 
-</div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-06-08 03:50:13 </i>
-</div> <!-- id="about" -->
-</div> <!-- id="container" -->
-</body>
-</html>
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>type</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     type of an entity &mdash; (example: "unit")
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>force</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaForce.html">LuaForce</a></span>)
+
+     the force of an entity &mdash; (examples: "neutral", "enemy")
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a>, <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">{LuaSurface,...}</a></span>)
+
+     the surface to search &mdash; (example: "nauvis")
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area to search
+
+    (<em>optional</em>)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+
+    <!-- section end -->
+
+    </div>
+    </div>
+    </div>
+
+    <div class="footer container grid-1280">
+    <div class="divider divider-custom"></div>
+    <div class="footer-columns columns">
+    <div class="sidebar-footer column col-3 col-sm-12">
+    <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+    </div>
+    <div class="content-footer column col-9 col-sm-12">
+    <i>Last updated 2017-08-19 05:47:06 UTC</i>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

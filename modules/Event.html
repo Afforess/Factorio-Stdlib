@@ -1,223 +1,519 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<head>
-    <title>Factorio Stdlib</title>
+
+
+    <!doctype html>
+    <html class="no-js" lang="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Event module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
-</head>
-<body>
+    </head>
+    <body>
 
-<div id="container">
+    <div class="container grid-1280">
+    <div class="columns">
 
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
+    <!-- sidebar start -->
 
+    <div id="sidebar" class="column col-3 col-sm-12">
 
-<div id="main">
+    <div class="sidebar-custom">
 
+    <div class="project-infobox">
 
-<!-- Menu -->
+    <!-- project title -->
 
-<div id="navigation">
-<br/>
-<h1>Factorio Stdlib</h1>
+    <a href="../index.html"><h1>Factorio Stdlib</h1></a>
 
-<ul>
-  <li><a href="../index.html">Index</a></li>
-</ul>
+    <!-- project description -->
+    <p class="project-desc">Factorio Standard Library</p>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Functions">Functions</a></li>
-</ul>
+    <!-- project full description -->
+    <span>  The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.</span>
+    </div>
 
 
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><a href="../modules/Area.html">Area</a></li>
-  <li><a href="../modules/Chunk.html">Chunk</a></li>
-  <li><a href="../modules/Position.html">Position</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
-  <li><a href="../modules/Tile.html">Tile</a></li>
-  <li><a href="../modules/Color.html">Color</a></li>
-  <li><a href="../modules/Config.html">Config</a></li>
-  <li><a href="../modules/Core.html">Core</a></li>
-  <li><a href="../modules/Data.html">Data</a></li>
-  <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/defines.color.html">defines.color</a></li>
-  <li><a href="../modules/defines.time.html">defines.time</a></li>
-  <li><a href="../modules/Entity.html">Entity</a></li>
-  <li><a href="../modules/Inventory.html">Inventory</a></li>
-  <li><a href="../modules/Resource.html">Resource</a></li>
-  <li><strong>Event</strong></li>
-  <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
-  <li><a href="../modules/Event.Time.html">Event.Time</a></li>
-  <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Logger.html">Logger</a></li>
-  <li><a href="../modules/Queue.html">Queue</a></li>
-  <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/table.html">table</a></li>
-  <li><a href="../modules/Trains.html">Trains</a></li>
-</ul>
-<h2>Topics</h2>
-<ul class="">
-  <li><a href="../topics/readme.md.html">readme</a></li>
-</ul>
-<h2>Examples</h2>
-<ul class="nowrap">
-  <li><a href="../examples/event.lua.html">event.lua</a></li>
-  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
-</ul>
-
-</div>
-
-<div id="content">
-
-<h1>Module <code>Event</code></h1>
-<p>Makes working with events in factorio a lot more simple.</p>
-<p> <p>Factorio can only have one handler registered per event. This module
- allows you to easily register multiple handlers for each event.
- Using this module is as simple as replacing script.on_event(...) with Event.register(...)</p></p>
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">require(&apos;stdlib/event/event&apos;)
-</pre>
+    <!-- sidebar navigation -->
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Modules</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.html"><span class="module-name-item">Area</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Chunk.html"><span class="module-name-item">Chunk</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Color.html"><span class="module-name-item">Color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Config.html"><span class="module-name-item">Config</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Console.html"><span class="module-name-item">Console</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.html"><span class="module-name-item">Data</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.html"><span class="module-name-item">Entity</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Event.html"><span class="module-name-item">Event</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Force.html"><span class="module-name-item">Force</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Game.html"><span class="module-name-item">Game</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Gui.html"><span class="module-name-item">Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Inventory.html"><span class="module-name-item">Inventory</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Logger.html"><span class="module-name-item">Logger</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Player.html"><span class="module-name-item">Player</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Position.html"><span class="module-name-item">Position</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Queue.html"><span class="module-name-item">Queue</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Recipe.html"><span class="module-name-item">Recipe</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Resource.html"><span class="module-name-item">Resource</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Surface.html"><span class="module-name-item">Surface</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Tile.html"><span class="module-name-item">Tile</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Time.html"><span class="module-name-item">Time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Trains.html"><span class="module-name-item">Trains</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/string.html"><span class="module-name-item">string</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/table.html"><span class="module-name-item">table</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Topics</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/readme.md.html"><span class="module-name-item">readme.md</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Examples</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.time.lua.html"><span class="module-name-item">event.time.lua</span></a></div></li>
+    </ul>
+    </li>
     </ul>
 
 
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" nowrap><a href="#register">register (event, handler)</a></td>
-	<td class="summary">Registers a function for a given event.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#dispatch">dispatch (event)</a></td>
-	<td class="summary">Calls the registerd handlers
- Will stop dispatching remaning handlers if any handler passes invalid event userdata.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#remove">remove (event, handler)</a></td>
-	<td class="summary">Removes the handler from the event.</td>
-	</tr>
-</table>
 
-<br/>
-<br/>
+    <!-- list of items in a module -->
+    <ul class="nav nav-module-contents">
+    <li class="nav-item">
+    <h4>Contents of <strong>Event</strong></h4>
+    <ul class="nav">
+    <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    <li class="nav-item"><a href="#Tables"><span class="fragment-hashtag">#</span> Tables</a></li>
+    </ul>
+    </li>
+    </ul>
+    </div>
+    <div class="up-to-top">
+    <a href="#">Top <i class="icon icon-upward"></i></a>
+    </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content body start -->
+    <div class="column col-9 col-sm-12">
+
+    <!-- module list on the main page start -->
+    <!-- module list on the main page end -->
+
+    <!-- module contents -->
+
+    <!-- module content header start -->
+
+    <h2><span class="body-module-name"><strong><em>Event</em></strong></span> module</h2>
+    <p>Makes working with events in Factorio a lot more simple.</p>
+    <p> <p>By default, Factorio allows you to register <strong>only one handler</strong> to an event.
+ <p>This module lets you easily register <strong>multiple handlers</strong> to an event.
+ <p>Using this module is as simple as replacing <a href="http://lua-api.factorio.com/latest/LuaBootstrap.html#LuaBootstrap.on_event">script.on_event</a> with <a href="../modules/Event.html#register">Event.register</a>.
+ <blockquote>
+ Due to the way that Factorio's event system works, it is not recommended to intermingle <code>script.on_event</code> and <code>Event.register</code> in a mod.
+ <br>This module hooks into Factorio's event system, and using <code>script.on_event</code> for the same event will change which events are registered.
+ </blockquote>
+ <blockquote>
+ This module does not have many of the multiplayer protections that <code>script.on_event</code> does.
+ <br>Due to this, great care should be taken when registering events conditionally.
+ </blockquote></p>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <!-- module info start -->
+    <!-- module info end -->
 
-    <dl class="function">
+    <!-- module usage start -->
+    <h3>Usage</h3>
+    <pre class="code" data-lang="Lua"><code><span class="global">require</span>(<span class="string">"stdlib/event/event"</span>)</code></pre>
+    <!-- module usage end -->
+
+    <!-- module content header end -->
+
+    <!-- module section list start -->
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Functions">Functions</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#dispatch">dispatch (event)</a></td>
+    <td class="summary">Calls the handlers that are registered to the given event.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#register">register (event_ids, handler)</a></td>
+    <td class="summary">Registers a handler for the given events.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#remove">remove (event_ids, handler)</a></td>
+    <td class="summary">Removes a handler from the given events.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Tables">Tables</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#event_data">event_data</a></td>
+    <td class="summary">The user should create a table in this format, for a table that will be passed into <a href="../modules/Event.html#dispatch">Event.dispatch</a>.</td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- module section list end -->
+
+    <br />
+
+    <!-- section start -->
+    <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
+    <dl class="section-body-container">
     <dt>
-    <a name = "register"></a>
-    <strong>register (event, handler)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#dispatch" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="dispatch">dispatch (event)</span>
+    </div>
     </dt>
     <dd>
-    Registers a function for a given event.  If a nil handler is passed remove all events and stop listening for that event.
- Events are dispatched in the order they are registered.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Calls the handlers that are registered to the given event.</p>
+    <p class="section-item-description"> <p>Abort calling remaining handlers if any one of them has invalid userdata.
+ <p>Handlers are dispatched in the order they were created.</p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">event</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a> or <a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.events">{defines.events,...}</a></span>
-         events to register
-        </li>
-        <li><span class="parameter">handler</span>
-            <span class="types"><span class="type">function</span></span>
-         Function to call when event is triggered
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>event</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="../modules/Event.html#event_data">event_data</a></span>) the event data table
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">Event</span></span>
-
-
-
-    </ol>
+    <!-- returns start -->
+    <!-- returns end -->
 
 
-
-    <h3>Usage:</h3>
+    <!-- see also start -->
+    <strong>See also:</strong>
     <ul>
-        <pre class="example">Event.register(defines.events.on_tick, <span class="keyword">function</span>(event) <span class="global">print</span> event.tick <span class="keyword">end</span>)
- <span class="comment">-- creates an event that prints the current tick every tick.</span></pre>
+    <li><a href="https://forums.factorio.com/viewtopic.php?t=32039#p202158">Invalid Event Objects</a></li>
     </ul>
+    <!-- see also end -->
 
-</dd>
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
     <dt>
-    <a name = "dispatch"></a>
-    <strong>dispatch (event)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#register" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="register">register (event_ids, handler)</span>
+    </div>
     </dt>
     <dd>
-    Calls the registerd handlers
- Will stop dispatching remaning handlers if any handler passes invalid event userdata.
- Handlers are dispatched in the order they were created
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Registers a handler for the given events.</p>
+    <p class="section-item-description"> If a <code>nil</code> handler is passed, remove the given events and stop listening to them.
+ <p>Events dispatch in the order they are registered.
+ <p>An <em>event ID</em> can be obtained via <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>,
+ <a href="http://lua-api.factorio.com/latest/LuaBootstrap.html#LuaBootstrap.generate_event_name">script.generate_event_name</a> which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>,
+ and can be a custom input name which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>.
+ <p>The <code>event_ids</code> parameter takes in either a single, multiple, or mixture of <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, and <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>.</p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">event</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         LuaEvent as created by script.raise_event
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>event_ids</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, or {<a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>,...}</span>)
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>handler</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+     the function to call when the given events are triggered
+
+    </li>
+
+
     </ul>
 
+    <!-- parameters end -->
 
-
-    <h3>See also:</h3>
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-         <a href="https://forums.factorio.com/viewtopic.php?t=32039#p202158">Invalid Event Objects</a>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.html#">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
     </ul>
+    <!-- returns end -->
 
 
-</dd>
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code><span class="comment">-- Create an event that prints the current tick every tick.
+</span>Event.register(defines.events.on_tick, <span class="keyword">function</span>(event) <span class="global">print</span> event.tick <span class="keyword">end</span>)
+<span class="comment">-- Create an event that prints the new ID of a train.
+</span>Event.register(Trains.on_train_id_changed, <span class="keyword">function</span>(event) <span class="global">print</span>(event.new_id) <span class="keyword">end</span>)
+<span class="comment">-- Function call chaining
+</span>Event.register(event1, handler1).register(event2, handler2)</code></pre>
+    <!-- usage end -->
+
+    </dd>
     <dt>
-    <a name = "remove"></a>
-    <strong>remove (event, handler)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#remove" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="remove">remove (event_ids, handler)</span>
+    </div>
     </dt>
     <dd>
-    Removes the handler from the event.  If it removes the last handler for an event stop listening for that event.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Removes a handler from the given events.</p>
+    <p class="section-item-description"> <p>When the last handler for an event is removed, stop listening to that event.
+ <p>An <em>event ID</em> can be obtained via <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>,
+ <a href="http://lua-api.factorio.com/latest/LuaBootstrap.html#LuaBootstrap.generate_event_name">script.generate_event_name</a> which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>,
+ and can be a custom input name which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>.
+ <p>The <code>event_ids</code> parameter takes in either a single, multiple, or mixture of <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, and <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>.</p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">event</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a> or <a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.events">{defines.events,...}</a></span>
-         events to remove the handler for
-        </li>
-        <li><span class="parameter">handler</span>
-            <span class="types"><span class="type">function</span></span>
-         to remove
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>event_ids</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, or {<a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>,...}</span>)
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>handler</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+     the handler to remove
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-        Event
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.html#">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Tables" class="section-title"><a href="#Tables">Tables</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#event_data" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="event_data">event_data</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">The user should create a table in this format, for a table that will be passed into <a href="../modules/Event.html#dispatch">Event.dispatch</a>.</p>
+    <p class="section-item-description">
+
+<p> <p>In general, the user should create an event data table that is in a similar format as the one that Factorio returns.</p>
+<blockquote>
+    <p>The event data table <strong>MUST</strong> have either <code>name</code> or <code>input_name</code>.</p>
+</blockquote>
+</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
+    <ul>
 
 
 
 
-</dd>
-</dl>
+
+    <li class="section-subitem-li">
+
+    <strong><em>name</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a> or <a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a></span>)
+
+     unique event ID generated with <a href="http://lua-api.factorio.com/latest/LuaBootstrap.html#LuaBootstrap.generate_event_name">script.generate_event_name</a> <strong><em>OR</em></strong> <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>
+
+    (<em>optional</em>)
+    </li>
 
 
-</div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-06-08 03:50:13 </i>
-</div> <!-- id="about" -->
-</div> <!-- id="container" -->
-</body>
-</html>
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>input_name</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     custom input name of an event
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>...</em></strong>
+
+    <strong> : </strong>
+
+
+     any # of additional fields with extra data, which are passed into the handler registered to an event that this table represents
+
+    (<em>optional</em>)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code><span class="comment">-- below code is from Trains module.
+</span><span class="comment">-- old_id &amp; new_id are additional fields passed into the handler that's registered to Trains.on_train_id_changed event.
+</span><span class="keyword">local</span> event_data = {
+old_id = renaming.old_id,
+new_id = renaming.new_id,
+name = Trains.on_train_id_changed
+}
+Event.dispatch(event_data)</code></pre>
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+
+    <!-- section end -->
+
+    </div>
+    </div>
+    </div>
+
+    <div class="footer container grid-1280">
+    <div class="divider divider-custom"></div>
+    <div class="footer-columns columns">
+    <div class="sidebar-footer column col-3 col-sm-12">
+    <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+    </div>
+    <div class="content-footer column col-9 col-sm-12">
+    <i>Last updated 2017-08-19 05:47:06 UTC</i>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

@@ -1,287 +1,594 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<head>
-    <title>Factorio Stdlib</title>
+
+
+    <!doctype html>
+    <html class="no-js" lang="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Time module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
-</head>
-<body>
+    </head>
+    <body>
 
-<div id="container">
+    <div class="container grid-1280">
+    <div class="columns">
 
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
+    <!-- sidebar start -->
 
+    <div id="sidebar" class="column col-3 col-sm-12">
 
-<div id="main">
+    <div class="sidebar-custom">
 
+    <div class="project-infobox">
 
-<!-- Menu -->
+    <!-- project title -->
 
-<div id="navigation">
-<br/>
-<h1>Factorio Stdlib</h1>
+    <a href="../index.html"><h1>Factorio Stdlib</h1></a>
 
-<ul>
-  <li><a href="../index.html">Index</a></li>
-</ul>
+    <!-- project description -->
+    <p class="project-desc">Factorio Standard Library</p>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Fields">Fields</a></li>
-</ul>
+    <!-- project full description -->
+    <span>  The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.</span>
+    </div>
 
 
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><a href="../modules/Area.html">Area</a></li>
-  <li><a href="../modules/Chunk.html">Chunk</a></li>
-  <li><a href="../modules/Position.html">Position</a></li>
-  <li><a href="../modules/Tile.html">Tile</a></li>
-  <li><a href="../modules/Color.html">Color</a></li>
-  <li><a href="../modules/Config.html">Config</a></li>
-  <li><a href="../modules/Core.html">Core</a></li>
-  <li><a href="../modules/Data.html">Data</a></li>
-  <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><strong>Time</strong></li>
-  <li><a href="../modules/Entity.html">Entity</a></li>
-  <li><a href="../modules/Inventory.html">Inventory</a></li>
-  <li><a href="../modules/Event.html">Event</a></li>
-  <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
-  <li><a href="../modules/Event.Time.html">Event.Time</a></li>
-  <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Gui.html">Gui</a></li>
-  <li><a href="../modules/Logger.html">Logger</a></li>
-  <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
-  <li><a href="../modules/table.html">table</a></li>
-  <li><a href="../modules/Trains.html">Trains</a></li>
-</ul>
+    <!-- sidebar navigation -->
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Modules</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.html"><span class="module-name-item">Area</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Chunk.html"><span class="module-name-item">Chunk</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Color.html"><span class="module-name-item">Color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Config.html"><span class="module-name-item">Config</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Console.html"><span class="module-name-item">Console</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.html"><span class="module-name-item">Data</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.html"><span class="module-name-item">Entity</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.html"><span class="module-name-item">Event</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Force.html"><span class="module-name-item">Force</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Game.html"><span class="module-name-item">Game</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Gui.html"><span class="module-name-item">Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Inventory.html"><span class="module-name-item">Inventory</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Logger.html"><span class="module-name-item">Logger</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Player.html"><span class="module-name-item">Player</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Position.html"><span class="module-name-item">Position</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Queue.html"><span class="module-name-item">Queue</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Recipe.html"><span class="module-name-item">Recipe</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Resource.html"><span class="module-name-item">Resource</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Surface.html"><span class="module-name-item">Surface</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Tile.html"><span class="module-name-item">Tile</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Time.html"><span class="module-name-item">Time</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Trains.html"><span class="module-name-item">Trains</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/string.html"><span class="module-name-item">string</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/table.html"><span class="module-name-item">table</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Topics</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/readme.md.html"><span class="module-name-item">readme.md</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Examples</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.time.lua.html"><span class="module-name-item">event.time.lua</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
 
-</div>
 
-<div id="content">
 
-<h1>Module <code>Time</code></h1>
-<p>Time module</p>
-<p>
+    <!-- list of items in a module -->
+    <ul class="nav nav-module-contents">
+    <li class="nav-item">
+    <h4>Contents of <strong>Time</strong></h4>
+    <ul class="nav">
+    <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    <li class="nav-item"><a href="#Fields"><span class="fragment-hashtag">#</span> Fields</a></li>
+    </ul>
+    </li>
+    </ul>
+    </div>
+    <div class="up-to-top">
+    <a href="#">Top <i class="icon icon-upward"></i></a>
+    </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content body start -->
+    <div class="column col-9 col-sm-12">
+
+    <!-- module list on the main page start -->
+    <!-- module list on the main page end -->
+
+    <!-- module contents -->
+
+    <!-- module content header start -->
+
+    <h2><span class="body-module-name"><strong><em>Time</em></strong></span> module</h2>
+    <p>Raise events for surfaces at certain time intervals.</p>
+    <p> This module uses the <a href="../modules/Event.html#">Event</a> module.</p>
+
+
+    <!-- module info start -->
+    <!-- module info end -->
+
+    <!-- module usage start -->
+    <h3>See also</h3>
+    <ul class="module-see-also">
+    <li><a href="../examples/event.time.lua.html#">event.time.lua</a></li>
+    </ul>
+    <h3>Usage</h3>
+    <pre class="code" data-lang="Lua"><code><span class="global">require</span>(<span class="string">'stdlib/event/time'</span>)</code></pre>
+    <!-- module usage end -->
+
+    <!-- module content header end -->
+
+    <!-- module section list start -->
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Functions">Functions</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#get_day_time">get_day_time (surface)</a></td>
+    <td class="summary">Get the current time of a given surface.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Fields">Fields</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#Event.Time.daily">Event.Time.daily</a></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Event.Time.hourly">Event.Time.hourly</a></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Event.Time.midday">Event.Time.midday</a></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Event.Time.midnight">Event.Time.midnight</a></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Event.Time.minutely">Event.Time.minutely</a></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Event.Time.sunrise">Event.Time.sunrise</a></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Event.Time.sunset">Event.Time.sunset</a></td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- module section list end -->
+
+    <br />
+
+    <!-- section start -->
+    <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_day_time" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_day_time">get_day_time (surface)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Get the current time of a given surface.</p>
+    <p class="section-item-description">
 
 </p>
 
-
-<h2><a href="#Fields">Fields</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" nowrap><a href="#second">second</a></td>
-	<td class="summary">
-
-</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#minute">minute</a></td>
-	<td class="summary">
-
-</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#hour">hour</a></td>
-	<td class="summary">
-
-</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#day">day</a></td>
-	<td class="summary">
-
-</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#week">week</a></td>
-	<td class="summary">
-
-</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#month">month</a></td>
-	<td class="summary">
-
-</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#year">year</a></td>
-	<td class="summary">
-
-</td>
-	</tr>
-</table>
-
-<br/>
-<br/>
-
-
-    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "second"></a>
-    <strong>second</strong>
-    </dt>
-    <dd>
-
-
-
-
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
 
     <ul>
-        <li><span class="parameter">the</span>
-         number of factorio ticks in a second
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a></span>)
+
+
+
+
+
+    </li>
+
+
     </ul>
 
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#double">double</a></span>)
+    <span class="return-text">the current surface time such that 0.0 ⋜ surface time ⋜ 1.0</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
+    </dl>
+    <h3><span id="Fields" class="section-title"><a href="#Fields">Fields</a></span></h3>
+    <dl class="section-body-container">
     <dt>
-    <a name = "minute"></a>
-    <strong>minute</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Event.Time.daily" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Event.Time.daily">Event.Time.daily</span>
+    </div>
     </dt>
     <dd>
+    <div class="section-item-body">
 
 
-
-
+    <!-- parameters start -->
 
     <ul>
-        <li><span class="parameter">the</span>
-         number of factorio ticks in a minute
-        </li>
+
+
+
+
+
+    <li class="section-subitem-module-field-li">
+
+    <strong><em>daily</em></strong>
+
+    <strong> : </strong>
+
+
+     Fires every day for a surface
+
+    </li>
+
+
     </ul>
 
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "hour"></a>
-    <strong>hour</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Event.Time.hourly" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Event.Time.hourly">Event.Time.hourly</span>
+    </div>
     </dt>
     <dd>
+    <div class="section-item-body">
 
 
-
-
+    <!-- parameters start -->
 
     <ul>
-        <li><span class="parameter">the</span>
-         number of factorio ticks in an hour
-        </li>
+
+
+
+
+
+    <li class="section-subitem-module-field-li">
+
+    <strong><em>hourly</em></strong>
+
+    <strong> : </strong>
+
+
+     Fires every hour for a surface
+
+    </li>
+
+
     </ul>
 
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "day"></a>
-    <strong>day</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Event.Time.midday" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Event.Time.midday">Event.Time.midday</span>
+    </div>
     </dt>
     <dd>
+    <div class="section-item-body">
 
 
-
-
+    <!-- parameters start -->
 
     <ul>
-        <li><span class="parameter">the</span>
-         number of factorio ticks in a day
-        </li>
+
+
+
+
+
+    <li class="section-subitem-module-field-li">
+
+    <strong><em>midday</em></strong>
+
+    <strong> : </strong>
+
+
+     Fires whenever it becomes midday/noon on a surface
+
+    </li>
+
+
     </ul>
 
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "week"></a>
-    <strong>week</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Event.Time.midnight" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Event.Time.midnight">Event.Time.midnight</span>
+    </div>
     </dt>
     <dd>
+    <div class="section-item-body">
 
 
-
-
+    <!-- parameters start -->
 
     <ul>
-        <li><span class="parameter">the</span>
-         number of factorio ticks in a week
-        </li>
+
+
+
+
+
+    <li class="section-subitem-module-field-li">
+
+    <strong><em>midnight</em></strong>
+
+    <strong> : </strong>
+
+
+     Fires whenever it becomes midnight on a surface
+
+    </li>
+
+
     </ul>
 
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "month"></a>
-    <strong>month</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Event.Time.minutely" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Event.Time.minutely">Event.Time.minutely</span>
+    </div>
     </dt>
     <dd>
+    <div class="section-item-body">
 
 
-
-
+    <!-- parameters start -->
 
     <ul>
-        <li><span class="parameter">the</span>
-         number of factorio ticks in a month (30 days)
-        </li>
+
+
+
+
+
+    <li class="section-subitem-module-field-li">
+
+    <strong><em>minutely</em></strong>
+
+    <strong> : </strong>
+
+
+     Fires every minute for a surface
+
+    </li>
+
+
     </ul>
 
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "year"></a>
-    <strong>year</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Event.Time.sunrise" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Event.Time.sunrise">Event.Time.sunrise</span>
+    </div>
     </dt>
     <dd>
+    <div class="section-item-body">
 
 
-
-
+    <!-- parameters start -->
 
     <ul>
-        <li><span class="parameter">the</span>
-         number of factorio ticks in a year. (365 days)
-        </li>
+
+
+
+
+
+    <li class="section-subitem-module-field-li">
+
+    <strong><em>sunrise</em></strong>
+
+    <strong> : </strong>
+
+
+     Fires whenever the sunrises on a surface
+
+    </li>
+
+
     </ul>
 
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Event.Time.sunset" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Event.Time.sunset">Event.Time.sunset</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+
+    <!-- parameters start -->
+
+    <ul>
 
 
 
 
-</dd>
-</dl>
+
+    <li class="section-subitem-module-field-li">
+
+    <strong><em>sunset</em></strong>
+
+    <strong> : </strong>
 
 
-</div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-05-21 18:35:24 </i>
-</div> <!-- id="about" -->
-</div> <!-- id="container" -->
-</body>
-</html>
+     Fires whenever the sunsets on a surface
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+
+    <!-- section end -->
+
+    </div>
+    </div>
+    </div>
+
+    <div class="footer container grid-1280">
+    <div class="divider divider-custom"></div>
+    <div class="footer-columns columns">
+    <div class="sidebar-footer column col-3 col-sm-12">
+    <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+    </div>
+    <div class="content-footer column col-9 col-sm-12">
+    <i>Last updated 2017-08-19 05:47:06 UTC</i>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

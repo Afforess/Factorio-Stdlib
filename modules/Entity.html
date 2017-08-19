@@ -1,401 +1,1065 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<head>
-    <title>Factorio Stdlib</title>
+
+
+    <!doctype html>
+    <html class="no-js" lang="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Entity module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
-</head>
-<body>
+    </head>
+    <body>
 
-<div id="container">
+    <div class="container grid-1280">
+    <div class="columns">
 
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
+    <!-- sidebar start -->
 
+    <div id="sidebar" class="column col-3 col-sm-12">
 
-<div id="main">
+    <div class="sidebar-custom">
 
+    <div class="project-infobox">
 
-<!-- Menu -->
+    <!-- project title -->
 
-<div id="navigation">
-<br/>
-<h1>Factorio Stdlib</h1>
+    <a href="../index.html"><h1>Factorio Stdlib</h1></a>
 
-<ul>
-  <li><a href="../index.html">Index</a></li>
-</ul>
+    <!-- project description -->
+    <p class="project-desc">Factorio Standard Library</p>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Functions">Functions</a></li>
-</ul>
+    <!-- project full description -->
+    <span>  The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.</span>
+    </div>
 
 
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><a href="../modules/Area.html">Area</a></li>
-  <li><a href="../modules/Chunk.html">Chunk</a></li>
-  <li><a href="../modules/Position.html">Position</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
-  <li><a href="../modules/Tile.html">Tile</a></li>
-  <li><a href="../modules/Color.html">Color</a></li>
-  <li><a href="../modules/Config.html">Config</a></li>
-  <li><a href="../modules/Core.html">Core</a></li>
-  <li><a href="../modules/Data.html">Data</a></li>
-  <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/defines.color.html">defines.color</a></li>
-  <li><a href="../modules/defines.time.html">defines.time</a></li>
-  <li><strong>Entity</strong></li>
-  <li><a href="../modules/Inventory.html">Inventory</a></li>
-  <li><a href="../modules/Resource.html">Resource</a></li>
-  <li><a href="../modules/Event.html">Event</a></li>
-  <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
-  <li><a href="../modules/Event.Time.html">Event.Time</a></li>
-  <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Logger.html">Logger</a></li>
-  <li><a href="../modules/Queue.html">Queue</a></li>
-  <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/table.html">table</a></li>
-  <li><a href="../modules/Trains.html">Trains</a></li>
-</ul>
-<h2>Topics</h2>
-<ul class="">
-  <li><a href="../topics/readme.md.html">readme</a></li>
-</ul>
-<h2>Examples</h2>
-<ul class="nowrap">
-  <li><a href="../examples/event.lua.html">event.lua</a></li>
-  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
-</ul>
+    <!-- sidebar navigation -->
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Modules</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.html"><span class="module-name-item">Area</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Chunk.html"><span class="module-name-item">Chunk</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Color.html"><span class="module-name-item">Color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Config.html"><span class="module-name-item">Config</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Console.html"><span class="module-name-item">Console</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.html"><span class="module-name-item">Data</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Entity.html"><span class="module-name-item">Entity</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.html"><span class="module-name-item">Event</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Force.html"><span class="module-name-item">Force</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Game.html"><span class="module-name-item">Game</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Gui.html"><span class="module-name-item">Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Inventory.html"><span class="module-name-item">Inventory</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Logger.html"><span class="module-name-item">Logger</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Player.html"><span class="module-name-item">Player</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Position.html"><span class="module-name-item">Position</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Queue.html"><span class="module-name-item">Queue</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Recipe.html"><span class="module-name-item">Recipe</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Resource.html"><span class="module-name-item">Resource</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Surface.html"><span class="module-name-item">Surface</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Tile.html"><span class="module-name-item">Tile</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Time.html"><span class="module-name-item">Time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Trains.html"><span class="module-name-item">Trains</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/string.html"><span class="module-name-item">string</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/table.html"><span class="module-name-item">table</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Topics</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/readme.md.html"><span class="module-name-item">readme.md</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Examples</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.time.lua.html"><span class="module-name-item">event.time.lua</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
 
-</div>
 
-<div id="content">
 
-<h1>Module <code>Entity</code></h1>
-<p>Entity module</p>
-<p>
+    <!-- list of items in a module -->
+    <ul class="nav nav-module-contents">
+    <li class="nav-item">
+    <h4>Contents of <strong>Entity</strong></h4>
+    <ul class="nav">
+    <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    <li class="nav-item"><a href="#Functions_that_raise_events"><span class="fragment-hashtag">#</span> Functions that raise events </a></li>
+    </ul>
+    </li>
+    </ul>
+    </div>
+    <div class="up-to-top">
+    <a href="#">Top <i class="icon icon-upward"></i></a>
+    </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content body start -->
+    <div class="column col-9 col-sm-12">
+
+    <!-- module list on the main page start -->
+    <!-- module list on the main page end -->
+
+    <!-- module contents -->
+
+    <!-- module content header start -->
+
+    <h2><span class="body-module-name"><strong><em>Entity</em></strong></span> module</h2>
+    <p>Tools for working with entities.</p>
+    <p>
 
 </p>
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">local Entity = require(&apos;stdlib/entity/entity&apos;)
-</pre>
-    </ul>
 
 
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" nowrap><a href="#to_selection_area">to_selection_area (entity)</a></td>
-	<td class="summary">Converts an entity and its selection_box to the area around it</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#to_collision_area">to_collision_area (entity)</a></td>
-	<td class="summary">Converts an entity and its collision_box to the area around it</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#has">has (entity, field_name)</a></td>
-	<td class="summary">Tests whether an entity has access to the field</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#get_data">get_data (entity)</a></td>
-	<td class="summary">Gets user data from the entity, stored in a mod's global data.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#set_data">set_data (entity, data)</a></td>
-	<td class="summary">Sets user data on the entity, stored in a mod's global data.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#set_frozen">set_frozen (entity[, mode=true])</a></td>
-	<td class="summary">Freezes an entity, by making it inactive, inoperable, and non-rotatable, or unfreezes by doing the reverse.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#set_indestructible">set_indestructible (entity[, mode=true])</a></td>
-	<td class="summary">Makes an entity indestructible, so that it can not be damaged or mined by the player or enemy factions</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#_are_equal">_are_equal (entity_a, entity_b)</a></td>
-	<td class="summary">Tests if two entities are equal
- <p>If they don't have reference equality and entity<em>a has an 'equals' function,
- it will be called with entity</em>b as the first argument</p></td>
-	</tr>
-</table>
+    <!-- module info start -->
+    <!-- module info end -->
 
-<br/>
-<br/>
+    <!-- module usage start -->
+    <h3>Usage</h3>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Entity = <span class="global">require</span>(<span class="string">'stdlib/entity/entity'</span>)</code></pre>
+    <!-- module usage end -->
 
+    <!-- module content header end -->
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <!-- module section list start -->
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Functions">Functions</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#_are_equal">_are_equal (entity_a, entity_b)</a></td>
+    <td class="summary">Tests if two entities are equal.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_data">get_data (entity)</a></td>
+    <td class="summary">Gets the user data that is associated with an entity.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#has">has (entity, field_name)</a></td>
+    <td class="summary">Tests whether an entity has access to a given field.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#set_data">set_data (entity, data)</a></td>
+    <td class="summary">Associates the user data to an entity.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#set_frozen">set_frozen (entity[, mode=true])</a></td>
+    <td class="summary">Freezes an entity, by making it inactive, inoperable, and non-rotatable, or unfreezes by doing the reverse.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#set_indestructible">set_indestructible (entity[, mode=true])</a></td>
+    <td class="summary">Makes an entity indestructible so that it cannot be damaged or mined neither by the player nor by their enemy factions.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#to_collision_area">to_collision_area ()</a></td>
+    <td class="summary">Deprecated see <a href="http://lua-api.factorio.com/latest/LuaEntity.html#LuaEntity.bounding_box">LuaEntity.bounding_box</a>
+ <br>Converts an entity and its <a href="http://lua-api.factorio.com/latest/LuaEntityPrototype.html#LuaEntityPrototype.collision_box">collision_box</a> to the area around it.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#to_selection_area">to_selection_area ()</a></td>
+    <td class="summary">Converts an entity and its <a href="http://lua-api.factorio.com/latest/LuaEntityPrototype.html#LuaEntityPrototype.selection_box">selection_box</a> to the area around it.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Functions_that_raise_events">Functions that raise events </a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#create_entity">create_entity (surface, settings[, player_index][, raise_script_event])</a></td>
+    <td class="summary">Create an entity and raise a build event.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#destroy_entity">destroy_entity (entity[, died=false][, cause][, force])</a></td>
+    <td class="summary">Destroy an entity by first raising the event.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#revive">revive (ghost[, player_index][, raise_script_event])</a></td>
+    <td class="summary">Revivie an entity ghost and raise the <code>on_built</code> or <code>on_robot_built</code> event.</td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- module section list end -->
 
-    <dl class="function">
+    <br />
+
+    <!-- section start -->
+    <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
+    <dl class="section-body-container">
     <dt>
-    <a name = "to_selection_area"></a>
-    <strong>to_selection_area (entity)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#_are_equal" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="_are_equal">_are_equal (entity_a, entity_b)</span>
+    </div>
     </dt>
     <dd>
-    Converts an entity and its selection_box to the area around it
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Tests if two entities are equal.</p>
+    <p class="section-item-description"> If they don't have a reference equality and <strong><em>entity_a</em></strong> has <strong><em>equals</em></strong> function, it will be called with <strong><em>entity_b</em></strong> as its first argument.</p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">entity</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
-         to convert to an area
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>entity_a</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>entity_b</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+
+
+
+
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        area that entity selection_box is valid for
-    </ol>
-
-
-    <h3>See also:</h3>
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-         <a href="../modules/Area.html#to_selection_area">Area.to_selection_area</a>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    </li>
     </ul>
+    <!-- returns end -->
 
 
-</dd>
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
     <dt>
-    <a name = "to_collision_area"></a>
-    <strong>to_collision_area (entity)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_data" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_data">get_data (entity)</span>
+    </div>
     </dt>
     <dd>
-    Converts an entity and its collision_box to the area around it
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Gets the user data that is associated with an entity.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+<p> The user data is stored in the global object and it persists between loads.</p>
+<blockquote>
+    <p>The user data will be removed from an entity when the entity becomes invalid.</p>
+</blockquote>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">entity</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
-         to convert to an area
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>entity</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+
+     the entity to look up
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        area that entity collision_box is valid for
-    </ol>
-
-
-    <h3>See also:</h3>
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-         <a href="../modules/Area.html#to_collision_area">Area.to_collision_area</a>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a> or <span class="type">Mixed</span></span>)
+    <span class="return-text">the user data, or nil if no data exists for the entity</span>
+    </li>
     </ul>
+    <!-- returns end -->
 
 
-</dd>
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
     <dt>
-    <a name = "has"></a>
-    <strong>has (entity, field_name)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#has" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="has">has (entity, field_name)</span>
+    </div>
     </dt>
     <dd>
-    Tests whether an entity has access to the field
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Tests whether an entity has access to a given field.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">entity</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
-         to test field access
-        </li>
-        <li><span class="parameter">field_name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         that should be tested for
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>entity</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+
+     the entity to test the access to a field
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>field_name</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     the field name
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">boolean</span></span>
-        true if the entity has access to the field, false if the entity threw an exception accessing the field
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if the entity has access to the field, false if the entity threw an exception when trying to access the field</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "get_data"></a>
-    <strong>get_data (entity)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#set_data" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="set_data">set_data (entity, data)</span>
+    </div>
     </dt>
     <dd>
-    Gets user data from the entity, stored in a mod's global data.
- <p> The data will persist between loads, and will be removed for an entity when it becomes invalid</p>
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Associates the user data to an entity.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+<p> The user data will be stored in the global object and it will persist between loads.</p>
+<blockquote>
+    <p>The user data will be removed from an entity when the entity becomes invalid.</p>
+</blockquote>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">entity</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
-         the entity to look up data for
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>entity</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+
+     the entity with which to associate the user data
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>data</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a> or <span class="type">Mixed</span></span>)
+
+     the data to set, or nil to delete the data associated with the entity
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-        the data, or nil if no data exists for the entity
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a> or <span class="type">Mixed</span></span>)
+    <span class="return-text">the previous data associated with the entity, or nil if the entity had no previous data</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "set_data"></a>
-    <strong>set_data (entity, data)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#set_frozen" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="set_frozen">set_frozen (entity[, mode=true])</span>
+    </div>
     </dt>
     <dd>
-    Sets user data on the entity, stored in a mod's global data.
- <p> The data will persist between loads, and will be removed for an entity when it becomes invalid</p>
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Freezes an entity, by making it inactive, inoperable, and non-rotatable, or unfreezes by doing the reverse.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">entity</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
-         the entity to set data for
-        </li>
-        <li><span class="parameter">data</span>
-         the data to set, or nil to delete the data associated with the entity
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>entity</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+
+     the entity to freeze or unfreeze
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>mode</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     if true, freezes the entity, if false, unfreezes the entity. If not specified, it is set to true
+
+    (<em>default</em>: true)
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-        the previous data associated with the entity, or nil if the entity had no previous data
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+    <span class="return-text">the entity that has been frozen or unfrozen</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "set_frozen"></a>
-    <strong>set_frozen (entity[, mode=true])</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#set_indestructible" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="set_indestructible">set_indestructible (entity[, mode=true])</span>
+    </div>
     </dt>
     <dd>
-    Freezes an entity, by making it inactive, inoperable, and non-rotatable, or unfreezes by doing the reverse.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Makes an entity indestructible so that it cannot be damaged or mined neither by the player nor by their enemy factions.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">entity</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
-         to freeze or unfreeze
-        </li>
-        <li><span class="parameter">mode</span>
-            <span class="types"><span class="type">boolean</span></span>
-         if true, freezes the entity, if false, unfreezes the entity. If not specified, is true.
-         (<em>default</em> true)
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>entity</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+
+     the entity to make indestructable
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>mode</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     if true, makes the entity indestructible, if false, makes the entity destructable
+
+    (<em>default</em>: true)
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
-        entity passed into it
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+    <span class="return-text">the entity that has been made indestructable or destructable</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "set_indestructible"></a>
-    <strong>set_indestructible (entity[, mode=true])</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#to_collision_area" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="to_collision_area">to_collision_area ()</span>
+    </div>
     </dt>
     <dd>
-    Makes an entity indestructible, so that it can not be damaged or mined by the player or enemy factions
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Deprecated see <a href="http://lua-api.factorio.com/latest/LuaEntity.html#LuaEntity.bounding_box">LuaEntity.bounding_box</a>
+ <br>Converts an entity and its <a href="http://lua-api.factorio.com/latest/LuaEntityPrototype.html#LuaEntityPrototype.collision_box">collision_box</a> to the area around it.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
 
 
-    <h3>Parameters:</h3>
+    <!-- see also start -->
+    <strong>See also:</strong>
     <ul>
-        <li><span class="parameter">entity</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
-         the entity to set indestructible
-        </li>
-        <li><span class="parameter">mode</span>
-            <span class="types"><span class="type">boolean</span></span>
-         if true, makes the entity indestructible, if false, makes the entity destructable.
-         (<em>default</em> true)
-        </li>
+    <li><a href="../modules/Area.html#to_collision_area">Area.to_collision_area</a></li>
+    <li><a href="http://lua-api.factorio.com/latest/LuaEntity.html#LuaEntity.bounding_box">LuaEntity.bounding_box</a></li>
     </ul>
+    <!-- see also end -->
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- usage start -->
+    <!-- usage end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
-        entity passed into it
-    </ol>
-
-
-
-
-</dd>
+    </dd>
     <dt>
-    <a name = "_are_equal"></a>
-    <strong>_are_equal (entity_a, entity_b)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#to_selection_area" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="to_selection_area">to_selection_area ()</span>
+    </div>
     </dt>
     <dd>
-    Tests if two entities are equal
- <p>If they don't have reference equality and entity<em>a has an 'equals' function,
- it will be called with entity</em>b as the first argument</p>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Converts an entity and its <a href="http://lua-api.factorio.com/latest/LuaEntityPrototype.html#LuaEntityPrototype.selection_box">selection_box</a> to the area around it.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
 
 
-    <h3>Parameters:</h3>
+    <!-- see also start -->
+    <strong>See also:</strong>
     <ul>
-        <li><span class="parameter">entity_a</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
+    <li><a href="../modules/Area.html#to_selection_area">Area.to_selection_area</a></li>
+    </ul>
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Functions_that_raise_events" class="section-title"><a href="#Functions_that_raise_events">Functions that raise events </a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#create_entity" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="create_entity">create_entity (surface, settings[, player_index][, raise_script_event])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Create an entity and raise a build event.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
 
 
 
-        </li>
-        <li><span class="parameter">entity_b</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a></span>)
+
+     the surface to create the entity on
+
+    </li>
 
 
 
-        </li>
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>settings</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
+
+     settings to pass to create_entity see <a href="http://lua-api.factorio.com/latest/LuaSurface.html#LuaSurface.create_entity">LuaSurface.create_entity</a>
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>player_index</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#uint">uint</a></span>)
+
+     the index of the player, when not present and not raise<em>script</em>event pass a fake robot
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>raise_script_event</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     raise script<em>raised</em>built
+
+    (<em>optional</em>)
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">boolean</span></span>
-
-
-
-    </ol>
-
-
-
-
-</dd>
-</dl>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+    <span class="return-text">the created entity</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
-</div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-06-08 03:50:13 </i>
-</div> <!-- id="about" -->
-</div> <!-- id="container" -->
-</body>
-</html>
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#destroy_entity" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="destroy_entity">destroy_entity (entity[, died=false][, cause][, force])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Destroy an entity by first raising the event.</p>
+    <p class="section-item-description">
+
+<blockquote>
+    <p>Some entities can't be destroyed, such as the rails with trains on them.</p>
+</blockquote>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>entity</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+
+     the entity to be destroyed
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>died</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     raise on<em>entity</em>died event
+
+    (<em>default</em>: false)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>cause</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+
+     the entity if available that did the killing for on<em>entity</em>died
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>force</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaForce.html">LuaForce</a></span>)
+
+     the force if any that did the killing
+
+    (<em>optional</em>)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">was the entity destroyed?</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#revive" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="revive">revive (ghost[, player_index][, raise_script_event])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Revivie an entity ghost and raise the <code>on_built</code> or <code>on_robot_built</code> event.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>ghost</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+
+     the ghost entity to revivie
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>player_index</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#uint">uint</a></span>)
+
+     if present, raise <code>on_built_entity</code> with player_index, if not present raise <code>on_robot_built_entity</code>
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>raise_script_event</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+    , if true raise script<em>raised</em>built as the event
+
+    (<em>optional</em>)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
+    <span class="return-text">the item stacks this entity collided with</span>
+    </li>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+    <span class="return-text">the new revived entity</span>
+    </li>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+    <span class="return-text">the item request proxy if present</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+
+    <!-- section end -->
+
+    </div>
+    </div>
+    </div>
+
+    <div class="footer container grid-1280">
+    <div class="divider divider-custom"></div>
+    <div class="footer-columns columns">
+    <div class="sidebar-footer column col-3 col-sm-12">
+    <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+    </div>
+    <div class="content-footer column col-9 col-sm-12">
+    <i>Last updated 2017-08-19 05:47:06 UTC</i>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

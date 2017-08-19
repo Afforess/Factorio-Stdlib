@@ -1,288 +1,880 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<head>
-    <title>Factorio Stdlib</title>
+
+
+    <!doctype html>
+    <html class="no-js" lang="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Queue module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
-</head>
-<body>
+    </head>
+    <body>
 
-<div id="container">
+    <div class="container grid-1280">
+    <div class="columns">
 
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
+    <!-- sidebar start -->
 
+    <div id="sidebar" class="column col-3 col-sm-12">
 
-<div id="main">
+    <div class="sidebar-custom">
 
+    <div class="project-infobox">
 
-<!-- Menu -->
+    <!-- project title -->
 
-<div id="navigation">
-<br/>
-<h1>Factorio Stdlib</h1>
+    <a href="../index.html"><h1>Factorio Stdlib</h1></a>
 
-<ul>
-  <li><a href="../index.html">Index</a></li>
-</ul>
+    <!-- project description -->
+    <p class="project-desc">Factorio Standard Library</p>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Functions">Functions</a></li>
-</ul>
+    <!-- project full description -->
+    <span>  The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.</span>
+    </div>
 
 
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><a href="../modules/Area.html">Area</a></li>
-  <li><a href="../modules/Chunk.html">Chunk</a></li>
-  <li><a href="../modules/Position.html">Position</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
-  <li><a href="../modules/Tile.html">Tile</a></li>
-  <li><a href="../modules/Color.html">Color</a></li>
-  <li><a href="../modules/Config.html">Config</a></li>
-  <li><a href="../modules/Core.html">Core</a></li>
-  <li><a href="../modules/Data.html">Data</a></li>
-  <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/defines.color.html">defines.color</a></li>
-  <li><a href="../modules/defines.time.html">defines.time</a></li>
-  <li><a href="../modules/Entity.html">Entity</a></li>
-  <li><a href="../modules/Inventory.html">Inventory</a></li>
-  <li><a href="../modules/Resource.html">Resource</a></li>
-  <li><a href="../modules/Event.html">Event</a></li>
-  <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
-  <li><a href="../modules/Event.Time.html">Event.Time</a></li>
-  <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Logger.html">Logger</a></li>
-  <li><strong>Queue</strong></li>
-  <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/table.html">table</a></li>
-  <li><a href="../modules/Trains.html">Trains</a></li>
-</ul>
-<h2>Topics</h2>
-<ul class="">
-  <li><a href="../topics/readme.md.html">readme</a></li>
-</ul>
-<h2>Examples</h2>
-<ul class="nowrap">
-  <li><a href="../examples/event.lua.html">event.lua</a></li>
-  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
-</ul>
-
-</div>
-
-<div id="content">
-
-<h1>Module <code>Queue</code></h1>
-<p>A double queue.</p>
-<p> Taken from "Programming in Lua" (http://www.lua.org/pil/11.4.html)
- Modified to not allow nil values, and returns nil if pop<em>left or pop</em>right is used when the queue is empty.</p>
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">local Queue = require(&apos;stdlib/queue&apos;)
-</pre>
+    <!-- sidebar navigation -->
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Modules</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.html"><span class="module-name-item">Area</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Chunk.html"><span class="module-name-item">Chunk</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Color.html"><span class="module-name-item">Color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Config.html"><span class="module-name-item">Config</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Console.html"><span class="module-name-item">Console</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.html"><span class="module-name-item">Data</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.html"><span class="module-name-item">Entity</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.html"><span class="module-name-item">Event</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Force.html"><span class="module-name-item">Force</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Game.html"><span class="module-name-item">Game</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Gui.html"><span class="module-name-item">Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Inventory.html"><span class="module-name-item">Inventory</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Logger.html"><span class="module-name-item">Logger</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Player.html"><span class="module-name-item">Player</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Position.html"><span class="module-name-item">Position</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Queue.html"><span class="module-name-item">Queue</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Recipe.html"><span class="module-name-item">Recipe</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Resource.html"><span class="module-name-item">Resource</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Surface.html"><span class="module-name-item">Surface</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Tile.html"><span class="module-name-item">Tile</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Time.html"><span class="module-name-item">Time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Trains.html"><span class="module-name-item">Trains</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/string.html"><span class="module-name-item">string</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/table.html"><span class="module-name-item">table</span></a></div></li>
     </ul>
-
-
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" nowrap><a href="#new">new ()</a></td>
-	<td class="summary">Constructs a new Queue object.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#push_left">push_left (queue, value)</a></td>
-	<td class="summary">Push a new element to the front of the queue.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#push_right">push_right (queue, value)</a></td>
-	<td class="summary">Push a new element to the back of the queue.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#pop_left">pop_left (queue)</a></td>
-	<td class="summary">Retrieve the element at the front of the queue.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#pop_right">pop_right (queue)</a></td>
-	<td class="summary">Retrieve the element at the back of the queue.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#is_empty">is_empty (queue)</a></td>
-	<td class="summary">Returns true if the given queue is empty.</td>
-	</tr>
-</table>
-
-<br/>
-<br/>
-
-
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "new"></a>
-    <strong>new ()</strong>
-    </dt>
-    <dd>
-    Constructs a new Queue object.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">Queue</span></span>
-        A new, empty queue
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "push_left"></a>
-    <strong>push_left (queue, value)</strong>
-    </dt>
-    <dd>
-    Push a new element to the front of the queue.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">queue</span>
-            <span class="types"><span class="type">Queue</span></span>
-         the queue to push an element to
-        </li>
-        <li><span class="parameter">value</span>
-            <span class="types"><span class="type">T</span></span>
-         the element to push
-        </li>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Topics</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/readme.md.html"><span class="module-name-item">readme.md</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Examples</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.time.lua.html"><span class="module-name-item">event.time.lua</span></a></div></li>
+    </ul>
+    </li>
     </ul>
 
 
 
+    <!-- list of items in a module -->
+    <ul class="nav nav-module-contents">
+    <li class="nav-item">
+    <h4>Contents of <strong>Queue</strong></h4>
+    <ul class="nav">
+    <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    </ul>
+    </li>
+    </ul>
+    </div>
+    <div class="up-to-top">
+    <a href="#">Top <i class="icon icon-upward"></i></a>
+    </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content body start -->
+    <div class="column col-9 col-sm-12">
+
+    <!-- module list on the main page start -->
+    <!-- module list on the main page end -->
+
+    <!-- module contents -->
+
+    <!-- module content header start -->
+
+    <h2><span class="body-module-name"><strong><em>Queue</em></strong></span> module</h2>
+    <p>A double queue.</p>
+    <p> Taken from <strong><em>Programming in Lua</em></strong> <a href="http://www.lua.org/pil/11.4.html">Queues and Double Queues</a>
+ and modified to not allow nil values, and returns nil if <a href="../modules/Queue.html#pop_first">pop_first</a> or <a href="../modules/Queue.html#pop_last">pop_last</a> is used when the queue is empty.</p>
 
 
-</dd>
+    <!-- module info start -->
+    <!-- module info end -->
+
+    <!-- module usage start -->
+    <h3>Usage</h3>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Queue = <span class="global">require</span>(<span class="string">'stdlib/queue/queue'</span>)</code></pre>
+    <!-- module usage end -->
+
+    <!-- module content header end -->
+
+    <!-- module section list start -->
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Functions">Functions</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#count">count (queue)</a></td>
+    <td class="summary">Returns the number of items in the queue.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#is_empty">is_empty (queue)</a></td>
+    <td class="summary">Returns true if the given queue is empty.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#load">load (...)</a></td>
+    <td class="summary">Load global.queue or queues during on_load, as metatables are not persisted.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#new">new ()</a></td>
+    <td class="summary">Constructs a new Queue object.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#peek">peek ()</a></td>
+    <td class="summary">Shortcut for <a href="../modules/Queue.html#peek_first">Queue.peek_first</a></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#peek_first">peek_first (queue)</a></td>
+    <td class="summary">Return the element at the front of the queue and remove it from the queue.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#peek_last">peek_last (queue)</a></td>
+    <td class="summary">Return the element at the back of the queue.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#pop">pop ()</a></td>
+    <td class="summary">Shortcut for <a href="../modules/Queue.html#pop_first">Queue.pop_first</a></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#pop_first">pop_first (queue)</a></td>
+    <td class="summary">Retrieve the element at the front of the queue and remove it from the queue.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#pop_last">pop_last (queue)</a></td>
+    <td class="summary">Retrieve the element at the back of the queue and remove it from the queue.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#push">push ()</a></td>
+    <td class="summary">Shortcut for <a href="../modules/Queue.html#push_last">Queue.push_last</a></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#push_first">push_first (queue, value)</a></td>
+    <td class="summary">Push a new element to the front of the queue.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#push_last">push_last (queue, value)</a></td>
+    <td class="summary">Push a new element to the back of the queue.</td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- module section list end -->
+
+    <br />
+
+    <!-- section start -->
+    <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
+    <dl class="section-body-container">
     <dt>
-    <a name = "push_right"></a>
-    <strong>push_right (queue, value)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#count" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="count">count (queue)</span>
+    </div>
     </dt>
     <dd>
-    Push a new element to the back of the queue.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Returns the number of items in the queue.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">queue</span>
-            <span class="types"><span class="type">Queue</span></span>
-         the queue to push an element to
-        </li>
-        <li><span class="parameter">value</span>
-            <span class="types"><span class="type">T</span></span>
-         the element to push
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>queue</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="../modules/Queue.html#">Queue</a></span>) the queue to check
+
+    </li>
+
+
     </ul>
 
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">the number of items in the queue</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "pop_left"></a>
-    <strong>pop_left (queue)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#is_empty" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="is_empty">is_empty (queue)</span>
+    </div>
     </dt>
     <dd>
-    Retrieve the element at the front of the queue.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Returns true if the given queue is empty.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">queue</span>
-            <span class="types"><span class="type">Queue</span></span>
-         the queue to retrieve the element from
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>queue</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="../modules/Queue.html#">Queue</a></span>) the queue to check
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">T</span></span>
-        the element at the front of the queue
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if empty, false otherwise</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "pop_right"></a>
-    <strong>pop_right (queue)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#load" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="load">load (...)</span>
+    </div>
     </dt>
     <dd>
-    Retrieve the element at the back of the queue.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Load global.queue or queues during on_load, as metatables are not persisted.</p>
+    <p class="section-item-description"> <p>This is only needed if you are using the queue as an object and storing it in global.</p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">queue</span>
-            <span class="types"><span class="type">Queue</span></span>
-         the queue to retrieve the element from
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>...</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="../modules/Queue.html#">Queue</a></span>,...)
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">T</span></span>
-        the element at the back of the queue
-    </ol>
+    <!-- returns start -->
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code>global.myqueue1 = Queue.new()
+global.myqueue2 = Queue.new()
+script.on_load(<span class="keyword">function</span>() Queue.<span class="global">load</span>(myqueue1, myqueue2))</code></pre>
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "is_empty"></a>
-    <strong>is_empty (queue)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#new" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="new">new ()</span>
+    </div>
     </dt>
     <dd>
-    Returns true if the given queue is empty.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Constructs a new Queue object.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-        <li><span class="parameter">queue</span>
-            <span class="types"><span class="type">Queue</span></span>
-         the queue to check
-        </li>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Queue.html#">Queue</a></span>) a new, empty queue</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#peek" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="peek">peek ()</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <a href="../modules/Queue.html#peek_first">Queue.peek_first</a></p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#peek_first" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="peek_first">peek_first (queue)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Return the element at the front of the queue and remove it from the queue.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>queue</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="../modules/Queue.html#">Queue</a></span>) the queue to retrieve the element from
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">boolean</span></span>
-        true|false depending on whether the queue is empty or not
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">Mixed</span></span>)
+    <span class="return-text">the element at the front of the queue</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#peek_last" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="peek_last">peek_last (queue)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Return the element at the back of the queue.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
 
 
 
 
-</dd>
-</dl>
+
+    <li class="section-subitem-li">
+
+    <strong><em>queue</em></strong>
+
+    <strong> : </strong>
 
 
-</div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-06-08 03:50:13 </i>
-</div> <!-- id="about" -->
-</div> <!-- id="container" -->
-</body>
-</html>
+     (<span class="types"><a href="../modules/Queue.html#">Queue</a></span>) the queue to retrieve the element from
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">Mixed</span></span>)
+    <span class="return-text">the element at the back of the queue</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#pop" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="pop">pop ()</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <a href="../modules/Queue.html#pop_first">Queue.pop_first</a></p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#pop_first" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="pop_first">pop_first (queue)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Retrieve the element at the front of the queue and remove it from the queue.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>queue</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="../modules/Queue.html#">Queue</a></span>) the queue to retrieve the element from
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">Mixed</span></span>)
+    <span class="return-text">value the element at the front of the queue</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#pop_last" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="pop_last">pop_last (queue)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Retrieve the element at the back of the queue and remove it from the queue.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>queue</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="../modules/Queue.html#">Queue</a></span>) the queue to retrieve the element from
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">Mixed</span></span>)
+    <span class="return-text">the element at the back of the queue</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#push" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="push">push ()</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <a href="../modules/Queue.html#push_last">Queue.push_last</a></p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#push_first" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="push_first">push_first (queue, value)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Push a new element to the front of the queue.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>queue</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="../modules/Queue.html#">Queue</a></span>) the queue to push an element to
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>value</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">Mixed</span></span>)
+
+     the element to push
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#push_last" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="push_last">push_last (queue, value)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Push a new element to the back of the queue.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>queue</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="../modules/Queue.html#">Queue</a></span>) the queue to push an element to
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>value</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">Mixed</span></span>)
+
+     the element to push
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+
+    <!-- section end -->
+
+    </div>
+    </div>
+    </div>
+
+    <div class="footer container grid-1280">
+    <div class="divider divider-custom"></div>
+    <div class="footer-columns columns">
+    <div class="sidebar-footer column col-3 col-sm-12">
+    <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+    </div>
+    <div class="content-footer column col-9 col-sm-12">
+    <i>Last updated 2017-08-19 05:47:06 UTC</i>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

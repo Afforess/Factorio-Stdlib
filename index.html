@@ -1,209 +1,192 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<head>
+
+
+    <!doctype html>
+    <html class="no-js" lang="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Factorio Stdlib</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="spectre-icons.min.css" type="text/css" />
     <link rel="stylesheet" href="ldoc.css" type="text/css" />
-</head>
-<body>
+    </head>
+    <body>
 
-<div id="container">
+    <div class="container grid-1280">
+    <div class="columns">
 
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
+    <!-- sidebar start -->
 
+    <div id="sidebar" class="column col-3 col-sm-12">
 
-<div id="main">
+    <div class="sidebar-custom">
 
+    <div class="project-infobox">
 
-<!-- Menu -->
+    <!-- project title -->
 
-<div id="navigation">
-<br/>
-<h1>Factorio Stdlib</h1>
+    <a href="index.html"><h1>Factorio Stdlib</h1></a>
 
+    <!-- project description -->
+    <p class="project-desc">Factorio Standard Library</p>
 
-
-
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><a href="modules/Area.html">Area</a></li>
-  <li><a href="modules/Chunk.html">Chunk</a></li>
-  <li><a href="modules/Position.html">Position</a></li>
-  <li><a href="modules/Surface.html">Surface</a></li>
-  <li><a href="modules/Tile.html">Tile</a></li>
-  <li><a href="modules/Color.html">Color</a></li>
-  <li><a href="modules/Config.html">Config</a></li>
-  <li><a href="modules/Core.html">Core</a></li>
-  <li><a href="modules/Data.html">Data</a></li>
-  <li><a href="modules/Recipe.html">Recipe</a></li>
-  <li><a href="modules/defines.color.html">defines.color</a></li>
-  <li><a href="modules/defines.time.html">defines.time</a></li>
-  <li><a href="modules/Entity.html">Entity</a></li>
-  <li><a href="modules/Inventory.html">Inventory</a></li>
-  <li><a href="modules/Resource.html">Resource</a></li>
-  <li><a href="modules/Event.html">Event</a></li>
-  <li><a href="modules/Event.Gui.html">Event.Gui</a></li>
-  <li><a href="modules/Event.Time.html">Event.Time</a></li>
-  <li><a href="modules/Game.html">Game</a></li>
-  <li><a href="modules/Logger.html">Logger</a></li>
-  <li><a href="modules/Queue.html">Queue</a></li>
-  <li><a href="modules/string.html">string</a></li>
-  <li><a href="modules/table.html">table</a></li>
-  <li><a href="modules/Trains.html">Trains</a></li>
-</ul>
-<h2>Topics</h2>
-<ul class="">
-  <li><a href="topics/readme.md.html">readme</a></li>
-</ul>
-<h2>Examples</h2>
-<ul class="nowrap">
-  <li><a href="examples/event.lua.html">event.lua</a></li>
-  <li><a href="examples/event.time.lua.html">event.time.lua</a></li>
-</ul>
-
-</div>
-
-<div id="content">
+    <!-- project full description -->
+    <span>  The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.</span>
+    </div>
 
 
-  <h2>Factorio Standard Library</h2>
-  <p>The Factorio Standard Library aims to extend the Factorio Lua api with well-tested, documented, and easy-to-use functions to make modding easier.</p>
+    <!-- list of items in a module -->
+    </div>
+    </div>
+    <!-- sidebar end -->
 
-<h2>Modules</h2>
-<table class="module_list">
-	<tr>
-		<td class="name"  nowrap><a href="modules/Area.html">Area</a></td>
-		<td class="summary">For working with bounding boxes.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Chunk.html">Chunk</a></td>
-		<td class="summary">A chunk represents a 32x32 area of a surface in factorio.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Position.html">Position</a></td>
-		<td class="summary">For working with x, y coordinates.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Surface.html">Surface</a></td>
-		<td class="summary">A "domain" of the world.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Tile.html">Tile</a></td>
-		<td class="summary">A tile represents a 1x1 area on a surface in factorio.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Color.html">Color</a></td>
-		<td class="summary">For playing with colors</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Config.html">Config</a></td>
-		<td class="summary">Config module</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Core.html">Core</a></td>
-		<td class="summary">Core module</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Data.html">Data</a></td>
-		<td class="summary">For working with raw data.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Recipe.html">Recipe</a></td>
-		<td class="summary">For working with raw recipes.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/defines.color.html">defines.color</a></td>
-		<td class="summary">A defines module for retrieving colors by name
- Extends the Factorio defines table</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/defines.time.html">defines.time</a></td>
-		<td class="summary">A defines module for retrieving the number of ticks in 1 unit of time.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Entity.html">Entity</a></td>
-		<td class="summary">Entity module</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Inventory.html">Inventory</a></td>
-		<td class="summary">For working with inventories</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Resource.html">Resource</a></td>
-		<td class="summary">Resource utilities.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Event.html">Event</a></td>
-		<td class="summary">Makes working with events in factorio a lot more simple.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Event.Gui.html">Event.Gui</a></td>
-		<td class="summary">Gui Event module
- <p>Makes monolithic Factorio gui events more manageable.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Event.Time.html">Event.Time</a></td>
-		<td class="summary">Raise events at certain times throughout a surfaces day, This module uses the stdlib Event system
- See also <a href="examples/event.time.lua.html#">event.time.lua</a></td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Game.html">Game</a></td>
-		<td class="summary">Game module</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Logger.html">Logger</a></td>
-		<td class="summary">Logger module</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Queue.html">Queue</a></td>
-		<td class="summary">A double queue.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/string.html">string</a></td>
-		<td class="summary">Extends Lua 5.2 string</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/table.html">table</a></td>
-		<td class="summary">Extends lua 5.2 table</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Trains.html">Trains</a></td>
-		<td class="summary">Trains module
- <p>When this module is loaded, it registers new
- events in order to track trains as locomotives and
- carriages are moved around.</td>
-	</tr>
-</table>
-<h2>Topics</h2>
-<table class="module_list">
-	<tr>
-		<td class="name"  nowrap><a href="topics/readme.md.html">readme.md</a></td>
-		<td class="summary"></td>
-	</tr>
-</table>
-<h2>Examples</h2>
-<table class="module_list">
-	<tr>
-		<td class="name"  nowrap><a href="examples/event.lua.html">event.lua</a></td>
-		<td class="summary"></td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="examples/event.time.lua.html">event.time.lua</a></td>
-		<td class="summary"></td>
-	</tr>
-</table>
+    <!-- content body start -->
+    <div class="column col-9 col-sm-12">
 
-</div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-06-08 03:50:13 </i>
-</div> <!-- id="about" -->
-</div> <!-- id="container" -->
-</body>
-</html>
+    <!-- module list on the main page start -->
+    <h2>Modules</h2>
+    <table class="module_list">
+    <tr>
+    <td class="name"><a href="modules/Area.html">Area</a></td>
+    <td class="summary"><span>Tools for working with bounding boxes.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Chunk.html">Chunk</a></td>
+    <td class="summary"><span>For working with chunks.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Position.html">Position</a></td>
+    <td class="summary"><span>Tools for working with <code>&lt;x,y&gt;</code> coordinates.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Surface.html">Surface</a></td>
+    <td class="summary"><span>For working with surfaces.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Tile.html">Tile</a></td>
+    <td class="summary"><span>Tools for working with tiles.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Color.html">Color</a></td>
+    <td class="summary"><span>For playing with colors.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Config.html">Config</a></td>
+    <td class="summary"><span>For working with mod configurations.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Data.html">Data</a></td>
+    <td class="summary"><span>Tools for working with raw data.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Recipe.html">Recipe</a></td>
+    <td class="summary"><span>For working with raw recipes.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/defines.color.html">defines.color</a></td>
+    <td class="summary"><span>A defines module for retrieving colors by name.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/defines.time.html">defines.time</a></td>
+    <td class="summary"><span>A defines module for retrieving the number of ticks in 1 unit of time.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Entity.html">Entity</a></td>
+    <td class="summary"><span>Tools for working with entities.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Inventory.html">Inventory</a></td>
+    <td class="summary"><span>For working with inventories.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Resource.html">Resource</a></td>
+    <td class="summary"><span>Resource utilities.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Event.html">Event</a></td>
+    <td class="summary"><span>Makes working with events in Factorio a lot more simple.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Force.html">Force</a></td>
+    <td class="summary"><span>Force global creation.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Gui.html">Gui</a></td>
+    <td class="summary"><span>Makes monolithic Factorio GUI events more manageable.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Player.html">Player</a></td>
+    <td class="summary"><span>Player global creation.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Time.html">Time</a></td>
+    <td class="summary"><span>Raise events for surfaces at certain time intervals.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Trains.html">Trains</a></td>
+    <td class="summary"><span>Tools for working with trains.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Game.html">Game</a></td>
+    <td class="summary"><span>The game module.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Logger.html">Logger</a></td>
+    <td class="summary"><span>For logging debug information to files.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Queue.html">Queue</a></td>
+    <td class="summary"><span>A double queue.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/Console.html">Console</a></td>
+    <td class="summary"><span>Debug console.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/string.html">string</a></td>
+    <td class="summary"><span>Extends Lua 5.2 string.</span></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="modules/table.html">table</a></td>
+    <td class="summary"><span>Extends Lua 5.2 table.</span></td>
+    </tr>
+    </table>
+    <h2>Topics</h2>
+    <table class="module_list">
+    <tr>
+    <td class="name"><a href="topics/readme.md.html">readme.md</a></td>
+    </tr>
+    </table>
+    <h2>Examples</h2>
+    <table class="module_list">
+    <tr>
+    <td class="name"><a href="examples/event.lua.html">event.lua</a></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="examples/event.time.lua.html">event.time.lua</a></td>
+    </tr>
+    </table>
+    <!-- module list on the main page end -->
+
+    <!-- module contents -->
+
+    <!-- section end -->
+
+    </div>
+    </div>
+    </div>
+
+    <div class="footer container grid-1280">
+    <div class="divider divider-custom"></div>
+    <div class="footer-columns columns">
+    <div class="sidebar-footer column col-3 col-sm-12">
+    <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+    </div>
+    <div class="content-footer column col-9 col-sm-12">
+    <i>Last updated 2017-08-19 05:47:06 UTC</i>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

@@ -1,321 +1,663 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<head>
-    <title>Factorio Stdlib</title>
+
+
+    <!doctype html>
+    <html class="no-js" lang="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Tile module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
-</head>
-<body>
+    </head>
+    <body>
 
-<div id="container">
+    <div class="container grid-1280">
+    <div class="columns">
 
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
+    <!-- sidebar start -->
 
+    <div id="sidebar" class="column col-3 col-sm-12">
 
-<div id="main">
+    <div class="sidebar-custom">
 
+    <div class="project-infobox">
 
-<!-- Menu -->
+    <!-- project title -->
 
-<div id="navigation">
-<br/>
-<h1>Factorio Stdlib</h1>
+    <a href="../index.html"><h1>Factorio Stdlib</h1></a>
 
-<ul>
-  <li><a href="../index.html">Index</a></li>
-</ul>
+    <!-- project description -->
+    <p class="project-desc">Factorio Standard Library</p>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Functions">Functions</a></li>
-</ul>
+    <!-- project full description -->
+    <span>  The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.</span>
+    </div>
 
 
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><a href="../modules/Area.html">Area</a></li>
-  <li><a href="../modules/Chunk.html">Chunk</a></li>
-  <li><a href="../modules/Position.html">Position</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
-  <li><strong>Tile</strong></li>
-  <li><a href="../modules/Color.html">Color</a></li>
-  <li><a href="../modules/Config.html">Config</a></li>
-  <li><a href="../modules/Core.html">Core</a></li>
-  <li><a href="../modules/Data.html">Data</a></li>
-  <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/defines.color.html">defines.color</a></li>
-  <li><a href="../modules/defines.time.html">defines.time</a></li>
-  <li><a href="../modules/Entity.html">Entity</a></li>
-  <li><a href="../modules/Inventory.html">Inventory</a></li>
-  <li><a href="../modules/Resource.html">Resource</a></li>
-  <li><a href="../modules/Event.html">Event</a></li>
-  <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
-  <li><a href="../modules/Event.Time.html">Event.Time</a></li>
-  <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Logger.html">Logger</a></li>
-  <li><a href="../modules/Queue.html">Queue</a></li>
-  <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/table.html">table</a></li>
-  <li><a href="../modules/Trains.html">Trains</a></li>
-</ul>
-<h2>Topics</h2>
-<ul class="">
-  <li><a href="../topics/readme.md.html">readme</a></li>
-</ul>
-<h2>Examples</h2>
-<ul class="nowrap">
-  <li><a href="../examples/event.lua.html">event.lua</a></li>
-  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
-</ul>
+    <!-- sidebar navigation -->
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Modules</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.html"><span class="module-name-item">Area</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Chunk.html"><span class="module-name-item">Chunk</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Color.html"><span class="module-name-item">Color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Config.html"><span class="module-name-item">Config</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Console.html"><span class="module-name-item">Console</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.html"><span class="module-name-item">Data</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.html"><span class="module-name-item">Entity</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.html"><span class="module-name-item">Event</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Force.html"><span class="module-name-item">Force</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Game.html"><span class="module-name-item">Game</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Gui.html"><span class="module-name-item">Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Inventory.html"><span class="module-name-item">Inventory</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Logger.html"><span class="module-name-item">Logger</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Player.html"><span class="module-name-item">Player</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Position.html"><span class="module-name-item">Position</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Queue.html"><span class="module-name-item">Queue</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Recipe.html"><span class="module-name-item">Recipe</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Resource.html"><span class="module-name-item">Resource</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Surface.html"><span class="module-name-item">Surface</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Tile.html"><span class="module-name-item">Tile</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Time.html"><span class="module-name-item">Time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Trains.html"><span class="module-name-item">Trains</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/string.html"><span class="module-name-item">string</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/table.html"><span class="module-name-item">table</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Topics</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/readme.md.html"><span class="module-name-item">readme.md</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Examples</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.time.lua.html"><span class="module-name-item">event.time.lua</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
 
-</div>
 
-<div id="content">
 
-<h1>Module <code>Tile</code></h1>
-<p>A tile represents a 1x1 area on a surface in factorio.</p>
-<p>
+    <!-- list of items in a module -->
+    <ul class="nav nav-module-contents">
+    <li class="nav-item">
+    <h4>Contents of <strong>Tile</strong></h4>
+    <ul class="nav">
+    <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    </ul>
+    </li>
+    </ul>
+    </div>
+    <div class="up-to-top">
+    <a href="#">Top <i class="icon icon-upward"></i></a>
+    </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content body start -->
+    <div class="column col-9 col-sm-12">
+
+    <!-- module list on the main page start -->
+    <!-- module list on the main page end -->
+
+    <!-- module contents -->
+
+    <!-- module content header start -->
+
+    <h2><span class="body-module-name"><strong><em>Tile</em></strong></span> module</h2>
+    <p>Tools for working with tiles.</p>
+    <p> A tile represents a 1 unit<sup>2</sup> on a surface in Factorio.</p>
+
+
+    <!-- module info start -->
+    <!-- module info end -->
+
+    <!-- module usage start -->
+    <h3>See also</h3>
+    <ul class="module-see-also">
+    <li><a href="http://lua-api.factorio.com/latest/LuaTile.html">LuaTile</a></li>
+    </ul>
+    <h3>Usage</h3>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Tile = <span class="global">require</span>(<span class="string">'stdlib/area/tile'</span>)</code></pre>
+    <!-- module usage end -->
+
+    <!-- module content header end -->
+
+    <!-- module section list start -->
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Functions">Functions</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#adjacent">adjacent (surface, position[, diagonal=false][, tile_name])</a></td>
+    <td class="summary">Creates an array of tile positions for all adjacent tiles (N, E, S, W) <strong>OR</strong> (N, NE, E, SE, S, SW, W, NW) if diagonal is set to true.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#from_position">from_position (position)</a></td>
+    <td class="summary">Get the <a href="http://lua-api.factorio.com/latest/LuaTile.html#LuaTile.position">tile position</a> of a tile where the given position resides.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_data">get_data (surface, tile_pos[, default_value])</a></td>
+    <td class="summary">Gets the user data that is associated with a tile.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_index">get_index (tile_pos)</a></td>
+    <td class="summary">Calculates and returns a stable and deterministic integer ID of a tile from a given tile position.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#set_data">set_data (surface, tile_pos, data)</a></td>
+    <td class="summary">Associates the user data to a tile.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#to_area">to_area (tile_pos)</a></td>
+    <td class="summary">Converts a tile position to the <a href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">area</a> of the tile it is in.</td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- module section list end -->
+
+    <br />
+
+    <!-- section start -->
+    <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#adjacent" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="adjacent">adjacent (surface, position[, diagonal=false][, tile_name])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Creates an array of tile positions for all adjacent tiles (N, E, S, W) <strong>OR</strong> (N, NE, E, SE, S, SW, W, NW) if diagonal is set to true.</p>
+    <p class="section-item-description">
 
 </p>
-    <h3>See also:</h3>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-         <a href="http://lua-api.factorio.com/latest/LuaTile.html">Tile</a>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a></span>)
+
+     the surface to examine for adjacent tiles
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>position</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTile.html#LuaTile.position">LuaTile.position</a></span>)
+
+     the tile position of the origin tile
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>diagonal</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     whether to include diagonal tiles
+
+    (<em>default</em>: false)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>tile_name</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     whether to restrict adjacent tiles to a particular tile name (example: "water-tile")
+
+    (<em>optional</em>)
+    </li>
+
+
     </ul>
-    <h3>Usage:</h3>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-        <pre class="example">local Tile = require(&apos;stdlib/area/tile&apos;)
-</pre>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTile.html#LuaTile.position">{LuaTile.position,...}</a></span>)
+    <span class="return-text">an array of tile positions of the tiles that are adjacent to the origin tile</span>
+    </li>
     </ul>
+    <!-- returns end -->
 
 
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" nowrap><a href="#from_position">from_position (position)</a></td>
-	<td class="summary">Calculates the tile coordinates for the position given</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#to_area">to_area (tile_pos)</a></td>
-	<td class="summary">Converts a tile position to the area it contains</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#adjacent">adjacent (surface, position, diagonal, tile_name)</a></td>
-	<td class="summary">Creates a list of tile positions for all adjacent tiles (N, E, S, W) or (N, NE, E, SE, S, SW, W, NW) if diagonal is true</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#get_data">get_data (surface, tile_pos, default_value)</a></td>
-	<td class="summary">Gets user data from the tile, stored in a mod's global data.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#set_data">set_data (surface, tile_pos, data)</a></td>
-	<td class="summary">Sets user data on the tile, stored in a mod's global data.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#get_index">get_index (tile_pos)</a></td>
-	<td class="summary">Calculates and returns a stable, deterministic integer id for the given tile_pos
- <p> Tile id will not change once calculated</p>
- <p> Tile ids are only unique for the chunk they are in, they may repeat across a surface.<p></td>
-	</tr>
-</table>
+    <!-- see also start -->
+    <!-- see also end -->
 
-<br/>
-<br/>
+    <!-- usage start -->
+    <!-- usage end -->
 
-
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-
-    <dl class="function">
+    </dd>
     <dt>
-    <a name = "from_position"></a>
-    <strong>from_position (position)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#from_position" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="from_position">from_position (position)</span>
+    </div>
     </dt>
     <dd>
-    Calculates the tile coordinates for the position given
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Get the <a href="http://lua-api.factorio.com/latest/LuaTile.html#LuaTile.position">tile position</a> of a tile where the given position resides.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">position</span>
-         to calculate the tile for
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>position</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+     the position that resides somewhere in a tile
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-        the tile position
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTile.html#LuaTile.position">LuaTile.position</a></span>)
+    <span class="return-text">the tile position</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "to_area"></a>
-    <strong>to_area (tile_pos)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_data" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_data">get_data (surface, tile_pos[, default_value])</span>
+    </div>
     </dt>
     <dd>
-    Converts a tile position to the area it contains
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Gets the user data that is associated with a tile.</p>
+    <p class="section-item-description"> The user data is stored in the global object and it persists between loads.</p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">tile_pos</span>
-         to convert to an area
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a></span>)
+
+     the surface on which the user data is looked up
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>tile_pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTile.html#LuaTile.position">LuaTile.position</a></span>)
+
+     the tile position on which the user data is looked up
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>default_value</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">Mixed</span></span>)
+
+     the user data to set for the tile and returned if it did not have user data
+
+    (<em>optional</em>)
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-        area that tile is valid for
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a> or <span class="type">Mixed</span></span>)
+    <span class="return-text">the user data <strong>OR</strong> <em>nil</em> if it does not exist for the tile and no default_value was set</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "adjacent"></a>
-    <strong>adjacent (surface, position, diagonal, tile_name)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_index" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_index">get_index (tile_pos)</span>
+    </div>
     </dt>
     <dd>
-    Creates a list of tile positions for all adjacent tiles (N, E, S, W) or (N, NE, E, SE, S, SW, W, NW) if diagonal is true
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Calculates and returns a stable and deterministic integer ID of a tile from a given tile position.</p>
+    <p class="section-item-description"> The tile ID will not change once it is calculated, and every tile ID is unique to the chunk they are in and they may repeat across a surface.</p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">surface</span>
-         to examine for adjacent tiles
-        </li>
-        <li><span class="parameter">position</span>
-         the center tile position, to search around
-        </li>
-        <li><span class="parameter">diagonal</span>
-         (optional: defaults to false) whether to include diagonal tiles
-        </li>
-        <li><span class="parameter">tile_name</span>
-         (optional) whether to restrict adjacent tiles to one particular tile name (e.g 'water-tile')
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>tile_pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTile.html#LuaTile.position">LuaTile.position</a></span>)
+
+
+
+
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-        list of tile positions adjacent to the given position
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>)
+    <span class="return-text">the tile ID</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "get_data"></a>
-    <strong>get_data (surface, tile_pos, default_value)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#set_data" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="set_data">set_data (surface, tile_pos, data)</span>
+    </div>
     </dt>
     <dd>
-    Gets user data from the tile, stored in a mod's global data.
- <p> The data will persist between loads</p>
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Associates the user data to a tile.</p>
+    <p class="section-item-description"> The user data will be stored in the global object and it will persist between loads.</p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">surface</span>
-         the surface to look up data for
-        </li>
-        <li><span class="parameter">tile_pos</span>
-         the tile coordinates to look up data for
-        </li>
-        <li><span class="parameter">default_value</span>
-         (optional) to set and return if no data exists
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a></span>)
+
+     the surface on which the user data will reside
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>tile_pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTile.html#LuaTile.position">LuaTile.position</a></span>)
+
+     the tile position of a tile that will be associated with the user data
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>data</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a> or <span class="type">Mixed</span></span>)
+
+     the user data to set <strong>OR</strong> <em>nil</em> to erase the existing user data for the tile
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-        the data, or nil if no data exists for the chunk
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a> or <span class="type">Mixed</span></span>)
+    <span class="return-text">the previous user data associated with the tile <strong>OR</strong> <em>nil</em> if the tile had no previous user data</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "set_data"></a>
-    <strong>set_data (surface, tile_pos, data)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#to_area" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="to_area">to_area (tile_pos)</span>
+    </div>
     </dt>
     <dd>
-    Sets user data on the tile, stored in a mod's global data.
- <p> The data will persist between loads</p>
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Converts a tile position to the <a href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">area</a> of the tile it is in.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">surface</span>
-         the surface to look up data for
-        </li>
-        <li><span class="parameter">tile_pos</span>
-         the chunk coordinates to look up data for
-        </li>
-        <li><span class="parameter">data</span>
-         the data to set (or nil to erase the data for the tile)
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>tile_pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaTile.html#LuaTile.position">LuaTile.position</a></span>)
+
+     the tile position
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-        the previous data associated with the tile, or nil if the tile had no previous data
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "get_index"></a>
-    <strong>get_index (tile_pos)</strong>
-    </dt>
-    <dd>
-    Calculates and returns a stable, deterministic integer id for the given tile_pos
- <p> Tile id will not change once calculated</p>
- <p> Tile ids are only unique for the chunk they are in, they may repeat across a surface.<p>
-
-
-    <h3>Parameters:</h3>
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-        <li><span class="parameter">tile_pos</span>
-
-
-
-        </li>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the area of the tile</span>
+    </li>
     </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        the tile index
-    </ol>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
-</dl>
+    </dd>
+    </dl>
 
+    <!-- section end -->
 
-</div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-06-08 03:50:13 </i>
-</div> <!-- id="about" -->
-</div> <!-- id="container" -->
-</body>
-</html>
+    </div>
+    </div>
+    </div>
+
+    <div class="footer container grid-1280">
+    <div class="divider divider-custom"></div>
+    <div class="footer-columns columns">
+    <div class="sidebar-footer column col-3 col-sm-12">
+    <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+    </div>
+    <div class="content-footer column col-9 col-sm-12">
+    <i>Last updated 2017-08-19 05:47:06 UTC</i>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

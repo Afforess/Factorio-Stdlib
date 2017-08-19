@@ -1,324 +1,1070 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<head>
-    <title>Factorio Stdlib</title>
+
+
+    <!doctype html>
+    <html class="no-js" lang="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>defines.color module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
-</head>
-<body>
+    </head>
+    <body>
 
-<div id="container">
+    <div class="container grid-1280">
+    <div class="columns">
 
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
+    <!-- sidebar start -->
 
+    <div id="sidebar" class="column col-3 col-sm-12">
 
-<div id="main">
+    <div class="sidebar-custom">
 
+    <div class="project-infobox">
 
-<!-- Menu -->
+    <!-- project title -->
 
-<div id="navigation">
-<br/>
-<h1>Factorio Stdlib</h1>
+    <a href="../index.html"><h1>Factorio Stdlib</h1></a>
 
-<ul>
-  <li><a href="../index.html">Index</a></li>
-</ul>
+    <!-- project description -->
+    <p class="project-desc">Factorio Standard Library</p>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Tables">Tables</a></li>
-</ul>
+    <!-- project full description -->
+    <span>  The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.</span>
+    </div>
 
 
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><a href="../modules/Area.html">Area</a></li>
-  <li><a href="../modules/Chunk.html">Chunk</a></li>
-  <li><a href="../modules/Position.html">Position</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
-  <li><a href="../modules/Tile.html">Tile</a></li>
-  <li><a href="../modules/Color.html">Color</a></li>
-  <li><a href="../modules/Config.html">Config</a></li>
-  <li><a href="../modules/Core.html">Core</a></li>
-  <li><a href="../modules/Data.html">Data</a></li>
-  <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><strong>defines.color</strong></li>
-  <li><a href="../modules/defines.time.html">defines.time</a></li>
-  <li><a href="../modules/Entity.html">Entity</a></li>
-  <li><a href="../modules/Inventory.html">Inventory</a></li>
-  <li><a href="../modules/Resource.html">Resource</a></li>
-  <li><a href="../modules/Event.html">Event</a></li>
-  <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
-  <li><a href="../modules/Event.Time.html">Event.Time</a></li>
-  <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Logger.html">Logger</a></li>
-  <li><a href="../modules/Queue.html">Queue</a></li>
-  <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/table.html">table</a></li>
-  <li><a href="../modules/Trains.html">Trains</a></li>
-</ul>
-<h2>Topics</h2>
-<ul class="">
-  <li><a href="../topics/readme.md.html">readme</a></li>
-</ul>
-<h2>Examples</h2>
-<ul class="nowrap">
-  <li><a href="../examples/event.lua.html">event.lua</a></li>
-  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
-</ul>
+    <!-- sidebar navigation -->
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Modules</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.html"><span class="module-name-item">Area</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Chunk.html"><span class="module-name-item">Chunk</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Color.html"><span class="module-name-item">Color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Config.html"><span class="module-name-item">Config</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Console.html"><span class="module-name-item">Console</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.html"><span class="module-name-item">Data</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.html"><span class="module-name-item">Entity</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.html"><span class="module-name-item">Event</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Force.html"><span class="module-name-item">Force</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Game.html"><span class="module-name-item">Game</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Gui.html"><span class="module-name-item">Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Inventory.html"><span class="module-name-item">Inventory</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Logger.html"><span class="module-name-item">Logger</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Player.html"><span class="module-name-item">Player</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Position.html"><span class="module-name-item">Position</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Queue.html"><span class="module-name-item">Queue</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Recipe.html"><span class="module-name-item">Recipe</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Resource.html"><span class="module-name-item">Resource</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Surface.html"><span class="module-name-item">Surface</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Tile.html"><span class="module-name-item">Tile</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Time.html"><span class="module-name-item">Time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Trains.html"><span class="module-name-item">Trains</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/string.html"><span class="module-name-item">string</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/table.html"><span class="module-name-item">table</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Topics</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/readme.md.html"><span class="module-name-item">readme.md</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Examples</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.time.lua.html"><span class="module-name-item">event.time.lua</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
 
-</div>
 
-<div id="content">
 
-<h1>Module <code>defines.color</code></h1>
-<p>A defines module for retrieving colors by name
- Extends the Factorio defines table</p>
-<p>
+    <!-- list of items in a module -->
+    <ul class="nav nav-module-contents">
+    <li class="nav-item">
+    <h4>Contents of <strong>defines.color</strong></h4>
+    <ul class="nav">
+    <li class="nav-item"><a href="#Tables"><span class="fragment-hashtag">#</span> Tables</a></li>
+    </ul>
+    </li>
+    </ul>
+    </div>
+    <div class="up-to-top">
+    <a href="#">Top <i class="icon icon-upward"></i></a>
+    </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content body start -->
+    <div class="column col-9 col-sm-12">
+
+    <!-- module list on the main page start -->
+    <!-- module list on the main page end -->
+
+    <!-- module contents -->
+
+    <!-- module content header start -->
+
+    <h2><span class="body-module-name"><strong><em>defines.color</em></strong></span> module</h2>
+    <p>A defines module for retrieving colors by name.</p>
+    <p> Extends the Factorio defines table.</p>
+
+
+    <!-- module info start -->
+    <!-- module info end -->
+
+    <!-- module usage start -->
+    <h3>See also</h3>
+    <ul class="module-see-also">
+    <li><a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Concepts.Color</a></li>
+    </ul>
+    <h3>Usage</h3>
+    <pre class="code" data-lang="Lua"><code><span class="global">require</span>(<span class="string">'stdlib/defines/color'</span>)</code></pre>
+    <!-- module usage end -->
+
+    <!-- module content header end -->
+
+    <!-- module section list start -->
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Tables">Tables</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#defines.anticolor">defines.anticolor</a></td>
+    <td class="summary">Returns white for dark colors or black for lighter colors.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#defines.color">defines.color</a></td>
+    <td class="summary">A table of colors allowing retrieval by color name.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#defines.lightcolor">defines.lightcolor</a></td>
+    <td class="summary">Returns a lighter color of a named color.</td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- module section list end -->
+
+    <br />
+
+    <!-- section start -->
+    <h3><span id="Tables" class="section-title"><a href="#Tables">Tables</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#defines.anticolor" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="defines.anticolor">defines.anticolor</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns white for dark colors or black for lighter colors.</p>
+    <p class="section-item-description">
 
 </p>
-    <h3>See also:</h3>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
     <ul>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Concepts Color</a>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>green</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.black
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>grey</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.black
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>lightblue</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.black
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>lightgreen</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.black
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>lightgrey</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.black
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>lightred</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.black
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>orange</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.black
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>white</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.black
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>yellow</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.black
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>black</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.white
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>blue</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.white
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>brown</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.white
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>darkblue</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.white
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>darkgreen</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.white
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>darkgrey</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.white
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>darkred</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.white
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pink</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.white
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>purple</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.white
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>red</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.white
+
+    </li>
+
+
     </ul>
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">require(&apos;stdlib/defines/color&apos;)
-</pre>
-    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
 
 
-<h2><a href="#Tables">Tables</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" nowrap><a href="#defines.color">defines.color</a></td>
-	<td class="summary">A table of colors retrived by color name</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#defines.anticolor">defines.anticolor</a></td>
-	<td class="summary">Return white for dark colors or black for lighter colors</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#defines.lightcolor">defines.lightcolor</a></td>
-	<td class="summary">Return a lighter color of the named color passed</td>
-	</tr>
-</table>
+    <!-- see also start -->
+    <!-- see also end -->
 
-<br/>
-<br/>
+    <!-- usage start -->
+    <!-- usage end -->
 
-
-    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
-
-    <dl class="function">
+    </dd>
     <dt>
-    <a name = "defines.color"></a>
-    <strong>defines.color</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#defines.color" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="defines.color">defines.color</span>
+    </div>
     </dt>
     <dd>
-    A table of colors retrived by color name
+    <div class="section-item-body">
 
+    <p class="section-item-summary">A table of colors allowing retrieval by color name.</p>
+    <p class="section-item-description">
 
-    <h3>Fields:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
     <ul>
-        <li><span class="parameter">white</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">black</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">darkgrey</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">grey</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">lightgrey</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">red</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">darkred</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">lightred</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">green</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">darkgreen</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">lightgreen</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">blue</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">darkblue</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">lightblue</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">orange</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">yellow</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">pink</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">purple</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
-        <li><span class="parameter">brown</span>
-         <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a>
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>white</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>black</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>darkgrey</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>grey</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>lightgrey</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>red</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>darkred</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>lightred</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>green</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>darkgreen</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>lightgreen</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>blue</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>darkblue</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>lightblue</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>orange</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>yellow</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pink</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>purple</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>brown</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+
+
+
+
+    </li>
+
+
     </ul>
 
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">color = defines.color.red</pre>
-    </ul>
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code>color = defines.color.red</code></pre>
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "defines.anticolor"></a>
-    <strong>defines.anticolor</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#defines.lightcolor" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="defines.lightcolor">defines.lightcolor</span>
+    </div>
     </dt>
     <dd>
-    Return white for dark colors or black for lighter colors
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Returns a lighter color of a named color.</p>
+    <p class="section-item-description">
 
-    <h3>Fields:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
     <ul>
-        <li><span class="parameter">green</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.black
-        </li>
-        <li><span class="parameter">grey</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.black
-        </li>
-        <li><span class="parameter">lightblue</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.black
-        </li>
-        <li><span class="parameter">lightgreen</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.black
-        </li>
-        <li><span class="parameter">lightgrey</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.black
-        </li>
-        <li><span class="parameter">lightred</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.black
-        </li>
-        <li><span class="parameter">orange</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.black
-        </li>
-        <li><span class="parameter">white</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.black
-        </li>
-        <li><span class="parameter">yellow</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.black
-        </li>
-        <li><span class="parameter">black</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.white
-        </li>
-        <li><span class="parameter">blue</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.white
-        </li>
-        <li><span class="parameter">brown</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.white
-        </li>
-        <li><span class="parameter">darkblue</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.white
-        </li>
-        <li><span class="parameter">darkgreen</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.white
-        </li>
-        <li><span class="parameter">darkgrey</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.white
-        </li>
-        <li><span class="parameter">darkred</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.white
-        </li>
-        <li><span class="parameter">pink</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.white
-        </li>
-        <li><span class="parameter">purple</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.white
-        </li>
-        <li><span class="parameter">red</span>
-         returns <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.white
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>white</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.lightgrey
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>grey</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.darkgrey
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>lightgrey</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.grey
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>red</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.lightred
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>green</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.lightgreen
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>blue</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.lightblue
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>yellow</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.orange
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pink</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     defines.color.purple
+
+    </li>
+
+
     </ul>
 
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
-    <dt>
-    <a name = "defines.lightcolor"></a>
-    <strong>defines.lightcolor</strong>
-    </dt>
-    <dd>
-    Return a lighter color of the named color passed
+    </dd>
+    </dl>
 
+    <!-- section end -->
 
-    <h3>Fields:</h3>
-    <ul>
-        <li><span class="parameter">white</span>
-         return <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.lightgrey
-        </li>
-        <li><span class="parameter">grey</span>
-         return <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.darkgrey
-        </li>
-        <li><span class="parameter">lightgrey</span>
-         return <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.grey
-        </li>
-        <li><span class="parameter">red</span>
-         return <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.lightred
-        </li>
-        <li><span class="parameter">green</span>
-         return <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.lightgreen
-        </li>
-        <li><span class="parameter">blue</span>
-         return <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.lightblue
-        </li>
-        <li><span class="parameter">yellow</span>
-         return <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.orange
-        </li>
-        <li><span class="parameter">pink</span>
-         return <a href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a> defines.color.purple
-        </li>
-    </ul>
+    </div>
+    </div>
+    </div>
 
-
-
-
-
-</dd>
-</dl>
-
-
-</div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-06-08 03:50:13 </i>
-</div> <!-- id="about" -->
-</div> <!-- id="container" -->
-</body>
-</html>
+    <div class="footer container grid-1280">
+    <div class="divider divider-custom"></div>
+    <div class="footer-columns columns">
+    <div class="sidebar-footer column col-3 col-sm-12">
+    <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+    </div>
+    <div class="content-footer column col-9 col-sm-12">
+    <i>Last updated 2017-08-19 05:47:06 UTC</i>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

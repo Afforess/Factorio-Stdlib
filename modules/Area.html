@@ -1,784 +1,2140 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<head>
-    <title>Factorio Stdlib</title>
+
+
+    <!doctype html>
+    <html class="no-js" lang="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Area module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
+    <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
-</head>
-<body>
+    </head>
+    <body>
 
-<div id="container">
+    <div class="container grid-1280">
+    <div class="columns">
 
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
+    <!-- sidebar start -->
 
+    <div id="sidebar" class="column col-3 col-sm-12">
 
-<div id="main">
+    <div class="sidebar-custom">
 
+    <div class="project-infobox">
 
-<!-- Menu -->
+    <!-- project title -->
 
-<div id="navigation">
-<br/>
-<h1>Factorio Stdlib</h1>
+    <a href="../index.html"><h1>Factorio Stdlib</h1></a>
 
-<ul>
-  <li><a href="../index.html">Index</a></li>
-</ul>
+    <!-- project description -->
+    <p class="project-desc">Factorio Standard Library</p>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Functions">Functions</a></li>
-</ul>
+    <!-- project full description -->
+    <span>  The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.</span>
+    </div>
 
 
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><strong>Area</strong></li>
-  <li><a href="../modules/Chunk.html">Chunk</a></li>
-  <li><a href="../modules/Position.html">Position</a></li>
-  <li><a href="../modules/Surface.html">Surface</a></li>
-  <li><a href="../modules/Tile.html">Tile</a></li>
-  <li><a href="../modules/Color.html">Color</a></li>
-  <li><a href="../modules/Config.html">Config</a></li>
-  <li><a href="../modules/Core.html">Core</a></li>
-  <li><a href="../modules/Data.html">Data</a></li>
-  <li><a href="../modules/Recipe.html">Recipe</a></li>
-  <li><a href="../modules/defines.color.html">defines.color</a></li>
-  <li><a href="../modules/defines.time.html">defines.time</a></li>
-  <li><a href="../modules/Entity.html">Entity</a></li>
-  <li><a href="../modules/Inventory.html">Inventory</a></li>
-  <li><a href="../modules/Resource.html">Resource</a></li>
-  <li><a href="../modules/Event.html">Event</a></li>
-  <li><a href="../modules/Event.Gui.html">Event.Gui</a></li>
-  <li><a href="../modules/Event.Time.html">Event.Time</a></li>
-  <li><a href="../modules/Game.html">Game</a></li>
-  <li><a href="../modules/Logger.html">Logger</a></li>
-  <li><a href="../modules/Queue.html">Queue</a></li>
-  <li><a href="../modules/string.html">string</a></li>
-  <li><a href="../modules/table.html">table</a></li>
-  <li><a href="../modules/Trains.html">Trains</a></li>
-</ul>
-<h2>Topics</h2>
-<ul class="">
-  <li><a href="../topics/readme.md.html">readme</a></li>
-</ul>
-<h2>Examples</h2>
-<ul class="nowrap">
-  <li><a href="../examples/event.lua.html">event.lua</a></li>
-  <li><a href="../examples/event.time.lua.html">event.time.lua</a></li>
-</ul>
+    <!-- sidebar navigation -->
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Modules</h2>
+    <ul class="nav">
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Area.html"><span class="module-name-item">Area</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Chunk.html"><span class="module-name-item">Chunk</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Color.html"><span class="module-name-item">Color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Config.html"><span class="module-name-item">Config</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Console.html"><span class="module-name-item">Console</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.html"><span class="module-name-item">Data</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.html"><span class="module-name-item">Entity</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.html"><span class="module-name-item">Event</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Force.html"><span class="module-name-item">Force</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Game.html"><span class="module-name-item">Game</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Gui.html"><span class="module-name-item">Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Inventory.html"><span class="module-name-item">Inventory</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Logger.html"><span class="module-name-item">Logger</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Player.html"><span class="module-name-item">Player</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Position.html"><span class="module-name-item">Position</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Queue.html"><span class="module-name-item">Queue</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Recipe.html"><span class="module-name-item">Recipe</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Resource.html"><span class="module-name-item">Resource</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Surface.html"><span class="module-name-item">Surface</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Tile.html"><span class="module-name-item">Tile</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Time.html"><span class="module-name-item">Time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Trains.html"><span class="module-name-item">Trains</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/string.html"><span class="module-name-item">string</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/table.html"><span class="module-name-item">table</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Topics</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/readme.md.html"><span class="module-name-item">readme.md</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
+    <ul class="nav nav-modules">
+    <li class="nav-item">
+    <h2>Examples</h2>
+    <ul class="nav">
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.time.lua.html"><span class="module-name-item">event.time.lua</span></a></div></li>
+    </ul>
+    </li>
+    </ul>
 
-</div>
 
-<div id="content">
 
-<h1>Module <code>Area</code></h1>
-<p>For working with bounding boxes.</p>
-<p>
+    <!-- list of items in a module -->
+    <ul class="nav nav-module-contents">
+    <li class="nav-item">
+    <h4>Contents of <strong>Area</strong></h4>
+    <ul class="nav">
+    <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    <li class="nav-item"><a href="#Tables"><span class="fragment-hashtag">#</span> Tables</a></li>
+    <li class="nav-item"><a href="#Fields"><span class="fragment-hashtag">#</span> Fields</a></li>
+    </ul>
+    </li>
+    </ul>
+    </div>
+    <div class="up-to-top">
+    <a href="#">Top <i class="icon icon-upward"></i></a>
+    </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content body start -->
+    <div class="column col-9 col-sm-12">
+
+    <!-- module list on the main page start -->
+    <!-- module list on the main page end -->
+
+    <!-- module contents -->
+
+    <!-- module content header start -->
+
+    <h2><span class="body-module-name"><strong><em>Area</em></strong></span> module</h2>
+    <p>Tools for working with bounding boxes.</p>
+    <p> The tables passed into the Area functions are mutated in-place.</p>
+
+
+    <!-- module info start -->
+    <!-- module info end -->
+
+    <!-- module usage start -->
+    <h3>See also</h3>
+    <ul class="module-see-also">
+    <li><a href="../modules/Position.html#">Position</a></li>
+    <li><a href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">Concepts.BoundingBox</a></li>
+    <li><a href="http://lua-api.factorio.com/latest/Concepts.html#Position">Concepts.Position</a></li>
+    </ul>
+    <h3>Usage</h3>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Area = <span class="global">require</span>(<span class="string">'stdlib/area/area'</span>)</code></pre>
+    <!-- module usage end -->
+
+    <!-- module content header end -->
+
+    <!-- module section list start -->
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Functions">Functions</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#adjust">adjust (area, vector)</a></td>
+    <td class="summary">Adjust an area by shrinking or expanding.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#center">center (area)</a></td>
+    <td class="summary">Calculates the center of the area and returns the position.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#compare">compare (area1, area2)</a></td>
+    <td class="summary">Returns true if two areas are the same.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#construct">construct (x1, y1, x2, y2)</a></td>
+    <td class="summary">Creates an area from the two positions p1 and p2.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#copy">copy (area)</a></td>
+    <td class="summary">Creates an area that is a copy of the given area.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#equals">equals (area1, area2)</a></td>
+    <td class="summary">Compares the size of two areas.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#expand">expand (area, amount)</a></td>
+    <td class="summary">Expands the size of an area by the given amount.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#inside">inside (area, pos)</a></td>
+    <td class="summary">Tests if a position {x, y} is located in an area (including the border).</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#iterate">iterate (area)</a></td>
+    <td class="summary">Iterates an area.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#less_than">less_than (area1, area2)</a></td>
+    <td class="summary">Is area1 smaller in size than area2</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#new">new (area_arr, copy)</a></td>
+    <td class="summary">Converts an area in either array or table format to an area with a metatable.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#normalize">normalize (area)</a></td>
+    <td class="summary">Normalizes the given area.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#offset">offset (area, pos)</a></td>
+    <td class="summary">Offsets the area by the <code>{x, y}</code> values.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#rotate">rotate (area)</a></td>
+    <td class="summary">Rotate an area such that its value of the width becomes the height, and its value of the height becomes the width.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#round_to_integer">round_to_integer (area)</a></td>
+    <td class="summary">Rounds down the xy-values in <code>area.left_top</code> and rounds up the xy-values in <code>area.right_bottom</code>.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#shrink">shrink (area, amount)</a></td>
+    <td class="summary">Shrinks the area by the given amount.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#size">size (area)</a></td>
+    <td class="summary">Gets the properties of the given area.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#spiral_iterate">spiral_iterate (area)</a></td>
+    <td class="summary">Iterates the given area in a spiral as depicted below, from innermost to the outermost location.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#tile_center_points">tile_center_points (area)</a></td>
+    <td class="summary">Gets the center positions of the tiles where the given area's two positions reside.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#to_collision_area">to_collision_area (entity)</a></td>
+    <td class="summary">Deprecated see <a href="http://lua-api.factorio.com/latest/LuaEntity.html#LuaEntity.bounding_box">LuaEntity.bounding_box</a>
+ <br>Converts an entity and its <a href="http://lua-api.factorio.com/latest/LuaEntityPrototype.html#LuaEntityPrototype.collision_box">collision_box</a> to the area around it.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#to_selection_area">to_selection_area (entity)</a></td>
+    <td class="summary">Converts an entity and its <a href="http://lua-api.factorio.com/latest/LuaEntityPrototype.html#LuaEntityPrototype.selection_box">selection_box</a> to the area around it.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#to_table">to_table ()</a></td>
+    <td class="summary">Deprecated</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#tostring">tostring (area)</a></td>
+    <td class="summary">Converts an area to a string.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#translate">translate (area, direction, distance)</a></td>
+    <td class="summary">Translates an area in the given direction.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Tables">Tables</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#Metamethods">Metamethods</a></td>
+    <td class="summary">Area tables are returned with these Metamethods attached.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Fields">Fields</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#immutable">immutable</a></td>
+    <td class="summary">By default area tables are mutated in place set this to true to make the tables immutable.</td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- module section list end -->
+
+    <br />
+
+    <!-- section start -->
+    <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#adjust" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="adjust">adjust (area, vector)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Adjust an area by shrinking or expanding.</p>
+    <p class="section-item-description"> Imagine pinching &amp; holding with fingers the top-left &amp; bottom-right corners of a 2D box and pulling outwards to expand and pushing inwards to shrink the box.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area to adjust
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>vector</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Vector">Vector</a></span>)
+
+     the vectors to use
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the adjusted bounding box</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> area = Area.adjust({{-<span class="number">2</span>, -<span class="number">2</span>}, {<span class="number">2</span>, <span class="number">2</span>}}, {<span class="number">4</span>, -<span class="number">1</span>})
+ <span class="comment">-- returns {left_top = {x = -6, y = -1}, right_bottom = {x = 6, y = 1}}</span></code></pre>
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#center" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="center">center (area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Calculates the center of the area and returns the position.</p>
+    <p class="section-item-description">
 
 </p>
-    <h3>See also:</h3>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-         <li><a href="../modules/Position.html#">Position</a></li>
-         <li><a href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">Concepts BoundingBox</a></li>
-         <li><a href="http://lua-api.factorio.com/latest/Concepts.html#Position">Concepts Position</a></li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area
+
+    </li>
+
+
     </ul>
-    <h3>Usage:</h3>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-        <pre class="example">local Area = require(&apos;stdlib/area/area&apos;)
-</pre>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">the center of the area</span>
+    </li>
     </ul>
+    <!-- returns end -->
 
 
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" nowrap><a href="#construct">construct (x1, y1, x2, y2)</a></td>
-	<td class="summary">Creates an area from the 2 positions p1 and p2</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#size">size (area)</a></td>
-	<td class="summary">Returns the size of the space contained in the 2d area</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#inside">inside (area, pos)</a></td>
-	<td class="summary">Tests if a position {x, y} is inside (inclusive) of area</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#shrink">shrink (area, amount)</a></td>
-	<td class="summary">Shrinks the size of an area by the given amount</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#expand">expand (area, amount)</a></td>
-	<td class="summary">Expands the size of an area by the given amount</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#adjust">adjust (area, vector)</a></td>
-	<td class="summary">Adjust an area by shrinking or expanding</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#rotate">rotate (area)</a></td>
-	<td class="summary">Rotate an area such that its width becomes it height, and its height becomes it width.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#center">center (area)</a></td>
-	<td class="summary">Calculates the center of the area and returns the position</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#offset">offset (area, pos)</a></td>
-	<td class="summary">Offsets the area by the {x, y} values</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#translate">translate (area, direction, distance)</a></td>
-	<td class="summary">Translates an area in the given direction</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#round_to_integer">round_to_integer (area)</a></td>
-	<td class="summary">Converts an area to the integer representation, by taking the floor of the left<em>top and the ceiling of the right</em>bottom</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#iterate">iterate (area)</a></td>
-	<td class="summary">Iterates an area.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#spiral_iterate">spiral_iterate (area)</a></td>
-	<td class="summary">Iterates an area in a spiral inner-most to outer-most fashion.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#normalize">normalize (area)</a></td>
-	<td class="summary">Creates a new area, a modified copy of the original, such that left and right x, up and down y are normalized, where left.x &lt; right.x, left.y &lt; right.y order</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#to_table">to_table (area_arr)</a></td>
-	<td class="summary">Converts an area in the array format to an array in the table format</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#tile_center_points">tile_center_points (area)</a></td>
-	<td class="summary">Converts area bounding box points to center of their tiles</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#tostring">tostring (area)</a></td>
-	<td class="summary">Converts an area to a string</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#to_collision_area">to_collision_area (entity)</a></td>
-	<td class="summary">Converts an entity and its collision_box to the area around it</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#to_selection_area">to_selection_area (entity)</a></td>
-	<td class="summary">Converts an entity and its selection_box to the area around it</td>
-	</tr>
-</table>
+    <!-- see also start -->
+    <!-- see also end -->
 
-<br/>
-<br/>
+    <!-- usage start -->
+    <!-- usage end -->
 
-
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-
-    <dl class="function">
+    </dd>
     <dt>
-    <a name = "construct"></a>
-    <strong>construct (x1, y1, x2, y2)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#compare" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="compare">compare (area1, area2)</span>
+    </div>
     </dt>
     <dd>
-    Creates an area from the 2 positions p1 and p2
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Returns true if two areas are the same.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">x1</span>
-            <span class="types"><span class="type">number</span></span>
-         x-position of left_top, first point
-        </li>
-        <li><span class="parameter">y1</span>
-            <span class="types"><span class="type">number</span></span>
-         y-position of left_top, first point
-        </li>
-        <li><span class="parameter">x2</span>
-            <span class="types"><span class="type">number</span></span>
-         x-position of right_bottom, second point
-        </li>
-        <li><span class="parameter">y2</span>
-            <span class="types"><span class="type">number</span></span>
-         y-position of right_bottom, second point
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area1</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area2</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        tabled area
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if areas are the same</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "size"></a>
-    <strong>size (area)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#construct" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="construct">construct (x1, y1, x2, y2)</span>
+    </div>
     </dt>
     <dd>
-    Returns the size of the space contained in the 2d area
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Creates an area from the two positions p1 and p2.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>x1</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+
+     x-position of left_top, first position
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>y1</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+
+     y-position of left_top, first position
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>x2</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+
+     x-position of right_bottom, second position
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>y2</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+
+     y-position of right_bottom, second position
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-           <span class="types"><span class="type">number</span></span>
-        the size of the area</li>
-        <li>
-           <span class="types"><span class="type">number</span></span>
-        the width of the area</li>
-        <li>
-           <span class="types"><span class="type">number</span></span>
-        the height of the area</li>
-        <li>
-           <span class="types"><span class="type">number</span></span>
-        the perimeter of the area</li>
-    </ol>
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the area in a table format</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "inside"></a>
-    <strong>inside (area, pos)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#copy" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="copy">copy (area)</span>
+    </div>
     </dt>
     <dd>
-    Tests if a position {x, y} is inside (inclusive) of area
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Creates an area that is a copy of the given area.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area
-        </li>
-        <li><span class="parameter">pos</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
-         the position to check
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the position to copy
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">boolean</span></span>
-        true if the position is inside of the area
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">a new area that is a copy of the passed area</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "shrink"></a>
-    <strong>shrink (area, amount)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#equals" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="equals">equals (area1, area2)</span>
+    </div>
     </dt>
     <dd>
-    Shrinks the size of an area by the given amount
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Compares the size of two areas.</p>
+    <p class="section-item-description"> note: The shame of either area is not taking into consideration, see <a href="../modules/Area.html#compare">Area.compare</a></p>
 
-    <h3>Parameters:</h3>
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area
-        </li>
-        <li><span class="parameter">amount</span>
-            <span class="types"><span class="type">number</span> or <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Vector">Vector</a></span>
-         to shrink each edge of the area inwards by
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area1</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area2</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        the new shrunken area
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">is area1 the same size as area2</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "expand"></a>
-    <strong>expand (area, amount)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#expand" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="expand">expand (area, amount)</span>
+    </div>
     </dt>
     <dd>
-    Expands the size of an area by the given amount
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Expands the size of an area by the given amount.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area
-        </li>
-        <li><span class="parameter">amount</span>
-            <span class="types"><span class="type">number</span> or <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Vector">Vector</a></span>
-         to expand each edge of the area outwards by
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>amount</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a> or <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Vector">Vector</a></span>)
+
+     to expand each edge of the area outwards by
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        the new expanded area
-    </ol>
-
-
-    <h3>See also:</h3>
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-         <a href="../modules/Area.html#shrink">Area.shrink</a>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the area expanded by amount</span>
+    </li>
     </ul>
+    <!-- returns end -->
 
 
-</dd>
+    <!-- see also start -->
+    <strong>See also:</strong>
+    <ul>
+    <li><a href="../modules/Area.html#shrink">Area.shrink</a></li>
+    </ul>
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
     <dt>
-    <a name = "adjust"></a>
-    <strong>adjust (area, vector)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#inside" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="inside">inside (area, pos)</span>
+    </div>
     </dt>
     <dd>
-    Adjust an area by shrinking or expanding
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Tests if a position {x, y} is located in an area (including the border).</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area
-        </li>
-        <li><span class="parameter">vector</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Vector">Vector</a></span>
-         the vectors to use
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the search area
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+     the position to check
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        the adjusted bounding box
-    </ol>
-
-
-
-    <h3>Usage:</h3>
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-        <pre class="example"><span class="keyword">local</span> area = Area.adjust({{-<span class="number">2</span>, -<span class="number">2</span>}, {<span class="number">2</span>, <span class="number">2</span>}}, {<span class="number">4</span>, -<span class="number">1</span>})
- <span class="comment">-- returns {left_top = {x = -6, y = -1}, right_bottom = {x = 6, y = 1}}</span></pre>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if the position is located in the area</span>
+    </li>
     </ul>
+    <!-- returns end -->
 
-</dd>
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
     <dt>
-    <a name = "rotate"></a>
-    <strong>rotate (area)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#iterate" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="iterate">iterate (area)</span>
+    </div>
     </dt>
     <dd>
-    Rotate an area such that its width becomes it height, and its height becomes it width.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Iterates an area.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area to rotate
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area to iterate
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        the rotated area
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "center"></a>
-    <strong>center (area)</strong>
-    </dt>
-    <dd>
-    Calculates the center of the area and returns the position
-
-
-    <h3>Parameters:</h3>
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area
-        </li>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+    <span class="return-text">an iterator</span>
+    </li>
     </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
-        the center of the area
-    </ol>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
-
-</dd>
-    <dt>
-    <a name = "offset"></a>
-    <strong>offset (area, pos)</strong>
-    </dt>
-    <dd>
-    Offsets the area by the {x, y} values
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area
-        </li>
-        <li><span class="parameter">pos</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>
-         the position to offset the area to
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        new area offset by the position
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "translate"></a>
-    <strong>translate (area, direction, distance)</strong>
-    </dt>
-    <dd>
-    Translates an area in the given direction
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area to translate
-        </li>
-        <li><span class="parameter">direction</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>
-         in which to translate
-        </li>
-        <li><span class="parameter">distance</span>
-            <span class="types"><span class="type">number</span></span>
-         distance of the translation
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        a new translated area
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "round_to_integer"></a>
-    <strong>round_to_integer (area)</strong>
-    </dt>
-    <dd>
-    Converts an area to the integer representation, by taking the floor of the left<em>top and the ceiling of the right</em>bottom
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">int</span></span>
-        the rounded integer representation
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "iterate"></a>
-    <strong>iterate (area)</strong>
-    </dt>
-    <dd>
-    Iterates an area.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        iterator
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">for</span> x,y <span class="keyword">in</span> Area.iterate({{<span class="number">0</span>, -<span class="number">5</span>}, {<span class="number">3</span>, -<span class="number">3</span>}}) <span class="keyword">do</span>
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">for</span> x,y <span class="keyword">in</span> Area.iterate({{<span class="number">0</span>, -<span class="number">5</span>}, {<span class="number">3</span>, -<span class="number">3</span>}}) <span class="keyword">do</span>
 ...
-<span class="keyword">end</span></pre>
-    </ul>
+<span class="keyword">end</span></code></pre>
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "spiral_iterate"></a>
-    <strong>spiral_iterate (area)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#less_than" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="less_than">less_than (area1, area2)</span>
+    </div>
     </dt>
     <dd>
-    Iterates an area in a spiral inner-most to outer-most fashion.
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Is area1 smaller in size than area2</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area1</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area2</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><span class="type">iterator</span></span>
-         <pre>iterates in the order depicted:<br/>
- <img src="http://i.imgur.com/EwfO0Es.png" alt=""/></pre>
-    </ol>
-
-
-
-    <h3>Usage:</h3>
+    <!-- returns start -->
+    <strong>Returns:</strong>
     <ul>
-        <pre class="example"><span class="keyword">for</span> x, y <span class="keyword">in</span> Area.spiral_iterate({{-<span class="number">2</span>, -<span class="number">1</span>}, {<span class="number">2</span>, <span class="number">1</span>}}) <span class="keyword">do</span>
-  <span class="global">print</span>(<span class="string">'('</span> .. x .. <span class="string">', '</span> .. y .. <span class="string">')'</span>)
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">is area1 less than area2 in size</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#new" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="new">new (area_arr, copy)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Converts an area in either array or table format to an area with a metatable.</p>
+    <p class="section-item-description"> Returns itself if it already has a metatable</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area_arr</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area to convert
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>copy</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">a converted area</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#normalize" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="normalize">normalize (area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Normalizes the given area.</p>
+    <p class="section-item-description"> <ul>
+ <li>Swaps the values between <code>right_bottom.x</code> &amp; <code>left_top.x</code> <strong>IF</strong> <code>right_bottom.x</code> &lt; <code>left_top.x</code>
+ <li>Swaps the values between <code>right_bottom.y</code> &amp; <code>left_top.y</code> <strong>IF</strong> <code>right_bottom.y</code> &lt; <code>left_top.y</code>
+ </ul>
+ Essentially, the normalization process constructs a new area out of the swapped coordinates.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area to normalize
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the normalized area</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#offset" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="offset">offset (area, pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Offsets the area by the <code>{x, y}</code> values.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area to offset
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+     the position to which the area will offset
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the area offset by the position</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#rotate" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="rotate">rotate (area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Rotate an area such that its value of the width becomes the height, and its value of the height becomes the width.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area to rotate
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the rotated area</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#round_to_integer" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="round_to_integer">round_to_integer (area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Rounds down the xy-values in <code>area.left_top</code> and rounds up the xy-values in <code>area.right_bottom</code>.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area to round
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the area with rounded positions</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> position1 = {x = <span class="number">1.5</span>, y = <span class="number">1.5</span>}
+<span class="keyword">local</span> position2 = {x = <span class="number">1.5</span>, y = <span class="number">1.5</span>}
+<span class="keyword">local</span> area = {left_top = position1, right_bottom = position2}
+Area.round_to_integer(area) <span class="comment">--&gt; {left_top = {x = 1, y = 1}, right_bottom = {x = 2, y = 2}}</span></code></pre>
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#shrink" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="shrink">shrink (area, amount)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shrinks the area by the given amount.</p>
+    <p class="section-item-description"> The area shrinks inwards from top-left towards the bottom-right, and from bottom-right towards the top-left.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area to shrink
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>amount</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a> or <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Vector">Vector</a></span>)
+
+     the amount to shrink
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the area reduced by amount</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#size" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="size">size (area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Gets the properties of the given area.</p>
+    <p class="section-item-description"> This function returns a total of four values that represent the properties of the given area.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area from which to get the size
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">the size of the area &mdash; (width &times; height)</span>
+    </li>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">the width of the area</span>
+    </li>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">the height of the area</span>
+    </li>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">the perimeter of the area &mdash; (2 &times; (width + height))</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#spiral_iterate" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="spiral_iterate">spiral_iterate (area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Iterates the given area in a spiral as depicted below, from innermost to the outermost location.</p>
+    <p class="section-item-description"> <p><img src="http://i.imgur.com/EwfO0Es.png" alt=""/></p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area on which to perform a spiral iteration
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+    <span class="return-text">an iterator</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">for</span> x, y <span class="keyword">in</span> Area.spiral_iterate({{-<span class="number">2</span>, -<span class="number">1</span>}, {<span class="number">2</span>, <span class="number">1</span>}}) <span class="keyword">do</span>
+<span class="global">print</span>(<span class="string">'('</span> .. x .. <span class="string">', '</span> .. y .. <span class="string">')'</span>)
 <span class="keyword">end</span>
-prints: (<span class="number">0</span>, <span class="number">0</span>) (<span class="number">1</span>, <span class="number">0</span>) (<span class="number">1</span>, <span class="number">1</span>) (<span class="number">0</span>, <span class="number">1</span>) (-<span class="number">1</span>, <span class="number">1</span>) (-<span class="number">1</span>, <span class="number">0</span>) (-<span class="number">1</span>, -<span class="number">1</span>) (<span class="number">0</span>, -<span class="number">1</span>) (<span class="number">1</span>, -<span class="number">1</span>) (<span class="number">2</span>, -<span class="number">1</span>) (<span class="number">2</span>, <span class="number">0</span>) (<span class="number">2</span>, <span class="number">1</span>) (-<span class="number">2</span>, <span class="number">1</span>) (-<span class="number">2</span>, <span class="number">0</span>) (-<span class="number">2</span>, -<span class="number">1</span>)</pre>
-    </ul>
+prints: (<span class="number">0</span>, <span class="number">0</span>) (<span class="number">1</span>, <span class="number">0</span>) (<span class="number">1</span>, <span class="number">1</span>) (<span class="number">0</span>, <span class="number">1</span>) (-<span class="number">1</span>, <span class="number">1</span>) (-<span class="number">1</span>, <span class="number">0</span>) (-<span class="number">1</span>, -<span class="number">1</span>) (<span class="number">0</span>, -<span class="number">1</span>) (<span class="number">1</span>, -<span class="number">1</span>) (<span class="number">2</span>, -<span class="number">1</span>) (<span class="number">2</span>, <span class="number">0</span>) (<span class="number">2</span>, <span class="number">1</span>) (-<span class="number">2</span>, <span class="number">1</span>) (-<span class="number">2</span>, <span class="number">0</span>) (-<span class="number">2</span>, -<span class="number">1</span>)</code></pre>
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "normalize"></a>
-    <strong>normalize (area)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#tile_center_points" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="tile_center_points">tile_center_points (area)</span>
+    </div>
     </dt>
     <dd>
-    Creates a new area, a modified copy of the original, such that left and right x, up and down y are normalized, where left.x &lt; right.x, left.y &lt; right.y order
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Gets the center positions of the tiles where the given area's two positions reside.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area to adjust
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area to examine
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        a normalized area, always { left<em>top = {x = ..., y = ...}, right</em>bottom = {x = ..., y = ...} }
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the area with its two positions at the center of the tiles in which they reside</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "to_table"></a>
-    <strong>to_table (area_arr)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#to_collision_area" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="to_collision_area">to_collision_area (entity)</span>
+    </div>
     </dt>
     <dd>
-    Converts an area in the array format to an array in the table format
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Deprecated see <a href="http://lua-api.factorio.com/latest/LuaEntity.html#LuaEntity.bounding_box">LuaEntity.bounding_box</a>
+ <br>Converts an entity and its <a href="http://lua-api.factorio.com/latest/LuaEntityPrototype.html#LuaEntityPrototype.collision_box">collision_box</a> to the area around it.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">area_arr</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area to convert
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>entity</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+
+     the entity to convert to an area
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        a converted area
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "tile_center_points"></a>
-    <strong>tile_center_points (area)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#to_selection_area" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="to_selection_area">to_selection_area (entity)</span>
+    </div>
     </dt>
     <dd>
-    Converts area bounding box points to center of their tiles
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Converts an entity and its <a href="http://lua-api.factorio.com/latest/LuaEntityPrototype.html#LuaEntityPrototype.selection_box">selection_box</a> to the area around it.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>entity</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">LuaEntity</a></span>)
+
+     to convert to an area
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-        an area bounding box on tile center points
-    </ol>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
+    <!-- usage start -->
+    <!-- usage end -->
 
-</dd>
+    </dd>
     <dt>
-    <a name = "tostring"></a>
-    <strong>tostring (area)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#to_table" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="to_table">to_table ()</span>
+    </div>
     </dt>
     <dd>
-    Converts an area to a string
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Deprecated</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
 
 
-    <h3>Parameters:</h3>
+    <!-- see also start -->
+    <strong>See also:</strong>
     <ul>
-        <li><span class="parameter">area</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-         the area to convert
-        </li>
+    <li><a href="../modules/Area.html#new">Area.new</a></li>
     </ul>
+    <!-- see also end -->
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- usage start -->
+    <!-- usage end -->
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-        representation of area
-    </ol>
-
-
-
-
-</dd>
+    </dd>
     <dt>
-    <a name = "to_collision_area"></a>
-    <strong>to_collision_area (entity)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#tostring" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="tostring">tostring (area)</span>
+    </div>
     </dt>
     <dd>
-    Converts an entity and its collision_box to the area around it
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Converts an area to a string.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">entity</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
-         to convert to an area
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area to convert
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+    <span class="return-text">the string representation of the area</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
+    <!-- see also start -->
+    <!-- see also end -->
 
-    </ol>
+    <!-- usage start -->
+    <!-- usage end -->
 
-
-
-
-</dd>
+    </dd>
     <dt>
-    <a name = "to_selection_area"></a>
-    <strong>to_selection_area (entity)</strong>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#translate" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="translate">translate (area, direction, distance)</span>
+    </div>
     </dt>
     <dd>
-    Converts an entity and its selection_box to the area around it
+    <div class="section-item-body">
 
+    <p class="section-item-summary">Translates an area in the given direction.</p>
+    <p class="section-item-description">
 
-    <h3>Parameters:</h3>
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-        <li><span class="parameter">entity</span>
-            <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaEntity.html">Entity</a></span>
-         to convert to an area
-        </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     the area to translate
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>direction</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>)
+
+     the direction of translation
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>distance</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+
+     the distance of the translation
+
+    </li>
+
+
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
+    <!-- parameters end -->
 
-           <span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>
-
-
-
-    </ol>
-
-
-
-
-</dd>
-</dl>
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the area translated</span>
+    </li>
+    </ul>
+    <!-- returns end -->
 
 
-</div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-06-08 03:50:13 </i>
-</div> <!-- id="about" -->
-</div> <!-- id="container" -->
-</body>
-</html>
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Tables" class="section-title"><a href="#Tables">Tables</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Metamethods" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Metamethods">Metamethods</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Area tables are returned with these Metamethods attached.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__index</em></strong>
+
+    <strong> : </strong>
+
+
+    If key is not found, see if there is one availble in the Area module.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__add</em></strong>
+
+    <strong> : </strong>
+
+
+    Will expand the area by the number or vector on the RHS.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__sub</em></strong>
+
+    <strong> : </strong>
+
+
+    Will shrink the area by the number or vector on the RHS.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__tostring</em></strong>
+
+    <strong> : </strong>
+
+
+    Will print a string representation of the area.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__eq</em></strong>
+
+    <strong> : </strong>
+
+
+    Is the size of area1 the same as area2.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__lt</em></strong>
+
+    <strong> : </strong>
+
+
+    is the size of area1 less than area2.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__len</em></strong>
+
+    <strong> : </strong>
+
+
+    The size of the area.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__concat</em></strong>
+
+    <strong> : </strong>
+
+
+    calls tostring on both sides of concact.
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Fields" class="section-title"><a href="#Fields">Fields</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#immutable" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="immutable">immutable</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">By default area tables are mutated in place set this to true to make the tables immutable.</p>
+    <p class="section-item-description">
+
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+
+    <!-- section end -->
+
+    </div>
+    </div>
+    </div>
+
+    <div class="footer container grid-1280">
+    <div class="divider divider-custom"></div>
+    <div class="footer-columns columns">
+    <div class="sidebar-footer column col-3 col-sm-12">
+    <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+    </div>
+    <div class="content-footer column col-9 col-sm-12">
+    <i>Last updated 2017-08-19 05:47:06 UTC</i>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>

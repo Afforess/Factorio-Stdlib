@@ -32,6 +32,15 @@ Game = { --luacheck: allow defined top
     end
 }
 
+-- No Doc
+-- This is a helper global and functions until .16
+-- to set the name of your mod in control.lua set _stdlib_mod_name = 'name of your mod'
+-- luacheck: ignore _stdlib_mod_name
+function Game.get_mod_name()
+    local ok, mod_name = pcall(function() return script.mod_name end)
+    return ok and mod_name or _stdlib_mod_name or "stdlib"
+end
+
 --- Print msg if specified var evaluates to false.
 -- @tparam Mixed var variable to evaluate
 -- @tparam[opt="missing value"] string msg message

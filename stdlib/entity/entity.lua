@@ -2,7 +2,8 @@
 -- @module Entity
 -- @usage local Entity = require('stdlib/entity/entity')
 
-local fail_if_missing = require 'stdlib/game'['fail_if_missing']
+local Game = require 'stdlib/game'
+local fail_if_missing = Game.fail_if_missing
 local Area = require 'stdlib/area/area'
 
 Entity = {} --luacheck: allow defined top
@@ -150,64 +151,92 @@ end
 
 --- Destroy an entity by first raising the event.
 --> Some entities can't be destroyed, such as the rails with trains on them.
--- In these cases, the event will still be raised as there is no way to find out if something is indestructible temporarily.
 -- @tparam LuaEntity entity the entity to be destroyed
--- @tparam[opt] table event additional data to pass to the event handler
+-- @tparam[opt=false] boolean died raise on_entity_died event
+-- @tparam[opt] LuaEntity cause the entity if available that did the killing for on_entity_died
+-- @tparam[opt] LuaForce force the force if any that did the killing
 -- @treturn boolean was the entity destroyed?
-function Entity.destroy_entity( entity, event )
-    if entity and entity.valid then
-        event = event or {}
-        -- If no event name is passed, assume on_died, otherwise raise the event with the passed event name. ie. defines.events.on_preplayer_mined_item
-        event.name = (not event.name and defines.events.on_entity_died) or event.name
-        event.entity = entity
+function Entity.destroy_entity( entity, died, cause, force )
+    if entity and entity.valid and entity.can_be_destroyed then
+        local event = {
+            name = died and defines.events.on_entity_died or defines.events.script_raised_destroy,
+            entity = entity,
+            cause = cause,
+            force = force,
+            script = true,
+            mod_name = Game.get_mod_name()
+        }
+        -- If no event name is passed, assume script_raised_destroy, otherwise raise the event
+        -- with the passed event name. ie. defines.events.on_preplayer_mined_item
         event.script = true
-        event.modname = "stdlib"
+        event.mod_name = "stdlib"
         script.raise_event(event.name, event)
         return entity.destroy()
     end
 end
 
---- Create an entity and raise the `on_built` or `on_robot_built` event.
+--- Create an entity and raise a build event.
 -- @tparam LuaSurface surface the surface to create the entity on
 -- @tparam table settings settings to pass to create_entity see @{LuaSurface.create_entity}
--- @tparam[opt] LuaPlayer player If present raise `on_built_entity` with players index, if not present raise `on_robot_built_entity`
+-- @tparam[opt] uint player_index the index of the player, when not present and not raise_script_event pass a fake robot
+-- @tparam[opt] boolean raise_script_event raise script_raised_built
 -- @treturn LuaEntity the created entity
-function Entity.create_entity( surface, settings, player )
+function Entity.create_entity( surface, settings, player_index, raise_script_event)
     surface = game.surfaces[surface]
     local entity = surface.create_entity( settings )
     if entity then
-        local event = {created_entity = entity, script = true, modname = "stdlib"}
-        if player then
-            player = game.players[player] and game.players[player].index or nil
-            event.player_index = player
-            script.raise_event(defines.events.on_built_entity, event)
+        local event = {
+            created_entity = entity,
+            script = true,
+            mod_name = Game.get_mod_name()
+        }
+
+        if raise_script_event then
+            event.name = defines.events.script_raised_built
+            event.player_index = player_index
+        elseif player_index then
+            event.name = defines.events.on_built_entity
+            event.player_index = player_index
         else
-            event.robot = {valid = false}
-            script.raise_event(defines.events.on_robot_built_entity, event)
+            event.name = defines.events.on_robot_built_entity
+            event.robot = {}
         end
+
+        script.raise_event(event.name, event)
         return entity
     end
 end
 
 --- Revivie an entity ghost and raise the `on_built` or `on_robot_built` event.
 -- @tparam LuaEntity ghost the ghost entity to revivie
--- @tparam[opt] LuaPlayer player if present, raise `on_built_entity` with players index, if not present raise `on_robot_built_entity`
+-- @tparam[opt] uint player_index if present, raise `on_built_entity` with player_index, if not present raise `on_robot_built_entity`
+-- @tparam[opt] boolean raise_script_event, if true raise script_raised_built as the event
 -- @treturn table the item stacks this entity collided with
 -- @treturn LuaEntity the new revived entity
 -- @treturn LuaEntity the item request proxy if present
-function Entity.revive(ghost, player)
+function Entity.revive(ghost, player_index, raise_script_event)
     if ghost and ghost.valid then
         local collided, revived, proxy = ghost.revive(true)
         if revived then
-            local event = {created_entity = revived, revived = true, modname = "stdlib"}
-            if player then
-                player = game.players[player] and game.players[player].index or nil
-                event.player_index = player
-                script.raise_event(defines.events.on_built_entity, event)
+            local event = {
+                created_entity = revived,
+                revived = true,
+                script = true,
+                modname = "stdlib"
+            }
+
+            if raise_script_event then
+                event.name = defines.events.script_raised_built
+                event.player_index = player_index
+            elseif player_index then
+                event.name = defines.events.on_built_entity
+                event.player_index = player_index
             else
-                event.robot = {valid = false}
-                script.raise_event(defines.events.on_robot_built_entity, event)
+                event.name = defines.events.on_robot_built_entity
+                event.robot = {}
             end
+
+            script.raise_event(event.name, event)
             return collided, revived, proxy
         end
     end

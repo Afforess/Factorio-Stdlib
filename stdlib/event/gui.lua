@@ -63,7 +63,6 @@ function Gui.dispatch(event)
     end
 end
 
-
 --- Removes the handler with matching gui element pattern from the event.
 -- @tparam defines.events event_id valid values are `defines.events.on_gui_*` from @{defines.events}
 -- @tparam string gui_element_pattern the name or string regular expression for a handler to remove
@@ -87,7 +86,6 @@ function Gui.remove(event_id, gui_element_pattern)
     return Gui
 end
 
-
 --- Registers a function for a given gui element name or pattern when the element is clicked.
 -- @tparam string gui_element_pattern the name or string regular expression to match the gui element
 -- @tparam function handler the function to call when gui element is clicked
@@ -96,34 +94,34 @@ function Gui.on_click(gui_element_pattern, handler)
     return Gui.register(defines.events.on_gui_click, gui_element_pattern, handler)
 end
 
---- Registers a function for a given gui element name or pattern when the element checked state changes.
--- @tparam string gui_element_pattern the name or string regular expression to match the gui element
--- @tparam function handler the function to call when gui element checked state changes
--- @treturn Gui
+--- Registers a function for a given GUI element name or pattern when the element checked state changes.
+-- @tparam string gui_element_pattern the name or string regular expression to match the GUI element
+-- @tparam function handler the function to call when GUI element checked state changes
+-- @return (<span class="types">@{Gui}</span>)
 function Gui.on_checked_state_changed(gui_element_pattern, handler)
     return Gui.register(defines.events.on_gui_checked_state_changed, gui_element_pattern, handler)
 end
 
---- Registers a function for a given gui element name or pattern when the element text changes.
--- @tparam string gui_element_pattern the name or string regular expression to match the gui element
--- @tparam function handler the function to call when gui element text changes
--- @treturn Gui
+--- Registers a function for a given GUI element name or pattern when the element text changes.
+-- @tparam string gui_element_pattern the name or string regular expression to match the GUI element
+-- @tparam function handler the function to call when GUI element text changes
+-- @return (<span class="types">@{Gui}</span>)
 function Gui.on_text_changed(gui_element_pattern, handler)
     return Gui.register(defines.events.on_gui_text_changed, gui_element_pattern, handler)
 end
 
---- Registers a function for a given gui element name or pattern when the element selection changes.
--- @tparam string gui_element_pattern the name or string regular expression to match the gui element
--- @tparam function handler the function to call when gui element selection changes
--- @treturn Gui
+--- Registers a function for a given GUI element name or pattern when the element selection changes.
+-- @tparam string gui_element_pattern the name or string regular expression to match the GUI element
+-- @tparam function handler the function to call when GUI element selection changes
+-- @return (<span class="types">@{Gui}</span>)
 function Gui.on_elem_changed(gui_element_pattern, handler)
     return Gui.register(defines.events.on_gui_elem_changed, gui_element_pattern, handler)
 end
 
---- Registers a function for a given gui element name or pattern when the element state changes (dropdown).
--- @tparam string gui_element_pattern the name or string regular expression to match the gui element
--- @tparam function handler the function to call when gui element state changes
--- @treturn Gui
+--- Registers a function for a given GUI element name or pattern when the element state changes (dropdown).
+-- @tparam string gui_element_pattern the name or string regular expression to match the GUI element
+-- @tparam function handler the function to call when GUI element state changes
+-- @return (<span class="types">@{Gui}</span>)
 function Gui.on_selection_state_changed(gui_element_pattern, handler)
     return Gui.register(defines.events.on_gui_selection_state_changed, gui_element_pattern, handler)
 end

@@ -1,4 +1,5 @@
 --- Tools for working with bounding boxes.
+-- The tables passed into the Area functions are mutated in-place.
 -- @module Area
 -- @usage local Area = require('stdlib/area/area')
 -- @see Position

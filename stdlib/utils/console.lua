@@ -1,9 +1,10 @@
 --- Debug console.
--- Creates a textfield allowing you to run commands directly in your mods enviorment.
--- <br>Requires use of the stdlib event system for gui interaction.
--- <br>Console Code from adil modified for use with stdlib.
+-- Creates a textfield allowing you to run commands directly in your mod's enviorment.
+-- <p>This module requires the use of stdlib's @{Event} module for GUI interactions.
+-- <p>This module was originally the ***Console*** code from a modder named ***adil***, which has been modified for use with stdlib.
 -- @module Console
--- @usage remote.add_interface("my_interface", {show=require('stdlib/utils/console')})
+-- @usage
+-- remote.add_interface("my_interface", {show = require("stdlib/utils/console")})
 -- /c remote.call("my_interface", "show", game.player)
 -- --In the window that appears you can run lua code directly on your mod, including globals.
 
@@ -61,7 +62,6 @@ local function create_gui(player)
         create_gui_player(player)
     end
 end
-
 
 local function enter(event)
     local p = game.players[event.player_index]

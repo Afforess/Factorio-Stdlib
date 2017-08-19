@@ -1,10 +1,11 @@
 --- Player global creation.
--- Requiring this module will register init and player creation events using the stdlib Event module.
--- All existing and new players will be added to the global.players table.
--- <br>This module should be first required after any other Init functions but before any scripts needing global.players
--- <br>Registers on_init, on_configuration_changed, on_player_created, on_player_removed
+-- Requiring this module will register init and player creation events using the stdlib @{Event} module.
+-- <p>All existing and new players will be added to the `global.players` table.
+-- <p>This module should be first required after any other Init functions but before any scripts needing `global.players`.
+-- <p>This module registers the following events: `on_init`, `on_configuration_changed`, `on_player_created`, and `on_player_removed`.
 -- @module Player
--- @usage local Player = require 'stdlib/event/player'
+-- @usage
+-- local Player = require 'stdlib/event/player'
 -- -- The fist time this module is required it will register player creation events
 
 local Game = require 'stdlib/game'
@@ -20,11 +21,12 @@ local function new(player_index)
     }
 end
 
---- Get the game.players[index] and global.players[index] objects, create the global.players[index] object if it doesn't exist.
+--- Get `game.players[index]` & `global.players[index]`, or create `global.players[index]` if it doesn't exist.
 -- @tparam number|string|LuaPlayer player the player index to get data for
--- @treturn LuaPlayer
--- @treturn table The players global data
--- @usage local Player = require 'stdlib/event/player'
+-- @treturn LuaPlayer the player instance
+-- @treturn table the player's global data
+-- @usage
+-- local Player = require 'stdlib/event/player'
 -- local player, player_data = Player.get(event.player_index)
 function Player.get(player)
     player = Game.get_player(player)
@@ -32,7 +34,7 @@ function Player.get(player)
     return game.players[player.index], global.players[player.index] or Player.init(player.index)
 end
 
---- Merge a copy of the passed data to all players in global.players
+--- Merge a copy of the passed data to all players in `global.players`.
 -- @tparam table data a table containing variables to merge
 -- @usage local data = {a = 'abc', b= 'def'}
 -- Player.add_data_all(data)
@@ -41,8 +43,8 @@ function Player.add_data_all(data)
     table.each(pdata, function(v) table.merge(v, table.deepcopy(data)) end)
 end
 
---- Remove data for a player when they are deleted
--- @tparam table event event table containing the player_index
+--- Remove data for a player when they are deleted.
+-- @tparam table event event table containing the `player_index`
 function Player.remove(event)
     local player = Game.get_player(event)
     if player then
@@ -51,7 +53,8 @@ function Player.remove(event)
 end
 Event.register(defines.events.on_player_removed, Player.remove)
 
---- Init or re-init a player or players, Passing a nil event will iterate all existing players
+--- Init or re-init a player or players.
+-- Passing a `nil` event will iterate all existing players.
 -- @tparam[opt] number|table|string|LuaPlayer event
 -- @tparam[opt=false] boolean overwrite the player data
 function Player.init(event, overwrite)

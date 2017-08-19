@@ -1,4 +1,5 @@
 --- Tools for working with `<x,y>` coordinates.
+-- The tables passed into the Position functions are mutated in-place.
 -- @module Position
 -- @usage local Position = require('stdlib/area/position')
 -- @see Area

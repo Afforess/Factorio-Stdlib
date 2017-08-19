@@ -148,11 +148,12 @@ end
 -- from @{https://github.com/aubergine10/lifecycle-events lifecycle-events}
 -- <br>Used for raising `on_built and on_died` events for other mods
 
---- Destroy an entity by first raising the event. Some entities can't be destroyed 'rails with trains on them'
--- <p>In these cases the event will be still be raised as there is no way to find out if something is indestructible temporarily
--- @tparam LuaEntity entity The entity to be destroyed
+--- Destroy an entity by first raising the event.
+--> Some entities can't be destroyed, such as the rails with trains on them.
+-- In these cases, the event will still be raised as there is no way to find out if something is indestructible temporarily.
+-- @tparam LuaEntity entity the entity to be destroyed
 -- @tparam[opt] table event additional data to pass to the event handler
--- @treturn boolean Was the entity destroyed?
+-- @treturn boolean was the entity destroyed?
 function Entity.destroy_entity( entity, event )
     if entity and entity.valid then
         event = event or {}
@@ -166,9 +167,9 @@ function Entity.destroy_entity( entity, event )
     end
 end
 
---- Create an entity and raise the on_built or on_robot_built event
+--- Create an entity and raise the `on_built` or `on_robot_built` event.
 -- @tparam LuaSurface surface the surface to create the entity on
--- @tparam table settings settings to pass to create_entity  see @{LuaSurface.create_entity}
+-- @tparam table settings settings to pass to create_entity see @{LuaSurface.create_entity}
 -- @tparam[opt] LuaPlayer player If present raise `on_built_entity` with players index, if not present raise `on_robot_built_entity`
 -- @treturn LuaEntity the created entity
 function Entity.create_entity( surface, settings, player )
@@ -188,10 +189,10 @@ function Entity.create_entity( surface, settings, player )
     end
 end
 
---- Revivie an entity ghost and raise the on_built or on_robot_built event
+--- Revivie an entity ghost and raise the `on_built` or `on_robot_built` event.
 -- @tparam LuaEntity ghost the ghost entity to revivie
--- @tparam[opt] LuaPlayer player If present raise `on_built_entity` with players index, if not present raise `on_robot_built_entity`
--- @treturn table Item stacks this entity collided with
+-- @tparam[opt] LuaPlayer player if present, raise `on_built_entity` with players index, if not present raise `on_robot_built_entity`
+-- @treturn table the item stacks this entity collided with
 -- @treturn LuaEntity the new revived entity
 -- @treturn LuaEntity the item request proxy if present
 function Entity.revive(ghost, player)

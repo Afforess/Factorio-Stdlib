@@ -12,7 +12,7 @@ Gui = {} --luacheck: allow defined top
 -- @tparam defines.events event_id valid values are `defines.events.on_gui_*` from @{defines.events}
 -- @tparam string gui_element_pattern the name or string regular expression to match the gui element
 -- @tparam function handler the function to call when the event is triggered
--- @treturn Gui
+-- @return (<span class="types">@{Gui}</span>)
 function Gui.register(event_id, gui_element_pattern, handler)
     fail_if_missing(event_id, "missing event name argument")
     fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
@@ -66,7 +66,7 @@ end
 --- Removes the handler with matching gui element pattern from the event.
 -- @tparam defines.events event_id valid values are `defines.events.on_gui_*` from @{defines.events}
 -- @tparam string gui_element_pattern the name or string regular expression for a handler to remove
--- @treturn Gui
+-- @return (<span class="types">@{Gui}</span>)
 function Gui.remove(event_id, gui_element_pattern)
     fail_if_missing(event_id, "missing event argument")
 
@@ -89,7 +89,7 @@ end
 --- Registers a function for a given gui element name or pattern when the element is clicked.
 -- @tparam string gui_element_pattern the name or string regular expression to match the gui element
 -- @tparam function handler the function to call when gui element is clicked
--- @treturn Gui
+-- @return (<span class="types">@{Gui}</span>)
 function Gui.on_click(gui_element_pattern, handler)
     return Gui.register(defines.events.on_gui_click, gui_element_pattern, handler)
 end

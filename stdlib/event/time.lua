@@ -4,6 +4,7 @@
 -- @usage require('stdlib/event/time')
 -- @see event.time.lua
 
+require 'stdlib/core'
 require 'stdlib/event/event'
 require 'stdlib/defines/time'
 

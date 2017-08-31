@@ -88,30 +88,6 @@ describe("Game Spec",
             end
         )
 
-        it("Game.fail_if_missing should return false if var is true or truthy",
-            function()
-                assert.is_false(Game.fail_if_missing(true, nil))
-                assert.is_false(Game.fail_if_missing({}, nil))
-                assert.is_false(Game.fail_if_missing(0, nil))
-                assert.is_false(Game.fail_if_missing(0.123, nil))
-                assert.is_false(Game.fail_if_missing("", nil))
-            end
-        )
-
-        it("Game.fail_if_missing should error with Missing value as a message when var is false or nil",
-            function()
-                assert.has_error(function() Game.fail_if_missing(false, nil) end, "Missing value")
-                assert.has_error(function() Game.fail_if_missing(nil, nil) end, "Missing value")
-            end
-        )
-
-        it("Game.fail_if_missing should error with given msg when var is false or nil",
-            function()
-                assert.has_error(function() Game.fail_if_missing(false, "error1") end, "error1")
-                assert.has_error(function() Game.fail_if_missing(nil, "error2") end, "error2")
-            end
-        )
-
         it("Game.get_force should return mixed if mixed is table & userdata and mixed.valid is not nil",
             function()
                 local force_names = {"ForceOne", "ForceTwo", "ForceThree"}
@@ -274,30 +250,6 @@ describe("Game Spec",
                 for player_index in ipairs(player_names) do
                     assert.is_false(Game.get_player(player_index))
                 end
-            end
-        )
-
-        --Only describing these here as they will be the same for all
-        describe('Area Metatable Protections',
-            function()
-                local Area = require 'stdlib/area/area'
-                it('Should not allow adding new keys',
-                    function()
-                        assert.has_error(function() Area["fake"] = true end)
-                    end
-                )
-
-                it('Should not allow setting a new metatable',
-                    function()
-                        assert.has_error(function() setmetatable(Area, {}) end)
-                    end
-                )
-
-                it('Should not allow getting the metatable',
-                    function()
-                        assert.is_true(getmetatable(Area))
-                    end
-                )
             end
         )
     end

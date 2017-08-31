@@ -378,11 +378,11 @@ function table.invert(tbl)
     return inverted
 end
 
---- Return the size of a table using built in table_size function
+--- Return the size of a table using the factorio built in table_size function
 -- @function size
 -- @tparam table table to use
 -- @treturn int size of the table
-table.size = table_size
+table.size = table_size --luacheck: globals table_size
 
 --- For all string or number values in an array map them to a key = true table
 -- @usage local a = {"v1", "v2"}

@@ -6,6 +6,7 @@
 -- Event registration is performed at the bottom of this file,
 -- once all other functions have been defined
 
+require 'stdlib/core'
 require 'stdlib/event/event'
 local Surface = require 'stdlib/area/surface'
 local Entity = require 'stdlib/entity/entity'

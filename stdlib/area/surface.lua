@@ -4,7 +4,7 @@
 -- @usage local Surface = require('stdlib/area/surface')
 -- @see LuaSurface
 
-local Game = require 'stdlib/game'
+local Core = require 'stdlib/core'
 local Area = require 'stdlib/area/area'
 
 Surface = {} --luacheck: allow defined top
@@ -61,7 +61,7 @@ end
 -- @param search_criteria (<span class="types">@{search_criteria}</span>) a table used to search for entities
 -- @treturn {nil|LuaEntity,...} an array of all entities that matched the criteria **OR** *nil* if there were no matches
 function Surface.find_all_entities(search_criteria)
-    Game.fail_if_missing(search_criteria, 'missing search_criteria argument')
+    Core.fail_if_missing(search_criteria, 'missing search_criteria argument')
     if search_criteria.name == nil and search_criteria.type == nil and search_criteria.force == nil and search_criteria.area == nil then
         error('Missing search criteria field: name or type or force or area of entity', 2)
     end
@@ -103,7 +103,7 @@ end
 -- @tparam LuaSurface surface the surface for which to get the area
 -- @treturn Concepts.BoundingBox the area of a given surface
 function Surface.get_surface_bounds(surface)
-    Game.fail_if_missing(surface, 'missing surface value')
+    Core.fail_if_missing(surface, 'missing surface value')
     local x1, y1, x2, y2 = 0, 0, 0, 0
 
     for chunk in surface.get_chunks() do
@@ -122,4 +122,4 @@ function Surface.get_surface_bounds(surface)
     return Area.construct(x1*32, y1*32, x2*32, y2*32)
 end
 
-return setmetatable(Surface, Game._protect("Surface"))
+return setmetatable(Surface, Core._protect("Surface"))

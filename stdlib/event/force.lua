@@ -8,6 +8,7 @@
 -- local Force = require 'stdlib/event/force'
 -- -- The fist time this is required it will register force creation events
 
+local Core = require 'stdlib/core'
 local Game = require 'stdlib/game'
 require 'stdlib/event/event'
 
@@ -32,7 +33,7 @@ end
 -- -- Returns data for the force named "player" from either a string or LuaForce object
 function Force.get(force)
     force = Game.get_force(force)
-    Game.fail_if_missing(force, 'force is missing')
+    Core.fail_if_missing(force, 'force is missing')
     return game.forces[force.name], global.forces[force.name] or Force.init(force.name)
 end
 

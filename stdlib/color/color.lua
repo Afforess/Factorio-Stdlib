@@ -2,8 +2,7 @@
 -- @module Color
 -- @usage local Color = require('stdlib/color/color')
 
-require 'stdlib/defines/color'
-local fail_if_missing = require 'stdlib/game'['fail_if_missing']
+local Core = require 'stdlib/core'
 
 Color = {} --luacheck: allow defined top
 
@@ -54,7 +53,7 @@ end
 -- @tparam[opt=1] float alpha the alpha value to set; such that ***[ 0 &#8924; value &#8924; 1 ]***
 -- @treturn Concepts.Color a color table with RGB converted from Hex and with alpha
 function Color.from_hex(hex, alpha)
-    fail_if_missing(hex, "missing color hex value")
+    Core.fail_if_missing(hex, "missing color hex value")
     if hex:find("#") then hex = hex:sub(2) end
     if not(#hex == 6) then error("invalid color hex value: "..hex)  end
     local number = tonumber(hex, 16)

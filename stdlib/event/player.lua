@@ -8,6 +8,7 @@
 -- local Player = require 'stdlib/event/player'
 -- -- The fist time this module is required it will register player creation events
 
+local Core = require 'stdlib/core'
 local Game = require 'stdlib/game'
 require 'stdlib/event/event'
 
@@ -30,7 +31,7 @@ end
 -- local player, player_data = Player.get(event.player_index)
 function Player.get(player)
     player = Game.get_player(player)
-    Game.fail_if_missing(player, 'Missing player to retrieve')
+    Core.fail_if_missing(player, 'Missing player to retrieve')
     return game.players[player.index], global.players[player.index] or Player.init(player.index)
 end
 

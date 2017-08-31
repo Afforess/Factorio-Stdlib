@@ -1,6 +1,7 @@
 --Generate Table of events
 --Portions of this code graciously liberated from Smart Trains and Custom Events Mods
 
+require 'stdlib/core'
 require 'stdlib/event/event'
 
 -- Generate the event names

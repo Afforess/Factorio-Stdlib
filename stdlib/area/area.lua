@@ -6,7 +6,7 @@
 -- @see Concepts.BoundingBox
 -- @see Concepts.Position
 
-local Game = require 'stdlib/game'
+local Core = require 'stdlib/core'
 local Position = require 'stdlib/area/position'
 
 Area = {} --luacheck: allow defined top
@@ -20,7 +20,7 @@ Area.immutable = false
 -- @tparam boolean copy
 -- @treturn Concepts.BoundingBox a converted area
 function Area.new(area_arr, copy)
-    Game.fail_if_missing(area_arr, 'missing area value')
+    Core.fail_if_missing(area_arr, 'missing area value')
 
     if not (copy or Area.immutable) and getmetatable(area_arr) == Area._mt then
         return area_arr
@@ -67,7 +67,7 @@ function Area.copy(area)
 end
 
 local function validate_vector(amount)
-    Game.fail_if_missing(amount, 'Missing amount to shrink by')
+    Core.fail_if_missing(amount, 'Missing amount to shrink by')
 
     if type(amount) == 'number' then
         if amount < 0 then error('Can not shrink or expand area by a negative amount!', 2) end
@@ -124,7 +124,7 @@ end
 -- @treturn Concepts.BoundingBox the adjusted bounding box
 function Area.adjust(area, vector)
     area = Area.new(area)
-    Game.fail_if_missing(vector, 'missing vector value')
+    Core.fail_if_missing(vector, 'missing vector value')
 
     --shrink or expand on x vector
     if assert(vector[1], 'x vector missing') > 0 then
@@ -181,7 +181,7 @@ end
 -- @treturn Concepts.BoundingBox the area translated
 function Area.translate(area, direction, distance)
     area = Area.new(area)
-    Game.fail_if_missing(direction, 'missing direction argument')
+    Core.fail_if_missing(direction, 'missing direction argument')
     distance = distance or 1
 
     area.left_top = Position.translate(area.left_top, direction, distance)
@@ -422,7 +422,7 @@ end
 -------------------------------------------------------------------------------
 
 local function to_bounding_box_area(entity, box)
-    Game.fail_if_missing(entity, "missing entity argument")
+    Core.fail_if_missing(entity, "missing entity argument")
 
     local pos = entity.position
     local bb = entity.prototype[box]
@@ -458,7 +458,7 @@ Area._mt = {
     __eq = Area.equals, -- Is the size of area1 the same as area2.
     __lt = Area.less_than, --is the size of area1 less than area2.
     __len = Area.size, -- The size of the area.
-    __concat = Game._concat, -- calls tostring on both sides of concact.
+    __concat = Core._concat, -- calls tostring on both sides of concact.
 }
 
-return setmetatable(Area, Game._protect("Area"))
+return setmetatable(Area, Core._protect("Area"))

@@ -8,9 +8,9 @@ FILES := $(shell find . -iname '*.json' -type f -path "./stdlib/*") $(shell find
 DEP_FILES := $(shell find . -iname '*.lua' -type f -path "./deprecated/*")
 MOD_FILES := $(shell find . -iname '*' -type f -path "./mod/*")
 
-all: clean check test package mod-files deprecated ldoc luacheck release
+all: clean check test package mod-files ldoc luacheck release
 
-nodeps: clean check test package mod-files ldoc luacheck release
+deprecated: clean check test package mod-files deprecated ldoc luacheck release
 
 mod: clean test package mod-files
 

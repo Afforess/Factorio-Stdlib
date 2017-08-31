@@ -6,7 +6,7 @@
 -- local LOGGER = require('stdlib/log/logger').new(...)
 -- -- and to use the same LOGGER in multiple require files make it global by removing 'local'.
 
-local fail_if_missing = require 'stdlib/game'['fail_if_missing']
+local Core = require 'stdlib/core'
 
 Logger = {} --luacheck: allow defined top
 
@@ -32,7 +32,7 @@ Logger = {} --luacheck: allow defined top
 -- @tparam[opt={...}] options options a table with optional arguments
 -- @return (<span class="types">@{Logger}</span>) the logger instance
 function Logger.new(mod_name, log_name, debug_mode, options)
-    fail_if_missing(mod_name, "Logger must be given a mod_name as the first argument")
+    Core.fail_if_missing(mod_name, "Logger must be given a mod_name as the first argument")
 
     log_name = log_name or "main"
     options = options or {}

@@ -2,10 +2,8 @@
 -- @module Config
 -- @usage require('stdlib/config/config')
 
-require 'stdlib/utils/string'
-require 'stdlib/utils/table'
+require 'stdlib/core'
 
---luacheck: ignore value
 -----------------------------------------------------------------------
 --Setup repeated code for use in sub functions here
 -----------------------------------------------------------------------
@@ -122,7 +120,6 @@ function Config.new(config_table)
 
         local pathParts = path:split('.')
         local part = config
-        local value = nil
 
         for key = 1, #pathParts - 1, 1 do
             local partKey = pathParts[key]
@@ -130,7 +127,6 @@ function Config.new(config_table)
                 part[partKey] = {}
             end
 
-            value = part[partKey]
             part = part[partKey]
         end
 
@@ -152,7 +148,6 @@ function Config.new(config_table)
 
         local pathParts = path:split('.')
         local part = config
-        local value = nil
 
         for key = 1, #pathParts - 1, 1 do
             local partKey = pathParts[key]

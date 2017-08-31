@@ -1,6 +1,10 @@
 -- Work in progress iterators, not recomended for live mods!
 
-local iter = {}
+-- luacheck: globals iter (Allow mutating iter)
+iter = {}
+
+iter.pairs = pairs
+iter.ipairs = ipairs
 
 function iter.pairs_sorted (t, f)
     local a = {}

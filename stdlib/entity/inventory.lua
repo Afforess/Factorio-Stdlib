@@ -2,7 +2,7 @@
 -- @module Inventory
 -- @usage local Inventory = require('stdlib/entity/inventory')
 
-local fail_if_missing = require 'stdlib/game'['fail_if_missing']
+local Core = require 'stdlib/core'
 
 Inventory = {} --luacheck: allow defined top
 
@@ -12,8 +12,8 @@ Inventory = {} --luacheck: allow defined top
 -- @tparam[opt=false] boolean clear clear the contents of the source inventory
 -- @treturn {Concepts.SimpleItemStack,...} an array of left over items that could not be inserted into the destination
 function Inventory.copy_as_simple_stacks(src, dest, clear)
-    fail_if_missing(src, "missing source inventory")
-    fail_if_missing(dest, "missing destination inventory")
+    Core.fail_if_missing(src, "missing source inventory")
+    Core.fail_if_missing(dest, "missing destination inventory")
 
     local left_over = {}
     for i = 1, #src do

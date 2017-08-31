@@ -4,7 +4,7 @@
 -- @module Queue
 -- @usage local Queue = require('stdlib/queue/queue')
 
-local Game = require 'stdlib/game'
+local Core = require 'stdlib/core'
 
 Queue = {} --luacheck: allow defined top
 
@@ -35,7 +35,7 @@ end
 -- @param queue (<span class="types">@{Queue}</span>) the queue to push an element to
 -- @tparam Mixed value the element to push
 function Queue.push_first(queue, value)
-    Game.fail_if_missing(value)
+    Core.fail_if_missing(value)
 
     local first = queue.first - 1
     queue.first = first
@@ -47,7 +47,7 @@ end
 -- @param queue (<span class="types">@{Queue}</span>) the queue to push an element to
 -- @tparam Mixed value the element to push
 function Queue.push_last(queue, value)
-    Game.fail_if_missing(value)
+    Core.fail_if_missing(value)
 
     local last = queue.last + 1
     queue.last = last
@@ -133,4 +133,4 @@ Queue._mt = {
     __len = Queue.count,
 }
 
-return setmetatable(Queue, Game._protect("Queue"))
+return setmetatable(Queue, Core._protect("Queue"))

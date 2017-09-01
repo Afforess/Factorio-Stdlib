@@ -10,13 +10,13 @@ MOD_FILES := $(shell find . -iname '*' -type f -path "./mod/*")
 
 all: clean check test package mod-files ldoc luacheck release
 
-deprecated: clean check test package mod-files deprecated ldoc luacheck release
+deprecation: clean check test package mod-files deprecated ldoc luacheck release
 
 mod: clean test package mod-files
 
-nochecks: clean package deprecated release
+nochecks: clean package release
 
-doc: clean package deprecated ldoc
+doc: clean package ldoc
 
 clean:
 	@rm -rf $(BUILD_DIR)

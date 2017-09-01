@@ -382,7 +382,7 @@ end
 -- @function size
 -- @tparam table table to use
 -- @treturn int size of the table
-table.size = table_size --luacheck: globals table_size
+table.size = table_size or table.count_keys --luacheck: globals table_size
 
 --- For all string or number values in an array map them to a key = true table
 -- @usage local a = {"v1", "v2"}

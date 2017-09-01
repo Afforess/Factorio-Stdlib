@@ -2,7 +2,6 @@
 -- @module Gui
 -- @usage local Gui = require('stdlib/event/gui')
 
--- luacheck: globals Event
 local Core = require 'stdlib/core'
 require 'stdlib/event/event'
 

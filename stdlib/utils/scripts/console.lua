@@ -2,7 +2,7 @@
 -- Creates a textfield allowing you to run commands directly in your mod's enviorment.
 -- <p>This module requires the use of stdlib's @{Event} module for GUI interactions.
 -- <p>This module was originally the ***Console*** code from a modder named ***adil***, which has been modified for use with stdlib.
--- @module Console
+-- @script console
 -- @usage
 -- remote.add_interface("my_interface", {show = require("stdlib/utils/console")})
 -- /c remote.call("my_interface", "show", game.player)

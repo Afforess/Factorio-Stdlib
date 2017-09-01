@@ -6,6 +6,7 @@
 require 'stdlib/utils/table'
 require 'stdlib/utils/string'
 require 'stdlib/utils/iterators'
+require 'stdlib/utils/math'
 require 'stdlib/defines/color'
 require 'stdlib/defines/time'
 
@@ -47,6 +48,12 @@ function Core.prequire(module)
     local ok, err = pcall(require, module)
     if ok then
         return err
+    end
+end
+
+function Core.add_fields(to, from)
+    for k, v in pairs(from) do
+        to[k] = v
     end
 end
 

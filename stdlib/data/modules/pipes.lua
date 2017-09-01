@@ -1,3 +1,6 @@
+--- Pipes module
+-- @module Data.Pipes
+
 local Pipes = setmetatable({}, {__index = require 'stdlib/data/core'})
 
 --Define pipe connection pipe pictures, not all entities use these. This function needs some work though.
@@ -10,7 +13,7 @@ function Pipes.pictures(pictures, shift_north, shift_south, shift_west, shift_ea
             width = 35,
             height = 18,
             shift = shift_north
-        } or Pipes.empty_sprite(),
+        } or Pipes.empty_picture(),
 
         south = shift_south and
         {
@@ -19,7 +22,7 @@ function Pipes.pictures(pictures, shift_north, shift_south, shift_west, shift_ea
             width = 44,
             height = 31,
             shift = shift_south
-        } or Pipes.empty_sprite(),
+        } or Pipes.empty_picture(),
 
         west = shift_west and
         {
@@ -28,7 +31,7 @@ function Pipes.pictures(pictures, shift_north, shift_south, shift_west, shift_ea
             width = 19,
             height = 37,
             shift = shift_west
-        } or Pipes.empty_sprite(),
+        } or Pipes.empty_picture(),
 
         east = shift_east and
         {
@@ -37,7 +40,7 @@ function Pipes.pictures(pictures, shift_north, shift_south, shift_west, shift_ea
             width = 20,
             height = 38,
             shift = shift_east
-        } or Pipes.empty_sprite(),
+        } or Pipes.empty_picture(),
     }
     for direction, image in pairs(replacements or {}) do
         if not (new_pictures[direction].filename == "__core__/graphics/empty.png") then
@@ -89,7 +92,7 @@ function Pipes.covers(n, s, w, e)
                 }
             },
         },
-    } or Pipes.empty_sprite()
+    } or Pipes.empty_picture()
     e = e and {
         layers =
         {
@@ -124,7 +127,7 @@ function Pipes.covers(n, s, w, e)
                 }
             },
         },
-    } or Pipes.empty_sprite()
+    } or Pipes.empty_picture()
     s = s and {
         layers =
         {
@@ -159,7 +162,7 @@ function Pipes.covers(n, s, w, e)
                 }
             },
         },
-    } or Pipes.empty_sprite()
+    } or Pipes.empty_picture()
     w = w and {
         layers =
         {
@@ -194,7 +197,7 @@ function Pipes.covers(n, s, w, e)
                 }
             },
         },
-    } or Pipes.empty_sprite()
+    } or Pipes.empty_picture()
 
     return {north = n, south = s, east = e, west = w}
 end

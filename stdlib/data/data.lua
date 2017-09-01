@@ -1,17 +1,32 @@
---- Data module
--- @module Data
+--- @module Data
 
-require 'stdlib/core'
-Data = setmetatable({}, {__index = require 'stdlib/data/core'}) --luacheck: allow defined top
+--- Data Functions
+-- @section Data
 
+local Core = require 'stdlib/data/core'
+Data = setmetatable({},{__index = Core})  --luacheck: allow defined top
+
+Core.add_fields(Data, require 'stdlib/data/modules/data_select')
+Core.add_fields(Data, require 'stdlib/data/developer/developer')
+
+--- Change subroup and/or order
+-- @tparam string data_type
+-- @tparam string name
+-- @tparam string subgroup
+-- @tparam string order
 function Data.subgroup_order(data_type, name, subgroup, order)
     local data = data.raw[data_type] and data.raw[data_type][name]
     if data then
-        data.subgroup = subgroup or data.subgroup
-        data.order = order or data.order
+        data.subgroup = subgroup and #subgroup > 0 and subgroup or data.subgroup
+        data.order = order and #order > 0 and order or data.order
     end
 end
 
+--- Replace an icon
+-- @tparam string data_type
+-- @tparam string name
+-- @tparam string icon
+-- @tparam int size
 function Data.replace_icon(data_type, name, icon, size)
     local data = data.raw[data_type] and data.raw[data_type][name]
     if data then
@@ -25,6 +40,10 @@ function Data.replace_icon(data_type, name, icon, size)
     end
 end
 
+--- Get the icons
+-- @tparam string data_type
+-- @tparam string name
+-- @tparam boolean copy
 function Data.get_icons(data_type, name, copy)
     local data = data.raw[data_type] and data.raw[data_type][name]
     return data and copy and table.deepcopy(data.icons) or data and data.icons
@@ -34,8 +53,6 @@ function Data.get_icon(data_type, name)
     local data = data.raw[data_type] and data.raw[data_type][name]
     return data and data.icon
 end
-
-
 
 --Quickly duplicate an existing prototype into a new one.
 function Data.duplicate(data_type, orig_name, new_name, mining_result)
@@ -81,7 +98,28 @@ function Data.extract_monolith(filename, x, y, w, h)
     }
 end
 
-Data.select = require 'stdlib/data/modules/select'['select']
+function Data.create_sound(name, file_or_sound_table, volume)
+    Data.fail_if_missing(name)
+    Data.fail_if_missing(file_or_sound_table)
+    local sound = {
+        type = "explosion",
+        name = name,
+        animations = Data.empty_animations()
+    }
+
+    if type(file_or_sound_table) == "table" then
+        sound.sound = file_or_sound_table
+    else
+        sound.sound = {
+            filename = file_or_sound_table,
+            volume = volume or 1
+        }
+    end
+    data:extend{sound}
+end
+
+
+--Data.select = require 'stdlib/data/modules/data_select'['select']
 
 Data.Pipes = require 'stdlib/data/modules/pipes'
 Data.Technology = require 'stdlib/data/modules/technology'

@@ -1,9 +1,12 @@
-local Core = require 'stdlib/core'
+--- @module Data
 
-local data_select = {}
+--- Data Functions
+-- @section Data
+
+local Data = setmetatable({}, {__index = require 'stdlib/data/core'})
 
 -- this metatable is set on recipes, to control access to ingredients and results
-data_select._select_metatable = {
+Data._select_metatable = {
     new = function()
     local self = {}
     self.__index = function(tbl, key)
@@ -39,8 +42,8 @@ end
 -- @usage Data.select('recipe:steel.*') -- returns a table with all recipes whose name matches 'steel.*'
 -- @param pattern to search with
 -- @return table containing the elements matching the selector pattern, or an empty table if there was no matches
-function data_select.select(pattern)
-    Core.fail_if_missing(pattern, "missing pattern argument")
+function Data.select(pattern)
+    Data.fail_if_missing(pattern, "missing pattern argument")
 
     local parts = string.split(pattern, ":")
     local category_pattern = table.first(parts)
@@ -57,8 +60,8 @@ function data_select.select(pattern)
             end
         end
     end
-    setmetatable(results, data_select._select_metatable.new(results))
+    setmetatable(results, Data._select_metatable.new(results))
     return results
 end
 
-return data_select
+return Data

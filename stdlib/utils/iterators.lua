@@ -1,6 +1,8 @@
--- Work in progress iterators, not recomended for live mods!
+--- Iterator library.
+-- @module iter
 
 -- luacheck: globals iter (Allow mutating iter)
+
 iter = {}
 
 iter.pairs = pairs

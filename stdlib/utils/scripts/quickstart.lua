@@ -1,9 +1,17 @@
+--- Quickstart script.
+-- Creates a quickstart world for testing mods.
+-- <p>This module requires the use of stdlib's @{Event} module for player creation interactions.
+-- <p>config settings should be a created in a table retured from `config-quickstart.lua`
+-- @script quickstart
+-- @usage
+-- if DEBUG then
+--   require 'stdlib/utils/scripts/quickstart'
+-- end
+
 local Core = require 'stdlib/core'
 require 'stdlib/event/event'
 local Config = require 'stdlib.config.config'
 local Area = require 'stdlib.area.area'
-
-
 
 if not remote.interfaces["quickstart-script"] then
     local qs_interface = {}
@@ -117,7 +125,7 @@ function quickstart.on_player_created(event)
             for x, y in Area.iterate({{-37.5, -27.5}, {-33.5,-3.5}}) do
                 surface.create_entity{name="coal", position={x, y}, amount = 2500}
             end
-            ---Top Right
+            --Top Right
             for x, y in Area.iterate({{33.5, -27.5}, {37.5, -3.5}}) do
                 surface.create_entity{name="iron-ore", position={x, y}, amount = 2500}
             end
@@ -240,17 +248,24 @@ function quickstart.on_player_created(event)
             Event.register(defines.events.on_chunk_generated, create_center_map_tag)
         end
 
-        if QS.get("setup_power", false) and game.active_mods["creative-mode"] then
-            if game.item_prototypes["creative-mode_energy-source"] then
-                local es = surface.create_entity{name="creative-mode_energy-source", position={-1, -34}, force=force}
+        if QS.get("setup_power", false) then
+            if game.entity_prototypes["debug-energy-interface"] then
+                local es = surface.create_entity{name="debug-energy-interface", position={0, 0}, force=force}
+                es.destructible = false
                 script.raise_event(defines.events.on_built_entity, {created_entity = es, player_index = player.index})
-                local sb = surface.create_entity{name="creative-mode_super-substation", position={1, -34}, force=force}
-                script.raise_event(defines.events.on_built_entity, {created_entity = sb, player_index = player.index})
-                local radar = surface.create_entity{name="creative-mode_super-radar", position={3.5, -34.5}, force=force}
-                script.raise_event(defines.events.on_built_entity, {created_entity = radar, player_index = player.index})
-                local rb = surface.create_entity{name="creative-mode_super-roboport", position={-4, -35}, force=force}
-                script.raise_event(defines.events.on_built_entity, {created_entity = rb, player_index = player.index})
             end
+            if game.entity_prototypes["debug-substation"] then
+                local sb = surface.create_entity{name="debug-substation", position={0, 0}, force=force}
+                sb.destructible = false
+                script.raise_event(defines.events.on_built_entity, {created_entity = sb, player_index = player.index})
+            end
+        end
+
+        if QS.get("setup_creative_mode", false) and game.active_mods["creative-mode"] then
+            local radar = surface.create_entity{name="creative-mode_super-radar", position={3.5, -34.5}, force=force}
+            script.raise_event(defines.events.on_built_entity, {created_entity = radar, player_index = player.index})
+            local rb = surface.create_entity{name="creative-mode_super-roboport", position={-4, -35}, force=force}
+            script.raise_event(defines.events.on_built_entity, {created_entity = rb, player_index = player.index})
         end
     end
 end

@@ -6,7 +6,6 @@
 
 require 'stdlib/core'
 require 'stdlib/event/event'
-require 'stdlib/defines/time'
 
 Event.Time = {}
 

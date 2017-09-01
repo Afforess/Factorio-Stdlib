@@ -1,8 +1,21 @@
---Generate Table of events
---Portions of this code graciously liberated from Smart Trains and Custom Events Mods
+--- Raise events for opening and closing inventories.
+-- Portions of this code graciously liberated from Smart Trains and Custom Events Mods
+-- This module uses the @{Event} module.
+-- @module Opened
+-- @usage require('stdlib/event/openend')
+-- Event.register(Event.on_player_opened, function_to_run_when_something_is_opened)
 
 require 'stdlib/core'
 require 'stdlib/event/event'
+
+Event.Opened = {}
+
+--- Event data returned
+-- @tfield int name unique event ID for the event
+-- @tfield uint player_index the index of the player that raised the event
+-- @tfield string type the type of the inventory opened,  either `self` or `entity`
+-- @tfield[opt] LuaEntity entity the entity that was openened or closed if not self
+-- @table event
 
 -- Generate the event names
 Event.on_player_opened = script.generate_event_name()
@@ -12,7 +25,7 @@ local function create_globals()
     global._opened_guis = global._opened_guis or {}
 end
 
-local function raise_opened_closed_events(event)
+function Event.Opened.raise_opened_closed_events(event)
     if event.tick % 30 == 0 then -- check twice per second
 
         for _, player in pairs( game.connected_players ) do
@@ -45,6 +58,8 @@ local function raise_opened_closed_events(event)
         end--for player
     end--if event.tick
 end
-Event.register(defines.events.on_tick, raise_opened_closed_events)
+Event.register(defines.events.on_tick, Event.Opened.raise_opened_closed_events)
 
 Event.register(Event.core_events.init_and_config, create_globals)
+
+return Event.Opened

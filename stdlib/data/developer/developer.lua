@@ -61,6 +61,8 @@ function Data.make_test_entities(name)
         power.collision_mask = {}
         power.selection_box = {{0.0, -0.5}, {0.5, 0.5}}
         power.picture = Core.empty_picture()
+        power.vehicle_impact_sound =  nil
+        power.working_sound = nil
 
         data:extend{power}
     end
@@ -78,6 +80,8 @@ function Data.make_test_entities(name)
         pole.maximum_wire_distance = 100
         pole.supply_area_distance = 50
         pole.connection_points = Core.empty_connection_points(1)
+        pole.vehicle_impact_sound =  nil
+        pole.working_sound = nil
 
         data:extend{pole}
     end

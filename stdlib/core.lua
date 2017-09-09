@@ -41,6 +41,10 @@ function Core.fail_if_missing(var, msg)
     return false
 end
 
+function Core.fail_if_not_type(var, types)
+    error("Required parameter "..var.." must be: " .. table.concat(types, ", or"), 2)
+end
+
 --- Require a file that may not exist
 -- @tparam string module path to the module
 -- @treturn mixed

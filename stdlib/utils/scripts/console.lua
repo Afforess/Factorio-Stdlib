@@ -70,7 +70,6 @@ local function enter(event)
 
     local ok, err = pcall(function() return loadstring(s)() end )
     if not ok then p.print(err) end
-    --pcall(loadstring("return function(a, b, c) ".. chunkstring .. " end"))
     game.write_file(prefix..'/console.log', s..'\n', true, p.index)
 end
 Gui.on_click('^'..names.enter..'$', enter)

@@ -8,18 +8,34 @@ iter = {}
 iter.pairs = pairs
 iter.ipairs = ipairs
 
-function iter.pairs_sorted (t, f)
+function iter.spairs(t, f)
     local a = {}
     for n in pairs(t) do table.insert(a, n) end
     table.sort(a, f)
-    local i = 0 -- iterator variable
-    local iter_pairs_sorted = function () -- iterator function
+    local i = 0
+
+    return function()
         i = i + 1
-        if a[i] == nil then return nil
-        else return a[i], t[a[i]]
+        if a[i] == nil then
+            return nil
+        else
+            return a[i], t[a[i]]
         end
     end
-    return iter_pairs_sorted
+end
+
+function iter.top(t, stop)
+    local start = #t
+    stop = stop or 1
+
+    return function()
+        if start >= stop and t[start] ~= nil then
+            local cur = start
+            start = start - 1
+            return cur, t[cur]
+        end
+        return nil
+    end
 end
 
 return iter

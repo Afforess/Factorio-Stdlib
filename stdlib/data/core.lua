@@ -1,4 +1,4 @@
---- The Data module
+--- This module is a work in progress
 -- @module Data
 -- @alias Core
 
@@ -6,6 +6,28 @@
 -- @section Core
 
 local Core = require 'stdlib/core'
+if _G.remote and _G.script then
+    error("Data Modules can only be required in the data stage", 2)
+end
+
+Core.default_options = {
+    ["silent"] = false,
+    ["fail"] = false,
+    ['verbose'] = false,
+}
+
+local function get_options(...)
+    local tuple = {}
+    for _, arg in ipairs({...}) do
+        tuple[#tuple + 1] = Core.default_options[arg] or false
+    end
+    return table.unpack(tuple)
+end
+
+function Core.log(msg)
+    local silent, fail = get_options("silent", "fail")
+    return (fail and error(msg, 2)) or not silent and log(msg)
+end
 
 --- Quick to use empty picture.
 -- @treturn table an empty pictures table
@@ -65,8 +87,6 @@ function Core.empty_connection_points(count)
     end
     return points
 end
-
-
 
 -- render layers
 -- "tile-transition", "resource", "decorative", "remnants", "floor", "transport-belt-endings", "corpse",

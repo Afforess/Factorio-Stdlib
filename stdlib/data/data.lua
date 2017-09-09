@@ -4,7 +4,17 @@
 -- @section Data
 
 local Core = require 'stdlib/data/core'
-Data = setmetatable({},{__index = Core})  --luacheck: allow defined top
+
+Data = { --luacheck: allow defined top
+    Pipes = require 'stdlib/data/pipes',
+    Technology = require 'stdlib/data/technology',
+    Item = require 'stdlib/data/item',
+    Category = require 'stdlib/data/category',
+    Entity = require 'stdlib/data/entity',
+    Recipe = require 'stdlib/data/recipe',
+    Fluid = require 'stdlib/data/fluid'
+}
+setmetatable(Data, {__index = Core})
 
 Core.add_fields(Data, require 'stdlib/data/modules/data_select')
 Core.add_fields(Data, require 'stdlib/data/developer/developer')
@@ -117,15 +127,5 @@ function Data.create_sound(name, file_or_sound_table, volume)
     end
     data:extend{sound}
 end
-
-
---Data.select = require 'stdlib/data/modules/data_select'['select']
-
-Data.Pipes = require 'stdlib/data/modules/pipes'
-Data.Technology = require 'stdlib/data/modules/technology'
-Data.Item = require 'stdlib/data/modules/item'
-Data.Category = require 'stdlib/data/modules/category'
-Data.Entity = require 'stdlib/data/modules/entity'
-Data.Recipe = require 'stdlib/data/modules/recipe'
 
 return Data

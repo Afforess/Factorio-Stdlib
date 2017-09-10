@@ -244,9 +244,9 @@ end
 -- @tparam Concepts.Position pos the position to start with
 -- @tparam[opt=0] number inc_x optional increment x by this amount
 -- @tparam[opt=0] number inc_y optional increment y by this amount
--- @tparam[opt=false] increment_intial Whether the first use should be incremented
+-- @tparam[opt=false] boolean increment_initial Whether the first use should be incremented
 -- @treturn function @{increment_closure} a function closure that returns an incremented position
-function Position.increment(pos, inc_x, inc_y, increment_inital)
+function Position.increment(pos, inc_x, inc_y, increment_initial)
     pos = Position.new(pos)
 
     local x, y = pos.x, pos.y
@@ -260,13 +260,13 @@ function Position.increment(pos, inc_x, inc_y, increment_inital)
     -- @tparam[opt=0] number new_inc_y
     -- @treturn Concepts.Position the incremented position
     return function(new_inc_x, new_inc_y)
-        if increment_inital then
+        if increment_initial then
             x = x + (new_inc_x or inc_x)
             y = y + (new_inc_y or inc_y)
         else
             x = x
             y = y
-            increment_inital = true
+            increment_initial = true
         end
         return Position.new({x, y})
     end

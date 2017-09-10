@@ -1,10 +1,10 @@
 require ("spec/setup/defines")
 _G.serpent = require("serpent")
-_G.log = function(msg) print(_G.serpent.block(msg, {comment=false, nocode=true})) end
+_G.log = function(msg) print(_G.serpent.block(msg, {comment=false, nocode=true, sort=false})) end
 _G.data = {}
 
 _G.data.extend = function(self, otherdata)
-    if type(otherdata) ~= table or #otherdata == 0 then
+    if type(otherdata) ~= "table" or #otherdata == 0 then
         error("Invalid prototype array " .. _G.serpent.block(otherdata, {maxlevel= 1}))
     end
 
@@ -27,7 +27,30 @@ _G.data.raw = {
             name = "stone-furnace",
             type = "recipe",
             ingredients = {
-                {"brick", 10}
+                {"stone-brick", 10}
+            },
+            result = "stone-furnace",
+            result_count = 1,
+        },
+        ["miner"] = {
+            name = "miner",
+            type = "recipe",
+            normal = {
+                ingredients = {
+                    {"stone-brick", 10}
+                },
+                results = {
+                    {type="item", name="miner", count=1}
+                }
+            },
+            expensive =
+            {
+                ingredients = {
+                    {"stone-brick", 20}
+                },
+                results = {
+                    {type="item", name="miner", count=1}
+                }
             }
         }
     },
@@ -38,12 +61,12 @@ _G.data.raw = {
         }
     },
     ["item"] = {
-        ["brick"] = {
-            name = "brick",
+        ["stone-brick"] = {
+            name = "stone-brick",
             type = "item",
         },
-        ["rock"] = {
-            name = "rock",
+        ["stone"] = {
+            name = "stone",
             type = "item",
         },
         ["stone-furnace"] = {

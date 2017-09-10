@@ -1,7 +1,8 @@
---- Category module
--- @module Data.Category
-local Core = require('stdlib/data/core')
+--- Category
+-- @classmod Category
+
+local Data = require('stdlib/data/data')
 local Category = {}
 
-Core.data_methods(Category)
+Data.data_methods(Category)
 return Category

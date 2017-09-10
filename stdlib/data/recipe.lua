@@ -1,13 +1,16 @@
---- Recipe module
--- @module Data.Recipe
+--- Recipe class
+-- @classmod Recipe
 
-local Core = require('stdlib/data/core')
+local Data = require('stdlib/data/data')
 local Recipe = {}
 
 local Item = require 'stdlib/data/item'
 local Fluid = require('stdlib/data/fluid')
 
---- Returns a valid recipe object reference
+--- Returns a valid recipe object reference. This is the main getter
+-- @tparam string|data recipe
+-- @tparam table opts Logging options to pass
+-- @treturn Recipe
 function Recipe:get(recipe, opts)
     self.fail_if_missing(recipe, "recipe is required")
 
@@ -28,23 +31,23 @@ function Recipe:get(recipe, opts)
     end
 end
 
+--- Copies a recipe to a new recipe.
+-- @tparam string new_name The new name for the recipe.
+-- @treturn Recipe
 function Recipe:copy(new_name)
     self.fail_if_missing(new_name, "New name is required")
-    print(self.valid("recipe"))
-    if self.valid("recipe") then
-        self.log("copying recipe")
-
+    if self:valid("recipe") then
         local copy = table.deepcopy(self)
         copy.name = new_name
+
         data:extend{copy}
-        copy = Recipe(new_name)
-        return copy
+        return Recipe(new_name)
     else
         return self
     end
 end
 
---- Returns a formated ingredient table
+-- Returns a formated ingredient table
 local function format_ing(ingredient)
     -- ingredients can be in the format of:
     -- {"name", count} -- Assumes a type of "item"
@@ -80,48 +83,123 @@ local function format_ing(ingredient)
                 count = 1
             }
         end
-    else
-        Recipe.fail_if_not_type("ingredient", {"string", "table"})
     end
-
     return object
 end
 
---- returns a formated product table
+-- get items for dificulties
+local function get_difficulties(normal, expensive)
+    return format_ing(normal), format_ing((expensive == true and normal) or expensive)
+end
+
+
+--- Remove an ingredient from an ingredients table
+-- @tparam table ingredients
+-- @tparam string name Name of the ingredient to remove
+local function remove_ingredient(ingredients, name)
+    for i, ingredient in pairs(ingredients) do
+        if ingredient[1] == name or ingredient.name == name then
+            ingredients[i] = nil
+            return true
+        end
+    end
+end
+
+
+--- Replace an ingredient
+-- @tparam table ingredients Ingredients table
+-- @tparam string find ingredient to replace
+-- @tparam concepts.ingredient replace
+-- @tparam boolean replace_name_only Don't replace counts
+local function replace_ingredient(ingredients, find, replace, replace_name_only)
+    for i, ingredient in pairs(ingredients) do
+        if ingredient[1] == find or ingredient.name == find then
+            if replace_name_only then
+                local count = ingredient[2] or ingredient.count
+                replace.count = count
+            end
+            ingredients[i] = replace
+            return true
+        end
+    end
+end
+
+-- returns a formated product table
 -- local function format_product()
---     local object
+-- local object
 --
---     return object
+-- return object
 -- end
 
---- adding ingredients will turn the recipe into a normal/expensive version?
+--- Add an ingredient to a recipe
+-- @tparam string|Concepts.ingredient normal
+-- @tparam[opt] string|Concepts.ingredient|boolean expensive
+-- @treturn Recipe
 function Recipe:add_ingredient(normal, expensive)
+    self.fail_if_missing(normal, "normal recipe name is required")
     if self:valid() then
-        local new_normal = format_ing(normal)
-        local new_expensive = expensive and format_ing(expensive) or table.deepcopy(new_normal)
-        if new_normal then
-            if self.normal then
-                self.normal.ingredients[#self.normal.ingredients + 1] = new_normal
-                self.expensive.ingredients[#self.expensive.ingredients + 1] = new_expensive
-            else
-                self.ingredients[#self.ingredients + 1] = normal
+        normal, expensive = get_difficulties(normal, expensive)
+
+        if self.normal then
+            if normal then
+                self.normal.ingredients[#self.normal.ingredients + 1] = normal
             end
+            if expensive then
+                self.expensive.ingredients[#self.expensive.ingredients + 1] = expensive
+            end
+        elseif normal then
+            self.ingredients[#self.ingredients + 1] = normal
         end
     end
     return self
 end
 
---remove one ing completly
--- function Recipe:remove_ingredient(normal, expensive)
---
---     return self
--- end
---
--- --replace one ing with another
--- function Recipe:replace_ingredient(normal, expensive)
---
---     return self
--- end
+--- Remove one ingredient completly
+-- @tparam string normal
+-- @tparam string|boolean expensive exepsive recipe to remove, or if true remove normal recipe from both
+-- @treturn Recipe
+function Recipe:remove_ingredient(normal, expensive)
+    self.fail_if_missing(normal, "normal is required")
+    if self:valid() then
+        normal, expensive = get_difficulties(normal, expensive)
+        if self.normal then
+            if normal then
+                remove_ingredient(self.normal.ingredients, normal)
+            end
+            if expensive then
+                remove_ingredient(self.expensive.ingredients, expensive)
+            end
+        elseif normal then
+            remove_ingredient(self.ingredients, normal)
+        end
+    end
+    return self
+end
+
+--- Replace one ingredient with another.
+-- @tparam string replace
+-- @tparam string|ingredient normal
+-- @tparam[opt] string|ingredient|boolean expensive
+function Recipe:replace_ingredient(replace, normal, expensive)
+    self.fail_if_missing(replace, "missing recipe to replace")
+    if self:valid() then
+        local n_string = type(normal) == "string"
+        local e_string = type(expensive == true and normal or expensive) == "string"
+        normal, expensive = get_difficulties(normal, expensive)
+
+        if self.normal then
+            if normal then
+                replace_ingredient(self.normal.ingredients, replace, normal, n_string)
+            end
+            if expensive then
+                replace_ingredient(self.expensive.ingredients, replace, expensive, e_string)
+            end
+        elseif normal then
+            replace_ingredient(self.ingredients, replace, normal, n_string)
+        end
+    end
+    return self
+end
 --
 -- --replace one ing with another in everything
 -- function Recipe.replace_ingredient_in_all(recipe)
@@ -137,12 +215,12 @@ end
 -- function Recipe.replace_result(recipe)
 -- end
 
-Core.add_fields(Recipe, require 'stdlib/data/modules/recipe_select')
+--Data.add_fields(Recipe, require 'stdlib/data/modules/recipe_select')
 
 Recipe._mt = {
     type = "recipe",
     __index = Recipe
 }
 
-Core.data_methods(Recipe)
+Data.data_methods(Recipe)
 return Recipe

@@ -1,22 +1,122 @@
---- @module Data
+--- Data
+-- @module Data
 
---- Data Functions
--- @section Data
+if _G.remote and _G.script then
+    error("Data Modules can only be required in the data stage", 2)
+end
 
-local Core = require 'stdlib/data/core'
+local Core = require 'stdlib/core'
 
-Data = { --luacheck: allow defined top
-    Pipes = require 'stdlib/data/pipes',
-    Technology = require 'stdlib/data/technology',
-    Item = require 'stdlib/data/item',
-    Category = require 'stdlib/data/category',
-    Entity = require 'stdlib/data/entity',
-    Recipe = require 'stdlib/data/recipe',
-    Fluid = require 'stdlib/data/fluid'
+Data = {} --luacheck: allow defined top
+setmetatable(Data, {__index = Core})
+
+Data.default_options = {
+    ["silent"] = false,
+    ["fail"] = false,
+    ['verbose'] = false,
 }
 
-Core.add_fields(Data, require 'stdlib/data/modules/data_select')
-Core.add_fields(Data, require 'stdlib/data/developer/developer')
+local function get_options(...)
+    local tuple = {}
+    for _, arg in ipairs({...}) do
+        tuple[#tuple + 1] = Data.default_options[arg] or false
+    end
+    return table.unpack(tuple)
+end
+
+function Data.log(msg)
+    local silent, fail = get_options("silent", "fail")
+    return (fail and error(msg, 2)) or not silent and log(msg)
+end
+
+--- Quick to use empty picture.
+-- @treturn table an empty pictures table
+function Data.empty_picture()
+    return {
+        filename = "__core__/graphics/empty.png",
+        priority = "extra-high",
+        width = 1,
+        height = 1
+    }
+end
+
+--- Quick to use empty pictures.
+-- @treturn table an empty pictures table
+function Data.empty_pictures()
+    local empty = Data.empty_picture()
+    return {
+        filename = empty.filename,
+        width = empty.width,
+        height = empty.height,
+        line_length = 1,
+        frame_count = 1,
+        shift = { 0, 0},
+        animation_speed = 1,
+        direction_count=1
+    }
+end
+
+--- Quick to use empty animation.
+-- @treturn table an empty animations table
+function Data.empty_animations()
+    return {
+        Data.empty_pictures()
+    }
+end
+
+--- Quick to use empty connections table.
+-- @tparam int count how many connection points are needed
+-- @treturn table an empty pictures table
+function Data.empty_connection_points(count)
+    local points = {}
+    for i = 1, count or 1, 1 do
+        points[i] = {
+            shadow =
+            {
+                copper = {0, 0},
+                green = {0, 0},
+                red = {0, 0}
+            },
+            wire =
+            {
+                copper = {0, 0},
+                green = {0, 0},
+                red = {0, 0}
+            }
+        }
+    end
+    return points
+end
+
+function Data.valid(class, name)
+    if name then
+        return getmetatable(class).type == name
+    else
+        return getmetatable(class).type
+    end
+end
+
+function Data.data_methods(this)
+    local obj = {
+        __index = Data,
+        __call = this.get,
+    }
+    return setmetatable(this, obj)
+end
+
+-- render layers
+-- "tile-transition", "resource", "decorative", "remnants", "floor", "transport-belt-endings", "corpse",
+-- "floor-mechanics", "item", "lower-object", "object", "higher-object-above", "higher-object-under",
+-- "wires", "lower-radius-visualization", "radius-visualization", "entity-info-icon", "explosion",
+-- "projectile", "smoke", "air-object", "air-entity-info-con", "light-effect", "selection-box", "arrow", "cursor"
+
+-- collision masks
+-- "ground-tile", "water-tile", "resource-layer", "floor-layer", "item-layer",
+-- "object-layer", "player-layer", "ghost-layer", "doodad-layer", "not-colliding-with-itself"
+
+--Data.add_fields(Data, require 'stdlib/data/developer/developer')
+--Data.add_fields(Data, require 'stdlib/data/modules/data_select')
+--Data.Recipe = {select = require 'stdlib/data/modules/recipe_select'}
 
 --- Change subroup and/or order
 -- @tparam string data_type
@@ -127,5 +227,4 @@ function Data.create_sound(name, file_or_sound_table, volume)
     data:extend{sound}
 end
 
-Core.data_methods(Data)
 return Data

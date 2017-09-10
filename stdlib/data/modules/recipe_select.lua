@@ -1,5 +1,3 @@
---- @module Data.Recipe
-
 local Recipe = {}
 local data_select = require 'stdlib/data/modules/data_select'
 

@@ -1,7 +1,7 @@
---- Pipes module
--- @module Data.Pipes
+--- Pipes
+-- @classmod Pipes
 
-local Core = require('stdlib/data/core')
+local Data = require('stdlib/data/data')
 local Pipes = {}
 
 --Define pipe connection pipe pictures, not all entities use these. This function needs some work though.
@@ -203,5 +203,5 @@ function Pipes.covers(n, s, w, e)
     return {north = n, south = s, east = e, west = w}
 end
 
-Core.data_methods(Pipes)
+Data.data_methods(Pipes)
 return Pipes

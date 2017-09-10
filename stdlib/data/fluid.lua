@@ -1,11 +1,11 @@
---- Fluid module
--- @module Data.Fluid
+--- Fluid
+-- @classmod Fluid
 
-local Core = require('stdlib/data/core')
+local Data = require('stdlib/data/data')
 local Fluid = {}
 
 function Fluid:get(fluid)
-    Core.fail_if_missing(fluid, "fluid is required")
+    self.fail_if_missing(fluid, "fluid is required")
     local object = data.raw["fluid"][fluid]
     if object then
         local mt = {
@@ -20,5 +20,5 @@ function Fluid:get(fluid)
     return self
 end
 
-Core.data_methods(Fluid, "fluid")
+Data.data_methods(Fluid, "fluid")
 return Fluid

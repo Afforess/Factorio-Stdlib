@@ -1,8 +1,8 @@
---- Technology module
--- @module Data.Technology
+--- Technology
+-- @classmod Technology
 
-local Core = require('stdlib/data/core')
+local Data = require('stdlib/data/data')
 local Technology = {}
 
-Core.data_methods(Technology)
+Data.data_methods(Technology)
 return Technology

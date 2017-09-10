@@ -1,7 +1,7 @@
---- Item module
--- @module Data.Item
+--- Item
+-- @classmod Item
 
-local Core = require('stdlib/data/core')
+local Data = require('stdlib/data/data')
 local Item = {}
 
 local item_types = {
@@ -29,5 +29,5 @@ function Item:get(item, itype)
     return self
 end
 
-Core.data_methods(Item)
+Data.data_methods(Item)
 return Item

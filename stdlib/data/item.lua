@@ -2,7 +2,7 @@
 -- @module Data.Item
 
 local Core = require('stdlib/data/core')
-local Item = setmetatable({}, {__index = Core})
+local Item = {}
 
 local item_types = {
     "item", "ammo", "armor", "gun", "capsule", "repair-tool", "mining-tool", "item-with-entity-data",
@@ -10,19 +10,24 @@ local item_types = {
     "item-with-tags", "item-with-label", "item-with-inventory", "module",
 }
 
-function Item.get(item, itype)
+function Item:get(item, itype)
     local types = itype and {itype} or item_types
 
     for _, type_name in pairs(types) do
         local object = data.raw[type_name][item]
         if object then
-            return object
+            local mt = {
+                type = "item",
+                __index = self
+            }
+            return setmetatable(object, mt)
         end
     end
 
     local msg = "Item: "..(itype and (itype.."/") or "")..item.." does not exist."
-    Item.log(msg)
+    self.log(msg)
+    return self
 end
 
-
+Core.data_methods(Item)
 return Item

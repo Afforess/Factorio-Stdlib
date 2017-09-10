@@ -1,7 +1,8 @@
 --- Pipes module
 -- @module Data.Pipes
 
-local Pipes = setmetatable({}, {__index = require 'stdlib/data/core'})
+local Core = require('stdlib/data/core')
+local Pipes = {}
 
 --Define pipe connection pipe pictures, not all entities use these. This function needs some work though.
 function Pipes.pictures(pictures, shift_north, shift_south, shift_west, shift_east, replacements)
@@ -202,4 +203,5 @@ function Pipes.covers(n, s, w, e)
     return {north = n, south = s, east = e, west = w}
 end
 
+Core.data_methods(Pipes)
 return Pipes

@@ -14,7 +14,6 @@ Data = { --luacheck: allow defined top
     Recipe = require 'stdlib/data/recipe',
     Fluid = require 'stdlib/data/fluid'
 }
-setmetatable(Data, {__index = Core})
 
 Core.add_fields(Data, require 'stdlib/data/modules/data_select')
 Core.add_fields(Data, require 'stdlib/data/developer/developer')
@@ -128,4 +127,5 @@ function Data.create_sound(name, file_or_sound_table, volume)
     data:extend{sound}
 end
 
+Core.data_methods(Data)
 return Data

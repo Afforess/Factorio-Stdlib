@@ -1,6 +1,8 @@
 --- Technology module
 -- @module Data.Technology
 
-local Technology = setmetatable({}, {__index = require 'stdlib/data/core'})
+local Core = require('stdlib/data/core')
+local Technology = {}
 
+Core.data_methods(Technology)
 return Technology

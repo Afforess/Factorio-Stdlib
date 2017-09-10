@@ -6,6 +6,7 @@
 -- @section Core
 
 local Core = require 'stdlib/core'
+
 if _G.remote and _G.script then
     error("Data Modules can only be required in the data stage", 2)
 end
@@ -88,6 +89,23 @@ function Core.empty_connection_points(count)
     return points
 end
 
+function Core:valid(name)
+    if name then
+        print(getmetatable(self).type, name)
+        return getmetatable(self).type == name
+    else
+        return getmetatable(self).type
+    end
+end
+
+function Core.data_methods(this)
+    local obj = {
+        __index = Core,
+        __call = this.get,
+    }
+    return setmetatable(this, obj)
+end
+
 -- render layers
 -- "tile-transition", "resource", "decorative", "remnants", "floor", "transport-belt-endings", "corpse",
 -- "floor-mechanics", "item", "lower-object", "object", "higher-object-above", "higher-object-under",
@@ -98,4 +116,4 @@ end
 -- "ground-tile", "water-tile", "resource-layer", "floor-layer", "item-layer",
 -- "object-layer", "player-layer", "ghost-layer", "doodad-layer", "not-colliding-with-itself"
 
-return Core
+return setmetatable(Core, Core._protect("core"))

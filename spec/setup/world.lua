@@ -196,6 +196,8 @@ World.init = function(tick, load_only, saved_global, saved_game, config_changed_
             }
         }
     }
+
+    --run a fake data loader here to populate game.xxx_prototypes
     for _, force in pairs (game.forces) do
         setmetatable(force, meta.base)
     end

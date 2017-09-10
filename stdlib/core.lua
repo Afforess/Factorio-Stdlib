@@ -14,7 +14,7 @@ local Core = {
     _protect = function(module_name)
         return {
             __newindex = function() error("Attempt to mutatate read-only "..module_name.." Module") end,
-            __metatable = true
+            __metatable = {}
         }
     end,
     _concat = function(lhs, rhs)
@@ -28,7 +28,13 @@ local Core = {
         local s = tostring(t)
         m.__tostring = f
         return s
-    end
+    end,
+    -- No Doc
+    -- This is a helper global and functions until .16 to set the name of your mod in control.lua set _stdlib_mod_name = 'name of your mod'
+    _get_mod_name = function(name)
+        local ok, mod_name = pcall(function() return script.mod_name end)
+        return ok and mod_name or name or _stdlib_mod_name or "stdlib" -- luacheck: ignore _stdlib_mod_name
+    end,
 }
 
 --- Print msg if specified var evaluates to false.
@@ -59,15 +65,6 @@ function Core.add_fields(to, from)
     for k, v in pairs(from) do
         to[k] = v
     end
-end
-
--- No Doc
--- This is a helper global and functions until .16
--- to set the name of your mod in control.lua set _stdlib_mod_name = 'name of your mod'
--- luacheck: ignore _stdlib_mod_name
-function Core.get_mod_name(name)
-    local ok, mod_name = pcall(function() return script.mod_name end)
-    return ok and mod_name or name or _stdlib_mod_name or "stdlib"
 end
 
 return Core

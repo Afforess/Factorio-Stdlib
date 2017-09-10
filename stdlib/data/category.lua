@@ -1,6 +1,7 @@
 --- Category module
 -- @module Data.Category
+local Core = require('stdlib/data/core')
+local Category = {}
 
-local Category = setmetatable({}, {__index = require 'stdlib/data/core'})
-
+Core.data_methods(Category)
 return Category

@@ -1,6 +1,8 @@
 --- Entity module
 -- @module Data.Entity
 
-local Entity = setmetatable({}, {__index = require 'stdlib/data/core'})
+local Core = require('stdlib/data/core')
+local Entity = {}
 
+Core.data_methods(Entity)
 return Entity

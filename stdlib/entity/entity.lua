@@ -164,7 +164,7 @@ function Entity.destroy_entity( entity, died, cause, force )
             cause = cause,
             force = force,
             script = true,
-            mod_name = Game.get_mod_name()
+            mod_name = Game._get_mod_name()
         }
         -- If no event name is passed, assume script_raised_destroy, otherwise raise the event
         -- with the passed event name. ie. defines.events.on_preplayer_mined_item
@@ -188,7 +188,7 @@ function Entity.create_entity( surface, settings, player_index, raise_script_eve
         local event = {
             created_entity = entity,
             script = true,
-            mod_name = Game.get_mod_name()
+            mod_name = Game._get_mod_name()
         }
 
         if raise_script_event then

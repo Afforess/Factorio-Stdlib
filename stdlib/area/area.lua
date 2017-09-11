@@ -59,6 +59,10 @@ function Area.construct(...)
     return Area.new{ left_top = {x = args[1+a], y = args[2+a]}, right_bottom = {x = args[3+a], y = args[4+a]} }
 end
 
+function Area.empty()
+    return Area.construct(0, 0, 0, 0)
+end
+
 --- Creates an area that is a copy of the given area.
 -- @tparam Concepts.BoundingBox area the position to copy
 -- @treturn Concepts.BoundingBox a new area that is a copy of the passed area
@@ -417,6 +421,19 @@ function Area.spiral_iterate(area)
     return iterator.iterate, area, 0
 end
 
+function Area.shrink_to_surface_size(area, surface)
+    area = Area.new(area)
+    local w, h = surface.map_gen_settings.width, surface.map_gen_settings.height
+    if math.abs(area.left_top.x) > w / 2 then
+        area.left_top.x = -(w / 2)
+        area.right_bottom.x = (w / 2)
+    end
+    if math.abs(area.left_top.y) > w / 2 then
+        area.left_top.y = -(h / 2)
+        area.right_bottom.y = (h / 2)
+    end
+    return area
+end
 -------------------------------------------------------------------------------
 --[[Entity Helpers]]--
 -------------------------------------------------------------------------------
@@ -438,7 +455,7 @@ end
 -- @tparam LuaEntity entity the entity to convert to an area
 -- @treturn Concepts.BoundingBox
 function Area.to_collision_area(entity)
-    return entity.bounding_box
+    return Area.new(entity.bounding_box)
 end
 
 --- Converts an entity and its @{LuaEntityPrototype.selection_box|selection_box} to the area around it.
@@ -459,6 +476,15 @@ Area._mt = {
     __lt = Area.less_than, --is the size of area1 less than area2.
     __len = Area.size, -- The size of the area.
     __concat = Core._concat, -- calls tostring on both sides of concact.
+    __call = Area.copy
 }
 
-return setmetatable(Area, Core._protect("Area"))
+local function _call(_, ...)
+    if type((...)) == "table" then
+        return Area.new((...))
+    else
+        return Area.construct(...)
+    end
+end
+
+return setmetatable(Area, Core._protect("Area", _call))

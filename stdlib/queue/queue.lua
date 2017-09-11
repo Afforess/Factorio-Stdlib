@@ -133,4 +133,4 @@ Queue._mt = {
     __len = Queue.count,
 }
 
-return setmetatable(Queue, Core._protect("Queue"))
+return setmetatable(Queue, Core._protect("Queue", Queue.new))

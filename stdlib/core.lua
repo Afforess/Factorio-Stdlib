@@ -11,10 +11,11 @@ require 'stdlib/defines/color'
 require 'stdlib/defines/time'
 
 local Core = {
-    _protect = function(module_name)
+    _protect = function(module_name, call)
         return {
             __newindex = function() error("Attempt to mutatate read-only "..module_name.." Module") end,
-            __metatable = {}
+            __metatable = {},
+            __call = call
         }
     end,
     _concat = function(lhs, rhs)

@@ -1,6 +1,6 @@
 require ("spec/setup/defines")
 _G.serpent = require("serpent")
-_G.log = function(msg) print(_G.serpent.block(msg, {comment=false, nocode=true, sort=false})) end
+_G.log = function(msg, lvl) print(_G.serpent.block(msg, {comment=false, nocode=true, sort=false, maxlevel=lvl or 200})) end
 _G.data = {}
 
 _G.data.extend = function(self, otherdata)
@@ -40,7 +40,7 @@ _G.data.raw = {
                     {"stone-brick", 10}
                 },
                 results = {
-                    {type="item", name="miner", count=1}
+                    {type="item", name="miner", amount=1}
                 }
             },
             expensive =
@@ -49,7 +49,7 @@ _G.data.raw = {
                     {"stone-brick", 20}
                 },
                 results = {
-                    {type="item", name="miner", count=1}
+                    {type="item", name="miner", amount=1}
                 }
             }
         }
@@ -126,3 +126,11 @@ _G.data.raw = {
 
     },
 }
+
+require("spec/setup/data/ammo-category")
+require("spec/setup/data/equipment-category")
+require("spec/setup/data/fuel-category")
+require("spec/setup/data/recipe-category")
+require("spec/setup/data/module-category")
+require("spec/setup/data/rail-category")
+require("spec/setup/data/resource-category")

@@ -227,4 +227,17 @@ function Data.create_sound(name, file_or_sound_table, volume)
     data:extend{sound}
 end
 
+--local
+function Data.map_to_types(type, map)
+    if type then
+        if data.raw[type] then
+            return {[type] = true}
+        else
+            error("Category "..type.. " does not exist", 2)
+        end
+    else
+        return map
+    end
+end
+
 return Data

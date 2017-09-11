@@ -10,8 +10,7 @@
 
 local Core = require 'stdlib/core'
 require 'stdlib/event/event'
-local Config = require 'stdlib.config.config'
-local Area = require 'stdlib.area.area'
+local Area = require 'stdlib/area/area'
 
 if not remote.interfaces["quickstart-script"] then
     local qs_interface = {}
@@ -26,7 +25,7 @@ else
     return
 end
 
-local QS = Config.new(Core.prequire("config-quickstart") or {})
+local QS = require('stdlib/config/config').new(Core.prequire("config-quickstart") or {})
 local quickstart = {}
 
 function quickstart.on_player_created(event)
@@ -35,7 +34,8 @@ function quickstart.on_player_created(event)
         local surface = player.surface
         local force = player.force
 
-        local area = QS.get("area_box", {{-100, -100}, {100, 100}})
+        local area = Area(QS.get("area_box", {{-100, -100}, {100, 100}})):shrink_to_surface_size(surface)
+
         player.force.chart(surface, area)
 
         if QS.get("cheat_mode", false) then

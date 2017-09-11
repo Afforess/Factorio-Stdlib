@@ -40,13 +40,15 @@ function Position.new(pos_arr, copy)
     return setmetatable(pos, Position._mt)
 end
 
+function Position.empty()
+    return Position.construct(0, 0)
+end
+
 --- Creates a position that is a copy of the given position.
 -- @tparam Concepts.Position pos the position to copy
 -- @treturn Concepts.Position a new position with values identical to the given position
 function Position.copy(pos)
-    pos = Position.new(pos)
-
-    return Position.new({ x = pos.x, y = pos.y })
+    return Position.new(pos, true)
 end
 
 --- Deprecated
@@ -328,7 +330,16 @@ Position._mt = {
     __eq = Position.equals, -- Are two positions the same.
     __lt = Position.less_than, -- Is position1 less than position2.
     __le = Position.less_than_eq, -- Is position1 less than or equal to position2.
-    __concat = Core._concat -- calls tostring on both sides of concact.
+    __concat = Core._concat, -- calls tostring on both sides of concact.
+    __call = Position.copy
 }
 
-return setmetatable(Position, Core._protect("Position"))
+local function _call(_, ...)
+    if type((...)) == "table" then
+        return Position.new((...))
+    else
+        return Position.construct(...)
+    end
+end
+
+return setmetatable(Position, Core._protect("Position", _call))

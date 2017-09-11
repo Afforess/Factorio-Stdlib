@@ -5,6 +5,14 @@ local Data = require 'stdlib/data/data'
 local Developer = {}
 setmetatable(Developer, {__index=Data})
 
+local function make_no_controls()
+    local controls = {}
+    for name in pairs(data.raw["autoplace-control"]) do
+        controls[name] = {size = "none", frequency = "very-low", richness = "very-low"}
+    end
+    return controls
+end
+
 --- Make entities for easier mod testing.
 -- @tparam string name The name of your mod
 -- @usage
@@ -61,7 +69,7 @@ function Developer.make_test_entities(name)
         power.collision_mask = {}
         power.selection_box = {{0.0, -0.5}, {0.5, 0.5}}
         power.picture = Developer.empty_picture()
-        power.vehicle_impact_sound =  nil
+        power.vehicle_impact_sound = nil
         power.working_sound = nil
 
         data:extend{power}
@@ -80,7 +88,7 @@ function Developer.make_test_entities(name)
         pole.maximum_wire_distance = 100
         pole.supply_area_distance = 50
         pole.connection_points = Developer.empty_connection_points(1)
-        pole.vehicle_impact_sound =  nil
+        pole.vehicle_impact_sound = nil
         pole.working_sound = nil
 
         data:extend{pole}
@@ -88,6 +96,21 @@ function Developer.make_test_entities(name)
 
     data.raw.tile["lab-dark-1"].map_color = {r=100, g=100, b=100}
     data.raw.tile["lab-dark-2"].map_color = {r=50, g=50, b=50}
+
+    data.raw["map-gen-presets"]["default"]["debug"] = {
+        type = "map-gen-presets",
+        name = "debug",
+        localised_name = "Debug",
+        localised_description = "Default settings for a debug world",
+        order = "z",
+        basic_settings = {
+            terrain_segmentation = "none",
+            water = "very-low",
+            autoplace_controls = make_no_controls(),
+            height = 128,
+            width = 128,
+        }
+    }
 end
 
 return Developer

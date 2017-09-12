@@ -4,21 +4,50 @@
 local Data = require('stdlib/data/data')
 local Technology = {}
 
-local function create_technology_prototype(name)
-    local new = {
-        type = type,
-        name = name,
-    }
-    data:extend{new}
-    return true
-end
+--[[
+type = "technology",
+name = "military",
+icon = "__base__/graphics/technology/military.png",
+effects =
+{
+  {
+    type = "unlock-recipe",
+    recipe = "submachine-gun"
+  },
+  {
+    type = "unlock-recipe",
+    recipe = "shotgun"
+  },
+  {
+    type = "unlock-recipe",
+    recipe = "shotgun-shell"
+  }
+},
+unit =
+{
+  count = 10,
+  ingredients = {{"science-pack-1", 1}},
+  time = 15
+},
+order = "e-a-a"
+}
+--]]
 
-function Technology:get(tech_name, create_new)
+-- local function create_technology_prototype(name)
+--     local new = {
+--         type = type,
+--         name = name,
+--     }
+--     data:extend{new}
+--     return true
+-- end
+
+function Technology:get(tech_name)
     self.fail_if_missing(tech_name, "Technology name is required")
 
-    if create_new then
-        create_technology_prototype(tech_name)
-    end
+    -- if create_new then
+    --     create_technology_prototype(tech_name)
+    -- end
 
     local object = data.raw["technology"][tech_name]
     if object then
@@ -34,7 +63,14 @@ function Technology:get(tech_name, create_new)
     return self
 end
 
-function Technology:add_unlock()
+function Technology:add_unlock(recipe, unlock_type)
+    self.fail_if_missing(recipe)
+    if self:valid("technology") then
+        unlock_type = (not unlock_type and "unlock-recipe") or unlock_type
+        if unlock_type == "unlock-recipe" and data.raw["recipe"][recipe] then
+            self.effects = self.effects or {}
+        end
+    end
 end
 
 function Technology:remove_unlock()

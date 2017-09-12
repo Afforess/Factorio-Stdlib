@@ -7,10 +7,10 @@ end
 
 local Core = require 'stdlib/core'
 
-Data = {} --luacheck: allow defined top
+local Data = {} --luacheck: allow defined top
 setmetatable(Data, {__index = Core})
 
-Data.default_options = {
+Data._default_options = {
     ["silent"] = false,
     ["fail"] = false,
     ['verbose'] = false,
@@ -19,7 +19,7 @@ Data.default_options = {
 local function get_options(...)
     local tuple = {}
     for _, arg in ipairs({...}) do
-        tuple[#tuple + 1] = Data.default_options[arg] or false
+        tuple[#tuple + 1] = Data._default_options[arg] or false
     end
     return table.unpack(tuple)
 end
@@ -103,20 +103,6 @@ function Data.data_methods(this)
     }
     return setmetatable(this, obj)
 end
-
--- render layers
--- "tile-transition", "resource", "decorative", "remnants", "floor", "transport-belt-endings", "corpse",
--- "floor-mechanics", "item", "lower-object", "object", "higher-object-above", "higher-object-under",
--- "wires", "lower-radius-visualization", "radius-visualization", "entity-info-icon", "explosion",
--- "projectile", "smoke", "air-object", "air-entity-info-con", "light-effect", "selection-box", "arrow", "cursor"
-
--- collision masks
--- "ground-tile", "water-tile", "resource-layer", "floor-layer", "item-layer",
--- "object-layer", "player-layer", "ghost-layer", "doodad-layer", "not-colliding-with-itself"
-
---Data.add_fields(Data, require 'stdlib/data/developer/developer')
---Data.add_fields(Data, require 'stdlib/data/modules/data_select')
---Data.Recipe = {select = require 'stdlib/data/modules/recipe_select'}
 
 --- Change subroup and/or order
 -- @tparam string data_type
@@ -207,6 +193,7 @@ function Data.extract_monolith(filename, x, y, w, h)
     }
 end
 
+--Entity!
 function Data.create_sound(name, file_or_sound_table, volume)
     Data.fail_if_missing(name)
     Data.fail_if_missing(file_or_sound_table)
@@ -241,3 +228,16 @@ function Data.map_to_types(type, map)
 end
 
 return Data
+-- render layers
+-- "tile-transition", "resource", "decorative", "remnants", "floor", "transport-belt-endings", "corpse",
+-- "floor-mechanics", "item", "lower-object", "object", "higher-object-above", "higher-object-under",
+-- "wires", "lower-radius-visualization", "radius-visualization", "entity-info-icon", "explosion",
+-- "projectile", "smoke", "air-object", "air-entity-info-con", "light-effect", "selection-box", "arrow", "cursor"
+
+-- collision masks
+-- "ground-tile", "water-tile", "resource-layer", "floor-layer", "item-layer",
+-- "object-layer", "player-layer", "ghost-layer", "doodad-layer", "not-colliding-with-itself"
+
+--Data.add_fields(Data, require 'stdlib/data/developer/developer')
+--Data.add_fields(Data, require 'stdlib/data/modules/data_select')
+--Data.Recipe = {select = require 'stdlib/data/modules/recipe_select'}

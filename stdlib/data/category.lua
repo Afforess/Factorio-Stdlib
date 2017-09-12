@@ -14,14 +14,17 @@ local category_type_map = {
     ["resource-category"] = true,
 }
 
-local function create_prototype(name, type)
+local function create_category_prototype(name, type)
     if data.raw[type] then
-        local new = {
-            type = type,
-            name = name,
-        }
-        data:extend{new}
-        return true
+        if not data.raw[type][name] then
+            local new = {
+                type = type,
+                name = name,
+            }
+            data:extend{new}
+            return true
+        end
+        return false
     else
         local tstring = {"Prototype creation failed", "type = "..type, "name = "..name}
         error(table.concat(tstring))
@@ -34,7 +37,7 @@ function Category:get(category_name, category_type, create_new)
     local types = self.map_to_types(category_type, category_type_map)
 
     if create_new and category_type then
-        create_prototype(category_name, category_type)
+        create_category_prototype(category_name, category_type)
     end
 
     for type_name in pairs(types) do

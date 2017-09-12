@@ -84,7 +84,7 @@ local function format(ingredient, result_count)
             if item:valid() then
                 object = table.deepcopy(ingredient)
                 if not object.amount and not (object.amount_min and object.amount_max and object.probability) then
-                    error("Object table requires amount or probabilities")
+                    error("Ingredient table requires amount or probabilities")
                 end
             end
         elseif #ingredient > 0 then
@@ -142,13 +142,6 @@ local function replace_ingredient(ingredients, find, replace, replace_name_only)
         end
     end
 end
-
--- returns a formated product table
--- local function format_product()
--- local object
---
--- return object
--- end
 
 --- Add an ingredient to a recipe
 -- @tparam string|Concepts.ingredient normal

@@ -2,10 +2,17 @@ require 'spec/setup/defines'
 local Area = require 'stdlib/area/area'
 
 describe('Area', function()
-    it('should validate the size of an area', function()
-        assert.same(25, Area.size({{0,0}, {5,5}}))
-        assert.same(100, Area.size({{-5,-5}, {5,5}}))
-        assert.same(25, Area.size({{-2.5,2.5}, {2.5,7.5}}))
+
+    describe('Constructors', function()
+
+    end)
+
+    describe('size', function()
+        it('should validate the size of an area', function()
+            assert.same(25, Area.size({{0,0}, {5,5}}))
+            assert.same(100, Area.size({{-5,-5}, {5,5}}))
+            assert.same(25, Area.size({{-2.5,2.5}, {2.5,7.5}}))
+        end)
     end)
 
     it('should validate the area is normalized correctly', function()
@@ -138,7 +145,6 @@ describe('Area', function()
         assert.same(center, Area.tile_center_points(area))
     end)
 
-
     it('should return a string representation of an area', function()
         local area = {{0, -5}, {x = 3, y = -3}}
         local s = "{left_top = {x = 0, y = -5}, right_bottom = {x = 3, y = -3}}"
@@ -202,5 +208,8 @@ describe('Area', function()
             assert.same({ x = 0, y = -1.5 }, Area.to_selection_area(entity).left_top)
             assert.same({ x = 2, y = 0.5 }, Area.to_selection_area(entity).right_bottom)
         end)
+    end)
+
+    describe('Metamethods', function()
     end)
 end)

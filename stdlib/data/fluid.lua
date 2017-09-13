@@ -1,8 +1,8 @@
 --- Fluid
 -- @classmod Fluid
 
-local Data = require('stdlib/data/data')
 local Fluid = {}
+setmetatable(Fluid, {__index = require("stdlib/data/core")})
 
 function Fluid:get(fluid)
     self.fail_if_missing(fluid, "fluid is required")
@@ -19,6 +19,6 @@ function Fluid:get(fluid)
     self.log(msg)
     return self
 end
+Fluid:set_caller(Fluid.get)
 
-Data.data_methods(Fluid, "fluid")
 return Fluid

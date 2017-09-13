@@ -3,29 +3,29 @@ local Data = setmetatable({}, {__index = require 'stdlib/data/core'})
 -- this metatable is set on recipes, to control access to ingredients and results
 Data._select_metatable = {
     new = function()
-    local self = {}
-    self.__index = function(tbl, key)
-        if key == 'apply' then
-            return function(k, v)
-                table.each(tbl,
-                    function(obj)
-                        obj[k] = v
-                    end
-                )
-                return tbl
+        local self = {}
+        self.__index = function(tbl, key)
+            if key == 'apply' then
+                return function(k, v)
+                    table.each(tbl,
+                        function(obj)
+                            obj[k] = v
+                        end
+                    )
+                    return tbl
+                end
             end
         end
-    end
-    self.__newindex = function(tbl, key, value)
-        table.each(tbl,
-            function(obj)
-                obj[key] = value
-            end
-        )
-    end
+        self.__newindex = function(tbl, key, value)
+            table.each(tbl,
+                function(obj)
+                    obj[key] = value
+                end
+            )
+        end
 
-    return self
-end
+        return self
+    end
 }
 
 --- Selects all data values where the key matches the selector pattern.

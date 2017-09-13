@@ -18,10 +18,12 @@ local Core = {
             __call = call
         }
     end,
+
     _concat = function(lhs, rhs)
         --Sanatize to remove address
         return tostring(lhs):gsub("(%w+)%: %x+", "%1: (ADDR)") .. tostring(rhs):gsub("(%w+)%: %x+", "%1: (ADDR)")
     end,
+
     _rawstring = function (t)
         local m = getmetatable(t)
         local f = m.__tostring
@@ -30,12 +32,19 @@ local Core = {
         m.__tostring = f
         return s
     end,
+
     -- No Doc
     -- This is a helper global and functions until .16 to set the name of your mod in control.lua set _stdlib_mod_name = 'name of your mod'
     _get_mod_name = function(name)
         local ok, mod_name = pcall(function() return script.mod_name end)
         return ok and mod_name or name or _stdlib_mod_name or "stdlib" -- luacheck: ignore _stdlib_mod_name
     end,
+
+    _default_options = {
+        ["silent"] = false,
+        ["fail"] = false,
+        ['verbose'] = false,
+    },
 }
 
 --- Print msg if specified var evaluates to false.
@@ -66,6 +75,28 @@ function Core.add_fields(to, from)
     for k, v in pairs(from) do
         to[k] = v
     end
+end
+
+function Core.set_caller(this, caller)
+    if getmetatable(this) then
+        getmetatable(this).__call = caller
+        return this
+    else
+        error("Metatable not found")
+    end
+end
+
+local function get_options(...)
+    local tuple = {}
+    for _, arg in ipairs({...}) do
+        tuple[#tuple + 1] = Core._default_options[arg] or false
+    end
+    return table.unpack(tuple)
+end
+
+function Core.log(msg)
+    local silent, fail = get_options("silent", "fail")
+    return (fail and error(msg, 2)) or not silent and log(msg)
 end
 
 return Core

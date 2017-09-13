@@ -1,8 +1,8 @@
 --- Item
 -- @classmod Item
 
-local Data = require('stdlib/data/data')
 local Item = {}
+setmetatable(Item, {__index = require("stdlib/data/core")})
 
 local item_types = {
     "item", "ammo", "armor", "gun", "capsule", "repair-tool", "mining-tool", "item-with-entity-data",
@@ -28,6 +28,6 @@ function Item:get(item, itype)
     self.log(msg)
     return self
 end
+Item:set_caller(Item.get)
 
-Data.data_methods(Item)
 return Item

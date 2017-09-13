@@ -1,8 +1,8 @@
 --- Category
 -- @classmod Category
 
-local Data = require('stdlib/data/data')
 local Category = {}
+setmetatable(Category, {__index = require("stdlib/data/core")})
 
 local category_type_map = {
     ["ammo-category"] = true,
@@ -55,6 +55,6 @@ function Category:get(category_name, category_type, create_new)
     self.log(msg)
     return self
 end
+Category:set_caller(Category.get)
 
-Data.data_methods(Category)
 return Category

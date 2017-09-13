@@ -1,12 +1,11 @@
 --- Recipe class
 -- @classmod Recipe
 
-local Data = require('stdlib/data/data')
 local Recipe = {}
+setmetatable(Recipe, {__index = require("stdlib/data/core")})
 
 local Item = require('stdlib/data/item')
 local Fluid = require('stdlib/data/fluid')
-local Category = require('stdlib/data/category')
 
 --- Returns a valid recipe object reference. This is the main getter
 -- @tparam string|data recipe
@@ -24,13 +23,14 @@ function Recipe:get(recipe, opts)
     end
 
     if object then
-        return setmetatable(object, Recipe._mt)
+        return setmetatable(object, Recipe._mt):save_options(opts)
     else
         local msg = "Recipe: "..tostring(recipe).." does not exist."
         self.log(msg, opts)
         return self
     end
 end
+Recipe:set_caller(Recipe.get)
 
 --- Copies a recipe to a new recipe.
 -- @tparam string new_name The new name for the recipe.
@@ -261,21 +261,33 @@ function Recipe:make_difficult(expensive_energy)
 end
 
 --- Change the recipe category
--- @tparam string new_category Crafting category
--- @tparam[opt=false] force_change Change the category even if it doesn't exist
+-- @tparam string category_name Crafting category
+-- @tparam[opt] boolean make_new Create the category if it doesn't exist
 -- @treturn self
 function Recipe:change_category(category_name, make_new)
     if self:valid() then
+        local Category = require('stdlib/data/category')
         self.category = (Category(category_name, "recipe-category", make_new):valid() and category_name) or self.category
     end
     return self
 end
 
---
--- --replace one ing with another in everything
--- function Recipe.replace_ingredient_in_all(recipe)
--- end
---
+function Recipe:add_unlock(tech_name)
+    if self:valid() then
+        local Tech = require("stdlib/data/technology")
+        Tech.add_unlock(self, tech_name)
+    end
+    return self
+end
+
+function Recipe:set_enabled(enabled)
+    if self.normal then
+        self.normal.enabled = enabled
+        self.expensive.enabled = enabled
+        self.enabled = enabled
+    end
+end
+
 -- --add to results, and convert result if needed
 -- function Recipe:add_result(recipe)
 -- end
@@ -286,12 +298,10 @@ end
 -- function Recipe:replace_result(recipe)
 -- end
 
---Data.add_fields(Recipe, require 'stdlib/data/modules/recipe_select')
-
 Recipe._mt = {
     type = "recipe",
-    __index = Recipe
+    __index = Recipe,
+    __call = Recipe.get,
 }
 
-Data.data_methods(Recipe)
 return Recipe

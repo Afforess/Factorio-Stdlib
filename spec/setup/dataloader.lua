@@ -127,10 +127,5 @@ _G.data.raw = {
     },
 }
 
-require("spec/setup/data/ammo-category")
-require("spec/setup/data/equipment-category")
-require("spec/setup/data/fuel-category")
-require("spec/setup/data/recipe-category")
-require("spec/setup/data/module-category")
-require("spec/setup/data/rail-category")
-require("spec/setup/data/resource-category")
+require("spec/setup/data/category")
+require("spec/setup/data/technology")

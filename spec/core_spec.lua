@@ -44,9 +44,9 @@ describe('Core', function()
                     end
                 )
 
-                it('Should not allow getting the metatable',
+                it('Should return an empty table',
                     function()
-                        assert.is_true(getmetatable(Area))
+                        assert.same(0, table.size(getmetatable(Area)))
                     end
                 )
             end

@@ -1,8 +1,8 @@
 --- Pipes
 -- @classmod Pipes
 
-local Data = require('stdlib/data/data')
 local Pipes = {}
+setmetatable(Pipes, {__index = require("stdlib/data/core")})
 
 --Define pipe connection pipe pictures, not all entities use these. This function needs some work though.
 function Pipes.pictures(pictures, shift_north, shift_south, shift_west, shift_east, replacements)
@@ -203,5 +203,4 @@ function Pipes.covers(n, s, w, e)
     return {north = n, south = s, east = e, west = w}
 end
 
-Data.data_methods(Pipes)
 return Pipes

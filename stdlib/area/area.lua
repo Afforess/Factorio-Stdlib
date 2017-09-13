@@ -16,27 +16,22 @@ Area.immutable = false
 
 --- Converts an area in either array or table format to an area with a metatable.
 -- Returns itself if it already has a metatable
--- @tparam Concepts.BoundingBox area_arr the area to convert
--- @tparam boolean copy
+-- @tparam Concepts.BoundingBox area the area to convert
+-- @tparam boolean new_copy return a new copy
 -- @treturn Concepts.BoundingBox a converted area
-function Area.new(area_arr, copy)
-    Core.fail_if_missing(area_arr, 'missing area value')
+function Area.new(area, new_copy)
+    Core.fail_if_missing(area, 'missing area value')
 
-    if not (copy or Area.immutable) and getmetatable(area_arr) == Area._mt then
-        return area_arr
+    if not (new_copy or Area.immutable) and getmetatable(area) == Area._mt then
+        return area
     end
 
-    local area
-    if #area_arr == 2 then
-        area = {left_top = Position.new(area_arr[1], copy), right_bottom = Position.new(area_arr[2], copy)}
-    elseif area_arr['left_top'] then
-        area = {left_top = Position.new(area_arr.left_top, copy), right_bottom = Position.new(area_arr.right_bottom, copy)}
-    else
-        error("malformed area")
-    end
-    area.orientation = area_arr.orientation
+    local left_top = Position.new(area.left_top or area[1], true)
+    local right_bottom = Position.new(area.right_bottom or area[2], true)
+    local new_area = {left_top = left_top, right_bottom = right_bottom}
+    new_area.orientation = area.orientation
 
-    return setmetatable(area, Area._mt)
+    return setmetatable(new_area, Area._mt)
 end
 
 --- Deprecated
@@ -45,22 +40,22 @@ end
 Area.to_table = Area.new
 
 --- Creates an area from the two positions p1 and p2.
--- @tparam number x1 x-position of left_top, first position
--- @tparam number y1 y-position of left_top, first position
--- @tparam number x2 x-position of right_bottom, second position
--- @tparam number y2 y-position of right_bottom, second position
+-- @tparam[opt=0] number x1 x-position of left_top, first position
+-- @tparam[opt=0] number y1 y-position of left_top, first position
+-- @tparam[opt=0] number x2 x-position of right_bottom, second position
+-- @tparam[opt=0] number y2 y-position of right_bottom, second position
 -- @treturn Concepts.BoundingBox the area in a table format
 function Area.construct(...)
+
     local args = {...}
-    if #args < 4 then error("Wrong # of arguments", 2) end
 
-    local a = (type(args[1]) == "table" and 1) or 0
+    --self was passed as first argument
+    local t = (type(args[1]) == "table" and 1) or 0
 
-    return Area.new{ left_top = {x = args[1+a], y = args[2+a]}, right_bottom = {x = args[3+a], y = args[4+a]} }
-end
+    local lt_x, lt_y = args[1+t] or 0, args[2+t] or 0
+    local rb_x, rb_y = args[3+t] or 0, args[4+t]
 
-function Area.empty()
-    return Area.construct(0, 0, 0, 0)
+    return Area.new{{lt_x, lt_y}, {rb_x, rb_y}}
 end
 
 --- Creates an area that is a copy of the given area.

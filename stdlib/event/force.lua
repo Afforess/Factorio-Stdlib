@@ -5,14 +5,16 @@
 -- <p>This module registers the following events: `on_init`, `on_configuration_changed`, `on_player_created`, and `on_player_removed`.
 -- @module Force
 -- @usage
--- local Force = require 'stdlib/event/force'
+-- local Force = require('stdlib/event/force')
 -- -- The fist time this is required it will register force creation events
 
-local Core = require 'stdlib/core'
-local Game = require 'stdlib/game'
-require 'stdlib/event/event'
+require('stdlib/event/event')
 
-local Force = {}
+local Force = {_module_name = "Force"}
+setmetatable(Force, {__index = require('stdlib/core')})
+
+local fail_if_missing = Force.fail_if_missing
+local Game = require('stdlib/game')
 
 -- return new default force object
 local function new(force_name)
@@ -27,13 +29,13 @@ end
 -- @treturn LuaForce the force instance
 -- @treturn table the force's global data
 -- @usage
--- local Force = require 'stdlib/event/force'
+-- local Force = require('stdlib/event/force')
 -- local force_name, force_data = Force.get("player")
 -- local force_name, force_data = Force.get(game.forces["player"])
 -- -- Returns data for the force named "player" from either a string or LuaForce object
 function Force.get(force)
     force = Game.get_force(force)
-    Core.fail_if_missing(force, 'force is missing')
+    fail_if_missing(force, 'force is missing')
     return game.forces[force.name], global.forces[force.name] or Force.init(force.name)
 end
 

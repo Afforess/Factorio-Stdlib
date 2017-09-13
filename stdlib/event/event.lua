@@ -13,18 +13,8 @@
 -- @module Event
 -- @usage require("stdlib/event/event")
 
-local Core = require 'stdlib/core'
-
-local function is_valid_id(event_id)
-    if not (type(event_id) == "number" or type(event_id) == "string") then
-        error("Invalid Event Id, Must be string or int, or array of strings and/or ints, Passed in :"..event_id, 3)
-    end
-    if (type(event_id) == "number" and event_id < -3) then
-        error("event_id must be greater than -3, Passed in: "..event_id, 3)
-    end
-end
-
 Event = { --luacheck: allow defined top
+    _module_name = "Event",
     _registry = {},
     core_events = {
         init = -1,
@@ -56,6 +46,18 @@ Event = { --luacheck: allow defined top
         end
     }
 }
+setmetatable(Event, {__index = require('stdlib/core')})
+
+local fail_if_missing = Event.fail_if_missing
+
+local function is_valid_id(event_id)
+    if not (type(event_id) == "number" or type(event_id) == "string") then
+        error("Invalid Event Id, Must be string or int, or array of strings and/or ints, Passed in :"..event_id, 3)
+    end
+    if (type(event_id) == "number" and event_id < -3) then
+        error("event_id must be greater than -3, Passed in: "..event_id, 3)
+    end
+end
 
 --- Registers a handler for the given events.
 -- If a `nil` handler is passed, remove the given events and stop listening to them.
@@ -75,7 +77,7 @@ Event = { --luacheck: allow defined top
 -- @tparam function handler the function to call when the given events are triggered
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.register(event_ids, handler)
-    Core.fail_if_missing(event_ids, "missing event_ids argument")
+    fail_if_missing(event_ids, "missing event_ids argument")
 
     event_ids = (type(event_ids) == "table" and event_ids) or {event_ids}
 
@@ -191,8 +193,8 @@ end
 -- @tparam function handler the handler to remove
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.remove(event_ids, handler)
-    Core.fail_if_missing(event_ids, "missing event_ids argument")
-    Core.fail_if_missing(handler, "missing handler argument")
+    fail_if_missing(event_ids, "missing event_ids argument")
+    fail_if_missing(handler, "missing handler argument")
 
     event_ids = (type(event_ids) == "table" and event_ids) or {event_ids}
 

@@ -1,4 +1,4 @@
-require 'spec/setup/defines'
+require('spec/setup/defines')
 _G.remote = {
     interfaces={}
 }
@@ -20,7 +20,7 @@ _G.script = {
 
 _G.global = { }
 
-require 'stdlib/event/time'
+require('stdlib/event/time')
 
 local long_tests = false
 

@@ -1,6 +1,6 @@
-require "spec/setup/defines"
-require "stdlib/utils/table"
-require "stdlib/event/event"
+require('spec/setup/defines')
+require('stdlib/utils/table')
+require('stdlib/event/event')
 
 describe("Force",
     function()

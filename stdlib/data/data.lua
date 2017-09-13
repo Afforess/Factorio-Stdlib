@@ -125,6 +125,6 @@ return Data
 -- "ground-tile", "water-tile", "resource-layer", "floor-layer", "item-layer",
 -- "object-layer", "player-layer", "ghost-layer", "doodad-layer", "not-colliding-with-itself"
 
---Data.add_fields(Data, require 'stdlib/data/developer/developer')
---Data.add_fields(Data, require 'stdlib/data/modules/data_select')
---Data.Recipe = {select = require 'stdlib/data/modules/recipe_select'}
+--Data.add_fields(Data, require('stdlib/data/developer/developer'))
+--Data.add_fields(Data, require('stdlib/data/modules/data_select'))
+--Data.Recipe = {select = require('stdlib/data/modules/recipe_select')}

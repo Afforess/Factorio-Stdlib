@@ -1,4 +1,4 @@
-local World = require "spec/setup/world"
+local World = require('spec/setup/world')
 World.Debug.allow_print = true
 
 describe("event.opened",

@@ -1,4 +1,4 @@
-local Data = setmetatable({}, {__index = require 'stdlib/data/core'})
+local Data = setmetatable({}, {__index = require('stdlib/data/core')})
 
 -- this metatable is set on recipes, to control access to ingredients and results
 Data._select_metatable = {

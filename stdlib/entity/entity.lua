@@ -2,11 +2,13 @@
 -- @module Entity
 -- @usage local Entity = require('stdlib/entity/entity')
 
-local Core = require 'stdlib/core'
-local Game = require 'stdlib/game'
-local Area = require 'stdlib/area/area'
+Entity = {_module_name = "Entity"} --luacheck: allow defined top
+setmetatable(Entity, {__index = require('stdlib/core')})
 
-Entity = {} --luacheck: allow defined top
+local fail_if_missing = Entity.fail_if_missing
+local Game = require('stdlib/game')
+local Area = require('stdlib/area/area')
+
 
 --- Converts an entity and its @{LuaEntityPrototype.selection_box|selection_box} to the area around it.
 -- @function to_selection_area
@@ -25,8 +27,8 @@ Entity.to_collision_area = Area.to_collision_area
 -- @tparam string field_name the field name
 -- @treturn boolean true if the entity has access to the field, false if the entity threw an exception when trying to access the field
 function Entity.has(entity, field_name)
-    Core.fail_if_missing(entity, "missing entity argument")
-    Core.fail_if_missing(field_name, "missing field name argument")
+    fail_if_missing(entity, "missing entity argument")
+    fail_if_missing(field_name, "missing field name argument")
 
     local status = pcall(function() return entity[field_name] end)
     return status
@@ -38,7 +40,7 @@ end
 -- @tparam LuaEntity entity the entity to look up
 -- @treturn ?|nil|Mixed the user data, or nil if no data exists for the entity
 function Entity.get_data(entity)
-    Core.fail_if_missing(entity, "missing entity argument")
+    fail_if_missing(entity, "missing entity argument")
     if not global._entity_data then return nil end
 
     local unit_number = entity.unit_number
@@ -65,7 +67,7 @@ end
 -- @tparam ?|nil|Mixed data the data to set, or nil to delete the data associated with the entity
 -- @treturn ?|nil|Mixed the previous data associated with the entity, or nil if the entity had no previous data
 function Entity.set_data(entity, data)
-    Core.fail_if_missing(entity, "missing entity argument")
+    fail_if_missing(entity, "missing entity argument")
 
     if not global._entity_data then global._entity_data = {} end
 
@@ -107,7 +109,7 @@ end
 -- @tparam[opt=true] boolean mode if true, freezes the entity, if false, unfreezes the entity. If not specified, it is set to true
 -- @treturn LuaEntity the entity that has been frozen or unfrozen
 function Entity.set_frozen(entity, mode)
-    Core.fail_if_missing(entity, "missing entity argument")
+    fail_if_missing(entity, "missing entity argument")
     mode = mode == false and true or false
     entity.active = mode
     entity.operable = mode
@@ -120,7 +122,7 @@ end
 -- @tparam[opt=true] boolean mode if true, makes the entity indestructible, if false, makes the entity destructable
 -- @treturn LuaEntity the entity that has been made indestructable or destructable
 function Entity.set_indestructible(entity, mode)
-    Core.fail_if_missing(entity, "missing entity argument")
+    fail_if_missing(entity, "missing entity argument")
     mode = mode == false and true or false
     entity.minable = mode
     entity.destructible = mode

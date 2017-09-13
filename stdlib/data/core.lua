@@ -2,8 +2,27 @@ if _G.remote and _G.script then
     error("Data Modules can only be required in the data stage", 2)
 end
 
-local Core = {}
+local Core = {
+    _default_options = {
+        ["silent"] = false,
+        ["fail"] = false,
+        ['verbose'] = false,
+    },
+}
 setmetatable(Core, {__index = require("stdlib/core")})
+
+local function get_options(...)
+    local tuple = {}
+    for _, arg in ipairs({...}) do
+        tuple[#tuple + 1] = Core._default_options[arg] or false
+    end
+    return table.unpack(tuple)
+end
+
+function Core.log(msg)
+    local silent, fail = get_options("silent", "fail")
+    return (fail and error(msg, 2)) or not silent and log(msg)
+end
 
 function Core.map_to_types(type, map)
     if type then

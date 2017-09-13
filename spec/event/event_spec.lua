@@ -1,7 +1,7 @@
-require 'spec/setup/defines'
-require "stdlib/utils/string"
-require 'stdlib/utils/table'
-require "stdlib/event/event"
+require('spec/setup/defines')
+require('stdlib/utils/string')
+require('stdlib/utils/table')
+require('stdlib/event/event')
 
 local test_function = {f = function(x) _G.someVariable = x end, g = function(event) event.entity.valid = false end}
 local function_a = function (arg) test_function.f(arg.tick) end

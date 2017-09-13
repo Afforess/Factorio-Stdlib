@@ -6,9 +6,9 @@
 -- local LOGGER = require('stdlib/log/logger').new(...)
 -- -- and to use the same LOGGER in multiple require files make it global by removing 'local'.
 
-local Core = require 'stdlib/core'
-
-Logger = {} --luacheck: allow defined top
+Logger = {_module_name = "Logger"} --luacheck: allow defined top
+setmetatable(Logger, {__index = require('stdlib/core')})
+local fail_if_missing = Logger.fail_if_missing
 
 --- Creates a new logger object.
 -- In debug mode, the logger writes to file immediately, otherwise the logger buffers the lines.
@@ -32,7 +32,7 @@ Logger = {} --luacheck: allow defined top
 -- @tparam[opt={...}] options options a table with optional arguments
 -- @return (<span class="types">@{Logger}</span>) the logger instance
 function Logger.new(mod_name, log_name, debug_mode, options)
-    Core.fail_if_missing(mod_name, "Logger must be given a mod_name as the first argument")
+    fail_if_missing(mod_name, "Logger must be given a mod_name as the first argument")
 
     log_name = log_name or "main"
     options = options or {}

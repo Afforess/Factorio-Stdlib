@@ -2,9 +2,10 @@
 -- @module Color
 -- @usage local Color = require('stdlib/color/color')
 
-local Core = require 'stdlib/core'
+Color = {_module_name = "Color"} --luacheck: allow defined top
+setmetatable(Color, {__index = require("stdlib/core")})
 
-Color = {} --luacheck: allow defined top
+local fail_if_missing = Color.fail_if_missing
 
 --- Set a value for the alpha channel in the given color table.
 -- `color.a` represents the alpha channel in the given color table.
@@ -53,7 +54,7 @@ end
 -- @tparam[opt=1] float alpha the alpha value to set; such that ***[ 0 &#8924; value &#8924; 1 ]***
 -- @treturn Concepts.Color a color table with RGB converted from Hex and with alpha
 function Color.from_hex(hex, alpha)
-    Core.fail_if_missing(hex, "missing color hex value")
+    fail_if_missing(hex, "missing color hex value")
     if hex:find("#") then hex = hex:sub(2) end
     if not(#hex == 6) then error("invalid color hex value: "..hex)  end
     local number = tonumber(hex, 16)

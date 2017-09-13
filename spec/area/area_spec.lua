@@ -1,5 +1,5 @@
-require 'spec/setup/defines'
-local Area = require 'stdlib/area/area'
+require('spec/setup/defines')
+local Area = require('stdlib/area/area')
 
 describe('Area', function()
 

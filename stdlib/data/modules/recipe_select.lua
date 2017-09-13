@@ -1,5 +1,5 @@
 local Recipe = {}
-local data_select = require 'stdlib/data/modules/data_select'
+local data_select = require('stdlib/data/modules/data_select')
 
 -- this metatable is set on recipes, to control access to ingredients and results
 Recipe._item_metatable = {

@@ -2,13 +2,14 @@
 -- @module Resource
 -- @usage local Resource = require('stdlib/entity/resource')
 
-local Core = require 'stdlib/core'
-local Surface = require 'stdlib/area/surface'
-local Area = require 'stdlib/area/area'
-local Tile = require 'stdlib/area/tile'
-local Queue = require 'stdlib/queue/queue'
+Resource = {_module_name = "Resource"} --luacheck: allow defined top
+setmetatable(Resource, {__index = require('stdlib/core')})
 
-Resource = {}--luacheck: allow defined top
+local fail_if_missing = Resource.fail_if_missing
+local Surface = require('stdlib/area/surface')
+local Area = require('stdlib/area/area')
+local Tile = require('stdlib/area/tile')
+local Queue = require('stdlib/queue/queue')
 
 --- Gets all resource entities at the specified position and surface.
 -- Adapted from *YARM/resmon.lua &rarr; find\_resource\_at*
@@ -16,11 +17,11 @@ Resource = {}--luacheck: allow defined top
 -- @tparam Concepts.Position position the position to check
 -- @treturn {nil|LuaEntity,...} an array of resource entities or nil if none found
 function Resource.get_resources_at(surface, position)
-    Core.fail_if_missing(surface, "missing surface")
-    Core.fail_if_missing(position, "missing position")
+    fail_if_missing(surface, "missing surface")
+    fail_if_missing(position, "missing position")
     local surfaces = Surface.lookup(surface)
     if #surfaces ~= 1 then
-        Core.fail_if_missing(surface, "invalid surface")
+        fail_if_missing(surface, "invalid surface")
     end
 
     local tile_at_position = Tile.from_position(position)
@@ -40,8 +41,8 @@ end
 -- @tparam Concepts.Position position the position to check
 -- @return (<span class="types">{@{nil}} or {[@{string} &lt;resource-type&gt;] = {@{LuaEntity},...},...}</span>) a map of resource types to resource entities or empty array if they don't exist
 function Resource.get_resource_patches_at(surface, position)
-    Core.fail_if_missing(surface, "missing surface")
-    Core.fail_if_missing(position, "missing position")
+    fail_if_missing(surface, "missing surface")
+    fail_if_missing(position, "missing position")
 
     -- get the initial resource tile if there is one at the given position
     local all_resource_entities = Resource.get_resources_at(surface, position)
@@ -64,12 +65,12 @@ end
 -- @tparam string type the resource type (example: "iron-ore")
 -- @treturn {nil|LuaEntity,...} an array containing all resources in the resource patch, or an empty array if there are no resources there
 function Resource.get_resource_patch_at(surface, position, type)
-    Core.fail_if_missing(surface, "missing surface")
-    Core.fail_if_missing(position, "missing position")
-    Core.fail_if_missing(position, "missing ore name")
+    fail_if_missing(surface, "missing surface")
+    fail_if_missing(position, "missing position")
+    fail_if_missing(position, "missing ore name")
     local surfaces = Surface.lookup(surface)
     if #surfaces ~= 1 then
-        Core.fail_if_missing(surface, "invalid surface")
+        fail_if_missing(surface, "invalid surface")
     end
     surface = table.first(surfaces)
 
@@ -152,7 +153,7 @@ end
 -- @tparam {string,...} resource_names the names of the resource entities
 -- @treturn {nil|LuaEntity,...} a new array containing the entities matching the given resource names or nil if no matches were found
 function Resource.filter_resources(resources, resource_names)
-    Core.fail_if_missing(resources, "missing resource entities list")
+    fail_if_missing(resources, "missing resource entities list")
 
     if not resource_names or #resource_names == 0 then
         return resources
@@ -171,7 +172,7 @@ end
 -- @tparam {LuaEntity,...} resource_patch the resource patch
 -- @treturn Concepts.BoundingBox the area of the resource patch
 function Resource.get_resource_patch_bounds(resource_patch)
-    Core.fail_if_missing(resource_patch, "missing resource patch")
+    fail_if_missing(resource_patch, "missing resource patch")
     local min_x = math.huge
     local min_y = math.huge
     local max_x = -math.huge

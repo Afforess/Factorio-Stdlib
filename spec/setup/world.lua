@@ -33,7 +33,7 @@ _G.print = function(...) --luacheck: ignore print
 end
 
 --Bring serpent in for debug work
-_G.serpent = require "serpent"
+_G.serpent = require('serpent')
 
 --This is our print override
 local print_buffer = function(msg, group)

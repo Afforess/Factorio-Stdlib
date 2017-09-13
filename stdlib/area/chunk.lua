@@ -4,11 +4,12 @@
 -- @usage local Chunk = require('stdlib/area/chunk')
 -- @see Concepts.ChunkPosition
 
-local Core = require 'stdlib/core'
-local Area = require 'stdlib/area/area'
-local Position = require 'stdlib/area/position'
+Chunk = {_module_name = "Chunk"} --luacheck: allow defined top
+setmetatable(Chunk, {__index = require('stdlib/core')})
 
-Chunk = {} --luacheck: allow defined top
+local fail_if_missing = Chunk.fail_if_missing
+local Area = require('stdlib/area/area')
+local Position = require('stdlib/area/position')
 
 local MAX_UINT = 4294967296
 
@@ -35,7 +36,7 @@ end
 -- @tparam Concepts.ChunkPosition chunk_pos the chunk position
 -- @treturn Concepts.BoundingBox the chunk's area
 function Chunk.to_area(chunk_pos)
-    Core.fail_if_missing(chunk_pos, "missing chunk_pos argument")
+    fail_if_missing(chunk_pos, "missing chunk_pos argument")
     chunk_pos = Position.new(chunk_pos)
 
     local left_top = Position.new({ x = chunk_pos.x * 32, y = chunk_pos.y * 32 })
@@ -53,8 +54,8 @@ end
 -- @tparam[opt] Mixed default_value the user data to set for the chunk and returned if the chunk had no user data
 -- @treturn ?|nil|Mixed the user data **OR** *nil* if it does not exist for the chunk and if no default_value was set
 function Chunk.get_data(surface, chunk_pos, default_value)
-    Core.fail_if_missing(surface, "missing surface argument")
-    Core.fail_if_missing(chunk_pos, "missing chunk_pos argument")
+    fail_if_missing(surface, "missing surface argument")
+    fail_if_missing(chunk_pos, "missing chunk_pos argument")
     if not global._chunk_data then
         if not default_value then return nil end
         global._chunk_data = {}
@@ -77,8 +78,8 @@ end
 -- @tparam ?|nil|Mixed data the user data to set **OR** *nil* to erase the existing user data for the chunk
 -- @treturn ?|nil|Mixed the previous user data associated with the chunk **OR** *nil* if the chunk had no previous user data
 function Chunk.set_data(surface, chunk_pos, data)
-    Core.fail_if_missing(surface, "missing surface argument")
-    Core.fail_if_missing(chunk_pos, "missing chunk_pos argument")
+    fail_if_missing(surface, "missing surface argument")
+    fail_if_missing(chunk_pos, "missing chunk_pos argument")
     if not global._chunk_data then global._chunk_data = {} end
 
     local idx = Chunk.get_index(surface, chunk_pos)
@@ -94,8 +95,8 @@ end
 -- @tparam Concepts.ChunkPosition chunk_pos
 -- @treturn int the chunk ID
 function Chunk.get_index(surface, chunk_pos)
-    Core.fail_if_missing(surface, "missing surface argument")
-    Core.fail_if_missing(chunk_pos, "missing chunk_pos argument")
+    fail_if_missing(surface, "missing surface argument")
+    fail_if_missing(chunk_pos, "missing chunk_pos argument")
     if not global._next_chunk_index then global._next_chunk_index = 0 end
     if not global._chunk_indexes then global._chunk_indexes = {} end
 
@@ -115,4 +116,4 @@ function Chunk.get_index(surface, chunk_pos)
     return surface_chunks[chunk_pos.x][chunk_pos.y]
 end
 
-return setmetatable(Chunk, Core._protect("Chunk"))
+return Chunk:_protect()

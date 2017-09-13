@@ -2,9 +2,10 @@
 -- @module Inventory
 -- @usage local Inventory = require('stdlib/entity/inventory')
 
-local Core = require 'stdlib/core'
+Inventory = {_module_name = "Inventory"} --luacheck: allow defined top
+setmetatable(Inventory, {__index = require('stdlib/core')})
 
-Inventory = {} --luacheck: allow defined top
+local fail_if_missing = Inventory.fail_if_missing
 
 --- Copies the contents of source inventory to destination inventory by using @{Concepts.SimpleItemStack}.
 -- @tparam LuaInventory src the source inventory
@@ -12,8 +13,8 @@ Inventory = {} --luacheck: allow defined top
 -- @tparam[opt=false] boolean clear clear the contents of the source inventory
 -- @treturn {Concepts.SimpleItemStack,...} an array of left over items that could not be inserted into the destination
 function Inventory.copy_as_simple_stacks(src, dest, clear)
-    Core.fail_if_missing(src, "missing source inventory")
-    Core.fail_if_missing(dest, "missing destination inventory")
+    fail_if_missing(src, "missing source inventory")
+    fail_if_missing(dest, "missing destination inventory")
 
     local left_over = {}
     for i = 1, #src do

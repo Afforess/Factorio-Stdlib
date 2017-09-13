@@ -5,10 +5,9 @@
 -- @usage require('stdlib/event/openend')
 -- Event.register(Event.on_player_opened, function_to_run_when_something_is_opened)
 
-require 'stdlib/core'
-require 'stdlib/event/event'
-
-Event.Opened = {}
+local Opened = {_module_name = "Opened"}
+setmetatable(Opened, {__index = require('stdlib/core')})
+require('stdlib/event/event')
 
 --- Event data returned
 -- @tfield int name unique event ID for the event
@@ -25,7 +24,7 @@ local function create_globals()
     global._opened_guis = global._opened_guis or {}
 end
 
-function Event.Opened.raise_opened_closed_events(event)
+function Opened.raise_opened_closed_events(event)
     if event.tick % 30 == 0 then -- check twice per second
 
         for _, player in pairs( game.connected_players ) do
@@ -58,8 +57,9 @@ function Event.Opened.raise_opened_closed_events(event)
         end--for player
     end--if event.tick
 end
-Event.register(defines.events.on_tick, Event.Opened.raise_opened_closed_events)
+Event.register(defines.events.on_tick, Opened.raise_opened_closed_events)
 
 Event.register(Event.core_events.init_and_config, create_globals)
 
-return Event.Opened
+Event.Opened = Opened
+return Opened

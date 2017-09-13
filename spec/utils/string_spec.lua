@@ -1,4 +1,4 @@
-require 'stdlib/utils/string'
+require('stdlib/utils/string')
 
 describe('String Spec', function()
     describe('string.trim', function()

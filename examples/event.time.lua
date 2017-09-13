@@ -1,5 +1,5 @@
 
-require "stdlib/event/time"
+require('stdlib/event/time')
 
 Event.register(Event.Time.hourly, function(event)
     game.print("hourly event for " .. event.surface.name)

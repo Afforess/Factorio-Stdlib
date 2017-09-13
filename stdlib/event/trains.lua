@@ -6,12 +6,13 @@
 -- Event registration is performed at the bottom of this file,
 -- once all other functions have been defined
 
-require 'stdlib/core'
-require 'stdlib/event/event'
-local Surface = require 'stdlib/area/surface'
-local Entity = require 'stdlib/entity/entity'
 
-Trains = {} --luacheck: allow defined top
+Trains = {_module_name = "Trains"} --luacheck: allow defined top
+setmetatable(Trains, {__index = require('stdlib/core')})
+require('stdlib/event/event')
+
+local Surface = require('stdlib/area/surface')
+local Entity = require('stdlib/entity/entity')
 
 --- This event fires when a train's ID changes.
 -- <p>The train ID is a property of the main locomotive,

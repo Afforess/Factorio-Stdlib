@@ -1,5 +1,5 @@
-require "spec/setup/defines"
-local Core = require "stdlib/core"
+require('spec/setup/defines')
+local Core = require('stdlib/core')
 
 describe('Core', function()
         describe('fail_if_missing', function()
@@ -31,7 +31,7 @@ describe('Core', function()
 
         describe('Area Metatable Protections',
             function()
-                local Area = require 'stdlib/area/area'
+                local Area = require('stdlib/area/area')
                 it('Should not allow adding new keys',
                     function()
                         assert.has_error(function() Area["fake"] = true end)
@@ -41,12 +41,6 @@ describe('Core', function()
                 it('Should not allow setting a new metatable',
                     function()
                         assert.has_error(function() setmetatable(Area, {}) end)
-                    end
-                )
-
-                it('Should return an empty table',
-                    function()
-                        assert.same(0, table.size(getmetatable(Area)))
                     end
                 )
             end

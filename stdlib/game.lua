@@ -2,13 +2,13 @@
 -- @module Game
 -- @usage local Game = require('stdlib/game')
 
-require 'stdlib/core'
-
 Game = { --luacheck: allow defined top
+    _module_name = "Game",
     VALID_FILTER = function(v)
         return v and v.valid
     end,
 }
+setmetatable(Game, {__index = require('stdlib/core')})
 
 --- Return a valid player object from event, index, string, or userdata
 -- @tparam string|number|LuaPlayer|event mixed

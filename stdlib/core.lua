@@ -3,20 +3,29 @@
 -- @module Core
 -- @usage local Core = require('stdlib/core')
 
-require 'stdlib/utils/table'
-require 'stdlib/utils/string'
-require 'stdlib/utils/iterators'
-require 'stdlib/utils/math'
-require 'stdlib/defines/color'
-require 'stdlib/defines/time'
+require('stdlib/utils/table')
+require('stdlib/utils/string')
+require('stdlib/utils/iterators')
+require('stdlib/utils/math')
+require('stdlib/defines/color')
+require('stdlib/defines/time')
 
 local Core = {
-    _protect = function(module_name, call)
-        return {
-            __newindex = function() error("Attempt to mutatate read-only "..module_name.." Module") end,
-            __metatable = {},
-            __call = call
-        }
+    _module_name = "Core",
+    _protect = function(this, caller, class_name)
+        local meta = getmetatable(this)
+        local name = this._module_name or class_name or "Unknown"
+
+        if meta and not meta.__metatable then
+            meta.__newindex = function() error("Attempt to mutatate read-only "..name.." Module") end
+            meta.__metatable = meta
+            meta.__call = caller
+        end
+        return this
+    end,
+
+    _setmetatable = function(this, meta)
+        return setmetatable(this, meta)
     end,
 
     _concat = function(lhs, rhs)
@@ -39,12 +48,6 @@ local Core = {
         local ok, mod_name = pcall(function() return script.mod_name end)
         return ok and mod_name or name or _stdlib_mod_name or "stdlib" -- luacheck: ignore _stdlib_mod_name
     end,
-
-    _default_options = {
-        ["silent"] = false,
-        ["fail"] = false,
-        ['verbose'] = false,
-    },
 }
 
 --- Print msg if specified var evaluates to false.
@@ -71,12 +74,6 @@ function Core.prequire(module)
     end
 end
 
-function Core.add_fields(to, from)
-    for k, v in pairs(from) do
-        to[k] = v
-    end
-end
-
 function Core.set_caller(this, caller)
     if getmetatable(this) then
         getmetatable(this).__call = caller
@@ -84,19 +81,6 @@ function Core.set_caller(this, caller)
     else
         error("Metatable not found")
     end
-end
-
-local function get_options(...)
-    local tuple = {}
-    for _, arg in ipairs({...}) do
-        tuple[#tuple + 1] = Core._default_options[arg] or false
-    end
-    return table.unpack(tuple)
-end
-
-function Core.log(msg)
-    local silent, fail = get_options("silent", "fail")
-    return (fail and error(msg, 2)) or not silent and log(msg)
 end
 
 return Core

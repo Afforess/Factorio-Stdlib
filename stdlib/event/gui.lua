@@ -2,10 +2,11 @@
 -- @module Gui
 -- @usage local Gui = require('stdlib/event/gui')
 
-local Core = require 'stdlib/core'
-require 'stdlib/event/event'
+Gui = {_module_name = "Gui"} --luacheck: allow defined top
+setmetatable(Gui, {__index = require('stdlib/core')})
+require('stdlib/event/event')
 
-Gui = {} --luacheck: allow defined top
+local fail_if_missing = Gui.fail_if_missing
 
 --- Registers a function for a given event and matching gui element pattern.
 -- @tparam defines.events event_id valid values are `defines.events.on_gui_*` from @{defines.events}
@@ -13,8 +14,8 @@ Gui = {} --luacheck: allow defined top
 -- @tparam function handler the function to call when the event is triggered
 -- @return (<span class="types">@{Gui}</span>)
 function Gui.register(event_id, gui_element_pattern, handler)
-    Core.fail_if_missing(event_id, "missing event name argument")
-    Core.fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
+    fail_if_missing(event_id, "missing event name argument")
+    fail_if_missing(gui_element_pattern, "missing gui name or pattern argument")
 
     if type(gui_element_pattern) ~= "string" then
         error("gui_element_pattern argument must be a string")
@@ -40,7 +41,7 @@ end
 --- Calls the registered handlers.
 -- @tparam {defines.events,...} event an array of @{defines.events} as raised by @{LuaBootstrap.raise_event|script.raise_event}
 function Gui.dispatch(event)
-    Core.fail_if_missing(event, "missing event argument")
+    fail_if_missing(event, "missing event argument")
 
     if event.element and event.element.valid then
         event.tick = event.tick or game.tick
@@ -67,7 +68,7 @@ end
 -- @tparam string gui_element_pattern the name or string regular expression for a handler to remove
 -- @return (<span class="types">@{Gui}</span>)
 function Gui.remove(event_id, gui_element_pattern)
-    Core.fail_if_missing(event_id, "missing event argument")
+    fail_if_missing(event_id, "missing event argument")
 
     if type(gui_element_pattern) ~= "string" then
         error("gui_element_pattern argument must be a string")

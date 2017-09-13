@@ -5,14 +5,15 @@
 -- <p>This module registers the following events: `on_init`, `on_configuration_changed`, `on_player_created`, and `on_player_removed`.
 -- @module Player
 -- @usage
--- local Player = require 'stdlib/event/player'
+-- local Player = require('stdlib/event/player')
 -- -- The fist time this module is required it will register player creation events
 
-local Core = require 'stdlib/core'
-local Game = require 'stdlib/game'
-require 'stdlib/event/event'
+local Player = {_module_name = "Player"}
+setmetatable(Player, {__index = require('stdlib/core')})
+require('stdlib/event/event')
 
-local Player = {}
+local fail_if_missing = Player.fail_if_missing
+local Game = require('stdlib/game')
 
 -- Return new default player object consiting of index and name
 local function new(player_index)
@@ -27,11 +28,11 @@ end
 -- @treturn LuaPlayer the player instance
 -- @treturn table the player's global data
 -- @usage
--- local Player = require 'stdlib/event/player'
+-- local Player = require('stdlib/event/player')
 -- local player, player_data = Player.get(event.player_index)
 function Player.get(player)
     player = Game.get_player(player)
-    Core.fail_if_missing(player, 'Missing player to retrieve')
+    fail_if_missing(player, 'Missing player to retrieve')
     return game.players[player.index], global.players[player.index] or Player.init(player.index)
 end
 

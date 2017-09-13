@@ -2,7 +2,14 @@
 -- @module Config
 -- @usage require('stdlib/config/config')
 
-require 'stdlib/core'
+---
+-- @tfield function new
+-- @tfield function get
+-- @tfield function set
+-- @tfield function delete
+-- @tfield function is_set
+Config = {_module_name = "Config"} --luacheck: allow defined top
+setmetatable(Config, {__index = require("stdlib/core")})
 
 -----------------------------------------------------------------------
 --Setup repeated code for use in sub functions here
@@ -17,14 +24,6 @@ local testReservedCharacters = function(path)
     end
     return nil
 end
-
----
--- @tfield function new
--- @tfield function get
--- @tfield function set
--- @tfield function delete
--- @tfield function is_set
-Config = {} --luacheck: allow defined top
 
 --- Creates a new Config object to ease the management of a config table.
 -- @tparam table config_table the config table to manage

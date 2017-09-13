@@ -5,12 +5,12 @@
 -- @script quickstart
 -- @usage
 -- if DEBUG then
---   require 'stdlib/utils/scripts/quickstart'
+--   require('stdlib/utils/scripts/quickstart')
 -- end
 
-local Core = require 'stdlib/core'
-require 'stdlib/event/event'
-local Area = require 'stdlib/area/area'
+local Core = require('stdlib/core')
+require('stdlib/event/event')
+local Area = require('stdlib/area/area')
 
 if not remote.interfaces["quickstart-script"] then
     local qs_interface = {}

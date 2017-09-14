@@ -20,7 +20,7 @@ describe("Event",
                     on_load = function(callback) _G.on_load = callback end,
                     on_configuration_changed = function(callback) _G.on_configuration_changed = callback end
                 }
-                _G.table.size = table.count_keys
+                _G.table.size = table.size
             end
         )
 

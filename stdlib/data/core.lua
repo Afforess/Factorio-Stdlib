@@ -38,9 +38,9 @@ end
 
 function Core.valid(this, name)
     if name then
-        return getmetatable(this).type == name and this
+        return getmetatable(this).type == name and this or nil
     else
-        return getmetatable(this).type and this
+        return getmetatable(this).type and this or nil
     end
 end
 

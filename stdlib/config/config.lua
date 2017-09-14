@@ -8,6 +8,7 @@
 -- @tfield function set
 -- @tfield function delete
 -- @tfield function is_set
+-- @table Config
 Config = {_module_name = "Config"} --luacheck: allow defined top
 setmetatable(Config, {__index = require("stdlib/core")})
 

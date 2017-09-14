@@ -43,35 +43,31 @@ order = "e-a-a"
 -- end
 
 function Technology:get(tech_name)
-    self.fail_if_missing(tech_name, "Technology name is required")
-
-    -- if create_new then
-    -- create_technology_prototype(tech_name)
-    -- end
-
-    local object = data.raw["technology"][tech_name]
-    if object then
-        local mt = {
-            type = "technology",
-            __index = self
-        }
-        return setmetatable(object, mt)
+    if tech_name then
+        local object = data.raw["technology"][tech_name]
+        if object then
+            local mt = {
+                type = "technology",
+                __index = self
+            }
+            return setmetatable(object, mt)
+        end
     end
-
-    local msg = "Technology: "..tech_name.." does not exist."
+    local msg = "Technology: "..(tech_name or "").." does not exist."
     self.log(msg)
     return self
 end
 Technology:set_caller(Technology.get)
 
-function Technology:add_unlock(recipe, unlock_type)
+function Technology:add_effect(recipe, unlock_type)
     self.fail_if_missing(recipe)
 
+    --todo fix for non recipe types
     local add_unlock = function(technology, name)
         local effects = technology.effects
         effects[#effects + 1] = {
             type = unlock_type,
-            name = name
+            recipe = name
         }
     end
 
@@ -87,10 +83,9 @@ function Technology:add_unlock(recipe, unlock_type)
         end
 
     elseif self:valid("recipe") then
-        log("valid recipe, Tech is "..recipe)
+        unlock_type = "unlock-recipe"
         local tech = Technology(recipe)
         if tech:valid("technology") then
-            --TODO confirm effect doesn't exist already, set enabled to false since this is a recipe obj
             self:set_enabled(false)
             add_unlock(tech, self.name)
         end
@@ -98,10 +93,34 @@ function Technology:add_unlock(recipe, unlock_type)
 
     return self
 end
---luacheck: ignore
-function Technology:remove_unlock()
+
+function Technology:remove_effect(tech_name, unlock_type, name)
+    if self:valid("technology") then
+        return self, name, unlock_type -- TODO finish
+    elseif self:valid("recipe") then
+        if tech_name then
+            local tech = Technology(tech_name):valid()
+            if tech then
+                for index, effect in pairs(tech.effects) do
+                    if effect.type == "unlock-recipe" and effect.recipe == self.name then
+                        table.remove(tech.effects, index)
+                    end
+                end
+            end
+        else
+            for _, tech in pairs(data.raw["technology"]) do
+                for index, effect in pairs(tech.effects) do
+                    if effect.type == "unlock-recipe" and effect.recipe == self.name then
+                        table.remove(tech.effects, index)
+                    end
+                end
+            end
+        end
+    end
+    return self
 end
 
+--luacheck: ignore
 function Technology:add_pack(pack)
     -- item type tool
 end

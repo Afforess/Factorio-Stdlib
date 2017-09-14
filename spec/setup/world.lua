@@ -17,7 +17,7 @@ World.close - Closes the world simulator
 note: save/load/reload havn't been tested yet.
 
 --]]
-
+require('spec/setup/globals')
 local World = {
     Debug = require("spec/setup/debug"),
 }
@@ -32,9 +32,6 @@ _G.print = function(...) --luacheck: ignore print
     end
 end
 
---Bring serpent in for debug work
-_G.serpent = require('serpent')
-
 --This is our print override
 local print_buffer = function(msg, group)
     group = group or "_P_"
@@ -42,20 +39,6 @@ local print_buffer = function(msg, group)
     print(group .. msg)
     return true
 end
-
-_G.log = function() end
-
---Mutate table_size (a factorio lua function) to table.count_keys
-local function count_keys(tbl)
-    if type(tbl) ~= 'table' then return 0 end
-    local count = 0
-    for _ in pairs(tbl) do
-        count = count + 1
-    end
-    return count
-end
-_G.table_size = count_keys
-_G.table.size = count_keys
 
 local override_require = function(replace)
     if replace and not _G._require then
@@ -160,11 +143,6 @@ World.open = function()
         end,
         mod_name = "tests"
     }
-end
-
-World.data_stage = function()
-    setmetatable(_G, meta._G)
-    require("spec/setup/defines")
 end
 
 --If using events make sure to require and register events before calling World.init

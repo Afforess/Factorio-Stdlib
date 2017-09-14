@@ -1,8 +1,11 @@
 require('spec/setup/defines')
 local Core = require('stdlib/core')
 
-describe('Core', function()
-        describe('fail_if_missing', function()
+describe('Core',
+    function()
+
+        describe('fail_if_missing',
+            function()
                 it("should return false if var is true or truthy",
                     function()
                         assert.is_false(Core.fail_if_missing(true, nil))
@@ -29,7 +32,7 @@ describe('Core', function()
             end
         )
 
-        describe('Area Metatable Protections',
+        describe('Metatable Protections',
             function()
                 local Area = require('stdlib/area/area')
                 it('Should not allow adding new keys',

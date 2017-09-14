@@ -25,5 +25,25 @@ _G.data:extend{
             time = 5
         },
         order = "c-a"
+    },
+    {
+        type = "technology",
+        name = "steel-processing-2",
+        icon = "__base__/graphics/technology/steel-processing.png",
+        effects =
+        {
+            {
+                type = "unlock-recipe",
+                recipe = "steel-plate"
+            },
+        },
+        prerequisites = {"steel-processing"},
+        unit =
+        {
+            count = 50,
+            ingredients = {{"science-pack-1", 1}},
+            time = 5
+        },
+        order = "c-a"
     }
 }

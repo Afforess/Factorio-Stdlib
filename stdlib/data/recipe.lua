@@ -84,7 +84,7 @@ local function format(ingredient, result_count)
             if item:valid() then
                 object = table.deepcopy(ingredient)
                 if not object.amount and not (object.amount_min and object.amount_max and object.probability) then
-                    error("Ingredient table requires amount or probabilities")
+                    error("Result table requires amount or probabilities")
                 end
             end
         elseif #ingredient > 0 then
@@ -148,7 +148,6 @@ end
 -- @tparam[opt] string|Concepts.ingredient|boolean expensive
 -- @treturn Recipe
 function Recipe:add_ingredient(normal, expensive)
-    self.fail_if_missing(normal, "normal recipe name is required")
     if self:valid() then
         normal, expensive = get_difficulties(normal, expensive)
 
@@ -171,7 +170,6 @@ end
 -- @tparam string|boolean expensive exepsive recipe to remove, or if true remove normal recipe from both
 -- @treturn Recipe
 function Recipe:remove_ingredient(normal, expensive)
-    self.fail_if_missing(normal, "Normal recipe is required")
     if self:valid() then
         normal, expensive = get_difficulties(normal, expensive)
         if self.normal then
@@ -275,7 +273,15 @@ end
 function Recipe:add_unlock(tech_name)
     if self:valid() then
         local Tech = require("stdlib/data/technology")
-        Tech.add_unlock(self, tech_name)
+        Tech.add_effect(self, tech_name)
+    end
+    return self
+end
+
+function Recipe:remove_unlock(tech_name)
+    if self:valid("recipe") then
+        local Tech = require("stdlib/data/technology")
+        Tech.remove_effect(self, tech_name, "unlock-recipe")
     end
     return self
 end
@@ -288,14 +294,57 @@ function Recipe:set_enabled(enabled)
     end
 end
 
--- --add to results, and convert result if needed
--- function Recipe:add_result(recipe)
+local function convert_result(this)
+    if this.normal then
+        if this.normal.result then
+            this.normal.results = {
+                format(this.normal.result, this.normal.result_count or 1)
+            }
+            this.normal.result = nil
+            this.normal.result_count = nil
+        end
+        if this.expensive.result then
+            this.expensive.results = {
+                format(this.expensive.result, this.expensive.result_count or 1)
+            }
+            this.expensive.result = nil
+            this.expensive.result_count = nil
+        end
+    elseif this.result then
+        this.results = {
+            format(this.result, this.result_count or 1)
+        }
+        this.result = nil
+        this.result_count = nil
+    end
+    return this
+end
+
+--add to results, and convert result if needed
+function Recipe:add_result(normal, expensive, main_product)
+    if self:valid() then
+        normal, expensive = get_difficulties(normal, expensive)
+        convert_result(self)
+
+        if self.normal then
+            if normal then
+                self.normal.main_product = main_product
+            end
+            if expensive then
+                self.expensive.main_product = main_product
+            end
+        elseif normal then
+            self.main_product = main_product
+        end
+
+    end
+    return self
+end
+--
+-- function Recipe:remove_result(normal, expensive, main_product)
 -- end
 --
--- function Recipe:remove_result(recipe)
--- end
---
--- function Recipe:replace_result(recipe)
+-- function Recipe:replace_result(normal, expensive, main_product)
 -- end
 
 Recipe._mt = {

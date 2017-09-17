@@ -48,7 +48,7 @@ function Recipe:copy(new_name)
     end
 end
 
--- Returns a formated ingredient table
+-- Returns a formated ingredient or prodcut table
 local function format(ingredient, result_count)
     --[[
     Ingredient table
@@ -167,7 +167,7 @@ end
 
 --- Remove one ingredient completly
 -- @tparam string normal
--- @tparam string|boolean expensive exepsive recipe to remove, or if true remove normal recipe from both
+-- @tparam string|boolean expensive expensive recipe to remove, or if true remove normal recipe from both
 -- @treturn Recipe
 function Recipe:remove_ingredient(normal, expensive)
     if self:valid() then

@@ -50,7 +50,7 @@ Debug.close = function()
 end
 
 Debug.packages = function(all)
-    local ignore = require('spec/setup/ignore_packs')
+    local ignore = require('spec/setup/utils/ignore_packs')
 
     local packages = {}
     for name in pairs(package.loaded) do
@@ -63,7 +63,7 @@ Debug.packages = function(all)
 end
 
 Debug.G = function(all)
-    local ignore = require("spec/setup/ignore_globs")
+    local ignore = require("spec/setup/utils/lua52_globals")
     local globs = {}
     for name in pairs(_G) do
         if all or not ignore[name] then

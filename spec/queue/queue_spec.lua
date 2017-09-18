@@ -70,6 +70,7 @@ describe('Queue', function()
         it('_first should return the first item in the queue', function()
             queue1:push_first("first")
             assert.same("first", queue1:peek_first())
+            assert.same("first", queue1:peek())
             assert.same("first", queue1[queue1.first])
         end)
 

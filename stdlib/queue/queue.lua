@@ -108,7 +108,7 @@ Queue.pop = Queue.pop_first
 
 --- Shortcut for @{Queue.peek_first}
 -- @function Queue.peek
-Queue.peek = Queue.peek_fist
+Queue.peek = Queue.peek_first
 
 --- Returns true if the given queue is empty.
 -- @param queue (<span class="types">@{Queue}</span>) the queue to check

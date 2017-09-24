@@ -165,7 +165,7 @@ function Recipe:add_ingredient(normal, expensive)
     return self
 end
 
---- Remove one ingredient completly
+--- Remove one ingredient completely
 -- @tparam string normal
 -- @tparam string|boolean expensive expensive recipe to remove, or if true remove normal recipe from both
 -- @treturn Recipe
@@ -270,6 +270,9 @@ function Recipe:change_category(category_name, make_new)
     return self
 end
 
+--- Add to technology as a recipe unlock
+-- @tparam string tech_name Name of the technology to add the unlock too
+-- @treturn self
 function Recipe:add_unlock(tech_name)
     if self:valid() then
         local Tech = require("stdlib/data/technology")
@@ -278,6 +281,9 @@ function Recipe:add_unlock(tech_name)
     return self
 end
 
+--- Remove the recipe unlock from the technology
+-- @tparam string tech_name Name of the technology to remove the unlock from
+-- @treturn self
 function Recipe:remove_unlock(tech_name)
     if self:valid("recipe") then
         local Tech = require("stdlib/data/technology")
@@ -286,66 +292,158 @@ function Recipe:remove_unlock(tech_name)
     return self
 end
 
+--- Set the enabled status of the recipe
+-- @tparam boolean enabled Enable or disable the recipe
+-- @treturn self
 function Recipe:set_enabled(enabled)
     if self.normal then
         self.normal.enabled = enabled
         self.expensive.enabled = enabled
         self.enabled = enabled
     end
+    return self
 end
 
-local function convert_result(this)
-    if this.normal then
-        if this.normal.result then
-            this.normal.results = {
-                format(this.normal.result, this.normal.result_count or 1)
+--- Convert result type to results type
+-- @treturn self
+function Recipe:convert_results()
+    if self:valid("recipe") then
+        if self.normal then
+            if self.normal.result then
+                self.normal.results = {
+                    format(self.normal.result, self.normal.result_count or 1)
+                }
+                self.normal.result = nil
+                self.normal.result_count = nil
+            end
+            if self.expensive.result then
+                self.expensive.results = {
+                    format(self.expensive.result, self.expensive.result_count or 1)
+                }
+                self.expensive.result = nil
+                self.expensive.result_count = nil
+            end
+        elseif self.result then
+            self.results = {
+                format(self.result, self.result_count or 1)
             }
-            this.normal.result = nil
-            this.normal.result_count = nil
+            self.result = nil
+            self.result_count = nil
         end
-        if this.expensive.result then
-            this.expensive.results = {
-                format(this.expensive.result, this.expensive.result_count or 1)
-            }
-            this.expensive.result = nil
-            this.expensive.result_count = nil
-        end
-    elseif this.result then
-        this.results = {
-            format(this.result, this.result_count or 1)
-        }
-        this.result = nil
-        this.result_count = nil
     end
-    return this
+    return self
 end
 
---add to results, and convert result if needed
+function Recipe:set_main_product(main_product, normal, expensive)
+    if self:valid("recipe") then
+        local normal_main, expensive_main
+        if main_product then
+            if type(main_product) == "string" and Item(main_product) then
+                normal_main = normal and main_product
+                expensive_main = expensive and main_product
+            elseif type(main_product) == "boolean" then
+                normal_main = normal and normal.name
+                expensive_main = expensive and expensive.name
+            end
+            if self.normal then
+                self.normal.main_product = normal_main
+                self.expensive.main_product = expensive_main
+            else
+                self.main_product = normal_main
+            end
+        end
+    end
+    return self
+end
+
+function Recipe:remove_main_product(for_normal, for_expensive)
+    if self:valid("recipe") then
+
+        if self.normal then
+            if for_normal then
+                self.normal.main_product = nil
+            end
+            if for_expensive then
+                self.expensive.main_product = nil
+            end
+        elseif for_normal then
+            self.main_product = nil
+        end
+    end
+    return self
+end
+
+
+--- Add a new product to results, converts if needed
+-- @tparam string|Concepts.product normal
+-- @tparam[opt] string|Concepts.product|boolean expensive
+-- @tparam[opt] string main_product
 function Recipe:add_result(normal, expensive, main_product)
     if self:valid() then
         normal, expensive = get_difficulties(normal, expensive)
-        convert_result(self)
+        self:convert_results()
+        self:set_main_product(main_product, normal, expensive)
 
-        if self.normal then
-            if normal then
-                self.normal.main_product = main_product
-            end
-            if expensive then
-                self.expensive.main_product = main_product
-            end
-        elseif normal then
-            self.main_product = main_product
-        end
+        -- if self.normal then
+        --     if normal then
+        --     end
+        --     if expensive then
+        --     end
+        -- elseif normal then
+        -- end
 
     end
     return self
 end
---
--- function Recipe:remove_result(normal, expensive, main_product)
--- end
---
--- function Recipe:replace_result(normal, expensive, main_product)
--- end
+
+--- Remove a product from results, converts if needed
+-- @tparam[opt] string|Concepts.product normal
+-- @tparam[opt] string|Concepts.product|boolean expensive
+-- @tparam[opt] string main_product new main_product to use
+function Recipe:remove_result(normal, expensive, main_product)
+    if self:valid() then
+        normal, expensive = get_difficulties(normal, expensive)
+        self:convert_results()
+        self:set_main_product(main_product, normal, expensive)
+
+        -- if self.normal then
+        --     if normal then
+        --     end
+        --     if expensive then
+        --     end
+        -- elseif normal then
+        -- end
+
+    end
+    return self
+end
+
+--- Remove a product from results, converts if needed
+-- @tparam string|Concepts.product result_name
+-- @tparam[opt] string|Concepts.product normal
+-- @tparam[opt] string|Concepts.product|boolean expensive
+-- @tparam[opt] string main_product
+-- @note normal or expensive is required
+function Recipe:replace_result(result_name, normal, expensive, main_product)
+    if self:valid() and normal or expensive then
+        result_name = format(result_name)
+        if result_name then
+            normal, expensive = get_difficulties(normal, expensive)
+            self:convert_results()
+            self:remove_result(result_name, expensive and result_name)
+            self:set_main_product(main_product, normal, expensive)
+
+            -- if self.normal then
+            --     if normal then
+            --     end
+            --     if expensive then
+            --     end
+            -- elseif normal then
+            -- end
+    end
+    end
+    return self
+end
 
 Recipe._mt = {
     type = "recipe",

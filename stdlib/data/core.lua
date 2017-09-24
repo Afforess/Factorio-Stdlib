@@ -78,6 +78,10 @@ function Core.empty_pictures()
     }
 end
 
+function Core.empty_animation()
+    return Core.empty_pictures()
+end
+
 --- Quick to use empty animation.
 -- @treturn table an empty animations table
 function Core.empty_animations()

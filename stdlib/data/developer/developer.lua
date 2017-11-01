@@ -57,7 +57,7 @@ function Developer.make_test_entities(name)
                 }
             }
         }
-        data:extend{markers}
+        Data:extend{markers}
     end
 
     if not data.raw["electric-energy-interface"]["debug-energy-interface"] then
@@ -73,7 +73,7 @@ function Developer.make_test_entities(name)
         power.vehicle_impact_sound = nil
         power.working_sound = nil
 
-        data:extend{power}
+        Data:extend{power}
     end
 
     if not data.raw["electric-pole"]["debug-substation"] then
@@ -86,13 +86,13 @@ function Developer.make_test_entities(name)
         pole.selection_box = {{-0.5, -0.5}, {0.0, 0.5}}
         pole.collision_mask = {}
         pole.pictures = Developer.empty_pictures()
-        pole.maximum_wire_distance = 100
-        pole.supply_area_distance = 50
+        pole.maximum_wire_distance = 64
+        pole.supply_area_distance = 64
         pole.connection_points = Developer.empty_connection_points(1)
         pole.vehicle_impact_sound = nil
         pole.working_sound = nil
 
-        data:extend{pole}
+        Data:extend{pole}
     end
 
     data.raw.tile["lab-dark-1"].map_color = {r=100, g=100, b=100}
@@ -105,8 +105,8 @@ function Developer.make_test_entities(name)
         localised_description = "Default settings for a debug world",
         order = "z",
         basic_settings = {
-            terrain_segmentation = "none",
-            water = "very-low",
+            terrain_segmentation = "very-low",
+            water = "none",
             autoplace_controls = make_no_controls(),
             height = 128,
             width = 128,

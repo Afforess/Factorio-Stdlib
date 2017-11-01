@@ -8,7 +8,7 @@ local Item = require('stdlib/data/item')
 local Fluid = require('stdlib/data/fluid')
 
 --- Returns a valid recipe object reference. This is the main getter
--- @tparam string|data recipe
+-- @tparam string|table recipe The recipe to use, if string the recipe must be in data.raw.recipe, tables are not verified
 -- @tparam table opts Logging options to pass
 -- @treturn Recipe
 function Recipe:get(recipe, opts)
@@ -17,7 +17,7 @@ function Recipe:get(recipe, opts)
     local object
 
     if type(recipe) == "table" then
-        object = recipe.name and data.raw["recipe"][recipe.name]
+        object = recipe.name and recipe.type and recipe
     elseif type(recipe) == "string" then
         object = data.raw["recipe"][recipe]
     end
@@ -74,7 +74,9 @@ local function format(ingredient, result_count)
     --]]
     local object
     if type(ingredient) == "table" then
-        if ingredient.name then
+        if ingredient.valid and ingredient:valid() then
+            return ingredient
+        elseif ingredient.name then
             local item
             if ingredient.type and ingredient.type == "fluid" then
                 item = Fluid(ingredient.name)
@@ -100,6 +102,12 @@ local function format(ingredient, result_count)
         if Item(ingredient):valid() then
             object = {
                 type = "item",
+                name = ingredient,
+                amount = result_count or 1
+            }
+        elseif Fluid(ingredient):valid() then
+            object = {
+                type = "fluid",
                 name = ingredient,
                 amount = result_count or 1
             }
@@ -334,16 +342,22 @@ function Recipe:convert_results()
     return self
 end
 
+--- Set the main product of the recipe.
+-- @tparam string|boolean main_product if boolean then use normal/expensive recipes passed as main product
+-- @tparam[opt] Concepts.Product|string normal recipe
+-- @tparam[opt] Concempts.Product|string expensive recipe
+-- @treturn self
 function Recipe:set_main_product(main_product, normal, expensive)
     if self:valid("recipe") then
+        normal, expensive = get_difficulties(normal, expensive)
         local normal_main, expensive_main
         if main_product then
-            if type(main_product) == "string" and Item(main_product) then
+            if type(main_product) == "string" and Item(main_product):valid() then
                 normal_main = normal and main_product
                 expensive_main = expensive and main_product
             elseif type(main_product) == "boolean" then
-                normal_main = normal and normal.name
-                expensive_main = expensive and expensive.name
+                normal_main = normal and Item(normal.name):valid() and normal.name
+                expensive_main = expensive and Item(expensive.name):valid() and expensive.name
             end
             if self.normal then
                 self.normal.main_product = normal_main
@@ -356,17 +370,20 @@ function Recipe:set_main_product(main_product, normal, expensive)
     return self
 end
 
+--- Remove the main product of the recipe.
+-- @tparam[opt=false] boolean for_normal
+-- @tparam[opt=false] boolean for_expensive
 function Recipe:remove_main_product(for_normal, for_expensive)
     if self:valid("recipe") then
 
         if self.normal then
-            if for_normal then
+            if for_normal or (for_normal == nil and for_expensive == nil) then
                 self.normal.main_product = nil
             end
-            if for_expensive then
+            if for_expensive or (for_normal == nil and for_expensive == nil)then
                 self.expensive.main_product = nil
             end
-        elseif for_normal then
+        elseif for_normal or (for_normal == nil and for_expensive == nil) then
             self.main_product = nil
         end
     end
@@ -440,7 +457,7 @@ function Recipe:replace_result(result_name, normal, expensive, main_product)
             --     end
             -- elseif normal then
             -- end
-    end
+        end
     end
     return self
 end

@@ -74,20 +74,25 @@ function Technology:add_effect(recipe, unlock_type)
     if self:valid("technology") then
         local Recipe = require("stdlib/data/recipe")
         unlock_type = (not unlock_type and "unlock-recipe") or unlock_type
+        local r_name = type(recipe) == "table" and recipe.name or recipe
         if unlock_type == "unlock-recipe" then
             if Recipe(recipe):valid() then
-                add_unlock(self, recipe)
+                add_unlock(self, r_name)
             end
         else
-            add_unlock(self, recipe)
+            add_unlock(self, r_name)
         end
 
     elseif self:valid("recipe") then
         unlock_type = "unlock-recipe"
-        local tech = Technology(recipe)
-        if tech:valid("technology") then
-            self:set_enabled(false)
-            add_unlock(tech, self.name)
+        local techs = type(recipe) == "string" and {recipe} or recipe
+        for _, name in pairs(techs) do
+            local tech = Technology(name)
+            if tech:valid("technology") then
+                self:set_enabled(false)
+                add_unlock(tech, self.name)
+                break
+            end
         end
     end
 

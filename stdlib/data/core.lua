@@ -51,6 +51,10 @@ function Core.save_options(this, opts)
     return this
 end
 
+function Core.extend(this, proto)
+    data:extend(this.valid and this:valid() and {this} or proto)
+end
+
 --- Quick to use empty picture.
 -- @treturn table an empty pictures table
 function Core.empty_picture()
@@ -60,6 +64,10 @@ function Core.empty_picture()
         width = 1,
         height = 1
     }
+end
+
+function Core.empty_sprite()
+    return Core.empty_picture()
 end
 
 --- Quick to use empty pictures.

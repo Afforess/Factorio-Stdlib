@@ -35,18 +35,6 @@ function Position.new(pos, new_copy)
     return setmetatable(new_pos, Position._mt)
 end
 
---- Creates a position that is a copy of the given position.
--- @tparam Concepts.Position pos the position to copy
--- @treturn Concepts.Position a new position with values identical to the given position
-function Position.copy(pos)
-    return Position.new(pos, true)
-end
-
---- Deprecated
---@function to_table
---@see Position.new
-Position.to_table = Position.new
-
 --- Creates a table representing the position from x and y.
 -- @tparam number x x-position
 -- @tparam number y y-position
@@ -57,9 +45,16 @@ function Position.construct(...)
     --self was passed as first argument
     local t = (type(args[1]) == "table" and 1) or 0
 
-    local x = args[1+t] or 0
-    local y = args[2+t] or 0
+    local x = args[1 + t] or 0
+    local y = args[2 + t] or 0
     return Position.new({ x = x, y = y })
+end
+
+--- Creates a position that is a copy of the given position.
+-- @tparam Concepts.Position pos the position to copy
+-- @treturn Concepts.Position a new position with values identical to the given position
+function Position.copy(pos)
+    return Position.new(pos, true)
 end
 
 --- Converts a position to a string.

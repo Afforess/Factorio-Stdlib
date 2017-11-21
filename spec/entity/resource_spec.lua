@@ -41,7 +41,7 @@ describe('Resource filtering', function()
         local find_entities_filtered = function(tbl)
             local results = {}
             -- intentionally optimized version of Area.inside to make the test faster
-            local area = Area.to_table(tbl.area)
+            local area = Area(tbl.area)
             local left_top = area.left_top
             local right_bottom = area.right_bottom
 

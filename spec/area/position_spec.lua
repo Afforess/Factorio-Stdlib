@@ -96,8 +96,8 @@ describe('Position', function()
 
     it('should validate position to_table conversion', function()
         local pos = {1, -4}
-        assert.same({x = 1, y = -4}, Position.to_table(pos, 0, 0))
-        assert.has_error(function() Position.to_table() end)
+        assert.same({x = 1, y = -4}, Position(pos, 0, 0))
+        assert.has_error(function() Position.new() end)
     end)
 
     it('should validate the distance squared between two positions', function()

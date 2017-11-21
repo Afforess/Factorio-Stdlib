@@ -35,11 +35,6 @@ function Area.new(area, new_copy)
     return setmetatable(new_area, Area._mt)
 end
 
---- Deprecated
--- @function to_table
--- @see Area.new
-Area.to_table = Area.new
-
 --- Creates an area from the two positions p1 and p2.
 -- @tparam[opt=0] number x1 x-position of left_top, first position
 -- @tparam[opt=0] number y1 y-position of left_top, first position
@@ -47,7 +42,6 @@ Area.to_table = Area.new
 -- @tparam[opt=0] number y2 y-position of right_bottom, second position
 -- @treturn Concepts.BoundingBox the area in a table format
 function Area.construct(...)
-
     local args = {...}
 
     --self was passed as first argument
@@ -77,6 +71,17 @@ local function validate_vector(amount)
     else
         error('amount is neither a vector or number', 2)
     end
+end
+
+--- Return a non zero sized area by expanding if needed
+-- @tparam Concepts.BoundingBox area the area to check
+-- @tparam number|Concepts.Vector amount the amount to expand
+-- @treturn Concepts.BoundingBox the area
+function Area.non_zero(area, amount)
+    area = Area.new(area)
+    amount = amount or .01
+
+    return Area.size(area) == 0 and Area.expand(area, amount) or area
 end
 
 --- Shrinks the area by the given amount.
@@ -443,36 +448,10 @@ function Area.shrink_to_surface_size(area, surface)
     end
     return area
 end
+
 -------------------------------------------------------------------------------
 --[[Entity Helpers]]--
 -------------------------------------------------------------------------------
-
-local function to_bounding_box_area(entity, box)
-    fail_if_missing(entity, "missing entity argument")
-
-    local pos = entity.position
-    local bb = entity.prototype[box]
-    if entity.direction and (entity.direction == defines.direction.west or entity.direction == defines.direction.east) then
-        --Let area.rotate determine if the box is rotatable, no point in duplicated code for it.
-        return Area.rotate(Area.offset(bb, pos))
-    end
-    return Area.offset(bb, pos)
-end
-
---- Deprecated see @{LuaEntity.bounding_box}
--- <br>Converts an entity and its @{LuaEntityPrototype.collision_box|collision_box} to the area around it.
--- @tparam LuaEntity entity the entity to convert to an area
--- @treturn Concepts.BoundingBox
-function Area.to_collision_area(entity)
-    return Area.new(entity.bounding_box)
-end
-
---- Converts an entity and its @{LuaEntityPrototype.selection_box|selection_box} to the area around it.
--- @tparam LuaEntity entity to convert to an area
--- @treturn Concepts.BoundingBox
-function Area.to_selection_area(entity)
-    return to_bounding_box_area(entity, "selection_box")
-end
 
 --- Set the metatable on a stored area without returning a new area. Usefull for restoring
 -- metatables to saved areas in global

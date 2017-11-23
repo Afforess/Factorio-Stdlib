@@ -137,7 +137,7 @@ end
 -- @treturn Concepts.Position a new translated position
 function Position.translate(pos, direction, distance)
     fail_if_missing(direction, 'missing direction argument')
-    fail_if_missing(distance, 'missing distance argument')
+    distance = distance or 1
     pos = Position.new(pos)
 
     if direction == defines.direction.north then

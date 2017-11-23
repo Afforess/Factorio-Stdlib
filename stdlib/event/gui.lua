@@ -126,6 +126,14 @@ function Gui.on_selection_state_changed(gui_element_pattern, handler)
     return Gui.register(defines.events.on_gui_selection_state_changed, gui_element_pattern, handler)
 end
 
+--- Registers a function for a given GUI element name or pattern when the element value changes (slider).
+-- @tparam string gui_element_pattern the name or string regular expression to match the GUI element
+-- @tparam function handler the function to call when GUI element state changes
+-- @return (<span class="types">@{Gui}</span>)
+function Gui.on_value_changed(gui_element_pattern, handler)
+    return Gui.register(defines.events.on_gui_value_changed, gui_element_pattern, handler)
+end
+
 Event.Gui = Gui
 
 return Gui

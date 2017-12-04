@@ -33,7 +33,7 @@ end
 function Player.get(player)
     player = Game.get_player(player)
     fail_if_missing(player, 'Missing player to retrieve')
-    return game.players[player.index], global.players[player.index] or Player.init(player.index)
+    return player, global.players[player.index] or Player.init(player.index)
 end
 
 --- Merge a copy of the passed data to all players in `global.players`.

@@ -67,6 +67,17 @@ function Core.fail_if_not_type(var, types)
     error("Required parameter "..var.." must be: " .. table.concat(types, ", or"), 2)
 end
 
+--- Returns true if the passed variable is a table.
+-- @tparam mixed tab The variable to check
+-- @treturn boolean If the variable is a table
+function Core.table(var)
+    return type(var) == "table"
+end
+
+function Core.string(var)
+    return type(var) == "string"
+end
+
 --- Require a file that may not exist
 -- @tparam string module path to the module
 -- @treturn mixed

@@ -32,7 +32,6 @@ unit =
 order = "e-a-a"
 
 --]]
-
 -- local function create_technology_prototype(name)
 -- local new = {
 -- type = type,
@@ -42,19 +41,15 @@ order = "e-a-a"
 -- return true
 -- end
 
-function Technology:get(tech_name)
-    if tech_name then
-        local object = data.raw["technology"][tech_name]
-        if object then
-            local mt = {
-                type = "technology",
-                __index = self
-            }
-            return setmetatable(object, mt)
-        end
+function Technology:get(tech, opts)
+    self.fail_if_missing(tech, "tech is required")
+    local object = self.get_object(tech, "technology")
+    if object then
+        return setmetatable(object, self._mt):save_options(opts)
+    else
+        local msg = "Technology: " .. tostring(tech) .. " does not exist."
+        self.log(msg, opts)
     end
-    local msg = "Technology: "..(tech_name or "").." does not exist."
-    self.log(msg)
     return self
 end
 Technology:set_caller(Technology.get)
@@ -63,7 +58,8 @@ function Technology:add_effect(recipe, unlock_type)
     self.fail_if_missing(recipe)
 
     --todo fix for non recipe types
-    local add_unlock = function(technology, name)
+    local add_unlock =
+        function(technology, name)
         local effects = technology.effects
         effects[#effects + 1] = {
             type = unlock_type,
@@ -82,7 +78,6 @@ function Technology:add_effect(recipe, unlock_type)
         else
             add_unlock(self, r_name)
         end
-
     elseif self:valid("recipe") then
         unlock_type = "unlock-recipe"
         local techs = type(recipe) == "string" and {recipe} or recipe
@@ -125,20 +120,92 @@ function Technology:remove_effect(tech_name, unlock_type, name)
     return self
 end
 
---luacheck: ignore
-function Technology:add_pack(pack)
-    -- item type tool
+function Technology:add_pack(new_pack, count)
+    if self:valid("technology") then
+        local Item = require("stdlib/data/item")
+        if self.table(new_pack) then
+            count = new_pack[2] or 1
+            new_pack = new_pack[1]
+        elseif self.string(new_pack) then
+            count = count or 1
+        else
+            error("new_pack must be a table or string")
+        end
+
+        if Item(new_pack):valid() then
+            self.unit.ingredients = self.unit.ingredients or {}
+            local ing = self.unit.ingredients
+            ing[#ing + 1] = {new_pack, count}
+        end
+    end
+    return self
 end
 
 function Technology:remove_pack(pack)
-    -- item type tool
+    if self:valid("technology") then
+        local ing = self.unit.ingredients
+        if ing then
+            for i = #ing, 1, -1 do
+                if ing[i][1] == pack then
+                    ing[i] = nil
+                    break
+                end
+            end
+        end
+    end
+    return self
+end
+
+function Technology:replace_pack(old_pack, new_pack, count)
+    if self:valid("technology") then
+        local ing = self.unit.ingredients
+        if ing then
+            for i = #ing, 1, -1 do
+                if ing[i][1] == old_pack then
+                    ing[i][1] = new_pack
+                    ing[i][2] = count or ing[i][2] or 1
+                    break
+                end
+            end
+        end
+    end
+    return self
 end
 
 function Technology:add_prereq(tech_name)
-    -- is prereq tech valid
+    if self:valid("technology") and Technology(tech_name):valid() then
+        self.prerequisites = self.prerequisites or {}
+        local pre = self.prerequisites
+        for _, existing in pairs(pre) do
+            if existing == tech_name then
+                return self
+            end
+        end
+
+        pre[#pre + 1] = tech_name
+    end
+    return self
 end
 
 function Technology:remove_prereq(tech_name)
+    if self:valid("technology") then
+        local pre = self.prerequisites or {}
+        for i = #pre, 1, -1 do
+            if pre[i] == tech_name then
+                table.remove(pre, i)
+            end
+        end
+        if #pre == 0 then
+            self.prerequisites = nil
+        end
+    end
+    return self
 end
+
+Technology._mt = {
+    type = "technology",
+    __index = Technology,
+    __call = Technology.get
+}
 
 return Technology

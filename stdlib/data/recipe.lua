@@ -14,21 +14,15 @@ local Fluid = require('stdlib/data/fluid')
 function Recipe:get(recipe, opts)
     self.fail_if_missing(recipe, "recipe is required")
 
-    local object
-
-    if type(recipe) == "table" then
-        object = recipe.name and recipe.type and recipe
-    elseif type(recipe) == "string" then
-        object = data.raw["recipe"][recipe]
-    end
+    local object = self.get_object(recipe, "recipe")
 
     if object then
         return setmetatable(object, Recipe._mt):save_options(opts)
     else
         local msg = "Recipe: "..tostring(recipe).." does not exist."
         self.log(msg, opts)
-        return self
     end
+    return self
 end
 Recipe:set_caller(Recipe.get)
 
@@ -466,6 +460,7 @@ Recipe._mt = {
     type = "recipe",
     __index = Recipe,
     __call = Recipe.get,
+    __tostring = Recipe.tostring
 }
 
 return Recipe

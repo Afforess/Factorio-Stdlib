@@ -4,21 +4,26 @@
 local Fluid = {}
 setmetatable(Fluid, {__index = require("stdlib/data/core")})
 
-function Fluid:get(fluid)
+function Fluid:get(fluid, opts)
     self.fail_if_missing(fluid, "fluid is required")
-    local object = data.raw["fluid"][fluid]
+
+    local object = self.get_object(fluid, "fluid")
+
     if object then
-        local mt = {
-            type = "fluid",
-            __index = self
-        }
-        return setmetatable(object, mt)
+        return setmetatable(object, Fluid.mt):save_options(opts)
     end
 
-    local msg = "Fluid: "..fluid.." does not exist."
+    local msg = "Fluid: "..tostring(fluid).." does not exist."
     self.log(msg)
     return self
 end
 Fluid:set_caller(Fluid.get)
+
+Fluid._mt = {
+    type = "fluid",
+    __index = Fluid,
+    __call = Fluid.get,
+    __tostring = Fluid.tostring
+}
 
 return Fluid

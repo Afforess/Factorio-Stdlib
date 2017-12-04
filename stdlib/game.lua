@@ -19,11 +19,11 @@ function Game.get_player(mixed)
             return mixed and mixed.valid and mixed
         elseif mixed.player_index then
             local player = game.players[mixed.player_index]
-            return player and player.valid and player
+            return player
         end
     elseif mixed then
         local player = game.players[mixed]
-        return player and player.valid and player
+        return player
     end
 end
 

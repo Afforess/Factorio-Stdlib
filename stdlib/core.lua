@@ -11,7 +11,6 @@ require('stdlib/defines/color')
 require('stdlib/defines/time')
 
 --Temporary fix for this change
-defines.events.on_preplayer_mined_item = defines.events.on_preplayer_mined_item or defines.events.on_pre_player_mined_item --luacheck: ignore defines
 defines.events.on_pre_player_mined_item = defines.events.on_pre_player_mined_item or defines.events.on_preplayer_mined_item --luacheck: ignore defines
 
 local Core = {

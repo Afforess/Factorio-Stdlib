@@ -8,18 +8,25 @@ iter = {}
 iter.pairs = pairs
 iter.ipairs = ipairs
 
-function iter.spairs(t, f)
-    local a = {}
-    for n in pairs(t) do table.insert(a, n) end
-    table.sort(a, f)
-    local i = 0
+function iter.spairs(t, order)
+    -- collect the keys
+    local keys = {}
+    for k in pairs(t) do keys[#keys+1] = k end
 
+    -- if order function given, sort by it by passing the table and keys a, b,
+    -- otherwise just sort the keys
+    if order then
+        table.sort(keys, function(a,b) return order(t, a, b) end)
+    else
+        table.sort(keys)
+    end
+
+    -- return the iterator function
+    local i = 0
     return function()
         i = i + 1
-        if a[i] == nil then
-            return nil
-        else
-            return a[i], t[a[i]]
+        if keys[i] then
+            return keys[i], t[keys[i]]
         end
     end
 end

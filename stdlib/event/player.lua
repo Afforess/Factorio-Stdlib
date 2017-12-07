@@ -1,16 +1,15 @@
 --- Player global creation.
--- Requiring this module will register init and player creation events using the stdlib @{Event} module.
--- <p>All existing and new players will be added to the `global.players` table.
--- <p>This module should be first required after any other Init functions but before any scripts needing `global.players`.
--- <p>This module registers the following events: `on_init`, `on_configuration_changed`, `on_player_created`, and `on_player_removed`.
+-- This module adds player helper functions, it does not automatically register events
+-- unless Player.register_events() is called
 -- @module Player
 -- @usage
--- local Player = require('stdlib/event/player')
--- -- The fist time this module is required it will register player creation events
+-- local Player = require('stdlib/event/player').register_events()
+-- -- The fist time this is required it will register player creation events
+
+require("stdlib/event/event")
 
 local Player = {_module_name = "Player"}
 setmetatable(Player, {__index = require("stdlib/core")})
-require("stdlib/event/event")
 
 local fail_if_missing = Player.fail_if_missing
 local Game = require("stdlib/game")
@@ -19,13 +18,14 @@ local Game = require("stdlib/game")
 local function new(player_index)
     local pdata = {
         index = player_index,
-        name = game.players[player_index].name
+        name = game.players[player_index].name,
+        force = game.players[player_index].force.name
     }
-    if MOD.new_player_data then
-        if type(MOD.new_player_data) == "table" then
-            table.merge(pdata, table.deepcopy(MOD.new_player_data))
-        elseif type(MOD.new_player_data) == "function" then
-            local new_data = MOD.new_player_data(player_index)
+    if Event._new_player_data then
+        if type(Event._new_player_data) == "table" then
+            table.merge(pdata, table.deepcopy(Event._new_player_data))
+        elseif type(Event._new_player_data) == "function" then
+            local new_data = Event._new_player_data(player_index)
             if type(new_data) == "table" then
                 table.merge(pdata, new_data)
             else
@@ -36,6 +36,11 @@ local function new(player_index)
         end
     end
     return pdata
+end
+
+function Player.additional_data(func_or_table)
+    Event._new_player_data = func_or_table
+    return Player
 end
 
 --- Get `game.players[index]` & `global.players[index]`, or create `global.players[index]` if it doesn't exist.
@@ -73,7 +78,6 @@ function Player.remove(event)
         global.players[player.index] = nil
     end
 end
-Event.register(defines.events.on_player_removed, Player.remove)
 
 --- Init or re-init a player or players.
 -- Passing a `nil` event will iterate all existing players.
@@ -89,8 +93,8 @@ function Player.init(event, overwrite)
     if player then --If player is not nil then we are working with a valid player.
         if not global.players[player.index] or (global.players[player.index] and overwrite) then
             global.players[player.index] = new(player.index)
+            return global.players[player.index]
         end
-        return global.players[player.index]
     else --Check all players
         for index in pairs(game.players) do
             if not global.players[index] or (global.players[index] and overwrite) then
@@ -108,11 +112,20 @@ function Player.init(event, overwrite)
         )
         global._print_queue = nil
     end
+    return Player
 end
 
--- If the mod has already done Init before adding this module we need to make sure we init players
--- Calling this on every configuration_changed event has no harm.
-local events = {defines.events.on_player_created, Event.core_events.init, Event.core_events.configuration_changed}
-Event.register(events, Player.init)
+function Player.update_force(event)
+    local player, pdata = Player.get(event.player_index)
+    pdata.force = player.force.name
+end
+
+local events = {defines.events.on_player_created, Event.core_events.configuration_changed}
+function Player.register_events()
+    Event.register(events, Player.init)
+    Event.register(defines.events.on_player_changed_force, Player.update_force)
+    Event.register(defines.events.on_player_removed, Player.remove)
+    return Player
+end
 
 return Player

@@ -8,14 +8,16 @@
 --   require('stdlib/utils/scripts/quickstart')
 -- end
 
-local Core = require('stdlib/core')
-require('stdlib/event/event')
-local Area = require('stdlib/area/area')
+local Core = require("stdlib/core")
+require("stdlib/event/event")
+local Area = require("stdlib/area/area")
 
 if not remote.interfaces["quickstart-script"] then
     local qs_interface = {}
     qs_interface.registered_to = function()
-        if game then game.print(script.mod_name) end
+        if game then
+            game.print(script.mod_name)
+        end
         return script.mod_name
     end
     qs_interface.creative_mode_quickstart_registerd_to = qs_interface.registered_to
@@ -25,7 +27,7 @@ else
     return
 end
 
-local QS = require('stdlib/config/config').new(Core.prequire("config-quickstart") or {})
+local QS = require("stdlib/config/config").new(Core.prequire("config-quickstart") or {})
 local quickstart = {}
 
 function quickstart.on_player_created(event)
@@ -78,7 +80,7 @@ function quickstart.on_player_created(event)
             if grid then
                 for _, eq in pairs(QS.get("equipment", {"fusion-reactor-equipment"})) do
                     if game.equipment_prototypes[eq] then
-                        grid.put{name = eq}
+                        grid.put {name = eq}
                     end
                 end
             end
@@ -111,13 +113,13 @@ function quickstart.on_player_created(event)
                     if x % 2 == 0 then
                         tiles[#tiles + 1] = {name = floor_tile, position = {x = x, y = y}}
                     else
-                        tiles[#tiles+1] = {name = floor_tile_alt, position = {x = x, y = y}}
+                        tiles[#tiles + 1] = {name = floor_tile_alt, position = {x = x, y = y}}
                     end
                 else
                     if x % 2 ~= 0 then
-                        tiles[#tiles+1] = {name = floor_tile, position = {x = x, y = y}}
+                        tiles[#tiles + 1] = {name = floor_tile, position = {x = x, y = y}}
                     else
-                        tiles[#tiles+1] = {name = floor_tile_alt, position = {x = x, y = y}}
+                        tiles[#tiles + 1] = {name = floor_tile_alt, position = {x = x, y = y}}
                     end
                 end
             end
@@ -127,28 +129,28 @@ function quickstart.on_player_created(event)
 
         if QS.get("ore_patches", true) then
             --Top left
-            for x, y in Area.iterate({{-37.5, -27.5}, {-33.5,-3.5}}) do
-                surface.create_entity{name="coal", position={x, y}, amount = 2500}
+            for x, y in Area.iterate({{-37.5, -27.5}, {-33.5, -3.5}}) do
+                surface.create_entity {name = "coal", position = {x, y}, amount = 2500}
             end
             --Top Right
             for x, y in Area.iterate({{33.5, -27.5}, {37.5, -3.5}}) do
-                surface.create_entity{name="iron-ore", position={x, y}, amount = 2500}
+                surface.create_entity {name = "iron-ore", position = {x, y}, amount = 2500}
             end
             --Bottom Right
             for x, y in Area.iterate({{33.5, 3.5}, {37.5, 27.5}}) do
-                surface.create_entity{name="copper-ore", position={x, y}, amount = 2500}
+                surface.create_entity {name = "copper-ore", position = {x, y}, amount = 2500}
             end
             --Bottom Left
             for x, y in Area.iterate({{-37.5, 3.5}, {-33.5, 27.5}}) do
-                surface.create_entity{name="stone", position={x, y}, amount = 2500}
+                surface.create_entity {name = "stone", position = {x, y}, amount = 2500}
             end
-            surface.create_entity{name = "crude-oil", position = {-35.5, 1.5}, amount = 32000}
-            surface.create_entity{name = "crude-oil", position = {-35.5, -1.5}, amount = 32000}
-            surface.create_entity{name = "crude-oil", position = {35.5, 1.5}, amount = 32000}
-            surface.create_entity{name = "crude-oil", position = {35.5, -1.5}, amount = 32000}
+            surface.create_entity {name = "crude-oil", position = {-35.5, 1.5}, amount = 32000}
+            surface.create_entity {name = "crude-oil", position = {-35.5, -1.5}, amount = 32000}
+            surface.create_entity {name = "crude-oil", position = {35.5, 1.5}, amount = 32000}
+            surface.create_entity {name = "crude-oil", position = {35.5, -1.5}, amount = 32000}
 
             local water_tiles = {}
-            for x = 27.5 , -27.5, -1 do
+            for x = 27.5, -27.5, -1 do
                 for y = 45.5, 50.5, 1 do
                     if x < -4 or x > 4 then
                         water_tiles[#water_tiles + 1] = {
@@ -159,24 +161,24 @@ function quickstart.on_player_created(event)
                 end
             end
             surface.set_tiles(water_tiles, false)
-            surface.create_entity{name = "offshore-pump", position = {4.5, 44.5}, force = force, direction = defines.direction.south}
-            surface.create_entity{name = "offshore-pump", position = {-4.5, 44.5}, force = force, direction = defines.direction.south}
-            surface.create_entity{name = "offshore-pump", position = {27.5, 44.5}, force = force, direction = defines.direction.south}
-            surface.create_entity{name = "offshore-pump", position = {-27.5, 44.5}, force = force, direction = defines.direction.south}
+            surface.create_entity {name = "offshore-pump", position = {4.5, 44.5}, force = force, direction = defines.direction.south}
+            surface.create_entity {name = "offshore-pump", position = {-4.5, 44.5}, force = force, direction = defines.direction.south}
+            surface.create_entity {name = "offshore-pump", position = {27.5, 44.5}, force = force, direction = defines.direction.south}
+            surface.create_entity {name = "offshore-pump", position = {-27.5, 44.5}, force = force, direction = defines.direction.south}
         end
 
         if QS.get("chunk_bounds", false) then
             if game.entity_prototypes["debug-chunk-marker"] then
-                local a = surface.create_entity{name="debug-chunk-marker", position={0,0}}
+                local a = surface.create_entity {name = "debug-chunk-marker", position = {0, 0}}
                 a.graphics_variation = 1
                 for i = 1, 31, 2 do
-                    a = surface.create_entity{name="debug-chunk-marker", position={i,0}}
+                    a = surface.create_entity {name = "debug-chunk-marker", position = {i, 0}}
                     a.graphics_variation = 2
-                    a = surface.create_entity{name="debug-chunk-marker", position={-i,0}}
+                    a = surface.create_entity {name = "debug-chunk-marker", position = {-i, 0}}
                     a.graphics_variation = 2
-                    a = surface.create_entity{name="debug-chunk-marker", position={0,i}}
+                    a = surface.create_entity {name = "debug-chunk-marker", position = {0, i}}
                     a.graphics_variation = 3
-                    a = surface.create_entity{name="debug-chunk-marker", position={0,-i}}
+                    a = surface.create_entity {name = "debug-chunk-marker", position = {0, -i}}
                     a.graphics_variation = 3
                 end
             end
@@ -196,38 +198,43 @@ function quickstart.on_player_created(event)
         end
 
         if QS.get("starter_tracks", false) then
-
             -- Create proxy blueprint from string, read in the entities and remove it.
-            local bp = surface.create_entity{name = "item-on-ground", position = {0,0}, force = force, stack = "blueprint"}
+            local bp = surface.create_entity {name = "item-on-ground", position = {0, 0}, force = force, stack = "blueprint"}
             bp.stack.import_stack(quickstart.trackstring)
             local tracks = bp.stack.get_blueprint_entities()
             bp.destroy()
 
             for _, track in pairs(tracks) do
                 local pos = {track.position.x + 1, track.position.y + 1}
-                local ent = surface.create_entity{name=track.name, position=pos, direction=track.direction, force=force}
+                local ent = surface.create_entity {name = track.name, position = pos, direction = track.direction, force = force}
                 if ent.name == "train-stop" then
-                    if ent.position.x > 0 and ent.position.y > 0 then ent.backer_name = "#SOUTH"
-                    elseif ent.position.x < 0 and ent.position.y > 0 then ent.backer_name = "#WEST"
-                    elseif ent.position.x > 0 and ent.position.y < 0 then ent.backer_name = "#EAST"
-                    else ent.backer_name = "#NORTH" end
+                    if ent.position.x > 0 and ent.position.y > 0 then
+                        ent.backer_name = "#SOUTH"
+                    elseif ent.position.x < 0 and ent.position.y > 0 then
+                        ent.backer_name = "#WEST"
+                    elseif ent.position.x > 0 and ent.position.y < 0 then
+                        ent.backer_name = "#EAST"
+                    else
+                        ent.backer_name = "#NORTH"
+                    end
                 end
-
             end
 
             if QS.get("make_train", false) then
-                local loco = surface.create_entity{name="locomotive", position={20, 39}, orientation=0.25, direction=2, force=force}
+                local loco = surface.create_entity {name = "locomotive", position = {20, 39}, orientation = 0.25, direction = 2, force = force}
                 loco.orientation = .25
                 loco.get_fuel_inventory().insert({name = "rocket-fuel", count = 30})
-                local cwag = surface.create_entity{name="cargo-wagon", position={13, 39}, orientation=0.25, direction=2, force=force}
+                local cwag = surface.create_entity {name = "cargo-wagon", position = {13, 39}, orientation = 0.25, direction = 2, force = force}
                 cwag.orientation = .25
-                local fwag = surface.create_entity{name="fluid-wagon", position={7, 39}, orientation=0.25, direction=2, force=force}
+                local fwag = surface.create_entity {name = "fluid-wagon", position = {7, 39}, orientation = 0.25, direction = 2, force = force}
                 fwag.orientation = .25
+                local awag = surface.create_entity {name = "artillery-wagon", position = {0, 39}, orientation = 0.25, direction = 2, force = force}
+                awag.orientation = .25
 
                 local train = loco and loco.train
                 if train then
                     local records = {}
-                    for _, name in pairs ({"#SOUTH", "#EAST", "#NORTH", "#WEST"}) do
+                    for _, name in pairs({"#SOUTH", "#EAST", "#NORTH", "#WEST"}) do
                         records[#records + 1] = {station = name, wait_conditions = {{type = "time", ticks = 0, compare_type = "and"}}}
                     end
                     records[1].wait_conditions = {{type = "full", compare_type = "and"}}
@@ -255,28 +262,29 @@ function quickstart.on_player_created(event)
 
         if QS.get("setup_power", false) then
             if game.entity_prototypes["debug-energy-interface"] then
-                local es = surface.create_entity{name="debug-energy-interface", position={0, 0}, force=force}
+                local es = surface.create_entity {name = "debug-energy-interface", position = {0, 0}, force = force}
                 es.destructible = false
                 script.raise_event(defines.events.on_built_entity, {created_entity = es, player_index = player.index})
             end
             if game.entity_prototypes["debug-substation"] then
-                local sb = surface.create_entity{name="debug-substation", position={0, 0}, force=force}
+                local sb = surface.create_entity {name = "debug-substation", position = {0, 0}, force = force}
                 sb.destructible = false
                 script.raise_event(defines.events.on_built_entity, {created_entity = sb, player_index = player.index})
             end
         end
 
         if QS.get("setup_creative_mode", false) and game.active_mods["creative-mode"] then
-            local radar = surface.create_entity{name="creative-mode_super-radar", position={3.5, -34.5}, force=force}
+            local radar = surface.create_entity {name = "creative-mode_super-radar", position = {3.5, -34.5}, force = force}
             script.raise_event(defines.events.on_built_entity, {created_entity = radar, player_index = player.index})
-            local rb = surface.create_entity{name="creative-mode_super-roboport", position={-4, -35}, force=force}
+            local rb = surface.create_entity {name = "creative-mode_super-roboport", position = {-4, -35}, force = force}
             script.raise_event(defines.events.on_built_entity, {created_entity = rb, player_index = player.index})
         end
     end
 end
 Event.register(defines.events.on_player_created, quickstart.on_player_created)
 
-quickstart.trackstring = [[
+quickstart.trackstring =
+    [[
 0eNqdmt1u2kAUhF+l2muIvLveP677BL2tqgoSK7VEDAITNYry7rUDRYWMy0zuAOHPZ33m7O7Z8atZrQ/Ndtd2vVm8mvZ+0+3N4vur2beP3XI9/ta/bBuzMG3fP
 JmZ6ZZP47fdsl2bt5lpu4fmt1nYtx8z03R927fN8fr3Ly8/u8PTqtkNf7i4cn6iz8x2sx+u2XTjjQbO3KW7MDMvw6fa3oXhBg/trrk//sO9zT5w3ZnbD+Buvu8
 3W4SNJ6i7REaA9Gfk/WH33DzM38f6ken9kenLbWZ9Zu7HOB9/9VNUl0+RVrcHH3hq5KmRp9Y8NfFUx1MzT614aqGpVsiWrXiskC5reayQL+t4rJAw63mskDHLF

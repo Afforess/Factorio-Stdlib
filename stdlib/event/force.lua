@@ -8,20 +8,36 @@
 -- local Force = require('stdlib/event/force')
 -- -- The fist time this is required it will register force creation events
 
-require('stdlib/event/event')
+require("stdlib/event/event")
 
 local Force = {_module_name = "Force"}
-setmetatable(Force, {__index = require('stdlib/core')})
+setmetatable(Force, {__index = require("stdlib/core")})
 
 local fail_if_missing = Force.fail_if_missing
-local Game = require('stdlib/game')
+local Game = require("stdlib/game")
 
 -- return new default force object
 local function new(force_name)
-    return {
+    local fdata = {
         index = force_name,
-        name = force_name,
+        name = force_name
     }
+    if MOD.new_force_data then
+        if type(MOD.new_force_data) == "table" then
+            table.merge(fdata, table.deepcopy(MOD.new_force_data))
+        elseif type(MOD.new_force_data) == "function" then
+            local new_data = MOD.new_force_data(force_name)
+            if type(new_data) == "table" then
+                table.merge(fdata, new_data)
+            else
+                error("new_player_data did not return a table")
+            end
+        else
+            error("new_player_data present but is not a function or table")
+        end
+    end
+
+    return fdata
 end
 
 --- Get `game.forces[name]` & `global.forces[name]`, or create `global.forces[name]` if it doesn't exist.
@@ -35,7 +51,7 @@ end
 -- -- Returns data for the force named "player" from either a string or LuaForce object
 function Force.get(force)
     force = Game.get_force(force)
-    fail_if_missing(force, 'force is missing')
+    fail_if_missing(force, "force is missing")
     return game.forces[force.name], global.forces[force.name] or Force.init(force.name)
 end
 
@@ -45,7 +61,12 @@ end
 -- local data = {a = "abc", b = "def"}
 -- Force.add_data_all(data)
 function Force.add_data_all(data)
-    table.each(global.forces, function(v) table.merge(v, table.deepcopy(data)) end)
+    table.each(
+        global.forces,
+        function(v)
+            table.merge(v, table.deepcopy(data))
+        end
+    )
 end
 
 --- Init or re-init a force or forces.

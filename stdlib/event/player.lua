@@ -9,18 +9,33 @@
 -- -- The fist time this module is required it will register player creation events
 
 local Player = {_module_name = "Player"}
-setmetatable(Player, {__index = require('stdlib/core')})
-require('stdlib/event/event')
+setmetatable(Player, {__index = require("stdlib/core")})
+require("stdlib/event/event")
 
 local fail_if_missing = Player.fail_if_missing
-local Game = require('stdlib/game')
+local Game = require("stdlib/game")
 
 -- Return new default player object consiting of index and name
 local function new(player_index)
-    return {
+    local pdata = {
         index = player_index,
-        name = game.players[player_index].name,
+        name = game.players[player_index].name
     }
+    if MOD.new_player_data then
+        if type(MOD.new_player_data) == "table" then
+            table.merge(pdata, table.deepcopy(MOD.new_player_data))
+        elseif type(MOD.new_player_data) == "function" then
+            local new_data = MOD.new_player_data(player_index)
+            if type(new_data) == "table" then
+                table.merge(pdata, new_data)
+            else
+                error("new_player_data did not return a table")
+            end
+        else
+            error("new_player_data present but is not a function or table")
+        end
+    end
+    return pdata
 end
 
 --- Get `game.players[index]` & `global.players[index]`, or create `global.players[index]` if it doesn't exist.
@@ -32,7 +47,7 @@ end
 -- local player, player_data = Player.get(event.player_index)
 function Player.get(player)
     player = Game.get_player(player)
-    fail_if_missing(player, 'Missing player to retrieve')
+    fail_if_missing(player, "Missing player to retrieve")
     return player, global.players[player.index] or Player.init(player.index)
 end
 
@@ -42,7 +57,12 @@ end
 -- Player.add_data_all(data)
 function Player.add_data_all(data)
     local pdata = global.players
-    table.each(pdata, function(v) table.merge(v, table.deepcopy(data)) end)
+    table.each(
+        pdata,
+        function(v)
+            table.merge(v, table.deepcopy(data))
+        end
+    )
 end
 
 --- Remove data for a player when they are deleted.
@@ -80,7 +100,12 @@ function Player.init(event, overwrite)
     end
 
     if global._print_queue then
-        table.each(global._print_queue, function(msg) game.print(tostring(msg)) end)
+        table.each(
+            global._print_queue,
+            function(msg)
+                game.print(tostring(msg))
+            end
+        )
         global._print_queue = nil
     end
 end

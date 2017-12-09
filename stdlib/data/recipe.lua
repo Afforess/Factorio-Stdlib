@@ -84,6 +84,7 @@ local function format(ingredient, result_count)
                 end
             end
         elseif #ingredient > 0 then
+            -- Can only be item types not fluid
             if Item(ingredient[1]):valid() then
                 object = {
                     type = "item",
@@ -93,6 +94,7 @@ local function format(ingredient, result_count)
             end
         end
     elseif type(ingredient) == "string" then
+        -- Our shortcut so we need to check it
         if Item(ingredient):valid() then
             object = {
                 type = "item",

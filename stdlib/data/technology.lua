@@ -54,8 +54,8 @@ function Technology:get(tech, opts)
 end
 Technology:set_caller(Technology.get)
 
-function Technology:add_effect(recipe, unlock_type)
-    self.fail_if_missing(recipe)
+function Technology:add_effect(effect, unlock_type)
+    self.fail_if_missing(effect)
 
     --todo fix for non recipe types
     local add_unlock =
@@ -70,9 +70,9 @@ function Technology:add_effect(recipe, unlock_type)
     if self:valid("technology") then
         local Recipe = require("stdlib/data/recipe")
         unlock_type = (not unlock_type and "unlock-recipe") or unlock_type
-        local r_name = type(recipe) == "table" and recipe.name or recipe
+        local r_name = type(effect) == "table" and effect.name or effect
         if unlock_type == "unlock-recipe" then
-            if Recipe(recipe):valid() then
+            if Recipe(effect):valid() then
                 add_unlock(self, r_name)
             end
         else
@@ -80,7 +80,8 @@ function Technology:add_effect(recipe, unlock_type)
         end
     elseif self:valid("recipe") then
         unlock_type = "unlock-recipe"
-        local techs = type(recipe) == "string" and {recipe} or recipe
+        -- Convert to array and return first valid tech
+        local techs = type(effect) == "string" and {effect} or effect
         for _, name in pairs(techs) do
             local tech = Technology(name)
             if tech:valid("technology") then

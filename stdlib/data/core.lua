@@ -36,6 +36,14 @@ function Core.map_to_types(type, map)
     end
 end
 
+function Core.get_object(object, class)
+    if Core.table(object) then
+        return object.name and object.type == class and object
+    elseif type(object) == "string" then
+        return data.raw[class][object]
+    end
+end
+
 function Core.valid(this, name)
     if name then
         return getmetatable(this).type == name and this or nil
@@ -51,16 +59,15 @@ function Core.save_options(this, opts)
     return this
 end
 
-function Core.get_object(object, class)
-    if type(object) == "table" then
-        return object.name and object.type == class and object
-    elseif type(object) == "string" then
-        return data.raw[class][object]
+function Core.extend(this, proto_array)
+    if proto_array then
+        data:extend(proto_array and #proto_array > 0 and proto_array or {proto_array})
+    elseif this and ((this.name and this.type) or this:valid()) then
+        data:extend{this}
+    else
+        error("Could not extend data", 2)
     end
-end
-
-function Core.extend(this, proto)
-    data:extend(this.valid and this:valid() and {this} or proto)
+    return this
 end
 
 function Core.extended(this)

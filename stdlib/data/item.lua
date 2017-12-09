@@ -29,10 +29,10 @@ function Item:get(item, itype, opts)
     local object
 
     if self.table(item) and item.type then
-        object = self:get_object(item, item.type)
+        object = self.get_object(item, item.type)
     else
         for _, type_name in pairs(itype and {itype} or item_types) do
-            object = self:get_object(item, type_name)
+            object = self.get_object(item, type_name)
             if object then
                 break
             end
@@ -40,7 +40,7 @@ function Item:get(item, itype, opts)
     end
 
     if object then
-        return setmetatable(item, Item._mt):save_options(opts)
+        return setmetatable(object, Item._mt):save_options(opts)
     end
 
     local msg = "Item: " .. (itype and (itype .. "/") or "") .. tostring(item) .. " does not exist."

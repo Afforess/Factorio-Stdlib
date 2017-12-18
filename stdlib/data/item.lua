@@ -49,6 +49,32 @@ function Item:get(item, itype, opts)
 end
 Item:set_caller(Item.get)
 
+function Item:add_flag(flag)
+    if self:valid() then
+        self.flags = self.flags or {}
+        for _, existing in pairs(self.flags) do
+            if existing == flag then
+                return self
+            end
+        end
+        self.flags[#self.flags + 1] = flag
+    end
+    return self
+end
+
+function Item:remove_flag(flag)
+    if self:valid() then
+        self.flags = self.flags or {}
+        for i, existing in pairs(self.flags) do
+            if existing == flag then
+                self.flags[i] = nil
+                return self
+            end
+        end
+    end
+    return self
+end
+
 Item._mt = {
     type = "item",
     __index = Item,

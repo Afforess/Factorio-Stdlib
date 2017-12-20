@@ -26,11 +26,9 @@ local item_types = {
 }
 
 function Item:get(item, itype, opts)
-    local object
+    local object = self.get_object(item)
 
-    if self.table(item) and item.type then
-        object = self.get_object(item, item.type)
-    else
+    if not object then
         for _, type_name in pairs(itype and {itype} or item_types) do
             object = self.get_object(item, type_name)
             if object then
@@ -40,7 +38,7 @@ function Item:get(item, itype, opts)
     end
 
     if object then
-        return setmetatable(object, Item._mt):save_options(opts)
+        return setmetatable(object, Item._mt):extend():save_options(opts)
     end
 
     local msg = "Item: " .. (itype and (itype .. "/") or "") .. tostring(item) .. " does not exist."
@@ -48,32 +46,6 @@ function Item:get(item, itype, opts)
     return self
 end
 Item:set_caller(Item.get)
-
-function Item:add_flag(flag)
-    if self:valid() then
-        self.flags = self.flags or {}
-        for _, existing in pairs(self.flags) do
-            if existing == flag then
-                return self
-            end
-        end
-        self.flags[#self.flags + 1] = flag
-    end
-    return self
-end
-
-function Item:remove_flag(flag)
-    if self:valid() then
-        self.flags = self.flags or {}
-        for i, existing in pairs(self.flags) do
-            if existing == flag then
-                self.flags[i] = nil
-                return self
-            end
-        end
-    end
-    return self
-end
 
 Item._mt = {
     type = "item",

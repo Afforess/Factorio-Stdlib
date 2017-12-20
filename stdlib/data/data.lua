@@ -4,6 +4,43 @@
 local Data = {} --luacheck: allow defined top
 setmetatable(Data, {__index = require("stdlib/data/core")})
 
+--- Returns a valid thing object reference. This is the main getter
+-- @tparam string|table thing The thing to use, if string the thing must be in data.raw[type], tables are not verified
+-- @tparam[opt] string type the thing type
+-- @tparam table opts Logging options to pass
+-- @treturn Entity
+function Data:new(thing, opts)
+    self.fail_if_missing(thing, "thing is required")
+
+    if Data.table(thing) and thing.name and thing.type then
+        return setmetatable(thing, Data._mt):extend():save_options(opts)
+    else
+        local msg = "Data: "..tostring(thing).." is malformed."
+        error(msg, 4)
+    end
+end
+Data:set_caller(Data.new)
+
+function Data.new_style(style)
+    data.raw["gui-style"].default[style.name] = style
+end
+
+function Data.disable_control(control)
+    if data.raw["custom-input"] and data.raw["custom-input"][control] then
+        data.raw["custom-input"][control].enabled = false
+    end
+end
+
+function Data.new_sound(name, file)
+    Data.fail_if_missing(name)
+    Data.fail_if_missing(file)
+    return Data {
+        type = "sound",
+        name = name,
+        filename = file
+    }
+end
+
 --- Change subroup and/or order
 -- @tparam string data_type
 -- @tparam string name
@@ -49,81 +86,12 @@ function Data.get_icon(data_type, name)
     return data and data.icon
 end
 
---Quickly duplicate an existing prototype into a new one.
-function Data.duplicate(data_type, orig_name, new_name, mining_result)
-    mining_result = type(mining_result) == "boolean" and new_name or mining_result
-    if data.raw[data_type][orig_name] then
-        local proto = table.deepcopy(data.raw[data_type][orig_name])
-        proto.name = new_name
-        if mining_result then
-            if proto.minable and proto.minable.result then
-                proto.minable.result = mining_result
-            end
-        end
-        if proto.place_result then
-            proto.place_result = new_name
-        end
-        if proto.result then
-            proto.result = new_name
-        end
-        return(proto)
-    else
-        error("Unknown Prototype "..data_type.."/".. orig_name )
-    end
-end
-
---Prettier monolith extracting
-function Data.extract_monolith(filename, x, y, w, h)
-    return {
-        type = "monolith",
-
-        top_monolith_border = 0,
-        right_monolith_border = 0,
-        bottom_monolith_border = 0,
-        left_monolith_border = 0,
-
-        monolith_image = {
-            filename = filename,
-            priority = "extra-high-no-scale",
-            width = w,
-            height = h,
-            x = x,
-            y = y,
-        },
-    }
-end
-
---Entity!
-function Data.create_sound_old(name, file_or_sound_table, volume)
-    Data.fail_if_missing(name)
-    Data.fail_if_missing(file_or_sound_table)
-    local sound = {
-        type = "explosion",
-        name = name,
-        animations = Data.empty_animations()
-    }
-
-    if type(file_or_sound_table) == "table" then
-        sound.sound = file_or_sound_table
-    else
-        sound.sound = {
-            filename = file_or_sound_table,
-            volume = volume or 1
-        }
-    end
-    data:extend{sound}
-end
-
-function Data.create_sound(name, file)
-    Data.fail_if_missing(name)
-    Data.fail_if_missing(file)
-    local sound = {
-        type = "sound",
-        name = name,
-        filename = file
-    }
-    data:extend{sound}
-end
+Data._mt = {
+    type = "data",
+    __index = Data,
+    __call = Data.get,
+    __tostring = Data.tostring
+}
 
 return Data
 -- render layers

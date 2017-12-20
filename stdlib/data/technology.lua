@@ -45,7 +45,7 @@ function Technology:get(tech, opts)
     self.fail_if_missing(tech, "tech is required")
     local object = self.get_object(tech, "technology")
     if object then
-        return setmetatable(object, self._mt):save_options(opts)
+        return setmetatable(object, self._mt):extend():save_options(opts)
     else
         local msg = "Technology: " .. tostring(tech) .. " does not exist."
         self.log(msg, opts)

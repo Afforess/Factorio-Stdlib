@@ -17,7 +17,7 @@ function Recipe:get(recipe, opts)
     local object = self.get_object(recipe, "recipe")
 
     if object then
-        return setmetatable(object, Recipe._mt):save_options(opts)
+        return setmetatable(object, Recipe._mt):extend():save_options(opts)
     else
         local msg = "Recipe: "..tostring(recipe).." does not exist."
         self.log(msg, opts)
@@ -25,22 +25,6 @@ function Recipe:get(recipe, opts)
     return self
 end
 Recipe:set_caller(Recipe.get)
-
---- Copies a recipe to a new recipe.
--- @tparam string new_name The new name for the recipe.
--- @treturn Recipe
-function Recipe:copy(new_name)
-    self.fail_if_missing(new_name, "New name is required")
-    if self:valid("recipe") then
-        local copy = table.deepcopy(self)
-        copy.name = new_name
-
-        data:extend{copy}
-        return Recipe(new_name)
-    else
-        return self
-    end
-end
 
 -- Returns a formated ingredient or prodcut table
 local function format(ingredient, result_count)
@@ -436,7 +420,6 @@ end
 -- @tparam[opt] string|Concepts.product normal
 -- @tparam[opt] string|Concepts.product|boolean expensive
 -- @tparam[opt] string main_product
--- @note normal or expensive is required
 function Recipe:replace_result(result_name, normal, expensive, main_product)
     if self:valid() and normal or expensive then
         result_name = format(result_name)

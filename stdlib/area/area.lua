@@ -449,10 +449,6 @@ function Area.shrink_to_surface_size(area, surface)
     return area
 end
 
--------------------------------------------------------------------------------
---[[Entity Helpers]]--
--------------------------------------------------------------------------------
-
 --- Set the metatable on a stored area without returning a new area. Usefull for restoring
 -- metatables to saved areas in global
 -- @tparam Concepts.BoundingBox area

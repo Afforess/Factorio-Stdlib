@@ -10,7 +10,7 @@ function Fluid:get(fluid, opts)
     local object = self.get_object(fluid, "fluid")
 
     if object then
-        return setmetatable(object, Fluid._mt):save_options(opts)
+        return setmetatable(object, Fluid._mt):extend():save_options(opts)
     end
 
     local msg = "Fluid: "..tostring(fluid).." does not exist."

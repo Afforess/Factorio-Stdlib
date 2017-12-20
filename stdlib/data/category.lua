@@ -43,11 +43,7 @@ function Category:get(category_name, category_type, create_new)
     for type_name in pairs(types) do
         local object = data.raw[type_name][category_name]
         if object then
-            local mt = {
-                type = "category",
-                __index = self
-            }
-            return setmetatable(object, mt)
+            return setmetatable(object, self._mt):extend()
         end
     end
 
@@ -56,5 +52,12 @@ function Category:get(category_name, category_type, create_new)
     return self
 end
 Category:set_caller(Category.get)
+
+Category._mt = {
+    type = "category",
+    __index = Category,
+    __call = Category.get,
+    __tostring = Category.tostring
+}
 
 return Category

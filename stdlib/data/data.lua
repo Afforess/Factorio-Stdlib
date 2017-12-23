@@ -9,11 +9,13 @@ setmetatable(Data, {__index = require("stdlib/data/core")})
 -- @tparam[opt] string type the thing type
 -- @tparam table opts Logging options to pass
 -- @treturn Entity
-function Data:new(thing, opts)
+function Data:new(thing, class, opts)
     self.fail_if_missing(thing, "thing is required")
 
-    if Data.table(thing) and thing.name and thing.type then
-        return setmetatable(thing, Data._mt):extend():save_options(opts)
+    local object = self.get_object(thing, class or thing.type)
+
+    if object then
+            return setmetatable(thing, Data._mt):extend():save_options(opts)
     else
         local msg = "Data: "..tostring(thing).." is malformed."
         error(msg, 4)

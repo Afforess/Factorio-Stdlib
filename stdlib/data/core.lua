@@ -47,7 +47,6 @@ end
 function Core.duplicate(data_type, orig_name, new_name, mining_result)
     mining_result = type(mining_result) == "boolean" and new_name or mining_result
     if data.raw[data_type] and data.raw[data_type][orig_name] then
-
         local proto = table.deepcopy(data.raw[data_type][orig_name])
         proto.name = new_name
 
@@ -65,9 +64,9 @@ function Core.duplicate(data_type, orig_name, new_name, mining_result)
             proto.result = new_name
         end
 
-        return(proto)
+        return (proto)
     else
-        error("Unknown Prototype "..data_type.."/".. orig_name )
+        error("Unknown Prototype " .. data_type .. "/" .. orig_name)
     end
 end
 
@@ -75,20 +74,18 @@ end
 function Core.extract_monolith(filename, x, y, w, h)
     return {
         type = "monolith",
-
         top_monolith_border = 0,
         right_monolith_border = 0,
         bottom_monolith_border = 0,
         left_monolith_border = 0,
-
         monolith_image = {
             filename = filename,
             priority = "extra-high-no-scale",
             width = w,
             height = h,
             x = x,
-            y = y,
-        },
+            y = y
+        }
     }
 end
 
@@ -167,6 +164,12 @@ function Core.empty_connection_points(count)
     return points
 end
 
+function Core.extend_array(proto_array)
+    if proto_array then
+        data:extend(proto_array and #proto_array > 0 and proto_array or {proto_array})
+    end
+end
+
 --- Is this a valid object
 -- @tparam[opt] string class if present is the object a member of the class
 -- @treturn self
@@ -188,18 +191,18 @@ function Core:save_options(opts)
 end
 
 --- Extend object(s) into the data table
--- @tparam[opt] table|array proto_array extends an object table or array of object tables if nil extend self
+-- @tparam[opt] boolean force Extend even if it is already extended
 -- @treturn self
-function Core:extend(proto_array)
-    if proto_array then
-        data:extend(proto_array and #proto_array > 0 and proto_array or {proto_array})
-    elseif self and ((self.name and self.type) or self:valid()) then
-        local t = data.raw[self.type]
-        if t == nil then
-            t = {}
-            data.raw[self.type] = t
+function Core:extend(force)
+    if self and ((self.name and self.type) or self:valid()) then
+        if not self:extended() or force then
+            local t = data.raw[self.type]
+            if t == nil then
+                t = {}
+                data.raw[self.type] = t
+            end
+            t[self.name] = self
         end
-        t[self.name] = self
     else
         error("Could not extend data", 2)
     end
@@ -218,7 +221,7 @@ function Core:copy(new_name, mining_result)
         copy.name = new_name
 
         -- For Entities
-         if mining_result then
+        if mining_result then
             if copy.minable and copy.minable.result then
                 copy.minable.result = mining_result
             end
@@ -230,9 +233,9 @@ function Core:copy(new_name, mining_result)
         end
 
         -- For recipes, need also to check results!!
-        if copy.result and self:valid("recipe")  then
+        if copy.result and self:valid("recipe") then
             copy.result = new_name
-            --copy:replace_result(from, new_name)
+        --copy:replace_result(from, new_name)
         end
 
         return self(copy):extend()
@@ -274,10 +277,18 @@ function Core:remove_flag(flag)
     return self
 end
 
+function Core:set_fields(tab)
+    if self:valid() then
+        for k, v in pairs(tab) do
+            rawset(self, k, v)
+        end
+    end
+end
+
 --- Has this object been extended
 -- @treturn self
 function Core:extended()
-    return self.name and self.type and data.raw[self.type][self.name]
+    return self.name and self.type and data.raw[self.type] and data.raw[self.type][self.name]
 end
 
 --- Get the objects name.

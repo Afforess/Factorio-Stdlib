@@ -91,6 +91,7 @@ end
 
 function Core.get_object(object, class)
     if Core.table(object) then
+        object.update_data = true
         return object.name and object.type and object
     elseif type(object) == "string" then
         return data.raw[class] and data.raw[class][object]

@@ -38,7 +38,7 @@ function Item:get(item, itype, opts)
     end
 
     if object then
-        return setmetatable(object, Item._mt):extend():save_options(opts)
+        return setmetatable(object, Item._mt):extend(object.update_data):save_options(opts)
     end
 
     local msg = "Item: " .. (itype and (itype .. "/") or "") .. tostring(item) .. " does not exist."

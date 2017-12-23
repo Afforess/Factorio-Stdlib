@@ -15,7 +15,7 @@ function Data:new(thing, class, opts)
     local object = self.get_object(thing, class or thing.type)
 
     if object then
-            return setmetatable(thing, Data._mt):extend():save_options(opts)
+            return setmetatable(thing, Data._mt):extend(object.update_data):save_options(opts)
     else
         local msg = "Data: "..tostring(thing).." is malformed."
         error(msg, 4)

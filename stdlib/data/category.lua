@@ -43,7 +43,7 @@ function Category:get(category_name, category_type, create_new)
     for type_name in pairs(types) do
         local object = data.raw[type_name][category_name]
         if object then
-            return setmetatable(object, self._mt):extend()
+            return setmetatable(object, self._mt):extend(object.update_data)
         end
     end
 

@@ -17,7 +17,7 @@ function Recipe:get(recipe, opts)
     local object = self.get_object(recipe, "recipe")
 
     if object then
-        return setmetatable(object, Recipe._mt):extend():save_options(opts)
+        return setmetatable(object, Recipe._mt):extend(object.update_data):save_options(opts)
     else
         local msg = "Recipe: "..tostring(recipe).." does not exist."
         self.log(msg, opts)

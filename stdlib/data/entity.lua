@@ -15,7 +15,7 @@ function Entity:get(entity, type, opts)
     local object = self.get_object(entity, type)
 
     if object then
-        return setmetatable(object, Entity._mt):extend():save_options(opts)
+        return setmetatable(object, Entity._mt):extend(object.update_data):save_options(opts)
     else
         local msg = "Entity: "..tostring(entity).." does not exist."
         self.log(msg, opts)

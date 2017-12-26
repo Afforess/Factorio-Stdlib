@@ -1,6 +1,5 @@
 --- Player global creation.
--- This module adds player helper functions, it does not automatically register events
--- unless Player.register_events() is called
+-- This module adds player helper functions, it does not automatically register events unless Player.register_events() is called
 -- @module Player
 -- @usage
 -- local Player = require('stdlib/event/player').register_events()
@@ -125,6 +124,11 @@ function Player.register_events()
     Event.register(events, Player.init)
     Event.register(defines.events.on_player_changed_force, Player.update_force)
     Event.register(defines.events.on_player_removed, Player.remove)
+    return Player
+end
+
+function Player.register_init()
+    Event.register(Event.core_events.init, Player.init)
     return Player
 end
 

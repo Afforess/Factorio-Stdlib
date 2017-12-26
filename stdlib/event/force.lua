@@ -1,12 +1,11 @@
 --- Force global creation.
--- Requiring this module will register init and force creation events using the stdlib @{Event} module.
--- <p>All existing and new players will be added to the `global.forces` table.
--- <p>This module should be first required after any other Init functions but before any scripts needing `global.players`.
--- <p>This module registers the following events: `on_init`, `on_configuration_changed`, `on_player_created`, and `on_player_removed`.
+-- <p>All new forces will be added to the `global.forces` table.
+-- <p>This modules events should be registered after any other Init functions but before any scripts needing `global.players`.
+-- <p>This modules can register the following events: `on_force_created`, and `on_forces_merging`.
 -- @module Force
 -- @usage
 -- local Force = require('stdlib/event/force').register_events()
--- -- The fist time this is required it will register force creation events
+-- -- inside your Init event Force.init() -- to properly handle any existing forces
 
 require("stdlib/event/event")
 
@@ -109,4 +108,8 @@ function Force.register_events()
     return Force
 end
 
+function Force.register_init()
+    Event.register(Event.core_events.init, Force.init)
+    return Force
+end
 return Force

@@ -13,7 +13,8 @@
 -- @module Event
 -- @usage require("stdlib/event/event")
 
-Event = { --luacheck: allow defined top
+Event = {
+    --luacheck: allow defined top
     _module_name = "Event",
     _registry = {},
     core_events = {
@@ -43,19 +44,28 @@ Event = { --luacheck: allow defined top
                     end
                 )
             end
+        end,
+        _remove = function(id)
+            if id == Event.core_events.init then
+                script.on_init()
+            elseif id == Event.core_events.load then
+                script.on_load()
+            elseif id == Event.core_events.configuration_changed then
+                script.on_configuration_changed()
+            end
         end
     }
 }
-setmetatable(Event, {__index = require('stdlib/core')})
+setmetatable(Event, {__index = require("stdlib/core")})
 
 local fail_if_missing = Event.fail_if_missing
 
 local function is_valid_id(event_id)
     if not (type(event_id) == "number" or type(event_id) == "string") then
-        error("Invalid Event Id, Must be string or int, or array of strings and/or ints, Passed in :"..event_id, 3)
+        error("Invalid Event Id, Must be string or int, or array of strings and/or ints, Passed in :" .. event_id, 3)
     end
     if (type(event_id) == "number" and event_id < -3) then
-        error("event_id must be greater than -3, Passed in: "..event_id, 3)
+        error("event_id must be greater than -3, Passed in: " .. event_id, 3)
     end
 end
 
@@ -78,33 +88,29 @@ end
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.register(event_ids, handler)
     fail_if_missing(event_ids, "missing event_ids argument")
+    fail_if_missing(handler, "handler is missing, use Event.remove to unregister events")
 
     event_ids = (type(event_ids) == "table" and event_ids) or {event_ids}
 
     for _, event_id in pairs(event_ids) do
         is_valid_id(event_id)
+        if not Event._registry[event_id] then
+            Event._registry[event_id] = {}
 
-        if handler == nil then
-            Event._registry[event_id] = nil
-            script.on_event(event_id, nil)
-        else
-            if not Event._registry[event_id] then
-                Event._registry[event_id] = {}
-
-                if type(event_id) == "string" or event_id >= 0 then
-                    script.on_event(event_id, Event.dispatch)
-                elseif event_id < 0 then
-                    Event.core_events._register(event_id)
-                end
+            if type(event_id) == "string" or event_id >= 0 then
+                script.on_event(event_id, Event.dispatch)
+            elseif event_id < 0 then
+                Event.core_events._register(event_id)
             end
-            --If the handler is already registered for this event: remove and insert it to the end.
-            local _, reg_index = table.find(Event._registry[event_id], function(v) return v == handler end)
-            if reg_index then
-                table.remove(Event._registry[event_id], reg_index)
-                log("Same handler already registered for event "..event_id..", reording it to the bottom")
-            end
-            table.insert(Event._registry[event_id], handler)
         end
+        --If the handler is already registered for this event: remove and insert it to the end.
+        local _, reg_index = table.find(Event._registry[event_id], function(v) return v == handler end)
+
+        if reg_index then
+            table.remove(Event._registry[event_id], reg_index)
+            log("Same handler already registered for event " .. event_id .. ", reording it to the bottom")
+        end
+        table.insert(Event._registry[event_id], handler)
     end
     return Event
 end
@@ -141,7 +147,6 @@ function Event.dispatch(event)
 
             local force_crc = Event.force_crc
             for idx, handler in ipairs(_registry) do
-
                 -- Check for userdata and stop processing further handlers if not valid
                 for _, val in pairs(event) do
                     if type(val) == "table" and val.__self and not val.valid then
@@ -149,7 +154,7 @@ function Event.dispatch(event)
                     end
                 end
 
-                setmetatable(event, { __index = { _handler = handler } })
+                setmetatable(event, {__index = {_handler = handler}})
 
                 -- Call the handler
                 local success, err = pcall(handler, event)
@@ -162,7 +167,7 @@ function Event.dispatch(event)
                     else -- no players received the message, force a real error so someone notices
                         error(err) -- no way to handle errors cleanly when the game is not up
                     end
-                    -- continue processing the remaning handlers. In most cases they won"t be related to the failed code.
+                -- continue processing the remaning handlers. In most cases they won"t be related to the failed code.
                 end
 
                 -- force a crc check if option is enabled. This is a debug option and will hamper perfomance if enabled
@@ -209,7 +214,11 @@ function Event.remove(event_ids, handler)
             end
             if table.size(Event._registry[event_id]) == 0 then
                 Event._registry[event_id] = nil
-                script.on_event(event_id, nil)
+                if type(event_id) == "string" or event_id >= 0 then
+                    script.on_event(event_id, nil)
+                else
+                    Event.core_events._remove(event_id)
+                end
             end
         end
     end

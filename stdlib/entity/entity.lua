@@ -6,7 +6,6 @@ Entity = {_module_name = "Entity"} --luacheck: allow defined top
 setmetatable(Entity, {__index = require('stdlib/core')})
 
 local fail_if_missing = Entity.fail_if_missing
-local Game = require('stdlib/game')
 
 --- Tests whether an entity has access to a given field.
 -- @tparam LuaEntity entity the entity to test the access to a field
@@ -152,7 +151,6 @@ function Entity.destroy_entity( entity, died, cause, force )
             cause = cause,
             force = force,
             script = true,
-            mod_name = Game._get_mod_name()
         }
         -- If no event name is passed, assume script_raised_destroy, otherwise raise the event
         -- with the passed event name. ie. defines.events.on_preplayer_mined_item
@@ -176,7 +174,6 @@ function Entity.create_entity( surface, settings, player_index, raise_script_eve
         local event = {
             created_entity = entity,
             script = true,
-            mod_name = Game._get_mod_name()
         }
 
         if raise_script_event then

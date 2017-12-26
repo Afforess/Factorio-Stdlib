@@ -8,7 +8,6 @@
 -- /c remote.call("my_interface", "show", game.player)
 -- --In the window that appears you can run lua code directly on your mod, including globals.
 
-local Core = require('stdlib/core')
 require('stdlib/event/gui')
 
 local make_globals_for_use_in_console = {
@@ -21,7 +20,7 @@ for _, req in pairs (make_globals_for_use_in_console) do
 end
 
 --TODO fix for .16 when script.mod_name is implemented
-local prefix = Core._get_mod_name(MOD and MOD.console_prefix)
+local prefix = script.mod_name
 
 local names = {
     frame = prefix..'_console',

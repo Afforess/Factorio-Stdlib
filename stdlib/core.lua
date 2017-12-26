@@ -10,9 +10,6 @@ require('stdlib/utils/math')
 require('stdlib/defines/color')
 require('stdlib/defines/time')
 
---Temporary fix for this change
-defines.events.on_pre_player_mined_item = defines.events.on_pre_player_mined_item or defines.events.on_preplayer_mined_item --luacheck: ignore defines
-
 local Core = {
     _module_name = "Core",
     _protect = function(this, caller, class_name)
@@ -43,13 +40,6 @@ local Core = {
         local s = tostring(t)
         m.__tostring = f
         return s
-    end,
-
-    -- No Doc
-    -- This is a helper global and functions until .16 to set the name of your mod in control.lua set _stdlib_mod_name = 'name of your mod'
-    _get_mod_name = function(name)
-        local ok, mod_name = pcall(function() return script.mod_name end)
-        return ok and mod_name or name or _stdlib_mod_name or "stdlib" -- luacheck: ignore _stdlib_mod_name
     end,
 }
 

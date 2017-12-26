@@ -19,7 +19,13 @@ setmetatable(Changes, {__index = require("stdlib/core")})
     old_version :: string: Old version of the mod. May be nil if the mod wasn't previously present (i.e. it was just added).
     new_version :: string: New version of the mod. May be nil if the mod is no longer present (i.e. it was just removed).
 --]]
-Changes.version = {}
+Changes.versions = Changes.prequire("changes/versions") or {}
+Changes["map-change-always-first"] = Changes.prequire("changes/map-change-always-first")
+Changes["any-change-always-first"] = Changes.prequire("changes/any-change-always-first")
+Changes["mod-change-always-first"] = Changes.prequire("changes/mod-change-always-first")
+Changes["mod-change-always-last"] = Changes.prequire("changes/mod-change-always-last")
+Changes["any-change-always-last"] = Changes.prequire("changes/any-change-always-last")
+Changes["map-change-always-last"] = Changes.prequire("changes/map-change-always-last")
 
 local function run_if_exists(func)
     return func and type(func) == "function" and func()
@@ -28,8 +34,8 @@ end
 --[Mark all migrations as complete during Init]--
 function Changes.on_init()
     local list = {}
-    local cur_version = game.active_mods[script.mod_name] or 0
-    for ver in ipairs(Changes.version) do
+    local cur_version = game.active_mods[script.mod_name]
+    for ver in pairs(Changes.versions) do
         list[ver] = cur_version
     end
     global._changes = list
@@ -53,12 +59,12 @@ end
 
 function Changes.on_mod_changed(this_mod_changes)
     global._changes = global._changes or {}
-    local old = this_mod_changes.old_version or 0
 
+    local old = this_mod_changes.old_version
     if old then -- Find the last installed version
-        for ver, func in pairs(Changes.version or {}) do
+        for ver, func in pairs(Changes.versions) do
             if not global._changes[ver] then
-                func()
+                run_if_exists(func)
                 global._changes[ver] = old
                 log("Migration completed for version " .. ver)
             end

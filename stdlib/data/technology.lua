@@ -1,8 +1,15 @@
 --- Technology
 -- @classmod Technology
 
-local Technology = {}
-setmetatable(Technology, {__index = require("stdlib/data/core")})
+local Technology = {
+    _class = "Technology"
+}
+setmetatable(Technology, {__index = require("stdlib/data/data")})
+
+function Technology:_get(tech)
+    return self:get(tech, "technology")
+end
+Technology:set_caller(Technology._get)
 
 --[[
 type = "technology",
@@ -40,19 +47,6 @@ order = "e-a-a"
 -- data:extend{new}
 -- return true
 -- end
-
-function Technology:get(tech, opts)
-    self.fail_if_missing(tech, "tech is required")
-    local object = self.get_object(tech, "technology")
-    if object then
-        return setmetatable(object, self._mt):extend(object.update_data):save_options(opts)
-    else
-        local msg = "Technology: " .. tostring(tech) .. " does not exist."
-        self.log(msg, opts)
-    end
-    return self
-end
-Technology:set_caller(Technology.get)
 
 function Technology:add_effect(effect, unlock_type)
     self.fail_if_missing(effect)
@@ -206,7 +200,7 @@ end
 Technology._mt = {
     type = "technology",
     __index = Technology,
-    __call = Technology.get
+    __call = Technology._get
 }
 
 return Technology

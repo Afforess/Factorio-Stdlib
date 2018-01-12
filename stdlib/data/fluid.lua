@@ -1,28 +1,20 @@
 --- Fluid
 -- @classmod Fluid
 
-local Fluid = {}
-setmetatable(Fluid, {__index = require("stdlib/data/core")})
+local Fluid = {
+    _class = "Fluid"
+}
+setmetatable(Fluid, {__index = require("stdlib/data/data")})
 
-function Fluid:get(fluid, opts)
-    self.fail_if_missing(fluid, "fluid is required")
-
-    local object = self.get_object(fluid, "fluid")
-
-    if object then
-        return setmetatable(object, Fluid._mt):extend(object.update_data):save_options(opts)
-    end
-
-    local msg = "Fluid: "..tostring(fluid).." does not exist."
-    self.log(msg)
-    return self
+function Fluid:_get(fluid)
+    return self:get(fluid)
 end
-Fluid:set_caller(Fluid.get)
+Fluid:set_caller(Fluid._get)
 
 Fluid._mt = {
     type = "fluid",
     __index = Fluid,
-    __call = Fluid.get,
+    __call = Fluid._get,
     __tostring = Fluid.tostring
 }
 

@@ -192,7 +192,7 @@ function table.avg(tbl)
 end
 
 --- Merges two tables &mdash; values from first get overwritten by the second.
---- @usage
+-- @usage
 -- function some_func(x, y, args)
 --     args = table.merge({option1=false}, args)
 --     if opts.option1 == true then return x else return y end
@@ -225,9 +225,38 @@ function table.merge(tblA, tblB, array_merge, raw)
     return tblA
 end
 
--- copied from factorio/data/core/luablib/util.lua
+--- Creates a new merged dictionary, if the values in tbl_b are in tbl_a they are not overwritten.
+-- @usage
+-- local a = {one = A}
+-- local b = {one = Z, two = B}
+-- local merged = table.dictionary_merge(tbl_a, tbl_b)
+-- --meged = {one = A, two = B}
+-- @tparam table tbl_a
+-- @tparam table tbl_b
+-- @treturn table with a and b merged together
+function table.dictionary_merge(tbl_a, tbl_b)
+    local meta_a = getmetatable(tbl_a)
+    local meta_b = getmetatable(tbl_b)
+    setmetatable(tbl_a, nil)
+    setmetatable(tbl_b, nil)
+
+    local new_t = {}
+    for k, v in pairs(tbl_a) do
+        new_t[k] = v
+    end
+    for k, v in pairs(tbl_b or {}) do
+        if not new_t[k] then
+            new_t[k] = v
+        end
+    end
+    setmetatable(tbl_a, meta_a)
+    setmetatable(tbl_b, meta_b)
+    return new_t
+end
+
 
 --- Creates a deep copy of table without copying Factorio objects.
+-- copied from factorio/data/core/luablib/util.lua
 -- @usage local copy = table.deepcopy[data.raw.["stone-furnace"]["stone-furnace"]] -- returns a copy of the stone furnace entity
 -- @tparam table object the table to copy
 -- @treturn table a copy of the table

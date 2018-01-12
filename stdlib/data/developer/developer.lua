@@ -2,9 +2,8 @@
 -- @script Developer
 
 local Developer = {}
-setmetatable(Developer, {__index = require("stdlib/data/core")})
-
 local Data = require("stdlib/data/data")
+setmetatable(Developer, {__index = Data})
 
 local function make_no_controls()
     local controls = {}

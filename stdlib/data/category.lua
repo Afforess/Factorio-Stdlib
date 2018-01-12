@@ -1,8 +1,10 @@
 --- Category
 -- @classmod Category
 
-local Category = {}
-setmetatable(Category, {__index = require("stdlib/data/core")})
+local Category = {
+    _class = "Category"
+}
+setmetatable(Category, {__index = require("stdlib/data/data")})
 
 local category_type_map = {
     ["ammo-category"] = true,

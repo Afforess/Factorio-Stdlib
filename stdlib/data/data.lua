@@ -228,17 +228,31 @@ function Data.new_sound(name, file)
     }
 end
 
+local function subgroup_order(data, subgroup, order)
+    data.subgroup = subgroup and #subgroup > 0 and subgroup or data.subgroup
+    data.order = order and #order > 0 and order or data.order
+end
+
 --- Change subroup and/or order
 -- @tparam string data_type
 -- @tparam string name
 -- @tparam string subgroup
 -- @tparam string order
-function Data.subgroup_order(data_type, name, subgroup, order)
+function Data.subgroup_order_from(data_type, name, subgroup, order)
     local data = data.raw[data_type] and data.raw[data_type][name]
     if data then
-        data.subgroup = subgroup and #subgroup > 0 and subgroup or data.subgroup
-        data.order = order and #order > 0 and order or data.order
+        subgroup_order(data, subgroup, order)
     end
+end
+
+local function replace_icon(data, icon, size)
+    if type(icon) == "table" then
+        data.icons = icon
+        data.icon = nil
+    else
+        data.icon = icon
+    end
+    data.icon_size = size or data.icon_size
 end
 
 --- Replace an icon
@@ -246,31 +260,33 @@ end
 -- @tparam string name
 -- @tparam string icon
 -- @tparam int size
-function Data.replace_icon(data_type, name, icon, size)
+function Data.replace_icon_from(data_type, name, icon, size)
     local data = data.raw[data_type] and data.raw[data_type][name]
     if data then
-        if type(icon) == "table" then
-            data.icons = icon
-            data.icon = nil
-        else
-            data.icon = icon
-            data.icon_size = size or data.icon_size
-        end
+        replace_icon(data, icon, size)
     end
+end
+
+local function get_icons(data, copy)
+    return copy and table.deepcopy(data.icons) or data.icons
 end
 
 --- Get the icons
 -- @tparam string data_type
 -- @tparam string name
 -- @tparam boolean copy
-function Data.get_icons(data_type, name, copy)
+function Data.get_icons_from(data_type, name, copy)
     local data = data.raw[data_type] and data.raw[data_type][name]
-    return data and copy and table.deepcopy(data.icons) or data and data.icons
+    return data and get_icons(data, copy)
 end
 
-function Data.get_icon(data_type, name)
+local function get_icon(data)
+    return data.icon
+end
+
+function Data.get_icon_from(data_type, name)
     local data = data.raw[data_type] and data.raw[data_type][name]
-    return data and data.icon
+    return data and get_icon(data)
 end
 
 --[Classes]--------------------------------------------------------------------
@@ -387,6 +403,43 @@ function Data:set_fields(tab)
         for k, v in pairs(tab) do
             rawset(self, k, v)
         end
+    end
+    return self
+end
+
+--- Change subroup and/or order
+-- @tparam string subgroup
+-- @tparam string order
+function Data:subgroup_order(subgroup, order)
+    if self:valid() then
+        subgroup_order(self, subgroup, order)
+    end
+    return self
+end
+
+--- Replace an icon
+-- @tparam string icon
+-- @tparam int size
+function Data:replace_icon(icon, size)
+    if self:valid() then
+        replace_icon(self, icon, size)
+    end
+    return self
+end
+
+--- Get the icons
+-- @tparam string data_type
+-- @tparam string name
+-- @tparam boolean copy
+function Data:get_icons(copy)
+    if self:valid() then
+        return get_icons(self, copy)
+    end
+end
+
+function Data:get_icon()
+    if self:valid() then
+        return get_icon(self)
     end
 end
 

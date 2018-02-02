@@ -52,8 +52,7 @@ function Technology:add_effect(effect, unlock_type)
     self.fail_if_missing(effect)
 
     --todo fix for non recipe types
-    local add_unlock =
-        function(technology, name)
+    local add_unlock = function(technology, name)
         local effects = technology.effects
         effects[#effects + 1] = {
             type = unlock_type,
@@ -65,12 +64,10 @@ function Technology:add_effect(effect, unlock_type)
         local Recipe = require("stdlib/data/recipe")
         unlock_type = (not unlock_type and "unlock-recipe") or unlock_type
         local r_name = type(effect) == "table" and effect.name or effect
-        if unlock_type == "unlock-recipe" then
+        if unlock_type == "unlock-recipe" or not unlock_type then
             if Recipe(effect):valid() then
                 add_unlock(self, r_name)
             end
-        else
-            add_unlock(self, r_name)
         end
     elseif self:valid("recipe") then
         unlock_type = "unlock-recipe"
@@ -96,7 +93,7 @@ function Technology:remove_effect(tech_name, unlock_type, name)
         if tech_name then
             local tech = Technology(tech_name):valid()
             if tech then
-                for index, effect in pairs(tech.effects) do
+                for index, effect in pairs(tech.effects or {}) do
                     if effect.type == "unlock-recipe" and effect.recipe == self.name then
                         table.remove(tech.effects, index)
                     end
@@ -104,7 +101,7 @@ function Technology:remove_effect(tech_name, unlock_type, name)
             end
         else
             for _, tech in pairs(data.raw["technology"]) do
-                for index, effect in pairs(tech.effects) do
+                for index, effect in pairs(tech.effects or {}) do
                     if effect.type == "unlock-recipe" and effect.recipe == self.name then
                         table.remove(tech.effects, index)
                     end

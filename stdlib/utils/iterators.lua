@@ -1,9 +1,7 @@
 --- Iterator library.
 -- @module iter
 
--- luacheck: globals iter (Allow mutating iter)
-
-iter = {}
+iter = {} --luacheck: allow defined top
 
 iter.pairs = pairs
 iter.ipairs = ipairs

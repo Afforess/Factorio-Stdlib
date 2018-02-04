@@ -59,13 +59,37 @@ end
 
 --- Returns true if the passed variable is a table.
 -- @tparam mixed var The variable to check
--- @treturn boolean If the variable is a table
-function Core.table(var)
+-- @treturn boolean
+function Core.is_table(var)
     return type(var) == "table"
 end
 
-function Core.string(var)
+--- Returns true if the passed variable is a string.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_string(var)
     return type(var) == "string"
+end
+
+--- Returns true if the passed variable is a number.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_number(var)
+    return type(var) == "number"
+end
+
+--- Returns true if the passed variable is a boolean.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_bool(var)
+    return type(var) == "boolean"
+end
+
+--- Returns true if the passed variable is nil.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_nil(var)
+    return type(var) == "nil"
 end
 
 --- Require a file that may not exist
@@ -78,6 +102,10 @@ function Core.prequire(module)
     end
 end
 
+--- Sets the __call metamethod on the metatable.
+-- @tparam table this The object to get the metatable for
+-- @tparam function caller The function to set to __call
+-- @treturn table with metatable attached
 function Core.set_caller(this, caller)
     if getmetatable(this) then
         getmetatable(this).__call = caller

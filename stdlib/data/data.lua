@@ -1,5 +1,5 @@
 --- Data
--- @module Data
+-- @classmod Data
 
 if _G.remote and _G.script then
     error("Data Modules can only be required in the data stage", 2)
@@ -82,7 +82,7 @@ end
 --- Quickly duplicate an existing prototype into a new one.
 -- @tparam string data_type The type of the object to duplicate
 -- @tparam string orig_name The name of the object to duplicate
--- @tpara string new_name The new name to use.
+-- @tparam string new_name The new name to use.
 -- @tparam[opt] string|boolean mining_result If true set mining_result to new_name, if truthy set mining_result to value
 function Data.duplicate(data_type, orig_name, new_name, mining_result)
     mining_result = type(mining_result) == "boolean" and new_name or mining_result
@@ -250,7 +250,7 @@ end
 --- Change the item-subgroup and/or order.
 -- @tparam[opt=nil] string subgroup, The subgroup to change to if valid.
 -- @tparam[opt=nil] string order The order string to use
--- @note if subgroup is non nil and subgroub is not valid order wil not be changed.
+-- note if subgroup is non nil and subgroub is not valid order wil not be changed.
 -- @treturn self
 function Data:subgroup_order(subgroup, order)
     if self:valid() then
@@ -288,9 +288,7 @@ function Data:replace_icon(icon, size)
 end
 
 --- Get the icons
--- @tparam string data_type
--- @tparam string name
--- @tparam boolean copy
+-- @tparam[opt=false] boolean copy return a copy of the icons table
 -- @treturn table icons
 function Data:get_icons(copy)
     if self:valid() then
@@ -311,9 +309,9 @@ function Data:tostring()
 end
 
 --- Returns a valid thing object reference. This is the main getter
--- @tparam string|table thing The thing to use, if string the thing must be in data.raw[type], tables are not verified
--- @tparam[opt] string type the thing type
--- @tparam[opt] table opts Logging options to pass
+-- @tparam string|table object The thing to use, if string the thing must be in data.raw[type], tables are not verified
+-- @tparam[opt] string object_type the raw type. Required if object is a string
+-- @tparam[opt] table opts options to pass
 -- @treturn Object
 function Data:get(object, object_type, opts) --luacheck: ignore opts
     self.fail_if_missing(object, "object name string or table is required")

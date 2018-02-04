@@ -1,5 +1,5 @@
 --- Pipes
--- @classmod Pipes
+-- @module Pipes
 
 local Pipes = {}
 --setmetatable(Pipes, {__index = require("stdlib/data/data")})

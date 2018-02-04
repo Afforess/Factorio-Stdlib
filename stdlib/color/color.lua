@@ -15,7 +15,7 @@ local fail_if_missing = Color.fail_if_missing
 -- <li>If ***alpha*** is not given, and if the given color table already has a value for `color.a`, then leave `color.a` alone.
 -- </ul>
 -- @tparam[opt=white] defines.color|Concepts.Color color the color to configure
--- @tparam[opt=1] float alpha the alpha value (*[0 - 1]*) to set for the given color
+-- @tparam[opt=1] float alpha the alpha value 0 - 1 to set for the given color
 -- @treturn Concepts.Color a color table that has the specified value for the alpha channel
 function Color.set(color, alpha)
     color = color or defines.color.white
@@ -51,7 +51,7 @@ end
 --- Get a color table with a hexadecimal string.
 -- Optionally provide the value for the alpha channel.
 -- @tparam string hex hexadecimal color string (#ffffff, not #fff)
--- @tparam[opt=1] float alpha the alpha value to set; such that ***[ 0 &#8924; value &#8924; 1 ]***
+-- @tparam[opt=1] float alpha the alpha value to set; such that *** 0 &#8924; value &#8924; 1 ***
 -- @treturn Concepts.Color a color table with RGB converted from Hex and with alpha
 function Color.from_hex(hex, alpha)
     fail_if_missing(hex, "missing color hex value")

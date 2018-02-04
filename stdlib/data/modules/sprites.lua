@@ -1,3 +1,6 @@
+--- Pipes
+-- @module Pipes
+
 local Sprites = {}
 --setmetatable(Sprites, {__index = require("stdlib/data/data")})
 

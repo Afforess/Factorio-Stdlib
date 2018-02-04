@@ -383,14 +383,16 @@ end
 -- table.count_keys(a, function(v, k) return k % 2 == 1 end) -- produces: 3, 5
 function table.count_keys(tbl, func, ...)
     local count, total = 0, 0
-    for k, v in pairs(tbl or {}) do
-        total = total + 1
-        if func then
-            if func(v, k, ...) then
+    if type(tbl) == "table" then
+        for k, v in pairs(tbl) do
+            total = total + 1
+            if func then
+                if func(v, k, ...) then
+                    count = count + 1
+                end
+            else
                 count = count + 1
             end
-        else
-            count = count + 1
         end
     end
     return count, total

@@ -43,8 +43,8 @@ describe(
                     "should get a Technology",
                     function()
                         assert.not_nil(Technology("steel-processing-2"))
-                        assert.not_nil(Technology:get("steel-processing-2"))
-                        assert.not_nil(Technology:get("fake"))
+                        assert.not_nil(Technology:_get("steel-processing-2"))
+                        assert.not_nil(Technology:_get("fake"))
                         assert.not_nil(Technology("fake"))
                     end
                 )

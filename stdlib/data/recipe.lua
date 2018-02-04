@@ -11,7 +11,7 @@ local Item = require("stdlib/data/item")
 function Recipe:_get(recipe)
     return self:get(recipe, "recipe")
 end
-Recipe:set_caller(function(recipe) Recipe:get(recipe, "recipe") end)
+Recipe:set_caller(Recipe._get)
 
 function Recipe:Products(products) --luacheck: ignore
     --if not products then return products table,
@@ -235,13 +235,16 @@ end
 -- -- @tparam string category_name Crafting category
 -- -- @tparam[opt] boolean make_new Create the category if it doesn't exist
 -- -- @treturn self
--- function Recipe:change_category(category_name, make_new)
---     if self:valid() then
---         local Category = require("stdlib/data/category")
---         self.category = (Category(category_name, "recipe-category", make_new):valid() and category_name) or self.category
---     end
---     return self
--- end
+function Recipe:change_category(category_name, make_new)
+    if self:valid() then
+        local Category = require("stdlib/data/category")
+        local cat = Category(category_name, "recipe-category")
+        if cat:valid() then
+            self.category = cat.name
+        end
+    end
+    return self
+end
 
 --- Add to technology as a recipe unlock
 -- @tparam string tech_name Name of the technology to add the unlock too

@@ -47,12 +47,12 @@ describe("Player",
 
         it("should register handlers for creation events",
             function()
-                local register_spy = spy.on(_G.Event, "register")
-                require("stdlib/event/player")
-                local match = require("luassert.match")
-                local events = {defines.events.on_player_created, Event.core_events.init, Event.core_events.configuration_changed}
-                assert.spy(register_spy).was_called_with(events, match.is_function())
-                assert.is_same(4, table.count_keys(Event._registry))
+                --local register_spy = spy.on(_G.Event, "register")
+                require("stdlib/event/player").register_events()
+                --local match = require("luassert.match")
+                --local events = {defines.events.on_player_created, Event.core_events.init, Event.core_events.configuration_changed}
+                --assert.spy(register_spy).was_called_with(events, match.is_function())
+                assert.is_same(5, table.count_keys(Event._registry))
                 assert.is_truthy(Event._registry[defines.events.on_player_created])
                 assert.is_truthy(Event._registry[defines.events.on_player_removed])
             end
@@ -61,7 +61,7 @@ describe("Player",
         it("should register handlers for destruction events",
             function()
                 local register_spy = spy.on(_G.Event, "register")
-                require("stdlib/event/player")
+                require("stdlib/event/player").register_events()
                 local match = require("luassert.match")
                 assert.spy(register_spy).was_called_with(defines.events.on_player_removed, match.is_function())
             end
@@ -74,7 +74,7 @@ describe("Player",
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { index = player_index, name = player_name }
                 end
-                require("stdlib/event/player")
+                require("stdlib/event/player").register_events()
                 Event.dispatch({name = Event.core_events.init})
                 for player_index in ipairs(global.players) do
                     assert.same(game.players[player_index].name, global.players[player_index].name)
@@ -89,7 +89,7 @@ describe("Player",
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { index = player_index, name = player_name }
                 end
-                require("stdlib/event/player")
+                require("stdlib/event/player").register_events()
                 Event.dispatch({name = Event.core_events.configuration_changed, test = "TEST"})
                 for player_index in ipairs(global.players) do
                     assert.same(game.players[player_index].name, global.players[player_index].name)
@@ -100,6 +100,7 @@ describe("Player",
         it("should load players into the global object when players are created in the game object",
             function()
                 _G.global = {}
+                require("stdlib/event/player").register_events()
                 local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { index = player_index, name = player_name }
@@ -127,7 +128,7 @@ describe("Player",
 
         it(".get should retrieve player objects from game.players and global.players objects",
             function()
-                local Player = require("stdlib/event/player")
+                local Player = require("stdlib/event/player").register_events()
                 local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { index = player_index, name = player_name }
@@ -145,7 +146,7 @@ describe("Player",
 
         it(".get should add a player into global.players if the player is in game.players but does not exist in global.players",
             function()
-                local Player = require("stdlib/event/player")
+                local Player = require("stdlib/event/player").register_events()
                 local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { index = player_index, name = player_name }
@@ -166,7 +167,7 @@ describe("Player",
                 for player_index, player_name in ipairs(player_names) do
                     global.players[player_index] = { index = player_index, name = player_name, data = "Data" .. player_index }
                 end
-                local Player = require("stdlib/event/player")
+                local Player = require("stdlib/event/player").register_events()
                 local data = {a = "abc", b = "def"}
                 Player.add_data_all(data)
                 for player_index, _ in ipairs(player_names) do
@@ -178,7 +179,7 @@ describe("Player",
 
         it(".remove should remove data for players when an event is passed",
             function()
-                local Player = require("stdlib/event/player")
+                local Player = require("stdlib/event/player").register_events()
                 local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { index = player_index, name = player_name }
@@ -193,7 +194,7 @@ describe("Player",
 
         it(".init should initialize global.players",
             function()
-                local Player = require("stdlib/event/player")
+                local Player = require("stdlib/event/player").register_events()
                 local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { index = player_index, name = player_name }
@@ -210,7 +211,7 @@ describe("Player",
 
         it(".init should re-init players",
             function()
-                local Player = require("stdlib/event/player")
+                local Player = require("stdlib/event/player").register_events()
                 local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { index = player_index, name = player_name }
@@ -227,7 +228,7 @@ describe("Player",
 
         it(".init should iterate all game.players[index] and initialize global.players[index] when nil is passed",
             function()
-                local Player = require("stdlib/event/player")
+                local Player = require("stdlib/event/player").register_events()
                 local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { index = player_index, name = player_name }
@@ -243,7 +244,7 @@ describe("Player",
 
         it(".init should iterate all game.players[index] and re-init global.players[index] when event is nil and overwrite is true",
             function()
-                local Player = require("stdlib/event/player")
+                local Player = require("stdlib/event/player").register_events()
                 local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { index = player_index, name = player_name }
@@ -266,7 +267,7 @@ describe("Player",
             --If a player isn"t valid then it won"t add it to global table
             --Additionally game.players won"t return invalid players (TBD)
             function()
-                local Player = require("stdlib/event/player")
+                local Player = require("stdlib/event/player").register_events()
                 local player_names = {"PlayerOne", "PlayerTwo", "PlayerThree"}
                 for player_index, player_name in ipairs(player_names) do
                     game.players[player_index] = { index = player_index, name = player_name}

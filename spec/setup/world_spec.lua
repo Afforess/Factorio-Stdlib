@@ -16,8 +16,8 @@ describe('World',
         after_each(function() World.close() end)
 
         it('should load!', function()
-            require("stdlib.event.opened")
-            assert.same(1, #Event._registry[-1])
+            require("stdlib.event.player").register_events()
+            assert.same(1, #_G.Event._registry[-1])
             World.Debug.new_globs(true)
             World.Debug.watched_packages(true)
             World.Debug.packages()
@@ -25,7 +25,7 @@ describe('World',
         end)
 
         it('should init and create some players', function()
-            require("stdlib.event.opened")
+            require("stdlib.event.player").register_events()
 
             assert.is_nil(game)
 
@@ -46,7 +46,7 @@ describe('World',
         end)
 
         it('should update the tick!', function()
-            require("stdlib.event.opened")
+            require("stdlib.event.player").register_events()
 
             World.init()
             World.create_players(1)

@@ -35,7 +35,7 @@ end
 --This is our print override
 local print_buffer = function(msg, group)
     group = group or "_P_"
-    World.Debug.msg_buffer[World.Debug.msg_buffer +1 ] = group .. msg
+    World.Debug._msg_buffer[#World.Debug._msg_buffer +1 ] = group .. msg
     print(group .. msg)
     return true
 end
@@ -121,12 +121,12 @@ World.open = function()
     if _G.script then error("Cannot Open, simulation already running") end
 
     override_require(true)
-    require("spec/setup/defines")
+    --require("spec/setup/defines")
 
     setmetatable(_G, meta._G)
-
     _G.global = nil
     _G.game = nil
+    _G.remote = nil
     _G.script = {
         _next_id = 200,
         on_event = function(_, _) return end,
@@ -173,6 +173,10 @@ World.init = function(tick, load_only, saved_global, saved_game, config_changed_
                 name = "nauvis"
             }
         }
+    }
+    _G.remote = {
+        interfaces = {},
+        call = function() end
     }
 
     --run a fake data loader here to populate game.xxx_prototypes
@@ -263,9 +267,10 @@ World.close = function(save, skip_unloading_these)
     _G.global = nil
     _G.game = nil
 
+    _G.remote = nil
     _G.script = nil
     _G.Game = nil
-    _G.Event = nil
+    --_G.Event = nil
     _G.on_init = nil
     _G.on_configuration_changed = nil
 

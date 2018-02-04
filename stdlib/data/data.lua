@@ -352,7 +352,7 @@ function Data:get(object, object_type)
                 end
             end
         else
-            error("object_type is missing", 3)
+            error("object_type is missing for ".. (self._class or "Unknown") .."/" .. (object or ""), 3)
         end
     end
 

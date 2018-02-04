@@ -1,4 +1,4 @@
-local Technology, Raw, Rawtech
+local Technology, Raw, Rawtech --luacheck: ignore Raw
 local tn = "steel-processing-2"
 local mp = "military-4"
 

@@ -50,7 +50,7 @@ describe("Force",
             function()
                 --local register_spy = spy.on(_G.Event, "register")
                 require("stdlib/event/force").register_events()
-                local match = require("luassert.match")
+                --local match = require("luassert.match")
                 --local events = {defines.events.on_force_created, Event.core_events.init, Event.core_events.configuration_changed}
                 --assert.spy(register_spy).was_called_with(events, match.is_function())
                 assert.is_same(4, table.count_keys(Event._registry))

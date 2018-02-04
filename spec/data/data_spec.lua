@@ -1,4 +1,4 @@
-local Data, Raw, R, F
+local Data, Raw, R, F --luacheck: ignore Raw
 
 describe('Recipe', function()
 

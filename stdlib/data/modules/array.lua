@@ -1,3 +1,4 @@
+--luacheck: ignore
 local Array = {}
 
 function Array:has()

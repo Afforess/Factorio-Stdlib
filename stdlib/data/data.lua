@@ -428,7 +428,8 @@ function Data:get(object, object_type)
     if new then
         return setmetatable(new, self._mt):extend()
     else
-        local msg = self._class .. " " .. tostring(object) .. " does not exist."
+        local msg = (self._class and self._class or "") .. (self.name and "/" .. self.name or "") .. " "
+        msg = msg .. (object_type and (object_type .. "/") or " ") .. tostring(object) .. " does not exist."
         log(msg)
     end
     return self

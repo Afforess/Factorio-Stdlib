@@ -223,7 +223,9 @@ function quickstart.on_player_created(event)
             if QS.get("make_train", false) then
                 local loco = surface.create_entity {name = "locomotive", position = {20, 39}, orientation = 0.25, direction = 2, force = force}
                 loco.orientation = .25
-                loco.get_fuel_inventory().insert({name = "rocket-fuel", count = 30})
+                --Setting the burner this way rather than using insert allows us to not inflate the production statistics
+                loco.burner.currently_burning = "rocket-fuel"
+                loco.burner.remaining_burning_fuel = 222222222
                 local cwag = surface.create_entity {name = "cargo-wagon", position = {13, 39}, orientation = 0.25, direction = 2, force = force}
                 cwag.orientation = .25
                 local fwag = surface.create_entity {name = "fluid-wagon", position = {7, 39}, orientation = 0.25, direction = 2, force = force}

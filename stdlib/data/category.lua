@@ -6,7 +6,7 @@ local Category = {
 }
 setmetatable(Category, {__index = require("stdlib/data/data")})
 
-local category_type_map = {
+local category_type_map = { --luacheck: ignore category_type_map
     ["ammo-category"] = true,
     ["equipment-category"] = true,
     ["fuel-category"] = true,
@@ -16,49 +16,35 @@ local category_type_map = {
     ["resource-category"] = true,
 }
 
-local function create_category_prototype(name, type)
-    if data.raw[type] then
-        if not data.raw[type][name] then
-            local new = {
-                type = type,
-                name = name,
-            }
-            data:extend{new}
-            return true
-        end
-        return false
-    else
-        local tstring = {"Prototype creation failed", "type = "..type, "name = "..name}
-        error(table.concat(tstring))
-    end
+function Category:_get(category_name, category_type)
+    return self:get(category_name, category_type)
 end
+Category:set_caller(Category._get)
 
-function Category:get(category_name, category_type, create_new)
-    self.fail_if_missing(category_name, "Category is required")
-
-    local types = self.map_to_types(category_type, category_type_map)
-
-    if create_new and category_type then
-        create_category_prototype(category_name, category_type)
-    end
-
-    for type_name in pairs(types) do
-        local object = data.raw[type_name][category_name]
-        if object then
-            return setmetatable(object, self._mt):extend(object.update_data)
-        end
-    end
-
-    local msg = "Category: "..(category_type and (category_type.."/") or "")..category_name.." does not exist."
-    self.log(msg)
+function Category:create()
     return self
 end
-Category:set_caller(Category.get)
+
+function Category:add()
+    return self
+end
+
+function Category:remove()
+    return self
+end
+
+function Category:replace(a, b)
+    if self:valid("category") then
+        self:remove(a)
+        self:add(b)
+    end
+    return self
+end
 
 Category._mt = {
     type = "category",
     __index = Category,
-    __call = Category.get,
+    __call = Category._get,
     __tostring = Category.tostring
 }
 

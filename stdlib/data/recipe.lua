@@ -11,7 +11,15 @@ local Item = require("stdlib/data/item")
 function Recipe:_get(recipe)
     return self:get(recipe, "recipe")
 end
-Recipe:set_caller(Recipe._get)
+Recipe:set_caller(function(recipe) Recipe:get(recipe, "recipe") end)
+
+function Recipe:Products(products) --luacheck: ignore
+    --if not products then return products table,
+    --if products and products is string return if not product return products table, else return product?
+end
+
+function Recipe:Ingredients(ingredients) --luacheck: ignore
+end
 
 -- Returns a formated ingredient or prodcut table
 local function format(ingredient, result_count)
@@ -222,17 +230,17 @@ function Recipe:make_difficult(expensive_energy)
     return self
 end
 
---- Change the recipe category
--- @tparam string category_name Crafting category
--- @tparam[opt] boolean make_new Create the category if it doesn't exist
--- @treturn self
-function Recipe:change_category(category_name, make_new)
-    if self:valid() then
-        local Category = require("stdlib/data/category")
-        self.category = (Category(category_name, "recipe-category", make_new):valid() and category_name) or self.category
-    end
-    return self
-end
+-- --- Change the recipe category
+-- -- @tparam string category_name Crafting category
+-- -- @tparam[opt] boolean make_new Create the category if it doesn't exist
+-- -- @treturn self
+-- function Recipe:change_category(category_name, make_new)
+--     if self:valid() then
+--         local Category = require("stdlib/data/category")
+--         self.category = (Category(category_name, "recipe-category", make_new):valid() and category_name) or self.category
+--     end
+--     return self
+-- end
 
 --- Add to technology as a recipe unlock
 -- @tparam string tech_name Name of the technology to add the unlock too
@@ -304,7 +312,7 @@ end
 --- Set the main product of the recipe.
 -- @tparam string|boolean main_product if boolean then use normal/expensive recipes passed as main product
 -- @tparam[opt] Concepts.Product|string normal recipe
--- @tparam[opt] Concempts.Product|string expensive recipe
+-- @tparam[opt] Concepts.Product|string expensive recipe
 -- @treturn self
 function Recipe:set_main_product(main_product, normal, expensive)
     if self:valid("recipe") then
@@ -415,6 +423,10 @@ function Recipe:replace_result(result_name, normal, expensive, main_product)
     end
     return self
 end
+
+Recipe.rep_ing = Recipe.replace_ingredient
+Recipe.add_ing = Recipe.add_ingredient
+Recipe.rem_ing = Recipe.remove_ingredient
 
 Recipe._mt = {
     type = "recipe",

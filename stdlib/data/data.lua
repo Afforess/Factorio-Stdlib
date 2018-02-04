@@ -6,10 +6,9 @@ if _G.remote and _G.script then
 end
 
 local Data = {
-    Flags = setmetatable({}, {}),
     Sprites = require("stdlib/data/modules/sprites"),
     Pipes = require("stdlib/data/modules/pipes"),
-    _array_mt = require("stdlib/data/modules/array"),
+    _array_mt = require("stdlib/utils/classes/string_array"),
     _default_options = {
         ["silent"] = false,
         ["fail"] = false,
@@ -50,7 +49,7 @@ function Data.create_data_globals()
     _G.Entity = require("stdlib.data.entity")
     _G.Technology = require("stdlib.data.technology")
     _G.Category = require("stdlib.data.category")
-    _G.Pipes = require("stdlib.data.pipes")
+    --_G.Pipes = require("stdlib.data.pipes")
     _G.Data = Data
     return Data
 end
@@ -117,7 +116,6 @@ function Data.extend_array(proto_array)
     end
 end
 
-
 function Data.disable_control(control)
     if data.raw["custom-input"] and data.raw["custom-input"][control] then
         data.raw["custom-input"][control].enabled = false
@@ -144,9 +142,7 @@ end
 --- Save options to the metatable
 -- @tparam table opts
 function Data:save_options(opts)
-    if getmetatable(self) then
-        getmetatable(self).opts = opts
-    end
+    getmetatable(self).opts = opts
     return self
 end
 
@@ -171,6 +167,7 @@ end
 
 --- Copies a recipe to a new recipe.
 -- @tparam string new_name The new name for the recipe.
+-- @tparam string mining_result
 -- @treturn self
 function Data:copy(new_name, mining_result)
     self.fail_if_missing(new_name, "New name is required")
@@ -211,45 +208,31 @@ function Data:execute(func, ...)
     return self
 end
 
-function Data.Flags:get(has_flag_string)
+function Data:Flags(has_flag_string)
     if self:valid() then
-        self.flags = self.flags or {}
-        setmetatable(self.flags, Data._array_mt)
-        if has_flag_string then
-            return self.flags:has(has_flag_string)
+        if self.flags then
+            setmetatable(self.flags, Data._array_mt)
+            if has_flag_string then
+                return self.flags:has(has_flag_string)
+            end
+            return self.flags
         end
     end
-    return self.flags or setmetatable({}, Data._array_mt)
+    return self
 end
-Data.set_caller(Data.Flags, Data.Flags.get)
 
 function Data:add_flag(flag)
-    if self:valid() then
-        self.flags = self.flags or {}
-        for _, existing in pairs(self.flags) do
-            if existing == flag then
-                return self
-            end
-        end
-        self.flags[#self.flags + 1] = flag
-    end
+    self:Flags():add(flag)
     return self
 end
 
 function Data:remove_flag(flag)
-    if self:valid() then
-        self.flags = self.flags or {}
-        for i, existing in pairs(self.flags) do
-            if existing == flag then
-                self.flags[i] = nil
-                return self
-            end
-        end
-    end
+    self:Flags():remove(flag)
     return self
 end
 
-function Data:has_flag(flag) --luacheck: ignore
+function Data:has_flag(flag)
+    return self:Flags(flag)
 end
 
 --- Iterate a dictionary table and set fields on the object. Existing fields are overwritten.
@@ -330,9 +313,9 @@ end
 --- Returns a valid thing object reference. This is the main getter
 -- @tparam string|table thing The thing to use, if string the thing must be in data.raw[type], tables are not verified
 -- @tparam[opt] string type the thing type
--- @tparam table opts Logging options to pass
--- @treturn Entity
-function Data:get(object, object_type)
+-- @tparam[opt] table opts Logging options to pass
+-- @treturn Object
+function Data:get(object, object_type, opts) --luacheck: ignore opts
     self.fail_if_missing(object, "object name string or table is required")
 
     local new
@@ -352,7 +335,7 @@ function Data:get(object, object_type)
                 end
             end
         else
-            error("object_type is missing for ".. (self._class or "Unknown") .."/" .. (object or ""), 3)
+            error("object_type is missing for " .. (self._class or "Unknown") .. "/" .. (object or ""), 3)
         end
     end
 
@@ -385,7 +368,3 @@ return Data
 -- collision masks
 -- "ground-tile", "water-tile", "resource-layer", "floor-layer", "item-layer",
 -- "object-layer", "player-layer", "ghost-layer", "doodad-layer", "not-colliding-with-itself"
-
---Data.add_fields(Data, require('stdlib/data/developer/developer'))
---Data.add_fields(Data, require('stdlib/data/modules/data_select'))
---Data.Recipe = {select = require('stdlib/data/modules/recipe_select')}

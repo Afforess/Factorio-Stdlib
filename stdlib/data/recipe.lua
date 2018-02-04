@@ -90,6 +90,7 @@ end
 -- @tparam table ingredients
 -- @tparam string name Name of the ingredient to remove
 local function remove_ingredient(ingredients, name)
+    name = name.name
     for i, ingredient in pairs(ingredients) do
         if ingredient[1] == name or ingredient.name == name then
             ingredients[i] = nil

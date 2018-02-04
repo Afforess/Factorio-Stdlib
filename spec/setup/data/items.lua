@@ -10,5 +10,6 @@ _G.data:extend{
     {
         name = "stone-furnace",
         type = "item",
+        flags = {"hidden"}
     },
 }

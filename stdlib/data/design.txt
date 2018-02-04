@@ -1,0 +1,40 @@
+Core - available to all Contains core stuff useable in both control and data
+
+Data() - Available in all stages, contains core stuff useable only in data stage, main base for everything else
+Data:get(type, name) - gets from string or extends from table a prototype
+Data:copy(new_name)
+Data:valid()
+Data:save_options(table)
+Data:extend()
+Data:continue(condition)
+Data:execute(function, params)
+Data:tostring()
+
+Data:set_fields(table)
+
+Data:subgroup_order() - Change the subgroup (if exists) and/or the order (changes if nil or subgroup exists only)
+Data:get_icon()
+Data:set_icon()
+Data:set_icons()
+
+Data:has_flag(flag)
+Data:add_flag(flag)
+Data:remove_flag(flag)
+
+
+Recipe()
+set_enabled()
+set_hidden()
+add_unlock()
+remove_unlock()
+make_difficult(energy_change)
+set_category()
+
+Recipe():Results() -- get a results object,
+Recipe():Ingredients() -- get an ingredients object,
+has()
+replace()
+add() + metamethod
+remove() - metamethod
+
+convert() -- to results if needed

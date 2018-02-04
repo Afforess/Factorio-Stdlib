@@ -83,7 +83,7 @@ function Core.set_caller(this, caller)
         getmetatable(this).__call = caller
         return this
     else
-        error("Metatable not found")
+        error("Metatable not found", 2)
     end
 end
 

@@ -2,7 +2,7 @@
 -- @classmod Pipes
 
 local Pipes = {}
-setmetatable(Pipes, {__index = require("stdlib/data/data")})
+--setmetatable(Pipes, {__index = require("stdlib/data/data")})
 
 --Define pipe connection pipe pictures, not all entities use these. This function needs some work though.
 function Pipes.pictures(pictures, shift_north, shift_south, shift_west, shift_east, replacements)

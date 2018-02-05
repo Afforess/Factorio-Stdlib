@@ -8,6 +8,7 @@ end
 local Data = {
     Sprites = require("stdlib/data/modules/sprites"),
     Pipes = require("stdlib/data/modules/pipes"),
+    Util = require("stdlib/data/modules/util"),
     _array_mt = require("stdlib/utils/classes/string_array"),
     _default_options = {
         ["silent"] = false,
@@ -76,37 +77,6 @@ function Data.map_to_types(type, map)
         end
     else
         return map
-    end
-end
-
---- Quickly duplicate an existing prototype into a new one.
--- @tparam string data_type The type of the object to duplicate
--- @tparam string orig_name The name of the object to duplicate
--- @tparam string new_name The new name to use.
--- @tparam[opt] string|boolean mining_result If true set mining_result to new_name, if truthy set mining_result to value
-function Data.duplicate(data_type, orig_name, new_name, mining_result)
-    mining_result = type(mining_result) == "boolean" and new_name or mining_result
-    if data.raw[data_type] and data.raw[data_type][orig_name] then
-        local proto = table.deepcopy(data.raw[data_type][orig_name])
-        proto.name = new_name
-
-        if mining_result then
-            if proto.minable and proto.minable.result then
-                proto.minable.result = mining_result
-            end
-        end
-
-        if proto.place_result then
-            proto.place_result = new_name
-        end
-
-        if proto.result then
-            proto.result = new_name
-        end
-
-        return (proto)
-    else
-        error("Unknown Prototype " .. data_type .. "/" .. orig_name)
     end
 end
 

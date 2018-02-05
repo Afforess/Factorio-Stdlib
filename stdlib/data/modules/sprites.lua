@@ -1,8 +1,7 @@
---- Pipes
--- @module Pipes
+--- Sprites
+-- @module Sprites
 
 local Sprites = {}
---setmetatable(Sprites, {__index = require("stdlib/data/data")})
 
 function Sprites.extract_monolith(filename, x, y, w, h)
     return {
@@ -57,7 +56,6 @@ function Sprites.empty_animation()
     return Sprites.empty_pictures()
 end
 
--- [[METHODS]]
 --- Quick to use empty animation.
 -- @treturn table an empty animations table
 function Sprites.empty_animations()

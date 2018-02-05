@@ -25,7 +25,7 @@ function Recipe:Results(get_expensive)
         end
         if self.normal then
             if self.normal.result then
-                self.normal.resuts = {
+                self.normal.results = {
                     {type = "item", name = self.normal.result, amount = self.normal.result_count or 1}
                 }
                 self.normal.result = nil
@@ -35,7 +35,7 @@ function Recipe:Results(get_expensive)
             self.normal.results._valid = "results"
             setmetatable(self.normal.results, Recipe._results_mt)
             if self.expensive.result then
-                self.expensive.resuts = {
+                self.expensive.results = {
                     {type = "item", name = self.expensive.result, amount = self.expensive.result_count or 1}
                 }
                 self.expensive.result = nil
@@ -143,7 +143,7 @@ local function format(ingredient, result_count)
     return object
 end
 
--- get items for dificulties
+-- get items for difficulties
 local function get_difficulties(normal, expensive)
     return format(normal), format((expensive == true and table.deepcopy(normal)) or expensive)
 end

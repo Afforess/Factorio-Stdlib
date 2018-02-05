@@ -2,23 +2,40 @@
 -- @classmod Recipe
 
 local Recipe = {
-    _class = "Recipe"
+    _class = "Recipe",
+    _ingredients_mt = require("stdlib/data/modules/ingredients"),
+    _results_mt = require("stdlib/data/modules/results")
 }
 setmetatable(Recipe, {__index = require("stdlib/data/data")})
 
 local Item = require("stdlib/data/item")
 
 function Recipe:_get(recipe)
-    return self:get(recipe, "recipe")
+    local new = self:get(recipe, "recipe")
+    new:Ingredients()
+    new:Results()
+    return new
 end
 Recipe:set_caller(Recipe._get)
 
-function Recipe:Products(products) --luacheck: ignore
+function Recipe:Products(product) --luacheck: ignore
     --if not products then return products table,
     --if products and products is string return if not product return products table, else return product?
 end
 
-function Recipe:Ingredients(ingredients) --luacheck: ignore
+function Recipe:Ingredients(ingredient)
+    if self:valid("recipe") then
+        self.ingredients = self.ingredients or {}
+        setmetatable(self.ingredients, Recipe._ingredients_mt)
+        self.ingredients._owner = self
+        self.ingredients._valid = true
+
+        if ingredient then
+            return self.ingredients:get(ingredient)
+        end
+        return self.ingredients
+    end
+    return self
 end
 
 -- Returns a formated ingredient or prodcut table

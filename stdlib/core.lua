@@ -85,6 +85,34 @@ function Core.is_bool(var)
     return type(var) == "boolean"
 end
 
+--- Returns true if the passed variable is true
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_true(var)
+    return var == true
+end
+
+--- Returns true if the passed variable is not nil or false.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_truthy(var)
+    return var and true or false
+end
+
+--- Returns true if the passed variable is false.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_false(var)
+    return var == false
+end
+
+--- Returns true if the passed variable is false or nil.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_falsy(var)
+    return not var
+end
+
 --- Returns true if the passed variable is nil.
 -- @tparam mixed var The variable to check
 -- @treturn boolean

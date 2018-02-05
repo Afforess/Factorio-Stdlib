@@ -8,3 +8,4 @@ mod/*
 !mod/info.json
 
 .luacompleterc
+make.exe.stackdump

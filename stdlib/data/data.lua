@@ -6,6 +6,7 @@ if _G.remote and _G.script then
 end
 
 local Data = {
+    _class = "data",
     Sprites = require("stdlib/data/modules/sprites"),
     Pipes = require("stdlib/data/modules/pipes"),
     Util = require("stdlib/data/modules/util"),
@@ -18,29 +19,27 @@ local Data = {
 }
 setmetatable(Data, {__index = require("stdlib/core")})
 
-function Data.item_types()
-    return {
-        "item",
-        "ammo",
-        "armor",
-        "gun",
-        "capsule",
-        "repair-tool",
-        "mining-tool",
-        "item-with-entity-data",
-        "rail-planner",
-        "tool",
-        "blueprint",
-        "deconstruction-item",
-        "blueprint-book",
-        "selection-tool",
-        "item-with-tags",
-        "item-with-label",
-        "item-with-inventory",
-        "module",
-        "fluid"
-    }
-end
+local item_types = {
+    "item",
+    "ammo",
+    "armor",
+    "gun",
+    "capsule",
+    "repair-tool",
+    "mining-tool",
+    "item-with-entity-data",
+    "rail-planner",
+    "tool",
+    "blueprint",
+    "deconstruction-item",
+    "blueprint-book",
+    "selection-tool",
+    "item-with-tags",
+    "item-with-label",
+    "item-with-inventory",
+    "module",
+    "fluid"
+}
 
 --- Load the whole library as globals
 function Data.create_data_globals()
@@ -50,50 +49,8 @@ function Data.create_data_globals()
     _G.Entity = require("stdlib.data.entity")
     _G.Technology = require("stdlib.data.technology")
     _G.Category = require("stdlib.data.category")
-    --_G.Pipes = require("stdlib.data.pipes")
     _G.Data = Data
     return Data
-end
-
-local function get_options(...)
-    local tuple = {}
-    for _, arg in ipairs({...}) do
-        tuple[#tuple + 1] = Data._default_options[arg] or false
-    end
-    return table.unpack(tuple)
-end
-
-function Data.log(msg)
-    local silent, fail = get_options("silent", "fail")
-    return (fail and error(msg, 2)) or not silent and log(msg)
-end
-
-function Data.map_to_types(type, map)
-    if type then
-        if data.raw[type] then
-            return {[type] = true}
-        else
-            error("Category " .. type .. " does not exist", 2)
-        end
-    else
-        return map
-    end
-end
-
-function Data.extend_array(proto_array)
-    if proto_array then
-        data:extend(proto_array and #proto_array > 0 and proto_array or {proto_array})
-    end
-end
-
-function Data.disable_control(control)
-    if data.raw["custom-input"] and data.raw["custom-input"][control] then
-        data.raw["custom-input"][control].enabled = false
-    end
-end
-
-function Data.extend_style(style)
-    data.raw["gui-style"].default[style.name] = style
 end
 
 --[Classes]--------------------------------------------------------------------
@@ -103,20 +60,23 @@ end
 -- @treturn self
 function Data:valid(class)
     if class then
-        return getmetatable(self).type == class or false
+        return self._valid == class or false
     else
-        return getmetatable(self).type and true or false
+        return self._valid and true or false
     end
 end
 
---- Save options to the metatable
--- @tparam table opts
-function Data:save_options(opts)
-    getmetatable(self).opts = opts
+--- Invalidates the object.
+-- @tparam boolean should_continue if false then invalidate the object
+-- @treturn self
+function Data:continue(should_continue)
+    if not should_continue then
+        self._valid = false
+    end
     return self
 end
 
---- Extend object(s) into the data table
+--- Extend object into the data table
 -- @tparam[opt] boolean force Extend even if it is already extended
 -- @treturn self
 function Data:extend(force)
@@ -148,6 +108,7 @@ function Data:copy(new_name, mining_result)
         copy.name = new_name
 
         -- For Entities
+        -- Need to also check mining_results!!!!!!
         if mining_result then
             if copy.minable and copy.minable.result then
                 copy.minable.result = mining_result
@@ -159,10 +120,14 @@ function Data:copy(new_name, mining_result)
             copy.place_result = new_name
         end
 
-        -- For recipes, need also to check results!!
-        if copy.result and self:valid("recipe") then
-            copy.result = new_name
-        --copy:replace_result(from, new_name)
+        -- For recipes, should also to check results!!
+        if copy.type == "recipe" then
+            if copy.normal then
+                copy.normal.result = new_name
+                copy.expensive.result = new_name
+            else
+                copy.result = new_name
+            end
         end
 
         return self(copy):extend()
@@ -288,12 +253,12 @@ function Data:get(object, object_type, opts) --luacheck: ignore opts
 
     local new
     if type(object) == "table" then
-        new = object.name and object.type and object
-        new._update_data = true -- What am I using this for?
+        self.fail_if_missing(object.type and object.name, "Name and Type are required")
+        new = object
         new._extended = data.raw[object.type] and data.raw[object.type][object.name] == object
     elseif type(object) == "string" then
         --Get type from object_type, or fluid or item_types
-        local types = (object_type and {object_type}) or (self._class == "Item" and self.item_types())
+        local types = (object_type and {object_type}) or (self._class == "item" and item_types)
         if types then
             for _, type in pairs(types) do
                 new = data.raw[type] and data.raw[type][object]
@@ -308,6 +273,8 @@ function Data:get(object, object_type, opts) --luacheck: ignore opts
     end
 
     if new then
+        new._valid = self._class or "data"
+        new._opt = opts
         return setmetatable(new, self._mt):extend()
     else
         local msg = (self._class and self._class or "") .. (self.name and "/" .. self.name or "") .. " "
@@ -319,7 +286,6 @@ end
 Data:set_caller(Data.get)
 
 Data._mt = {
-    type = "data",
     __index = Data,
     __call = Data.get,
     __tostring = Data.tostring

@@ -2,7 +2,7 @@
 -- @classmod Recipe
 
 local Recipe = {
-    _class = "Recipe",
+    _class = "recipe",
     _ingredients_mt = require("stdlib/data/modules/ingredients"),
     _results_mt = require("stdlib/data/modules/results")
 }
@@ -18,22 +18,67 @@ function Recipe:_get(recipe)
 end
 Recipe:set_caller(Recipe._get)
 
-function Recipe:Products(product) --luacheck: ignore
-    --if not products then return products table,
-    --if products and products is string return if not product return products table, else return product?
+function Recipe:Results(get_expensive)
+    if self:valid("recipe") then
+        if get_expensive then
+            self:make_difficult()
+        end
+        if self.normal then
+            if self.normal.result then
+                self.normal.resuts = {
+                    {type = "item", name = self.normal.result, amount = self.normal.result_count or 1}
+                }
+                self.normal.result = nil
+                self.normal.result_count = nil
+            end
+            self.normal.results._owner = self
+            self.normal.results._valid = "results"
+            setmetatable(self.normal.results, Recipe._results_mt)
+            if self.expensive.result then
+                self.expensive.resuts = {
+                    {type = "item", name = self.expensive.result, amount = self.expensive.result_count or 1}
+                }
+                self.expensive.result = nil
+                self.expensive.result_count = nil
+            end
+            self.expensive.results._owner = self
+            self.expensive.results._valid = "results"
+            setmetatable(self.expensive.results, Recipe._results_mt)
+            return get_expensive and self.expensive.results or self.normal.results
+        else
+            if self.result then
+                self.results = {
+                    {type = "item", name = self.result, amount = self.result_count or 1}
+                }
+                self.result = nil
+                self.result_count = nil
+            end
+            self.results._owner = self
+            self.results._valid = "results"
+            return setmetatable(self.results, Recipe._results_mt)
+        end
+    end
+    return self
 end
 
-function Recipe:Ingredients(ingredient)
+function Recipe:Ingredients(get_expensive)
     if self:valid("recipe") then
-        self.ingredients = self.ingredients or {}
-        setmetatable(self.ingredients, Recipe._ingredients_mt)
-        self.ingredients._owner = self
-        self.ingredients._valid = true
-
-        if ingredient then
-            return self.ingredients:get(ingredient)
+        if get_expensive then
+            self:make_difficult()
         end
-        return self.ingredients
+        if self.normal then
+            self.normal.ingredients._owner = self
+            self.normal.ingredients._valid = "ingredients"
+            setmetatable(self.normal.ingredients, Recipe._ingredients_mt)
+            self.expensive.ingredients._owner = self
+            self.expensive.ingredients._valid = "ingredients"
+            setmetatable(self.expensive.ingredients, Recipe._ingredients_mt)
+            return get_expensive and self.expensive.ingredients or self.normal.ingredients
+        else
+            self.ingredients._owner = self
+            self.ingredients._valid = "ingredients"
+            return setmetatable(self.ingredients, Recipe._ingredients_mt)
+        end
     end
     return self
 end
@@ -450,7 +495,6 @@ Recipe.add_ing = Recipe.add_ingredient
 Recipe.rem_ing = Recipe.remove_ingredient
 
 Recipe._mt = {
-    type = "recipe",
     __index = Recipe,
     __call = Recipe._get,
     __tostring = Recipe.tostring

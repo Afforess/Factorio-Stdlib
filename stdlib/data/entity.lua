@@ -2,7 +2,7 @@
 -- @classmod Entity
 
 local Entity = {
-    _class = "Entity"
+    _class = "entity"
 }
 setmetatable(Entity, {__index = require("stdlib/data/data")})
 
@@ -12,7 +12,6 @@ end
 Entity:set_caller(Entity._get)
 
 Entity._mt = {
-    type = "entity",
     __index = Entity,
     __call = Entity._get,
     __tostring = Entity.tostring

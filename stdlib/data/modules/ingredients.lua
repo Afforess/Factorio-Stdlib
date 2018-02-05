@@ -1,3 +1,4 @@
+--luacheck: ignore
 local Ingredients = {
     _class = "Ingredients"
 }

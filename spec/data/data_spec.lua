@@ -14,6 +14,17 @@ describe('Data', function()
         RESET()
     end)
 
+    it("should not be in global", function()
+        assert.is_nil(_G.Data)
+        assert.is_table(Data)
+    end)
+
+    it("should be in global", function()
+        Data.create_data_globals()
+        assert.is_table(_G.Data)
+        assert.is_table(_G.Recipe)
+    end)
+
     it("should get an object", function()
         assert.same("stone-furnace", R.name)
         assert.is_nil(F.name)

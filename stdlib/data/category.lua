@@ -2,7 +2,7 @@
 -- @classmod Category
 
 local Category = {
-    _class = "Category"
+    _class = "category"
 }
 setmetatable(Category, {__index = require("stdlib/data/data")})
 
@@ -42,7 +42,6 @@ function Category:replace(a, b)
 end
 
 Category._mt = {
-    type = "category",
     __index = Category,
     __call = Category._get,
     __tostring = Category.tostring

@@ -2,7 +2,7 @@
 -- @classmod Technology
 
 local Technology = {
-    _class = "Technology"
+    _class = "technology"
 }
 setmetatable(Technology, {__index = require("stdlib/data/data")})
 
@@ -195,7 +195,6 @@ function Technology:remove_prereq(tech_name)
 end
 
 Technology._mt = {
-    type = "technology",
     __index = Technology,
     __call = Technology._get
 }

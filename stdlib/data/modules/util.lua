@@ -2,6 +2,22 @@
 -- @module Util
 
 local Util = {}
+setmetatable(Util, {__index = require("stdlib/core")})
+
+function Util.extend(proto_array)
+    Util.fail_if_missing(Util.is_table(proto_array), "Missing table or array to extend")
+    data:extend(#proto_array > 0 and proto_array or {proto_array})
+end
+
+function Util.disable_control(control)
+    if data.raw["custom-input"] and data.raw["custom-input"][control] then
+        data.raw["custom-input"][control].enabled = false
+    end
+end
+
+function Util.extend_style(style)
+    data.raw["gui-style"].default[style.name] = style
+end
 
 --- Quickly duplicate an existing prototype into a new one.
 -- @tparam string data_type The type of the object to duplicate

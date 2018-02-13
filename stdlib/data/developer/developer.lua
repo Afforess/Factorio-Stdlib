@@ -21,7 +21,9 @@ end
 -- Developer.make_test_entities("ModName")
 function Developer.make_test_entities(name)
     if not data.raw["simple-entity"]["debug-chunk-marker"] then
-        if not name then error("developer chunk markers need mod name") end
+        if not name then
+            error("developer chunk markers need mod name")
+        end
         Data {
             type = "simple-entity",
             name = "debug-chunk-marker",
@@ -31,24 +33,23 @@ function Developer.make_test_entities(name)
             collision_mask = {},
             render_layer = "light-effect",
             max_health = 200,
-            pictures =
-            {
+            pictures = {
                 {
-                    filename = "__"..name.."__/stdlib/data/developer/debug-chunk-marker.png",
+                    filename = "__" .. name .. "__/stdlib/data/developer/debug-chunk-marker.png",
                     priority = "extra-high-no-scale",
                     width = 64,
                     height = 64,
                     shift = {0, 0}
                 },
                 {
-                    filename = "__"..name.."__/stdlib/data/developer/debug-chunk-marker-horizontal.png",
+                    filename = "__" .. name .. "__/stdlib/data/developer/debug-chunk-marker-horizontal.png",
                     priority = "extra-high-no-scale",
                     width = 64,
                     height = 64,
                     shift = {0, 0}
                 },
                 {
-                    filename = "__"..name.."__/stdlib/data/developer/debug-chunk-marker-vertical.png",
+                    filename = "__" .. name .. "__/stdlib/data/developer/debug-chunk-marker-vertical.png",
                     priority = "extra-high-no-scale",
                     width = 64,
                     height = 64,
@@ -59,42 +60,32 @@ function Developer.make_test_entities(name)
     end
 
     if not data.raw["electric-energy-interface"]["debug-energy-interface"] then
-        local power = Data.duplicate("electric-energy-interface", "electric-energy-interface", "debug-energy-interface")
-        power.flags = {"placeable-off-grid"}
-        power.localised_name = "Debug power source"
-        power.icon = data.raw["item"]["electric-energy-interface"].icon
-        power.minable = nil
-        power.collision_box = nil
-        power.collision_mask = {}
-        power.selection_box = {{0.0, -0.5}, {0.5, 0.5}}
-        power.picture = Developer.empty_picture()
-        power.vehicle_impact_sound = nil
-        power.working_sound = nil
-
-        data:extend{power}
+        Data("electric-energy-interface", "electric-energy-interface"):copy("debug-energy-interface"):set_fields {
+            flags = {"placeable-off-grid"},
+            localised_name = "Debug source",
+            icon = data.raw["item"]["electric-energy-interface"].icon,
+            collision_mask = {},
+            selection_box = {{0.0, -0.5}, {0.5, 0.5}},
+            picture = Developer.Sprites.empty_picture()
+        }:remove_fields {"minable", "collision_box", "vehicle_impact_sound", "working_sound"}
     end
 
     if not data.raw["electric-pole"]["debug-substation"] then
-        local pole = Data.duplicate("electric-pole", "substation", "debug-substation")
-        pole.localised_name = "Debug power substation"
-        pole.flags = {"placeable-off-grid"}
-        pole.icon = data.raw["item"]["substation"].icon
-        pole.minable = nil
-        pole.collision_box = nil
-        pole.selection_box = {{-0.5, -0.5}, {0.0, 0.5}}
-        pole.collision_mask = {}
-        pole.pictures = Developer.empty_pictures()
-        pole.maximum_wire_distance = 64
-        pole.supply_area_distance = 64
-        pole.connection_points = Developer.empty_connection_points(1)
-        pole.vehicle_impact_sound = nil
-        pole.working_sound = nil
-
-        data:extend{pole}
+        Data("substation", "electric-pole"):copy("debug-substation"):set_fields {
+            localised_name = "Debug power substation",
+            flags = {"placeable-off-grid"},
+            icon = data.raw["item"]["substation"].icon,
+            selection_box = {{-0.5, -0.5}, {0.0, 0.5}},
+            collision_mask = {},
+            pictures = Developer.Sprites.empty_pictures(),
+            maximum_wire_distance = 64,
+            supply_area_distance = 64,
+            connection_points = Developer.Sprites.empty_connection_points(1)
+        }:remove_fields {"minable", "collision_box", "vehicle_impact_sound", "working_sound"}
     end
 
-    data.raw.tile["lab-dark-1"].map_color = {r=100, g=100, b=100}
-    data.raw.tile["lab-dark-2"].map_color = {r=50, g=50, b=50}
+    data.raw.tile["lab-dark-1"].map_color = {r = 100, g = 100, b = 100}
+    data.raw.tile["lab-dark-2"].map_color = {r = 50, g = 50, b = 50}
 
     data.raw["map-gen-presets"]["default"]["debug"] = {
         type = "map-gen-presets",
@@ -107,7 +98,7 @@ function Developer.make_test_entities(name)
             water = "none",
             autoplace_controls = make_no_controls(),
             height = 128,
-            width = 128,
+            width = 128
         }
     }
 end

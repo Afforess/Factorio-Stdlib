@@ -182,6 +182,18 @@ function Data:set_fields(tab)
     return self
 end
 
+--- Iterate a string array and set to nil.
+-- @tparam table table string array of fields to remove.
+-- @treturn self
+function Data:remove_fields(tab)
+    if self:valid() then
+        for _, k in pairs(tab) do
+            rawset(self, k, nil)
+        end
+    end
+    return self
+end
+
 --- Change the item-subgroup and/or order.
 -- @tparam[opt=nil] string subgroup, The subgroup to change to if valid.
 -- @tparam[opt=nil] string order The order string to use

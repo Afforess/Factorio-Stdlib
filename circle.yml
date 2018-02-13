@@ -13,6 +13,7 @@ dependencies:
         - sudo luarocks install markdown
         - sudo luarocks install ldoc
         - sudo luarocks install luacheck
+        - sudo luarocks install lua-discount
 test:
     override:
         - make

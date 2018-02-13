@@ -139,7 +139,7 @@ function Area.adjust(area, vector)
     end
 
     --shrink or expand on y vector
-    if assert(vector[2], 'mising y vector') > 0 then
+    if assert(vector[2], 'missing y vector') > 0 then
         area = Area.expand(area, {0, vector[2]})
     elseif vector[2] < 0 then
         area = Area.shrink(area, {0, math.abs(vector[2])})
@@ -460,14 +460,14 @@ end
 --- Area tables are returned with these Metamethods attached.
 -- @table Metamethods
 Area._mt = {
-    __index = Area, -- If key is not found, see if there is one availble in the Area module.
+    __index = Area, -- If key is not found, see if there is one available in the Area module.
     __add = Area.expand, -- Will expand the area by the number or vector on the RHS.
     __sub = Area.shrink, -- Will shrink the area by the number or vector on the RHS.
     __tostring = Area.tostring, -- Will print a string representation of the area.
     __eq = Area.equals, -- Is the size of area1 the same as area2.
     __lt = Area.less_than, --is the size of area1 less than area2.
     __len = Area.size, -- The size of the area.
-    __concat = Area._concat, -- calls tostring on both sides of concact.
+    __concat = Area._concat, -- calls tostring on both sides of concat.
     __call = Area.copy -- Return a new copy
 }
 

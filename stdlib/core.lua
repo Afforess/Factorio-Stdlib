@@ -1,5 +1,5 @@
 --- The Core module loads some helper functions usefull in all stages
--- of a mods lifecyle.
+-- of a mods life cycle.
 -- @module Core
 -- @usage local Core = require('stdlib/core')
 
@@ -17,7 +17,7 @@ local Core = {
         local name = this._module_name or class_name or "Unknown"
 
         if meta and not meta.__metatable then
-            meta.__newindex = function() error("Attempt to mutatate read-only "..name.." Module") end
+            meta.__newindex = function() error("Attempt to mutate read-only "..name.." Module") end
             meta.__metatable = meta
             meta.__call = caller
         end
@@ -29,7 +29,7 @@ local Core = {
     end,
 
     _concat = function(lhs, rhs)
-        --Sanatize to remove address
+        --Sanitize to remove address
         return tostring(lhs):gsub("(%w+)%: %x+", "%1: (ADDR)") .. tostring(rhs):gsub("(%w+)%: %x+", "%1: (ADDR)")
     end,
 
@@ -59,13 +59,65 @@ end
 
 --- Returns true if the passed variable is a table.
 -- @tparam mixed var The variable to check
--- @treturn boolean If the variable is a table
-function Core.table(var)
+-- @treturn boolean
+function Core.is_table(var)
     return type(var) == "table"
 end
 
-function Core.string(var)
+--- Returns true if the passed variable is a string.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_string(var)
     return type(var) == "string"
+end
+
+--- Returns true if the passed variable is a number.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_number(var)
+    return type(var) == "number"
+end
+
+--- Returns true if the passed variable is a boolean.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_bool(var)
+    return type(var) == "boolean"
+end
+
+--- Returns true if the passed variable is true
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_true(var)
+    return var == true
+end
+
+--- Returns true if the passed variable is not nil or false.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_truthy(var)
+    return var and true or false
+end
+
+--- Returns true if the passed variable is false.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_false(var)
+    return var == false
+end
+
+--- Returns true if the passed variable is false or nil.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_falsy(var)
+    return not var
+end
+
+--- Returns true if the passed variable is nil.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function Core.is_nil(var)
+    return type(var) == "nil"
 end
 
 --- Require a file that may not exist
@@ -78,12 +130,16 @@ function Core.prequire(module)
     end
 end
 
+--- Sets the __call metamethod on the metatable.
+-- @tparam table this The object to get the metatable for
+-- @tparam function caller The function to set to __call
+-- @treturn table with metatable attached
 function Core.set_caller(this, caller)
     if getmetatable(this) then
         getmetatable(this).__call = caller
         return this
     else
-        error("Metatable not found")
+        error("Metatable not found", 2)
     end
 end
 

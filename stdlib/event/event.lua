@@ -225,4 +225,16 @@ function Event.remove(event_ids, handler)
     return Event
 end
 
+--- Filters events related to entity_type.
+-- @tparam string event_parameter The event parameter to look inside to find the entity type
+-- @tparam string entity_type The entity type to filter events for
+-- @tparam callable callback The callback to invoke if the filter passes. The object defined in the event parameter is passed
+function Event.filter_entity(event_parameter, entity_type, callback)
+    return function(evt)
+        if(evt[event_parameter].type == entity_type) then
+            callback(evt[event_parameter])
+        end
+    end
+end
+
 return Event

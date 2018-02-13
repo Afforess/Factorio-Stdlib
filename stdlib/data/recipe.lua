@@ -2,23 +2,85 @@
 -- @classmod Recipe
 
 local Recipe = {
-    _class = "Recipe"
+    _class = "recipe",
+    _ingredients_mt = require("stdlib/data/modules/ingredients"),
+    _results_mt = require("stdlib/data/modules/results")
 }
 setmetatable(Recipe, {__index = require("stdlib/data/data")})
 
 local Item = require("stdlib/data/item")
 
 function Recipe:_get(recipe)
-    return self:get(recipe, "recipe")
+    local new = self:get(recipe, "recipe")
+    new:Ingredients()
+    new:Results()
+    return new
 end
-Recipe:set_caller(function(recipe) Recipe:get(recipe, "recipe") end)
+Recipe:set_caller(Recipe._get)
 
-function Recipe:Products(products) --luacheck: ignore
-    --if not products then return products table,
-    --if products and products is string return if not product return products table, else return product?
+function Recipe:Results(get_expensive)
+    if self:valid("recipe") then
+        if get_expensive then
+            self:make_difficult()
+        end
+        if self.normal then
+            if self.normal.result then
+                self.normal.results = {
+                    {type = "item", name = self.normal.result, amount = self.normal.result_count or 1}
+                }
+                self.normal.result = nil
+                self.normal.result_count = nil
+            end
+            self.normal.results._owner = self
+            self.normal.results._valid = "results"
+            setmetatable(self.normal.results, Recipe._results_mt)
+            if self.expensive.result then
+                self.expensive.results = {
+                    {type = "item", name = self.expensive.result, amount = self.expensive.result_count or 1}
+                }
+                self.expensive.result = nil
+                self.expensive.result_count = nil
+            end
+            self.expensive.results._owner = self
+            self.expensive.results._valid = "results"
+            setmetatable(self.expensive.results, Recipe._results_mt)
+            return get_expensive and self.expensive.results or self.normal.results
+        else
+            if self.result then
+                self.results = {
+                    {type = "item", name = self.result, amount = self.result_count or 1}
+                }
+                self.result = nil
+                self.result_count = nil
+            end
+            self.results._owner = self
+            self.results._valid = "results"
+            return setmetatable(self.results, Recipe._results_mt)
+        end
+    end
+    return self
 end
 
-function Recipe:Ingredients(ingredients) --luacheck: ignore
+function Recipe:Ingredients(get_expensive)
+    if self:valid("recipe") then
+        if get_expensive then
+            self:make_difficult()
+        end
+        if self.normal then
+            self.normal.ingredients._owner = self
+            self.normal.ingredients._valid = "ingredients"
+            setmetatable(self.normal.ingredients, Recipe._ingredients_mt)
+            self.expensive.ingredients._owner = self
+            self.expensive.ingredients._valid = "ingredients"
+            setmetatable(self.expensive.ingredients, Recipe._ingredients_mt)
+            return get_expensive and self.expensive.ingredients or self.normal.ingredients
+        else
+            self.ingredients._owner = self
+            self.ingredients._valid = "ingredients"
+            return setmetatable(self.ingredients, Recipe._ingredients_mt)
+        end
+    end
+    return self
 end
 
 -- Returns a formated ingredient or prodcut table
@@ -81,7 +143,7 @@ local function format(ingredient, result_count)
     return object
 end
 
--- get items for dificulties
+-- get items for difficulties
 local function get_difficulties(normal, expensive)
     return format(normal), format((expensive == true and table.deepcopy(normal)) or expensive)
 end
@@ -231,17 +293,17 @@ function Recipe:make_difficult(expensive_energy)
     return self
 end
 
--- --- Change the recipe category
--- -- @tparam string category_name Crafting category
--- -- @tparam[opt] boolean make_new Create the category if it doesn't exist
--- -- @treturn self
--- function Recipe:change_category(category_name, make_new)
---     if self:valid() then
---         local Category = require("stdlib/data/category")
---         self.category = (Category(category_name, "recipe-category", make_new):valid() and category_name) or self.category
---     end
---     return self
--- end
+--- Change the recipe category
+-- @tparam string category_name Crafting category
+-- @tparam[opt] boolean make_new Create the category if it doesn't exist
+-- @treturn self
+function Recipe:change_category(category_name)
+    if self:valid() then
+        local Category = require("stdlib/data/category")
+        self.category = Category(category_name, "recipe-category"):valid() and category_name or self.category
+    end
+    return self
+end
 
 --- Add to technology as a recipe unlock
 -- @tparam string tech_name Name of the technology to add the unlock too
@@ -430,7 +492,6 @@ Recipe.add_ing = Recipe.add_ingredient
 Recipe.rem_ing = Recipe.remove_ingredient
 
 Recipe._mt = {
-    type = "recipe",
     __index = Recipe,
     __call = Recipe._get,
     __tostring = Recipe.tostring

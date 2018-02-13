@@ -39,7 +39,7 @@ end
 -- @tparam string s the string to test
 -- @treturn boolean true if the string is empty
 function string.is_empty(s)
-    return s == nil or s == ''
+    return s == nil or s == ""
 end
 
 --- Splits a string into an array.

@@ -55,12 +55,11 @@ describe("Event",
             end
         )
 
-        it(".register should remove all handlers if nil is passed as a handler",
+        it(".register should error if nil is passed as a handler",
             function()
                 Event.register(0, function_a)
                 Event.register(0, function_b)
-                Event.register(0, nil)
-                assert.is_nil(Event._registry[0])
+                assert.has_error(function() Event.register(0, nil) end)
             end
         )
 

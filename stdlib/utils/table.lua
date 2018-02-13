@@ -191,7 +191,7 @@ function table.avg(tbl)
     return cnt ~= 0 and table.sum(tbl) / cnt or nil
 end
 
---- Merges two tables &mdash; values from first get overwritten by the second.
+--- Merges two tables, values from first get overwritten by the second.
 -- @usage
 -- function some_func(x, y, args)
 --     args = table.merge({option1=false}, args)
@@ -230,7 +230,7 @@ end
 -- local a = {one = A}
 -- local b = {one = Z, two = B}
 -- local merged = table.dictionary_merge(tbl_a, tbl_b)
--- --meged = {one = A, two = B}
+-- --merged = {one = A, two = B}
 -- @tparam table tbl_a
 -- @tparam table tbl_b
 -- @treturn table with a and b merged together
@@ -256,7 +256,7 @@ end
 
 
 --- Creates a deep copy of table without copying Factorio objects.
--- copied from factorio/data/core/luablib/util.lua
+-- copied from factorio/data/core/lualib/util.lua
 -- @usage local copy = table.deepcopy[data.raw.["stone-furnace"]["stone-furnace"]] -- returns a copy of the stone furnace entity
 -- @tparam table object the table to copy
 -- @treturn table a copy of the table
@@ -373,7 +373,7 @@ end
 
 --- Returns the number of keys in a table, if func is passed only count keys when the function is true.
 -- @tparam table tbl to count keys
--- @tparam[opt] function func to incremement counter
+-- @tparam[opt] function func to increment counter
 -- @param[optchain] ... additional arguments passed to the function
 -- @treturn number The number of keys matching the function or the number of all keys if func isn't passed
 -- @treturn number The total number of keys
@@ -383,14 +383,16 @@ end
 -- table.count_keys(a, function(v, k) return k % 2 == 1 end) -- produces: 3, 5
 function table.count_keys(tbl, func, ...)
     local count, total = 0, 0
-    for k, v in pairs(tbl or {}) do
-        total = total + 1
-        if func then
-            if func(v, k, ...) then
+    if type(tbl) == "table" then
+        for k, v in pairs(tbl) do
+            total = total + 1
+            if func then
+                if func(v, k, ...) then
+                    count = count + 1
+                end
+            else
                 count = count + 1
             end
-        else
-            count = count + 1
         end
     end
     return count, total

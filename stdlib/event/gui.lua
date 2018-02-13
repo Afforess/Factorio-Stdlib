@@ -2,9 +2,10 @@
 -- @module Gui
 -- @usage local Gui = require('stdlib/event/gui')
 
+require('stdlib/event/event')
+
 Gui = {_module_name = "Gui"} --luacheck: allow defined top
 setmetatable(Gui, {__index = require('stdlib/core')})
-require('stdlib/event/event')
 
 local fail_if_missing = Gui.fail_if_missing
 

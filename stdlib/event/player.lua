@@ -120,14 +120,19 @@ function Player.update_force(event)
 end
 
 local events = {defines.events.on_player_created, Event.core_events.configuration_changed}
-function Player.register_events()
+function Player.register_events(skip_init)
+    require("stdlib.event.event")
     Event.register(events, Player.init)
     Event.register(defines.events.on_player_changed_force, Player.update_force)
     Event.register(defines.events.on_player_removed, Player.remove)
+    if not skip_init then
+        Player.register_init()
+    end
     return Player
 end
 
 function Player.register_init()
+    require("stdlib.event.event")
     Event.register(Event.core_events.init, Player.init)
     return Player
 end

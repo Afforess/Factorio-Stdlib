@@ -2,7 +2,7 @@
 -- @classmod Technology
 
 local Technology = {
-    _class = "Technology"
+    _class = "technology"
 }
 setmetatable(Technology, {__index = require("stdlib/data/data")})
 
@@ -91,8 +91,8 @@ function Technology:remove_effect(tech_name, unlock_type, name)
         return self, name, unlock_type -- TODO finish
     elseif self:valid("recipe") then
         if tech_name then
-            local tech = Technology(tech_name):valid()
-            if tech then
+            local tech = Technology(tech_name)
+            if tech:valid() then
                 for index, effect in pairs(tech.effects or {}) do
                     if effect.type == "unlock-recipe" and effect.recipe == self.name then
                         table.remove(tech.effects, index)
@@ -195,7 +195,6 @@ function Technology:remove_prereq(tech_name)
 end
 
 Technology._mt = {
-    type = "technology",
     __index = Technology,
     __call = Technology._get
 }

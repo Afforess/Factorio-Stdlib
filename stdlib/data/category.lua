@@ -2,11 +2,11 @@
 -- @classmod Category
 
 local Category = {
-    _class = "Category"
+    _class = "category"
 }
 setmetatable(Category, {__index = require("stdlib/data/data")})
 
-local category_type_map = { --luacheck: ignore category_type_map
+Category.category_types = {
     ["ammo-category"] = true,
     ["equipment-category"] = true,
     ["fuel-category"] = true,
@@ -42,7 +42,6 @@ function Category:replace(a, b)
 end
 
 Category._mt = {
-    type = "category",
     __index = Category,
     __call = Category._get,
     __tostring = Category.tostring

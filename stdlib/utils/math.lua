@@ -49,9 +49,9 @@ end
 -- x       : an array of values
 -- returns : the quadratic mean
 function math.quadratic_mean(x)
-  local ssquares = 0
-  for _, v in ipairs(x) do ssquares = ssquares + (v * v) end
-  return math.sqrt((1 / #x) * ssquares)
+  local squares = 0
+  for _, v in ipairs(x) do squares = squares + (v * v) end
+  return math.sqrt((1 / #x) * squares)
 end
 
 -- Calculates the generalized mean (to a specified power p) of a set of values

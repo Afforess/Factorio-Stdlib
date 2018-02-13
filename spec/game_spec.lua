@@ -228,29 +228,5 @@ describe("Game Spec",
                 end
             end
         )
-
-        it("Game.get_player should return false if mixed is table, not userdata, mixed.player_index exists, but game.players[mixed.player_index].valid == false",
-            function()
-                local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
-                for player_index, player_name in ipairs(player_names) do
-                    game.players[player_index] = { player_index = player_index, name = player_name, valid = false, __self = false}
-                end
-                for _, player in ipairs(game.players) do
-                    assert.is_false(Game.get_player(player))
-                end
-            end
-        )
-
-        it("Game.get_player should return false if mixed is not a table and not nil and not false and game.players[mixed].valid == false",
-            function()
-                local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
-                for player_index, player_name in ipairs(player_names) do
-                    game.players[player_index] = { player_index = player_index, name = player_name, valid = false}
-                end
-                for player_index in ipairs(player_names) do
-                    assert.is_false(Game.get_player(player_index))
-                end
-            end
-        )
     end
 )

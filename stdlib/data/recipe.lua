@@ -293,17 +293,14 @@ function Recipe:make_difficult(expensive_energy)
     return self
 end
 
--- --- Change the recipe category
--- -- @tparam string category_name Crafting category
--- -- @tparam[opt] boolean make_new Create the category if it doesn't exist
--- -- @treturn self
+--- Change the recipe category
+-- @tparam string category_name Crafting category
+-- @tparam[opt] boolean make_new Create the category if it doesn't exist
+-- @treturn self
 function Recipe:change_category(category_name)
     if self:valid() then
         local Category = require("stdlib/data/category")
-        local cat = Category(category_name, "recipe-category")
-        if cat:valid() then
-            self.category = cat.name
-        end
+        self.category = Category(category_name, "recipe-category"):valid() and category_name or self.category
     end
     return self
 end

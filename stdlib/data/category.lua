@@ -6,7 +6,7 @@ local Category = {
 }
 setmetatable(Category, {__index = require("stdlib/data/data")})
 
-local category_type_map = { --luacheck: ignore category_type_map
+Category.category_types = {
     ["ammo-category"] = true,
     ["equipment-category"] = true,
     ["fuel-category"] = true,

@@ -1,5 +1,5 @@
 --- The Core module loads some helper functions usefull in all stages
--- of a mods lifecyle.
+-- of a mods life cycle.
 -- @module Core
 -- @usage local Core = require('stdlib/core')
 
@@ -17,7 +17,7 @@ local Core = {
         local name = this._module_name or class_name or "Unknown"
 
         if meta and not meta.__metatable then
-            meta.__newindex = function() error("Attempt to mutatate read-only "..name.." Module") end
+            meta.__newindex = function() error("Attempt to mutate read-only "..name.." Module") end
             meta.__metatable = meta
             meta.__call = caller
         end
@@ -29,7 +29,7 @@ local Core = {
     end,
 
     _concat = function(lhs, rhs)
-        --Sanatize to remove address
+        --Sanitize to remove address
         return tostring(lhs):gsub("(%w+)%: %x+", "%1: (ADDR)") .. tostring(rhs):gsub("(%w+)%: %x+", "%1: (ADDR)")
     end,
 

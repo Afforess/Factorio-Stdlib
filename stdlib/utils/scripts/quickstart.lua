@@ -47,6 +47,8 @@ function quickstart.on_player_created(event)
 
         player.force.chart(surface, area)
 
+        player.surface.always_day = QS.get("always_day", false)
+
         if QS.get("cheat_mode", false) then
             player.cheat_mode = true
             player.force.research_all_technologies()
@@ -63,8 +65,8 @@ function quickstart.on_player_created(event)
 
         local simple_stacks = QS.get("stacks", {})
         local qb_stacks = QS.get("quickbar", {})
-        local inv = player.get_inventory(player.character and defines.inventory.player_main or defines.inventory.god_main)
-        local qb = player.get_inventory(player.character and defines.inventory.player_quickbar or defines.inventory.god_quickbar)
+        local inv = player.get_main_inventory()
+        local qb = player.get_quickbar()
 
         if inv then
             for _, item in pairs(simple_stacks) do
@@ -77,6 +79,18 @@ function quickstart.on_player_created(event)
                     qb.insert(item)
                 end
             end
+        end
+
+        local tool_inv = player.get_inventory(defines.inventory.player_tools)
+        if tool_inv then
+            local tool = QS.get("tool", "steel-axe")
+            if not game.item_prototypes[tool] then
+                tool = "steel-axe"
+                if not game.item_prototypes[tool] then
+                    tool = nil
+                end
+            end
+            if tool then tool_inv.insert(tool) end
         end
 
         local power_armor = QS.get("power_armor", "fake")

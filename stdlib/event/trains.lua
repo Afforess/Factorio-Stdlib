@@ -3,7 +3,7 @@
 -- <p>To handle the events, you should use the @{Event} module.
 -- @module Trains
 
-Trains = {_module_name = "Trains"} --luacheck: allow defined top
+local Trains = {_module_name = "Trains"}
 setmetatable(Trains, {__index = require('stdlib/core')})
 
 local Surface = require('stdlib/area/surface')

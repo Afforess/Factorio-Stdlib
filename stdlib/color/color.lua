@@ -2,7 +2,7 @@
 -- @module Color
 -- @usage local Color = require('stdlib/color/color')
 
-Color = {_module_name = "Color"} --luacheck: allow defined top
+local Color = {_module_name = "Color"}
 setmetatable(Color, {__index = require("stdlib/core")})
 
 local fail_if_missing = Color.fail_if_missing

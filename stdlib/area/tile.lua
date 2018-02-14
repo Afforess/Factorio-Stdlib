@@ -4,11 +4,10 @@
 -- @usage local Tile = require('stdlib/area/tile')
 -- @see LuaTile
 
-Tile = {_module_name = "Tile"} --luacheck: allow defined top
+local Tile = {_module_name = "Tile"}
 setmetatable(Tile, {__index = require('stdlib/core')})
 
 local fail_if_missing = Tile.fail_if_missing
-local Tile = require('stdlib/core')
 local Area = require('stdlib/area/area')
 local Position = require('stdlib/area/position')
 local Chunk = require('stdlib/area/chunk')

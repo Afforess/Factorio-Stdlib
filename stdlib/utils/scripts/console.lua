@@ -4,22 +4,13 @@
 -- <p>This module was originally the ***Console*** code from a modder named ***adil***, which has been modified for use with stdlib.
 -- @script console
 -- @usage
--- remote.add_interface("my_interface", {show = require("stdlib/utils/console")})
+-- local console = require("stdlib/utils/console")
+-- remote.add_interface("my_interface", {show = console})
 -- /c remote.call("my_interface", "show", game.player)
 -- --In the window that appears you can run lua code directly on your mod, including globals.
 
 require('stdlib/event/gui')
 
-local make_globals_for_use_in_console = {
-    "game", "area.area", "area.position", "area.tile", "area.surface", "area.chunk", "color.color",
-    "entity.entity", "entity.inventory", "entity.resource", "config.config", "log.logger"
-}
-
-for _, req in pairs (make_globals_for_use_in_console) do
-    require('stdlib.'..req)
-end
-
---TODO fix for .16 when script.mod_name is implemented
 local prefix = script.mod_name
 
 local names = {

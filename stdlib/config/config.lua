@@ -9,8 +9,8 @@
 -- @tfield function delete
 -- @tfield function is_set
 -- @table Config
-Config = {_module_name = "Config"} --luacheck: allow defined top
-setmetatable(Config, {__index = require("stdlib/core")})
+local M = {_module_name = "Config"}
+setmetatable(M, {__index = require("stdlib/core")})
 
 -----------------------------------------------------------------------
 --Setup repeated code for use in sub functions here
@@ -55,7 +55,7 @@ end
 -- @usage --[Checking if a path exists in Config]
 -- CONFIG = Config.new(global.testtable)
 -- CONFIG.is_set("your.path.here")
-function Config.new(config_table)
+function M.new(config_table)
     if not config_table then
         error("config_table is a required parameter.", 2)
     elseif type(config_table) ~= "table" then
@@ -178,4 +178,4 @@ function Config.new(config_table)
     return Config
 end
 
-return Config
+return M

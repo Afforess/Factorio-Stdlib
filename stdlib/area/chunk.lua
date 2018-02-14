@@ -4,7 +4,7 @@
 -- @usage local Chunk = require('stdlib/area/chunk')
 -- @see Concepts.ChunkPosition
 
-Chunk = {_module_name = "Chunk"} --luacheck: allow defined top
+local Chunk = {_module_name = "Chunk"}
 setmetatable(Chunk, {__index = require('stdlib/core')})
 
 local fail_if_missing = Chunk.fail_if_missing

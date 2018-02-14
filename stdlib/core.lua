@@ -3,12 +3,13 @@
 -- @module Core
 -- @usage local Core = require('stdlib/core')
 
-require('stdlib/utils/table')
-require('stdlib/utils/string')
-require('stdlib/utils/iterators')
-require('stdlib/utils/math')
-require('stdlib/defines/color')
-require('stdlib/defines/time')
+require("stdlib/utils/table")
+require("stdlib/utils/string")
+require("stdlib/utils/iterators")
+require("stdlib/utils/is")
+require("stdlib/utils/math")
+require("stdlib/defines/color")
+require("stdlib/defines/time")
 
 local Core = {
     _module_name = "Core",
@@ -17,29 +18,34 @@ local Core = {
         local name = this._module_name or class_name or "Unknown"
 
         if meta and not meta.__metatable then
-            meta.__newindex = function() error("Attempt to mutate read-only "..name.." Module") end
+            meta.__newindex = function()
+                error("Attempt to mutate read-only " .. name .. " Module")
+            end
             meta.__metatable = meta
             meta.__call = caller
         end
         return this
     end,
-
     _setmetatable = function(this, meta)
         return setmetatable(this, meta)
     end,
-
     _concat = function(lhs, rhs)
         --Sanitize to remove address
         return tostring(lhs):gsub("(%w+)%: %x+", "%1: (ADDR)") .. tostring(rhs):gsub("(%w+)%: %x+", "%1: (ADDR)")
     end,
-
-    _rawstring = function (t)
+    _rawstring = function(t)
         local m = getmetatable(t)
         local f = m.__tostring
         m.__tostring = nil
         local s = tostring(t)
         m.__tostring = f
         return s
+    end,
+    _classes = {
+        string_array_mt = require("stdlib/utils/classes/string_array")
+    },
+    VALID_FILTER = function(v)
+        return v and v.valid
     end,
 }
 
@@ -54,70 +60,7 @@ function Core.fail_if_missing(var, msg)
 end
 
 function Core.fail_if_not_type(var, types)
-    error("Required parameter "..var.." must be: " .. table.concat(types, ", or"), 2)
-end
-
---- Returns true if the passed variable is a table.
--- @tparam mixed var The variable to check
--- @treturn boolean
-function Core.is_table(var)
-    return type(var) == "table"
-end
-
---- Returns true if the passed variable is a string.
--- @tparam mixed var The variable to check
--- @treturn boolean
-function Core.is_string(var)
-    return type(var) == "string"
-end
-
---- Returns true if the passed variable is a number.
--- @tparam mixed var The variable to check
--- @treturn boolean
-function Core.is_number(var)
-    return type(var) == "number"
-end
-
---- Returns true if the passed variable is a boolean.
--- @tparam mixed var The variable to check
--- @treturn boolean
-function Core.is_bool(var)
-    return type(var) == "boolean"
-end
-
---- Returns true if the passed variable is true
--- @tparam mixed var The variable to check
--- @treturn boolean
-function Core.is_true(var)
-    return var == true
-end
-
---- Returns true if the passed variable is not nil or false.
--- @tparam mixed var The variable to check
--- @treturn boolean
-function Core.is_truthy(var)
-    return var and true or false
-end
-
---- Returns true if the passed variable is false.
--- @tparam mixed var The variable to check
--- @treturn boolean
-function Core.is_false(var)
-    return var == false
-end
-
---- Returns true if the passed variable is false or nil.
--- @tparam mixed var The variable to check
--- @treturn boolean
-function Core.is_falsy(var)
-    return not var
-end
-
---- Returns true if the passed variable is nil.
--- @tparam mixed var The variable to check
--- @treturn boolean
-function Core.is_nil(var)
-    return type(var) == "nil"
+    error("Required parameter " .. var .. " must be: " .. table.concat(types, ", or"), 2)
 end
 
 --- Require a file that may not exist

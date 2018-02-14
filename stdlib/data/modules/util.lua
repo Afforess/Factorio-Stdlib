@@ -5,7 +5,7 @@ local Util = {}
 setmetatable(Util, {__index = require("stdlib/core")})
 
 function Util.extend(proto_array)
-    Util.fail_if_missing(Util.is_table(proto_array), "Missing table or array to extend")
+    Util.fail_if_missing(Is.Table(proto_array), "Missing table or array to extend")
     data:extend(#proto_array > 0 and proto_array or {proto_array})
 end
 

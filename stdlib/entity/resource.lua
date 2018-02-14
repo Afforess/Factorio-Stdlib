@@ -2,7 +2,7 @@
 -- @module Resource
 -- @usage local Resource = require('stdlib/entity/resource')
 
-Resource = {_module_name = "Resource"} --luacheck: allow defined top
+local Resource = {_module_name = "Resource"}
 setmetatable(Resource, {__index = require('stdlib/core')})
 
 local fail_if_missing = Resource.fail_if_missing

@@ -2,7 +2,7 @@
 -- @module Inventory
 -- @usage local Inventory = require('stdlib/entity/inventory')
 
-Inventory = {_module_name = "Inventory"} --luacheck: allow defined top
+local Inventory = {_module_name = "Inventory"}
 setmetatable(Inventory, {__index = require('stdlib/core')})
 
 local fail_if_missing = Inventory.fail_if_missing

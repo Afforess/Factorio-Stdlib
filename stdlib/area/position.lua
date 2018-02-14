@@ -6,7 +6,7 @@
 -- @see Concepts.Position
 -- @see defines.direction
 
-Position = {_module_name = "Position"} --luacheck: allow defined top
+local Position = {_module_name = "Position"}
 setmetatable(Position, {__index = require('stdlib/core')})
 
 local fail_if_missing = Position.fail_if_missing

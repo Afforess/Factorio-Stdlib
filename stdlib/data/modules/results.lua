@@ -1,4 +1,5 @@
 --luacheck: ignore
+
 local Results = {
     _class = "Results"
 }

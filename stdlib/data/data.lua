@@ -10,7 +10,6 @@ local Data = {
     Sprites = require("stdlib/data/modules/sprites"),
     Pipes = require("stdlib/data/modules/pipes"),
     Util = require("stdlib/data/modules/util"),
-    _array_mt = require("stdlib/utils/classes/string_array"),
     _default_options = {
         ["silent"] = false,
         ["fail"] = false,
@@ -146,7 +145,7 @@ end
 function Data:Flags(has_flag_string)
     if self:valid() then
         if self.flags then
-            setmetatable(self.flags, Data._array_mt)
+            setmetatable(self.flags, Data._classes.string_array_mt)
             if has_flag_string then
                 return self.flags:has(has_flag_string)
             end
@@ -183,7 +182,7 @@ function Data:set_fields(tab)
 end
 
 --- Iterate a string array and set to nil.
--- @tparam table table string array of fields to remove.
+-- @tparam table tab string array of fields to remove.
 -- @treturn self
 function Data:remove_fields(tab)
     if self:valid() then
@@ -260,7 +259,7 @@ end
 -- @tparam[opt] string object_type the raw type. Required if object is a string
 -- @tparam[opt] table opts options to pass
 -- @treturn Object
-function Data:get(object, object_type, opts) --luacheck: ignore opts
+function Data:get(object, object_type, opts)
     self.fail_if_missing(object, "object name string or table is required")
 
     local new

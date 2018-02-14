@@ -6,7 +6,7 @@
 -- @see Concepts.BoundingBox
 -- @see Concepts.Position
 
-Area = {_module_name = "Area"} --luacheck: allow defined top
+local Area = {_module_name = "Area"}
 setmetatable(Area, {__index = require('stdlib/core')})
 
 local fail_if_missing = Area.fail_if_missing

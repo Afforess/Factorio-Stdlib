@@ -12,8 +12,8 @@ local Item = require("stdlib/data/item")
 
 function Recipe:_get(recipe)
     local new = self:get(recipe, "recipe")
-    new:Ingredients()
-    new:Results()
+    --new:Ingredients()
+    --new:Results()
     return new
 end
 Recipe:set_caller(Recipe._get)
@@ -148,7 +148,7 @@ local function get_difficulties(normal, expensive)
     return format(normal), format((expensive == true and table.deepcopy(normal)) or expensive)
 end
 
---- Remove an ingredient from an ingredients table
+--- Remove an ingredient from an ingredients table.
 -- @tparam table ingredients
 -- @tparam string name Name of the ingredient to remove
 local function remove_ingredient(ingredients, name)
@@ -161,7 +161,7 @@ local function remove_ingredient(ingredients, name)
     end
 end
 
---- Replace an ingredient
+--- Replace an ingredient.
 -- @tparam table ingredients Ingredients table
 -- @tparam string find ingredient to replace
 -- @tparam concepts.ingredient replace
@@ -179,7 +179,7 @@ local function replace_ingredient(ingredients, find, replace, replace_name_only)
     end
 end
 
---- Add an ingredient to a recipe
+--- Add an ingredient to a recipe.
 -- @tparam string|Concepts.ingredient normal
 -- @tparam[opt] string|Concepts.ingredient|boolean expensive
 -- @treturn Recipe
@@ -201,7 +201,7 @@ function Recipe:add_ingredient(normal, expensive)
     return self
 end
 
---- Remove one ingredient completely
+--- Remove one ingredient completely.
 -- @tparam string normal
 -- @tparam string|boolean expensive expensive recipe to remove, or if true remove normal recipe from both
 -- @treturn Recipe
@@ -247,7 +247,7 @@ function Recipe:replace_ingredient(replace, normal, expensive)
     return self
 end
 
---- Converts a recipe to the difficulty recipe format
+--- Converts a recipe to the difficulty recipe format.
 -- @tparam[opt] number expensive_energy crafting energy_required for the expensive recipe
 -- @treturn self
 function Recipe:make_difficult(expensive_energy)
@@ -293,9 +293,8 @@ function Recipe:make_difficult(expensive_energy)
     return self
 end
 
---- Change the recipe category
--- @tparam string category_name Crafting category
--- @tparam[opt] boolean make_new Create the category if it doesn't exist
+--- Change the recipe category.
+-- @tparam string category_name The new crafting category
 -- @treturn self
 function Recipe:change_category(category_name)
     if self:valid() then
@@ -305,7 +304,7 @@ function Recipe:change_category(category_name)
     return self
 end
 
---- Add to technology as a recipe unlock
+--- Add to technology as a recipe unlock.
 -- @tparam string tech_name Name of the technology to add the unlock too
 -- @treturn self
 function Recipe:add_unlock(tech_name)
@@ -316,7 +315,7 @@ function Recipe:add_unlock(tech_name)
     return self
 end
 
---- Remove the recipe unlock from the technology
+--- Remove the recipe unlock from the technology.
 -- @tparam string tech_name Name of the technology to remove the unlock from
 -- @treturn self
 function Recipe:remove_unlock(tech_name)
@@ -327,7 +326,7 @@ function Recipe:remove_unlock(tech_name)
     return self
 end
 
---- Set the enabled status of the recipe
+--- Set the enabled status of the recipe.
 -- @tparam boolean enabled Enable or disable the recipe
 -- @treturn self
 function Recipe:set_enabled(enabled)
@@ -342,7 +341,7 @@ function Recipe:set_enabled(enabled)
     return self
 end
 
---- Convert result type to results type
+--- Convert result type to results type.
 -- @treturn self
 function Recipe:convert_results()
     if self:valid("recipe") then
@@ -419,7 +418,7 @@ function Recipe:remove_main_product(for_normal, for_expensive)
     return self
 end
 
---- Add a new product to results, converts if needed
+--- Add a new product to results, converts if needed.
 -- @tparam string|Concepts.product normal
 -- @tparam[opt] string|Concepts.product|boolean expensive
 -- @tparam[opt] string main_product
@@ -440,7 +439,7 @@ function Recipe:add_result(normal, expensive, main_product)
     return self
 end
 
---- Remove a product from results, converts if needed
+--- Remove a product from results, converts if needed.
 -- @tparam[opt] string|Concepts.product normal
 -- @tparam[opt] string|Concepts.product|boolean expensive
 -- @tparam[opt] string main_product new main_product to use
@@ -461,7 +460,7 @@ function Recipe:remove_result(normal, expensive, main_product)
     return self
 end
 
---- Remove a product from results, converts if needed
+--- Remove a product from results, converts if needed.
 -- @tparam string|Concepts.product result_name
 -- @tparam[opt] string|Concepts.product normal
 -- @tparam[opt] string|Concepts.product|boolean expensive

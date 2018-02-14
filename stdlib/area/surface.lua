@@ -4,11 +4,10 @@
 -- @usage local Surface = require('stdlib/area/surface')
 -- @see LuaSurface
 
-Surface = {_module_name = "Surface"} --luacheck: allow defined top
+local Surface = {_module_name = "Surface"}
 setmetatable(Surface, {__index = require('stdlib/core')})
 
 local fail_if_missing = Surface.fail_if_missing
-local Surface = require('stdlib/core')
 local Area = require('stdlib/area/area')
 
 --- Flexible and safe lookup function for surfaces.

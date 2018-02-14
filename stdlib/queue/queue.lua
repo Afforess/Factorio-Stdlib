@@ -4,8 +4,9 @@
 -- @module Queue
 -- @usage local Queue = require('stdlib/queue/queue')
 
-Queue = {_module_name = "Queue"} --luacheck: allow defined top
+local Queue = {_module_name = "Queue"}
 setmetatable(Queue, {__index = require('stdlib/core')})
+
 local fail_if_missing = Queue.fail_if_missing
 
 --- Constructs a new Queue object.

@@ -2,7 +2,7 @@
 -- @module Entity
 -- @usage local Entity = require('stdlib/entity/entity')
 
-Entity = {_module_name = "Entity"} --luacheck: allow defined top
+local Entity = {_module_name = "Entity"}
 setmetatable(Entity, {__index = require('stdlib/core')})
 
 local fail_if_missing = Entity.fail_if_missing

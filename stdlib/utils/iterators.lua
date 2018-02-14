@@ -1,12 +1,12 @@
 --- Iterator library.
--- @module iter
+-- @module Iter
 
-iter = {} --luacheck: allow defined top
+Iter = {} --luacheck: allow defined top
 
-iter.pairs = pairs
-iter.ipairs = ipairs
+Iter.pairs = pairs
+Iter.ipairs = ipairs
 
-function iter.spairs(t, order)
+function Iter.spairs(t, order)
     -- collect the keys
     local keys = {}
     for k in pairs(t) do
@@ -36,7 +36,7 @@ function iter.spairs(t, order)
     end
 end
 
-function iter.top(t, stop)
+function Iter.top(t, stop)
     local start = #t
     stop = stop or 1
 
@@ -50,7 +50,7 @@ function iter.top(t, stop)
     end
 end
 
-function iter.wrap(t, start, reverse)
+function Iter.wrap(t, start, reverse)
     --[[
     -- Returns an iterator that iterates over integer keys in table `t` from the specified start position, wrapping
     -- around and ending when it reaches `start` again.
@@ -86,4 +86,4 @@ function iter.wrap(t, start, reverse)
     end
 end
 
-return iter
+return Iter

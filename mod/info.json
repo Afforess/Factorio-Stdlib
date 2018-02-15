@@ -1,11 +1,11 @@
 {
   "name": "stdlib",
-  "version": "0.9.0",
-  "factorio_version": "0.15",
+  "version": "0.1.0",
+  "factorio_version": "0.16",
   "title": "Factorio Standard Library",
   "author": "Afforess",
   "contact": "",
-  "dependencies": ["base >= 0.15.32"],
+  "dependencies": ["base >= 0.16.0"],
   "homepage": "https://github.com/Afforess/Factorio-Stdlib",
   "description": "The Factorio Standard Library is a project to bring Factorio modders high-quality, commonly-required utilities and tools."
 }

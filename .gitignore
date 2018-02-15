@@ -1,15 +1,15 @@
-# Exclude the build directories
-build
-build/*
-.build
+# Exclude the build directory
+.build/
 
 # Temporarily Exclude mod file changes
 mod/*
 !mod/info.json
 
+# vscode related
 .vscode/
-.luacompleterc
-make.exe.stackdump
+*.stackdump
 
 # vim swapfiles
 .*.swp
+
+*.tmp

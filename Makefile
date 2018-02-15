@@ -50,7 +50,7 @@ ldoc:
 	@mkdir -p $(BUILD_DIR)/doc
 	@cp README.md $(BUILD_DIR)/doc/readme
 	@cp CHANGELOG.md $(BUILD_DIR)/doc/changelog
-	@CP LICENSE $(BUILD_DIR)/doc/license
+	@cp LICENSE $(BUILD_DIR)/doc/license
 	@cp doc/spectre.min.css $(BUILD_DIR)/doc/spectre.min.css
 	@cp doc/spectre-icons.min.css $(BUILD_DIR)/doc/spectre-icons.min.css
 	@cp -r examples/ $(BUILD_DIR)/doc/examples/

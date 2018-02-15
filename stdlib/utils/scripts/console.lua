@@ -11,7 +11,8 @@
 
 require('stdlib/event/gui')
 
-local prefix = script.mod_name
+-- munge hyphens as they otherwise need escaping in lua's regexnih pattern language
+local prefix = string.gsub(script.mod_name, '%-', '_')
 
 local names = {
     frame = prefix..'_console',

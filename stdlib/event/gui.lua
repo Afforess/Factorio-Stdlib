@@ -23,7 +23,7 @@ function Gui.register(event_id, gui_element_pattern, handler)
 
     if not Event._registry[event_id] then
         Event._registry[event_id] = {}
-        script.on_event(event_id, Event.Gui.dispatch)
+        script.on_event(event_id, Gui.dispatch)
     end
 
     if Event._registry[event_id][gui_element_pattern] then

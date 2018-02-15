@@ -10,3 +10,6 @@ mod/*
 .vscode/
 .luacompleterc
 make.exe.stackdump
+
+# vim swapfiles
+.*.swp

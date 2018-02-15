@@ -48,9 +48,9 @@ mod-files: $(MOD_FILES)
 ldoc:
 	@echo 'Auto Generating with ldoc'
 	@mkdir -p $(BUILD_DIR)/doc
-	@cp README.md $(BUILD_DIR)/doc/readme
-	@cp CHANGELOG.md $(BUILD_DIR)/doc/changelog
-	@cp LICENSE $(BUILD_DIR)/doc/license
+	@cp README.md $(BUILD_DIR)/readme
+	@cp CHANGELOG.md $(BUILD_DIR)/changelog
+	@cp LICENSE $(BUILD_DIR)/license
 	@cp doc/spectre.min.css $(BUILD_DIR)/doc/spectre.min.css
 	@cp doc/spectre-icons.min.css $(BUILD_DIR)/doc/spectre-icons.min.css
 	@cp -r examples/ $(BUILD_DIR)/doc/examples/
@@ -59,8 +59,8 @@ ldoc:
 luacheck:
 	@echo 'Running luacheck on build directory'
 	@luacheck --version
-	@wget -q --no-check-certificate -O $(BUILD_DIR)/.luacheckrc https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/master/.luacheckrc
-	@cd $(BUILD_DIR)/$(OUTPUT_NAME) && luacheck . -q
+	@wget -q --no-check-certificate -O $(BUILD_DIR)/luacheckrc.luacheckrc https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/master/.luacheckrc
+	@cd $(BUILD_DIR)/$(OUTPUT_NAME) && luacheck --config ../luacheckrc.luacheckrc -q .
 
 release:
 	@echo 'Making Release'

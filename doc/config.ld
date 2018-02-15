@@ -20,7 +20,7 @@ format = "discount"
 template_escape = ">"
 dir = BUILD_DIR .. "doc"
 examples = {BUILD_DIR .. "doc/examples"}
-topics = {BUILD_DIR .. "doc/readme", BUILD_DIR .. "doc/changelog", BUILD_DIR .. "doc/license"}
+topics = {BUILD_DIR .. "readme", BUILD_DIR .. "changelog", BUILD_DIR .. "license"}
 
 new_type("event", "Events", false, "Event Parameters")
 

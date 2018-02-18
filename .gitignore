@@ -12,4 +12,8 @@ mod/*
 # vim swapfiles
 .*.swp
 
+# {l,c}tags
+/tags
+/stdlib/tags
+
 *.tmp

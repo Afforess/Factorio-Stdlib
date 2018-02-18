@@ -8,7 +8,7 @@
 -- @tparam string s the string to remove leading or trailing whitespace from
 -- @treturn string a copy of the string without leading or trailing whitespace
 function string.trim(s)
-    return (s:gsub("^%s*(.-)%s*$", '%1'))
+    return s:gsub("^%s*(.-)%s*$", '%1')
 end
 
 --- Tests if a string starts with a given substring.

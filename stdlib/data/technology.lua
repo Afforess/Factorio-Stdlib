@@ -49,7 +49,7 @@ order = "e-a-a"
 -- end
 
 function Technology:add_effect(effect, unlock_type)
-    self.fail_if_missing(effect)
+    self.fail_if_not(effect)
 
     --todo fix for non recipe types
     local add_unlock = function(technology, name)

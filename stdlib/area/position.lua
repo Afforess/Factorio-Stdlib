@@ -9,7 +9,7 @@
 local Position = {_module_name = "Position"}
 setmetatable(Position, {__index = require('stdlib/core')})
 
-local fail_if_missing = Position.fail_if_missing
+local fail_if_not = Position.fail_if_not
 
 --- By default position tables are mutated in place set this to true to make the tables immutable.
 Position.immutable = false
@@ -25,7 +25,7 @@ Position.epsilon = 1.19e-07
 -- @tparam[opt=false] boolean new_copy return a new copy
 -- @treturn Concepts.Position itself or a new correctly formated position with metatable
 function Position.new(pos, new_copy)
-    fail_if_missing(pos, 'missing position argument')
+    fail_if_not(pos, 'missing position argument')
 
     if not (new_copy or Position.immutable) and getmetatable(pos) == Position._mt then
         return pos
@@ -121,8 +121,8 @@ end
 -- @tparam number y the amount to offset the position on the y-axis
 -- @treturn Concepts.Position a new position, offset by the x,y coordinates
 function Position.offset(pos, x, y)
-    fail_if_missing(x, 'missing x-coordinate value')
-    fail_if_missing(y, 'missing y-coordinate value')
+    fail_if_not(x, 'missing x-coordinate value')
+    fail_if_not(y, 'missing y-coordinate value')
     pos = Position.new(pos)
 
     pos.x = pos.x + x
@@ -136,7 +136,7 @@ end
 -- @tparam number distance distance of the translation
 -- @treturn Concepts.Position a new translated position
 function Position.translate(pos, direction, distance)
-    fail_if_missing(direction, 'missing direction argument')
+    fail_if_not(direction, 'missing direction argument')
     distance = distance or 1
     pos = Position.new(pos)
 
@@ -174,12 +174,12 @@ end
 -- @treturn Concepts.BoundingBox the area
 function Position.expand_to_area(pos, radius)
     pos = Position.new(pos)
-    fail_if_missing(radius, 'missing radius argument')
+    fail_if_not(radius, 'missing radius argument')
     local Area = require("stdlib/area/area")
 
     local left_top = Position.new({pos.x - radius, pos.y - radius})
     local right_bottom = Position.new({pos.x + radius, pos.y + radius})
-    --some way to return Area.new?
+
     return Area({ left_top = left_top, right_bottom = right_bottom })
 end
 
@@ -305,18 +305,18 @@ end
 -- @tparam[opt=false] boolean eight_way true to get the next direction in 8-way (note: not many prototypes support 8-way)
 -- @treturn defines.direction the next direction
 function Position.next_direction(direction, reverse, eight_way)
-    fail_if_missing(direction, 'missing starting direction')
+    fail_if_not(direction, 'missing starting direction')
 
     local next_dir = direction + (eight_way and ((reverse and -1) or 1) or ((reverse and -2) or 2))
     return (next_dir > 7 and next_dir-next_dir) or (reverse and next_dir < 0 and 8 + next_dir) or next_dir
 end
 
---- Set the metatable on a stored area without returning a new area. Usefull for restoring
+--- Restore the metatable on a stored position without returning a new position. Usefull for restoring
 -- metatables to saved areas in global
 -- @tparam Concepts.Position position
 -- @treturn position with metatable set
-function Position.setmetatable(position)
-    return Position._setmetatable(position, Position._mt)
+function Position.restore(position)
+    return setmetatable(position, Position._mt)
 end
 
 --- Position tables are returned with these metamethods attached

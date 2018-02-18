@@ -5,7 +5,7 @@
 local Color = {_module_name = "Color"}
 setmetatable(Color, {__index = require("stdlib/core")})
 
-local fail_if_missing = Color.fail_if_missing
+local fail_if_not = Color.fail_if_not
 
 --- Set a value for the alpha channel in the given color table.
 -- `color.a` represents the alpha channel in the given color table.
@@ -54,7 +54,7 @@ end
 -- @tparam[opt=1] float alpha the alpha value to set; such that *** 0 &#8924; value &#8924; 1 ***
 -- @treturn Concepts.Color a color table with RGB converted from Hex and with alpha
 function Color.from_hex(hex, alpha)
-    fail_if_missing(hex, "missing color hex value")
+    fail_if_not(hex, "missing color hex value")
     if hex:find("#") then hex = hex:sub(2) end
     if not(#hex == 6) then error("invalid color hex value: "..hex)  end
     local number = tonumber(hex, 16)

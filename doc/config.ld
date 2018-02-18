@@ -19,8 +19,8 @@ backtick_references = false
 format = "discount"
 template_escape = ">"
 dir = BUILD_DIR .. "doc"
-examples = {BUILD_DIR .. "doc/examples"}
-topics = {BUILD_DIR .. "readme", BUILD_DIR .. "changelog", BUILD_DIR .. "license"}
+examples = {"../examples"}
+topics = {"../README.md", "../CHANGELOG.md", "../LICENSE"}
 
 new_type("event", "Events", false, "Event Parameters")
 

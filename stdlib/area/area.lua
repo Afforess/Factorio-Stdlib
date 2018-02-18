@@ -9,7 +9,7 @@
 local Area = {_module_name = "Area"}
 setmetatable(Area, {__index = require('stdlib/core')})
 
-local fail_if_missing = Area.fail_if_missing
+local fail_if_not = Area.fail_if_not
 local Position = require('stdlib/area/position')
 
 --- By default area tables are mutated in place set this to true to make the tables immutable.
@@ -21,7 +21,7 @@ Area.immutable = false
 -- @tparam boolean new_copy return a new copy
 -- @treturn Concepts.BoundingBox a converted area
 function Area.new(area, new_copy)
-    fail_if_missing(area, 'missing area value')
+    fail_if_not(area, 'missing area value')
 
     if not (new_copy or Area.immutable) and getmetatable(area) == Area._mt then
         return area
@@ -61,7 +61,7 @@ function Area.copy(area)
 end
 
 local function validate_vector(amount)
-    fail_if_missing(amount, 'Missing amount to shrink by')
+    fail_if_not(amount, 'Missing amount to shrink by')
 
     if type(amount) == 'number' then
         if amount < 0 then error('Can not shrink or expand area by a negative amount!', 2) end
@@ -129,7 +129,7 @@ end
 -- @treturn Concepts.BoundingBox the adjusted bounding box
 function Area.adjust(area, vector)
     area = Area.new(area)
-    fail_if_missing(vector, 'missing vector value')
+    fail_if_not(vector, 'missing vector value')
 
     --shrink or expand on x vector
     if assert(vector[1], 'x vector missing') > 0 then
@@ -186,7 +186,7 @@ end
 -- @treturn Concepts.BoundingBox the area translated
 function Area.translate(area, direction, distance)
     area = Area.new(area)
-    fail_if_missing(direction, 'missing direction argument')
+    fail_if_not(direction, 'missing direction argument')
     distance = distance or 1
 
     area.left_top = Position.translate(area.left_top, direction, distance)
@@ -449,12 +449,18 @@ function Area.shrink_to_surface_size(area, surface)
     return area
 end
 
---- Set the metatable on a stored area without returning a new area. Usefull for restoring
+--- Restores the metatable on a stored area without returning a new area. Usefull for restoring
 -- metatables to saved areas in global
 -- @tparam Concepts.BoundingBox area
 -- @treturn area with metatable set
-function Area.setmetatable(area)
-    return Area._setmetatable(area, Area._mt)
+-- @usage
+-- script.on_load(function()
+--   for _, area in pairs(global.area) do
+--     Area.restore(area)
+--   end
+-- end
+function Area.restore(area)
+    return setmetatable(area, Area._mt)
 end
 
 --- Area tables are returned with these Metamethods attached.

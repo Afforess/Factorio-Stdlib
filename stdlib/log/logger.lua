@@ -8,7 +8,7 @@
 
 local M = {_module_name = "Logger"}
 setmetatable(M, {__index = require('stdlib/core')})
-local fail_if_missing = M.fail_if_missing
+local fail_if_not = M.fail_if_not
 
 --- Creates a new logger object.
 -- In debug mode, the logger writes to file immediately, otherwise the logger buffers the lines.
@@ -32,7 +32,7 @@ local fail_if_missing = M.fail_if_missing
 -- @tparam[opt={...}] options options a table with optional arguments
 -- @return (<span class="types">@{Logger}</span>) the logger instance
 function M.new(mod_name, log_name, debug_mode, options)
-    fail_if_missing(mod_name, "Logger must be given a mod_name as the first argument")
+    fail_if_not(mod_name, "Logger must be given a mod_name as the first argument")
 
     log_name = log_name or "main"
     options = options or {}

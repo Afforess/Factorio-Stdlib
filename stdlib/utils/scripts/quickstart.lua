@@ -14,8 +14,6 @@
 --  quickstart.on_player_created() -- can be wrapped in an if DEBUG type check
 -- end)
 
-
-local Core = require("stdlib/core")
 require("stdlib/event/event")
 local Area = require("stdlib/area/area")
 
@@ -34,7 +32,7 @@ else
     return
 end
 
-local QS = require("stdlib/config/config").new(Core.prequire("config-quickstart") or {})
+local QS = require("stdlib/config/config").new(prequire("config-quickstart") or {})
 local quickstart = {}
 
 function quickstart.on_player_created(event)

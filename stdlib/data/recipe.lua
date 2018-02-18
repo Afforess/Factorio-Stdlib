@@ -227,7 +227,7 @@ end
 -- @tparam string|ingredient normal
 -- @tparam[opt] string|ingredient|boolean expensive
 function Recipe:replace_ingredient(replace, normal, expensive)
-    self.fail_if_missing(replace, "Missing recipe to replace")
+    self.fail_if_not(replace, "Missing recipe to replace")
     if self:valid() then
         local n_string = type(normal) == "string"
         local e_string = type(expensive == true and normal or expensive) == "string"

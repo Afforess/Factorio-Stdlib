@@ -5,15 +5,15 @@
 local Entity = {_module_name = "Entity"}
 setmetatable(Entity, {__index = require('stdlib/core')})
 
-local fail_if_missing = Entity.fail_if_missing
+local fail_if_not = Entity.fail_if_not
 
 --- Tests whether an entity has access to a given field.
 -- @tparam LuaEntity entity the entity to test the access to a field
 -- @tparam string field_name the field name
 -- @treturn boolean true if the entity has access to the field, false if the entity threw an exception when trying to access the field
 function Entity.has(entity, field_name)
-    fail_if_missing(entity, "missing entity argument")
-    fail_if_missing(field_name, "missing field name argument")
+    fail_if_not(entity, "missing entity argument")
+    fail_if_not(field_name, "missing field name argument")
 
     local status = pcall(function() return entity[field_name] end)
     return status
@@ -25,7 +25,7 @@ end
 -- @tparam LuaEntity entity the entity to look up
 -- @treturn ?|nil|Mixed the user data, or nil if no data exists for the entity
 function Entity.get_data(entity)
-    fail_if_missing(entity, "missing entity argument")
+    fail_if_not(entity, "missing entity argument")
     if not global._entity_data then return nil end
 
     local unit_number = entity.unit_number
@@ -52,7 +52,7 @@ end
 -- @tparam ?|nil|Mixed data the data to set, or nil to delete the data associated with the entity
 -- @treturn ?|nil|Mixed the previous data associated with the entity, or nil if the entity had no previous data
 function Entity.set_data(entity, data)
-    fail_if_missing(entity, "missing entity argument")
+    fail_if_not(entity, "missing entity argument")
 
     if not global._entity_data then global._entity_data = {} end
 
@@ -94,7 +94,7 @@ end
 -- @tparam[opt=true] boolean mode if true, freezes the entity, if false, unfreezes the entity. If not specified, it is set to true
 -- @treturn LuaEntity the entity that has been frozen or unfrozen
 function Entity.set_frozen(entity, mode)
-    fail_if_missing(entity, "missing entity argument")
+    fail_if_not(entity, "missing entity argument")
     mode = mode == false and true or false
     entity.active = mode
     entity.operable = mode
@@ -107,7 +107,7 @@ end
 -- @tparam[opt=true] boolean mode if true, makes the entity indestructible, if false, makes the entity destructable
 -- @treturn LuaEntity the entity that has been made indestructable or destructable
 function Entity.set_indestructible(entity, mode)
-    fail_if_missing(entity, "missing entity argument")
+    fail_if_not(entity, "missing entity argument")
     mode = mode == false and true or false
     entity.minable = mode
     entity.destructible = mode

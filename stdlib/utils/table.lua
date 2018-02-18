@@ -425,7 +425,7 @@ end
 -- @function size
 -- @tparam table table to use
 -- @treturn int size of the table
-table.size = table_size or _size --luacheck: globals table_size
+table.size = _G.table_size or _size
 
 --- For all string or number values in an array map them to a key = true table
 -- @usage local a = {"v1", "v2"}
@@ -440,4 +440,21 @@ function table.arr_to_bool(tbl)
         end
     end
     return newtbl
+end
+
+--- Does the table contain any elements
+-- @tparam table tbl
+-- @treturn boolean
+function table.is_empty(tbl)
+    return _G.table_size and _G.table_size(tbl) == 0 or next(tbl) == nil
+end
+
+--- Clear all elements in a table
+-- @tparam table tbl the table to clear
+-- @treturn table the cleared table
+function table.clear(tbl)
+    for i in pairs(tbl) do
+        tbl[i] = nil
+    end
+    return tbl
 end

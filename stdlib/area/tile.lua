@@ -7,7 +7,7 @@
 local Tile = {_module_name = "Tile"}
 setmetatable(Tile, {__index = require('stdlib/core')})
 
-local fail_if_missing = Tile.fail_if_missing
+local fail_if_not = Tile.fail_if_not
 local Area = require('stdlib/area/area')
 local Position = require('stdlib/area/position')
 local Chunk = require('stdlib/area/chunk')
@@ -26,7 +26,7 @@ end
 -- @tparam LuaTile.position tile_pos the tile position
 -- @treturn Concepts.BoundingBox the area of the tile
 function Tile.to_area(tile_pos)
-    fail_if_missing(tile_pos, "missing tile_pos argument")
+    fail_if_not(tile_pos, "missing tile_pos argument")
     local left_top = Tile.from_position(tile_pos)
     local right_bottom = Position.offset(Position.copy(tile_pos), 1, 1)
 
@@ -40,8 +40,8 @@ end
 -- @tparam[opt] string tile_name whether to restrict adjacent tiles to a particular tile name (example: "water-tile")
 -- @treturn {LuaTile.position,...} an array of tile positions of the tiles that are adjacent to the origin tile
 function Tile.adjacent(surface, position, diagonal, tile_name)
-    fail_if_missing(surface, "missing surface argument")
-    fail_if_missing(position, "missing position argument")
+    fail_if_not(surface, "missing surface argument")
+    fail_if_not(position, "missing position argument")
 
     local offsets = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
     if diagonal then
@@ -69,8 +69,8 @@ end
 -- @tparam[opt] Mixed default_value the user data to set for the tile and returned if it did not have user data
 -- @treturn ?|nil|Mixed the user data **OR** *nil* if it does not exist for the tile and no default_value was set
 function Tile.get_data(surface, tile_pos, default_value)
-    fail_if_missing(surface, "missing surface argument")
-    fail_if_missing(tile_pos, "missing tile_pos argument")
+    fail_if_not(surface, "missing surface argument")
+    fail_if_not(tile_pos, "missing tile_pos argument")
     if not global._tile_data then
         if not default_value then return nil end
         global._tile_data = {}
@@ -101,8 +101,8 @@ end
 -- @tparam ?|nil|Mixed data the user data to set **OR** *nil* to erase the existing user data for the tile
 -- @treturn ?|nil|Mixed the previous user data associated with the tile **OR** *nil* if the tile had no previous user data
 function Tile.set_data(surface, tile_pos, data)
-    fail_if_missing(surface, "missing surface argument")
-    fail_if_missing(tile_pos, "missing tile_pos argument")
+    fail_if_not(surface, "missing surface argument")
+    fail_if_not(tile_pos, "missing tile_pos argument")
     if not global._tile_data then global._tile_data = {} end
 
     local chunk_idx = Chunk.get_index(surface, Chunk.from_position(tile_pos))
@@ -121,7 +121,7 @@ end
 -- @tparam LuaTile.position tile_pos
 -- @treturn int the tile ID
 function Tile.get_index(tile_pos)
-    fail_if_missing(tile_pos, "missing tile_pos argument")
+    fail_if_not(tile_pos, "missing tile_pos argument")
     return bit32.band(bit32.bor(bit32.lshift(bit32.band(tile_pos.x, 0x1F), 5), bit32.band(tile_pos.y, 0x1F)), 0x3FF)
 end
 

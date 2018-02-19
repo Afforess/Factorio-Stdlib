@@ -1,10 +1,9 @@
 --- load_globals script.
 -- load the stdlib into globals, by default it loads everything into an ALLCAPS name.
--- Alternatively you can pass a dictionary of global names -> require path.
+-- Alternatively you can pass a dictionary of [global names] -> [require path].
 -- @script load_globals
 -- @usage
 -- require('stdlib/utils/scripts/load_globals')() -- note the () on the end
--- @usage
 
 local Core = require("stdlib.core")
 

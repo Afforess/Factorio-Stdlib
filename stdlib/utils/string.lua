@@ -39,7 +39,7 @@ end
 -- @tparam string s the string to test
 -- @treturn boolean true if the string is empty
 function string.is_empty(s)
-    return not (#s) > 0
+    return s == nil or s == ''
 end
 
 --- does s only contain alphabetic characters?

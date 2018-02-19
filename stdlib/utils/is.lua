@@ -79,6 +79,14 @@ function Is.Empty(var)
     return Is.Nil(var)
 end
 
+function Is.Callable(var)
+   if type(var) == 'function' then
+      return var
+   end
+   return (getmetatable(var) or {}).__call
+end
+Is.Function = Is.Callable
+
 --- Returns t if the expression is true.
 -- @tparam mixed exp The expression to evaluate
 -- @tparam mixed t the true return

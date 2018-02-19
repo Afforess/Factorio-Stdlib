@@ -104,3 +104,17 @@ function math.energetic_mean(x)
   end
   return 10 * math.log10((1 / #x) * s)
 end
+
+function math.floor_to(n, p)
+   if(p or 0) == 0 then
+      return math.floor(n)
+   end
+   local e = 10 ^ p
+   return math.floor(n * e) / e
+end
+
+
+function math.round_to(n, p)
+   local e = 10 ^(p or 0)
+   return math.floor(n * e + 0.5) / e
+end

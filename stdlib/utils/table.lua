@@ -467,8 +467,8 @@ end
 -- @tparam table tbl the table to clear
 -- @treturn table the cleared table
 function table.clear(tbl)
-    for i in pairs(tbl) do
-        tbl[i] = nil
+    for k in pairs(tbl) do
+        tbl[k] = nil
     end
     return tbl
 end

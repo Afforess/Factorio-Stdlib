@@ -1,8 +1,6 @@
 require('spec/setup/defines')
 local Gui = require('stdlib/event/gui')
 require('stdlib/utils/table')
---local serpent = require("serpent")
---local ps = function(tab) print(serpent.block(tab, {comment=false, nocode=true})) end
 
 local test_function = {f=function(x) _G.someVariable = x end, g=function(x) _G.someVariable = x end}
 local function_a = function(arg) test_function.f(arg.tick) end

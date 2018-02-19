@@ -62,10 +62,10 @@ Core.Iter = require("stdlib/utils/iter")
 
 --- Print msg if specified var evaluates to false.
 -- @tparam Mixed var variable or expression to evaluate
--- @tparam[opt="incorrect value"] string msg message
+-- @tparam[opt="incorrect or missing value"] string msg message
 function Core.fail_if_not(var, msg)
     if not var then
-        error(msg or "incorrect value", 3)
+        error(msg or "incorrect or missing value", 3)
     end
     return false
 end

@@ -2,52 +2,52 @@
 -- @classmod Data
 
 if _G.remote and _G.script then
-    error("Data Modules can only be required in the data stage", 2)
+    error('Data Modules can only be required in the data stage', 2)
 end
 
 local Data = {
-    _class = "data",
-    Sprites = require("stdlib/data/modules/sprites"),
-    Pipes = require("stdlib/data/modules/pipes"),
-    Util = require("stdlib/data/modules/util"),
+    _class = 'data',
+    Sprites = require('stdlib.data.modules.sprites'),
+    Pipes = require('stdlib.data.modules.pipes'),
+    Util = require('stdlib.data.modules.util'),
     _default_options = {
-        ["silent"] = false,
-        ["fail"] = false,
-        ["verbose"] = false
+        ['silent'] = false,
+        ['fail'] = false,
+        ['verbose'] = false
     }
 }
-setmetatable(Data, {__index = require("stdlib/core")})
+setmetatable(Data, {__index = require('stdlib.core')})
 
 local item_and_fluid_types = {
-    "item",
-    "ammo",
-    "armor",
-    "gun",
-    "capsule",
-    "repair-tool",
-    "mining-tool",
-    "item-with-entity-data",
-    "rail-planner",
-    "tool",
-    "blueprint",
-    "deconstruction-item",
-    "blueprint-book",
-    "selection-tool",
-    "item-with-tags",
-    "item-with-label",
-    "item-with-inventory",
-    "module",
-    "fluid"
+    'item',
+    'ammo',
+    'armor',
+    'gun',
+    'capsule',
+    'repair-tool',
+    'mining-tool',
+    'item-with-entity-data',
+    'rail-planner',
+    'tool',
+    'blueprint',
+    'deconstruction-item',
+    'blueprint-book',
+    'selection-tool',
+    'item-with-tags',
+    'item-with-label',
+    'item-with-inventory',
+    'module',
+    'fluid'
 }
 
 --- Load the whole library as globals
 function Data.create_data_globals()
-    _G.Recipe = require("stdlib.data.recipe")
-    _G.Item = require("stdlib.data.item")
-    _G.Fluid = require("stdlib.data.fluid")
-    _G.Entity = require("stdlib.data.entity")
-    _G.Technology = require("stdlib.data.technology")
-    _G.Category = require("stdlib.data.category")
+    _G.Recipe = require('stdlib.data.recipe')
+    _G.Item = require('stdlib.data.item')
+    _G.Fluid = require('stdlib.data.fluid')
+    _G.Entity = require('stdlib.data.entity')
+    _G.Technology = require('stdlib.data.technology')
+    _G.Category = require('stdlib.data.category')
     _G.Data = Data
     return Data
 end
@@ -89,7 +89,7 @@ function Data:extend(force)
             t[self.name] = self
         end
     else
-        error("Could not extend data", 2)
+        error('Could not extend data', 2)
     end
     return self
 end
@@ -99,7 +99,7 @@ end
 -- @tparam string mining_result
 -- @treturn self
 function Data:copy(new_name, mining_result)
-    self.fail_if_not(new_name, "New name is required")
+    self.fail_if_not(new_name, 'New name is required')
     if self:valid() then
         mining_result = mining_result or new_name
         --local from = self.name
@@ -120,7 +120,7 @@ function Data:copy(new_name, mining_result)
         end
 
         -- For recipes, should also to check results!!
-        if copy.type == "recipe" then
+        if copy.type == 'recipe' then
             if copy.normal then
                 copy.normal.result = new_name
                 copy.expensive.result = new_name
@@ -131,7 +131,7 @@ function Data:copy(new_name, mining_result)
 
         return self(copy):extend()
     else
-        error("Cannot Copy, invalid prototype", 4)
+        error('Cannot Copy, invalid prototype', 4)
     end
 end
 
@@ -201,7 +201,7 @@ end
 function Data:subgroup_order(subgroup, order)
     if self:valid() then
         if subgroup then
-            if data.raw["item-subgroup"][subgroup] then
+            if data.raw['item-subgroup'][subgroup] then
                 self.subgroup = subgroup
             else
                 order = false
@@ -219,7 +219,7 @@ end
 -- @tparam int size
 function Data:replace_icon(icon, size)
     if self:valid() then
-        if type(icon) == "table" then
+        if type(icon) == 'table' then
             self.icons = icon
             self.icon = nil
         else
@@ -228,7 +228,7 @@ function Data:replace_icon(icon, size)
         self.icon_size = size or self.icon_size
     end
     if not self.icon_size then
-        error("Icon present but icon size not detected")
+        error('Icon present but icon size not detected')
     end
     return self
 end
@@ -251,7 +251,7 @@ end
 --- Get the objects name.
 -- @treturn string the objects name
 function Data:tostring()
-    return self.name and self.type and self.name or ""
+    return self.name and self.type and self.name or ''
 end
 
 --- Returns a valid thing object reference. This is the main getter
@@ -260,16 +260,16 @@ end
 -- @tparam[opt] table opts options to pass
 -- @treturn Object
 function Data:get(object, object_type, opts)
-    self.fail_if_not(object, "object name string or table is required")
+    self.fail_if_not(object, 'object name string or table is required')
 
     local new
-    if type(object) == "table" then
-        self.fail_if_not(object.type and object.name, "Name and Type are required")
+    if type(object) == 'table' then
+        self.fail_if_not(object.type and object.name, 'Name and Type are required')
         new = object
         new._extended = data.raw[object.type] and data.raw[object.type][object.name] == object
-    elseif type(object) == "string" then
+    elseif type(object) == 'string' then
         --Get type from object_type, or fluid or item_and_fluid_types
-        local types = (object_type and {object_type}) or (self._class == "item" and item_and_fluid_types)
+        local types = (object_type and {object_type}) or (self._class == 'item' and item_and_fluid_types)
         if types then
             for _, type in pairs(types) do
                 new = data.raw[type] and data.raw[type][object]
@@ -279,17 +279,17 @@ function Data:get(object, object_type, opts)
                 end
             end
         else
-            error("object_type is missing for " .. (self._class or "Unknown") .. "/" .. (object or ""), 3)
+            error('object_type is missing for ' .. (self._class or 'Unknown') .. '/' .. (object or ''), 3)
         end
     end
 
     if new then
-        new._valid = self._class or "data"
+        new._valid = self._class or 'data'
         new._opt = opts
         return setmetatable(new, self._mt):extend()
     else
-        local msg = (self._class and self._class or "") .. (self.name and "/" .. self.name or "") .. " "
-        msg = msg .. (object_type and (object_type .. "/") or " ") .. tostring(object) .. " does not exist."
+        local msg = (self._class and self._class or '') .. (self.name and '/' .. self.name or '') .. ' '
+        msg = msg .. (object_type and (object_type .. '/') or ' ') .. tostring(object) .. ' does not exist.'
         log(msg)
     end
     return self

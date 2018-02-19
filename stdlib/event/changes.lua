@@ -1,12 +1,12 @@
 --- Configuration changed event handling.
 -- This module registers events
 -- @module Changes
--- @usage require("stdlib/event/changes")
+-- @usage require('stdlib.event.changes')
 
-require("stdlib/event/event")
+require('stdlib.event.event')
 
-local Changes = {_module_name = "Changes"}
-setmetatable(Changes, {__index = require("stdlib/core")})
+local Changes = {_module_name = 'Changes'}
+setmetatable(Changes, {__index = require('stdlib.core')})
 
 --[[
     ConfigurationChangedData
@@ -19,16 +19,16 @@ setmetatable(Changes, {__index = require("stdlib/core")})
     old_version :: string: Old version of the mod. May be nil if the mod wasn't previously present (i.e. it was just added).
     new_version :: string: New version of the mod. May be nil if the mod is no longer present (i.e. it was just removed).
 --]]
-Changes.versions = prequire("changes/versions") or {}
-Changes["map-change-always-first"] = prequire("changes/map-change-always-first")
-Changes["any-change-always-first"] = prequire("changes/any-change-always-first")
-Changes["mod-change-always-first"] = prequire("changes/mod-change-always-first")
-Changes["mod-change-always-last"] = prequire("changes/mod-change-always-last")
-Changes["any-change-always-last"] = prequire("changes/any-change-always-last")
-Changes["map-change-always-last"] = prequire("changes/map-change-always-last")
+Changes.versions = prequire('changes.versions') or {}
+Changes['map-change-always-first'] = prequire('changes/map-change-always-first')
+Changes['any-change-always-first'] = prequire('changes/any-change-always-first')
+Changes['mod-change-always-first'] = prequire('changes/mod-change-always-first')
+Changes['mod-change-always-last'] = prequire('changes/mod-change-always-last')
+Changes['any-change-always-last'] = prequire('changes/any-change-always-last')
+Changes['map-change-always-last'] = prequire('changes/map-change-always-last')
 
 local function run_if_exists(func)
-    return func and type(func) == "function" and func()
+    return func and type(func) == 'function' and func()
 end
 
 --[Mark all migrations as complete during Init]--
@@ -42,19 +42,19 @@ function Changes.on_init()
 end
 
 function Changes.on_configuration_changed(event)
-    run_if_exists(Changes["map-change-always-first"])
+    run_if_exists(Changes['map-change-always-first'])
     if event.mod_changes then
-        run_if_exists(Changes["any-change-always-first"])
+        run_if_exists(Changes['any-change-always-first'])
         if event.mod_changes[script.mod_name] then
-            run_if_exists(Changes["mod-change-always-first"])
+            run_if_exists(Changes['mod-change-always-first'])
             local this_mod_changes = event.mod_changes[script.mod_name]
             Changes.on_mod_changed(this_mod_changes)
-            log("Version changed from " .. tostring(this_mod_changes.old_version) .. " to " .. tostring(this_mod_changes.new_version))
-            run_if_exists(Changes["mod-change-always-last"])
+            log('Version changed from ' .. tostring(this_mod_changes.old_version) .. ' to ' .. tostring(this_mod_changes.new_version))
+            run_if_exists(Changes['mod-change-always-last'])
         end
-        run_if_exists(Changes["any-change-always-last"])
+        run_if_exists(Changes['any-change-always-last'])
     end
-    run_if_exists(Changes["map-change-always-last"])
+    run_if_exists(Changes['map-change-always-last'])
 end
 
 function Changes.on_mod_changed(this_mod_changes)
@@ -66,7 +66,7 @@ function Changes.on_mod_changed(this_mod_changes)
             if not global._changes[ver] then
                 run_if_exists(func)
                 global._changes[ver] = old
-                log("Migration completed for version " .. ver)
+                log('Migration completed for version ' .. ver)
             end
         end
     end

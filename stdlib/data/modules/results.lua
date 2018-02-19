@@ -1,7 +1,7 @@
 --luacheck: ignore
 
 local Results = {
-    _class = "Results"
+    _class = 'Results'
 }
 
 return Results

@@ -2,9 +2,9 @@
 -- @classmod Entity
 
 local Entity = {
-    _class = "entity"
+    _class = 'entity'
 }
-setmetatable(Entity, {__index = require("stdlib/data/data")})
+setmetatable(Entity, {__index = require('stdlib.data.data')})
 
 function Entity:_get(entity, type)
     return self:get(entity, type)

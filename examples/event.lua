@@ -1,5 +1,5 @@
 -- Require the event module
-require('stdlib/event/event')
+require('stdlib.event.event')
 
 -- Register our hotkeys
 

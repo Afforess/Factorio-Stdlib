@@ -3,11 +3,13 @@
 -- <p>To handle the events, you should use the @{Event} module.
 -- @module Trains
 
-local Trains = {_module_name = "Trains"}
-setmetatable(Trains, {__index = require('stdlib/core')})
+local Trains = {
+    _module_name = 'Trains'
+}
+setmetatable(Trains, {__index = require('stdlib.core')})
 
-local Surface = require('stdlib/area/surface')
-local Entity = require('stdlib/entity/entity')
+local Surface = require('stdlib.area.surface')
+local Entity = require('stdlib.entity.entity')
 
 --- This event fires when a train's ID changes.
 -- <p>The train ID is a property of the main locomotive,
@@ -48,15 +50,23 @@ function Trains.find_filtered(criteria)
 
     -- Apply state filters
     if criteria.state then
-        results = table.filter(results, function(train)
-            return train.state == criteria.state
-        end)
+        results =
+            table.filter(
+            results,
+            function(train)
+                return train.state == criteria.state
+            end
+        )
     end
 
     -- Lastly, look up the train ids
-    results = table.map(results, function(train)
-        return { train = train, id = Trains.get_main_locomotive(train).unit_number }
-    end)
+    results =
+        table.map(
+        results,
+        function(train)
+            return {train = train, id = Trains.get_main_locomotive(train).unit_number}
+        end
+    )
 
     return results
 end
@@ -93,7 +103,7 @@ function Trains._on_locomotive_changed()
         -- If it's not
         if (id ~= derived_id) then
             -- Capture the rename
-            table.insert(renames, {old_id = id , new_id = derived_id, train = train })
+            table.insert(renames, {old_id = id, new_id = derived_id, train = train})
         end
     end
 
@@ -113,7 +123,6 @@ function Trains._on_locomotive_changed()
     end
 end
 
-
 --- Get the main locomotive of a train.
 -- @tparam LuaTrain train
 -- @treturn LuaEntity the main locomotive
@@ -127,7 +136,7 @@ end
 -- @tparam LuaTrain train
 -- @return (<span class="types">@{train_entity}</span>)
 function Trains.to_entity(train)
-    local name = "train-" .. Trains.get_train_id(train)
+    local name = 'train-' .. Trains.get_train_id(train)
     return {
         name = name,
         valid = train.valid,
@@ -186,7 +195,7 @@ end
 --- This needs to be called to register events for this module
 -- @treturn Trains
 function Trains.register_events()
-    require('stdlib/event/event')
+    require('stdlib.event.event')
     -- When a locomotive is removed ...
     local train_remove_events = {defines.events.on_entity_died, defines.events.on_pre_player_mined_item, defines.events.on_robot_pre_mined}
     Event.register(train_remove_events, Event.filter_entity('entity', 'locomotive', Trains._on_locomotive_changed))

@@ -2,16 +2,18 @@
 -- This module adds player helper functions, it does not automatically register events unless Player.register_events() is called
 -- @module Player
 -- @usage
--- local Player = require('stdlib/event/player').register_events()
+-- local Player = require('stdlib.event.player').register_events()
 -- -- The fist time this is required it will register player creation events
 
-require("stdlib/event/event")
+require('stdlib.event.event')
 
-local Player = {_module_name = "Player"}
-setmetatable(Player, {__index = require("stdlib/core")})
+local Player = {
+    _module_name = 'Player'
+}
+setmetatable(Player, {__index = require('stdlib.core')})
 
 local fail_if_not = Player.fail_if_not
-local Game = require("stdlib/game")
+local Game = require('stdlib.game')
 
 -- Return new default player object consiting of index and name
 local function new(player_index)
@@ -21,17 +23,17 @@ local function new(player_index)
         force = game.players[player_index].force.name
     }
     if Event._new_player_data then
-        if type(Event._new_player_data) == "table" then
+        if type(Event._new_player_data) == 'table' then
             table.merge(pdata, table.deepcopy(Event._new_player_data))
-        elseif type(Event._new_player_data) == "function" then
+        elseif type(Event._new_player_data) == 'function' then
             local new_data = Event._new_player_data(player_index)
-            if type(new_data) == "table" then
+            if type(new_data) == 'table' then
                 table.merge(pdata, new_data)
             else
-                error("new_player_data did not return a table")
+                error('new_player_data did not return a table')
             end
         else
-            error("new_player_data present but is not a function or table")
+            error('new_player_data present but is not a function or table')
         end
     end
     return pdata
@@ -47,11 +49,11 @@ end
 -- @treturn LuaPlayer the player instance
 -- @treturn table the player's global data
 -- @usage
--- local Player = require('stdlib/event/player')
+-- local Player = require('stdlib.event.player')
 -- local player, player_data = Player.get(event.player_index)
 function Player.get(player)
     player = Game.get_player(player)
-    fail_if_not(player, "Missing player to retrieve")
+    fail_if_not(player, 'Missing player to retrieve')
     return player, global.players[player.index] or Player.init(player.index)
 end
 
@@ -121,7 +123,7 @@ end
 
 local events = {defines.events.on_player_created, Event.core_events.configuration_changed}
 function Player.register_events(skip_init)
-    require("stdlib.event.event")
+    require('stdlib.event.event')
     Event.register(events, Player.init)
     Event.register(defines.events.on_player_changed_force, Player.update_force)
     Event.register(defines.events.on_player_removed, Player.remove)
@@ -132,7 +134,7 @@ function Player.register_events(skip_init)
 end
 
 function Player.register_init()
-    require("stdlib.event.event")
+    require('stdlib.event.event')
     Event.register(Event.core_events.init, Player.init)
     return Player
 end

@@ -1,13 +1,13 @@
 --- Tools for working with `<x,y>` coordinates.
 -- The tables passed into the Position functions are mutated in-place.
 -- @module Position
--- @usage local Position = require('stdlib/area/position')
+-- @usage local Position = require('stdlib.area.position')
 -- @see Area
 -- @see Concepts.Position
 -- @see defines.direction
 
-local Position = {_module_name = "Position"}
-setmetatable(Position, {__index = require('stdlib/core')})
+local Position = {_module_name = 'Position'}
+setmetatable(Position, {__index = require('stdlib.core')})
 
 local fail_if_not = Position.fail_if_not
 
@@ -31,7 +31,7 @@ function Position.new(pos, new_copy)
         return pos
     end
 
-    local new_pos = { x = pos.x or pos[1], y = pos.y or pos[2] }
+    local new_pos = {x = pos.x or pos[1], y = pos.y or pos[2]}
     return setmetatable(new_pos, Position._mt)
 end
 
@@ -43,11 +43,11 @@ function Position.construct(...)
     local args = {...}
 
     --self was passed as first argument
-    local t = (type(args[1]) == "table" and 1) or 0
+    local t = (type(args[1]) == 'table' and 1) or 0
 
     local x = args[1 + t] or 0
     local y = args[2 + t] or 0
-    return Position.new({ x = x, y = y })
+    return Position.new({x = x, y = y})
 end
 
 --- Creates a position that is a copy of the given position.
@@ -92,7 +92,9 @@ end
 -- @tparam Concepts.Position pos2 the second position
 -- @treturn boolean true if positions are equal
 function Position.equals(pos1, pos2)
-    if not pos1 or not pos2 then return false end
+    if not pos1 or not pos2 then
+        return false
+    end
     pos1 = Position.new(pos1)
     pos2 = Position.new(pos2)
 
@@ -175,12 +177,12 @@ end
 function Position.expand_to_area(pos, radius)
     pos = Position.new(pos)
     fail_if_not(radius, 'missing radius argument')
-    local Area = require("stdlib/area/area")
+    local Area = require('stdlib.area.area')
 
     local left_top = Position.new({pos.x - radius, pos.y - radius})
     local right_bottom = Position.new({pos.x + radius, pos.y + radius})
 
-    return Area({ left_top = left_top, right_bottom = right_bottom })
+    return Area({left_top = left_top, right_bottom = right_bottom})
 end
 
 --- Calculates the Euclidean distance squared between two positions, useful when sqrt is not needed.
@@ -279,16 +281,19 @@ function Position.center(pos)
     return pos
 end
 
-local opposites = (defines and defines.direction) and {
-    [defines.direction.north] = defines.direction.south,
-    [defines.direction.south] = defines.direction.north,
-    [defines.direction.east] = defines.direction.west,
-    [defines.direction.west] = defines.direction.east,
-    [defines.direction.northeast] = defines.direction.southwest,
-    [defines.direction.southwest] = defines.direction.northeast,
-    [defines.direction.northwest] = defines.direction.southeast,
-    [defines.direction.southeast] = defines.direction.northwest,
-} or {[0]=4, [1]=5, [2]=6, [3]=7, [4]=0, [5]=1, [6]=2, [7]=3}
+local opposites =
+    (defines and defines.direction) and
+    {
+        [defines.direction.north] = defines.direction.south,
+        [defines.direction.south] = defines.direction.north,
+        [defines.direction.east] = defines.direction.west,
+        [defines.direction.west] = defines.direction.east,
+        [defines.direction.northeast] = defines.direction.southwest,
+        [defines.direction.southwest] = defines.direction.northeast,
+        [defines.direction.northwest] = defines.direction.southeast,
+        [defines.direction.southeast] = defines.direction.northwest
+    } or
+    {[0] = 4, [1] = 5, [2] = 6, [3] = 7, [4] = 0, [5] = 1, [6] = 2, [7] = 3}
 
 --- Returns the opposite direction &mdash; adapted from Factorio util.lua.
 -- @release 0.8.1
@@ -308,7 +313,7 @@ function Position.next_direction(direction, reverse, eight_way)
     fail_if_not(direction, 'missing starting direction')
 
     local next_dir = direction + (eight_way and ((reverse and -1) or 1) or ((reverse and -2) or 2))
-    return (next_dir > 7 and next_dir-next_dir) or (reverse and next_dir < 0 and 8 + next_dir) or next_dir
+    return (next_dir > 7 and next_dir - next_dir) or (reverse and next_dir < 0 and 8 + next_dir) or next_dir
 end
 
 --- Restore the metatable on a stored position without returning a new position. Usefull for restoring
@@ -334,7 +339,7 @@ Position._mt = {
 }
 
 local function _call(_, ...)
-    if type((...)) == "table" then
+    if type((...)) == 'table' then
         return Position.new((...))
     else
         return Position.construct(...)

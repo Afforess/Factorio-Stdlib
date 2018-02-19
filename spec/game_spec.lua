@@ -1,6 +1,6 @@
-require('spec/setup/defines')
-require('stdlib/utils/table')
-local Game = require('stdlib/game')
+require('spec.setup.defines')
+require('stdlib.utils.table')
+local Game = require('stdlib.game')
 
 describe("Game Spec",
     function()

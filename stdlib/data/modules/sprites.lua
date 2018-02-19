@@ -5,14 +5,14 @@ local Sprites = {}
 
 function Sprites.extract_monolith(filename, x, y, w, h)
     return {
-        type = "monolith",
+        type = 'monolith',
         top_monolith_border = 0,
         right_monolith_border = 0,
         bottom_monolith_border = 0,
         left_monolith_border = 0,
         monolith_image = {
             filename = filename,
-            priority = "extra-high-no-scale",
+            priority = 'extra-high-no-scale',
             width = w,
             height = h,
             x = x,
@@ -25,8 +25,8 @@ end
 -- @treturn table an empty pictures table
 function Sprites.empty_picture()
     return {
-        filename = "__core__/graphics/empty.png",
-        priority = "extra-high",
+        filename = '__core__/graphics/empty.png',
+        priority = 'extra-high',
         width = 1,
         height = 1
     }
@@ -85,6 +85,5 @@ function Sprites.empty_connection_points(count)
     end
     return points
 end
-
 
 return Sprites

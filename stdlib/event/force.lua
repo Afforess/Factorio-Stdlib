@@ -4,16 +4,16 @@
 -- <p>This modules can register the following events: `on_force_created`, and `on_forces_merging`.
 -- @module Force
 -- @usage
--- local Force = require('stdlib/event/force').register_events()
+-- local Force = require('stdlib.event.force').register_events()
 -- -- inside your Init event Force.init() -- to properly handle any existing forces
 
-require("stdlib/event/event")
+require('stdlib.event.event')
 
-local Force = {_module_name = "Force"}
-setmetatable(Force, {__index = require("stdlib/core")})
+local Force = {_module_name = 'Force'}
+setmetatable(Force, {__index = require('stdlib.core')})
 
 local fail_if_not = Force.fail_if_not
-local Game = require("stdlib/game")
+local Game = require('stdlib.game')
 
 -- return new default force object
 local function new(force_name)
@@ -22,17 +22,17 @@ local function new(force_name)
         name = force_name
     }
     if Event._new_force_data then
-        if type(Event._new_force_data) == "table" then
+        if type(Event._new_force_data) == 'table' then
             table.merge(fdata, table.deepcopy(Event._new_force_data))
-        elseif type(Event._new_force_data) == "function" then
+        elseif type(Event._new_force_data) == 'function' then
             local new_data = Event._new_force_data(force_name)
-            if type(new_data) == "table" then
+            if type(new_data) == 'table' then
                 table.merge(fdata, new_data)
             else
-                error("new_player_data did not return a table")
+                error('new_player_data did not return a table')
             end
         else
-            error("new_player_data present but is not a function or table")
+            error('new_player_data present but is not a function or table')
         end
     end
 
@@ -49,13 +49,13 @@ end
 -- @treturn LuaForce the force instance
 -- @treturn table the force's global data
 -- @usage
--- local Force = require('stdlib/event/force')
+-- local Force = require('stdlib.event.force')
 -- local force_name, force_data = Force.get("player")
 -- local force_name, force_data = Force.get(game.forces["player"])
 -- -- Returns data for the force named "player" from either a string or LuaForce object
 function Force.get(force)
     force = Game.get_force(force)
-    fail_if_not(force, "force is missing")
+    fail_if_not(force, 'force is missing')
     return game.forces[force.name], global.forces[force.name] or Force.init(force.name)
 end
 
@@ -103,7 +103,7 @@ end
 
 local events = {defines.events.on_force_created, Event.core_events.configuration_changed}
 function Force.register_events(skip_init)
-    require('stdlib/event/event')
+    require('stdlib.event.event')
     Event.register(events, Force.init)
     Event.register(defines.events.on_forces_merging, Force.merge)
     if not skip_init then
@@ -113,7 +113,7 @@ function Force.register_events(skip_init)
 end
 
 function Force.register_init()
-    require('stdlib/event/event')
+    require('stdlib.event.event')
     Event.register(Event.core_events.init, Force.init)
     return Force
 end

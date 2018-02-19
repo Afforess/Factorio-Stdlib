@@ -2,23 +2,23 @@
 -- @module Util
 
 local Util = {
-    _module_name = "Util"
+    _module_name = 'Util'
 }
-setmetatable(Util, {__index = require("stdlib/core")})
+setmetatable(Util, {__index = require('stdlib.core')})
 
 function Util.extend(proto_array)
-    Util.fail_if_not(Util.Is.Table(proto_array), "Missing table or array to extend")
+    Util.fail_if_not(Util.Is.Table(proto_array), 'Missing table or array to extend')
     data:extend(#proto_array > 0 and proto_array or {proto_array})
 end
 
 function Util.disable_control(control)
-    if data.raw["custom-input"] and data.raw["custom-input"][control] then
-        data.raw["custom-input"][control].enabled = false
+    if data.raw['custom-input'] and data.raw['custom-input'][control] then
+        data.raw['custom-input'][control].enabled = false
     end
 end
 
 function Util.extend_style(style)
-    data.raw["gui-style"].default[style.name] = style
+    data.raw['gui-style'].default[style.name] = style
 end
 
 --- Quickly duplicate an existing prototype into a new one.
@@ -27,7 +27,7 @@ end
 -- @tparam string new_name The new name to use.
 -- @tparam[opt] string|boolean mining_result If true set mining_result to new_name, if truthy set mining_result to value
 function Util.duplicate(data_type, orig_name, new_name, mining_result)
-    mining_result = type(mining_result) == "boolean" and new_name or mining_result
+    mining_result = type(mining_result) == 'boolean' and new_name or mining_result
     if data.raw[data_type] and data.raw[data_type][orig_name] then
         local proto = table.deepcopy(data.raw[data_type][orig_name])
         proto.name = new_name
@@ -48,7 +48,7 @@ function Util.duplicate(data_type, orig_name, new_name, mining_result)
 
         return (proto)
     else
-        error("Unknown Prototype " .. data_type .. "/" .. orig_name)
+        error('Unknown Prototype ' .. data_type .. '/' .. orig_name)
     end
 end
 

@@ -5,7 +5,7 @@
 -- luacheck: globals math (Allow mutating global table)
 
 function math.round(x)
-  return x>=0 and math.floor(x+0.5) or math.ceil(x-0.5)
+  return x >= 0 and math.floor(x + 0.5) or math.ceil(x - 0.5)
 end
 
 -- Various average (means) algorithms implementation
@@ -14,7 +14,9 @@ end
 -- Returns the sum of a sequence of values
 function math.sum(x)
   local s = 0
-  for _, v in ipairs(x) do s = s + v end
+  for _, v in ipairs(x) do
+    s = s + v
+  end
   return s
 end
 
@@ -32,7 +34,9 @@ math.avg = math.arithmetic_mean
 -- returns : the geometric mean
 function math.geometric_mean(x)
   local prod = 1
-  for _, v in ipairs(x) do prod = prod * v end
+  for _, v in ipairs(x) do
+    prod = prod * v
+  end
   return (prod ^ (1 / #x))
 end
 
@@ -41,7 +45,9 @@ end
 -- returns : the harmonic mean
 function math.harmonic_mean(x)
   local s = 0
-  for _, v in ipairs(x) do s = s + (1 / v) end
+  for _, v in ipairs(x) do
+    s = s + (1 / v)
+  end
   return (#x / s)
 end
 
@@ -50,7 +56,9 @@ end
 -- returns : the quadratic mean
 function math.quadratic_mean(x)
   local squares = 0
-  for _, v in ipairs(x) do squares = squares + (v * v) end
+  for _, v in ipairs(x) do
+    squares = squares + (v * v)
+  end
   return math.sqrt((1 / #x) * squares)
 end
 
@@ -60,7 +68,9 @@ end
 -- returns : the generalized mean
 function math.generalized_mean(x, p)
   local sump = 0
-  for _, v in ipairs(x) do sump = sump + (v ^ p) end
+  for _, v in ipairs(x) do
+    sump = sump + (v ^ p)
+  end
   return ((1 / #x) * sump) ^ (1 / p)
 end
 
@@ -70,7 +80,9 @@ end
 -- returns : the weighted mean
 function math.weighted_mean(x, w)
   local sump = 0
-  for i, v in ipairs (x) do sump = sump + (v * w[i]) end
+  for i, v in ipairs(x) do
+    sump = sump + (v * w[i])
+  end
   return sump / math.sum(w)
 end
 
@@ -87,6 +99,8 @@ end
 -- returns : the energetic mean
 function math.energetic_mean(x)
   local s = 0
-  for _,v in ipairs(x) do s = s + (10 ^ (v / 10)) end
+  for _, v in ipairs(x) do
+    s = s + (10 ^ (v / 10))
+  end
   return 10 * math.log10((1 / #x) * s)
 end

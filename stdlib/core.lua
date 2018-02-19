@@ -1,22 +1,22 @@
 --- The Core module loads some helper functions usefull in all stages
 -- of a mods life cycle. All modules have an __index method into core.
 -- @module Core
--- @usage local Core = require('stdlib/core')
+-- @usage local Core = require('stdlib.core')
 
 --Global mutates
-require("stdlib/utils/table")
-require("stdlib/utils/string")
-require("stdlib/utils/math")
-require("stdlib/utils/globals")
+require('stdlib.utils.table')
+require('stdlib.utils.string')
+require('stdlib.utils.math')
+require('stdlib.utils.globals')
 
 --Defines Mutates
-require("stdlib/defines/color")
-require("stdlib/defines/time")
+require('stdlib.defines.color')
+require('stdlib.defines.time')
 
 local Core = {
-    _VERSION = "1.0.0",
-    _DESCRIPTION = "Factorio Lua Standard Library Project",
-    _URL = "https://github.com/Afforess/Factorio-Stdlib",
+    _VERSION = '1.0.0',
+    _DESCRIPTION = 'Factorio Lua Standard Library Project',
+    _URL = 'https://github.com/Afforess/Factorio-Stdlib',
     _LICENSE = [[
         MIT LICENSE
 
@@ -34,38 +34,38 @@ local Core = {
         ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
         OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     ]],
-    _module_name = "Core",
+    _module_name = 'Core',
     _protect = function(this, caller, class_name)
         local meta = getmetatable(this)
-        local name = this._module_name or class_name or "Unknown"
+        local name = this._module_name or class_name or 'Unknown'
 
         if meta and not meta.__metatable then
             meta.__metatable = meta
             meta.__call = caller
             meta.__newindex = function()
-                error("Attempt to mutate read-only " .. name .. " Module")
+                error('Attempt to mutate read-only ' .. name .. ' Module')
             end
         end
         return this
     end,
     _concat = function(lhs, rhs)
         --Sanitize to remove address
-        return tostring(lhs):gsub("(%w+)%: %x+", "%1: (ADDR)") .. tostring(rhs):gsub("(%w+)%: %x+", "%1: (ADDR)")
+        return tostring(lhs):gsub('(%w+)%: %x+', '%1: (ADDR)') .. tostring(rhs):gsub('(%w+)%: %x+', '%1: (ADDR)')
     end,
     _classes = {
-        string_array_mt = require("stdlib/utils/classes/string_array")
-    },
+        string_array_mt = require('stdlib.utils.classes.string_array')
+    }
 }
 
-Core.Is = require("stdlib/utils/is")
-Core.Iter = require("stdlib/utils/iter")
+Core.Is = require('stdlib.utils.is')
+Core.Iter = require('stdlib.utils.iter')
 
 --- Print msg if specified var evaluates to false.
 -- @tparam Mixed var variable or expression to evaluate
 -- @tparam[opt="incorrect or missing value"] string msg message
 function Core.fail_if_not(var, msg)
     if not var then
-        error(msg or "incorrect or missing value", 3)
+        error(msg or 'incorrect or missing value', 3)
     end
     return false
 end
@@ -83,7 +83,7 @@ function Core.set_caller(this, caller)
         getmetatable(this).__call = caller
         return this
     else
-        error("Metatable not found", 2)
+        error('Metatable not found', 2)
     end
 end
 

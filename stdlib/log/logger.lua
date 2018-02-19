@@ -1,13 +1,13 @@
 --- For logging debug information to files.
 -- @module Logger
 -- @usage
--- local Logger = require('stdlib/log/logger')
+-- local Logger = require('stdlib.log.logger')
 -- -- or to create a logger directly:
--- local LOGGER = require('stdlib/log/logger').new(...)
+-- local LOGGER = require('stdlib.log.logger').new(...)
 -- -- and to use the same LOGGER in multiple require files make it global by removing 'local'.
 
-local M = {_module_name = "Logger"}
-setmetatable(M, {__index = require('stdlib/core')})
+local M = {_module_name = 'Logger'}
+setmetatable(M, {__index = require('stdlib.core')})
 local fail_if_not = M.fail_if_not
 
 --- Creates a new logger object.
@@ -32,9 +32,9 @@ local fail_if_not = M.fail_if_not
 -- @tparam[opt={...}] options options a table with optional arguments
 -- @return (<span class="types">@{Logger}</span>) the logger instance
 function M.new(mod_name, log_name, debug_mode, options)
-    fail_if_not(mod_name, "Logger must be given a mod_name as the first argument")
+    fail_if_not(mod_name, 'Logger must be given a mod_name as the first argument')
 
-    log_name = log_name or "main"
+    log_name = log_name or 'main'
     options = options or {}
 
     local Logger = {
@@ -55,7 +55,7 @@ function M.new(mod_name, log_name, debug_mode, options)
     Logger.options = {
         log_ticks = options.log_ticks or false,
         file_extension = options.file_extension or 'log',
-        force_append = options.force_append or false,
+        force_append = options.force_append or false
     }
 
     Logger.file_name = Logger.mod_name .. '/' .. Logger.log_name .. '.' .. Logger.options.file_extension
@@ -70,18 +70,18 @@ function M.new(mod_name, log_name, debug_mode, options)
         if _G.game then
             local tick = game.tick
             local floor = math.floor
-            local time_s = floor(tick/60)
-            local time_minutes = floor(time_s/60)
-            local time_hours = floor(time_minutes/60)
+            local time_s = floor(tick / 60)
+            local time_minutes = floor(time_s / 60)
+            local time_hours = floor(time_minutes / 60)
 
             if type(msg) ~= 'string' then
                 msg = serpent.block(msg, {comment = false, nocode = true, sparse = true})
             end
 
             if Logger.options.log_ticks then
-                table.insert(Logger.buffer, format("%02d:%02d:%02d.%02d: %s\n", time_hours, time_minutes % 60, time_s % 60, tick - time_s * 60, msg))
+                table.insert(Logger.buffer, format('%02d:%02d:%02d.%02d: %s\n', time_hours, time_minutes % 60, time_s % 60, tick - time_s * 60, msg))
             else
-                table.insert(Logger.buffer, format("%02d:%02d:%02d: %s\n", time_hours, time_minutes % 60, time_s % 60, msg))
+                table.insert(Logger.buffer, format('%02d:%02d:%02d: %s\n', time_hours, time_minutes % 60, time_s % 60, msg))
             end
 
             -- write the log every minute
@@ -91,12 +91,12 @@ function M.new(mod_name, log_name, debug_mode, options)
         else
             if _G.script then --buffer when a save is loaded but _G.game isn't available
                 if Logger.options.log_ticks then
-                    table.insert(Logger.buffer, format("00:00:00:00: %s\n", msg))
+                    table.insert(Logger.buffer, format('00:00:00:00: %s\n', msg))
                 else
-                    table.insert(Logger.buffer, format("00:00:00: %s\n", msg))
+                    table.insert(Logger.buffer, format('00:00:00: %s\n', msg))
                 end
             else --log in data stage
-                log(format("%s/%s: %s", Logger.mod_name, Logger.log_name, msg))
+                log(format('%s/%s: %s', Logger.mod_name, Logger.log_name, msg))
             end
         end
         return false

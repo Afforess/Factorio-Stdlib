@@ -1,21 +1,23 @@
-local Is = require("stdlib/utils/is")
+local Is = require('stdlib.utils.is')
 
 describe(
-    "variable type checks",
+    'variable type checks',
     function()
         local a, b, c, d, e
 
         before_each(
             function()
-                a = "string"
+                a = 'string'
                 b = 1
                 c = {}
                 d =
                     setmetatable(
                     {},
-                    {__tostring = function()
-                            return "string"
-                        end}
+                    {
+                        __tostring = function()
+                            return 'string'
+                        end
+                    }
                 )
                 e = true
             end
@@ -27,17 +29,17 @@ describe(
         )
 
         it(
-            "is_bool",
+            'is_bool',
             function()
                 assert.is_true(Is.Boolean(true))
                 assert.is_true(Is.Boolean(false))
-                assert.is_false(Is.Boolean("true"))
+                assert.is_false(Is.Boolean('true'))
                 assert.is_false(Is.Boolean(nil))
                 assert.is_false(Is.Boolean())
             end
         )
         it(
-            "is_string",
+            'is_string',
             function()
                 assert.is_false(Is.String())
                 assert.is_false(Is.String(nil))
@@ -50,7 +52,7 @@ describe(
             end
         )
         it(
-            "is_table",
+            'is_table',
             function()
                 local f = Is.Table
                 assert.is_false(f())
@@ -61,7 +63,7 @@ describe(
             end
         )
         it(
-            "is_true",
+            'is_true',
             function()
                 local f = Is.True
                 assert.is_false(f())
@@ -75,7 +77,7 @@ describe(
             end
         )
         it(
-            "is_false",
+            'is_false',
             function()
                 local f = Is.False
                 assert.is_false(f())
@@ -89,7 +91,7 @@ describe(
             end
         )
         it(
-            "is_number",
+            'is_number',
             function()
                 local f = Is.Number
                 assert.is_false(f())
@@ -103,7 +105,7 @@ describe(
             end
         )
         it(
-            "is_truthy",
+            'is_truthy',
             function()
                 local f = Is.Truthy
                 assert.is_false(f())
@@ -117,7 +119,7 @@ describe(
             end
         )
         it(
-            "is_falsy",
+            'is_falsy',
             function()
                 local f = Is.Falsy
                 assert.is_true(f())
@@ -131,7 +133,7 @@ describe(
             end
         )
         it(
-            "is_nil",
+            'is_nil',
             function()
                 local f = Is.Nil
                 local hah = nil

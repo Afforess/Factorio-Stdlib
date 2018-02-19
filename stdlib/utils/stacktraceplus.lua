@@ -1,4 +1,4 @@
---luacheck: ignore globals io coroutine
+--luacheck: globals io coroutine
 -- tables
 local _G = _G
 local string, io, debug, coroutine = string, io, debug, coroutine

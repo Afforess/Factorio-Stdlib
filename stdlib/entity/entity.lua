@@ -1,9 +1,9 @@
 --- Tools for working with entities.
 -- @module Entity
--- @usage local Entity = require('stdlib/entity/entity')
+-- @usage local Entity = require('stdlib.entity.entity')
 
-local Entity = {_module_name = "Entity"}
-setmetatable(Entity, {__index = require('stdlib/core')})
+local Entity = {_module_name = 'Entity'}
+setmetatable(Entity, {__index = require('stdlib.core')})
 
 local fail_if_not = Entity.fail_if_not
 
@@ -12,10 +12,15 @@ local fail_if_not = Entity.fail_if_not
 -- @tparam string field_name the field name
 -- @treturn boolean true if the entity has access to the field, false if the entity threw an exception when trying to access the field
 function Entity.has(entity, field_name)
-    fail_if_not(entity, "missing entity argument")
-    fail_if_not(field_name, "missing field name argument")
+    fail_if_not(entity, 'missing entity argument')
+    fail_if_not(field_name, 'missing field name argument')
 
-    local status = pcall(function() return entity[field_name] end)
+    local status =
+        pcall(
+        function()
+            return entity[field_name]
+        end
+    )
     return status
 end
 
@@ -25,15 +30,19 @@ end
 -- @tparam LuaEntity entity the entity to look up
 -- @treturn ?|nil|Mixed the user data, or nil if no data exists for the entity
 function Entity.get_data(entity)
-    fail_if_not(entity, "missing entity argument")
-    if not global._entity_data then return nil end
+    fail_if_not(entity, 'missing entity argument')
+    if not global._entity_data then
+        return nil
+    end
 
     local unit_number = entity.unit_number
     if unit_number then
         return global._entity_data[unit_number]
     else
         local entity_name = entity.name
-        if not global._entity_data[entity_name] then return nil end
+        if not global._entity_data[entity_name] then
+            return nil
+        end
 
         local entity_category = global._entity_data[entity_name]
         for _, entity_data in pairs(entity_category) do
@@ -52,9 +61,11 @@ end
 -- @tparam ?|nil|Mixed data the data to set, or nil to delete the data associated with the entity
 -- @treturn ?|nil|Mixed the previous data associated with the entity, or nil if the entity had no previous data
 function Entity.set_data(entity, data)
-    fail_if_not(entity, "missing entity argument")
+    fail_if_not(entity, 'missing entity argument')
 
-    if not global._entity_data then global._entity_data = {} end
+    if not global._entity_data then
+        global._entity_data = {}
+    end
 
     local unit_number = entity.unit_number
     if unit_number then
@@ -84,7 +95,7 @@ function Entity.set_data(entity, data)
                 return prev
             end
         end
-        table.insert(entity_category, { entity = entity, data = data })
+        table.insert(entity_category, {entity = entity, data = data})
     end
     return nil
 end
@@ -94,7 +105,7 @@ end
 -- @tparam[opt=true] boolean mode if true, freezes the entity, if false, unfreezes the entity. If not specified, it is set to true
 -- @treturn LuaEntity the entity that has been frozen or unfrozen
 function Entity.set_frozen(entity, mode)
-    fail_if_not(entity, "missing entity argument")
+    fail_if_not(entity, 'missing entity argument')
     mode = mode == false and true or false
     entity.active = mode
     entity.operable = mode
@@ -107,7 +118,7 @@ end
 -- @tparam[opt=true] boolean mode if true, makes the entity indestructible, if false, makes the entity destructable
 -- @treturn LuaEntity the entity that has been made indestructable or destructable
 function Entity.set_indestructible(entity, mode)
-    fail_if_not(entity, "missing entity argument")
+    fail_if_not(entity, 'missing entity argument')
     mode = mode == false and true or false
     entity.minable = mode
     entity.destructible = mode
@@ -124,7 +135,7 @@ function Entity._are_equal(entity_a, entity_b)
         return entity_a == entity_b
     elseif entity_a == entity_b then
         return true
-    elseif Entity.has(entity_a, "equals") and entity_a.equals ~= nil then
+    elseif Entity.has(entity_a, 'equals') and entity_a.equals ~= nil then
         return entity_a.equals(entity_b)
     else
         return false
@@ -143,19 +154,19 @@ end
 -- @tparam[opt] LuaEntity cause the entity if available that did the killing for on_entity_died
 -- @tparam[opt] LuaForce force the force if any that did the killing
 -- @treturn boolean was the entity destroyed?
-function Entity.destroy_entity( entity, died, cause, force )
+function Entity.destroy_entity(entity, died, cause, force)
     if entity and entity.valid and entity.can_be_destroyed then
         local event = {
             name = died and defines.events.on_entity_died or defines.events.script_raised_destroy,
             entity = entity,
             cause = cause,
             force = force,
-            script = true,
+            script = true
         }
         -- If no event name is passed, assume script_raised_destroy, otherwise raise the event
         -- with the passed event name. ie. defines.events.on_preplayer_mined_item
         event.script = true
-        event.mod_name = "stdlib"
+        event.mod_name = 'stdlib'
         script.raise_event(event.name, event)
         return entity.destroy()
     end
@@ -167,13 +178,13 @@ end
 -- @tparam[opt] uint player_index the index of the player, when not present and not raise_script_event pass a fake robot
 -- @tparam[opt] boolean raise_script_event raise script_raised_built
 -- @treturn LuaEntity the created entity
-function Entity.create_entity( surface, settings, player_index, raise_script_event)
+function Entity.create_entity(surface, settings, player_index, raise_script_event)
     surface = game.surfaces[surface]
-    local entity = surface.create_entity( settings )
+    local entity = surface.create_entity(settings)
     if entity then
         local event = {
             created_entity = entity,
-            script = true,
+            script = true
         }
 
         if raise_script_event then
@@ -207,7 +218,7 @@ function Entity.revive(ghost, player_index, raise_script_event)
                 created_entity = revived,
                 revived = true,
                 script = true,
-                modname = "stdlib"
+                modname = 'stdlib'
             }
 
             if raise_script_event then

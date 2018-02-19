@@ -11,11 +11,11 @@
 -- <br>Due to this, great care should be taken when registering events conditionally.
 -- </blockquote>
 -- @module Event
--- @usage require("stdlib/event/event")
+-- @usage require('stdlib.event.event')
 
 Event = {
     --luacheck: allow defined top
-    _module_name = "Event",
+    _module_name = 'Event',
     _registry = {},
     core_events = {
         init = -1,
@@ -56,16 +56,16 @@ Event = {
         end
     }
 }
-setmetatable(Event, {__index = require("stdlib/core")})
+setmetatable(Event, {__index = require('stdlib.core')})
 
 local fail_if_not = Event.fail_if_not
 
 local function is_valid_id(event_id)
-    if not (type(event_id) == "number" or type(event_id) == "string") then
-        error("Invalid Event Id, Must be string or int, or array of strings and/or ints, Passed in :" .. event_id, 3)
+    if not (type(event_id) == 'number' or type(event_id) == 'string') then
+        error('Invalid Event Id, Must be string or int, or array of strings and/or ints, Passed in :' .. event_id, 3)
     end
-    if (type(event_id) == "number" and event_id < -3) then
-        error("event_id must be greater than -3, Passed in: " .. event_id, 3)
+    if (type(event_id) == 'number' and event_id < -3) then
+        error('event_id must be greater than -3, Passed in: ' .. event_id, 3)
     end
 end
 
@@ -87,28 +87,35 @@ end
 -- @tparam function handler the function to call when the given events are triggered
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.register(event_ids, handler)
-    fail_if_not(event_ids, "missing event_ids argument")
-    fail_if_not(handler, "handler is missing, use Event.remove to unregister events")
+    fail_if_not(event_ids, 'missing event_ids argument')
+    fail_if_not(handler, 'handler is missing, use Event.remove to unregister events')
 
-    event_ids = (type(event_ids) == "table" and event_ids) or {event_ids}
+    event_ids = (type(event_ids) == 'table' and event_ids) or {event_ids}
 
     for _, event_id in pairs(event_ids) do
         is_valid_id(event_id)
         if not Event._registry[event_id] then
             Event._registry[event_id] = {}
 
-            if type(event_id) == "string" or event_id >= 0 then
+            if type(event_id) == 'string' or event_id >= 0 then
                 script.on_event(event_id, Event.dispatch)
             elseif event_id < 0 then
                 Event.core_events._register(event_id)
             end
         end
         --If the handler is already registered for this event: remove and insert it to the end.
-        local _, reg_index = table.find(Event._registry[event_id], function(v) return v == handler end)
+        local _,
+            reg_index =
+            table.find(
+            Event._registry[event_id],
+            function(v)
+                return v == handler
+            end
+        )
 
         if reg_index then
             table.remove(Event._registry[event_id], reg_index)
-            log("Same handler already registered for event " .. event_id .. ", reording it to the bottom")
+            log('Same handler already registered for event ' .. event_id .. ', reording it to the bottom')
         end
         table.insert(Event._registry[event_id], handler)
     end
@@ -149,7 +156,7 @@ function Event.dispatch(event)
             for idx, handler in ipairs(_registry) do
                 -- Check for userdata and stop processing further handlers if not valid
                 for _, val in pairs(event) do
-                    if type(val) == "table" and val.__self and not val.valid then
+                    if type(val) == 'table' and val.__self and not val.valid then
                         return
                     end
                 end
@@ -172,7 +179,7 @@ function Event.dispatch(event)
 
                 -- force a crc check if option is enabled. This is a debug option and will hamper perfomance if enabled
                 if (force_crc or event.force_crc) and _G.game then
-                    local msg = "CRC check called for event " .. event.name .. " handler #" .. idx
+                    local msg = 'CRC check called for event ' .. event.name .. ' handler #' .. idx
                     log(msg) -- log the message to factorio-current.log
                     game.force_crc()
                 end
@@ -184,7 +191,7 @@ function Event.dispatch(event)
             end
         end
     else
-        error("missing event argument")
+        error('missing event argument')
     end
 end
 
@@ -198,10 +205,10 @@ end
 -- @tparam function handler the handler to remove
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.remove(event_ids, handler)
-    fail_if_not(event_ids, "missing event_ids argument")
-    fail_if_not(handler, "missing handler argument")
+    fail_if_not(event_ids, 'missing event_ids argument')
+    fail_if_not(handler, 'missing handler argument')
 
-    event_ids = (type(event_ids) == "table" and event_ids) or {event_ids}
+    event_ids = (type(event_ids) == 'table' and event_ids) or {event_ids}
 
     for _, event_id in pairs(event_ids) do
         is_valid_id(event_id)
@@ -214,7 +221,7 @@ function Event.remove(event_ids, handler)
             end
             if table.size(Event._registry[event_id]) == 0 then
                 Event._registry[event_id] = nil
-                if type(event_id) == "string" or event_id >= 0 then
+                if type(event_id) == 'string' or event_id >= 0 then
                     script.on_event(event_id, nil)
                 else
                     Event.core_events._remove(event_id)
@@ -231,7 +238,7 @@ end
 -- @tparam callable callback The callback to invoke if the filter passes. The object defined in the event parameter is passed
 function Event.filter_entity(event_parameter, entity_type, callback)
     return function(evt)
-        if(evt[event_parameter].type == entity_type) then
+        if (evt[event_parameter].type == entity_type) then
             callback(evt[event_parameter])
         end
     end

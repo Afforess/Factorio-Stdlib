@@ -39,8 +39,11 @@ function table.filter(tbl, func, ...)
     local insert = #tbl > 0
     for k, v in pairs(tbl) do
         if func(v, k, ...) then
-            if insert then table.insert(newtbl, v)
-            else newtbl[k] = v end
+            if insert then
+                table.insert(newtbl, v)
+            else
+                newtbl[k] = v
+            end
         end
     end
     return newtbl
@@ -110,9 +113,10 @@ end
 -- @treturn array a new array that represents the flattened contents of the given array
 function table.flatten(tbl, level)
     local flattened = {}
-    table.each(tbl,
+    table.each(
+        tbl,
         function(value)
-            if type(value) == "table" and #value > 0 then
+            if type(value) == 'table' and #value > 0 then
                 if level then
                     if level > 0 then
                         table.merge(flattened, table.flatten(value, level - 1), true)
@@ -142,7 +146,9 @@ end
 -- @treturn ?|nil|Mixed the last element or nil
 function table.last(tbl)
     local size = #tbl
-    if size == 0 then return nil end
+    if size == 0 then
+        return nil
+    end
     return tbl[size]
 end
 
@@ -150,7 +156,9 @@ end
 -- @tparam {number,...} tbl the array with only numeric values
 -- @treturn ?|nil|number the minimum value
 function table.min(tbl)
-    if #tbl == 0 then return nil end
+    if #tbl == 0 then
+        return nil
+    end
 
     local min = tbl[1]
     for _, num in pairs(tbl) do
@@ -163,7 +171,9 @@ end
 -- @tparam {number,...} tbl the array with only numeric values
 -- @treturn ?|nil|number the maximum value
 function table.max(tbl)
-    if #tbl == 0 then return nil end
+    if #tbl == 0 then
+        return nil
+    end
 
     local max = tbl[1]
     for _, num in pairs(tbl) do
@@ -212,7 +222,6 @@ function table.merge(tblA, tblB, array_merge, raw)
         for _, v in pairs(tblB) do
             table.insert(tblA, v)
         end
-
     else
         for k, v in pairs(tblB) do
             if raw then
@@ -254,7 +263,6 @@ function table.dictionary_merge(tbl_a, tbl_b)
     return new_t
 end
 
-
 --- Creates a deep copy of table without copying Factorio objects.
 -- copied from factorio/data/core/lualib/util.lua
 -- @usage local copy = table.deepcopy[data.raw.["stone-furnace"]["stone-furnace"]] -- returns a copy of the stone furnace entity
@@ -263,7 +271,7 @@ end
 function table.deepcopy(object)
     local lookup_table = {}
     local function _copy(this_object)
-        if type(this_object) ~= "table" then
+        if type(this_object) ~= 'table' then
             return this_object
         elseif this_object.__self then
             return this_object
@@ -286,7 +294,9 @@ end
 -- @tparam[opt] boolean as_string whether to try and parse the values as strings, or leave them as their existing type
 -- @treturn array an array with a copy of all the values in the table
 function table.values(tbl, sorted, as_string)
-    if not tbl then return {} end
+    if not tbl then
+        return {}
+    end
     local valueset = {}
     local n = 0
     if as_string then --checking as_string /before/ looping is faster
@@ -301,7 +311,8 @@ function table.values(tbl, sorted, as_string)
         end
     end
     if sorted then
-        table.sort(valueset,
+        table.sort(
+            valueset,
             function(x, y) --sorts tables with mixed index types.
                 local tx = type(x) == 'number'
                 local ty = type(y) == 'number'
@@ -324,7 +335,9 @@ end
 -- @tparam[opt] boolean as_string whether to try and parse the keys as strings, or leave them as their existing type
 -- @treturn array an array with a copy of all the keys in the table
 function table.keys(tbl, sorted, as_string)
-    if not tbl then return {} end
+    if not tbl then
+        return {}
+    end
     local keyset = {}
     local n = 0
     if as_string then --checking as_string /before/ looping is faster
@@ -339,7 +352,8 @@ function table.keys(tbl, sorted, as_string)
         end
     end
     if sorted then
-        table.sort(keyset,
+        table.sort(
+            keyset,
             function(x, y) --sorts tables with mixed index types.
                 local tx = type(x) == 'number'
                 local ty = type(y) == 'number'
@@ -383,7 +397,7 @@ end
 -- table.count_keys(a, function(v, k) return k % 2 == 1 end) -- produces: 3, 5
 function table.count_keys(tbl, func, ...)
     local count, total = 0, 0
-    if type(tbl) == "table" then
+    if type(tbl) == 'table' then
         for k, v in pairs(tbl) do
             total = total + 1
             if func then
@@ -435,7 +449,7 @@ table.size = _G.table_size or _size
 function table.arr_to_bool(tbl)
     local newtbl = {}
     for _, v in pairs(tbl) do
-        if type(v) == "string" or type(v) == "number" then
+        if type(v) == 'string' or type(v) == 'number' then
             newtbl[v] = true
         end
     end

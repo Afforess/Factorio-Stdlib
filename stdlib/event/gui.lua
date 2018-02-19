@@ -1,10 +1,10 @@
 --- Makes monolithic Factorio GUI events more manageable.
 -- @module Gui
--- @usage local Gui = require('stdlib/event/gui')
+-- @usage local Gui = require('stdlib.event.gui')
 
-require('stdlib/event/event')
-Gui = {_module_name = "Gui"} --luacheck: allow defined top
-setmetatable(Gui, {__index = require('stdlib/core')})
+require('stdlib.event.event')
+Gui = {_module_name = 'Gui'} --luacheck: allow defined top
+setmetatable(Gui, {__index = require('stdlib.core')})
 
 local fail_if_not = Gui.fail_if_not
 
@@ -14,8 +14,8 @@ local fail_if_not = Gui.fail_if_not
 -- @tparam function handler the function to call when the event is triggered
 -- @return (<span class="types">@{Gui}</span>)
 function Gui.register(event_id, gui_element_pattern, handler)
-    fail_if_not(event_id, "missing event name argument")
-    fail_if_not(Gui.Is.String(gui_element_pattern), "missing gui pattern string")
+    fail_if_not(event_id, 'missing event name argument')
+    fail_if_not(Gui.Is.String(gui_element_pattern), 'missing gui pattern string')
 
     if handler == nil then
         return Gui.remove(event_id, gui_element_pattern)
@@ -27,7 +27,7 @@ function Gui.register(event_id, gui_element_pattern, handler)
     end
 
     if Event._registry[event_id][gui_element_pattern] then
-        log("Same handler already registered for Gui event "..event_id..".")
+        log('Same handler already registered for Gui event ' .. event_id .. '.')
     end
     Event._registry[event_id][gui_element_pattern] = handler
 
@@ -37,18 +37,18 @@ end
 --- Calls the registered handlers.
 -- @tparam {defines.events,...} event an array of @{defines.events} as raised by @{LuaBootstrap.raise_event|script.raise_event}
 function Gui.dispatch(event)
-    fail_if_not(event, "missing event argument")
+    fail_if_not(event, 'missing event argument')
 
     if event.element and event.element.valid then
         event.tick = event.tick or game.tick
         for gui_element_pattern, handler in pairs(Event._registry[event.name]) do
-            if event.element and event.element.valid then  -- Checking here inside the loop also to make sure we didn't invalidate
+            if event.element and event.element.valid then -- Checking here inside the loop also to make sure we didn't invalidate
                 local match_str = event.element.name:match(gui_element_pattern)
                 if match_str then
                     event.match = match_str
                     event.state = event.name == defines.events.on_gui_checked_state_changed and event.element.state or nil
                     event.text = event.name == defines.events.on_gui_text_changed and event.element.text or nil
-                    setmetatable(event, { __index = { _handler = handler } })
+                    setmetatable(event, {__index = {_handler = handler}})
                     local success, err = pcall(handler, event)
                     if not success then
                         game.print(err)
@@ -64,10 +64,10 @@ end
 -- @tparam string gui_element_pattern the name or string regular expression for a handler to remove
 -- @return (<span class="types">@{Gui}</span>)
 function Gui.remove(event_id, gui_element_pattern)
-    fail_if_not(event_id, "missing event argument")
+    fail_if_not(event_id, 'missing event argument')
 
-    if type(gui_element_pattern) ~= "string" then
-        error("gui_element_pattern argument must be a string")
+    if type(gui_element_pattern) ~= 'string' then
+        error('gui_element_pattern argument must be a string')
     end
 
     if Event._registry[event_id] then

@@ -1,15 +1,15 @@
 --- For working with chunks.
 -- A chunk represents a 32 tile<sup>2</sup> on a surface in Factorio.
 -- @module Chunk
--- @usage local Chunk = require('stdlib/area/chunk')
+-- @usage local Chunk = require('stdlib.area.chunk')
 -- @see Concepts.ChunkPosition
 
-local Chunk = {_module_name = "Chunk"}
-setmetatable(Chunk, {__index = require('stdlib/core')})
+local Chunk = {_module_name = 'Chunk'}
+setmetatable(Chunk, {__index = require('stdlib.core')})
 
 local fail_if_not = Chunk.fail_if_not
-local Area = require('stdlib/area/area')
-local Position = require('stdlib/area/position')
+local Area = require('stdlib.area.area')
+local Position = require('stdlib.area.position')
 
 local MAX_UINT = 4294967296
 
@@ -36,15 +36,14 @@ end
 -- @tparam Concepts.ChunkPosition chunk_pos the chunk position
 -- @treturn Concepts.BoundingBox the chunk's area
 function Chunk.to_area(chunk_pos)
-    fail_if_not(chunk_pos, "missing chunk_pos argument")
+    fail_if_not(chunk_pos, 'missing chunk_pos argument')
     chunk_pos = Position.new(chunk_pos)
 
-    local left_top = Position.new({ x = chunk_pos.x * 32, y = chunk_pos.y * 32 })
+    local left_top = Position.new({x = chunk_pos.x * 32, y = chunk_pos.y * 32})
 
     local right_bottom = Position.offset(Position.copy(left_top), 32, 32)
 
-
-    return Area.new({ left_top = left_top, right_bottom = right_bottom })
+    return Area.new({left_top = left_top, right_bottom = right_bottom})
 end
 
 --- Gets the user data that is associated with a chunk.
@@ -54,10 +53,12 @@ end
 -- @tparam[opt] Mixed default_value the user data to set for the chunk and returned if the chunk had no user data
 -- @treturn ?|nil|Mixed the user data **OR** *nil* if it does not exist for the chunk and if no default_value was set
 function Chunk.get_data(surface, chunk_pos, default_value)
-    fail_if_not(surface, "missing surface argument")
-    fail_if_not(chunk_pos, "missing chunk_pos argument")
+    fail_if_not(surface, 'missing surface argument')
+    fail_if_not(chunk_pos, 'missing chunk_pos argument')
     if not global._chunk_data then
-        if not default_value then return nil end
+        if not default_value then
+            return nil
+        end
         global._chunk_data = {}
     end
 
@@ -78,9 +79,11 @@ end
 -- @tparam ?|nil|Mixed data the user data to set **OR** *nil* to erase the existing user data for the chunk
 -- @treturn ?|nil|Mixed the previous user data associated with the chunk **OR** *nil* if the chunk had no previous user data
 function Chunk.set_data(surface, chunk_pos, data)
-    fail_if_not(surface, "missing surface argument")
-    fail_if_not(chunk_pos, "missing chunk_pos argument")
-    if not global._chunk_data then global._chunk_data = {} end
+    fail_if_not(surface, 'missing surface argument')
+    fail_if_not(chunk_pos, 'missing chunk_pos argument')
+    if not global._chunk_data then
+        global._chunk_data = {}
+    end
 
     local idx = Chunk.get_index(surface, chunk_pos)
     local prev = global._chunk_data[idx]
@@ -95,19 +98,27 @@ end
 -- @tparam Concepts.ChunkPosition chunk_pos
 -- @treturn int the chunk ID
 function Chunk.get_index(surface, chunk_pos)
-    fail_if_not(surface, "missing surface argument")
-    fail_if_not(chunk_pos, "missing chunk_pos argument")
-    if not global._next_chunk_index then global._next_chunk_index = 0 end
-    if not global._chunk_indexes then global._chunk_indexes = {} end
+    fail_if_not(surface, 'missing surface argument')
+    fail_if_not(chunk_pos, 'missing chunk_pos argument')
+    if not global._next_chunk_index then
+        global._next_chunk_index = 0
+    end
+    if not global._chunk_indexes then
+        global._chunk_indexes = {}
+    end
 
     if type(surface) ~= table then
         surface = game.surfaces[surface]
     end
     local surface_idx = surface.index
-    if not global._chunk_indexes[surface_idx] then global._chunk_indexes[surface_idx] = {} end
+    if not global._chunk_indexes[surface_idx] then
+        global._chunk_indexes[surface_idx] = {}
+    end
 
     local surface_chunks = global._chunk_indexes[surface_idx]
-    if not surface_chunks[chunk_pos.x] then surface_chunks[chunk_pos.x] = {} end
+    if not surface_chunks[chunk_pos.x] then
+        surface_chunks[chunk_pos.x] = {}
+    end
     if not surface_chunks[chunk_pos.x][chunk_pos.y] then
         surface_chunks[chunk_pos.x][chunk_pos.y] = global._next_chunk_index
         global._next_chunk_index = global._next_chunk_index + 1

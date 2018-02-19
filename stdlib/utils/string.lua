@@ -8,7 +8,7 @@
 -- @tparam string s the string to remove leading or trailing whitespace from
 -- @treturn string a copy of the string without leading or trailing whitespace
 function string.trim(s)
-    return s:gsub("^%s*(.-)%s*$", '%1')
+    return s:gsub('^%s*(.-)%s*$', '%1')
 end
 
 --- Tests if a string starts with a given substring.
@@ -39,7 +39,7 @@ end
 -- @tparam string s the string to test
 -- @treturn boolean true if the string is empty
 function string.is_empty(s)
-    return s == nil or s == ""
+    return s == nil or s == ''
 end
 
 --- Splits a string into an array.
@@ -50,9 +50,9 @@ end
 -- @tparam[opt=false] boolean pattern whether to interpret the separator as a lua pattern or plaintext for the string split
 -- @treturn {string,...} an array of strings
 function string.split(s, sep, pattern)
-    sep = sep or "."
-    sep = sep ~= "" and sep or "."
-    sep = not pattern and string.gsub(sep, "([^%w])", "%%%1") or sep
+    sep = sep or '.'
+    sep = sep ~= '' and sep or '.'
+    sep = not pattern and string.gsub(sep, '([^%w])', '%%%1') or sep
 
     local fields = {}
     local start_idx, end_idx = string.find(s, sep)

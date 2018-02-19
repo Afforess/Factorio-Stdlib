@@ -1,14 +1,14 @@
 --- For working with surfaces.
 -- Surfaces are the "domain" of the world.
 -- @module Surface
--- @usage local Surface = require('stdlib/area/surface')
+-- @usage local Surface = require('stdlib.area.surface')
 -- @see LuaSurface
 
-local Surface = {_module_name = "Surface"}
-setmetatable(Surface, {__index = require('stdlib/core')})
+local Surface = {_module_name = 'Surface'}
+setmetatable(Surface, {__index = require('stdlib.core')})
 
 local fail_if_not = Surface.fail_if_not
-local Area = require('stdlib/area/area')
+local Area = require('stdlib.area.area')
 
 --- Flexible and safe lookup function for surfaces.
 -- <ul>
@@ -27,7 +27,7 @@ function Surface.lookup(surface)
     if type(surface) == 'string' or type(surface) == 'number' then
         local lookup = game.surfaces[surface]
         if lookup then
-            return { lookup }
+            return {lookup}
         end
         return {}
     end
@@ -46,7 +46,6 @@ function Surface.lookup(surface)
     end
     return results
 end
-
 
 --- Given a @{search_criteria|search criteria}, find all entities that match the criteria.
 -- <ul>
@@ -75,13 +74,15 @@ function Surface.find_all_entities(search_criteria)
     local results = {}
 
     for _, surface in pairs(surface_list) do
-        local entities = surface.find_entities_filtered(
+        local entities =
+            surface.find_entities_filtered(
             {
                 area = search_criteria.area,
                 name = search_criteria.name,
                 type = search_criteria.type,
                 force = search_criteria.force
-            })
+            }
+        )
         for _, entity in pairs(entities) do
             table.insert(results, entity)
         end
@@ -120,7 +121,7 @@ function Surface.get_surface_bounds(surface)
         end
     end
 
-    return Area.construct(x1*32, y1*32, x2*32, y2*32)
+    return Area.construct(x1 * 32, y1 * 32, x2 * 32, y2 * 32)
 end
 
 return Surface:_protect()

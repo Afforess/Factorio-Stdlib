@@ -546,5 +546,5 @@ _G.defines = {
         red = 2
     }
 }
--- require('stdlib/defines/color')
--- require('stdlib/defines/time')
+-- require('stdlib.defines.color')
+-- require('stdlib.defines.time')

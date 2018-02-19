@@ -1,6 +1,6 @@
-require('spec/setup/defines')
-local Resource = require('stdlib/entity/resource')
-local Area = require('stdlib/area/area')
+require('spec.setup.defines')
+local Resource = require('stdlib.entity.resource')
+local Area = require('stdlib.area.area')
 
 describe('Resource filtering', function()
     local resources = {}

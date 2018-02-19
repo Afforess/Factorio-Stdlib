@@ -1,15 +1,15 @@
 --- The game module.
 -- @module Game
--- @usage local Game = require('stdlib/game')
+-- @usage local Game = require('stdlib.game')
 
-local Game = {_module_name = "Game"}
-setmetatable(Game, {__index = require('stdlib/core')})
+local Game = {_module_name = 'Game'}
+setmetatable(Game, {__index = require('stdlib.core')})
 
 --- Return a valid player object from event, index, string, or userdata
 -- @tparam string|number|LuaPlayer|event mixed
 -- @treturn LuaPlayer a valid player or nil
 function Game.get_player(mixed)
-    if type(mixed) == "table" then
+    if type(mixed) == 'table' then
         if mixed.__self then
             return mixed and mixed.valid and mixed
         elseif mixed.player_index then
@@ -26,13 +26,13 @@ end
 -- @tparam string|LuaForce|event mixed
 -- @treturn LuaForce a valid force or nil
 function Game.get_force(mixed)
-    if type(mixed) == "table" then
+    if type(mixed) == 'table' then
         if mixed.__self then
             return mixed and mixed.valid and mixed
         elseif mixed.force then
             return Game.get_force(mixed.force)
         end
-    elseif type(mixed) == "string" then
+    elseif type(mixed) == 'string' then
         local force = game.forces[mixed]
         return (force and force.valid) and force
     end

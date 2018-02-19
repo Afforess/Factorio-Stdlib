@@ -1,16 +1,16 @@
-require("stdlib/utils/table")
+require('stdlib.utils.table')
 
 local Debug = {
     _watched_packages = {},
     _new_globs = {},
     _msg_buffer = {},
     allow_print = false,
-    disable_test = false,
+    disable_test = false
 }
 
 local make_seperator = function(title)
-    local _sep_char = "="
-    local _seperator = "\n%s%s%s\n"
+    local _sep_char = '='
+    local _seperator = '\n%s%s%s\n'
     title = title or _sep_char
 
     local lo = (80 - #title) / 2
@@ -29,17 +29,17 @@ local block_print = function(msg, title)
 end
 
 Debug.block = function(obj, title)
-    title = title or "="
-    block_print(_G.serpent.block(obj, {comment = true, nocode = true, sparse = false }), title)
+    title = title or '='
+    block_print(_G.serpent.block(obj, {comment = true, nocode = true, sparse = false}), title)
 end
 
 Debug.watched_packages = function()
-    block_print(table.concat(Debug._watched_packages, "\n"), "Watched Packages")
+    block_print(table.concat(Debug._watched_packages, '\n'), 'Watched Packages')
     return Debug._watched_packages
 end
 
 Debug.new_globs = function()
-    block_print(table.concat(Debug._new_globs, "\n"), "New Globals")
+    block_print(table.concat(Debug._new_globs, '\n'), 'New Globals')
     return Debug._new_globs
 end
 
@@ -50,7 +50,7 @@ Debug.close = function()
 end
 
 Debug.packages = function(all)
-    local ignore = require('spec/setup/utils/ignore_packs')
+    local ignore = require('spec.setup.utils.ignore_packs')
 
     local packages = {}
     for name in pairs(package.loaded) do
@@ -59,11 +59,11 @@ Debug.packages = function(all)
         end
     end
     table.sort(packages)
-    block_print(table.concat(packages, "\n"), (all and "All " or "Filtered ").."Packages")
+    block_print(table.concat(packages, '\n'), (all and 'All ' or 'Filtered ') .. 'Packages')
 end
 
 Debug.G = function(all)
-    local ignore = require("spec/setup/utils/lua52_globals")
+    local ignore = require('spec.setup.utils.lua52_globals')
     local globs = {}
     for name in pairs(_G) do
         if all or not ignore[name] then
@@ -71,7 +71,7 @@ Debug.G = function(all)
         end
     end
     table.sort(globs)
-    block_print(table.concat(globs, "\n"), "_G")
+    block_print(table.concat(globs, '\n'), '_G')
 end
 
 return Debug

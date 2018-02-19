@@ -1,5 +1,5 @@
-require('spec/setup/defines')
-local Recipe = require('stdlib/data/modules/recipe')
+require('spec.setup.defines')
+local Recipe = require('stdlib.data.modules.recipe')
 
 describe('Recipe Spec', function()
     before_each(function()

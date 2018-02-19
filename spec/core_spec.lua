@@ -16,10 +16,10 @@ describe('Core',
                     end
                 )
 
-                it("should error with Missing value as a message when var is false or nil",
+                it("should error with 'incorrect or missing value' as a message when var is false or nil",
                     function()
-                        assert.has_error(function() Core.fail_if_not(false, nil) end, "Missing value")
-                        assert.has_error(function() Core.fail_if_not(nil, nil) end, "Missing value")
+                        assert.has_error(function() Core.fail_if_not(false, nil) end, "incorrect or missing value")
+                        assert.has_error(function() Core.fail_if_not(nil, nil) end, "incorrect or missing value")
                     end
                 )
 

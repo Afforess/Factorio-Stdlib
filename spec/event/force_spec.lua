@@ -7,7 +7,6 @@ describe("Force",
 
         setup(
             function()
-                --_G.serpent = require("serpent")
                 _G.script = {
                     on_event = function(_, _) return end,
                     on_init = function(callback) _G.on_init = callback end,

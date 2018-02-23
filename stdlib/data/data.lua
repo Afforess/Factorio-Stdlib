@@ -7,16 +7,16 @@ end
 
 local Data = {
     _class = 'data',
-    Sprites = require('stdlib.data.modules.sprites'),
-    Pipes = require('stdlib.data.modules.pipes'),
-    Util = require('stdlib.data.modules.util'),
+    Sprites = require('stdlib/data/modules/sprites'),
+    Pipes = require('stdlib/data/modules/pipes'),
+    Util = require('stdlib/data/modules/util'),
     _default_options = {
         ['silent'] = false,
         ['fail'] = false,
         ['verbose'] = false
     }
 }
-setmetatable(Data, {__index = require('stdlib.core')})
+setmetatable(Data, {__index = require('stdlib/core')})
 
 local item_and_fluid_types = {
     'item',
@@ -42,12 +42,12 @@ local item_and_fluid_types = {
 
 --- Load the whole library as globals
 function Data.create_data_globals()
-    _G.Recipe = require('stdlib.data.recipe')
-    _G.Item = require('stdlib.data.item')
-    _G.Fluid = require('stdlib.data.fluid')
-    _G.Entity = require('stdlib.data.entity')
-    _G.Technology = require('stdlib.data.technology')
-    _G.Category = require('stdlib.data.category')
+    _G.Recipe = require('stdlib/data/recipe')
+    _G.Item = require('stdlib/data/item')
+    _G.Fluid = require('stdlib/data/fluid')
+    _G.Entity = require('stdlib/data/entity')
+    _G.Technology = require('stdlib/data/technology')
+    _G.Category = require('stdlib/data/category')
     _G.Data = Data
     return Data
 end

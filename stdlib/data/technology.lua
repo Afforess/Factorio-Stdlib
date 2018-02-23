@@ -4,7 +4,7 @@
 local Technology = {
     _class = 'technology'
 }
-setmetatable(Technology, {__index = require('stdlib.data.data')})
+setmetatable(Technology, {__index = require('stdlib/data/data')})
 
 function Technology:_get(tech)
     return self:get(tech, 'technology')
@@ -62,7 +62,7 @@ function Technology:add_effect(effect, unlock_type)
     end
 
     if self:valid('technology') then
-        local Recipe = require('stdlib.data.recipe')
+        local Recipe = require('stdlib/data/recipe')
         unlock_type = (not unlock_type and 'unlock-recipe') or unlock_type
         local r_name = type(effect) == 'table' and effect.name or effect
         if unlock_type == 'unlock-recipe' or not unlock_type then
@@ -115,7 +115,7 @@ end
 
 function Technology:add_pack(new_pack, count)
     if self:valid('technology') then
-        local Item = require('stdlib.data.item')
+        local Item = require('stdlib/data/item')
         if self.table(new_pack) then
             count = new_pack[2] or 1
             new_pack = new_pack[1]

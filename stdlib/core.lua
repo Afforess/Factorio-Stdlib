@@ -1,17 +1,17 @@
 --- The Core module loads some helper functions useful in all stages
 -- of a mods life cycle. All modules have an __index method into core.
 -- @module Core
--- @usage local Core = require('stdlib.core')
+-- @usage local Core = require('stdlib/core')
 
 --Global mutates
-require('stdlib.utils.table')
-require('stdlib.utils.string')
-require('stdlib.utils.math')
-require('stdlib.utils.globals')
+require('stdlib/utils/table')
+require('stdlib/utils/string')
+require('stdlib/utils/math')
+require('stdlib/utils/globals')
 
 --Defines Mutates
-require('stdlib.defines.color')
-require('stdlib.defines.time')
+require('stdlib/defines/color')
+require('stdlib/defines/time')
 
 local Core = {
     _VERSION = '1.0.0',
@@ -53,12 +53,12 @@ local Core = {
         return tostring(lhs):gsub('(%w+)%: %x+', '%1: (ADDR)') .. tostring(rhs):gsub('(%w+)%: %x+', '%1: (ADDR)')
     end,
     _classes = {
-        string_array_mt = require('stdlib.utils.classes.string_array')
+        string_array_mt = require('stdlib/utils/classes/string_array')
     }
 }
 
-Core.Is = require('stdlib.utils.is')
-Core.Iter = require('stdlib.utils.iter')
+Core.Is = require('stdlib/utils/is')
+Core.Iter = require('stdlib/utils/iter')
 
 --- Print msg if specified var evaluates to false.
 -- @tparam Mixed var variable or expression to evaluate

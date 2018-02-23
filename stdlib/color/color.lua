@@ -1,9 +1,9 @@
 --- For playing with colors.
 -- @module Color
--- @usage local Color = require('stdlib.color.color')
+-- @usage local Color = require('stdlib/color/color')
 
 local Color = {_module_name = 'Color'}
-setmetatable(Color, {__index = require('stdlib.core')})
+setmetatable(Color, {__index = require('stdlib/core')})
 
 local fail_if_not = Color.fail_if_not
 

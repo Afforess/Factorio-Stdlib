@@ -4,12 +4,12 @@
 -- <p>This module was originally the ***Console*** code from a modder named ***adil***, which has been modified for use with stdlib.
 -- @script console
 -- @usage
--- local console = require('stdlib.utils.console')
+-- local console = require('stdlib/utils/console')
 -- remote.add_interface('my_interface', {show = console})
 -- /c remote.call('my_interface', 'show', game.player)
 -- --In the window that appears you can run lua code directly on your mod, including globals.
 
-local Gui = require('stdlib.event.gui')
+local Gui = require('stdlib/event/gui')
 
 -- Munge hyphens as they otherwise need escaping in Lua's regexnih pattern language
 local prefix = script.mod_name:gsub('%-', '_')

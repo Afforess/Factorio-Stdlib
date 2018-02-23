@@ -1,9 +1,9 @@
 --- Tools for working with entities.
 -- @module Entity
--- @usage local Entity = require('stdlib.entity.entity')
+-- @usage local Entity = require('stdlib/entity/entity')
 
 local Entity = {_module_name = 'Entity'}
-setmetatable(Entity, {__index = require('stdlib.core')})
+setmetatable(Entity, {__index = require('stdlib/core')})
 
 local fail_if_not = Entity.fail_if_not
 

@@ -1,12 +1,12 @@
 --- Makes monolithic Factorio GUI events more manageable.
 -- @module Gui
--- @usage local Gui = require('stdlib.event.gui')
+-- @usage local Gui = require('stdlib/event/gui')
 
-local Event = require('stdlib.event.event')
+local Event = require('stdlib/event/event')
 local Gui = {
     _module_name = 'Gui'
 }
-setmetatable(Gui, {__index = require('stdlib.core')})
+setmetatable(Gui, {__index = require('stdlib/core')})
 
 local function create_callback(pattern)
     local function callback(event)

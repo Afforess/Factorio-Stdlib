@@ -2,7 +2,7 @@
 -- @script Developer
 
 local Developer = {}
-local Data = require('stdlib.data.data')
+local Data = require('stdlib/data/data')
 setmetatable(Developer, {__index = Data})
 
 local function make_no_controls()
@@ -17,7 +17,7 @@ end
 -- @tparam string name The name of your mod
 -- @usage
 -- --data.lua
--- local Developer = require('stdlib.data.develper.developer')
+-- local Developer = require('stdlib/data/develper/developer')
 -- Developer.make_test_entities("ModName")
 function Developer.make_test_entities(name)
     if not data.raw['simple-entity']['debug-chunk-marker'] then

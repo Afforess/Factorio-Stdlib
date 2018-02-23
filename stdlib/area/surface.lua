@@ -1,14 +1,14 @@
 --- For working with surfaces.
 -- Surfaces are the "domain" of the world.
 -- @module Surface
--- @usage local Surface = require('stdlib.area.surface')
+-- @usage local Surface = require('stdlib/area/surface')
 -- @see LuaSurface
 
 local Surface = {_module_name = 'Surface'}
-setmetatable(Surface, {__index = require('stdlib.core')})
+setmetatable(Surface, {__index = require('stdlib/core')})
 
 local fail_if_not = Surface.fail_if_not
-local Area = require('stdlib.area.area')
+local Area = require('stdlib/area/area')
 
 --- Flexible and safe lookup function for surfaces.
 -- <ul>

@@ -3,9 +3,9 @@
 -- Alternatively you can pass a dictionary of [global names] -> [require path].
 -- @script load_globals
 -- @usage
--- require('stdlib.utils.scripts.load_globals')() -- note the () on the end
+-- require('stdlib/utils/scripts/load_globals')() -- note the () on the end
 
-local Core = require('stdlib.core')
+local Core = require('stdlib/core')
 
 local function load_stdlib_as_globals(files)
     files =

@@ -1,9 +1,9 @@
 --- For working with inventories.
 -- @module Inventory
--- @usage local Inventory = require('stdlib.entity.inventory')
+-- @usage local Inventory = require('stdlib/entity/inventory')
 
 local Inventory = {_module_name = 'Inventory'}
-setmetatable(Inventory, {__index = require('stdlib.core')})
+setmetatable(Inventory, {__index = require('stdlib/core')})
 
 local fail_if_not = Inventory.fail_if_not
 

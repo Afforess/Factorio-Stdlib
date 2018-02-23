@@ -1,4 +1,4 @@
-require('spec.setup.globals')
+require('spec/setup/globals')
 _G.data = {}
 
 _G.data.extend = function(self, otherdata)
@@ -39,7 +39,7 @@ _G.data.raw = {
     ['module'] = {}
 }
 
-require('spec.setup.data.recipes')
-require('spec.setup.data.items')
-require('spec.setup.data.categories')
-require('spec.setup.data.technologies')
+require('spec/setup/data/recipes')
+require('spec/setup/data/items')
+require('spec/setup/data/categories')
+require('spec/setup/data/technologies')

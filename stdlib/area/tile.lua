@@ -1,16 +1,16 @@
 --- Tools for working with tiles.
 -- A tile represents a 1 unit<sup>2</sup> on a surface in Factorio.
 -- @module Tile
--- @usage local Tile = require('stdlib.area.tile')
+-- @usage local Tile = require('stdlib/area/tile')
 -- @see LuaTile
 
 local Tile = {_module_name = 'Tile'}
-setmetatable(Tile, {__index = require('stdlib.core')})
+setmetatable(Tile, {__index = require('stdlib/core')})
 
 local fail_if_not = Tile.fail_if_not
-local Area = require('stdlib.area.area')
-local Position = require('stdlib.area.position')
-local Chunk = require('stdlib.area.chunk')
+local Area = require('stdlib/area/area')
+local Position = require('stdlib/area/position')
+local Chunk = require('stdlib/area/chunk')
 
 --local MAX_UINT = 4294967296
 

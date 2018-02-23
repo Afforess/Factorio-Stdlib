@@ -1,6 +1,7 @@
-require('spec.setup.defines')
-local Gui = require('stdlib.event.gui')
-require('stdlib.utils.table')
+require('spec/setup/defines')
+require('stdlib/utils/table')
+local Event = require('stdlib/event/event')
+local Gui = require('stdlib/event/gui')
 
 local test_function = {f=function(x) _G.someVariable = x end, g=function(x) _G.someVariable = x end}
 local function_a = function(arg) test_function.f(arg.tick) end

@@ -1,15 +1,15 @@
 --- Resource utilities.
 -- @module Resource
--- @usage local Resource = require('stdlib.entity.resource')
+-- @usage local Resource = require('stdlib/entity/resource')
 
 local Resource = {_module_name = 'Resource'}
-setmetatable(Resource, {__index = require('stdlib.core')})
+setmetatable(Resource, {__index = require('stdlib/core')})
 
 local fail_if_not = Resource.fail_if_not
-local Surface = require('stdlib.area.surface')
-local Area = require('stdlib.area.area')
-local Tile = require('stdlib.area.tile')
-local Queue = require('stdlib.queue.queue')
+local Surface = require('stdlib/area/surface')
+local Area = require('stdlib/area/area')
+local Tile = require('stdlib/area/tile')
+local Queue = require('stdlib/queue/queue')
 
 --- Gets all resource entities at the specified position and surface.
 -- Adapted from *YARM/resmon.lua &rarr; find\_resource\_at*

@@ -4,7 +4,7 @@
 local Category = {
     _class = 'category'
 }
-setmetatable(Category, {__index = require('stdlib.data.data')})
+setmetatable(Category, {__index = require('stdlib/data/data')})
 
 Category.category_types = {
     ['ammo-category'] = true,

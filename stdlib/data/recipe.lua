@@ -3,12 +3,12 @@
 
 local Recipe = {
     _class = 'recipe',
-    _ingredients_mt = require('stdlib.data.modules.ingredients'),
-    _results_mt = require('stdlib.data.modules.results')
+    _ingredients_mt = require('stdlib/data/modules/ingredients'),
+    _results_mt = require('stdlib/data/modules/results')
 }
-setmetatable(Recipe, {__index = require('stdlib.data.data')})
+setmetatable(Recipe, {__index = require('stdlib/data/data')})
 
-local Item = require('stdlib.data.item')
+local Item = require('stdlib/data/item')
 
 function Recipe:_get(recipe)
     local new = self:get(recipe, 'recipe')
@@ -298,7 +298,7 @@ end
 -- @treturn self
 function Recipe:change_category(category_name)
     if self:valid() then
-        local Category = require('stdlib.data.category')
+        local Category = require('stdlib/data/category')
         self.category = Category(category_name, 'recipe-category'):valid() and category_name or self.category
     end
     return self
@@ -309,7 +309,7 @@ end
 -- @treturn self
 function Recipe:add_unlock(tech_name)
     if self:valid() then
-        local Tech = require('stdlib.data.technology')
+        local Tech = require('stdlib/data/technology')
         Tech.add_effect(self, tech_name)
     end
     return self
@@ -320,7 +320,7 @@ end
 -- @treturn self
 function Recipe:remove_unlock(tech_name)
     if self:valid('recipe') then
-        local Tech = require('stdlib.data.technology')
+        local Tech = require('stdlib/data/technology')
         Tech.remove_effect(self, tech_name, 'unlock-recipe')
     end
     return self

@@ -4,7 +4,7 @@
 local Item = {
     _class = 'item'
 }
-setmetatable(Item, {__index = require('stdlib.data.data')})
+setmetatable(Item, {__index = require('stdlib/data/data')})
 
 Item.item_types = {
     'item',

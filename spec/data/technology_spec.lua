@@ -7,8 +7,8 @@ describe(
     function()
         before_each(
             function()
-                require('spec.setup.dataloader')
-                Technology = require('stdlib.data.technology')
+                require('spec/setup/dataloader')
+                Technology = require('stdlib/data/technology')
                 Raw = _G.data.raw['recipe']
                 Rawtech = _G.data.raw['technology']['steel-processing-2']
             end

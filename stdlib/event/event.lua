@@ -11,7 +11,7 @@
 -- <br>Due to this, great care should be taken when registering events conditionally.
 -- </blockquote>
 -- @module Event
--- @usage local Event = require('stdlib.event.event')
+-- @usage local Event = require('stdlib/event/event')
 
 --Holds the event registry
 local event_registry = {}
@@ -26,9 +26,9 @@ local Event = {
     },
     _registry = event_registry
 }
-setmetatable(Event, {__index = require('stdlib.core')})
+setmetatable(Event, {__index = require('stdlib/core')})
 
-local Is = require('stdlib.utils.is')
+local Is = require('stdlib/utils/is')
 local fail_if_not = Event.fail_if_not
 
 local bootstrap_register = {
@@ -66,7 +66,7 @@ end
 -- @tparam function handler the function to call when the given events are triggered
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.register(event_id, handler, callback)
-    fail_if_not(event_id, 'missing event_ids argument')
+    fail_if_not(event_id, 'missing event_id argument')
     fail_if_not(handler, 'handler is missing, use Event.remove to un register events')
 
     --Recursively handle event id tables

@@ -1,13 +1,13 @@
 --- For logging debug information to files.
 -- @module Logger
 -- @usage
--- local Logger = require('stdlib.log.logger')
+-- local Logger = require('stdlib/log/logger')
 -- -- or to create a logger directly:
--- local LOGGER = require('stdlib.log.logger').new(...)
+-- local LOGGER = require('stdlib/log/logger').new(...)
 -- -- and to use the same LOGGER in multiple require files make it global by removing 'local'.
 
 local M = {_module_name = 'Logger'}
-setmetatable(M, {__index = require('stdlib.core')})
+setmetatable(M, {__index = require('stdlib/core')})
 local fail_if_not = M.fail_if_not
 
 --- Creates a new logger object.

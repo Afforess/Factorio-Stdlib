@@ -1,5 +1,5 @@
-require('spec.setup.defines')
-local Logger = require('stdlib.log.logger')
+require('spec/setup/defines')
+local Logger = require('stdlib/log/logger')
 
 describe('Logger', function()
 

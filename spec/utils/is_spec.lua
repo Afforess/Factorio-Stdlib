@@ -1,4 +1,4 @@
-local Is = require('stdlib.utils.is')
+local Is = require('stdlib/utils/is')
 
 describe(
     'variable type checks',

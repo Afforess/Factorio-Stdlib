@@ -4,7 +4,7 @@
 local Util = {
     _module_name = 'Util'
 }
-setmetatable(Util, {__index = require('stdlib.core')})
+setmetatable(Util, {__index = require('stdlib/core')})
 
 function Util.extend(proto_array)
     Util.fail_if_not(Util.Is.Table(proto_array), 'Missing table or array to extend')

@@ -1,16 +1,16 @@
 --- Tools for working with bounding boxes.
 -- The tables passed into the Area functions are mutated in-place.
 -- @module Area
--- @usage local Area = require('stdlib.area.area')
+-- @usage local Area = require('stdlib/area/area')
 -- @see Position
 -- @see Concepts.BoundingBox
 -- @see Concepts.Position
 
 local Area = {_module_name = 'Area'}
-setmetatable(Area, {__index = require('stdlib.core')})
+setmetatable(Area, {__index = require('stdlib/core')})
 
 local fail_if_not = Area.fail_if_not
-local Position = require('stdlib.area.position')
+local Position = require('stdlib/area/position')
 
 --- By default area tables are mutated in place set this to true to make the tables immutable.
 Area.immutable = false

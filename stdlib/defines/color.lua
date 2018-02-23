@@ -1,6 +1,6 @@
 --- A defines module for retrieving colors by name.
 -- Extends the Factorio defines table.
--- @usage require('stdlib.defines.color')
+-- @usage require('stdlib/defines/color')
 -- @module defines.color
 -- @see Concepts.Color
 

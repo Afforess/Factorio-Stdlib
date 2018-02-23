@@ -4,16 +4,16 @@
 -- <p>This modules can register the following events: `on_force_created`, and `on_forces_merging`.
 -- @module Force
 -- @usage
--- local Force = require('stdlib.event.force').register_events()
+-- local Force = require('stdlib/event/force').register_events()
 -- -- inside your Init event Force.init() -- to properly handle any existing forces
 
-require('stdlib.event.event')
+local Event = require('stdlib/event/event')
 
 local Force = {_module_name = 'Force'}
-setmetatable(Force, {__index = require('stdlib.core')})
+setmetatable(Force, {__index = require('stdlib/core')})
 
 local fail_if_not = Force.fail_if_not
-local Game = require('stdlib.game')
+local Game = require('stdlib/game')
 
 -- return new default force object
 local function new(force_name)
@@ -49,7 +49,7 @@ end
 -- @treturn LuaForce the force instance
 -- @treturn table the force's global data
 -- @usage
--- local Force = require('stdlib.event.force')
+-- local Force = require('stdlib/event/force')
 -- local force_name, force_data = Force.get("player")
 -- local force_name, force_data = Force.get(game.forces["player"])
 -- -- Returns data for the force named "player" from either a string or LuaForce object
@@ -103,7 +103,6 @@ end
 
 local events = {defines.events.on_force_created, Event.core_events.configuration_changed}
 function Force.register_events(skip_init)
-    require('stdlib.event.event')
     Event.register(events, Force.init)
     Event.register(defines.events.on_forces_merging, Force.merge)
     if not skip_init then
@@ -113,7 +112,6 @@ function Force.register_events(skip_init)
 end
 
 function Force.register_init()
-    require('stdlib.event.event')
     Event.register(Event.core_events.init, Force.init)
     return Force
 end

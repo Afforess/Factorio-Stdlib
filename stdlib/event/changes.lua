@@ -1,12 +1,12 @@
 --- Configuration changed event handling.
 -- This module registers events
 -- @module Changes
--- @usage require('stdlib.event.changes')
+-- @usage require('stdlib/event/changes')
 
-require('stdlib.event.event')
+local Event = require('stdlib/event/event')
 
 local Changes = {_module_name = 'Changes'}
-setmetatable(Changes, {__index = require('stdlib.core')})
+setmetatable(Changes, {__index = require('stdlib/core')})
 
 --[[
     ConfigurationChangedData
@@ -19,7 +19,7 @@ setmetatable(Changes, {__index = require('stdlib.core')})
     old_version :: string: Old version of the mod. May be nil if the mod wasn't previously present (i.e. it was just added).
     new_version :: string: New version of the mod. May be nil if the mod is no longer present (i.e. it was just removed).
 --]]
-Changes.versions = prequire('changes.versions') or {}
+Changes.versions = prequire('changes/versions') or {}
 Changes['map-change-always-first'] = prequire('changes/map-change-always-first')
 Changes['any-change-always-first'] = prequire('changes/any-change-always-first')
 Changes['mod-change-always-first'] = prequire('changes/mod-change-always-first')

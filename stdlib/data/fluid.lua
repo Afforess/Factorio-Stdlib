@@ -4,7 +4,7 @@
 local Fluid = {
     _class = 'fluid'
 }
-setmetatable(Fluid, {__index = require('stdlib.data.data')})
+setmetatable(Fluid, {__index = require('stdlib/data/data')})
 
 function Fluid:_get(fluid)
     return self:get(fluid)

@@ -17,9 +17,9 @@ World.close - Closes the world simulator
 note: save/load/reload havn't been tested yet.
 
 --]]
-require('spec.setup.globals')
+require('spec/setup/globals')
 local World = {
-    Debug = require('spec.setup.debug')
+    Debug = require('spec/setup/debug')
 }
 
 -------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ World.open =
     end
 
     override_require(true)
-    --require('spec.setup.defines')
+    --require('spec/setup/defines')
 
     setmetatable(_G, meta._G)
     _G.global = nil
@@ -151,6 +151,7 @@ World.open =
         end,
         raise_event = function(event_id, event_tbl)
             event_tbl.name = event_id
+            local Event = require('stdlib/event/event')
             return Event and Event.dispatch(event_tbl)
         end,
         mod_name = 'tests'
@@ -262,7 +263,7 @@ end
 
 World.save = function()
     --requiring table here just in case it isn't loaded
-    require('stdlib.utils.table')
+    require('stdlib/utils/table')
 
     if _G.global then
         local global_meta = getmetatable(_G.global)

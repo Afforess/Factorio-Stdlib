@@ -1,4 +1,4 @@
-_G.serpent = require('spec.setup.utils.serpent')
+_G.serpent = require('spec/setup/utils/serpent')
 _G.log = function()
 end
 _G.SLOG = function(msg, lvl)
@@ -14,4 +14,4 @@ _G.RESET = function()
     _G.defines = nil
 end
 
-require('spec.setup.defines')
+require('spec/setup/defines')

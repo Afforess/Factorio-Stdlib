@@ -1,13 +1,13 @@
 --- Tools for working with `<x,y>` coordinates.
 -- The tables passed into the Position functions are mutated in-place.
 -- @module Position
--- @usage local Position = require('stdlib.area.position')
+-- @usage local Position = require('stdlib/area/position')
 -- @see Area
 -- @see Concepts.Position
 -- @see defines.direction
 
 local Position = {_module_name = 'Position'}
-setmetatable(Position, {__index = require('stdlib.core')})
+setmetatable(Position, {__index = require('stdlib/core')})
 
 local fail_if_not = Position.fail_if_not
 
@@ -177,7 +177,7 @@ end
 function Position.expand_to_area(pos, radius)
     pos = Position.new(pos)
     fail_if_not(radius, 'missing radius argument')
-    local Area = require('stdlib.area.area')
+    local Area = require('stdlib/area/area')
 
     local left_top = Position.new({pos.x - radius, pos.y - radius})
     local right_bottom = Position.new({pos.x + radius, pos.y + radius})

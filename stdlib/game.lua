@@ -1,9 +1,9 @@
 --- The game module.
 -- @module Game
--- @usage local Game = require('stdlib.game')
+-- @usage local Game = require('stdlib/game')
 
 local Game = {_module_name = 'Game'}
-setmetatable(Game, {__index = require('stdlib.core')})
+setmetatable(Game, {__index = require('stdlib/core')})
 
 --- Return a valid player object from event, index, string, or userdata
 -- @tparam string|number|LuaPlayer|event mixed

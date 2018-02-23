@@ -1,5 +1,5 @@
-require('spec.setup.defines')
-local Entity = require('stdlib.entity.entity')
+require('spec/setup/defines')
+local Entity = require('stdlib/entity/entity')
 
 describe('Entity', function()
     it('an entity should be frozen', function()

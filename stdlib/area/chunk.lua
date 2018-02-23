@@ -1,15 +1,15 @@
 --- For working with chunks.
 -- A chunk represents a 32 tile<sup>2</sup> on a surface in Factorio.
 -- @module Chunk
--- @usage local Chunk = require('stdlib.area.chunk')
+-- @usage local Chunk = require('stdlib/area/chunk')
 -- @see Concepts.ChunkPosition
 
 local Chunk = {_module_name = 'Chunk'}
-setmetatable(Chunk, {__index = require('stdlib.core')})
+setmetatable(Chunk, {__index = require('stdlib/core')})
 
 local fail_if_not = Chunk.fail_if_not
-local Area = require('stdlib.area.area')
-local Position = require('stdlib.area.position')
+local Area = require('stdlib/area/area')
+local Position = require('stdlib/area/position')
 
 local MAX_UINT = 4294967296
 

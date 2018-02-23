@@ -1,4 +1,4 @@
---- Extends Lua 5.2 math. work in progress
+--- Extends Lua 5.2 math.
 -- @module math
 -- @see math
 
@@ -12,6 +12,8 @@ end
 -- See: http://en.wikipedia.org/wiki/Average
 
 -- Returns the sum of a sequence of values
+
+
 function math.sum(x)
   local s = 0
   for _, v in ipairs(x) do
@@ -105,16 +107,23 @@ function math.energetic_mean(x)
   return 10 * math.log10((1 / #x) * s)
 end
 
-function math.floor_to(n, p)
+-- Returns the number floored to p decimal spaces.
+-- @tparam number x
+-- @tparam[opt=0] int p the number of decimal places to floor to
+-- @treturn number floored to p decimal spaces.
+function math.floor_to(x, p)
    if(p or 0) == 0 then
-      return math.floor(n)
+      return math.floor(x)
    end
    local e = 10 ^ p
-   return math.floor(n * e) / e
+   return math.floor(x * e) / e
 end
 
-
-function math.round_to(n, p)
+-- Returns the number rounded to p decimal places
+-- @tparam number x
+-- @tparam[opt=0] int p the number of decimal places to round to
+-- @treturn number rounded to p decimal spaces.
+function math.round_to(x, p)
    local e = 10 ^(p or 0)
-   return math.floor(n * e + 0.5) / e
+   return math.floor(x * e + 0.5) / e
 end

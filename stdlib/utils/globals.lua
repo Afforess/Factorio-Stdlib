@@ -1,7 +1,7 @@
 --- Additional lua globals
 -- @module globals
 
--- luacheck: globals prequire rawstring
+-- luacheck: globals prequire rawtostring
 
 --- Require a file that may not exist
 -- @tparam string module path to the module

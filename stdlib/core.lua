@@ -1,4 +1,4 @@
---- The Core module loads some helper functions usefull in all stages
+--- The Core module loads some helper functions useful in all stages
 -- of a mods life cycle. All modules have an __index method into core.
 -- @module Core
 -- @usage local Core = require('stdlib.core')

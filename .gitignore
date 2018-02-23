@@ -17,3 +17,6 @@ mod/*
 /stdlib/tags
 
 *.tmp
+
+# Ignore temp.lua files
+temp*.lua

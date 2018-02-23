@@ -11,62 +11,41 @@
 -- <br>Due to this, great care should be taken when registering events conditionally.
 -- </blockquote>
 -- @module Event
--- @usage require('stdlib.event.event')
+-- @usage local Event = require('stdlib.event.event')
 
-Event = {
-    --luacheck: allow defined top
+--Holds the event registry
+local event_registry = {}
+
+local Event = {
     _module_name = 'Event',
-    _registry = {},
     core_events = {
-        init = -1,
-        load = -2,
-        configuration_changed = -3,
-        init_and_config = {-1, -3},
-        _register = function(id)
-            if id == Event.core_events.init then
-                script.on_init(
-                    function()
-                        Event.dispatch({name = Event.core_events.init, tick = game.tick})
-                    end
-                )
-            elseif id == Event.core_events.load then
-                script.on_load(
-                    function()
-                        Event.dispatch({name = Event.core_events.load, tick = -1})
-                    end
-                )
-            elseif id == Event.core_events.configuration_changed then
-                script.on_configuration_changed(
-                    function(event)
-                        event.name = Event.core_events.configuration_changed
-                        event.data = event -- for backwards compatibilty
-                        Event.dispatch(event)
-                    end
-                )
-            end
-        end,
-        _remove = function(id)
-            if id == Event.core_events.init then
-                script.on_init()
-            elseif id == Event.core_events.load then
-                script.on_load()
-            elseif id == Event.core_events.configuration_changed then
-                script.on_configuration_changed()
-            end
-        end
-    }
+        init = 'on_init',
+        load = 'on_load',
+        configuration_changed = 'on_configuration_changed',
+        init_and_config = {'on_init', 'on_configuration_changed'}
+    },
+    _registry = event_registry
 }
 setmetatable(Event, {__index = require('stdlib.core')})
 
+local Is = require('stdlib.utils.is')
 local fail_if_not = Event.fail_if_not
 
-local function is_valid_id(event_id)
-    if not (type(event_id) == 'number' or type(event_id) == 'string') then
-        error('Invalid Event Id, Must be string or int, or array of strings and/or ints, Passed in :' .. event_id, 3)
+local bootstrap_register = {
+    on_init = function()
+        Event.dispatch({name = 'on_init'})
+    end,
+    on_load = function()
+        Event.dispatch({name = 'on_load', tick = -1})
+    end,
+    on_configuration_changed = function(event)
+        event.name = 'on_configuration_changed'
+        Event.dispatch(event)
     end
-    if (type(event_id) == 'number' and event_id < -3) then
-        error('event_id must be greater than -3, Passed in: ' .. event_id, 3)
-    end
+}
+
+local function valid_id(id)
+    return (Is.Number(id) or Is.String(id)), 'Invalid Event Id, Must be string/int/defines.events, Passed in: ' .. type(id)
 end
 
 --- Registers a handler for the given events.
@@ -75,7 +54,7 @@ end
 -- <p>An *event ID* can be obtained via @{defines.events},
 -- @{LuaBootstrap.generate_event_name|script.generate_event_name} which is in <span class="types">@{int}</span>,
 -- and can be a custom input name which is in <span class="types">@{string}</span>.
--- <p>The `event_ids` parameter takes in either a single, multiple, or mixture of @{defines.events}, @{int}, and @{string}.
+-- <p>The `event_id` parameter takes in either a single, multiple, or mixture of @{defines.events}, @{int}, and @{string}.
 -- @usage
 -- -- Create an event that prints the current tick every tick.
 -- Event.register(defines.events.on_tick, function(event) print event.tick end)
@@ -83,42 +62,59 @@ end
 -- Event.register(Trains.on_train_id_changed, function(event) print(event.new_id) end)
 -- -- Function call chaining
 -- Event.register(event1, handler1).register(event2, handler2)
--- @param event_ids (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
+-- @param event_id (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
 -- @tparam function handler the function to call when the given events are triggered
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
-function Event.register(event_ids, handler)
-    fail_if_not(event_ids, 'missing event_ids argument')
-    fail_if_not(handler, 'handler is missing, use Event.remove to unregister events')
+function Event.register(event_id, handler, callback)
+    fail_if_not(event_id, 'missing event_ids argument')
+    fail_if_not(handler, 'handler is missing, use Event.remove to un register events')
 
-    event_ids = (type(event_ids) == 'table' and event_ids) or {event_ids}
-
-    for _, event_id in pairs(event_ids) do
-        is_valid_id(event_id)
-        if not Event._registry[event_id] then
-            Event._registry[event_id] = {}
-
-            if type(event_id) == 'string' or event_id >= 0 then
-                script.on_event(event_id, Event.dispatch)
-            elseif event_id < 0 then
-                Event.core_events._register(event_id)
-            end
+    --Recursively handle event id tables
+    if Is.Table(event_id) then
+        for _, id in pairs(event_id) do
+            Event.register(id, handler)
         end
-        --If the handler is already registered for this event: remove and insert it to the end.
-        local _,
-            reg_index =
-            table.find(
-            Event._registry[event_id],
-            function(v)
-                return v == handler
-            end
-        )
-
-        if reg_index then
-            table.remove(Event._registry[event_id], reg_index)
-            log('Same handler already registered for event ' .. event_id .. ', reording it to the bottom')
-        end
-        table.insert(Event._registry[event_id], handler)
+        return Event
     end
+
+    fail_if_not(valid_id(event_id))
+
+    -- If the event_id has never been registered before make sure we call the correct script action to register
+    -- our Event handler with factorio
+    if not event_registry[event_id] then
+        event_registry[event_id] = {}
+
+        if Is.String(event_id) then
+            --String event ids will either be Bootstrap events or custom input events
+            if bootstrap_register[event_id] then
+                script[event_id](bootstrap_register[event_id])
+            else
+                script.on_event(event_id, Event.dispatch)
+            end
+        elseif event_id >= 0 then
+            --Positive values will be defines.events
+            script.on_event(event_id, Event.dispatch)
+        elseif event_id < 0 then
+            --Use negative values to register on_nth_tick
+            script.on_nth_tick(event_id, handler)
+        end
+    end
+
+    local registry = event_registry[event_id]
+
+    --If handler is already registered for this event: remove it for re-insertion at the end.
+    if #registry > 0 then
+        for i, registered in ipairs(registry) do
+            if handler == registered.handler then
+                table.remove(registry, i)
+                log('Same handler already registered for event ' .. event_id .. ' at position ' .. i .. ', moving it to the bottom')
+                break
+            end
+        end
+    end
+
+    --Finally insert the handler
+    table.insert(registry, {handler = handler, callback = callback})
     return Event
 end
 
@@ -146,41 +142,58 @@ end
 -- @see https://forums.factorio.com/viewtopic.php?t=32039#p202158 Invalid Event Objects
 function Event.dispatch(event)
     if event then
-        local _registry = event.name and Event._registry[event.name] or event.input_name and Event._registry[event.input_name]
-        if _registry then
+        --get the registered handlers from name or input_name
+        local registry = event.name and event_registry[event.name] or event.input_name and event_registry[event.input_name]
+
+        if registry then
             --add the tick if it is not present, this only affects calling Event.dispatch manually
-            --doing the check up here as it should be faster than checking every iteration for a constant value
+            --doing the check up here as it will faster than checking every iteration for a constant value
             event.tick = event.tick or _G.game and game.tick or 0
 
-            local force_crc = Event.force_crc
-            for idx, handler in ipairs(_registry) do
+            local force_crc = Event.force_crc or event.force_crc
+
+            for idx, registered in ipairs(registry) do
                 -- Check for userdata and stop processing further handlers if not valid
+                -- This is the same behavior as factorio events.
+                -- This is done inside the loop as other events can modify the event.
                 for _, val in pairs(event) do
                     if type(val) == 'table' and val.__self and not val.valid then
                         return
                     end
                 end
 
-                setmetatable(event, {__index = {_handler = handler}})
+                -- Can't directly put our handler into the event, but we can index into it.
+                setmetatable(event, {__index = {_handler = registered.handler, _callback = registered.callback}})
 
-                -- Call the handler
-                local success, err = pcall(handler, event)
+                -- Call the callback and the handler in protected mode.
+                local success, err
+                if registered.callback then
+                    success, err = pcall(registered.callback, event)
+                    if success and err then
+                        success, err = pcall(registered.handler, event)
+                    end
+                else
+                    success, err = pcall(registered.handler, event)
+                end
 
                 -- If the handler errors lets make sure someone notices
                 if not success then
-                    if _G.game and #game.connected_players > 0 then -- may be nil in on_load
+                    if _G.game and #game.connected_players > 0 then
                         log(err) -- Log the error to factorio-current.log
                         game.print(err)
-                    else -- no players received the message, force a real error so someone notices
-                        error(err) -- no way to handle errors cleanly when the game is not up
+                        -- continue processing the remaining handlers.
+                        --In most cases they won"t be related to the failed code.
+                        break
+                    else
+                        -- no players received the message, force a real error so someone notices
+                        error(err)
                     end
-                -- continue processing the remaning handlers. In most cases they won"t be related to the failed code.
                 end
 
-                -- force a crc check if option is enabled. This is a debug option and will hamper perfomance if enabled
-                if (force_crc or event.force_crc) and _G.game then
-                    local msg = 'CRC check called for event ' .. event.name .. ' handler #' .. idx
-                    log(msg) -- log the message to factorio-current.log
+                -- force a crc check if option is enabled. This is a debug option and will hamper performance if enabled
+                if force_crc and game then
+                    -- log the message to factorio-current.log
+                    log('CRC check called for event ' .. event.name .. ' handler #' .. idx)
                     game.force_crc()
                 end
 
@@ -200,32 +213,60 @@ end
 -- <p>An *event ID* can be obtained via @{defines.events},
 -- @{LuaBootstrap.generate_event_name|script.generate_event_name} which is in <span class="types">@{int}</span>,
 -- and can be a custom input name which is in <span class="types">@{string}</span>.
--- <p>The `event_ids` parameter takes in either a single, multiple, or mixture of @{defines.events}, @{int}, and @{string}.
--- @param event_ids (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
--- @tparam function handler the handler to remove
+-- <p>The `event_id` parameter takes in either a single, multiple, or mixture of @{defines.events}, @{int}, and @{string}.
+-- @param event_id (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
+-- @tparam[opt] function handler the handler to remove, if not present remove all registered handlers for the event_id
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
-function Event.remove(event_ids, handler)
-    fail_if_not(event_ids, 'missing event_ids argument')
-    fail_if_not(handler, 'missing handler argument')
+function Event.remove(event_id, handler, callback_result)
+    fail_if_not(event_id, 'missing event_id argument')
+    fail_if_not(Is.Nil(handler) or Is.Function(handler), 'handler must be nil or a function')
 
-    event_ids = (type(event_ids) == 'table' and event_ids) or {event_ids}
+    -- Handle recursion here
+    if Is.Table(event_id) then
+        for _, id in pairs(event_id) do
+            Event.remove(id, handler)
+        end
+        return Event
+    end
 
-    for _, event_id in pairs(event_ids) do
-        is_valid_id(event_id)
+    fail_if_not(valid_id(event_id))
 
-        if Event._registry[event_id] then
-            for i = #Event._registry[event_id], 1, -1 do
-                if Event._registry[event_id][i] == handler then
-                    table.remove(Event._registry[event_id], i)
+    local registry = event_registry[event_id]
+    if registry then
+        for i = #registry, 1, -1 do
+            local registered = registry[i]
+            if not handler and not callback_result then
+                table.remove(registry, i)
+            elseif registered.callback then
+                if registered.callback() == callback_result and registered.handler == handler then
+                    table.remove(registry, i)
+                end
+            elseif registered.handler == handler then
+                table.remove(registry, i)
+            elseif not handler and callback_result and registered.callback then
+                if registered.callback() == callback_result then
+                    table.remove(registry, i)
                 end
             end
-            if table.size(Event._registry[event_id]) == 0 then
-                Event._registry[event_id] = nil
-                if type(event_id) == 'string' or event_id >= 0 then
-                    script.on_event(event_id, nil)
+        end
+
+        -- Clear the registry data and un subscribe if there are no registered handlers left
+        if table.size(registry) == 0 then
+            event_registry[event_id] = nil
+
+            if Is.String(event_id) then
+                -- String event ids will either be Bootstrap events or custom input events
+                if bootstrap_register[event_id] then
+                    script[event_id](nil)
                 else
-                    Event.core_events._remove(event_id)
+                    script.on_event(event_id, nil)
                 end
+            elseif event_id >= 0 then
+                -- Positive values will be defines.events
+                script.on_event(event_id, nil)
+            elseif event_id < 0 then
+                -- Use negative values to remove on_nth_tick
+                script.on_nth_tick(event_id, nil)
             end
         end
     end

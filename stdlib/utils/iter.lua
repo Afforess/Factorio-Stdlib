@@ -1,7 +1,7 @@
 --- Iterator library.
 -- @module Iter
 
-Iter = {} --luacheck: allow defined top
+local Iter = {}
 
 Iter.pairs = pairs
 Iter.ipairs = ipairs

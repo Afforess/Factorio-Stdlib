@@ -181,44 +181,52 @@ function Event.remove(event_id, handler, matcher, pattern)
 
     local registry = event_registry[event_id]
     if registry then
+        local found_something = false
         for i = #registry, 1, -1 do
             local registered = registry[i]
-
             if handler then -- handler, possibly matcher, possibly pattern
                 if handler == registered.handler then
                     if not matcher and not pattern then
                         table.remove(registry, i)
+                        found_something = true
                     elseif matcher then
                         if matcher == registered.matcher then
                             if not pattern then
                                 table.remove(registry, i)
+                                found_something = true
                             elseif pattern and pattern == registered.pattern then
                                 table.remove(registry, i)
+                                found_something = true
                             end
                         end
                     elseif pattern and pattern == registered.pattern then
                         table.remove(registry, i)
+                        found_something = true
                     end
                 end
             elseif matcher then -- no handler, matcher, possibly pattern
                 if matcher == registered.matcher then
                     if not pattern then
                         table.remove(registry, i)
+                        found_something = true
                     elseif pattern and pattern == registered.pattern then
                         table.remove(registry, i)
+                        found_something = true
                     end
                 end
             elseif pattern then -- no handler, no matcher, pattern
                 if pattern == registered.pattern then
                     table.remove(registry, i)
+                    found_something = true
                 end
             else -- no handler, matcher, or pattern
                 table.remove(registry, i)
+                found_something = true
             end
         end
 
-        -- Clear the registry data and un subscribe if there are no registered handlers left
-        if table.size(registry) == 0 then
+        if found_something and table.size(registry) == 0 then
+            -- Clear the registry data and un subscribe if there are no registered handlers left
             event_registry[event_id] = nil
 
             if Is.String(event_id) then
@@ -235,7 +243,11 @@ function Event.remove(event_id, handler, matcher, pattern)
                 -- Use negative values to remove on_nth_tick
                 script.on_nth_tick(math.abs(event_id), nil)
             end
+        elseif not found_something then
+            log('Attempt to deregister already non-registered listener from event: ' .. event_id)
         end
+    else
+        log('Attempt to deregister already non-registered listener from event: ' .. event_id)
     end
     return Event
 end

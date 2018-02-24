@@ -1,26 +1,40 @@
 require('spec/setup/defines')
 require('stdlib/utils/string')
 require('stdlib/utils/table')
-local Event = require('stdlib/event/event')
 
+local Event
+
+-- faketorio event registry placed here
+local factorio_event_registry
+
+-- fire faketorio event into registered listeners if any
+local function fire(e)
+    if not e then e = {} end
+    if not e.name then e.name = 0 end
+    if factorio_event_registry[e.name] then
+        return factorio_event_registry[e.name](e)
+    end
+end
 
 describe("Event",
     function()
 
         setup(
             function()
-                _G.script = {
-                    on_event = function(_, _) return end,
-                    on_init = function(callback) _G.on_init = callback end,
-                    on_load = function(callback) _G.on_load = callback end,
-                    on_configuration_changed = function(callback) _G.on_configuration_changed = callback end
-                }
                 _G.table.size = table.size
             end
         )
 
         before_each(
             function()
+                factorio_event_registry = {}
+                Event = require('stdlib/event/event')
+                _G.script = {
+                    on_event = function(i, f) factorio_event_registry[i] = f end,
+                    on_init = function(f) _G.on_event(_G.script.on_event(Event.core_events.init, f)) end,
+                    on_load = function(f) _G.on_event(_G.script.on_event(Event.core_events.load, f)) end,
+                    on_configuration_changed = function(f) _G.on_event(_G.script.on_event(Event.core_events.on_configuration_changed, f)) end
+                }
                 _G.game = {tick = 1, print = function() end}
                 _G.log = function() end
             end
@@ -28,7 +42,7 @@ describe("Event",
 
         after_each(
             function()
-                _G.Event._registry = {}
+                package.loaded['stdlib/event/event'] = nil
             end
         )
 

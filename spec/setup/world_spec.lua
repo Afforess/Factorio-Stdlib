@@ -16,11 +16,6 @@ describe('World',
         after_each(function() World.close() end)
 
         it('should load!', function()
-            require('stdlib/event/player').register_events()
-            assert.same(1, #_G.Event._registry[-1])
-            World.Debug.new_globs(true)
-            World.Debug.watched_packages(true)
-            World.Debug.packages()
         end)
 
         it('should init and create some players', function()

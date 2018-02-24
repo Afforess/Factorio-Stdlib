@@ -21,8 +21,8 @@ describe('Data', function()
 
     it("should be in global", function()
         Data.create_data_globals()
-        assert.is_table(_G.Data)
-        assert.is_table(_G.Recipe)
+        assert.is_table(_G.DATA)
+        assert.is_table(_G.RECIPE)
     end)
 
     it("should get an object", function()

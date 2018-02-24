@@ -18,13 +18,14 @@ note: save/load/reload havn't been tested yet.
 
 --]]
 require('spec/setup/globals')
+
 local World = {
     Debug = require('spec/setup/debug')
 }
 
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 --[Setup Globals]--
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 _G._print = print
 _G.print = function(...) --luacheck: ignore print
     if World.Debug.allow_print then
@@ -55,10 +56,10 @@ local override_require = function(replace)
         _G._require = nil
     end
 end
- --
 
--------------------------------------------------------------------------------
---[[Setup metatables]] -------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--[Setup Metatables]--
+--------------------------------------------------------------------------------
 local meta = {}
 
 local get_connected_players = function()
@@ -113,11 +114,10 @@ meta._G = {
         rawset(t, k, v)
     end
 }
- --
 
--------------------------------------------------------------------------------
---[[World Functions]] -------------------------------------------------------------------------------
-
+--------------------------------------------------------------------------------
+--[World Functions]--
+--------------------------------------------------------------------------------
 World.open =
     function()
     if _G.script then
@@ -125,7 +125,6 @@ World.open =
     end
 
     override_require(true)
-    --require('spec/setup/defines')
 
     setmetatable(_G, meta._G)
     _G.global = nil
@@ -209,7 +208,7 @@ World.init =
 
     setmetatable(game, meta.game)
 
-    --init if load_only run load only elseif if config_changed_data
+    --init, if load_only run load only elseif if config_changed_data
     if load_only or config_changed_data then
         script.raise_event(-2, {tick = game.tick})
         if config_changed_data then
@@ -262,9 +261,6 @@ World.reload = function(save_and_reload)
 end
 
 World.save = function()
-    --requiring table here just in case it isn't loaded
-    require('stdlib/utils/table')
-
     if _G.global then
         local global_meta = getmetatable(_G.global)
         _G.saved_global = table.deepcopy(setmetatable(_G.global, nil))
@@ -290,7 +286,6 @@ World.close = function(save, skip_unloading_these)
     _G.remote = nil
     _G.script = nil
     _G.Game = nil
-    --_G.Event = nil
     _G.on_init = nil
     _G.on_configuration_changed = nil
 

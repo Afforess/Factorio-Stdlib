@@ -2,12 +2,17 @@
 -- @module string
 -- @see string
 
--- luacheck: globals string (Allow mutating string)
+local M = {}
+
+local concat = table.concat
+local insert = table.insert
+local ceil = math.ceil
+local abs = math.abs
 
 --- Returns a copy of the string with any leading or trailing whitespace from the string removed.
 -- @tparam string s the string to remove leading or trailing whitespace from
 -- @treturn string a copy of the string without leading or trailing whitespace
-function string.trim(s)
+function M.trim(s)
     return (s:gsub([[^%s*(.-)%s*$]], '%1'))
 end
 
@@ -15,74 +20,74 @@ end
 -- @tparam string s the string to check for the start substring
 -- @tparam string start the substring to test for
 -- @treturn boolean true if the start substring was found in the string
-function string.starts_with(s, start)
-    return string.find(s, start, 1, true) == 1
+function M.starts_with(s, start)
+    return s:find(start, 1, true) == 1
 end
 
 --- Tests if a string ends with a given substring.
 -- @tparam string s the string to check for the end substring
 -- @tparam string ends the substring to test for
 -- @treturn boolean true if the end substring was found in the string
-function string.ends_with(s, ends)
-    return #s >= #ends and string.find(s, ends, #s - #ends + 1, true) and true or false
+function M.ends_with(s, ends)
+    return #s >= #ends and s:find(ends, #s - #ends + 1, true) and true or false
 end
 
 --- Tests if a string contains a given substring.
 -- @tparam string s the string to check for the substring
 -- @tparam string contains the substring to test for
 -- @treturn boolean true if the substring was found in the string
-function string.contains(s, contains)
-    return s and string.find(s, contains) ~= nil
+function M.contains(s, contains)
+    return s and s:find(contains) ~= nil
 end
 
 --- Tests whether a string is empty.
 -- @tparam string s the string to test
 -- @treturn boolean true if the string is empty
-function string.is_empty(s)
+function M.is_empty(s)
     return s == nil or s == ''
 end
 
 --- does s only contain alphabetic characters?
 -- @string s a string
-function string.is_alpha(s)
-    return string.find(s, '^%a+$') == 1
+function M.is_alpha(s)
+    return s:find('^%a+$') == 1
 end
 
 --- does s only contain digits?
 -- @string s a string
-function string.is_digit(s)
-    return string.find(s, '^%d+$') == 1
+function M.is_digit(s)
+    return s:find('^%d+$') == 1
 end
 
 --- does s only contain alphanumeric characters?
 -- @string s a string
-function string.is_alnum(s)
-    return string.find(s, '^%w+$') == 1
+function M.is_alnum(s)
+    return s:find('^%w+$') == 1
 end
 
 --- does s only contain spaces?
 -- @string s a string
-function string.is_space(s)
-    return string.find(s, '^%s+$') == 1
+function M.is_space(s)
+    return s:find('^%s+$') == 1
 end
 
 --- does s only contain lower case characters?
 -- @string s a string
-function string.is_lower(s)
-    return string.find(s, '^[%l%s]+$') == 1
+function M.is_lower(s)
+    return s:find('^[%l%s]+$') == 1
 end
 
 --- does s only contain upper case characters?
 -- @string s a string
-function string.is_upper(s)
-    return string.find(s, '^[%u%s]+$') == 1
+function M.is_upper(s)
+    return s:find('^[%u%s]+$') == 1
 end
 
 --- iniital word letters uppercase ('title case').
 -- Here 'words' mean chunks of non-space characters.
 -- @string s the string
 -- @return a string with each word's first letter uppercase
-function string.title(s)
+function M.title(s)
     return (s:gsub(
         [[(%S)(%S*)]],
         function(f, r)
@@ -102,7 +107,7 @@ local n_ellipsis = #ellipsis
 -- @usage ('1234567890'):shorten(8) == '12345...'
 -- @usage ('1234567890'):shorten(8, true) == '...67890'
 -- @usage ('1234567890'):shorten(20) == '1234567890'
-function string.shorten(s, w, tail)
+function M.shorten(s, w, tail)
     if #s > w then
         if w < n_ellipsis then
             return ellipsis:sub(1, w)
@@ -121,8 +126,8 @@ end
 -- @string s the string
 -- @param seq a table of strings or numbers
 -- @usage (' '):join {1,2,3} == '1 2 3'
-function string.join(s, seq)
-    return table.concat(seq, s)
+function M.join(s, seq)
+    return concat(seq, s)
 end
 
 local function _just(s, w, ch, left, right)
@@ -133,15 +138,15 @@ local function _just(s, w, ch, left, right)
         end
         local f1, f2
         if left and right then
-            local rn = math.ceil((w - n) / 2)
+            local rn =ceil((w - n) / 2)
             local ln = w - n - rn
-            f1 = string.rep(ch, ln)
-            f2 = string.rep(ch, rn)
+            f1 = ch:rep(ln)
+            f2 = ch:rep(rn)
         elseif right then
-            f1 = string.rep(ch, w - n)
+            f1 = ch:rep(w - n)
             f2 = ''
         else
-            f2 = string.rep(ch, w - n)
+            f2 = ch:rep(w - n)
             f1 = ''
         end
         return f1 .. s .. f2
@@ -154,7 +159,7 @@ end
 -- @string s the string
 -- @int w width of justification
 -- @string[opt=' '] ch padding character
-function string.ljust(s, w, ch)
+function M.ljust(s, w, ch)
     return _just(s, w, ch, true, false)
 end
 
@@ -162,7 +167,7 @@ end
 -- @string s the string
 -- @int w width of justification
 -- @string[opt=' '] ch padding character
-function string.rjust(s, w, ch)
+function M.rjust(s, w, ch)
     return _just(s, w, ch, false, true)
 end
 
@@ -170,7 +175,7 @@ end
 -- @string s the string
 -- @int w width of justification
 -- @string[opt=' '] ch padding character
-function string.center(s, w, ch)
+function M.center(s, w, ch)
     return _just(s, w, ch, true, true)
 end
 
@@ -181,31 +186,34 @@ end
 -- @tparam[opt="."] string sep the separator to use.
 -- @tparam[opt=false] boolean pattern whether to interpret the separator as a lua pattern or plaintext for the string split
 -- @treturn {string,...} an array of strings
-function string.split(s, sep, pattern)
+function M.split(s, sep, pattern)
     sep = sep or '.'
     sep = sep ~= '' and sep or '.'
-    sep = not pattern and string.gsub(sep, '([^%w])', '%%%1') or sep
+    sep = not pattern and sep:gsub('([^%w])', '%%%1') or sep
 
     local fields = {}
-    local start_idx, end_idx = string.find(s, sep)
+    local start_idx, end_idx = s:find(sep)
     local last_find = 1
     while start_idx do
-        local substr = string.sub(s, last_find, start_idx - 1)
-        if string.len(substr) > 0 then
-            table.insert(fields, string.sub(s, last_find, start_idx - 1))
+        local substr = s:sub(last_find, start_idx - 1)
+        if substr:len() > 0 then
+            table.insert(fields, s:sub(last_find, start_idx - 1))
         end
         last_find = end_idx + 1
-        start_idx, end_idx = string.find(s, sep, end_idx + 1)
+        start_idx, end_idx = s:find(sep, end_idx + 1)
     end
-    local substr = string.sub(s, last_find)
-    if string.len(substr) > 0 then
-        table.insert(fields, string.sub(s, last_find))
+    local substr = s:sub(last_find)
+    if substr:len() > 0 then
+        insert(fields, s:sub(last_find))
     end
     return fields
 end
 
-function string.ordinal_suffix(n)
-    n = math.abs(n) % 100
+--- Return the ordinal suffix for a number.
+-- @tparam number n
+-- @treturn string the ordinal suffix
+function M.ordinal_suffix(n)
+    n = abs(n) % 100
     local d = n % 10
     if d == 1 and n ~= 11 then
         return 'st'
@@ -217,5 +225,10 @@ function string.ordinal_suffix(n)
         return 'th'
     end
 end
--- local a = 234
--- print(a..tostring(a):ordinal_suffix())
+
+-- Extend into string
+for k, v in pairs(M) do
+    string[k] = v -- luacheck: globals string (Allow mutating global string)
+end
+
+return M

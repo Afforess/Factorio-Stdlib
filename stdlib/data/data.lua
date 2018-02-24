@@ -63,9 +63,7 @@ function Data.create_data_globals(files)
     return Data
 end
 
---------------------------------------------------------------------------------
---[Classes]--
---------------------------------------------------------------------------------
+--[Classes]--------------------------------------------------------------------
 
 --- Is this a valid object
 -- @tparam[opt] string class if present is the object a member of the class

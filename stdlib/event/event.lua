@@ -24,11 +24,10 @@ local Event = {
         configuration_changed = 'on_configuration_changed',
         init_and_config = {'on_init', 'on_configuration_changed'}
     },
-    _registry = event_registry
 }
 setmetatable(Event, {__index = require('stdlib/core')})
 
-local Is = require('stdlib/utils/is')
+local Is = Event.Is
 local fail_if_not = Event.fail_if_not
 
 local bootstrap_register = {
@@ -64,6 +63,8 @@ end
 -- Event.register(event1, handler1).register(event2, handler2)
 -- @param event_id (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
 -- @tparam function handler the function to call when the given events are triggered
+-- @tparam[opt=nil] function matcher a function whose return determines if the handler is executed
+-- @tparam[opt=nil] mixed pattern an invariant that can be used in the matcher function, stored in event._pattern
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.register(event_id, handler, matcher, pattern)
     fail_if_not(event_id, 'missing event_id argument')
@@ -126,6 +127,8 @@ end
 -- <p>The `event_id` parameter takes in either a single, multiple, or mixture of @{defines.events}, @{int}, and @{string}.
 -- @param event_id (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
 -- @tparam[opt] function handler the handler to remove, if not present remove all registered handlers for the event_id
+-- @tparam[opt] function matcher
+-- @tparam[opt] mixed pattern
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.remove(event_id, handler, matcher, pattern)
     fail_if_not(event_id, 'missing event_id argument')
@@ -273,6 +276,10 @@ function Event.dispatch(event)
     else
         error('missing event argument')
     end
+end
+
+function Event.get_registry()
+    return table.deepcopy(event_registry)
 end
 
 --- Filters events related to entity_type.

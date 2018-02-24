@@ -2,10 +2,15 @@ require('spec/setup/defines')
 require('stdlib/utils/string')
 require('stdlib/utils/table')
 
+local match = require('luassert.match')
+
 local Event
 
 -- faketorio event registry placed here
 local factorio_event_registry
+
+-- fake global log handler
+local fake_log
 
 -- fire faketorio event into registered listeners if any
 local function fire(e)
@@ -37,12 +42,14 @@ describe("Event",
         setup(
             function()
                 _G.table.size = table.size
+                _G.log = function(...) fake_log.log(...) end
             end
         )
 
         before_each(
             function()
                 factorio_event_registry = {}
+                fake_log = { log = function() end }
                 Event = require('stdlib/event/event')
                 _G.script = {
                     on_event = function(i, f) factorio_event_registry[i] = f end,
@@ -51,7 +58,6 @@ describe("Event",
                     on_configuration_changed = function(f) _G.on_event(_G.script.on_event(Event.core_events.on_configuration_changed, f)) end
                 }
                 _G.game = {tick = 1, print = function() end}
-                _G.log = function() end
             end
         )
 
@@ -63,10 +69,15 @@ describe("Event",
 
         it(".register should add multiple callbacks for the same event",
             function()
-                Event.register(0, function_a)
-                Event.register(0, function_b)
-                assert.equals(function_a, Event._registry[0][1])
-                assert.equals(function_b, Event._registry[0][2])
+                local f, g = genstubs(2)
+                Event.register(0, f)
+                Event.register(0, g)
+                local e = {name = 0}
+                fire(e)
+                assert.stub(f).was.called_with(e)
+                assert.stub(f).was.called(1)
+                assert.stub(g).was.called_with(e)
+                assert.stub(g).was.called(1)
             end
         )
 
@@ -80,107 +91,123 @@ describe("Event",
 
         it(".register should error if nil is passed as a handler",
             function()
-                Event.register(0, function_a)
-                Event.register(0, function_b)
-                assert.has_error(function() Event.register(0, nil) end)
+                local f, g = genstubs(2)
+                Event.register(0, f)
+                Event.register(0, g)
+                assert.has.errors(function() Event.register(0, nil) end)
             end
         )
 
         it(".register should add a handler for multiple events",
             function()
-                Event.register({0, 2}, function_a).register({0, 2}, function_b)
-                assert.equals(function_a, Event._registry[0][1])
-                assert.equals(function_b, Event._registry[0][2])
-                assert.is_nil(Event._registry[1])
-                assert.equals(function_a, Event._registry[2][1])
-                assert.equals(function_b, Event._registry[2][2])
+                local f, g = genstubs(2)
+                Event.register({0, 2}, f).register(2, g)
+                fire({name=0})
+                assert.stub(f).was.called(1)
+                fire({name=2})
+                assert.stub(f).was.called(2)
+                assert.stub(g).was.called(1)
             end
         )
 
-        it(".register should hook the event to script.on_event",
+        it("initial but not subsequent .register invocations for a given event should cause global registration with factorio",
             function()
                 local s = spy.on(script, "on_event")
-                Event.register(0, function_a)
-                assert.spy(s).was_called_with(0, Event.dispatch)
+                Event.register(0, genstubs())
+                assert.spy(s).was.called(1)
+                Event.register(0, genstubs())
+                assert.spy(s).was.called(1)
+                Event.register(1, genstubs())
+                assert.spy(s).was.called(2)
+                Event.register(1, genstubs())
+                assert.spy(s).was.called(2)
+                Event.register(1, genstubs(), genstubs())
+                Event.register(1, genstubs(), genstubs(), "foo")
+                assert.spy(s).was.called(2)
             end
         )
 
-        it(".register should return itself",
+        it(".register should return the event module to callers",
             function()
-                assert.equals(Event, Event.register(0, function_a))
-                assert.equals(Event, Event.register(0, function_b).register(0, function_c))
-                assert.equals(function_a, Event._registry[0][1])
-                assert.equals(function_b, Event._registry[0][2])
-                assert.equals(function_c, Event._registry[0][3])
+                assert.equals(Event, Event.register(0, genstubs(1)))
+                assert.equals(Event, Event.register(0, genstubs(1)).register(0, genstubs(1)))
             end
         )
 
-        it(".register should not add duplicate handers to a single event",
+        it(".register should not add duplicate handers to a single event, and should fire in order of least recent registration",
             function()
-                Event.register(0, function_a).register(0, function_b).register(0, function_a)
-                assert.same(2, table.size(Event._registry[0]))
-                assert.same(Event._registry[0][2], function_a)
-            end
-        )
-
-        it(".dispatch should cascade through registered handlers",
-            function()
-                Event.register(0, function_a)
-                Event.register(0, function_b)
-                local event = {name = 0, tick = 9001, player_index = 1}
-                local s = spy.on(test_function, "f")
-                Event.dispatch(event)
-                assert.spy(s).was_called_with(9001)
-                assert.spy(s).was_called_with(1)
-                assert.equals(1, _G.someVariable)
+                local g = genstubs()
+                local f = spy(function ()
+                    assert.stub(g).was.called(1)
+                end)
+                Event.register(0, f).register(0, g).register(0, f)
+                fire()
+                assert.spy(f).was.called(1)
             end
         )
 
         it(".dispatch should abort if a handler event passes stop_processing",
             function()
-                Event.register(0, function_a)
-                Event.register(0, function_c)
-                Event.register(0, function_b)
-                local event = {name = 0, tick = 9001, player_index = 1, stop_processing = true}
-                local s = spy.on(test_function, "f")
-                Event.dispatch(event)
-                assert.spy(s).was_called_with(9001)
-                assert.spy(s).was_not_called_with(1)
-                assert.equals(9001, _G.someVariable)
+                local g = spy(function (e)
+                    e.stop_processing = true
+                end)
+                local f, h = genstubs(2)
+                Event.register(0, f).register(0, g).register(0, h)
+                fire()
+                assert.stub(f).was.called(1)
+                assert.spy(g).was.called(1)
+                assert.stub(h).was_not.called()
             end
         )
 
-        it(".remove should remove the given handler from the event",
+        it(".remove should log, but not emit an error, for de-registration of non-registered listeners",
             function()
-                Event.register(0, function_a)
-                Event.register(0, function_c)
-                Event.register(0, function_b)
-                Event.register(0, function_c)
+                local s = spy.on(fake_log, "log")
+                assert.has_no.errors(function () Event.remove(0, genstubs()) end)
+                assert.spy(s).was.called()
+            end
+        )
 
-                Event.remove(0, function_c)
-                assert.equals(function_a, Event._registry[0][1])
-                assert.equals(function_b, Event._registry[0][2])
-                assert.is_true(#Event._registry[0] == 2)
+        it(".remove should deregister a given handler from an event",
+            function()
+                local f, g, h, i = genstubs(4)
+                local function check_counts(fc,gc,hc,ic)
+                    assert.stub(f).was.called(fc)
+                    assert.stub(g).was.called(gc)
+                    assert.stub(h).was.called(hc)
+                    assert.stub(i).was.called(ic)
+                end
 
-                Event.register({ 0, 2, 1, "test"}, function_c)
+                Event.register(0, f).register({0, 1}, g).register({0, 1, 2}, h).register({2, 0}, i)
 
-                assert.equals(function_c, Event._registry[0][3])
-                assert.equals(function_c, Event._registry[2][1])
-                assert.equals(function_c, Event._registry[1][1])
-                assert.equals(function_c, Event._registry["test"][1])
-
-                local s = spy.on(script, "on_event")
-                Event.remove({0, 2}, function_c)
-
-                assert.equals(function_c, Event._registry[1][1])
-                assert.is_nil(Event._registry[0][3])
-                assert.is_true(#Event._registry[1] == 1)
-                assert.is_nil(Event._registry[2])
-                assert.spy(s).was_called_with(2, nil)
-
-                Event.remove("test", function_c)
-                assert.spy(s).was_called_with("test", nil)
-
+                fire()
+                check_counts(1, 1, 1, 1)
+                fire({name = 2})
+                check_counts(1, 1, 2, 2)
+                Event.remove(0, f)
+                fire()
+                check_counts(1, 2, 3, 3)
+                Event.remove(0, i)
+                fire()
+                check_counts(1, 3, 4, 3)
+                fire({name = 2})
+                check_counts(1, 3, 5, 4)
+                Event.remove(2, i)
+                fire({name = 2})
+                check_counts(1, 3, 6, 4)
+                fire({name = 1})
+                check_counts(1, 4, 7, 4)
+                Event.remove(1, h)
+                fire({name = 1})
+                check_counts(1, 5, 7, 4)
+                fire()
+                check_counts(1, 6, 8, 4)
+                Event.remove({0, 1}, g)
+                Event.remove({0, 1, 2}, h)
+                fire()
+                fire({name = 1})
+                fire({name = 2})
+                check_counts(1, 6, 8, 4)
             end
         )
 
@@ -203,7 +230,7 @@ describe("Event",
 
                 Event.register( 0, function() error("should error") end)
                 Event.dispatch({name = 0, tick = 9001, player_index = 1})
-                assert.spy(s).was_called()
+                assert.spy(s).was.called()
             end
         )
 
@@ -228,8 +255,8 @@ describe("Event",
                 local s2 = spy.on(test_function, "f")
 
                 Event.dispatch({tick = 23, name = 1, entity = {__self = "userdata", valid = true}})
-                assert.spy(s).was_called(1)
-                assert.spy(s2).was_called(0)
+                assert.spy(s).was.called(1)
+                assert.spy(s2).was.called(0)
             end
         )
 

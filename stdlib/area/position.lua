@@ -31,8 +31,8 @@ function Position.new(pos, new_copy)
         return pos
     end
 
-    local new_pos = {x = pos.x or pos[1], y = pos.y or pos[2]}
-    return setmetatable(new_pos, Position._mt)
+    pos = {x = pos.x or pos[1], y = pos.y or pos[2]}
+    return setmetatable((new_copy or Position.immutable) and table.deepcopy(pos) or pos, Position._mt)
 end
 
 --- Creates a table representing the position from x and y.
@@ -314,14 +314,6 @@ function Position.next_direction(direction, reverse, eight_way)
 
     local next_dir = direction + (eight_way and ((reverse and -1) or 1) or ((reverse and -2) or 2))
     return (next_dir > 7 and next_dir - next_dir) or (reverse and next_dir < 0 and 8 + next_dir) or next_dir
-end
-
---- Restore the metatable on a stored position without returning a new position. Usefull for restoring
--- metatables to saved areas in global
--- @tparam Concepts.Position position
--- @treturn position with metatable set
-function Position.restore(position)
-    return setmetatable(position, Position._mt)
 end
 
 --- Position tables are returned with these metamethods attached

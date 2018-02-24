@@ -29,10 +29,8 @@ function Area.new(area, new_copy)
 
     local left_top = Position.new(area.left_top or area[1], true)
     local right_bottom = Position.new(area.right_bottom or area[2], true)
-    local new_area = {left_top = left_top, right_bottom = right_bottom}
-    new_area.orientation = area.orientation
-
-    return setmetatable(new_area, Area._mt)
+    area = {left_top = left_top, right_bottom = right_bottom, orientation = area.orientation}
+    return setmetatable((new_copy or Area.immutable) and table.deepcopy(area) or area, Area._mt)
 end
 
 --- Creates an area from the two positions p1 and p2.
@@ -459,20 +457,6 @@ function Area.shrink_to_surface_size(area, surface)
         area.right_bottom.y = (h / 2)
     end
     return area
-end
-
---- Restores the metatable on a stored area without returning a new area. Usefull for restoring
--- metatables to saved areas in global
--- @tparam Concepts.BoundingBox area
--- @treturn area with metatable set
--- @usage
--- script.on_load(function()
---   for _, area in pairs(global.area) do
---     Area.restore(area)
---   end
--- end
-function Area.restore(area)
-    return setmetatable(area, Area._mt)
 end
 
 --- Area tables are returned with these Metamethods attached.

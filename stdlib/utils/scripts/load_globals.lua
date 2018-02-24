@@ -4,35 +4,36 @@
 -- @script load_globals
 -- @usage
 -- require('stdlib/utils/scripts/load_globals')() -- note the () on the end
-
+local str = "std.ast.txt"
+print((str:gsub("%.", "/")))
 local Core = require('stdlib/core')
 
 local function load_stdlib_as_globals(files)
     files =
         files or
         {
-            GAME = 'stdlib.game',
-            AREA = 'stdlib.area.area',
-            POSITION = 'stdlib.area.position',
-            TILE = 'stdlib.area.tile',
-            SURFACE = 'stdlib.area.surface',
-            CHUNK = 'stdlib.area.chunk',
-            COLOR = 'stdlib.color.color',
-            ENTITY = 'stdlib.entity.entity',
-            INVENTORY = 'stdlib.entity.inventory',
-            RESOURCE = 'stdlib.entity.resource',
-            CONFIG = 'stdlib.config.config',
-            LOGGER = 'stdlib.log.logger',
-            QUEUE = 'stdlib.queue.queue',
-            EVENT = 'stdlib.event.event',
-            GUI = 'stdlib.event.gui',
-            PLAYER = 'stdlib.event.player',
-            FORCE = 'stdlib.event.force'
+            GAME = 'stdlib/game',
+            AREA = 'stdlib/area/area',
+            POSITION = 'stdlib/area/position',
+            TILE = 'stdlib/area/tile',
+            SURFACE = 'stdlib/area/surface',
+            CHUNK = 'stdlib/area/chunk',
+            COLOR = 'stdlib/color/color',
+            ENTITY = 'stdlib/entity/entity',
+            INVENTORY = 'stdlib/entity/inventory',
+            RESOURCE = 'stdlib/entity/resource',
+            CONFIG = 'stdlib/config/config',
+            LOGGER = 'stdlib/log/logger',
+            QUEUE = 'stdlib/queue/queue',
+            EVENT = 'stdlib/event/event',
+            GUI = 'stdlib/event/gui',
+            PLAYER = 'stdlib/event/player',
+            FORCE = 'stdlib/event/force'
         }
     Core.fail_if_not(Core.Is.Table(files), 'files must be a dictionary of global names -> file paths')
 
     for glob, path in pairs(files) do
-        _G[glob] = prequire(path)
+        _G[glob] = prequire((path:gsub("%.", "/")))  -- extra () required to emulate select(1)
     end
 end
 

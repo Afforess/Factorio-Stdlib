@@ -1,5 +1,5 @@
 --- human-readable representations of tables
--- @script semver
+-- @script inspect
 
 local inspect = {
     _VERSION = 'inspect.lua 3.1.0',

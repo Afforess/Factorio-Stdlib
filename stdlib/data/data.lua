@@ -40,19 +40,32 @@ local item_and_fluid_types = {
     'fluid'
 }
 
---- Load the whole library as globals
-function Data.create_data_globals()
-    _G.Recipe = require('stdlib/data/recipe')
-    _G.Item = require('stdlib/data/item')
-    _G.Fluid = require('stdlib/data/fluid')
-    _G.Entity = require('stdlib/data/entity')
-    _G.Technology = require('stdlib/data/technology')
-    _G.Category = require('stdlib/data/category')
-    _G.Data = Data
+-- load the data portion of stdlib into globals, by default it loads everything into an ALLCAPS name.
+-- Alternatively you can pass a dictionary of `[global names] -> [require path]`.
+-- @tparam[opt] table files
+-- @treturn Data
+-- @usage
+-- require('stdlib/data/data).create_data_globals()
+function Data.create_data_globals(files)
+    files =
+        files or
+        {
+            RECIPE = 'stdlib/data/recipe',
+            ITEM = 'stdlib/data/item',
+            FLUID = 'stdlib/data/fluid',
+            ENTITY = 'stdlib/data/entity',
+            TECHNOLOGY = 'stdlib/data/technology',
+            CATEGORY = 'stdlib/data/category',
+            DATA = 'stdlib/data/data'
+        }
+    Data.create_stdlib_globals(files)
+
     return Data
 end
 
---[Classes]--------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--[Classes]--
+--------------------------------------------------------------------------------
 
 --- Is this a valid object
 -- @tparam[opt] string class if present is the object a member of the class

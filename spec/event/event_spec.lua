@@ -3,11 +3,6 @@ require('stdlib/utils/string')
 require('stdlib/utils/table')
 local Event = require('stdlib/event/event')
 
-local test_function = {f = function(x) _G.someVariable = x end, g = function(event) event.entity.valid = false end}
-local function_a = function (arg) test_function.f(arg.tick) end
-local function_b = function (arg) test_function.f(arg.player_index) end
-local function_c = function () return true end
-local function_d = function (arg) test_function.g(arg) end
 
 describe("Event",
     function()
@@ -26,7 +21,6 @@ describe("Event",
 
         before_each(
             function()
-                _G.someVariable = false
                 _G.game = {tick = 1, print = function() end}
                 _G.log = function() end
             end

@@ -97,7 +97,7 @@ function Event.register(event_id, handler, matcher, pattern)
             script.on_event(event_id, Event.dispatch)
         elseif event_id < 0 then
             --Use negative values to register on_nth_tick
-            script.on_nth_tick(event_id, handler)
+            script.on_nth_tick(event_id, Event.dispatch)
         end
     end
 
@@ -206,7 +206,14 @@ end
 function Event.dispatch(event)
     if event then
         --get the registered handlers from name or input_name
-        local registry = event.name and event_registry[event.name] or event.input_name and event_registry[event.input_name]
+        local registry
+        if event.name then
+            registry = event_registry[event.name]
+        elseif event.input_name then
+            registry = event_registry[event.input_name]
+        elseif event.nth_tick then
+            registry = event_registry[-event.nth_tick]
+        end
 
         if registry then
             --add the tick if it is not present, this only affects calling Event.dispatch manually

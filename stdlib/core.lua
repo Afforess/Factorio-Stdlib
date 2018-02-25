@@ -70,6 +70,14 @@ function Core.fail_if_not(var, msg)
     return false
 end
 
+function Core.log_and_print(msg)
+    if game and #game.connected_players > 0 then
+        log(msg)
+        game.print(msg)
+        return true
+    end
+end
+
 function Core.VALID_FILTER(v)
     return v and v.valid
 end

@@ -2,6 +2,10 @@
 -- @module Is
 
 local Is = {}
+Is.Not = {}
+Is.Assert = {}
+Is.Assert.Not = {}
+
 local type = type
 
 --- Returns true if the passed variable is a table.
@@ -79,25 +83,77 @@ function Is.Empty(var)
     return Is.Nil(var)
 end
 
+--- Returns true if the passed variable is a single alphbetical word.
+-- Does not allow any special chars
+-- @tparam mixed var The variable to check
+-- @treturn boolean true if the passed variable is a single alphbetical word
+function Is.StrictWord(var)
+    return Is.String(var) and var:find('^[%a]+$') == 1
+end
+
+--- Returns true if the passed variable is a single alphbetical word.
+-- Allows _ and - as part of the word
+-- @tparam mixed var The variable to check
+-- @treturn boolean true if the passed variable is a single alphbetical word
+function Is.AlphabetWord(var)
+    return Is.String(var) and var:find('^[%a%_%-]+$') == 1
+end
+Is.Word = Is.AlphabetWord
+
+--- Returns true if the passed variable is a single alphbetical word.
+-- Must start with a letter, allows _ and - as part of the word
+-- @tparam mixed var The variable to check
+-- @treturn boolean true if the passed variable is a single alphbetical word
+function Is.AlphanumWord(var)
+    return Is.String(var) and var:find('^%a+[%w%_%-]*$') == 1
+end
+
+--- Returns true if the passed variable is a callable function.
+-- @tparam mixed var The variable to check
+-- @treturn boolean true if the passed variable is a callable function
 function Is.Callable(var)
-   if type(var) == 'function' then
-      return var
-   end
-   return (getmetatable(var) or {}).__call
+    if type(var) == 'function' then
+        return var
+    end
+    return (getmetatable(var) or {}).__call
 end
 Is.Function = Is.Callable
 
---- Returns t if the expression is true.
--- @tparam mixed exp The expression to evaluate
--- @tparam mixed t the true return
--- @tparam mixed f the false return
--- @treturn boolean
-function Is.If(exp, t, f)
-    if exp then
-        return t
-    else
-        return f
-    end
-end
+setmetatable(
+    Is.Not,
+    {
+        __index = function(_, k)
+            return function(...)
+                return not Is[k](...)
+            end
+        end
+    }
+)
+
+setmetatable(
+    Is.Assert,
+    {
+        __index = function(_, k)
+            return function(...)
+                local params = (...)
+                local message = select('#', ...) > 1 and select(-1, ...) or nil
+                return (assert(Is[k](params), message))
+            end
+        end
+    }
+)
+
+setmetatable(
+    Is.Assert.Not,
+    {
+        __index = function(_, k)
+            return function(...)
+                local params = (...)
+                local message = select('#', ...) > 1 and select(-1, ...) or nil
+                return (assert(not Is[k](params), message))
+            end
+        end
+    }
+)
 
 return Is

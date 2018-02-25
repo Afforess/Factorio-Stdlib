@@ -24,11 +24,13 @@ local Event = {
         configuration_changed = 'on_configuration_changed',
         init_and_config = {'on_init', 'on_configuration_changed'}
     },
+    custom_events = {} -- Holds custom event ids
 }
 setmetatable(Event, {__index = require('stdlib/core')})
 
-local Is = Event.Is
+local Is = require('stdlib/core/is')
 local fail_if_not = Event.fail_if_not
+local log_and_print = Event.log_and_print
 
 local bootstrap_register = {
     on_init = function()
@@ -217,12 +219,12 @@ function Event.dispatch(event)
         if registry then
             --add the tick if it is not present, this only affects calling Event.dispatch manually
             --doing the check up here as it will faster than checking every iteration for a constant value
-            event.tick = event.tick or _G.game and game.tick or 0
+            event.tick = event.tick or game and game.tick or 0
 
             local force_crc = Event.force_crc or event.force_crc
 
             for idx, registered in ipairs(registry) do
-                -- Check for userdata and stop processing further handlers if not valid
+                -- Check for userdata and stop processing this and further handlers if not valid
                 -- This is the same behavior as factorio events.
                 -- This is done inside the loop as other events can modify the event.
                 for _, val in pairs(event) do
@@ -254,11 +256,9 @@ function Event.dispatch(event)
 
                 -- If the handler errors lets make sure someone notices
                 if not success then
-                    if _G.game and #game.connected_players > 0 then
-                        log(err) -- Log the error to factorio-current.log
-                        game.print(err)
+                    if log_and_print(err) then
                         -- continue processing the remaining handlers.
-                        --In most cases they won"t be related to the failed code.
+                        --In most cases they will not be related to the failed code.
                         break
                     else
                         -- no players received the message, force a real error so someone notices
@@ -268,7 +268,6 @@ function Event.dispatch(event)
 
                 -- force a crc check if option is enabled. This is a debug option and will hamper performance if enabled
                 if force_crc and game then
-                    -- log the message to factorio-current.log
                     log('CRC check called for event ' .. event.name .. ' handler #' .. idx)
                     game.force_crc()
                 end
@@ -284,11 +283,43 @@ function Event.dispatch(event)
     end
 end
 
+--- Retrieve or Generate an event_name and store it in Event.custom_events
+-- @tparam string event_name the custom name for your event.
+-- @treturn int the id associated with the event.
+-- @usage
+-- Event.register(Event.generate_event_name("my_custom_event"), handler)
+function Event.generate_event_name(event_name)
+    fail_if_not(Is.String(event_name), 'event_name must be a string.')
+
+    local id
+    if Is.Number(Event.custom_events[event_name]) then
+        id = Event.custom_events[event_name]
+    else
+        id = script.generate_event_name()
+        Event.custom[event_name] = id
+    end
+    return id
+end
+
+-- TODO complete stub
+function Event.raise_event(...)
+    script.raise_event(...)
+end
+
+-- TODO complete stub
+function Event.get_event_handler(...)
+    script.get_event_handler(...)
+end
+
+
+--- Retrieve a copy of the the event_registry
+-- @treturn table event_registry
 function Event.get_registry()
     return table.deepcopy(event_registry)
 end
 
 --- Filters events related to entity_type.
+-- DEPRECATED
 -- @tparam string event_parameter The event parameter to look inside to find the entity type
 -- @tparam string entity_type The entity type to filter events for
 -- @tparam callable matcher The matcher to invoke if the filter passes. The object defined in the event parameter is passed

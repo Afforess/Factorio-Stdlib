@@ -97,7 +97,7 @@ function Event.register(event_id, handler, matcher, pattern)
             script.on_event(event_id, Event.dispatch)
         elseif event_id < 0 then
             --Use negative values to register on_nth_tick
-            script.on_nth_tick(event_id, Event.dispatch)
+            script.on_nth_tick(math.abs(event_id), Event.dispatch)
         end
     end
 
@@ -150,10 +150,9 @@ function Event.remove(event_id, handler, matcher, pattern)
 
             -- TODO better removing if something is not present
             if not handler and not pattern and not matcher then
-                table.remove(registered, i)
-                break
+                table.remove(registry, i)
             elseif handler == registered.handler and pattern == registered.pattern and matcher == registered.matcher then
-                table.remove(registered, i)
+                table.remove(registry, i)
                 break
             end
         end
@@ -174,7 +173,7 @@ function Event.remove(event_id, handler, matcher, pattern)
                 script.on_event(event_id, nil)
             elseif event_id < 0 then
                 -- Use negative values to remove on_nth_tick
-                script.on_nth_tick(event_id, nil)
+                script.on_nth_tick(math.abs(event_id), nil)
             end
         end
     end

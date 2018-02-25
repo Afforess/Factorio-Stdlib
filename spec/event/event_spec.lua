@@ -53,9 +53,9 @@ describe("Event",
                 Event = require('stdlib/event/event')
                 _G.script = {
                     on_event = function(i, f) factorio_event_registry[i] = f end,
-                    on_init = function(f) _G.on_event(_G.script.on_event(Event.core_events.init, f)) end,
-                    on_load = function(f) _G.on_event(_G.script.on_event(Event.core_events.load, f)) end,
-                    on_configuration_changed = function(f) _G.on_event(_G.script.on_event(Event.core_events.on_configuration_changed, f)) end
+                    on_init = function(f) _G.script.on_event(Event.core_events.init, f) end,
+                    on_load = function(f) _G.script.on_event(Event.core_events.load, f) end,
+                    on_configuration_changed = function(f) _G.script.on_event(Event.core_events.on_configuration_changed, f) end
                 }
                 _G.game = {tick = 1, print = function() end}
             end

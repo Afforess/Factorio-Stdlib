@@ -45,6 +45,42 @@ local bootstrap_register = {
     end
 }
 
+-- Call the matcher and the handler in protected mode.
+local function run_protected(registered, event)
+    local success, err
+    if registered.matcher then
+        success, err = pcall(registered.matcher, event)
+        if success and err then
+            success, err = pcall(registered.handler, event)
+        end
+    else
+        success, err = pcall(registered.handler, event)
+    end
+
+    -- If the handler errors lets make sure someone notices
+    if not success then
+        if log_and_print(err) then
+            -- continue processing the remaining handlers.
+            --In most cases they will not be related to the failed code.
+            return
+        else
+            -- no players received the message, force a real error so someone notices
+            error(err)
+        end
+    end
+
+    -- force a crc check if option is enabled. This is a debug option and will hamper performance if enabled
+    if (Event.force_crc or event.force_crc) and game then
+        log('CRC check called for event [' .. event.name .. ']')
+        game.force_crc()
+    end
+
+    -- if present stop further handlers for this event
+    if event.stop_processing then
+        return
+    end
+end
+
 local function valid_id(id)
     return (Is.Number(id) or Is.String(id)), 'Invalid Event Id, Must be string/int/defines.events, Passed in: ' .. type(id)
 end
@@ -216,19 +252,19 @@ function Event.dispatch(event)
             registry = event_registry[-event.nth_tick]
         end
 
+        local protected = Event.protected_mode or event.protected_mode
+
         if registry then
             --add the tick if it is not present, this only affects calling Event.dispatch manually
             --doing the check up here as it will faster than checking every iteration for a constant value
             event.tick = event.tick or game and game.tick or 0
 
-            local force_crc = Event.force_crc or event.force_crc
-
-            for idx, registered in ipairs(registry) do
+            for _, registered in ipairs(registry) do
                 -- Check for userdata and stop processing this and further handlers if not valid
                 -- This is the same behavior as factorio events.
                 -- This is done inside the loop as other events can modify the event.
                 for _, val in pairs(event) do
-                    if type(val) == 'table' and val.__self and not val.valid then
+                    if Is.Object(val) and not val.valid then
                         return
                     end
                 end
@@ -243,38 +279,14 @@ function Event.dispatch(event)
                 }
                 setmetatable(event, mt)
 
-                -- Call the matcher and the handler in protected mode.
-                local success, err
-                if registered.matcher then
-                    success, err = pcall(registered.matcher, event)
-                    if success and err then
-                        success, err = pcall(registered.handler, event)
+                if protected then
+                    run_protected(registered, event)
+                elseif registered.matcher then
+                    if registered.matcher(event) then
+                        registered.handler(event)
                     end
                 else
-                    success, err = pcall(registered.handler, event)
-                end
-
-                -- If the handler errors lets make sure someone notices
-                if not success then
-                    if log_and_print(err) then
-                        -- continue processing the remaining handlers.
-                        --In most cases they will not be related to the failed code.
-                        break
-                    else
-                        -- no players received the message, force a real error so someone notices
-                        error(err)
-                    end
-                end
-
-                -- force a crc check if option is enabled. This is a debug option and will hamper performance if enabled
-                if force_crc and game then
-                    log('CRC check called for event ' .. event.name .. ' handler #' .. idx)
-                    game.force_crc()
-                end
-
-                -- if present stop further handlers for this event
-                if event.stop_processing then
-                    return
+                    registered.handler(event)
                 end
             end
         end
@@ -310,7 +322,6 @@ end
 function Event.get_event_handler(...)
     script.get_event_handler(...)
 end
-
 
 --- Retrieve a copy of the the event_registry
 -- @treturn table event_registry

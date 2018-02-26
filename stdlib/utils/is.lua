@@ -108,6 +108,14 @@ function Is.AlphanumWord(var)
     return Is.String(var) and var:find('^%a+[%w%_%-]*$') == 1
 end
 
+function Is.Valid(var)
+    return Is.Table(var) and var.valid
+end
+
+function Is.Object(var)
+    return Is.Table(var) and var.__self
+end
+
 --- Returns true if the passed variable is a callable function.
 -- @tparam mixed var The variable to check
 -- @treturn boolean true if the passed variable is a callable function

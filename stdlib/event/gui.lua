@@ -3,14 +3,15 @@
 -- @usage local Gui = require('stdlib/event/gui')
 
 local Event = require('stdlib/event/event')
+
 local Gui = {
     _module_name = 'Gui'
 }
 setmetatable(Gui, {__index = require('stdlib/core')})
 
-local function matcher(event)
-    if event.element and event.element.valid then -- Checking here inside the loop also to make sure we didn't invalidate
-        local match_str = event.element.name:match(event._pattern)
+local function matcher(event, pattern)
+    if event.element and event.element.valid then
+        local match_str = event.element.name:match(pattern)
         if match_str then
             event.match = match_str
             event.state = event.name == defines.events.on_gui_checked_state_changed and event.element.state or nil

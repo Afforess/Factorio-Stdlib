@@ -5,7 +5,9 @@
 
 local Event = require('stdlib/event/event')
 
-local Changes = {_module_name = 'Changes'}
+local Changes = {
+    _module_name = 'Changes'
+}
 setmetatable(Changes, {__index = require('stdlib/core')})
 
 --[[

@@ -9,7 +9,9 @@
 
 local Event = require('stdlib/event/event')
 
-local Force = {_module_name = 'Force'}
+local Force = {
+    _module_name = 'Force'
+}
 setmetatable(Force, {__index = require('stdlib/core')})
 
 local fail_if_not = Force.fail_if_not
@@ -101,9 +103,13 @@ end
 function Force.merge()
 end
 
-local events = {defines.events.on_force_created, Event.core_events.configuration_changed}
+function Force.register_init()
+    Event.register(Event.core_events.init, Force.init)
+    return Force
+end
+
 function Force.register_events(skip_init)
-    Event.register(events, Force.init)
+    Event.register(defines.events.on_force_created, Force.init)
     Event.register(defines.events.on_forces_merging, Force.merge)
     if not skip_init then
         Force.register_init()
@@ -111,8 +117,4 @@ function Force.register_events(skip_init)
     return Force
 end
 
-function Force.register_init()
-    Event.register(Event.core_events.init, Force.init)
-    return Force
-end
 return Force

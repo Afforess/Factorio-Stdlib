@@ -24,12 +24,13 @@ local Event = {
         configuration_changed = 'on_configuration_changed',
         init_and_config = {'on_init', 'on_configuration_changed'}
     },
-    custom_events = {} -- Holds custom event ids
+    custom_events = {}, -- Holds custom event ids
+    protected_mode = false,
+    force_crc = false
 }
 setmetatable(Event, {__index = require('stdlib/core')})
 
-local Is = require('stdlib/core/is')
-local fail_if_not = Event.fail_if_not
+local Is = require('stdlib/utils/is')
 local log_and_print = Event.log_and_print
 
 local bootstrap_register = {
@@ -62,7 +63,7 @@ local function run_protected(registered, event)
         if log_and_print(err) then
             -- continue processing the remaining handlers.
             --In most cases they will not be related to the failed code.
-            return
+            return false
         else
             -- no players received the message, force a real error so someone notices
             error(err)
@@ -74,11 +75,7 @@ local function run_protected(registered, event)
         log('CRC check called for event [' .. event.name .. ']')
         game.force_crc()
     end
-
-    -- if present stop further handlers for this event
-    if event.stop_processing then
-        return
-    end
+    return true
 end
 
 local function valid_id(id)
@@ -101,12 +98,13 @@ end
 -- Event.register(event1, handler1).register(event2, handler2)
 -- @param event_id (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
 -- @tparam function handler the function to call when the given events are triggered
--- @tparam[opt=nil] function matcher a function whose return determines if the handler is executed
--- @tparam[opt=nil] mixed pattern an invariant that can be used in the matcher function, stored in event._pattern
+-- @tparam[opt=nil] function matcher a function whose return determines if the handler is executed. event and pattern are passed into this
+-- @tparam[opt=nil] mixed pattern an invariant that can be used in the matcher function, passed as the second parameter to your matcher
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.register(event_id, handler, matcher, pattern)
-    fail_if_not(event_id, 'missing event_id argument')
-    fail_if_not(handler, 'handler is missing, use Event.remove to un register events')
+    Is.Assert(event_id, 'missing event_id argument')
+    Is.Assert(Is.Function(handler), 'handler function is missing, use Event.remove to un register events')
+    Is.Assert(Is.Nil(matcher) or Is.Function(matcher), 'matcher must be a function when present')
 
     --Recursively handle event id tables
     if Is.Table(event_id) then
@@ -116,7 +114,7 @@ function Event.register(event_id, handler, matcher, pattern)
         return Event
     end
 
-    fail_if_not(valid_id(event_id))
+    Is.Assert(valid_id(event_id))
 
     -- If the event_id has never been registered before make sure we call the correct script action to register
     -- our Event handler with factorio
@@ -153,7 +151,7 @@ function Event.register(event_id, handler, matcher, pattern)
     end
 
     --Finally insert the handler
-    table.insert(registry, {handler = handler, pattern = pattern, matcher = matcher})
+    table.insert(registry, {handler = handler, matcher = matcher, pattern = pattern})
     return Event
 end
 
@@ -169,7 +167,7 @@ end
 -- @tparam[opt] mixed pattern
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.remove(event_id, handler, matcher, pattern)
-    fail_if_not(event_id, 'missing event_id argument')
+    Is.Assert(event_id, 'missing event_id argument')
 
     -- Handle recursion here
     if Is.Table(event_id) then
@@ -179,19 +177,43 @@ function Event.remove(event_id, handler, matcher, pattern)
         return Event
     end
 
-    fail_if_not(valid_id(event_id))
+    Is.Assert(valid_id(event_id))
 
     local registry = event_registry[event_id]
     if registry then
         for i = #registry, 1, -1 do
             local registered = registry[i]
 
-            -- TODO better removing if something is not present
-            if not handler and not pattern and not matcher then
+            if handler then -- handler, possibly matcher, possibly pattern
+                if handler == registered.handler then
+                    if not matcher and not pattern then
+                        table.remove(registry, i)
+                    elseif matcher then
+                        if matcher == registered.matcher then
+                            if not pattern then
+                                table.remove(registry, i)
+                            elseif pattern and pattern == registered.pattern then
+                                table.remove(registry, i)
+                            end
+                        end
+                    elseif pattern and pattern == registered.pattern then
+                        table.remove(registry, i)
+                    end
+                end
+            elseif matcher then -- no handler, matcher, possibly pattern
+                if matcher == registered.matcher then
+                    if not pattern then
+                        table.remove(registry, i)
+                    elseif pattern and pattern == registered.pattern then
+                        table.remove(registry, i)
+                    end
+                end
+            elseif pattern then -- no handler, no matcher, pattern
+                if pattern == registered.pattern then
+                    table.remove(registry, i)
+                end
+            else -- no handler, matcher, or pattern
                 table.remove(registry, i)
-            elseif handler == registered.handler and pattern == registered.pattern and matcher == registered.matcher then
-                table.remove(registry, i)
-                break
             end
         end
 
@@ -241,57 +263,46 @@ end
 -- @param event (<span class="types">@{event_data}</span>) the event data table
 -- @see https://forums.factorio.com/viewtopic.php?t=32039#p202158 Invalid Event Objects
 function Event.dispatch(event)
-    if event then
-        --get the registered handlers from name or input_name
-        local registry
-        if event.name then
-            registry = event_registry[event.name]
-        elseif event.input_name then
-            registry = event_registry[event.input_name]
-        elseif event.nth_tick then
-            registry = event_registry[-event.nth_tick]
-        end
+    Is.Assert.Table(event, 'missing event table')
+    --get the registered handlers from name, input_name, or nth_tick in that priority.
+    local registry
+    if event.name then
+        registry = event_registry[event.name]
+    elseif event.input_name then
+        registry = event_registry[event.input_name]
+    elseif event.nth_tick then
+        registry = event_registry[-event.nth_tick]
+    end
 
+    if registry then
+        -- protected_mode runs the handler and matcher in pcall, additionaly forcing a crc can only be
+        -- accomplished in protected_mode
         local protected = Event.protected_mode or event.protected_mode
 
-        if registry then
-            --add the tick if it is not present, this only affects calling Event.dispatch manually
-            --doing the check up here as it will faster than checking every iteration for a constant value
-            event.tick = event.tick or game and game.tick or 0
+        --add the tick if it is not present, this only affects calling Event.dispatch manually
+        --doing the check up here as it will faster than checking every iteration for a constant value
+        event.tick = event.tick or game and game.tick or 0
 
-            for _, registered in ipairs(registry) do
-                -- Check for userdata and stop processing this and further handlers if not valid
-                -- This is the same behavior as factorio events.
-                -- This is done inside the loop as other events can modify the event.
-                for _, val in pairs(event) do
-                    if Is.Object(val) and not val.valid then
-                        return
-                    end
-                end
-
-                -- Can't directly put our handler into the event, but we can index into it.
-                local mt = {
-                    __index = {
-                        _handler = registered.handler,
-                        _matcher = registered.matcher,
-                        _pattern = registered.pattern
-                    }
-                }
-                setmetatable(event, mt)
-
-                if protected then
-                    run_protected(registered, event)
-                elseif registered.matcher then
-                    if registered.matcher(event) then
-                        registered.handler(event)
-                    end
-                else
-                    registered.handler(event)
+        for _, registered in ipairs(registry) do
+            -- Check for userdata and stop processing this and further handlers if not valid
+            -- This is the same behavior as factorio events.
+            -- This is done inside the loop as other events can modify the event.
+            for _, val in pairs(event) do
+                if Is.Object(val) and not val.valid then
+                    return
                 end
             end
+
+            if protected then
+                run_protected(registered, event)
+            elseif registered.matcher then
+                if registered.matcher(event, registered.pattern) then
+                    registered.handler(event)
+                end
+            else
+                registered.handler(event)
+            end
         end
-    else
-        error('missing event argument')
     end
 end
 
@@ -301,7 +312,7 @@ end
 -- @usage
 -- Event.register(Event.generate_event_name("my_custom_event"), handler)
 function Event.generate_event_name(event_name)
-    fail_if_not(Is.String(event_name), 'event_name must be a string.')
+    Is.Assert.String(event_name, 'event_name must be a string.')
 
     local id
     if Is.Number(Event.custom_events[event_name]) then

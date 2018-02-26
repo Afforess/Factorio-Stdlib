@@ -329,15 +329,50 @@ function Event.raise_event(...)
     script.raise_event(...)
 end
 
--- TODO complete stub
-function Event.get_event_handler(...)
-    script.get_event_handler(...)
+function Event.get_event_handlers(event_id)
+    Is.Assert(valid_id(event_id))
+    return {
+        script = (tonumber(event_id) or 0 >= 0 or Is.String(event_id)) and script.get_event_handler(event_id),
+        handlers = event_registry[event_id]
+    }
 end
 
 --- Retrieve a copy of the the event_registry
 -- @treturn table event_registry
 function Event.get_registry()
     return table.deepcopy(event_registry)
+end
+
+function Event.dump(reg_type)
+    local init, config, load, events, nth = 0, 0, 0, 0, 0
+    for id, registry in pairs(event_registry) do
+        if tonumber(id) then
+            if id < 0 then
+                nth = nth + #registry
+            else
+                events = events + #registry
+            end
+        else
+            if id == "on_init" then
+                init = init + #registry
+            elseif id == "on_configuration_changed" then
+                config = config + #registry
+            elseif id == "load" then
+                load = load + #registry
+            else
+                events = events + #registry
+            end
+        end
+    end
+    local all = {
+        core = init + load + config,
+        init = init,
+        config = config,
+        load = load,
+        events = events,
+        nth = nth,
+    }
+    return reg_type and all[reg_type] or all
 end
 
 --- Filters events related to entity_type.

@@ -49,6 +49,7 @@ Is.Assert.Not = {}
 local M = {}
 
 local type = type
+local abs = math.abs
 
 local function _find(key)
     return assert(M[key], 'Is[' .. key .. '] not found')
@@ -127,6 +128,22 @@ function M.Empty(var)
         return #string == 0
     end
     return M.Nil(var)
+end
+
+function M.Positive(var)
+    return M.Number(var) and var == abs(var) or false
+end
+
+function M.Negative(var)
+    return M.Number(var) and var < 0 or false
+end
+
+function M.Position(var)
+    return M.Table(var) and ((var.x and var.y) or (var[1] and var[2])) or false
+end
+
+function M.Area(var)
+    return M.Table(var) and ((var.left_top and var.right_bottom) or (var[1] and var[1][1] and var[2] and var[2][1])) or false
 end
 
 --- Returns true if the passed variable is a single alphbetical word.

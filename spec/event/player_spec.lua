@@ -59,7 +59,7 @@ describe(
             function()
                 --local register_spy = spy.on(_G.Event, "register")
                 require('stdlib/event/player').register_events()
-                --local match = require('luassert/match'))
+                --local match = require('luassert.match'))
                 --local events = {defines.events.on_player_created, Event.core_events.init, Event.core_events.configuration_changed}
                 --assert.spy(register_spy).was_called_with(events, match.is_function())
                 assert.is_same(5, table.count_keys(Event._registry))
@@ -73,7 +73,7 @@ describe(
             function()
                 local register_spy = spy.on(_G.Event, 'register')
                 require('stdlib/event/player').register_events()
-                local match = require('luassert/match')
+                local match = require('luassert.match')
                 assert.spy(register_spy).was_called_with(defines.events.on_player_removed, match.is_function())
             end
         )

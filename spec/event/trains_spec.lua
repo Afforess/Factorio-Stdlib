@@ -56,7 +56,7 @@ describe('when the train module loads', function()
 
         -- Act
         require('stdlib/event/trains').register_events()
-        local match = require('luassert/match')
+        local match = require('luassert.match')
 
         -- assert
         local train_remove_events = {defines.events.on_entity_died, defines.events.on_pre_player_mined_item, defines.events.on_robot_pre_mined}
@@ -70,7 +70,7 @@ describe('when the train module loads', function()
 
         -- Act
         require('stdlib/event/trains').register_events()
-        local match = require('luassert/match')
+        local match = require('luassert.match')
 
         -- assert
         assert.spy(register_spy).was_called_with(defines.events.on_train_created, match.is_function())

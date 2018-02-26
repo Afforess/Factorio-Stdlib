@@ -1,4 +1,4 @@
-local mock = require('luassert/mock')
+local mock = require('luassert.mock')
 
 -- convenience function to generate a pile of unique stubs, i.e.:
 -- a,b,c = genstubs(3)

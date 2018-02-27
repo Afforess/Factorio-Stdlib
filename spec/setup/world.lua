@@ -17,7 +17,9 @@ World.close - Closes the world simulator
 note: save/load/reload havn't been tested yet.
 
 --]]
-require('spec/setup/globals')
+
+--require('spec/setup/globals')
+require('spec/setup/defines')
 
 local World = {
     Debug = require('spec/setup/debug')
@@ -26,6 +28,10 @@ local World = {
 --------------------------------------------------------------------------------
 --[Setup Globals]--
 --------------------------------------------------------------------------------
+_G.serpent = require('spec/setup/utils/serpent')
+_G.log = function()
+end
+
 _G._print = print
 _G.print = function(...) --luacheck: ignore print
     if World.Debug.allow_print then
@@ -39,22 +45,6 @@ local print_buffer = function(msg, group)
     World.Debug._msg_buffer[#World.Debug._msg_buffer + 1] = group .. msg
     print(group .. msg)
     return true
-end
-
-local override_require = function(replace)
-    if replace and not _G._require then
-        --print("require ovverride on")
-        _G._require = _G.require
-        _G.require = function(path) --luacheck: ignore require
-            local p = World.Debug._watched_packages
-            p[#p + 1] = path
-            return _G._require(path)
-        end
-    elseif not replace and _G._require then
-        --print("require override off")
-        _G.require = _G._require
-        _G._require = nil
-    end
 end
 
 --------------------------------------------------------------------------------
@@ -107,29 +97,17 @@ meta.game = {
     end
 }
 
-meta._G = {
-    __newindex = function(t, k, v)
-        local globs = World.Debug._new_globs
-        globs[#globs + 1] = k
-        rawset(t, k, v)
-    end
-}
-
 --------------------------------------------------------------------------------
 --[World Functions]--
 --------------------------------------------------------------------------------
+World.data = function() end
+
 World.open =
     function()
     if _G.script then
         error('Cannot Open, simulation already running')
     end
 
-    override_require(true)
-
-    setmetatable(_G, meta._G)
-    _G.global = nil
-    _G.game = nil
-    _G.remote = nil
     _G.script = {
         _next_id = 200,
         on_event = function(_, _)
@@ -149,12 +127,13 @@ World.open =
             return _G.script._next_id
         end,
         raise_event = function(event_id, event_tbl)
+            event_tbl = event_tbl or {}
             event_tbl.name = event_id
-            local Event = require('stdlib/event/event')
-            return Event and Event.dispatch(event_tbl)
+            require('stdlib/event/event').dispatch(event_tbl)
         end,
         mod_name = 'tests'
     }
+    return World
 end
 
 --If using events make sure to require and register events before calling World.init
@@ -210,13 +189,14 @@ World.init =
 
     --init, if load_only run load only elseif if config_changed_data
     if load_only or config_changed_data then
-        script.raise_event(-2, {tick = game.tick})
+        script.raise_event('on_load', {tick = game.tick})
         if config_changed_data then
-            script.raise_event(-3, config_changed_data)
+            script.raise_event('on_configuration_changed', config_changed_data)
         end
     else
-        script.raise_event(-1, {tick = game.tick})
+        script.raise_event('on_init', {tick = game.tick})
     end
+    return World
 end
 
 World.update = function(ticks)
@@ -247,17 +227,18 @@ World.create_players =
         _G.game.players[cur] = player
         _G.script.raise_event(defines.events.on_player_created, {tick = _G.game.tick, player_index = next})
     end
+    return World
 end
 
 -- performs a load
 World.load = function(config_changed_data, saved_global, saved_game)
-    World.init(nil, false, saved_global, saved_game, config_changed_data)
+    return World.init(nil, false, saved_global, saved_game, config_changed_data)
 end
 
 --Performs a quit and load
 World.reload = function(save_and_reload)
     local saved_global, saved_game = World.close(save_and_reload)
-    World.load(nil, save_and_reload, saved_global, saved_game)
+    return World.load(nil, save_and_reload, saved_global, saved_game)
 end
 
 World.save = function()
@@ -278,33 +259,6 @@ end
 World.close = function(save, skip_unloading_these)
     if save then
         World.save()
-    end
-
-    _G.global = nil
-    _G.game = nil
-
-    _G.remote = nil
-    _G.script = nil
-    _G.Game = nil
-    _G.on_init = nil
-    _G.on_configuration_changed = nil
-
-    local ignore = {}
-    for _, pack_name in pairs(skip_unloading_these or {}) do
-        ignore[pack_name] = true
-    end
-    for pack in pairs(package.loaded) do
-        if not ignore[pack] and pack:find('^stdlib/') then
-            package.loaded[pack] = nil
-        end
-    end
-    package.loaded['spec/setup/defines'] = nil
-
-    override_require(false)
-
-    World.Debug.close()
-
-    if save then
         return _G.saved_global, _G.saved_game
     end
 end

@@ -27,7 +27,7 @@ Position.epsilon = 1.19e-07
 -- @tparam[opt=false] boolean new_copy return a new copy
 -- @treturn Concepts.Position itself or a new correctly formated position with metatable
 function Position.new(pos, new_copy)
-    Is.Assert.Position(pos, 'missing position argument')
+    Is.Assert.Table(pos, 'missing position argument')
 
     local copy = new_copy or Position.immutable
     if not copy and getmetatable(pos) == Position._mt then
@@ -64,7 +64,7 @@ end
 -- @tparam Concepts.Position pos the position to load the metatable onto
 -- @treturn Concepts.Position the position with metatable attached
 function Position.load(pos)
-    Is.Assert.Position(pos, 'position missing')
+    Is.Assert.Table(pos, 'position missing')
     return setmetatable(pos, Position._mt)
 end
 

@@ -226,11 +226,14 @@ setmetatable(
     {
         __index = function(_, k)
             return function(_assert, _message)
-                return assert(M[k](_assert), _message)
+                --return assert(M[k](_assert), _message)
+                return M[k](_assert) or error(_message, 3)
             end
         end,
         __call = function(_, ...)
-            return assert(...)
+            --return assert(...)
+            local param = {...}
+            return param[1] or error(param[2], 3)
         end
     }
 )
@@ -240,12 +243,14 @@ setmetatable(
     {
         __index = function(_, k)
             return function(_assert, _message)
-                return assert(not M[k](_assert), _message)
+                --return assert(not M[k](_assert), _message)
+                return not M[k] or error(_message, 3)
             end
         end,
         __call = function(_, ...)
             local param = {...}
-            return assert(not param[1], param[2])
+            --return assert(not param[1], param[2])
+            return not param[1] or error(param[2], 3)
         end
     }
 )

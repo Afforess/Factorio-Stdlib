@@ -21,7 +21,7 @@ Area.immutable = false
 -- @tparam boolean new_copy return a new copy
 -- @treturn Concepts.BoundingBox a converted area
 function Area.new(area, new_copy)
-    Is.Assert.Area(area, 'missing area value')
+    Is.Assert.Table(area, 'missing area value')
 
     local copy = new_copy or Area.immutable
     if not copy and getmetatable(area) == Area._mt then
@@ -63,12 +63,12 @@ end
 -- @tparam Concepts.BoundingBox pos the Area to load the metatable onto
 -- @treturn Concepts.BoundingBox the Area with metatable attached
 function Area.load(pos)
-    Is.Assert.Area(pos, 'position missing')
+    Is.Assert.Table(pos, 'position missing')
     return setmetatable(pos, Area._mt)
 end
 
 local function validate_vector(amount)
-    Is.Assert.Number(amount, 'Missing amount to shrink by')
+    Is.Assert(amount, 'Missing amount to adjust by')
 
     if type(amount) == 'number' then
         if amount < 0 then

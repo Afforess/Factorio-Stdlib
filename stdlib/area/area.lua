@@ -9,7 +9,7 @@
 local Area = {_module_name = 'Area'}
 setmetatable(Area, {__index = require('stdlib/core')})
 
-local fail_if_not = Area.fail_if_not
+local Is = require('stdlib/utils/is')
 local Position = require('stdlib/area/position')
 
 --- By default area tables are mutated in place set this to true to make the tables immutable.
@@ -21,16 +21,17 @@ Area.immutable = false
 -- @tparam boolean new_copy return a new copy
 -- @treturn Concepts.BoundingBox a converted area
 function Area.new(area, new_copy)
-    fail_if_not(area, 'missing area value')
+    Is.Assert.Area(area, 'missing area value')
 
-    if not (new_copy or Area.immutable) and getmetatable(area) == Area._mt then
+    local copy = new_copy or Area.immutable
+    if not copy and getmetatable(area) == Area._mt then
         return area
     end
 
     local left_top = Position.new(area.left_top or area[1], true)
     local right_bottom = Position.new(area.right_bottom or area[2], true)
-    area = {left_top = left_top, right_bottom = right_bottom, orientation = area.orientation}
-    return setmetatable((new_copy or Area.immutable) and table.deepcopy(area) or area, Area._mt)
+    local new = {left_top = left_top, right_bottom = right_bottom, orientation = area.orientation}
+    return setmetatable(new, Area._mt)
 end
 
 --- Creates an area from the two positions p1 and p2.
@@ -58,8 +59,16 @@ function Area.copy(area)
     return Area.new(area, true)
 end
 
+--- Loads the metatable into the passed Area without creating a new one.
+-- @tparam Concepts.BoundingBox pos the Area to load the metatable onto
+-- @treturn Concepts.BoundingBox the Area with metatable attached
+function Area.load(pos)
+    Is.Assert.Area(pos, 'position missing')
+    return setmetatable(pos, Area._mt)
+end
+
 local function validate_vector(amount)
-    fail_if_not(amount, 'Missing amount to shrink by')
+    Is.Assert.Number(amount, 'Missing amount to shrink by')
 
     if type(amount) == 'number' then
         if amount < 0 then
@@ -129,7 +138,7 @@ end
 -- @treturn Concepts.BoundingBox the adjusted bounding box
 function Area.adjust(area, vector)
     area = Area.new(area)
-    fail_if_not(vector, 'missing vector value')
+    Is.Assert(vector, 'missing vector value')
 
     --shrink or expand on x vector
     if assert(vector[1], 'x vector missing') > 0 then
@@ -185,8 +194,9 @@ end
 -- @tparam number distance the distance of the translation
 -- @treturn Concepts.BoundingBox the area translated
 function Area.translate(area, direction, distance)
+    Is.Assert.Number(direction, 'missing direction argument')
+
     area = Area.new(area)
-    fail_if_not(direction, 'missing direction argument')
     distance = distance or 1
 
     area.left_top = Position.translate(area.left_top, direction, distance)
@@ -473,12 +483,13 @@ Area._mt = {
     __call = Area.copy -- Return a new copy
 }
 
-local function _call(_, ...)
+local function __call(_, ...)
     if type((...)) == 'table' then
-        return Area.new((...))
+        return Area.new(...)
     else
         return Area.construct(...)
     end
 end
+Area:_protect(__call)
 
-return Area:_protect(_call)
+return Area

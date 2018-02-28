@@ -4,17 +4,18 @@ require('stdlib/utils/table')
 
 local genstubs = require('spec/utils/stub_factory')
 
+local World = require('spec/setup/world')
 local Event
 
-local World = require('spec/setup/world')
+World.control = function()
+    Event = require('stdlib/event/event')
+end
 
 describe("Event",
     function()
 
         before_each(
             function()
-                World.open()
-                Event = require('stdlib/event/event')
                 World.init()
             end
         )

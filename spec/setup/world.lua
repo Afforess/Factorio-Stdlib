@@ -25,20 +25,6 @@ local World = {
     Debug = require('spec/setup/debug')
 }
 
---------------------------------------------------------------------------------
---[Setup Globals]--
---------------------------------------------------------------------------------
-_G.serpent = require('spec/setup/utils/serpent')
-_G.log = function()
-end
-
-_G._print = print
-_G.print = function(...) --luacheck: ignore print
-    if World.Debug.allow_print then
-        _G._print(...)
-    end
-end
-
 --This is our print override
 local print_buffer = function(msg, group)
     group = group or '_P_'
@@ -94,7 +80,7 @@ end
 
 local function fakegame(game)
     local rslt = fakeuserdata(game)
-    local rsltmeta = getmetatable(fakeuserdata)
+    local rsltmeta = getmetatable(rslt)
     local rsltmetaindex = rsltmeta.__index
     rsltmeta.__index = function(_, k)
         if k == 'connected_players' then
@@ -120,13 +106,74 @@ local function fakegame(game)
 end
 
 --------------------------------------------------------------------------------
+--[World Frobs and Callbacks]--
+--------------------------------------------------------------------------------
+
+World.data = function() end -- simulated data.lua global environment
+World.control = function() end -- simulated control.lua global environment
+World.log = function() end -- global log() callback
+
+-- Did anyone ever call World.reset?
+local world_primed = false
+
+local real_require = require
+local in_event_handler = 0 -- track event callback recursion (a psuedosemaphore)
+
+--------------------------------------------------------------------------------
 --[World Functions]--
 --------------------------------------------------------------------------------
-World.data = function() end
+
+-- Returns World module to pristine state; should be mostly equivalent to:
+--
+--   package.loaded['spec/setup/world'] = nil
+--   MyWorldLocalVariable = require('spec/setup/world')
+World.reset = function(save)
+    world_primed = true
+    local rslt = false
+    if save then
+        rslt = World.close(true)
+    end
+    -- Setup Globals
+    _G.serpent = require('spec/setup/utils/serpent')
+    _G.log = function(...)
+        World.log(...)
+    end
+    _G._print = print
+    _G.print = function(...) --luacheck: ignore print
+        if World.Debug.allow_print then
+            _G._print(...)
+        end
+    end
+    _G.script = nil
+    _G.game = nil
+    -- TODO: _G.data = something
+    _G.global = {} -- TODO: check if should be nil
+
+    -- optional simulated data.lua in test callback
+    World.data()
+
+    _G.global = {}
+    -- we must steal require here to simulate factorio's outrageous and oppressive require semantics
+    _G.require = function(...) --luacheck: ignore require
+        if in_event_handler > 0 then
+            error('faketorio does not allow the use of the require function in event callbacks because it is a big stupid jerk', 1)
+        else
+            real_require(...)
+        end
+    end
+
+    return rslt or nil
+end
 
 World.open = function()
     if _G.script then
         error('Cannot Open, simulation already running')
+    end
+
+    -- world must be reset at least once before it can be used
+    -- (otherwise serpent, log, etc. globals will be missing)
+    if not world_primed then
+        World.reset()
     end
 
     local registry = {}
@@ -161,17 +208,21 @@ World.open = function()
             id = id or 0
             e.name = e.name or id
             e.tick = e.tick or _G.game and _G.game.tick or 0
-            (_G.script.registry[id] or function() end)(e)
+            in_event_handler = in_event_handler + 1
+            local ok, msg = xpcall(registry[id] or function() end, debug.traceback, e)
+            in_event_handler = in_event_handler - 1
+            if not ok then
+                error(msg)
+            end
         end,
         mod_name = 'tests'
     }
+
     return World
 end
 
---If using events make sure to require and register events before calling World.init
-World.init =
-    function(tick, load_only, saved_global, saved_game, config_changed_data, is_multiplayer)
-
+--If using events make sure to require and register events during control callback
+World.init = function(multiplayer, savetable, config_changed_data)
     if not _G.script then
         World.open()
     end
@@ -179,11 +230,23 @@ World.init =
         error("Can't Init, simulation already running")
     end
 
-    is_multiplayer = is_multiplayer or false
+    savetable = savetable or {}
+    saved_global = savetable.global
+    saved_game = savetable.game
+    savetable = table.size(savetable) > 0 and savetable or false
+    assert(savetable and saved_global and saved_game or not savetable, 'Invalid savetable')
+
+    -- ensure config_changed_data is always a table if requested
+    config_changed_data = config_changed_data == true and {} or config_changed_data
+
+    -- optional simulated control.lua in test callback
+    World.control()
+
+    multiplayer = multiplayer or false
 
     _G.global = saved_global or {}
     _G.game = fakegame(saved_game or {
-        tick = tick or 0,
+        tick = 0,
         players = {},
         print = print_buffer,
         forces = {
@@ -203,7 +266,7 @@ World.init =
                 name = 'nauvis'
             }
         },
-        is_multiplayer = function() return is_multiplayer; end
+        is_multiplayer = function() return multiplayer; end
     })
     _G.remote = fakeuserdata({
         interfaces = {},
@@ -219,12 +282,9 @@ World.init =
         fakeuserdata(surface)
     end
 
-    -- ensure at least one player is created
-    World.create_players()
-
     --init, if load_only run load only elseif if config_changed_data
-    if load_only or config_changed_data then
-        script.raise_event('on_load', {tick = game.tick})
+    if savetable then
+        script.raise_event('on_load')
         if config_changed_data then
             script.raise_event('on_configuration_changed', config_changed_data)
         end
@@ -243,7 +303,8 @@ World.update = function(ticks)
     end
 end
 
---Create some players, pdata can be used to setup defaults
+--Create some players
+--TODO: optional pdata argument can be used to setup defaults
 World.create_players = function(how_many)
     how_many = how_many or 1
 
@@ -262,35 +323,44 @@ World.create_players = function(how_many)
 end
 
 -- performs a load
-World.load = function(config_changed_data, saved_global, saved_game)
-    return World.init(nil, false, saved_global, saved_game, config_changed_data)
-end
-
---Performs a quit and load
-World.reload = function(save_and_reload)
-    local saved_global, saved_game = World.close(save_and_reload)
-    return World.load(nil, save_and_reload, saved_global, saved_game)
+World.load = function(savetable, config_changed_data)
+    return World.init(savetable, config_changed_data)
 end
 
 World.save = function()
+    local saved_global, saved_game
     if _G.global then
         local global_meta = getmetatable(_G.global)
-        _G.saved_global = table.deepcopy(setmetatable(_G.global, nil))
+        saved_global = table.deepcopy(setmetatable(_G.global, nil))
         setmetatable(_G.global, global_meta)
+    else
+        saved_global = {}
     end
 
     if _G.game then
         local game_meta = getmetatable(_G.game)
-        _G.saved_game = table.deepcopy(setmetatable(_G.game, nil))
+        saved_game = table.deepcopy(setmetatable(_G.game, nil))
         setmetatable(_G.game, game_meta)
+    else
+        saved_game = {}
     end
-    return _G.saved_global, _G.saved_game
+    return {global = saved_global, game = saved_game}
 end
 
-World.close = function(save, skip_unloading_these)
+World.close = function(save)
     if save then
         return World.save()
     end
+    _G.global = {}
+    _G.game = nil
 end
+
+--Performs a quit and load
+World.reload = function(save_and_reload, config_changed_data)
+    local savetable = World.close(save_and_reload)
+    return World.load(savetable, config_changed_data)
+end
+
+World.reset()
 
 return World

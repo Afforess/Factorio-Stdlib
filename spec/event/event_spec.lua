@@ -6,49 +6,24 @@ local genstubs = require('spec/utils/stub_factory')
 
 local Event
 
--- faketorio event registry placed here
-local factorio_event_registry
-
--- fake global log handler
-local fake_log
-
--- fire faketorio event into registered listeners if any
-local function fire(e)
-    if not e then e = {} end
-    if not e.name then e.name = 0 end
-    if factorio_event_registry[e.name] then
-        return factorio_event_registry[e.name](e)
-    end
-end
+local World = require('spec/setup/world')
 
 describe("Event",
     function()
 
-        setup(
-            function()
-                _G.table.size = table.size
-                _G.log = function(...) fake_log.log(...) end
-            end
-        )
-
         before_each(
             function()
-                factorio_event_registry = {}
-                fake_log = { log = function() end }
+                World.open()
                 Event = require('stdlib/event/event')
-                _G.script = {
-                    on_event = function(i, f) factorio_event_registry[i] = f end,
-                    on_init = function(f) _G.script.on_event(Event.core_events.init, f) end,
-                    on_load = function(f) _G.script.on_event(Event.core_events.load, f) end,
-                    on_configuration_changed = function(f) _G.script.on_event(Event.core_events.on_configuration_changed, f) end
-                }
-                _G.game = {tick = 1, print = function() end}
+                World.init()
             end
         )
 
         after_each(
             function()
                 package.loaded['stdlib/event/event'] = nil
+                Event = nil
+                World.close()
             end
         )
 
@@ -58,7 +33,7 @@ describe("Event",
                 Event.register(0, f)
                 Event.register(0, g)
                 local e = {name = 0}
-                fire(e)
+                script.raise_event(0, e)
                 assert.stub(f).was.called_with(e)
                 assert.stub(f).was.called(1)
                 assert.stub(g).was.called_with(e)
@@ -87,9 +62,9 @@ describe("Event",
             function()
                 local f, g = genstubs(2)
                 Event.register({0, 2}, f).register(2, g)
-                fire({name=0})
+                script.raise_event()
                 assert.stub(f).was.called(1)
-                fire({name=2})
+                script.raise_event(2)
                 assert.stub(f).was.called(2)
                 assert.stub(g).was.called(1)
             end
@@ -126,7 +101,7 @@ describe("Event",
                     assert.stub(g).was.called(1)
                 end)
                 Event.register(0, f).register(0, g).register(0, f)
-                fire()
+                script.raise_event()
                 assert.spy(f).was.called(1)
             end
         )
@@ -138,7 +113,7 @@ describe("Event",
                 end)
                 local f, h = genstubs(2)
                 Event.register(0, f).register(0, g).register(0, h)
-                fire()
+                script.raise_event()
                 assert.stub(f).was.called(1)
                 assert.spy(g).was.called(1)
                 assert.stub(h).was_not.called()
@@ -165,33 +140,33 @@ describe("Event",
 
                 Event.register(0, f).register({0, 1}, g).register({0, 1, 2}, h).register({2, 0}, i)
 
-                fire()
+                script.raise_event()
                 check_counts(1, 1, 1, 1)
-                fire({name = 2})
+                script.raise_event(2)
                 check_counts(1, 1, 2, 2)
                 Event.remove(0, f)
-                fire()
+                script.raise_event()
                 check_counts(1, 2, 3, 3)
                 Event.remove(0, i)
-                fire()
+                script.raise_event()
                 check_counts(1, 3, 4, 3)
-                fire({name = 2})
+                script.raise_event(2)
                 check_counts(1, 3, 5, 4)
                 Event.remove(2, i)
-                fire({name = 2})
+                script.raise_event(2)
                 check_counts(1, 3, 6, 4)
-                fire({name = 1})
+                script.raise_event(1)
                 check_counts(1, 4, 7, 4)
                 Event.remove(1, h)
-                fire({name = 1})
+                script.raise_event(1)
                 check_counts(1, 5, 7, 4)
-                fire()
+                script.raise_event()
                 check_counts(1, 6, 8, 4)
                 Event.remove({0, 1}, g)
                 Event.remove({0, 1, 2}, h)
-                fire()
-                fire({name = 1})
-                fire({name = 2})
+                script.raise_event()
+                script.raise_event(1)
+                script.raise_event(1)
                 check_counts(1, 6, 8, 4)
             end
         )

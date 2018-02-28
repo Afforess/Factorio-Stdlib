@@ -50,8 +50,6 @@ end
 --------------------------------------------------------------------------------
 --[Setup Metatables]--
 --------------------------------------------------------------------------------
-local meta = {}
-
 local get_connected_players = function()
     local players = {}
     for _, p in pairs(_G.game.players) do
@@ -62,74 +60,108 @@ local get_connected_players = function()
     return players
 end
 
---Set __self and valid on __index when players are added to game
-meta.base = {
-    __index = {
-        valid = true,
-        __self = 'userdata',
-        print = print_buffer,
-        connected = true
-    }
-}
-
-meta.new_player = {
-    __newindex = function(t, k, v)
-        rawset(t, k, v)
-        setmetatable(t[k], meta.base)
+local function fakehex64()
+    function fakehex32()
+        return string.format('%08x', math.random(0, 2^32-1))
     end
-}
+    return '0x' .. fakehex32() .. fakehex32()
+end
 
-meta.connected_players = {
-    __index = function(_, k)
-        return get_connected_players()[k]
-    end,
-    __len = function()
-        return #get_connected_players()
-    end
-}
+local function fakeuserdata(target)
+    target = target or {}
+    return setmetatable(
+        target,
+        {
+            __index = {
+                valid = true,
+                __self = 'userdata: ' .. fakehex64(),
+                print = print_buffer,
+                connected = true
+            },
+            __pairs = function(self)
+                local isfirst = true
+                return function()
+                    if isfirst then
+                        isfirst = false
+                        return '__self', self.__self
+                    end
+                end
+            end,
+            __ipairs = function() end
+        }
+    )
+end
 
-meta.game = {
-    __index = function(t, k)
+local function fakegame(game)
+    local rslt = fakeuserdata(game)
+    local rsltmeta = getmetatable(fakeuserdata)
+    local rsltmetaindex = rsltmeta.__index
+    rsltmeta.__index = function(_, k)
         if k == 'connected_players' then
-            return setmetatable(get_connected_players(), meta.connected_players)
+            return setmetatable({},{
+                __index = function(_, k)
+                    return get_connected_players()[k]
+                end,
+                __len = function()
+                    return #get_connected_players()
+                end,
+                __pairs = function()
+                    return ipairs(get_connected_players())
+                end,
+                __ipairs = function()
+                    return ipairs(get_connected_players())
+                end
+            })
+        else
+            return rsltmetaindex[k]
         end
-        return t[k]
     end
-}
+    return rslt
+end
 
 --------------------------------------------------------------------------------
 --[World Functions]--
 --------------------------------------------------------------------------------
 World.data = function() end
 
-World.open =
-    function()
+World.open = function()
     if _G.script then
         error('Cannot Open, simulation already running')
     end
 
+    local registry = {}
+    local next_id = 200
     _G.script = {
-        _next_id = 200,
-        on_event = function(_, _)
-            return
+        on_event = function(eid, callback)
+            registry[eid] = callback
         end,
         on_init = function(callback)
-            _G.on_init = callback
+            _G.script.on_event('on_init', callback)
         end,
         on_load = function(callback)
-            _G.on_load = callback
+            _G.script.on_event('on_load', callback)
         end,
         on_configuration_changed = function(callback)
-            _G.on_configuration_changed = callback
+            _G.script.on_event('on_configuration_changed', callback)
+        end,
+        on_nth_tick = function(tick, callback)
+            error('script.on_nth_tick: not implemented yet')
         end,
         generate_event_name = function()
-            _G.script._next_id = _G.script._next_id + 1
-            return _G.script._next_id
+            next_id = next_id + 1
+            return next_id
         end,
-        raise_event = function(event_id, event_tbl)
-            event_tbl = event_tbl or {}
-            event_tbl.name = event_id
-            require('stdlib/event/event').dispatch(event_tbl)
+        get_event_handler = function(id)
+            return registry[id]
+        end,
+        raise_event = function(id, e)
+            -- presumably the real raise_event arguments are
+            -- not optional but it's handy for testing.
+            e = e or {}
+            id = id or 0
+            e.name = e.name or id
+            e.tick = e.tick or _G.game and _G.game.tick or 0
+            (_G.script.registry[id] or function() end)(e)
         end,
         mod_name = 'tests'
     }
@@ -138,54 +170,57 @@ end
 
 --If using events make sure to require and register events before calling World.init
 World.init =
-    function(tick, load_only, saved_global, saved_game, config_changed_data)
+    function(tick, load_only, saved_global, saved_game, config_changed_data, is_multiplayer)
+
     if not _G.script then
-        World.init()
+        World.open()
     end
     if _G.game then
         error("Can't Init, simulation already running")
     end
 
+    is_multiplayer = is_multiplayer or false
+
     _G.global = saved_global or {}
-    _G.game =
-        saved_game or
-        {
-            tick = tick or 0,
-            players = {},
-            print = print_buffer,
-            forces = {
-                {
-                    name = 'player'
-                },
-                {
-                    name = 'neutral'
-                },
-                {
-                    name = 'enemy'
-                }
+    _G.game = fakegame(saved_game or {
+        tick = tick or 0,
+        players = {},
+        print = print_buffer,
+        forces = {
+            {
+                name = 'player'
             },
-            surfaces = {
-                {
-                    index = 1,
-                    name = 'nauvis'
-                }
+            {
+                name = 'neutral'
+            },
+            {
+                name = 'enemy'
             }
-        }
-    _G.remote = {
+        },
+        surfaces = {
+            {
+                index = 1,
+                name = 'nauvis'
+            }
+        },
+        is_multiplayer = function() return is_multiplayer; end
+    })
+    _G.remote = fakeuserdata({
         interfaces = {},
         call = function()
         end
-    }
+    })
 
     --run a fake data loader here to populate game.xxx_prototypes
     for _, force in pairs(game.forces) do
-        setmetatable(force, meta.base)
+        fakeuserdata(force)
     end
     for _, surface in pairs(game.surfaces) do
-        setmetatable(surface, meta.base)
+        fakeuserdata(surface)
     end
 
-    setmetatable(game, meta.game)
+    -- ensure at least one player is created
+    World.create_players()
 
     --init, if load_only run load only elseif if config_changed_data
     if load_only or config_changed_data then
@@ -209,23 +244,19 @@ World.update = function(ticks)
 end
 
 --Create some players, pdata can be used to setup defaults
-World.create_players =
-    function(how_many, pdata)
+World.create_players = function(how_many)
     how_many = how_many or 1
-    pdata = pdata or {}
 
-    for _ = 1, how_many do
-        local cur = #game.players + 1
-        local player = {
-            index = cur,
-            name = 'Player' .. cur
-        }
-        for k, v in pairs(pdata) do
-            player[k] = v
-        end
-        setmetatable(player, meta.base)
-        _G.game.players[cur] = player
-        _G.script.raise_event(defines.events.on_player_created, {tick = _G.game.tick, player_index = next})
+    _G.game.players = _G.game.players or {}
+
+    -- players may be sparse so some care must be taken here
+    while table.size(game.players) < how_many do
+        local newindex = #game.players + 1
+        game.players[newindex] = fakeuserdata({
+            index = newindex,
+            name = 'Player' .. tostring(newindex)
+        })
+        _G.script.raise_event(defines.events.on_player_created, {tick = _G.game.tick, player_index = newindex})
     end
     return World
 end
@@ -258,8 +289,7 @@ end
 
 World.close = function(save, skip_unloading_these)
     if save then
-        World.save()
-        return _G.saved_global, _G.saved_game
+        return World.save()
     end
 end
 

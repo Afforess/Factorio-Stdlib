@@ -209,10 +209,14 @@ World.open = function()
             e.name = e.name or id
             e.tick = e.tick or _G.game and _G.game.tick or 0
             in_event_handler = in_event_handler + 1
-            local ok, msg = xpcall(registry[id] or function() end, debug.traceback, e)
+            local ok, msg = xpcall(function()
+                return (registry[id] or function() end)(e)
+            end, debug.traceback)
             in_event_handler = in_event_handler - 1
             if not ok then
                 error(msg)
+            else
+                return msg
             end
         end,
         mod_name = 'tests'

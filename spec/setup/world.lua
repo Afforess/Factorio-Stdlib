@@ -14,7 +14,7 @@ World.reload - perfoms a save and calls world.close and world.load using the sav
 
 World.quit - Closes the world simulator
 
-note: save/load/reload havn't been tested yet.
+note: save/load/reload haven't been tested yet.
 --]]
 require('spec/setup/defines')
 

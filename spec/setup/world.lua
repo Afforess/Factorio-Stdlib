@@ -361,6 +361,4 @@ World.reload = function(save_and_reload, config_changed_data)
     return World.load(savetable, config_changed_data)
 end
 
-World.reset()
-
 return World

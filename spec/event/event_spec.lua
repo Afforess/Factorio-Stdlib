@@ -14,8 +14,8 @@ insulate("Event", function()
         World.init()
     end)
 
-    insulate(function()
-        it(".register should add multiple callbacks for the same event", function()
+    insulate('.register', function()
+        it("should add multiple callbacks for the same event", function()
             local f, g = genstubs(2)
             Event.register(0, f)
             Event.register(0, g)
@@ -28,16 +28,16 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it(".register should fail if a nil/false event id is passed", function()
+    insulate('.register', function()
+        it("should fail if a nil/false event id is passed", function()
             assert.has.errors(function() Event.register(false, function_a) end)
             assert.has.errors(function() Event.register({0, false}, function_a) end)
             assert.has.errors(function() Event.register({0, {}}) end)
         end)
     end)
 
-    insulate(function()
-        it(".register should error if nil is passed as a handler", function()
+    insulate('.register', function()
+        it("should error if nil is passed as a handler", function()
             local f, g = genstubs(2)
             Event.register(0, f)
             Event.register(0, g)
@@ -45,8 +45,8 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it(".register should add a handler for multiple events", function()
+    insulate('.register', function()
+        it("should add a handler for multiple events", function()
             local f, g = genstubs(2)
             Event.register({0, 2}, f).register(2, g)
             script.raise_event()
@@ -57,8 +57,8 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it("initial, but not subsequent, .register invocations for a given event"
+    insulate('.register', function()
+        it("initial, but not subsequent, invocations for a given event"
             .. " should cause global registration with factorio", function()
             local s = spy.on(script, "on_event")
             Event.register(0, genstubs())
@@ -75,15 +75,15 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it(".register should return the event module to callers", function()
+    insulate('.register', function()
+        it("should return the event module to callers", function()
             assert.equals(Event, Event.register(0, genstubs(1)))
             assert.equals(Event, Event.register(0, genstubs(1)).register(0, genstubs(1)))
         end)
     end)
 
-    insulate(function()
-        it(".register should not add duplicate handers to a single event, and"
+    insulate('.register', function()
+        it("should not add duplicate handers to a single event, and"
             .. " should fire in order of least recent registration", function()
             local g = genstubs()
             local f = spy(function ()
@@ -95,8 +95,8 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it(".dispatch should abort if a handler event passes stop_processing", function()
+    insulate('.dispatch', function()
+        it("should abort if a handler event passes stop_processing", function()
             local g = spy(function (e)
                 e.stop_processing = true
             end)
@@ -109,17 +109,17 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it(".remove should log, but not emit an error, for de-registration"
+    insulate('.remove', function()
+        it("should log, but not emit an error, for de-registration"
             .. " of non-registered listeners", function()
-            local s = spy.on(fake_log, "log")
+            World.log = genstubs()
             assert.has_no.errors(function () Event.remove(0, genstubs()) end)
-            assert.spy(s).was.called()
+            assert.stub(s).was.called()
         end)
     end)
 
-    insulate(function()
-        it(".remove should deregister a given handler from an event", function()
+    insulate('.remove', function()
+        it("should deregister a given handler from an event", function()
             local f, g, h, i = genstubs(4)
             local function check_counts(fc,gc,hc,ic)
                 assert.stub(f).was.called(fc)
@@ -162,9 +162,8 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it(".remove(_, event._handler) remove the handler itself if called"
-            .. " inside event callback", function()
+    insulate('.remove', function()
+        it("should remove the running handler if requested", function()
             Event.register(0, function(event)
                 if event._handler then Event.remove(0, event._handler) end
             end)
@@ -177,8 +176,8 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it(".dispatch should print an error to connected players if a handler"
+    insulate('.dispatch', function()
+        it("should print an error to connected players if a handler"
             .. " throws an error", function()
             game.connected_players = {{
                 name = "test_player",
@@ -194,8 +193,8 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it(".dispatch should error when there are no connected players"
+    insulate('.dispatch', function()
+        it("should error when there are no connected players"
             .. " if a handler throws an error", function()
             game.players = {{
                 name = "test_player",
@@ -214,8 +213,8 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it(".dispatch should return nil if an event has a table where table.__self"
+    insulate('.dispatch', function()
+        it("should return nil if an event has a table where table.__self"
             .. " exists but table.valid is false", function()
             Event.register(1, function_d).register(1, function_b)
 
@@ -232,8 +231,8 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it(".register with core_events.on_init should register callbacks"
+    insulate('.register', function()
+        it("should register core_events.on_init callbacks"
             .. " and dispatch events", function()
             local control = {
                 on_init = function(event)
@@ -252,8 +251,8 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it(".register with core_events.on_load should register callbacks"
+    insulate('.register', function()
+        it("should register on_load callbacks"
             .. " and dispatch events", function()
             local control = {
                 on_load = function(event)
@@ -272,9 +271,9 @@ insulate("Event", function()
         end)
     end)
 
-    insulate(function()
-        it(".register with core_events.on_configuration_changed should"
-            .. " register callbacks and dispatch events", function()
+    insulate('.register', function()
+        it("should register on_configuration_changed callbacks"
+            .. " and dispatch events", function()
             -- mock configuration change data
             game.connected_players = {{
                 name = "test_player",

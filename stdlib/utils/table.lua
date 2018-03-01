@@ -38,11 +38,11 @@ end
 -- @treturn table a new table containing the filtered key-value pairs
 function M.filter(tbl, func, ...)
     local newtbl = {}
-    local insert = #tbl > 0
+    local add = #tbl > 0
     for k, v in pairs(tbl) do
         if func(v, k, ...) then
-            if insert then
-                table.insert(newtbl, v)
+            if add then
+                insert(newtbl, v)
             else
                 newtbl[k] = v
             end

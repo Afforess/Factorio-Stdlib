@@ -1,3 +1,8 @@
+do
+    return
+end
+--luacheck: ignore
+
 require('spec/setup/defines')
 require('stdlib/utils/table')
 local Event = require('stdlib/event/event')

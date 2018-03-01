@@ -225,15 +225,14 @@ setmetatable(
     Is.Assert,
     {
         __index = function(_, k)
-            return function(_assert, _message)
-                --return assert(M[k](_assert), _message)
-                return M[k](_assert) or error(_message, 3)
+            return function(_assert, _message, _level)
+                _level = tonumber(_level) or 3
+                return M[k](_assert) or error(_message, _level)
             end
         end,
         __call = function(_, ...)
-            --return assert(...)
             local param = {...}
-            return param[1] or error(param[2], 3)
+            return param[1] or error(param[2], tonumber(param[3]) or 3)
         end
     }
 )
@@ -242,15 +241,14 @@ setmetatable(
     Is.Assert.Not,
     {
         __index = function(_, k)
-            return function(_assert, _message)
-                --return assert(not M[k](_assert), _message)
-                return not M[k] or error(_message, 3)
+            return function(_assert, _message, _level)
+                _level = tonumber(_level) or 3
+                return not M[k] or error(_message, _level)
             end
         end,
         __call = function(_, ...)
             local param = {...}
-            --return assert(not param[1], param[2])
-            return not param[1] or error(param[2], 3)
+            return not param[1] or error(param[2], tonumber(param[3]) or 3)
         end
     }
 )

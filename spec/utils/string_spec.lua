@@ -1,5 +1,7 @@
 require('stdlib/utils/string')
 
+--luacheck: ignore 143/string (TODO sync with luacheck rc)
+
 describe('String Spec', function()
     describe('string.trim', function()
         it('should not have any leading whitespace', function()

@@ -1,6 +1,8 @@
--- Because the train module executes registers events immediately
--- when it's loaded, in order to isolate our tests we must include
--- the things it includes, then override them.
+do
+    return
+end
+--luacheck: ignore
+
 require('spec/setup/defines')
 local Event = require('stdlib/event/event')
 

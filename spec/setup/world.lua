@@ -2,7 +2,7 @@
 --[[World]] -- World creator for making tests easier!
 -------------------------------------------------------------------------------
 --[[
-World.open - Simulates opening a world by clicking generate but stopping before init (script loading phase)
+World.bootstrap - Simulates opening a world by clicking generate/load but stopping before init/load (script loading phase)
 
 World.init - Simulates on_init/on_load/ and configuration changed, calls open if needed
 
@@ -12,176 +12,48 @@ World.load - Simulates a world load, can only be called if world is closed
 
 World.reload - perfoms a save and calls world.close and world.load using the saves
 
-World.close - Closes the world simulator
+World.quit - Closes the world simulator
 
 note: save/load/reload havn't been tested yet.
-
 --]]
-
---require('spec/setup/globals')
 require('spec/setup/defines')
 
 local World = {
-    Debug = require('spec/setup/debug')
+    _msg_buffer = {},
+    _log_buffer = {}
 }
 
---This is our print override
 local print_buffer = function(msg, group)
     group = group or '_P_'
-    World.Debug._msg_buffer[#World.Debug._msg_buffer + 1] = group .. msg
-    print(group .. msg)
-    return true
+    World._msg_buffer[#World._msg_buffer + 1] = group .. msg
+    return msg
+end
+
+local log_buffer = function(msg)
+    World._log_buffer[#World._log_buffer + 1] = msg
+    return msg
 end
 
 --------------------------------------------------------------------------------
---[Setup Metatables]--
+--[BOOTSTRAP]--
 --------------------------------------------------------------------------------
-local get_connected_players = function()
-    local players = {}
-    for _, p in pairs(_G.game.players) do
-        if p and p.connected then
-            players[#players + 1] = p
-        end
-    end
-    return players
-end
-
-local function fakehex64()
-    function fakehex32()
-        return string.format('%08x', math.random(0, 2^32-1))
-    end
-    return '0x' .. fakehex32() .. fakehex32()
-end
-
-local function fakeuserdata(target)
-    target = target or {}
-    return setmetatable(
-        target,
-        {
-            __index = {
-                valid = true,
-                __self = 'userdata: ' .. fakehex64(),
-                print = print_buffer,
-                connected = true
-            },
-            __pairs = function(self)
-                local isfirst = true
-                return function()
-                    if isfirst then
-                        isfirst = false
-                        return '__self', self.__self
-                    end
-                end
-            end,
-            __ipairs = function() end
-        }
-    )
-end
-
-local function fakegame(game)
-    local rslt = fakeuserdata(game)
-    local rsltmeta = getmetatable(rslt)
-    local rsltmetaindex = rsltmeta.__index
-    rsltmeta.__index = function(_, k)
-        if k == 'connected_players' then
-            return setmetatable({},{
-                __index = function(_, k)
-                    return get_connected_players()[k]
-                end,
-                __len = function()
-                    return #get_connected_players()
-                end,
-                __pairs = function()
-                    return ipairs(get_connected_players())
-                end,
-                __ipairs = function()
-                    return ipairs(get_connected_players())
-                end
-            })
-        else
-            return rsltmetaindex[k]
-        end
-    end
-    return rslt
-end
-
---------------------------------------------------------------------------------
---[World Frobs and Callbacks]--
---------------------------------------------------------------------------------
-
-World.data = function() end -- simulated data.lua global environment
-World.control = function() end -- simulated control.lua global environment
-World.log = function() end -- global log() callback
-
--- Did anyone ever call World.reset?
-local world_primed = false
-
-_G.real_require = _G.real_require or _G.require
-local in_event_handler = 0 -- track event callback recursion (a psuedosemaphore)
-
---------------------------------------------------------------------------------
---[World Functions]--
---------------------------------------------------------------------------------
-
--- Returns World module to pristine state; should be mostly equivalent to:
---
---   package.loaded['spec/setup/world'] = nil
---   MyWorldLocalVariable = require('spec/setup/world')
-World.reset = function(save)
-    world_primed = true
-    local rslt = false
-    if save then
-        rslt = World.close(true)
-    end
-    -- Setup Globals
-    _G.serpent = require('spec/setup/utils/serpent')
-    _G.log = function(...)
-        World.log(...)
-    end
-    _G._print = print
-    _G.print = function(...) --luacheck: ignore print
-        if World.Debug.allow_print then
-            _G._print(...)
-        end
-    end
-    _G.script = nil
-    _G.game = nil
-    -- TODO: _G.data = something
-    _G.global = {} -- TODO: check if should be nil
-
-    -- optional simulated data.lua in test callback
-    World.data()
-
-    _G.global = {}
-    -- we must steal require here to simulate factorio's outrageous and oppressive require semantics
-    _G.require = function(...) --luacheck: ignore require
-        local what = (...)
-        if string.match(what, '^stdlib') or string.match(what, '^spec') then
-            if in_event_handler > 0 then
-                error('faketorio does not allow the use of the require'
-                        .. ' function in event callbacks because it is a big stupid jerk')
-            else
-                return real_require(...)
-            end
-        else
-            return real_require(...)
-        end
-    end
-
-    return rslt or nil
-end
-
-World.open = function()
+function World.bootstrap()
     if _G.script then
         error('Cannot Open, simulation already running')
     end
 
-    -- world must be reset at least once before it can be used
-    -- (otherwise serpent, log, etc. globals will be missing)
-    if not world_primed then
-        World.reset()
-    end
+    _G._require = _G._require or require
 
+    -- Setup Globals
+    _G.serpent = require('spec/setup/utils/serpent')
+
+    _G.log = log_buffer
+
+    _G.game = nil
+    -- TODO: _G.data = something
+    _G.global = {} -- TODO: check if should be nil
+
+    local in_event_handler = 0 -- track event callback recursion (a psuedosemaphore)
     local registry = {}
     local next_id = 200
     _G.script = {
@@ -197,7 +69,7 @@ World.open = function()
         on_configuration_changed = function(callback)
             _G.script.on_event('on_configuration_changed', callback)
         end,
-        on_nth_tick = function(tick, callback)
+        on_nth_tick = function(tick, callback) --luacheck: ignore
             error('script.on_nth_tick: not implemented yet')
         end,
         generate_event_name = function()
@@ -215,13 +87,27 @@ World.open = function()
             e.name = e.name or id
             e.tick = e.tick or _G.game and _G.game.tick or 0
             in_event_handler = in_event_handler + 1
-            local ok, msg = xpcall(function()
-                return (registry[id] or function() end)(e)
-            end, debug.traceback)
+            _G.require = function()
+                error([[
+                faketorio does not allow the use of the require
+                function in event callbacks because it is a big stupid jerk']])
+            end
+            local ok,
+                msg =
+                xpcall(
+                function()
+                    return (registry[id] or function()
+                        end)(e)
+                end,
+                debug.traceback
+            )
             in_event_handler = in_event_handler - 1
             if not ok then
                 error(msg)
             else
+                if in_event_handler == 0 then
+                    _G.require = _G._require
+                end
                 return msg
             end
         end,
@@ -231,65 +117,148 @@ World.open = function()
     return World
 end
 
---If using events make sure to require and register events during control callback
-World.init = function(multiplayer, savetable, config_changed_data)
+--------------------------------------------------------------------------------
+--[INIT]--
+-------------------------------------------------------------------------------
+--Setup Metatables
+local function get_connected_players()
+    local players = {}
+    for _, p in pairs(_G.game.players) do
+        if p and p.connected then
+            players[#players + 1] = p
+        end
+    end
+    return players
+end
+
+local function fake_hex_64()
+    local function fake_hex_32()
+        return string.format('%08x', math.random(0, 2 ^ 32 - 1))
+    end
+    return '0x' .. fake_hex_32() .. fake_hex_32()
+end
+
+local function fake_user_data(target)
+    target = target or {}
+    return setmetatable(
+        target,
+        {
+            __index = {
+                valid = true,
+                __self = 'userdata: ' .. fake_hex_64(),
+                print = print_buffer,
+                connected = true
+            },
+            __pairs = function(self)
+                local isfirst = true
+                return function()
+                    if isfirst then
+                        isfirst = false
+                        return '__self', self.__self
+                    end
+                end
+            end,
+            __ipairs = function()
+            end
+        }
+    )
+end
+
+local function fake_game(game)
+    local rslt = fake_user_data(game)
+    local rsltmeta = getmetatable(rslt)
+    local rsltmetaindex = rsltmeta.__index
+    rsltmeta.__index =
+        function(_, k)
+        if k == 'connected_players' then
+            return setmetatable(
+                {},
+                {
+                    __index = function(_, kk)
+                        return get_connected_players()[kk]
+                    end,
+                    __len = function()
+                        return #get_connected_players()
+                    end,
+                    __pairs = function()
+                        return pairs(get_connected_players())
+                    end,
+                    __ipairs = function()
+                        return ipairs(get_connected_players())
+                    end
+                }
+            )
+        else
+            return rsltmetaindex[k]
+        end
+    end
+    return rslt
+end
+
+--If using events make sure to require and register events during bootstrap callback
+function World.init(multiplayer, savetable, config_changed_data)
     if not _G.script then
         World.open()
     end
+
     if _G.game then
         error("Can't Init, simulation already running")
     end
 
     savetable = savetable or {}
-    saved_global = savetable.global
-    saved_game = savetable.game
+    local saved_global = savetable.global
+    local saved_game = savetable.game
     savetable = table.size(savetable) > 0 and savetable or false
     assert(savetable and saved_global and saved_game or not savetable, 'Invalid savetable')
 
     -- ensure config_changed_data is always a table if requested
     config_changed_data = config_changed_data == true and {} or config_changed_data
 
-    -- optional simulated control.lua in test callback
-    World.control()
-
     multiplayer = multiplayer or false
 
     _G.global = saved_global or {}
-    _G.game = fakegame(saved_game or {
-        tick = 0,
-        players = {},
-        print = print_buffer,
-        forces = {
+    _G.game =
+        fake_game(
+        saved_game or
             {
-                name = 'player'
-            },
-            {
-                name = 'neutral'
-            },
-            {
-                name = 'enemy'
+                tick = 0,
+                players = {},
+                print = print_buffer,
+                forces = {
+                    {
+                        name = 'player'
+                    },
+                    {
+                        name = 'neutral'
+                    },
+                    {
+                        name = 'enemy'
+                    }
+                },
+                surfaces = {
+                    {
+                        index = 1,
+                        name = 'nauvis'
+                    }
+                },
+                is_multiplayer = function()
+                    return multiplayer
+                end
             }
-        },
-        surfaces = {
-            {
-                index = 1,
-                name = 'nauvis'
-            }
-        },
-        is_multiplayer = function() return multiplayer; end
-    })
-    _G.remote = fakeuserdata({
+    )
+    _G.remote = {
         interfaces = {},
         call = function()
         end
-    })
+    }
 
     --run a fake data loader here to populate game.xxx_prototypes
     for _, force in pairs(game.forces) do
-        fakeuserdata(force)
+        fake_user_data(force)
     end
+
     for _, surface in pairs(game.surfaces) do
-        fakeuserdata(surface)
+        fake_user_data(surface)
     end
 
     --init, if load_only run load only elseif if config_changed_data
@@ -301,21 +270,28 @@ World.init = function(multiplayer, savetable, config_changed_data)
     else
         script.raise_event('on_init', {tick = game.tick})
     end
+
+    --Create 1 player on a world init that is not mp
+    if multiplayer and not savetable then
+        World.create_players(1)
+    end
+
     return World
 end
 
-World.update = function(ticks)
+function World.update(ticks)
     ticks = ticks or 1
     while ticks > 0 do
         _G.game.tick = _G.game.tick + 1
         _G.script.raise_event(0, {tick = _G.game.tick})
         ticks = ticks - 1
     end
+    return World
 end
 
 --Create some players
 --TODO: optional pdata argument can be used to setup defaults
-World.create_players = function(how_many)
+function World.create_players(how_many)
     how_many = how_many or 1
 
     _G.game.players = _G.game.players or {}
@@ -323,21 +299,24 @@ World.create_players = function(how_many)
     -- players may be sparse so some care must be taken here
     while table.size(game.players) < how_many do
         local newindex = #game.players + 1
-        game.players[newindex] = fakeuserdata({
-            index = newindex,
-            name = 'Player' .. tostring(newindex)
-        })
+        game.players[newindex] =
+            fake_user_data(
+            {
+                index = newindex,
+                name = 'Player' .. tostring(newindex)
+            }
+        )
         _G.script.raise_event(defines.events.on_player_created, {tick = _G.game.tick, player_index = newindex})
     end
     return World
 end
 
 -- performs a load
-World.load = function(savetable, config_changed_data)
+function World.load(savetable, config_changed_data)
     return World.init(savetable, config_changed_data)
 end
 
-World.save = function()
+function World.save()
     local saved_global, saved_game
     if _G.global then
         local global_meta = getmetatable(_G.global)
@@ -357,16 +336,17 @@ World.save = function()
     return {global = saved_global, game = saved_game}
 end
 
-World.close = function(save)
+function World.quit(save)
     if save then
         return World.save()
     end
     _G.global = {}
     _G.game = nil
+    _G.script = nil
 end
 
 --Performs a quit and load
-World.reload = function(save_and_reload, config_changed_data)
+function World.reload(save_and_reload, config_changed_data)
     local savetable = World.close(save_and_reload)
     return World.load(savetable, config_changed_data)
 end

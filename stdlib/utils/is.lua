@@ -51,10 +51,6 @@ local M = {}
 local type = type
 local abs = math.abs
 
-local function _find(key)
-    return assert(M[key], 'Is[' .. key .. '] not found')
-end
-
 --- Returns true if the passed variable is a table.
 -- @tparam mixed var The variable to check
 -- @treturn boolean
@@ -243,7 +239,7 @@ setmetatable(
         __index = function(_, k)
             return function(_assert, _message, _level)
                 _level = tonumber(_level) or 3
-                return not M[k] or error(_message, _level)
+                return not M[k](_assert) or error(_message, _level)
             end
         end,
         __call = function(_, ...)

@@ -151,3 +151,29 @@ describe(
         )
     end
 )
+describe('semantic modifiers',
+    function()
+        it(
+            'returns nil when non-existent members or transforms are requested',
+            function()
+                local f = Is
+                assert.is_not_nil(f)
+                local g = f.Not
+                assert.is_not_nil(g)
+                local h = f.Assert
+                assert.is_not_nil(h)
+                local i = f.Assert.Not
+                assert.is_not_nil(i)
+
+                local j = f.PickledCollegiateMicrocosmInAspic
+                assert.is_nil(j)
+                local k = g.SnotNorselloutVoidBuckingConventionGoers
+                assert.is_nil(k)
+                local l = h.Unamuorumumomamamuculist
+                assert.is_nil(l)
+                local m = i.HyperHypnoHippoHeadCheese
+                assert.is_nil(m)
+            end
+        )
+    end
+)

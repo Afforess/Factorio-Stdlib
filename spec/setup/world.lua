@@ -87,10 +87,18 @@ function World.bootstrap()
             e.name = e.name or id
             e.tick = e.tick or _G.game and _G.game.tick or 0
             in_event_handler = in_event_handler + 1
-            _G.require = function()
-                error([[
-                faketorio does not allow the use of the require
-                function in event callbacks because it is a big stupid jerk']])
+            if in_event_handler == 1 then
+                _G.require = function(...)
+                    -- debatable if '^spec' should be included here?
+                    -- nb: stdlib.foo is a no-no, however, this is
+                    -- not the right place to enforce that rule.
+                    if string.match((...), '^stdlib[/.]') then
+                        error('faketorio does not allow the use of the require function \z
+                              in event callbacks because it is a big stupid jerk', 2)
+                    else
+                        return _G._require(...)
+                    end
+                end
             end
             local ok,
                 msg =

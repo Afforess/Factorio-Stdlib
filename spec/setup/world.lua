@@ -155,8 +155,14 @@ World.reset = function(save)
     _G.global = {}
     -- we must steal require here to simulate factorio's outrageous and oppressive require semantics
     _G.require = function(...) --luacheck: ignore require
-        if in_event_handler > 0 then
-            error('faketorio does not allow the use of the require function in event callbacks because it is a big stupid jerk', 1)
+        local what = (...)
+        if string.match(what, '^stdlib') or string.match(what, '^spec') then
+            if in_event_handler > 0 then
+                error('faketorio does not allow the use of the require'
+                        .. ' function in event callbacks because it is a big stupid jerk')
+            else
+                return real_require(...)
+            end
         else
             return real_require(...)
         end

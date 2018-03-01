@@ -1,22 +1,18 @@
-require('spec/setup/defines')
-require('stdlib/utils/string')
-require('stdlib/utils/table')
+insulate("Event", function()
 
-local genstubs = require('spec/utils/stub_factory')
+    require('spec/setup/defines')
+    require('stdlib/utils/string')
+    require('stdlib/utils/table')
+    local genstubs = require('spec/utils/stub_factory')
+    local World = require('spec/setup/world')
+    local Event
+    World.control = function()
+        Event = require('stdlib/event/event')
+    end
 
-local World = require('spec/setup/world')
-local Event
-
-World.control = function()
-    Event = require('stdlib/event/event')
-end
-
-describe("Event", function()
-    before_each(
-        function()
-            World.init()
-        end
-    )
+    before_each(function()
+        World.init()
+    end)
 
     insulate(function()
         it(".register should add multiple callbacks for the same event", function()

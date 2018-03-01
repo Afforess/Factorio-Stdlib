@@ -116,7 +116,7 @@ World.log = function() end -- global log() callback
 -- Did anyone ever call World.reset?
 local world_primed = false
 
-local real_require = require
+_G.real_require = _G.real_require or _G.require
 local in_event_handler = 0 -- track event callback recursion (a psuedosemaphore)
 
 --------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ World.reset = function(save)
         if in_event_handler > 0 then
             error('faketorio does not allow the use of the require function in event callbacks because it is a big stupid jerk', 1)
         else
-            real_require(...)
+            return real_require(...)
         end
     end
 

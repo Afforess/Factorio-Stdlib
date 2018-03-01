@@ -383,6 +383,7 @@ function Event.dump(reg_type)
         load = load,
         events = events,
         nth = nth,
+        all = init + config + load + events + nth
     }
     return reg_type and all[reg_type] or all
 end

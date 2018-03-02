@@ -26,7 +26,8 @@ local Event = {
     },
     custom_events = {}, -- Holds custom event ids
     protected_mode = false,
-    force_crc = false
+    force_crc = false,
+    stop_processing = {} -- just has to be unique
 }
 setmetatable(Event, {__index = require('stdlib/core')})
 
@@ -305,13 +306,19 @@ function Event.dispatch(event)
             end
 
             if protected then
-                run_protected(registered, event)
+                if run_protected(registered, event) == Event.stop_processing then
+                    return
+                end
             elseif registered.matcher then
                 if registered.matcher(event, registered.pattern) then
-                    registered.handler(event)
+                    if registered.handler(event) == Event.stop_processing then
+                        return
+                    end
                 end
             else
-                registered.handler(event)
+                if registered.handler(event) == Event.stop_processing then
+                    return
+                end
             end
         end
     end

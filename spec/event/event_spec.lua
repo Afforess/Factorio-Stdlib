@@ -603,4 +603,112 @@ describe('Event', function ()
             assert.stub(h).was_not.called()
         end)
     end)
+
+    insulate('.dispatch', function()
+        it('should abort event processing when a handler returns \z
+            stop_processing', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local return_value = Event.stop_processing
+            local g = spy(function (e)
+                return return_value
+            end)
+            local f, h = genstub(2)
+            Event.register(0, f).register(0, g).register(0, h)
+
+            script.raise_event()
+            assert.stub(f).was.called(1)
+            assert.spy(g).was.called(1)
+            assert.stub(h).was_not.called()
+            f:clear(); g:clear(); h:clear()
+
+            script.raise_event(0, {protected_mode = true})
+            assert.stub(f).was.called(1)
+            assert.spy(g).was.called(1)
+            assert.stub(h).was_not.called()
+            f:clear(); g:clear(); h:clear()
+
+            return_value = nil
+
+            script.raise_event()
+            assert.stub(f).was.called(1)
+            assert.spy(g).was.called(1)
+            assert.stub(h).was.called(1)
+            f:clear(); g:clear(); h:clear()
+
+            script.raise_event(0, {protected_mode = true})
+            assert.stub(f).was.called(1)
+            assert.spy(g).was.called(1)
+            assert.stub(h).was.called(1)
+        end)
+    end)
+
+    insulate('.dispatch', function()
+        it('should abort event processing when a matched handler \z
+            returns stop_processing', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local i,k = genstub(2)
+            local j = spy(function(e)
+                return Event.stop_processing
+            end)
+            local true_matcher = function() return true end
+            local foo_matcher = function(e) return e.foo and true or false end
+            Event.register(1, i, true_matcher).register(1, j, foo_matcher)
+            Event.register(1, k, true_matcher)
+
+            script.raise_event(1, {foo = false})
+            assert.stub(i).was.called(1)
+            assert.stub(j).was_not.called()
+            assert.stub(k).was.called(1)
+            i:clear(); j:clear(); k:clear()
+
+            script.raise_event(1, {foo = true})
+            assert.stub(i).was.called(1)
+            assert.stub(j).was.called(1)
+            assert.stub(k).was_not.called()
+            i:clear(); j:clear(); k:clear()
+
+            script.raise_event(1, {foo = false, protected_mode = true})
+            assert.stub(i).was.called(1)
+            assert.stub(j).was_not.called()
+            assert.stub(k).was.called(1)
+            i:clear(); j:clear(); k:clear()
+
+            script.raise_event(1, {foo = true, protected_mode = true})
+            assert.stub(i).was.called(1)
+            assert.stub(j).was.called(1)
+            assert.stub(k).was_not.called()
+        end)
+    end)
+
+    insulate('.dispatch', function()
+        it('should not stop processing when a matcher returns \z
+            Event.stop_processing, which should just count as a \z
+            successful match in that context', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local l,m,n,o = genstub(4)
+            local pattern_identity_matcher = function(event, pattern)
+                return pattern
+            end
+            Event.register(2, l)
+            Event.register(2, m, pattern_identity_matcher, Event.stop_processing)
+            Event.register(2, n, pattern_identity_matcher, false)
+            Event.register(2, o)
+
+            script.raise_event(2)
+            assert.stub(l).was.called(1)
+            assert.stub(m).was.called(1) -- because stop_processing counts as true
+            assert.stub(n).was_not.called() -- because false counts as false
+            assert.stub(o).was.called(1) -- because nonmatch does not stop processing
+            l:clear(); m:clear(); n:clear(); o:clear()
+
+            script.raise_event(2, {protected_mode = true})
+            assert.stub(l).was.called(1)
+            assert.stub(m).was.called(1)
+            assert.stub(n).was_not.called()
+            assert.stub(o).was.called(1)
+        end)
+    end)
 end)

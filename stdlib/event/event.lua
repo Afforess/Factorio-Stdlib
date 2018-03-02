@@ -220,7 +220,10 @@ function Event.remove(event_id, handler, matcher, pattern)
     return Event
 end
 
--- Call the matcher and the handler in protected mode.
+-- A dispatch helper function
+--
+-- Call any matcher and, as applicable, the event handler, in protected mode.  Errors are
+-- caught and logged to stdout but event processing proceeds thereafter; errors are suppressed.
 local function run_protected(registered, event)
     local success, err
     if registered.matcher then
@@ -234,11 +237,7 @@ local function run_protected(registered, event)
 
     -- If the handler errors lets make sure someone notices
     if not success then
-        if log_and_print(err) then
-            -- continue processing the remaining handlers.
-            --In most cases they will not be related to the failed code.
-            return false
-        else
+        if not log_and_print(err) then
             -- no players received the message, force a real error so someone notices
             error(err)
         end
@@ -249,7 +248,8 @@ local function run_protected(registered, event)
         log('CRC check called for event [' .. event.name .. ']')
         game.force_crc()
     end
-    return true
+
+    return success and err or nil
 end
 
 --- The user should create a table in this format, for a table that will be passed into @{Event.dispatch}.

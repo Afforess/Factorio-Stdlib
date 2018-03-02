@@ -224,7 +224,7 @@ end
 local function run_protected(registered, event)
     local success, err
     if registered.matcher then
-        success, err = pcall(registered.matcher, event)
+        success, err = pcall(registered.matcher, event, registered.pattern)
         if success and err then
             success, err = pcall(registered.handler, event)
         end

@@ -46,38 +46,6 @@ local bootstrap_register = {
     end
 }
 
--- Call the matcher and the handler in protected mode.
-local function run_protected(registered, event)
-    local success, err
-    if registered.matcher then
-        success, err = pcall(registered.matcher, event)
-        if success and err then
-            success, err = pcall(registered.handler, event)
-        end
-    else
-        success, err = pcall(registered.handler, event)
-    end
-
-    -- If the handler errors lets make sure someone notices
-    if not success then
-        if log_and_print(err) then
-            -- continue processing the remaining handlers.
-            --In most cases they will not be related to the failed code.
-            return false
-        else
-            -- no players received the message, force a real error so someone notices
-            error(err)
-        end
-    end
-
-    -- force a crc check if option is enabled. This is a debug option and will hamper performance if enabled
-    if (Event.force_crc or event.force_crc) and game then
-        log('CRC check called for event [' .. event.name .. ']')
-        game.force_crc()
-    end
-    return true
-end
-
 local function valid_id(id)
     return (Is.Number(id) or Is.String(id)), 'Invalid Event Id, Must be string/int/defines.events, Passed in: ' .. type(id)
 end
@@ -250,6 +218,38 @@ function Event.remove(event_id, handler, matcher, pattern)
         log('Attempt to deregister already non-registered listener from event: ' .. event_id)
     end
     return Event
+end
+
+-- A dispatch helper function
+--
+-- Call any matcher and, as applicable, the event handler, in protected mode.  Errors are
+-- caught and logged to stdout but event processing proceeds thereafter; errors are suppressed.
+local function run_protected(registered, event)
+    local success, err
+    if registered.matcher then
+        success, err = pcall(registered.matcher, event, registered.pattern)
+        if success and err then
+            success, err = pcall(registered.handler, event)
+        end
+    else
+        success, err = pcall(registered.handler, event)
+    end
+
+    -- If the handler errors lets make sure someone notices
+    if not success then
+        if not log_and_print(err) then
+            -- no players received the message, force a real error so someone notices
+            error(err)
+        end
+    end
+
+    -- force a crc check if option is enabled. This is a debug option and will hamper performance if enabled
+    if (Event.force_crc or event.force_crc) and game then
+        log('CRC check called for event [' .. event.name .. ']')
+        game.force_crc()
+    end
+
+    return success and err or nil
 end
 
 --- The user should create a table in this format, for a table that will be passed into @{Event.dispatch}.

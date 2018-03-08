@@ -4,13 +4,13 @@
 --[[
 World.bootstrap - Simulates opening a world by clicking generate/load but stopping before init/load (script loading phase)
 
-World.init - Simulates on_init/on_load/ and configuration changed, calls open if needed
+World.init - Simulates on_init/on_load/ and configuration changed, calls bootstrap if needed
 
-World.save - saves the world to _G.saved_global and _G.saved_game
+World.save - saves the world to a table which is returned to the caller
 
-World.load - Simulates a world load, can only be called if world is closed
+World.load - Simulates a world load, can only be called if world is not initialized
 
-World.reload - perfoms a save and calls world.close and world.load using the saves
+World.reload - optionally perfoms a save and calls world.quit and world.load, optionally using the saved game
 
 World.quit - Closes the world simulator
 
@@ -206,7 +206,7 @@ end
 --If using events make sure to require and register events during bootstrap callback
 function World.init(multiplayer, savetable, config_changed_data)
     if not _G.script then
-        World.open()
+        World.bootstrap()
     end
 
     if _G.game then
@@ -354,8 +354,8 @@ function World.quit(save)
 end
 
 --Performs a quit and load
-function World.reload(save_and_reload, config_changed_data)
-    local savetable = World.close(save_and_reload)
+function World.reload(save, config_changed_data)
+    local savetable = World.quit(save)
     return World.load(savetable, config_changed_data)
 end
 

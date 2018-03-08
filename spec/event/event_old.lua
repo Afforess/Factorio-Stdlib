@@ -14,22 +14,6 @@ insulate("Event", function()
         World.init()
     end)
 
-
-        it("should print an error to connected players if a handler"
-            .. " throws an error", function()
-            game.connected_players = {{
-                name = "test_player",
-                valid = true,
-                connected = true,
-                print = function() end
-            }}
-            local s = spy.on(game, "print")
-
-            Event.register( 0, function() error("should error") end)
-            Event.dispatch({name = 0, tick = 9001, player_index = 1})
-            assert.spy(s).was.called()
-        end)
-
         it("should error when there are no connected players"
             .. " if a handler throws an error", function()
             game.players = {{

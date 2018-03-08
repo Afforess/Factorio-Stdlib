@@ -239,6 +239,115 @@ describe('Event', function ()
         end)
     end)
 
+    insulate('.register', function()
+        it('should register itself with factorio when the initial listener \z
+            is registered for the on_init, on_load, or on_configuration_changed \z
+            events, and should deregister itself when the corresponding final \z
+            listener is removed.', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local spy_on_init = spy.on(script, 'on_init')
+            local spy_on_load = spy.on(script, 'on_load')
+            local spy_on_configuration_changed = spy.on(script, 'on_configuration_changed')
+            local stub_init_a, stub_init_b, stub_load_a, stub_load_b,
+                stub_configuration_changed_a, stub_configuration_changed_b = genstub(6)
+
+            spy_on_init:clear()
+            Event.register('on_init', stub_init_a)
+            assert.spy(spy_on_init).was.called(1)
+            assert.spy(spy_on_init).was.called_with(match.is_callable())
+            spy_on_init:clear()
+            Event.register('on_init', stub_init_b)
+            assert.spy(spy_on_init).was_not.called()
+            spy_on_init:clear()
+            Event.remove('on_init', stub_init_b)
+            assert.spy(spy_on_init).was_not.called()
+            spy_on_init:clear()
+
+            spy_on_load:clear()
+            Event.register('on_load', stub_load_a)
+            assert.spy(spy_on_load).was.called(1)
+            assert.spy(spy_on_load).was.called_with(match.is_callable())
+            spy_on_load:clear()
+            Event.register('on_load', stub_load_b)
+            assert.spy(spy_on_load).was_not.called()
+            spy_on_load:clear()
+            Event.remove('on_load', stub_load_b)
+            assert.spy(spy_on_load).was_not.called()
+            spy_on_load:clear()
+
+            spy_on_configuration_changed:clear()
+            Event.register('on_configuration_changed', stub_configuration_changed_a)
+            assert.spy(spy_on_configuration_changed).was.called(1)
+            assert.spy(spy_on_configuration_changed).was.called_with(match.is_callable())
+            spy_on_configuration_changed:clear()
+            Event.register('on_configuration_changed', stub_configuration_changed_b)
+            assert.spy(spy_on_configuration_changed).was_not.called()
+            spy_on_configuration_changed:clear()
+            Event.remove('on_configuration_changed', stub_configuration_changed_b)
+            assert.spy(spy_on_configuration_changed).was_not.called()
+            stub_init_a:clear(); stub_init_b:clear(); stub_load_a:clear()
+            stub_load_b:clear(); stub_configuration_changed_a:clear()
+            stub_configuration_changed_b:clear(); spy_on_init:clear()
+            spy_on_load:clear(); spy_on_configuration_changed:clear()
+
+            -- trigger on_init by simulating init in world
+            World.init()
+            assert.stub(stub_init_a).was.called(1)
+            assert.stub(stub_init_b).was_not.called()
+            assert.stub(stub_load_a).was_not.called()
+            assert.stub(stub_load_b).was_not.called()
+            assert.stub(stub_configuration_changed_a).was_not.called()
+            assert.stub(stub_configuration_changed_b).was_not.called()
+            stub_init_a:clear(); stub_init_b:clear(); stub_load_a:clear()
+            stub_load_b:clear(); stub_configuration_changed_a:clear()
+            stub_configuration_changed_b:clear(); spy_on_init:clear()
+            spy_on_load:clear(); spy_on_configuration_changed:clear()
+
+            -- trigger on_load and on_configuration_changed
+            -- Doing this with World would require simulating save/load which,
+            -- as of the moment this test was authored, was a work-in-progress.
+            -- For now, simply fire the events manually.  nb: as the test
+            -- is more modular this way, it arguably should not be "upgraded,"
+            -- once World save/load are working.  TODO: Once it is, reassess.
+            script.raise_event('on_load')
+            assert.stub(stub_init_a).was_not.called()
+            assert.stub(stub_init_b).was_not.called()
+            assert.stub(stub_load_a).was.called(1)
+            assert.stub(stub_load_b).was_not.called()
+            assert.stub(stub_configuration_changed_a).was_not.called()
+            assert.stub(stub_configuration_changed_b).was_not.called()
+            stub_init_a:clear(); stub_init_b:clear(); stub_load_a:clear()
+            stub_load_b:clear(); stub_configuration_changed_a:clear()
+            stub_configuration_changed_b:clear(); spy_on_init:clear()
+            spy_on_load:clear(); spy_on_configuration_changed:clear()
+
+            script.raise_event('on_configuration_changed')
+            assert.stub(stub_init_a).was_not.called()
+            assert.stub(stub_init_b).was_not.called()
+            assert.stub(stub_load_a).was_not.called()
+            assert.stub(stub_load_b).was_not.called()
+            assert.stub(stub_configuration_changed_a).was.called(1)
+            assert.stub(stub_configuration_changed_b).was_not.called()
+            stub_init_a:clear(); stub_init_b:clear(); stub_load_a:clear()
+            stub_load_b:clear(); stub_configuration_changed_a:clear()
+            stub_configuration_changed_b:clear(); spy_on_init:clear()
+            spy_on_load:clear(); spy_on_configuration_changed:clear()
+
+            -- remove the final listeners and ensure that Event deregisters
+            -- its listeners with factorio
+            Event.remove('on_init', stub_init_a)
+            assert.spy(spy_on_init).was.called(1)
+            assert.spy(spy_on_init).was.called_with(nil)
+            Event.remove('on_load', stub_load_a)
+            assert.spy(spy_on_load).was.called(1)
+            assert.spy(spy_on_load).was.called_with(nil)
+            Event.remove('on_configuration_changed', stub_configuration_changed_a)
+            assert.spy(spy_on_configuration_changed).was.called(1)
+            assert.spy(spy_on_configuration_changed).was.called_with(nil)
+        end)
+    end)
+
     insulate('.remove', function()
         it('unregisters the requested handler regardless of the order \z
             in which it was registered', function()

@@ -345,12 +345,14 @@ function World.save()
 end
 
 function World.quit(save)
+    local result = false
     if save then
-        return World.save()
+        result = World.save()
     end
     _G.global = {}
     _G.game = nil
     _G.script = nil
+    return result or nil
 end
 
 --Performs a quit and load

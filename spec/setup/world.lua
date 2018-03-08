@@ -355,7 +355,11 @@ function World.quit(save)
     return result or nil
 end
 
---Performs a quit and load
+-- convenience function to quit and re-init World, optionally simulating save/load
+-- This function has two notable limitations: first, if save is false, World will
+-- always be re-initialized as single-player; second, if certain steps corresponding
+-- to "control.lua" are required, this function is not suitable as it provides no
+-- opportunity to execute those steps between quit() and load().
 function World.reload(save, config_changed_data)
     local savetable = World.quit(save)
     return World.load(savetable, config_changed_data)

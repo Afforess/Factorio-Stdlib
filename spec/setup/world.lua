@@ -146,7 +146,7 @@ local function fake_hex_64()
     return '0x' .. fake_hex_32() .. fake_hex_32()
 end
 
-local function fake_user_data(target)
+function World.fake_userdata(target)
     target = target or {}
     return setmetatable(
         target,
@@ -173,7 +173,7 @@ local function fake_user_data(target)
 end
 
 local function fake_game(game)
-    local rslt = fake_user_data(game)
+    local rslt = World.fake_userdata(game)
     local rsltmeta = getmetatable(rslt)
     local rsltmetaindex = rsltmeta.__index
     rsltmeta.__index =
@@ -262,11 +262,11 @@ function World.init(multiplayer, savetable, config_changed_data)
 
     --run a fake data loader here to populate game.xxx_prototypes
     for _, force in pairs(game.forces) do
-        fake_user_data(force)
+        World.fake_userdata(force)
     end
 
     for _, surface in pairs(game.surfaces) do
-        fake_user_data(surface)
+        World.fake_userdata(surface)
     end
 
     --init, if load_only run load only elseif if config_changed_data
@@ -308,7 +308,7 @@ function World.create_players(how_many)
     while table.size(game.players) < how_many do
         local newindex = #game.players + 1
         game.players[newindex] =
-            fake_user_data(
+            World.fake_userdata(
             {
                 index = newindex,
                 name = 'Player' .. tostring(newindex)

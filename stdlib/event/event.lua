@@ -31,7 +31,6 @@ local Event = {
 setmetatable(Event, {__index = require('stdlib/core')})
 
 local Is = require('stdlib/utils/is')
-local log_and_print = Event.log_and_print
 
 local bootstrap_register = {
     on_init = function()
@@ -237,7 +236,7 @@ local function run_protected(registered, event)
 
     -- If the handler errors lets make sure someone notices
     if not success then
-        if not log_and_print(err) then
+        if not Event.log_and_print(err) then
             -- no players received the message, force a real error so someone notices
             error(err)
         end

@@ -474,4 +474,24 @@ describe('Event', function ()
             assert.spy(u).was.called(1)
         end)
     end)
+
+    insulate('.dispatch', function()
+        it('should cease processing an event with a userdata property \z
+            which has become non-valid', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local fud = World.fake_userdata()
+            local e = {foo = 'bar', fud = fud}
+            local f, h = genstub(2)
+            local g = spy(function(event)
+                event.fud.valid = false
+            end)
+            Event.register(0, f).register(0, g).register(0, h)
+
+            script.raise_event(0, e)
+            assert.stub(f).was.called(1)
+            assert.spy(g).was.called(1)
+            assert.stub(h).was_not.called()
+        end)
+    end)
 end)

@@ -14,40 +14,6 @@ insulate("Event", function()
         World.init()
     end)
 
-        it("should error when there are no connected players"
-            .. " if a handler throws an error", function()
-            game.players = {{
-                name = "test_player",
-                valid = true,
-                connected = false,
-                print = function() end
-            }}
-            game.connected_players = {}
-            Event.register(0, function() error("should error") end)
-
-            -- verify error was raised
-            local success, err = pcall(Event.dispatch,
-                {name = 0, tick = 9001, player_index = 1})
-            assert.is_false(success)
-            assert.is_true(err:find("^should error"))
-        end)
-
-        it("should return nil if an event has a table where table.__self"
-            .. " exists but table.valid is false", function()
-            Event.register(1, function_d).register(1, function_b)
-
-            local s = spy.on(test_function, "g")
-            local s2 = spy.on(test_function, "f")
-
-            Event.dispatch({
-                tick = 23,
-                name = 1,
-                entity = {__self = "userdata", valid = true}
-            })
-            assert.spy(s).was.called(1)
-            assert.spy(s2).was.called(0)
-        end)
-
         it("should register core_events.on_init callbacks"
             .. " and dispatch events", function()
             local control = {

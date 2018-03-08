@@ -321,7 +321,7 @@ end
 
 -- performs a load
 function World.load(savetable, config_changed_data)
-    return World.init(savetable, config_changed_data)
+    return World.init(savetable and savetable.is_multiplayer() or false, savetable, config_changed_data)
 end
 
 function World.save()

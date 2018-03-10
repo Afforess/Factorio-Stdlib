@@ -217,18 +217,39 @@ setmetatable(
     }
 )
 
+-- convenience function for un-lambda-ing deferred error messages
+local function safeinvoke(f)
+    local ok, msg = xpcall(f, debug.traceback)
+    if not ok then
+        -- ensure msg really is a string so there is theoretically no chance
+        -- of a triple fault (i.e.: from a monkey-patched debug.traceback
+        -- returning something that now fails to concatenate to a string)
+        if type(msg) == 'string' then
+            msg = '<<< DOUBLE FAULT: ' .. msg .. ' >>>'
+        end
+    end
+    -- for sanity-preservation, always return something truthy
+    return msg or 'Unknown Error'
+end
+
 setmetatable(
     Is.Assert,
     {
         __index = function(_, k)
             return M[k] and function(_assert, _message, _level)
                 _level = tonumber(_level) or 3
-                return M[k](_assert) or error(_message, _level)
+                return M[k](_assert) or error(
+                    type(_message) == 'function' and safeinvoke(_message) or _message,
+                    _level
+                )
             end or nil
         end,
         __call = function(_, ...)
             local param = {...}
-            return param[1] or error(param[2], tonumber(param[3]) or 3)
+            return param[1] or error(
+                type(param[2]) == 'function' and safeinvoke(param[2]) or param[2],
+                tonumber(param[3]) or 3
+            )
         end
     }
 )
@@ -239,12 +260,18 @@ setmetatable(
         __index = function(_, k)
             return M[k] and function(_assert, _message, _level)
                 _level = tonumber(_level) or 3
-                return not M[k](_assert) or error(_message, _level)
+                return not M[k](_assert) or error(
+                    type(_message) == 'function' and safeinvoke(_message) or _message,
+                    _level
+                )
             end or nil
         end,
         __call = function(_, ...)
             local param = {...}
-            return not param[1] or error(param[2], tonumber(param[3]) or 3)
+            return not param[1] or error(
+                type(param[2]) == 'function' and safeinvoke(param[2]) or param[2],
+                tonumber(param[3]) or 3
+            )
         end
     }
 )

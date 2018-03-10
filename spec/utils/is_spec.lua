@@ -177,3 +177,108 @@ describe('semantic modifiers',
         )
     end
 )
+describe('Assert',
+    function()
+        it(
+            'Accepts a lambda in place of a string message as its second argument, \z
+            which is called only when the assertion fails',
+            function()
+                local spy_error = spy(
+                    function()
+                        return 'Fake error message'
+                    end
+                )
+
+                -- Uhoh, type(spy) == 'table' which Is.Assert will not accept as a lambda.
+                -- To work around this snafu, wrap the spy in a regular function
+                local spy_error_function = function()
+                    return spy_error()
+                end
+
+                assert.has_no.errors(
+                    function()
+                        Is.Assert(true, spy_error_function)
+                    end
+                )
+                assert.spy(spy_error).was_not.called()
+                spy_error:clear()
+
+                assert.has_no.errors(
+                    function()
+                        Is.Assert.True(true, spy_error_function)
+                    end
+                )
+                assert.spy(spy_error).was_not.called()
+                spy_error:clear()
+
+                assert.has_no.errors(
+                    function()
+                        Is.Assert.Not(false, spy_error_function)
+                    end
+                )
+                assert.spy(spy_error).was_not.called()
+                spy_error:clear()
+
+                assert.has_no.errors(
+                    function()
+                        Is.Assert.Not.Number('string', spy_error_function)
+                    end
+                )
+                assert.spy(spy_error).was_not.called()
+                spy_error:clear()
+
+                assert.has.errors(
+                    function()
+                        Is.Assert(false, spy_error_function)
+                    end
+                )
+                assert.spy(spy_error).was.called()
+                spy_error:clear()
+
+                assert.has.errors(
+                    function()
+                        Is.Assert.True(false, spy_error_function)
+                    end
+                )
+                assert.spy(spy_error).was.called()
+                spy_error:clear()
+
+                assert.has.errors(
+                    function()
+                        Is.Assert.Not(true, spy_error_function)
+                    end
+                )
+                assert.spy(spy_error).was.called()
+                spy_error:clear()
+
+                assert.has.errors(
+                    function()
+                        Is.Assert.Not.Number(1, spy_error_function)
+                    end
+                )
+                assert.spy(spy_error).was.called()
+                spy_error:clear()
+            end
+        )
+        it('Reports a double-fault in a lambda message calculator',
+            function()
+                local double_fault_generator = function()
+                    error('kaboom')
+                end
+                assert.has.errors(
+                    function()
+                        Is.Assert(false, double_fault_generator)
+                    end
+                )
+                -- the error should not be 'kaboom', but some sort of traceback
+                -- triggered by it, which is what this test checks for...
+                assert.has_no.errors(
+                    function()
+                        Is.Assert(false, double_fault_generator)
+                    end,
+                    'kaboom'
+                )
+            end
+        )
+    end
+)

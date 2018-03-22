@@ -833,4 +833,26 @@ describe('LinkedList', function()
             end
         end)
     end)
+
+    describe('.tostring', function()
+        it('returns a lua expression which would build a similar LinkedList \z
+            from a corresponding stack using LinkedList:from_stack (assuming \z
+            the string representations of the items in the LinkedList \z
+            are similarly self-serializing lua expressions).', function()
+            local l = LinkedList:from_stack {1, -2.2, "three", false,
+                setmetatable({}, {__tostring = function() return "{}" end})}
+            assert.are.equal(
+                'LinkedList:from_stack {1, -2.2, "three", false, {}}',
+                l:tostring()
+            )
+        end)
+
+        it('appropriately represents sparse LinkedLists using constructors \z
+            for corresponding sparse pseudo-stacks.', function()
+            local l = LinkedList:from_stack {1, 2, 3, [5] = 5, [6] = 6}
+            assert.are.equal(
+                'LinkedList:from_stack {1, 2, 3, [5] = 5, [6] = 6}',
+                l:tostring())
+        end)
+    end)
 end)

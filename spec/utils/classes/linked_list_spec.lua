@@ -616,8 +616,8 @@ describe('LinkedList', function()
     describe('.concatenate', function()
         it('returns a new list containing all the nodes from self \z
             followed by all the nodes from other', function()
-            local la = LinkedList:from_stack({'one', 'two', 'three'})
-            local lb = LinkedList:from_stack({'four', 'five', 'six'})
+            local la = LinkedList:from_stack {'one', 'two', 'three'}
+            local lb = LinkedList:from_stack {'four', 'five', 'six'}
             local lab = la:concatenate(lb)
             assert.is_not_equal(la, lab)
             assert.is_not_equal(lb, lab)
@@ -631,7 +631,7 @@ describe('LinkedList', function()
     describe('.nodes', function()
         it('returns an iterator which traverses the nodes in the list',
         function()
-            local l = LinkedList:from_stack({1, 2, 3, 4, 5})
+            local l = LinkedList:from_stack {1, 2, 3, 4, 5}
             local nodes = {}
             for node in l:nodes() do
                 table.insert(nodes, node)
@@ -656,7 +656,7 @@ describe('LinkedList', function()
     describe('.items', function()
         it('returns an iterator which traverses the items in the list, \z
             skipping any nil items.', function()
-            local l = LinkedList:from_stack({1, 2, 3, 4, 5})
+            local l = LinkedList:from_stack {1, 2, 3, 4, 5}
             local thirdnode = l.next.next.next
             local items = {}
             for item in l:items() do

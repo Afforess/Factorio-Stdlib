@@ -343,7 +343,7 @@ LinkedList._mt.__ipairs = LinkedList.ipairs
 LinkedList._mt.__pairs = LinkedList.ipairs
 
 function LinkedList:tostring()
-    local result = 'LinkedList.from_stack {'
+    local result = self._class_name .. ':from_stack {'
     local skipped = false
     local firstrep = true
     local count = 0
@@ -356,11 +356,11 @@ function LinkedList:tostring()
             noderep = 'false'
         elseif node.item then
             if Is.String(node.item) then
-                noderep = '"' .. tostring(node.item) .. '"'
+                noderep = '"' .. node.item .. '"'
             else
                 noderep = tostring(node.item)
             end
-        end -- else we skip it
+        end -- else it is nil and we skip it
         if noderep then
             if not firstrep then
                 result = result .. ', '
@@ -368,7 +368,8 @@ function LinkedList:tostring()
                 firstrep = false
             end
             if skipped then
-                -- Not perfectly right but the best we can do...
+                -- if any index has been skipped then we provide
+                -- explicit lua index syntax i.e., {[2] = 'foo'}
                 result = result .. '[' .. tostring(count) .. '] = '
             end
             result = result .. noderep

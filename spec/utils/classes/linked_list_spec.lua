@@ -644,11 +644,48 @@ describe('LinkedList', function()
                 l.next.next.next.next.next
             }, nodes)
 
+            -- test empty list
             l = LinkedList:new()
             for node in l:nodes() do
+                -- should never be reached
                 assert.is_true(false)
             end
         end)
     end)
 
+    describe('.items', function()
+        it('returns an iterator which traverses the items in the list, \z
+            skipping any nil items.', function()
+            local l = LinkedList:from_stack({1, 2, 3, 4, 5})
+            local thirdnode = l.next.next.next
+            local items = {}
+            for item in l:items() do
+                table.insert(items, item)
+            end
+            assert.are.same({1, 2, 3, 4, 5}, items)
+
+            -- test skipping nil items
+            thirdnode.item = nil
+            items = {}
+            for item in l:items() do
+                table.insert(items, item)
+            end
+            assert.are.same({1, 2, 4, 5}, items)
+
+            -- test not skipping false items
+            thirdnode.item = false
+            items = {}
+            for item in l:items() do
+                table.insert(items, item)
+            end
+            assert.are.same({1, 2, false, 4, 5}, items)
+
+            -- test empty list
+            l = LinkedList:new()
+            for item in l:items() do
+                -- should never be reached
+                assert.is_true(false)
+            end
+        end)
+    end)
 end)

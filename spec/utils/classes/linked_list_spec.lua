@@ -729,6 +729,43 @@ describe('LinkedList', function()
                 lab:to_stack()
             )
         end)
+
+        it('preserves nil nodes when concatenating', function()
+            local la = LinkedList:from_stack {1, 2, 3}
+            local lb = LinkedList:from_stack {4, 5, 6}
+            la:prepend(nil)
+            la:append(nil)
+            lb:prepend(nil)
+            lb:append(nil)
+            local lab = la:concatenate(lb)
+            assert.is_not.Nil(    lab.next)
+            assert.is.Nil(        lab.next.item)
+            assert.is_not.Nil(    lab.next.next)
+            assert.are.equal(1,   lab.next.next.item)
+            assert.is_not.Nil(    lab.next.next.next)
+            assert.are.equal(2,   lab.next.next.next.item)
+            assert.is_not.Nil(    lab.next.next.next.next)
+            assert.are.equal(3,   lab.next.next.next.next.item)
+            assert.is_not.Nil(    lab.next.next.next.next.next)
+            assert.is.Nil(        lab.next.next.next.next.next.item)
+            assert.is_not.Nil(    lab.next.next.next.next.next.next)
+            assert.is.Nil(        lab.next.next.next.next.next.next.item)
+            assert.is_not.Nil(    lab.next.next.next.next.next.next.next)
+            assert.are.equal(4,   lab.next.next.next.next.next.next.next.item)
+            assert.is_not.Nil(    lab.next.next.next.next.next.next.next.next)
+            assert.are.equal(5,
+                lab.next.next.next.next.next.next.next.next.item)
+            assert.is_not.Nil(
+                lab.next.next.next.next.next.next.next.next.next)
+            assert.equal(6,
+                lab.next.next.next.next.next.next.next.next.next.item)
+            assert.is_not.Nil(
+                lab.next.next.next.next.next.next.next.next.next.next)
+            assert.is.Nil(
+                lab.next.next.next.next.next.next.next.next.next.next.item)
+            assert.are.equal(lab,
+                lab.next.next.next.next.next.next.next.next.next.next.next)
+        end)
     end)
 
     describe('.nodes', function()

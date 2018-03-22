@@ -317,11 +317,13 @@ function LinkedList:items()
     local iter = self.nodeiter
     local node = self
     return function()
+        -- not much we can do about nils here so ignore them
         repeat
             node = iter(self, node)
-        -- not much we can do about nils here so ignore them
-        until node.item ~= nil
-        return node.item
+            if node and node.item ~= nil then
+                return node.item
+            end
+        until node == nil
     end
 end
 

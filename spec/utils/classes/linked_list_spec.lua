@@ -627,4 +627,28 @@ describe('LinkedList', function()
             )
         end)
     end)
+
+    describe('.nodes', function()
+        it('returns an iterator which traverses the nodes in the list',
+        function()
+            local l = LinkedList:from_stack({1, 2, 3, 4, 5})
+            local nodes = {}
+            for node in l:nodes() do
+                table.insert(nodes, node)
+            end
+            assert.are.same({
+                l.next,
+                l.next.next,
+                l.next.next.next,
+                l.next.next.next.next,
+                l.next.next.next.next.next
+            }, nodes)
+
+            l = LinkedList:new()
+            for node in l:nodes() do
+                assert.is_true(false)
+            end
+        end)
+    end)
+
 end)

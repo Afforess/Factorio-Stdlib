@@ -47,9 +47,7 @@ Is.Assert.Not = {}
 -- @section Functions
 
 local M = {}
-
 local type = type
-local abs = math.abs
 
 --- Returns true if the passed variable is a table.
 -- @tparam mixed var The variable to check
@@ -127,7 +125,7 @@ function M.Empty(var)
 end
 
 function M.Positive(var)
-    return M.Number(var) and var == abs(var) or false
+    return M.Number(var) and var >= 0 or false
 end
 
 function M.Negative(var)
@@ -135,11 +133,19 @@ function M.Negative(var)
 end
 
 function M.Position(var)
-    return M.Table(var) and ((var.x and var.y) or (var[1] and var[2])) or false
+    return M.Table(var) and (var.x and var.y) or false
+end
+
+function M.position(var)
+    return M.Position(var) --TODO check simple or complex Position
 end
 
 function M.Area(var)
-    return M.Table(var) and ((var.left_top and var.right_bottom) or (var[1] and var[1][1] and var[2] and var[2][1])) or false
+    return M.Table(var) and (M.Position(var.left_top) and M.Position(var.right_bottom)) or false
+end
+
+function M.area(var)
+    return M.area(var) --TODO check simple areas
 end
 
 --- Returns true if the passed variable is a single alphbetical word.

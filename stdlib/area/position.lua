@@ -64,7 +64,7 @@ end
 -- @tparam Concepts.Position pos the position to load the metatable onto
 -- @treturn Concepts.Position the position with metatable attached
 function Position.load(pos)
-    Is.Assert.Table(pos, 'position missing')
+    Is.Assert.Table(pos, 'position missing or malformed')
     return setmetatable(pos, Position._mt)
 end
 

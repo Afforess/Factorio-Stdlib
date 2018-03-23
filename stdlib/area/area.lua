@@ -62,9 +62,9 @@ end
 --- Loads the metatable into the passed Area without creating a new one.
 -- @tparam Concepts.BoundingBox pos the Area to load the metatable onto
 -- @treturn Concepts.BoundingBox the Area with metatable attached
-function Area.load(pos)
-    Is.Assert.Table(pos, 'position missing')
-    return setmetatable(pos, Area._mt)
+function Area.load(area)
+    Is.Assert.Area(area, 'area missing or malformed')
+    return setmetatable(area, Area._mt)
 end
 
 local function validate_vector(amount)

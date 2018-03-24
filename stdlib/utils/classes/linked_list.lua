@@ -84,6 +84,8 @@ function LinkedList:from_stack(stack, allow_insane_sparseness)
     end
     table.sort(sparsekeys)
     local result = self._class:new()
+    -- subclasses could theoretically override the allow_insane_sparseness
+    -- object-level override in _class:new(), so respect their wishes here.
     result.allow_insane_sparseness = result.allow_insane_sparseness or allow_insane_sparseness
     local lastkey = 0
     for _,k in ipairs(sparsekeys) do
@@ -186,29 +188,34 @@ function LinkedList._mt.__index(self, k)
 end
 
 function LinkedList._mt.__newindex(self, k, v)
-    if type(k) ~= 'number' or math.floor(k) == k or k >= 1 then
+    if type(k) ~= 'number' or math.floor(k) ~= k or k < 1 then
         -- any non-special index goes straight into the table (the class is
         -- immutable, but the object may opt to override class functions)
-        return rawset(self, k , v)
+        return rawset(self, k, v)
     end
     local count = 1
     local node = self.next
     while node ~= self do
         if count == k then
-            node.item = k
+            node.item = v
             return nil
         end
         node = node.next
         count = count + 1
     end
-    -- They have requested a new special index be created.  Is it resonable?
-    Is.Assert(k - count <= 999 or self.allow_insane_sparseness,
+    -- They have requested a new node to be appended, perhaps with a certain
+    -- number of intervening empty nodes.  But, would the request create an
+    -- insanely sparse index?
+    Is.Assert(k - count < 999 or self.allow_insane_sparseness,
         'Setting requested index in linkedlist would create insanely sparse list')
     repeat
+        -- this is a bit gross; we increment count one /exta/ time here, on the
+        -- first iteration; so now count == self.length + 2
         count = count + 1
         node = self:append(nil)
-    until count == k
-    node.item = k
+        -- nb: count == self.length + 1
+    until count > k
+    node.item = v
 end
 
 function LinkedList:append(item)

@@ -134,31 +134,49 @@ function M.Empty(var)
 end
 M.empty = M.Empty
 
+--- Returns the passed var if it is a positive number.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Positive(var)
     return M.Number(var) and var >= 0 and var
 end
 M.positive = M.Positive
 
+--- Returns the passed var if it is a positive number.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Negative(var)
     return M.Number(var) and var < 0 and var
 end
 M.negative = M.Negative
 
+--- Returns the passed var if it is a full position.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Position(var)
     return M.Table(var) and (var.x and var.y) and var
 end
 M.position = M.Position
 
+--- Returns the passed var if it is a full area.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Area(var)
     return M.Table(var) and (M.Position(var.left_top) and M.Position(var.right_bottom)) and var
 end
 M.area = M.Area
 
+--- Returns the passed var if it is a simple position/vector.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Vector(var)
     return M.Table(var) and (M.Number(var[1]) and M.Number(var[2])) and var
 end
 M.vector = M.Vector
 
+--- Returns the passed var if it is a simple area/boundingbox.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.BoundingBox(var)
     return M.Table(var) and (M.Vector(var[1]) and M.Vector(var[2]))
 end
@@ -166,6 +184,9 @@ M.boundingbox = M.BoundingBox
 M.bounding_box = M.BoundingBox
 M.Bounding_Box = M.BoundingBox
 
+--- Returns the hex value of the passed var if it is hexadecimal.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Hex(var)
     return M.String(var) and var:match('%x%x%x%x%x%x$')
 end

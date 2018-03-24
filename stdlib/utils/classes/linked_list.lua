@@ -303,6 +303,8 @@ function LinkedList:copy()
     return self:_copy_with(identity)
 end
 
+LinkedList.deepcopy = table.flexcopy
+
 function LinkedList:nodeiter(node)
     return node.next ~= self and node.next or nil
 end

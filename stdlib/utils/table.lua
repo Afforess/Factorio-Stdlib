@@ -290,6 +290,33 @@ function M.deepcopy(object)
     return _copy(object)
 end
 
+--- Creates a flexible deep copy of an object, recursively copying sub-objects
+-- @usage local copy = table.flexcopy(data.raw.["stone-furnace"]["stone-furnace"]) -- returns a copy of the stone furnace entity
+-- @tparam table object the table to copy
+-- @treturn table a copy of the table
+function M.flexcopy(object)
+    local lookup_table = {}
+    local function _copy(this_object)
+        if type(this_object) ~= 'table' then
+            return this_object
+        elseif this_object.__self then
+            return this_object
+        elseif lookup_table[this_object] then
+            return lookup_table[this_object]
+        elseif type(this_object._copy_with) == 'function' then
+            lookup_table[this_object] = this_object:_copy_with(_copy)
+            return lookup_table[this_object]
+        end
+        local new_table = {}
+        lookup_table[this_object] = new_table
+        for index, value in pairs(this_object) do
+            new_table[_copy(index)] = _copy(value)
+        end
+        return setmetatable(new_table, getmetatable(this_object))
+    end
+    return _copy(object)
+end
+
 --- Returns a copy of all of the values in the table.
 -- @tparam table tbl the table to copy the keys from, or an empty table if tbl is nil
 -- @tparam[opt] boolean sorted whether to sort the keys (slower) or keep the random order from pairs()

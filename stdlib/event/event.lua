@@ -347,7 +347,7 @@ function Event.raise_event(...)
     script.raise_event(...)
 end
 
-function Event.get_event_handlers(event_id)
+function Event.get_event_handler(event_id)
     Is.Assert(valid_id(event_id))
     return {
         script = (tonumber(event_id) or 0 >= 0 or Is.String(event_id)) and script.get_event_handler(event_id),
@@ -355,10 +355,10 @@ function Event.get_event_handlers(event_id)
     }
 end
 
---- Retrieve a copy of the the event_registry
+--- Retrieve the event_registry
 -- @treturn table event_registry
 function Event.get_registry()
-    return table.deepcopy(event_registry)
+    return event_registry
 end
 
 function Event.dump(reg_type)

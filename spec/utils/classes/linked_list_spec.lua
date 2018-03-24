@@ -34,7 +34,7 @@ describe('LinkedList', function()
             end)
         end)
 
-        it('should validate a sparse linked-list that includes itself as an \z
+        it('should validate a "sparse" linked-list that includes itself as an \z
             item in multiple positions', function()
             local l = LinkedList:new()
             l:append(l)
@@ -293,9 +293,9 @@ describe('LinkedList', function()
         end)
 
         it('will not insert insanely sparse items, defined as items whose \z
-            indices would implicitly create more than 999 empty nodes in \z
-            one operation, unless the LinkedList has the \z
-            allow_insane_sparseness flag is set to true.', function()
+            indices would implicitly create more than 999 nodes in \z
+            one operation, unless the LinkedList instance has the \z
+            allow_insane_sparseness flag set to true.', function()
             local l = LinkedList:new()
             l:append('one')
             l:append('two')

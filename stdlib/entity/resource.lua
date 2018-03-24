@@ -5,7 +5,7 @@
 local Resource = {_module_name = 'Resource'}
 setmetatable(Resource, {__index = require('stdlib/core')})
 
-local fail_if_not = Resource.fail_if_not
+local Is = require('stdlib/utils/is')
 local Surface = require('stdlib/area/surface')
 local Area = require('stdlib/area/area')
 local Tile = require('stdlib/area/tile')
@@ -17,12 +17,10 @@ local Queue = require('stdlib/queue/queue')
 -- @tparam Concepts.Position position the position to check
 -- @treturn {nil|LuaEntity,...} an array of resource entities or nil if none found
 function Resource.get_resources_at(surface, position)
-    fail_if_not(surface, 'missing surface')
-    fail_if_not(position, 'missing position')
+    Is.Assert(surface, 'missing surface')
+    Is.Assert(position, 'missing position')
     local surfaces = Surface.lookup(surface)
-    if #surfaces ~= 1 then
-        fail_if_not(surface, 'invalid surface')
-    end
+    Is.Assert(#surfaces == 1, 'invalid surface')
 
     local tile_at_position = Tile.from_position(position)
     local tile_area = Tile.to_area(tile_at_position)
@@ -41,8 +39,8 @@ end
 -- @tparam Concepts.Position position the position to check
 -- @return (<span class="types">{@{nil}} or {[@{string} &lt;resource-type&gt;] = {@{LuaEntity},...},...}</span>) a map of resource types to resource entities or empty array if they don't exist
 function Resource.get_resource_patches_at(surface, position)
-    fail_if_not(surface, 'missing surface')
-    fail_if_not(position, 'missing position')
+    Is.Assert(surface, 'missing surface')
+    Is.Assert(position, 'missing position')
 
     -- get the initial resource tile if there is one at the given position
     local all_resource_entities = Resource.get_resources_at(surface, position)
@@ -65,13 +63,12 @@ end
 -- @tparam string type the resource type (example: "iron-ore")
 -- @treturn {nil|LuaEntity,...} an array containing all resources in the resource patch, or an empty array if there are no resources there
 function Resource.get_resource_patch_at(surface, position, type)
-    fail_if_not(surface, 'missing surface')
-    fail_if_not(position, 'missing position')
-    fail_if_not(position, 'missing ore name')
+    Is.Assert(surface, 'missing surface')
+    Is.Assert(position, 'missing position')
+    Is.Assert(position, 'missing ore name')
     local surfaces = Surface.lookup(surface)
-    if #surfaces ~= 1 then
-        fail_if_not(surface, 'invalid surface')
-    end
+    Is.Assert(#surfaces == 1, 'invalid surface')
+
     surface = table.first(surfaces)
 
     -- get the initial resource tile if there is one at the given position
@@ -153,7 +150,7 @@ end
 -- @tparam {string,...} resource_names the names of the resource entities
 -- @treturn {nil|LuaEntity,...} a new array containing the entities matching the given resource names or nil if no matches were found
 function Resource.filter_resources(resources, resource_names)
-    fail_if_not(resources, 'missing resource entities list')
+    Is.Assert(resources, 'missing resource entities list')
 
     if not resource_names or #resource_names == 0 then
         return resources
@@ -181,7 +178,7 @@ end
 -- @tparam {LuaEntity,...} resource_patch the resource patch
 -- @treturn Concepts.BoundingBox the area of the resource patch
 function Resource.get_resource_patch_bounds(resource_patch)
-    fail_if_not(resource_patch, 'missing resource patch')
+    Is.Assert(resource_patch, 'missing resource patch')
     local min_x = math.huge
     local min_y = math.huge
     local max_x = -math.huge

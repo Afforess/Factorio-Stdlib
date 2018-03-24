@@ -7,7 +7,7 @@
 local Surface = {_module_name = 'Surface'}
 setmetatable(Surface, {__index = require('stdlib/core')})
 
-local fail_if_not = Surface.fail_if_not
+local Is = require('stdlib/utils/is')
 local Area = require('stdlib/area/area')
 
 --- Flexible and safe lookup function for surfaces.
@@ -61,7 +61,7 @@ end
 -- @param search_criteria (<span class="types">@{search_criteria}</span>) a table used to search for entities
 -- @treturn {nil|LuaEntity,...} an array of all entities that matched the criteria **OR** *nil* if there were no matches
 function Surface.find_all_entities(search_criteria)
-    fail_if_not(search_criteria, 'missing search_criteria argument')
+    Is.Assert.Table(search_criteria, 'missing search_criteria argument')
     if search_criteria.name == nil and search_criteria.type == nil and search_criteria.force == nil and search_criteria.area == nil then
         error('Missing search criteria field: name or type or force or area of entity', 2)
     end
@@ -105,7 +105,7 @@ end
 -- @tparam LuaSurface surface the surface for which to get the area
 -- @treturn Concepts.BoundingBox the area of a given surface
 function Surface.get_surface_bounds(surface)
-    fail_if_not(surface, 'missing surface value')
+    Is.Assert(surface, 'missing surface value')
     local x1, y1, x2, y2 = 0, 0, 0, 0
 
     for chunk in surface.get_chunks() do

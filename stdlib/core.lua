@@ -46,16 +46,6 @@ local Core = {
     }
 }
 
---- Print msg if specified var evaluates to false.
--- @tparam Mixed var variable or expression to evaluate
--- @tparam[opt="incorrect or missing value"] string msg message
-function Core.fail_if_not(var, msg)
-    if not var then
-        error(msg or 'incorrect or missing value', 3)
-    end
-    return false
-end
-
 function Core.log_and_print(msg)
     if game and #game.connected_players > 0 then
         log(msg)
@@ -109,7 +99,7 @@ function Core.create_stdlib_globals(files)
             PLAYER = 'stdlib/event/player',
             FORCE = 'stdlib/event/force'
         }
-    Core.fail_if_not(Is.Table(files), 'files must be a dictionary of global names -> file paths')
+    Is.Assert.Table(files, 'files must be a dictionary of global names -> file paths')
 
     for glob, path in pairs(files) do
         _G[glob] = prequire((path:gsub('%.', '/'))) -- extra () required to emulate select(1)

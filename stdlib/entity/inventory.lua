@@ -5,7 +5,7 @@
 local Inventory = {_module_name = 'Inventory'}
 setmetatable(Inventory, {__index = require('stdlib/core')})
 
-local fail_if_not = Inventory.fail_if_not
+local Is = require('stdlib/utils/is')
 
 --- Copies the contents of source inventory to destination inventory by using @{Concepts.SimpleItemStack}.
 -- @tparam LuaInventory src the source inventory
@@ -13,8 +13,8 @@ local fail_if_not = Inventory.fail_if_not
 -- @tparam[opt=false] boolean clear clear the contents of the source inventory
 -- @treturn {Concepts.SimpleItemStack,...} an array of left over items that could not be inserted into the destination
 function Inventory.copy_as_simple_stacks(src, dest, clear)
-    fail_if_not(src, 'missing source inventory')
-    fail_if_not(dest, 'missing destination inventory')
+    Is.Assert(src, 'missing source inventory')
+    Is.Assert(dest, 'missing destination inventory')
 
     local left_over = {}
     for i = 1, #src do

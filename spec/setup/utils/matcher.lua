@@ -1,9 +1,9 @@
 local luassert = require('luassert.assert')
-local match = require('luassert.match')
+--local match = require('luassert.match')
 
 local is_callable = require('luassert.util').callable
 
-local function is_callable_matcher(state, arguments)
+local function is_callable_matcher(_, _)
     return function(value)
         return is_callable(value)
     end

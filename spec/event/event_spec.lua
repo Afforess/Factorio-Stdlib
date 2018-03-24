@@ -142,12 +142,12 @@ describe('Event', function ()
             local MikeyLikesIt = spy(function() return true end)
             local ReginaRejectsalot = spy(function() return false end)
             local PickyPaul = spy(function(event) return event.is_special end)
-            local RepeatyPete = spy(function(event, pattern)
+            local RepeatyPete = spy(function(_, pattern)
                 pete_repeat_repeated_pattern = pattern
                 return pattern
             end)
             -- stubs
-            mike, regina, paul, pete, peterepeat, peterepeatrepeat = genstub(6)
+            local mike, regina, paul, pete, peterepeat, peterepeatrepeat = genstub(6)
             -- registrations
             Event.register(0, mike, MikeyLikesIt).register(0, regina, ReginaRejectsalot)
             Event.register(0, paul, PickyPaul).register(0, pete, RepeatyPete, false)
@@ -185,15 +185,15 @@ describe('Event', function ()
             -- these mostly just test reordering of callees which
             -- is hard to do elegantly using called_with
             local up_value = 0
-            local PlusPattern = function(event, pattern)
+            local PlusPattern = function(event, pattern) --luacheck: ignore
                 up_value = up_value + pattern
                 return up_value > 0
             end
-            local TimesPatternMinusTwo = function(event, pattern)
+            local TimesPatternMinusTwo = function(event, pattern) --luacheck: ignore
                 up_value = up_value * pattern - 2
                 return up_value > 0
             end
-            local AdditiveInverse = function()
+            local AdditiveInverse = function() --luacheck: ignore
                 up_value = up_value * -1
                 return up_value > 0
             end
@@ -419,7 +419,7 @@ describe('Event', function ()
             local Event = require('stdlib/event/event')
             local f, h = genstub(2)
             local g = spy(function()
-                Event.remove(0, g)
+                Event.remove(0, g) --luacheck: ignore g
             end)
             Event.register(0, f).register(0, g).register(0, h)
 
@@ -442,7 +442,7 @@ describe('Event', function ()
             World.bootstrap()
             local Event = require('stdlib/event/event')
             local f = spy(function()
-                Event.remove(0, g).remove(0, h)
+                Event.remove(0, g).remove(0, h) --luacheck: ignore g h
             end)
             local g, h, i = genstub(3)
             Event.register(0, f).register(0, g).register(0, h).register(0, i)
@@ -610,7 +610,7 @@ describe('Event', function ()
             World.bootstrap()
             local Event = require('stdlib/event/event')
             local return_value = Event.stop_processing
-            local g = spy(function (e)
+            local g = spy(function ()
                 return return_value
             end)
             local f, h = genstub(2)
@@ -649,7 +649,7 @@ describe('Event', function ()
             World.bootstrap()
             local Event = require('stdlib/event/event')
             local i,k = genstub(2)
-            local j = spy(function(e)
+            local j = spy(function()
                 return Event.stop_processing
             end)
             local true_matcher = function() return true end
@@ -689,7 +689,7 @@ describe('Event', function ()
             World.bootstrap()
             local Event = require('stdlib/event/event')
             local l,m,n,o = genstub(4)
-            local pattern_identity_matcher = function(event, pattern)
+            local pattern_identity_matcher = function(_, pattern)
                 return pattern
             end
             Event.register(2, l)

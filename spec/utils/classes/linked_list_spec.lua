@@ -118,7 +118,7 @@ describe('LinkedList', function()
             end)
         end)
 
-        it('Returns the new node', function()
+        it('returns the new node', function()
             local l = LinkedList:new()
             local node_1 = l:append('one')
             local node_2 = l:append('two')
@@ -131,7 +131,7 @@ describe('LinkedList', function()
     end)
 
     describe('.prepend', function()
-        it('Adds to the beginning of the list', function()
+        it('adds to the beginning of the list', function()
             local l = LinkedList:new()
             l:prepend('four')
             l:prepend('three')
@@ -150,7 +150,7 @@ describe('LinkedList', function()
             end)
         end)
 
-        it('Returns the new node', function()
+        it('returns the new node', function()
             local l = LinkedList:new()
             local node_3 = l:prepend('three')
             local node_2 = l:prepend('two')
@@ -163,7 +163,7 @@ describe('LinkedList', function()
     end)
 
     describe('.length', function()
-        it('Returns the number of nodes in the list', function()
+        it('returns the number of nodes in the list', function()
             local l = LinkedList:new()
             assert.are.equal(0, l:length())
             l:append('one')
@@ -176,7 +176,7 @@ describe('LinkedList', function()
             assert.are.equal(4, l:length())
         end)
 
-        it('Considers nil list-items as part of the length', function()
+        it('considers nil list-items as part of the length', function()
             local l = LinkedList:new()
             l:append('one')
             l:append('two')
@@ -191,7 +191,7 @@ describe('LinkedList', function()
     end)
 
     describe('.insert', function()
-        it('Is equivalent to .append when invoked with one or zero arguments',
+        it('is equivalent to .append when invoked with one or zero arguments',
         function()
             local l = LinkedList:new()
             l:insert('one')
@@ -217,7 +217,7 @@ describe('LinkedList', function()
             end)
         end)
 
-        it('Can insert items at arbitrary positions when invoked with a \z
+        it('can insert items at arbitrary positions when invoked with a \z
             valid second argument', function()
             local l = LinkedList:new()
             l:append('one')
@@ -292,7 +292,7 @@ describe('LinkedList', function()
             assert.are.equal('seven', l.next.next.next.next.next.next.next.item)
         end)
 
-        it('Will not insert insanely sparse items, defined as items whose \z
+        it('will not insert insanely sparse items, defined as items whose \z
             indices would implicitly create more than 999 empty nodes in \z
             one operation, unless the LinkedList has the \z
             allow_insane_sparseness flag is set to true.', function()
@@ -336,7 +336,7 @@ describe('LinkedList', function()
             assert.are.equal('one-thousand-two-hundred-and-sixty-seven', l.prev.item)
         end)
 
-        it('Will not accept non-index-y things as indexes.', function()
+        it('will not accept non-index-y things as indexes.', function()
             local l = LinkedList:new()
             l:append('one')
             l:append('two')
@@ -371,7 +371,7 @@ describe('LinkedList', function()
             assert.are.equal('three', l.prev.item)
         end)
 
-        it('Returns the new node', function()
+        it('returns the new node', function()
             local l = LinkedList:new()
             local node_1 = l:insert('one')
             local node_2 = l:insert('two')
@@ -437,7 +437,7 @@ describe('LinkedList', function()
             assert.are.equal(4, l:length())
         end)
 
-        it('Will not accept non-index-y things as indexes.', function()
+        it('will not accept non-index-y things as indexes.', function()
             local l = LinkedList:new()
             l:append('one')
             l:append('two')

@@ -14,7 +14,7 @@ local Force = {
 }
 setmetatable(Force, {__index = require('stdlib/core')})
 
-local fail_if_not = Force.fail_if_not
+local Is = require('stdlib/utils/is')
 local Game = require('stdlib/game')
 
 -- return new default force object
@@ -57,7 +57,7 @@ end
 -- -- Returns data for the force named "player" from either a string or LuaForce object
 function Force.get(force)
     force = Game.get_force(force)
-    fail_if_not(force, 'force is missing')
+    Is.Assert(force, 'force is missing')
     return game.forces[force.name], global.forces[force.name] or Force.init(force.name)
 end
 

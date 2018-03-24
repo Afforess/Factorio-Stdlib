@@ -6,6 +6,8 @@ local Technology = {
 }
 setmetatable(Technology, {__index = require('stdlib/data/data')})
 
+local Is = require('stdlib/utils/is')
+
 function Technology:_get(tech)
     return self:get(tech, 'technology')
 end
@@ -49,7 +51,7 @@ order = "e-a-a"
 -- end
 
 function Technology:add_effect(effect, unlock_type)
-    self.fail_if_not(effect)
+    Is.Assert(effect)
 
     --todo fix for non recipe types
     local add_unlock =

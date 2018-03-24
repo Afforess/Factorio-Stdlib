@@ -8,6 +8,7 @@ local Recipe = {
 }
 setmetatable(Recipe, {__index = require('stdlib/data/data')})
 
+local Is = require('stdlib/utils/is')
 local Item = require('stdlib/data/item')
 
 function Recipe:_get(recipe)
@@ -227,7 +228,7 @@ end
 -- @tparam string|ingredient normal
 -- @tparam[opt] string|ingredient|boolean expensive
 function Recipe:replace_ingredient(replace, normal, expensive)
-    self.fail_if_not(replace, 'Missing recipe to replace')
+    Is.Assert(replace, 'Missing recipe to replace')
     if self:valid() then
         local n_string = type(normal) == 'string'
         local e_string = type(expensive == true and normal or expensive) == 'string'

@@ -127,4 +127,4 @@ function Chunk.get_index(surface, chunk_pos)
     return surface_chunks[chunk_pos.x][chunk_pos.y]
 end
 
-return Chunk:_protect()
+return Chunk

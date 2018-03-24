@@ -1,11 +1,11 @@
 --- For playing with colors.
 -- @module Color
--- @usage local Color = require('stdlib/color/color')
+-- @usage local Color = require('stdlib/utils/color')
 
 local Color = {_module_name = 'Color'}
 setmetatable(Color, {__index = require('stdlib/core')})
 
-local fail_if_not = Color.fail_if_not
+local Is = require('stdlib/utils/is')
 
 --- Set a value for the alpha channel in the given color table.
 -- `color.a` represents the alpha channel in the given color table.
@@ -54,14 +54,8 @@ end
 -- @tparam[opt=1] float alpha the alpha value to set; such that *** 0 &#8924; value &#8924; 1 ***
 -- @treturn Concepts.Color a color table with RGB converted from Hex and with alpha
 function Color.from_hex(hex, alpha)
-    fail_if_not(hex, 'missing color hex value')
-    if hex:find('#') then
-        hex = hex:sub(2)
-    end
-    if not (#hex == 6) then
-        error('invalid color hex value: ' .. hex)
-    end
-    local number = tonumber(hex, 16)
+    --Is.Assert.Hex(hex, 'missing color hex value')
+    local number = tonumber(Is.Assert.Hex(hex, 'missing color hex value'), 16)
     return {
         r = bit32.extract(number, 16, 8) / 255,
         g = bit32.extract(number, 8, 8) / 255,

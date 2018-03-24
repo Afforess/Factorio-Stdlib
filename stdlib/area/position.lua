@@ -16,6 +16,15 @@ local Is = require('stdlib/utils/is')
 --- By default position tables are mutated in place set this to true to make the tables immutable.
 Position.immutable = false
 
+local function __call(_, ...)
+    if type((...)) == 'table' then
+        return Position.new(...)
+    else
+        return Position.construct(...)
+    end
+end
+Position:set_caller(__call)
+
 --- Machine Epsilon
 -- @see wiki Machine_epsilon
 -- @return epsilon
@@ -340,14 +349,5 @@ Position._mt = {
     __concat = Position._concat, -- calls tostring on both sides of concact.
     __call = Position.copy
 }
-
-local function __call(_, ...)
-    if type((...)) == 'table' then
-        return Position.new(...)
-    else
-        return Position.construct(...)
-    end
-end
-Position:_protect(__call)
 
 return Position

@@ -31,21 +31,5 @@ describe('Core',
                 )
             end
         )
-        describe('Metatable Protections',
-            function()
-                local Area = require('stdlib/area/area')
-                it('Should not allow adding new keys',
-                    function()
-                        assert.has_error(function() Area["fake"] = true end)
-                    end
-                )
-
-                it('Should not allow setting a new metatable',
-                    function()
-                        assert.has_error(function() setmetatable(Area, {}) end)
-                    end
-                )
-            end
-        )
     end
 )

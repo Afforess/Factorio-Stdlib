@@ -135,4 +135,4 @@ function Tile.get_index(tile_pos)
     return bit32.band(bit32.bor(bit32.lshift(bit32.band(tile_pos.x, 0x1F), 5), bit32.band(tile_pos.y, 0x1F)), 0x3FF)
 end
 
-return Tile:_protect()
+return Tile

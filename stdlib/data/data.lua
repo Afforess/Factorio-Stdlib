@@ -18,6 +18,8 @@ local Data = {
 }
 setmetatable(Data, {__index = require('stdlib/core')})
 
+local Is = require('stdlib/utils/is')
+
 local item_and_fluid_types = {
     'item',
     'ammo',
@@ -110,7 +112,7 @@ end
 -- @tparam string mining_result
 -- @treturn self
 function Data:copy(new_name, mining_result)
-    self.fail_if_not(new_name, 'New name is required')
+    Is.Assert.String(new_name, 'New name is required')
     if self:valid() then
         mining_result = mining_result or new_name
         --local from = self.name
@@ -271,11 +273,11 @@ end
 -- @tparam[opt] table opts options to pass
 -- @treturn Object
 function Data:get(object, object_type, opts)
-    self.fail_if_not(object, 'object name string or table is required')
+    Is.Assert(object, 'object string or table is required')
 
     local new
     if type(object) == 'table' then
-        self.fail_if_not(object.type and object.name, 'Name and Type are required')
+        Is.Assert(object.type and object.name, 'Name and Type are required')
         new = object
         new._extended = data.raw[object.type] and data.raw[object.type][object.name] == object
     elseif type(object) == 'string' then

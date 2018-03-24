@@ -15,6 +15,15 @@ local Position = require('stdlib/area/position')
 --- By default area tables are mutated in place set this to true to make the tables immutable.
 Area.immutable = false
 
+local function __call(_, ...)
+    if type((...)) == 'table' then
+        return Area.new(...)
+    else
+        return Area.construct(...)
+    end
+end
+Area:set_caller(__call)
+
 --- Converts an area in either array or table format to an area with a metatable.
 -- Returns itself if it already has a metatable
 -- @tparam Concepts.BoundingBox area the area to convert
@@ -482,14 +491,5 @@ Area._mt = {
     __concat = Area._concat, -- calls tostring on both sides of concat.
     __call = Area.copy -- Return a new copy
 }
-
-local function __call(_, ...)
-    if type((...)) == 'table' then
-        return Area.new(...)
-    else
-        return Area.construct(...)
-    end
-end
-Area:_protect(__call)
 
 return Area

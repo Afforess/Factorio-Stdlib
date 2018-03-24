@@ -7,7 +7,7 @@
 local Queue = {_module_name = 'Queue'}
 setmetatable(Queue, {__index = require('stdlib/core')})
 
-local fail_if_not = Queue.fail_if_not
+local Is = require('stdlib/utils/is')
 
 --- Constructs a new Queue object.
 -- @return (<span class="types">@{Queue}</span>) a new, empty queue
@@ -16,6 +16,7 @@ function Queue.new()
     setmetatable(queue, Queue._mt)
     return queue
 end
+Queue:set_caller(Queue.new)
 
 --- Load global.queue or queues during on_load, as metatables are not persisted.
 -- <p>This is only needed if you are using the queue as an object and storing it in global.
@@ -38,7 +39,7 @@ end
 -- @param queue (<span class="types">@{Queue}</span>) the queue to push an element to
 -- @tparam Mixed value the element to push
 function Queue.push_first(queue, value)
-    fail_if_not(value)
+    Is.Assert(value, "must have a value to push")
 
     local first = queue.first - 1
     queue.first = first
@@ -50,7 +51,7 @@ end
 -- @param queue (<span class="types">@{Queue}</span>) the queue to push an element to
 -- @tparam Mixed value the element to push
 function Queue.push_last(queue, value)
-    fail_if_not(value)
+    Is.Assert(value, "must have a value to push")
 
     local last = queue.last + 1
     queue.last = last
@@ -133,7 +134,8 @@ end
 
 Queue._mt = {
     __index = Queue,
-    __len = Queue.count
+    __len = Queue.count,
+    __call = Queue.peek_first
 }
 
-return Queue:_protect()
+return Queue

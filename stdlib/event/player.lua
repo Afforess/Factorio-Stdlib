@@ -12,7 +12,7 @@ local Player = {
 }
 setmetatable(Player, {__index = require('stdlib/core')})
 
-local fail_if_not = Player.fail_if_not
+local Is = require('stdlib/utils/is')
 local Game = require('stdlib/game')
 
 -- Return new default player object consiting of index and name
@@ -53,7 +53,7 @@ end
 -- local player, player_data = Player.get(event.player_index)
 function Player.get(player)
     player = Game.get_player(player)
-    fail_if_not(player, 'Missing player to retrieve')
+    Is.Assert(player, 'Missing player to retrieve')
     return player, global.players[player.index] or Player.init(player.index)
 end
 

@@ -124,4 +124,4 @@ function Surface.get_surface_bounds(surface)
     return Area.construct(x1 * 32, y1 * 32, x2 * 32, y2 * 32)
 end
 
-return Surface:_protect()
+return Surface

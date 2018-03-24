@@ -1,4 +1,4 @@
-require('busted/runner')()
+require('busted.runner')()
 
 require('spec/setup/defines')
 local Color

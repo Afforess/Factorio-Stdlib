@@ -766,6 +766,16 @@ describe('LinkedList', function()
             assert.are.equal(lab,
                 lab.next.next.next.next.next.next.next.next.next.next.next)
         end)
+
+        it('does not attempt to concatenate non-LinkedList others', function()
+            local l = LinkedList.new()
+            l:append(1)
+            l:append(2)
+            l:append(3)
+            assert.has.errors(function()
+                l:concatenate({4, 5, 6})
+            end)
+        end)
     end)
 
     describe('.nodes', function()

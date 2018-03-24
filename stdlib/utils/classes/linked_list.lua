@@ -406,6 +406,4 @@ function LinkedList:validate_integrity()
     return true
 end
 
---LinkedListNode:_protect(nil, 'LinkedListNode')
-
-return LinkedList --:_protect()
+return LinkedList

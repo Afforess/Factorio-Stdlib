@@ -49,26 +49,29 @@ Is.Assert.Not = {}
 local M = {}
 local type = type
 
---- Returns true if the passed variable is a table.
+--- Returns the var if the passed variable is a table.
 -- @tparam mixed var The variable to check
--- @treturn boolean
+-- @treturn mixed
 function M.Table(var)
-    return type(var) == 'table'
+    return type(var) == 'table' and var
 end
+M.table = M.Table
 
---- Returns true if the passed variable is a string.
+--- Returns the var if the passed variable is a string.
 -- @tparam mixed var The variable to check
--- @treturn boolean
+-- @treturn mixed
 function M.String(var)
-    return type(var) == 'string'
+    return type(var) == 'string' and var
 end
+M.string = M.String
 
---- Returns true if the passed variable is a number.
+--- Returns the var if the passed variable is a number.
 -- @tparam mixed var The variable to check
--- @treturn boolean
+-- @treturn mixed
 function M.Number(var)
-    return type(var) == 'number'
+    return type(var) == 'number' and var
 end
+M.number = M.Number
 
 --- Returns true if the passed variable is a boolean.
 -- @tparam mixed var The variable to check
@@ -76,6 +79,7 @@ end
 function M.Boolean(var)
     return type(var) == 'boolean'
 end
+M.boolean = M.boolean
 
 --- Returns true if the passed variable is true
 -- @tparam mixed var The variable to check
@@ -83,13 +87,15 @@ end
 function M.True(var)
     return var == true
 end
+M.is_true = M.True
 
---- Returns true if the passed variable is not nil or false.
+--- Returns the var if the passed variable is not nil or false.
 -- @tparam mixed var The variable to check
--- @treturn boolean
+-- @treturn mixed
 function M.Truthy(var)
-    return var and true or false
+    return var or false
 end
+M.truthy = M.Truthy
 
 --- Returns true if the passed variable is false.
 -- @tparam mixed var The variable to check
@@ -97,6 +103,7 @@ end
 function M.False(var)
     return var == false
 end
+M.is_false = M.False
 
 --- Returns true if the passed variable is false or nil.
 -- @tparam mixed var The variable to check
@@ -104,6 +111,7 @@ end
 function M.Falsy(var)
     return not var
 end
+M.falsy = M.Falsy
 
 --- Returns true if the passed variable is nil.
 -- @tparam mixed var The variable to check
@@ -111,6 +119,7 @@ end
 function M.Nil(var)
     return type(var) == 'nil'
 end
+M.is_nil = M.Nil
 
 --- Returns true if the passed variable is nil, an empty table, or an empty string.
 -- @tparam mixed var The variable to check
@@ -123,30 +132,44 @@ function M.Empty(var)
     end
     return M.Nil(var)
 end
+M.empty = M.Empty
 
 function M.Positive(var)
-    return M.Number(var) and var >= 0 or false
+    return M.Number(var) and var >= 0 and var
 end
+M.positive = M.Positive
 
 function M.Negative(var)
-    return M.Number(var) and var < 0 or false
+    return M.Number(var) and var < 0 and var
 end
+M.negative = M.Negative
 
 function M.Position(var)
-    return M.Table(var) and (var.x and var.y) or false
+    return M.Table(var) and (var.x and var.y) and var
 end
-
-function M.position(var)
-    return M.Position(var) --TODO check simple or complex Position
-end
+M.position = M.Position
 
 function M.Area(var)
-    return M.Table(var) and (M.Position(var.left_top) and M.Position(var.right_bottom)) or false
+    return M.Table(var) and (M.Position(var.left_top) and M.Position(var.right_bottom)) and var
 end
+M.area = M.Area
 
-function M.area(var)
-    return M.area(var) --TODO check simple areas
+function M.Vector(var)
+    return M.Table(var) and (M.Number(var[1]) and M.Number(var[2])) and var
 end
+M.vector = M.Vector
+
+function M.BoundingBox(var)
+    return M.Table(var) and (M.Vector(var[1]) and M.Vector(var[2]))
+end
+M.boundingbox = M.BoundingBox
+M.bounding_box = M.BoundingBox
+M.Bounding_Box = M.BoundingBox
+
+function M.Hex(var)
+    return M.String(var) and var:match('%x%x%x%x%x%x$')
+end
+M.hex = M.Hex
 
 --- Returns true if the passed variable is a single alphbetical word.
 -- Does not allow any special chars
@@ -155,6 +178,7 @@ end
 function M.StrictWord(var)
     return M.String(var) and var:find('^[%a]+$') == 1
 end
+M.strict_word = M.StrictWord
 
 --- Returns true if the passed variable is a single alphbetical word.
 -- Allows _ and - as part of the word
@@ -172,6 +196,9 @@ M.Word = M.AlphabetWord
 function M.AlphanumWord(var)
     return M.String(var) and var:find('^%a+[%w%_%-]*$') == 1
 end
+M.Alpha = M.AlphanumWord
+M.alpha = M.AlphanumWord
+M.alphanumword = M.AlphanumWord
 
 --- Is this factorio object valid
 -- @tparam LuaObject var The variable to check
@@ -179,6 +206,7 @@ end
 function M.Valid(var)
     return M.Table(var) and var.valid
 end
+M.valid = M.Valid
 
 --- Is this a factorio object
 -- @tparam LuaObject var The variable to check
@@ -186,6 +214,7 @@ end
 function M.Object(var)
     return M.Table(var) and var.__self
 end
+M.object = M.Object
 
 --- Returns true if the passed variable is a callable function.
 -- @tparam mixed var The variable to check
@@ -193,15 +222,17 @@ end
 function M.Callable(var)
     return type(var) == 'function' or type((getmetatable(var) or {}).__call) == 'function'
 end
+M.callable = M.Callable
 M.Function = M.Callable
+M.is_function = M.Callable
 
 setmetatable(
     Is,
     {
         __index = function(_, k)
             return M[k] and function(_assert)
-                return M[k](_assert)
-            end or nil
+                    return M[k](_assert)
+                end or nil
         end,
         __call = function(_, ...)
             return (...)
@@ -214,8 +245,8 @@ setmetatable(
     {
         __index = function(_, k)
             return M[k] and function(_assert)
-                return not M[k](_assert)
-            end or nil
+                    return not M[k](_assert)
+                end or nil
         end,
         __call = function(_, ...)
             return not (...)
@@ -243,19 +274,13 @@ setmetatable(
     {
         __index = function(_, k)
             return M[k] and function(_assert, _message, _level)
-                _level = tonumber(_level) or 3
-                return M[k](_assert) or error(
-                    type(_message) == 'function' and safeinvoke(_message) or _message,
-                    _level
-                )
-            end or nil
+                    _level = tonumber(_level) or 3
+                    return M[k](_assert) or error(type(_message) == 'function' and safeinvoke(_message) or _message, _level)
+                end or nil
         end,
         __call = function(_, ...)
             local param = {...}
-            return param[1] or error(
-                type(param[2]) == 'function' and safeinvoke(param[2]) or param[2],
-                tonumber(param[3]) or 3
-            )
+            return param[1] or error(type(param[2]) == 'function' and safeinvoke(param[2]) or param[2], tonumber(param[3]) or 3)
         end
     }
 )
@@ -265,19 +290,13 @@ setmetatable(
     {
         __index = function(_, k)
             return M[k] and function(_assert, _message, _level)
-                _level = tonumber(_level) or 3
-                return not M[k](_assert) or error(
-                    type(_message) == 'function' and safeinvoke(_message) or _message,
-                    _level
-                )
-            end or nil
+                    _level = tonumber(_level) or 3
+                    return not M[k](_assert) or error(type(_message) == 'function' and safeinvoke(_message) or _message, _level)
+                end or nil
         end,
         __call = function(_, ...)
             local param = {...}
-            return not param[1] or error(
-                type(param[2]) == 'function' and safeinvoke(param[2]) or param[2],
-                tonumber(param[3]) or 3
-            )
+            return not param[1] or error(type(param[2]) == 'function' and safeinvoke(param[2]) or param[2], tonumber(param[3]) or 3)
         end
     }
 )

@@ -1,3 +1,5 @@
+require('busted.runner')()
+
 local Is = require('stdlib/utils/is')
 
 describe(
@@ -43,12 +45,12 @@ describe(
             function()
                 assert.is_false(Is.String())
                 assert.is_false(Is.String(nil))
-                assert.is_true(Is.String(a))
+                assert.is_string(Is.String(a))
                 assert.is_false(Is.String(b))
-                assert.is_true(Is.String(tostring(b)))
+                assert.is_string(Is.String(tostring(b)))
                 assert.is_false(Is.String(c))
                 assert.is_false(Is.String(d))
-                assert.is_true(Is.String(tostring(d)))
+                assert.string(Is.String(tostring(d)))
             end
         )
         it(
@@ -58,8 +60,8 @@ describe(
                 assert.is_false(f())
                 assert.is_false(f(a))
                 assert.is_false(f(b))
-                assert.is_true(f(c))
-                assert.is_true(f(d))
+                assert.truthy(f(c))
+                assert.truthy(f(d))
             end
         )
         it(
@@ -97,7 +99,7 @@ describe(
                 assert.is_false(f())
                 assert.is_false(f(nil))
                 assert.is_false(f(a))
-                assert.is_true(f(b))
+                assert.is_number(f(b))
                 assert.is_false(f(c))
                 assert.is_false(f(d))
                 assert.is_false(f(false))
@@ -110,10 +112,10 @@ describe(
                 local f = Is.Truthy
                 assert.is_false(f())
                 assert.is_false(f(nil))
-                assert.is_true(f(a))
-                assert.is_true(f(b))
-                assert.is_true(f(c))
-                assert.is_true(f(d))
+                assert.is_string(f(a))
+                assert.truthy(f(b))
+                assert.truthy(f(c))
+                assert.truthy(f(d))
                 assert.is_false(f(false))
                 assert.is_false(f(not true))
             end
@@ -149,9 +151,51 @@ describe(
                 assert.is_false(f(not true))
             end
         )
+        it(
+            'is_area',
+            function()
+                local f = Is.Area
+                local area = {left_top = {x = -1, y = -1}, right_bottom = {x = 1, y = 1}}
+                local area2 = {left_top = {x = -1, y = -1}, right_bottom = {1, 1}}
+                local area3 = {left_top = {x = -1, y = -1}, {1, 1}}
+                local area4 = {{-1, -1}, {1, 1}}
+
+                assert.truthy(f(area))
+                assert.falsy(f(area2))
+                assert.falsy(f(area3))
+                assert.falsy(f(area4))
+            end
+        )
+        it(
+            'is_position',
+            function()
+                local f = Is.Position
+                local p1 = {x = 1, y = 2}
+                local p2 = {1, 2}
+                local p3 = {x = 1, 2}
+
+                assert.truthy(f(p1))
+                assert.falsy(f(p2))
+                assert.falsy(f(p3))
+            end
+        )
+        it(
+            'is_hex',
+            function()
+                local f = Is.Hex
+                local hex1 = '#FFFFFF'
+                local hex2 = '#FFFFF'
+                local hex3 = 'ffffff'
+
+                assert.truthy(f(hex1))
+                assert.falsy(f(hex2))
+                assert.truthy(f(hex3))
+            end
+        )
     end
 )
-describe('semantic modifiers',
+describe(
+    'semantic modifiers',
     function()
         it(
             'returns nil when non-existent members or transforms are requested',
@@ -177,13 +221,15 @@ describe('semantic modifiers',
         )
     end
 )
-describe('Assert',
+describe(
+    'Assert',
     function()
         it(
             'Accepts a lambda in place of a string message as its second argument, \z
             which is called only when the assertion fails',
             function()
-                local spy_error = spy(
+                local spy_error =
+                    spy(
                     function()
                         return 'Fake error message'
                     end
@@ -260,7 +306,8 @@ describe('Assert',
                 spy_error:clear()
             end
         )
-        it('Reports a double-fault in a lambda message calculator',
+        it(
+            'Reports a double-fault in a lambda message calculator',
             function()
                 local double_fault_generator = function()
                     error('kaboom')

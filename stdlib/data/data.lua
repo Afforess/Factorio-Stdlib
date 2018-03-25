@@ -299,6 +299,7 @@ function Data:get(object, object_type, opts)
     if new then
         new._valid = self._class or 'data'
         new._opt = opts
+        new.flags = new.flags and setmetatable(new.flags, Data._classes.string_array_mt)
         return setmetatable(new, self._mt):extend()
     else
         local trace = debug.traceback()

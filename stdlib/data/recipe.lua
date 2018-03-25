@@ -13,7 +13,45 @@ local Item = require('stdlib/data/item')
 
 function Recipe:_get(recipe)
     local new = self:get(recipe, 'recipe')
+    --[[prototype
+        type, name
+        localised_name[opt]
+        localised_description[opt]
+        subgroup, order (needed when no main product)
+    --]]
+    --[[recipe
+        category
+        icon/icons (or has main_product)
+        crafting_machine_tint = {
+            primary, secondary, tertiary
+        }
+        normal/expensive = {
+            ingredients
+            results, result, result_count[opt=1] (result ignored if results present) at least 1 result
+            main_product
+            energy_required > 0.001
+            emissions_multiplier
+            requester_paste_multiplier
+            overload_multiplier
+            enabled <boolean>
+            hidden <boolean>
+            hide_from_stats <boolean>
+            allow_decomposition <boolean>
+            allow_as_intermediate <boolean>
+            allow_intermediates <boolean>
+            always_show_made_in <boolean>
+            show_amount_in_title <boolean>
+            always_show_products <boolean>
+        }
+    --]]
+
+
+    -- Convert the recipe to difficult format
+
+    -- Convert the ingredients to full format
     --new:Ingredients()
+
+    -- Convert the results to full format
     --new:Results()
     return new
 end

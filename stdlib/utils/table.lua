@@ -265,6 +265,40 @@ function M.dictionary_merge(tbl_a, tbl_b)
     return new_t
 end
 
+--- Compares 2 tables for inner equality.
+-- copied from factorio/data/core/lualib/util.lua
+-- @tparam table tbl_a
+-- @tparam table tbl_2
+-- @treturn boolean if the tables are the same
+function M.compare(tbl_a, tbl_b)
+    if tbl_a == tbl_b then
+        return true
+    end
+    for k, v in pairs(tbl_a) do
+        if type(v) == 'table' and type(tbl_b[k]) == 'table' then
+            if not M.compare(v, tbl_b[k]) then
+                return false
+            end
+        else
+            if (v ~= tbl_b[k]) then
+                return false
+            end
+        end
+    end
+    for k, v in pairs(tbl_b) do
+        if type(v) == 'table' and type(tbl_a[k]) == 'table' then
+            if not M.compare(v, tbl_a[k]) then
+                return false
+            end
+        else
+            if v ~= tbl_a[k] then
+                return false
+            end
+        end
+    end
+    return true
+end
+
 --- Creates a deep copy of table without copying Factorio objects.
 -- copied from factorio/data/core/lualib/util.lua
 -- @usage local copy = table.deepcopy[data.raw.["stone-furnace"]["stone-furnace"]] -- returns a copy of the stone furnace entity

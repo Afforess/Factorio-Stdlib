@@ -6,7 +6,7 @@ local World = require('spec/setup/world')
 -- bootstrap world for _G.log
 World.bootstrap()
 
-logspy = spy.on(_G, 'log')
+local logspy = spy.on(_G, 'log')
 
 describe('LinkedList', function()
     it('has a _class property pointing to the LinkedList class', function()
@@ -491,7 +491,7 @@ describe('LinkedList', function()
             -- 1000 contiguous empty nodes
             t = {'one', [1001] = 'one-thousand-and-one'}
             assert.has.errors(function()
-                local l = LinkedList:from_stack(t)
+                LinkedList:from_stack(t)
             end)
 
             -- 1234 contiguous empty nodes (with insane sparseness override)

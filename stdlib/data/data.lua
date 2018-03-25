@@ -301,9 +301,14 @@ function Data:get(object, object_type, opts)
         new._opt = opts
         return setmetatable(new, self._mt):extend()
     else
+        local trace = debug.traceback()
         local msg = (self._class and self._class or '') .. (self.name and '/' .. self.name or '') .. ' '
-        msg = msg .. (object_type and (object_type .. '/') or ' ') .. tostring(object) .. ' does not exist.'
-        log(msg)
+        msg = msg .. (object_type and (object_type .. '/') or '') .. tostring(object) .. ' does not exist.'
+
+        trace = trace:gsub('stack traceback:\n', ''):gsub('.*%(%.%.%.tail calls%.%.%.%)\n', ''):gsub(' in main chunk.*$', '')
+        trace = trace:gsub('%_%_.*%_%_%/stdlib/data.*\n', ''):gsub('\n', '->'):gsub('\t', '')
+        trace = msg .. '  [' .. trace .. ']'
+        log(trace)
     end
     return self
 end

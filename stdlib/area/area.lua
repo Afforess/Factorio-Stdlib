@@ -380,10 +380,6 @@ end
 function Area.tostring(area)
     area = Area.new(area)
 
-    --local left_top = 'left_top = '..Position.tostring(area.left_top)
-    --local right_bottom = 'right_bottom = '..Position.tostring(area.right_bottom)
-    --local left_top = 'left_top = '..area.left_top:tostring()
-    --local right_bottom = 'right_bottom = '..area.right_bottom:tostring()
     local left_top = 'left_top = ' .. area.left_top
     local right_bottom = 'right_bottom = ' .. area.right_bottom
 

@@ -47,7 +47,11 @@ Is.Assert.Not = {}
 -- @section Functions
 
 local M = {}
+
 local type = type
+local floor = math.floor
+local INF_POS = math.huge
+local INF_NEG = -math.huge
 
 --- Returns the var if the passed variable is a table.
 -- @tparam mixed var The variable to check
@@ -72,6 +76,24 @@ function M.Number(var)
     return type(var) == 'number' and var
 end
 M.number = M.Number
+
+function M.Thread(var)
+    return type(var) == 'thread' and var
+end
+M.thread = M.Thread
+
+function M.Userdata(var)
+    return type(var) == 'userdata' and var
+end
+M.userdata = M.Userdata
+
+--- Returns true if the passed variable is nil.
+-- @tparam mixed var The variable to check
+-- @treturn boolean
+function M.Nil(var)
+    return type(var) == 'nil'
+end
+M.is_nil = M.Nil
 
 --- Returns true if the passed variable is a boolean.
 -- @tparam mixed var The variable to check
@@ -113,14 +135,6 @@ function M.Falsy(var)
 end
 M.falsy = M.Falsy
 
---- Returns true if the passed variable is nil.
--- @tparam mixed var The variable to check
--- @treturn boolean
-function M.Nil(var)
-    return type(var) == 'nil'
-end
-M.is_nil = M.Nil
-
 --- Returns true if the passed variable is nil, an empty table, or an empty string.
 -- @tparam mixed var The variable to check
 -- @treturn boolean
@@ -133,6 +147,12 @@ function M.Empty(var)
     return M.Nil(var)
 end
 M.empty = M.Empty
+
+function M.None(var)
+    return M.Empty(var) or M.False(var) or var == 0 or var ~= var
+end
+M.none = M.None
+
 
 --- Returns the passed var if it is a positive number.
 -- @tparam mixed var The variable to check
@@ -149,6 +169,61 @@ function M.Negative(var)
     return M.Number(var) and var < 0 and var
 end
 M.negative = M.Negative
+
+function M.NaN(arg)
+    return arg ~= arg
+end
+M.nan = M.NaN
+
+function M.Finite(var)
+    return M.Number(var) and (var < INF_POS and var > INF_NEG) and var
+end
+M.finite = M.Finite
+
+function M.Int(var)
+    return M.Finite(var) and rawequal(floor(var), var) and var
+end
+M.int = M.Int
+
+function M.Int8(var)
+    return M.Int(var) and var >= -128 and var <= 127 and var
+end
+M.int8 = M.Int8
+
+function M.Int16(var)
+    return M.Int(var) and var >= -32768 and var <= 32767 and var
+end
+M.int16 = M.Int16
+
+function M.Int32(var)
+    return M.Int(var) and var >= -2147483648 and var <= 2147483647 and var
+end
+M.int32 = M.Int32
+
+function M.Unsigned(var)
+    return Is.Number(var) and (var < INF_POS and var >= 0) and var
+end
+M.unsigned = M.Unsigned
+
+function M.UInt(var)
+    return M.Unsigned(var) and rawequal(floor(var), var) and var
+end
+M.uint = M.UInt
+
+function M.UInt8(var)
+    return M.UInt(var) and var <= 255 and var
+end
+M.uint8 = M.UInt8
+
+function M.UInt16(var)
+    return M.UInt(var) and var <= 65535 and var
+end
+M.uint16 = M.UInt16
+
+function M.UInt32(var)
+    return M.UInt(var) and var <= 4294967295 and var
+end
+M.uint32 = M.UInt32
 
 --- Returns the passed var if it is a full position.
 -- @tparam mixed var The variable to check

@@ -6,13 +6,13 @@ local M = {
     _module_name = 'string-array-class'
 }
 
+local Is = require('stdlib/utils/is')
+
 --- Does this array contain name.
 -- @tparam string name The string to find.
 -- @treturn boolean string is in array
 function M:has(name)
-    if type(name) ~= 'string' then
-        error('name must be a string', 2)
-    end
+    Is.Assert.String(name, 'name must be a string')
     for _, str in ipairs(self) do
         if str == name then
             return true
@@ -24,9 +24,7 @@ end
 -- @tparam string name
 -- @treturn self
 function M:add(name)
-    if type(name) ~= 'string' then
-        error('name must be a string', 2)
-    end
+    Is.Assert.String(name, 'name must be a string')
     for _, str in ipairs(self) do
         if str == name then
             return self
@@ -40,9 +38,7 @@ end
 -- @tparam string name
 -- @treturn self
 function M:remove(name)
-    if type(name) ~= 'string' then
-        error('name must be a string', 2)
-    end
+    Is.Assert.String(name, 'name must be a string')
     for i, str in ipairs(self) do
         if str == name then
             table.remove(self, i)
@@ -56,9 +52,7 @@ end
 -- @tparam string name
 -- @treturn self
 function M:toggle(name)
-    if type(name) ~= 'string' then
-        error('name must be a string', 2)
-    end
+    Is.Assert.String(name, 'name must be a string')
     for i, str in ipairs(self) do
         if str == name then
             table.remove(self, i)

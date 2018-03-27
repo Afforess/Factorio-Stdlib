@@ -34,8 +34,8 @@ describe('LinkedList', function()
             end)
         end)
 
-        it('should validate a "sparse" linked-list that includes itself as an \z
-            item in multiple positions', function()
+        it('should validate a pseudosparse linked-list that includes itself \z
+            as an item in multiple positions', function()
             local l = LinkedList:new()
             l:append(l)
             l:append(nil)

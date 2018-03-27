@@ -321,6 +321,8 @@ function LinkedList:nodes()
 end
 
 function LinkedList:items()
+    -- we "need" a closure here in order to track the node, since it is not
+    -- returned by the iterator.
     local iter = self.nodeiter
     local node = self
     return function()
@@ -338,12 +340,16 @@ function LinkedList:ipairs()
     local i = 0
     local node = self
     local iter = self.nodeiter
+    -- we kind-of "need" a closure here or else we'll end up having to
+    -- chase down the indexed node every iteration at potentially huge cost.
     return function()
-        node = iter(self, node)
-        if node then
+        repeat
             i = i + 1
-            return i, node and node.item or node
-        end
+            node = iter(self, node)
+            if node ~= nil and node.item ~= nil then
+                return i, node.item
+            end
+        until node == nil
     end
 end
 LinkedList._mt.__ipairs = LinkedList.ipairs

@@ -342,6 +342,7 @@ function Recipe:change_category(category_name)
     end
     return self
 end
+Recipe.set_category = Recipe.change_category
 
 --- Add to technology as a recipe unlock.
 -- @tparam string tech_name Name of the technology to add the unlock too

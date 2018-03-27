@@ -353,7 +353,6 @@ function LinkedList:ipairs()
     end
 end
 LinkedList._mt.__ipairs = LinkedList.ipairs
-LinkedList._mt.__pairs = LinkedList.ipairs
 
 function LinkedList:tostring()
     local result = self._class_name .. ':from_stack {'

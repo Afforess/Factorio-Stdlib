@@ -1100,4 +1100,353 @@ describe('LinkedList', function()
                 l:tostring())
         end)
     end)
+
+    describe('LinkedList instance metatables', function()
+        it('differs from the LinkedList class metatable', function()
+            assert.are_not.equal(getmetatable(LinkedList),
+                getmetatable(LinkedList:new()))
+        end)
+
+        it('is the same for LinkedList instances', function()
+            assert.are.equal(getmetatable(LinkedList:new()),
+                getmetatable(LinkedList:new()))
+        end)
+
+        it('maps # to :count()', function()
+            local l = LinkedList:from_stack {1, 2, 3}
+            assert.are_equal(3, #l)
+            l:append(nil)
+            assert.are_equal(4, #l)
+        end)
+
+        it('overrides the concatenation operator using :concatenate()',
+        function()
+            local la = LinkedList:from_stack {1, 2, 3}
+            local lb = LinkedList:from_stack {4, 'five', 6}
+            local lab = la .. lb
+            assert.are.same({1, 2, 3, 4, 'five', 6}, lab:to_stack())
+        end)
+
+        it('overrides natural-number indexed reads, interpreting them as \z
+            offsets into the linked-list, returning the corresponding item at that \z
+            position, or nil, if an index beyond the end of the list is \z
+            requested', function()
+            local l = LinkedList:from_stack {'a', 'b', 'c', 'd'}
+            l:append(nil)
+            l:append('f')
+            assert.are.equal('a', l[1])
+            assert.are.equal('b', l[2])
+            assert.are.equal('c', l[3])
+            assert.are.equal('d', l[4])
+            assert.is.Nil(        l[5])
+            assert.are.equal('f', l[6])
+            assert.is.Nil(        l[7])
+            assert.is.Nil(        l[8])
+            assert.is.Nil(        l[9])
+            assert.is.Nil(        l[1000])
+            -- here we are testing that "insanely sparse" indexes don't
+            -- produce any error or misbehavior
+            assert.is.Nil(        l[2000])
+            -- here we are implicitly testing that the LinkedList doesn't
+            -- iterate forever given a huge index -- if it did, busted would
+            -- freeze here, hopefully leading someone to look into the cause.
+            assert.is.Nil(        l[10000000])
+
+            local function testit()
+                -- test that existing LinkedList methods are ignored by the
+                -- LinkedList instance metatable even for overridden indexes
+                rawset(LinkedList, 2, 'two')
+                rawset(LinkedList, 1000, 'one k')
+                rawset(LinkedList, 10000, 'ten k')
+                assert.are.equal('b', l[2])
+                assert.is.Nil(l[1000])
+                assert.is.Nil(l[10000])
+            end
+
+            local function cleanup()
+                -- our test may have messed up LinkedList so clean up after ourselves
+                rawset(LinkedList, 10000, nil)
+                rawset(LinkedList, 1000, nil)
+                rawset(LinkedList, 2, 'two')
+            end
+
+            -- here we do a bit of a poor-man's try-finally since the test scribbles
+            -- over LinkedList, and we don't want to leave a messed-up class to
+            -- subsequent tests which could be confused by it.
+            local ok, msg = xpcall(testit, debug.traceback)
+            cleanup()
+            if not ok then
+                error(msg)
+            end
+        end)
+
+        it('overrides natural-number indexed writes, interpreting them as \z
+            offsets into the list, setting the corresponding item at that \z
+            position, or extending the list to the neccesary length, if an \z
+            index beyond the end of the list is specified.', function()
+            local l = LinkedList:from_stack {'a', 'b', 'c', 'd'}
+            l[1] = 'aargh'
+            l[3] = 'chow'
+            assert.are.equal('aargh', l[1])
+            assert.are.equal('b',     l[2])
+            assert.are.equal('chow',  l[3])
+            assert.are.equal('d',     l[4])
+            assert.are.equal(4, l:length())
+            l[7] = 'j'
+            assert.are.equal('aargh', l[1])
+            assert.are.equal('b',     l[2])
+            assert.are.equal('chow',  l[3])
+            assert.are.equal('d',     l[4])
+            assert.is.Nil(            l[5])
+            assert.is.Nil(            l[6])
+            assert.are.equal('j',     l[7])
+            assert.are.equal(7, l:length())
+        end)
+
+        it('will not create insanely sparse new nodes unless the \z
+            offsets into the list, setting the corresponding item at that \z
+            position, or extending the list to the neccesary length, if an \z
+            index beyond the end of the list is specified.', function()
+            local l = LinkedList:from_stack {'a', 'b', 'c', 'd'}
+            assert.are.equal('a', l[1])
+            assert.are.equal('b', l[2])
+            assert.are.equal('c', l[3])
+            assert.are.equal('d', l[4])
+            assert.are.equal(4, l:length())
+
+            -- will create 998 new nodes
+            l[1002] = 'S'
+            assert.are.equal('a', l[1])
+            assert.are.equal('b', l[2])
+            assert.are.equal('c', l[3])
+            assert.are.equal('d', l[4])
+            assert.is.Nil(        l[5])
+            assert.is.Nil(        l[6])
+            assert.is.Nil(        l[1000])
+            assert.is.Nil(        l[1001])
+            assert.are.equal('S', l[1002])
+            assert.are.equal(1002, l:length())
+
+            l = LinkedList:from_stack {'a', 'b', 'c', 'd'}
+            -- will create 999 new nodes
+            l[1003] = 'S'
+            assert.are.equal('a', l[1])
+            assert.are.equal('b', l[2])
+            assert.are.equal('c', l[3])
+            assert.are.equal('d', l[4])
+            assert.is.Nil(        l[5])
+            assert.is.Nil(        l[6])
+            assert.is.Nil(        l[1001])
+            assert.is.Nil(        l[1002])
+            assert.are.equal('S', l[1003])
+            assert.are.equal(1003, l:length())
+
+            l = LinkedList:from_stack {'a', 'b', 'c', 'd'}
+            -- would create 1000 new nodes and should fail
+            assert.has_errors(function()
+                l[1004] = 'S'
+            end)
+            assert.are.equal('a', l[1])
+            assert.are.equal('b', l[2])
+            assert.are.equal('c', l[3])
+            assert.are.equal('d', l[4])
+            assert.are.equal(4, l:length())
+
+            l = LinkedList:from_stack {'a', 'b', 'c', 'd'}
+            l.allow_insane_sparseness = true
+            -- should create 1000 new nodes
+            l[1004] = 'S'
+            assert.are.equal('a', l[1])
+            assert.are.equal('b', l[2])
+            assert.are.equal('c', l[3])
+            assert.are.equal('d', l[4])
+            assert.is.Nil(        l[5])
+            assert.is.Nil(        l[6])
+            assert.is.Nil(        l[1002])
+            assert.is.Nil(        l[1003])
+            assert.are.equal('S', l[1004])
+            assert.are.equal(1004, l:length())
+
+            l = LinkedList:from_stack {'a', 'b', 'c', 'd'}
+            l.allow_insane_sparseness = true
+            -- should create 1500 new nodes
+            l[1504] = 'S'
+            assert.are.equal('a', l[1])
+            assert.are.equal('b', l[2])
+            assert.are.equal('c', l[3])
+            assert.are.equal('d', l[4])
+            assert.is.Nil(        l[5])
+            assert.is.Nil(        l[6])
+            assert.is.Nil(        l[1502])
+            assert.is.Nil(        l[1503])
+            assert.are.equal('S', l[1504])
+            assert.are.equal(1504, l:length())
+
+            -- will create 999 new nodes
+            l = LinkedList:new()
+            l[999] = 'S'
+            assert.is.Nil(l[1])
+            assert.is.Nil(l[2])
+            assert.is.Nil(l[997])
+            assert.is.Nil(l[998])
+            assert.are.equal('S', l[999])
+            assert.are.equal(999, l:length())
+
+            -- would create 1000 new nodes (but should fail)
+            l = LinkedList:new()
+            assert.has.errors(function()
+                l[1000] = 'S'
+            end)
+            assert.are.equal(0, l:length())
+        end)
+
+        it('allows arbitrary non-overloaded indexes to be set, interpreting \z
+            them as regular raw table indexes of the instance table', function()
+            local l = LinkedList:from_stack {'a', 'b', 'c', 'd'}
+            local f = function() end
+            l[4.5] = 'e'
+            l[0] = 'f'
+            l[-4.5] = 'g'
+            l[f] = 'h'
+            l['foo'] = 'i'
+            local t = l:to_stack()
+            assert.are.same({'a', 'b', 'c', 'd'}, t)
+            assert.are.equal('e', rawget(l, 4.5))
+            assert.are.equal('e', l[4.5])
+            assert.are.equal('f', rawget(l, 0))
+            assert.are.equal('f', l[0])
+            assert.are.equal('g', rawget(l, -4.5))
+            assert.are.equal('g', l[-4.5])
+            assert.are.equal('h', rawget(l, f))
+            assert.are.equal('h', l[f])
+            assert.are.equal('i', rawget(l, 'foo'))
+            assert.are.equal('i', l.foo)
+        end)
+
+        it('provides access to LinkedList class methods', function()
+            assert.are.equal(LinkedList.new, LinkedList:new().new)
+            assert.are.equal(LinkedList.concatenate, LinkedList:new().concatenate)
+        end)
+
+        it('can retrieve arbitrary non-overloaded numeric indexes from the \z
+            LinkedList class, but not overloaded numeric indexes', function()
+            local function testit()
+                local l = LinkedList:from_stack {'a', 'b', 'c', 'd'}
+                rawset(LinkedList, 3.5, 'LinkedList[3.5]')
+                assert.are.equal('LinkedList[3.5]', LinkedList[3.5])
+                assert.are.equal('LinkedList[3.5]', l[3.5])
+                rawset(LinkedList, 0, 'LinkedList[0]')
+                assert.are.equal('LinkedList[0]', LinkedList[0])
+                assert.are.equal('LinkedList[0]', l[0])
+                rawset(LinkedList, 2, 'LinkedList[2]')
+                assert.are.equal('LinkedList[2]', LinkedList[2])
+                assert.are.equal('b', l[2])
+            end
+
+            local function cleanup()
+                -- our test may have messed up LinkedList so clean up after ourselves
+                rawset(LinkedList, 3.5, nil)
+                rawset(LinkedList, 0, nil)
+                rawset(LinkedList, 2, nil)
+            end
+
+            -- here we do a bit of a poor-man's try-finally since the test scribbles
+            -- over LinkedList, and we don't want to leave a messed-up class to
+            -- subsequent tests which could be confused by it.
+            local ok, msg = xpcall(testit, debug.traceback)
+            cleanup()
+            if not ok then
+                error(msg)
+            end
+        end)
+
+        it('Has a normal pairs implementation, which is kinda wierd', function()
+            local l = LinkedList:new()
+            local foo = l:append('foo')
+            local bar = l:append('bar')
+            local baz = l:append('baz')
+
+            l.quux = 'zzyzx'
+            l[0] = 'zilch'
+            l[-1.333] = 0
+
+            local remaining_keys = {
+                [-1.333] = 0,
+                [0] = 'zilch',
+                [1] = 'foo',
+                [2] = 'bar',
+                [3] = 'baz',
+                _class = LinkedList,
+                quux = 'zzyzx',
+                next = foo,
+                prev = baz
+            }
+            for k, v in pairs(l) do
+                -- here if we require k to be in remaining_keys then any
+                -- future enchancements/changes to instance internals would
+                -- require a corresponding update to remianing_keys.  The point
+                -- of this test is not to limit the API surface or anything
+                -- like that so here, remaining_keys serves as a whitelist
+                -- for things we want checked.
+                if remaining_keys[k] then
+                    assert.are.equal(remaining_keys[k], v)
+                    remaining_keys[k] = nil
+                end
+            end
+
+            -- we should have identified and hence removed all, except for
+            -- natural numeric keys.  This tests the intentional (but
+            -- really wierd) behavior that LinkedList instance pairs() does
+            -- not include the stuff from ipairs.
+            assert.are.same({'foo', 'bar', 'baz'}, remaining_keys)
+        end)
+
+        it('Maps ipairs to virtualized LinkedList:ipairs()', function()
+            local l = LinkedList:new()
+            l:append(false)
+            l:append('bar')
+            l:append('baz')
+            l[5] = 6
+
+            l.quux = 'zzyzx'
+            l[0] = 'zilch'
+            l[-1.333] = 0
+
+            local dummy = {}
+            local remaining_keys = {
+                [-1.333] = 0,
+                [0] = 'zilch',
+                [1] = false,
+                [2] = 'bar',
+                [3] = 'baz',
+                [4] = dummy,
+                [5] = 6,
+                _class = LinkedList,
+                quux = 'zzyzx',
+                next = foo,
+                prev = baz
+            }
+            for k, v in ipairs(l) do
+                -- here, unlike in the pairs() test, we expect a precise set of keys
+                -- to be provided (the keys should be 1, 2, 3, and 5 only).  So we do
+                -- fail if the key is not in remaining_keys as it contains all the
+                -- key values ipairs() should enumerate.
+                assert.is.Not.Nil(remaining_keys[k])
+                assert.are.equal(remaining_keys[k], v)
+                remaining_keys[k] = nil
+            end
+
+            -- we should have identified and hence removed only the psuedo-stack keys,
+            -- specifically, these are 1, 2, 3, and 5.
+            assert.are.same({
+                [-1.333] = 0,
+                [0] = 'zilch',
+                [4] = dummy,
+                _class = LinkedList,
+                quux = 'zzyzx',
+                next = foo,
+                prev = baz
+            }, remaining_keys)
+        end)
+    end)
 end)

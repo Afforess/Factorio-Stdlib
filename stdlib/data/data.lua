@@ -153,13 +153,6 @@ function Data:copy(new_name, mining_result)
     end
 end
 
-function Data:execute(func, ...)
-    if self:valid() then
-        func(self, ...)
-    end
-    return self
-end
-
 function Data:Flags(has_flag_string)
     if self:valid() then
         if self.flags then
@@ -185,6 +178,39 @@ end
 
 function Data:has_flag(flag)
     return self:Flags(flag)
+end
+
+--- Run a function if the object is valid.
+-- The object and any additional paramaters are passed to the function.
+-- @tparam function func then function to run.
+-- @treturn self
+function Data:execute(func, ...)
+    if self:valid() then
+        func(self, ...)
+    end
+    return self
+end
+
+--- Add or change a field.
+-- @tparam string field the field to change.
+-- @tparam mixed value the value to set on the field.
+-- @treturn self
+function Data:set_field(field, value)
+    if self:valid() then
+        rawset(self, field, value)
+    end
+    return self
+end
+Data.set = Data.set_field
+
+--- Get a field.
+-- @tparam field
+-- @treturn mixed the value of the field
+-- @note Will error if the object is not valid
+function Data:get_field(field)
+    if self:valid() then
+        return rawget(self, field)
+    end
 end
 
 --- Iterate a dictionary table and set fields on the object. Existing fields are overwritten.
@@ -264,6 +290,34 @@ function Data:get_icon()
     if self:valid() then
         return self.icon
     end
+end
+
+function Data:make_icons(...)
+    if self:valid() then
+        if not self.icons then
+            if self.icon then
+                self.icons = {{icon = self.icon, icon_size = self.icon_size}}
+                self.icon = nil
+            else
+                self.icons = {}
+            end
+        end
+        for _, icon in pairs({...}) do
+            self.icons[#self.icons + 1] = table.deepcopy(icon)
+        end
+    end
+    return self
+end
+
+function Data:set_icon_at(index, values)
+    if self:valid() then
+        if self.icons then
+            for k, v in pairs(values or {}) do
+                self.icons[index].k = v
+            end
+        end
+    end
+    return self
 end
 
 --- Get the objects name.

@@ -722,7 +722,7 @@ describe('LinkedList', function()
             t = {[1000] = 'one-thousand'}
             l = false
             assert.has.errors(function()
-                local l = LinkedList:from_stack(t)
+                LinkedList:from_stack(t)
             end)
             assert.is.False(l)
 
@@ -1036,7 +1036,7 @@ describe('LinkedList', function()
 
             -- test empty list
             l = LinkedList:new()
-            for node in l:nodes() do
+            for _ in l:nodes() do
                 -- should never be reached
                 assert.is_true(false)
             end
@@ -1072,7 +1072,7 @@ describe('LinkedList', function()
 
             -- test empty list
             l = LinkedList:new()
-            for item in l:items() do
+            for _ in l:items() do
                 -- should never be reached
                 assert.is_true(false)
             end
@@ -1363,7 +1363,7 @@ describe('LinkedList', function()
         it('Has a normal pairs implementation, which is kinda wierd', function()
             local l = LinkedList:new()
             local foo = l:append('foo')
-            local bar = l:append('bar')
+            l:append('bar')
             local baz = l:append('baz')
 
             l.quux = 'zzyzx'
@@ -1404,9 +1404,10 @@ describe('LinkedList', function()
         it('Maps ipairs to virtualized LinkedList:ipairs()', function()
             local l = LinkedList:new()
             l:append(false)
-            l:append('bar')
+            local firstnode = l:append('bar')
             l:append('baz')
             l[5] = 6
+            local lastnode = l:last_node()
 
             l.quux = 'zzyzx'
             l[0] = 'zilch'
@@ -1423,9 +1424,10 @@ describe('LinkedList', function()
                 [5] = 6,
                 _class = LinkedList,
                 quux = 'zzyzx',
-                next = foo,
-                prev = baz
+                next = firstnode,
+                prev = lastnode
             }
+
             for k, v in ipairs(l) do
                 -- here, unlike in the pairs() test, we expect a precise set of keys
                 -- to be provided (the keys should be 1, 2, 3, and 5 only).  So we do
@@ -1444,8 +1446,8 @@ describe('LinkedList', function()
                 [4] = dummy,
                 _class = LinkedList,
                 quux = 'zzyzx',
-                next = foo,
-                prev = baz
+                next = firstnode,
+                prev = lastnode
             }, remaining_keys)
         end)
     end)

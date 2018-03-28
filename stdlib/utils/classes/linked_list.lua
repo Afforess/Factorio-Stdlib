@@ -202,7 +202,7 @@ function LinkedList._mt.__newindex(self, k, v)
         count = count + 1
     end
     -- They have requested a new special index be created.  Is it resonable?
-    Is.Assert(count <= 999 or self.allow_insane_sparseness,
+    Is.Assert(k - count <= 999 or self.allow_insane_sparseness,
         'Setting requested index in linkedlist would create insanely sparse list')
     repeat
         count = count + 1

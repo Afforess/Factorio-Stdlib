@@ -1,6 +1,5 @@
 --- A double-linked list implementation
 local Is = require('stdlib/utils/is')
-require('stdlib/utils/table')
 
 -- @class LinkedListNode
 -- @usage local llnode = linkedlist.append(item)

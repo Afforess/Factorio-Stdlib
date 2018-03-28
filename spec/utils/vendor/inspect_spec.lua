@@ -1,4 +1,4 @@
-local inspect         = require 'stdlib/utils/scripts/inspect'
+local inspect = require 'stdlib/utils/vendor/inspect'
 
 local getIndentPreffix = function(str)
     local level = math.huge

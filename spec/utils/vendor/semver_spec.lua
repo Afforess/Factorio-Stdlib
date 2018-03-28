@@ -19,7 +19,7 @@ say:set('assertion.greater.negative', 'Expected %s to not be greater than %s')
 assert:register('assertion', 'greater', greater, 'assertion.greater.positive', 'assertion.greater.negative')
 
 
-local v = require 'stdlib/utils/scripts/semver'
+local v = require 'stdlib/utils/vendor/semver'
 
 local function checkVersion(ver, major, minor, patch, prerelease, build)
   assert.equal(major, ver.major)

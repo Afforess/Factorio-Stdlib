@@ -96,7 +96,7 @@ end
 -- @treturn self
 function Data:extend(force)
     if self and ((self.name and self.type) or self:valid()) then
-        if not self._extended or force then
+        if not self._extended or not self._skip_extend or force then
             local t = data.raw[self.type]
             if t == nil then
                 t = {}
@@ -153,17 +153,11 @@ function Data:copy(new_name, mining_result)
     end
 end
 
-function Data:Flags(has_flag_string)
+function Data:Flags(create_flags)
     if self:valid() then
-        if self.flags then
-            setmetatable(self.flags, Data._classes.string_array_mt)
-            if has_flag_string then
-                return self.flags:has(has_flag_string)
-            end
-            return self.flags
-        end
+        self.flags = create_flags and {} or self.flags
+        return self.flags and setmetatable(self.flags, Data._classes.string_array_mt)
     end
-    return self
 end
 
 function Data:add_flag(flag)
@@ -177,7 +171,7 @@ function Data:remove_flag(flag)
 end
 
 function Data:has_flag(flag)
-    return self:Flags(flag)
+    return self:Flags():has(flag)
 end
 
 --- Run a function if the object is valid.
@@ -358,8 +352,9 @@ function Data:get(object, object_type, opts)
     if new then
         new._valid = self._class or 'data'
         new._opt = opts
-        new.flags = new.flags and setmetatable(new.flags, Data._classes.string_array_mt)
-        return setmetatable(new, self._mt):extend()
+        setmetatable(new, self._mt)
+        new:Flags()
+        return new:extend()
     else
         local trace = traceback()
         local msg = (self._class and self._class or '') .. (self.name and '/' .. self.name or '') .. ' '

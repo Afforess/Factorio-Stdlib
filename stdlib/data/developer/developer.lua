@@ -20,6 +20,8 @@ end
 -- local Developer = require('stdlib/data/develper/developer')
 -- Developer.make_test_entities("ModName")
 function Developer.make_test_entities(name)
+    assert(type(name) == 'string', 'make_test_entities must be passed the name of the mod')
+    local path = '__' .. name .. '__/stdlib/data/developer/'
     if not data.raw['simple-entity']['debug-chunk-marker'] then
         if not name then
             error('developer chunk markers need mod name')
@@ -35,21 +37,21 @@ function Developer.make_test_entities(name)
             max_health = 200,
             pictures = {
                 {
-                    filename = '__' .. name .. '__/stdlib/data/developer/debug-chunk-marker.png',
+                    filename = path .. 'debug-chunk-marker.png',
                     priority = 'extra-high-no-scale',
                     width = 64,
                     height = 64,
                     shift = {0, 0}
                 },
                 {
-                    filename = '__' .. name .. '__/stdlib/data/developer/debug-chunk-marker-horizontal.png',
+                    filename = path .. 'debug-chunk-marker-horizontal.png',
                     priority = 'extra-high-no-scale',
                     width = 64,
                     height = 64,
                     shift = {0, 0}
                 },
                 {
-                    filename = '__' .. name .. '__/stdlib/data/developer/debug-chunk-marker-vertical.png',
+                    filename = path .. 'debug-chunk-marker-vertical.png',
                     priority = 'extra-high-no-scale',
                     width = 64,
                     height = 64,

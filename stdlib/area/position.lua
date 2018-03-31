@@ -10,11 +10,7 @@ local Position = {
     _module_name = 'Position'
 }
 setmetatable(Position, {__index = require('stdlib/core')})
-
-local Is = require('stdlib/utils/is')
-
---- By default position tables are mutated in place set this to true to make the tables immutable.
-Position.immutable = false
+local Is = Position.Is
 
 local function __call(_, ...)
     if type((...)) == 'table' then
@@ -24,6 +20,12 @@ local function __call(_, ...)
     end
 end
 Position:set_caller(__call)
+
+local MAX_UINT = 4294967296
+local floor = math.floor
+
+--- By default position tables are mutated in place set this to true to make the tables immutable.
+Position.immutable = false
 
 --- Machine Epsilon
 -- @see wiki Machine_epsilon
@@ -73,16 +75,8 @@ end
 -- @tparam Concepts.Position pos the position to load the metatable onto
 -- @treturn Concepts.Position the position with metatable attached
 function Position.load(pos)
-    Is.Assert.Table(pos, 'position missing or malformed')
+    Is.Assert.Position(pos, 'position missing or malformed')
     return setmetatable(pos, Position._mt)
-end
-
---- Converts a position to a string.
--- @tparam Concepts.Position pos the position to convert
--- @treturn string string representation of the position
-function Position.tostring(pos)
-    pos = Position.new(pos)
-    return '{x = ' .. pos.x .. ', y = ' .. pos.y .. '}'
 end
 
 --- Adds two positions.
@@ -105,36 +99,6 @@ function Position.subtract(pos1, ...)
     local pos2 = Position(...)
 
     return Position.new({x = pos1.x - pos2.x, y = pos1.y - pos2.y})
-end
-
---- Tests whether or not the two given positions are equal.
--- @tparam Concepts.Position pos1 the first position
--- @tparam Concepts.Position pos2 the second position
--- @treturn boolean true if positions are equal
-function Position.equals(pos1, pos2)
-    if not pos1 or not pos2 then
-        return false
-    end
-    pos1 = Position.new(pos1)
-    pos2 = Position.new(pos2)
-
-    local epsilon = Position.epsilon
-    local abs = math.abs
-    return abs(pos1.x - pos2.x) < epsilon and abs(pos1.y - pos2.y) < epsilon
-end
-
-function Position.less_than(pos1, pos2)
-    pos1 = Position.new(pos1)
-    pos2 = Position.new(pos2)
-
-    return pos1.x < pos2.x and pos1.y < pos2.y
-end
-
-function Position.less_than_eq(pos1, pos2)
-    pos1 = Position.new(pos1)
-    pos2 = Position.new(pos2)
-
-    return pos1.x <= pos2.x and pos1.y <= pos2.y
 end
 
 --- Creates a position that is offset by x,y coordinates.
@@ -190,57 +154,6 @@ function Position.translate(pos, direction, distance)
     return pos
 end
 
---- Expands a position to a square area.
--- @tparam Concepts.Position pos the position to expand into an area
--- @tparam number radius half of the side length of the area
--- @treturn Concepts.BoundingBox the area
-function Position.expand_to_area(pos, radius)
-    pos = Position.new(pos)
-    Is.Assert.Number(radius, 'missing radius argument')
-    local Area = require('stdlib/area/area')
-
-    local left_top = Position.new({pos.x - radius, pos.y - radius})
-    local right_bottom = Position.new({pos.x + radius, pos.y + radius})
-
-    return Area({left_top = left_top, right_bottom = right_bottom})
-end
-
---- Calculates the Euclidean distance squared between two positions, useful when sqrt is not needed.
--- @tparam Concepts.Position pos1 the first position
--- @tparam Concepts.Position pos2 the second position
--- @treturn number the square of the euclidean distance
-function Position.distance_squared(pos1, pos2)
-    pos1 = Position.new(pos1)
-    pos2 = Position.new(pos2)
-
-    local axbx = pos1.x - pos2.x
-    local ayby = pos1.y - pos2.y
-    return axbx * axbx + ayby * ayby
-end
-
---- Calculates the Euclidean distance between two positions.
--- @tparam Concepts.Position pos1 the first position
--- @tparam Concepts.Position pos2 the second position
--- @treturn number the euclidean distance
-function Position.distance(pos1, pos2)
-    pos1 = Position.new(pos1)
-    pos2 = Position.new(pos2)
-
-    return math.sqrt(Position.distance_squared(pos1, pos2))
-end
-
---- Calculates the manhatten distance between two positions.
--- @tparam Concepts.Position pos1 the first position
--- @tparam Concepts.Position pos2 the second position
--- @treturn number the manhatten distance
--- @see https://en.wikipedia.org/wiki/Taxicab_geometry Taxicab geometry (manhatten distance)
-function Position.manhattan_distance(pos1, pos2)
-    pos1 = Position.new(pos1)
-    pos2 = Position.new(pos2)
-
-    return math.abs(pos2.x - pos1.x) + math.abs(pos2.y - pos1.y)
-end
-
 --- Increment a position each time it is called.
 -- This can be used to increment or even decrement a position quickly.
 -- <p>Do not store function closures in the global object; use them in the current tick.
@@ -294,11 +207,181 @@ function Position.center(pos)
     pos = Position.new(pos)
 
     local x, y = pos.x, pos.y
-    x = x >= 0 and math.floor(x) + 0.5 or math.ceil(x) - 0.5
-    y = y >= 0 and math.floor(y) + 0.5 or math.ceil(y) - 0.5
+    x = x >= 0 and floor(x) + 0.5 or math.ceil(x) - 0.5
+    y = y >= 0 and floor(y) + 0.5 or math.ceil(y) - 0.5
     pos.x = x
     pos.y = y
+
     return pos
+end
+
+--- Get the @{LuaTile.position|tile position} of a tile where the given position resides.
+-- @tparam Concepts.Position pos the position that resides somewhere in a tile
+-- @treturn LuaTile.position a new tile position
+function Position.tile_position(pos)
+    pos = Position.new(pos)
+
+    local x = floor(pos.x)
+    local y = floor(pos.y)
+
+    return Position.load {x = x, y = y}
+end
+
+--- Gets the chunk position of a chunk where the specified position resides.
+-- @tparam Concepts.Position pos a position residing somewhere in a chunk
+-- @treturn Concepts.ChunkPosition a new chunk position
+-- @usage local chunk_x = Position.chunk_position(pos).x
+function Position.chunk_position(pos)
+    pos = Position.new(pos)
+
+    local x, y = floor(pos.x), floor(pos.y)
+
+    x = x < 0 and (bit32.arshift(x, 5) - MAX_UINT) or bit32.arshift(x, 5)
+    y = y < 0 and (bit32.arshift(y, 5) - MAX_UINT) or bit32.arshift(y, 5)
+
+    return Position.load {x = x, y = y}
+end
+
+--- Expands a position to a square area.
+-- @tparam Concepts.Position pos the position to expand into an area
+-- @tparam number radius half of the side length of the area
+-- @treturn Concepts.BoundingBox the area
+function Position.expand_to_area(pos, radius)
+    pos = Position.new(pos)
+    Is.Assert.Number(radius, 'missing radius argument')
+    local Area = require('stdlib/area/area')
+
+    local left_top = Position.new({pos.x - radius, pos.y - radius})
+    local right_bottom = Position.new({pos.x + radius, pos.y + radius})
+
+    return Area.load {left_top = left_top, right_bottom = right_bottom}
+end
+Position.to_area = Position.expand_to_area
+
+--- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
+-- @tparam LuaTile.position pos the tile position
+-- @treturn Concepts.BoundingBox the area of the tile
+function Position.expand_to_tile_area(pos)
+    pos = Position.tile_position(pos)
+    local Area = require('stdlib/area/area')
+
+    local left_top = pos:copy()
+    local right_bottom = pos:copy():offset(1, 1)
+
+    return Area.load {left_top = left_top, right_bottom = right_bottom}
+end
+--- @function Position.to_tile_area
+-- @see Position.expand_to_tile_area
+Position.to_tile_area = Position.expand_to_tile_area
+
+--- Gets the area of a chunk from the specified chunk position.
+-- @tparam Concepts.ChunkPosition pos the chunk position
+-- @treturn Concepts.BoundingBox the chunk's area
+function Position.expand_to_chunk_area(pos)
+    pos = Position.new(pos)
+    local Area = require('stdlib/area/area')
+
+    local left_top = Position.load {x = pos.x * 32, y = pos.y * 32}
+    local right_bottom = left_top:copy():offset(32, 32)
+
+    return Area.load {left_top = left_top, right_bottom = right_bottom}
+end
+Position.to_chunk_area = Position.expand_to_chunk_area
+
+--- Converts a position to a string.
+-- @tparam Concepts.Position pos the position to convert
+-- @treturn string string representation of the position
+function Position.tostring(pos)
+    pos = Position.new(pos)
+    return '{x = ' .. pos.x .. ', y = ' .. pos.y .. '}'
+end
+
+--- Converts a position string to a position.
+-- @tparam string pos the position to convert
+-- @treturn Concepts.Position
+function Position.from_string(pos)
+    return Position(load('return ' .. pos)())
+end
+
+--- Converts a position to a string suitable for using as a table index
+-- @tparam Concepts.Position pos the position to convert
+-- @treturn string
+function Position.to_key(pos)
+    pos = Position.new(pos)
+    return pos.x .. '/' .. pos.y
+end
+
+--- Converts a string key position to a position
+-- @tparam string pos the position to convert
+-- @treturn Concepts.Position
+function Position.from_key(pos)
+    return Position(pos:split('/'))
+end
+
+--- Tests whether or not the two given positions are equal.
+-- @tparam Concepts.Position pos1 the first position
+-- @tparam Concepts.Position pos2 the second position
+-- @treturn boolean true if positions are equal
+function Position.equals(pos1, pos2)
+    if not pos1 or not pos2 then
+        return false
+    end
+    pos1 = Position.new(pos1)
+    pos2 = Position.new(pos2)
+
+    local epsilon = Position.epsilon
+    local abs = math.abs
+    return abs(pos1.x - pos2.x) < epsilon and abs(pos1.y - pos2.y) < epsilon
+end
+
+function Position.less_than(pos1, pos2)
+    pos1 = Position.new(pos1)
+    pos2 = Position.new(pos2)
+
+    return pos1.x < pos2.x and pos1.y < pos2.y
+end
+
+function Position.less_than_eq(pos1, pos2)
+    pos1 = Position.new(pos1)
+    pos2 = Position.new(pos2)
+
+    return pos1.x <= pos2.x and pos1.y <= pos2.y
+end
+
+--- Calculates the Euclidean distance squared between two positions, useful when sqrt is not needed.
+-- @tparam Concepts.Position pos1 the first position
+-- @tparam Concepts.Position pos2 the second position
+-- @treturn number the square of the euclidean distance
+function Position.distance_squared(pos1, pos2)
+    pos1 = Position.new(pos1)
+    pos2 = Position.new(pos2)
+
+    local axbx = pos1.x - pos2.x
+    local ayby = pos1.y - pos2.y
+    return axbx * axbx + ayby * ayby
+end
+
+--- Calculates the Euclidean distance between two positions.
+-- @tparam Concepts.Position pos1 the first position
+-- @tparam Concepts.Position pos2 the second position
+-- @treturn number the euclidean distance
+function Position.distance(pos1, pos2)
+    pos1 = Position.new(pos1)
+    pos2 = Position.new(pos2)
+
+    return math.sqrt(Position.distance_squared(pos1, pos2))
+end
+
+--- Calculates the manhatten distance between two positions.
+-- @tparam Concepts.Position pos1 the first position
+-- @tparam Concepts.Position pos2 the second position
+-- @treturn number the manhatten distance
+-- @see https://en.wikipedia.org/wiki/Taxicab_geometry Taxicab geometry (manhatten distance)
+function Position.manhattan_distance(pos1, pos2)
+    pos1 = Position.new(pos1)
+    pos2 = Position.new(pos2)
+
+    return math.abs(pos2.x - pos1.x) + math.abs(pos2.y - pos1.y)
 end
 
 local opposites =

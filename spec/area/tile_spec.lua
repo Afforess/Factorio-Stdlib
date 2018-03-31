@@ -1,3 +1,5 @@
+require('busted.runner')()
+
 require('spec/setup/defines')
 local Tile = require('stdlib/area/tile')
 
@@ -31,24 +33,10 @@ describe('Tile Spec', function()
 
         assert.same(2, #Tile.adjacent(surface, {1, 1}, false, 'water'))
     end)
-    it('should ensure indexes are stable and deterministic', function()
-
-        assert.same(0, Tile.get_index({x = 0, y = 0}))
-        local set = {}
-        for x = 0, 31 do
-            for y = 0, 31 do
-                local idx = Tile.get_index({x = x, y = y})
-                assert.is_nil(set[idx])
-                set[idx] = true
-                assert.truthy(idx < 1024 and idx >= 0)
-            end
-        end
-        assert.same(0, Tile.get_index({x = 0, y = 0}))
-    end)
 
     it('should verify getting and setting data', function()
         _G.global = {}
-        _G.game = { surfaces = { nauvis = { index = 0 } } }
+        _G.game = { surfaces = { nauvis = { index = 1, __self = 'userdata', valid = true } } }
 
         local tile_pos = { x = 4, y = -6 }
         local surface = "nauvis"

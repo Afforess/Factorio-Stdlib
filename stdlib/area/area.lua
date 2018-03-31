@@ -69,7 +69,7 @@ function Area.copy(area)
 end
 
 --- Loads the metatable into the passed Area without creating a new one.
--- @tparam Concepts.BoundingBox pos the Area to load the metatable onto
+-- @tparam Concepts.BoundingBox area the Area to load the metatable onto
 -- @treturn Concepts.BoundingBox the Area with metatable attached
 function Area.load(area)
     Is.Assert.Area(area, 'area missing or malformed')

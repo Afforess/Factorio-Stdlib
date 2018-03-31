@@ -1,3 +1,5 @@
+require('busted.runner')()
+
 require('spec/setup/defines')
 local Chunk = require('stdlib/area/chunk')
 
@@ -17,28 +19,9 @@ describe('Chunk Spec', function()
         assert.same(96, Chunk.to_area({1, 2}).right_bottom.y)
     end)
 
-    it('should ensure indexes are stable and deterministic', function()
-        _G.global = {}
-        _G.game = { surfaces = { nauvis = { index = 0 }, foo = { index = 1 } } }
-
-        local chunk_pos = { x = 4, y = -6 }
-        local surface = "nauvis"
-        assert.same(0, Chunk.get_index(surface, chunk_pos))
-        for _ = 1, 10 do
-            assert.same(0, Chunk.get_index(surface, chunk_pos))
-        end
-
-        for i = 1, 100 do
-            local this_chunk_pos = { x = 4 - i, y = -6 + i }
-            assert.same(i, Chunk.get_index(surface, this_chunk_pos))
-        end
-        assert.same(0, Chunk.get_index(surface, chunk_pos))
-        assert.same(101, Chunk.get_index("foo", chunk_pos))
-    end)
-
     it('should verify getting and setting data', function()
         _G.global = {}
-        _G.game = { surfaces = { nauvis = { index = 0 } } }
+        _G.game = { surfaces = { nauvis = { index = 1, __self = "userdata", valid = true } } }
 
         local chunk_pos = { x = 4, y = -6 }
         local surface = "nauvis"

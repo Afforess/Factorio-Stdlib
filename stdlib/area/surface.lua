@@ -124,4 +124,29 @@ function Surface.get_surface_bounds(surface)
     return Area.construct(x1 * 32, y1 * 32, x2 * 32, y2 * 32)
 end
 
+--- Sets the daytime transition thresholds on a given surface
+-- @tparam LuaSurface surface the surface for which to set the thresholds
+-- @tparam number morning daytime to begin transition from dark to light
+-- @tparam number dawn daytime to finish transition from dark to light
+-- @tparam number dusk daytime to begin transition from light to dark
+-- @tparam number evening daytime to finish transition from light to dark
+-- @treturn boolean true if the thresholds were set, false if there was an error
+-- @return[opt] the raised error, if any
+function Surface.set_daytime_thresholds(surface, morning, dawn, dusk, evening)
+    Is.Assert.Valid(surface, 'missing surface value')
+    Is.Assert(Is.Float(morning) and Is.Float(dawn) and Is.float(dusk) and Is.Float(evening), 'paramaters must be floats')
+
+    return pcall(
+        function()
+            surface.dusk = 0
+            surface.evening = .0000000001
+            surface.morning = .0000000002
+            surface.dawn = dawn
+            surface.morning = morning
+            surface.evening = evening
+            surface.dusk = dusk
+        end
+    )
+end
+
 return Surface

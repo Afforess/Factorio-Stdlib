@@ -1,3 +1,5 @@
+require('busted.runner')()
+
 local Data, Raw, R, F --luacheck: ignore Raw
 
 describe('Data', function()
@@ -50,12 +52,12 @@ describe('Data', function()
         end)
 
         it(":Flags()", function()
-            assert.is_true(Data("stone-furnace", "item"):Flags("hidden"))
+            assert.is_true(Data("stone-furnace", "item"):Flags()("hidden"))
             assert.same(2, #flg)
         end)
 
         it("Flags:has()", function()
-            assert.is_true(Data("stone-furnace", "item"):Flags("hidden"))
+            --assert.is_true(Data("stone-furnace", "item"):Flags("hidden"))
             assert.is_true(flg:has("hidden"))
             assert.is_true(flg("hidden"))
         end)

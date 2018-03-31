@@ -192,8 +192,26 @@ describe(
                 assert.truthy(f(hex3))
             end
         )
+        it("is_numbers", function ()
+            assert.truthy(Is.Number(2))
+            assert.truthy(Is.Not.Number("2"))
+            assert.truthy(Is.Float(.01))
+            assert.truthy(Is.Not.Float(-0.3))
+            assert.truthy(Is.Not.Float(1))
+            assert.truthy(Is.Int32(-1234567890))
+            assert.truthy(Is.UInt32(3123456789))
+            assert.truthy(Is.UInt8(255))
+            assert.truthy(Is.Not.Finite(math.huge+1))
+            assert.truthy(Is.Int(3))
+            assert.truthy(Is.Not.Int(3.4))
+            assert.truthy(Is.Positive(3))
+            assert.falsy(Is.Positive(-3))
+            assert.truthy(Is.Negative(-3))
+            assert.falsy(Is.Negative(3.3))
+        end)
     end
 )
+
 describe(
     'semantic modifiers',
     function()
@@ -219,8 +237,15 @@ describe(
                 assert.is_nil(m)
             end
         )
+        it("works with lowercase", function ()
+            assert.is_true(Is.is_true(true))
+            assert.has.error(function() Is.assert.is_true(false, "my message")end)
+            assert.has.error(function() Is.assert.is_true(false, 'my message')end)
+            assert.has_error(function() Is.assert.is_not.is_true(true)end)
+        end)
     end
 )
+
 describe(
     'Assert',
     function()

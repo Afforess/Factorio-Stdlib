@@ -165,8 +165,6 @@ function Entity.destroy_entity(entity, died, cause, force)
         }
         -- If no event name is passed, assume script_raised_destroy, otherwise raise the event
         -- with the passed event name. ie. defines.events.on_preplayer_mined_item
-        event.script = true
-        event.mod_name = 'stdlib'
         script.raise_event(event.name, event)
         return entity.destroy()
     end
@@ -218,7 +216,6 @@ function Entity.revive(ghost, player_index, raise_script_event)
                 created_entity = revived,
                 revived = true,
                 script = true,
-                modname = 'stdlib'
             }
 
             if raise_script_event then

@@ -2,9 +2,14 @@
 -- @module table
 -- @see table
 
-local M = {}
+local Table = {}
 
 local insert = table.insert
+
+-- Add all of table to Table
+for k, v in pairs(table) do
+    Table[k] = v
+end
 
 --- Given a mapping function, creates a transformed copy of the table
 --- by calling the function for each element in the table, and using
@@ -17,7 +22,7 @@ local insert = table.insert
 -- @tparam function func the function to transform values
 -- @param[opt] ... additional arguments passed to the function
 -- @treturn table a new table containing the keys and mapped values
-function M.map(tbl, func, ...)
+function Table.map(tbl, func, ...)
     local newtbl = {}
     for i, v in pairs(tbl) do
         newtbl[i] = func(v, i, ...)
@@ -36,7 +41,7 @@ end
 -- @tparam function func the function to filter values
 -- @param[opt] ... additional arguments passed to the function
 -- @treturn table a new table containing the filtered key-value pairs
-function M.filter(tbl, func, ...)
+function Table.filter(tbl, func, ...)
     local newtbl = {}
     local add = #tbl > 0
     for k, v in pairs(tbl) do
@@ -62,7 +67,7 @@ end
 -- @tparam function func the function to use to search for any matching element
 -- @param[opt] ... additional arguments passed to the function
 -- @treturn ?|nil|Mixed the first found value, or nil if none was found
-function M.find(tbl, func, ...)
+function Table.find(tbl, func, ...)
     for k, v in pairs(tbl) do
         if func(v, k, ...) then
             return v, k
@@ -83,8 +88,8 @@ end
 -- @tparam function func the function to use to search for any matching element
 -- @param[opt] ... additional arguments passed to the function
 -- @treturn boolean true if an element was found, false if none was found
-function M.any(tbl, func, ...)
-    return M.find(tbl, func, ...) ~= nil
+function Table.any(tbl, func, ...)
+    return Table.find(tbl, func, ...) ~= nil
 end
 
 --- Given a function, apply it to each element in the table.
@@ -97,7 +102,7 @@ end
 -- @tparam function func the function to apply to elements
 -- @param[opt] ... additional arguments passed to the function
 -- @treturn table the table where the given function has been applied to its elements
-function M.each(tbl, func, ...)
+function Table.each(tbl, func, ...)
     for k, v in pairs(tbl) do
         if func(v, k, ...) then
             break
@@ -113,20 +118,20 @@ end
 -- @tparam array tbl the array to be flattened
 -- @tparam[opt] uint level recursive levels, or no limit to recursion if not supplied
 -- @treturn array a new array that represents the flattened contents of the given array
-function M.flatten(tbl, level)
+function Table.flatten(tbl, level)
     local flattened = {}
-    M.each(
+    Table.each(
         tbl,
         function(value)
             if type(value) == 'table' and #value > 0 then
                 if level then
                     if level > 0 then
-                        M.merge(flattened, M.flatten(value, level - 1), true)
+                        Table.merge(flattened, Table.flatten(value, level - 1), true)
                     else
                         insert(flattened, value)
                     end
                 else
-                    M.merge(flattened, M.flatten(value), true)
+                    Table.merge(flattened, Table.flatten(value), true)
                 end
             else
                 insert(flattened, value)
@@ -139,14 +144,14 @@ end
 --- Given an array, returns the first element or nil if no element exists.
 -- @tparam array tbl the array
 -- @treturn ?|nil|Mixed the first element
-function M.first(tbl)
+function Table.first(tbl)
     return tbl[1]
 end
 
 --- Given an array, returns the last element or nil if no elements exist.
 -- @tparam array tbl the array
 -- @treturn ?|nil|Mixed the last element or nil
-function M.last(tbl)
+function Table.last(tbl)
     local size = #tbl
     if size == 0 then
         return nil
@@ -157,7 +162,7 @@ end
 --- Given an array of only numeric values, returns the minimum or nil if no element exists.
 -- @tparam {number,...} tbl the array with only numeric values
 -- @treturn ?|nil|number the minimum value
-function M.min(tbl)
+function Table.min(tbl)
     if #tbl == 0 then
         return nil
     end
@@ -172,7 +177,7 @@ end
 ---Given an array of only numeric values, returns the maximum or nil if no element exists.
 -- @tparam {number,...} tbl the array with only numeric values
 -- @treturn ?|nil|number the maximum value
-function M.max(tbl)
+function Table.max(tbl)
     if #tbl == 0 then
         return nil
     end
@@ -187,7 +192,7 @@ end
 --- Given an array of only numeric values, return the sum of all values, or 0 for empty arrays.
 -- @tparam {number,...} tbl the array with only numeric values
 -- @treturn number the sum of the numbers or zero if the given array was empty
-function M.sum(tbl)
+function Table.sum(tbl)
     local sum = 0
     for _, num in pairs(tbl) do
         sum = sum + num
@@ -198,9 +203,9 @@ end
 --- Given an array of only numeric values, returns the average or nil if no element exists.
 -- @tparam {number,...} tbl the array with only numeric values
 -- @treturn ?|nil|number the average value
-function M.avg(tbl)
+function Table.avg(tbl)
     local cnt = #tbl
-    return cnt ~= 0 and M.sum(tbl) / cnt or nil
+    return cnt ~= 0 and Table.sum(tbl) / cnt or nil
 end
 
 --- Merges two tables, values from first get overwritten by the second.
@@ -216,13 +221,13 @@ end
 -- @tparam[opt=false] boolean array_merge set to true to merge the tables as an array or false for an associative array
 -- @tparam[opt=false] boolean raw use rawset for associated array
 -- @treturn array|table an array or an associated array where tblA and tblB have been merged
-function M.merge(tblA, tblB, array_merge, raw)
+function Table.merge(tblA, tblB, array_merge, raw)
     if not tblB then
         return tblA
     end
     if array_merge then
         for _, v in pairs(tblB) do
-            table.insert(tblA, v)
+            insert(tblA, v)
         end
     else
         for k, v in pairs(tblB) do
@@ -245,7 +250,7 @@ end
 -- @tparam table tbl_a
 -- @tparam table tbl_b
 -- @treturn table with a and b merged together
-function M.dictionary_merge(tbl_a, tbl_b)
+function Table.dictionary_merge(tbl_a, tbl_b)
     local meta_a = getmetatable(tbl_a)
     local meta_b = getmetatable(tbl_b)
     setmetatable(tbl_a, nil)
@@ -268,15 +273,15 @@ end
 --- Compares 2 tables for inner equality.
 -- copied from factorio/data/core/lualib/util.lua
 -- @tparam table tbl_a
--- @tparam table tbl_2
+-- @tparam table tbl_b
 -- @treturn boolean if the tables are the same
-function M.compare(tbl_a, tbl_b)
+function Table.compare(tbl_a, tbl_b)
     if tbl_a == tbl_b then
         return true
     end
     for k, v in pairs(tbl_a) do
         if type(v) == 'table' and type(tbl_b[k]) == 'table' then
-            if not M.compare(v, tbl_b[k]) then
+            if not Table.compare(v, tbl_b[k]) then
                 return false
             end
         else
@@ -287,7 +292,7 @@ function M.compare(tbl_a, tbl_b)
     end
     for k, v in pairs(tbl_b) do
         if type(v) == 'table' and type(tbl_a[k]) == 'table' then
-            if not M.compare(v, tbl_a[k]) then
+            if not Table.compare(v, tbl_a[k]) then
                 return false
             end
         else
@@ -304,7 +309,7 @@ end
 -- @usage local copy = table.deepcopy[data.raw.["stone-furnace"]["stone-furnace"]] -- returns a copy of the stone furnace entity
 -- @tparam table object the table to copy
 -- @treturn table a copy of the table
-function M.deepcopy(object)
+function Table.deepcopy(object)
     local lookup_table = {}
     local function _copy(this_object)
         if type(this_object) ~= 'table' then
@@ -328,7 +333,7 @@ end
 -- @usage local copy = table.flexcopy(data.raw.["stone-furnace"]["stone-furnace"]) -- returns a copy of the stone furnace entity
 -- @tparam table object the table to copy
 -- @treturn table a copy of the table
-function M.flexcopy(object)
+function Table.flexcopy(object)
     local lookup_table = {}
     local function _copy(this_object)
         if type(this_object) ~= 'table' then
@@ -356,7 +361,7 @@ end
 -- @tparam[opt] boolean sorted whether to sort the keys (slower) or keep the random order from pairs()
 -- @tparam[opt] boolean as_string whether to try and parse the values as strings, or leave them as their existing type
 -- @treturn array an array with a copy of all the values in the table
-function M.values(tbl, sorted, as_string)
+function Table.values(tbl, sorted, as_string)
     if not tbl then
         return {}
     end
@@ -397,7 +402,7 @@ end
 -- @tparam[opt] boolean sorted whether to sort the keys (slower) or keep the random order from pairs()
 -- @tparam[opt] boolean as_string whether to try and parse the keys as strings, or leave them as their existing type
 -- @treturn array an array with a copy of all the keys in the table
-function M.keys(tbl, sorted, as_string)
+function Table.keys(tbl, sorted, as_string)
     if not tbl then
         return {}
     end
@@ -441,7 +446,7 @@ end
 -- @tparam table tbl the table to remove the keys from
 -- @tparam {Mixed,...} keys an array of keys that exist in the given table
 -- @treturn table tbl without the specified keys
-function M.remove_keys(tbl, keys)
+function Table.remove_keys(tbl, keys)
     for i = 1, #keys do
         tbl[keys[i]] = nil
     end
@@ -458,7 +463,7 @@ end
 -- table.count_keys(a) -- produces: 5, 5
 -- @usage local a = {1, 2, 3, 4, 5}
 -- table.count_keys(a, function(v, k) return k % 2 == 1 end) -- produces: 3, 5
-function M.count_keys(tbl, func, ...)
+function Table.count_keys(tbl, func, ...)
     local count, total = 0, 0
     if type(tbl) == 'table' then
         for k, v in pairs(tbl) do
@@ -482,7 +487,7 @@ end
 --table.invert(b) --returns {'foo' = k1, 'bar' = ?}
 -- @tparam table tbl the table to invert
 -- @treturn table a new table with inverted mapping
-function M.invert(tbl)
+function Table.invert(tbl)
     local inverted = {}
     for k, v in pairs(tbl) do
         inverted[v] = k
@@ -502,14 +507,14 @@ end
 -- @function size
 -- @tparam table table to use
 -- @treturn int size of the table
-M.size = _G.table_size or _size
+Table.size = _G.table_size or _size
 
 --- For all string or number values in an array map them to a value = value table
 -- @usage local a = {"v1", "v2"}
 -- table.array_to_bool(a) -- return {["v1"] = "v1", ["v2"]= "v2"}
 -- @tparam table tbl the table to convert
 -- @treturn table the converted table
-function M.array_to_dictionary(tbl)
+function Table.array_to_dictionary(tbl)
     local newtbl = {}
     for _, v in ipairs(tbl) do
         if type(v) == 'string' or type(v) == 'number' then
@@ -522,23 +527,22 @@ end
 --- Does the table contain any elements
 -- @tparam table tbl
 -- @treturn boolean
-function M.is_empty(tbl)
+function Table.is_empty(tbl)
     return _G.table_size and _G.table_size(tbl) == 0 or next(tbl) == nil
 end
 
 --- Clear all elements in a table
 -- @tparam table tbl the table to clear
 -- @treturn table the cleared table
-function M.clear(tbl)
+function Table.clear(tbl)
     for k in pairs(tbl) do
         tbl[k] = nil
     end
     return tbl
 end
 
--- Extend into table
-for k, v in pairs(M) do
-    table[k] = v -- luacheck: globals table (Allow mutating global table)
+for k, v in pairs(Table) do
+    table[k] = v --luacheck: globals table
 end
 
-return M
+return Table

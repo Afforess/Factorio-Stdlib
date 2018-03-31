@@ -48,10 +48,10 @@ Is.Assert.Not = {}
 
 local M = {}
 
+require('stdlib/utils/math')
 local type = type
 local floor = math.floor
-local INF_POS = math.huge
-local INF_NEG = -math.huge
+local huge = math.huge
 
 --- Returns the var if the passed variable is a table.
 -- @tparam mixed var The variable to check
@@ -176,7 +176,7 @@ end
 M.nan = M.NaN
 
 function M.Finite(var)
-    return M.Number(var) and (var < INF_POS and var > INF_NEG) and var
+    return M.Number(var) and (var < huge and var > -huge) and var
 end
 M.finite = M.Finite
 
@@ -201,7 +201,7 @@ end
 M.int32 = M.Int32
 
 function M.Unsigned(var)
-    return Is.Number(var) and (var < INF_POS and var >= 0) and var
+    return Is.Number(var) and (var < huge and var >= 0) and var
 end
 M.unsigned = M.Unsigned
 
@@ -224,6 +224,11 @@ function M.UInt32(var)
     return M.UInt(var) and var <= 4294967295 and var
 end
 M.uint32 = M.UInt32
+
+function M.Float(var)
+    return M.number(var) and var >= 0 and var < 1 and var
+end
+M.float = M.Float
 
 --- Returns the passed var if it is a full position.
 -- @tparam mixed var The variable to check
@@ -296,21 +301,21 @@ M.Alpha = M.AlphanumWord
 M.alpha = M.AlphanumWord
 M.alphanumword = M.AlphanumWord
 
---- Is this factorio object valid
--- @tparam LuaObject var The variable to check
--- @treturn boolean true if this is a valid LuaObject
-function M.Valid(var)
-    return M.Table(var) and var.valid
-end
-M.valid = M.Valid
-
 --- Is this a factorio object
 -- @tparam LuaObject var The variable to check
--- @treturn boolean true if this is an LuaObject
+-- @treturn mixed the var if this is an LuaObject
 function M.Object(var)
-    return M.Table(var) and var.__self
+    return M.Table(var) and var.__self and var
 end
 M.object = M.Object
+
+--- Is this factorio object valid
+-- @tparam LuaObject var The variable to check
+-- @treturn mixed the var if this is a valid LuaObject
+function M.Valid(var)
+    return M.Object(var) and var.valid and var
+end
+M.valid = M.Valid
 
 --- Returns true if the passed variable is a callable function.
 -- @tparam mixed var The variable to check
@@ -349,6 +354,7 @@ setmetatable(
         end
     }
 )
+Is.is_not = Is.Not
 
 -- convenience function for un-lambda-ing deferred error messages
 local function safeinvoke(f)
@@ -371,15 +377,16 @@ setmetatable(
         __index = function(_, k)
             return M[k] and function(_assert, _message, _level)
                     _level = tonumber(_level) or 3
-                    return M[k](_assert) or error(type(_message) == 'function' and safeinvoke(_message) or _message, _level)
+                    return M[k](_assert) or error(type(_message) == 'function' and safeinvoke(_message) or _message or 'assertion failed', _level)
                 end or nil
         end,
         __call = function(_, ...)
             local param = {...}
-            return param[1] or error(type(param[2]) == 'function' and safeinvoke(param[2]) or param[2], tonumber(param[3]) or 3)
+            return param[1] or error(type(param[2]) == 'function' and safeinvoke(param[2]) or param[2] or 'assertion failed', tonumber(param[3]) or 3)
         end
     }
 )
+Is.assert = Is.Assert
 
 setmetatable(
     Is.Assert.Not,
@@ -387,14 +394,15 @@ setmetatable(
         __index = function(_, k)
             return M[k] and function(_assert, _message, _level)
                     _level = tonumber(_level) or 3
-                    return not M[k](_assert) or error(type(_message) == 'function' and safeinvoke(_message) or _message, _level)
+                    return not M[k](_assert) or error(type(_message) == 'function' and safeinvoke(_message) or _message or 'assertion failed', _level)
                 end or nil
         end,
         __call = function(_, ...)
             local param = {...}
-            return not param[1] or error(type(param[2]) == 'function' and safeinvoke(param[2]) or param[2], tonumber(param[3]) or 3)
+            return not param[1] or error(type(param[2]) == 'function' and safeinvoke(param[2]) or param[2] or 'assertion failed', tonumber(param[3]) or 3)
         end
     }
 )
+Is.assert.is_not = Is.Assert.Not
 
 return Is

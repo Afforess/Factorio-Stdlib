@@ -198,9 +198,8 @@ end
 Data.set = Data.set_field
 
 --- Get a field.
--- @tparam field
--- @treturn mixed the value of the field
--- @note Will error if the object is not valid
+-- @tparam string field
+-- @treturn nil|mixed the value of the field
 function Data:get_field(field)
     if self:valid() then
         return rawget(self, field)

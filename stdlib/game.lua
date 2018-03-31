@@ -5,6 +5,8 @@
 local Game = {_module_name = 'Game'}
 setmetatable(Game, {__index = require('stdlib/core')})
 
+local Is = Game.Is
+
 --- Return a valid player object from event, index, string, or userdata
 -- @tparam string|number|LuaPlayer|event mixed
 -- @treturn LuaPlayer a valid player or nil
@@ -14,11 +16,11 @@ function Game.get_player(mixed)
             return mixed and mixed.valid and mixed
         elseif mixed.player_index then
             local player = game.players[mixed.player_index]
-            return player
+            return player and player.valid and player
         end
     elseif mixed then
         local player = game.players[mixed]
-        return player
+        return player and player.valid and player
     end
 end
 
@@ -35,6 +37,19 @@ function Game.get_force(mixed)
     elseif type(mixed) == 'string' then
         local force = game.forces[mixed]
         return (force and force.valid) and force
+    end
+end
+
+function Game.get_surface(mixed)
+    if type(mixed) == 'table' then
+        if mixed.__self then
+            return mixed.valid and mixed
+        elseif mixed.surface then
+            return Game.get_surface(mixed.surface)
+        end
+    elseif mixed then
+        local surface = game.surfaces[mixed]
+        return surface and surface.valid and surface
     end
 end
 
@@ -58,6 +73,36 @@ function Game.print_all(msg, condition)
         global._print_queue = global._print_queue or {}
         global._print_queue[#global._print_queue + 1] = msg
     end
+end
+
+--- Gets or sets data in the global variable.
+-- @tparam string sub_table the name of the table to use to store data.
+-- @tparam[opt] mixed index an optional index to use for the sub_table
+-- @tparam mixed key the key to store the data in
+-- @tparam[opt] boolean set store the contents of value, when true return previously stored data
+-- @tparam[opt] mixed value when set is true set key to this value, if not set and key is empty store this
+-- @treturn mixed the chunk value stored at the key or the previous value
+function Game.get_or_set_data(sub_table, index, key, set, value)
+    Is.Assert.String(sub_table, 'sub_table must be a string')
+    global[sub_table] = global[sub_table] or {}
+    local this
+    if index then
+        global[sub_table][index] = global[sub_table][index] or {}
+        this = global[sub_table][index]
+    else
+        this = global[sub_table]
+    end
+    local previous
+
+    if set then
+        previous = this[key]
+        this[key] = value
+        return previous
+    elseif not this[key] and value then
+        this[key] = value
+        return this[key]
+    end
+    return this[key]
 end
 
 return Game

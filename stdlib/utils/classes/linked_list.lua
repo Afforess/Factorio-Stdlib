@@ -1,4 +1,6 @@
 --- A double-linked list implementation
+-- @classmod LinkedList
+
 local Is = require('stdlib/utils/is')
 
 -- @class LinkedListNode

@@ -202,7 +202,7 @@ describe('Event', function ()
     end)
 
     insulate('.register', function()
-        it('succeeds while processing an event but, if the added handler \z
+        pending('succeeds while processing an event but, if the added handler \z
             is for the event being dispatched, does not cause the handler \z
             to fire.', function()
             World.bootstrap()
@@ -414,7 +414,7 @@ describe('Event', function ()
     end)
 
     insulate('.remove', function()
-        it('should remove the running handler if requested', function()
+        pending('should remove the running handler if requested', function()
             World.bootstrap()
             local Event = require('stdlib/event/event')
             local f, h = genstub(2)
@@ -437,7 +437,7 @@ describe('Event', function ()
     end)
 
     insulate('.remove', function()
-        it('should prevent invocation of subsequent handlers \z
+        pending('should prevent invocation of subsequent handlers \z
             during processing of preceeding handlers', function()
             World.bootstrap()
             local Event = require('stdlib/event/event')

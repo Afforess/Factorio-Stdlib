@@ -22,11 +22,11 @@ local function new(player_index)
         name = game.players[player_index].name,
         force = game.players[player_index].force.name
     }
-    if Event._new_player_data then
-        if type(Event._new_player_data) == 'table' then
-            table.merge(pdata, table.deepcopy(Event._new_player_data))
-        elseif type(Event._new_player_data) == 'function' then
-            local new_data = Event._new_player_data(player_index)
+    if Player._new_player_data then
+        if type(Player._new_player_data) == 'table' then
+            table.merge(pdata, table.deepcopy(Player._new_player_data))
+        elseif type(Player._new_player_data) == 'function' then
+            local new_data = Player._new_player_data(player_index)
             if type(new_data) == 'table' then
                 table.merge(pdata, new_data)
             else
@@ -40,7 +40,7 @@ local function new(player_index)
 end
 
 function Player.additional_data(func_or_table)
-    Event._new_player_data = func_or_table
+    Player._new_player_data = func_or_table
     return Player
 end
 
@@ -59,7 +59,7 @@ end
 
 --- Merge a copy of the passed data to all players in `global.players`.
 -- @tparam table data a table containing variables to merge
--- @usage local data = {a = 'abc', b= 'def'}
+-- @usage local data = {a = 'abc', b = 'def'}
 -- Player.add_data_all(data)
 function Player.add_data_all(data)
     local pdata = global.players
@@ -126,11 +126,11 @@ function Player.register_init()
     return Player
 end
 
-function Player.register_events(skip_init)
+function Player.register_events(do_on_init)
     Event.register(defines.events.on_player_created, Player.init)
     Event.register(defines.events.on_player_changed_force, Player.update_force)
     Event.register(defines.events.on_player_removed, Player.remove)
-    if not skip_init then
+    if do_on_init then
         Player.register_init()
     end
     return Player

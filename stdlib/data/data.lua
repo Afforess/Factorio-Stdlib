@@ -332,6 +332,9 @@ function Data:get(object, object_type, opts)
         Is.Assert(object.type and object.name, 'Name and Type are required')
         new = object
         new._extended = data.raw[object.type] and data.raw[object.type][object.name] == object
+        if new._extended then
+            log('NOTICE: Overwriting ' .. object.type .. '/' .. object.name)
+        end
     elseif type(object) == 'string' then
         --Get type from object_type, or fluid or item_and_fluid_types
         local types = (object_type and {object_type}) or (self._class == 'item' and item_and_fluid_types)

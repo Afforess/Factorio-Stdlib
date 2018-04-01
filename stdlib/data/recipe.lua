@@ -44,8 +44,6 @@ function Recipe:_get(recipe)
             always_show_products <boolean>
         }
     --]]
-
-
     -- Convert the recipe to difficult format
 
     -- Convert the ingredients to full format
@@ -281,6 +279,23 @@ function Recipe:replace_ingredient(replace, normal, expensive)
             end
         elseif normal then
             replace_ingredient(self.ingredients, replace, normal, n_string)
+        end
+    end
+    return self
+end
+
+-- Currently does no checking
+function Recipe:clear_ingredients()
+    if self:valid() then
+        if self.normal then
+            if self.normal.ingredients then
+                self.normal.ingredients = {}
+            end
+            if self.expensive.ingredients then
+                self.expensive.ingredients = {}
+            end
+        elseif self.ingredients then
+            self.ingredients = {}
         end
     end
     return self

@@ -4,7 +4,7 @@
 local Migrate = {}
 setmetatable(Migrate, {__index = require('stdlib/core')})
 
-local Is = require('stdlib/utils/is')
+local Is = Migrate.Is
 
 --- Migrate a dictionary of recipe -> tech names
 -- @tparam dictionary dictionary
@@ -25,7 +25,7 @@ function Migrate.all_recipes()
     for _, force in pairs(game.forces) do
         for _, tech in pairs(force.technologies) do
             if tech.researched then
-                for _, unlock in pairs(force.effects or {}) do
+                for _, unlock in pairs(tech.effects or {}) do
                     if unlock.type == "unlock-recipe" then
                         force.recipes[unlock.recipe].enabled = true
                     end

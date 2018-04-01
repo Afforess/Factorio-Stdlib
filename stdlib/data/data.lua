@@ -331,8 +331,9 @@ function Data:get(object, object_type, opts)
     if type(object) == 'table' then
         Is.Assert(object.type and object.name, 'Name and Type are required')
         new = object
-        new._extended = data.raw[object.type] and data.raw[object.type][object.name] == object
-        if new._extended then
+        local existing = data.raw[object.type] and data.raw[object.type][object.name]
+        new._extended = existing == object
+        if existing and not new._extended then
             log('NOTICE: Overwriting ' .. object.type .. '/' .. object.name)
         end
     elseif type(object) == 'string' then

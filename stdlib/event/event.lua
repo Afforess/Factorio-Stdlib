@@ -278,9 +278,10 @@ function Event.dispatch(event)
     Is.Assert.Table(event, 'missing event table')
     --get the registered handlers from name, input_name, or nth_tick in that priority.
     local registry
-    if event.name then
+
+    if event.name and event_registry[event.name] then
         registry = event_registry[event.name]
-    elseif event.input_name then
+    elseif event.input_name and event_registry[event.input_name] then
         registry = event_registry[event.input_name]
     elseif event.nth_tick then
         registry = event_registry[-event.nth_tick]

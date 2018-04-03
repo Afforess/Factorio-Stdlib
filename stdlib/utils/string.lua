@@ -142,7 +142,7 @@ local function _just(s, w, ch, left, right)
         end
         local f1, f2
         if left and right then
-            local rn =ceil((w - n) / 2)
+            local rn = ceil((w - n) / 2)
             local ln = w - n - rn
             f1 = ch:rep(ln)
             f2 = ch:rep(rn)
@@ -230,11 +230,18 @@ function String.ordinal_suffix(n, prepend_number)
     end
 end
 
-for k, v in pairs(String) do
-    string[k] = v -- luacheck: globals string (Allow mutating global)
+--- Overwrite the global table 'string'
+-- @treturn String
+function String.overwrite_global_table()
+    if debug and debug.setmetatable then
+        _G.string = String
+        debug.setmetatable('', {__index = String})
+    else
+        for k, v in pairs(String) do
+            _G.string[k] = v
+        end
+    end
+    return String
 end
--- if debug and debug.setmetatable then
---      debug.setmetatable('', {__index = String})
--- end
 
 return String

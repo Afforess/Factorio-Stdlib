@@ -541,8 +541,11 @@ function Table.clear(tbl)
     return tbl
 end
 
-for k, v in pairs(Table) do
-    table[k] = v --luacheck: globals table
+--- Overwrite the global table 'table'
+-- @treturn Table
+function Table.overwrite_global_table()
+    _G.table = Table --luacheck: globals table
+    return Table
 end
 
 return Table

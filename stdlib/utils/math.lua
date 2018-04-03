@@ -156,8 +156,11 @@ function Math.round_to(x, p)
     return floor(x * e + 0.5) / e
 end
 
-for k, v in pairs(Math) do
-    math[k] = v --luacheck: globals math
+--- Overwrite the global table 'math'
+-- @treturn Table
+function Math.overwrite_global_table()
+    _G.math = Math
+    return Math
 end
 
 return Math

@@ -1,7 +1,7 @@
 require('busted.runner')()
 
 require('spec/setup/defines')
-local Queue = require('stdlib/queue/queue')
+local Queue = require('stdlib/lists/queue')
 
 describe('Queue', function()
     local queue1

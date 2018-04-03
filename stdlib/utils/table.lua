@@ -329,6 +329,32 @@ function Table.deepcopy(object)
     return _copy(object)
 end
 
+--- Creates a deep copy of a table without copying factorio objects
+-- internal table refs are also deepcopy. The resulting table should
+-- @usage local copy = table.fullcopy[data.raw.["stone-furnace"]["stone-furnace"]]
+-- -- returns a deepcopy of the stone furnace entity with no internal table references.
+-- @tparam table object the table to copy
+-- @treturn table a copy of the table
+function Table.fullcopy(object)
+    local lookup_table = {}
+    local function _copy(this_object)
+        if type(this_object) ~= 'table' then
+            return this_object
+        elseif this_object.__self then
+            return this_object
+        elseif lookup_table[this_object] then
+            return _copy(lookup_table[this_object])
+        end
+        local new_table = {}
+        lookup_table[this_object] = new_table
+        for index, value in pairs(this_object) do
+            new_table[_copy(index)] = _copy(value)
+        end
+        return setmetatable(new_table, getmetatable(this_object))
+    end
+    return _copy(object)
+end
+
 --- Creates a flexible deep copy of an object, recursively copying sub-objects
 -- @usage local copy = table.flexcopy(data.raw.["stone-furnace"]["stone-furnace"]) -- returns a copy of the stone furnace entity
 -- @tparam table object the table to copy

@@ -539,12 +539,13 @@ Table.size = _G.table_size or _size
 -- @usage local a = {"v1", "v2"}
 -- table.array_to_bool(a) -- return {["v1"] = "v1", ["v2"]= "v2"}
 -- @tparam table tbl the table to convert
+-- @tparam[opt=false] as_bool map to true instead of value
 -- @treturn table the converted table
-function Table.array_to_dictionary(tbl)
+function Table.array_to_dictionary(tbl, as_bool)
     local newtbl = {}
     for _, v in ipairs(tbl) do
         if type(v) == 'string' or type(v) == 'number' then
-            newtbl[v] = true
+            newtbl[v] = as_bool and true or v
         end
     end
     return newtbl

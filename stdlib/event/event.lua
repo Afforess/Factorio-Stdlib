@@ -50,6 +50,10 @@ local function valid_id(id)
     return (Is.Number(id) or Is.String(id)), 'Invalid Event Id, Must be string/int/defines.events, Passed in: ' .. type(id)
 end
 
+local function valid_event_id(id)
+    return (tonumber(id) and id >= 0) or (Is.String(id) and not bootstrap_register[id])
+end
+
 --- Registers a handler for the given events.
 -- If a `nil` handler is passed, remove the given events and stop listening to them.
 -- <p>Events dispatch in the order they are registered.
@@ -351,7 +355,7 @@ end
 function Event.get_event_handler(event_id)
     Is.Assert(valid_id(event_id))
     return {
-        script = (tonumber(event_id) or 0 >= 0 or Is.String(event_id)) and script.get_event_handler(event_id),
+        script = bootstrap_register(event_id) or (valid_event_id(event_id) and script.get_event_handler(event_id)),
         handlers = event_registry[event_id]
     }
 end

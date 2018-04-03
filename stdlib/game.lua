@@ -5,7 +5,7 @@
 local Game = {_module_name = 'Game'}
 setmetatable(Game, {__index = require('stdlib/core')})
 
-local Is = Game.Is
+local Is = require('stdlib/utils/is')
 
 --- Return a valid player object from event, index, string, or userdata
 -- @tparam string|number|LuaPlayer|event mixed

@@ -7,7 +7,7 @@
 local Tile = {_module_name = 'Tile'}
 setmetatable(Tile, {__index = require('stdlib/core')})
 
-local Is = Tile.Is
+local Is = require('stdlib/utils/is')
 local Game = require('stdlib/game')
 local Position = require('stdlib/area/position')
 

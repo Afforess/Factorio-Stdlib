@@ -4,7 +4,7 @@
 local Migrate = {}
 setmetatable(Migrate, {__index = require('stdlib/core')})
 
-local Is = Migrate.Is
+local Is = require('stdlib/utils/is')
 
 --- Migrate a dictionary of recipe -> tech names
 -- @tparam dictionary dictionary

@@ -10,7 +10,7 @@ local Position = {
     _module_name = 'Position'
 }
 setmetatable(Position, {__index = require('stdlib/core')})
-local Is = Position.Is
+local Is = require('stdlib/utils/is')
 
 local function __call(_, ...)
     if type((...)) == 'table' then

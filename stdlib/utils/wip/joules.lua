@@ -4,7 +4,7 @@
 local Joules = {}
 setmetatable(Joules, {__index = require('stdlib/core')})
 
-local Is = Joules.Is
+local Is = require('stdlib/utils/is')
 
 local high_to_low = {'Y', 'Z', 'E', 'P', 'T', 'G', 'M', 'k', 'm', 'u', 'n', 'p', 'f', 'a', 'z', 'y'}
 

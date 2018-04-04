@@ -20,9 +20,6 @@ setmetatable(Data, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 
-local _traceback = function() return '' end
-local traceback = debug and debug.traceback or _traceback
-
 local item_and_fluid_types = {
     'item',
     'ammo',

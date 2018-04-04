@@ -539,7 +539,7 @@ Table.size = _G.table_size or _size
 -- @usage local a = {"v1", "v2"}
 -- table.array_to_bool(a) -- return {["v1"] = "v1", ["v2"]= "v2"}
 -- @tparam table tbl the table to convert
--- @tparam[opt=false] as_bool map to true instead of value
+-- @tparam[opt=false] boolean as_bool map to true instead of value
 -- @treturn table the converted table
 function Table.array_to_dictionary(tbl, as_bool)
     local newtbl = {}
@@ -568,11 +568,9 @@ function Table.clear(tbl)
     return tbl
 end
 
---- Overwrite the global table 'table'
--- @treturn Table
-function Table.overwrite_global_table()
-    _G.table = Table --luacheck: globals table
-    return Table
+-- Overwrite the global table 'table' if the flag is not set.
+if not _G._STDLIB_NO_TABLE then
+    _G.table = Table
 end
 
 return Table

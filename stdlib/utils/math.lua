@@ -156,11 +156,9 @@ function Math.round_to(x, p)
     return floor(x * e + 0.5) / e
 end
 
---- Overwrite the global table 'math'
--- @treturn Table
-function Math.overwrite_global_table()
+-- Overwrite the global table 'math' if the flag is not set.
+if not _G._STDLIB_NO_MATH then
     _G.math = Math
-    return Math
 end
 
 return Math

@@ -1,7 +1,28 @@
 --- Additional lua globals
 -- @module globals
 
--- luacheck: globals prequire rawtostring inline_if serpent inspect semver
+-- luacheck: globals prequire rawtostring inline_if serpent inspect semver traceback
+-- luacheck: globals _STDLIB_NO_STRING _STDLIB_NO_TABLE _STDLIB_NO_MATH _STDLIB_NO_DEFINES_COLOR _STDLIB_NO_DEFINES_TIME
+
+-- Mutate lua built ins
+_STDLIB_NO_STRING = _STDLIB_NO_STRING or false
+_STDLIB_NO_TABLE = _STDLIB_NO_TABLE or false
+_STDLIB_NO_MATH = _STDLIB_NO_MATH or false
+require('stdlib/utils/table')
+require('stdlib/utils/string')
+require('stdlib/utils/math')
+
+-- Defines Mutates
+_STDLIB_NO_DEFINES_COLOR = _STDLIB_NO_DEFINES_COLOR
+_STDLIB_NO_DEFINES_TIME = _STDLIB_NO_DEFINES_TIME
+require('stdlib/defines/color')
+require('stdlib/defines/time')
+
+local _traceback = function()
+    return ''
+end
+traceback = type(debug) == 'table' and debug.traceback or _traceback
+
 
 serpent = serpent or require('stdlib/utils/vendor/serpent')
 inspect = inspect or require('stdlib/utils/vendor/inspect')

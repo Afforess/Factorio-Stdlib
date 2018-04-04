@@ -1,6 +1,6 @@
 require('busted.runner')()
 
-local LinkedList = require('stdlib/utils/classes/linked_list')
+local LinkedList = require('stdlib/lists/linked_list')
 local World = require('spec/setup/world')
 
 -- bootstrap world for _G.log
@@ -1173,7 +1173,7 @@ describe('LinkedList', function()
             -- here we do a bit of a poor-man's try-finally since the test scribbles
             -- over LinkedList, and we don't want to leave a messed-up class to
             -- subsequent tests which could be confused by it.
-            local ok, msg = xpcall(testit, debug.traceback)
+            local ok, msg = xpcall(testit, traceback)
             cleanup()
             if not ok then
                 error(msg)
@@ -1353,7 +1353,7 @@ describe('LinkedList', function()
             -- here we do a bit of a poor-man's try-finally since the test scribbles
             -- over LinkedList, and we don't want to leave a messed-up class to
             -- subsequent tests which could be confused by it.
-            local ok, msg = xpcall(testit, debug.traceback)
+            local ok, msg = xpcall(testit, traceback)
             cleanup()
             if not ok then
                 error(msg)

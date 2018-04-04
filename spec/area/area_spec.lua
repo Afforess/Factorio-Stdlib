@@ -1,3 +1,5 @@
+require('busted.runner')()
+
 require('spec/setup/defines')
 local Area = require('stdlib/area/area')
 

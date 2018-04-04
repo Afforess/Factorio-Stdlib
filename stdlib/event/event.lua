@@ -13,8 +13,10 @@
 -- @module Event
 -- @usage local Event = require('stdlib/event/event')
 
+
+local Table = require('stdlib/utils/table')
+
 --Holds the event registry
-require('stdlib/utils/table')
 local event_registry = {}
 
 local Event = {
@@ -33,7 +35,7 @@ local Event = {
     inspect_event = false,
     force_crc = false,
     stop_processing = {}, -- just has to be unique
-    event_names = table.invert(defines.events)
+    event_names = Table.invert(defines.events)
 }
 setmetatable(Event, require('stdlib/core'))
 

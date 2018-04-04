@@ -6,14 +6,6 @@
 --Global mutates
 require('stdlib/utils/globals')
 
-require('stdlib/utils/table').overwrite_global_table()
-require('stdlib/utils/string').overwrite_global_table()
-require('stdlib/utils/math').overwrite_global_table()
-
---Defines Mutates
-require('stdlib/defines/color')
-require('stdlib/defines/time')
-
 local Is = require('stdlib/utils/is')
 
 local Core = {

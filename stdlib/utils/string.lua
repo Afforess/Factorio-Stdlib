@@ -12,6 +12,8 @@ local abs = math.abs
 for k, v in pairs(string) do
     String[k] = v
 end
+local old_string_meta = getmetatable(string)
+setmetatable(string, {__index = String})
 
 --- Returns a copy of the string with any leading or trailing whitespace from the string removed.
 -- @tparam string s the string to remove leading or trailing whitespace from
@@ -215,33 +217,28 @@ end
 
 --- Return the ordinal suffix for a number.
 -- @tparam number n
+-- @tparam boolean prepend_number if the passed number should be pre-pended
 -- @treturn string the ordinal suffix
 function String.ordinal_suffix(n, prepend_number)
     n = abs(n) % 100
     local d = n % 10
     if d == 1 and n ~= 11 then
-        return prepend_number and (n or '') .. 'st'
+        return (prepend_number and n or '') .. 'st'
     elseif d == 2 and n ~= 12 then
-        return prepend_number and (n or '') .. 'nd'
+        return (prepend_number and n or '') .. 'nd'
     elseif d == 3 and n ~= 13 then
-        return prepend_number and (n or '') .. 'rd'
+        return (prepend_number and n or '') .. 'rd'
     else
-        return prepend_number and (n or '') .. 'th'
+        return (prepend_number and n or '') .. 'th'
     end
 end
 
---- Overwrite the global table 'string'
--- @treturn String
-function String.overwrite_global_table()
-    if debug and debug.setmetatable then
-        _G.string = String
-        debug.setmetatable('', {__index = String})
-    else
-        for k, v in pairs(String) do
-            _G.string[k] = v
-        end
+-- Overwrite the global table 'string' if the flag is not set.
+if not _G._STDLIB_NO_STRING then
+    setmetatable(string, old_string_meta)
+    for k, v in pairs(String) do
+        _G.string[k] = v
     end
-    return String
 end
 
 return String

@@ -5,7 +5,7 @@
 -- @see Concepts.ChunkPosition
 
 local Chunk = {_module_name = 'Chunk'}
-setmetatable(Chunk, {__index = require('stdlib/core')})
+setmetatable(Chunk, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 local Game = require('stdlib/game')

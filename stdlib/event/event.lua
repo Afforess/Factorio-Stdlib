@@ -35,7 +35,7 @@ local Event = {
     stop_processing = {}, -- just has to be unique
     event_names = table.invert(defines.events)
 }
-setmetatable(Event, {__index = require('stdlib/core')})
+setmetatable(Event, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 local inspect = require('stdlib/utils/vendor/inspect')

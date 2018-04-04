@@ -10,7 +10,7 @@
 -- @tfield function is_set
 -- @table Config
 local M = {_module_name = 'Config'}
-setmetatable(M, {__index = require('stdlib/core')})
+setmetatable(M, require('stdlib/core'))
 
 -----------------------------------------------------------------------
 --Setup repeated code for use in sub functions here

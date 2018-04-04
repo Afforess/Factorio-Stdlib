@@ -3,7 +3,7 @@
 -- @usage local Resource = require('stdlib/entity/resource')
 
 local Resource = {_module_name = 'Resource'}
-setmetatable(Resource, {__index = require('stdlib/core')})
+setmetatable(Resource, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 local Surface = require('stdlib/area/surface')

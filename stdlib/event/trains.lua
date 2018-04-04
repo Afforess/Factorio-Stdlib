@@ -6,7 +6,7 @@
 local Trains = {
     _module_name = 'Trains'
 }
-setmetatable(Trains, {__index = require('stdlib/core')})
+setmetatable(Trains, require('stdlib/core'))
 
 local Event = require('stdlib/event/event')
 local Surface = require('stdlib/area/surface')

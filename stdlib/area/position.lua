@@ -9,17 +9,16 @@
 local Position = {
     _module_name = 'Position'
 }
-setmetatable(Position, {__index = require('stdlib/core')})
+setmetatable(Position, require('stdlib/core'))
 local Is = require('stdlib/utils/is')
 
-local function __call(_, ...)
+function Position._caller(_, ...)
     if type((...)) == 'table' then
         return Position.new(...)
     else
         return Position.construct(...)
     end
 end
-Position:set_caller(__call)
 
 local MAX_UINT = 4294967296
 local floor = math.floor
@@ -41,12 +40,12 @@ function Position.new(pos, new_copy)
     Is.Assert.Table(pos, 'missing position argument')
 
     local copy = new_copy or Position.immutable
-    if not copy and getmetatable(pos) == Position._mt then
+    if not copy and getmetatable(pos) == Position then
         return pos
     end
 
     local new = {x = pos.x or pos[1], y = pos.y or pos[2]}
-    return setmetatable(new, Position._mt)
+    return setmetatable(new, Position)
 end
 
 --- Creates a table representing the position from x and y.
@@ -76,7 +75,7 @@ end
 -- @treturn Concepts.Position the position with metatable attached
 function Position.load(pos)
     Is.Assert.Position(pos, 'position missing or malformed')
-    return setmetatable(pos, Position._mt)
+    return setmetatable(pos, Position)
 end
 
 --- Adds two positions.
@@ -421,7 +420,7 @@ end
 
 --- Position tables are returned with these metamethods attached
 -- @table Metamethods
-Position._mt = {
+local _metamethods = {
     __index = Position, -- If key is not found, see if there is one availble in the Position module.
     __tostring = Position.tostring, -- Returns a string representation of the position
     __add = Position.add, -- Adds two position together.
@@ -432,5 +431,9 @@ Position._mt = {
     __concat = Position._concat, -- calls tostring on both sides of concact.
     __call = Position.copy
 }
+
+for k, v in pairs(_metamethods) do
+    Position[k] = v
+end
 
 return Position

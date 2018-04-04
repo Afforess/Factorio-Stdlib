@@ -3,7 +3,7 @@
 -- @usage local Color = require('stdlib/utils/color')
 
 local Color = {_module_name = 'Color'}
-setmetatable(Color, {__index = require('stdlib/core')})
+setmetatable(Color, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 

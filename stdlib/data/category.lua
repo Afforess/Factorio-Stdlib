@@ -4,7 +4,7 @@
 local Category = {
     _class = 'category'
 }
-setmetatable(Category, {__index = require('stdlib/data/data')})
+setmetatable(Category, require('stdlib/data/data'))
 
 Category.category_types = {
     ['ammo-category'] = true,
@@ -16,10 +16,9 @@ Category.category_types = {
     ['resource-category'] = true
 }
 
-function Category:_get(category_name, category_type)
+function Category:_caller(category_name, category_type)
     return self:get(category_name, category_type)
 end
-Category:set_caller(Category._get)
 
 function Category:create()
     return self
@@ -43,7 +42,7 @@ end
 
 Category._mt = {
     __index = Category,
-    __call = Category._get,
+    __call = Category._caller,
     __tostring = Category.tostring
 }
 

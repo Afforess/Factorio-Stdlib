@@ -42,10 +42,11 @@ local Core = {
         --Sanitize to remove address
         return tostring(lhs):gsub('(%w+)%: %x+', '%1: (ADDR)') .. tostring(rhs):gsub('(%w+)%: %x+', '%1: (ADDR)')
     end,
-    _classes = {
-        string_array_mt = require('stdlib/utils/classes/string_array')
-    },
+    __call = function(t, ...)
+        return t._caller(t, ...)
+    end
 }
+Core.__index = Core
 
 function Core.log_and_print(msg)
     if game and #game.connected_players > 0 then
@@ -57,19 +58,6 @@ end
 
 function Core.VALID_FILTER(v)
     return v and v.valid
-end
-
---- Sets the __call metamethod on the metatable.
--- @tparam table this The object to get the metatable for
--- @tparam function caller The function to set to __call
--- @treturn table with metatable attached
-function Core.set_caller(this, caller)
-    if getmetatable(this) then
-        getmetatable(this).__call = caller
-        return this
-    else
-        error('Metatable not found', 2)
-    end
 end
 
 --- load the stdlib into globals, by default it loads everything into an ALLCAPS name.

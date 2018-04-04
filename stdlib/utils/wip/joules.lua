@@ -2,7 +2,7 @@
 -- @classmod Joules
 
 local Joules = {}
-setmetatable(Joules, {__index = require('stdlib/core')})
+setmetatable(Joules, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 
@@ -27,10 +27,9 @@ local units = {
     Y = 1E24
 }
 
-local function __call(_, j)
+function Joules._caller(_, j)
     return Joules.new(j)
 end
-Joules.set_caller(Joules, __call)
 
 local function breakdown(j)
     local n, m = string.match(j, '([0-9.-]+)%s*([yzafpnumkMGTPEZY]?)%s*[jJ]')
@@ -72,7 +71,7 @@ function Joules.nearest(j)
 end
 
 Joules._mt = {
-    __call = __call,
+    __call = Joules._caller,
     __index = Joules
 }
 

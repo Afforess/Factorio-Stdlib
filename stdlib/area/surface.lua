@@ -5,7 +5,7 @@
 -- @see LuaSurface
 
 local Surface = {_module_name = 'Surface'}
-setmetatable(Surface, {__index = require('stdlib/core')})
+setmetatable(Surface, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 local Area = require('stdlib/area/area')

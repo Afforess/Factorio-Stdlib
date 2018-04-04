@@ -4,16 +4,15 @@
 local Fluid = {
     _class = 'fluid'
 }
-setmetatable(Fluid, {__index = require('stdlib/data/data')})
+setmetatable(Fluid, require('stdlib/data/data'))
 
-function Fluid:_get(fluid)
+function Fluid:_caller(fluid)
     return self:get(fluid)
 end
-Fluid:set_caller(Fluid._get)
 
 Fluid._mt = {
     __index = Fluid,
-    __call = Fluid._get,
+    __call = Fluid._caller,
     __tostring = Fluid.tostring
 }
 

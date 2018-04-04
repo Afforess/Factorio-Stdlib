@@ -8,7 +8,7 @@ local Event = require('stdlib/event/event')
 local Changes = {
     _module_name = 'Changes'
 }
-setmetatable(Changes, {__index = require('stdlib/core')})
+setmetatable(Changes, require('stdlib/core'))
 
 --[[
     ConfigurationChangedData

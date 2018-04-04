@@ -7,7 +7,7 @@
 -- -- and to use the same LOGGER in multiple require files make it global by removing 'local'.
 
 local M = {_module_name = 'Logger'}
-setmetatable(M, {__index = require('stdlib/core')})
+setmetatable(M, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 

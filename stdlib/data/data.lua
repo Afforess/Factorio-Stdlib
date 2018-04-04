@@ -16,7 +16,7 @@ local Data = {
         ['verbose'] = false
     }
 }
-setmetatable(Data, {__index = require('stdlib/core')})
+setmetatable(Data, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 
@@ -156,7 +156,7 @@ end
 function Data:Flags(create_flags)
     if self:valid() then
         self.flags = create_flags and {} or self.flags
-        return self.flags and setmetatable(self.flags, Data._classes.string_array_mt)
+        return self.flags and setmetatable(self.flags, require('stdlib/utils/classes/string_array'))
     end
 end
 
@@ -370,11 +370,14 @@ function Data:get(object, object_type, opts)
     end
     return self
 end
-Data:set_caller(Data.get)
+Data._caller = Data.get
+
+Data.__index = Data
+Data.__call = Data.__call
 
 Data._mt = {
     __index = Data,
-    __call = Data.get,
+    __call = Data._caller,
     __tostring = Data.tostring
 }
 

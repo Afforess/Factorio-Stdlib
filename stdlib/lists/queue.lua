@@ -5,7 +5,7 @@
 -- @usage local Queue = require('stdlib/lists/queue')
 
 local Queue = {_module_name = 'Queue'}
-setmetatable(Queue, {__index = require('stdlib/core')})
+setmetatable(Queue, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 local t_size = table.size
@@ -14,13 +14,12 @@ local t_size = table.size
 -- @return (<span class="types">@{Queue}</span>) a new, empty queue
 function Queue.new()
     local queue = {first = 1, last = 0, objects = {}}
-    setmetatable(queue, Queue._mt)
-    return queue
+    return setmetatable(queue, Queue)
 end
-Queue:set_caller(Queue.new)
+Queue._caller = Queue.new
 
 -- Allows queue[3] to return the item at queue.objects[3]
-local function __index(self, k)
+function Queue.__index(self, k)
     if Is.number(k) then
         return self.objects[k]
     else
@@ -29,7 +28,7 @@ local function __index(self, k)
 end
 
 -- Allows queue() to pop_first and queue(data) to push_last
-local function __call(self, ...)
+function Queue.__call(self, ...)
     if ... then
         return self.push(self, ...)
     else
@@ -39,18 +38,12 @@ end
 
 --- Load global.queue or queues during on_load, as metatables are not persisted.
 -- <p>This is only needed if you are using the queue as an object and storing it in global.
--- @param ... (<span class="types">@{Queue}</span>,...)
+-- @tparam table queue (<span class="types">@{Queue}</span>,...)
 -- @usage global.myqueue1 = Queue.new()
--- global.myqueue2 = Queue.new()
--- script.on_load(function() Queue.load(myqueue1, myqueue2))
-function Queue.load(...)
-    if not ... then
-        return
-    end
-    for _, queue in pairs({...}) do
-        if queue.first then
-            setmetatable(queue, Queue._mt)
-        end
+-- script.on_load(function() Queue.load(global.myqueue))
+function Queue.load(queue)
+    if Is.Table(queue) and queue.first then
+        return setmetatable(queue, Queue)
     end
 end
 
@@ -189,12 +182,8 @@ function Queue.rpairs(queue, pop)
 end
 Queue.iter_last = Queue.rpairs
 
-Queue._mt = {
-    __index = __index,
-    __pairs = Queue.pairs,
-    __ipairs = Queue.pairs,
-    __len = Queue.count,
-    __call = __call
-}
+Queue.__pairs = Queue.pairs
+Queue.__ipairs = Queue.pairs
+Queue.__len = Queue.count
 
 return Queue

@@ -28,7 +28,7 @@ describe('Queue', function()
         end)
 
         it('should have a metatable', function()
-            assert.same(getmetatable(queue1), Queue._mt)
+            assert.same(getmetatable(queue1), Queue)
         end)
 
         it('__index should retrieve objects or queue', function()
@@ -231,7 +231,8 @@ describe('Queue', function()
             assert.not_truthy(getmetatable(queue1))
             _G.global.queue1 = queue1
             _G.global.queue2 = queue2
-            Queue.load(_G.global.queue1, _G.global.queue2)
+            Queue.load(_G.global.queue1)
+            Queue.load(_G.global.queue2)
             assert.truthy(_G.global.queue1)
             assert.same(tostring(getmetatable(queue1).__index), tostring(getmetatable(queue2).__index))
         end)

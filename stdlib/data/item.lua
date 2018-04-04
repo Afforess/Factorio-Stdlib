@@ -4,7 +4,7 @@
 local Item = {
     _class = 'item'
 }
-setmetatable(Item, {__index = require('stdlib/data/data')})
+setmetatable(Item, require('stdlib/data/data'))
 
 Item.item_types = {
     'item',
@@ -27,10 +27,9 @@ Item.item_types = {
     'module'
 }
 
-function Item:_get(item, item_type)
+function Item:_caller(item, item_type)
     return self:get(item, item_type)
 end
-Item:set_caller(Item._get)
 
 Item.item_types = {
     'item',
@@ -55,7 +54,7 @@ Item.item_types = {
 
 Item._mt = {
     __index = Item,
-    __call = Item._get,
+    __call = Item._caller,
     __tostring = Item.tostring
 }
 

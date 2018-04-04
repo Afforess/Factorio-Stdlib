@@ -1,6 +1,7 @@
 --- A double-linked list implementation
 -- @classmod LinkedList
 
+local Core = require('stdlib/core')
 local Is = require('stdlib/utils/is')
 
 -- @class LinkedListNode
@@ -13,7 +14,7 @@ local LinkedListNode = setmetatable(
         _mt = {}
     },
     {
-        __index = require('stdlib/core')
+        __index = Core.__index
     }
 )
 LinkedListNode._mt.__index = LinkedListNode
@@ -30,7 +31,7 @@ local LinkedList = setmetatable(
         _mt = {}
     },
     {
-        __index = require('stdlib/core')
+        __index = Core.__index
     }
 )
 LinkedList._class = LinkedList

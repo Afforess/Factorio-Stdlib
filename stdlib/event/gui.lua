@@ -7,7 +7,7 @@ local Event = require('stdlib/event/event')
 local Gui = {
     _module_name = 'Gui'
 }
-setmetatable(Gui, {__index = require('stdlib/core')})
+setmetatable(Gui, require('stdlib/core'))
 
 local function matcher(event, pattern)
     if event.element and event.element.valid then

@@ -4,14 +4,13 @@
 local Technology = {
     _class = 'technology'
 }
-setmetatable(Technology, {__index = require('stdlib/data/data')})
+setmetatable(Technology, require('stdlib/data/data'))
 
 local Is = require('stdlib/utils/is')
 
-function Technology:_get(tech)
+function Technology:_caller(tech)
     return self:get(tech, 'technology')
 end
-Technology:set_caller(Technology._get)
 
 --[[
 type = "technology",
@@ -199,7 +198,8 @@ end
 
 Technology._mt = {
     __index = Technology,
-    __call = Technology._get
+    __call = Technology._caller,
+    __tostring = Technology.tostring
 }
 
 return Technology

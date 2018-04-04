@@ -6,8 +6,10 @@
 -- @see Concepts.BoundingBox
 -- @see Concepts.Position
 
-local Area = {_module_name = 'Area'}
-setmetatable(Area, {__index = require('stdlib/core')})
+local Area = {
+    _module_name = 'Area'
+}
+setmetatable(Area, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 local Position = require('stdlib/area/position')
@@ -15,14 +17,13 @@ local Position = require('stdlib/area/position')
 --- By default area tables are mutated in place set this to true to make the tables immutable.
 Area.immutable = false
 
-local function __call(_, ...)
+function Area._caller(_, ...)
     if type((...)) == 'table' then
         return Area.new(...)
     else
         return Area.construct(...)
     end
 end
-Area:set_caller(__call)
 
 --- Converts an area in either array or table format to an area with a metatable.
 -- Returns itself if it already has a metatable
@@ -33,14 +34,14 @@ function Area.new(area, new_copy)
     Is.Assert.Table(area, 'missing area value')
 
     local copy = new_copy or Area.immutable
-    if not copy and getmetatable(area) == Area._mt then
+    if not copy and getmetatable(area) == Area then
         return area
     end
 
     local left_top = Position.new(area.left_top or area[1], true)
     local right_bottom = Position.new(area.right_bottom or area[2], true)
     local new = {left_top = left_top, right_bottom = right_bottom, orientation = area.orientation}
-    return setmetatable(new, Area._mt)
+    return setmetatable(new, Area)
 end
 
 --- Creates an area from the two positions p1 and p2.
@@ -73,7 +74,7 @@ end
 -- @treturn Concepts.BoundingBox the Area with metatable attached
 function Area.load(area)
     Is.Assert.Area(area, 'area missing or malformed')
-    return setmetatable(area, Area._mt)
+    return setmetatable(area, Area)
 end
 
 local function validate_vector(amount)
@@ -476,8 +477,8 @@ end
 
 --- Area tables are returned with these Metamethods attached.
 -- @table Metamethods
-Area._mt = {
-    __index = Area, -- If key is not found, see if there is one available in the Area module.
+local _metamethods = {
+    __index = Area, -- @field If key is not found see if there is one available in the Area module.
     __add = Area.expand, -- Will expand the area by the number or vector on the RHS.
     __sub = Area.shrink, -- Will shrink the area by the number or vector on the RHS.
     __tostring = Area.tostring, -- Will print a string representation of the area.
@@ -487,5 +488,9 @@ Area._mt = {
     __concat = Area._concat, -- calls tostring on both sides of concat.
     __call = Area.copy -- Return a new copy
 }
+
+for k, v in pairs(_metamethods) do
+    Area[k] = v
+end
 
 return Area

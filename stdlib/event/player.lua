@@ -10,7 +10,7 @@ local Event = require('stdlib/event/event')
 local Player = {
     _module_name = 'Player'
 }
-setmetatable(Player, {__index = require('stdlib/core')})
+setmetatable(Player, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 local Game = require('stdlib/game')

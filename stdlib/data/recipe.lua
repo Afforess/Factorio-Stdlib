@@ -6,12 +6,12 @@ local Recipe = {
     _ingredients_mt = require('stdlib/data/modules/ingredients'),
     _results_mt = require('stdlib/data/modules/results')
 }
-setmetatable(Recipe, {__index = require('stdlib/data/data')})
+setmetatable(Recipe, require('stdlib/data/data'))
 
 local Is = require('stdlib/utils/is')
 local Item = require('stdlib/data/item')
 
-function Recipe:_get(recipe)
+function Recipe:_caller(recipe)
     local new = self:get(recipe, 'recipe')
     --[[prototype
         type, name
@@ -53,7 +53,6 @@ function Recipe:_get(recipe)
     --new:Results()
     return new
 end
-Recipe:set_caller(Recipe._get)
 
 function Recipe:Results(get_expensive)
     if self:valid('recipe') then
@@ -547,7 +546,7 @@ Recipe.rem_ing = Recipe.remove_ingredient
 
 Recipe._mt = {
     __index = Recipe,
-    __call = Recipe._get,
+    __call = Recipe._caller,
     __tostring = Recipe.tostring
 }
 

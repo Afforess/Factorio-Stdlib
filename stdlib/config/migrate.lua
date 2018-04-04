@@ -2,7 +2,7 @@
 -- @module Migrate
 
 local Migrate = {}
-setmetatable(Migrate, {__index = require('stdlib/core')})
+setmetatable(Migrate, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 

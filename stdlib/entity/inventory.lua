@@ -3,7 +3,7 @@
 -- @usage local Inventory = require('stdlib/entity/inventory')
 
 local Inventory = {_module_name = 'Inventory'}
-setmetatable(Inventory, {__index = require('stdlib/core')})
+setmetatable(Inventory, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 

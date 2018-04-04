@@ -4,7 +4,7 @@
 local Util = {
     _module_name = 'Util'
 }
-setmetatable(Util, {__index = require('stdlib/core')})
+setmetatable(Util, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 

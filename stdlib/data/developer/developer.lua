@@ -3,7 +3,7 @@
 
 local Developer = {}
 local Data = require('stdlib/data/data')
-setmetatable(Developer, {__index = Data})
+setmetatable(Developer, Data)
 
 local function make_no_controls()
     local controls = {}

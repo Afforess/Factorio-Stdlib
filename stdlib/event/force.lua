@@ -12,7 +12,7 @@ local Event = require('stdlib/event/event')
 local Force = {
     _module_name = 'Force'
 }
-setmetatable(Force, {__index = require('stdlib/core')})
+setmetatable(Force, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 local Game = require('stdlib/game')

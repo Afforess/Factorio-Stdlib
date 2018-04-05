@@ -17,6 +17,8 @@ local Data = {
     }
 }
 setmetatable(Data, require('stdlib/core'))
+Data.__call = Data.__call -- sets Data.__call to Core.__call, which returns self._caller
+Data.__index = Data
 
 local Is = require('stdlib/utils/is')
 
@@ -152,7 +154,7 @@ end
 
 function Data:Flags(create_flags)
     if self:valid() then
-        self.flags = create_flags and {} or self.flags
+        self.flags = self.flags or {}
         return self.flags and setmetatable(self.flags, require('stdlib/utils/classes/string_array'))
     end
 end
@@ -368,9 +370,6 @@ function Data:get(object, object_type, opts)
     return self
 end
 Data._caller = Data.get
-
-Data.__index = Data
-Data.__call = Data.__call
 
 Data._mt = {
     __index = Data,

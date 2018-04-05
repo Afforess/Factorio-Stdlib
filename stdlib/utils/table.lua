@@ -290,15 +290,9 @@ function Table.compare(tbl_a, tbl_b)
             end
         end
     end
-    for k, v in pairs(tbl_b) do
-        if type(v) == 'table' and type(tbl_a[k]) == 'table' then
-            if not Table.compare(v, tbl_a[k]) then
-                return false
-            end
-        else
-            if v ~= tbl_a[k] then
-                return false
-            end
+    for k in pairs(tbl_b) do
+        if tbl_a[k] == nil then
+            return false
         end
     end
     return true

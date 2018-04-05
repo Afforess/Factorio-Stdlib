@@ -398,3 +398,22 @@ function table.arr_to_bool(tbl)
     end
     return newtbl
 end
+
+--- Recursively compare the contents of two tables
+-- Improved from Factorio data/core/lualib/util.lua
+-- @tparam table tbl1 first table to compare
+-- @tparam table tbl2 second table to compare
+-- @treturn boolean true iff the contents of the table are equal
+function table.compare(tbl1, tbl2)
+    for k, v in pairs(tbl1) do
+        if type(v) == "table" and type(tbl2[k]) == "table" then
+            if not table.compare(v, tbl2[k]) then return false end
+        else
+            if (v ~= tbl2[k]) then return false end
+        end
+    end
+    for k, v in pairs(tbl2) do
+        if tbl1[k] == nil then return false end
+    end
+    return true
+end

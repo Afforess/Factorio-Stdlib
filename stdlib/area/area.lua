@@ -13,6 +13,7 @@ setmetatable(Area, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
 local Position = require('stdlib/area/position')
+local unpack = table.unpack
 
 --- By default area tables are mutated in place set this to true to make the tables immutable.
 Area.immutable = false

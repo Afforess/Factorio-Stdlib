@@ -9,6 +9,7 @@ local ceil = math.ceil
 local min = math.min
 local max = math.max
 local log10 = math.log10
+local unpack = table.unpack
 
 for k, v in pairs(math) do
     Math[k] = v

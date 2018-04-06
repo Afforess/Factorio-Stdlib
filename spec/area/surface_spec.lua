@@ -33,4 +33,12 @@ describe('Surface Spec', function()
             assert.same({ game.surfaces['nauvis'] }, Surface.lookup({ game.surfaces['nauvis'] }))
         end)
     end)
+
+    describe('Surface set daytime thresholds', function()
+        it('should fail with no parameters', function()
+            assert.falsy(pcall(Surface.set_daytime_thresholds))
+        end)
+        -- TODO reproduce dusk<=evening<=morning<=dawn check and assertions for testing
+    end)
+
 end)

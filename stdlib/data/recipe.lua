@@ -3,6 +3,7 @@
 
 local Recipe = {
     _class = 'recipe',
+    _module_name = 'Recipe',
     _ingredients_mt = require('stdlib/data/modules/ingredients'),
     _results_mt = require('stdlib/data/modules/results')
 }
@@ -10,6 +11,14 @@ setmetatable(Recipe, require('stdlib/data/data'))
 
 local Is = require('stdlib/utils/is')
 local Item = require('stdlib/data/item')
+
+--TODO
+--[[
+    Recipe:replace_ingredients --swap whole ingredients
+    Recipe:replace_results --swap whole results
+
+    Finish Recipe:xxx_result stuff
+]]
 
 function Recipe:_caller(recipe)
     local new = self:get(recipe, 'recipe')

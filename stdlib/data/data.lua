@@ -5,20 +5,26 @@ if _G.remote and _G.script then
     error('Data Modules can only be required in the data stage', 2)
 end
 
+local Core = require('stdlib.core')
+
 local Data = {
     _class = 'data',
+    _module_name = 'Data',
     Sprites = require('stdlib/data/modules/sprites'),
     Pipes = require('stdlib/data/modules/pipes'),
     Util = require('stdlib/data/modules/util'),
     _default_options = {
-        ['silent'] = false,
-        ['fail'] = false,
-        ['verbose'] = false
-    }
+        ['silent'] = false, -- Don't log if not present
+        ['fail'] = false, -- Error instead of logging
+        ['verbose'] = false, -- Extra logging info
+        ['extend'] = true, -- Don't Extend the data
+        ['skip_string_validity'] = false, -- Skip checking for valid data
+        ['items_and_fluids'] = true, -- consider fluids valid for Item checks
+    },
+    __call = Core.__call
 }
-setmetatable(Data, require('stdlib/core'))
-Data.__call = Data.__call -- sets Data.__call to Core.__call, which returns self._caller
 Data.__index = Data
+setmetatable(Data, Core)
 
 local Is = require('stdlib/utils/is')
 
@@ -220,9 +226,9 @@ end
 --- Iterate a string array and set to nil.
 -- @tparam table tab string array of fields to remove.
 -- @treturn self
-function Data:remove_fields(tab)
+function Data:remove_fields(arr)
     if self:valid() then
-        for _, k in pairs(tab) do
+        for _, k in pairs(arr) do
             rawset(self, k, nil)
         end
     end
@@ -318,6 +324,20 @@ function Data:tostring()
     return self.name and self.type and self.name or ''
 end
 
+function Data:pairs(data_type)
+    local t = data.raw[data_type or self._class] or {}
+    local index, val
+
+    local function _next()
+        index, val = next(t, index)
+        if index then
+            return index, self(val)
+        end
+    end
+
+    return _next, index, val
+end
+
 --- Returns a valid thing object reference. This is the main getter
 -- @tparam string|table object The thing to use, if string the thing must be in data.raw[type], tables are not verified
 -- @tparam[opt] string object_type the raw type. Required if object is a string
@@ -353,7 +373,7 @@ function Data:get(object, object_type, opts)
 
     if new then
         new._valid = self._class or 'data'
-        new._opt = opts
+        new._options = opts
         setmetatable(new, self._mt)
         new:Flags()
         return new:extend()
@@ -378,13 +398,3 @@ Data._mt = {
 }
 
 return Data
-
--- render layers
--- "tile-transition", "resource", "decorative", "remnants", "floor", "transport-belt-endings", "corpse",
--- "floor-mechanics", "item", "lower-object", "object", "higher-object-above", "higher-object-under",
--- "wires", "lower-radius-visualization", "radius-visualization", "entity-info-icon", "explosion",
--- "projectile", "smoke", "air-object", "air-entity-info-con", "light-effect", "selection-box", "arrow", "cursor"
-
--- collision masks
--- "ground-tile", "water-tile", "resource-layer", "floor-layer", "item-layer",
--- "object-layer", "player-layer", "ghost-layer", "doodad-layer", "not-colliding-with-itself"

@@ -35,8 +35,8 @@ local Core = {
         return tostring(lhs):gsub('(%w+)%: %x+', '%1: (ADDR)') .. tostring(rhs):gsub('(%w+)%: %x+', '%1: (ADDR)')
     end,
     __call = function(t, ...)
-        return t._caller(t, ...)
-    end
+        return t:_caller(...)
+    end,
 }
 Core.__index = Core
 

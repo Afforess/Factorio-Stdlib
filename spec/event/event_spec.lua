@@ -1,260 +1,714 @@
-require 'spec/setup/defines'
-require "stdlib/utils/string"
-require 'stdlib/utils/table'
-require "stdlib/event/event"
+require('busted.runner')()
 
-local test_function = {f = function(x) _G.someVariable = x end, g = function(event) event.entity.valid = false end}
-local function_a = function (arg) test_function.f(arg.tick) end
-local function_b = function (arg) test_function.f(arg.player_index) end
-local function_c = function () return true end
-local function_d = function (arg) test_function.g(arg) end
+local match = require('luassert.match')
+require('spec/setup/utils/matcher')
 
-describe("Event",
-    function()
+local World = require('spec/setup/world')
+local genstub = require('spec/setup/utils/stub_factory')
 
-        setup(
-            function()
-                _G.script = {
-                    on_event = function(_, _) return end,
-                    on_init = function(callback) _G.on_init = callback end,
-                    on_load = function(callback) _G.on_load = callback end,
-                    on_configuration_changed = function(callback) _G.on_configuration_changed = callback end
-                }
-                _G.table.size = table.count_keys
+describe('Event', function ()
+    insulate('.register', function()
+        it('should multiplex events to multiple registered handlers', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local f, g = genstub(2)
+            Event.register(0, f)
+            Event.register(0, g)
+            local e = {name = 0}
+            script.raise_event(0, e)
+            assert.stub(f).was.called_with(e)
+            assert.stub(f).was.called(1)
+            assert.stub(g).was.called_with(e)
+            assert.stub(g).was.called(1)
+        end)
+    end)
+
+    insulate('.register', function()
+        it('should error() if a nil/false event id is supplied', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            assert.has.errors(function() Event.register(false, function() end) end)
+            assert.has.errors(function() Event.register({0, false}, function() end) end)
+            assert.has.errors(function() Event.register({0, {}}) end)
+        end)
+    end)
+
+    insulate('.register', function()
+        it('should error() if no handler is provided', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local f, g = genstub(2)
+            Event.register(0, f)
+            Event.register(0, g)
+            assert.has.errors(function() Event.register(0, nil) end)
+        end)
+    end)
+
+    insulate('.register', function()
+        it('should add and invoke handlers for multiple events', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local f, g = genstub(2)
+            Event.register({0, 2}, f).register(2, g)
+
+            script.raise_event()
+            assert.stub(f).was.called(1)
+            assert.stub(g).was_not.called()
+            f:clear()
+            g:clear()
+
+            script.raise_event(2)
+            assert.stub(f).was.called(1)
+            assert.stub(g).was.called(1)
+        end)
+    end)
+
+    insulate('.register', function()
+        it('should attach to factorio events when initial, but not subsequent \z
+            registrations are requested on a per-event basis', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local s = spy.on(script, 'on_event')
+
+            Event.register(0, genstub())
+            assert.spy(s).was.called(1)
+            assert.spy(s).was.called_with(0, match.is_callable())
+            script.on_event:clear()
+
+            Event.register(0, genstub())
+            assert.spy(s).was_not.called()
+            script.on_event:clear()
+
+            Event.register(1, genstub())
+            assert.spy(s).was.called(1)
+            assert.spy(s).was.called_with(1, match.is_callable())
+            script.on_event:clear()
+
+            Event.register(1, genstub())
+            assert.spy(s).was_not.called()
+            script.on_event:clear()
+
+            Event.register(1, genstub(), genstub())
+            Event.register(1, genstub(), genstub(), 'foo')
+            assert.spy(s).was_not.called()
+        end)
+    end)
+
+    insulate('.register', function()
+        it('should return the event module to callers', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            assert.equals(Event, Event.register(0, genstub(1)))
+            assert.equals(Event, Event.register(0, genstub(1)).register(0, genstub(1)))
+        end)
+    end)
+
+    insulate('.register', function()
+        it('should not add duplicate handers to a single event, and \z
+            should fire in order of least recent registration', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local g = genstub()
+            local f = spy(function ()
+                assert.stub(g).was.called(1)
+            end)
+            Event.register(0, f).register(0, g).register(0, f)
+            script.raise_event()
+            assert.spy(f).was.called(1)
+            f:clear(); g:clear()
+
+            Event.register(0, f)
+            Event.register(0, f)
+            Event.register(0, f)
+            Event.register(0, g)
+            Event.register(0, g)
+            Event.register(0, g)
+            Event.remove(0, f)
+            script.raise_event()
+            assert.spy(f).was_not.called()
+            assert.stub(g).was.called(1)
+        end)
+    end)
+
+    insulate('.register', function()
+        it('should register and appropriately invoke filtered handlers', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+
+            local pete_repeat_repeated_pattern = 'pete_repeat' -- RepeatyPete copies pattern here when invoked
+            local that_one_thing = {} -- arbitrary singleton
+
+            -- filters
+            local MikeyLikesIt = spy(function() return true end)
+            local ReginaRejectsalot = spy(function() return false end)
+            local PickyPaul = spy(function(event) return event.is_special end)
+            local RepeatyPete = spy(function(_, pattern)
+                pete_repeat_repeated_pattern = pattern
+                return pattern
+            end)
+            -- stubs
+            local mike, regina, paul, pete, peterepeat, peterepeatrepeat = genstub(6)
+            -- registrations
+            Event.register(0, mike, MikeyLikesIt).register(0, regina, ReginaRejectsalot)
+            Event.register(0, paul, PickyPaul).register(0, pete, RepeatyPete, false)
+            Event.register(0, peterepeat, RepeatyPete, true)
+            Event.register(0, peterepeatrepeat, RepeatyPete, that_one_thing)
+
+            script.raise_event()
+            assert.spy(MikeyLikesIt).was.called(1)
+            assert.spy(MikeyLikesIt).was.called_with(match.is_table(), nil)
+            assert.stub(mike).was.called(1)
+            assert.spy(ReginaRejectsalot).was.called(1)
+            assert.spy(ReginaRejectsalot).was.called_with(match.is_table(), nil)
+            assert.stub(regina).was_not.called()
+            assert.spy(PickyPaul).was.called(1)
+            assert.spy(PickyPaul).was.called_with(match.is_table(), nil)
+            assert.stub(paul).was_not.called()
+            assert.spy(RepeatyPete).was.called(3)
+            assert.spy(RepeatyPete).was.called_with(match.is_table(), false)
+            assert.spy(RepeatyPete).was.called_with(match.is_table(), true)
+            assert.spy(RepeatyPete).was.called_with(match.is_table(), that_one_thing)
+            assert.stub(pete).was_not.called()
+            assert.stub(peterepeat).was.called(1)
+            assert.stub(peterepeatrepeat).was.called(1)
+            assert.are.equals(pete_repeat_repeated_pattern, that_one_thing)
+
+            paul:clear(); PickyPaul:clear()
+
+            -- test that picky paul is getting the event info passed through
+            script.raise_event(0, {is_special = true})
+            assert.spy(PickyPaul).was.called(1)
+            assert.spy(PickyPaul).was.called_with(match.is_table(), nil)
+            assert.stub(paul).was.called(1)
+
+            -- some math filters affecting arbitrary upvalue
+            -- these mostly just test reordering of callees which
+            -- is hard to do elegantly using called_with
+            local up_value = 0
+            local PlusPattern = function(event, pattern) --luacheck: ignore
+                up_value = up_value + pattern
+                return up_value > 0
             end
-        )
-
-        before_each(
-            function()
-                _G.someVariable = false
-                _G.game = {tick = 1, print = function() end}
-                _G.log = function() end
+            local TimesPatternMinusTwo = function(event, pattern) --luacheck: ignore
+                up_value = up_value * pattern - 2
+                return up_value > 0
             end
-        )
-
-        after_each(
-            function()
-                _G.Event._registry = {}
+            local AdditiveInverse = function() --luacheck: ignore
+                up_value = up_value * -1
+                return up_value > 0
             end
-        )
+            -- TODO: Use them!
+        end)
+    end)
 
-        it(".register should add multiple callbacks for the same event",
-            function()
-                Event.register(0, function_a)
-                Event.register(0, function_b)
-                assert.equals(function_a, Event._registry[0][1])
-                assert.equals(function_b, Event._registry[0][2])
+    insulate('.register', function()
+        pending('succeeds while processing an event but, if the added handler \z
+            is for the event being dispatched, does not cause the handler \z
+            to fire.', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local g, h = genstub(2)
+            local f = spy(function()
+                Event.register(0, h)
+            end)
+            Event.register(0, f).register(0, g)
+
+            script.raise_event()
+            assert.spy(f).was.called(1)
+            assert.stub(g).was.called(1)
+            assert.stub(h).was_not.called()
+            f:clear(); g:clear(); h:clear()
+
+            script.raise_event()
+            assert.spy(f).was.called(1)
+            assert.stub(g).was.called(1)
+            assert.stub(h).was.called(1)
+            f:clear(); g:clear(); h:clear()
+
+            Event.remove(0, f).remove(0, g).remove(0, h)
+            f = spy(function()
+                -- force f to the end of the list by re-registering
+                Event.register(0, f)
+            end)
+            Event.register(0, f).register(0, g).register(0, h)
+
+            script.raise_event()
+            assert.spy(f).was.called(1)
+            assert.stub(g).was.called(1)
+            assert.stub(h).was.called(1)
+        end)
+    end)
+
+    insulate('.register', function()
+        it('should register itself with factorio when the initial listener \z
+            is registered for the on_init, on_load, or on_configuration_changed \z
+            events, and should deregister itself when the corresponding final \z
+            listener is removed.', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local spy_on_init = spy.on(script, 'on_init')
+            local spy_on_load = spy.on(script, 'on_load')
+            local spy_on_configuration_changed = spy.on(script, 'on_configuration_changed')
+            local stub_init_a, stub_init_b, stub_load_a, stub_load_b,
+                stub_configuration_changed_a, stub_configuration_changed_b = genstub(6)
+
+            spy_on_init:clear()
+            Event.register('on_init', stub_init_a)
+            assert.spy(spy_on_init).was.called(1)
+            assert.spy(spy_on_init).was.called_with(match.is_callable())
+            spy_on_init:clear()
+            Event.register('on_init', stub_init_b)
+            assert.spy(spy_on_init).was_not.called()
+            spy_on_init:clear()
+            Event.remove('on_init', stub_init_b)
+            assert.spy(spy_on_init).was_not.called()
+            spy_on_init:clear()
+
+            spy_on_load:clear()
+            Event.register('on_load', stub_load_a)
+            assert.spy(spy_on_load).was.called(1)
+            assert.spy(spy_on_load).was.called_with(match.is_callable())
+            spy_on_load:clear()
+            Event.register('on_load', stub_load_b)
+            assert.spy(spy_on_load).was_not.called()
+            spy_on_load:clear()
+            Event.remove('on_load', stub_load_b)
+            assert.spy(spy_on_load).was_not.called()
+            spy_on_load:clear()
+
+            spy_on_configuration_changed:clear()
+            Event.register('on_configuration_changed', stub_configuration_changed_a)
+            assert.spy(spy_on_configuration_changed).was.called(1)
+            assert.spy(spy_on_configuration_changed).was.called_with(match.is_callable())
+            spy_on_configuration_changed:clear()
+            Event.register('on_configuration_changed', stub_configuration_changed_b)
+            assert.spy(spy_on_configuration_changed).was_not.called()
+            spy_on_configuration_changed:clear()
+            Event.remove('on_configuration_changed', stub_configuration_changed_b)
+            assert.spy(spy_on_configuration_changed).was_not.called()
+            stub_init_a:clear(); stub_init_b:clear(); stub_load_a:clear()
+            stub_load_b:clear(); stub_configuration_changed_a:clear()
+            stub_configuration_changed_b:clear(); spy_on_init:clear()
+            spy_on_load:clear(); spy_on_configuration_changed:clear()
+
+            -- trigger on_init by simulating init in world
+            World.init()
+            assert.stub(stub_init_a).was.called(1)
+            assert.stub(stub_init_b).was_not.called()
+            assert.stub(stub_load_a).was_not.called()
+            assert.stub(stub_load_b).was_not.called()
+            assert.stub(stub_configuration_changed_a).was_not.called()
+            assert.stub(stub_configuration_changed_b).was_not.called()
+            stub_init_a:clear(); stub_init_b:clear(); stub_load_a:clear()
+            stub_load_b:clear(); stub_configuration_changed_a:clear()
+            stub_configuration_changed_b:clear(); spy_on_init:clear()
+            spy_on_load:clear(); spy_on_configuration_changed:clear()
+
+            -- trigger on_load and on_configuration_changed
+            -- Doing this with World would require simulating save/load which,
+            -- as of the moment this test was authored, was a work-in-progress.
+            -- For now, simply fire the events manually.  nb: as the test
+            -- is more modular this way, it arguably should not be "upgraded,"
+            -- once World save/load are working.  TODO: Once it is, reassess.
+            script.raise_event('on_load')
+            assert.stub(stub_init_a).was_not.called()
+            assert.stub(stub_init_b).was_not.called()
+            assert.stub(stub_load_a).was.called(1)
+            assert.stub(stub_load_b).was_not.called()
+            assert.stub(stub_configuration_changed_a).was_not.called()
+            assert.stub(stub_configuration_changed_b).was_not.called()
+            stub_init_a:clear(); stub_init_b:clear(); stub_load_a:clear()
+            stub_load_b:clear(); stub_configuration_changed_a:clear()
+            stub_configuration_changed_b:clear(); spy_on_init:clear()
+            spy_on_load:clear(); spy_on_configuration_changed:clear()
+
+            script.raise_event('on_configuration_changed')
+            assert.stub(stub_init_a).was_not.called()
+            assert.stub(stub_init_b).was_not.called()
+            assert.stub(stub_load_a).was_not.called()
+            assert.stub(stub_load_b).was_not.called()
+            assert.stub(stub_configuration_changed_a).was.called(1)
+            assert.stub(stub_configuration_changed_b).was_not.called()
+            stub_init_a:clear(); stub_init_b:clear(); stub_load_a:clear()
+            stub_load_b:clear(); stub_configuration_changed_a:clear()
+            stub_configuration_changed_b:clear(); spy_on_init:clear()
+            spy_on_load:clear(); spy_on_configuration_changed:clear()
+
+            -- remove the final listeners and ensure that Event deregisters
+            -- its listeners with factorio
+            Event.remove('on_init', stub_init_a)
+            assert.spy(spy_on_init).was.called(1)
+            assert.spy(spy_on_init).was.called_with(nil)
+            Event.remove('on_load', stub_load_a)
+            assert.spy(spy_on_load).was.called(1)
+            assert.spy(spy_on_load).was.called_with(nil)
+            Event.remove('on_configuration_changed', stub_configuration_changed_a)
+            assert.spy(spy_on_configuration_changed).was.called(1)
+            assert.spy(spy_on_configuration_changed).was.called_with(nil)
+        end)
+    end)
+
+    insulate('.remove', function()
+        it('unregisters the requested handler regardless of the order \z
+            in which it was registered', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local f, g, h = genstub(3)
+            Event.register(0, f).register(0, g).register(0, h)
+
+            script.raise_event()
+            assert.stub(f).was.called(1)
+            assert.stub(g).was.called(1)
+            assert.stub(h).was.called(1)
+            f:clear(); g:clear(); h:clear()
+
+            Event.remove(0, g)
+            script.raise_event()
+            assert.stub(f).was.called(1)
+            assert.stub(g).was_not.called()
+            assert.stub(h).was.called(1)
+            f:clear(); g:clear(); h:clear()
+
+            Event.remove(0, h)
+            script.raise_event()
+            assert.stub(f).was.called(1)
+            assert.stub(g).was_not.called()
+            assert.stub(h).was_not.called()
+            f:clear(); g:clear(); h:clear()
+
+            Event.remove(0, f)
+            script.raise_event()
+            assert.stub(f).was_not.called()
+            assert.stub(g).was_not.called()
+            assert.stub(h).was_not.called()
+        end)
+    end)
+
+    insulate('.remove', function()
+        it('returns the Event module when called', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local f, g, h = genstub(3)
+            Event.register(0, f).register(0, g).register(0, h)
+
+            script.raise_event()
+            assert.stub(f).was.called(1)
+            assert.stub(g).was.called(1)
+            assert.stub(h).was.called(1)
+            f:clear(); g:clear(); h:clear()
+
+            local remove_result = Event.remove(0, f)
+            assert.are.equals(Event, remove_result)
+            script.raise_event()
+            assert.stub(f).was_not.called()
+            assert.stub(g).was.called(1)
+            assert.stub(h).was.called(1)
+            f:clear(); g:clear(); h:clear()
+
+            Event.remove(0, g).remove(0, h)
+            script.raise_event()
+            assert.stub(f).was_not.called()
+            assert.stub(g).was_not.called()
+            assert.stub(h).was_not.called()
+        end)
+    end)
+
+    insulate('.remove', function()
+        pending('should remove the running handler if requested', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local f, h = genstub(2)
+            local g = spy(function()
+                Event.remove(0, g) --luacheck: ignore g
+            end)
+            Event.register(0, f).register(0, g).register(0, h)
+
+            script.raise_event()
+            assert.stub(f).was.called(1)
+            assert.spy(g).was.called(1)
+            assert.stub(h).was.called(1)
+            f:clear(); g:clear(); h:clear()
+
+            script.raise_event()
+            assert.stub(f).was.called(1)
+            assert.spy(g).was_not.called()
+            assert.stub(h).was.called(1)
+        end)
+    end)
+
+    insulate('.remove', function()
+        pending('should prevent invocation of subsequent handlers \z
+            during processing of preceeding handlers', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local f = spy(function()
+                Event.remove(0, g).remove(0, h) --luacheck: ignore g h
+            end)
+            local g, h, i = genstub(3)
+            Event.register(0, f).register(0, g).register(0, h).register(0, i)
+
+            script.raise_event()
+            assert.spy(f).was.called(1)
+            assert.stub(g).was_not.called()
+            assert.stub(h).was_not.called()
+            assert.stub(i).was.called(1)
+        end)
+    end)
+
+    insulate('.remove', function()
+        it('should log, but not error(), upon de-registration \z
+            of non-registered listeners', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            _G.log = genstub()
+            assert.has_no.errors(function () Event.remove(0, genstub()) end)
+            assert.stub(_G.log).was.called()
+        end)
+    end)
+
+    insulate('.remove', function()
+        it('should deregister a given handler from an event', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local f, g, h, i = genstub(4)
+            Event.register(0, f).register({0, 1}, g)
+            Event.register({0, 1, 2}, h).register({2, 0}, i)
+
+            script.raise_event()
+            assert.stub(f).was.called(1)
+            assert.stub(g).was.called(1)
+            assert.stub(h).was.called(1)
+            assert.stub(i).was.called(1)
+            f:clear(); g:clear(); h:clear(); i:clear()
+
+            script.raise_event(2)
+            assert.stub(f).was_not.called(1)
+            assert.stub(g).was_not.called(1)
+            assert.stub(h).was.called(1)
+            assert.stub(i).was.called(1)
+            f:clear(); g:clear(); h:clear(); i:clear()
+
+            Event.remove(0, f)
+            script.raise_event()
+            assert.stub(f).was_not.called(1)
+            assert.stub(g).was.called(1)
+            assert.stub(h).was.called(1)
+            assert.stub(i).was.called(1)
+            f:clear(); g:clear(); h:clear(); i:clear()
+
+            Event.remove(0, i)
+            script.raise_event()
+            assert.stub(f).was_not.called()
+            assert.stub(g).was.called(1)
+            assert.stub(h).was.called(1)
+            assert.stub(i).was_not.called()
+            f:clear(); g:clear(); h:clear(); i:clear()
+
+            script.raise_event(2)
+            assert.stub(f).was_not.called()
+            assert.stub(g).was_not.called()
+            assert.stub(h).was.called(1)
+            assert.stub(i).was.called(1)
+            f:clear(); g:clear(); h:clear(); i:clear()
+
+            Event.remove(2, i)
+            script.raise_event(2)
+            assert.stub(f).was_not.called()
+            assert.stub(g).was_not.called()
+            assert.stub(h).was.called(1)
+            assert.stub(i).was_not.called()
+            f:clear(); g:clear(); h:clear(); i:clear()
+
+            script.raise_event(1)
+            assert.stub(f).was_not.called()
+            assert.stub(g).was.called(1)
+            assert.stub(h).was.called(1)
+            assert.stub(i).was_not.called()
+            f:clear(); g:clear(); h:clear(); i:clear()
+
+            Event.remove(1, h)
+            script.raise_event(1)
+            assert.stub(f).was_not.called()
+            assert.stub(g).was.called(1)
+            assert.stub(h).was_not.called()
+            assert.stub(i).was_not.called()
+            f:clear(); g:clear(); h:clear(); i:clear()
+
+            script.raise_event()
+            assert.stub(f).was_not.called()
+            assert.stub(g).was.called(1)
+            assert.stub(h).was.called(1)
+            assert.stub(i).was_not.called()
+            f:clear(); g:clear(); h:clear(); i:clear()
+
+            Event.remove({0, 1}, g)
+            Event.remove({0, 1, 2}, h)
+            script.raise_event()
+            script.raise_event(1)
+            script.raise_event(2)
+            assert.stub(f).was_not.called()
+            assert.stub(g).was_not.called()
+            assert.stub(h).was_not.called()
+            assert.stub(i).was_not.called()
+            f:clear(); g:clear(); h:clear(); i:clear()
+        end)
+    end)
+
+    insulate('.dispatch', function()
+        it('should print an error to connected players if a protected handler \z
+            throws an error', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            World.init(true)
+            World.create_players(2)
+            local s = spy.on(game, 'print')
+            local t = spy.on(_G, 'log')
+            local u = spy(function() error('Testing 123') end)
+            Event.register(0, u)
+
+            assert.has.errors(function()
+                script.raise_event()
+            end)
+            assert.spy(s).was_not.called()
+            assert.spy(t).was_not.called()
+            assert.spy(u).was.called(1)
+            s:clear(); t:clear(); u:clear()
+
+            Event.protected_mode = true
+            assert.has_no.errors(function()
+                script.raise_event()
+            end)
+            assert.spy(s).was.called(1)
+            assert.spy(t).was.called(1)
+            assert.spy(u).was.called(1)
+        end)
+    end)
+
+    insulate('.dispatch', function()
+        it('should cease processing an event with a userdata property \z
+            which has become non-valid', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local fud = World.fake_userdata()
+            local e = {foo = 'bar', fud = fud}
+            local f, h = genstub(2)
+            local g = spy(function(event)
+                event.fud.valid = false
+            end)
+            Event.register(0, f).register(0, g).register(0, h)
+
+            script.raise_event(0, e)
+            assert.stub(f).was.called(1)
+            assert.spy(g).was.called(1)
+            assert.stub(h).was_not.called()
+        end)
+    end)
+
+    insulate('.dispatch', function()
+        it('should abort event processing when a handler returns \z
+            stop_processing', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local return_value = Event.stop_processing
+            local g = spy(function ()
+                return return_value
+            end)
+            local f, h = genstub(2)
+            Event.register(0, f).register(0, g).register(0, h)
+
+            script.raise_event()
+            assert.stub(f).was.called(1)
+            assert.spy(g).was.called(1)
+            assert.stub(h).was_not.called()
+            f:clear(); g:clear(); h:clear()
+
+            script.raise_event(0, {protected_mode = true})
+            assert.stub(f).was.called(1)
+            assert.spy(g).was.called(1)
+            assert.stub(h).was_not.called()
+            f:clear(); g:clear(); h:clear()
+
+            return_value = nil
+
+            script.raise_event()
+            assert.stub(f).was.called(1)
+            assert.spy(g).was.called(1)
+            assert.stub(h).was.called(1)
+            f:clear(); g:clear(); h:clear()
+
+            script.raise_event(0, {protected_mode = true})
+            assert.stub(f).was.called(1)
+            assert.spy(g).was.called(1)
+            assert.stub(h).was.called(1)
+        end)
+    end)
+
+    insulate('.dispatch', function()
+        it('should abort event processing when a matched handler \z
+            returns stop_processing', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local i,k = genstub(2)
+            local j = spy(function()
+                return Event.stop_processing
+            end)
+            local true_matcher = function() return true end
+            local foo_matcher = function(e) return e.foo and true or false end
+            Event.register(1, i, true_matcher).register(1, j, foo_matcher)
+            Event.register(1, k, true_matcher)
+
+            script.raise_event(1, {foo = false})
+            assert.stub(i).was.called(1)
+            assert.stub(j).was_not.called()
+            assert.stub(k).was.called(1)
+            i:clear(); j:clear(); k:clear()
+
+            script.raise_event(1, {foo = true})
+            assert.stub(i).was.called(1)
+            assert.stub(j).was.called(1)
+            assert.stub(k).was_not.called()
+            i:clear(); j:clear(); k:clear()
+
+            script.raise_event(1, {foo = false, protected_mode = true})
+            assert.stub(i).was.called(1)
+            assert.stub(j).was_not.called()
+            assert.stub(k).was.called(1)
+            i:clear(); j:clear(); k:clear()
+
+            script.raise_event(1, {foo = true, protected_mode = true})
+            assert.stub(i).was.called(1)
+            assert.stub(j).was.called(1)
+            assert.stub(k).was_not.called()
+        end)
+    end)
+
+    insulate('.dispatch', function()
+        it('should not stop processing when a matcher returns \z
+            Event.stop_processing, which should just count as a \z
+            successful match in that context', function()
+            World.bootstrap()
+            local Event = require('stdlib/event/event')
+            local l,m,n,o = genstub(4)
+            local pattern_identity_matcher = function(_, pattern)
+                return pattern
             end
-        )
+            Event.register(2, l)
+            Event.register(2, m, pattern_identity_matcher, Event.stop_processing)
+            Event.register(2, n, pattern_identity_matcher, false)
+            Event.register(2, o)
 
-        it(".register should fail if a nil/false event id is passed",
-            function()
-                assert.has.errors(function() Event.register(false, function_a) end)
-                assert.has.errors(function() Event.register({0, false}, function_a) end)
-                assert.has.errors(function() Event.register({0, {}}) end)
-            end
-        )
+            script.raise_event(2)
+            assert.stub(l).was.called(1)
+            assert.stub(m).was.called(1) -- because stop_processing counts as true
+            assert.stub(n).was_not.called() -- because false counts as false
+            assert.stub(o).was.called(1) -- because nonmatch does not stop processing
+            l:clear(); m:clear(); n:clear(); o:clear()
 
-        it(".register should remove all handlers if nil is passed as a handler",
-            function()
-                Event.register(0, function_a)
-                Event.register(0, function_b)
-                Event.register(0, nil)
-                assert.is_nil(Event._registry[0])
-            end
-        )
-
-        it(".register should add a handler for multiple events",
-            function()
-                Event.register({0, 2}, function_a).register({0, 2}, function_b)
-                assert.equals(function_a, Event._registry[0][1])
-                assert.equals(function_b, Event._registry[0][2])
-                assert.is_nil(Event._registry[1])
-                assert.equals(function_a, Event._registry[2][1])
-                assert.equals(function_b, Event._registry[2][2])
-            end
-        )
-
-        it(".register should hook the event to script.on_event",
-            function()
-                local s = spy.on(script, "on_event")
-                Event.register(0, function_a)
-                assert.spy(s).was_called_with(0, Event.dispatch)
-            end
-        )
-
-        it(".register should return itself",
-            function()
-                assert.equals(Event, Event.register(0, function_a))
-                assert.equals(Event, Event.register(0, function_b).register(0, function_c))
-                assert.equals(function_a, Event._registry[0][1])
-                assert.equals(function_b, Event._registry[0][2])
-                assert.equals(function_c, Event._registry[0][3])
-            end
-        )
-
-        it(".register should not add duplicate handers to a single event",
-            function()
-                Event.register(0, function_a).register(0, function_b).register(0, function_a)
-                assert.same(2, table.size(Event._registry[0]))
-                assert.same(Event._registry[0][2], function_a)
-            end
-        )
-
-        it(".dispatch should cascade through registered handlers",
-            function()
-                Event.register(0, function_a)
-                Event.register(0, function_b)
-                local event = {name = 0, tick = 9001, player_index = 1}
-                local s = spy.on(test_function, "f")
-                Event.dispatch(event)
-                assert.spy(s).was_called_with(9001)
-                assert.spy(s).was_called_with(1)
-                assert.equals(1, _G.someVariable)
-            end
-        )
-
-        it(".dispatch should abort if a handler event passes stop_processing",
-            function()
-                Event.register(0, function_a)
-                Event.register(0, function_c)
-                Event.register(0, function_b)
-                local event = {name = 0, tick = 9001, player_index = 1, stop_processing = true}
-                local s = spy.on(test_function, "f")
-                Event.dispatch(event)
-                assert.spy(s).was_called_with(9001)
-                assert.spy(s).was_not_called_with(1)
-                assert.equals(9001, _G.someVariable)
-            end
-        )
-
-        it(".remove should remove the given handler from the event",
-            function()
-                Event.register(0, function_a)
-                Event.register(0, function_c)
-                Event.register(0, function_b)
-                Event.register(0, function_c)
-
-                Event.remove(0, function_c)
-                assert.equals(function_a, Event._registry[0][1])
-                assert.equals(function_b, Event._registry[0][2])
-                assert.is_true(#Event._registry[0] == 2)
-
-                Event.register({ 0, 2, 1, "test"}, function_c)
-
-                assert.equals(function_c, Event._registry[0][3])
-                assert.equals(function_c, Event._registry[2][1])
-                assert.equals(function_c, Event._registry[1][1])
-                assert.equals(function_c, Event._registry["test"][1])
-
-                local s = spy.on(script, "on_event")
-                Event.remove({0, 2}, function_c)
-
-                assert.equals(function_c, Event._registry[1][1])
-                assert.is_nil(Event._registry[0][3])
-                assert.is_true(#Event._registry[1] == 1)
-                assert.is_nil(Event._registry[2])
-                assert.spy(s).was_called_with(2, nil)
-
-                Event.remove("test", function_c)
-                assert.spy(s).was_called_with("test", nil)
-
-            end
-        )
-
-        it(".remove(_, event._handler) remove the handler itself if called inside event callback",
-            function()
-                Event.register(0, function(event) if event._handler then Event.remove(0, event._handler) end end)
-                assert.is_true(#Event._registry[0] == 1)
-
-                local event = {name = 0, tick = 9001, player_index = 1}
-                Event.dispatch(event)
-
-                assert.is_nil(Event._registry[0])
-            end
-        )
-
-        it(".dispatch should print an error to connected players if a handler throws an error",
-            function()
-                game.connected_players = { { name = "test_player", valid = true, connected = true, print = function() end } }
-                local s = spy.on(game, "print")
-
-                Event.register( 0, function() error("should error") end)
-                Event.dispatch({name = 0, tick = 9001, player_index = 1})
-                assert.spy(s).was_called()
-            end
-        )
-
-        it(".dispatch should error when there are no connected players if a handler throws an error",
-            function()
-                game.players = {{name = "test_player", valid = true, connected = false, print = function() end}}
-                game.connected_players = {}
-                Event.register(0, function() error("should error") end)
-
-                -- verify error was raised
-                local success, err = pcall(Event.dispatch, {name = 0, tick = 9001, player_index = 1})
-                assert.is_false(success)
-                assert.is_true(string.contains(err, "should error"))
-            end
-        )
-
-        it(".dispatch should return nil if an event has a table where table.__self exists but table.valid is false",
-            function()
-                Event.register(1, function_d).register(1, function_b)
-
-                local s = spy.on(test_function, "g")
-                local s2 = spy.on(test_function, "f")
-
-                Event.dispatch({tick = 23, name = 1, entity = {__self = "userdata", valid = true}})
-                assert.spy(s).was_called(1)
-                assert.spy(s2).was_called(0)
-            end
-        )
-
-        it(".register with core_events.on_init should register callbacks and dispatch events",
-            function()
-                local control = { on_init = function(event) assert.same(-1, event.name) assert.same(1, event.tick) end }
-                local s = spy.on(control, "on_init")
-
-                Event.register(Event.core_events.init, control.on_init)
-                assert.is_true(#Event._registry[ - 1] == 1)
-
-                -- trigger on_init as if we were the game engine
-                _G.on_init()
-                assert.spy(s).was.called()
-            end
-        )
-
-        it(".register with core_events.on_load should register callbacks and dispatch events",
-            function()
-                local control = { on_load = function(event) assert.same(-2, event.name) assert.same(-1, event.tick) end }
-                local s = spy.on(control, "on_load")
-
-                Event.register(Event.core_events.load, control.on_load)
-                assert.is_true(#Event._registry[ - 2] == 1)
-
-                -- trigger on_load as if we were the game engine
-                _G.on_load()
-                assert.spy(s).was.called()
-            end
-        )
-
-        it(".register with core_events.on_configuration_changed should register callbacks and dispatch events",
-            function()
-                -- mock configuration change data
-                game.connected_players = {{ name = "test_player", valid = true, connected = true, print = function() end }}
-                local data = {}
-
-                local control = {on_configuration_changed = function(event) assert.same(-3, event.name) assert.same(1, event.tick) assert.same(data, event.data) end }
-                local s = spy.on(control, "on_configuration_changed")
-
-                Event.register(Event.core_events.configuration_changed, control.on_configuration_changed)
-                assert.is_true(#Event._registry[ - 3] == 1)
-
-                -- trigger on_load as if we were the game engine
-                _G.on_configuration_changed(data)
-                assert.spy(s).was.called()
-            end
-        )
-    end
-)
+            script.raise_event(2, {protected_mode = true})
+            assert.stub(l).was.called(1)
+            assert.stub(m).was.called(1)
+            assert.stub(n).was_not.called()
+            assert.stub(o).was.called(1)
+        end)
+    end)
+end)

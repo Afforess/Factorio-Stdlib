@@ -6,57 +6,61 @@
 -- @see Concepts.BoundingBox
 -- @see Concepts.Position
 
-local Game = require 'stdlib/game'
-local Position = require 'stdlib/area/position'
+local Area = {
+    _module_name = 'Area'
+}
+setmetatable(Area, require('stdlib/core'))
 
-Area = {} --luacheck: allow defined top
+local Is = require('stdlib/utils/is')
+local Position = require('stdlib/area/position')
+local unpack = table.unpack
 
 --- By default area tables are mutated in place set this to true to make the tables immutable.
 Area.immutable = false
 
---- Converts an area in either array or table format to an area with a metatable.
--- Returns itself if it already has a metatable
--- @tparam Concepts.BoundingBox area_arr the area to convert
--- @tparam boolean copy
--- @treturn Concepts.BoundingBox a converted area
-function Area.new(area_arr, copy)
-    Game.fail_if_missing(area_arr, 'missing area value')
-
-    if not (copy or Area.immutable) and getmetatable(area_arr) == Area._mt then
-        return area_arr
-    end
-
-    local area
-    if #area_arr == 2 then
-        area = {left_top = Position.new(area_arr[1], copy), right_bottom = Position.new(area_arr[2], copy)}
-    elseif area_arr['left_top'] then
-        area = {left_top = Position.new(area_arr.left_top, copy), right_bottom = Position.new(area_arr.right_bottom, copy)}
+function Area._caller(_, ...)
+    if type((...)) == 'table' then
+        return Area.new(...)
     else
-        error("malformed area")
+        return Area.construct(...)
     end
-    area.orientation = area_arr.orientation
-
-    return setmetatable(area, Area._mt)
 end
 
---- Deprecated
--- @function to_table
--- @see Area.new
-Area.to_table = Area.new
+--- Converts an area in either array or table format to an area with a metatable.
+-- Returns itself if it already has a metatable
+-- @tparam Concepts.BoundingBox area the area to convert
+-- @tparam boolean new_copy return a new copy
+-- @treturn Concepts.BoundingBox a converted area
+function Area.new(area, new_copy)
+    Is.Assert.Table(area, 'missing area value')
+
+    local copy = new_copy or Area.immutable
+    if not copy and getmetatable(area) == Area then
+        return area
+    end
+
+    local left_top = Position.new(area.left_top or area[1], true)
+    local right_bottom = Position.new(area.right_bottom or area[2], true)
+    local new = {left_top = left_top, right_bottom = right_bottom, orientation = area.orientation}
+    return setmetatable(new, Area)
+end
 
 --- Creates an area from the two positions p1 and p2.
--- @tparam number x1 x-position of left_top, first position
--- @tparam number y1 y-position of left_top, first position
--- @tparam number x2 x-position of right_bottom, second position
--- @tparam number y2 y-position of right_bottom, second position
+-- @tparam[opt=0] number x1 x-position of left_top, first position
+-- @tparam[opt=0] number y1 y-position of left_top, first position
+-- @tparam[opt=0] number x2 x-position of right_bottom, second position
+-- @tparam[opt=0] number y2 y-position of right_bottom, second position
 -- @treturn Concepts.BoundingBox the area in a table format
 function Area.construct(...)
     local args = {...}
-    if #args < 4 then error("Wrong # of arguments", 2) end
 
-    local a = (type(args[1]) == "table" and 1) or 0
+    --self was passed as first argument
+    local t = (type(args[1]) == 'table' and 1) or 0
 
-    return Area.new{ left_top = {x = args[1+a], y = args[2+a]}, right_bottom = {x = args[3+a], y = args[4+a]} }
+    local lt_x, lt_y = args[1 + t] or 0, args[2 + t] or 0
+    local rb_x, rb_y = args[3 + t] or 0, args[4 + t]
+
+    return Area.new {{lt_x, lt_y}, {rb_x, rb_y}}
 end
 
 --- Creates an area that is a copy of the given area.
@@ -66,17 +70,38 @@ function Area.copy(area)
     return Area.new(area, true)
 end
 
+--- Loads the metatable into the passed Area without creating a new one.
+-- @tparam Concepts.BoundingBox area the Area to load the metatable onto
+-- @treturn Concepts.BoundingBox the Area with metatable attached
+function Area.load(area)
+    Is.Assert.Area(area, 'area missing or malformed')
+    return setmetatable(area, Area)
+end
+
 local function validate_vector(amount)
-    Game.fail_if_missing(amount, 'Missing amount to shrink by')
+    Is.Assert(amount, 'Missing amount to adjust by')
 
     if type(amount) == 'number' then
-        if amount < 0 then error('Can not shrink or expand area by a negative amount!', 2) end
+        if amount < 0 then
+            error('Can not shrink or expand area by a negative amount!', 2)
+        end
         return amount, amount
     elseif type(amount) == 'table' and assert(amount[1], 'missing x vector') then
         return amount[1], assert(amount[2], 'missing y vector')
     else
         error('amount is neither a vector or number', 2)
     end
+end
+
+--- Return a non zero sized area by expanding if needed
+-- @tparam Concepts.BoundingBox area the area to check
+-- @tparam number|Concepts.Vector amount the amount to expand
+-- @treturn Concepts.BoundingBox the area
+function Area.non_zero(area, amount)
+    area = Area.new(area)
+    amount = amount or .01
+
+    return Area.size(area) == 0 and Area.expand(area, amount) or area
 end
 
 --- Shrinks the area by the given amount.
@@ -124,7 +149,7 @@ end
 -- @treturn Concepts.BoundingBox the adjusted bounding box
 function Area.adjust(area, vector)
     area = Area.new(area)
-    Game.fail_if_missing(vector, 'missing vector value')
+    Is.Assert(vector, 'missing vector value')
 
     --shrink or expand on x vector
     if assert(vector[1], 'x vector missing') > 0 then
@@ -134,7 +159,7 @@ function Area.adjust(area, vector)
     end
 
     --shrink or expand on y vector
-    if assert(vector[2], 'mising y vector') > 0 then
+    if assert(vector[2], 'missing y vector') > 0 then
         area = Area.expand(area, {0, vector[2]})
     elseif vector[2] < 0 then
         area = Area.shrink(area, {0, math.abs(vector[2])})
@@ -152,10 +177,10 @@ function Area.rotate(area)
     if w == h then
         return area -- no point rotating a square
     elseif h > w then
-        local rad = h/2 - w/2
+        local rad = h / 2 - w / 2
         return Area.adjust(area, {rad, -rad})
     elseif w > h then
-        local rad = w/2 - h/2
+        local rad = w / 2 - h / 2
         return Area.adjust(area, {-rad, rad})
     end
 end
@@ -180,8 +205,9 @@ end
 -- @tparam number distance the distance of the translation
 -- @treturn Concepts.BoundingBox the area translated
 function Area.translate(area, direction, distance)
+    Is.Assert.Number(direction, 'missing direction argument')
+
     area = Area.new(area)
-    Game.fail_if_missing(direction, 'missing direction argument')
     distance = distance or 1
 
     area.left_top = Position.translate(area.left_top, direction, distance)
@@ -200,8 +226,8 @@ end
 function Area.round_to_integer(area)
     area = Area.new(area)
 
-    area.left_top = {x = math.floor(area.left_top.x), y = math.floor(area.left_top.y)}
-    area.right_bottom = {x = math.ceil(area.right_bottom.x), y = math.ceil(area.right_bottom.y)}
+    area.left_top = Position {x = math.floor(area.left_top.x), y = math.floor(area.left_top.y)}
+    area.right_bottom = Position {x = math.ceil(area.right_bottom.x), y = math.ceil(area.right_bottom.y)}
     return area
 end
 
@@ -254,7 +280,7 @@ function Area.center(area)
     local dist_x = area.right_bottom.x - area.left_top.x
     local dist_y = area.right_bottom.y - area.left_top.y
 
-    return Position.new{area.left_top.x + (dist_x / 2), area.left_top.y + (dist_y / 2)}
+    return Position.new {area.left_top.x + (dist_x / 2), area.left_top.y + (dist_y / 2)}
 end
 
 --- Returns true if two areas are the same.
@@ -262,7 +288,9 @@ end
 -- @tparam Concepts.BoundingBox area2
 -- @treturn boolean true if areas are the same
 function Area.compare(area1, area2)
-    if not area1 or not area2 then return false end
+    if not area1 or not area2 then
+        return false
+    end
     area1 = Area.new(area1)
     area2 = Area.new(area2)
 
@@ -297,7 +325,9 @@ end
 -- @tparam Concepts.BoundingBox area2
 -- @treturn boolean is area1 the same size as area2
 function Area.equals(area1, area2)
-    if not area1 or not area2 then return false end
+    if not area1 or not area2 then
+        return false
+    end
     area1 = Area.new(area1)
     area2 = Area.new(area2)
 
@@ -309,11 +339,28 @@ end
 -- @tparam Concepts.BoundingBox area2
 -- @treturn boolean is area1 less than area2 in size
 function Area.less_than(area1, area2)
-    if not area1 or not area2 then return false end
+    if not area1 or not area2 then
+        return false
+    end
     area1 = Area.new(area1)
     area2 = Area.new(area2)
 
     return Area.size(area1) < Area.size(area2)
+end
+
+--- Is area1 smaller in size than area2
+-- @tparam Concepts.BoundingBox area1
+-- @tparam Concepts.BoundingBox area2
+-- @treturn boolean is area1 less than or equal to area2 in size
+-- @local
+function Area.less_than_eq(area1, area2)
+    if not area1 or not area2 then
+        return false
+    end
+    area1 = Area.new(area1)
+    area2 = Area.new(area2)
+
+    return Area.size(area1) <= Area.size(area2)
 end
 
 --- Tests if a position {x, y} is located in an area (including the border).
@@ -335,16 +382,12 @@ end
 function Area.tostring(area)
     area = Area.new(area)
 
-    --local left_top = 'left_top = '..Position.tostring(area.left_top)
-    --local right_bottom = 'right_bottom = '..Position.tostring(area.right_bottom)
-    --local left_top = 'left_top = '..area.left_top:tostring()
-    --local right_bottom = 'right_bottom = '..area.right_bottom:tostring()
-    local left_top = 'left_top = '..area.left_top
-    local right_bottom = 'right_bottom = '..area.right_bottom
+    local left_top = 'left_top = ' .. area.left_top
+    local right_bottom = 'right_bottom = ' .. area.right_bottom
 
-    local orientation = area.orientation and ', '..area.orientation or ''
+    local orientation = area.orientation and ', ' .. area.orientation or ''
 
-    return '{'..left_top..', '..right_bottom..orientation..'}'
+    return '{' .. left_top .. ', ' .. right_bottom .. orientation .. '}'
 end
 
 --- Iterates an area.
@@ -408,7 +451,9 @@ function Area.spiral_iterate(area)
     end
 
     function iterator.iterate()
-        if #iterator.list < iterator.idx then return end
+        if #iterator.list < iterator.idx then
+            return
+        end
         local x2, y2 = unpack(iterator.list[iterator.idx])
         iterator.idx = iterator.idx + 1
 
@@ -417,48 +462,36 @@ function Area.spiral_iterate(area)
     return iterator.iterate, area, 0
 end
 
--------------------------------------------------------------------------------
---[[Entity Helpers]]--
--------------------------------------------------------------------------------
-
-local function to_bounding_box_area(entity, box)
-    Game.fail_if_missing(entity, "missing entity argument")
-
-    local pos = entity.position
-    local bb = entity.prototype[box]
-    if entity.direction and (entity.direction == defines.direction.west or entity.direction == defines.direction.east) then
-        --Let area.rotate determine if the box is rotatable, no point in duplicated code for it.
-        return Area.rotate(Area.offset(bb, pos))
+function Area.shrink_to_surface_size(area, surface)
+    area = Area.new(area)
+    local w, h = surface.map_gen_settings.width, surface.map_gen_settings.height
+    if math.abs(area.left_top.x) > w / 2 then
+        area.left_top.x = -(w / 2)
+        area.right_bottom.x = (w / 2)
     end
-    return Area.offset(bb, pos)
-end
-
---- Deprecated see @{LuaEntity.bounding_box}
--- <br>Converts an entity and its @{LuaEntityPrototype.collision_box|collision_box} to the area around it.
--- @tparam LuaEntity entity the entity to convert to an area
--- @treturn Concepts.BoundingBox
-function Area.to_collision_area(entity)
-    return entity.bounding_box
-end
-
---- Converts an entity and its @{LuaEntityPrototype.selection_box|selection_box} to the area around it.
--- @tparam LuaEntity entity to convert to an area
--- @treturn Concepts.BoundingBox
-function Area.to_selection_area(entity)
-    return to_bounding_box_area(entity, "selection_box")
+    if math.abs(area.left_top.y) > w / 2 then
+        area.left_top.y = -(h / 2)
+        area.right_bottom.y = (h / 2)
+    end
+    return area
 end
 
 --- Area tables are returned with these Metamethods attached.
 -- @table Metamethods
-Area._mt = {
-    __index = Area, -- If key is not found, see if there is one availble in the Area module.
+local _metamethods = {
+    __index = Area, -- @field If key is not found see if there is one available in the Area module.
     __add = Area.expand, -- Will expand the area by the number or vector on the RHS.
     __sub = Area.shrink, -- Will shrink the area by the number or vector on the RHS.
     __tostring = Area.tostring, -- Will print a string representation of the area.
     __eq = Area.equals, -- Is the size of area1 the same as area2.
     __lt = Area.less_than, --is the size of area1 less than area2.
     __len = Area.size, -- The size of the area.
-    __concat = Game._concat, -- calls tostring on both sides of concact.
+    __concat = Area._concat, -- calls tostring on both sides of concat.
+    __call = Area.copy -- Return a new copy
 }
 
-return setmetatable(Area, Game._protect("Area"))
+for k, v in pairs(_metamethods) do
+    Area[k] = v
+end
+
+return Area

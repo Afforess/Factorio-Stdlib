@@ -27,5 +27,5 @@ defines.time = {
     day = DAY, -- the number of Factorio ticks in an day
     week = WEEK, -- the number of Factorio ticks in a week
     month = MONTH, -- the number of Factorio ticks in a month (30 days)
-    year = YEAR, -- the number of Factorio ticks in a year (365 days)
+    year = YEAR -- the number of Factorio ticks in a year (365 days)
 }

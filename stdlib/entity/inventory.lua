@@ -2,9 +2,10 @@
 -- @module Inventory
 -- @usage local Inventory = require('stdlib/entity/inventory')
 
-local fail_if_missing = require 'stdlib/game'['fail_if_missing']
+local Inventory = {_module_name = 'Inventory'}
+setmetatable(Inventory, require('stdlib/core'))
 
-Inventory = {} --luacheck: allow defined top
+local Is = require('stdlib/utils/is')
 
 --- Copies the contents of source inventory to destination inventory by using @{Concepts.SimpleItemStack}.
 -- @tparam LuaInventory src the source inventory
@@ -12,8 +13,8 @@ Inventory = {} --luacheck: allow defined top
 -- @tparam[opt=false] boolean clear clear the contents of the source inventory
 -- @treturn {Concepts.SimpleItemStack,...} an array of left over items that could not be inserted into the destination
 function Inventory.copy_as_simple_stacks(src, dest, clear)
-    fail_if_missing(src, "missing source inventory")
-    fail_if_missing(dest, "missing destination inventory")
+    Is.Assert(src, 'missing source inventory')
+    Is.Assert(dest, 'missing destination inventory')
 
     local left_over = {}
     for i = 1, #src do
@@ -35,7 +36,9 @@ function Inventory.copy_as_simple_stacks(src, dest, clear)
             end
         end
     end
-    if clear then src.clear() end
+    if clear then
+        src.clear()
+    end
     return left_over
 end
 
@@ -90,7 +93,7 @@ end
 -- @treturn ?|nil|LuaItemStack the slot where the iteration was aborted **OR** nil if not aborted
 function Inventory.each(inventory, func, ...)
     local index
-    for i=1, #inventory do
+    for i = 1, #inventory do
         if func(inventory[i], i, ...) then
             index = i
             break
@@ -109,7 +112,7 @@ end
 -- @treturn ?|nil|LuaItemStack the slot where the iteration was aborted **OR** nil if not aborted
 function Inventory.each_reverse(inventory, func, ...)
     local index
-    for i=#inventory, 1, -1 do
+    for i = #inventory, 1, -1 do
         if func(inventory[i], i, ...) then
             index = i
             break

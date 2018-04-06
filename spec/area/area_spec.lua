@@ -1,11 +1,20 @@
-require 'spec/setup/defines'
-local Area = require 'stdlib/area/area'
+require('busted.runner')()
+
+require('spec/setup/defines')
+local Area = require('stdlib/area/area')
 
 describe('Area', function()
-    it('should validate the size of an area', function()
-        assert.same(25, Area.size({{0,0}, {5,5}}))
-        assert.same(100, Area.size({{-5,-5}, {5,5}}))
-        assert.same(25, Area.size({{-2.5,2.5}, {2.5,7.5}}))
+
+    describe('Constructors', function()
+
+    end)
+
+    describe('size', function()
+        it('should validate the size of an area', function()
+            assert.same(25, Area.size({{0,0}, {5,5}}))
+            assert.same(100, Area.size({{-5,-5}, {5,5}}))
+            assert.same(25, Area.size({{-2.5,2.5}, {2.5,7.5}}))
+        end)
     end)
 
     it('should validate the area is normalized correctly', function()
@@ -93,9 +102,9 @@ describe('Area', function()
     end)
 
     describe('area.translate', function()
-        local area = Area.to_table({{-12, 12}, {-10, 8}})
-        local same = Area.to_table({{-14, 14}, {-12, 10}})
-        local nodir = Area.to_table({{-13, 13}, {-11, 9}})
+        local area = Area({{-12, 12}, {-10, 8}})
+        local same = Area({{-14, 14}, {-12, 10}})
+        local nodir = Area({{-13, 13}, {-11, 9}})
 
         it('should validate area translates correctly', function()
             assert.same(same, Area.translate(area, defines.direction.southwest, 2))
@@ -111,8 +120,8 @@ describe('Area', function()
         assert.same(square, Area.rotate(square))
         assert.same(same, Area.rotate(area))
 
-        area = Area.to_table({{12,0}, {20, 1}})
-        same = Area.to_table({{15.5, -3.5}, {16.5, 4.5}})
+        area = Area({{12,0}, {20, 1}})
+        same = Area({{15.5, -3.5}, {16.5, 4.5}})
         assert.same(same, Area.rotate(area))
 
         assert.has_error(function() Area.adjust() end)
@@ -120,24 +129,23 @@ describe('Area', function()
 
     it('should validate area to table conversation', function()
         local area = {{0, -5}, {x = 3, y = -3}}
-        assert.same({x = 0, y = -5}, Area.to_table(area).left_top)
-        assert.same({x = 3, y = -3}, Area.to_table(area).right_bottom)
+        assert.same({x = 0, y = -5}, Area(area).left_top)
+        assert.same({x = 3, y = -3}, Area(area).right_bottom)
 
         area = {left_top = {0, -5}, right_bottom = {x = 3, y = -3}}
-        assert.same({x = 0, y = -5}, Area.to_table(area).left_top)
-        assert.same({x = 3, y = -3}, Area.to_table(area).right_bottom)
+        assert.same({x = 0, y = -5}, Area(area).left_top)
+        assert.same({x = 3, y = -3}, Area(area).right_bottom)
 
-        assert.has_error(function() Area.to_table(nil) end)
+        assert.has_error(function() Area.new() end)
     end)
 
     it('should return an area with the points centered on the tile', function()
         local area = {{0, -5}, {x = 3, y = -3}}
-        local center = Area.to_table({{0.5, -5.5}, {3.5, -3.5}})
+        local center = Area({{0.5, -5.5}, {3.5, -3.5}})
         assert.same(center, Area.tile_center_points(area))
         area = {{0.642, -5.123}, {x = 3.243, y = -3.6435}}
         assert.same(center, Area.tile_center_points(area))
     end)
-
 
     it('should return a string representation of an area', function()
         local area = {{0, -5}, {x = 3, y = -3}}
@@ -195,12 +203,6 @@ describe('Area', function()
         end
     end)
 
-    describe('Entity wrappers', function()
-        it('an entity should have the correct selection area', function()
-            local entity = { position = { 1, -0.5 }, prototype = { selection_box = { left_top = { x = -1, y = -1 }, right_bottom = { x = 1, y = 1 }}}}
-
-            assert.same({ x = 0, y = -1.5 }, Area.to_selection_area(entity).left_top)
-            assert.same({ x = 2, y = 0.5 }, Area.to_selection_area(entity).right_bottom)
-        end)
+    describe('Metamethods', function()
     end)
 end)

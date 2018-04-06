@@ -1,138 +1,117 @@
-require 'spec/setup/defines'
-local Recipe = require 'stdlib/data/recipe'
+local Recipe, Raw, Rawtech
 
-describe('Recipe Spec', function()
+describe('Recipe', function()
+
     before_each(function()
-        _G.data = {}
-        _G.data.raw = {}
-        _G.data.raw.recipe = {
-            ["copper-plate"] = {
-                type = "recipe",
-                name = "copper-plate",
-                category = "smelting",
-                energy_required = 6.33,
-                ingredients = { [1] = { [1] = "copper-ore", [2] = 1 } },
-                result = "copper-plate",
-                result_count = 5
-            },
-            ["iron-plate"] = {
-                type = "recipe",
-                name = "iron-plate",
-                category = "smelting",
-                energy_required = 7,
-                ingredients = { [1] = { [1] = "iron-ore", [2] = 2} },
-                result = "iron-plate",
-                result_count = 5
-            },
-            ["stone-brick"] = {
-                type = "recipe",
-                name = "stone-brick",
-                category = "smelting",
-                energy_required = 7,
-                ingredients={ [1] = { [1] = "stone", [2] = 5 } },
-                result = "stone-brick"
-            }
-        }
+        require('spec/setup/dataloader')
+        Recipe = require('stdlib/data/recipe')
+        Raw = _G.data.raw["recipe"]
+        Rawtech = _G.data.raw["technology"]["steel-processing"]
     end)
 
-    it('should select recipe correctly', function()
-        assert.same(3, #Recipe.select(".*"))
-        assert.same(1, #Recipe.select("copper.*"))
-
-        assert.same({'copper-ore', 1}, table.first(Recipe.select("copper.*:ingredients")))
-        assert.same({'copper-ore', 1}, table.first(Recipe.select("copper.*:ingredients:copper.*")))
+    after_each(function()
+        RESET()
     end)
 
-    it('should have write access to all elements from the selection', function()
-        Recipe.select(".*").energy_required = 5
-        for _, recipe in pairs(_G.data.raw.recipe) do
-            assert.same(5, recipe.energy_required)
-        end
-
-        -- should be safe when no fields are returned
-        Recipe.select("null").energy_required = 10
-    end)
-
-    it('should escape the hypen in selections', function()
-        assert.same(1, #Recipe.select("copper-plate*:ingredients:copper.*"))
-    end)
-
-    it('should be able to write into nested fields', function()
-        Recipe.select("copper.*:ingredients:copper.*").name = 'unobtainium-ore'
-        assert.same(1, #_G.data.raw.recipe['copper-plate'].ingredients)
-        for _, item in pairs(_G.data.raw.recipe['copper-plate'].ingredients) do
-            assert.same('unobtainium-ore', item.name)
-            assert.same('unobtainium-ore', item[1])
-        end
-
-        -- should not error even though no copper ingredients exist now
-        Recipe.select("copper.*:ingredients:copper.*").name = 'unobtainium-ore'
-    end)
-
-    it('should be able to chain writing fields with the selector function "apply"', function()
-        Recipe.select(".*").apply('energy_required', 5).apply('category', 'fluid')
-        for _, recipe in pairs(_G.data.raw.recipe) do
-            assert.same(5, recipe.energy_required)
-            assert.same('fluid', recipe.category)
-        end
-
-        -- should be safe when no fields are returned
-        Recipe.select("null").apply('energy_required', 5).apply('category', 'fluid')
-
-        -- should also be able to apply into fields, like ingredients
-        Recipe.select("copper.*:ingredients:copper.*").apply('amount', 100)
-        assert.same(1, #_G.data.raw.recipe['copper-plate'].ingredients)
-        for _, item in pairs(_G.data.raw.recipe['copper-plate'].ingredients) do
-            assert.same(100, item.amount)
-            assert.same(100, item[2])
-        end
-    end)
-
-    describe('should standardize access to recipe ingredients and results', function()
-        it('verify that the metatables work', function()
-            assert.same('copper-ore', table.first(Recipe.select("copper.*:ingredients:copper.*"))[1])
-            assert.same('copper-ore', table.first(Recipe.select("copper.*:ingredients:copper.*")).name)
-
-            assert.same('copper-ore', table.first(Recipe.select("copper.*:ingredients")).name)
-            assert.same(1, table.first(Recipe.select("copper.*:ingredients*")).amount)
+    describe(':get', function()
+        it('should error with no paramaters', function()
+            assert.has_error(function() Recipe.get() end)
+            assert.has_error(function() Recipe() end)
         end)
 
-        it('replace the ingredients and verify access to the metatable fields work', function()
-            local copper_plate_recipe = table.first(Recipe.select("copper.*"))
-            copper_plate_recipe.ingredients = { { name = 'copper-ore', amount = 2} }
+        it('should get a recipe', function()
+            assert.not_nil(Recipe("stone-furnace"))
+            assert.not_nil(Recipe:_get("stone-furnace", "recipe"))
+            assert.not_nil(Recipe:_get("fake", "recipe"))
+            assert.not_nil(Recipe("fake"))
+        end)
+    end)
 
-            assert.same('copper-ore', table.first(Recipe.select("copper.*:ingredients:copper.*")).name)
-            assert.same(2, table.first(Recipe.select("copper.*:ingredients:copper.*")).amount)
-            assert.same('copper-ore', table.first(Recipe.select("copper.*:ingredients:copper.*"))[1])
-            assert.same(2, table.first(Recipe.select("copper.*:ingredients:copper.*"))[2])
+    describe(':valid', function()
 
-            copper_plate_recipe.ingredients = { { 'copper-ore', 3} }
-
-            assert.same('copper-ore', table.first(Recipe.select("copper.*:ingredients:copper.*")).name)
-            assert.same(3, table.first(Recipe.select("copper.*:ingredients:copper.*")).amount)
-            assert.same('copper-ore', table.first(Recipe.select("copper.*:ingredients:copper.*"))[1])
-            assert.same(3, table.first(Recipe.select("copper.*:ingredients:copper.*"))[2])
+        it('should return the recipe', function()
+            assert.truthy(Recipe("stone-furnace"):valid())
+            assert.truthy(Recipe("stone-furnace"):valid("recipe"))
+            local recipe = Recipe:_get("stone-furnace")
+            assert.truthy(recipe:valid())
+            assert.truthy(recipe:valid("recipe"))
         end)
 
-        it('update the ingredients and verify access to the metatable fields work', function()
-            local copper_plate_recipe = table.first(Recipe.select("copper.*"))
-            table.insert(copper_plate_recipe.ingredients, { name = 'steel-plate', amount = 5})
+        it('should return falsy if not a recipe', function()
+            assert.not_truthy(Recipe("fake"):valid())
+            assert.not_truthy(Recipe("fake"):valid("recipe"))
+            local recipe = Recipe:_get("fake")
+            assert.not_truthy(recipe:valid())
+            assert.not_truthy(recipe:valid("recipe"))
+        end)
+    end)
 
-            assert.same('steel-plate', table.first(Recipe.select("copper.*:ingredients:steel.*")).name)
-            assert.same('steel-plate', table.first(Recipe.select("copper.*:ingredients:steel.*"))[1])
+    describe(':copy', function()
+
+        it('should error without a new name', function()
+            assert.has_error(function() Recipe:get("stone-furnace"):copy() end)
         end)
 
-        it('update the ingredient fields and verify access to the metatable fields work', function()
-            local copper_plate_recipe = table.first(Recipe.select("copper.*"))
-            copper_plate_recipe.ingredients[1].amount = 5
-
-            assert.same(5, table.first(Recipe.select("copper.*:ingredients:copper.*")).amount)
-            assert.same(5, table.first(Recipe.select("copper.*:ingredients:copper.*"))[2])
-
-            copper_plate_recipe.ingredients[1][2] = 20
-
-            assert.same(20, table.first(Recipe.select("copper.*:ingredients:copper.*")).amount)
-            assert.same(20, table.first(Recipe.select("copper.*:ingredients:copper.*"))[2])
+        it('should extend a recipe copy and return it', function()
+            assert.is_nil(Raw["fake"])
+            local recipe = Recipe("stone-furnace"):copy("fake")
+            assert.truthy(Raw["fake"])
+            assert.same(Raw["fake"].name, recipe.name)
         end)
+    end)
+
+    describe(':make_difficult', function()
+        it('should change the recipe to the difficulty version', function()
+            local raw = Raw["stone-furnace"]
+            assert.is_nil(raw.normal)
+            assert.not_nil(raw.ingredients)
+            Recipe("stone-furnace"):make_difficult()
+            assert.same(1, #raw.normal.ingredients)
+            assert.same(1, #raw.normal.results)
+            assert.same(1, #raw.expensive.ingredients)
+            assert.same(1, #raw.expensive.results)
+            assert.is_nil(raw.ingredients)
+            assert.is_nil(raw.result, raw.results)
+        end)
+    end)
+
+    describe(':change_category', function()
+
+        it('should change the category if it exists', function()
+            assert.same(nil, _G.data.raw.recipe["stone-furnace"].category)
+            Recipe("stone-furnace"):change_category("hand-held")
+            assert.same(nil, _G.data.raw.recipe["stone-furnace"].category)
+            Recipe("stone-furnace"):change_category("advanced-crafting")
+            assert.same("advanced-crafting", _G.data.raw.recipe["stone-furnace"].category)
+        end)
+    end)
+
+    describe(':add_unlock', function()
+        it('should add the unlock if the tech exists', function()
+            Recipe("stone-furnace"):add_unlock("steel-processing")
+            log(Rawtech.effects)
+            assert.same("stone-furnace", Rawtech.effects[4].recipe)
+            assert.not_truthy(_G.data.raw.recipe["stone-furnace"].enabled)
+        end)
+
+        it('should not do anything if the tech doesnt exist', function()
+            local s = spy.on(_G, "log")
+            Recipe("stone-furnace"):add_unlock("fake")
+            assert.spy(s).was_called(1)
+        end)
+    end)
+
+    describe(':remove_unlock', function()
+        it('should remove the unlock from the tech if it exists', function()
+            Recipe("steel-plate"):remove_unlock("steel-processing")
+            assert.same(2, #Rawtech.effects)
+        end)
+
+        it('should remove the unlock from all techs', function()
+            Recipe("steel-plate"):remove_unlock()
+            assert.same(2, #Rawtech.effects)
+            assert.same(0, #_G.data.raw["technology"]["steel-processing-2"].effects)
+        end)
+
     end)
 end)

@@ -1,6 +1,6 @@
-require 'spec/setup/defines'
-local Resource = require 'stdlib/entity/resource'
-local Area = require 'stdlib/area/area'
+require('spec/setup/defines')
+local Resource = require('stdlib/entity/resource')
+local Area = require('stdlib/area/area')
 
 describe('Resource filtering', function()
     local resources = {}
@@ -41,7 +41,7 @@ describe('Resource filtering', function()
         local find_entities_filtered = function(tbl)
             local results = {}
             -- intentionally optimized version of Area.inside to make the test faster
-            local area = Area.to_table(tbl.area)
+            local area = Area(tbl.area)
             local left_top = area.left_top
             local right_bottom = area.right_bottom
 

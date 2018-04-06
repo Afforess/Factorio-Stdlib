@@ -1,84 +1,135 @@
 -------------------------------------------------------------------------------
---[[World]]-- World creator for making tests easier!
+--[[World]] -- World creator for making tests easier!
 -------------------------------------------------------------------------------
 --[[
-World.open - Simulates opening a world by clicking generate but stopping before init (script loading phase)
+World.bootstrap - Simulates opening a world by clicking generate/load but stopping before init/load (script loading phase)
 
-World.init - Simulates on_init/on_load/ and configuration changed, calls open if needed
+World.init - Simulates on_init/on_load/ and configuration changed, calls bootstrap if needed
 
-World.save - saves the world to _G.saved_global and _G.saved_game
+World.save - saves the world to a table which is returned to the caller
 
-World.load - Simulates a world load, can only be called if world is closed
+World.load - Simulates a world load, can only be called if world is not initialized
 
-World.reload - perfoms a save and calls world.close and world.load using the saves
+World.reload - optionally perfoms a save and calls world.quit and world.load, optionally using the saved game
 
-World.close - Closes the world simulator
+World.quit - Closes the world simulator
 
-note: save/load/reload havn't been tested yet.
-
+note: save/load/reload haven't been tested yet.
 --]]
+require('spec/setup/defines')
 
 local World = {
-    Debug = require("spec/setup/debug"),
+    _msg_buffer = {},
+    _log_buffer = {}
 }
 
--------------------------------------------------------------------------------
---[[Setup Globals]]--
--------------------------------------------------------------------------------
-_G._print = print
-_G.print = function(...) --luacheck: ignore print
-    if World.Debug.allow_print then
-        _G._print(...)
-    end
-end
-
---Bring serpent in for debug work
-_G.serpent = require "serpent"
-
---This is our print override
 local print_buffer = function(msg, group)
-    group = group or "_P_"
-    World.Debug.msg_buffer[World.Debug.msg_buffer +1 ] = group .. msg
-    print(group .. msg)
-    return true
+    group = group or '_P_'
+    World._msg_buffer[#World._msg_buffer + 1] = group .. msg
+    return msg
 end
 
-_G.log = function() end
+local log_buffer = function(msg)
+    World._log_buffer[#World._log_buffer + 1] = msg
+    return msg
+end
 
---Mutate table_size (a factorio lua function) to table.count_keys
-local function count_keys(tbl)
-    if type(tbl) ~= 'table' then return 0 end
-    local count = 0
-    for _ in pairs(tbl) do
-        count = count + 1
+--------------------------------------------------------------------------------
+--[BOOTSTRAP]--
+--------------------------------------------------------------------------------
+function World.bootstrap()
+    if _G.script then
+        error('Cannot Open, simulation already running')
     end
-    return count
+
+    _G._require = _G._require or require
+
+    -- Setup Globals
+    _G.serpent = require('spec/setup/utils/serpent')
+
+    _G.log = log_buffer
+
+    _G.game = nil
+    -- TODO: _G.data = something
+    _G.global = {} -- TODO: check if should be nil
+
+    local in_event_handler = 0 -- track event callback recursion (a psuedosemaphore)
+    local registry = {}
+    local next_id = 200
+    _G.script = {
+        on_event = function(eid, callback)
+            registry[eid] = callback
+        end,
+        on_init = function(callback)
+            _G.script.on_event('on_init', callback)
+        end,
+        on_load = function(callback)
+            _G.script.on_event('on_load', callback)
+        end,
+        on_configuration_changed = function(callback)
+            _G.script.on_event('on_configuration_changed', callback)
+        end,
+        on_nth_tick = function(tick, callback) --luacheck: ignore
+            error('script.on_nth_tick: not implemented yet')
+        end,
+        generate_event_name = function()
+            next_id = next_id + 1
+            return next_id
+        end,
+        get_event_handler = function(id)
+            return registry[id]
+        end,
+        raise_event = function(id, e)
+            -- presumably the real raise_event arguments are
+            -- not optional but it's handy for testing.
+            e = e or {}
+            id = id or 0
+            e.name = e.name or id
+            e.tick = e.tick or _G.game and _G.game.tick or 0
+            in_event_handler = in_event_handler + 1
+            if in_event_handler == 1 then
+                _G.require = function(...)
+                    -- debatable if '^spec' should be included here?
+                    -- nb: stdlib.foo is a no-no, however, this is
+                    -- not the right place to enforce that rule.
+                    if string.match((...), '^stdlib[/.]') then
+                        error('faketorio does not allow the use of the require function \z
+                              in event callbacks because it is a big stupid jerk', 2)
+                    else
+                        return _G._require(...)
+                    end
+                end
+            end
+            local ok,
+                msg =
+                xpcall(
+                function()
+                    return (registry[id] or function()
+                        end)(e)
+                end,
+                debug.traceback
+            )
+            in_event_handler = in_event_handler - 1
+            if not ok then
+                error(msg)
+            else
+                if in_event_handler == 0 then
+                    _G.require = _G._require
+                end
+                return msg
+            end
+        end,
+        mod_name = 'tests'
+    }
+
+    return World
 end
-_G.table_size = count_keys
-_G.table.size = count_keys
 
-local override_require = function(replace)
-    if replace and not _G._require then
-        --print("require ovverride on")
-        _G._require = _G.require
-        _G.require = function(path) --luacheck: ignore require
-            local p = World.Debug._watched_packages
-            p[#p + 1] = path
-            return _G._require(path)
-        end
-    elseif not replace and _G._require then
-        --print("require override off")
-        _G.require = _G._require
-        _G._require = nil
-    end
-end
-
+--------------------------------------------------------------------------------
+--[INIT]--
 -------------------------------------------------------------------------------
---[[Setup metatables]]--
--------------------------------------------------------------------------------
-local meta = {}
-
-local get_connected_players = function()
+--Setup Metatables
+local function get_connected_players()
     local players = {}
     for _, p in pairs(_G.game.players) do
         if p and p.connected then
@@ -88,225 +139,230 @@ local get_connected_players = function()
     return players
 end
 
---Set __self and valid on __index when players are added to game
-meta.base = {
-    __index = {
-        valid = true,
-        __self = "userdata",
-        print = print_buffer,
-        connected = true
-    }
-}
-
-meta.new_player = {
-    __newindex = function(t, k, v)
-        rawset(t, k, v)
-        setmetatable(t[k], meta.base)
+local function fake_hex_64()
+    local function fake_hex_32()
+        return string.format('%08x', math.random(0, 2 ^ 32 - 1))
     end
-}
+    return '0x' .. fake_hex_32() .. fake_hex_32()
+end
 
-meta.connected_players = {
-    __index = function(_, k)
-        return get_connected_players()[k]
-    end,
-    __len = function() return #get_connected_players() end
-}
+function World.fake_userdata(target)
+    target = target or {}
+    return setmetatable(
+        target,
+        {
+            __index = {
+                valid = true,
+                __self = 'userdata: ' .. fake_hex_64(),
+                print = print_buffer,
+                connected = true
+            },
+            __pairs = function(self)
+                local isfirst = true
+                return function()
+                    if isfirst then
+                        isfirst = false
+                        return '__self', self.__self
+                    end
+                end
+            end,
+            __ipairs = function()
+            end
+        }
+    )
+end
 
-meta.game = {
-    __index = function(t, k)
-        if k == "connected_players" then
-            return setmetatable(get_connected_players(), meta.connected_players)
+local function fake_game(game)
+    local rslt = World.fake_userdata(game)
+    local rsltmeta = getmetatable(rslt)
+    local rsltmetaindex = rsltmeta.__index
+    rsltmeta.__index =
+        function(_, k)
+        if k == 'connected_players' then
+            return setmetatable(
+                {},
+                {
+                    __index = function(_, kk)
+                        return get_connected_players()[kk]
+                    end,
+                    __len = function()
+                        return #get_connected_players()
+                    end,
+                    __pairs = function()
+                        return pairs(get_connected_players())
+                    end,
+                    __ipairs = function()
+                        return ipairs(get_connected_players())
+                    end
+                }
+            )
+        else
+            return rsltmetaindex[k]
         end
-        return t[k]
     end
-}
-
-meta._G = {
-    __newindex = function(t, k, v)
-        local globs = World.Debug._new_globs
-        globs[#globs + 1] = k
-        rawset(t,k,v)
-    end
-}
-
--------------------------------------------------------------------------------
---[[World Functions]]--
--------------------------------------------------------------------------------
-
-
-World.open = function()
-    if _G.script then error("Cannot Open, simulation already running") end
-
-    override_require(true)
-    require("spec/setup/defines")
-
-    setmetatable(_G, meta._G)
-
-    _G.global = nil
-    _G.game = nil
-    _G.script = {
-        _next_id = 200,
-        on_event = function(_, _) return end,
-        on_init = function(callback) _G.on_init = callback end,
-        on_load = function(callback) _G.on_load = callback end,
-        on_configuration_changed = function(callback) _G.on_configuration_changed = callback end,
-        generate_event_name = function()
-            _G.script._next_id = _G.script._next_id + 1
-            return _G.script._next_id
-        end,
-        raise_event = function(event_id, event_tbl)
-            event_tbl.name = event_id
-            return Event and Event.dispatch(event_tbl)
-        end,
-        mod_name = "tests"
-    }
+    return rslt
 end
 
-World.data_stage = function()
-    setmetatable(_G, meta._G)
-    require("spec/setup/defines")
-end
+--If using events make sure to require and register events during bootstrap callback
+function World.init(multiplayer, savetable, config_changed_data)
+    if not _G.script then
+        World.bootstrap()
+    end
 
---If using events make sure to require and register events before calling World.init
-World.init = function(tick, load_only, saved_global, saved_game, config_changed_data)
-    if not _G.script then World.init() end
-    if _G.game then error("Can't Init, simulation already running") end
+    if _G.game then
+        error("Can't Init, simulation already running")
+    end
+
+    savetable = savetable or {}
+    local saved_global = savetable.global
+    local saved_game = savetable.game
+    savetable = table.size(savetable) > 0 and savetable or false
+    assert(savetable and saved_global and saved_game or not savetable, 'Invalid savetable')
+
+    -- ensure config_changed_data is always a table if requested
+    config_changed_data = config_changed_data == true and {} or config_changed_data
+
+    multiplayer = multiplayer or false
 
     _G.global = saved_global or {}
-    _G.game = saved_game or {
-        tick = tick or 0,
-        players = {},
-
-        print = print_buffer,
-        forces = {
+    _G.game =
+        fake_game(
+        saved_game or
             {
-                name = "player"
-            },
-            {
-                name = "neutral"
-            },
-            {
-                name = "enemy"
+                tick = 0,
+                players = {},
+                print = print_buffer,
+                forces = {
+                    {
+                        name = 'player'
+                    },
+                    {
+                        name = 'neutral'
+                    },
+                    {
+                        name = 'enemy'
+                    }
+                },
+                surfaces = {
+                    {
+                        index = 1,
+                        name = 'nauvis'
+                    }
+                },
+                is_multiplayer = function()
+                    return multiplayer
+                end
             }
-        },
-        surfaces = {
-            {
-                index = 1,
-                name = "nauvis"
-            }
-        }
+    )
+    _G.remote = {
+        interfaces = {},
+        call = function()
+        end
     }
-    for _, force in pairs (game.forces) do
-        setmetatable(force, meta.base)
+
+    --run a fake data loader here to populate game.xxx_prototypes
+    for _, force in pairs(game.forces) do
+        World.fake_userdata(force)
     end
+
     for _, surface in pairs(game.surfaces) do
-        setmetatable(surface, meta.base)
+        World.fake_userdata(surface)
     end
 
-    setmetatable(game, meta.game)
-
-    --init if load_only run load only elseif if config_changed_data
-    if load_only or config_changed_data then
-        script.raise_event(-2, {tick = game.tick})
+    --init, if load_only run load only elseif if config_changed_data
+    if savetable then
+        script.raise_event('on_load')
         if config_changed_data then
-            script.raise_event(-3, config_changed_data)
+            script.raise_event('on_configuration_changed', config_changed_data)
         end
     else
-        script.raise_event(-1, {tick = game.tick})
+        script.raise_event('on_init', {tick = game.tick})
     end
+
+    --Create 1 player on a world init that is not mp
+    if multiplayer and not savetable then
+        World.create_players(1)
+    end
+
+    return World
 end
 
-World.update = function(ticks)
+function World.update(ticks)
     ticks = ticks or 1
     while ticks > 0 do
         _G.game.tick = _G.game.tick + 1
         _G.script.raise_event(0, {tick = _G.game.tick})
         ticks = ticks - 1
     end
+    return World
 end
 
---Create some players, pdata can be used to setup defaults
-World.create_players = function(how_many, pdata)
+--Create some players
+--TODO: optional pdata argument can be used to setup defaults
+function World.create_players(how_many)
     how_many = how_many or 1
-    pdata = pdata or {}
 
-    for _ = 1, how_many do
-        local cur = #game.players + 1
-        local player = {
-            index = cur,
-            name = "Player"..cur,
-        }
-        for k, v in pairs(pdata) do
-            player[k] = v
-        end
-        setmetatable(player, meta.base)
-        _G.game.players[cur] = player
-        _G.script.raise_event(defines.events.on_player_created, {tick = _G.game.tick, player_index = next})
+    _G.game.players = _G.game.players or {}
+
+    -- players may be sparse so some care must be taken here
+    while table.size(game.players) < how_many do
+        local newindex = #game.players + 1
+        game.players[newindex] =
+            World.fake_userdata(
+            {
+                index = newindex,
+                name = 'Player' .. tostring(newindex)
+            }
+        )
+        _G.script.raise_event(defines.events.on_player_created, {tick = _G.game.tick, player_index = newindex})
     end
+    return World
 end
 
 -- performs a load
-World.load = function(config_changed_data, saved_global, saved_game)
-    World.init(nil, false, saved_global, saved_game, config_changed_data)
+function World.load(savetable, config_changed_data)
+    return World.init(savetable and savetable.is_multiplayer() or false, savetable, config_changed_data)
 end
 
---Performs a quit and load
-World.reload = function (save_and_reload)
-    local saved_global, saved_game = World.close(save_and_reload)
-    World.load(nil, save_and_reload, saved_global, saved_game)
-end
-
-World.save = function()
-    --requiring table here just in case it isn't loaded
-    require("stdlib/utils/table")
-
+function World.save()
+    local saved_global, saved_game
     if _G.global then
         local global_meta = getmetatable(_G.global)
-        _G.saved_global = table.deepcopy(setmetatable(_G.global, nil))
+        saved_global = table.deepcopy(setmetatable(_G.global, nil))
         setmetatable(_G.global, global_meta)
+    else
+        saved_global = {}
     end
 
     if _G.game then
         local game_meta = getmetatable(_G.game)
-        _G.saved_game = table.deepcopy(setmetatable(_G.game, nil))
+        saved_game = table.deepcopy(setmetatable(_G.game, nil))
         setmetatable(_G.game, game_meta)
+    else
+        saved_game = {}
     end
-    return _G.saved_global, _G.saved_game
+    return {global = saved_global, game = saved_game}
 end
 
-World.close = function(save, skip_unloading_these)
-
+function World.quit(save)
+    local result = false
     if save then
-        World.save()
+        result = World.save()
     end
-
-    _G.global = nil
+    _G.global = {}
     _G.game = nil
-
     _G.script = nil
-    _G.Game = nil
-    _G.Event = nil
-    _G.on_init = nil
-    _G.on_configuration_changed = nil
+    return result or nil
+end
 
-    local ignore = {}
-    for _, pack_name in pairs(skip_unloading_these or {}) do
-        ignore[pack_name] = true
-    end
-    for pack in pairs(package.loaded) do
-        if not ignore[pack] and pack:find("^stdlib/") then
-            package.loaded[pack] = nil
-        end
-    end
-    package.loaded["spec/setup/defines"] = nil
-
-    override_require(false)
-
-    World.Debug.close()
-
-    if save then
-        return _G.saved_global, _G.saved_game
-    end
+-- convenience function to quit and re-init World, optionally simulating save/load
+-- This function has two notable limitations: first, if save is false, World will
+-- always be re-initialized as single-player; second, if certain steps corresponding
+-- to "control.lua" are required, this function is not suitable as it provides no
+-- opportunity to execute those steps between quit() and load().
+function World.reload(save, config_changed_data)
+    local savetable = World.quit(save)
+    return World.load(savetable, config_changed_data)
 end
 
 return World

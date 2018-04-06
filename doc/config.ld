@@ -1,22 +1,26 @@
---luacheck: ignore
+--luacheck: ignore 11. (ignore global variable related stuff)
 project = "Factorio Stdlib"
 title = "Factorio Stdlib"
 description = "Factorio Standard Library"
 full_description = [[
   The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.
 ]]
+
+local BUILD_DIR = "../.build/"
+
 no_lua_ref = true
 convert_opt = true
 sort = true
+no_space_before_args = true
 no_return_or_parms = false
 not_luadoc = true
 merge = false
 backtick_references = false
 format = "discount"
 template_escape = ">"
-dir = "../build/doc"
-examples = {"../build/doc/examples"}
-topics = {"../build/doc/readme.md"}
+dir = BUILD_DIR .. "doc"
+examples = {"../examples"}
+topics = {"../README.md", "../CHANGELOG.md", "../LICENSE"}
 
 new_type("event", "Events", false, "Event Parameters")
 

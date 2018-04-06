@@ -2,14 +2,20 @@
 -- @module Config
 -- @usage require('stdlib/config/config')
 
-require 'stdlib/utils/string'
-require 'stdlib/utils/table'
+---
+-- @tfield function new
+-- @tfield function get
+-- @tfield function set
+-- @tfield function delete
+-- @tfield function is_set
+-- @table Config
+local M = {_module_name = 'Config'}
+setmetatable(M, require('stdlib/core'))
 
---luacheck: ignore value
 -----------------------------------------------------------------------
 --Setup repeated code for use in sub functions here
 -----------------------------------------------------------------------
-local reservedCharacters = '`~!@#$%^&*+=|;:/\\\'",?()[]{}<>'
+local reservedCharacters = [[`~!@#$%^&*+=|;:/\\\'",?()[]{}<>]]
 local testReservedCharacters = function(path)
     local reserved = reservedCharacters
     for c in reserved:gmatch('.') do
@@ -19,14 +25,6 @@ local testReservedCharacters = function(path)
     end
     return nil
 end
-
----
--- @tfield function new
--- @tfield function get
--- @tfield function set
--- @tfield function delete
--- @tfield function is_set
-Config = {} --luacheck: allow defined top
 
 --- Creates a new Config object to ease the management of a config table.
 -- @tparam table config_table the config table to manage
@@ -57,12 +55,12 @@ Config = {} --luacheck: allow defined top
 -- @usage --[Checking if a path exists in Config]
 -- CONFIG = Config.new(global.testtable)
 -- CONFIG.is_set("your.path.here")
-function Config.new(config_table)
+function M.new(config_table)
     if not config_table then
-        error("config_table is a required parameter.", 2)
-    elseif type(config_table) ~= "table" then
-        error("config_table must be a table. Was given [" .. type(config_table) .. "]", 2)
-    elseif type(config_table.get) == "function" then
+        error('config_table is a required parameter.', 2)
+    elseif type(config_table) ~= 'table' then
+        error('config_table must be a table. Was given [' .. type(config_table) .. ']', 2)
+    elseif type(config_table.get) == 'function' then
         error("Config can't manage another Config object", 2)
     end
 
@@ -76,12 +74,16 @@ function Config.new(config_table)
     -- @tparam[opt] Mixed default value to be used if path is nil
     -- @treturn Mixed value at path or nil if not found and no default given
     function Config.get(path, default)
-        if type(path) ~= "string" or path:is_empty() then error("path is invalid", 2) end
+        if type(path) ~= 'string' or path:is_empty() then
+            error('path is invalid', 2)
+        end
 
         local config = config_table
 
         local c = testReservedCharacters(path)
-        if c ~= nil then error("path '" .. path .. "' contains the reserved character '" .. c .. "'", 2) end
+        if c ~= nil then
+            error("path '" .. path .. "' contains the reserved character '" .. c .. "'", 2)
+        end
 
         local pathParts = path:split('.')
         local part = config
@@ -89,7 +91,7 @@ function Config.new(config_table)
 
         for key = 1, #pathParts, 1 do
             local partKey = pathParts[key]
-            if (type(part) ~= "table") then
+            if (type(part) ~= 'table') then
                 value = nil
                 break
             end
@@ -98,7 +100,7 @@ function Config.new(config_table)
             part = part[partKey]
         end
 
-        if (type(value) == "table") then
+        if (type(value) == 'table') then
             --Force break references.
             return table.deepcopy(value)
         elseif (value ~= nil) then
@@ -113,24 +115,26 @@ function Config.new(config_table)
     -- @tparam ?|nil|Mixed data the value to set the path to. If *nil*, it behaves identical to @{delete|Config.delete()}
     -- @treturn uint 0 on failure or the number of affected paths on success
     function Config.set(path, data)
-        if type(path) ~= "string" or path:is_empty() then error("path is invalid", 2) end
+        if type(path) ~= 'string' or path:is_empty() then
+            error('path is invalid', 2)
+        end
 
         local config = config_table
 
         local c = testReservedCharacters(path)
-        if c ~= nil then error("path contains the reserved character '" .. c .. "'", 2) end
+        if c ~= nil then
+            error("path contains the reserved character '" .. c .. "'", 2)
+        end
 
         local pathParts = path:split('.')
         local part = config
-        local value = nil
 
         for key = 1, #pathParts - 1, 1 do
             local partKey = pathParts[key]
-            if (type(part[partKey]) ~= "table") then
+            if (type(part[partKey]) ~= 'table') then
                 part[partKey] = {}
             end
 
-            value = part[partKey]
             part = part[partKey]
         end
 
@@ -143,20 +147,23 @@ function Config.new(config_table)
     -- @tparam string path the config path to delete
     -- @treturn uint 0 on failure or the number of affected paths on success
     function Config.delete(path)
-        if type(path) ~= "string" or path:is_empty() then error("path is invalid", 2) end
+        if type(path) ~= 'string' or path:is_empty() then
+            error('path is invalid', 2)
+        end
 
         local config = config_table
 
         local c = testReservedCharacters(path)
-        if c ~= nil then error("path contains the reserved character '" .. c .. "'", 2) end
+        if c ~= nil then
+            error("path contains the reserved character '" .. c .. "'", 2)
+        end
 
         local pathParts = path:split('.')
         local part = config
-        local value = nil
 
         for key = 1, #pathParts - 1, 1 do
             local partKey = pathParts[key]
-            if (type(part[partKey]) ~= "table") then
+            if (type(part[partKey]) ~= 'table') then
                 return 0
             end
 
@@ -175,7 +182,9 @@ function Config.new(config_table)
     -- @tparam string path the config path to test
     -- @treturn boolean true if the value exists, false otherwise
     function Config.is_set(path)
-        if type(path) ~= "string" or path:is_empty() then error("path is invalid", 2) end
+        if type(path) ~= 'string' or path:is_empty() then
+            error('path is invalid', 2)
+        end
 
         return Config.get(path) ~= nil
     end
@@ -183,4 +192,4 @@ function Config.new(config_table)
     return Config
 end
 
-return Config
+return M

@@ -2,60 +2,16 @@
 -- @module Game
 -- @usage local Game = require('stdlib/game')
 
-require 'stdlib/utils/table'
-require 'stdlib/utils/string'
+local Game = {_module_name = 'Game'}
+setmetatable(Game, require('stdlib/core'))
 
-require 'stdlib/defines/color'
-require 'stdlib/defines/time'
-
-Game = { --luacheck: allow defined top
-    VALID_FILTER = function(v)
-        return v and v.valid
-    end,
-    _protect = function(module_name)
-        return {
-            __newindex = function() error("Attempt to mutatate read-only "..module_name.." Module") end,
-            __metatable = true
-        }
-    end,
-    _concat = function(lhs, rhs)
-        --Sanatize to remove address
-        return tostring(lhs):gsub("(%w+)%: %x+", "%1: (ADDR)") .. tostring(rhs):gsub("(%w+)%: %x+", "%1: (ADDR)")
-    end,
-    _rawstring = function (t)
-        local m = getmetatable(t)
-        local f = m.__tostring
-        m.__tostring = nil
-        local s = tostring(t)
-        m.__tostring = f
-        return s
-    end
-}
-
--- No Doc
--- This is a helper global and functions until .16
--- to set the name of your mod in control.lua set _stdlib_mod_name = 'name of your mod'
--- luacheck: ignore _stdlib_mod_name
-function Game.get_mod_name()
-    local ok, mod_name = pcall(function() return script.mod_name end)
-    return ok and mod_name or _stdlib_mod_name or "stdlib"
-end
-
---- Print msg if specified var evaluates to false.
--- @tparam Mixed var variable to evaluate
--- @tparam[opt="missing value"] string msg message
-function Game.fail_if_missing(var, msg)
-    if not var then
-        error(msg or "Missing value", 3)
-    end
-    return false
-end
+local Is = require('stdlib/utils/is')
 
 --- Return a valid player object from event, index, string, or userdata
 -- @tparam string|number|LuaPlayer|event mixed
 -- @treturn LuaPlayer a valid player or nil
 function Game.get_player(mixed)
-    if type(mixed) == "table" then
+    if type(mixed) == 'table' then
         if mixed.__self then
             return mixed and mixed.valid and mixed
         elseif mixed.player_index then
@@ -72,15 +28,28 @@ end
 -- @tparam string|LuaForce|event mixed
 -- @treturn LuaForce a valid force or nil
 function Game.get_force(mixed)
-    if type(mixed) == "table" then
+    if type(mixed) == 'table' then
         if mixed.__self then
             return mixed and mixed.valid and mixed
         elseif mixed.force then
             return Game.get_force(mixed.force)
         end
-    elseif type(mixed) == "string" then
+    elseif type(mixed) == 'string' then
         local force = game.forces[mixed]
         return (force and force.valid) and force
+    end
+end
+
+function Game.get_surface(mixed)
+    if type(mixed) == 'table' then
+        if mixed.__self then
+            return mixed.valid and mixed
+        elseif mixed.surface then
+            return Game.get_surface(mixed.surface)
+        end
+    elseif mixed then
+        local surface = game.surfaces[mixed]
+        return surface and surface.valid and surface
     end
 end
 
@@ -104,6 +73,36 @@ function Game.print_all(msg, condition)
         global._print_queue = global._print_queue or {}
         global._print_queue[#global._print_queue + 1] = msg
     end
+end
+
+--- Gets or sets data in the global variable.
+-- @tparam string sub_table the name of the table to use to store data.
+-- @tparam[opt] mixed index an optional index to use for the sub_table
+-- @tparam mixed key the key to store the data in
+-- @tparam[opt] boolean set store the contents of value, when true return previously stored data
+-- @tparam[opt] mixed value when set is true set key to this value, if not set and key is empty store this
+-- @treturn mixed the chunk value stored at the key or the previous value
+function Game.get_or_set_data(sub_table, index, key, set, value)
+    Is.Assert.String(sub_table, 'sub_table must be a string')
+    global[sub_table] = global[sub_table] or {}
+    local this
+    if index then
+        global[sub_table][index] = global[sub_table][index] or {}
+        this = global[sub_table][index]
+    else
+        this = global[sub_table]
+    end
+    local previous
+
+    if set then
+        previous = this[key]
+        this[key] = value
+        return previous
+    elseif not this[key] and value then
+        this[key] = value
+        return this[key]
+    end
+    return this[key]
 end
 
 return Game

@@ -53,7 +53,7 @@ local colors = {
     yellow = {r = 1.00, g = 1.00, b = 0.00},
     pink = {r = 1.00, g = 0.00, b = 1.00},
     purple = {r = 0.60, g = 0.10, b = 0.60},
-    brown = {r = 0.60, g = 0.40, b = 0.10},
+    brown = {r = 0.60, g = 0.40, b = 0.10}
 }
 
 --- Returns white for dark colors or black for lighter colors.
@@ -97,7 +97,7 @@ local anticolors = {
     darkred = colors.white,
     pink = colors.white,
     purple = colors.white,
-    red = colors.white,
+    red = colors.white
 }
 
 --- Returns a lighter color of a named color.
@@ -111,17 +111,20 @@ local anticolors = {
 -- @tfield Concepts.Color pink defines.color.purple
 defines.lightcolor = {}
 local lightcolors = {
-    white = colors.lightgrey, grey = colors.darkgrey, lightgrey = colors.grey,
-    red = colors.lightred, green = colors.lightgreen, blue = colors.lightblue,
-    yellow = colors.orange, pink = colors.purple,
+    white = colors.lightgrey,
+    grey = colors.darkgrey,
+    lightgrey = colors.grey,
+    red = colors.lightred,
+    green = colors.lightgreen,
+    blue = colors.lightblue,
+    yellow = colors.orange,
+    pink = colors.purple
 }
 
 local _mt = {
     color = {
         __index = function(_, c)
-            return colors[c]
-            and { r = colors[c]['r'], g=colors[c]['g'], b=colors[c]['b'], a = colors[c]['a'] }
-            or { r = 1, g = 1, b = 1, a = 1 }
+            return colors[c] and {r = colors[c]['r'], g = colors[c]['g'], b = colors[c]['b'], a = colors[c]['a']} or {r = 1, g = 1, b = 1, a = 1}
         end,
         __pairs = function()
             local k = nil
@@ -135,9 +138,7 @@ local _mt = {
     },
     anticolor = {
         __index = function(_, c)
-            return anticolors[c]
-            and { r = anticolors[c]['r'], g=anticolors[c]['g'], b=anticolors[c]['b'], a = anticolors[c]['a'] }
-            or { r = 1, g = 1, b = 1, a = 1 }
+            return anticolors[c] and {r = anticolors[c]['r'], g = anticolors[c]['g'], b = anticolors[c]['b'], a = anticolors[c]['a']} or {r = 1, g = 1, b = 1, a = 1}
         end,
         __pairs = function()
             local k = nil
@@ -151,9 +152,7 @@ local _mt = {
     },
     lightcolor = {
         __index = function(_, c)
-            return lightcolors[c]
-            and { r = lightcolors[c]['r'], g=lightcolors[c]['g'], b=lightcolors[c]['b'], a = lightcolors[c]['a'] }
-            or { r = 1, g = 1, b = 1, a = 1 }
+            return lightcolors[c] and {r = lightcolors[c]['r'], g = lightcolors[c]['g'], b = lightcolors[c]['b'], a = lightcolors[c]['a']} or {r = 1, g = 1, b = 1, a = 1}
         end,
         __pairs = function()
             local k = nil

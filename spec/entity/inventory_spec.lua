@@ -1,6 +1,8 @@
-require 'spec/setup/defines'
-local Inventory = require 'stdlib/entity/inventory'
-require 'stdlib/utils/table'
+require('busted.runner')()
+
+require('spec/setup/defines')
+local Inventory = require('stdlib/entity/inventory')
+require('stdlib/utils/table')
 
 describe('Inventory Spec', function()
     local function make_get_contents(inv)

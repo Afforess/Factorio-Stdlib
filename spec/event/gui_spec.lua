@@ -1,8 +1,12 @@
-require 'spec/setup/defines'
-local Gui = require 'stdlib/event/gui'
-require 'stdlib/utils/table'
---local serpent = require("serpent")
---local ps = function(tab) print(serpent.block(tab, {comment=false, nocode=true})) end
+do
+    return
+end
+--luacheck: ignore
+
+require('spec/setup/defines')
+require('stdlib/utils/table')
+local Event = require('stdlib/event/event')
+local Gui = require('stdlib/event/gui')
 
 local test_function = {f=function(x) _G.someVariable = x end, g=function(x) _G.someVariable = x end}
 local function_a = function(arg) test_function.f(arg.tick) end
@@ -22,7 +26,7 @@ describe('Gui', function()
                 on_load = function(callback) _G.on_load = callback end,
                 on_configuration_changed = function(callback) _G.on_configuration_changed = callback end
             }
-            _G.table.size = table.count_keys
+            _G.table.size = table.size
         end
     )
 

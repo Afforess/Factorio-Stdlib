@@ -1,11 +1,13 @@
-require 'spec/setup/defines'
+require('busted.runner')()
+
+require('spec/setup/defines')
 local Color
 
 describe('Color',  function ()
-    local say = require("say")
+    local say = require('say')
 
     setup(function()
-            Color = require 'stdlib/color/color'
+            Color = require('stdlib/color/color')
         end
     )
 

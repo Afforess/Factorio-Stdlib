@@ -1,13 +1,13 @@
-require "spec/setup/defines"
-require "stdlib/utils/table"
-local Game = require "stdlib/game"
+require('spec/setup/defines')
+require('stdlib/utils/table')
+local Game = require('stdlib/game')
 
 describe("Game Spec",
     function()
 
         setup(
             function()
-                -- _G.serpent = require("serpent")
+                -- _G.serpent = require('serpent')
             end
         )
 
@@ -85,30 +85,6 @@ describe("Game Spec",
                 --assert.same(8, Game.print_force("player", "Hello World"))
                 assert.spy(game.players[5].print).was_not_called_with("Hello World")
                 assert.spy(game.players[7].print).was_not_called_with("Hello World")
-            end
-        )
-
-        it("Game.fail_if_missing should return false if var is true or truthy",
-            function()
-                assert.is_false(Game.fail_if_missing(true, nil))
-                assert.is_false(Game.fail_if_missing({}, nil))
-                assert.is_false(Game.fail_if_missing(0, nil))
-                assert.is_false(Game.fail_if_missing(0.123, nil))
-                assert.is_false(Game.fail_if_missing("", nil))
-            end
-        )
-
-        it("Game.fail_if_missing should error with Missing value as a message when var is false or nil",
-            function()
-                assert.has_error(function() Game.fail_if_missing(false, nil) end, "Missing value")
-                assert.has_error(function() Game.fail_if_missing(nil, nil) end, "Missing value")
-            end
-        )
-
-        it("Game.fail_if_missing should error with given msg when var is false or nil",
-            function()
-                assert.has_error(function() Game.fail_if_missing(false, "error1") end, "error1")
-                assert.has_error(function() Game.fail_if_missing(nil, "error2") end, "error2")
             end
         )
 
@@ -250,54 +226,6 @@ describe("Game Spec",
                 for _, player in ipairs(game.players) do
                     assert.is_nil(Game.get_player(player))
                 end
-            end
-        )
-
-        it("Game.get_player should return false if mixed is table, not userdata, mixed.player_index exists, but game.players[mixed.player_index].valid == false",
-            function()
-                local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
-                for player_index, player_name in ipairs(player_names) do
-                    game.players[player_index] = { player_index = player_index, name = player_name, valid = false, __self = false}
-                end
-                for _, player in ipairs(game.players) do
-                    assert.is_false(Game.get_player(player))
-                end
-            end
-        )
-
-        it("Game.get_player should return false if mixed is not a table and not nil and not false and game.players[mixed].valid == false",
-            function()
-                local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
-                for player_index, player_name in ipairs(player_names) do
-                    game.players[player_index] = { player_index = player_index, name = player_name, valid = false}
-                end
-                for player_index in ipairs(player_names) do
-                    assert.is_false(Game.get_player(player_index))
-                end
-            end
-        )
-
-        --Only describing these here as they will be the same for all
-        describe('Area Metatable Protections',
-            function()
-                local Area = require 'stdlib/area/area'
-                it('Should not allow adding new keys',
-                    function()
-                        assert.has_error(function() Area["fake"] = true end)
-                    end
-                )
-
-                it('Should not allow setting a new metatable',
-                    function()
-                        assert.has_error(function() setmetatable(Area, {}) end)
-                    end
-                )
-
-                it('Should not allow getting the metatable',
-                    function()
-                        assert.is_true(getmetatable(Area))
-                    end
-                )
             end
         )
     end

@@ -1,24 +1,47 @@
 --- Player global creation.
--- Requiring this module will register init and player creation events using the stdlib @{Event} module.
--- <p>All existing and new players will be added to the `global.players` table.
--- <p>This module should be first required after any other Init functions but before any scripts needing `global.players`.
--- <p>This module registers the following events: `on_init`, `on_configuration_changed`, `on_player_created`, and `on_player_removed`.
+-- This module adds player helper functions, it does not automatically register events unless Player.register_events() is called
 -- @module Player
 -- @usage
--- local Player = require 'stdlib/event/player'
--- -- The fist time this module is required it will register player creation events
+-- local Player = require('stdlib/event/player').register_events()
+-- -- The fist time this is required it will register player creation events
 
-local Game = require 'stdlib/game'
-require 'stdlib/event/event'
+local Event = require('stdlib/event/event')
 
-local Player = {}
+local Player = {
+    _module_name = 'Player'
+}
+setmetatable(Player, require('stdlib/core'))
+
+local Is = require('stdlib/utils/is')
+local Game = require('stdlib/game')
 
 -- Return new default player object consiting of index and name
 local function new(player_index)
-    return {
+    local pdata = {
         index = player_index,
         name = game.players[player_index].name,
+        force = game.players[player_index].force.name
     }
+    if Player._new_player_data then
+        if type(Player._new_player_data) == 'table' then
+            table.merge(pdata, table.deepcopy(Player._new_player_data))
+        elseif type(Player._new_player_data) == 'function' then
+            local new_data = Player._new_player_data(player_index)
+            if type(new_data) == 'table' then
+                table.merge(pdata, new_data)
+            else
+                error('new_player_data did not return a table')
+            end
+        else
+            error('new_player_data present but is not a function or table')
+        end
+    end
+    return pdata
+end
+
+function Player.additional_data(func_or_table)
+    Player._new_player_data = func_or_table
+    return Player
 end
 
 --- Get `game.players[index]` & `global.players[index]`, or create `global.players[index]` if it doesn't exist.
@@ -26,21 +49,26 @@ end
 -- @treturn LuaPlayer the player instance
 -- @treturn table the player's global data
 -- @usage
--- local Player = require 'stdlib/event/player'
+-- local Player = require('stdlib/event/player')
 -- local player, player_data = Player.get(event.player_index)
 function Player.get(player)
     player = Game.get_player(player)
-    Game.fail_if_missing(player, 'Missing player to retrieve')
-    return game.players[player.index], global.players[player.index] or Player.init(player.index)
+    Is.Assert(player, 'Missing player to retrieve')
+    return player, global.players[player.index] or Player.init(player.index)
 end
 
 --- Merge a copy of the passed data to all players in `global.players`.
 -- @tparam table data a table containing variables to merge
--- @usage local data = {a = 'abc', b= 'def'}
+-- @usage local data = {a = 'abc', b = 'def'}
 -- Player.add_data_all(data)
 function Player.add_data_all(data)
     local pdata = global.players
-    table.each(pdata, function(v) table.merge(v, table.deepcopy(data)) end)
+    table.each(
+        pdata,
+        function(v)
+            table.merge(v, table.deepcopy(data))
+        end
+    )
 end
 
 --- Remove data for a player when they are deleted.
@@ -51,7 +79,6 @@ function Player.remove(event)
         global.players[player.index] = nil
     end
 end
-Event.register(defines.events.on_player_removed, Player.remove)
 
 --- Init or re-init a player or players.
 -- Passing a `nil` event will iterate all existing players.
@@ -67,8 +94,8 @@ function Player.init(event, overwrite)
     if player then --If player is not nil then we are working with a valid player.
         if not global.players[player.index] or (global.players[player.index] and overwrite) then
             global.players[player.index] = new(player.index)
+            return global.players[player.index]
         end
-        return global.players[player.index]
     else --Check all players
         for index in pairs(game.players) do
             if not global.players[index] or (global.players[index] and overwrite) then
@@ -78,14 +105,35 @@ function Player.init(event, overwrite)
     end
 
     if global._print_queue then
-        table.each(global._print_queue, function(msg) game.print(tostring(msg)) end)
+        table.each(
+            global._print_queue,
+            function(msg)
+                game.print(tostring(msg))
+            end
+        )
         global._print_queue = nil
     end
+    return Player
 end
 
--- If the mod has already done Init before adding this module we need to make sure we init players
--- Calling this on every configuration_changed event has no harm.
-local events = {defines.events.on_player_created, Event.core_events.init, Event.core_events.configuration_changed}
-Event.register(events, Player.init)
+function Player.update_force(event)
+    local player, pdata = Player.get(event.player_index)
+    pdata.force = player.force.name
+end
+
+function Player.register_init()
+    Event.register(Event.core_events.init, Player.init)
+    return Player
+end
+
+function Player.register_events(do_on_init)
+    Event.register(defines.events.on_player_created, Player.init)
+    Event.register(defines.events.on_player_changed_force, Player.update_force)
+    Event.register(defines.events.on_player_removed, Player.remove)
+    if do_on_init then
+        Player.register_init()
+    end
+    return Player
+end
 
 return Player

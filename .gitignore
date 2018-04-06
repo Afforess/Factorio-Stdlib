@@ -1,10 +1,22 @@
-# Exclude the build directories
-build
-build/*
-.build
+# Exclude the build directory
+.build/
 
 # Temporarily Exclude mod file changes
 mod/*
 !mod/info.json
 
-.luacompleterc
+# vscode related
+.vscode/
+*.stackdump
+
+# vim swapfiles
+.*.swp
+
+# {l,c}tags
+/tags
+/stdlib/tags
+
+*.tmp
+
+# Ignore temp.lua files
+temp*.lua

@@ -3,14 +3,14 @@
 -- <p>To handle the events, you should use the @{Event} module.
 -- @module Trains
 
--- Event registration is performed at the bottom of this file,
--- once all other functions have been defined
+local Trains = {
+    _module_name = 'Trains'
+}
+setmetatable(Trains, require('stdlib/core'))
 
-require 'stdlib/event/event'
-local Surface = require 'stdlib/area/surface'
-local Entity = require 'stdlib/entity/entity'
-
-Trains = {} --luacheck: allow defined top
+local Event = require('stdlib/event/event')
+local Surface = require('stdlib/area/surface')
+local Entity = require('stdlib/entity/entity')
 
 --- This event fires when a train's ID changes.
 -- <p>The train ID is a property of the main locomotive,
@@ -51,15 +51,23 @@ function Trains.find_filtered(criteria)
 
     -- Apply state filters
     if criteria.state then
-        results = table.filter(results, function(train)
-            return train.state == criteria.state
-        end)
+        results =
+            table.filter(
+            results,
+            function(train)
+                return train.state == criteria.state
+            end
+        )
     end
 
     -- Lastly, look up the train ids
-    results = table.map(results, function(train)
-        return { train = train, id = Trains.get_main_locomotive(train).unit_number }
-    end)
+    results =
+        table.map(
+        results,
+        function(train)
+            return {train = train, id = Trains.get_main_locomotive(train).unit_number}
+        end
+    )
 
     return results
 end
@@ -96,7 +104,7 @@ function Trains._on_locomotive_changed()
         -- If it's not
         if (id ~= derived_id) then
             -- Capture the rename
-            table.insert(renames, {old_id = id , new_id = derived_id, train = train })
+            table.insert(renames, {old_id = id, new_id = derived_id, train = train})
         end
     end
 
@@ -116,7 +124,6 @@ function Trains._on_locomotive_changed()
     end
 end
 
-
 --- Get the main locomotive of a train.
 -- @tparam LuaTrain train
 -- @treturn LuaEntity the main locomotive
@@ -130,7 +137,7 @@ end
 -- @tparam LuaTrain train
 -- @return (<span class="types">@{train_entity}</span>)
 function Trains.to_entity(train)
-    local name = "train-" .. Trains.get_train_id(train)
+    local name = 'train-' .. Trains.get_train_id(train)
     return {
         name = name,
         valid = train.valid,
@@ -170,7 +177,7 @@ end
 
 -- Creates a registry of known trains.
 -- @return table a mapping of train id to LuaTrain object
-local function create_train_registry()
+function Trains.create_train_registry()
     global._train_registry = global._train_registry or {}
 
     local all_trains = Trains.find_filtered()
@@ -178,35 +185,28 @@ local function create_train_registry()
         global._train_registry[tonumber(trainInfo.id)] = trainInfo.train
     end
 
-    --return registry
+    return global._train_registry
 end
 
--- When developers load this module, we need to attach some new events.
-
---- Filters events related to entity_type.
--- @tparam string event_parameter The event parameter to look inside to find the entity type
--- @tparam string entity_type The entity type to filter events for
--- @tparam callable callback The callback to invoke if the filter passes. The object defined in the event parameter is passed
-local function filter_event(event_parameter, entity_type, callback)
-    return function(evt)
-        if(evt[event_parameter].type == entity_type) then
-            callback(evt[event_parameter])
-        end
-    end
-end
-
--- When a locomotive is removed ...
-local train_remove_events = {defines.events.on_entity_died, defines.events.on_preplayer_mined_item, defines.events.on_robot_pre_mined}
-Event.register(train_remove_events, filter_event('entity', 'locomotive', Trains._on_locomotive_changed))
-
--- When a locomotive is added ...
-local function on_train_created(event)
+function Trains.on_train_created(event)
     local train_id = Trains.get_train_id(event.train)
     global._train_registry[train_id] = event.train
 end
-Event.register(defines.events.on_train_created, on_train_created)
 
--- When the mod is initialized the first time
-Event.register(Event.core_events.init_and_config, create_train_registry)
+--- This needs to be called to register events for this module
+-- @treturn Trains
+function Trains.register_events()
+    require('stdlib/event/event')
+    -- When a locomotive is removed ...
+    local train_remove_events = {defines.events.on_entity_died, defines.events.on_pre_player_mined_item, defines.events.on_robot_pre_mined}
+    Event.register(train_remove_events, Event.filter_entity('entity', 'locomotive', Trains._on_locomotive_changed))
+
+    -- When a locomotive is added ...
+    Event.register(defines.events.on_train_created, Trains.on_train_created)
+
+    -- When the mod is initialized the first time
+    Event.register(Event.core_events.init_and_config, Trains.create_train_registry)
+    return Trains
+end
 
 return Trains

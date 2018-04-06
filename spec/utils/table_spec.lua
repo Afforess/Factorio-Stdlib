@@ -1,3 +1,4 @@
+require('busted.runner')()
 require('stdlib/utils/table')
 
 describe('Table Spec', function()
@@ -368,16 +369,34 @@ describe('Table Spec', function()
             assert.falsy (table.compare({}, {{{1,"a"},"b"}}))
         end)
 
-        it('fails to compare non-tables', function()
-            assert.falsy (pcall(table.compare, {}, 1))
-            assert.falsy (pcall(table.compare, {}, "a"))
-            assert.falsy (pcall(table.compare, {}, true))
-            assert.falsy (pcall(table.compare, 1, 1))
-            assert.falsy (pcall(table.compare, "a", "a"))
-            assert.falsy (pcall(table.compare, true, true))
-            assert.falsy (pcall(table.compare, 1, true))
-            assert.falsy (pcall(table.compare, "a", 1))
-            assert.falsy (pcall(table.compare, true, "a"))
+        it('compares eq metamethod', function()
+            local mt = {__eq = function(lhs, rhs) return lhs.type == rhs.type end}
+
+            local a = {name = 'a', type = 'same'}
+            local b = {name = 'b', type = 'same'}
+            assert.is_false(table.compare(a, b))
+            assert.is_false(table.compare(a, b, true))
+
+            setmetatable(a, mt)
+            setmetatable(b, mt)
+
+            assert.is_true(table.compare(a, b))
+            assert.is_false(table.compare(a, b, true))
+
+        end)
+
+        it('compares non-tables', function()
+            local f = function(a, b) return table.compare(a, b) end
+            assert.is_false(f({}, 1))
+            assert.is_false(f({}, "a"))
+            assert.is_false(f({}, true))
+            assert.is_false(f({}, true))
+            assert.is_true(f(1, 1))
+            assert.is_true(f("a", "a"))
+            assert.is_true(f(true, true))
+            assert.is_false(f(1, true))
+            assert.is_false(f("a", 1))
+            assert.is_false(f(true, "a"))
         end)
 
     end)

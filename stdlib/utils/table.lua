@@ -270,14 +270,11 @@ function Table.dictionary_merge(tbl_a, tbl_b)
     return new_t
 end
 
---- Compares 2 tables for inner equality.
--- copied from factorio/data/core/lualib/util.lua
--- @tparam table tbl_a
--- @tparam table tbl_b
--- @treturn boolean if the tables are the same
 function Table.compare(tbl_a, tbl_b)
     if tbl_a == tbl_b then
         return true
+    elseif type(tbl_a) ~= type(tbl_b) then
+        return false
     end
     for k, v in pairs(tbl_a) do
         if type(v) == 'table' and type(tbl_b[k]) == 'table' then
@@ -298,12 +295,51 @@ function Table.compare(tbl_a, tbl_b)
     return true
 end
 
+--- Compares 2 tables for inner equality.
+-- copied from factorio/data/core/lualib/util.lua
+-- @tparam table tbl_a
+-- @tparam table tbl_b
+-- @tparam[opt=false] boolean ignore_mt ignore eq metamethod
+-- @treturn boolean if the tables are the same
+-- @author Sparr, Nexela, luacode.org
+function Table.deep_compare(t1, t2, ignore_mt)
+    local ty1, ty2 = type(t1), type(t2)
+    if ty1 ~= ty2 then
+        return false
+    end
+    -- non-table types can be directly compared
+    if ty1 ~= 'table' and ty2 ~= 'table' then
+        return t1 == t2
+    end
+    -- as well as tables which have the metamethod __eq
+    if not ignore_mt then
+        local mt = getmetatable(t1)
+        if mt and mt.__eq then
+            return t1 == t2
+        end
+    end
+    for k1, v1 in pairs(t1) do
+        local v2 = t2[k1]
+        if v2 == nil or not Table.deep_compare(v1, v2) then
+            return false
+        end
+    end
+    for k in pairs(t2) do
+        if t1[k] == nil then
+            return false
+        end
+    end
+
+    return true
+end
+Table.compare = Table.deep_compare
+
 --- Creates a deep copy of table without copying Factorio objects.
 -- copied from factorio/data/core/lualib/util.lua
 -- @usage local copy = table.deepcopy[data.raw.["stone-furnace"]["stone-furnace"]] -- returns a copy of the stone furnace entity
 -- @tparam table object the table to copy
 -- @treturn table a copy of the table
-function Table.deepcopy(object)
+function Table.deep_copy(object)
     local lookup_table = {}
     local function _copy(this_object)
         if type(this_object) ~= 'table' then
@@ -322,6 +358,7 @@ function Table.deepcopy(object)
     end
     return _copy(object)
 end
+Table.deepcopy = Table.deep_copy
 
 --- Creates a deep copy of a table without copying factorio objects
 -- internal table refs are also deepcopy. The resulting table should
@@ -329,7 +366,7 @@ end
 -- -- returns a deepcopy of the stone furnace entity with no internal table references.
 -- @tparam table object the table to copy
 -- @treturn table a copy of the table
-function Table.fullcopy(object)
+function Table.full_copy(object)
     local lookup_table = {}
     local function _copy(this_object)
         if type(this_object) ~= 'table' then
@@ -348,12 +385,13 @@ function Table.fullcopy(object)
     end
     return _copy(object)
 end
+Table.fullcopy = Table.full_copy
 
 --- Creates a flexible deep copy of an object, recursively copying sub-objects
 -- @usage local copy = table.flexcopy(data.raw.["stone-furnace"]["stone-furnace"]) -- returns a copy of the stone furnace entity
 -- @tparam table object the table to copy
 -- @treturn table a copy of the table
-function Table.flexcopy(object)
+function Table.flex_copy(object)
     local lookup_table = {}
     local function _copy(this_object)
         if type(this_object) ~= 'table' then
@@ -375,6 +413,7 @@ function Table.flexcopy(object)
     end
     return _copy(object)
 end
+Table.flexcopy = Table.flex_copy
 
 --- Returns a copy of all of the values in the table.
 -- @tparam table tbl the table to copy the keys from, or an empty table if tbl is nil

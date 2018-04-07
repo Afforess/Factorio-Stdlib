@@ -20,7 +20,7 @@ local Table = require('stdlib/utils/table')
 local event_registry = {}
 
 local Event = {
-    _module_name = 'Event',
+    _module = 'Event',
     core_events = {
         on_init = 'on_init',
         on_load = 'on_load',

@@ -2,7 +2,7 @@
 -- @module Game
 -- @usage local Game = require('stdlib/game')
 
-local Game = {_module_name = 'Game'}
+local Game = {_module = 'Game'}
 setmetatable(Game, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')

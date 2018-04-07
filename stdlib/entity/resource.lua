@@ -2,7 +2,7 @@
 -- @module Resource
 -- @usage local Resource = require('stdlib/entity/resource')
 
-local Resource = {_module_name = 'Resource'}
+local Resource = {_module = 'Resource'}
 setmetatable(Resource, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')

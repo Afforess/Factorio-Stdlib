@@ -8,7 +8,7 @@ local Is = require('stdlib/utils/is')
 -- @usage local llnode = linkedlist.append(item)
 local LinkedListNode = setmetatable(
     {
-        _module_name = 'linked_list',
+        _module = 'linked_list',
         _class_name = 'LinkedListNode',
         _is_LinkedListNode = true,
         _mt = {}
@@ -24,7 +24,7 @@ LinkedListNode._class = LinkedListNode
 -- @usage local LinkedList = require('stdlib.utils.classes.linked_list')
 local LinkedList = setmetatable(
     {
-        _module_name = 'linked_list',
+        _module = 'linked_list',
         _class_name = 'LinkedList',
         _is_LinkedList = true,
         _node_class = LinkedListNode,
@@ -72,8 +72,8 @@ end
 LinkedListNode.new_node = LinkedList.new_node
 
 function LinkedList:from_stack(stack, allow_insane_sparseness)
-    Is.Assert.Not.Nil(self._class, 'LinkedList:from_stack is a class method, not a static function; \z
-        For example LinkedList:from_stack(stack) would be a correct invocation syntax')
+    Is.Assert.Not.Nil(self._class, [[LinkedList:from_stack is a class method, not a static function; \z
+        For example LinkedList:from_stack(stack) would be a correct invocation syntax']])
     -- since linkedlists effectively support sparse keys, ensure we can
     -- round-trip various configurations by supporting sparse pseudo-stacks
     local sparsekeys = {}

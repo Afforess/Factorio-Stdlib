@@ -3,7 +3,7 @@
 -- @classmod string_array
 
 local M = {
-    _module_name = 'string-array-class'
+    _module = 'string-array-class'
 }
 
 local Is = require('stdlib/utils/is')

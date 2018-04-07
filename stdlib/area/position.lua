@@ -7,7 +7,7 @@
 -- @see defines.direction
 
 local Position = {
-    _module_name = 'Position'
+    _module = 'Position'
 }
 setmetatable(Position, require('stdlib/core'))
 local Is = require('stdlib/utils/is')

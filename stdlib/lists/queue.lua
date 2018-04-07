@@ -4,7 +4,7 @@
 -- @module Queue
 -- @usage local Queue = require('stdlib/lists/queue')
 
-local Queue = {_module_name = 'Queue'}
+local Queue = {_module = 'Queue'}
 setmetatable(Queue, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')

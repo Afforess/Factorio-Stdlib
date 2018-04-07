@@ -9,7 +9,7 @@ local Core = require('stdlib.core')
 
 local Data = {
     _class = 'data',
-    _module_name = 'Data',
+    _module = 'Data',
     Sprites = require('stdlib/data/modules/sprites'),
     Pipes = require('stdlib/data/modules/pipes'),
     Util = require('stdlib/data/modules/util'),

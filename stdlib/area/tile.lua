@@ -4,7 +4,7 @@
 -- @usage local Tile = require('stdlib/area/tile')
 -- @see LuaTile
 
-local Tile = {_module_name = 'Tile'}
+local Tile = {_module = 'Tile'}
 setmetatable(Tile, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')

@@ -2,7 +2,7 @@
 -- @module Entity
 -- @usage local Entity = require('stdlib/entity/entity')
 
-local Entity = {_module_name = 'Entity'}
+local Entity = {_module = 'Entity'}
 setmetatable(Entity, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')

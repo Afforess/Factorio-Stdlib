@@ -3,7 +3,7 @@
 
 local Recipe = {
     _class = 'recipe',
-    _module_name = 'Recipe',
+    _module = 'Recipe',
     _ingredients_mt = require('stdlib/data/modules/ingredients'),
     _results_mt = require('stdlib/data/modules/results')
 }

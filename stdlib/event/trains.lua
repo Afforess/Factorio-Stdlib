@@ -4,7 +4,7 @@
 -- @module Trains
 
 local Trains = {
-    _module_name = 'Trains'
+    _module = 'Trains'
 }
 setmetatable(Trains, require('stdlib/core'))
 

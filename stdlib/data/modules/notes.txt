@@ -7,3 +7,53 @@ render layers
 collision masks
 "ground-tile", "water-tile", "resource-layer", "floor-layer", "item-layer",
 "object-layer", "player-layer", "ghost-layer", "doodad-layer", "not-colliding-with-itself"
+
+-------------------------------------------------------------------------------
+Data(name, type) Data:Get()
+Data:valid(type)
+Data:copy()
+
+Data:Flags()
+
+Data:extend()
+Data:continue()
+Data:continue_if(func)
+
+Data:subgroup_order()
+
+Data:run_function(func) Data:execute()
+Data:get_function_results(func)
+Recipe:set_field()
+Recipe:set_fields()
+Recipe:remove_field()
+Recipe:remove_fields()
+
+------------------------------------------------------------------------------
+Recipe()
+
+Recipe:Ingredients()
+Recipe:Results()
+
+Recipe:make_difficult()
+Recipe:make_simple()
+
+Recipe:change_category()
+
+-- Wrappers to set_field
+Recipe:set_hidden()
+Recipe:set_enabled()
+
+Recipe:clear_ingredients()
+Recipe:replace_ingredients()
+Recipe:replace_ingredient()
+Recipe:add_ingredient()
+Recipe:remove_ingredient()
+
+Recipe:clear_results()
+Recipe:replace_results()
+Recipe:replace_result()
+Recipe:add_result()
+Recipe:remove_result()
+
+Recipe:add_unlock()
+Recipe:remove_unlock()

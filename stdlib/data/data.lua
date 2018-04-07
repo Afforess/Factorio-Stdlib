@@ -224,7 +224,7 @@ function Data:set_fields(tab)
 end
 
 --- Iterate a string array and set to nil.
--- @tparam table tab string array of fields to remove.
+-- @tparam table arr string array of fields to remove.
 -- @treturn self
 function Data:remove_fields(arr)
     if self:valid() then

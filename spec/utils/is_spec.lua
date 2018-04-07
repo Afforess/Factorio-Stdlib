@@ -250,8 +250,8 @@ describe(
     'Assert',
     function()
         it(
-            'Accepts a lambda in place of a string message as its second argument, \z
-            which is called only when the assertion fails',
+            [[accepts a lambda in place of a string message as its second argument,
+            which is called only when the assertion fails']],
             function()
                 local spy_error =
                     spy(

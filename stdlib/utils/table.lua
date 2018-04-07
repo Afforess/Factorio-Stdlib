@@ -208,6 +208,32 @@ function Table.avg(tbl)
     return cnt ~= 0 and Table.sum(tbl) / cnt or nil
 end
 
+--- Return a new array slice.
+-- @tparam array tbl the table to slice
+-- @tparam[opt=1] number start
+-- @tparam[opt=#tbl] number stop stop at this index, use negative to stop from end.
+-- @usage local tab = { 10, 20, 30, 40, 50}
+-- slice(tab, 2, -2) --returns { 20, 30, 40 }
+function Table.slice(tbl, start, stop)
+    local res = {}
+    local n = #tbl
+
+    start = start or 1
+    stop = stop or n
+    stop = stop < 0 and (n + stop + 1) or stop
+
+    if start < 1 or start > n then
+        return {}
+    end
+
+    local k = 1
+    for i = start, stop do
+        res[k] = tbl[i]
+        k = k + 1
+    end
+    return res
+end
+
 --- Merges two tables, values from first get overwritten by the second.
 -- @usage
 -- function some_func(x, y, args)
@@ -296,9 +322,9 @@ function Table.compare(tbl_a, tbl_b)
 end
 
 --- Compares 2 tables for inner equality.
--- copied from factorio/data/core/lualib/util.lua
--- @tparam table tbl_a
--- @tparam table tbl_b
+-- Modified from factorio/data/core/lualib/util.lua
+-- @tparam table t1
+-- @tparam table t2
 -- @tparam[opt=false] boolean ignore_mt ignore eq metamethod
 -- @treturn boolean if the tables are the same
 -- @author Sparr, Nexela, luacode.org

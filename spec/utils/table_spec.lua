@@ -1,5 +1,5 @@
 require('busted.runner')()
-require('stdlib/utils/table')
+local table = require('stdlib/utils/table')
 
 describe('Table Spec', function()
     describe('table.map', function()
@@ -167,6 +167,29 @@ describe('Table Spec', function()
             local func = function(_, k, arg1) return k % 2 == arg1 end
 
             assert.is_true(table.any({1, 2, 3, 4}, func, 0))
+        end)
+    end)
+
+    describe('table.slice', function()
+        local base = {10, 20, 30, 40, 50}
+
+        it('should slice an array from start to #array', function()
+            assert.same({20, 30, 40, 50}, table.slice(base, 2))
+            assert.same(4, #table.slice(base, 2))
+        end)
+
+        it('should slice an array from start to stop', function ()
+            assert.same({20, 30, 40}, table.slice(base, 2, 4))
+            assert.same(3, #table.slice(base, 2, 4))
+        end)
+
+        it ('should slice an array from start to -stop from end', function()
+            assert.same({20, 30, 40}, table.slice(base, 2, -2))
+            assert.same(3, #table.slice(base, 2, -2))
+        end)
+
+        it('should return an empty array if start is > stop or #tbl', function()
+            assert.same({}, table.slice(base, 7, -2))
         end)
     end)
 

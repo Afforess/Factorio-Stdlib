@@ -7,6 +7,8 @@ end
 
 local Core = require('stdlib/core')
 local table = require('stdlib/utils/table')
+local Is = require('stdlib/utils/is')
+local Inspect = require('stdlib/utils/vendor/inspect')
 
 local Data = {
     _class = 'data',
@@ -26,8 +28,6 @@ local Data = {
 }
 Data.__index = Data
 setmetatable(Data, Core)
-
-local Is = require('stdlib/utils/is')
 
 local item_and_fluid_types = {
     'item',
@@ -85,6 +85,16 @@ function Data:valid(class)
     else
         return self._valid and true or false
     end
+end
+
+function Data:log(tbl)
+    log(Inspect(tbl and tbl or self))
+    return self
+end
+
+function Data:error(msg)
+    error(msg or "Forced Error")
+    return self
 end
 
 --- Changes the validity of the object.

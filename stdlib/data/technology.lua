@@ -137,13 +137,11 @@ end
 
 function Technology:remove_pack(pack)
     if self:valid('technology') then
-        local ing = self.unit.ingredients
-        if ing then
-            for i = #ing, 1, -1 do
-                if ing[i][1] == pack then
-                    ing[i] = nil
-                    break
-                end
+        local ings = self.unit.ingredients
+        for i, ing in pairs(ings or {}) do
+            if ing[1] == pack then
+                table.remove(ings, i)
+                break
             end
         end
     end
@@ -152,14 +150,12 @@ end
 
 function Technology:replace_pack(old_pack, new_pack, count)
     if self:valid('technology') then
-        local ing = self.unit.ingredients
-        if ing then
-            for i = #ing, 1, -1 do
-                if ing[i][1] == old_pack then
-                    ing[i][1] = new_pack
-                    ing[i][2] = count or ing[i][2] or 1
-                    break
-                end
+        local ings = self.unit.ingredients
+        for i, ing in pairs(ings or {}) do
+            if ing[1] == old_pack then
+                ing[1] = new_pack
+                ing[2] = count or ing[2] or 1
+                break
             end
         end
     end

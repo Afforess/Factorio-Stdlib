@@ -435,8 +435,8 @@ function Data:get(object, object_type, opts)
     end
 
     if new then
-        new._valid = self.type or 'data'
-        new._type = self.type or 'data'
+        new._valid = new.type -- can change
+        new._type = new.type -- static
         new._options = opts
         setmetatable(new, self._mt)
         new:Flags()

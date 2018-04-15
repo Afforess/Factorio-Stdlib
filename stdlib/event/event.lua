@@ -14,7 +14,7 @@
 -- @usage local Event = require('stdlib/event/event')
 
 
-local Table = require('stdlib/utils/table')
+local table = require('stdlib/utils/table')
 
 --Holds the event registry
 local event_registry = {}
@@ -35,7 +35,7 @@ local Event = {
     inspect_event = false,
     force_crc = false,
     stop_processing = {}, -- just has to be unique
-    event_names = Table.invert(defines.events)
+    event_names = table.invert(defines.events)
 }
 setmetatable(Event, require('stdlib/core'))
 
@@ -240,7 +240,12 @@ end
 local function run_protected(registered, event)
     local success, err
 
-    if Event.inspect_event or event.inspect_event then --luacheck: ignore (TODO)
+    if Event.inspect_event or event.inspect_event then
+        if game then
+            Event._inspect_count = Event._inspect_count or 0
+            game.write_file(script.mod_name..'/event-trigger.lua', inspect(event) .. '\n', Event._inspect_count > 0)
+            Event._inspect_count = Event._inspect_count + 1
+        end
     end
 
     if registered.matcher then
@@ -312,6 +317,7 @@ function Event.dispatch(event)
         --add the tick if it is not present, this only affects calling Event.dispatch manually
         --doing the check up here as it will faster than checking every iteration for a constant value
         event.tick = event.tick or game and game.tick or 0
+        event.define_name = event.name and Event.event_names[event.name]
 
         for _, registered in ipairs(registry) do
             -- Check for userdata and stop processing this and further handlers if not valid
@@ -355,7 +361,7 @@ function Event.generate_event_name(event_name)
         id = Event.custom_events[event_name]
     else
         id = script.generate_event_name()
-        Event.custom[event_name] = id
+        Event.custom_events[event_name] = id
     end
     return id
 end

@@ -2,7 +2,7 @@
 -- @classmod Category
 
 local Category = {
-    _class = 'category'
+    _class = 'Category'
 }
 setmetatable(Category, require('stdlib/data/data'))
 

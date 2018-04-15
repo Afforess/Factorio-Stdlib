@@ -2,8 +2,7 @@
 -- @classmod Recipe
 
 local Recipe = {
-    _class = 'recipe',
-    _module = 'Recipe',
+    _class = 'Recipe',
     _ingredients_mt = require('stdlib/data/modules/ingredients'),
     _results_mt = require('stdlib/data/modules/results')
 }

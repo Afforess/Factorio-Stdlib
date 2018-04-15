@@ -11,8 +11,7 @@ local Is = require('stdlib/utils/is')
 local Inspect = require('stdlib/utils/vendor/inspect')
 
 local Data = {
-    _class = 'data',
-    _module = 'Data',
+    _class = 'Data',
     Sprites = require('stdlib/data/modules/sprites'),
     Pipes = require('stdlib/data/modules/pipes'),
     Util = require('stdlib/data/modules/util'),
@@ -22,7 +21,7 @@ local Data = {
         ['verbose'] = false, -- Extra logging info
         ['extend'] = true, -- Don't Extend the data
         ['skip_string_validity'] = false, -- Skip checking for valid data
-        ['items_and_fluids'] = true, -- consider fluids valid for Item checks
+        ['items_and_fluids'] = true -- consider fluids valid for Item checks
     },
     __call = Core.__call
 }
@@ -77,23 +76,36 @@ end
 --[Classes]--------------------------------------------------------------------
 
 --- Is this a valid object
--- @tparam[opt] string class if present is the object a member of the class
+-- @tparam[opt] string type if present is the object this type
 -- @treturn self
-function Data:valid(class)
-    if class then
-        return self._valid == class or false
+function Data:valid(type)
+    if type then
+        return self._valid == type or false
     else
         return self._valid and true or false
     end
 end
 
+function Data:class(class)
+    if class then
+        return self._class == class or false
+    else
+        return self._class and true or false
+    end
+end
+
 function Data:log(tbl)
-    log(Inspect(tbl and tbl or self))
+    local no_meta = function(item, path)
+        if path[#path] ~= Inspect.METATABLE then
+            return item
+        end
+    end
+    log(Inspect(tbl and tbl or self, {process = no_meta}))
     return self
 end
 
 function Data:error(msg)
-    error(msg or "Forced Error")
+    error(msg or 'Forced Error')
     return self
 end
 
@@ -101,9 +113,7 @@ end
 -- @tparam boolean bool
 -- @treturn self
 function Data:continue(bool)
-    if self._type then
-        self._valid = bool and self._type or false
-    end
+    self._valid = bool and self.type or false
     return self
 end
 
@@ -111,9 +121,7 @@ end
 -- @tparam function func the function to test, self is passed as the first paramater
 -- @treturn self
 function Data:continue_if(func, ...)
-    if self._type then
-        self._valid = func(self, ...) and self._type or false
-    end
+    self._valid = self.type and func(self, ...) or false
     return self
 end
 
@@ -180,10 +188,9 @@ function Data:copy(new_name, mining_result)
 end
 
 --(( Flags ))--
-function Data:Flags(create_flags)
-    if self:valid() then
-        self.flags = self.flags or {}
-        return self.flags and setmetatable(self.flags, require('stdlib/utils/classes/string_array'))
+function Data:Flags()
+    if self:valid() and self.flags then
+        return setmetatable(self.flags, require('stdlib/utils/classes/string_array'))
     end
 end
 
@@ -420,7 +427,7 @@ function Data:get(object, object_type, opts)
         end
     elseif type(object) == 'string' then
         --Get type from object_type, or fluid or item_and_fluid_types
-        local types = (object_type and {object_type}) or (self._class == 'item' and item_and_fluid_types)
+        local types = (object_type and {object_type}) or (self._class == 'Item' and item_and_fluid_types)
         if types then
             for _, type in pairs(types) do
                 new = data.raw[type] and data.raw[type][object]
@@ -436,7 +443,6 @@ function Data:get(object, object_type, opts)
 
     if new then
         new._valid = new.type -- can change
-        new._type = new.type -- static
         new._options = opts
         setmetatable(new, self._mt)
         new:Flags()

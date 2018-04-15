@@ -2,7 +2,7 @@
 -- @classmod Entity
 
 local Entity = {
-    _class = 'entity'
+    _class = 'Entity'
 }
 setmetatable(Entity, require('stdlib/data/data'))
 

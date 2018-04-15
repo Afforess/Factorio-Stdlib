@@ -2,7 +2,7 @@
 -- @classmod Technology
 
 local Technology = {
-    _class = 'technology'
+    _class = 'Technology'
 }
 setmetatable(Technology, require('stdlib/data/data'))
 

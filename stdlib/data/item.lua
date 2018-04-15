@@ -2,7 +2,7 @@
 -- @classmod Item
 
 local Item = {
-    _class = 'item'
+    _class = 'Item',
 }
 setmetatable(Item, require('stdlib/data/data'))
 
@@ -30,27 +30,6 @@ Item.item_types = {
 function Item:_caller(item, item_type)
     return self:get(item, item_type)
 end
-
-Item.item_types = {
-    'item',
-    'ammo',
-    'armor',
-    'gun',
-    'capsule',
-    'repair-tool',
-    'mining-tool',
-    'item-with-entity-data',
-    'rail-planner',
-    'tool',
-    'blueprint',
-    'deconstruction-item',
-    'blueprint-book',
-    'selection-tool',
-    'item-with-tags',
-    'item-with-label',
-    'item-with-inventory',
-    'module'
-}
 
 Item._mt = {
     __index = Item,

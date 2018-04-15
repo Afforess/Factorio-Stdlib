@@ -48,12 +48,8 @@ mod-files: $(MOD_FILES)
 ldoc:
 	@echo 'Auto Generating with ldoc'
 	@mkdir -p $(BUILD_DIR)/doc
-	#@cp README.md $(BUILD_DIR)/readme
-	#@cp CHANGELOG.md $(BUILD_DIR)/changelog
-	#@cp LICENSE $(BUILD_DIR)/license
 	@cp doc/spectre.min.css $(BUILD_DIR)/doc/spectre.min.css
 	@cp doc/spectre-icons.min.css $(BUILD_DIR)/doc/spectre-icons.min.css
-	#@cp -r examples/ $(BUILD_DIR)/doc/examples/
 	@cd $(BUILD_DIR) && ldoc -c ../doc/config.ld -l ../doc -s ../doc $(OUTPUT_NAME)/$(PACKAGE_NAME)
 
 luacheck:

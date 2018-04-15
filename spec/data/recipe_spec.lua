@@ -82,6 +82,29 @@ describe('Recipe', function()
         end)
     end)
 
+    describe(':pairs()', function()
+        it('should classify everything', function()
+            for _, class in Recipe:pairs('recipe') do
+                assert.same('Recipe', class._class)
+            end
+        end)
+
+        it('should work without a paramater', function()
+            for _, class in Recipe:pairs() do
+                assert.same('Recipe', class._class)
+            end
+        end)
+        it('should work on a class', function()
+            local r = Recipe('stone-furnace')
+            local count = 0
+            for _, class in r:pairs() do
+                assert.same('Recipe', class._class)
+                count = count + 1
+            end
+            assert.same(table.size(_G.data.raw.recipe), count)
+        end)
+    end)
+
     describe(':add_unlock', function()
         it('should add the unlock if the tech exists', function()
             Recipe("stone-furnace"):add_unlock("steel-processing")

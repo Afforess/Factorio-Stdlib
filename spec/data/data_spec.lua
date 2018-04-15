@@ -48,24 +48,30 @@ describe('Data', function()
         assert.is_true(F:class())
     end)
 
-    it("class('Data')", function()
+    it(":class('Data')", function()
         assert.is_true(R:class('Data'))
         assert.is_true(F:class('Data'))
         assert.is_false(R:class('Recipe'))
     end)
 
-    it('continue()', function()
+    it(':continue()', function()
         assert.is_false(R:continue(false):valid())
         assert.is_false(R:continue():valid())
         assert.is_true(R:continue(true):valid())
     end)
 
-    it('continue_if()', function()
+    it(':continue_if()', function()
         local f = function(self, recipe)
             return self.type == recipe
         end
         assert.is_true(R:continue_if(f, 'recipe'):valid())
         assert.is_false(R:continue_if(f, 'data'):valid())
+    end)
+
+    it(':pairs()', function()
+        for _, class in Data:pairs('recipe') do
+            assert.same('Data', class._class)
+        end
     end)
 
     --This can in the future be moved to a string_array_class module

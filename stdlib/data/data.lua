@@ -395,7 +395,7 @@ function Data:tostring()
 end
 
 function Data:pairs(data_type)
-    local t = data.raw[data_type or self._type or self._class] or {}
+    local t = data.raw[data_type or self.type or self._class:lower()] or {}
     local index, val
 
     local function _next()

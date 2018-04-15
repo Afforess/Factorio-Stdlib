@@ -267,13 +267,13 @@ function Inspector:getId(v)
     return tostring(id)
 end
 
-function Inspector:putKey(k)
-    if isIdentifier(k) then
+function Inspector:putKey(k, arraykey)
+    if arraykey or (not self.longkeys and isIdentifier(k)) then
         return self:puts(k)
     end
-    self:puts('[')
+    self:puts(arraykey and '' or '[')
     self:putValue(k)
-    self:puts(']')
+    self:puts(arraykey and '' or ']')
 end
 
 function Inspector:putTable(t)
@@ -307,8 +307,17 @@ function Inspector:putTable(t)
                     if count > 0 then
                         self:puts(',')
                     end
-                    self:puts(' ')
-                    self:putValue(t[i])
+                    if self.arraytabify then
+                        self:tabify()
+                    else
+                        self:puts(' ')
+                    end
+                    if self.arraykeys then
+                        self:putKey(i, self.arraykeys)
+                        self:puts(' = ')
+                    end
+
+                        self:putValue(t[i])
                     count = count + 1
                 end
 
@@ -334,7 +343,7 @@ function Inspector:putTable(t)
             end
         )
 
-        if #nonSequentialKeys > 0 or type(mt) == 'table' then -- result is multi-lined. Justify closing }
+        if #nonSequentialKeys > 0 or type(mt) == 'table' or self.arraytabify then -- result is multi-lined. Justify closing }
             self:tabify()
         elseif sequenceLength > 0 then -- array tables have one extra space before closing }
             self:puts(' ')
@@ -367,6 +376,10 @@ function inspect.inspect(root, options)
     local newline = options.newline or '\n'
     local indent = options.indent or '  '
     local process = options.process
+    local longkeys = options.longkeys
+    local arraykeys = options.arraykeys
+    local arraytabify = options.arraytabify
+    local metatables = options.metatables
 
     if process then
         root = processRecursive(process, root, {}, {})
@@ -382,6 +395,10 @@ function inspect.inspect(root, options)
             maxIds = {},
             newline = newline,
             indent = indent,
+            longkeys = longkeys,
+            arraykeys = arraykeys,
+            arraytabify = arraytabify,
+            metatables = metatables,
             tableAppearances = countTableAppearances(root)
         },
         Inspector_mt

@@ -198,7 +198,7 @@ end
 -- @tparam string name Name of the ingredient to remove
 local function remove_ingredient(ingredients, name)
     name = name.name
-    for i, ingredient in pairs(ingredients) do
+    for i, ingredient in pairs(ingredients or {}) do
         if ingredient[1] == name or ingredient.name == name then
             ingredients[i] = nil
             return true
@@ -212,7 +212,7 @@ end
 -- @tparam concepts.ingredient replace
 -- @tparam boolean replace_name_only Don't replace amounts
 local function replace_ingredient(ingredients, find, replace, replace_name_only)
-    for i, ingredient in pairs(ingredients) do
+    for i, ingredient in pairs(ingredients or {}) do
         if ingredient[1] == find or ingredient.name == find then
             if replace_name_only then
                 local amount = ingredient[2] or ingredient.amount
@@ -234,12 +234,15 @@ function Recipe:add_ingredient(normal, expensive)
 
         if self.normal then
             if normal then
+                self.normal.ingredients = self.normal.ingredients or {}
                 self.normal.ingredients[#self.normal.ingredients + 1] = normal
             end
             if expensive then
+                self.expensive.ingredients = self.expensive.ingredients or {}
                 self.expensive.ingredients[#self.expensive.ingredients + 1] = expensive
             end
         elseif normal then
+            self.ingredients = self.ingredients or {}
             self.ingredients[#self.ingredients + 1] = normal
         end
     end
@@ -277,7 +280,6 @@ function Recipe:replace_ingredient(replace, normal, expensive)
         local n_string = type(normal) == 'string'
         local e_string = type(expensive == true and normal or expensive) == 'string'
         normal, expensive = get_difficulties(normal, expensive)
-
         if self.normal then
             if normal then
                 replace_ingredient(self.normal.ingredients, replace, normal, n_string)

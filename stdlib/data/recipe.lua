@@ -18,61 +18,6 @@ end
 
 -- Returns a formated ingredient or prodcut table
 local function format(ingredient, result_count)
-    --[[
-        --[[prototype
-        type, name
-        localised_name[opt]
-        localised_description[opt]
-        subgroup, order (needed when no main product)
-    --]]
-    --[[recipe
-        category
-        icon/icons (or has main_product)
-        crafting_machine_tint = {
-            primary, secondary, tertiary
-        }
-        normal/expensive = {
-            ingredients
-            results, result, result_count[opt=1] (result ignored if results present) at least 1 result
-            main_product
-            energy_required > 0.001
-            emissions_multiplier
-            requester_paste_multiplier
-            overload_multiplier
-            enabled <boolean>
-            hidden <boolean>
-            hide_from_stats <boolean>
-            allow_decomposition <boolean>
-            allow_as_intermediate <boolean>
-            allow_intermediates <boolean>
-            always_show_made_in <boolean>
-            show_amount_in_title <boolean>
-            always_show_products <boolean>
-        }
-    --]]
-    --[[
-
-    Ingredient table
-    {"name", amount} -- Assumes a type of "item"
-    {
-        type :: string: "item" or "fluid".
-        name :: string: Prototype name of the required item or fluid.
-        amount :: uint: Amount of the item.
-        minimum_temperature :: uint (optional): The minimum fluid temperature required. Has no effect if type is '"item"'.
-        maximum_temperature :: uint (optional): The maximum fluid temperature allowed. Has no effect if type is '"item"'.
-    }
-
-    Product table
-    {
-        type :: string: "item" or "fluid".
-        name :: string: Prototype name of the result.
-        amount :: float (optional): If not specified, amount_min, amount_max and probability must all be specified.
-        temperature :: uint (optional): The fluid temperature of this product. Has no effect if type is '"item"'.
-        amount_min :: uint (optional):
-        amount_max :: uint (optional):
-        probability :: double (optional): A value in range [0, 1].
-    }
-    --]]
     local object
     if type(ingredient) == 'table' then
         if ingredient.valid and ingredient:valid() then
@@ -145,6 +90,7 @@ local function replace_ingredient(ingredients, find, replace, replace_name_only)
         end
     end
 end
+Recipe.rep_ing = Recipe.replace_ingredient
 
 --- Add an ingredient to a recipe.
 -- @tparam string|Concepts.ingredient normal
@@ -170,6 +116,7 @@ function Recipe:add_ingredient(normal, expensive)
     end
     return self
 end
+Recipe.add_ing = Recipe.add_ingredient
 
 --- Remove one ingredient completely.
 -- @tparam string normal
@@ -191,6 +138,7 @@ function Recipe:remove_ingredient(normal, expensive)
     end
     return self
 end
+Recipe.rem_ing = Recipe.remove_ingredient
 
 --- Replace one ingredient with another.
 -- @tparam string replace
@@ -472,10 +420,6 @@ function Recipe:replace_result(result_name, normal, expensive, main_product)
     end
     return self
 end
-
-Recipe.rep_ing = Recipe.replace_ingredient
-Recipe.add_ing = Recipe.add_ingredient
-Recipe.rem_ing = Recipe.remove_ingredient
 
 Recipe._mt = {
     __index = Recipe,

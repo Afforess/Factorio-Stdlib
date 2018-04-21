@@ -233,7 +233,7 @@ end
 
 function Data:set_string_array(field)
     if self:valid() and self[field] then
-        setmetatable(self[field], require('stdlib/utils/classes/string_array'))
+        setmetatable(rawget(self, field), require('stdlib/utils/classes/string_array'))
     end
     return self
 end
@@ -265,9 +265,9 @@ end
 --- Get a field.
 -- @tparam string field
 -- @treturn nil|mixed the value of the field
-function Data:get_field(field)
+function Data:get_field(field, default_value)
     if self:valid() then
-        return rawget(self, field)
+        return rawget(self, field) or default_value
     end
 end
 

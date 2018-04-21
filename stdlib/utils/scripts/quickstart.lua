@@ -47,16 +47,6 @@ function quickstart.on_player_created(event)
 
         player.surface.always_day = QS.get('always_day', false)
 
-        if QS.get('cheat_mode', false) then
-            player.cheat_mode = true
-            player.force.research_all_technologies()
-            if player.character then
-                player.character_running_speed_modifier = 2
-                player.character_reach_distance_bonus = 100
-                player.character_build_distance_bonus = 100
-            end
-        end
-
         if QS.get('clear_items', false) then
             player.clear_items_inside()
         end
@@ -289,6 +279,20 @@ function quickstart.on_player_created(event)
     end
 end
 Event.register(defines.events.on_player_created, quickstart.on_player_created)
+
+function quickstart.on_player_joined_game(event)
+    local player = game.players[event.player_index]
+    if QS.get('cheat_mode', false) then
+        player.cheat_mode = true
+        player.force.research_all_technologies()
+        if player.character then
+            player.character_running_speed_modifier = 2
+            player.character_reach_distance_bonus = 100
+            player.character_build_distance_bonus = 100
+        end
+    end
+end
+Event.register(defines.events.on_player_joined_game, quickstart.on_player_joined_game)
 
 quickstart.trackstring =
     [[

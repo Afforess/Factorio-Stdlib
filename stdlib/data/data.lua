@@ -231,6 +231,13 @@ function Data:get_function_results(func, ...)
     end
 end
 
+function Data:set_string_array(field)
+    if self:valid() and self[field] then
+        setmetatable(self[field], require('stdlib/utils/classes/string_array'))
+    end
+    return self
+end
+
 --- Add or change a field.
 -- @tparam string field the field to change.
 -- @tparam mixed value the value to set on the field.
@@ -445,7 +452,9 @@ function Data:get(object, object_type, opts)
         new._valid = new.type -- can change
         new._options = opts
         setmetatable(new, self._mt)
-        new:Flags()
+        new:set_string_array('flags')
+        new:set_string_array('crafting-categories')
+        new:set_string_array('mining-categories')
         return new:extend()
     else
         local trace = traceback()

@@ -264,10 +264,16 @@ end
 
 --- Get a field.
 -- @tparam string field
+-- @tparam mixed default_value return this if the field doesn't exist
 -- @treturn nil|mixed the value of the field
 function Data:get_field(field, default_value)
     if self:valid() then
-        return rawget(self, field) or default_value
+        local has = rawget(self, field)
+        if has ~= nil then
+            return has
+        else
+            return default_value
+        end
     end
 end
 
@@ -453,8 +459,8 @@ function Data:get(object, object_type, opts)
         new._options = opts
         setmetatable(new, self._mt)
         new:set_string_array('flags')
-        new:set_string_array('crafting-categories')
-        new:set_string_array('mining-categories')
+        new:set_string_array('crafting_categories')
+        new:set_string_array('mining_categories')
         return new:extend()
     else
         local trace = traceback()

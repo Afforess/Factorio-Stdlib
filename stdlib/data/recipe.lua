@@ -2,26 +2,24 @@
 -- @classmod Recipe
 
 local Recipe = {
-    _class = 'Recipe',
-    _ingredients_mt = require('stdlib/data/modules/ingredients'),
-    _results_mt = require('stdlib/data/modules/results')
+    _class = 'Recipe'
 }
 setmetatable(Recipe, require('stdlib/data/data'))
 
 local Is = require('stdlib/utils/is')
 local Item = require('stdlib/data/item')
 
---TODO
---[[
-    Recipe:replace_ingredients --swap whole ingredients
-    Recipe:replace_results --swap whole results
-
-    Finish Recipe:xxx_result stuff
-]]
-
 function Recipe:_caller(recipe)
     local new = self:get(recipe, 'recipe')
-    --[[prototype
+    --new.Ingredients = require('stdlib/data/modules/ingredients')(new)
+    --new.Results = require('stdlib/data/modules/results')(new)
+    return new
+end
+
+-- Returns a formated ingredient or prodcut table
+local function format(ingredient, result_count)
+    --[[
+        --[[prototype
         type, name
         localised_name[opt]
         localised_description[opt]
@@ -52,84 +50,8 @@ function Recipe:_caller(recipe)
             always_show_products <boolean>
         }
     --]]
-    -- Convert the recipe to difficult format
-
-    -- Convert the ingredients to full format
-    --new:Ingredients()
-
-    -- Convert the results to full format
-    --new:Results()
-    return new
-end
-
-function Recipe:Results(get_expensive)
-    if self:valid('recipe') then
-        if get_expensive then
-            self:make_difficult()
-        end
-        if self.normal then
-            if self.normal.result then
-                self.normal.results = {
-                    {type = 'item', name = self.normal.result, amount = self.normal.result_count or 1}
-                }
-                self.normal.result = nil
-                self.normal.result_count = nil
-            end
-            self.normal.results._owner = self
-            self.normal.results._valid = 'results'
-            setmetatable(self.normal.results, Recipe._results_mt)
-            if self.expensive.result then
-                self.expensive.results = {
-                    {type = 'item', name = self.expensive.result, amount = self.expensive.result_count or 1}
-                }
-                self.expensive.result = nil
-                self.expensive.result_count = nil
-            end
-            self.expensive.results._owner = self
-            self.expensive.results._valid = 'results'
-            setmetatable(self.expensive.results, Recipe._results_mt)
-            return get_expensive and self.expensive.results or self.normal.results
-        else
-            if self.result then
-                self.results = {
-                    {type = 'item', name = self.result, amount = self.result_count or 1}
-                }
-                self.result = nil
-                self.result_count = nil
-            end
-            self.results._owner = self
-            self.results._valid = 'results'
-            return setmetatable(self.results, Recipe._results_mt)
-        end
-    end
-    return self
-end
-
-function Recipe:Ingredients(get_expensive)
-    if self:valid('recipe') then
-        if get_expensive then
-            self:make_difficult()
-        end
-        if self.normal then
-            self.normal.ingredients._owner = self
-            self.normal.ingredients._valid = 'ingredients'
-            setmetatable(self.normal.ingredients, Recipe._ingredients_mt)
-            self.expensive.ingredients._owner = self
-            self.expensive.ingredients._valid = 'ingredients'
-            setmetatable(self.expensive.ingredients, Recipe._ingredients_mt)
-            return get_expensive and self.expensive.ingredients or self.normal.ingredients
-        else
-            self.ingredients._owner = self
-            self.ingredients._valid = 'ingredients'
-            return setmetatable(self.ingredients, Recipe._ingredients_mt)
-        end
-    end
-    return self
-end
-
--- Returns a formated ingredient or prodcut table
-local function format(ingredient, result_count)
     --[[
+
     Ingredient table
     {"name", amount} -- Assumes a type of "item"
     {

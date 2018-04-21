@@ -1,3 +1,0 @@
---luacheck: ignore
-
-return {}

@@ -73,7 +73,7 @@ function Data.create_data_globals(files)
     return Data
 end
 
---[Classes]--------------------------------------------------------------------
+--(( CLASSES ))--
 
 --- Is this a valid object
 -- @tparam[opt] string type if present is the object this type
@@ -189,8 +189,9 @@ end
 
 --(( Flags ))--
 function Data:Flags()
-    if self:valid() and self.flags then
-        return setmetatable(self.flags, require('stdlib/utils/classes/string_array'))
+    if self:valid() then
+        self.flags = rawget(self, 'flags') or {}
+        return setmetatable(self.flags, self._classes.string_array)
     end
 end
 
@@ -231,9 +232,15 @@ function Data:get_function_results(func, ...)
     end
 end
 
+--- Set the string array class to the field if the field is present
+-- @tparam table field
+-- @treturn self
 function Data:set_string_array(field)
-    if self:valid() and self[field] then
-        setmetatable(rawget(self, field), require('stdlib/utils/classes/string_array'))
+    if self:valid() then
+        local has = rawget(self, field)
+        if Is.Table(has) then
+            setmetatable(has, self._classes.string_arrary)
+        end
     end
     return self
 end
@@ -481,5 +488,6 @@ Data._mt = {
     __call = Data._caller,
     __tostring = Data.tostring
 }
+--))
 
 return Data

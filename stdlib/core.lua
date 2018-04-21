@@ -37,6 +37,9 @@ local Core = {
     __call = function(t, ...)
         return t:_caller(...)
     end,
+    _classes = {
+        string_array = require('stdlib/utils/classes/string_array')
+    }
 }
 Core.__index = Core
 

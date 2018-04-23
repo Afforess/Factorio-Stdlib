@@ -1,6 +1,9 @@
 # Exclude the build directory
 .build/
 
+# Exclude the output director
+.output/
+
 # Temporarily Exclude mod file changes
 mod/*
 !mod/info.json

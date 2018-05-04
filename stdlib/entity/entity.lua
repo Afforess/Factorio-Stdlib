@@ -235,4 +235,22 @@ function Entity.revive(ghost, player_index, raise_script_event)
     end
 end
 
+function Entity.damaged(entity)
+    return entity.health and entity.prototype.max_health and entity.health < entity.prototype.max_health
+end
+
+function Entity.is_circuit_connected(entity)
+    local list = entity.circuit_connected_entities
+    return list and (next(list.red) or next(list.green))
+end
+
+function Entity.has_fluidbox(entity)
+    local box = entity.fluidbox
+    return box and #box > 0
+end
+
+function Entity.can_deconstruct(entity)
+    return entity.minable and entity.prototype.selectable_in_game and not entity.has_flag('not-deconstructable')
+end
+
 return Entity

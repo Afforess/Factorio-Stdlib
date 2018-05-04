@@ -31,10 +31,7 @@ function Sprites.empty_picture()
         height = 1
     }
 end
-
-function Sprites.empty_sprite()
-    return Sprites.empty_picture()
-end
+Sprites.empty_sprite = Sprites.empty_picture
 
 --- Quick to use empty pictures.
 -- @treturn table an empty pictures table
@@ -51,10 +48,7 @@ function Sprites.empty_pictures()
         direction_count = 1
     }
 end
-
-function Sprites.empty_animation()
-    return Sprites.empty_pictures()
-end
+Sprites.empty_animation = Sprites.empty_pictures
 
 --- Quick to use empty animation.
 -- @treturn table an empty animations table

@@ -11,8 +11,6 @@ local Item = require('stdlib/data/item')
 
 function Recipe:_caller(recipe)
     local new = self:get(recipe, 'recipe')
-    --new.Ingredients = require('stdlib/data/modules/ingredients')(new)
-    --new.Results = require('stdlib/data/modules/results')(new)
     return new
 end
 

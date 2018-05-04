@@ -31,29 +31,63 @@ Recipe:remove_fields()
 ------------------------------------------------------------------------------
 Recipe()
 
-Recipe:Ingredients()
-Recipe:Results()
+Recipe:Ingredients() -- wrapper to Products(type)
+Recipe:Results() -- wrapper to Products(type)
+Recipe:Products(recipe, type, difficulty)
+:get(recipe, type, difficulty)
+:add()
+:remove()
+:replace()
+:convert()
+:clear()
+:recipe() -- return recipe object
 
-Recipe:make_difficult()
-Recipe:make_simple()
+:make_difficult()
+:make_simple()
 
-Recipe:change_category()
+-- affects top level
+:change_category()
+.crafting_machine_tint
 
--- Wrappers to set_field
-Recipe:set_hidden()
-Recipe:set_enabled()
+-- Wrappers to recipe difficulty data (set_field)
+-- Maybe override set_field/s()
+.ingredients, -- table
+.results, -- table
+.result, -- string
+.result_count, -- number
+-- string fields
+.main_product,
+-- number fields
+.energy_required,
+.requester_paste_multiplier,
+.overload_multiplier,
+.emissions_multiplier,
+-- bool fields
+.enabled,
+.hidden,
+.hide_from_stats,
+.allow_decomposition,
+.allow_as_intermediate,
+.allow_intermediates,
+.always_show_made_in,
+.show_amount_in_title,
+.always_show_products,
 
-Recipe:clear_ingredients()
-Recipe:replace_ingredients()
-Recipe:replace_ingredient()
-Recipe:add_ingredient()
-Recipe:remove_ingredient()
+:set_hidden()
+:set_enabled()
 
-Recipe:clear_results()
-Recipe:replace_results()
-Recipe:replace_result()
-Recipe:add_result()
-Recipe:remove_result()
+-- Wrappers to Products()
+:clear_ingredients()
+:replace_ingredients()
+:replace_ingredient()
+:add_ingredient()
+:remove_ingredient()
+:clear_results()
+:replace_results()
+:replace_result()
+:add_result()
+:remove_result()
 
-Recipe:add_unlock()
-Recipe:remove_unlock()
+-- Wrappers to Technology()
+:add_unlock()
+:remove_unlock()

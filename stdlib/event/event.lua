@@ -13,11 +13,11 @@
 -- @module Event
 -- @usage local Event = require('stdlib/event/event')
 
-
 local table = require('stdlib/utils/table')
 
 --Holds the event registry
 local event_registry = {}
+local event_names = table.invert(defines.events)
 
 local Event = {
     _module = 'Event',
@@ -33,9 +33,11 @@ local Event = {
     custom_events = {}, -- Holds custom event ids
     protected_mode = false,
     inspect_event = false,
+    inspect_append = false, -- Only used for write_file, can cause desyncs elsewhere
     force_crc = false,
+    event_order = nil, -- Assigned when needed due to crash in 0.16.41
+    counts = {}, -- assigned when needed
     stop_processing = {}, -- just has to be unique
-    event_names = table.invert(defines.events)
 }
 setmetatable(Event, require('stdlib/core'))
 
@@ -61,6 +63,14 @@ end
 
 local function valid_event_id(id)
     return (tonumber(id) and id >= 0) or (Is.String(id) and not bootstrap_register[id])
+end
+
+local function get_event_name(name)
+    return event_names[name] or table.invert(Event.custom_events)[name] or name or 'unknown'
+end
+
+local function get_file_path(append)
+    return script.mod_name .. '/Event/' .. append
 end
 
 --- Registers a handler for the given events.
@@ -237,16 +247,8 @@ end
 --
 -- Call any matcher and, as applicable, the event handler, in protected mode.  Errors are
 -- caught and logged to stdout but event processing proceeds thereafter; errors are suppressed.
-local function run_protected(registered, event)
+local function run_protected(event, registered)
     local success, err
-
-    if Event.inspect_event or event.inspect_event then
-        if game then
-            Event._inspect_count = Event._inspect_count or 0
-            game.write_file(script.mod_name..'/event-trigger.lua', inspect(event) .. '\n', Event._inspect_count > 0)
-            Event._inspect_count = Event._inspect_count + 1
-        end
-    end
 
     if registered.matcher then
         success, err = pcall(registered.matcher, event, registered.pattern)
@@ -258,17 +260,9 @@ local function run_protected(registered, event)
     end
 
     -- If the handler errors lets make sure someone notices
-    if not success then
-        if not Event.log_and_print(err) then
-            -- no players received the message, force a real error so someone notices
-            error(err)
-        end
-    end
-
-    -- force a crc check if option is enabled. This is a debug option and will hamper performance if enabled
-    if (Event.force_crc or event.force_crc) and game then
-        log('CRC check called for event [' .. event.name .. ']')
-        game.force_crc()
+    if not success and not Event.log_and_print(err) then
+        -- no players received the message, force a real error so someone notices
+        error(err)
     end
 
     return success and err or nil
@@ -310,14 +304,15 @@ function Event.dispatch(event)
     end
 
     if registry then
-        -- protected_mode runs the handler and matcher in pcall, additionaly forcing a crc can only be
+        -- protected_mode runs the handler and matcher in pcall,
+        -- additionaly forcing a crc or inspect can only be
         -- accomplished in protected_mode
         local protected = Event.protected_mode or event.protected_mode
 
         --add the tick if it is not present, this only affects calling Event.dispatch manually
         --doing the check up here as it will faster than checking every iteration for a constant value
-        event.tick = event.tick or game and game.tick or 0
-        event.define_name = event.name and Event.event_names[event.name]
+        event.tick = event.tick or (game and game.tick) or 0
+        event.define_name = event_names[event.name or '']
 
         for _, registered in ipairs(registry) do
             -- Check for userdata and stop processing this and further handlers if not valid
@@ -329,8 +324,16 @@ function Event.dispatch(event)
                 end
             end
 
+            if (Event.inspect_event or event.inspect_event) and game then
+                if not Event.inspect_append then
+                    game.remove_path(get_file_path('events/'))
+                    Event.inspect_append = true
+                end
+                game.write_file(get_file_path('events/' .. get_event_name(event.input_name or event.name) .. '.lua'), inspect(event) .. '\n', true)
+            end
+
             if protected then
-                if run_protected(registered, event) == Event.stop_processing then
+                if run_protected(event, registered) == Event.stop_processing then
                     return
                 end
             elseif registered.matcher then
@@ -343,6 +346,12 @@ function Event.dispatch(event)
                 if registered.handler(event) == Event.stop_processing then
                     return
                 end
+            end
+
+            -- force a crc check if option is enabled. This is a debug option and will hamper performance if enabled
+            if (Event.force_crc or event.force_crc) and game then
+                log('CRC check called for event [' .. event.name .. ']')
+                game.force_crc()
             end
         end
     end
@@ -366,6 +375,11 @@ function Event.generate_event_name(event_name)
     return id
 end
 
+function Event.get_event_name(event_name)
+    Is.Assert.String(event_name, 'event_name must be a string')
+    return Event.custom_events[event_name]
+end
+
 -- TODO complete stub
 function Event.raise_event(...)
     script.raise_event(...)
@@ -386,58 +400,49 @@ function Event.get_registry()
 end
 
 function Event.counts(reg_type)
-    local init, config, load, events, nth = 0, 0, 0, 0, 0
+    local core, nth, on_events = 0, 0, 0
+    local events = {}
     for id, registry in pairs(event_registry) do
         if tonumber(id) then
             if id < 0 then
                 nth = nth + #registry
             else
-                events = events + #registry
+                on_events = on_events + #registry
             end
         else
-            if id == 'on_init' then
-                init = init + #registry
-            elseif id == 'on_configuration_changed' then
-                config = config + #registry
-            elseif id == 'load' then
-                load = load + #registry
+            if bootstrap_register[id] then
+                core = core + #registry
             else
-                events = events + #registry
+                on_events = on_events + #registry
             end
         end
+        local name = get_event_name(id)
+        events[name] = (events[name] or 0) + #registry
     end
     local all = {
-        core = init + load + config,
-        init = init,
-        config = config,
-        load = load,
+        core = core,
         events = events,
         nth = nth,
-        all = init + config + load + events + nth
+        on_events = on_events,
+        total = on_events + nth + core
     }
     return reg_type and all[reg_type] or all
 end
 
 function Event.dump_data()
-    local log_file = function(name)
-        return script.mod_name .. '/Events/' .. (name or '_') .. '.lua'
-    end
+    Event.counts = Event.counts()
+    Event.event_order = script.get_event_order()
+    game.write_file(get_file_path('Event.lua'), inspect(Event))
 
-    local _options = function(name)
-        return {comment = false, sparse = true, compact = true, indent = '  ', nocode = true, name = name or nil, metatostring = false}
-    end
-
-    Event._counts_total = Event.counts()
-    game.write_file(log_file('registry'), inspect(event_registry))
-    game.write_file(log_file('Event'), inspect(Event))
-
-    local t = {}
-    for event in pairs(event_registry) do
+    local r, t = {}, {}
+    for event, data in pairs(event_registry) do
+        r[get_event_name(event)] = data
         if valid_event_id(event) then
-            t[event] = script.get_event_handler(event)
+            t[get_event_name(event)] = script.get_event_handler(event)
         end
     end
-    game.write_file(log_file('registered_events'), inspect(t))
+    game.write_file(get_file_path('registry.lua'), inspect(r, {longkeys = true, arraykeys = true}))
+    game.write_file(get_file_path('registered_events.lua'), inspect(t, {longkeys = true, arraykeys = true}))
 end
 
 --- Filters events related to entity_type.

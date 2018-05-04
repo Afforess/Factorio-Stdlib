@@ -1,7 +1,7 @@
 local DATA_DIRECTORY = 'e:\\Games\\Factorio_Web\\Factorio\\data\\'
-local MODS_DIRECTORY = 'e:\\Games\\Factorio_Web\\Factorio\\appdata\\mods\\'
-local FACTORIO_VERSION = '0.16'
-local BASE_VERSION = '0.16.36'
+-- local MODS_DIRECTORY = 'e:\\Games\\Factorio_Web\\Factorio\\appdata\\mods\\'
+-- local FACTORIO_VERSION = '0.16'
+-- local BASE_VERSION = '0.16.36'
 
 _G.mods = {}
 _G.settings = {}
@@ -15,7 +15,7 @@ local lfs = require('lfs')
 local io = _G.io
 local table = require('stdlib/utils/table')
 local inspect = require('stdlib/utils/vendor/inspect')
-local files = {'data', 'data-update', 'data-final-fixes'}
+-- local files = {'data', 'data-update', 'data-final-fixes'}
 lfs.mkdir('.output')
 local lib = DATA_DIRECTORY .. 'core\\lualib\\?.lua;'
 local core = DATA_DIRECTORY .. 'core\\?.lua;'

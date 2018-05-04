@@ -329,7 +329,9 @@ function Event.dispatch(event)
                     game.remove_path(get_file_path('events/'))
                     Event.inspect_append = true
                 end
-                game.write_file(get_file_path('events/' .. get_event_name(event.input_name or event.name) .. '.lua'), inspect(event) .. '\n', true)
+                local result = inspect(event) .. '\n'
+                game.write_file(get_file_path('events/' .. get_event_name(event.input_name or event.name) .. '.lua'), result, true)
+                game.write_file(get_file_path('events/ORDERED.lua'), result , true)
             end
 
             if protected then

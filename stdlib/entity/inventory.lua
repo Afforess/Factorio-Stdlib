@@ -42,48 +42,6 @@ function Inventory.copy_as_simple_stacks(src, dest, clear)
     return left_over
 end
 
--- Remove all items inside an entity and return an array of SimpleItemStacks removed
--- @param entity: The entity object to remove items from
--- @return table: a table of SimpleItemStacks or nil if empty
--- local function get_all_items_inside(entity, existing_stacks)
---     local item_stacks = existing_stacks or {}
---     --Inserters need to check held_stack
---     if entity.type == "inserter" then
---         local stack = entity.held_stack
---         if stack.valid_for_read then
---             item_stacks[#item_stacks+1] = {name=stack.name, count=stack.count, health=stack.health}
---             stack.clear()
---         end
---         --Entities with transport lines only need to check each line individually
---     elseif transport_types[entity.type] then
---         for i=1, transport_types[entity.type] do
---             local lane = entity.get_transport_line(i)
---             for name, count in pairs(lane.get_contents()) do
---                 local cur_stack = {name=name, count=count, health=1}
---                 item_stacks[#item_stacks+1] = cur_stack
---                 lane.remove_item(cur_stack)
---             end
---         end
---     else
---         --Loop through regular inventories
---         for _, inv in pairs(defines.inventory) do
---             local inventory = entity.get_inventory(inv)
---             if inventory and inventory.valid then
---                 if inventory.get_item_count() > 0 then
---                     for i=1, #inventory do
---                         if inventory[i].valid_for_read then
---                             local stack = inventory[i]
---                             item_stacks[#item_stacks+1] = {name=stack.name, count=stack.count, health=stack.health or 1}
---                             stack.clear()
---                         end
---                     end
---                 end
---             end
---         end
---     end
---     return (item_stacks[1] and item_stacks) or {}
--- end
-
 --- Given a function, apply it to each slot in the given inventory.
 -- Passes the index of a slot as the second argument to the given function.
 -- <p>Iteration is aborted if the applied function returns true for any element during iteration.
@@ -119,6 +77,47 @@ function Inventory.each_reverse(inventory, func, ...)
         end
     end
     return index and inventory[index]
+end
+
+--- Get a table of a players main inventory and quickbar.
+-- @tparam LuaPlayer player
+-- @treturn table
+function Inventory.get_main_inventories(player)
+    return {player.get_quickbar(), player.get_main_inventory()}
+end
+
+--- Return a blueprint stack from either stack or blueprint_book
+-- @tparam LuaItemStack stack
+-- @tparam[opt] bool is_bp_setup
+-- @tparam[opt] bool no_book
+-- @treturn LuaItemStack
+function Inventory.get_blueprint(stack, is_bp_setup, no_book)
+    if stack and stack.valid and stack.valid_for_read then
+        if stack.is_blueprint then
+            return not is_bp_setup and stack or stack.is_blueprint_setup() and stack
+        elseif stack.is_blueprint_book and not no_book and stack.active_index then
+            return Inventory.get_blueprint(stack.get_inventory(defines.inventory.item_main)[stack.active_index], is_bp_setup)
+        end
+    end
+end
+
+--- Is the stack a blueprint with label?
+-- @tparam LuaItemStack stack
+-- @tparam string label
+-- @treturn bool
+function Inventory.is_named_bp(stack, label)
+    return stack and stack.valid_for_read and stack.is_blueprint and stack.label and stack.label:find('^' .. label)
+end
+
+--- Returns either the item at a position, or the filter at the position if there isn't an item there.
+-- @tparam LuaInventory inventory
+-- @tparam int idx
+-- @tparam[opt] bool item_only
+-- @tparam[opt] bool filter_only
+-- @return the item or filter
+function Inventory.get_item_or_filter(inventory, idx, item_only, filter_only)
+    local filter = not item_only and inventory.get_filter(idx)
+    return filter or (not filter_only and inventory[idx].valid_for_read and inventory[idx].name) or nil
 end
 
 return Inventory

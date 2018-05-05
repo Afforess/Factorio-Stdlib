@@ -12,6 +12,8 @@ local table = require('stdlib/utils/table')
 local Is = require('stdlib/utils/is')
 local Inspect = require('stdlib/utils/vendor/inspect')
 
+local groups = require('stdlib/data/modules/groups')
+
 local Data = {
     _class = 'Data',
     Sprites = require('stdlib/data/modules/sprites'),
@@ -29,30 +31,6 @@ local Data = {
 }
 Data.__index = Data
 setmetatable(Data, Core)
---))
-
---(( Fluff ))--
-local item_and_fluid_types = {
-    'item',
-    'ammo',
-    'armor',
-    'gun',
-    'capsule',
-    'repair-tool',
-    'mining-tool',
-    'item-with-entity-data',
-    'rail-planner',
-    'tool',
-    'blueprint',
-    'deconstruction-item',
-    'blueprint-book',
-    'selection-tool',
-    'item-with-tags',
-    'item-with-label',
-    'item-with-inventory',
-    'module',
-    'fluid'
-}
 
 -- load the data portion of stdlib into globals, by default it loads everything into an ALLCAPS name.
 -- Alternatively you can pass a dictionary of `[global names] -> [require path]`.
@@ -62,35 +40,35 @@ local item_and_fluid_types = {
 -- require('stdlib/data/data).create_data_globals()
 function Data.create_data_globals(files)
     files =
-        files or
-        {
-            RECIPE = 'stdlib/data/recipe',
-            ITEM = 'stdlib/data/item',
-            FLUID = 'stdlib/data/fluid',
-            ENTITY = 'stdlib/data/entity',
-            TECHNOLOGY = 'stdlib/data/technology',
-            CATEGORY = 'stdlib/data/category',
-            DATA = 'stdlib/data/data'
-        }
+    files or
+    {
+        RECIPE = 'stdlib/data/recipe',
+        ITEM = 'stdlib/data/item',
+        FLUID = 'stdlib/data/fluid',
+        ENTITY = 'stdlib/data/entity',
+        TECHNOLOGY = 'stdlib/data/technology',
+        CATEGORY = 'stdlib/data/category',
+        DATA = 'stdlib/data/data'
+    }
     Data.create_stdlib_globals(files)
 
     return Data
-end --
+end --))
 
---(( CLASSES ))--
+--(( METHODS ))--
 
 --- Is this a valid object
 -- @tparam[opt] string type if present is the object this type
 -- @treturn self
-function Data:valid(type)
+function Data:is_valid(type)
     if type then
-        return self.valid == type or false
+        return rawget(self, 'valid') == type or false
     else
-        return self.valid and true or false
+        return rawget(self, 'valid') and true or false
     end
 end
 
-function Data:class(class)
+function Data:is_class(class)
     if class then
         return self._class == class or false
     else
@@ -102,6 +80,8 @@ function Data:log(tbl)
     local no_meta = function(item, path)
         if path[#path] ~= Inspect.METATABLE then
             return item
+        else
+            return {}
         end
     end
     log(Inspect(tbl and tbl or self, {process = no_meta}))
@@ -117,7 +97,7 @@ end
 -- @tparam boolean bool
 -- @treturn self
 function Data:continue(bool)
-    self.valid = bool and self.type or false
+    rawset(self, 'valid', (bool and rawget(self, 'raw') and self.type) or false)
     return self
 end
 
@@ -125,7 +105,7 @@ end
 -- @tparam function func the function to test, self is passed as the first paramater
 -- @treturn self
 function Data:continue_if(func, ...)
-    self.valid = self.type and func(self, ...) or false
+    rawset(self, 'valid', (func(self, ...) and rawget(self, 'raw') and self.type) or false)
     return self
 end
 
@@ -134,7 +114,7 @@ end
 -- @treturn self
 function Data:extend(force)
     if self.valid then
-        if not self.extended or not self._skip_extend or force then
+        if not self.extended or force then
             local t = data.raw[self.type]
             if t == nil then
                 t = {}
@@ -143,8 +123,6 @@ function Data:extend(force)
             t[self.name] = self.raw
             self.extended = true
         end
-    else
-        --error('Could not extend data', 2)
     end
     return self
 end
@@ -155,10 +133,10 @@ end
 -- @treturn self
 function Data:copy(new_name, mining_result)
     Is.Assert.String(new_name, 'New name is required')
-    if self:valid() then
+    if self:is_valid() then
         mining_result = mining_result or new_name
         --local from = self.name
-        local copy = table.deep_copy(self)
+        local copy = table.deep_copy(rawget(self, 'raw'))
         copy.name = new_name
 
         -- For Entities
@@ -194,8 +172,8 @@ end
 
 --(( Flags ))--
 function Data:Flags()
-    if self:valid() then
-        self.flags = rawget(self, 'flags') or {}
+    if self:is_valid() then
+        self.flags = self.flags or {}
         return setmetatable(self.flags, self._classes.string_array)
     end
 end
@@ -220,7 +198,7 @@ end
 -- @tparam function func then function to run.
 -- @treturn self
 function Data:run_function(func, ...)
-    if self:valid() then
+    if self:is_valid() then
         func(self, ...)
     end
     return self
@@ -232,7 +210,7 @@ Data.execute = Data.run_function
 -- @treturn boolean if the object was valid
 -- @treturn the results from the passed function
 function Data:get_function_results(func, ...)
-    if self:valid() then
+    if self:is_valid() then
         return true, func(self, ...)
     end
 end
@@ -241,10 +219,10 @@ end
 -- @tparam table field
 -- @treturn self
 function Data:set_string_array(field)
-    if self:valid() then
-        local has = rawget(self, field)
+    if self:is_valid() then
+        local has = self[field]
         if Is.Table(has) then
-            setmetatable(has, self._classes.string_arrary)
+            setmetatable(has, self._classes.string_array)
         end
     end
     return self
@@ -255,10 +233,7 @@ end
 -- @tparam mixed value the value to set on the field.
 -- @treturn self
 function Data:set_field(field, value)
-    --if self:valid() then
-        --rawset(self, field, value)
-        self[field] = value
-    --end
+    self[field] = value
     return self
 end
 Data.set = Data.set_field
@@ -267,9 +242,9 @@ Data.set = Data.set_field
 -- @tparam table tab dictionary table of fields to set.
 -- @treturn self
 function Data:set_fields(tab)
-    if self:valid() then
+    if self:is_valid() then
         for field, value in pairs(tab) do
-            rawset(self, field, value)
+            self[field] = value
         end
     end
     return self
@@ -280,8 +255,8 @@ end
 -- @tparam mixed default_value return this if the field doesn't exist
 -- @treturn nil|mixed the value of the field
 function Data:get_field(field, default_value)
-    if self:valid() then
-        local has = rawget(self, field)
+    if self:is_valid() then
+        local has = self[field]
         if has ~= nil then
             return has
         else
@@ -296,14 +271,10 @@ end
 -- @treturn mixed the parameters
 -- @usage local icon, name = Data('stone-furnace', 'furnace'):get_fields({icon, name})
 function Data:get_fields(arr, as_dictionary)
-    if self:valid() then
+    if self:is_valid() then
         local values = {}
         for _, name in pairs(arr) do
-            if as_dictionary then
-                values[name] = rawget(self, name)
-            else
-                values[#values + 1] = rawget(self, name)
-            end
+            values[as_dictionary and name or #values + 1] = self[name]
         end
         return as_dictionary and values or table.unpack(values)
     end
@@ -313,8 +284,8 @@ end
 -- @tparam string field The field to remove
 -- @treturn self
 function Data:remove_field(field)
-    if self:valid() then
-        rawset(self, field, nil)
+    if self:is_valid() then
+        self[field] = nil
     end
     return self
 end
@@ -323,9 +294,9 @@ end
 -- @tparam table arr string array of fields to remove.
 -- @treturn self
 function Data:remove_fields(arr)
-    if self:valid() then
+    if self:is_valid() then
         for _, field in pairs(arr) do
-            rawset(self, field, nil)
+            self[field] = nil
         end
     end
     return self
@@ -337,7 +308,7 @@ end
 -- note if subgroup is non nil and subgroub is not valid order wil not be changed.
 -- @treturn self
 function Data:subgroup_order(subgroup, order)
-    if self:valid() then
+    if self:is_valid() then
         if subgroup then
             if data.raw['item-subgroup'][subgroup] then
                 self.subgroup = subgroup
@@ -356,7 +327,7 @@ end
 -- @tparam string icon
 -- @tparam int size
 function Data:replace_icon(icon, size)
-    if self:valid() then
+    if self:is_valid() then
         if type(icon) == 'table' then
             self.icons = icon
             self.icon = nil
@@ -375,19 +346,19 @@ end
 -- @tparam[opt=false] boolean copy return a copy of the icons table
 -- @treturn table icons
 function Data:get_icons(copy)
-    if self:valid() then
+    if self:is_valid() then
         return copy and table.deepcopy(self.icons) or self.icons
     end
 end
 
 function Data:get_icon()
-    if self:valid() then
+    if self:is_valid() then
         return self.icon
     end
 end
 
 function Data:make_icons(...)
-    if self:valid() then
+    if self:is_valid() then
         if not self.icons then
             if self.icon then
                 self.icons = {{icon = self.icon, icon_size = self.icon_size}}
@@ -404,7 +375,7 @@ function Data:make_icons(...)
 end
 
 function Data:set_icon_at(index, values)
-    if self:valid() then
+    if self:is_valid() then
         if self.icons then
             for k, v in pairs(values or {}) do
                 self.icons[index].k = v
@@ -417,15 +388,19 @@ end
 --- Get the objects name.
 -- @treturn string the objects name
 function Data:tostring()
-    return self.valid and self.name and self.type and self.name or ''
+    return self.valid and (self.name and self.type) and (self.type .. '/' .. self.name) or rawtostring(self)
 end
 
-function Data:pairs(data_type)
-    local t = data.raw[data_type or self.type or self._class:lower()] or {}
+function Data:pairs(source)
     local index, val
+    if not source and self.type then
+        source = data.raw[self.type]
+    else
+        source = Is.String(source) and data.raw[source] or Is.Assert.Table(source, 'Source missing')
+    end
 
     local function _next()
-        index, val = next(t, index)
+        index, val = next(source, index)
         if index then
             return index, self(val)
         end
@@ -447,6 +422,7 @@ function Data:get(object, object_type, opts)
         extended = false,
         overwrite = false,
         raw = nil,
+        options = opts,
     }
     if type(object) == 'table' then
         Is.Assert(object.type and object.name, 'Name and Type are required')
@@ -454,16 +430,15 @@ function Data:get(object, object_type, opts)
         new.raw = object
         new.valid = object.type
         --Is a data-raw that we are overwriting
-        new.extended = data.raw[object.type] and data.raw[object.type][object.name] == object
-
-        if new.extended then
-            --overwrites are always logged?
-            new.overwrite = true
+        local existing = data.raw[object.type] and data.raw[object.type][object.name]
+        new.extended = existing == object
+        new.overwrite = not new.extended and existing and true or false
+        if new.overwrite then
             log('NOTICE: Overwriting ' .. object.type .. '/' .. object.name)
         end
     elseif type(object) == 'string' then
         --Get type from object_type, or fluid or item_and_fluid_types
-        local types = (object_type and {object_type}) or (self._class == 'Item' and item_and_fluid_types)
+        local types = (object_type and {object_type}) or (self._class == 'Item' and groups.item_and_fluid)
         if types then
             for _, type in pairs(types) do
                 new.raw = data.raw[type] and data.raw[type][object]
@@ -478,15 +453,11 @@ function Data:get(object, object_type, opts)
         end
     end
 
+    setmetatable(new, self.object_mt)
     if new.valid then
-        --new.valid = new.raw.type -- can change
-        --new.options = table.merge(table.deep_copy(self._default_options), opts)
-        --setmetatable(new, self:get_object_mt()) --assign new table based on self.mt_constructor
-        --setmetatable(new, self.object_mt)
-        --new:set_string_array('flags')
-        --new:set_string_array('crafting_categories')
-        --new:set_string_array('mining_categories')
-        --return new:extend()
+        new:set_string_array('flags')
+        new:set_string_array('crafting_categories')
+        new:set_string_array('mining_categories')
     else
         local trace = traceback()
         local msg = (self._class and self._class or '') .. (self.name and '/' .. self.name or '') .. ' '
@@ -497,15 +468,13 @@ function Data:get(object, object_type, opts)
         trace = msg .. '  [' .. trace .. ']'
         log(trace)
     end
-    setmetatable(new, self.object_mt)
     return new:extend()
-    --return self
 end
 Data._caller = Data.get
 
 Data.object_mt = {
     __index = function(t, k)
-        return rawget(t, 'valid') and (rawget(t, 'raw') and t.raw[k] or Data[k]) or function() return t end
+        return rawget(t, 'raw') and t.raw[k] or Data[k]
     end,
     __newindex = function(t, k, v)
         if rawget(t, 'valid') and rawget(t, 'raw') then
@@ -515,29 +484,16 @@ Data.object_mt = {
     __call = Data._caller,
     __tostring = Data.tostring,
 }
---))
+--)) Methods ((--
 
 --(( TESTS ))--
 require('spec/setup/dataloader')
--- local a = Data('stone-furnace', 'recipe')('stone-furnace', 'recipe')
--- a.test = true
--- --print(inspect(a))
+_G.log = function(m) print(inspect(m)) end
 
--- local b =
---     Data {
---     name = 'stone-test',
---     type = 'recipe',
---     ingredients = {},
---     results = {}
--- }
--- b.valid = false
--- b.test = 'wtf'
--- b.valid = b.raw and b.raw.type
--- print(inspect(b))
---print(inspect(data.raw.recipe['stone-test']))
+local b = Data('miner', 'recipe')
+for _, d in b:pairs() do
+    print(d)
+end
+log(groups.item_and_fluid)
 
-local c = Data('fake', 'fake')
-c.test = 'this'
-print(inspect(c))
-
-return Data
+--Data('stone-furnace', 'recipe'):log():copy('stone-furnace'):add_flag('test'):log()('miner', 'recipe'):log()

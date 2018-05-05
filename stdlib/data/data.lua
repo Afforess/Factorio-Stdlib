@@ -1,6 +1,8 @@
 --- Data
 -- @classmod Data
 
+
+--(( DATA HEADER ))--
 if _G.remote and _G.script then
     error('Data Modules can only be required in the data stage', 2)
 end
@@ -27,7 +29,9 @@ local Data = {
 }
 Data.__index = Data
 setmetatable(Data, Core)
+--))
 
+--(( Fluff ))--
 local item_and_fluid_types = {
     'item',
     'ammo',
@@ -71,7 +75,7 @@ function Data.create_data_globals(files)
     Data.create_stdlib_globals(files)
 
     return Data
-end
+end --
 
 --(( CLASSES ))--
 
@@ -80,9 +84,9 @@ end
 -- @treturn self
 function Data:valid(type)
     if type then
-        return self._valid == type or false
+        return self.valid == type or false
     else
-        return self._valid and true or false
+        return self.valid and true or false
     end
 end
 
@@ -113,7 +117,7 @@ end
 -- @tparam boolean bool
 -- @treturn self
 function Data:continue(bool)
-    self._valid = bool and self.type or false
+    self.valid = bool and self.type or false
     return self
 end
 
@@ -121,7 +125,7 @@ end
 -- @tparam function func the function to test, self is passed as the first paramater
 -- @treturn self
 function Data:continue_if(func, ...)
-    self._valid = self.type and func(self, ...) or false
+    self.valid = self.type and func(self, ...) or false
     return self
 end
 
@@ -129,17 +133,18 @@ end
 -- @tparam[opt] boolean force Extend even if it is already extended
 -- @treturn self
 function Data:extend(force)
-    if self and ((self.name and self.type) or self:valid()) then
-        if not self._extended or not self._skip_extend or force then
+    if self.valid then
+        if not self.extended or not self._skip_extend or force then
             local t = data.raw[self.type]
             if t == nil then
                 t = {}
                 data.raw[self.type] = t
             end
-            t[self.name] = self
+            t[self.name] = self.raw
+            self.extended = true
         end
     else
-        error('Could not extend data', 2)
+        --error('Could not extend data', 2)
     end
     return self
 end
@@ -250,9 +255,10 @@ end
 -- @tparam mixed value the value to set on the field.
 -- @treturn self
 function Data:set_field(field, value)
-    if self:valid() then
-        rawset(self, field, value)
-    end
+    --if self:valid() then
+        --rawset(self, field, value)
+        self[field] = value
+    --end
     return self
 end
 Data.set = Data.set_field
@@ -411,7 +417,7 @@ end
 --- Get the objects name.
 -- @treturn string the objects name
 function Data:tostring()
-    return self.name and self.type and self.name or ''
+    return self.valid and self.name and self.type and self.name or ''
 end
 
 function Data:pairs(data_type)
@@ -436,13 +442,23 @@ end
 function Data:get(object, object_type, opts)
     Is.Assert(object, 'object string or table is required')
 
-    local new
+    local new = {
+        valid = false,
+        extended = false,
+        overwrite = false,
+        raw = nil,
+    }
     if type(object) == 'table' then
         Is.Assert(object.type and object.name, 'Name and Type are required')
-        new = object
-        local existing = data.raw[object.type] and data.raw[object.type][object.name]
-        new._extended = existing == object
-        if existing and not new._extended then
+
+        new.raw = object
+        new.valid = object.type
+        --Is a data-raw that we are overwriting
+        new.extended = data.raw[object.type] and data.raw[object.type][object.name] == object
+
+        if new.extended then
+            --overwrites are always logged?
+            new.overwrite = true
             log('NOTICE: Overwriting ' .. object.type .. '/' .. object.name)
         end
     elseif type(object) == 'string' then
@@ -450,9 +466,10 @@ function Data:get(object, object_type, opts)
         local types = (object_type and {object_type}) or (self._class == 'Item' and item_and_fluid_types)
         if types then
             for _, type in pairs(types) do
-                new = data.raw[type] and data.raw[type][object]
-                if new then
-                    new._extended = true
+                new.raw = data.raw[type] and data.raw[type][object]
+                if new.raw then
+                    new.valid = new.raw.type
+                    new.extended = true
                     break
                 end
             end
@@ -461,33 +478,66 @@ function Data:get(object, object_type, opts)
         end
     end
 
-    if new then
-        new._valid = new.type -- can change
-        new._options = opts
-        setmetatable(new, self._mt)
-        new:set_string_array('flags')
-        new:set_string_array('crafting_categories')
-        new:set_string_array('mining_categories')
-        return new:extend()
+    if new.valid then
+        --new.valid = new.raw.type -- can change
+        --new.options = table.merge(table.deep_copy(self._default_options), opts)
+        --setmetatable(new, self:get_object_mt()) --assign new table based on self.mt_constructor
+        --setmetatable(new, self.object_mt)
+        --new:set_string_array('flags')
+        --new:set_string_array('crafting_categories')
+        --new:set_string_array('mining_categories')
+        --return new:extend()
     else
         local trace = traceback()
         local msg = (self._class and self._class or '') .. (self.name and '/' .. self.name or '') .. ' '
         msg = msg .. (object_type and (object_type .. '/') or '') .. tostring(object) .. ' does not exist.'
 
-        trace = trace:gsub('stack traceback:\n', ''):gsub('.*%(%.%.%.tail calls%.%.%.%)\n', ''):gsub(' in main chunk.*$', '')
+        trace = trace:gsub('stack traceback:\nz', ''):gsub('.*%(%.%.%.tail calls%.%.%.%)\n', ''):gsub(' in main chunk.*$', '')
         trace = trace:gsub('%_%_.*%_%_%/stdlib/data.*\n', ''):gsub('\n', '->'):gsub('\t', '')
         trace = msg .. '  [' .. trace .. ']'
         log(trace)
     end
-    return self
+    setmetatable(new, self.object_mt)
+    return new:extend()
+    --return self
 end
 Data._caller = Data.get
 
-Data._mt = {
-    __index = Data,
+Data.object_mt = {
+    __index = function(t, k)
+        return rawget(t, 'valid') and (rawget(t, 'raw') and t.raw[k] or Data[k]) or function() return t end
+    end,
+    __newindex = function(t, k, v)
+        if rawget(t, 'valid') and rawget(t, 'raw') then
+            t.raw[k] = v
+        end
+    end,
     __call = Data._caller,
-    __tostring = Data.tostring
+    __tostring = Data.tostring,
 }
 --))
+
+--(( TESTS ))--
+require('spec/setup/dataloader')
+-- local a = Data('stone-furnace', 'recipe')('stone-furnace', 'recipe')
+-- a.test = true
+-- --print(inspect(a))
+
+-- local b =
+--     Data {
+--     name = 'stone-test',
+--     type = 'recipe',
+--     ingredients = {},
+--     results = {}
+-- }
+-- b.valid = false
+-- b.test = 'wtf'
+-- b.valid = b.raw and b.raw.type
+-- print(inspect(b))
+--print(inspect(data.raw.recipe['stone-test']))
+
+local c = Data('fake', 'fake')
+c.test = 'this'
+print(inspect(c))
 
 return Data

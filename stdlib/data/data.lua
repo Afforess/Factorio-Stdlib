@@ -418,6 +418,7 @@ function Data:get(object, object_type, opts)
     Is.Assert(object, 'object string or table is required')
 
     local new = {
+        class = self.class or self,
         valid = false,
         extended = false,
         overwrite = false,
@@ -474,14 +475,14 @@ Data._caller = Data.get
 
 Data.object_mt = {
     __index = function(t, k)
-        return rawget(t, 'raw') and t.raw[k] or Data[k]
+        return rawget(t, 'raw') and t.raw[k] or t.class[k]
     end,
     __newindex = function(t, k, v)
         if rawget(t, 'valid') and rawget(t, 'raw') then
             t.raw[k] = v
         end
     end,
-    __call = Data._caller,
+    __call = Data.__call,
     __tostring = Data.tostring,
 }
 --)) Methods ((--
@@ -491,9 +492,9 @@ require('spec/setup/dataloader')
 _G.log = function(m) print(inspect(m)) end
 
 local b = Data('miner', 'recipe')
+print (b.abc)
 for _, d in b:pairs() do
-    print(d)
+    print(d, d._class)
 end
-log(groups.item_and_fluid)
 
---Data('stone-furnace', 'recipe'):log():copy('stone-furnace'):add_flag('test'):log()('miner', 'recipe'):log()
+return Data

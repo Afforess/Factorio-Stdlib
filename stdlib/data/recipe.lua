@@ -9,19 +9,22 @@ setmetatable(Recipe, require('stdlib/data/data'))
 local Is = require('stdlib/utils/is')
 local Item = require('stdlib/data/item')
 
-function Recipe:_caller(recipe)
+local function _caller(self, recipe)
     local new = self:get(recipe, 'recipe')
+    rawset(new, 'Ingredients', {})
+    rawset(new, 'Results', {})
     return new
 end
+rawset(Recipe, '_caller', _caller)
 
 -- Returns a formated ingredient or prodcut table
 local function format(ingredient, result_count)
     local object
     if type(ingredient) == 'table' then
-        if ingredient.valid and ingredient:valid() then
+        if ingredient.valid and ingredient:is_valid() then
             return ingredient
         elseif ingredient.name then
-            if Item(ingredient.name, ingredient.type):valid() then
+            if Item(ingredient.name, ingredient.type):is_valid() then
                 object = table.deepcopy(ingredient)
                 if not object.amount and not (object.amount_min and object.amount_max and object.probability) then
                     error('Result table requires amount or probabilities')
@@ -30,7 +33,7 @@ local function format(ingredient, result_count)
         elseif #ingredient > 0 then
             -- Can only be item types not fluid
             local item = Item(ingredient[1])
-            if item:valid() and item.type ~= 'fluid' then
+            if item:is_valid() and item.type ~= 'fluid' then
                 object = {
                     type = 'item',
                     name = ingredient[1],
@@ -41,7 +44,7 @@ local function format(ingredient, result_count)
     elseif type(ingredient) == 'string' then
         -- Our shortcut so we need to check it
         local item = Item(ingredient)
-        if item:valid() then
+        if item:is_valid() then
             object = {
                 type = item.type == 'fluid' and 'fluid' or 'item',
                 name = ingredient,
@@ -95,7 +98,7 @@ Recipe.rep_ing = Recipe.replace_ingredient
 -- @tparam[opt] string|Concepts.ingredient|boolean expensive
 -- @treturn Recipe
 function Recipe:add_ingredient(normal, expensive)
-    if self:valid() then
+    if self:is_valid() then
         normal, expensive = get_difficulties(normal, expensive)
 
         if self.normal then
@@ -121,7 +124,7 @@ Recipe.add_ing = Recipe.add_ingredient
 -- @tparam string|boolean expensive expensive recipe to remove, or if true remove normal recipe from both
 -- @treturn Recipe
 function Recipe:remove_ingredient(normal, expensive)
-    if self:valid() then
+    if self:is_valid() then
         normal, expensive = get_difficulties(normal, expensive)
         if self.normal then
             if normal then
@@ -144,7 +147,7 @@ Recipe.rem_ing = Recipe.remove_ingredient
 -- @tparam[opt] string|ingredient|boolean expensive
 function Recipe:replace_ingredient(replace, normal, expensive)
     Is.Assert(replace, 'Missing recipe to replace')
-    if self:valid() then
+    if self:is_valid() then
         local n_string = type(normal) == 'string'
         local e_string = type(expensive == true and normal or expensive) == 'string'
         normal, expensive = get_difficulties(normal, expensive)
@@ -164,7 +167,7 @@ end
 
 -- Currently does no checking
 function Recipe:clear_ingredients()
-    if self:valid() then
+    if self:is_valid() then
         if self.normal then
             if self.normal.ingredients then
                 self.normal.ingredients = {}
@@ -183,7 +186,7 @@ end
 -- @tparam[opt] number expensive_energy crafting energy_required for the expensive recipe
 -- @treturn self
 function Recipe:make_difficult(expensive_energy)
-    if self:valid('recipe') and not self.normal then
+    if self:is_valid('recipe') and not self.normal then
         --convert all ingredients
         local normal, expensive = {}, {}
         for _, ingredient in ipairs(self.ingredients) do
@@ -229,9 +232,9 @@ end
 -- @tparam string category_name The new crafting category
 -- @treturn self
 function Recipe:change_category(category_name)
-    if self:valid() then
+    if self:is_valid() then
         local Category = require('stdlib/data/category')
-        self.category = Category(category_name, 'recipe-category'):valid() and category_name or self.category
+        self.category = Category(category_name, 'recipe-category'):is_valid() and category_name or self.category
     end
     return self
 end
@@ -241,7 +244,7 @@ Recipe.set_category = Recipe.change_category
 -- @tparam string tech_name Name of the technology to add the unlock too
 -- @treturn self
 function Recipe:add_unlock(tech_name)
-    if self:valid() then
+    if self:is_valid() then
         local Tech = require('stdlib/data/technology')
         Tech.add_effect(self, tech_name) --self is passed as a valid recipe
     end
@@ -252,7 +255,7 @@ end
 -- @tparam string tech_name Name of the technology to remove the unlock from
 -- @treturn self
 function Recipe:remove_unlock(tech_name)
-    if self:valid('recipe') then
+    if self:is_valid('recipe') then
         local Tech = require('stdlib/data/technology')
         Tech.remove_effect(self, tech_name, 'unlock-recipe')
     end
@@ -263,7 +266,7 @@ end
 -- @tparam boolean enabled Enable or disable the recipe
 -- @treturn self
 function Recipe:set_enabled(enabled)
-    if self:valid() then
+    if self:is_valid() then
         if self.normal then
             self.normal.enabled = enabled
             self.expensive.enabled = enabled
@@ -277,7 +280,7 @@ end
 --- Convert result type to results type.
 -- @treturn self
 function Recipe:convert_results()
-    if self:valid('recipe') then
+    if self:is_valid('recipe') then
         if self.normal then
             if self.normal.result then
                 self.normal.results = {
@@ -310,16 +313,16 @@ end
 -- @tparam[opt] Concepts.Product|string expensive recipe
 -- @treturn self
 function Recipe:set_main_product(main_product, normal, expensive)
-    if self:valid('recipe') then
+    if self:is_valid('recipe') then
         normal, expensive = get_difficulties(normal, expensive)
         local normal_main, expensive_main
         if main_product then
-            if type(main_product) == 'string' and Item(main_product):valid() then
+            if type(main_product) == 'string' and Item(main_product):is_valid() then
                 normal_main = normal and main_product
                 expensive_main = expensive and main_product
             elseif type(main_product) == 'boolean' then
-                normal_main = normal and Item(normal.name):valid() and normal.name
-                expensive_main = expensive and Item(expensive.name):valid() and expensive.name
+                normal_main = normal and Item(normal.name):is_valid() and normal.name
+                expensive_main = expensive and Item(expensive.name):is_valid() and expensive.name
             end
             if self.normal then
                 self.normal.main_product = normal_main
@@ -336,7 +339,7 @@ end
 -- @tparam[opt=false] boolean for_normal
 -- @tparam[opt=false] boolean for_expensive
 function Recipe:remove_main_product(for_normal, for_expensive)
-    if self:valid('recipe') then
+    if self:is_valid('recipe') then
         if self.normal then
             if for_normal or (for_normal == nil and for_expensive == nil) then
                 self.normal.main_product = nil
@@ -356,7 +359,7 @@ end
 -- @tparam[opt] string|Concepts.product|boolean expensive
 -- @tparam[opt] string main_product
 function Recipe:add_result(normal, expensive, main_product)
-    if self:valid() then
+    if self:is_valid() then
         normal, expensive = get_difficulties(normal, expensive)
         self:convert_results()
         self:set_main_product(main_product, normal, expensive)
@@ -377,7 +380,7 @@ end
 -- @tparam[opt] string|Concepts.product|boolean expensive
 -- @tparam[opt] string main_product new main_product to use
 function Recipe:remove_result(normal, expensive, main_product)
-    if self:valid() then
+    if self:is_valid() then
         normal, expensive = get_difficulties(normal, expensive)
         self:convert_results()
         self:set_main_product(main_product, normal, expensive)
@@ -399,7 +402,7 @@ end
 -- @tparam[opt] string|Concepts.product|boolean expensive
 -- @tparam[opt] string main_product
 function Recipe:replace_result(result_name, normal, expensive, main_product)
-    if self:valid() and normal or expensive then
+    if self:is_valid() and normal or expensive then
         result_name = format(result_name)
         if result_name then
             normal, expensive = get_difficulties(normal, expensive)
@@ -419,10 +422,20 @@ function Recipe:replace_result(result_name, normal, expensive, main_product)
     return self
 end
 
-Recipe._mt = {
-    __index = Recipe,
-    __call = Recipe._caller,
-    __tostring = Recipe.tostring
-}
+--(( TESTS ))--
+require('spec/setup/dataloader')
+_G.log = function(m) print(m) end
+
+for _, i in Recipe.__index:pairs("item") do
+    print(i)
+end
+local b = Recipe('stone-furnace')('miner')
+print(b, b._class)
+for _, d in b:pairs() do
+    print(d, d.class._class)
+end
+b:add_ing("stone")
+b:log()
+--print(Recipe.__index('miner', 'recipe').class._class)
 
 return Recipe

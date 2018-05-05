@@ -267,6 +267,28 @@ function Table.merge(tblA, tblB, array_merge, raw)
     return tblA
 end
 
+function Table.array_combine(...)
+    local tables = {...}
+    local new = {}
+    for _, tab in pairs(tables) do
+        for _, v in pairs(tab) do
+            insert(new, v)
+        end
+    end
+    return new
+end
+
+function Table.dictionary_combine(...)
+    local tables = {...}
+    local new = {}
+    for _, tab in pairs(tables) do
+        for k, v in pairs(tab) do
+            new[k] = v
+        end
+    end
+    return new
+end
+
 --- Creates a new merged dictionary, if the values in tbl_b are in tbl_a they are not overwritten.
 -- @usage
 -- local a = {one = A}

@@ -38,27 +38,33 @@ _G.data.extend = function(self, otherdata)
     end
 end
 
-_G.data.raw = {
-    ['ammo'] = {},
-    ['armor'] = {},
-    ['gun'] = {},
-    ['capsule'] = {},
-    ['repair-tool'] = {},
-    ['mining-tool'] = {},
-    ['item-with-entity-data'] = {},
-    ['rail-planner'] = {},
-    ['tool'] = {},
-    ['blueprint'] = {},
-    ['deconstruction-item'] = {},
-    ['blueprint-book'] = {},
-    ['selection-tool'] = {},
-    ['item-with-tags'] = {},
-    ['item-with-label'] = {},
-    ['item-with-inventory'] = {},
-    ['module'] = {}
-}
+local raw = require('spec/setup/data/raw')
 
-require('spec/setup/data/recipes')
-require('spec/setup/data/items')
-require('spec/setup/data/categories')
-require('spec/setup/data/technologies')
+if raw then
+    _G.data.raw = raw
+else
+    _G.data.raw = {
+        ['ammo'] = {},
+        ['armor'] = {},
+        ['gun'] = {},
+        ['capsule'] = {},
+        ['repair-tool'] = {},
+        ['mining-tool'] = {},
+        ['item-with-entity-data'] = {},
+        ['rail-planner'] = {},
+        ['tool'] = {},
+        ['blueprint'] = {},
+        ['deconstruction-item'] = {},
+        ['blueprint-book'] = {},
+        ['selection-tool'] = {},
+        ['item-with-tags'] = {},
+        ['item-with-label'] = {},
+        ['item-with-inventory'] = {},
+        ['module'] = {}
+    }
+
+    require('spec/setup/data/recipes')
+    require('spec/setup/data/items')
+    require('spec/setup/data/categories')
+    require('spec/setup/data/technologies')
+end

@@ -7,11 +7,10 @@ if _G.remote and _G.script then
     error('Data Modules can only be required in the data stage', 2)
 end
 
-local Core = require('stdlib/core')
+local Core = require('stdlib/core') -- Calling core up here to setup any required global stuffs
 local table = require('stdlib/utils/table')
 local Is = require('stdlib/utils/is')
 local Inspect = require('stdlib/utils/vendor/inspect')
-
 local groups = require('stdlib/data/modules/groups')
 
 local Data = {
@@ -27,10 +26,9 @@ local Data = {
         ['skip_string_validity'] = false, -- Skip checking for valid data
         ['items_and_fluids'] = true -- consider fluids valid for Item checks
     },
-    __call = Core.__call
+    __index = Core
 }
-Data.__index = Data
-setmetatable(Data, Core)
+setmetatable(Data, Data)
 
 -- load the data portion of stdlib into globals, by default it loads everything into an ALLCAPS name.
 -- Alternatively you can pass a dictionary of `[global names] -> [require path]`.
@@ -77,12 +75,15 @@ function Data:is_class(class)
 end
 
 function Data:log(tbl)
-    local no_meta = function(item, path)
-        if path[#path] ~= Inspect.METATABLE then
-            return item
-        else
-            return {}
+    local _class = {self.class, _class = self._class}
+    local no_meta = function(item, _path)
+        if item == (self.class or self) then
+            return _class
         end
+        if item == Data.object_mt then
+            return _class
+        end
+        return item
     end
     log(Inspect(tbl and tbl or self, {process = no_meta}))
     return self
@@ -417,6 +418,7 @@ end
 function Data:get(object, object_type, opts)
     Is.Assert(object, 'object string or table is required')
 
+    -- Create our middle man container object
     local new = {
         class = self.class or self,
         valid = false,
@@ -425,6 +427,7 @@ function Data:get(object, object_type, opts)
         raw = nil,
         options = opts,
     }
+
     if type(object) == 'table' then
         Is.Assert(object.type and object.name, 'Name and Type are required')
 
@@ -471,7 +474,7 @@ function Data:get(object, object_type, opts)
     end
     return new:extend()
 end
-Data._caller = Data.get
+Data.__call = Data.get
 
 Data.object_mt = {
     __index = function(t, k)
@@ -482,19 +485,18 @@ Data.object_mt = {
             t.raw[k] = v
         end
     end,
-    __call = Data.__call,
+    __call = function(t, ...) return t:__call(...) end,
     __tostring = Data.tostring,
 }
 --)) Methods ((--
 
 --(( TESTS ))--
-require('spec/setup/dataloader')
-_G.log = function(m) print(inspect(m)) end
+-- require('spec/setup/dataloader')
+-- _G.log = function(m) print(m) end
 
-local b = Data('miner', 'recipe')
-print (b.abc)
-for _, d in b:pairs() do
-    print(d, d._class)
-end
+-- local b = Data('stone-furnace', 'recipe')
+-- for _, d in b:pairs() do
+--     print(d, d._class)
+-- end
 
 return Data

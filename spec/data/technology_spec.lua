@@ -1,6 +1,8 @@
+require('busted.runner')()
+
 local Technology, Raw, Rawtech  --luacheck: ignore Raw
-local tn = 'steel-processing-2'
-local mp = 'military-4'
+local tn = 'steel-processing'
+local mp = 'military'
 
 describe(
     'Technology',
@@ -10,7 +12,7 @@ describe(
                 require('spec/setup/dataloader')
                 Technology = require('stdlib/data/technology')
                 Raw = _G.data.raw['recipe']
-                Rawtech = _G.data.raw['technology']['steel-processing-2']
+                Rawtech = _G.data.raw['technology']['steel-processing']
             end
         )
 
@@ -50,26 +52,30 @@ describe(
                 it(
                     'should add a prereq',
                     function()
-                        Technology(tn):add_prereq('military-4')
-                        assert.same(2, #Rawtech.prerequisites)
+                        local t = Technology('advanced-electronics')
+                        assert.same(2, #t.prerequisites)
+                        t:add_prereq('automation')
+                        assert.same(3, #t.prerequisites)
                     end
                 )
                 it(
                     "should not add a prereq that doesn't exist",
                     function()
-                        assert.same(1, #Rawtech.prerequisites)
-                        Technology(tn):add_prereq('fake')
-                        assert.same(1, #Rawtech.prerequisites)
+                        local t = Technology('advanced-electronics')
+                        assert.same(2, #t.prerequisites)
+                        t:add_prereq('fake')
+                        assert.same(2, #t.prerequisites)
                     end
                 )
                 it(
                     'should not duplicate prereqs',
                     function()
-                        assert.same(1, #Rawtech.prerequisites)
-                        Technology(tn):add_prereq('steel-processing')
-                        assert.same(1, #Rawtech.prerequisites)
-                        Technology(tn):add_prereq('military-4')
-                        assert.same(2, #Rawtech.prerequisites)
+                        local t = Technology('advanced-electronics')
+                        assert.same(2, #t.prerequisites)
+                        t:add_prereq('automation')
+                        assert.same(3, #t.prerequisites)
+                        t:add_prereq('automation')
+                        assert.same(3, #t.prerequisites)
                     end
                 )
             end
@@ -80,11 +86,10 @@ describe(
                 it(
                     'should remove a prereq',
                     function()
-                        assert.same(1, #Rawtech.prerequisites)
-                        Technology(tn):remove_prereq('steel-processing')
-                        assert.is_nil(Rawtech.prerequisites)
-                        local mpt = Technology(mp):remove_prereq('steel-processing')
-                        assert.same(1, #mpt.prerequisites)
+                        local t = Technology('advanced-electronics')
+                        assert.same(2, #t.prerequisites)
+                        t:remove_prereq('plastics')
+                        assert.same(1, #t.prerequisites)
                     end
                 )
                 it(

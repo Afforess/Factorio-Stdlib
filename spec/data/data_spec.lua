@@ -32,40 +32,40 @@ describe('Data', function()
         assert.is_nil(F.name)
     end)
 
-    it(":valid()", function()
-        assert.is_true(R:valid())
-        assert.is_false(F:valid())
+    it(":is_valid()", function()
+        assert.is_true(R:is_valid())
+        assert.is_false(F:is_valid())
     end)
 
-    it(":valid('data')", function()
-        assert.is_true(R:valid("recipe"))
-        assert.is_false(R:valid("data"))
-        assert.is_false(F:valid("data"))
+    it(":is_valid('data')", function()
+        assert.is_true(R:is_valid("recipe"))
+        assert.is_false(R:is_valid("data"))
+        assert.is_false(F:is_valid("data"))
     end)
 
-    it(":class()", function()
-        assert.is_true(R:class())
-        assert.is_true(F:class())
+    it(":if_class()", function()
+        assert.is_true(R:is_class())
+        assert.is_true(F:is_class())
     end)
 
-    it(":class('Data')", function()
-        assert.is_true(R:class('Data'))
-        assert.is_true(F:class('Data'))
-        assert.is_false(R:class('Recipe'))
+    it(":is_class('Data')", function()
+        assert.is_true(R:is_class('Data'))
+        assert.is_true(F:is_class('Data'))
+        assert.is_false(R:is_class('Recipe'))
     end)
 
     it(':continue()', function()
-        assert.is_false(R:continue(false):valid())
-        assert.is_false(R:continue():valid())
-        assert.is_true(R:continue(true):valid())
+        assert.is_false(R:continue(false):is_valid())
+        assert.is_false(R:continue():is_valid())
+        assert.is_true(R:continue(true):is_valid())
     end)
 
     it(':continue_if()', function()
         local f = function(self, recipe)
             return self.type == recipe
         end
-        assert.is_true(R:continue_if(f, 'recipe'):valid())
-        assert.is_false(R:continue_if(f, 'data'):valid())
+        assert.is_true(R:continue_if(f, 'recipe'):is_valid())
+        assert.is_false(R:continue_if(f, 'data'):is_valid())
     end)
 
     it(':pairs()', function()
@@ -79,41 +79,41 @@ describe('Data', function()
         local flg
 
         before_each(function()
-            flg = Data("stone-furnace", "item"):Flags()
+            flg = Data("cliff-explosives", "capsule"):Flags()
         end)
 
         it(":Flags()", function()
-            assert.is_true(Data("stone-furnace", "item"):Flags()("hidden"))
+            --assert.is_true(Data("stone-furnace", "item"):Flags()("hidden"))
             assert.same(2, #flg)
         end)
 
         it("Flags:has()", function()
             --assert.is_true(Data("stone-furnace", "item"):Flags("hidden"))
-            assert.is_true(flg:has("hidden"))
-            assert.is_true(flg("hidden"))
+            assert.is_true(flg:has("goes-to-quickbar"))
+            assert.is_true(flg("goes-to-quickbar"))
         end)
 
         it("Flags:add()", function()
             assert.same(2, #flg)
             flg:add("mighty")
             assert.same(3, #flg)
-            flg:add("uber")
+            flg:add("goes-to-quickbar")
             assert.same(3, #flg) --uber is in the list, no change
             flg = flg + "test"
             assert.same(4, #flg)
-            flg = flg + "hidden" --hidden is already in the list, should be no change
+            flg = flg + "hide-from-bonus-gui" --hidden is already in the list, should be no change
             assert.same(4, #flg)
          end)
 
          it("Flags:remove()", function()
             assert.same(2, #flg)
-            flg:remove("uber")
+            flg:remove("goes-to-quickbar")
             assert.same(1, #flg)
             flg:remove("uber")
             assert.same(1, #flg)
-            flg = flg - "hidden"
+            flg = flg - "hide-from-bonus-gui"
             assert.same(0, #flg)
-            flg = flg - "hidden"
+            flg = flg - "hide-from-bonus-gui"
             assert.same(0, #flg) --Can't remove twice, no error on empty table
         end)
 
@@ -124,26 +124,26 @@ describe('Data', function()
         end)
 
         it("Flags:toggle()", function()
-            flg:toggle("test")
-            assert.same(3, #flg)
+            flg:toggle("goes-to-quickbar")
+            assert.same(1, #flg)
             flg:toggle("hidden")
             assert.same(2, #flg)
             flg:toggle("hidden")
-            assert.same(3, #flg)
+            assert.same(1, #flg)
         end)
 
-        it("Flags:concat()", function()
-            assert.same("hidden, uber", tostring(flg .. flg))
-            assert.same("hidden, uber, awesome, stuff", tostring(flg .. Data("stone", "item"):Flags()))
-            assert.same("hidden, uber, awesome, stuff, test", tostring("test" .. flg))
-            flg = -flg
-            assert.same("", tostring(flg))
-            assert.same(1, #(flg.."ok"))
-            assert.same(3, #((flg .. "wow").."test"))
-        end)
+        -- it("Flags:concat()", function()
+        --     assert.same("hidden, uber", tostring(flg .. flg))
+        --     assert.same("hidden, uber, awesome, stuff", tostring(flg .. Data("stone", "item"):Flags()))
+        --     assert.same("hidden, uber, awesome, stuff, test", tostring("test" .. flg))
+        --     flg = -flg
+        --     assert.same("", tostring(flg))
+        --     assert.same(1, #(flg.."ok"))
+        --     assert.same(3, #((flg .. "wow").."test"))
+        -- end)
 
         it("Flags:tostring()", function()
-            assert.same("hidden, uber", Data("stone-furnace", "item"):Flags():tostring())
+            assert.same("goes-to-quickbar, hide-from-bonus-gui", Data("cliff-explosives", "capsule"):Flags():tostring())
         end)
     end)
 end)

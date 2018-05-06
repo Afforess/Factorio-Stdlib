@@ -2,20 +2,20 @@
 -- @classmod Recipe
 
 local Recipe = {
-    _class = 'Recipe'
+    _class = 'Recipe',
+    __index = require('stdlib/data/data'),
 }
-setmetatable(Recipe, require('stdlib/data/data'))
+setmetatable(Recipe, Recipe)
 
 local Is = require('stdlib/utils/is')
 local Item = require('stdlib/data/item')
 
-local function _caller(self, recipe)
+function Recipe:__call(recipe)
     local new = self:get(recipe, 'recipe')
-    rawset(new, 'Ingredients', {})
-    rawset(new, 'Results', {})
+    -- rawset(new, 'Ingredients', {})
+    -- rawset(new, 'Results', {})
     return new
 end
-rawset(Recipe, '_caller', _caller)
 
 -- Returns a formated ingredient or prodcut table
 local function format(ingredient, result_count)
@@ -423,19 +423,7 @@ function Recipe:replace_result(result_name, normal, expensive, main_product)
 end
 
 --(( TESTS ))--
-require('spec/setup/dataloader')
-_G.log = function(m) print(m) end
-
-for _, i in Recipe.__index:pairs("item") do
-    print(i)
-end
-local b = Recipe('stone-furnace')('miner')
-print(b, b._class)
-for _, d in b:pairs() do
-    print(d, d.class._class)
-end
-b:add_ing("stone")
-b:log()
---print(Recipe.__index('miner', 'recipe').class._class)
+--require('spec/setup/dataloader')
+--_G.log = function(m) print(m) end
 
 return Recipe

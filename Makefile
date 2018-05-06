@@ -5,10 +5,9 @@ OUTPUT_NAME := $(PACKAGE_NAME)_$(VERSION_STRING)
 BUILD_DIR := .build
 
 FILES := $(shell find . -iname '*.json' -type f -path "./stdlib/*") $(shell find . -iname '*.lua' -type f -path "./stdlib/*")
-DEP_FILES := $(shell find . -iname '*.lua' -type f -path "./deprecated/*")
 MOD_FILES := $(shell find . -iname '*' -type f -path "./mod/*")
 
-all: clean check test package mod-files ldoc luacheck release
+all: clean test package mod-files ldoc luacheck release
 
 quick: clean package mod-files ldoc release
 
@@ -21,10 +20,6 @@ doc: clean package ldoc
 clean:
 	@rm -rf $(BUILD_DIR)
 
-check:
-	@echo 'Checking lua files for errors'
-	@set -e; for file in $$(find . -iname '*.lua' -type f -not -path "./$(BUILD_DIR)/*"); do echo "Checking syntax: $$file" ; luac -p $$file; done;
-
 test:
 	@echo 'Running tests'
 	@busted
@@ -36,10 +31,6 @@ package: $(FILES)
 	@cp README.md $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/README.md
 	@cp LICENSE $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/LICENSE.md
 	@cp CHANGELOG.md $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/CHANGELOG.md
-
-deprecated: $(DEP_FILES)
-	@echo 'Copying deprecated files'
-	@cp -rPn ./deprecated/* $(BUILD_DIR)/$(OUTPUT_NAME)/$(PACKAGE_NAME)
 
 mod-files: $(MOD_FILES)
 	@echo 'Copying test mod files'

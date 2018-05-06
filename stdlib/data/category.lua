@@ -2,9 +2,11 @@
 -- @classmod Category
 
 local Category = {
-    _class = 'Category'
+    _class = 'Category',
+    __index = require('stdlib/data/data'),
+    __call = require('stdlib/data/data').__call
 }
-setmetatable(Category, require('stdlib/data/data'))
+setmetatable(Category, Category)
 
 Category.category_types = {
     ['ammo-category'] = true,
@@ -15,10 +17,6 @@ Category.category_types = {
     ['rail-category'] = true,
     ['resource-category'] = true
 }
-
-function Category:_caller(category_name, category_type)
-    return self:get(category_name, category_type)
-end
 
 function Category:create()
     return self
@@ -39,11 +37,5 @@ function Category:replace(a, b)
     end
     return self
 end
-
-Category._mt = {
-    __index = Category,
-    __call = Category._caller,
-    __tostring = Category.tostring
-}
 
 return Category

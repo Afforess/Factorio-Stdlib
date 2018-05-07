@@ -1,8 +1,6 @@
 require('busted.runner')()
 
-local Technology, Raw, Rawtech  --luacheck: ignore Raw
-local tn = 'steel-processing'
-local mp = 'military'
+local Technology
 
 describe(
     'Technology',
@@ -11,8 +9,6 @@ describe(
             function()
                 require('spec/setup/dataloader')
                 Technology = require('stdlib/data/technology')
-                Raw = _G.data.raw['recipe']
-                Rawtech = _G.data.raw['technology']['steel-processing']
             end
         )
 

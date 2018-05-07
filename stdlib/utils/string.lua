@@ -12,8 +12,49 @@ local abs = math.abs
 for k, v in pairs(string) do
     String[k] = v
 end
+
 local old_string_meta = getmetatable(string)
 setmetatable(string, {__index = String})
+
+if not _G._STDLIB_NO_STRING then
+    local mt = getmetatable('')
+    function mt.__add(a, b)
+        return a .. b
+    end
+    function mt.__sub(a, b)
+        return a:gsub(b, '')
+    end
+    function mt.__mul(a, b)
+        return a:rep(b)
+    end
+    function mt.__div(a, b)
+        return a:split(b, true)
+    end
+
+    function mt:__index(key)
+        if type(key) == 'number' then
+            local len = #self
+            if key > len or key < -len or key == 0 then
+                return nil
+            end
+            return self:sub(key, key)
+        else
+            return String[key]
+        end
+    end
+
+    function mt:__call(i, j)
+        if type(i) == 'string' then
+            return self:match(i, j)
+        else
+            local len = #self
+            if i > len or i < -len or i == 0 then
+                return nil
+            end
+            return self:sub(i, j or i)
+        end
+    end
+end
 
 --- Returns a copy of the string with any leading or trailing whitespace from the string removed.
 -- @tparam string s the string to remove leading or trailing whitespace from

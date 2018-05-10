@@ -7,18 +7,11 @@
 -- @see defines.direction
 
 local Position = {
-    _module = 'Position'
+    _module = 'Position',
+    __index = require('stdlib/core')
 }
-setmetatable(Position, require('stdlib/core'))
+setmetatable(Position, Position)
 local Is = require('stdlib/utils/is')
-
-function Position._caller(_, ...)
-    if type((...)) == 'table' then
-        return Position.new(...)
-    else
-        return Position.construct(...)
-    end
-end
 
 local MAX_UINT = 4294967296
 local floor = math.floor
@@ -418,6 +411,21 @@ function Position.next_direction(direction, reverse, eight_way)
     return (next_dir > 7 and next_dir - next_dir) or (reverse and next_dir < 0 and 8 + next_dir) or next_dir
 end
 
+Position.__tostring = Position.tostring
+Position.__add = Position.add
+Position.__sub = Position.subtract
+Position.__eq = Position.equals
+Position.__lt = Position.less_than
+Position.__le = Position.less_than_eq
+Position.__concat = Position._concat
+Position.__call = function(_, ...)
+    if type((...)) == 'table' then
+        return Position.new(...)
+    else
+        return Position.construct(...)
+    end
+end
+
 --- Position tables are returned with these metamethods attached
 -- @table Metamethods
 local _metamethods = {
@@ -431,9 +439,5 @@ local _metamethods = {
     __concat = Position._concat, -- calls tostring on both sides of concact.
     __call = Position.copy
 }
-
-for k, v in pairs(_metamethods) do
-    Position[k] = v
-end
 
 return Position

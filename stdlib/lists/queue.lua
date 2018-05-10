@@ -4,37 +4,31 @@
 -- @module Queue
 -- @usage local Queue = require('stdlib/lists/queue')
 
-local Queue = {_module = 'Queue'}
-setmetatable(Queue, require('stdlib/core'))
+local Queue = {
+    _module = 'Queue',
+    __index = require('stdlib/core')
+}
+setmetatable(Queue, Queue)
+
+local table = require('stdlib/utils/table')
+local t_size = table.size
 
 local Is = require('stdlib/utils/is')
-local t_size = table.size
+local Inspect = require('stdlib/utils/vendor/inspect')
 
 --- Constructs a new Queue object.
 -- @return (<span class="types">@{Queue}</span>) a new, empty queue
-function Queue.new()
+function Queue.new(_, ...)
     local queue = {first = 1, last = 0, objects = {}}
-    return setmetatable(queue, Queue)
-end
-Queue._caller = Queue.new
-
--- Allows queue[3] to return the item at queue.objects[3]
-function Queue.__index(self, k)
-    if Is.number(k) then
-        return self.objects[k]
-    else
-        return rawget(self, k) or Queue[k]
+    setmetatable(queue, Queue._mt)
+    for _, push in ipairs({...}) do
+        if push ~= nil then
+            queue(push)
+        end
     end
+    return queue
 end
-
--- Allows queue() to pop_first and queue(data) to push_last
-function Queue.__call(self, ...)
-    if ... then
-        return self.push(self, ...)
-    else
-        return self.pop(self)
-    end
-end
+Queue.__call = Queue.new
 
 --- Load global.queue or queues during on_load, as metatables are not persisted.
 -- <p>This is only needed if you are using the queue as an object and storing it in global.
@@ -43,7 +37,7 @@ end
 -- script.on_load(function() Queue.load(global.myqueue))
 function Queue.load(queue)
     if Is.Table(queue) and queue.first then
-        return setmetatable(queue, Queue)
+        return setmetatable(queue, Queue._mt)
     end
 end
 
@@ -182,8 +176,29 @@ function Queue.rpairs(queue, pop)
 end
 Queue.iter_last = Queue.rpairs
 
-Queue.__pairs = Queue.pairs
-Queue.__ipairs = Queue.pairs
-Queue.__len = Queue.count
+Queue._mt = {
+    __pairs = Queue.pairs,
+    __ipairs = Queue.ipairs,
+    __len = Queue.count,
+    -- Allows queue[3] to return the item at queue.objects[3]
+    __index = function(self, k)
+        if Is.number(k) then
+            return self.objects[k]
+        else
+            return rawget(self, k) or Queue[k]
+        end
+    end,
+    -- Allows queue() to pop_first and queue(data) to push_last
+    __call = function(self, ...)
+        if ... then
+            return self.push(self, ...)
+        else
+            return self.pop(self)
+        end
+    end,
+    __tostring = function(self)
+        return Inspect({first = self.first, last = self.last, objects = self.objects}, {arraykeys = true})
+    end,
+}
 
 return Queue

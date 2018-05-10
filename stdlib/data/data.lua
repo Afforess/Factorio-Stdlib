@@ -74,18 +74,35 @@ function Data:is_class(class)
     end
 end
 
+function Data:print(...)
+    local arr = {}
+    for _ , key in pairs({...}) do
+        arr[#arr + 1] = Inspect(self[key])
+    end
+        print(table.unpack(arr))
+    return self
+end
+
 function Data:log(tbl)
-    local _class = {self.class, _class = self._class}
-    local no_meta = function(item, _path)
-        if item == (self.class or self) then
-            return _class
+    local reduce_spam = function(item, path)
+        -- if item == self.class then
+        --     return {item._class, self._class}
+        -- end
+        if item == Data._object_mt then
+            return {self._class, tostring(self)}
         end
-        if item == Data.object_mt then
-            return _class
+        if path[#path] == 'parent' then
+            return {item._class, tostring(item)}
+        end
+        if path[#path] == 'class' then
+            return {item._class, self._class}
+        end
+        if path[#path] == Inspect.METATABLE then
+            return {item.__index._class, tostring(self)}
         end
         return item
     end
-    log(Inspect(tbl and tbl or self, {process = no_meta}))
+    log(Inspect(tbl and tbl or self, {process = reduce_spam}))
     return self
 end
 
@@ -421,6 +438,7 @@ end
 -- @tparam[opt] table opts options to pass
 -- @treturn Object
 function Data:get(object, object_type, opts)
+
     Is.Assert(object, 'object string or table is required')
 
     -- Create our middle man container object
@@ -462,7 +480,7 @@ function Data:get(object, object_type, opts)
         end
     end
 
-    setmetatable(new, self.object_mt)
+    setmetatable(new, self._object_mt)
     if new.valid then
         new:set_string_array('flags')
         new:set_string_array('crafting_categories')
@@ -481,7 +499,7 @@ function Data:get(object, object_type, opts)
 end
 Data.__call = Data.get
 
-Data.object_mt = {
+Data._object_mt = {
     __index = function(t, k)
         return rawget(t, 'raw') and t.raw[k] or t.class[k]
     end,

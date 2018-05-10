@@ -1,8 +1,11 @@
 --- For working with energy strings
 -- @classmod Joules
 
-local Joules = {}
-setmetatable(Joules, require('stdlib/core'))
+local Joules = {
+    _class = "Joules",
+    __index = require('stdlib/core')
+}
+setmetatable(Joules, Joules)
 
 local Is = require('stdlib/utils/is')
 
@@ -27,7 +30,7 @@ local units = {
     Y = 1E24
 }
 
-function Joules._caller(_, j)
+function Joules.__call(_, j)
     return Joules.new(j)
 end
 
@@ -71,7 +74,7 @@ function Joules.nearest(j)
 end
 
 Joules._mt = {
-    __call = Joules._caller,
+    __call = Joules.__call,
     __index = Joules
 }
 

@@ -7,9 +7,10 @@
 -- @see Concepts.Position
 
 local Area = {
-    _module = 'Area'
+    _module = 'Area',
+    __index = require('stdlib/core')
 }
-setmetatable(Area, require('stdlib/core'))
+setmetatable(Area, Area)
 
 local Is = require('stdlib/utils/is')
 local Position = require('stdlib/area/position')
@@ -17,14 +18,6 @@ local unpack = table.unpack
 
 --- By default area tables are mutated in place set this to true to make the tables immutable.
 Area.immutable = false
-
-function Area._caller(_, ...)
-    if type((...)) == 'table' then
-        return Area.new(...)
-    else
-        return Area.construct(...)
-    end
-end
 
 --- Converts an area in either array or table format to an area with a metatable.
 -- Returns itself if it already has a metatable
@@ -476,6 +469,21 @@ function Area.shrink_to_surface_size(area, surface)
     return area
 end
 
+Area.__add = Area.expand
+Area.__sub = Area.shrink
+Area.__tostring = Area.tostring
+Area.__eq = Area.equals
+Area.__lt = Area.less_than
+Area.__len = Area.size
+Area.__concat = Area.Concat
+Area.__call = function (_, ...)
+    if type((...)) == 'table' then
+        return Area.new(...)
+    else
+        return Area.construct(...)
+    end
+end
+
 --- Area tables are returned with these Metamethods attached.
 -- @table Metamethods
 local _metamethods = {
@@ -489,9 +497,5 @@ local _metamethods = {
     __concat = Area._concat, -- calls tostring on both sides of concat.
     __call = Area.copy -- Return a new copy
 }
-
-for k, v in pairs(_metamethods) do
-    Area[k] = v
-end
 
 return Area

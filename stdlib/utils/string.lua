@@ -44,7 +44,9 @@ if not _G._STDLIB_NO_STRING then
     end
 
     function mt:__call(i, j)
-        if type(i) == 'string' then
+        if not i then
+            return self
+        elseif type(i) == 'string' then
             return self:match(i, j)
         else
             local len = #self

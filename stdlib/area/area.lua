@@ -19,6 +19,14 @@ local unpack = table.unpack
 --- By default area tables are mutated in place set this to true to make the tables immutable.
 Area.immutable = false
 
+Area.__call = function (_, ...)
+    if type((...)) == 'table' then
+        return Area.new(...)
+    else
+        return Area.construct(...)
+    end
+end
+
 --- Converts an area in either array or table format to an area with a metatable.
 -- Returns itself if it already has a metatable
 -- @tparam Concepts.BoundingBox area the area to convert
@@ -28,14 +36,14 @@ function Area.new(area, new_copy)
     Is.Assert.Table(area, 'missing area value')
 
     local copy = new_copy or Area.immutable
-    if not copy and getmetatable(area) == Area then
+    if not copy and getmetatable(area) == Area._mt then
         return area
     end
 
     local left_top = Position.new(area.left_top or area[1], true)
     local right_bottom = Position.new(area.right_bottom or area[2], true)
     local new = {left_top = left_top, right_bottom = right_bottom, orientation = area.orientation}
-    return setmetatable(new, Area)
+    return setmetatable(new, Area._mt)
 end
 
 --- Creates an area from the two positions p1 and p2.
@@ -68,7 +76,7 @@ end
 -- @treturn Concepts.BoundingBox the Area with metatable attached
 function Area.load(area)
     Is.Assert.Area(area, 'area missing or malformed')
-    return setmetatable(area, Area)
+    return setmetatable(area, Area._mt)
 end
 
 local function validate_vector(amount)
@@ -469,24 +477,9 @@ function Area.shrink_to_surface_size(area, surface)
     return area
 end
 
-Area.__add = Area.expand
-Area.__sub = Area.shrink
-Area.__tostring = Area.tostring
-Area.__eq = Area.equals
-Area.__lt = Area.less_than
-Area.__len = Area.size
-Area.__concat = Area.Concat
-Area.__call = function (_, ...)
-    if type((...)) == 'table' then
-        return Area.new(...)
-    else
-        return Area.construct(...)
-    end
-end
-
 --- Area tables are returned with these Metamethods attached.
 -- @table Metamethods
-local _metamethods = {
+Area._mt = {
     __index = Area, -- @field If key is not found see if there is one available in the Area module.
     __add = Area.expand, -- Will expand the area by the number or vector on the RHS.
     __sub = Area.shrink, -- Will shrink the area by the number or vector on the RHS.

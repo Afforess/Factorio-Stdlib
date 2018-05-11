@@ -24,6 +24,14 @@ Position.immutable = false
 -- @return epsilon
 Position.epsilon = 1.19e-07
 
+Position.__call = function(_, ...)
+    if type((...)) == 'table' then
+        return Position.new(...)
+    else
+        return Position.construct(...)
+    end
+end
+
 --- Returns a correctly formated position object.
 -- @usage Position.new({0, 0}) -- returns {x = 0, y = 0}
 -- @tparam Concepts.Position pos the position table or array to convert
@@ -33,12 +41,12 @@ function Position.new(pos, new_copy)
     Is.Assert.Table(pos, 'missing position argument')
 
     local copy = new_copy or Position.immutable
-    if not copy and getmetatable(pos) == Position then
+    if not copy and getmetatable(pos) == Position._mt then
         return pos
     end
 
     local new = {x = pos.x or pos[1], y = pos.y or pos[2]}
-    return setmetatable(new, Position)
+    return setmetatable(new, Position._mt)
 end
 
 --- Creates a table representing the position from x and y.
@@ -68,7 +76,7 @@ end
 -- @treturn Concepts.Position the position with metatable attached
 function Position.load(pos)
     Is.Assert.Position(pos, 'position missing or malformed')
-    return setmetatable(pos, Position)
+    return setmetatable(pos, Position._mt)
 end
 
 --- Adds two positions.
@@ -411,24 +419,9 @@ function Position.next_direction(direction, reverse, eight_way)
     return (next_dir > 7 and next_dir - next_dir) or (reverse and next_dir < 0 and 8 + next_dir) or next_dir
 end
 
-Position.__tostring = Position.tostring
-Position.__add = Position.add
-Position.__sub = Position.subtract
-Position.__eq = Position.equals
-Position.__lt = Position.less_than
-Position.__le = Position.less_than_eq
-Position.__concat = Position._concat
-Position.__call = function(_, ...)
-    if type((...)) == 'table' then
-        return Position.new(...)
-    else
-        return Position.construct(...)
-    end
-end
-
 --- Position tables are returned with these metamethods attached
 -- @table Metamethods
-local _metamethods = {
+Position._mt = {
     __index = Position, -- If key is not found, see if there is one availble in the Position module.
     __tostring = Position.tostring, -- Returns a string representation of the position
     __add = Position.add, -- Adds two position together.

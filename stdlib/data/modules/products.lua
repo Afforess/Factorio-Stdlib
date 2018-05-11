@@ -7,7 +7,7 @@ local Products = {
 setmetatable(Products, Products)
 
 local ProductData = require('stdlib/data/modules/productdata')
-ProductData.__index = Products
+--ProductData.__index = Products
 
 function Products:Parent()
     return self.parent
@@ -35,6 +35,18 @@ local function get_results(products, difficulty)
     return {{"TEST"}}
 end
 
+local _mt = {
+    __index = function(t, k)
+        if rawget(t.parent, k) then
+            return t.parent[k]
+        end
+        if ProductData[k] ~= nil then
+            return ProductData[k]
+        end
+        return Products[k]
+    end,
+    _class = 'products'
+}
 --Gets a single ingredient
 function Products:__call(parent, product_type)
     if self.parent then
@@ -43,9 +55,12 @@ function Products:__call(parent, product_type)
     local products = {
         _class = 'products',
         parent = parent,
+        __tostring = ProductData._mt.__tostring
     }
-    setmetatable(products, ProductData._mt)
-    products.ingredients = setmetatable({}, {__index = products, __tostring = ProductData._mt.__tostring})
+    products.__index = products
+    setmetatable(products, _mt)
+    --products.ingredients = setmetatable({_class = 'ingredients'}, {__index = products, __tostring = ProductData._mt.__tostring})
+    products.ingredients = setmetatable({_class = 'ingredients'}, {__index = products, _class = 'ingredients'})
     --products.results = setmetatable({}, {__index = products})
     rawset(parent, 'products', products)
     if parent:is_valid('recipe') then

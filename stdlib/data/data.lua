@@ -98,11 +98,16 @@ function Data:log(tbl)
             return {item._class, self._class}
         end
         if path[#path] == Inspect.METATABLE then
-            return {item.__index._class, tostring(self)}
+            return {self._class or item._class, item._class}
         end
         return item
     end
     log(Inspect(tbl and tbl or self, {process = reduce_spam}))
+    return self
+end
+
+function Data:serpent()
+    log(serpent.block(self, {name = self.name, metatostring = false, nocode = true, comment = false}))
     return self
 end
 

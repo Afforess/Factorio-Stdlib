@@ -33,7 +33,7 @@ require('spec/setup/dataloader')
 _G.log = function(m) print(m) end
 --print((Recipe('electronic-circuit'):Ingredients()))
 --local _ = Recipe('stone-furnace'):Ingredients():log():Parent():log()
-local _ = Recipe('electronic-circuit'):Ingredients():log()
+local _ = Recipe('electronic-circuit'):Ingredients():clear():log():Parent():log()
 -- local b = a:Ingredients()
 -- b:log()
 -- local c = b:Parent()

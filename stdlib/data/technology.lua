@@ -12,7 +12,6 @@ local Is = require('stdlib/utils/is')
 function Technology:__call(tech)
     return self:get(tech, 'technology')
 end
-require('spec/setup/dataloader')
 
 --[[
 type = "technology",

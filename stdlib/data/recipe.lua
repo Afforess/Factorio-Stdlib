@@ -422,8 +422,4 @@ function Recipe:replace_result(result_name, normal, expensive, main_product)
     return self
 end
 
---(( TESTS ))--
---require('spec/setup/dataloader')
---_G.log = function(m) print(m) end
-
 return Recipe

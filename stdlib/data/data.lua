@@ -516,15 +516,5 @@ Data._object_mt = {
     __call = function(t, ...) return t:__call(...) end,
     __tostring = Data.tostring,
 }
---)) Methods ((--
-
---(( TESTS ))--
--- require('spec/setup/dataloader')
--- _G.log = function(m) print(m) end
-
--- local b = Data('stone-furnace', 'recipe')
--- for _, d in b:pairs() do
---     print(d, d._class)
--- end
 
 return Data

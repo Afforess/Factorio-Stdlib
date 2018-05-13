@@ -17,6 +17,7 @@ local old_string_meta = getmetatable(string)
 setmetatable(string, {__index = String})
 
 if not _G._STDLIB_NO_STRING then
+    --! TODO better handling of these
     local mt = getmetatable('')
     function mt.__add(a, b)
         return a .. b
@@ -31,17 +32,17 @@ if not _G._STDLIB_NO_STRING then
         return a:split(b, true)
     end
 
-    function mt:__index(key)
-        if type(key) == 'number' then
-            local len = #self
-            if key > len or key < -len or key == 0 then
-                return nil
-            end
-            return self:sub(key, key)
-        else
-            return String[key]
-        end
-    end
+    -- function mt:__index(key)
+    --     if type(key) == 'number' then
+    --         local len = #self
+    --         if key > len or key < -len or key == 0 then
+    --             return nil
+    --         end
+    --         return self:sub(key, key)
+    --     else
+    --         return String[key]
+    --     end
+    -- end
 
     function mt:__call(i, j)
         if not i then

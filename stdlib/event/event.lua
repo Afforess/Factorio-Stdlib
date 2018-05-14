@@ -42,7 +42,7 @@ local Event = {
 setmetatable(Event, require('stdlib/core'))
 
 local Is = require('stdlib/utils/is')
-local inspect = require('stdlib/utils/vendor/inspect')
+local inspect = require('stdlib/vendor/inspect')
 
 local bootstrap_register = {
     on_init = function()

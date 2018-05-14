@@ -5,11 +5,11 @@
 -- @usage
 -- -- For use with STDLIB Events
 -- if DEBUG then
---   require('stdlib/utils/scripts/quickstart').register_events()
+--   require('stdlib/scripts/quickstart').register_events()
 -- end
 -- @usage
 -- --If not using stdlibs event system
--- local quickstart = require('stdlib/utils/scripts/quickstart')
+-- local quickstart = require('stdlib/scripts/quickstart')
 -- script.on_event(defines.events.on_player_created, function()
 --  quickstart.on_player_created() -- can be wrapped in an if DEBUG type check
 -- end)

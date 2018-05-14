@@ -24,8 +24,8 @@ end
 traceback = type(debug) == 'table' and debug.traceback or _traceback
 
 
-serpent = serpent or require('stdlib/utils/vendor/serpent')
-inspect = inspect or require('stdlib/utils/vendor/inspect')
+serpent = serpent or require('stdlib/vendor/serpent')
+inspect = inspect or require('stdlib/vendor/inspect')
 
 --- Require a file that may not exist
 -- @tparam string module path to the module

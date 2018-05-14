@@ -10,7 +10,7 @@ end
 local Core = require('stdlib/core') -- Calling core up here to setup any required global stuffs
 local table = require('stdlib/utils/table')
 local Is = require('stdlib/utils/is')
-local Inspect = require('stdlib/utils/vendor/inspect')
+local Inspect = require('stdlib/vendor/inspect')
 local groups = require('stdlib/data/modules/groups')
 
 local Data = {

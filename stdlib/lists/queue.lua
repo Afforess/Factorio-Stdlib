@@ -14,7 +14,7 @@ local table = require('stdlib/utils/table')
 local t_size = table.size
 
 local Is = require('stdlib/utils/is')
-local Inspect = require('stdlib/utils/vendor/inspect')
+local Inspect = require('stdlib/vendor/inspect')
 
 --- Constructs a new Queue object.
 -- @return (<span class="types">@{Queue}</span>) a new, empty queue

@@ -17,44 +17,35 @@ local old_string_meta = getmetatable(string)
 setmetatable(string, {__index = String})
 
 if not _G._STDLIB_NO_STRING then
-    --! TODO better handling of these
     local mt = getmetatable('')
+
     function mt.__add(a, b)
         return a .. b
     end
+
     function mt.__sub(a, b)
         return a:gsub(b, '')
     end
+
     function mt.__mul(a, b)
         return a:rep(b)
     end
+
     function mt.__div(a, b)
         return a:split(b, true)
     end
 
-    -- function mt:__index(key)
-    --     if type(key) == 'number' then
-    --         local len = #self
-    --         if key > len or key < -len or key == 0 then
-    --             return nil
-    --         end
-    --         return self:sub(key, key)
-    --     else
-    --         return String[key]
-    --     end
-    -- end
-
-    function mt:__call(i, j)
+    function mt.__call(s, i, j)
         if not i then
-            return self
+            return s
         elseif type(i) == 'string' then
-            return self:match(i, j)
+            return s:match(i, j)
         else
-            local len = #self
+            local len = #s
             if i > len or i < -len or i == 0 then
                 return nil
             end
-            return self:sub(i, j or i)
+            return s:sub(i, j or i)
         end
     end
 end

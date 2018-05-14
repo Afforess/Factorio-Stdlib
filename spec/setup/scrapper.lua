@@ -15,8 +15,8 @@ require('spec/setup/defines')
 local lfs = require('lfs')
 local io = _G.io
 local table = require('stdlib/utils/table')
-local inspect = require('stdlib/utils/vendor/inspect')
-local serpent = require('stdlib/utils/vendor/serpent')
+local inspect = require('stdlib/vendor/inspect')
+local serpent = require('stdlib/vendor/serpent')
 -- local files = {'data', 'data-update', 'data-final-fixes'}
 
 local lib = DATA_DIRECTORY .. 'core\\lualib\\?.lua;'

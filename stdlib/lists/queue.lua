@@ -178,7 +178,7 @@ Queue.iter_last = Queue.rpairs
 
 Queue._mt = {
     __pairs = Queue.pairs,
-    __ipairs = Queue.ipairs,
+    __ipairs = Queue.pairs,
     __len = Queue.count,
     -- Allows queue[3] to return the item at queue.objects[3]
     __index = function(self, k)

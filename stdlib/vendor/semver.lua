@@ -1,6 +1,3 @@
---- semver for Lua
--- @script semver
-
 local semver = {
     _VERSION = '1.2.1',
     _DESCRIPTION = 'semver for Lua',

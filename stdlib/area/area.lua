@@ -480,7 +480,7 @@ end
 --- Area tables are returned with these Metamethods attached.
 -- @table Metamethods
 Area._mt = {
-    __index = Area, -- @field If key is not found see if there is one available in the Area module.
+    __index = Area, -- If key is not found see if there is one available in the Area module.
     __add = Area.expand, -- Will expand the area by the number or vector on the RHS.
     __sub = Area.shrink, -- Will shrink the area by the number or vector on the RHS.
     __tostring = Area.tostring, -- Will print a string representation of the area.

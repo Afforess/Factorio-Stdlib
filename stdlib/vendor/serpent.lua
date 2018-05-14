@@ -1,4 +1,3 @@
---luacheck: ignore
 --Serpent version used in factorio
 do
   local n, v = "serpent", "0.30" -- (C) 2012-17 Paul Kulchenko; MIT License

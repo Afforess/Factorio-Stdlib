@@ -97,12 +97,16 @@ function M:concat(rhs)
     return self
 end
 
-return {
-    __index = M, -- Index to module
-    __tostring = M.tostring, -- tostring
-    __concat = M.concat, -- Concat
-    __add = M.add, -- Adds a string to the string-array object
-    __sub = M.remove, -- Removes a string from the string-array object
+--- The following metamethods are provided.
+-- @table metamethods
+local metamethods = {
+    __index = M, -- Index to the string array class.
+    __tostring = M.tostring, -- tostring.
+    __concat = M.concat, -- adds the right hand side to the object.
+    __add = M.add, -- Adds a string to the string-array object.
+    __sub = M.remove, -- Removes a string from the string-array object.
     __unm = M.clear, -- Clears the array.
-    __call = M.has -- Has the flag
+    __call = M.has -- Array contains this string.
 }
+
+return metamethods

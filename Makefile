@@ -41,7 +41,7 @@ ldoc:
 	@mkdir -p $(BUILD_DIR)/doc
 	@cp doc/spectre.min.css $(BUILD_DIR)/doc/spectre.min.css
 	@cp doc/spectre-icons.min.css $(BUILD_DIR)/doc/spectre-icons.min.css
-	@cd $(BUILD_DIR) && ldoc -c ../doc/config.ld -l ../doc -s ../doc $(OUTPUT_NAME)/$(PACKAGE_NAME)
+	@cd $(BUILD_DIR) && ldoc -ic ../doc/config.ld -l ../doc -s ../doc $(OUTPUT_NAME)/$(PACKAGE_NAME)
 
 luacheck:
 	@echo 'Running luacheck on build directory'

@@ -220,17 +220,21 @@ function String.center(s, w, ch)
     return _just(s, w, ch, true, true)
 end
 
+local noop = function(...) return ... end
+
 --- Splits a string into an array.
 -- *Note:* Empty split substrings are not included in the resulting table.
 -- <p>For example, `string.split("foo.bar...", ".", false)` results in the table `{"foo", "bar"}`.
 -- @tparam string s the string to split
 -- @tparam[opt="."] string sep the separator to use.
 -- @tparam[opt=false] boolean pattern whether to interpret the separator as a lua pattern or plaintext for the string split
+-- @tparam[opt] function func pass each split string through this function.
 -- @treturn {string,...} an array of strings
-function String.split(s, sep, pattern)
+function String.split(s, sep, pattern, func)
     sep = sep or '.'
     sep = sep ~= '' and sep or '.'
     sep = not pattern and sep:gsub('([^%w])', '%%%1') or sep
+    func = func or noop
 
     local fields = {}
     local start_idx, end_idx = s:find(sep)
@@ -238,14 +242,14 @@ function String.split(s, sep, pattern)
     while start_idx do
         local substr = s:sub(last_find, start_idx - 1)
         if substr:len() > 0 then
-            table.insert(fields, s:sub(last_find, start_idx - 1))
+            table.insert(fields, func(s:sub(last_find, start_idx - 1)))
         end
         last_find = end_idx + 1
         start_idx, end_idx = s:find(sep, end_idx + 1)
     end
     local substr = s:sub(last_find)
     if substr:len() > 0 then
-        insert(fields, s:sub(last_find))
+        insert(fields, func(s:sub(last_find)))
     end
     return fields
 end

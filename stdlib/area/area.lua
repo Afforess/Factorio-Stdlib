@@ -14,6 +14,8 @@ setmetatable(Area, Area)
 
 local Is = require('stdlib/utils/is')
 local Position = require('stdlib/area/position')
+local math = require('stdlib/utils/math')
+local round2 = function(x) return math.round_to(x, 2) end
 local unpack = table.unpack
 
 --- By default area tables are mutated in place set this to true to make the tables immutable.
@@ -169,14 +171,14 @@ function Area.adjust(area, vector)
     return area
 end
 
---- Rotate an area such that its value of the width becomes the height, and its value of the height becomes the width.
--- @tparam Concepts.BoundingBox area the area to rotate
--- @treturn Concepts.BoundingBox the rotated area
-function Area.rotate(area)
+--- Flip an area such that its value of the width becomes the height, and its value of the height becomes the width.
+-- @tparam Concepts.BoundingBox area the area to flip
+-- @treturn Concepts.BoundingBox the flip area
+function Area.flip(area)
     area = Area.new(area)
     local _, w, h = Area.size(area)
     if w == h then
-        return area -- no point rotating a square
+        return area -- no point flipping a square
     elseif h > w then
         local rad = h / 2 - w / 2
         return Area.adjust(area, {rad, -rad})
@@ -184,6 +186,29 @@ function Area.rotate(area)
         local rad = w / 2 - h / 2
         return Area.adjust(area, {-rad, rad})
     end
+end
+
+local r2d = 180 / math.pi
+
+--- Rotate an area by degrees.
+-- @tparam Concepts.BoundingBox area
+-- @tparam number deg degrees
+-- @treturn Concepts.BoundingBox the area rotated
+function Area.rotate(area, deg)
+    area = Area.new(area)
+
+    local x1, y1 = area.left_top.x, area.left_top.y
+    local x2, y2 = area.right_bottom.x, area.right_bottom.y
+    local rad = deg / r2d
+    local cos, sin = math.cos(rad), math.sin(rad)
+
+    area.left_top.x = round2((x1 * cos) - (y1 * sin))
+    area.left_top.y = round2((x1 * sin) + (y1 * cos))
+    area.right_bottom.x = round2((x2 * cos) - (y2 * sin))
+    area.right_bottom.y = round2((x2 * sin) + (y2 * cos))
+
+    Area.normalize(area)
+    return area
 end
 
 --- Offsets the area by the `{x, y}` values.

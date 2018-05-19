@@ -113,18 +113,29 @@ describe('Area', function()
         end)
     end)
 
-    it('should validate area rotates accurately', function()
+    it('should validate area flips accurately', function()
         local area = {left_top = {x = -1, y = -1.5}, right_bottom = {x = 1, y = 1.5}}
         local same = {left_top = {x = -1.5, y = -1}, right_bottom = {x = 1.5, y = 1}}
         local square = {left_top = {x = -2, y = -2}, right_bottom = {x = 2, y = 2}}
-        assert.same(square, Area.rotate(square))
-        assert.same(same, Area.rotate(area))
+        assert.same(square, Area.flip(square))
+        assert.same(same, Area.flip(area))
 
         area = Area({{12,0}, {20, 1}})
         same = Area({{15.5, -3.5}, {16.5, 4.5}})
-        assert.same(same, Area.rotate(area))
+        assert.same(same, Area.flip(area))
 
         assert.has_error(function() Area.adjust() end)
+    end)
+
+    describe('area.rotate', function()
+        local area = Area {{-2, -1}, {2, 1}}
+        local square = Area {{-1, -1}, {1, 1}}
+
+        it('should rotate', function()
+            assert.same(Area {{-1, -2}, {1, 2}}, area:rotate(90))
+            assert.same(square, square:copy():rotate(90))
+            assert.same(area, area:copy():rotate(180))
+        end)
     end)
 
     it('should validate area to table conversation', function()

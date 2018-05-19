@@ -11,9 +11,8 @@ local Position = {
     __index = require('stdlib/core')
 }
 setmetatable(Position, Position)
-local Is = require('stdlib/utils/is')
 
-local MAX_UINT = 4294967296
+local Is = require('stdlib/utils/is')
 local floor = math.floor
 
 --- By default position tables are mutated in place set this to true to make the tables immutable.
@@ -127,26 +126,22 @@ function Position.translate(pos, direction, distance)
     pos = Position.new(pos)
 
     if direction == defines.direction.north then
-        pos.x = pos.x
         pos.y = pos.y - distance
     elseif direction == defines.direction.northeast then
         pos.x = pos.x + distance
         pos.y = pos.y - distance
     elseif direction == defines.direction.east then
         pos.x = pos.x + distance
-        pos.y = pos.y
     elseif direction == defines.direction.southeast then
         pos.x = pos.x + distance
         pos.y = pos.y + distance
     elseif direction == defines.direction.south then
-        pos.x = pos.x
         pos.y = pos.y + distance
     elseif direction == defines.direction.southwest then
         pos.x = pos.x - distance
         pos.y = pos.y + distance
     elseif direction == defines.direction.west then
         pos.x = pos.x - distance
-        pos.y = pos.y
     elseif direction == defines.direction.northwest then
         pos.x = pos.x - distance
         pos.y = pos.y - distance
@@ -234,10 +229,7 @@ end
 function Position.chunk_position(pos)
     pos = Position.new(pos)
 
-    local x, y = floor(pos.x), floor(pos.y)
-
-    x = x < 0 and (bit32.arshift(x, 5) - MAX_UINT) or bit32.arshift(x, 5)
-    y = y < 0 and (bit32.arshift(y, 5) - MAX_UINT) or bit32.arshift(y, 5)
+    local x, y = floor(pos.x / 32), floor(pos.y / 32)
 
     return Position.load {x = x, y = y}
 end
@@ -384,26 +376,12 @@ function Position.manhattan_distance(pos1, pos2)
     return math.abs(pos2.x - pos1.x) + math.abs(pos2.y - pos1.y)
 end
 
-local opposites =
-    (defines and defines.direction) and
-    {
-        [defines.direction.north] = defines.direction.south,
-        [defines.direction.south] = defines.direction.north,
-        [defines.direction.east] = defines.direction.west,
-        [defines.direction.west] = defines.direction.east,
-        [defines.direction.northeast] = defines.direction.southwest,
-        [defines.direction.southwest] = defines.direction.northeast,
-        [defines.direction.northwest] = defines.direction.southeast,
-        [defines.direction.southeast] = defines.direction.northwest
-    } or
-    {[0] = 4, [1] = 5, [2] = 6, [3] = 7, [4] = 0, [5] = 1, [6] = 2, [7] = 3}
-
 --- Returns the opposite direction &mdash; adapted from Factorio util.lua.
 -- @release 0.8.1
 -- @tparam defines.direction direction the direction
 -- @treturn defines.direction the opposite direction
 function Position.opposite_direction(direction)
-    return opposites[direction or defines.direction.north]
+    return (direction + 4) % 8
 end
 
 --- Returns the next direction.
@@ -415,8 +393,28 @@ end
 function Position.next_direction(direction, reverse, eight_way)
     Is.Assert.Number(direction, 'missing starting direction')
 
-    local next_dir = direction + (eight_way and ((reverse and -1) or 1) or ((reverse and -2) or 2))
-    return (next_dir > 7 and next_dir - next_dir) or (reverse and next_dir < 0 and 8 + next_dir) or next_dir
+    return (direction + (eight_way and ((reverse and -1) or 1) or ((reverse and -2) or 2))) % 8
+end
+
+--- Returns an 8 way direction from orientation
+-- @tparam float orientation
+-- @treturn defines.direction
+function Position.orientation_to_8way(orientation)
+    return floor(orientation * 8 + 0.5) % 8
+end
+
+--- Returns a 4 way direction from orientation
+-- @tparam float orientation
+-- @treturn defines.direction
+function Position.orientation_to_4way(orientation)
+    return floor(orientation * 4 + 0.5) % 4 * 2
+end
+
+--- Returns an orientation from a direction
+-- @tparam defines.direction direction
+-- @treturn float
+function Position.direction_to_orientation(direction)
+    return direction / 8
 end
 
 --- Position tables are returned with these metamethods attached

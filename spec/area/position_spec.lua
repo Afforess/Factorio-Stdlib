@@ -231,10 +231,6 @@ describe('Position', function()
             assert.same(d.west, Position.opposite_direction(d.east))
             assert.same(d.southwest, Position.opposite_direction(d.northeast))
         end)
-
-        it('retuns the opposite of north when not given a direction', function()
-            assert.same(d.south, Position.opposite_direction())
-        end)
     end)
 
     describe('next_direction', function()

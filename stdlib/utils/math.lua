@@ -17,42 +17,42 @@ for k, v in pairs(math) do
 end
 
 --(( Math Constants
-Math.maxint8 = 127
-Math.minint8 = -128
-Math.maxuint8 = 255
+Math.MAXINT8 = 127
+Math.MININT8 = -128
+Math.MAXUINT8 = 255
 
-Math.max_int8 = Math.maxint8
-Math.min_int8 = Math.minint8
-Math.max_uint8 = Math.maxuint8
+Math.MAX_INT8 = Math.MAXINT8
+Math.MIN_INT8 = Math.MININT8
+Math.MAX_UINT8 = Math.MAXUINT8
 
-Math.maxint16 = 32767
-Math.minint16 = -32768
-Math.maxuint16 = 65535
-Math.max_int16 = Math.maxint16
-Math.min_int16 = Math.minint16
-Math.max_uint16 = Math.maxuint16
+Math.MAXINT16 = 32767
+Math.MININT16 = -32768
+Math.MAXUINT16 = 65535
+Math.MAX_INT16 = Math.MAXINT16
+Math.MIN_INT16 = Math.MININT16
+Math.MAX_UINT16 = Math.MAXUINT16
 
-Math.maxint =  2147483647
-Math.max_int = Math.maxint
-Math.maxint32 = Math.maxint
-Math.max_int32 = Math.maxint
+Math.MAXINT =  2147483647
+Math.MAX_INT = Math.MAXINT
+Math.MAXINT32 = Math.MAXINT
+Math.MAX_INT32 = Math.MAXINT
 
-Math.maxuint = 4294967295
-Math.max_uint = Math.maxuint
-Math.maxuint32 = Math.maxuint
-Math.max_uint32 = Math.maxuint
+Math.MAXUINT = 4294967295
+Math.MAX_UINT = Math.MAXUINT
+Math.MAXUINT32 = Math.MAXUINT
+Math.MAX_UINT32 = Math.MAXUINT
 
-Math.minint = -2147483648
-Math.min_int = Math.minint
-Math.minint32 = Math.minint
-Math.min_int32 = Math.minint
+Math.MININT = -2147483648
+Math.MIN_INT = Math.MININT
+Math.MININT32 = Math.MININT
+Math.MIN_INT32 = Math.MININT
 
-Math.maxint64 = 9223372036854775807
-Math.minint64 = -9223372036854775808
-Math.maxuint64 = 18446744073709551615
-Math.max_int64 = Math.maxint64
-Math.min_int64 = Math.minint64
-Math.max_uint64 = Math.maxuint64
+Math.MAXINT64 = 9223372036854775807
+Math.MININT64 = -9223372036854775808
+Math.MAXUINT64 = 18446744073709551615
+Math.MAX_INT64 = Math.MAXINT64
+Math.MIN_INT64 = Math.MININT64
+Math.MAX_UINT64 = Math.MAXUINT64
 --))
 
 --- Round a number.

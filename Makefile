@@ -3,11 +3,12 @@ VERSION_STRING := $(shell cat 'mod/info.json'|jq -r .version)
 OUTPUT_DIR := $(PACKAGE_NAME)
 OUTPUT_NAME := $(PACKAGE_NAME)_$(VERSION_STRING)
 BUILD_DIR := .build
+CONFIG = ./$(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/utils/globals.lua
 
 FILES := $(shell find . -iname '*.json' -type f -path "./stdlib/*") $(shell find . -iname '*.lua' -type f -path "./stdlib/*")
 MOD_FILES := $(shell find . -iname '*' -type f -path "./mod/*")
 
-all: clean test package mod-files ldoc luacheck release
+all: clean test package nodebug mod-files ldoc luacheck release
 
 quick: clean package mod-files ldoc release
 
@@ -31,6 +32,12 @@ package: $(FILES)
 	@cp README.md $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/README.md
 	@cp LICENSE $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/LICENSE.md
 	@cp CHANGELOG.md $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/CHANGELOG.md
+
+nodebug:
+	@[ -e $(CONFIG) ] && \
+	echo Removing debug switches. && \
+	sed -i 's/^\(local \_TESTING =\).*/\1 false/' $(CONFIG) || \
+	echo No Config Files
 
 mod-files: $(MOD_FILES)
 	@echo 'Copying test mod files'

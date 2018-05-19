@@ -15,7 +15,7 @@ setmetatable(Area, Area)
 local Is = require('stdlib/utils/is')
 local Position = require('stdlib/area/position')
 local math = require('stdlib/utils/math')
-local round2 = function(x) return math.round_to(x, 2) end
+local round_to = math.round_to
 local unpack = table.unpack
 
 --- By default area tables are mutated in place set this to true to make the tables immutable.
@@ -202,10 +202,10 @@ function Area.rotate(area, deg)
     local rad = deg / r2d
     local cos, sin = math.cos(rad), math.sin(rad)
 
-    area.left_top.x = round2((x1 * cos) - (y1 * sin))
-    area.left_top.y = round2((x1 * sin) + (y1 * cos))
-    area.right_bottom.x = round2((x2 * cos) - (y2 * sin))
-    area.right_bottom.y = round2((x2 * sin) + (y2 * cos))
+    area.left_top.x = round_to((x1 * cos) - (y1 * sin), 2)
+    area.left_top.y = round_to((x1 * sin) + (y1 * cos), 2)
+    area.right_bottom.x = round_to((x2 * cos) - (y2 * sin), 2)
+    area.right_bottom.y = round_to((x2 * sin) + (y2 * cos), 2)
 
     Area.normalize(area)
     return area

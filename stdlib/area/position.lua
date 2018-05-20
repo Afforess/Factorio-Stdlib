@@ -280,6 +280,17 @@ function Position.chunk_position(pos)
     pos.y = floor(pos.y / 32)
     return pos
 end
+Position.to_chunk_position = Position.chunk_position
+
+--- Gets the tile position from the chunk position.
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position
+function Position.from_chunk_position(pos)
+    pos = Position.new(pos)
+    pos.x = pos.x * 32
+    pos.y = pos.y * 32
+    return pos
+end
 
 --- Position Functions
 -- @section Functions
@@ -563,7 +574,7 @@ end
 
 local function __mod(pos1, pos2)
     pos1, pos2 = Position(pos1), Position(pos2)
-    return Position.load({x = abs(pos2.x - pos1.x), y = abs(pos2.x - pos1.x)})
+    return Position.load({x = abs(pos2.x - pos1.x), y = abs(pos2.y - pos1.y)})
 end
 
 local function __unm(pos)

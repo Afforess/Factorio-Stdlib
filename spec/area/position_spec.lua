@@ -2,6 +2,7 @@ require('busted.runner')()
 
 require('spec/setup/defines')
 local Position = require('stdlib/area/position')
+local P = Position
 
 describe('Constructors', function ()
 
@@ -196,22 +197,27 @@ describe('Position Methods', function()
 
     describe('.chunk_position, .to_chunk_position', function()
         it('should ', function()
-
+            assert.same(P(), P.chunk_position(Z))
+            assert.same(P(1, 1), P.chunk_position({32, 32}))
+            assert.same(P(0, -1), P.chunk_position({0, -32}))
+            assert.same(P(0, -1), A:chunk_position())
+            assert.not_same(b, A)
         end)
         it('should not mutate', function()
             Position.immutable = true
-            assert.same(1.5, A:center().x)
+            assert.same(0, A:chunk_position().x)
             assert.same(b, A)
         end)
     end)
 
     describe('.from_chunk_position', function()
         it('should ', function()
-
+            assert.same(32, A:from_chunk_position().x)
+            assert.not_same(b, A)
         end)
         it('should not mutate', function()
             Position.immutable = true
-            assert.same(1.5, A:center().x)
+            assert.same(32, A:from_chunk_position().x)
             assert.same(b, A)
         end)
     end)
@@ -222,7 +228,7 @@ describe('Position Methods', function()
         end)
         it('should not mutate', function()
             Position.immutable = true
-            A:tile_position()
+            A:perpendicular()
             assert.same(b, A)
         end)
     end)
@@ -258,7 +264,7 @@ describe('Position Methods', function()
         end)
         it('should not mutate', function()
             Position.immutable = true
-            assert.same(1.5, A:center().x)
+            --assert.same(1.5, A:length().x)
             assert.same(b, A)
         end)
     end)
@@ -301,7 +307,7 @@ describe('Position Methods', function()
         end)
         it('should not mutate', function()
             Position.immutable = true
-            assert.same(1.5, A:center().x)
+
             assert.same(b, A)
         end)
     end)
@@ -312,7 +318,7 @@ describe('Position Methods', function()
         end)
         it('should not mutate', function()
             Position.immutable = true
-            assert.same(1.5, A:center().x)
+
             assert.same(b, A)
         end)
     end)
@@ -323,7 +329,7 @@ describe('Position Methods', function()
         end)
         it('should not mutate', function()
             Position.immutable = true
-            assert.same(1.5, A:center().x)
+
             assert.same(b, A)
         end)
     end)
@@ -334,7 +340,7 @@ describe('Position Methods', function()
         end)
         it('should not mutate', function()
             Position.immutable = true
-            assert.same(1.5, A:center().x)
+
             assert.same(b, A)
         end)
     end)
@@ -350,7 +356,7 @@ describe('Position Methods', function()
         end)
         it('should not mutate', function()
             Position.immutable = true
-            assert.same(1.5, A:center().x)
+
             assert.same(b, A)
         end)
     end)
@@ -546,60 +552,75 @@ describe('Direction Functions', function()
     local d = defines.direction
 
     describe('.next_direction', function()
-
+        local nd = Position.next_direction
         it('returns the next 4way direction clockwise', function()
             for i=0, 7, 2 do
-                assert.same(i, Position.next_direction(i-2))
+                assert.same(i, nd(i-2))
             end
-            assert.same(d.north, Position.next_direction(d.west))
+            assert.same(d.north, nd(d.west))
+            assert.same(d.south, nd(nd(0)))
         end)
 
         it('returns the next 8way direction clockwise', function()
             for i=0, 7, 1 do
-                assert.same(i, Position.next_direction(i-1, false, true))
+                assert.same(i, nd(i-1, false, true))
             end
-            assert.same(d.north, Position.next_direction(d.northwest, false, true))
+            assert.same(d.north, nd(d.northwest, false, true))
         end)
 
         it('returns the next 4way direction counter-clockwise', function()
             for i=7, 0, 2 do
-                assert.same(i, Position.next_direction(i+2))
+                assert.same(i, nd(i+2))
             end
-            assert.same(d.west, Position.next_direction(d.north, true))
+            assert.same(d.west, nd(d.north, true))
         end)
 
         it('returns the next 8way direction counter-clockwise', function()
             for i=7, 0, 1 do
-                assert.same(i, Position.next_direction(i+1), true, true)
+                assert.same(i, nd(i+1), true, true)
             end
-            assert.same(d.northwest, Position.next_direction(d.north, true, true))
+            assert.same(d.northwest, nd(d.north, true, true))
         end)
     end)
 
     describe('.direction_to_orientation', function()
         it('should ', function()
+            local dto = Position.direction_to_orientation
+            assert.same(0, dto(0))
+            assert.same(.25, dto(2))
+            assert.same(.5, dto(4))
+            assert.same(.75, dto(6))
 
+            assert.same(.125, dto(1))
+            assert.same(.375, dto(3))
+            assert.same(.625, dto(5))
+            assert.same(.875, dto(7))
         end)
     end)
 
     describe('.opposite_direction', function()
-
         it ('returns the opposite direction', function ()
-            assert.same(d.west, Position.opposite_direction(d.east))
-            assert.same(d.southwest, Position.opposite_direction(d.northeast))
+            local od = Position.opposite_direction
+            assert.same(d.west, od(d.east))
+            assert.same(d.southwest, od(d.northeast))
         end)
     end)
 
-
     describe('.orientation_to_4way', function()
         it('should ', function()
-
+            assert.same(0, Position.orientation_to_4way(.124))
+            assert.same(2, Position.orientation_to_4way(.125))
+            assert.same(4, Position.orientation_to_4way(.624))
+            assert.same(0, Position.orientation_to_4way(.875))
         end)
     end)
 
     describe('.orientation_to_8way', function()
         it('should ', function()
-
+            assert.same(0, Position.orientation_to_8way(.06))
+            assert.same(1, Position.orientation_to_8way(.0625))
+            assert.same(5, Position.orientation_to_8way(.628))
+            assert.same(4, Position.orientation_to_8way(.501))
         end)
     end)
 

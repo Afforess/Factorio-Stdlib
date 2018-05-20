@@ -14,6 +14,7 @@ setmetatable(Position, Position)
 
 local Is = require('stdlib/utils/is')
 local string = require('stdlib/utils/string')
+local math = require('stdlib/utils/math')
 local floor = math.floor
 local abs = math.abs
 local dirs = defines.direction
@@ -282,13 +283,13 @@ function Position.chunk_position(pos)
 end
 Position.to_chunk_position = Position.chunk_position
 
---- Gets the tile position from the chunk position.
+--- Gets the left top tile position of a chunk from the chunk position.
 -- @tparam Concepts.Position pos
 -- @treturn Concepts.Position
 function Position.from_chunk_position(pos)
     pos = Position.new(pos)
-    pos.x = pos.x * 32
-    pos.y = pos.y * 32
+    pos.x = (floor(pos.x) * 32)
+    pos.y = (floor(pos.y) * 32)
     return pos
 end
 

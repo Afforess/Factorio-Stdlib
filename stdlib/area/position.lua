@@ -27,6 +27,9 @@ Position.immutable = false
 -- @return epsilon
 Position.epsilon = 1.19e-07
 
+--- Constructor Methods
+-- @section Constructors
+
 Position.__call = function(_, ...)
     local t = type((...))
     if t == 'table' then
@@ -37,9 +40,6 @@ Position.__call = function(_, ...)
         return Position.construct(...)
     end
 end
-
---- Constructor Methods
--- @section Constructors
 
 --- Returns a correctly formated position object.
 -- @usage Position.new({0, 0}) -- returns {x = 0, y = 0}
@@ -89,14 +89,14 @@ function Position.load(pos)
 end
 
 --- Converts a position string to a position.
--- @tparam string pos the position to convert
+-- @tparam string pos_string the position to convert
 -- @treturn Concepts.Position
 function Position.from_string(pos_string)
     return Position(load('return ' .. pos_string)())
 end
 
 --- Converts a string key position to a position.
--- @tparam string pos the position to convert
+-- @tparam string pos_string the position to convert
 -- @treturn Concepts.Position
 function Position.from_key(pos_string)
     -- local t = string.split(pos_string, '/')

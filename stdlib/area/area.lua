@@ -21,6 +21,9 @@ local unpack = table.unpack
 --- By default area tables are mutated in place set this to true to make the tables immutable.
 Area.immutable = false
 
+--- Constructor Methods
+-- @section Constructors
+
 Area.__call = function (_, ...)
     if type((...)) == 'table' then
         return Area.new(...)
@@ -80,6 +83,9 @@ function Area.load(area)
     Is.Assert.Area(area, 'area missing or malformed')
     return setmetatable(area, Area._mt)
 end
+
+--- Area Methods
+-- @section Methods
 
 local function validate_vector(amount)
     Is.Assert(amount, 'Missing amount to adjust by')
@@ -297,6 +303,23 @@ function Area.tile_center_points(area)
     return area
 end
 
+function Area.shrink_to_surface_size(area, surface)
+    area = Area.new(area)
+    local w, h = surface.map_gen_settings.width, surface.map_gen_settings.height
+    if math.abs(area.left_top.x) > w / 2 then
+        area.left_top.x = -(w / 2)
+        area.right_bottom.x = (w / 2)
+    end
+    if math.abs(area.left_top.y) > w / 2 then
+        area.left_top.y = -(h / 2)
+        area.right_bottom.y = (h / 2)
+    end
+    return area
+end
+
+--- Area Functions
+-- @section Functions
+
 --- Calculates the center of the area and returns the position.
 -- @tparam Concepts.BoundingBox area the area
 -- @treturn Concepts.Position the center of the area
@@ -487,32 +510,23 @@ function Area.spiral_iterate(area)
     end
     return iterator.iterate, area, 0
 end
-
-function Area.shrink_to_surface_size(area, surface)
-    area = Area.new(area)
-    local w, h = surface.map_gen_settings.width, surface.map_gen_settings.height
-    if math.abs(area.left_top.x) > w / 2 then
-        area.left_top.x = -(w / 2)
-        area.right_bottom.x = (w / 2)
-    end
-    if math.abs(area.left_top.y) > w / 2 then
-        area.left_top.y = -(h / 2)
-        area.right_bottom.y = (h / 2)
-    end
-    return area
-end
+--- @section end
 
 --- Area tables are returned with these Metamethods attached.
 -- @table Metamethods
 Area._mt = {
     __index = Area, -- If key is not found see if there is one available in the Area module.
+    __tostring = Area.tostring, -- Will print a string representation of the area.
+    __concat = Area._concat, -- calls tostring on both sides of concat.
     __add = Area.expand, -- Will expand the area by the number or vector on the RHS.
     __sub = Area.shrink, -- Will shrink the area by the number or vector on the RHS.
-    __tostring = Area.tostring, -- Will print a string representation of the area.
+    __mul = nil,
+    __div = nil,
+    __mod = nil,
     __eq = Area.equals, -- Is the size of area1 the same as area2.
     __lt = Area.less_than, --is the size of area1 less than area2.
+    __le = nil,
     __len = Area.size, -- The size of the area.
-    __concat = Area._concat, -- calls tostring on both sides of concat.
     __call = Area.copy -- Return a new copy
 }
 

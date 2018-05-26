@@ -250,7 +250,7 @@ M.area = M.Area
 -- @tparam mixed var The variable to check
 -- @treturn mixed
 function M.Vector(var)
-    return M.Table(var) and (M.Number(var[1]) and M.Number(var[2])) and var
+    return M.Table(var) and ((M.Number(var[1]) and M.Number(var[2])) or M.Position(var)) and var
 end
 M.vector = M.Vector
 

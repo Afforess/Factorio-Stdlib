@@ -91,4 +91,15 @@ function Core.create_stdlib_globals(files)
     return Core
 end
 
+local function no_meta(item, path)
+    if path[#path] == inspect.METATABLE then
+        return {item._class or item._module or item.__class}
+    end
+    return item
+end
+
+function Core.inspect(self)
+    return inspect(self, {process = no_meta})
+end
+
 return Core

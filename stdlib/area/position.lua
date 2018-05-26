@@ -8,6 +8,7 @@
 
 local Position = {
     _module = 'Position',
+    __class = 'Position',
     __index = require('stdlib/core')
 }
 setmetatable(Position, Position)
@@ -357,6 +358,21 @@ function Position.average(...)
     return avg:divide(n)
 end
 
+--- Is a position inside of an area.
+-- @tparam Concepts.Position pos The pos to check
+-- @tparam Concepts.BoundingBox area The area to check.
+-- @treturn boolean Is the position inside of the area.
+function Position.inside(pos, area)
+    local Area = require('stdlib/area/area')
+    pos = Position.new(pos)
+    area = Area.new(area)
+
+    local lt = area.left_top
+    local rb = area.right_bottom
+
+    return pos.x >= lt.x and pos.y >= lt.y and pos.x <= rb.x and pos.y <= rb.y
+end
+
 --- Expands a position to a square area.
 -- @tparam Concepts.Position pos the position to expand into an area
 -- @tparam number radius half of the side length of the area
@@ -591,6 +607,7 @@ end
 --- Position tables are returned with these metamethods attached
 -- @table Metamethods
 Position._mt = {
+    __class = 'position',
     __index = Position, -- If key is not found, see if there is one availble in the Position module.
     __add = __add, -- Adds two position together. Returns a new position.
     __sub = __sub, -- Subtracts one position from another. Returns a new position.

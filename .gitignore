@@ -24,3 +24,4 @@ mod/*
 # Ignore temp.lua files
 temp*.lua
 stdlib/data/modules/tester.lua
+scratchpad.lua

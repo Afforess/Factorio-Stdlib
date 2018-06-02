@@ -91,7 +91,6 @@ groups.item = {
     'repair-tool',
     'selection-tool',
     'tool',
-    'selection-tool'
 }
 
 groups.entity = {

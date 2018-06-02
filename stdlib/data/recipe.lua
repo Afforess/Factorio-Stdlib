@@ -91,7 +91,6 @@ local function replace_ingredient(ingredients, find, replace, replace_name_only)
         end
     end
 end
-Recipe.rep_ing = Recipe.replace_ingredient
 
 --- Add an ingredient to a recipe.
 -- @tparam string|Concepts.ingredient normal
@@ -164,6 +163,7 @@ function Recipe:replace_ingredient(replace, normal, expensive)
     end
     return self
 end
+Recipe.rep_ing = Recipe.replace_ingredient
 
 -- Currently does no checking
 function Recipe:clear_ingredients()

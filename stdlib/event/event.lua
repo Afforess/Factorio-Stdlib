@@ -58,7 +58,6 @@ Event = { --luacheck: allow defined top
 }
 
 --- Registers a handler for the given events.
--- If a `nil` handler is passed, remove the given events and stop listening to them.
 -- <p>Events dispatch in the order they are registered.
 -- <p>An *event ID* can be obtained via @{defines.events},
 -- @{LuaBootstrap.generate_event_name|script.generate_event_name} which is in <span class="types">@{int}</span>,
@@ -76,33 +75,29 @@ Event = { --luacheck: allow defined top
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.register(event_ids, handler)
     fail_if_missing(event_ids, "missing event_ids argument")
+	fail_if_missing(handler, "missing handler argument")
 
     event_ids = (type(event_ids) == "table" and event_ids) or {event_ids}
 
     for _, event_id in pairs(event_ids) do
         is_valid_id(event_id)
+		
+        if not Event._registry[event_id] then
+            Event._registry[event_id] = {}
 
-        if handler == nil then
-            Event._registry[event_id] = nil
-            script.on_event(event_id, nil)
-        else
-            if not Event._registry[event_id] then
-                Event._registry[event_id] = {}
-
-                if type(event_id) == "string" or event_id >= 0 then
-                    script.on_event(event_id, Event.dispatch)
-                elseif event_id < 0 then
-                    Event.core_events._register(event_id)
-                end
+            if type(event_id) == "string" or event_id >= 0 then
+                script.on_event(event_id, Event.dispatch)
+            elseif event_id < 0 then
+                Event.core_events._register(event_id)
             end
-            --If the handler is already registered for this event: remove and insert it to the end.
-            local _, reg_index = table.find(Event._registry[event_id], function(v) return v == handler end)
-            if reg_index then
-                table.remove(Event._registry[event_id], reg_index)
-                log("Same handler already registered for event "..event_id..", reording it to the bottom")
-            end
-            table.insert(Event._registry[event_id], handler)
         end
+        --If the handler is already registered for this event: remove and insert it to the end.
+        local _, reg_index = table.find(Event._registry[event_id], function(v) return v == handler end)
+        if reg_index then
+            table.remove(Event._registry[event_id], reg_index)
+            log("Same handler already registered for event "..event_id..", reording it to the bottom")
+        end
+        table.insert(Event._registry[event_id], handler)
     end
     return Event
 end
@@ -213,5 +208,27 @@ function Event.remove(event_ids, handler)
     end
     return Event
 end
+
+--- Removes all handlers from and stops listening to the given events.
+-- <p>An *event ID* can be obtained via @{defines.events},
+-- @{LuaBootstrap.generate_event_name|script.generate_event_name} which is in <span class="types">@{int}</span>,
+-- and can be a custom input name which is in <span class="types">@{string}</span>.
+-- <p>The `event_ids` parameter takes in either a single, multiple, or mixture of @{defines.events}, @{int}, and @{string}.
+-- @param event_ids (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
+-- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
+function Event.remove_all(event_ids)
+    fail_if_missing(event_ids, "missing event_ids argument")
+
+    event_ids = (type(event_ids) == "table" and event_ids) or {event_ids}
+
+    for _, event_id in pairs(event_ids) do
+        is_valid_id(event_id)
+		
+		Event._registry[event_id] = nil
+		script.on_event(event_id, nil)
+    end
+    return Event
+end
+
 
 return Event

@@ -1,5 +1,5 @@
 require('spec/setup/defines')
-local Surface = require('stdlib/area/surface')
+local Surface = require('area/surface')
 
 describe('Surface Spec', function()
     describe('Surface lookups', function()

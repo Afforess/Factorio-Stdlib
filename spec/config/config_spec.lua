@@ -1,5 +1,5 @@
 require('spec/setup/defines')
-local Config = require('stdlib/config/config')
+local Config = require('config/config')
 
 --[[ the table to be duplicated for all tests. ]]--
 _G.config_template = {

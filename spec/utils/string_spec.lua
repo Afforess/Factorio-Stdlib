@@ -1,4 +1,4 @@
-require('stdlib/utils/string')
+require('utils/string')
 
 --luacheck: ignore 143/string (TODO sync with luacheck rc)
 

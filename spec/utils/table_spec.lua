@@ -1,5 +1,5 @@
 require('busted.runner')()
-local table = require('stdlib/utils/table')
+local table = require('utils/table')
 
 describe('Table Spec', function()
     describe('table.map', function()

@@ -8,7 +8,7 @@ describe(
         before_each(
             function()
                 require('spec/setup/dataloader')
-                Technology = require('stdlib/data/technology')
+                Technology = require('data/technology')
             end
         )
 

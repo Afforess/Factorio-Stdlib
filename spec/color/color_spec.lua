@@ -7,7 +7,7 @@ describe('Color',  function ()
     local say = require('say')
 
     setup(function()
-            Color = require('stdlib/color/color')
+            Color = require('color/color')
         end
     )
 

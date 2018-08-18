@@ -1,7 +1,7 @@
 require('busted.runner')()
 
 require('spec/setup/defines')
-local Chunk = require('stdlib/area/chunk')
+local Chunk = require('area/chunk')
 
 describe('Chunk Spec', function()
     it('should give the correct chunk coordinates for a position', function()

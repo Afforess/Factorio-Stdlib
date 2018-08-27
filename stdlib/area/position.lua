@@ -1,7 +1,7 @@
 --- Tools for working with `<x,y>` coordinates.
 -- The tables passed into the Position functions are mutated in-place.
 -- @module Position
--- @usage local Position = require('__stdlib__/area/position')
+-- @usage local Position = require('__stdlib__/stdlib/area/position')
 -- @see Area
 -- @see Concepts.Position
 -- @see defines.direction
@@ -9,13 +9,13 @@
 local Position = {
     _module = 'Position',
     __class = 'Position',
-    __index = require('__stdlib__/core')
+    __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Position, Position)
 
-local Is = require('__stdlib__/utils/is')
-local string = require('__stdlib__/utils/string')
-local math = require('__stdlib__/utils/math')
+local Is = require('__stdlib__/stdlib/utils/is')
+local string = require('__stdlib__/stdlib/utils/string')
+local math = require('__stdlib__/stdlib/utils/math')
 local floor = math.floor
 local abs = math.abs
 local dirs = defines.direction
@@ -363,7 +363,7 @@ end
 -- @tparam Concepts.BoundingBox area The area to check.
 -- @treturn boolean Is the position inside of the area.
 function Position.inside(pos, area)
-    local Area = require('__stdlib__/area/area')
+    local Area = require('__stdlib__/stdlib/area/area')
     pos = Position.new(pos)
     area = Area.new(area)
 
@@ -380,7 +380,7 @@ end
 function Position.expand_to_area(pos, radius)
     pos = Position.new(pos)
     Is.Assert.Number(radius, 'missing radius argument')
-    local Area = require('__stdlib__/area/area')
+    local Area = require('__stdlib__/stdlib/area/area')
 
     local left_top = Position.new({pos.x - radius, pos.y - radius})
     local right_bottom = Position.new({pos.x + radius, pos.y + radius})
@@ -394,7 +394,7 @@ Position.to_area = Position.expand_to_area
 -- @treturn Concepts.BoundingBox the area of the tile
 function Position.expand_to_tile_area(pos)
     pos = Position.tile_position(pos)
-    local Area = require('__stdlib__/area/area')
+    local Area = require('__stdlib__/stdlib/area/area')
 
     local left_top = pos:copy()
     local right_bottom = pos:copy():offset(1, 1)
@@ -410,7 +410,7 @@ Position.to_tile_area = Position.expand_to_tile_area
 -- @treturn Concepts.BoundingBox the chunk's area
 function Position.expand_to_chunk_area(pos)
     pos = Position.new(pos)
-    local Area = require('__stdlib__/area/area')
+    local Area = require('__stdlib__/stdlib/area/area')
 
     local left_top = Position.load {x = pos.x * 32, y = pos.y * 32}
     local right_bottom = left_top:copy():offset(32, 32)

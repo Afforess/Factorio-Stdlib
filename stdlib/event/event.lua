@@ -11,9 +11,9 @@
 -- <br>Due to this, great care should be taken when registering events conditionally.
 -- </blockquote>
 -- @module Event
--- @usage local Event = require('__stdlib__/event/event')
+-- @usage local Event = require('__stdlib__/stdlib/event/event')
 
-local table = require('__stdlib__/utils/table')
+local table = require('__stdlib__/stdlib/utils/table')
 
 --Holds the event registry
 local event_registry = {}
@@ -39,10 +39,10 @@ local Event = {
     count_data = {}, -- assigned when needed
     stop_processing = {}, -- just has to be unique
 }
-setmetatable(Event, require('__stdlib__/core'))
+setmetatable(Event, require('__stdlib__/stdlib/core'))
 
-local Is = require('__stdlib__/utils/is')
-local inspect = require('__stdlib__/vendor/inspect')
+local Is = require('__stdlib__/stdlib/utils/is')
+local inspect = require('__stdlib__/stdlib/vendor/inspect')
 
 local bootstrap_register = {
     on_init = function()

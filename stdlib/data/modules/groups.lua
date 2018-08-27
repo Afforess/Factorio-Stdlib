@@ -1,4 +1,4 @@
-local table = require('__stdlib__/utils/table')
+local table = require('__stdlib__/stdlib/utils/table')
 local groups = {}
 
 groups.category = {

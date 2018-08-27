@@ -3,7 +3,7 @@
 
 local Fluid = {
     _class = 'Fluid',
-    __index = require('__stdlib__/data/data'),
+    __index = require('__stdlib__/stdlib/data/data'),
 }
 setmetatable(Fluid, Fluid)
 

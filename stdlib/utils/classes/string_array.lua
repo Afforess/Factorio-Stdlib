@@ -6,7 +6,7 @@ local M = {
     _module = 'string-array-class'
 }
 
-local Is = require('__stdlib__/utils/is')
+local Is = require('__stdlib__/stdlib/utils/is')
 
 --- Does this array contain name.
 -- @tparam string name The string to find.

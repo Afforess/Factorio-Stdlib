@@ -2,19 +2,19 @@
 -- Taken from ***Programming in Lua*** [Queues and Double Queues](http://www.lua.org/pil/11.4.html)
 -- and modified to not allow nil values, and returns nil if @{pop_first} or @{pop_last} is used when the queue is empty.
 -- @module Queue
--- @usage local Queue = require('__stdlib__/lists/queue')
+-- @usage local Queue = require('__stdlib__/stdlib/lists/queue')
 
 local Queue = {
     _module = 'Queue',
-    __index = require('__stdlib__/core')
+    __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Queue, Queue)
 
-local table = require('__stdlib__/utils/table')
+local table = require('__stdlib__/stdlib/utils/table')
 local t_size = table.size
 
-local Is = require('__stdlib__/utils/is')
-local Inspect = require('__stdlib__/vendor/inspect')
+local Is = require('__stdlib__/stdlib/utils/is')
+local Inspect = require('__stdlib__/stdlib/vendor/inspect')
 
 --- Constructs a new Queue object.
 -- @return (<span class="types">@{Queue}</span>) a new, empty queue

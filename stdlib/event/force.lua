@@ -4,18 +4,18 @@
 -- <p>This modules can register the following events: `on_force_created`, and `on_forces_merging`.
 -- @module Force
 -- @usage
--- local Force = require('__stdlib__/event/force').register_events()
+-- local Force = require('__stdlib__/stdlib/event/force').register_events()
 -- -- inside your Init event Force.init() -- to properly handle any existing forces
 
-local Event = require('__stdlib__/event/event')
+local Event = require('__stdlib__/stdlib/event/event')
 
 local Force = {
     _module = 'Force'
 }
-setmetatable(Force, require('__stdlib__/core'))
+setmetatable(Force, require('__stdlib__/stdlib/core'))
 
-local Is = require('__stdlib__/utils/is')
-local Game = require('__stdlib__/game')
+local Is = require('__stdlib__/stdlib/utils/is')
+local Game = require('__stdlib__/stdlib/game')
 
 -- return new default force object
 local function new(force_name)
@@ -51,7 +51,7 @@ end
 -- @treturn LuaForce the force instance
 -- @treturn table the force's global data
 -- @usage
--- local Force = require('__stdlib__/event/force')
+-- local Force = require('__stdlib__/stdlib/event/force')
 -- local force_name, force_data = Force.get("player")
 -- local force_name, force_data = Force.get(game.forces["player"])
 -- -- Returns data for the force named "player" from either a string or LuaForce object

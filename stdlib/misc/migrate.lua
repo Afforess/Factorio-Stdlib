@@ -2,9 +2,9 @@
 -- @module Migrate
 
 local Migrate = {}
-setmetatable(Migrate, require('__stdlib__/core'))
+setmetatable(Migrate, require('__stdlib__/stdlib/core'))
 
-local Is = require('__stdlib__/utils/is')
+local Is = require('__stdlib__/stdlib/utils/is')
 
 --- Migrate a dictionary of recipe -> tech names
 -- @tparam dictionary dictionary

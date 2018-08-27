@@ -3,8 +3,8 @@
 
 local Entity = {
     _class = 'Entity',
-    __index = require('__stdlib__/data/data'),
-    __call = require('__stdlib__/data/data').__call
+    __index = require('__stdlib__/stdlib/data/data'),
+    __call = require('__stdlib__/stdlib/data/data').__call
 }
 setmetatable(Entity, Entity)
 

@@ -1,6 +1,6 @@
 --- A collection library to simplify sequential table operations
 --
---    local Enumerable = require('__stdlib__/enumerable')
+--    local Enumerable = require('__stdlib__/stdlib/enumerable')
 --    Enumerable.create({1,2,3})
 -- @classmod enumerable
 -- @author Billiam

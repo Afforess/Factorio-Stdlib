@@ -1,11 +1,11 @@
 --- For working with inventories.
 -- @module Inventory
--- @usage local Inventory = require('__stdlib__/entity/inventory')
+-- @usage local Inventory = require('__stdlib__/stdlib/entity/inventory')
 
 local Inventory = {_module = 'Inventory'}
-setmetatable(Inventory, require('__stdlib__/core'))
+setmetatable(Inventory, require('__stdlib__/stdlib/core'))
 
-local Is = require('__stdlib__/utils/is')
+local Is = require('__stdlib__/stdlib/utils/is')
 
 --- Copies the contents of source inventory to destination inventory by using @{Concepts.SimpleItemStack}.
 -- @tparam LuaInventory src the source inventory

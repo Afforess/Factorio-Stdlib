@@ -1,6 +1,6 @@
 --- For working with mod configurations.
 -- @module Config
--- @usage require('__stdlib__/config/config')
+-- @usage require('__stdlib__/stdlib/config/config')
 
 ---
 -- @tfield function new
@@ -10,7 +10,7 @@
 -- @tfield function is_set
 -- @table Config
 local M = {_module = 'Config'}
-setmetatable(M, require('__stdlib__/core'))
+setmetatable(M, require('__stdlib__/stdlib/core'))
 
 -----------------------------------------------------------------------
 --Setup repeated code for use in sub functions here

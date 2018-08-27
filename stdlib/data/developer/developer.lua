@@ -1,7 +1,7 @@
 --- Developer
 -- @script Developer
 
-local Data = require('__stdlib__/data/data')
+local Data = require('__stdlib__/stdlib/data/data')
 local path = '__stdlib__/data/developer/'
 
 local Developer = {
@@ -21,7 +21,7 @@ end
 -- @tparam string name The name of your mod
 -- @usage
 -- --data.lua
--- local Developer = require('__stdlib__/data/develper/developer')
+-- local Developer = require('__stdlib__/stdlib/data/develper/developer')
 -- Developer.make_test_entities()
 function Developer.make_test_entities()
     if not data.raw['simple-entity']['debug-chunk-marker'] then

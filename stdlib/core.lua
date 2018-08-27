@@ -1,12 +1,38 @@
---- The Core module loads some helper functions useful in all stages
+--- The Core module loads some helper functions and globals useful in all stages
 -- of a mods life cycle. All modules have an __index method into core.
 -- @module Core
--- @usage local Core = require('__stdlib__/core')
+-- @usage local Core = require('__stdlib__/stdlib/core')
 
---Global mutates
-require('__stdlib__/utils/globals')
+-- Set the global default options
+STDLIB = STDLIB or {}
+STDLIB.no_string = STDLIB.no_string or false
+STDLIB.no_table = STDLIB.no_table or false
+STDLIB.no_math = STDLIB.no_math or false
+STDLIB.no_defines_color = STDLIB.no_defines_color or false
+STDLIB.no_defines_time = STDLIB.no_defines_time or false
 
-local Is = require('__stdlib__/utils/is')
+-- require global helper functions.
+require('__stdlib__/stdlib/utils/globals')
+
+local Is = require('__stdlib__/stdlib/utils/is')
+
+-- Set up default stuff for testing, defines will already be available in an active mod or busted setup specs
+if not defines then
+    require('__stdlib__/stdlib/spec/setup/world')
+end
+
+-- Mutate lua built-ins, options are checked inside each.
+require('__stdlib__/stdlib/utils/table')
+require('__stdlib__/stdlib/utils/string')
+require('__stdlib__/stdlib/utils/math')
+
+-- Defines Mutates
+local color = require('__stdlib__/stdlib/utils/defines/color')
+local anticolor = require('__stdlib__/stdlib/utils/defines/anticolor')
+local lightcolor = require('__stdlib__/stdlib/utils/defines/lightcolor')
+local time = require('__stdlib__/stdlib/defines/time')
+
+local string_array = require('__stdlib__/stdlib/utils/classes/string_array')
 
 local Core = {
     _VERSION = '1.0.0',
@@ -37,8 +63,14 @@ local Core = {
     __call = function(t, ...)
         return t:__call(...)
     end,
-    _classes = {
-        string_array = require('__stdlib__/utils/classes/string_array')
+    classes = {
+        string_array = string_array
+    },
+    defines = {
+        color = color,
+        anticolor = anticolor,
+        lightcolor = lightcolor,
+        time = time
     }
 }
 Core.__index = Core
@@ -48,6 +80,8 @@ function Core.log_and_print(msg)
         log(msg)
         game.print(msg)
         return true
+    else
+        log(msg)
     end
 end
 
@@ -60,7 +94,7 @@ end
 -- @tparam[opt] table files
 -- @treturn Core
 -- @usage
--- require('__stdlib__/core).create_stdlib_globals()
+-- require('__stdlib__/stdlib/core).create_stdlib_globals()
 function Core.create_stdlib_globals(files)
     files =
         files or
@@ -86,7 +120,7 @@ function Core.create_stdlib_globals(files)
     Is.Assert.Table(files, 'files must be a dictionary of global names -> file paths')
 
     for glob, path in pairs(files) do
-        _G[glob] = prequire((path:gsub('%.', '/'))) -- extra () required to emulate select(1)
+        _G[glob] = prequire('__stdlib__/stdlib/'..(path:gsub('%.', '/'))) -- extra () required to emulate select(1)
     end
     return Core
 end

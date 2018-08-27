@@ -3,11 +3,11 @@
 
 local Technology = {
     _class = 'Technology',
-    __index = require('__stdlib__/data/data'),
+    __index = require('__stdlib__/stdlib/data/data'),
 }
 setmetatable(Technology, Technology)
 
-local Is = require('__stdlib__/utils/is')
+local Is = require('__stdlib__/stdlib/utils/is')
 
 function Technology:__call(tech)
     return self:get(tech, 'technology')
@@ -64,7 +64,7 @@ function Technology:add_effect(effect, unlock_type)
     end
 
     if self:is_valid('technology') then
-        local Recipe = require('__stdlib__/data/recipe')
+        local Recipe = require('__stdlib__/stdlib/data/recipe')
         unlock_type = (not unlock_type and 'unlock-recipe') or unlock_type
         local r_name = type(effect) == 'table' and effect.name or effect
         if unlock_type == 'unlock-recipe' or not unlock_type then
@@ -117,7 +117,7 @@ end
 
 function Technology:add_pack(new_pack, count)
     if self:is_valid('technology') then
-        local Item = require('__stdlib__/data/item')
+        local Item = require('__stdlib__/stdlib/data/item')
         if self.table(new_pack) then
             count = new_pack[2] or 1
             new_pack = new_pack[1]

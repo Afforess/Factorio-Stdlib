@@ -6,11 +6,11 @@
 local Trains = {
     _module = 'Trains'
 }
-setmetatable(Trains, require('__stdlib__/core'))
+setmetatable(Trains, require('__stdlib__/stdlib/core'))
 
-local Event = require('__stdlib__/event/event')
-local Surface = require('__stdlib__/area/surface')
-local Entity = require('__stdlib__/entity/entity')
+local Event = require('__stdlib__/stdlib/event/event')
+local Surface = require('__stdlib__/stdlib/area/surface')
+local Entity = require('__stdlib__/stdlib/entity/entity')
 
 --- This event fires when a train's ID changes.
 -- <p>The train ID is a property of the main locomotive,
@@ -196,7 +196,7 @@ end
 --- This needs to be called to register events for this module
 -- @treturn Trains
 function Trains.register_events()
-    require('__stdlib__/event/event')
+    require('__stdlib__/stdlib/event/event')
     -- When a locomotive is removed ...
     local train_remove_events = {defines.events.on_entity_died, defines.events.on_pre_player_mined_item, defines.events.on_robot_pre_mined}
     Event.register(train_remove_events, Event.filter_entity('entity', 'locomotive', Trains._on_locomotive_changed))

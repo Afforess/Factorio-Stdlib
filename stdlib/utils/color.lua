@@ -1,11 +1,32 @@
 --- For playing with colors.
 -- @module Color
--- @usage local Color = require('__stdlib__/utils/color')
+-- @usage local Color = require('__stdlib__/stdlib/utils/color')
 
-local Color = {_module = 'Color'}
-setmetatable(Color, require('__stdlib__/core'))
+local Color = {}
 
-local Is = require('__stdlib__/utils/is')
+local Is = require('__stdlib__/stdlib/utils/is')
+
+Color.colors = {
+    white = {r = 1.00, g = 1.00, b = 1.00},
+    black = {r = 0.00, g = 0.00, b = 0.00},
+    darkgrey = {r = 0.25, g = 0.25, b = 0.25},
+    grey = {r = 0.50, g = 0.50, b = 0.50},
+    lightgrey = {r = 0.75, g = 0.75, b = 0.75},
+    red = {r = 1.00, g = 0.00, b = 0.00},
+    darkred = {r = 0.50, g = 0.00, b = 0.00},
+    lightred = {r = 1.00, g = 0.50, b = 0.50},
+    green = {r = 0.00, g = 1.00, b = 0.00},
+    darkgreen = {r = 0.00, g = 0.50, b = 0.00},
+    lightgreen = {r = 0.50, g = 1.00, b = 0.50},
+    blue = {r = 0.00, g = 0.00, b = 1.00},
+    darkblue = {r = 0.00, g = 0.00, b = 0.50},
+    lightblue = {r = 0.50, g = 0.50, b = 1.00},
+    orange = {r = 1.00, g = 0.55, b = 0.10},
+    yellow = {r = 1.00, g = 1.00, b = 0.00},
+    pink = {r = 1.00, g = 0.00, b = 1.00},
+    purple = {r = 0.60, g = 0.10, b = 0.60},
+    brown = {r = 0.60, g = 0.40, b = 0.10}
+}
 
 --- Set a value for the alpha channel in the given color table.
 -- `color.a` represents the alpha channel in the given color table.
@@ -18,7 +39,7 @@ local Is = require('__stdlib__/utils/is')
 -- @tparam[opt=1] float alpha the alpha value 0 - 1 to set for the given color
 -- @treturn Concepts.Color a color table that has the specified value for the alpha channel
 function Color.set(color, alpha)
-    color = color or defines.color.white
+    color = color or {r = 1, g = 1, b = 1}
     Color.to_table(color)
     color.a = alpha or color.a or 1
     return color

@@ -5,17 +5,17 @@
 -- @usage
 -- -- For use with STDLIB Events
 -- if DEBUG then
---   require('__stdlib__/scripts/quickstart').register_events()
+--   require('__stdlib__/stdlib/scripts/quickstart').register_events()
 -- end
 -- @usage
 -- --If not using stdlibs event system
--- local quickstart = require('__stdlib__/scripts/quickstart')
+-- local quickstart = require('__stdlib__/stdlib/scripts/quickstart')
 -- script.on_event(defines.events.on_player_created, function()
 --  quickstart.on_player_created() -- can be wrapped in an if DEBUG type check
 -- end)
 
-local Event = require('__stdlib__/event/event')
-local Area = require('__stdlib__/area/area')
+local Event = require('__stdlib__/stdlib/event/event')
+local Area = require('__stdlib__/stdlib/area/area')
 
 if not remote.interfaces['quickstart-script'] then
     local qs_interface = {}
@@ -32,7 +32,7 @@ else
     return
 end
 
-local QS = require('__stdlib__/config/config').new(prequire('config-quickstart') or {})
+local QS = require('__stdlib__/stdlib/config/config').new(prequire('config-quickstart') or {})
 local quickstart = {}
 
 function quickstart.on_player_created(event)

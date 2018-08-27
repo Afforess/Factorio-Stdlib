@@ -1,15 +1,15 @@
 --- Tools for working with tiles.
 -- A tile represents a 1 unit<sup>2</sup> on a surface in Factorio.
 -- @module Tile
--- @usage local Tile = require('__stdlib__/area/tile')
+-- @usage local Tile = require('__stdlib__/stdlib/area/tile')
 -- @see LuaTile
 
 local Tile = {_module = 'Tile'}
-setmetatable(Tile, require('__stdlib__/core'))
+setmetatable(Tile, require('__stdlib__/stdlib/core'))
 
-local Is = require('__stdlib__/utils/is')
-local Game = require('__stdlib__/game')
-local Position = require('__stdlib__/area/position')
+local Is = require('__stdlib__/stdlib/utils/is')
+local Game = require('__stdlib__/stdlib/game')
+local Position = require('__stdlib__/stdlib/area/position')
 
 --- Get the @{LuaTile.position|tile position} of a tile where the given position resides.
 -- @function Tile.from_position

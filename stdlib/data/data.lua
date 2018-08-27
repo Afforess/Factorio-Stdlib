@@ -7,17 +7,17 @@ if _G.remote and _G.script then
     error('Data Modules can only be required in the data stage', 2)
 end
 
-local Core = require('__stdlib__/core') -- Calling core up here to setup any required global stuffs
-local table = require('__stdlib__/utils/table')
-local Is = require('__stdlib__/utils/is')
-local Inspect = require('__stdlib__/vendor/inspect')
-local groups = require('__stdlib__/data/modules/groups')
+local Core = require('__stdlib__/stdlib/core') -- Calling core up here to setup any required global stuffs
+local table = require('__stdlib__/stdlib/utils/table')
+local Is = require('__stdlib__/stdlib/utils/is')
+local Inspect = require('__stdlib__/stdlib/vendor/inspect')
+local groups = require('__stdlib__/stdlib/data/modules/groups')
 
 local Data = {
     _class = 'Data',
-    Sprites = require('__stdlib__/data/modules/sprites'),
-    Pipes = require('__stdlib__/data/modules/pipes'),
-    Util = require('__stdlib__/data/modules/util'),
+    Sprites = require('__stdlib__/stdlib/data/modules/sprites'),
+    Pipes = require('__stdlib__/stdlib/data/modules/pipes'),
+    Util = require('__stdlib__/stdlib/data/modules/util'),
     _default_options = {
         ['silent'] = false, -- Don't log if not present
         ['fail'] = false, -- Error instead of logging
@@ -35,7 +35,7 @@ setmetatable(Data, Data)
 -- @tparam[opt] table files
 -- @treturn Data
 -- @usage
--- require('__stdlib__/data/data).create_data_globals()
+-- require('__stdlib__/stdlib/data/data).create_data_globals()
 function Data.create_data_globals(files)
     files =
     files or
@@ -202,7 +202,7 @@ end
 function Data:Flags()
     if self:is_valid() then
         self.flags = self.flags or {}
-        return setmetatable(self.flags, self._classes.string_array)
+        return setmetatable(self.flags, self.classes.string_array)
     end
 end
 
@@ -250,7 +250,7 @@ function Data:set_string_array(field)
     if self:is_valid() then
         local has = self[field]
         if Is.Table(has) then
-            setmetatable(has, self._classes.string_array)
+            setmetatable(has, self.classes.string_array)
         end
     end
     return self

@@ -1,7 +1,7 @@
 --- Is expression library
 -- @module Is
 -- @usage
--- local Is = require('__stdlib__/utils/is')
+-- local Is = require('__stdlib__/stdlib/utils/is')
 -- Is.True(true)
 -- Is.Not.True(false)
 -- Is.Assert.True(true)
@@ -48,7 +48,7 @@ Is.Assert.Not = {}
 
 local M = {}
 
-require('__stdlib__/utils/math')
+require('__stdlib__/stdlib/utils/math')
 local type = type
 local floor = math.floor
 local huge = math.huge

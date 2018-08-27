@@ -1,20 +1,20 @@
 --- Tools for working with bounding boxes.
 -- The tables passed into the Area functions are mutated in-place.
 -- @module Area
--- @usage local Area = require('__stdlib__/area/area')
+-- @usage local Area = require('__stdlib__/stdlib/area/area')
 -- @see Position
 -- @see Concepts.BoundingBox
 -- @see Concepts.Position
 
 local Area = {
     _module = 'Area',
-    __index = require('__stdlib__/core')
+    __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Area, Area)
 
-local Is = require('__stdlib__/utils/is')
-local Position = require('__stdlib__/area/position')
-local math = require('__stdlib__/utils/math')
+local Is = require('__stdlib__/stdlib/utils/is')
+local Position = require('__stdlib__/stdlib/area/position')
+local math = require('__stdlib__/stdlib/utils/math')
 local round_to = math.round_to
 local unpack = table.unpack
 

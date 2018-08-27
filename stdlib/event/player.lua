@@ -2,18 +2,18 @@
 -- This module adds player helper functions, it does not automatically register events unless Player.register_events() is called
 -- @module Player
 -- @usage
--- local Player = require('__stdlib__/event/player').register_events()
+-- local Player = require('__stdlib__/stdlib/event/player').register_events()
 -- -- The fist time this is required it will register player creation events
 
-local Event = require('__stdlib__/event/event')
+local Event = require('__stdlib__/stdlib/event/event')
 
 local Player = {
     _module = 'Player'
 }
-setmetatable(Player, require('__stdlib__/core'))
+setmetatable(Player, require('__stdlib__/stdlib/core'))
 
-local Is = require('__stdlib__/utils/is')
-local Game = require('__stdlib__/game')
+local Is = require('__stdlib__/stdlib/utils/is')
+local Game = require('__stdlib__/stdlib/game')
 
 -- Return new default player object consiting of index and name
 local function new(player_index)
@@ -49,7 +49,7 @@ end
 -- @treturn LuaPlayer the player instance
 -- @treturn table the player's global data
 -- @usage
--- local Player = require('__stdlib__/event/player')
+-- local Player = require('__stdlib__/stdlib/event/player')
 -- local player, player_data = Player.get(event.player_index)
 function Player.get(player)
     player = Game.get_player(player)

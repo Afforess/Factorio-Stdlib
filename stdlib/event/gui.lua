@@ -1,13 +1,13 @@
 --- Makes monolithic Factorio GUI events more manageable.
 -- @module Gui
--- @usage local Gui = require('__stdlib__/event/gui')
+-- @usage local Gui = require('__stdlib__/stdlib/event/gui')
 
-local Event = require('__stdlib__/event/event')
+local Event = require('__stdlib__/stdlib/event/event')
 
 local Gui = {
     _module = 'Gui'
 }
-setmetatable(Gui, require('__stdlib__/core'))
+setmetatable(Gui, require('__stdlib__/stdlib/core'))
 
 local function matcher(event, pattern)
     if event.element and event.element.valid then

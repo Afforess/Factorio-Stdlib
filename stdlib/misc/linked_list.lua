@@ -1,8 +1,8 @@
 --- A double-linked list implementation
 -- @classmod LinkedList
 
-local Core = require('__stdlib__/core')
-local Is = require('__stdlib__/utils/is')
+local Core = require('__stdlib__/stdlib/core')
+local Is = require('__stdlib__/stdlib/utils/is')
 
 -- @class LinkedListNode
 -- @usage local llnode = linkedlist.append(item)
@@ -21,7 +21,7 @@ LinkedListNode._mt.__index = LinkedListNode
 LinkedListNode._class = LinkedListNode
 
 -- @module linked_list
--- @usage local LinkedList = require('__stdlib__/stdlib.utils.classes.linked_list')
+-- @usage local LinkedList = require('__stdlib__/stdlib/stdlib.utils.classes.linked_list')
 local LinkedList = setmetatable(
     {
         _module = 'linked_list',

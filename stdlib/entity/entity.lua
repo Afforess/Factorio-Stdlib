@@ -1,11 +1,11 @@
 --- Tools for working with entities.
 -- @module Entity
--- @usage local Entity = require('__stdlib__/entity/entity')
+-- @usage local Entity = require('__stdlib__/stdlib/entity/entity')
 
 local Entity = {_module = 'Entity'}
-setmetatable(Entity, require('__stdlib__/core'))
+setmetatable(Entity, require('__stdlib__/stdlib/core'))
 
-local Is = require('__stdlib__/utils/is')
+local Is = require('__stdlib__/stdlib/utils/is')
 
 --- Tests whether an entity has access to a given field.
 -- @tparam LuaEntity entity the entity to test the access to a field

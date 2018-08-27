@@ -30,7 +30,7 @@ require('__stdlib__/stdlib/utils/math')
 local color = require('__stdlib__/stdlib/utils/defines/color')
 local anticolor = require('__stdlib__/stdlib/utils/defines/anticolor')
 local lightcolor = require('__stdlib__/stdlib/utils/defines/lightcolor')
-local time = require('__stdlib__/stdlib/defines/time')
+local time = require('__stdlib__/stdlib/utils/defines/time')
 
 local string_array = require('__stdlib__/stdlib/utils/classes/string_array')
 

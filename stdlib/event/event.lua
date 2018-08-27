@@ -13,12 +13,6 @@
 -- @module Event
 -- @usage local Event = require('__stdlib__/stdlib/event/event')
 
-local table = require('__stdlib__/stdlib/utils/table')
-
---Holds the event registry
-local event_registry = {}
-local event_names = table.invert(defines.events)
-
 local Event = {
     _module = 'Event',
     core_events = {
@@ -40,6 +34,11 @@ local Event = {
     stop_processing = {}, -- just has to be unique
 }
 setmetatable(Event, require('__stdlib__/stdlib/core'))
+
+local table = require('__stdlib__/stdlib/utils/table')
+--Holds the event registry
+local event_registry = {}
+local event_names = table.invert(defines.events)
 
 local Is = require('__stdlib__/stdlib/utils/is')
 local inspect = require('__stdlib__/stdlib/vendor/inspect')
@@ -135,7 +134,8 @@ function Event.register(event_id, handler, matcher, pattern)
         for i, registered in ipairs(registry) do
             if registered.handler == handler and registered.pattern == pattern and registered.matcher == matcher then
                 table.remove(registry, i)
-                log('Same handler already registered for event ' .. event_id .. ' at position ' .. i .. ', moving it to the bottom')
+                local event_str = event_id .. '(' .. (event_names[event_id] or ' ') .. ')'
+                log('Same handler already registered for event ' .. event_str .. ' at position ' .. i .. ', moving it to the bottom')
                 break
             end
         end
@@ -331,7 +331,7 @@ function Event.dispatch(event)
                 end
                 local result = inspect(event) .. '\n'
                 game.write_file(get_file_path('events/' .. get_event_name(event.input_name or event.name) .. '.lua'), result, true)
-                game.write_file(get_file_path('events/ORDERED.lua'), result , true)
+                game.write_file(get_file_path('events/ordered.lua'), result , true)
             end
 
             if protected then

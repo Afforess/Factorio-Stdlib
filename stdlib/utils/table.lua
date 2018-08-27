@@ -650,7 +650,7 @@ function Table.clear(tbl)
 end
 
 -- Overwrite the global table 'table' if the flag is not set.
-if not _G._STDLIB_NO_TABLE then
+if not STDLIB.no_table then
     _G.table = Table
 end
 

@@ -32,7 +32,7 @@ else
     return
 end
 
-local QS = require('__stdlib__/stdlib/config/config').new(prequire('config-quickstart') or {})
+local QS = require('__stdlib__/stdlib/misc/config').new(prequire('config-quickstart') or {})
 local quickstart = {}
 
 function quickstart.on_player_created(event)

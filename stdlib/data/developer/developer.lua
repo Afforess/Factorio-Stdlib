@@ -2,7 +2,7 @@
 -- @script Developer
 
 local Data = require('__stdlib__/stdlib/data/data')
-local path = '__stdlib__/data/developer/'
+local path = '__stdlib__/stdlib/data/developer/'
 
 local Developer = {
     __index = Data
@@ -85,8 +85,8 @@ function Developer.make_test_entities()
         }:remove_fields {'minable', 'collision_box', 'vehicle_impact_sound', 'working_sound'}
     end
 
-    data.raw.tile['lab-dark-1'].map_color = {r = 100, g = 100, b = 100}
-    data.raw.tile['lab-dark-2'].map_color = {r = 50, g = 50, b = 50}
+    --data.raw.tile['lab-dark-1'].map_color = {r = 100, g = 100, b = 100}
+    --data.raw.tile['lab-dark-2'].map_color = {r = 50, g = 50, b = 50}
 
     data.raw['map-gen-presets']['default']['debug'] = {
         type = 'map-gen-presets',

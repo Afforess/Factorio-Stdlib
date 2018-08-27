@@ -105,20 +105,19 @@ function Core.create_stdlib_globals(files)
             TILE = 'stdlib/area/tile',
             SURFACE = 'stdlib/area/surface',
             CHUNK = 'stdlib/area/chunk',
-            COLOR = 'stdlib/color/color',
+            COLOR = 'stdlib/utils/color',
             ENTITY = 'stdlib/entity/entity',
             INVENTORY = 'stdlib/entity/inventory',
             RESOURCE = 'stdlib/entity/resource',
-            CONFIG = 'stdlib/config/config',
-            LOGGER = 'stdlib/log/logger',
-            QUEUE = 'stdlib/lists/queue',
+            CONFIG = 'stdlib/misc/config',
+            LOGGER = 'stdlib/misc/logger',
+            QUEUE = 'stdlib/misc/queue',
             EVENT = 'stdlib/event/event',
             GUI = 'stdlib/event/gui',
             PLAYER = 'stdlib/event/player',
             FORCE = 'stdlib/event/force'
         }
     Is.Assert.Table(files, 'files must be a dictionary of global names -> file paths')
-
     for glob, path in pairs(files) do
         _G[glob] = prequire('__stdlib__/stdlib/'..(path:gsub('%.', '/'))) -- extra () required to emulate select(1)
     end

@@ -24,7 +24,7 @@ local time = {
     year = YEAR -- the number of Factorio ticks in a year (365 days)
 }
 
-if not STDLIB.no_defines_time then
+if not (STDLIB and STDLIB.no_defines_time) then
     --luacheck: ignore defines (This is used for testing locally)
     defines = defines or {}
     defines.time = time

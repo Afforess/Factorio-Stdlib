@@ -273,7 +273,7 @@ function String.ordinal_suffix(n, prepend_number)
 end
 
 -- Overwrite the global table 'string' if the flag is not set.
-if not STDLIB.no_string then
+if not (STDLIB and STDLIB.no_string) then
     setmetatable(string, old_string_meta)
     for k, v in pairs(String) do
         _G.string[k] = v

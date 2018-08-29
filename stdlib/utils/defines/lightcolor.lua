@@ -48,7 +48,7 @@ local _mt = {
 
 setmetatable(lightcolor, _mt)
 
-if not STDLIB.no_defines_color then
+if not (STDLIB and STDLIB.no_defines_color) then
     -- Ignore assigning to read only defines table. defines table is not ready only, however
     --luacheck: ignore defines (This is used for testing locally)
     defines = defines or {}

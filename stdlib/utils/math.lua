@@ -205,7 +205,7 @@ function Math.pingpong(x)
 end
 
 -- Overwrite the global table 'math' if the flag is not set.
-if not STDLIB.no_math then
+if not (STDLIB and STDLIB.no_math) then
     _G.math = Math
 end
 

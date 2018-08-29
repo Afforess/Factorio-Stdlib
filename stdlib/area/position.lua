@@ -311,6 +311,36 @@ function Position.next_direction(direction, reverse, eight_way)
     return (next_dir > 7 and next_dir-next_dir) or (reverse and next_dir < 0 and 8 + next_dir) or next_dir
 end
 
+
+--- Returns the position along line between source and target, at the distance from target
+-- @tparam LuaPosition simple position table where the line starts and extends from.
+-- @tparam LuaPosition simple position table where the line ends and is offset back from.
+-- @tparam int distance backwards from end point along line for the new position.
+-- @treturn LuaPosition at point along line between source and target, at requested offset back from target. 
+function Position.offset_along_linevec(source_position, target_position, distance_from_target)
+
+    local posA = Position.new(source_position)
+    local posB = Position.new(target_position)
+    local retPos =  Position.new(source_position)
+
+
+    -- debug printing  Game.print_all("source pos: " .. Position.tostring(posA) .. " target pos: " .. Position.tostring(posB) )
+ 
+    local angle = math.atan2( target_position.y - source_position.y  , target_position.x - source_position.x )
+    local dist = Position.distance(source_position, target_position)
+    local veclength = dist - distance_from_target
+
+    -- debug printing  Game.print_all("Angle: " .. angle .. " length: " .. dist .. " length w offset: " .. veclength )
+
+    --from source_position, project the point along the vector at angle, and veclength
+    retPos.x = posA.x + math.cos(angle)*veclength
+    retPos.y = posA.y + math.sin(angle)*veclength
+    
+    -- debug printing  Game.print_all("ret pos: " .. Position.tostring(retPos) )
+    return retPos
+end
+
+
 --- Position tables are returned with these metamethods attached
 -- @table Metamethods
 Position._mt = {

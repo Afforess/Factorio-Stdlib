@@ -48,7 +48,6 @@ Is.Assert.Not = {}
 
 local M = {}
 
-require('__stdlib__/stdlib/utils/math')
 local type = type
 local floor = math.floor
 local huge = math.huge
@@ -153,8 +152,7 @@ function M.None(var)
 end
 M.none = M.None
 
-
---- Returns the passed var if it is a positive number.
+--- Returns the passed var if it is positive.
 -- @tparam mixed var The variable to check
 -- @treturn mixed
 function M.Positive(var)
@@ -162,7 +160,21 @@ function M.Positive(var)
 end
 M.positive = M.Positive
 
---- Returns the passed var if it is a positive number.
+--- Returns the passed var if it is odd.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
+function M.odd(var)
+    return M.number(var) and (var % 2 ~= 0) and var
+end
+
+--- Returns the passed var if it is even.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
+function M.even(var)
+    return M.number(var) and (var % 2 == 0) and var
+end
+
+--- Returns the passed var if it is negative.
 -- @tparam mixed var The variable to check
 -- @treturn mixed
 function M.Negative(var)
@@ -170,61 +182,97 @@ function M.Negative(var)
 end
 M.negative = M.Negative
 
-function M.NaN(arg)
-    return arg ~= arg
+--- Returns the passed var if it is not a number.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
+function M.NaN(var)
+    return var ~= var
 end
 M.nan = M.NaN
 
+--- Returns the passed var if it is finite.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Finite(var)
     return M.Number(var) and (var < huge and var > -huge) and var
 end
 M.finite = M.Finite
 
+--- Returns the passed var if it is an int.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Int(var)
     return M.Finite(var) and rawequal(floor(var), var) and var
 end
 M.int = M.Int
 
+--- Returns the passed var if it is an int8.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Int8(var)
     return M.Int(var) and var >= -128 and var <= 127 and var
 end
 M.int8 = M.Int8
 
+--- Returns the passed var if it is an int16.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Int16(var)
     return M.Int(var) and var >= -32768 and var <= 32767 and var
 end
 M.int16 = M.Int16
 
+--- Returns the passed var if it is an int32.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Int32(var)
     return M.Int(var) and var >= -2147483648 and var <= 2147483647 and var
 end
 M.int32 = M.Int32
 
+--- Returns the passed var if it is an unsigned int.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Unsigned(var)
     return Is.Number(var) and (var < huge and var >= 0) and var
 end
 M.unsigned = M.Unsigned
 
+--- Returns the passed var if it is an unsigned int.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.UInt(var)
     return M.Unsigned(var) and rawequal(floor(var), var) and var
 end
 M.uint = M.UInt
 
+--- Returns the passed var if it is an unsigned int8.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.UInt8(var)
     return M.UInt(var) and var <= 255 and var
 end
 M.uint8 = M.UInt8
 
+--- Returns the passed var if it is an unsigned int16.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.UInt16(var)
     return M.UInt(var) and var <= 65535 and var
 end
 M.uint16 = M.UInt16
 
+--- Returns the passed var if it is an unsigned int32.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.UInt32(var)
     return M.UInt(var) and var <= 4294967295 and var
 end
 M.uint32 = M.UInt32
 
+--- Returns the passed var if it is a float.
+-- @tparam mixed var The variable to check
+-- @treturn mixed
 function M.Float(var)
     return M.number(var) and var >= 0 and var < 1 and var
 end
@@ -404,5 +452,7 @@ setmetatable(
     }
 )
 Is.assert.is_not = Is.Assert.Not
+
+print(Is.UInt32(23.4))
 
 return Is

@@ -453,6 +453,4 @@ setmetatable(
 )
 Is.assert.is_not = Is.Assert.Not
 
-print(Is.UInt32(23.4))
-
 return Is

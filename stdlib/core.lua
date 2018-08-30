@@ -18,7 +18,7 @@ local Is = require('__stdlib__/stdlib/utils/is')
 
 -- Set up default stuff for testing, defines will already be available in an active mod or busted setup specs
 if not defines then
-    require('__stdlib__/stdlib/spec/setup/world')
+    require('__stdlib__/spec/setup/world')
 end
 
 -- Mutate lua built-ins, options are checked inside each.

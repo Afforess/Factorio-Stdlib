@@ -12,6 +12,15 @@ local Is = require('__stdlib__/stdlib/utils/is')
 -- @tparam string name The string to find.
 -- @treturn boolean string is in array
 function M:has(name)
+    if Is.Table(name) then
+        for _, str in pairs(name) do
+            if not self:has(str) then
+                return false
+            end
+        end
+        return true
+    end
+
     Is.Assert.String(name, 'name must be a string')
     for _, str in ipairs(self) do
         if str == name then
@@ -24,6 +33,12 @@ end
 -- @tparam string name
 -- @treturn self
 function M:add(name)
+    if Is.Table(name) then
+        for _, str in pairs(name) do
+            self:add(str)
+        end
+        return self
+    end
     Is.Assert.String(name, 'name must be a string')
     for _, str in ipairs(self) do
         if str == name then
@@ -38,6 +53,12 @@ end
 -- @tparam string name
 -- @treturn self
 function M:remove(name)
+    if Is.Table(name) then
+        for _, str in pairs(name) do
+            self:add(str)
+        end
+        return self
+    end
     Is.Assert.String(name, 'name must be a string')
     for i, str in ipairs(self) do
         if str == name then
@@ -70,6 +91,11 @@ function M:clear()
         table.remove(self, i)
     end
     return self
+end
+
+function M:log()
+    --luacheck: globals log
+    log(self:tostring())
 end
 
 --- Convert the array to a string

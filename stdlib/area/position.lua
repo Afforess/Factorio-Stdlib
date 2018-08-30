@@ -191,6 +191,26 @@ function Position.offset(pos, x, y)
     return pos
 end
 
+--- Returns the position along line between source and target, at the distance from target
+-- @tparam Concepts.Position pos1 where the line starts and extends from.
+-- @tparam Concepts.Position pos2 where the line ends and is offset back from.
+-- @tparam number distance backwards from pos1 for the new position.
+-- @treturn Concepts.Position a point along line between source and target, at requested offset back from target.
+function Position.offset_along_line(pos1, pos2, distance_from_pos2)
+    pos1, pos2 = Position(pos1), Position(pos2)
+
+    local angle = pos1:atan2(pos2)
+    local veclength = pos1:distance(pos2) - distance_from_pos2
+
+    -- From source_position, project the point along the vector at angle, and veclength
+    --pos1.x = pos1.x == pos2.x and pos1.x or pos1.x + math.cos(angle) * veclength
+    --pos1.y = pos1.y == pos2.y and pos2.y or pos1.y + math.sin(angle) * veclength
+    pos1.x = pos1.x + math.cos(angle) * veclength
+    pos1.y = pos1.y + math.sin(angle) * veclength
+
+    return pos1
+end
+
 --- Translates a position in the given direction.
 -- @tparam Concepts.Position pos the position to translate
 -- @tparam defines.direction direction the direction of translation
@@ -294,6 +314,81 @@ function Position.from_chunk_position(pos)
     return pos
 end
 
+--- Area Conversion Functions
+-- @section Area Conversion Functions
+
+--- Expands a position to a square area.
+-- @tparam Concepts.Position pos the position to expand into an area
+-- @tparam number radius half of the side length of the area
+-- @treturn Concepts.BoundingBox the area
+function Position.expand_to_area(pos, radius)
+    pos = Position.new(pos)
+    Is.Assert.Number(radius, 'missing radius argument')
+    local Area = require('__stdlib__/stdlib/area/area')
+
+    local left_top = Position.new({pos.x - radius, pos.y - radius})
+    local right_bottom = Position.new({pos.x + radius, pos.y + radius})
+
+    return Area.load {left_top = left_top, right_bottom = right_bottom}
+end
+Position.to_area = Position.expand_to_area
+
+--- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
+-- @tparam LuaTile.position pos the tile position
+-- @treturn Concepts.BoundingBox the area of the tile
+function Position.expand_to_tile_area(pos)
+    pos = Position.tile_position(pos)
+    local Area = require('__stdlib__/stdlib/area/area')
+
+    local left_top = pos:copy()
+    local right_bottom = pos:copy():offset(1, 1)
+
+    return Area.load {left_top = left_top, right_bottom = right_bottom}
+end
+--- @function Position.to_tile_area
+-- @see Position.expand_to_tile_area
+Position.to_tile_area = Position.expand_to_tile_area
+
+--- Gets the area of a chunk from the specified chunk position.
+-- @tparam Concepts.ChunkPosition pos the chunk position
+-- @treturn Concepts.BoundingBox the chunk's area
+function Position.expand_to_chunk_area(pos)
+    pos = Position.new(pos)
+    local Area = require('__stdlib__/stdlib/area/area')
+
+    local left_top = Position.load {x = pos.x * 32, y = pos.y * 32}
+    local right_bottom = left_top:copy():offset(32, 32)
+
+    return Area.load {left_top = left_top, right_bottom = right_bottom}
+end
+--- @function Position.to_chunk_area
+-- @see Position.expand_to_chunk_area
+Position.to_chunk_area = Position.expand_to_chunk_area
+
+--- Position Iterators
+-- @section Iterators
+
+-- TODO complete this!
+--- Returns an iterator stepping from position.
+function Position.walk(pos, step, direction, distance)  --luacheck: ignore
+    pos = Position(pos)
+    return function()
+        return pos
+    end
+end
+
+-- TODO complete this!
+--- Returns an iterator from Pos1 to pos2 in steps.
+-- @tparam Concepts.Position pos2
+-- @tparam Concepts.Position pos2
+-- @tparam number step The step size to use
+function Position.traverse(pos1, pos2, step)
+    pos1, pos2 = Position(pos1), Position(pos2)
+    return function()
+        return pos1, pos2 * step
+    end
+end
+
 --- Position Functions
 -- @section Functions
 
@@ -358,6 +453,15 @@ function Position.average(...)
     return avg:divide(n)
 end
 
+--- Return the atan2 of 2 positions
+-- @tparam Concepts.Position pos1
+-- @tparam Concepts.Position pos2
+-- @treturn number
+function Position.atan2(pos1, pos2)
+    pos1, pos2 = Position(pos1), Position(pos2)
+    return math.atan2(pos2.y - pos1.y, pos2.x - pos1.x)
+end
+
 --- Is a position inside of an area.
 -- @tparam Concepts.Position pos The pos to check
 -- @tparam Concepts.BoundingBox area The area to check.
@@ -372,54 +476,6 @@ function Position.inside(pos, area)
 
     return pos.x >= lt.x and pos.y >= lt.y and pos.x <= rb.x and pos.y <= rb.y
 end
-
---- Expands a position to a square area.
--- @tparam Concepts.Position pos the position to expand into an area
--- @tparam number radius half of the side length of the area
--- @treturn Concepts.BoundingBox the area
-function Position.expand_to_area(pos, radius)
-    pos = Position.new(pos)
-    Is.Assert.Number(radius, 'missing radius argument')
-    local Area = require('__stdlib__/stdlib/area/area')
-
-    local left_top = Position.new({pos.x - radius, pos.y - radius})
-    local right_bottom = Position.new({pos.x + radius, pos.y + radius})
-
-    return Area.load {left_top = left_top, right_bottom = right_bottom}
-end
-Position.to_area = Position.expand_to_area
-
---- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
--- @tparam LuaTile.position pos the tile position
--- @treturn Concepts.BoundingBox the area of the tile
-function Position.expand_to_tile_area(pos)
-    pos = Position.tile_position(pos)
-    local Area = require('__stdlib__/stdlib/area/area')
-
-    local left_top = pos:copy()
-    local right_bottom = pos:copy():offset(1, 1)
-
-    return Area.load {left_top = left_top, right_bottom = right_bottom}
-end
---- @function Position.to_tile_area
--- @see Position.expand_to_tile_area
-Position.to_tile_area = Position.expand_to_tile_area
-
---- Gets the area of a chunk from the specified chunk position.
--- @tparam Concepts.ChunkPosition pos the chunk position
--- @treturn Concepts.BoundingBox the chunk's area
-function Position.expand_to_chunk_area(pos)
-    pos = Position.new(pos)
-    local Area = require('__stdlib__/stdlib/area/area')
-
-    local left_top = Position.load {x = pos.x * 32, y = pos.y * 32}
-    local right_bottom = left_top:copy():offset(32, 32)
-
-    return Area.load {left_top = left_top, right_bottom = right_bottom}
-end
---- @function Position.to_chunk_area
--- @see Position.expand_to_chunk_area
-Position.to_chunk_area = Position.expand_to_chunk_area
 
 --- Converts a position to a string.
 -- @tparam Concepts.Position pos the position to convert

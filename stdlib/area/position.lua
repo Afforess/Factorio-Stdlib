@@ -203,10 +203,8 @@ function Position.offset_along_line(pos1, pos2, distance_from_pos2)
     local veclength = pos1:distance(pos2) - distance_from_pos2
 
     -- From source_position, project the point along the vector at angle, and veclength
-    --pos1.x = pos1.x == pos2.x and pos1.x or pos1.x + math.cos(angle) * veclength
-    --pos1.y = pos1.y == pos2.y and pos2.y or pos1.y + math.sin(angle) * veclength
-    pos1.x = pos1.x + math.cos(angle) * veclength
-    pos1.y = pos1.y + math.sin(angle) * veclength
+    pos1.x = pos1.x + math.round_to(math.cos(angle) * veclength, 10)
+    pos1.y = pos1.y + math.round_to(math.sin(angle) * veclength, 10)
 
     return pos1
 end

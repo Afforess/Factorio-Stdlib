@@ -111,6 +111,24 @@ end
 --- Position Methods
 -- @section Methods
 
+--- Returns the position along line between source and target, at the distance from target
+-- @tparam Concepts.Position pos1 where the line starts and extends from.
+-- @tparam Concepts.Position pos2 where the line ends and is offset back from.
+-- @tparam number distance backwards from pos1 for the new position.
+-- @treturn Concepts.Position a point along line between source and target, at requested offset back from target.
+function Position.offset_along_line(pos1, pos2, distance_from_pos2)
+    pos1, pos2 = Position(pos1), Position(pos2)
+
+    local angle = pos1:atan2(pos2)
+    local veclength = pos1:distance(pos2) - distance_from_pos2
+
+    -- From source_position, project the point along the vector at angle, and veclength
+    pos1.x = pos1.x + math.round_to(math.cos(angle) * veclength, 10)
+    pos1.y = pos1.y + math.round_to(math.sin(angle) * veclength, 10)
+
+    return pos1
+end
+
 --- Adds two positions.
 -- @tparam Concepts.Position pos1 the first position
 -- @tparam Concepts.Position pos2 the second position

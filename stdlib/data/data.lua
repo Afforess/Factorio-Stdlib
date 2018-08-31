@@ -1,7 +1,6 @@
 --- Data
 -- @classmod Data
 
-
 --(( DATA HEADER ))--
 if _G.remote and _G.script then
     error('Data Modules can only be required in the data stage', 2)
@@ -38,16 +37,16 @@ setmetatable(Data, Data)
 -- require('__stdlib__/stdlib/data/data).create_data_globals()
 function Data.create_data_globals(files)
     files =
-    files or
-    {
-        RECIPE = 'stdlib/data/recipe',
-        ITEM = 'stdlib/data/item',
-        FLUID = 'stdlib/data/fluid',
-        ENTITY = 'stdlib/data/entity',
-        TECHNOLOGY = 'stdlib/data/technology',
-        CATEGORY = 'stdlib/data/category',
-        DATA = 'stdlib/data/data'
-    }
+        files or
+        {
+            RECIPE = 'stdlib/data/recipe',
+            ITEM = 'stdlib/data/item',
+            FLUID = 'stdlib/data/fluid',
+            ENTITY = 'stdlib/data/entity',
+            TECHNOLOGY = 'stdlib/data/technology',
+            CATEGORY = 'stdlib/data/category',
+            DATA = 'stdlib/data/data'
+        }
     Data.create_stdlib_globals(files)
 
     return Data
@@ -76,10 +75,10 @@ end
 
 function Data:print(...)
     local arr = {}
-    for _ , key in pairs({...}) do
+    for _, key in pairs({...}) do
         arr[#arr + 1] = Inspect(self[key])
     end
-        print(table.unpack(arr))
+    print(table.unpack(arr))
     return self
 end
 
@@ -443,7 +442,6 @@ end
 -- @tparam[opt] table opts options to pass
 -- @treturn Object
 function Data:get(object, object_type, opts)
-
     Is.Assert(object, 'object string or table is required')
 
     -- Create our middle man container object
@@ -453,7 +451,7 @@ function Data:get(object, object_type, opts)
         extended = false,
         overwrite = false,
         raw = nil,
-        options = opts,
+        options = opts
     }
 
     if type(object) == 'table' then
@@ -513,8 +511,10 @@ Data._object_mt = {
             t.raw[k] = v
         end
     end,
-    __call = function(t, ...) return t:__call(...) end,
-    __tostring = Data.tostring,
+    __call = function(t, ...)
+        return t:__call(...)
+    end,
+    __tostring = Data.tostring
 }
 
 return Data

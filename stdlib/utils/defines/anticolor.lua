@@ -25,7 +25,7 @@
 -- @tfield Concepts.Color purple defines.color.white
 -- @tfield Concepts.Color red defines.color.white
 local anticolor = {}
-local colors = require('__stdlib__/stdlib/utils/color').colors
+local colors = require('__stdlib__/stdlib/utils/defines/colors')
 
 local anticolors = {
     green = colors.black,

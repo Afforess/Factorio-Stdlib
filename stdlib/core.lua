@@ -18,9 +18,10 @@ local Is = require('__stdlib__/stdlib/utils/is')
 
 -- Set up default stuff for testing, defines will already be available in an active mod or busted setup specs
 if not defines then
-    require('__stdlib__/spec/setup/world')
+    require('spec/setup/world')
 end
 
+-- TODO remove mutation and deal with explicitly because that is the way it should be.
 -- Mutate lua built-ins, options are checked inside each.
 require('__stdlib__/stdlib/utils/table')
 require('__stdlib__/stdlib/utils/string')
@@ -119,7 +120,7 @@ function Core.create_stdlib_globals(files)
         }
     Is.Assert.Table(files, 'files must be a dictionary of global names -> file paths')
     for glob, path in pairs(files) do
-        _G[glob] = prequire('__stdlib__/stdlib/'..(path:gsub('%.', '/'))) -- extra () required to emulate select(1)
+        _G[glob] = require('__stdlib__/'..(path:gsub('%.', '/'))) -- extra () required to emulate select(1)
     end
     return Core
 end

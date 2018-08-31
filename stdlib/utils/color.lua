@@ -6,28 +6,10 @@ local Color = {}
 
 local Is = require('__stdlib__/stdlib/utils/is')
 
-Color.colors = {
-    white = {r = 1.00, g = 1.00, b = 1.00},
-    black = {r = 0.00, g = 0.00, b = 0.00},
-    darkgrey = {r = 0.25, g = 0.25, b = 0.25},
-    grey = {r = 0.50, g = 0.50, b = 0.50},
-    lightgrey = {r = 0.75, g = 0.75, b = 0.75},
-    red = {r = 1.00, g = 0.00, b = 0.00},
-    darkred = {r = 0.50, g = 0.00, b = 0.00},
-    lightred = {r = 1.00, g = 0.50, b = 0.50},
-    green = {r = 0.00, g = 1.00, b = 0.00},
-    darkgreen = {r = 0.00, g = 0.50, b = 0.00},
-    lightgreen = {r = 0.50, g = 1.00, b = 0.50},
-    blue = {r = 0.00, g = 0.00, b = 1.00},
-    darkblue = {r = 0.00, g = 0.00, b = 0.50},
-    lightblue = {r = 0.50, g = 0.50, b = 1.00},
-    orange = {r = 1.00, g = 0.55, b = 0.10},
-    yellow = {r = 1.00, g = 1.00, b = 0.00},
-    pink = {r = 1.00, g = 0.00, b = 1.00},
-    purple = {r = 0.60, g = 0.10, b = 0.60},
-    brown = {r = 0.60, g = 0.40, b = 0.10}
-}
-
+Color.colors = require('__stdlib__/stdlib/utils/defines/colors')
+Color.color = require('__stdlib__/stdlib/utils/defines/color')
+Color.anticolor = require('__stdlib__/stdlib/utils/defines/anticolor')
+Color.lightcolor = require('__stdlib__/stdlib/utils/defines/lightcolor')
 --- Set a value for the alpha channel in the given color table.
 -- `color.a` represents the alpha channel in the given color table.
 -- <ul>

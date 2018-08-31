@@ -6,10 +6,11 @@ local Resource = {_module = 'Resource'}
 setmetatable(Resource, require('__stdlib__/stdlib/core'))
 
 local Is = require('__stdlib__/stdlib/utils/is')
+
 local Surface = require('__stdlib__/stdlib/area/surface')
 local Area = require('__stdlib__/stdlib/area/area')
 local Tile = require('__stdlib__/stdlib/area/tile')
-local Queue = require('__stdlib__/stdlib/lists/queue')
+local Queue = require('__stdlib__/stdlib/misc/queue')
 
 --- Gets all resource entities at the specified position and surface.
 -- Adapted from *YARM/resmon.lua &rarr; find\_resource\_at*

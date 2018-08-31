@@ -1,4 +1,6 @@
 require('busted.runner')()
+require('spec/setup/utils/searcher')
+require('spec/setup/defines')
 
 local Data, Raw, R, F --luacheck: ignore Raw
 
@@ -6,7 +8,7 @@ describe('Data', function()
 
     before_each(function()
         require('spec/setup/dataloader')
-        Data = require('data/data')
+        Data = require('stdlib/data/data')
         Raw = _G.data.raw["recipe"]
         R = Data("stone-furnace", "recipe")
         F = Data("fake", "fake")

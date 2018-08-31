@@ -1,7 +1,8 @@
 require('busted.runner')()
-
+require('spec/setup/utils/searcher')
 require('spec/setup/defines')
-local Area = require('area/area')
+
+local Area = require('stdlib/area/area')
 
 describe('Area', function()
 

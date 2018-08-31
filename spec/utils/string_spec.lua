@@ -1,4 +1,8 @@
-require('utils/string')
+require('busted.runner')()
+require('spec/setup/utils/searcher')
+require('spec/setup/defines')
+
+require('stdlib/utils/string')
 
 --luacheck: ignore 143/string (TODO sync with luacheck rc)
 

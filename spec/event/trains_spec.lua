@@ -3,11 +3,14 @@ do
 end
 --luacheck: ignore
 
+require('busted.runner')()
+require('spec/setup/utils/searcher')
 require('spec/setup/defines')
-local Event = require('event/event')
+
+local Event = require('stdlib/event/event')
 
 local Trains
---local Surface = require('area/surface')
+--local Surface = require('stdlib/area/surface')
 local Train_Spec_Fixtures = require('spec/setup/fixtures/train_fixtures')
 
 local entity_to_trains = function(tbl) return table.map(tbl, function(entity) return entity.train end) end
@@ -36,7 +39,7 @@ describe('when the train module loads', function()
     end)
 
     it('it should allow the train module to be loaded at startup time', function()
-        require('event/trains')
+        require('stdlib/event/trains')
     end)
 
     it('it should load all trains in to the registry', function()
@@ -44,7 +47,7 @@ describe('when the train module loads', function()
         _G.game.surfaces[1].get_trains = function() return entity_to_trains(Train_Spec_Fixtures.Two_Trains_With_Single_Locomotive) end
 
         -- Act
-        Trains = require('event/trains').register_events()
+        Trains = require('stdlib/event/trains').register_events()
         _G.on_init()
 
         -- Assert
@@ -57,7 +60,7 @@ describe('when the train module loads', function()
         local register_spy = spy.on(_G.Event, 'register')
 
         -- Act
-        require('event/trains').register_events()
+        require('stdlib/event/trains').register_events()
         local match = require('luassert.match')
 
         -- assert
@@ -71,7 +74,7 @@ describe('when the train module loads', function()
         local register_spy = spy.on(_G.Event, 'register')
 
         -- Act
-        require('event/trains').register_events()
+        require('stdlib/event/trains').register_events()
         local match = require('luassert.match')
 
         -- assert
@@ -83,7 +86,7 @@ end)
 describe('Trains module', function()
 
     before_each(function()
-        Trains = require('event/trains').register_events()
+        Trains = require('stdlib/event/trains').register_events()
         _G.log = function() end
         _G.on_init()
     end)
@@ -140,7 +143,7 @@ describe('Trains module', function()
             local dispatch_spy = spy.on(_G.Event, 'dispatch')
 
             -- Import the library
-            Trains = require('event/trains')
+            Trains = require('stdlib/event/trains')
             _G.on_init()
 
             local event_data = {
@@ -191,7 +194,7 @@ describe('Trains module', function()
             }
 
             -- Import the library
-            Trains = require('event/trains').register_events()
+            Trains = require('stdlib/event/trains').register_events()
             _G.on_init()
 
             -- Check the state of the registry first

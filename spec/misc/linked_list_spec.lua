@@ -1,6 +1,8 @@
 require('busted.runner')()
+require('spec/setup/utils/searcher')
+require('spec/setup/defines')
 
-local LinkedList = require('lists/linked_list')
+local LinkedList = require('stdlib/misc/linked_list')
 local World = require('spec/setup/world')
 
 -- bootstrap world for _G.log

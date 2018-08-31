@@ -76,12 +76,11 @@ describe('Color',  function ()
             -- should really be two separate tests, one for Color.set and one for Color.from_hex
             local white = Color.from_hex("#ffffff")
             assert.is_equal(white.a, 1)
-
-            assert.is_equal(Color.set(defines.color.white).a, 1)
+            assert.is_equal(Color.set(Color.color.white).a, 1)
         end)
 
         it('should return the right colors', function ()
-            -- based on defines.color, converted with an external tool to the closest hex colour possible
+            -- based on Color.color, converted with an external tool to the closest hex colour possible
             local colors = {
                 white = "#ffffff",
                 black = "#000000",
@@ -107,7 +106,7 @@ describe('Color',  function ()
             local epsilon = (1/255) -- because of rounding, as #000001 is b=0.003921...
 
             for k,hex in pairs(colors) do
-                assert.is.near(epsilon, Color.from_hex(hex), Color.set(defines.color[k]))
+                assert.is.near(epsilon, Color.from_hex(hex), Color.set(Color.color[k]))
             end
         end)
 

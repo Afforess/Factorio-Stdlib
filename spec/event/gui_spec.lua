@@ -2,11 +2,12 @@ do
     return
 end
 --luacheck: ignore
-
+require('busted.runner')()
+require('spec/setup/utils/searcher')
 require('spec/setup/defines')
-require('utils/table')
-local Event = require('event/event')
-local Gui = require('event/gui')
+
+local Event = require('stdlib/event/event')
+local Gui = require('stdlib/event/gui')
 
 local test_function = {f=function(x) _G.someVariable = x end, g=function(x) _G.someVariable = x end}
 local function_a = function(arg) test_function.f(arg.tick) end

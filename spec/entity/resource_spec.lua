@@ -1,6 +1,9 @@
+require('busted.runner')()
+require('spec/setup/utils/searcher')
 require('spec/setup/defines')
-local Resource = require('entity/resource')
-local Area = require('area/area')
+
+local Resource = require('stdlib/entity/resource')
+local Area = require('stdlib/area/area')
 
 describe('Resource filtering', function()
     local resources = {}

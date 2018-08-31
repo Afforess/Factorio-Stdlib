@@ -1,7 +1,8 @@
 require('busted.runner')()
-
+require('spec/setup/utils/searcher')
 require('spec/setup/defines')
-local Tile = require('area/tile')
+
+local Tile = require('stdlib/area/tile')
 
 describe('Tile Spec', function()
     it('should give the correct tile coordinates for a position', function()

@@ -1,6 +1,8 @@
 require('busted.runner')()
+require('spec/setup/utils/searcher')
+require('spec/setup/defines')
 
-local Is = require('utils/is')
+local Is = require('stdlib/utils/is')
 
 describe(
     'variable type checks',

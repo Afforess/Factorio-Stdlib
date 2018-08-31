@@ -1,5 +1,8 @@
+require('busted.runner')()
+require('spec/setup/utils/searcher')
 require('spec/setup/defines')
-local Surface = require('area/surface')
+
+local Surface = require('stdlib/area/surface')
 
 describe('Surface Spec', function()
     describe('Surface lookups', function()

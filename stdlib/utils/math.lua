@@ -13,10 +13,6 @@ local math_max = math.max
 local log10 = math.log10
 local unpack = table.unpack
 
-for k, v in pairs(math) do
-    Math[k] = v
-end
-
 --(( Math Constants
 Math.MAXINT8 = 128
 Math.MININT8 = -128
@@ -65,6 +61,36 @@ end
 -- @treturn number the rounded number
 function Math.round(x)
     return x >= 0 and math_floor(x + 0.5) or math_ceil(x - 0.5)
+end
+
+-- Returns the number x rounded to p decimal places.
+-- @tparam number x
+-- @tparam[opt=0] int p the number of decimal places to round to
+-- @treturn number rounded to p decimal spaces.
+function Math.round_to(x, p)
+    local e = 10 ^ (p or 0)
+    return math_floor(x * e + 0.5) / e
+end
+
+-- Returns the number floored to p decimal spaces.
+-- @tparam number x
+-- @tparam[opt=0] int p the number of decimal places to floor to
+-- @treturn number floored to p decimal spaces.
+function Math.floor_to(x, p)
+    if (p or 0) == 0 then
+        return math_floor(x)
+    end
+    local e = 10 ^ p
+    return math_floor(x * e) / e
+end
+
+-- Returns the number ceiled to p decimal spaces.
+-- @tparam number x
+-- @tparam[opt=0] int p the number of decimal places to ceil to
+-- @treturn number ceiled to p decimal spaces.
+function Math.ceil_to(x, p)
+    local e = 10 ^ (p or 0)
+    return math_ceil(x * e + 0.5) /e
 end
 
 -- Various average (means) algorithms implementation
@@ -173,27 +199,6 @@ function Math.energetic_mean(...)
     return 10 * log10((1 / #x) * s)
 end
 
--- Returns the number floored to p decimal spaces.
--- @tparam number x
--- @tparam[opt=0] int p the number of decimal places to floor to
--- @treturn number floored to p decimal spaces.
-function Math.floor_to(x, p)
-    if (p or 0) == 0 then
-        return math_floor(x)
-    end
-    local e = 10 ^ p
-    return math_floor(x * e) / e
-end
-
--- Returns the number x rounded to p decimal places.
--- @tparam number x
--- @tparam[opt=0] int p the number of decimal places to round to
--- @treturn number rounded to p decimal spaces.
-function Math.round_to(x, p)
-    local e = 10 ^ (p or 0)
-    return math_floor(x * e + 0.5) / e
-end
-
 --- Returns the number x clamped between the numbers min and max
 -- @tparam number x
 -- @tparam number min
@@ -222,6 +227,12 @@ function Math.overwrite_global()
         _G.math[k] = v
     end
     return math
+end
+for k, v in pairs(math) do
+    Math[k] = v
+end
+if (STDLIB and STDLIB.global_math) then
+    return Math.overwrite_global()
 end
 
 return Math

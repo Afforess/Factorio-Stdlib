@@ -7,10 +7,6 @@ local Table = {}
 
 local insert = table.insert
 
-for k, v in pairs(table) do
-    Table[k] = v
-end
-
 --- Given a mapping function, creates a transformed copy of the table
 --- by calling the function for each element in the table, and using
 --- the result as the new value for the key. Passes the index as second argument to the function.
@@ -654,6 +650,12 @@ function Table.overwrite_global()
         _G.table[k] = v
     end
     return table
+end
+for k, v in pairs(table) do
+    Table[k] = v
+end
+if (STDLIB and STDLIB.global_table) then
+    return Table.overwrite_global()
 end
 
 return Table

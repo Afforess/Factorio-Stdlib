@@ -5,19 +5,14 @@
 
 local String = {}
 
+if not (STDLIB and STDLIB.no_string_index) then
+    setmetatable(string, {__index = String})
+end
+
 local concat = table.concat
 local insert = table.insert
 local ceil = math.ceil
 local abs = math.abs
-
--- Copy string into String,
--- index String in string because string metatable
-for k, v in pairs(string) do
-    String[k] = v
-end
-if not (STDLIB and STDLIB.no_string) then
-    setmetatable(string, {__index = String})
-end
 
 --- Returns a copy of the string with any leading or trailing whitespace from the string removed.
 -- @tparam string s the string to remove leading or trailing whitespace from
@@ -246,13 +241,18 @@ function String.ordinal_suffix(n, prepend_number)
     return prepend_number and n
 end
 
--- Overwrite the global table 'string' if the flag is not set.
 function String.overwrite_global()
     for k, v in pairs(String) do
         _G.string[k] = v
         setmetatable(_G.string, nil)
     end
     return string
+end
+for k, v in pairs(string) do
+    String[k] = v
+end
+if (STDLIB and STDLIB.global_string) then
+    return String.overwrite_global()
 end
 
 return String

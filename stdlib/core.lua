@@ -5,7 +5,10 @@
 
 -- Set the global default options
 STDLIB = STDLIB or {}
-STDLIB.no_string = STDLIB.no_string or false
+STDLIB.no_string_index = STDLIB.no_string_index or false
+STDLIB.global_string = STDLIB.global_string or false
+STDLIB.global_math = STDLIB.global_math or false
+STDLIB.global_table = STDLIB.global_table or false
 STDLIB.no_defines_color = STDLIB.no_defines_color or false
 STDLIB.no_defines_time = STDLIB.no_defines_time or false
 

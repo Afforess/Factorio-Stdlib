@@ -198,6 +198,7 @@ end
 -- @treturn Concepts.Position a point along line between source and target, at requested offset back from target.
 function Position.offset_along_line(pos1, pos2, distance_from_pos2)
     pos1, pos2 = Position(pos1), Position(pos2)
+    distance_from_pos2 = distance_from_pos2 or 0
 
     local angle = pos1:atan2(pos2)
     local veclength = pos1:distance(pos2) - distance_from_pos2
@@ -366,24 +367,20 @@ Position.to_chunk_area = Position.expand_to_chunk_area
 --- Position Iterators
 -- @section Iterators
 
--- TODO complete this!
 --- Returns an iterator stepping from position.
-function Position.walk(pos, step, direction, distance)  --luacheck: ignore
-    pos = Position(pos)
-    return function()
-        return pos
-    end
-end
-
--- TODO complete this!
---- Returns an iterator from Pos1 to pos2 in steps.
--- @tparam Concepts.Position pos2
--- @tparam Concepts.Position pos2
--- @tparam number step The step size to use
-function Position.traverse(pos1, pos2, step)
+function Position.walk(pos1, pos2, step_size)
     pos1, pos2 = Position(pos1), Position(pos2)
+    local new = pos1:copy()
+    local dist = pos1:distance(pos2)
+    step_size = step_size or 1
+
     return function()
-        return pos1, pos2 * step
+        if dist <= step_size then
+            return
+        else
+            dist = dist - step_size
+            return new:offset_along_line(pos2, dist)
+        end
     end
 end
 
@@ -561,14 +558,6 @@ function Position.manhattan_distance(pos1, pos2)
     return math.abs(pos2.x - pos1.x) + math.abs(pos2.y - pos1.y)
 end
 
---- Calculates the distance to {0, 0}.
--- @tparam Concepts.Position pos
--- @treturn number the distance
-function Position.length(pos)
-    pos = Position(pos)
-    return Position.distance(pos, {0, 0})
-end
-
 --- Is this position {0, 0}.
 -- @tparam Concepts.Position pos
 -- @treturn boolean
@@ -653,6 +642,11 @@ local function __unm(pos)
     return Position.load({x = -pos.x, y = -pos.y})
 end
 
+local function __len(pos)
+    pos = Position(pos)
+    return pos:distance()
+end
+
 local function __eq(pos1, pos2)
     --eq requires both sides to have same metatable so constructor check isn't needed
     return abs(pos1.x - pos2.x) < Position.epsilon and abs(pos1.y - pos2.y) < Position.epsilon
@@ -670,7 +664,7 @@ Position._mt = {
     __mod = __mod, -- Position between 2 positions. Returns a new position.
     __unm = __unm, -- Unary Minus of a position. Returns a new position.
     __eq = __eq, -- Are two positions at the same spot.
-    __len = Position.length, -- Distance from 0, 0.
+    __len = __len, -- Distance from 0, 0.
     __lt = Position.less_than, -- Is position1 less than position2.
     __le = Position.less_than_eq, -- Is position1 less than or equal to position2.
     __tostring = Position.tostring, -- Returns a string representation of the position

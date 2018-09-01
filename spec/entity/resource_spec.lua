@@ -1,6 +1,7 @@
 require('busted.runner')()
 require('spec/setup/utils/searcher')
 require('spec/setup/defines')
+require('stdlib/utils/table').overwrite_global()
 
 local Resource = require('stdlib/entity/resource')
 local Area = require('stdlib/area/area')

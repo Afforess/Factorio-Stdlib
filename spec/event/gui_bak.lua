@@ -1,7 +1,3 @@
-do
-    return
-end
---luacheck: ignore
 require('busted.runner')()
 require('spec/setup/utils/searcher')
 require('spec/setup/defines')

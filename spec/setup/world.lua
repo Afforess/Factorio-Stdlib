@@ -45,7 +45,8 @@ function World.bootstrap()
     _G._require = _G._require or require
 
     -- Setup Globals
-    _G.serpent = require('spec/setup/utils/serpent')
+    _G.serpent = require('stdlib/vendor/serpent')
+    _G.inspect = require('stdlib/vendor/inspect')
 
     _G.log = log_buffer
 

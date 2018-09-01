@@ -1,14 +1,9 @@
-do
-    return
-end
---luacheck: ignore
-
 require('busted.runner')()
 require('spec/setup/utils/searcher')
 require('spec/setup/defines')
+require('stdlib/utils/table').overwrite_global()
 
 local Event = require('stdlib/event/event')
-require('stdlib/utils/table')
 
 describe(
     'Player',
@@ -70,7 +65,9 @@ describe(
                 --local match = require('luassert.match'))
                 --local events = {defines.events.on_player_created, Event.core_events.init, Event.core_events.configuration_changed}
                 --assert.spy(register_spy).was_called_with(events, match.is_function())
-                assert.is_same(5, table.count_keys(Event._registry))
+                --print(inspect(Event.get_registry()))
+                for k, v in pairs(package.loaded) do if k:find('stdlib') then print(k) end end
+                assert.is_same(5, table.size(Event.get_registry()))
                 assert.is_truthy(Event._registry[defines.events.on_player_created])
                 assert.is_truthy(Event._registry[defines.events.on_player_removed])
             end

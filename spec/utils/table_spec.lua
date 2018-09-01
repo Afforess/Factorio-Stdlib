@@ -1,6 +1,5 @@
 require('busted.runner')()
 require('spec/setup/utils/searcher')
-require('spec/setup/defines')
 
 local table = require('stdlib/utils/table')
 

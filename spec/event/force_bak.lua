@@ -1,14 +1,9 @@
-do
-    return
-end
---luacheck: ignore
-
 require('busted.runner')()
 require('spec/setup/utils/searcher')
 require('spec/setup/defines')
+require('stdlib/utils/table').overwrite_global()
 
 local Event = require('stdlib/event/event')
-require('stdlib/utils/table')
 
 describe("Force",
     function()

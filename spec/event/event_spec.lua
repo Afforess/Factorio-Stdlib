@@ -1,6 +1,7 @@
 require('busted.runner')()
 require('spec/setup/utils/searcher')
 require('spec/setup/defines')
+require('stdlib/utils/table').overwrite_global()
 
 local match = require('luassert.match')
 require('spec/setup/utils/matcher')
@@ -203,6 +204,7 @@ describe('Event', function ()
         end)
     end)
 
+    --[[
     insulate('.register', function()
         pending('succeeds while processing an event but, if the added handler \z
             is for the event being dispatched, does not cause the handler \z
@@ -240,6 +242,7 @@ describe('Event', function ()
             assert.stub(h).was.called(1)
         end)
     end)
+    --]]
 
     insulate('.register', function()
         it('should register itself with factorio when the initial listener \z
@@ -415,6 +418,7 @@ describe('Event', function ()
         end)
     end)
 
+    --[[
     insulate('.remove', function()
         pending('should remove the running handler if requested', function()
             World.bootstrap()
@@ -437,7 +441,6 @@ describe('Event', function ()
             assert.stub(h).was.called(1)
         end)
     end)
-
     insulate('.remove', function()
         pending('should prevent invocation of subsequent handlers \z
             during processing of preceeding handlers', function()
@@ -456,6 +459,7 @@ describe('Event', function ()
             assert.stub(i).was.called(1)
         end)
     end)
+    --]]
 
     insulate('.remove', function()
         it('should log, but not error(), upon de-registration \z

@@ -1,11 +1,7 @@
-_G.serpent = require('spec/setup/utils/serpent')
+_G.serpent = require('stdlib/vendor/serpent')
 require('spec/setup/defines')
 
 _G.log = function()
-end
-
-_G.SLOG = function(msg, lvl)
-    print(_G.serpent.block(msg, {comment = false, nocode = true, sort = false, maxlevel = lvl or 200}))
 end
 
 _G.RESET = function()

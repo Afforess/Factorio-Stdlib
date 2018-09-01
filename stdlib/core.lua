@@ -6,8 +6,6 @@
 -- Set the global default options
 STDLIB = STDLIB or {}
 STDLIB.no_string = STDLIB.no_string or false
-STDLIB.no_table = STDLIB.no_table or false
-STDLIB.no_math = STDLIB.no_math or false
 STDLIB.no_defines_color = STDLIB.no_defines_color or false
 STDLIB.no_defines_time = STDLIB.no_defines_time or false
 
@@ -18,14 +16,8 @@ local Is = require('__stdlib__/stdlib/utils/is')
 
 -- Set up default stuff for testing, defines will already be available in an active mod or busted setup specs
 if not defines then
-    require('spec/setup/world')
+    require('spec/setup/dataloader')
 end
-
--- TODO remove mutation and deal with explicitly because that is the way it should be.
--- Mutate lua built-ins, options are checked inside each.
-require('__stdlib__/stdlib/utils/table')
-require('__stdlib__/stdlib/utils/string')
-require('__stdlib__/stdlib/utils/math')
 
 -- Defines Mutates
 local color = require('__stdlib__/stdlib/utils/defines/color')

@@ -1,6 +1,7 @@
 --- Extends Lua 5.2 math.
 -- @module math
 -- @see math
+-- @usage local math = require('__stdlib__/stdlib/utils/math')
 
 local Math = {}
 
@@ -55,6 +56,10 @@ Math.MIN_INT64 = Math.MININT64
 Math.MAX_UINT64 = Math.MAXUINT64
 --))
 
+local function tupple(...)
+    return type(...) == 'table' and ... or {...}
+end
+
 --- Round a number.
 -- @tparam number x
 -- @treturn number the rounded number
@@ -66,9 +71,10 @@ end
 -- See: http://en.wikipedia.org/wiki/Average
 
 --- Calculates the sum of a sequence of values.
--- @tparam array x and array of numbers
+-- @tparam tupple ... a tuple of numbers
 -- @treturn the sum
-function Math.sum(x)
+function Math.sum(...)
+    local x = tupple(...)
     local s = 0
     for _, v in ipairs(x) do
         s = s + v
@@ -79,7 +85,8 @@ end
 --- Calculates the arithmetic mean of a set of values.
 -- @tparam array x an array of numbers
 -- @treturn number the arithmetic mean
-function Math.arithmetic_mean(x)
+function Math.arithmetic_mean(...)
+    local x = tupple(...)
     return (Math.sum(x) / #x)
 end
 
@@ -88,7 +95,8 @@ Math.avg = Math.arithmetic_mean
 --- Calculates the geometric mean of a set of values.
 -- @tparam array x an array of numbers
 -- @treturn number the geometric mean
-function Math.geometric_mean(x)
+function Math.geometric_mean(...)
+    local x = tupple(...)
     local prod = 1
     for _, v in ipairs(x) do
         prod = prod * v
@@ -97,9 +105,10 @@ function Math.geometric_mean(x)
 end
 
 --- Calculates the harmonic mean of a set of values.
--- @tparam array x an array of numbers
+-- @tparam tupple ... an array of numbers
 -- @treturn number the harmonic mean
-function Math.harmonic_mean(x)
+function Math.harmonic_mean(...)
+    local x = tupple(...)
     local s = 0
     for _, v in ipairs(x) do
         s = s + (1 / v)
@@ -108,9 +117,10 @@ function Math.harmonic_mean(x)
 end
 
 --- Calculates the quadratic mean of a set of values.
--- @tparam array x an array of numbers
+-- @tparam tupple ... an array of numbers
 -- @treturn number the quadratic mean
-function Math.quadratic_mean(x)
+function Math.quadratic_mean(...)
+    local x = tupple(...)
     local squares = 0
     for _, v in ipairs(x) do
         squares = squares + (v * v)
@@ -119,10 +129,11 @@ function Math.quadratic_mean(x)
 end
 
 --- Calculates the generalized mean (to a specified power) of a set of values.
--- @tparam array x an array of numbers
 -- @tparam number p power
+-- @tparam tupple ... an array of numbers
 -- @treturn number the generalized mean
-function Math.generalized_mean(x, p)
+function Math.generalized_mean(p, ...)
+    local x = tupple(...)
     local sump = 0
     for _, v in ipairs(x) do
         sump = sump + (v ^ p)
@@ -145,14 +156,16 @@ end
 --- Calculates the midrange mean of a set of values.
 -- @tparam array x an array of numbers
 -- @treturn number the midrange mean
-function Math.midrange_mean(x)
+function Math.midrange_mean(...)
+    local x = tupple(...)
     return 0.5 * (math_min(unpack(x)) + math_max(unpack(x)))
 end
 
 --- Calculates the energetic mean of a set of values.
 -- @tparam array x an array of numbers
 -- @treturn number the energetic mean
-function Math.energetic_mean(x)
+function Math.energetic_mean(...)
+    local x = tupple(...)
     local s = 0
     for _, v in ipairs(x) do
         s = s + (10 ^ (v / 10))
@@ -204,9 +217,11 @@ function Math.pingpong(x)
     return 1 - math_abs(1 - x % 2)
 end
 
--- Overwrite the global table 'math' if the flag is not set.
-if not (STDLIB and STDLIB.no_math) then
-    _G.math = Math
+function Math.overwrite_global()
+    for k, v in pairs(Math) do
+        _G.math[k] = v
+    end
+    return math
 end
 
 return Math

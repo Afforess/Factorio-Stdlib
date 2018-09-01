@@ -1,12 +1,12 @@
 --- Extends Lua 5.2 table.
 -- @module table
 -- @see table
+-- @usage local table = require('__stdlib__/stdlib/utils/table')
 
 local Table = {}
 
 local insert = table.insert
 
--- Add all of table to Table
 for k, v in pairs(table) do
     Table[k] = v
 end
@@ -384,7 +384,7 @@ Table.compare = Table.deep_compare
 
 --- Creates a deep copy of table without copying Factorio objects.
 -- copied from factorio/data/core/lualib/util.lua
--- @usage local copy = table.deepcopy[data.raw.["stone-furnace"]["stone-furnace"]] -- returns a copy of the stone furnace entity
+-- @usage local copy = table.deep_copy[data.raw.["stone-furnace"]["stone-furnace"]] -- returns a copy of the stone furnace entity
 -- @tparam table object the table to copy
 -- @treturn table a copy of the table
 function Table.deep_copy(object)
@@ -649,9 +649,11 @@ function Table.clear(tbl)
     return tbl
 end
 
--- Overwrite the global table 'table' if the flag is not set.
-if not (STDLIB and STDLIB.no_table) then
-    _G.table = Table
+function Table.overwrite_global()
+    for k, v in pairs(Table) do
+        _G.table[k] = v
+    end
+    return table
 end
 
 return Table

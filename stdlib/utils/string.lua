@@ -1,6 +1,7 @@
 --- Extends Lua 5.2 string.
 -- @module string
 -- @see string
+-- @usage local string = require('__stdlib__/stdlib/utils/string')
 
 local String = {}
 
@@ -9,46 +10,14 @@ local insert = table.insert
 local ceil = math.ceil
 local abs = math.abs
 
+-- Copy string into String,
+-- index String in string because string metatable
 for k, v in pairs(string) do
     String[k] = v
 end
-
-local old_string_meta = getmetatable(string)
-setmetatable(string, {__index = String})
-
--- if not _G._STDLIB_NO_STRING then
---     local mt = getmetatable('')
-
---     function mt.__add(a, b)
---         return a .. b
---     end
-
---     function mt.__sub(a, b)
---         return a:gsub(b, '')
---     end
-
---     function mt.__mul(a, b)
---         return a:rep(b)
---     end
-
---     function mt.__div(a, b)
---         return a:split(b, true)
---     end
-
---     function mt.__call(s, i, j)
---         if not i then
---             return s
---         elseif type(i) == 'string' then
---             return s:match(i, j)
---         else
---             local len = #s
---             if i > len or i < -len or i == 0 then
---                 return nil
---             end
---             return s:sub(i, j or i)
---         end
---     end
--- end
+if not (STDLIB and STDLIB.no_string) then
+    setmetatable(string, {__index = String})
+end
 
 --- Returns a copy of the string with any leading or trailing whitespace from the string removed.
 -- @tparam string s the string to remove leading or trailing whitespace from
@@ -220,7 +189,9 @@ function String.center(s, w, ch)
     return _just(s, w, ch, true, true)
 end
 
-local noop = function(...) return ... end
+local noop = function(...)
+    return ...
+end
 
 --- Splits a string into an array.
 -- *Note:* Empty split substrings are not included in the resulting table.
@@ -259,25 +230,29 @@ end
 -- @tparam boolean prepend_number if the passed number should be pre-pended
 -- @treturn string the ordinal suffix
 function String.ordinal_suffix(n, prepend_number)
-    n = abs(n) % 100
-    local d = n % 10
-    if d == 1 and n ~= 11 then
-        return (prepend_number and n or '') .. 'st'
-    elseif d == 2 and n ~= 12 then
-        return (prepend_number and n or '') .. 'nd'
-    elseif d == 3 and n ~= 13 then
-        return (prepend_number and n or '') .. 'rd'
-    else
-        return (prepend_number and n or '') .. 'th'
+    if tonumber(n) then
+        n = abs(n) % 100
+        local d = n % 10
+        if d == 1 and n ~= 11 then
+            return (prepend_number and n or '') .. 'st'
+        elseif d == 2 and n ~= 12 then
+            return (prepend_number and n or '') .. 'nd'
+        elseif d == 3 and n ~= 13 then
+            return (prepend_number and n or '') .. 'rd'
+        else
+            return (prepend_number and n or '') .. 'th'
+        end
     end
+    return prepend_number and n
 end
 
 -- Overwrite the global table 'string' if the flag is not set.
-if not (STDLIB and STDLIB.no_string) then
-    setmetatable(string, old_string_meta)
+function String.overwrite_global()
     for k, v in pairs(String) do
         _G.string[k] = v
+        setmetatable(_G.string, nil)
     end
+    return string
 end
 
 return String

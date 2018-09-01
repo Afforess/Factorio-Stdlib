@@ -3,6 +3,8 @@
 
 local Iter = {}
 
+local pairs = pairs
+local ipairs = ipairs
 Iter.pairs = pairs
 Iter.ipairs = ipairs
 
@@ -84,6 +86,10 @@ function Iter.wrap(t, start, reverse)
         end
         return i, t[i]
     end
+end
+
+function Iter.tpairs(...)
+    return ipairs(type(...) == 'table' and ... or {...})
 end
 
 return Iter

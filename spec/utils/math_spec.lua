@@ -1,7 +1,7 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
 
-local math = require('stdlib/utils/math')
+
+local math = require('__stdlib__/stdlib/utils/math')
 
 describe('Math', function()
     it('should sum', function()

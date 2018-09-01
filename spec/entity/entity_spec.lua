@@ -1,8 +1,8 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
-require('spec/setup/defines')
 
-local Entity = require('stdlib/entity/entity')
+require('__stdlib__/spec/setup/defines')
+
+local Entity = require('__stdlib__/stdlib/entity/entity')
 
 describe('Entity', function()
     it('an entity should be frozen', function()

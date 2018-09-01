@@ -1,7 +1,7 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
 
-local table = require('stdlib/utils/table')
+
+local table = require('__stdlib__/stdlib/utils/table')
 
 describe('Table Spec', function()
     describe('table.map', function()

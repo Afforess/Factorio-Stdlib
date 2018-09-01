@@ -1,8 +1,8 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
-require('spec/setup/defines')
 
-local Logger = require('stdlib/misc/logger')
+require('__stdlib__/spec/setup/defines')
+
+local Logger = require('__stdlib__/stdlib/misc/logger')
 
 describe('Logger', function()
 

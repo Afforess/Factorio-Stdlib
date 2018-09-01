@@ -1,9 +1,9 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
-require('spec/setup/defines')
 
-local Event = require('stdlib/event/event')
-local Gui = require('stdlib/event/gui')
+require('__stdlib__/spec/setup/defines')
+
+local Event = require('__stdlib__/stdlib/event/event')
+local Gui = require('__stdlib__/stdlib/event/gui')
 
 local test_function = {f=function(x) _G.someVariable = x end, g=function(x) _G.someVariable = x end}
 local function_a = function(arg) test_function.f(arg.tick) end

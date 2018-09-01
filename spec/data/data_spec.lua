@@ -1,15 +1,15 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
-require('spec/setup/defines')
-require('stdlib/utils/table').overwrite_global()
+
+require('__stdlib__/spec/setup/defines')
+require('__stdlib__/stdlib/utils/table').overwrite_global()
 
 local Data, Raw, R, F --luacheck: ignore Raw
 
 describe('Data', function()
 
     before_each(function()
-        require('spec/setup/dataloader')
-        Data = require('stdlib/data/data')
+        require('__stdlib__/spec/setup/dataloader')
+        Data = require('__stdlib__/stdlib/data/data')
         Raw = _G.data.raw["recipe"]
         R = Data("stone-furnace", "recipe")
         F = Data("fake", "fake")

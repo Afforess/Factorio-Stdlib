@@ -1,7 +1,7 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
 
-local string = require('stdlib/utils/string')
+
+local string = require('__stdlib__/stdlib/utils/string')
 
 describe('String Spec', function()
     describe('string.trim', function()

@@ -1,8 +1,8 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
-require('spec/setup/defines')
 
-local Position = require('stdlib/area/position')
+require('__stdlib__/spec/setup/defines')
+
+local Position = require('__stdlib__/stdlib/area/position')
 local P = Position
 
 describe('Constructors', function ()

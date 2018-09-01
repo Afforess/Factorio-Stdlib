@@ -1,12 +1,12 @@
-_G.serpent = require('stdlib/vendor/serpent')
-require('spec/setup/defines')
+_G.serpent = require('__stdlib__/stdlib/vendor/serpent')
+require('__stdlib__/spec/setup/defines')
 
 _G.log = function()
 end
 
 _G.RESET = function()
     for name in pairs(package.loaded) do
-        if name:find('^spec') or name:find('^stdlib') then
+        if name:find('%_%_stdlib%_%_') then
             package.loaded[name] = nil
         end
     end
@@ -34,7 +34,7 @@ _G.data.extend = function(self, otherdata)
     end
 end
 
-local raw = require('spec/setup/data/raw')
+local raw = require('__stdlib__/spec/setup/data/raw')
 
 if raw then
     _G.data.raw = raw
@@ -59,8 +59,8 @@ else
         ['module'] = {}
     }
 
-    require('spec/setup/data/recipes')
-    require('spec/setup/data/items')
-    require('spec/setup/data/categories')
-    require('spec/setup/data/technologies')
+    require('__stdlib__/spec/setup/data/recipes')
+    require('__stdlib__/spec/setup/data/items')
+    require('__stdlib__/spec/setup/data/categories')
+    require('__stdlib__/spec/setup/data/technologies')
 end

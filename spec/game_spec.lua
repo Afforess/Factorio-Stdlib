@@ -1,9 +1,9 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
-require('spec/setup/defines')
-require('stdlib/utils/table').overwrite_global()
 
-local Game = require('stdlib/game')
+require('__stdlib__/spec/setup/defines')
+require('__stdlib__/stdlib/utils/table').overwrite_global()
+
+local Game = require('__stdlib__/stdlib/game')
 
 describe("Game Spec",
     function()

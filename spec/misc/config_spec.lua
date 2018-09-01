@@ -1,9 +1,9 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
-require('spec/setup/defines')
-require('stdlib/utils/table').overwrite_global()
 
-local Config = require('stdlib/misc/config')
+require('__stdlib__/spec/setup/defines')
+require('__stdlib__/stdlib/utils/table').overwrite_global()
+
+local Config = require('__stdlib__/stdlib/misc/config')
 
 --[[ the table to be duplicated for all tests. ]]--
 _G.config_template = {

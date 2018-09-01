@@ -16,7 +16,7 @@ World.quit - Closes the world simulator
 
 note: save/load/reload haven't been tested yet.
 --]]
-require('spec/setup/defines')
+require('__stdlib__/spec/setup/defines')
 
 local World = {
     _msg_buffer = {},
@@ -45,8 +45,8 @@ function World.bootstrap()
     _G._require = _G._require or require
 
     -- Setup Globals
-    _G.serpent = require('stdlib/vendor/serpent')
-    _G.inspect = require('stdlib/vendor/inspect')
+    _G.serpent = require('__stdlib__/stdlib/vendor/serpent')
+    _G.inspect = require('__stdlib__/stdlib/vendor/inspect')
 
     _G.log = log_buffer
 

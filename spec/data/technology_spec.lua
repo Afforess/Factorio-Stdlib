@@ -1,6 +1,6 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
-require('spec/setup/defines')
+
+require('__stdlib__/spec/setup/defines')
 
 local Technology
 
@@ -9,8 +9,8 @@ describe(
     function()
         before_each(
             function()
-                require('spec/setup/dataloader')
-                Technology = require('stdlib/data/technology')
+                require('__stdlib__/spec/setup/dataloader')
+                Technology = require('__stdlib__/stdlib/data/technology')
             end
         )
 

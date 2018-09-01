@@ -10,13 +10,13 @@ _G.log = function(a)
     print(a)
 end
 
-require('stdlib/utils/globals')
-require('spec/setup/defines')
+require('__stdlib__/stdlib/utils/globals')
+require('__stdlib__/spec/setup/defines')
 local lfs = require('lfs')
 local io = _G.io
-local table = require('stdlib/utils/table')
-local inspect = require('stdlib/vendor/inspect')
-local serpent = require('stdlib/vendor/serpent')
+local table = require('__stdlib__/stdlib/utils/table')
+local inspect = require('__stdlib__/stdlib/vendor/inspect')
+local serpent = require('__stdlib__/stdlib/vendor/serpent')
 -- local files = {'data', 'data-update', 'data-final-fixes'}
 
 local lib = DATA_DIRECTORY .. 'core\\lualib\\?.lua;'

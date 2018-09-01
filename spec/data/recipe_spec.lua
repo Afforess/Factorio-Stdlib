@@ -1,15 +1,15 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
-require('spec/setup/defines')
-require('stdlib/utils/table').overwrite_global()
+
+require('__stdlib__/spec/setup/defines')
+require('__stdlib__/stdlib/utils/table').overwrite_global()
 
 local Recipe, Raw, Rawtech
 
 describe('Recipe', function()
 
     before_each(function()
-        require('spec/setup/dataloader')
-        Recipe = require('stdlib/data/recipe')
+        require('__stdlib__/spec/setup/dataloader')
+        Recipe = require('__stdlib__/stdlib/data/recipe')
         Raw = _G.data.raw["recipe"]
         Rawtech = _G.data.raw["technology"]["steel-processing"]
     end)

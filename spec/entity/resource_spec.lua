@@ -1,10 +1,10 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
-require('spec/setup/defines')
-require('stdlib/utils/table').overwrite_global()
 
-local Resource = require('stdlib/entity/resource')
-local Area = require('stdlib/area/area')
+require('__stdlib__/spec/setup/defines')
+require('__stdlib__/stdlib/utils/table').overwrite_global()
+
+local Resource = require('__stdlib__/stdlib/entity/resource')
+local Area = require('__stdlib__/stdlib/area/area')
 
 describe('Resource filtering', function()
     local resources = {}

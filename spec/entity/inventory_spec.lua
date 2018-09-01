@@ -1,9 +1,9 @@
 require('busted.runner')()
-require('spec/setup/utils/searcher')
-require('spec/setup/defines')
-require('stdlib/utils/table').overwrite_global()
 
-local Inventory = require('stdlib/entity/inventory')
+require('__stdlib__/spec/setup/defines')
+require('__stdlib__/stdlib/utils/table').overwrite_global()
+
+local Inventory = require('__stdlib__/stdlib/entity/inventory')
 
 describe('Inventory Spec', function()
     local function make_get_contents(inv)

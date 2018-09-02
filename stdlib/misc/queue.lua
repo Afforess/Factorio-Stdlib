@@ -137,6 +137,16 @@ function Queue.peek_last(queue)
     return queue.objects[queue.last]
 end
 
+function Queue.pop_and_push(queue)
+    local ret = queue.pop(queue)
+    queue.push(queue, ret)
+    return ret
+end
+
+function Queue.cycle(queue)
+    return queue.push(queue, queue.pop(queue))
+end
+
 --- Returns true if the given queue is empty.
 -- @param queue (<span class="types">@{Queue}</span>) the queue to check
 -- @treturn boolean true if empty, false otherwise
@@ -147,9 +157,13 @@ end
 --- Returns the number of items in the queue.
 -- @param queue (<span class="types">@{Queue}</span>) the queue to check
 -- @treturn number the number of items in the queue
-function Queue.count(queue)
+function Queue.size(queue)
     return t_size(queue.objects)
 end
+
+--- Shortcut for @{Queue.size}
+-- @function Queue.count
+Queue.count = Queue.size
 
 function Queue.pairs(queue, pop)
     local i = queue.first - 1
@@ -161,8 +175,6 @@ function Queue.pairs(queue, pop)
         end
     end
 end
-Queue.iter = Queue.pairs
-Queue.iter_first = Queue.pairs
 
 function Queue.rpairs(queue, pop)
     local i = queue.last + 1
@@ -174,20 +186,48 @@ function Queue.rpairs(queue, pop)
         end
     end
 end
-Queue.iter_last = Queue.rpairs
+
+local mt = {}
+function mt.__add(queue1, queue2)
+    local new = Queue.new()
+
+    local one = Is.Table(queue1) and getmetatable(queue1) == Queue._mt and true
+    local two = Is.Table(queue2) and getmetatable(queue2) == Queue._mt and true
+
+    if one then
+        for _, v in pairs(queue1) do
+            new:push(v)
+        end
+    else
+        new:push(queue1)
+    end
+
+    if two then
+        for _, v in pairs(queue2) do
+            new:push(v)
+        end
+    else
+        new:push(queue2)
+    end
+
+    return new
+end
 
 Queue._mt = {
     __pairs = Queue.pairs,
     __ipairs = Queue.pairs,
-    __len = Queue.count,
+    __len = Queue.size,
     -- Allows queue[3] to return the item at queue.objects[3]
     __index = function(self, k)
         if Is.number(k) then
+            --k = self.first - 1 + k
             return self.objects[k]
         else
             return rawget(self, k) or Queue[k]
         end
     end,
+    __add = mt.__add,
+    __unm = Queue.pop,
     -- Allows queue() to pop_first and queue(data) to push_last
     __call = function(self, ...)
         if ... then
@@ -198,7 +238,7 @@ Queue._mt = {
     end,
     __tostring = function(self)
         return Inspect({first = self.first, last = self.last, objects = self.objects}, {arraykeys = true})
-    end,
+    end
 }
 
 return Queue

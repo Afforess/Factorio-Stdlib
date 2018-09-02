@@ -155,11 +155,67 @@ describe('Queue', function()
         end)
     end)
 
+    describe("pop_and_push", function ()
+        it("should pop the first, push it last and return it", function ()
+            queue1 = queue1 + 23
+            queue1 = queue1 + 45
+            queue1 = 54 + queue1
+            assert.same(54, queue1:pop_and_push())
+            assert.same(54, queue1:peek_last())
+        end)
+    end)
+
+    describe("cycle", function ()
+        it("should cycle first to last", function ()
+            queue1 = queue1 + 23
+            queue1 = queue1 + 45
+            assert.same(45, queue1.peek(queue1.cycle(queue1)))
+            assert.same(2, queue1.size(queue1))
+        end)
+    end)
+
     describe('is_empty', function()
         it('should return true if there is nothing in the queue', function()
             assert.is_true(queue1:is_empty())
             queue1:push("stuff")
             assert.not_truthy(queue1:is_empty())
+        end)
+    end)
+
+    describe("methods", function ()
+        describe("__umn", function ()
+            it("should pop the first one", function ()
+                queue1 = queue1 + 45
+                queue1(46)
+                queue1(47)
+                assert.same(3, queue1:size())
+                assert.same(45, -queue1)
+                assert.same(2, queue1:size())
+                assert.same(46, -queue1)
+                assert.same(1, queue1:size())
+            end)
+        end)
+
+        describe("__add", function ()
+            it("should add queues together", function ()
+                queue1 = queue1 + "t"
+                assert.same("t", queue1[1])
+                queue1 = "s" + queue1
+                assert.same("s", queue1[1])
+                queue2(23)
+                queue2(34)
+                queue1 = queue1 + queue2
+                assert.same(34, queue1[4])
+            end)
+        end)
+
+        describe("__index", function ()
+            it("should get the correct index", function ()
+                queue1:push_first("test")
+                queue1:push_first("in front")
+                assert.same(-1, queue1.first)
+                assert.same("in front", queue1[-1])
+            end)
         end)
     end)
 

@@ -21,13 +21,13 @@ setmetatable(Changes, require('__stdlib__/stdlib/core'))
     old_version :: string: Old version of the mod. May be nil if the mod wasn't previously present (i.e. it was just added).
     new_version :: string: New version of the mod. May be nil if the mod is no longer present (i.e. it was just removed).
 --]]
-Changes.versions = prequire('__stdlib__/stdlib/changes/versions') or {}
-Changes['map-change-always-first'] = prequire('__stdlib__/stdlib/changes/map-change-always-first')
-Changes['any-change-always-first'] = prequire('__stdlib__/stdlib/changes/any-change-always-first')
-Changes['mod-change-always-first'] = prequire('__stdlib__/stdlib/changes/mod-change-always-first')
-Changes['mod-change-always-last'] = prequire('__stdlib__/stdlib/changes/mod-change-always-last')
-Changes['any-change-always-last'] = prequire('__stdlib__/stdlib/changes/any-change-always-last')
-Changes['map-change-always-last'] = prequire('__stdlib__/stdlib/changes/map-change-always-last')
+Changes.versions = prequire('changes/versions') or {}
+Changes['map-change-always-first'] = prequire('changes/map-change-always-first')
+Changes['any-change-always-first'] = prequire('changes/any-change-always-first')
+Changes['mod-change-always-first'] = prequire('changes/mod-change-always-first')
+Changes['mod-change-always-last'] = prequire('changes/mod-change-always-last')
+Changes['any-change-always-last'] = prequire('changes/any-change-always-last')
+Changes['map-change-always-last'] = prequire('changes/map-change-always-last')
 
 local function run_if_exists(func)
     return func and type(func) == 'function' and func()

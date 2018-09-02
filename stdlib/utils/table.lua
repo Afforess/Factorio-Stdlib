@@ -110,7 +110,7 @@ end
 --- Returns a new array that is a one-dimensional recursive flattening of the given array.
 -- For every element that is an array, extract its elements into the new array.
 -- <p>The optional level argument determines the level of recursion to flatten.
---> This function flattens an integer-indexed array, but not an associative array.
+-- > This function flattens an integer-indexed array, but not an associative array.
 -- @tparam array tbl the array to be flattened
 -- @tparam[opt] uint level recursive levels, or no limit to recursion if not supplied
 -- @treturn array a new array that represents the flattened contents of the given array

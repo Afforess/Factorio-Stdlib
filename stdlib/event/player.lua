@@ -14,6 +14,7 @@ setmetatable(Player, require('__stdlib__/stdlib/core'))
 
 local Is = require('__stdlib__/stdlib/utils/is')
 local Game = require('__stdlib__/stdlib/game')
+local table = require('__stdlib__/stdlib/utils/table')
 
 -- Return new default player object consiting of index and name
 local function new(player_index)

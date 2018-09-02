@@ -17,6 +17,7 @@ World.quit - Closes the world simulator
 note: save/load/reload haven't been tested yet.
 --]]
 require('__stdlib__/spec/setup/defines')
+local table = require('__stdlib__/stdlib/utils/table')
 
 local World = {
     _msg_buffer = {},

@@ -7,6 +7,7 @@ local Util = {
 setmetatable(Util, require('__stdlib__/stdlib/core'))
 
 local Is = require('__stdlib__/stdlib/utils/is')
+local table = require('__stdlib__/stdlib/utils/table')
 
 function Util.extend(proto_array)
     Is.Assert.Table(proto_array, 'Missing table or array to extend')
@@ -31,7 +32,7 @@ end
 function Util.duplicate(data_type, orig_name, new_name, mining_result)
     mining_result = type(mining_result) == 'boolean' and new_name or mining_result
     if data.raw[data_type] and data.raw[data_type][orig_name] then
-        local proto = table.deepcopy(data.raw[data_type][orig_name])
+        local proto = table.deep_copy(data.raw[data_type][orig_name])
         proto.name = new_name
 
         if mining_result then

@@ -16,6 +16,7 @@ setmetatable(Force, require('__stdlib__/stdlib/core'))
 
 local Is = require('__stdlib__/stdlib/utils/is')
 local Game = require('__stdlib__/stdlib/game')
+local table = require('__stdlib__/stdlib/utils/table')
 
 -- return new default force object
 local function new(force_name)

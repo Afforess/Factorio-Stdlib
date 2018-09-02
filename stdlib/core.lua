@@ -15,13 +15,6 @@ STDLIB.no_defines_time = STDLIB.no_defines_time or false
 -- require global helper functions.
 require('__stdlib__/stdlib/utils/globals')
 
-local Is = require('__stdlib__/stdlib/utils/is')
-
--- Set up default stuff for testing, defines will already be available in an active mod or busted setup specs
-if not defines then
-    require('__stdlib__/spec/setup/dataloader')
-end
-
 -- Defines Mutates
 local color = require('__stdlib__/stdlib/utils/defines/color')
 local anticolor = require('__stdlib__/stdlib/utils/defines/anticolor')
@@ -113,7 +106,6 @@ function Core.create_stdlib_globals(files)
             PLAYER = 'stdlib/event/player',
             FORCE = 'stdlib/event/force'
         }
-    Is.Assert.Table(files, 'files must be a dictionary of global names -> file paths')
     for glob, path in pairs(files) do
         _G[glob] = require('__stdlib__/'..(path:gsub('%.', '/'))) -- extra () required to emulate select(1)
     end

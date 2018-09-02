@@ -1,7 +1,7 @@
 require('busted.runner')()
 
 require('__stdlib__/spec/setup/defines')
-require('__stdlib__/stdlib/utils/table').overwrite_global()
+local table = require('__stdlib__/stdlib/utils/table').overwrite_global()
 
 local Config = require('__stdlib__/stdlib/misc/config')
 

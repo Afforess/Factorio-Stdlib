@@ -3,6 +3,7 @@
 
 local Core = require('__stdlib__/stdlib/core')
 local Is = require('__stdlib__/stdlib/utils/is')
+local table = require('__stdlib__/stdlib/utils/table')
 
 -- @class LinkedListNode
 -- @usage local llnode = linkedlist.append(item)

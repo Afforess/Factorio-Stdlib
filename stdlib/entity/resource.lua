@@ -11,6 +11,7 @@ local Surface = require('__stdlib__/stdlib/area/surface')
 local Area = require('__stdlib__/stdlib/area/area')
 local Tile = require('__stdlib__/stdlib/area/tile')
 local Queue = require('__stdlib__/stdlib/misc/queue')
+local table = require('__stdlib__/stdlib/utils/table')
 
 --- Gets all resource entities at the specified position and surface.
 -- Adapted from *YARM/resmon.lua &rarr; find\_resource\_at*

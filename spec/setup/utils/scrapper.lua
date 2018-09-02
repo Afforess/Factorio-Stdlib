@@ -1,9 +1,6 @@
 local DATA_DIRECTORY = 'e:\\Games\\Factorio_Web\\Factorio\\data\\'
-local full_output = false
+local full_output = true
 -- local MODS_DIRECTORY = 'e:\\Games\\Factorio_Web\\Factorio\\appdata\\mods\\'
--- local FACTORIO_VERSION = '0.16'
--- local BASE_VERSION = '0.16.36'
-
 _G.mods = {}
 _G.settings = {}
 _G.log = function(a)
@@ -12,8 +9,7 @@ end
 
 require('__stdlib__/stdlib/utils/globals')
 require('__stdlib__/spec/setup/defines')
-local lfs = require('lfs')
-local io = _G.io
+
 local table = require('__stdlib__/stdlib/utils/table')
 local inspect = require('__stdlib__/stdlib/vendor/inspect')
 local serpent = require('__stdlib__/stdlib/vendor/serpent')
@@ -49,8 +45,9 @@ end --))
 
 -- loop through all info.json and sort by dependency *shudder*
 -- loop through all mods by sorted list and load data in all 3 stages
-
+local io = _G.io
 if full_output then --(( OUTPUT
+    local lfs = require('lfs')
     lfs.mkdir('.output')
 
     -- Write data.raw

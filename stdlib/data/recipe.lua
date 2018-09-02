@@ -9,6 +9,7 @@ setmetatable(Recipe, Recipe)
 
 local Is = require('__stdlib__/stdlib/utils/is')
 local Item = require('__stdlib__/stdlib/data/item')
+local table = require('__stdlib__/stdlib/utils/table')
 
 function Recipe:__call(recipe)
     local new = self:get(recipe, 'recipe')

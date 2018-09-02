@@ -152,7 +152,7 @@ end
 -- @treturn Concepts.BoundingBox the area
 function Area.non_zero(area, amount)
     area = Area.new(area)
-    amount = amount or .01
+    amount = amount or 0.01
 
     return Area.size(area) == 0 and Area.expand(area, amount) or area
 end

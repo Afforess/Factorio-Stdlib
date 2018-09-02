@@ -12,7 +12,11 @@ setmetatable(Developer, Developer)
 local function make_no_controls()
     local controls = {}
     for name in pairs(data.raw['autoplace-control']) do
-        controls[name] = {size = 'none', frequency = 'very-low', richness = 'very-low'}
+        if name == 'grass' then
+            controls[name] = {size = 'very-high', frequency = 'very-high', richness = 'very-low'}
+        else
+            controls[name] = {size = 'none', frequency = 'very-low', richness = 'very-low'}
+        end
     end
     return controls
 end
@@ -85,10 +89,8 @@ function Developer.make_test_entities()
         }:remove_fields {'minable', 'collision_box', 'vehicle_impact_sound', 'working_sound'}
     end
 
-    --data.raw.tile['lab-dark-1'].map_color = {r = 100, g = 100, b = 100}
-    --data.raw.tile['lab-dark-2'].map_color = {r = 50, g = 50, b = 50}
-
-    data.raw['map-gen-presets']['default']['debug'] = {
+    local gen = data.raw['map-gen-presets']
+    gen['default']['debug'] = {
         type = 'map-gen-presets',
         name = 'debug',
         localised_name = 'Debug',
@@ -100,7 +102,7 @@ function Developer.make_test_entities()
             autoplace_controls = make_no_controls(),
             height = 128,
             width = 128
-        }
+        },
     }
 end
 

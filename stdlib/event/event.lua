@@ -377,6 +377,13 @@ function Event.generate_event_name(event_name)
     return id
 end
 
+function Event.set_event_name(event_name, id)
+    Is.Assert.String(event_name, 'event_name must be a string')
+    Is.Assert.Number(id)
+    Event.custom_events[event_name] = id
+    return Event.custom_events[event_name]
+end
+
 function Event.get_event_name(event_name)
     Is.Assert.String(event_name, 'event_name must be a string')
     return Event.custom_events[event_name]

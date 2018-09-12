@@ -21,7 +21,7 @@ setmetatable(Changes, require('__stdlib__/stdlib/core'))
     old_version :: string: Old version of the mod. May be nil if the mod wasn't previously present (i.e. it was just added).
     new_version :: string: New version of the mod. May be nil if the mod is no longer present (i.e. it was just removed).
 --]]
-Changes.versions = prequire('changes/versions', false) or {}
+Changes.versions = prequire('changes/versions') or {}
 Changes['map-change-always-first'] = prequire('changes/map-change-always-first')
 Changes['any-change-always-first'] = prequire('changes/any-change-always-first')
 Changes['mod-change-always-first'] = prequire('changes/mod-change-always-first')

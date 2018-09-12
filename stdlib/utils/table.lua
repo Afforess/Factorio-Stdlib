@@ -645,17 +645,13 @@ function Table.clear(tbl)
     return tbl
 end
 
-function Table.overwrite_global()
-    for k, v in pairs(Table) do
-        _G.table[k] = v
-    end
-    return table
-end
 for k, v in pairs(table) do
     Table[k] = v
 end
-if (STDLIB and STDLIB.global_table) then
-    return Table.overwrite_global()
+if not (STDLIB and STDLIB.no_global_table) then
+    for k, v in pairs(Table) do
+        _G.table[k] = v
+    end
 end
 
 return Table

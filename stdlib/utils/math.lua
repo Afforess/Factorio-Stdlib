@@ -222,17 +222,13 @@ function Math.pingpong(x)
     return 1 - math_abs(1 - x % 2)
 end
 
-function Math.overwrite_global()
-    for k, v in pairs(Math) do
-        _G.math[k] = v
-    end
-    return math
-end
 for k, v in pairs(math) do
     Math[k] = v
 end
-if (STDLIB and STDLIB.global_math) then
-    return Math.overwrite_global()
+if not (STDLIB and STDLIB.no_global_math) then
+    for k, v in pairs(Math) do
+        _G.math[k] = v
+    end
 end
 
 return Math

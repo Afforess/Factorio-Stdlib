@@ -241,18 +241,14 @@ function String.ordinal_suffix(n, prepend_number)
     return prepend_number and n
 end
 
-function String.overwrite_global()
-    for k, v in pairs(String) do
-        _G.string[k] = v
-        setmetatable(_G.string, nil)
-    end
-    return string
-end
 for k, v in pairs(string) do
     String[k] = v
 end
-if (STDLIB and STDLIB.global_string) then
-    return String.overwrite_global()
+if not (STDLIB and STDLIB.no_global_string) then
+    for k, v in pairs(String) do
+        _G.string[k] = v
+    end
+    setmetatable(_G.string, nil)
 end
 
 return String

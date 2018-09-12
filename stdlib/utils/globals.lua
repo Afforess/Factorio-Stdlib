@@ -23,11 +23,14 @@ end
 
 --- Require a file that may not exist
 -- @tparam string module path to the module
+-- @tparam boolean suppress_all suppress all errors, not just file_not_found
 -- @treturn mixed
-function prequire(module)
+function prequire(module, suppress_all)
     local ok, err = pcall(require, module)
     if ok then
         return err
+    elseif not suppress_all and not err:find("^module .* not found") then
+        error(err)
     end
 end
 

@@ -21,7 +21,7 @@ setmetatable(Changes, require('__stdlib__/stdlib/core'))
     old_version :: string: Old version of the mod. May be nil if the mod wasn't previously present (i.e. it was just added).
     new_version :: string: New version of the mod. May be nil if the mod is no longer present (i.e. it was just removed).
 --]]
-Changes.versions = prequire('changes/versions') or {}
+Changes.versions = prequire('changes/versions', false) or {}
 Changes['map-change-always-first'] = prequire('changes/map-change-always-first')
 Changes['any-change-always-first'] = prequire('changes/any-change-always-first')
 Changes['mod-change-always-first'] = prequire('changes/mod-change-always-first')
@@ -80,6 +80,23 @@ function Changes.register_events()
     return Changes
 end
 
+function Changes.dump_data()
+    local tabs = {
+        'versions',
+        'map-change-always-first',
+        'any-change-always-first',
+        'mod-change-always-first',
+        'map-change-always-last',
+        'any-change-always-last',
+        'mod-change-always-last'
+    }
+    for _, v in pairs(tabs) do
+        if Changes[v] then
+            game.write_file(Changes.get_file_path('Changes/' .. v .. '.lua'), inspect(Changes[v], {longkeys = true, arraykeys = true}))
+        end
+    end
+    game.write_file(Changes.get_file_path('Changes/global.lua'), inspect(global._changes or nil, {longkeys = true, arraykeys = true}))
+end
 --[Always run these before any migrations]--
 --Changes["map-change-always-first"] = function() end
 --Changes["any-change-always-first"] = function() end

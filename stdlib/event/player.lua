@@ -16,7 +16,7 @@ local Is = require('__stdlib__/stdlib/utils/is')
 local Game = require('__stdlib__/stdlib/game')
 local table = require('__stdlib__/stdlib/utils/table')
 
--- Return new default player object consiting of index and name
+-- Return new default player object consiting of index, name, force
 local function new(player_index)
     local pdata = {
         index = player_index,
@@ -40,6 +40,7 @@ local function new(player_index)
     return pdata
 end
 
+-- TODO This should add into a table with a getter function to add everything correctly
 function Player.additional_data(func_or_table)
     Player._new_player_data = func_or_table
     return Player
@@ -55,7 +56,7 @@ end
 function Player.get(player)
     player = Game.get_player(player)
     Is.Assert(player, 'Missing player to retrieve')
-    return player, global.players[player.index] or Player.init(player.index)
+    return player, global.players and global.players[player.index] or Player.init(player.index)
 end
 
 --- Merge a copy of the passed data to all players in `global.players`.
@@ -120,6 +121,11 @@ end
 function Player.update_force(event)
     local player, pdata = Player.get(event.player_index)
     pdata.force = player.force.name
+end
+
+function Player.dump_data()
+    game.write_file(Player.get_file_path('Player/player_data.lua'), inspect(Player._new_player_data, {longkeys = true, arraykeys = true}))
+    game.write_file(Player.get_file_path('Player/global.lua'), inspect(global.players or nil, {longkeys = true, arraykeys = true}))
 end
 
 function Player.register_init()

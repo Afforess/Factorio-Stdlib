@@ -59,7 +59,7 @@ end
 function Force.get(force)
     force = Game.get_force(force)
     Is.Assert(force, 'force is missing')
-    return game.forces[force.name], global.forces[force.name] or Force.init(force.name)
+    return game.forces[force.name], global.forces and global.forces[force.name] or Force.init(force.name)
 end
 
 --- Merge a copy of the passed data to all forces in `global.forces`.
@@ -98,6 +98,11 @@ function Force.init(event, overwrite)
         end
     end
     return Force
+end
+
+function Force.dump_data()
+    game.write_file(Force.get_file_path('Force/player_data.lua'), inspect(Force._new_player_data, {longkeys = true, arraykeys = true}))
+    game.write_file(Force.get_file_path('Force/global.lua'), inspect(global.players or nil, {longkeys = true, arraykeys = true}))
 end
 
 -- TODO Figure out best way to handle this!

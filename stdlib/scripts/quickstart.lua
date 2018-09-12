@@ -17,7 +17,7 @@
 local Event = require('__stdlib__/stdlib/event/event')
 local Area = require('__stdlib__/stdlib/area/area')
 
-if not remote.interfaces['quickstart-script'] then
+if not remote.interfaces['quickstart_script'] then
     local qs_interface = {}
     qs_interface.registered_to = function()
         if game then
@@ -25,7 +25,7 @@ if not remote.interfaces['quickstart-script'] then
         end
         return script.mod_name
     end
-    qs_interface.creative_mode_quickstart_registerd_to = qs_interface.registered_to
+    qs_interface.creative_mode_quickstart_registered_to = qs_interface.registered_to
     remote.add_interface('quickstart-script', qs_interface)
 else
     -- quickstart-script has already been registered, lets not clobber things

@@ -68,10 +68,6 @@ local function get_event_name(name)
     return event_names[name] or table.invert(Event.custom_events)[name] or name or 'unknown'
 end
 
-local function get_file_path(append)
-    return script.mod_name .. '/Event/' .. append
-end
-
 --- Registers a handler for the given events.
 -- If a `nil` handler is passed, remove the given events and stop listening to them.
 -- <p>Events dispatch in the order they are registered.
@@ -326,12 +322,12 @@ function Event.dispatch(event)
 
             if (Event.inspect_event or event.inspect_event) and game then
                 if not Event.inspect_append then
-                    game.remove_path(get_file_path('events/'))
+                    game.remove_path(Event.get_file_path('events/'))
                     Event.inspect_append = true
                 end
                 local result = inspect(event) .. '\n'
-                game.write_file(get_file_path('events/' .. get_event_name(event.input_name or event.name) .. '.lua'), result, true)
-                game.write_file(get_file_path('events/ordered.lua'), result , true)
+                game.write_file(Event.get_file_path('events/' .. get_event_name(event.input_name or event.name) .. '.lua'), result, true)
+                game.write_file(Event.get_file_path('events/ordered.lua'), result , true)
             end
 
             if protected then
@@ -439,11 +435,9 @@ function Event.get_registered_counts(reg_type)
 end
 
 function Event.dump_data()
-    Event.count_data = Event.get_registered_counts()
-    Event.event_order = script.get_event_order()
     local event_data = {
-        count_data = Event.count_data,
-        event_order = Event.event_order,
+        count_data = Event.get_registered_counts(),
+        event_order = script.get_event_order(),
         protected_mode = Event.protected_mode,
         force_crc = Event.force_crc,
         Custom_events = Event.custom_events,
@@ -451,17 +445,17 @@ function Event.dump_data()
         inspect_event = Event.inspect_event,
 
     }
-    local r, t = {}, {}
+    local registry, factorio_events = {}, {}
     for event, data in pairs(event_registry) do
-        r['['..event..'] '.. get_event_name(event)] = data
+        registry['['..event..'] '.. get_event_name(event)] = data
         if valid_event_id(event) then
-            t['['..event..'] '.. get_event_name(event)] = script.get_event_handler(event)
+            factorio_events['['..event..'] '.. get_event_name(event)] = script.get_event_handler(event)
         end
     end
-    game.write_file(get_file_path('event_settings.lua'), inspect(event_data))
-    game.write_file(get_file_path('event_registry.lua'), inspect(r, {longkeys = true, arraykeys = true}))
-    game.write_file(get_file_path('factorio_events.lua'), inspect(t, {longkeys = true, arraykeys = true}))
-    game.write_file(get_file_path('raw_registry.lua'), inspect(event_registry, {longkeys = true, arraykeys = true}))
+    game.write_file(Event.get_file_path('Event/event_data.lua'), inspect(event_data))
+    game.write_file(Event.get_file_path('Event/factorio_registry.lua'), inspect(factorio_events, {longkeys = true, arraykeys = true}))
+    game.write_file(Event.get_file_path('Event/event_registry.lua'), inspect(registry, {longkeys = true, arraykeys = true}))
+    game.write_file(Event.get_file_path('Event/raw_registry.lua'), inspect(event_registry, {longkeys = true, arraykeys = true}))
 end
 
 --- Filters events related to entity_type.

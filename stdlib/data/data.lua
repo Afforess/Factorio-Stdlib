@@ -21,7 +21,7 @@ local Data = {
         ['silent'] = false, -- Don't log if not present
         ['fail'] = false, -- Error instead of logging
         ['verbose'] = false, -- Extra logging info
-        ['extend'] = true, -- Don't Extend the data
+        ['extend'] = true, -- Extend the data
         ['skip_string_validity'] = false, -- Skip checking for valid data
         ['items_and_fluids'] = true -- consider fluids valid for Item checks
     },
@@ -119,7 +119,7 @@ end
 -- @tparam boolean bool
 -- @treturn self
 function Data:continue(bool)
-    rawset(self, 'valid', (bool and rawget(self, 'raw') and self.type) or false)
+    rawset(self, 'valid', (bool and rawget(self, '_raw') and self.type) or false)
     return self
 end
 
@@ -127,7 +127,7 @@ end
 -- @tparam function func the function to test, self is passed as the first paramater
 -- @treturn self
 function Data:continue_if(func, ...)
-    rawset(self, 'valid', (func(self, ...) and rawget(self, 'raw') and self.type) or false)
+    rawset(self, 'valid', (func(self, ...) and rawget(self, '_raw') and self.type) or false)
     return self
 end
 
@@ -135,16 +135,24 @@ end
 -- @tparam[opt] boolean force Extend even if it is already extended
 -- @treturn self
 function Data:extend(force)
-    if self.valid then
+    if self.valid and (self.options.extend or force) then
         if not self.extended or force then
             local t = data.raw[self.type]
             if t == nil then
                 t = {}
                 data.raw[self.type] = t
             end
-            t[self.name] = self.raw
+            t[self.name] = self._raw
             self.extended = true
         end
+    end
+    if force then
+        log('NOTICE: Force extend '.. self.type .. '/' .. self.name)
+    elseif not self.options.extend and not self.extended then
+        log('NOTICE: Did not extend ' .. self.type .. '/' .. self.name)
+    end
+    if self.overwrite then
+        log('NOTICE: Overwriting ' .. self.type .. '/' .. self.name)
     end
     return self
 end
@@ -153,12 +161,12 @@ end
 -- @tparam string new_name The new name for the recipe.
 -- @tparam string mining_result
 -- @treturn self
-function Data:copy(new_name, mining_result)
+function Data:copy(new_name, mining_result, opts)
     Is.Assert.String(new_name, 'New name is required')
     if self:is_valid() then
         mining_result = mining_result or new_name
         --local from = self.name
-        local copy = table.deep_copy(rawget(self, 'raw'))
+        local copy = table.deep_copy(rawget(self, '_raw'))
         copy.name = new_name
 
         -- For Entities
@@ -191,7 +199,7 @@ function Data:copy(new_name, mining_result)
             copy.placeable_by.item = new_name
         end
 
-        return self(copy):extend()
+        return self(copy, nil, opts or self.options)
     else
         error('Cannot Copy, invalid prototype', 4)
     end
@@ -374,7 +382,7 @@ end
 -- @treturn table icons
 function Data:get_icons(copy)
     if self:is_valid() then
-        return copy and table.deepcopy(self.icons) or self.icons
+        return copy and table.deep_copy(self.icons) or self.icons
     end
 end
 
@@ -395,7 +403,7 @@ function Data:make_icons(...)
             end
         end
         for _, icon in pairs({...}) do
-            self.icons[#self.icons + 1] = table.deepcopy(icon)
+            self.icons[#self.icons + 1] = table.deep_copy(icon)
         end
     end
     return self
@@ -436,7 +444,7 @@ function Data:pairs(source)
     return _next, index, val
 end
 
---- Returns a valid thing object reference. This is the main getter
+--- Returns a valid thing object reference. This is the main getter.
 -- @tparam string|table object The thing to use, if string the thing must be in data.raw[type], tables are not verified
 -- @tparam[opt] string object_type the raw type. Required if object is a string
 -- @tparam[opt] table opts options to pass
@@ -447,33 +455,30 @@ function Data:get(object, object_type, opts)
     -- Create our middle man container object
     local new = {
         class = self.class or self,
+        _raw = nil,
         valid = false,
         extended = false,
         overwrite = false,
-        raw = nil,
-        options = opts
+        options = table.merge(table.deep_copy(Data._default_options), opts or {})
     }
 
     if type(object) == 'table' then
         Is.Assert(object.type and object.name, 'Name and Type are required')
 
-        new.raw = object
+        new._raw = object
         new.valid = object.type
         --Is a data-raw that we are overwriting
         local existing = data.raw[object.type] and data.raw[object.type][object.name]
         new.extended = existing == object
         new.overwrite = not new.extended and existing and true or false
-        if new.overwrite then
-            log('NOTICE: Overwriting ' .. object.type .. '/' .. object.name)
-        end
     elseif type(object) == 'string' then
         --Get type from object_type, or fluid or item_and_fluid_types
         local types = (object_type and {object_type}) or (self._class == 'Item' and groups.item_and_fluid)
         if types then
             for _, type in pairs(types) do
-                new.raw = data.raw[type] and data.raw[type][object]
-                if new.raw then
-                    new.valid = new.raw.type
+                new._raw = data.raw[type] and data.raw[type][object]
+                if new._raw then
+                    new.valid = new._raw.type
                     new.extended = true
                     break
                 end
@@ -504,11 +509,11 @@ Data.__call = Data.get
 
 Data._object_mt = {
     __index = function(t, k)
-        return rawget(t, 'raw') and t.raw[k] or t.class[k]
+        return rawget(t, '_raw') and t._raw[k] or t.class[k]
     end,
     __newindex = function(t, k, v)
-        if rawget(t, 'valid') and rawget(t, 'raw') then
-            t.raw[k] = v
+        if rawget(t, 'valid') and rawget(t, '_raw') then
+            t._raw[k] = v
         end
     end,
     __call = function(t, ...)

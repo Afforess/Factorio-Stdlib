@@ -4,10 +4,26 @@
 -- local Logger = require('__stdlib__/stdlib/log/logger')
 -- -- or to create a logger directly:
 -- local LOGGER = require('__stdlib__/stdlib/log/logger').new(...)
--- -- and to use the same LOGGER in multiple require files make it global by removing 'local'.
 
-local M = {_module = 'Logger'}
-setmetatable(M, require('__stdlib__/stdlib/core'))
+local Logger = {
+    _module = 'Logger',
+    _loggers = {},
+    __call = function(self, ...)
+        return self.new(...)
+    end,
+    __index = require('__stdlib__/stdlib/core')
+}
+setmetatable(Logger, Logger)
+
+local _Log_mt = {
+    __call = function(self, msg)
+        if msg then
+            return self, self.log(msg)
+        else
+            return self, self.write()
+        end
+    end
+}
 
 local Is = require('__stdlib__/stdlib/utils/is')
 
@@ -32,19 +48,26 @@ local Is = require('__stdlib__/stdlib/utils/is')
 -- @tparam[opt=false] boolean debug_mode toggles the debug state of logger
 -- @tparam[opt={...}] options options a table with optional arguments
 -- @return (<span class="types">@{Logger}</span>) the logger instance
-function M.new(mod_name, log_name, debug_mode, options)
+function Logger.new(mod_name, log_name, debug_mode, options)
     Is.Assert.String(mod_name, 'Logger must be given a mod_name as the first argument')
 
     log_name = log_name or 'main'
+
+    local cache = mod_name .. '-' .. log_name
+    if Logger._loggers[cache] then
+        return Logger._loggers[cache]
+    end
+
     options = options or {}
 
-    local Logger = {
+    local Log = {
+        _module = 'Log',
         mod_name = mod_name,
         log_name = log_name,
         debug_mode = debug_mode,
         buffer = {},
         last_written = 0,
-        ever_written = false
+        ever_written = false,
     }
 
     ---
@@ -52,22 +75,28 @@ function M.new(mod_name, log_name, debug_mode, options)
     -- @tfield[opt=false] boolean log_ticks whether to include the game tick timestamp in the logs
     -- @tfield[opt="log"] string file_extension a string that overrides the default logfile extension
     -- @tfield[opt=false] boolean force_append if true, every new message appends to the current logfile instead of creating a new one
-    -- @table Logger.options
-    Logger.options = {
+    -- @table Log.options
+    Log.options = {
         log_ticks = options.log_ticks or false,
         file_extension = options.file_extension or 'log',
         force_append = options.force_append or false
     }
 
-    Logger.file_name = Logger.mod_name .. '/' .. Logger.log_name .. '.' .. Logger.options.file_extension
-    Logger.ever_written = Logger.options.force_append
+
+    Log.file_name = mod_name .. '/' .. log_name .. (log_name:find('%.') and '' or '.' .. Log.options.file_extension)
+    Log.ever_written = Log.options.force_append
 
     --- Logs a message.
     -- @tparam string|table msg the message to log. @{table}s will be dumped using [serpent](https://github.com/pkulchenko/serpent) which is included in the official Factorio Lualib
     -- @treturn boolean true if the message was written, false if it was queued for a later write
     -- @see https://forums.factorio.com/viewtopic.php?f=25&t=23844 Debugging utilities built in to Factorio
-    function Logger.log(msg)
+    function Log.log(msg)
         local format = string.format
+
+        if type(msg) ~= 'string' then
+            msg = serpent.block(msg, {comment = false, nocode = true, sparse = true})
+        end
+
         if _G.game then
             local tick = game.tick
             local floor = math.floor
@@ -75,29 +104,26 @@ function M.new(mod_name, log_name, debug_mode, options)
             local time_minutes = floor(time_s / 60)
             local time_hours = floor(time_minutes / 60)
 
-            if type(msg) ~= 'string' then
-                msg = serpent.block(msg, {comment = false, nocode = true, sparse = true})
-            end
-
-            if Logger.options.log_ticks then
-                table.insert(Logger.buffer, format('%02d:%02d:%02d.%02d: %s\n', time_hours, time_minutes % 60, time_s % 60, tick - time_s * 60, msg))
+            if Log.options.log_ticks then
+                table.insert(Log.buffer, format('%02d:%02d:%02d.%02d: %s\n', time_hours, time_minutes % 60, time_s % 60, tick - time_s * 60, msg))
             else
-                table.insert(Logger.buffer, format('%02d:%02d:%02d: %s\n', time_hours, time_minutes % 60, time_s % 60, msg))
+                table.insert(Log.buffer, format('%02d:%02d:%02d: %s\n', time_hours, time_minutes % 60, time_s % 60, msg))
             end
 
             -- write the log every minute
-            if (Logger.debug_mode or (tick - Logger.last_written) > 3600) then
-                return Logger.write()
+            if (Log.debug_mode or (tick - Log.last_written) > 3600) then
+                return Log.write()
             end
         else
             if _G.script then --buffer when a save is loaded but _G.game isn't available
-                if Logger.options.log_ticks then
-                    table.insert(Logger.buffer, format('00:00:00:00: %s\n', msg))
+                if Log.options.log_ticks then
+                    table.insert(Log.buffer, format('00:00:00:00: %s\n', msg))
                 else
-                    table.insert(Logger.buffer, format('00:00:00: %s\n', msg))
+                    table.insert(Log.buffer, format('00:00:00: %s\n', msg))
                 end
             else --log in data stage
-                log(format('%s/%s: %s', Logger.mod_name, Logger.log_name, msg))
+                log(format('%s/%s: %s', Log.mod_name, Log.log_name, msg))
+                return true
             end
         end
         return false
@@ -105,18 +131,20 @@ function M.new(mod_name, log_name, debug_mode, options)
 
     --- Writes out all buffered messages immediately.
     -- @treturn boolean true if write was successful, false otherwise
-    function Logger.write()
-        if _G.game then
-            Logger.last_written = game.tick
-            game.write_file(Logger.file_name, table.concat(Logger.buffer), Logger.ever_written)
-            Logger.buffer = {}
-            Logger.ever_written = true
+    function Log.write()
+        if _G.game and table_size(Log.buffer) > 0 then
+            Log.last_written = game.tick
+            game.write_file(Log.file_name, table.concat(Log.buffer), Log.ever_written)
+            Log.buffer = {}
+            Log.ever_written = true
             return true
         end
         return false
     end
 
-    return Logger
+    setmetatable(Log, _Log_mt)
+    Logger._loggers[cache] = Log
+    return Log
 end
 
-return M
+return Logger

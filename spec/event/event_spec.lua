@@ -1,7 +1,7 @@
 require('busted.runner')()
 
 require('__stdlib__/spec/setup/defines')
-require('__stdlib__/stdlib/utils/table').overwrite_global()
+require('__stdlib__/stdlib/utils/table')
 
 local match = require('luassert.match')
 require('__stdlib__/spec/setup/utils/matcher')

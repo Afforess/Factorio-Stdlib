@@ -26,6 +26,7 @@ local _Log_mt = {
 }
 
 local Is = require('__stdlib__/stdlib/utils/is')
+local format = string.format
 
 --- Creates a new logger object.
 -- In debug mode, the logger writes to file immediately, otherwise the logger buffers the lines.
@@ -82,7 +83,6 @@ function Logger.new(mod_name, log_name, debug_mode, options)
         force_append = options.force_append or false
     }
 
-
     Log.file_name = mod_name .. '/' .. log_name .. (log_name:find('%.') and '' or '.' .. Log.options.file_extension)
     Log.ever_written = Log.options.force_append
 
@@ -91,7 +91,6 @@ function Logger.new(mod_name, log_name, debug_mode, options)
     -- @treturn boolean true if the message was written, false if it was queued for a later write
     -- @see https://forums.factorio.com/viewtopic.php?f=25&t=23844 Debugging utilities built in to Factorio
     function Log.log(msg)
-        local format = string.format
 
         if type(msg) ~= 'string' then
             msg = serpent.block(msg, {comment = false, nocode = true, sparse = true})

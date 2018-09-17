@@ -17,8 +17,7 @@ require('__stdlib__/stdlib/utils/string')
 -- Set up default stuff for testing, defines will already be available in an active mod or busted setup specs
 if not _G.defines then
     require('__stdlib__/spec/setup/dataloader')
-    _G.table_size = _G.table_size or require('__stdlib__/stdlib/utils/table').size
-    _G.log = _G.log or function(msg) print(msg) end
+    _G.log = function(msg) print(msg) end
 end
 
 --- Require a file that may not exist

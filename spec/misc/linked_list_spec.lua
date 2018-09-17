@@ -1,7 +1,5 @@
 require('busted.runner')()
 
-require('__stdlib__/spec/setup/defines')
-
 local LinkedList = require('__stdlib__/stdlib/misc/linked_list')
 local World = require('__stdlib__/spec/setup/world')
 
@@ -529,33 +527,65 @@ describe('LinkedList', function()
             assert.are.equal(4, l:length())
         end)
 
+        it('returns the removed node to callers', function()
+            local l = LinkedList:new()
+            local n = l:append('x')
+            assert.are.equal(n, l:remove(1))
+        end)
+
+        it('causes an error if a node is removed more than once', function()
+            local l = LinkedList:new()
+            l:append('x')
+            local n
+            assert.has_no.errors(function()
+                n = l:remove(1)
+            end)
+            assert.has.errors(function()
+                n:remove()
+            end)
+            assert.has.errors(function()
+                n:remove()
+            end)
+            assert.has_no.errors(function()
+                l:validate_integrity()
+            end)
+        end)
+
         it('will not accept non-index-y things as indexes.', function()
             local l = LinkedList:new()
             l:append('one')
             l:append('two')
             l:append('three')
             assert.has_errors(function()
+                -- fraction
                 l:remove(6.3)
             end)
             assert.has_errors(function()
+                 -- zero
                 l:remove(0)
             end)
             assert.has_errors(function()
+                -- fraction 0 < r < 1
                 l:remove(0.5)
             end)
             assert.has_errors(function()
+                -- negative fraction
                 l:remove(-0.5)
             end)
             assert.has_errors(function()
+                -- negative whole number
                 l:remove(-10)
             end)
             assert.has_errors(function()
+                -- function
                 l:remove(function() end)
             end)
             assert.has_errors(function()
+                --table
                 l:remove({})
             end)
             assert.has_errors(function()
+                -- chair (just kidding: string)
                 l:remove('Eames')
             end)
             assert.is_not.Nil(        l.next)
@@ -563,15 +593,140 @@ describe('LinkedList', function()
             assert.is_not.Nil(        l.prev)
             assert.are.equal('three', l.prev.item)
         end)
+
+        it('Does not affect an ongoing node iteration if the node removed \z
+            has already been returned by the iterator', function()
+            local l = LinkedList:new()
+            l:append(1)
+            l:append(2)
+            l:append(3)
+            l:append(4)
+            l:append(5)
+            local iterated_items = {}
+            for n in l:nodes() do
+                table.insert(iterated_items, n.item)
+                -- since we removed all the nodes before it, the current node
+                -- should be the first one.
+                l:remove(1)
+            end
+            assert.are.equal(0, l:length())
+            assert.are.same({1, 2, 3, 4, 5}, iterated_items)
+        end)
+
+        it('Will cause an ongoing iteration to select the next non-removed \z
+            item even if multiple items, including the current item, are \z
+            removed.', function()
+            -- nb this is a potentially problematic test because once we remove
+            -- the current node, it still points to the next node.  Therefore,
+            -- if we immediately remove the next node (now the first), as well,
+            -- a naive iterator implementation might visit it next despite its
+            -- prior removal.
+            --
+            -- In this test we remove the first node of the list twice per
+            -- iteration; the expected behavior is to visit node one, remove
+            -- nodes one and two, visit node three, remove nodes three and
+            -- four, to visit node five, and, finally, to remove nodes
+            -- five and six.
+            local l = LinkedList:new()
+            l:append(1)
+            l:append(2)
+            l:append(3)
+            l:append(4)
+            l:append(5)
+            l:append(6)
+            local iterated_items = {}
+            for n in l:nodes() do
+                table.insert(iterated_items, n.item)
+                l:remove(1)
+                l:remove(1)
+            end
+            assert.are.equal(0, l:length())
+            assert.are.same({1, 3, 5}, iterated_items)
+
+            -- In this test we remove the first node of the list three times
+            -- per iteration; the expected behavior is to visit node one, remove
+            -- nodes one, two, and three, visit node four, and finally, remove
+            -- nodes four, five and six.
+            l = LinkedList:new()
+            l:append(1)
+            l:append(2)
+            l:append(3)
+            l:append(4)
+            l:append(5)
+            l:append(6)
+            iterated_items = {}
+            for n in l:nodes() do
+                table.insert(iterated_items, n.item)
+                l:remove(1)
+                l:remove(1)
+                l:remove(1)
+            end
+            assert.are.equal(0, l:length())
+            assert.are.same({1, 4}, iterated_items)
+        end)
+    end)
+
+    describe('.clear', function()
+        it('clears the list of all nodes', function()
+            local l = LinkedList.new()
+            l:append('a')
+            l:append(2)
+            l:append({})
+            l:append(nil)
+            l:append(LinkedList)
+            assert.are.equal(5, l:length())
+
+            l:clear()
+            assert.are.equal(0, l:length())
+        end)
+
+        it('causes all ongoing iterators to terminate as soon as the next item is requested.', function()
+            local l = LinkedList.new()
+            l:append(1)
+            l:append(2)
+            l:append(3)
+            l:append(4)
+            l:append(5)
+            l:append(6)
+            l:append(7)
+            l:append(8)
+            l:append(9)
+            for node in l:nodes() do
+                if node.item == 7 then
+                    for item in l:items() do
+                        if item == 3 then
+                            for index in ipairs(l) do
+                                if index == 5 then
+                                    l:clear()
+                                end
+                                -- we should never reach the sixth item
+                                assert.is_true(index < 6)
+                            end
+                        end
+                        -- we should never reach the fourth item
+                        assert.is_true(item < 4)
+                    end
+                end
+                -- we should never reach the eighth item
+                assert.is_true(node.item < 8)
+            end
+            -- make sure we actually emptied out the list
+            assert.are.equal(0, l:length())
+        end)
     end)
 
     describe('.copy', function()
-        it('copies stuff', function()
+        it('copies the list structure but does not copy the items', function()
             local l1 = LinkedList:new()
-            l1:append('one')
-            l1:append('two')
-            l1:append('three')
-            l1:append('four')
+            local i1 = {}
+            local i2 = {}
+            local i4 = {}
+            local i5 = {}
+            l1:append(i1)
+            l1:append(i2)
+            l1:append(nil)
+            l1:append(i4)
+            l1:append(i5)
             local l2 = l1:copy()
 
             assert.is_not_equal(l1, l2)
@@ -582,25 +737,167 @@ describe('LinkedList', function()
             assert.has_no.errors(function()
                 l2:validate_integrity()
             end)
-            assert.is_not.Nil(        l2.next)
-            assert.are.equal('one',   l2.next.item)
-            assert.is_not.Nil(        l2.next.next)
-            assert.are.equal('two',   l2.next.next.item)
-            assert.is_not.Nil(        l2.next.next.next)
-            assert.are.equal('three', l2.next.next.next.item)
-            assert.is_not.Nil(        l2.next.next.next.next)
-            assert.are.equal('four',  l2.next.next.next.next.item)
+            assert.is_not.Nil(   l2.next)
+            assert.are.equal(i1, l2.next.item)
+            assert.is_not.Nil(   l2.next.next)
+            assert.are.equal(i2, l2.next.next.item)
+            assert.is_not.Nil(   l2.next.next.next)
+            assert.is.Nil(       l2.next.next.next.item)
+            assert.is_not.Nil(   l2.next.next.next.next)
+            assert.are.equal(i4, l2.next.next.next.next.item)
+            assert.is_not.Nil(   l2.next.next.next.next.next)
+            assert.are.equal(i5, l2.next.next.next.next.next.item)
         end)
+    end)
 
-        it('does not create deep copies', function()
-            local l1 = LinkedList:new()
-            l1:append({'foo', 'bar'})
+    describe('.deepcopy', function()
+        it('copies the list structure, deeply copying each item', function()
+            local generated_stack = {}
+            local function generate_item()
+                -- take the most recently generated item as the "contents";
+                -- this way, the items are like russian dolls, providing
+                -- a reasonably challenging workout for flexcopy.
+                local result={contents=generated_stack[#generated_stack]}
+                table.insert(generated_stack, result)
+                return result
+            end
+            generate_item()
+            generate_item()
+            generate_item()
+            generate_item()
+            generate_item()
+
+            -- The first item should be {}; lets call that "A".
+            -- The second item should be {contents=A}; let's call
+            -- that "B".  The third item should be {contents=B}
+            -- So, the third item, in full should look like:
+            -- {contents={contents={contents={}}}}
+            --
+            -- When converted to a linked list...
+            --
+            -- first==l.next=={}
+            -- first.next=={contents=first}
+            -- first.next.next=={contents=first.next}
+            -- and so on...
+            --
+            -- The following simply sanity checks that our generate_item
+            -- works as intended and does not really test linkedlist at all.
+            assert.are.same({}, generated_stack[1])
+            assert.are.same({contents={}}, generated_stack[2])
+            assert.are.same({contents={contents={}}}, generated_stack[3])
+            assert.are.equal(generated_stack[1], generated_stack[2].contents)
+            assert.are.equal(generated_stack[2], generated_stack[3].contents)
+            assert.are.equal(generated_stack[3], generated_stack[4].contents)
+            assert.are.equal(generated_stack[4], generated_stack[5].contents)
+            assert.are.equal(5, #generated_stack)
+
+            local l1 = LinkedList:from_stack(generated_stack)
+            -- more sanity checking
+            assert.are.equal(generated_stack[1], l1[1])
+            assert.are.equal(generated_stack[2], l1[2])
+            assert.are.equal(generated_stack[3], l1[3])
+            assert.are.equal(generated_stack[4], l1[4])
+            assert.are.equal(generated_stack[5], l1[5])
+
+            -- Now we test the actual deepcopy
+            local l2 = l1:deepcopy()
+            assert.is_not.Nil(l2[1])
+            assert.is_not.Nil(l2[2])
+            assert.is_not.Nil(l2[3])
+            assert.is_not.Nil(l2[4])
+            assert.is_not.Nil(l2[5])
+            assert.are.equal(5, #l2)
+
+            -- items should be copied faithfully but not equal
+            assert.are.same(l1[1], l2[1])
+            assert.are_not.equal(l1[1], l2[1])
+            assert.are.same(l1[2], l2[2])
+            assert.are_not.equal(l1[2], l2[2])
+            assert.are.same(l1[3], l2[3])
+            assert.are_not.equal(l1[3], l2[3])
+            assert.are.same(l1[4], l2[4])
+            assert.are_not.equal(l1[4], l2[4])
+            assert.are.same(l1[5], l2[5])
+            assert.are_not.equal(l1[5], l2[5])
+
+            -- internal self-references should be preserved
+            assert.are.equal(l2[1], l2[2].contents)
+            assert.are.equal(l2[2], l2[3].contents)
+            assert.are.equal(l2[3], l2[4].contents)
+            assert.are.equal(l2[4], l2[5].contents)
+        end)
+    end)
+
+    describe('.copy', function()
+        it('copies the list structure, deeply copying each item', function()
+            local generated_stack = {}
+            local function generate_item()
+                -- take the most recently generated item as the "contents";
+                -- this way, the items are like russian dolls, providing
+                -- a reasonably challenging workout for flexcopy.
+                local result={contents=generated_stack[#generated_stack]}
+                table.insert(generated_stack, result)
+                return result
+            end
+            generate_item()
+            generate_item()
+            generate_item()
+            generate_item()
+            generate_item()
+
+            -- The first item should be {}; lets call that "A".
+            -- The second item should be {contents=A}; let's call
+            -- that "B".  The third item should be {contents=B}
+            -- So, the third item, in full should look like:
+            -- {contents={contents={contents={}}}}
+            --
+            -- When converted to a linked list...
+            --
+            -- first==l.next=={}
+            -- first.next=={contents=first}
+            -- first.next.next=={contents=first.next}
+            -- and so on...
+            --
+            -- The following simply sanity checks that our generate_item
+            -- works as intended and does not really test linkedlist at all.
+            assert.are.same({}, generated_stack[1])
+            assert.are.same({contents={}}, generated_stack[2])
+            assert.are.same({contents={contents={}}}, generated_stack[3])
+            assert.are.equal(generated_stack[1], generated_stack[2].contents)
+            assert.are.equal(generated_stack[2], generated_stack[3].contents)
+            assert.are.equal(generated_stack[3], generated_stack[4].contents)
+            assert.are.equal(generated_stack[4], generated_stack[5].contents)
+            assert.are.equal(5, #generated_stack)
+
+            local l1 = LinkedList:from_stack(generated_stack)
+            -- more sanity checking
+            assert.are.equal(generated_stack[1], l1[1])
+            assert.are.equal(generated_stack[2], l1[2])
+            assert.are.equal(generated_stack[3], l1[3])
+            assert.are.equal(generated_stack[4], l1[4])
+            assert.are.equal(generated_stack[5], l1[5])
+
+            -- Now we test the actual copy
             local l2 = l1:copy()
+            assert.is_not.Nil(l2[1])
+            assert.is_not.Nil(l2[2])
+            assert.is_not.Nil(l2[3])
+            assert.is_not.Nil(l2[4])
+            assert.is_not.Nil(l2[5])
+            assert.are.equal(5, #l2)
 
-            assert.is_not_equal(l1, l2)
-            assert.is_not.Nil(l1.next)
-            assert.is_not.Nil(l2.next)
-            assert.are.equal(l1.next.item, l2.next.item)
+            -- items should be equal
+            assert.are.equal(l1[1], l2[1])
+            assert.are.equal(l1[2], l2[2])
+            assert.are.equal(l1[3], l2[3])
+            assert.are.equal(l1[4], l2[4])
+            assert.are.equal(l1[5], l2[5])
+
+            -- internal self-references should be preserved
+            assert.are.equal(l2[1], l2[2].contents)
+            assert.are.equal(l2[2], l2[3].contents)
+            assert.are.equal(l2[3], l2[4].contents)
+            assert.are.equal(l2[4], l2[5].contents)
         end)
     end)
 
@@ -1045,6 +1342,111 @@ describe('LinkedList', function()
         end)
     end)
 
+    describe('.ipairs', function()
+        it('works much like the standard lua ipairs function', function()
+            local l = LinkedList:new()
+            l:append(false)
+            local firstnode = l:append('bar')
+            l:append('baz')
+            l[5] = 6
+            local lastnode = l:last_node()
+
+            l.quux = 'zzyzx'
+            l[0] = 'zilch'
+            l[-1.333] = 0
+
+            local dummy = {}
+            local remaining_keys = {
+                [-1.333] = 0,
+                [0] = 'zilch',
+                [1] = false,
+                [2] = 'bar',
+                [3] = 'baz',
+                [4] = dummy,
+                [5] = 6,
+                _class = LinkedList,
+                quux = 'zzyzx',
+                next = firstnode,
+                prev = lastnode
+            }
+
+            for k, v in l:ipairs() do
+                -- here, unlike in the pairs() test, we expect a precise set of keys
+                -- to be provided (the keys should be 1, 2, 3, and 5 only).  So we do
+                -- fail if the key is not in remaining_keys as it contains all the
+                -- key values ipairs() should enumerate.
+                assert.is.Not.Nil(remaining_keys[k])
+                assert.are.equal(remaining_keys[k], v)
+                remaining_keys[k] = nil
+            end
+
+            -- we should have identified and hence removed only the psuedo-stack keys,
+            -- specifically, these are 1, 2, 3, and 5.
+            assert.are.same({
+                [-1.333] = 0,
+                [0] = 'zilch',
+                [4] = dummy,
+                _class = LinkedList,
+                quux = 'zzyzx',
+                next = firstnode,
+                prev = lastnode
+            }, remaining_keys)
+        end)
+
+        it('skips nil items and keeps iterating', function()
+            -- regular ipairs terminates iteration upon encountering a nil.
+            -- LinkedList:ipairs() does not.
+            local l = LinkedList:from_stack {1, 2, 3, 4, 5}
+            assert.is.Not.Nil(l.next)
+            assert.is.Not.Nil(l.next.next)
+            l.next.next.item = nil
+
+            local iterated_items = {}
+            for k,v in l:ipairs() do
+                iterated_items[k] = v
+            end
+            assert.are.same({1, [3] = 3, [4] = 4, [5] = 5}, iterated_items)
+        end)
+
+        it('can nest iterations of a static list', function()
+            local l = LinkedList:from_stack {1, 2, 3, 4, 5}
+            local visited_items = {}
+
+            -- iterates until it reaches the node with index "depth", adding
+            -- each visited item to visited_items.  Before processing the node
+            -- with depth index, recursively invokes itself with depth = depth + 1
+            -- (unless depth is 5, at which point it stops recursing).
+            -- Should visit no more than 25 nodes.  Note that although we are
+            -- testing ipairs(), all the LinkedList iterators use the same
+            -- underlying iterator so this tests them all.
+
+            local total_iterations = 0
+            local function recursive_iterator(depth)
+                for index, value in l:ipairs() do
+                    total_iterations = total_iterations + 1
+                    assert.is.True(25 >= total_iterations)
+                    table.insert(visited_items, value)
+                    if depth < 5 and depth == value then
+                        recursive_iterator(depth + 1)
+                    end
+                end
+            end
+            recursive_iterator(1)
+
+            assert.are.same({
+                1,
+                1, 2,
+                1, 2, 3,
+                1, 2, 3, 4,
+                1, 2, 3, 4, 5,
+                            5,
+                         4, 5,
+                      3, 4, 5,
+                   2, 3, 4, 5
+            }, visited_items)
+        end)
+    end)
+
     describe('.items', function()
         it('returns an iterator which traverses the items in the list, \z
             skipping any nil items.', function()
@@ -1403,7 +1805,10 @@ describe('LinkedList', function()
             assert.are.same({'foo', 'bar', 'baz'}, remaining_keys)
         end)
 
-        it('Maps ipairs to virtualized LinkedList:ipairs()', function()
+        it('Maps ipairs to LinkedList:ipairs()', function()
+            -- nb: pretty hard to test this fact without peering into the
+            -- black boxes.  So we simply repeat the exact same test that is
+            -- used for :ipairs() here.
             local l = LinkedList:new()
             l:append(false)
             local firstnode = l:append('bar')
@@ -1451,6 +1856,153 @@ describe('LinkedList', function()
                 next = firstnode,
                 prev = lastnode
             }, remaining_keys)
+        end)
+    end)
+end)
+
+describe('LinkedListNode', function()
+    it('is the _node_class of LinkedList', function()
+        assert.are.equal('LinkedListNode', LinkedList._node_class._class_name)
+    end)
+
+    describe('.remove', function()
+        it('Removes the given node from the list that contians it', function()
+            local l1 = LinkedList:from_stack {'a', 'b', 'c', 'd'}
+            local l2 = LinkedList:from_stack {'a', 'b', 'c', 'd'}
+            assert.is.Not.Nil(l2.next)
+            assert.is.Not.Nil(l2.next.next)
+
+            l1:remove(2)
+            l2.next.next:remove()
+
+            local s1 = l1:to_stack()
+            local s2 = l2:to_stack()
+            assert.are.same(s1, s2)
+        end)
+
+        it('Returns the removed node to callers', function()
+            local l = LinkedList:new()
+            local n = l:append('x')
+            assert.are.equal(n, n:remove())
+        end)
+
+        it('causes an error to remove a node more than once', function()
+            local l = LinkedList:new()
+            local n = l:append('x')
+            assert.has_no.errors(function()
+                n:remove()
+            end)
+            assert.has.errors(function()
+                n:remove()
+            end)
+            assert.has.errors(function()
+                n:remove()
+            end)
+            assert.has_no.errors(function()
+                l:validate_integrity()
+            end)
+        end)
+
+        it('Does not affect an ongoing node iteration if the node removed \z
+            has already been returned by the iterator', function()
+            local l = LinkedList:new()
+            l:append(1)
+            l:append(2)
+            l:append(3)
+            l:append(4)
+            l:append(5)
+            local iterated_items = {}
+            for n in l:nodes() do
+                table.insert(iterated_items, n.item)
+                -- since we removed all the nodes before it, the current node
+                -- should be the first one.
+                n:remove()
+            end
+            assert.are.equal(0, l:length())
+            assert.are.same({1, 2, 3, 4, 5}, iterated_items)
+        end)
+
+        it('Does not affect an ongoing node iteration if the node removed \z
+            has already been returned by the iterator', function()
+            local l = LinkedList:new()
+            l:append(1)
+            l:append(2)
+            l:append(3)
+            l:append(4)
+            l:append(5)
+            local iterated_items = {}
+            for n in l:nodes() do
+                table.insert(iterated_items, n.item)
+                -- this makes sense because, having removed all the nodes
+                -- before it, the current -- node will always be the first one.
+                n:remove()
+            end
+            assert.are.equal(0, l:length())
+            assert.are.same({1, 2, 3, 4, 5}, iterated_items)
+        end)
+
+        it('Will cause an ongoing iteration to select the next non-removed \z
+            item even if multiple items, including the current item, are \z
+            removed.', function()
+            -- nb this is a potentially problematic test because once we remove
+            -- the current node, it still points to the next node.  Therefore,
+            -- if we immediately remove the next node (now the first), as well,
+            -- a naive iterator implementation might visit it next despite its
+            -- prior removal.
+            --
+            -- In this test we remove the first node of the list twice per
+            -- iteration; the expected behavior is to visit node one, remove
+            -- nodes one and two, visit node three, remove nodes three and
+            -- four, to visit node five, and, finally, to remove nodes
+            -- five and six.
+            local l = LinkedList:new()
+            l:append(1)
+            l:append(2)
+            l:append(3)
+            l:append(4)
+            l:append(5)
+            l:append(6)
+            local iterated_items = {}
+            for n in l:nodes() do
+                table.insert(iterated_items, n.item)
+                local nextnode = n.next
+                -- ensure we didn't reach the end of the list or something.
+                assert.is.Not.Nil(nextnode)
+                assert.are.equal('LinkedListNode', nextnode._class_name)
+                n:remove()
+                nextnode:remove()
+            end
+            assert.are.equal(0, l:length())
+            assert.are.same({1, 3, 5}, iterated_items)
+
+            -- In this test we remove the first node of the list three times
+            -- per iteration; the expected behavior is to visit node one, remove
+            -- nodes one, two, and three, visit node four, and finally, remove
+            -- nodes four, five and six.
+            l = LinkedList:new()
+            l:append(1)
+            l:append(2)
+            l:append(3)
+            l:append(4)
+            l:append(5)
+            l:append(6)
+            iterated_items = {}
+            for n in l:nodes() do
+                table.insert(iterated_items, n.item)
+                local nextnode = n.next
+                -- ensure we didn't reach the end of the list or something.
+                assert.is.Not.Nil(nextnode)
+                assert.are.equal('LinkedListNode', nextnode._class_name)
+                local nextnextnode = nextnode.next
+                -- ensure we didn't reach the end of the list or something.
+                assert.is.Not.Nil(nextnextnode)
+                assert.are.equal('LinkedListNode', nextnextnode._class_name)
+                n:remove()
+                nextnode:remove()
+                nextnextnode:remove()
+            end
+            assert.are.equal(0, l:length())
+            assert.are.same({1, 4}, iterated_items)
         end)
     end)
 end)

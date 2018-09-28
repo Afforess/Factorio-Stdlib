@@ -1,6 +1,8 @@
 --- Additional lua globals
 -- @module globals
 
+local STDLIB = require('__stdlib__/stdlib/config')
+
 --Since debug can be overridden we define a fallback function here.
 local _traceback = function()
     return ''
@@ -16,7 +18,11 @@ require('__stdlib__/stdlib/utils/string')
 
 -- Set up default stuff for testing, defines will already be available in an active mod or busted setup specs
 if not _G.defines then
-    require('__stdlib__/spec/setup/dataloader')
+    if STDLIB.control then
+        require('__stdlib__/spec/setup/world').bootstrap()
+    else
+        require('__stdlib__/spec/setup/dataloader')
+    end
     _G.log = function(msg) print(msg) end
 end
 

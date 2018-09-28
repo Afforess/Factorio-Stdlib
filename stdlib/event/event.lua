@@ -239,29 +239,38 @@ function Event.remove(event_id, handler, matcher, pattern)
     return Event
 end
 
--- A dispatch helper function
---
--- Call any matcher and, as applicable, the event handler, in protected mode.  Errors are
--- caught and logged to stdout but event processing proceeds thereafter; errors are suppressed.
-local function run_protected(event, registered)
-    local success, err
 
+-- Used to replace pcall in un-protected events.
+local function pcall_noop(handler, event, other)
+    return true, handler(event, other)
+end
+
+-- A dispatch helper function
+-- Call any matcher and as applicable the event handler.
+-- When protected errors are logged to game console if game is available, otherwise a real error
+-- is thrown.
+local function dispatch_event(event, registered, protected)
+    local success, match_result, handler_result
+    local pcall = protected and pcall or pcall_noop
+
+    -- If we have a matcher run it first passing event, and registered.pattern as parameters
+    -- If the matcher returns truthy call the handler passing event, and the result from the matcher
     if registered.matcher then
-        success, err = pcall(registered.matcher, event, registered.pattern)
-        if success and err then
-            success, err = pcall(registered.handler, event)
+        success, match_result = pcall(registered.matcher, event, registered.pattern)
+        if success and match_result then
+            success, handler_result = pcall(registered.handler, event, match_result)
         end
     else
-        success, err = pcall(registered.handler, event)
+        success, handler_result = pcall(registered.handler, event)
     end
 
     -- If the handler errors lets make sure someone notices
-    if not success and not Event.log_and_print(err) then
+    if not success and not Event.log_and_print(handler_result or match_result) then
         -- no players received the message, force a real error so someone notices
-        error(err)
+        error(handler_result or match_result)
     end
 
-    return success and err or nil
+    return success and handler_result or nil
 end
 
 --- The user should create a table in this format, for a table that will be passed into @{Event.dispatch}.
@@ -300,10 +309,6 @@ function Event.dispatch(event)
     end
 
     if registry then
-        -- protected_mode runs the handler and matcher in pcall,
-        -- additionaly forcing a crc or inspect can only be
-        -- accomplished in protected_mode
-        local protected = Event.protected_mode or event.protected_mode
 
         --add the tick if it is not present, this only affects calling Event.dispatch manually
         --doing the check up here as it will faster than checking every iteration for a constant value
@@ -321,29 +326,14 @@ function Event.dispatch(event)
             end
 
             if (Event.inspect_event or event.inspect_event) and game then
-                if not Event.inspect_append then
-                    game.remove_path(Event.get_file_path('events/'))
-                    Event.inspect_append = true
-                end
                 local result = inspect(event) .. '\n'
-                game.write_file(Event.get_file_path('events/' .. get_event_name(event.input_name or event.name) .. '.lua'), result, true)
-                game.write_file(Event.get_file_path('events/ordered.lua'), result , true)
+                game.write_file(Event.get_file_path('events/' .. get_event_name(event.input_name or event.name) .. '.lua'), result, Event.inspect_append)
+                game.write_file(Event.get_file_path('events/ordered.lua'), result , Event.inspect_append)
+                Event.inspect_append = true
             end
 
-            if protected then
-                if run_protected(event, registered) == Event.stop_processing then
-                    return
-                end
-            elseif registered.matcher then
-                if registered.matcher(event, registered.pattern) then
-                    if registered.handler(event) == Event.stop_processing then
-                        return
-                    end
-                end
-            else
-                if registered.handler(event) == Event.stop_processing then
-                    return
-                end
+            if dispatch_event(event, registered, Event.protected_mode or event.protected_mode) == Event.stop_processing then
+                return
             end
 
             -- force a crc check if option is enabled. This is a debug option and will hamper performance if enabled

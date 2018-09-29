@@ -196,7 +196,7 @@ function Data:copy(new_name, mining_result, opts)
 
         -- rail planners
         if copy.placeable_by and copy.placeable_by.item then
-            copy.placeable_by.item = new_name
+            copy.placeable_by.item = mining_result
         end
 
         return self(copy, nil, opts or self.options)

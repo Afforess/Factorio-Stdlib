@@ -55,6 +55,12 @@ function World.bootstrap()
     -- TODO: _G.data = something
     _G.global = {} -- TODO: check if should be nil
 
+    _G.remote = {
+        interfaces = {},
+        call = function() end,
+        add_interface = function() end
+    }
+
     local in_event_handler = 0 -- track event callback recursion (a psuedosemaphore)
     local registry = {}
     local next_id = 200
@@ -256,11 +262,6 @@ function World.init(multiplayer, savetable, config_changed_data)
                 end
             }
     )
-    _G.remote = {
-        interfaces = {},
-        call = function()
-        end
-    }
 
     --run a fake data loader here to populate game.xxx_prototypes
     for _, force in pairs(game.forces) do

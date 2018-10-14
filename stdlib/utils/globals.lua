@@ -18,8 +18,11 @@ require('__stdlib__/stdlib/utils/string')
 
 -- Set up default stuff for testing, defines will already be available in an active mod or busted setup specs
 if not _G.defines then
-    if STDLIB.control then
-        require('__stdlib__/spec/setup/world').bootstrap()
+    if STDLIB.control or STDLIB.game then
+        local world = require('__stdlib__/spec/setup/world').bootstrap()
+        if STDLIB.game then
+            world.init()
+        end
     else
         require('__stdlib__/spec/setup/dataloader')
     end

@@ -4,17 +4,18 @@
 -- @usage
 -- local Player = require('__stdlib__/stdlib/event/player').register_events()
 -- -- The fist time this is required it will register player creation events
-
 local Event = require('__stdlib__/stdlib/event/event')
 
 local Player = {
-    _module = 'Player'
+    _module = 'Player',
+    _new_player_data = {}
 }
 setmetatable(Player, require('__stdlib__/stdlib/core'))
 
 local Is = require('__stdlib__/stdlib/utils/is')
 local Game = require('__stdlib__/stdlib/game')
 local table = require('__stdlib__/stdlib/utils/table')
+local merge_additional_data = require('__stdlib__/stdlib/event/modules/merge_data')
 
 -- Return new default player object consiting of index, name, force
 local function new(player_index)
@@ -23,26 +24,16 @@ local function new(player_index)
         name = game.players[player_index].name,
         force = game.players[player_index].force.name
     }
-    if Player._new_player_data then
-        if type(Player._new_player_data) == 'table' then
-            table.merge(pdata, table.deepcopy(Player._new_player_data))
-        elseif type(Player._new_player_data) == 'function' then
-            local new_data = Player._new_player_data(player_index)
-            if type(new_data) == 'table' then
-                table.merge(pdata, new_data)
-            else
-                error('new_player_data did not return a table')
-            end
-        else
-            error('new_player_data present but is not a function or table')
-        end
-    end
+
+    merge_additional_data(Player._new_player_data, pdata)
     return pdata
 end
 
--- TODO This should add into a table with a getter function to add everything correctly
-function Player.additional_data(func_or_table)
-    Player._new_player_data = func_or_table
+function Player.additional_data(...)
+    for _, func_or_table in pairs({...}) do
+        Is.Assert(Is.Table(func_or_table) or Is.Function(func_or_table), 'Must be table or function')
+        Player._new_player_data[#Player._new_player_data + 1] = func_or_table
+    end
     return Player
 end
 
@@ -76,10 +67,7 @@ end
 --- Remove data for a player when they are deleted.
 -- @tparam table event event table containing the `player_index`
 function Player.remove(event)
-    local player = Game.get_player(event)
-    if player then
-        global.players[player.index] = nil
-    end
+    global.players[event.player_index] = nil
 end
 
 --- Init or re-init a player or players.

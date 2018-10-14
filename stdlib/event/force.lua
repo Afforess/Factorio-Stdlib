@@ -10,13 +10,15 @@
 local Event = require('__stdlib__/stdlib/event/event')
 
 local Force = {
-    _module = 'Force'
+    _module = 'Force',
+    _new_force_data = {}
 }
 setmetatable(Force, require('__stdlib__/stdlib/core'))
 
 local Is = require('__stdlib__/stdlib/utils/is')
 local Game = require('__stdlib__/stdlib/game')
 local table = require('__stdlib__/stdlib/utils/table')
+local merge_additional_data = require('__stdlib__/stdlib/event/modules/merge_data')
 
 -- return new default force object
 local function new(force_name)
@@ -24,26 +26,17 @@ local function new(force_name)
         index = force_name,
         name = force_name
     }
-    if Force._new_force_data then
-        if type(Force._new_force_data) == 'table' then
-            table.merge(fdata, table.deepcopy(Force._new_force_data))
-        elseif type(Force._new_force_data) == 'function' then
-            local new_data = Force._new_force_data(force_name)
-            if type(new_data) == 'table' then
-                table.merge(fdata, new_data)
-            else
-                error('new_player_data did not return a table')
-            end
-        else
-            error('new_player_data present but is not a function or table')
-        end
-    end
+
+    merge_additional_data(Force._new_force_data, fdata)
 
     return fdata
 end
 
-function Force.additional_data(func_or_table)
-    Force._new_force_data = func_or_table
+function Force.additional_data(...)
+    for _, func_or_table in pairs({...}) do
+        Is.Assert(Is.Table(func_or_table) or Is.Function(func_or_table), 'Must be table or function')
+        Force._new_force_data[#Force._new_force_data + 1] = func_or_table
+    end
     return Force
 end
 
@@ -105,8 +98,9 @@ function Force.dump_data()
     game.write_file(Force.get_file_path('Force/global.lua'), inspect(global.players or nil, {longkeys = true, arraykeys = true}))
 end
 
--- TODO Figure out best way to handle this!
-function Force.merge()
+-- When forces are merged, just remove the original forces data
+function Force.merged(event)
+    global.forces[event.source_name] = nil
 end
 
 function Force.register_init()
@@ -116,7 +110,7 @@ end
 
 function Force.register_events(do_on_init)
     Event.register(defines.events.on_force_created, Force.init)
-    Event.register(defines.events.on_forces_merging, Force.merge)
+    Event.register(defines.events.on_forces_merged, Force.merged)
     if do_on_init then
         Force.register_init()
     end

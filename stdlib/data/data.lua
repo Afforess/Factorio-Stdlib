@@ -28,29 +28,22 @@ local Data = {
     __index = Core
 }
 setmetatable(Data, Data)
+ --))
 
--- load the data portion of stdlib into globals, by default it loads everything into an ALLCAPS name.
--- Alternatively you can pass a dictionary of `[global names] -> [require path]`.
--- @tparam[opt] table files
--- @treturn Data
--- @usage
--- require('__stdlib__/stdlib/data/data).create_data_globals()
-function Data.create_data_globals(files)
-    files =
-        files or
-        {
-            RECIPE = 'stdlib/data/recipe',
-            ITEM = 'stdlib/data/item',
-            FLUID = 'stdlib/data/fluid',
-            ENTITY = 'stdlib/data/entity',
-            TECHNOLOGY = 'stdlib/data/technology',
-            CATEGORY = 'stdlib/data/category',
-            DATA = 'stdlib/data/data'
-        }
-    Data.create_stdlib_globals(files)
+--(( Local Functions ))--
 
-    return Data
-end --))
+-- This is the tracing function.
+local function log_trace(self, object, object_type)
+    local trace = traceback()
+    local msg = (self._class and self._class or '') .. (self.name and '/' .. self.name or '') .. ' '
+    msg = msg .. (object_type and (object_type .. '/') or '') .. tostring(object) .. ' does not exist.'
+
+    trace = trace:gsub('stack traceback:\nz', ''):gsub('.*%(%.%.%.tail calls%.%.%.%)\n', ''):gsub(' in main chunk.*$', '')
+    trace = trace:gsub('%_%_.*%_%_%/stdlib/data.*\n', ''):gsub('\n', '->'):gsub('\t', '')
+    trace = msg .. '  [' .. trace .. ']'
+    log(trace)
+end
+--)) END Local Functions ((--
 
 --(( METHODS ))--
 
@@ -87,14 +80,14 @@ function Data:log(tbl)
         -- if item == self.class then
         --     return {item._class, self._class}
         -- end
-        if item == Data._object_mt then
+        if item == self._object_mt then
             return {self._class, tostring(self)}
         end
         if path[#path] == 'parent' then
-            return {item._class, tostring(item)}
+            return {tostring(item), item._class}
         end
         if path[#path] == 'class' then
-            return {item._class, self._class}
+            return {self._class, item._class}
         end
         if path[#path] == Inspect.METATABLE then
             return {self._class or item._class, item._class}
@@ -456,6 +449,8 @@ function Data:get(object, object_type, opts)
     local new = {
         class = self.class or self,
         _raw = nil,
+        _products = nil,
+        _parent = nil,
         valid = false,
         extended = false,
         overwrite = false,
@@ -490,35 +485,36 @@ function Data:get(object, object_type, opts)
 
     setmetatable(new, self._object_mt)
     if new.valid then
+        rawset(new, '_parent', new)
         new:set_string_array('flags')
         new:set_string_array('crafting_categories')
         new:set_string_array('mining_categories')
     else
-        local trace = traceback()
-        local msg = (self._class and self._class or '') .. (self.name and '/' .. self.name or '') .. ' '
-        msg = msg .. (object_type and (object_type .. '/') or '') .. tostring(object) .. ' does not exist.'
-
-        trace = trace:gsub('stack traceback:\nz', ''):gsub('.*%(%.%.%.tail calls%.%.%.%)\n', ''):gsub(' in main chunk.*$', '')
-        trace = trace:gsub('%_%_.*%_%_%/stdlib/data.*\n', ''):gsub('\n', '->'):gsub('\t', '')
-        trace = msg .. '  [' .. trace .. ']'
-        log(trace)
+        log_trace(self, object, object_type)
     end
     return new:extend()
 end
 Data.__call = Data.get
+--)) END Methods ((--
 
+-- This is the table set on new objects
 Data._object_mt = {
+    --_class = "Data",
+    -- index from _raw if that is not available then retrieve from the class
     __index = function(t, k)
         return rawget(t, '_raw') and t._raw[k] or t.class[k]
     end,
+    -- Only allow setting on valid _raw tables.
     __newindex = function(t, k, v)
         if rawget(t, 'valid') and rawget(t, '_raw') then
             t._raw[k] = v
         end
     end,
+    -- Call the getter on itself
     __call = function(t, ...)
         return t:__call(...)
     end,
+    -- use Core.tostring
     __tostring = Data.tostring
 }
 

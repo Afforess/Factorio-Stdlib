@@ -55,4 +55,25 @@ function Util.duplicate(data_type, orig_name, new_name, mining_result)
     end
 end
 
+-- load the data portion of stdlib into globals, by default it loads everything into an ALLCAPS name.
+-- Alternatively you can pass a dictionary of `[global names] -> [require path]`.
+-- @tparam[opt] table files
+-- @treturn Data
+-- @usage
+-- require('__stdlib__/stdlib/data/data).create_data_globals()
+function Util.create_data_globals(files)
+    files =
+        files or
+        {
+            RECIPE = 'stdlib/data/recipe',
+            ITEM = 'stdlib/data/item',
+            FLUID = 'stdlib/data/fluid',
+            ENTITY = 'stdlib/data/entity',
+            TECHNOLOGY = 'stdlib/data/technology',
+            CATEGORY = 'stdlib/data/category',
+            DATA = 'stdlib/data/data'
+        }
+    Util.create_stdlib_globals(files)
+end
+
 return Util

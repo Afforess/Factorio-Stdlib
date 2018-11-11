@@ -1,8 +1,8 @@
 --- Tools for working with `<x,y>` coordinates.
 -- The tables passed into the Position functions are mutated in-place.
--- @module Position
+-- @module Area.Position
 -- @usage local Position = require('__stdlib__/stdlib/area/position')
--- @see Area
+-- @see Area.Area
 -- @see Concepts.Position
 -- @see defines.direction
 
@@ -151,7 +151,7 @@ function Position.divide(pos1, pos2)
     return pos1
 end
 
---- The middle of two positions
+--- The middle of two positions.
 -- @tparam Concepts.Position pos1 the first position
 -- @tparam Concepts.Position pos2 the second position
 -- @treturn Concepts.Position pos1 with pos2 subtracted
@@ -162,7 +162,7 @@ function Position.between(pos1, pos2)
     return pos1
 end
 
---- Flip the signs of the position
+--- Flip the signs of the position.
 -- @tparam Concepts.Position pos
 -- @return Concenpts.position with flipped signs
 function Position.unary(pos)
@@ -187,10 +187,10 @@ function Position.offset(pos, x, y)
     return pos
 end
 
---- Returns the position along line between source and target, at the distance from target
+--- Returns the position along line between source and target, at the distance from target.
 -- @tparam Concepts.Position pos1 where the line starts and extends from.
 -- @tparam Concepts.Position pos2 where the line ends and is offset back from.
--- @tparam number distance backwards from pos1 for the new position.
+-- @tparam number distance_from_pos2 backwards from pos1 for the new position.
 -- @treturn Concepts.Position a point along line between source and target, at requested offset back from target.
 function Position.offset_along_line(pos1, pos2, distance_from_pos2)
     pos1, pos2 = Position(pos1), Position(pos2)
@@ -328,6 +328,11 @@ function Position.expand_to_area(pos, radius)
 end
 Position.to_area = Position.expand_to_area
 
+--- Expands a position into an area by setting pos to left_top.
+-- @tparam Concepts.Position pos
+-- @tparam number width
+-- @tparam number height
+-- @treturn Concepts.BoundingBox
 function Position.expand_out(pos, width, height)
     pos = Position(pos)
     width = width or 0
@@ -455,7 +460,7 @@ function Position.average(...)
     return avg:divide(n)
 end
 
---- Return the atan2 of 2 positions
+--- Return the atan2 of 2 positions.
 -- @tparam Concepts.Position pos1
 -- @tparam Concepts.Position pos2
 -- @treturn number
@@ -524,7 +529,7 @@ function Position.equals(pos1, pos2)
     return abs(pos1.x - pos2.x) < Position.epsilon and abs(pos1.y - pos2.y) < Position.epsilon
 end
 
---- Is pos1 less than pos2
+--- Is pos1 less than pos2.
 -- @tparam Concepts.Position pos1
 -- @tparam Concepts.Position pos2
 -- @treturn boolean
@@ -533,7 +538,7 @@ function Position.less_than(pos1, pos2)
     return pos1.x < pos2.x and pos1.y < pos2.y
 end
 
---- Is pos1 less than or equal to pos2
+--- Is pos1 less than or equal to pos2.
 -- @tparam Concepts.Position pos1
 -- @tparam Concepts.Position pos2
 -- @treturn boolean
@@ -603,28 +608,28 @@ function Position.next_direction(direction, reverse, eight_way)
     return (direction + (eight_way and ((reverse and -1) or 1) or ((reverse and -2) or 2))) % 8
 end
 
---- Returns an 8 way direction from orientation
+--- Returns an 8 way direction from orientation.
 -- @tparam float orientation
 -- @treturn defines.direction
 function Position.orientation_to_8way(orientation)
     return floor(orientation * 8 + 0.5) % 8
 end
 
---- Returns a 4 way direction from orientation
+--- Returns a 4 way direction from orientation.
 -- @tparam float orientation
 -- @treturn defines.direction
 function Position.orientation_to_4way(orientation)
     return floor(orientation * 4 + 0.5) % 4 * 2
 end
 
---- Returns an orientation from a direction
+--- Returns an orientation from a direction.
 -- @tparam defines.direction direction
 -- @treturn float
 function Position.direction_to_orientation(direction)
     return direction / 8
 end
 
---- Returns the direction to a position
+--- Returns the direction to a position.
 -- @tparam Concepts.Position pos1
 -- @tparam Concepts.Position pos2
 -- @tparam boolean eight_way return the eight way direction

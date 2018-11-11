@@ -52,7 +52,7 @@ Math.MIN_INT64 = Math.MININT64
 Math.MAX_UINT64 = Math.MAXUINT64
 --))
 
-local function tupple(...)
+local function tuple(...)
     return type(...) == 'table' and ... or {...}
 end
 
@@ -97,10 +97,10 @@ end
 -- See: http://en.wikipedia.org/wiki/Average
 
 --- Calculates the sum of a sequence of values.
--- @tparam tupple ... a tuple of numbers
+-- @tparam tuple ... a tuple of numbers
 -- @treturn the sum
 function Math.sum(...)
-    local x = tupple(...)
+    local x = tuple(...)
     local s = 0
     for _, v in ipairs(x) do
         s = s + v
@@ -112,7 +112,7 @@ end
 -- @tparam array x an array of numbers
 -- @treturn number the arithmetic mean
 function Math.arithmetic_mean(...)
-    local x = tupple(...)
+    local x = tuple(...)
     return (Math.sum(x) / #x)
 end
 
@@ -122,7 +122,7 @@ Math.avg = Math.arithmetic_mean
 -- @tparam array x an array of numbers
 -- @treturn number the geometric mean
 function Math.geometric_mean(...)
-    local x = tupple(...)
+    local x = tuple(...)
     local prod = 1
     for _, v in ipairs(x) do
         prod = prod * v
@@ -131,10 +131,10 @@ function Math.geometric_mean(...)
 end
 
 --- Calculates the harmonic mean of a set of values.
--- @tparam tupple ... an array of numbers
+-- @tparam tuple ... an array of numbers
 -- @treturn number the harmonic mean
 function Math.harmonic_mean(...)
-    local x = tupple(...)
+    local x = tuple(...)
     local s = 0
     for _, v in ipairs(x) do
         s = s + (1 / v)
@@ -143,10 +143,10 @@ function Math.harmonic_mean(...)
 end
 
 --- Calculates the quadratic mean of a set of values.
--- @tparam tupple ... an array of numbers
+-- @tparam tuple ... an array of numbers
 -- @treturn number the quadratic mean
 function Math.quadratic_mean(...)
-    local x = tupple(...)
+    local x = tuple(...)
     local squares = 0
     for _, v in ipairs(x) do
         squares = squares + (v * v)
@@ -156,10 +156,10 @@ end
 
 --- Calculates the generalized mean (to a specified power) of a set of values.
 -- @tparam number p power
--- @tparam tupple ... an array of numbers
+-- @tparam tuple ... an array of numbers
 -- @treturn number the generalized mean
 function Math.generalized_mean(p, ...)
-    local x = tupple(...)
+    local x = tuple(...)
     local sump = 0
     for _, v in ipairs(x) do
         sump = sump + (v ^ p)
@@ -183,7 +183,7 @@ end
 -- @tparam array x an array of numbers
 -- @treturn number the midrange mean
 function Math.midrange_mean(...)
-    local x = tupple(...)
+    local x = tuple(...)
     return 0.5 * (math_min(unpack(x)) + math_max(unpack(x)))
 end
 
@@ -191,7 +191,7 @@ end
 -- @tparam array x an array of numbers
 -- @treturn number the energetic mean
 function Math.energetic_mean(...)
-    local x = tupple(...)
+    local x = tuple(...)
     local s = 0
     for _, v in ipairs(x) do
         s = s + (10 ^ (v / 10))

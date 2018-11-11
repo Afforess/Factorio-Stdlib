@@ -58,44 +58,26 @@ function Area.new(area, new_copy)
     return setmetatable(new, Area._mt)
 end
 
---- Creates an area from the two positions p1 and p2.
+--- Creates an area from number parameters.
 -- @tparam[opt=0] number x1 x-position of left_top, first position
 -- @tparam[opt=0] number y1 y-position of left_top, first position
 -- @tparam[opt=0] number x2 x-position of right_bottom, second position
 -- @tparam[opt=0] number y2 y-position of right_bottom, second position
 -- @treturn Concepts.BoundingBox the area in a table format
-function Area.construct(self, ...)
+function Area.construct(...)
     local args
 
-    if type(self) == 'table' then
-        args = {...}
+    -- self check
+    if type((...)) == 'table' then
+        args = {select(2, ...)}
     else
-        args = {self, ...}
+        args = {...}
     end
 
     local lt = Position.construct(args[1], args[2])
     local rb = Position.construct(args[3] or lt.x, args[4] or lt.y)
 
     return setmetatable({left_top = lt, right_bottom = rb}, Area._mt)
-end
-
-function Area.square(self, ...)
-    local args
-
-    if type(self) == 'table' then
-        if getmetatable(self) == Area._mt then
-            self.right_bottom = -self.left_top:copy()
-            return self:normalize()
-        end
-        args = {...}
-    else
-        args = {self, ...}
-    end
-
-    local lt = Position.construct(args[1], args[2])
-    local rb = Position.construct(-lt.x, -lt.y)
-
-    return setmetatable({left_top = lt, right_bottom = rb}, Area._mt):normalize()
 end
 
 --- Creates an area that is a copy of the given area.
@@ -124,9 +106,8 @@ end
 -- <li>Swaps the values between `right_bottom.x` & `left_top.x` **IF** `right_bottom.x` < `left_top.x`
 -- <li>Swaps the values between `right_bottom.y` & `left_top.y` **IF** `right_bottom.y` < `left_top.y`
 -- </ul>
--- Essentially, the normalization process constructs a new area out of the swapped coordinates.
 -- @tparam Concepts.BoundingBox area the area to normalize
--- @treturn Concepts.BoundingBox the normalized area
+-- @treturn Concepts.BoundingBox the area normalized
 function Area.normalize(area)
     area = Area.new(area)
 
@@ -157,6 +138,16 @@ function Area.non_zero(area, amount)
     amount = amount or 0.01
 
     return Area.size(area) == 0 and Area.expand(area, amount) or area
+end
+
+--- Adjust an area to a normalized square with right_bottom the unary of left_top.
+-- @tparam Concepts.BoundingBox area
+-- @treturn Concepts.BoundingBox normalized square
+function Area.square(area)
+    area = Area(area)
+
+    area.right_bottom = -area.left_top:copy()
+    return area:normalize()
 end
 
 --- Shrinks the area by the given amount.
@@ -333,8 +324,8 @@ function Area.set_to_surface_size(area, surface)
 end
 Area.shrink_to_surface_size = Area.set_to_surface_size -- DEPRECATED
 
---- Area Functions
--- @section Functions
+--- Position Conversion Functions
+-- @section Position Conversion Functions
 
 --- Calculates the center of the area and returns the position.
 -- @tparam Concepts.BoundingBox area the area
@@ -348,11 +339,20 @@ function Area.center(area)
     return Position.new {area.left_top.x + (dist_x / 2), area.left_top.y + (dist_y / 2)}
 end
 
+--- Area Functions
+-- @section Functions
+
+--- Are all points of the area 0.
+-- @tparam Concepts.BoundingBox area
+-- @treturn boolean
 function Area.is_zero(area)
     area = Area.new(area)
     return area:size() <= 0
 end
 
+--- Is the area normalized.
+-- @tparam Concepts.BoundingBox area
+-- @treturn boolean
 function Area.normalized(area)
     area = Area.new(area)
 
@@ -362,8 +362,10 @@ function Area.normalized(area)
     return right_bottom.x >= left_top.x and right_bottom.y >= left_top.y
 end
 
+--- Is the area non-zero and normalized.
+-- @tparam Concepts.BoundingBox area
+-- @treturn boolean
 function Area.is_valid(area)
-    area = Area.new(area)
     return not Area.is_zero(area) and Area.normalized(area)
 end
 
@@ -414,7 +416,7 @@ function Area.less_than(area1, area2)
     end
 end
 
---- Is area1 smaller or equal in size to area2
+--- Is area1 smaller or equal in size to area2.
 -- @tparam Concepts.BoundingBox area1
 -- @tparam Concepts.BoundingBox area2
 -- @treturn boolean is area1 less than or equal to area2 in size
@@ -429,7 +431,7 @@ function Area.less_than_eq(area1, area2)
     end
 end
 
---- Tests if positions {x, y} are located in an area (including the border).
+--- Are the passed positions all located in an area.
 -- @tparam Concepts.BoundingBox area the search area
 -- @param Concepts.Position pos the position to check
 -- @treturn boolean true if the positions are located in the area
@@ -446,7 +448,10 @@ function Area.contains_positions(area, ...)
 end
 Area.contains_position = Area.contains_positions
 
---- Completely contains an area
+--- Are all passed areas completly inside an area.
+-- @tparam Concepts.BoundingBox area
+-- @param ... area(s) to check
+-- @treturn boolean
 function Area.contains_areas(area, ...)
     area = Area(area)
 
@@ -459,7 +464,27 @@ function Area.contains_areas(area, ...)
 end
 Area.contains_area = Area.contains_areas
 
-function Area.overlaps(area1, area2)
+--- Do all passed areas collide with an area.
+-- @tparam Concepts.BoundingBox area
+-- @param ... area(s) to check
+-- @treturn boolean
+function Area.collides_areas(area, ...)
+    area = Area(area)
+
+    for _, inner in pairs({...}) do
+        if not area:overlaps(inner) then
+            return false
+        end
+    end
+    return true
+end
+Area.collides_area = Area.collides_areas
+
+--- Does either area overlap/collide with the other area.
+-- @tparam Concepts.BoundingBox area1
+-- @tparam Concepts.BoundingBox area2
+-- @treturn boolean
+function Area.collides(area1, area2)
     area1, area2 = Area(area1), Area(area2)
 
     local x1, y1 = Position.unpack(area1.left_top)
@@ -470,19 +495,36 @@ function Area.overlaps(area1, area2)
     return not ((x1 > x2 + w2) or (x1 > y2 + h2) or (x2 > x1 + w1) or (y2 > y1 + h1))
 end
 
+--- Unpack an area into a tuple.
+-- @tparam Concepts.Boundingbox area
+-- @treturn tuple lt.x, lt.y, rb.x, rb.y
 function Area.unpack(area)
     area = Area.new(area)
     return area.left_top.x, area.left_top.y, area.right_bottom.x, area.right_bottom.y, area.orientation
 end
 
+--- Unpack an area into a tuple of position tables.
+-- @tparam Concepts.BoundingBox area
+-- @treturn tuple left_top, right_bottom
 function Area.unpack_positions(area)
     area = Area.new(area)
     return area.left_top, area.right_bottom
 end
 
+--- Pack an area into an array.
+-- @tparam Concepts.BoundingBox area
+-- @treturn array
 function Area.pack(area)
     area = Area.new(area)
     return {area.left_top.x, area.left_top.y, area.right_bottom.x, area.right_bottom.y, area.orientation}
+end
+
+--- Pack an area into a simple bounding box array
+-- @tparam Concepts.BoundingBox area
+-- @treturn Concepts.BoundingBox simple array
+function Area.pack_area(area)
+    area = Area.new(area)
+    return {{area.left_top.x, Area.left_top.y}, {area.right_bottom.x, area.right_bottom.y}}
 end
 
 --- Converts an area to a string.

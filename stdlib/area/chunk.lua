@@ -1,6 +1,6 @@
 --- For working with chunks.
 -- A chunk represents a 32 tile<sup>2</sup> on a surface in Factorio.
--- @module Chunk
+-- @module Area.Chunk
 -- @usage local Chunk = require('__stdlib__/stdlib/area/chunk')
 -- @see Concepts.ChunkPosition
 
@@ -13,12 +13,12 @@ local Position = require('__stdlib__/stdlib/area/position')
 
 --- Gets the chunk position of a chunk where the specified position resides.
 -- @function Chunk.from_position
--- @see Position.chunk_position
+-- @see Area.Position.chunk_position
 Chunk.from_position = Position.chunk_position
 
 --- Gets the area of a chunk from the specified chunk position.
 -- @function Chunk.to_area
--- @see Position.expand_to_chunk_area
+-- @see Area.Position.expand_to_chunk_area
 Chunk.to_area = Position.expand_to_chunk_area
 
 --- Gets the user data that is associated with a chunk.

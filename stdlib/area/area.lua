@@ -1,8 +1,8 @@
 --- Tools for working with bounding boxes.
 -- The tables passed into the Area functions are mutated in-place.
--- @module Area
+-- @module Area.Area
 -- @usage local Area = require('__stdlib__/stdlib/area/area')
--- @see Position
+-- @see Area.Position
 -- @see Concepts.BoundingBox
 -- @see Concepts.Position
 

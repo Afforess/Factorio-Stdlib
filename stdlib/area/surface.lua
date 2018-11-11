@@ -1,6 +1,6 @@
 --- For working with surfaces.
 -- Surfaces are the "domain" of the world.
--- @module Surface
+-- @module Area.Surface
 -- @usage local Surface = require('__stdlib__/stdlib/area/surface')
 -- @see LuaSurface
 

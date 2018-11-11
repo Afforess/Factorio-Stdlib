@@ -1,6 +1,6 @@
 --- Tools for working with tiles.
 -- A tile represents a 1 unit<sup>2</sup> on a surface in Factorio.
--- @module Tile
+-- @module Area.Tile
 -- @usage local Tile = require('__stdlib__/stdlib/area/tile')
 -- @see LuaTile
 
@@ -13,12 +13,12 @@ local Position = require('__stdlib__/stdlib/area/position')
 
 --- Get the @{LuaTile.position|tile position} of a tile where the given position resides.
 -- @function Tile.from_position
--- @see Position.tile_position
+-- @see Area.Position.tile_position
 Tile.from_position = Position.tile_position
 
 --- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
 -- @function Tile.to_area
--- @see Position.expand_to_tile_area
+-- @see Area.Position.expand_to_tile_area
 Tile.to_area = Position.expand_to_tile_area
 
 --- Creates an array of tile positions for all adjacent tiles (N, E, S, W) **OR** (N, NE, E, SE, S, SW, W, NW) if diagonal is set to true.

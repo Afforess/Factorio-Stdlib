@@ -153,6 +153,7 @@ end
 --- Copies a recipe to a new recipe.
 -- @tparam string new_name The new name for the recipe.
 -- @tparam string mining_result
+-- @tparam[opt] table opts
 -- @treturn self
 function Data:copy(new_name, mining_result, opts)
     Is.Assert.String(new_name, 'New name is required')

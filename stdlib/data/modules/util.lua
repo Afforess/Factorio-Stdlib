@@ -60,7 +60,7 @@ end
 -- @tparam[opt] table files
 -- @treturn Data
 -- @usage
--- require('__stdlib__/stdlib/data/data).create_data_globals()
+-- require('__stdlib__/stdlib/data/data).util.create_data_globals()
 function Util.create_data_globals(files)
     files =
         files or

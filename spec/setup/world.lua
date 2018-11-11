@@ -17,7 +17,7 @@ World.quit - Closes the world simulator
 note: save/load/reload haven't been tested yet.
 --]]
 require('__stdlib__/spec/setup/defines')
-local table = require('__stdlib__/stdlib/utils/table')
+local Table = require('__stdlib__/stdlib/utils/table')
 
 local World = {
     _msg_buffer = {},
@@ -224,7 +224,7 @@ function World.init(multiplayer, savetable, config_changed_data)
     savetable = savetable or {}
     local saved_global = savetable.global
     local saved_game = savetable.game
-    savetable = table.size(savetable) > 0 and savetable or false
+    savetable = Table.size(savetable) > 0 and savetable or false
     assert(savetable and saved_global and saved_game or not savetable, 'Invalid savetable')
 
     -- ensure config_changed_data is always a table if requested
@@ -308,7 +308,7 @@ function World.create_players(how_many)
     _G.game.players = _G.game.players or {}
 
     -- players may be sparse so some care must be taken here
-    while table.size(game.players) < how_many do
+    while Table.size(game.players) < how_many do
         local newindex = #game.players + 1
         game.players[newindex] =
             World.fake_userdata(
@@ -331,7 +331,7 @@ function World.save()
     local saved_global, saved_game
     if _G.global then
         local global_meta = getmetatable(_G.global)
-        saved_global = table.deepcopy(setmetatable(_G.global, nil))
+        saved_global = Table.deepcopy(setmetatable(_G.global, nil))
         setmetatable(_G.global, global_meta)
     else
         saved_global = {}
@@ -339,7 +339,7 @@ function World.save()
 
     if _G.game then
         local game_meta = getmetatable(_G.game)
-        saved_game = table.deepcopy(setmetatable(_G.game, nil))
+        saved_game = Table.deepcopy(setmetatable(_G.game, nil))
         setmetatable(_G.game, game_meta)
     else
         saved_game = {}

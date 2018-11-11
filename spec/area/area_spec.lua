@@ -30,10 +30,10 @@ describe('Area', function()
     it('should validate whether positions are inside of an area', function()
         local pos = {1, -4}
         local area = {left_top = {0, -5}, right_bottom = {x = 3, y = -3}}
-        assert.truthy(Area.inside(area, pos))
+        assert.truthy(Area.contains_positions(area, pos))
 
         area = {left_top = {100, 100}, right_bottom = {95, 95}}
-        assert.falsy(Area.inside(area, pos))
+        assert.falsy(Area.contains_position(area, pos))
     end)
 
     it('should validate the integer representation of an area', function()

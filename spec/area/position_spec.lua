@@ -128,12 +128,6 @@ describe('Constructors', function ()
             assert.same(Position._mt, getmetatable(Position.load({x = 3, y = -2})))
             assert.has_no_error(function() Position.load({x = 1, y = -2}) end)
         end)
-
-        it('should error if it is not a valid Position', function()
-            assert.has_error(function() Position.load('1') end)
-            assert.has_error(function() Position.load({}) end)
-            assert.has_error(function() Position.load({1, 1}) end)
-        end)
     end)
 end)
 

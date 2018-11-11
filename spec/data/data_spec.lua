@@ -24,7 +24,7 @@ describe('Data', function()
     end)
 
     it("should be in global", function()
-        Data.create_data_globals()
+        Data.Util.create_data_globals()
         assert.is_table(_G.DATA)
         assert.is_table(_G.RECIPE)
     end)

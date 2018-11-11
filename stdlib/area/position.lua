@@ -16,8 +16,9 @@ setmetatable(Position, Position)
 local Is = require('__stdlib__/stdlib/utils/is')
 local string = require('__stdlib__/stdlib/utils/string')
 local math = require('__stdlib__/stdlib/utils/math')
-local floor = math.floor
-local abs = math.abs
+local area_path = '__stdlib__/stdlib/area/area'
+local floor, abs, atan2, round_to = math.floor, math.abs, math.atan2, math.round_to
+local cos, sin, ceil, sqrt, pi = math.cos, math.sin, math.ceil, math.sqrt, math.pi
 local dirs = defines.direction
 
 --- By default position methods mutate the table in place. Set this to true to make the position immutable.
@@ -82,10 +83,10 @@ function Position.copy(pos)
 end
 
 --- Loads the metatable into the passed position without creating a new one.
+-- Always assumes a valid position is passed
 -- @tparam Concepts.Position pos the position to load the metatable onto
 -- @treturn Concepts.Position the position with metatable attached
 function Position.load(pos)
-    Is.Assert.Position(pos, 'position missing or malformed')
     return setmetatable(pos, Position._mt)
 end
 
@@ -100,11 +101,6 @@ end
 -- @tparam string pos_string the position to convert
 -- @treturn Concepts.Position
 function Position.from_key(pos_string)
-    -- local t = string.split(pos_string, '/')
-    -- for k, v in pairs(t) do
-    --     t[k] = tonumber(v)
-    -- end
-    -- return Position(t)
     return Position(string.split(pos_string, '/', false, tonumber))
 end
 
@@ -204,8 +200,8 @@ function Position.offset_along_line(pos1, pos2, distance_from_pos2)
     local veclength = pos1:distance(pos2) - distance_from_pos2
 
     -- From source_position, project the point along the vector at angle, and veclength
-    pos1.x = pos1.x + math.round_to(math.cos(angle) * veclength, 10)
-    pos1.y = pos1.y + math.round_to(math.sin(angle) * veclength, 10)
+    pos1.x = pos1.x + round_to(sin(angle) * veclength, 10)
+    pos1.y = pos1.y + round_to(cos(angle) * veclength, 10)
 
     return pos1
 end
@@ -272,8 +268,8 @@ function Position.center(pos)
     pos = Position.new(pos)
 
     local x, y = pos.x, pos.y
-    x = x >= 0 and floor(x) + 0.5 or math.ceil(x) - 0.5
-    y = y >= 0 and floor(y) + 0.5 or math.ceil(y) - 0.5
+    x = x >= 0 and floor(x) + 0.5 or ceil(x) - 0.5
+    y = y >= 0 and floor(y) + 0.5 or ceil(y) - 0.5
     pos.x = x
     pos.y = y
 
@@ -323,7 +319,7 @@ end
 function Position.expand_to_area(pos, radius)
     pos = Position.new(pos)
     Is.Assert.Number(radius, 'missing radius argument')
-    local Area = require('__stdlib__/stdlib/area/area')
+    local Area = require(area_path)
 
     local left_top = Position.new({pos.x - radius, pos.y - radius})
     local right_bottom = Position.new({pos.x + radius, pos.y + radius})
@@ -332,12 +328,23 @@ function Position.expand_to_area(pos, radius)
 end
 Position.to_area = Position.expand_to_area
 
+function Position.expand_out(pos, width, height)
+    pos = Position(pos)
+    width = width or 0
+    height = height or width
+
+    local Area = require(area_path)
+    local right_bottom = pos:copy():offset(width, height)
+
+    return Area.load {left_top = pos, right_bottom = right_bottom}
+end
+
 --- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
 -- @tparam LuaTile.position pos the tile position
 -- @treturn Concepts.BoundingBox the area of the tile
 function Position.expand_to_tile_area(pos)
     pos = Position.tile_position(pos)
-    local Area = require('__stdlib__/stdlib/area/area')
+    local Area = require(area_path)
 
     local left_top = pos:copy()
     local right_bottom = pos:copy():offset(1, 1)
@@ -353,7 +360,7 @@ Position.to_tile_area = Position.expand_to_tile_area
 -- @treturn Concepts.BoundingBox the chunk's area
 function Position.expand_to_chunk_area(pos)
     pos = Position.new(pos)
-    local Area = require('__stdlib__/stdlib/area/area')
+    local Area = require(area_path)
 
     local left_top = Position.load {x = pos.x * 32, y = pos.y * 32}
     local right_bottom = left_top:copy():offset(32, 32)
@@ -454,7 +461,7 @@ end
 -- @treturn number
 function Position.atan2(pos1, pos2)
     pos1, pos2 = Position(pos1), Position(pos2)
-    return math.atan2(pos2.y - pos1.y, pos2.x - pos1.x)
+    return atan2(pos2.x - pos1.x, pos2.y - pos1.y)
 end
 
 --- Is a position inside of an area.
@@ -462,7 +469,7 @@ end
 -- @tparam Concepts.BoundingBox area The area to check.
 -- @treturn boolean Is the position inside of the area.
 function Position.inside(pos, area)
-    local Area = require('__stdlib__/stdlib/area/area')
+    local Area = require(area_path)
     pos = Position.new(pos)
     area = Area.new(area)
 
@@ -494,6 +501,14 @@ end
 function Position.unpack(pos)
     pos = Position.new(pos)
     return pos.x, pos.y
+end
+
+--- Packs a position into an array.
+-- @tparam Concepts.Position pos the position to pack
+-- @treturn array
+function Position.pack(pos)
+    pos = Position(pos)
+    return {pos.x, pos.y}
 end
 
 --- Tests whether or not the two given positions are equal.
@@ -545,7 +560,7 @@ end
 -- @treturn number the euclidean distance
 function Position.distance(pos1, pos2)
     pos1, pos2 = Position(pos1), Position(pos2)
-    return math.sqrt(Position.distance_squared(pos1, pos2))
+    return sqrt(Position.distance_squared(pos1, pos2))
 end
 
 --- Calculates the manhatten distance between two positions.
@@ -555,7 +570,7 @@ end
 -- @see https://en.wikipedia.org/wiki/Taxicab_geometry Taxicab geometry (manhatten distance)
 function Position.manhattan_distance(pos1, pos2)
     pos1, pos2 = Position(pos1), Position(pos2)
-    return math.abs(pos2.x - pos1.x) + math.abs(pos2.y - pos1.y)
+    return abs(pos2.x - pos1.x) + abs(pos2.y - pos1.y)
 end
 
 --- Is this position {0, 0}.
@@ -608,10 +623,21 @@ end
 function Position.direction_to_orientation(direction)
     return direction / 8
 end
+
+--- Returns the direction to a position
+-- @tparam Concepts.Position pos1
+-- @tparam Concepts.Position pos2
+-- @tparam boolean eight_way return the eight way direction
+-- @treturn defines.direction
+function Position.direction_to(pos1, pos2, eight_way)
+    pos1, pos2 = Position(pos1), Position(pos2)
+    local orientation_to_dir = eight_way and Position.orientation_to_8way or Position.orientation_to_4way
+    return orientation_to_dir((1 - ((pos1:atan2(pos2)) / pi)) / 2)
+end
 --- @section end
 
--- Some of these are qusi duplicates of the named methods, however the
--- the methods return new positions as opposed to mutating.
+-- Some of these are qusi duplicates of the named methods, however
+-- these methods return new positions as opposed to mutating.
 local function __add(pos1, pos2)
     pos1, pos2 = Position(pos1), Position(pos2)
     return Position.load({x = pos1.x + pos2.x, y = pos1.y + pos2.y})

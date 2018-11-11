@@ -1,5 +1,5 @@
 --- Item
--- @classmod Item
+-- @classmod Data.Item
 
 local Item = {
     _class = 'Item',

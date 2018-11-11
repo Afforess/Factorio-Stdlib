@@ -1,5 +1,5 @@
 --- Sprites
--- @module Sprites
+-- @module Data.Sprites
 
 local Sprites = {}
 

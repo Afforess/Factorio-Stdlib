@@ -1,5 +1,5 @@
 --- For playing with colors.
--- @module Color
+-- @module Utils.Color
 -- @usage local Color = require('__stdlib__/stdlib/utils/color')
 
 local Color = {}

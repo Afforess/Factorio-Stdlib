@@ -1,6 +1,3 @@
---- Recipe class
--- @classmod Recipe
-
 local Recipe = {
     _class = 'Recipe',
     __index = require('stdlib/data/data'),

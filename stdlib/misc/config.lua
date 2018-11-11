@@ -1,5 +1,5 @@
 --- For working with mod configurations.
--- @module Config
+-- @module Misc.Config
 -- @usage require('__stdlib__/stdlib/config/config')
 
 ---

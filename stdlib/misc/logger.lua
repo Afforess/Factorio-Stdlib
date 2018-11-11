@@ -1,5 +1,5 @@
 --- For logging debug information to files.
--- @module Logger
+-- @module Misc.Logger
 -- @usage
 -- local Logger = require('__stdlib__/stdlib/log/logger')
 -- -- or to create a logger directly:

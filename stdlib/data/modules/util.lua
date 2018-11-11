@@ -1,5 +1,5 @@
---- Utilities
--- @module Util
+--- Data Utilities
+-- @module Data.Util
 
 local Util = {
     _module = 'Util'

@@ -1,5 +1,5 @@
 --- Iterator library.
--- @module Iter
+-- @module Utils.Iter
 
 local Iter = {}
 

@@ -1,5 +1,5 @@
 --- Makes monolithic Factorio GUI events more manageable.
--- @module Gui
+-- @module Event.Gui
 -- @usage local Gui = require('__stdlib__/stdlib/event/gui')
 
 local Event = require('__stdlib__/stdlib/event/event')

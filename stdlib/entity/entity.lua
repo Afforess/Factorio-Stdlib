@@ -1,5 +1,5 @@
 --- Tools for working with entities.
--- @module Entity
+-- @module Entity.Entity
 -- @usage local Entity = require('__stdlib__/stdlib/entity/entity')
 
 local Entity = {_module = 'Entity'}

@@ -1,5 +1,5 @@
 --- Migration helper functions
--- @module Migrate
+-- @module Misc.Migrate
 
 local Migrate = {}
 setmetatable(Migrate, require('__stdlib__/stdlib/core'))

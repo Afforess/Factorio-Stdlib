@@ -1,5 +1,5 @@
 --- Extends Lua 5.2 math.
--- @module math
+-- @module Utils.math
 -- @see math
 -- @usage local math = require('__stdlib__/stdlib/utils/math')
 
@@ -224,11 +224,6 @@ end
 
 for k, v in pairs(math) do
     Math[k] = v
-end
-if not (STDLIB and STDLIB.no_global_math) then
-    for k, v in pairs(Math) do
-        _G.math[k] = v
-    end
 end
 
 return Math

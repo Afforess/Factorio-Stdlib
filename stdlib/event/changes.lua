@@ -1,6 +1,6 @@
 --- Configuration changed event handling.
 -- This module registers events
--- @module Changes
+-- @module Event.Changes
 -- @usage require('__stdlib__/stdlib/event/changes')
 
 local Event = require('__stdlib__/stdlib/event/event')

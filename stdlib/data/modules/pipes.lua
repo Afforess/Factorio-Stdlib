@@ -1,5 +1,5 @@
 --- Pipes
--- @module Pipes
+-- @module Data.Pipes
 
 local Pipes = {}
 local Sprites = require('__stdlib__/stdlib/data/modules/sprites')

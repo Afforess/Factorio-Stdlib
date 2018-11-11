@@ -1,5 +1,5 @@
 --- Fluid
--- @classmod Fluid
+-- @classmod Data.Fluid
 
 local Fluid = {
     _class = 'Fluid',

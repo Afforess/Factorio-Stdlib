@@ -1,7 +1,7 @@
 --- Tools for working with trains.
 -- When this module is loaded into a mod, it automatically registers a number of new events in order to keep track of the trains as their locomotives and wagons are moved around.
 -- <p>To handle the events, you should use the @{Event} module.
--- @module Trains
+-- @module Event.Trains
 
 local Trains = {
     _module = 'Trains'
@@ -134,7 +134,7 @@ function Trains.get_main_locomotive(train)
     end
 end
 
---- Creates an entity from a train that is compatible with the @{Entity} module.
+--- Creates an entity from a train that is compatible with the @{Entity.Entity} module.
 -- @tparam LuaTrain train
 -- @return (<span class="types">@{train_entity}</span>)
 function Trains.to_entity(train)
@@ -156,7 +156,7 @@ end
 -- @table train_entity
 
 --- Associates the user data to a train.
--- This is a helper around @{Entity.set_data}.
+-- This is a helper around @{Entity.Entity.set_data}.
 -- <p>The user data will be stored in the global object and it will persist between loads.
 --> The user data will be removed from a train when the train becomes invalid.
 -- @tparam LuaTrain train the train to set the user data for
@@ -167,7 +167,7 @@ function Trains.set_data(train, data)
 end
 
 --- Gets the user data that is associated with a train.
--- This is a helper around @{Entity.get_data}.
+-- This is a helper around @{Entity.Entity.get_data}.
 -- <p>The user data is stored in the global object and it persists between loads.
 --> The user data will be removed from a train when the train becomes invalid.
 -- @tparam LuaTrain train the train to look up user data for

@@ -10,7 +10,7 @@
 -- This module does not have many of the multiplayer protections that `script.on_event` does.
 -- <br>Due to this, great care should be taken when registering events conditionally.
 -- </blockquote>
--- @module Event
+-- @module Event.Event
 -- @usage local Event = require('__stdlib__/stdlib/event/event')
 
 local Event = {

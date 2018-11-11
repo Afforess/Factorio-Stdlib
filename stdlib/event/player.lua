@@ -1,6 +1,6 @@
 --- Player global creation.
 -- This module adds player helper functions, it does not automatically register events unless Player.register_events() is called
--- @module Player
+-- @module Event.Player
 -- @usage
 -- local Player = require('__stdlib__/stdlib/event/player').register_events()
 -- -- The fist time this is required it will register player creation events

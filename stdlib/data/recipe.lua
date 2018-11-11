@@ -1,5 +1,5 @@
 --- Recipe class
--- @classmod Recipe
+-- @classmod Data.Recipe
 
 local Recipe = {
     _class = 'Recipe',

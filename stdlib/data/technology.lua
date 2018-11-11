@@ -1,5 +1,5 @@
 --- Technology
--- @classmod Technology
+-- @classmod Data.Technology
 
 local Technology = {
     _class = 'Technology',

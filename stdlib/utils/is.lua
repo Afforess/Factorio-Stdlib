@@ -1,5 +1,5 @@
 --- Is expression library
--- @module Is
+-- @module Utils.Is
 -- @usage
 -- local Is = require('__stdlib__/stdlib/utils/is')
 -- Is.True(true)

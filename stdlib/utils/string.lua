@@ -1,13 +1,10 @@
 --- Extends Lua 5.2 string.
--- @module string
+-- @module Utils.string
 -- @see string
 -- @usage local string = require('__stdlib__/stdlib/utils/string')
 
 local String = {}
-
-if not (STDLIB and STDLIB.no_string_index) then
-    setmetatable(string, {__index = String})
-end
+setmetatable(string, {__index = String})
 
 local concat = table.concat
 local insert = table.insert
@@ -243,12 +240,6 @@ end
 
 for k, v in pairs(string) do
     String[k] = v
-end
-if not (STDLIB and STDLIB.no_global_string) then
-    for k, v in pairs(String) do
-        _G.string[k] = v
-    end
-    setmetatable(_G.string, nil)
 end
 
 return String

@@ -1,3 +1,11 @@
+--- Surface global creation.
+-- <p>All surfaces will be added to the `global.forces` table.
+-- <p>This modules events should be registered after any other Init functions but before any scripts needing `global.surfaces`.
+-- <p>This modules can register the following events:
+-- @module Event.Surface
+-- @usage
+-- local surface = require('__stdlib__/stdlib/event/surface').register_events()
+
 local Event = require('__stdlib__/stdlib/event/event')
 
 local Surface = {
@@ -7,8 +15,8 @@ local Surface = {
 setmetatable(Surface, require('__stdlib__/stdlib/core'))
 
 local Is = require('__stdlib__/stdlib/utils/is')
-local Game = require('__stdlib__/stdlib/game')
-local table = require('__stdlib__/stdlib/utils/table')
+-- local Game = require('__stdlib__/stdlib/game')
+-- local table = require('__stdlib__/stdlib/utils/table')
 local merge_additional_data = require('__stdlib__/stdlib/event/modules/merge_data')
 
 local function new(index)

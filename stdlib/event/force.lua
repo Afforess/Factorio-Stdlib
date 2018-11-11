@@ -2,7 +2,7 @@
 -- <p>All new forces will be added to the `global.forces` table.
 -- <p>This modules events should be registered after any other Init functions but before any scripts needing `global.players`.
 -- <p>This modules can register the following events: `on_force_created`, and `on_forces_merging`.
--- @module Force
+-- @module Event.Force
 -- @usage
 -- local Force = require('__stdlib__/stdlib/event/force').register_events()
 -- -- inside your Init event Force.init() -- to properly handle any existing forces

@@ -1,5 +1,5 @@
 --- A double-linked list implementation
--- @classmod LinkedList
+-- @classmod Misc.LinkedList
 
 local Core = require('__stdlib__/stdlib/core')
 local table = require('__stdlib__/stdlib/utils/table')

@@ -1,5 +1,5 @@
 --- For working with inventories.
--- @module Inventory
+-- @module Entity.Inventory
 -- @usage local Inventory = require('__stdlib__/stdlib/entity/inventory')
 
 local Inventory = {_module = 'Inventory'}

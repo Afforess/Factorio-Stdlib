@@ -1,5 +1,5 @@
 --- Category
--- @classmod Category
+-- @classmod Data.Category
 
 local Category = {
     _class = 'Category',

@@ -1,5 +1,5 @@
 --- Additional lua globals
--- @module globals
+-- @module Utils.Globals
 
 local STDLIB = require('__stdlib__/stdlib/config')
 
@@ -12,9 +12,9 @@ traceback = type(debug) == 'table' and debug.traceback or _traceback
 serpent = serpent or require('__stdlib__/stdlib/vendor/serpent')
 inspect = inspect or require('__stdlib__/stdlib/vendor/inspect')
 
-require('__stdlib__/stdlib/utils/math')
-require('__stdlib__/stdlib/utils/table')
-require('__stdlib__/stdlib/utils/string')
+local Math = require('__stdlib__/stdlib/utils/math')
+local Table = require('__stdlib__/stdlib/utils/table')
+local String = require('__stdlib__/stdlib/utils/string')
 
 -- Set up default stuff for testing, defines will already be available in an active mod or busted setup specs
 if not _G.defines then
@@ -26,7 +26,9 @@ if not _G.defines then
     else
         require('__stdlib__/spec/setup/dataloader')
     end
-    _G.log = function(msg) print(msg) end
+    _G.log = function(msg)
+        print(msg)
+    end
 end
 
 --- Require a file that may not exist
@@ -37,7 +39,7 @@ function prequire(module, suppress_all)
     local ok, err = pcall(require, module)
     if ok then
         return err
-    elseif not suppress_all and not err:find("^module .* not found") then
+    elseif not suppress_all and not err:find('^module .* not found') then
         error(err)
     end
 end
@@ -70,3 +72,27 @@ function inline_if(exp, t, f)
         return f
     end
 end
+
+-- luacheck: globals install
+
+--- Install global version of util libraries
+install = {
+    table = function()
+        for k, v in pairs(Table) do
+            _G.table[k] = v
+        end
+    end,
+    math = function()
+        for k, v in pairs(Math) do
+            _G.math[k] = v
+        end
+    end,
+    string = function()
+        for k, v in pairs(String) do
+            _G.string[k] = v
+        end
+        setmetatable(string, nil)
+    end,
+    reload = function()
+    end
+}

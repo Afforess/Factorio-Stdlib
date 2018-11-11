@@ -1,5 +1,5 @@
 --- Entity class
--- @classmod Entity
+-- @classmod Data.Entity
 
 local Entity = {
     _class = 'Entity',

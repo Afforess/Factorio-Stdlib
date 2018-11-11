@@ -15,8 +15,11 @@ setmetatable(Area, Area)
 local Is = require('__stdlib__/stdlib/utils/is')
 local Position = require('__stdlib__/stdlib/area/position')
 local math = require('__stdlib__/stdlib/utils/math')
-local round_to = math.round_to
+local abs, ceil, floor, max, round_to = math.abs, math.ceil, math.floor, math.max, math.round_to
+local pi, sin, cos = math.pi, math.sin, math.cos
 local unpack = table.unpack
+local r2d = 180 / pi
+local _tau = 2 * pi
 
 --- By default area tables are mutated in place set this to true to make the tables immutable.
 Area.immutable = false
@@ -106,7 +109,6 @@ end
 -- @tparam Concepts.BoundingBox area the Area to load the metatable onto
 -- @treturn Concepts.BoundingBox the Area with metatable attached
 function Area.load(area)
-    Is.Assert.Area(area, 'area missing or malformed')
     return setmetatable(area, Area._mt)
 end
 
@@ -208,14 +210,14 @@ function Area.adjust(area, amount)
     if vec.x > 0 then
         area = Area.expand(area, {vec.x, 0})
     else
-        area = Area.shrink(area, {math.abs(vec.x), 0})
+        area = Area.shrink(area, {abs(vec.x), 0})
     end
 
     --shrink or expand on y vector
     if vec.y > 0 then
         area = Area.expand(area, {0, vec.y})
     else
-        area = Area.shrink(area, {0, math.abs(vec.y)})
+        area = Area.shrink(area, {0, abs(vec.y)})
     end
 
     return area
@@ -238,8 +240,6 @@ function Area.flip(area)
     end
 end
 
-local r2d = 180 / math.pi
-
 --- Rotate an area by degrees.
 -- @tparam Concepts.BoundingBox area
 -- @tparam number deg degrees
@@ -250,12 +250,12 @@ function Area.rotate(area, deg)
     local x1, y1 = area.left_top.x, area.left_top.y
     local x2, y2 = area.right_bottom.x, area.right_bottom.y
     local rad = deg / r2d
-    local cos, sin = math.cos(rad), math.sin(rad)
+    local cos_value, sin_value = cos(rad), sin(rad)
 
-    area.left_top.x = round_to((x1 * cos) - (y1 * sin), 2)
-    area.left_top.y = round_to((x1 * sin) + (y1 * cos), 2)
-    area.right_bottom.x = round_to((x2 * cos) - (y2 * sin), 2)
-    area.right_bottom.y = round_to((x2 * sin) + (y2 * cos), 2)
+    area.left_top.x = round_to((x1 * cos_value) - (y1 * sin_value), 2)
+    area.left_top.y = round_to((x1 * sin_value) + (y1 * cos_value), 2)
+    area.right_bottom.x = round_to((x2 * cos_value) - (y2 * sin_value), 2)
+    area.right_bottom.y = round_to((x2 * sin_value) + (y2 * cos_value), 2)
 
     Area.normalize(area)
     return area
@@ -302,8 +302,8 @@ end
 function Area.round_to_integer(area)
     area = Area.new(area)
 
-    area.left_top = Position {x = math.floor(area.left_top.x), y = math.floor(area.left_top.y)}
-    area.right_bottom = Position {x = math.ceil(area.right_bottom.x), y = math.ceil(area.right_bottom.y)}
+    area.left_top = Position {x = floor(area.left_top.x), y = floor(area.left_top.y)}
+    area.right_bottom = Position {x = ceil(area.right_bottom.x), y = ceil(area.right_bottom.y)}
     return area
 end
 
@@ -321,11 +321,11 @@ end
 function Area.set_to_surface_size(area, surface)
     area = Area.new(area)
     local w, h = surface.map_gen_settings.width, surface.map_gen_settings.height
-    if math.abs(area.left_top.x) > w / 2 then
+    if abs(area.left_top.x) > w / 2 then
         area.left_top.x = -(w / 2)
         area.right_bottom.x = (w / 2)
     end
-    if math.abs(area.left_top.y) > w / 2 then
+    if abs(area.left_top.y) > w / 2 then
         area.left_top.y = -(h / 2)
         area.right_bottom.y = (h / 2)
     end
@@ -350,7 +350,7 @@ end
 
 function Area.is_zero(area)
     area = Area.new(area)
-    return area.size(area) <= 0
+    return area:size() <= 0
 end
 
 function Area.normalized(area)
@@ -380,8 +380,8 @@ function Area.size(area)
     local left_top = area.left_top
     local right_bottom = area.right_bottom
 
-    local width = math.abs(left_top.x - right_bottom.x)
-    local height = math.abs(left_top.y - right_bottom.y)
+    local width = abs(left_top.x - right_bottom.x)
+    local height = abs(left_top.y - right_bottom.y)
     local area_size = width * height
     local perimeter = width + width + height + height
     return area_size, width, height, perimeter
@@ -432,26 +432,57 @@ end
 --- Tests if positions {x, y} are located in an area (including the border).
 -- @tparam Concepts.BoundingBox area the search area
 -- @param Concepts.Position pos the position to check
--- @treturn boolean true if the position is located in the area
-function Area.contains(area, ...)
-    area = Area.new(area)
+-- @treturn boolean true if the positions are located in the area
+function Area.contains_positions(area, ...)
+    local lt, rb = Area.unpack_positions(area)
 
-    local args = Is.Vector(...) and {...} or ...
-    for _, pos in pairs(args) do
-        pos = Position.new(pos)
-        local lt = area.left_top
-        local rb = area.right_bottom
+    for _, pos in pairs({...}) do
+        pos = Position(pos)
         if not (pos.x >= lt.x and pos.y >= lt.y and pos.x <= rb.x and pos.y <= rb.y) then
             return false
         end
     end
     return true
 end
-Area.inside = Area.contains -- Area.inside is deprecated
+Area.contains_position = Area.contains_positions
+
+--- Completely contains an area
+function Area.contains_areas(area, ...)
+    area = Area(area)
+
+    for _, inner in pairs({...}) do
+        if not area:contains_positions(Area.unpack_positions(inner)) then
+            return false
+        end
+    end
+    return true
+end
+Area.contains_area = Area.contains_areas
+
+function Area.overlaps(area1, area2)
+    area1, area2 = Area(area1), Area(area2)
+
+    local x1, y1 = Position.unpack(area1.left_top)
+    local _, w1, h1 = area1:size()
+    local x2, y2 = Position.unpack(area2.left_top)
+    local _, w2, h2 = area2:size()
+
+    return not ((x1 > x2 + w2) or (x1 > y2 + h2) or (x2 > x1 + w1) or (y2 > y1 + h1))
+end
 
 function Area.unpack(area)
     area = Area.new(area)
-    return area.left_top.x, area.left_top.y, area.right_bottom.x, area.right_bottom.y
+    return area.left_top.x, area.left_top.y, area.right_bottom.x, area.right_bottom.y, area.orientation
+end
+
+function Area.unpack_positions(area)
+    area = Area.new(area)
+    return area.left_top, area.right_bottom
+end
+
+function Area.pack(area)
+    area = Area.new(area)
+    return {area.left_top.x, area.left_top.y, area.right_bottom.x, area.right_bottom.y, area.orientation}
 end
 
 --- Converts an area to a string.
@@ -482,7 +513,7 @@ function Area.iterate(area)
     function iterator.iterate(area) --luacheck: ignore area
         local rx = area.right_bottom.x - area.left_top.x + 1
         local dx = iterator.idx % rx
-        local dy = math.floor(iterator.idx / rx)
+        local dy = floor(iterator.idx / rx)
         iterator.idx = iterator.idx + 1
         if (area.left_top.y + dy) > area.right_bottom.y then
             return
@@ -505,8 +536,8 @@ function Area.spiral_iterate(area)
 
     local rx = area.right_bottom.x - area.left_top.x + 1
     local ry = area.right_bottom.y - area.left_top.y + 1
-    local half_x = math.floor(rx / 2)
-    local half_y = math.floor(ry / 2)
+    local half_x = floor(rx / 2)
+    local half_y = floor(ry / 2)
     local center_x = area.left_top.x + half_x
     local center_y = area.left_top.y + half_y
 
@@ -515,7 +546,7 @@ function Area.spiral_iterate(area)
     local dx = 0
     local dy = -1
     local iterator = {list = {}, idx = 1}
-    for _ = 1, math.max(rx, ry) * math.max(rx, ry) do
+    for _ = 1, max(rx, ry) * max(rx, ry) do
         if -(half_x) <= x and x <= half_x and -(half_y) <= y and y <= half_y then
             table.insert(iterator.list, {x, y})
         end

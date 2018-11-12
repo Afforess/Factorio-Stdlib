@@ -13,6 +13,22 @@
 -- @module Event.Event
 -- @usage local Event = require('__stdlib__/stdlib/event/event')
 
+require('__stdlib__/stdlib/config').control = true
+local Core = require('__stdlib__/stdlib/core')
+
+-- Check for post registration
+local register_event = script.on_event
+_G.script.on_event = function()
+    error('Detected attempt to register an event using script.on_event while using the STDLIB event system', 1)
+end
+
+-- check for pre registration
+for _, define in pairs(defines.events) do
+    if script.get_event_handler(define) then
+        error('Detected attempt to add the STDLIB event module after using script on_event')
+    end
+end
+
 local Event = {
     _module = 'Event',
     core_events = {
@@ -32,8 +48,9 @@ local Event = {
     event_order = nil, -- Assigned when needed due to crash in 0.16.41
     count_data = {}, -- assigned when needed
     stop_processing = {}, -- just has to be unique
+    __index = Core
 }
-setmetatable(Event, require('__stdlib__/stdlib/core'))
+setmetatable(Event, Event)
 
 local table = require('__stdlib__/stdlib/utils/table')
 --Holds the event registry
@@ -112,11 +129,11 @@ function Event.register(event_id, handler, matcher, pattern)
             if bootstrap_register[event_id] then
                 script[event_id](bootstrap_register[event_id])
             else
-                script.on_event(event_id, Event.dispatch)
+                register_event(event_id, Event.dispatch)
             end
         elseif event_id >= 0 then
             --Positive values will be defines.events
-            script.on_event(event_id, Event.dispatch)
+            register_event(event_id, Event.dispatch)
         elseif event_id < 0 then
             --Use negative values to register on_nth_tick
             script.on_nth_tick(math.abs(event_id), Event.dispatch)
@@ -221,11 +238,11 @@ function Event.remove(event_id, handler, matcher, pattern)
                 if bootstrap_register[event_id] then
                     script[event_id](nil)
                 else
-                    script.on_event(event_id, nil)
+                    register_event(event_id, nil)
                 end
             elseif event_id >= 0 then
                 -- Positive values will be defines.events
-                script.on_event(event_id, nil)
+                register_event(event_id, nil)
             elseif event_id < 0 then
                 -- Use negative values to remove on_nth_tick
                 script.on_nth_tick(math.abs(event_id), nil)
@@ -238,7 +255,6 @@ function Event.remove(event_id, handler, matcher, pattern)
     end
     return Event
 end
-
 
 -- Used to replace pcall in un-protected events.
 local function pcall_noop(handler, event, other)
@@ -309,7 +325,6 @@ function Event.dispatch(event)
     end
 
     if registry then
-
         --add the tick if it is not present, this only affects calling Event.dispatch manually
         --doing the check up here as it will faster than checking every iteration for a constant value
         event.tick = event.tick or (game and game.tick) or 0
@@ -328,7 +343,7 @@ function Event.dispatch(event)
             if (Event.inspect_event or event.inspect_event) and game then
                 local result = inspect(event) .. '\n'
                 game.write_file(Event.get_file_path('events/' .. get_event_name(event.input_name or event.name) .. '.lua'), result, Event.inspect_append)
-                game.write_file(Event.get_file_path('events/ordered.lua'), result , Event.inspect_append)
+                game.write_file(Event.get_file_path('events/ordered.lua'), result, Event.inspect_append)
                 Event.inspect_append = true
             end
 
@@ -432,14 +447,13 @@ function Event.dump_data()
         force_crc = Event.force_crc,
         Custom_events = Event.custom_events,
         inspect_append = Event.inspect_append,
-        inspect_event = Event.inspect_event,
-
+        inspect_event = Event.inspect_event
     }
     local registry, factorio_events = {}, {}
     for event, data in pairs(event_registry) do
-        registry['['..event..'] '.. get_event_name(event)] = data
+        registry['[' .. event .. '] ' .. get_event_name(event)] = data
         if valid_event_id(event) then
-            factorio_events['['..event..'] '.. get_event_name(event)] = script.get_event_handler(event)
+            factorio_events['[' .. event .. '] ' .. get_event_name(event)] = script.get_event_handler(event)
         end
     end
     game.write_file(Event.get_file_path('Event/event_data.lua'), inspect(event_data))

@@ -1,5 +1,5 @@
 --- Surface global creation.
--- <p>All surfaces will be added to the `global.forces` table.
+-- <p>All surfaces will be added to the `global.surfaces` table.
 -- <p>This modules events should be registered after any other Init functions but before any scripts needing `global.surfaces`.
 -- <p>This modules can register the following events:
 -- @module Event.Surface
@@ -38,8 +38,8 @@ function Surface.additional_data(...)
     return Surface
 end
 
---- Remove data for a player when they are deleted.
--- @tparam table event event table containing the `player_index`
+--- Remove data for a surface when it is deleted.
+-- @tparam table event event table containing the surface index
 function Surface.remove(event)
     global.surfaces[event.surface_index] = nil
 end
@@ -55,15 +55,15 @@ end
 -- function Surface.cleared(event)
 -- end
 
---- Init or re-init a player or players.
--- Passing a `nil` event will iterate all existing players.
--- @tparam[opt] number|table|string|LuaPlayer event
--- @tparam[opt=false] boolean overwrite the player data
+--- Init or re-init the surfaces.
+-- Passing a `nil` event will iterate all existing surfaces.
+-- @tparam[opt] number|table|string|LuaSurface event
+-- @tparam[opt=false] boolean overwrite the surface data
 function Surface.init(event, overwrite)
-    -- Create the global.players table if it doesn't exisit
+    -- Create the global.surfaces table if it doesn't exisit
     global.surfaces = global.surfaces or {}
 
-    --get a valid player object or nil
+    --get a valid surface object or nil
     local surface = game.surfaces[event.surface_index]
 
     if surface then

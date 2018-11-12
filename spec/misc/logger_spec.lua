@@ -50,7 +50,7 @@ describe('Logger', function()
             _G["game"] = { tick = 0, write_file = function() end }
             local s = spy.on(_G["game"], 'write_file')
 
-            local l = Logger.new('spec','test',true, {log_ticks = false})
+            local l = Logger.new('spec','test', true, {log_ticks = false})
             l.log('foo')
             assert.spy(s).was_called_with('spec/test.log', '00:00:00: foo\n', false)
 
@@ -68,7 +68,7 @@ describe('Logger', function()
 
         it('uses log() if _G.script is not available', function()
             _G["game"] = nil
-            _G["script"] = false
+            _G["script"] = nil
             _G["log"] = function() end
             local spyLog = spy.on(_G, 'log')
 

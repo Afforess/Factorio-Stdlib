@@ -9,7 +9,7 @@ local Logger = {
     _module = 'Logger',
     _loggers = {},
     __call = function(self, ...)
-        return self.new(...)
+        return self.get(...)
     end,
     __index = require('__stdlib__/stdlib/core')
 }
@@ -27,6 +27,16 @@ local _Log_mt = {
 
 local Is = require('__stdlib__/stdlib/utils/is')
 local format = string.format
+
+--- Get a saved log or create a new one if there is no saved log.
+function Logger.get(...)
+    local mod_name, log_name = ...
+    Is.Assert.String(mod_name, 'Logger must be given a mod_name as the first argument')
+    log_name = log_name or 'main'
+
+    local cache = mod_name .. '-' .. log_name
+    return Logger._loggers[cache] or Logger.new(...)
+end
 
 --- Creates a new logger object.
 -- In debug mode, the logger writes to file immediately, otherwise the logger buffers the lines.
@@ -55,9 +65,7 @@ function Logger.new(mod_name, log_name, debug_mode, options)
     log_name = log_name or 'main'
 
     local cache = mod_name .. '-' .. log_name
-    if Logger._loggers[cache] then
-        return Logger._loggers[cache]
-    end
+    Logger._loggers[cache] = nil
 
     options = options or {}
 

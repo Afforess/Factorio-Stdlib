@@ -14,20 +14,6 @@
 -- @usage local Event = require('__stdlib__/stdlib/event/event')
 
 require('__stdlib__/stdlib/config').control = true
-local Core = require('__stdlib__/stdlib/core')
-
--- Check for post registration
-local register_event = script.on_event
-_G.script.on_event = function()
-    error('Detected attempt to register an event using script.on_event while using the STDLIB event system', 1)
-end
-
--- check for pre registration
-for _, define in pairs(defines.events) do
-    if script.get_event_handler(define) then
-        error('Detected attempt to add the STDLIB event module after using script on_event')
-    end
-end
 
 local Event = {
     _module = 'Event',
@@ -48,9 +34,30 @@ local Event = {
     event_order = nil, -- Assigned when needed due to crash in 0.16.41
     count_data = {}, -- assigned when needed
     stop_processing = {}, -- just has to be unique
-    __index = Core
+    __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Event, Event)
+
+Event._script = {
+    on_event = script.on_event,
+    on_nth_tick = script.on_nth_tick,
+    on_init = script.on_init,
+    on_load = script.on_load,
+    on_configuration_changed = script.on_configuration_changed
+}
+
+-- Protections for post registrations
+for name in pairs(Event._script) do
+    _G.script[name] = function(id)
+        error('Detected attempt to register an event using script.'..name..' while using the STDLIB event system '.. id and id or '')
+    end
+end
+-- simple protections check for pre registration
+for _, define in pairs(defines.events) do
+    if script.get_event_handler(define) then
+        error('Detected attempt to add the STDLIB event module after using script.on_event')
+    end
+end
 
 local table = require('__stdlib__/stdlib/utils/table')
 --Holds the event registry
@@ -127,16 +134,16 @@ function Event.register(event_id, handler, matcher, pattern)
         if Is.String(event_id) then
             --String event ids will either be Bootstrap events or custom input events
             if bootstrap_register[event_id] then
-                script[event_id](bootstrap_register[event_id])
+                Event._script[event_id](bootstrap_register[event_id])
             else
-                register_event(event_id, Event.dispatch)
+                Event._script.on_event(event_id, Event.dispatch)
             end
         elseif event_id >= 0 then
             --Positive values will be defines.events
-            register_event(event_id, Event.dispatch)
+            Event._script.on_event(event_id, Event.dispatch)
         elseif event_id < 0 then
             --Use negative values to register on_nth_tick
-            script.on_nth_tick(math.abs(event_id), Event.dispatch)
+            Event._script.on_nth_tick(math.abs(event_id), Event.dispatch)
         end
     end
 
@@ -236,16 +243,16 @@ function Event.remove(event_id, handler, matcher, pattern)
             if Is.String(event_id) then
                 -- String event ids will either be Bootstrap events or custom input events
                 if bootstrap_register[event_id] then
-                    script[event_id](nil)
+                    Event._script[event_id](nil)
                 else
-                    register_event(event_id, nil)
+                    Event._script.on_event(event_id, nil)
                 end
             elseif event_id >= 0 then
                 -- Positive values will be defines.events
-                register_event(event_id, nil)
+                Event._script.on_event(event_id, nil)
             elseif event_id < 0 then
                 -- Use negative values to remove on_nth_tick
-                script.on_nth_tick(math.abs(event_id), nil)
+                Event._script.on_nth_tick(math.abs(event_id), nil)
             end
         elseif not found_something then
             log('Attempt to deregister already non-registered listener from event: ' .. event_id)

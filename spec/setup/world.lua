@@ -69,16 +69,16 @@ function World.bootstrap()
             registry[eid] = callback
         end,
         on_init = function(callback)
-            _G.script.on_event('on_init', callback)
+            registry['on_init'] = callback
         end,
         on_load = function(callback)
-            _G.script.on_event('on_load', callback)
+            registry['on_load'] = callback
         end,
         on_configuration_changed = function(callback)
-            _G.script.on_event('on_configuration_changed', callback)
+            registry['on_configuration_changed'] = callback
         end,
-        on_nth_tick = function(tick, callback) --luacheck: ignore
-            error('script.on_nth_tick: not implemented yet')
+        on_nth_tick = function(tick, callback)
+            registry[-math.abs(tick)] = callback
         end,
         generate_event_name = function()
             next_id = next_id + 1

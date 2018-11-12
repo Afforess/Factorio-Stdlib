@@ -1,8 +1,6 @@
 --- Additional lua globals
 -- @module Utils.Globals
 
-local STDLIB = require('__stdlib__/stdlib/config')
-
 --Since debug can be overridden we define a fallback function here.
 local _traceback = function()
     return ''
@@ -18,6 +16,7 @@ local String = require('__stdlib__/stdlib/utils/string')
 
 -- Set up default stuff for testing, defines will already be available in an active mod or busted setup specs
 if not _G.defines then
+    local STDLIB = require('__stdlib__/stdlib/config')
     if STDLIB.control or STDLIB.game then
         local world = require('__stdlib__/spec/setup/world').bootstrap()
         if STDLIB.game then
@@ -30,6 +29,12 @@ if not _G.defines then
         print(msg)
     end
 end
+
+-- Defines Mutates
+require('__stdlib__/stdlib/utils/defines/color')
+require('__stdlib__/stdlib/utils/defines/anticolor')
+require('__stdlib__/stdlib/utils/defines/lightcolor')
+require('__stdlib__/stdlib/utils/defines/time')
 
 --- Require a file that may not exist
 -- @tparam string module path to the module
@@ -74,25 +79,30 @@ function inline_if(exp, t, f)
 end
 
 -- luacheck: globals install
+install = {}
 
---- Install global version of util libraries
-install = {
-    table = function()
-        for k, v in pairs(Table) do
-            _G.table[k] = v
-        end
-    end,
-    math = function()
-        for k, v in pairs(Math) do
-            _G.math[k] = v
-        end
-    end,
-    string = function()
-        for k, v in pairs(String) do
-            _G.string[k] = v
-        end
-        setmetatable(string, nil)
-    end,
-    reload = function()
+--- install the Table library into global table
+function install.table()
+    for k, v in pairs(Table) do
+        _G.table[k] = v
     end
-}
+end
+
+--- Install the Math library into global math
+function install.math()
+    for k, v in pairs(Math) do
+        _G.math[k] = v
+    end
+end
+
+--- Install the string library into global string
+function install.string()
+    for k, v in pairs(String) do
+        _G.string[k] = v
+    end
+    setmetatable(string, nil)
+end
+
+--- Reload a module
+function install.reload()
+end

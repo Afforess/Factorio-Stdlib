@@ -7,6 +7,7 @@
 -- defines table is automatically required in all mod loading stages.
 
 --- Returns a lighter color of a named color.
+-- @table lightcolor
 -- @tfield Concepts.Color white defines.color.lightgrey
 -- @tfield Concepts.Color grey defines.color.darkgrey
 -- @tfield Concepts.Color lightgrey defines.color.grey
@@ -47,12 +48,7 @@ local _mt = {
 }
 
 setmetatable(lightcolor, _mt)
-
-if not (STDLIB and STDLIB.no_defines_color) then
-    -- Ignore assigning to read only defines table. defines table is not ready only, however
-    --luacheck: ignore defines (This is used for testing locally)
-    defines = defines or {}
-    defines.lightcolor = lightcolor
-end
+_G.defines = _G.defines or {}
+_G.defines.lightcolor = lightcolor
 
 return lightcolor

@@ -13,6 +13,7 @@ local MONTH = DAY * 30
 local YEAR = DAY * 365
 
 --- Returns the number of ticks in a second, minute, hour, day, week, month, or year.
+-- @table time
 -- @usage local ten_seconds = defines.time.second * 10
 local time = {
     second = SECOND, -- the number of Factorio ticks in a second
@@ -24,10 +25,7 @@ local time = {
     year = YEAR -- the number of Factorio ticks in a year (365 days)
 }
 
-if not (STDLIB and STDLIB.no_defines_time) then
-    --luacheck: ignore defines (This is used for testing locally)
-    defines = defines or {}
-    defines.time = time
-end
+_G.defines = _G.defines or {}
+_G.defines.time = time
 
 return time

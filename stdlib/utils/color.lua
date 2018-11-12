@@ -6,10 +6,13 @@ local Color = {}
 
 local Is = require('__stdlib__/stdlib/utils/is')
 
-Color.colors = require('__stdlib__/stdlib/utils/defines/colors')
+--- @table color @{defines.color}
 Color.color = require('__stdlib__/stdlib/utils/defines/color')
+--- @table anticolor @{defines.anticolor}
 Color.anticolor = require('__stdlib__/stdlib/utils/defines/anticolor')
+--- @table lightcolor @{defines.lightcolor}
 Color.lightcolor = require('__stdlib__/stdlib/utils/defines/lightcolor')
+
 --- Set a value for the alpha channel in the given color table.
 -- `color.a` represents the alpha channel in the given color table.
 -- <ul>

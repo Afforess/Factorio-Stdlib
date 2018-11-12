@@ -8,14 +8,6 @@
 -- require global helper functions.
 require('__stdlib__/stdlib/utils/globals')
 
--- Defines Mutates
-local color = require('__stdlib__/stdlib/utils/defines/color')
-local anticolor = require('__stdlib__/stdlib/utils/defines/anticolor')
-local lightcolor = require('__stdlib__/stdlib/utils/defines/lightcolor')
-local time = require('__stdlib__/stdlib/utils/defines/time')
-
-local string_array = require('__stdlib__/stdlib/utils/classes/string_array')
-
 local Core = {
     _VERSION = '1.0.0',
     _DESCRIPTION = 'Factorio Lua Standard Library Project',
@@ -46,14 +38,8 @@ local Core = {
         return t:__call(...)
     end,
     classes = {
-        string_array = string_array
+        string_array = require('__stdlib__/stdlib/utils/classes/string_array')
     },
-    defines = {
-        color = color,
-        anticolor = anticolor,
-        lightcolor = lightcolor,
-        time = time
-    }
 }
 Core.__index = Core
 

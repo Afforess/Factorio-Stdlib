@@ -91,7 +91,7 @@ local function removeCallbackFromNode(self, id)
 end
 
 
------- beholder table
+-- beholder table
 
 local beholder = {}
 
@@ -129,7 +129,7 @@ local function extractEventAndCallbackFromParams(params)
 end
 
 
------- Public interface
+-- Public interface
 
 function beholder.observe(...)
   local event, callback = extractEventAndCallbackFromParams({...})

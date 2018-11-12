@@ -7,6 +7,7 @@
 -- defines table is automatically required in all mod loading stages.
 
 --- A table of colors allowing retrieval by color name.
+-- @table color
 -- @usage color = defines.color.red
 -- @tfield Concepts.Color white
 -- @tfield Concepts.Color black
@@ -46,11 +47,7 @@ local _mt = {
 }
 setmetatable(color, _mt)
 
-if not (STDLIB and STDLIB.no_defines_color) then
-    -- Ignore assigning to read only defines table. defines table is not ready only, however
-    --luacheck: ignore defines (This is used for testing locally)
-    defines = defines or {}
-    defines.color = color
-end
+_G.defines = _G.defines or {}
+_G.defines.color = color
 
 return color

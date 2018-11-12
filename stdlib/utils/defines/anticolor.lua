@@ -5,6 +5,7 @@
 -- @see Concepts.Color
 
 --- Returns white for dark colors or black for lighter colors.
+-- @table anticolor
 -- @tfield Concepts.Color green defines.color.black
 -- @tfield Concepts.Color grey defines.color.black
 -- @tfield Concepts.Color lightblue defines.color.black
@@ -66,11 +67,7 @@ local _mt = {
 
 setmetatable(anticolor, _mt)
 
-if not (STDLIB and STDLIB.no_defines_color) then
-    -- Ignore assigning to read only defines table. defines table is not ready only, however
-    --luacheck: ignore defines (This is used for testing locally)
-    defines = defines or {}
-    defines.anticolor = anticolor
-end
+_G.defines = _G.defines or {}
+_G.defines.anticolor = anticolor
 
 return anticolor

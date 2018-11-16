@@ -43,7 +43,8 @@ Event._script = {
     on_nth_tick = script.on_nth_tick,
     on_init = script.on_init,
     on_load = script.on_load,
-    on_configuration_changed = script.on_configuration_changed
+    on_configuration_changed = script.on_configuration_changed,
+    generate_event_name = script.generate_event_name
 }
 
 -- Protections for post registrations
@@ -379,12 +380,13 @@ function Event.generate_event_name(event_name)
     if Is.Number(Event.custom_events[event_name]) then
         id = Event.custom_events[event_name]
     else
-        id = script.generate_event_name()
+        id = Event._script.generate_event_name()
         Event.custom_events[event_name] = id
     end
     return id
 end
 
+-- TODO is this even needed?
 function Event.set_event_name(event_name, id)
     Is.Assert.String(event_name, 'event_name must be a string')
     Is.Assert.Number(id)
@@ -392,6 +394,7 @@ function Event.set_event_name(event_name, id)
     return Event.custom_events[event_name]
 end
 
+-- TODO is this even needed?
 function Event.get_event_name(event_name)
     Is.Assert.String(event_name, 'event_name must be a string')
     return Event.custom_events[event_name]

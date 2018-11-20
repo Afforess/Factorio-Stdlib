@@ -30,12 +30,18 @@ local Core = {
         OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     ]],
     __module = 'Core',
+    -- TODO Note what this was for!
     __call = function(t, ...)
         return t:__call(...)
     end,
+    -- TODO remove these because why?
     classes = {
         string_array = require('__stdlib__/stdlib/utils/classes/string_array')
     },
+    concat = function(lhs, rhs)
+        --Sanitize to remove address
+        return tostring(lhs):gsub('(%w+)%: %x+', '%1: (ADDR)') .. tostring(rhs):gsub('(%w+)%: %x+', '%1: (ADDR)')
+    end
 }
 Core.__index = Core
 
@@ -54,7 +60,7 @@ function Core.VALID_FILTER(v)
 end
 
 function Core.get_file_path(append)
-    return script.mod_name .. '/'.. append
+    return script.mod_name .. '/' .. append
 end
 
 --- load the stdlib into globals, by default it loads everything into an ALLCAPS name.
@@ -86,7 +92,7 @@ function Core.create_stdlib_globals(files)
             FORCE = 'stdlib/event/force'
         }
     for glob, path in pairs(files) do
-        _G[glob] = require('__stdlib__/'..(path:gsub('%.', '/'))) -- extra () required to emulate select(1)
+        _G[glob] = require('__stdlib__/' .. (path:gsub('%.', '/'))) -- extra () required to emulate select(1)
     end
     return Core
 end
@@ -100,6 +106,30 @@ end
 
 function Core.inspect(self)
     return inspect(self, {process = no_meta})
+end
+
+function Core.help(self)
+    local help_string = ''
+    local tab = self
+
+    while type(tab) == 'table' do
+        local keys = {}
+        for key in pairs(tab) do
+            if not key:find('^%_%w') then
+                keys[#keys + 1] = key
+            end
+        end
+        table.sort(
+            keys,
+            function(a, b)
+                return a < b
+            end
+        )
+        help_string = help_string .. table.concat(keys, ', ') .. '\n\n'
+        local mt = getmetatable(tab)
+        tab = mt and mt.__index
+    end
+    return help_string
 end
 
 return Core

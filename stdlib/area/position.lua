@@ -7,7 +7,7 @@
 -- @see defines.direction
 
 local Position = {
-    _module = 'Position',
+    __module = 'Position',
     __class = 'Position',
     __index = require('__stdlib__/stdlib/core')
 }

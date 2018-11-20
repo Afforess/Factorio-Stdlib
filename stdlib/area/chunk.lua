@@ -4,7 +4,7 @@
 -- @usage local Chunk = require('__stdlib__/stdlib/area/chunk')
 -- @see Concepts.ChunkPosition
 
-local Chunk = {_module = 'Chunk'}
+local Chunk = {__module = 'Chunk'}
 setmetatable(Chunk, require('__stdlib__/stdlib/core'))
 
 local Is = require('__stdlib__/stdlib/utils/is')

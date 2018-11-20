@@ -2,7 +2,7 @@
 -- @module Data.Util
 
 local Util = {
-    _module = 'Util'
+    __module = 'Util'
 }
 setmetatable(Util, require('__stdlib__/stdlib/core'))
 

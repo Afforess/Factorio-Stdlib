@@ -29,11 +29,7 @@ local Core = {
         ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
         OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     ]],
-    _module = 'Core',
-    _concat = function(lhs, rhs)
-        --Sanitize to remove address
-        return tostring(lhs):gsub('(%w+)%: %x+', '%1: (ADDR)') .. tostring(rhs):gsub('(%w+)%: %x+', '%1: (ADDR)')
-    end,
+    __module = 'Core',
     __call = function(t, ...)
         return t:__call(...)
     end,

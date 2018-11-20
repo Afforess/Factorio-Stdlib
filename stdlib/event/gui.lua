@@ -5,7 +5,7 @@
 local Event = require('__stdlib__/stdlib/event/event')
 
 local Gui = {
-    _module = 'Gui'
+   __module = 'Gui'
 }
 setmetatable(Gui, require('__stdlib__/stdlib/core'))
 

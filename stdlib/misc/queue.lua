@@ -5,7 +5,7 @@
 -- @usage local Queue = require('__stdlib__/stdlib/lists/queue')
 
 local Queue = {
-    _module = 'Queue',
+   __module = 'Queue',
     __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Queue, Queue)

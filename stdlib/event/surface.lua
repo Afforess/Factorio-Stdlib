@@ -9,7 +9,7 @@
 local Event = require('__stdlib__/stdlib/event/event')
 
 local Surface = {
-    _module = 'Surface',
+   __module = 'Surface',
     _new_surface_data = {}
 }
 setmetatable(Surface, require('__stdlib__/stdlib/core'))

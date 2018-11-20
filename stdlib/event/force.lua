@@ -10,7 +10,7 @@
 local Event = require('__stdlib__/stdlib/event/event')
 
 local Force = {
-    _module = 'Force',
+   __module = 'Force',
     _new_force_data = {}
 }
 setmetatable(Force, require('__stdlib__/stdlib/core'))

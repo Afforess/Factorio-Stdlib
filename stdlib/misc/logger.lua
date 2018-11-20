@@ -6,7 +6,7 @@
 -- local LOGGER = require('__stdlib__/stdlib/log/logger').new(...)
 
 local Logger = {
-    _module = 'Logger',
+   __module = 'Logger',
     _loggers = {},
     __call = function(self, ...)
         return self.get(...)
@@ -70,7 +70,7 @@ function Logger.new(mod_name, log_name, debug_mode, options)
     options = options or {}
 
     local Log = {
-        _module = 'Log',
+       __module = 'Log',
         mod_name = mod_name,
         log_name = log_name,
         debug_mode = debug_mode,

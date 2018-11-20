@@ -4,7 +4,7 @@
 -- @module Event.Trains
 
 local Trains = {
-    _module = 'Trains'
+   __module = 'Trains'
 }
 setmetatable(Trains, require('__stdlib__/stdlib/core'))
 

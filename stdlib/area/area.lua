@@ -7,7 +7,7 @@
 -- @see Concepts.Position
 
 local Area = {
-    _module = 'Area',
+    __module = 'Area',
     __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Area, Area)

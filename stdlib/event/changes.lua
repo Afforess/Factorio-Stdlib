@@ -6,7 +6,7 @@
 local Event = require('__stdlib__/stdlib/event/event')
 
 local Changes = {
-    _module = 'Changes'
+   __module = 'Changes'
 }
 setmetatable(Changes, require('__stdlib__/stdlib/core'))
 

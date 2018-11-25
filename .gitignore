@@ -25,3 +25,4 @@ mod/*
 temp*.lua
 stdlib/data/modules/tester.lua
 scratchpad.lua
+*.bak.*

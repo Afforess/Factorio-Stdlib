@@ -24,7 +24,7 @@ function Resource.get_resources_at(surface, position)
     local surfaces = Surface.lookup(surface)
     Is.Assert(#surfaces == 1, 'invalid surface')
 
-    local tile_at_position = Tile.from_position(position)
+    local tile_at_position = Tile.from_position(Tile(position))
     local tile_area = Tile.to_area(tile_at_position)
 
     local resources_at_tile = table.first(surfaces).find_entities_filtered {area = tile_area, type = 'resource'} or {}
@@ -91,7 +91,7 @@ function Resource.get_resource_patch_at(surface, position, type)
     local bitwise_and = bit32.band
     local bitwise_lshift = bit32.lshift
 
-    local initial_tile = Tile.from_position(filtered_resource_entities[1].position)
+    local initial_tile = Tile.from_position(Tile(filtered_resource_entities[1].position))
 
     -- do a BFS starting from the initial tile
     local search_queue = Queue.new()

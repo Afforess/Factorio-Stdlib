@@ -4,22 +4,45 @@
 -- @usage local Chunk = require('__stdlib__/stdlib/area/chunk')
 -- @see Concepts.ChunkPosition
 
-local Chunk = {__module = 'Chunk'}
-setmetatable(Chunk, require('__stdlib__/stdlib/core'))
+local Chunk = {
+    __module = 'Chunk',
+    __index = require('__stdlib__/stdlib/core')
+}
+setmetatable(Chunk, Chunk)
 
 local Is = require('__stdlib__/stdlib/utils/is')
 local Game = require('__stdlib__/stdlib/game')
 local Position = require('__stdlib__/stdlib/area/position')
+local area_path = '__stdlib__/stdlib/area/area'
+
+Chunk.__call = Position.__call
+-- Chunk.__call = function(_, ...)
+--     local t = type((...))
+--     if t == 'table' then
+--         return Position.new((...))
+--     elseif t == 'string' then
+--         return Position.from_string(...)
+--     else
+--         return Position.construct(...)
+--     end
+-- end
 
 --- Gets the chunk position of a chunk where the specified position resides.
 -- @function Chunk.from_position
--- @see Area.Position.chunk_position
-Chunk.from_position = Position.chunk_position
+-- @see Area.Position.to_chunk_position
+Chunk.position = Position.to_chunk_position
 
 --- Gets the area of a chunk from the specified chunk position.
--- @function Chunk.to_area
--- @see Area.Position.expand_to_chunk_area
-Chunk.to_area = Position.expand_to_chunk_area
+-- @tparam Concepts.ChunkPosition pos the chunk position
+-- @treturn Concepts.BoundingBox the chunk's area
+function Chunk.to_area(pos)
+    local Area = require(area_path)
+    -- Todo, use to chunk pos
+    local left_top = Position.construct(pos.x * 32, pos.y * 32)
+    local right_bottom = Position.add(Position.copy(left_top), 32, 32)
+
+    return Area.load {left_top = left_top, right_bottom = right_bottom}
+end
 
 --- Gets the user data that is associated with a chunk.
 -- The user data is stored in the global object and it persists between loads.

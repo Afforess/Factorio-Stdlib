@@ -4,535 +4,540 @@ require('__stdlib__/spec/setup/defines')
 
 local Position = require('__stdlib__/stdlib/area/position')
 local P = Position
+describe('Position', function ()
 
-describe('Constructors', function ()
+    local C = spy.on(Position, 'construct')
+    local N = spy.on(Position, 'new')
+    local L = spy.on(Position, 'load')
+    local K = spy.on(Position, 'from_key')
+    local S = spy.on(Position, 'from_string')
+    local a, a1
+    local zero
+    local ps, sq, co
 
-    local a, A, C, N
     before_each(function()
-        C = spy.on(Position, "construct")
-        N = spy.on(Position, "new")
-        a = {1, 1}
-        A = {x = 1, y = 1}
+        a = {x = 1, y = 1}
+        a1 = {1, 1}
+        zero = {x = 0, y = 0}
+        ps = {
+            a = Position(4, 8),
+            b = Position(-12, 13),
+            c = Position(8, -6),
+            d = Position(-10, -11)
+        }
+        sq = {
+            a = Position(12, 12),
+            b = Position(-12, 12),
+            c = Position(12, -12),
+            d = Position(-12, -12)
+        }
+        co = {
+            a = Position(-12, -12),
+            b = Position(12, 12),
+            c = Position(-12, 12),
+            d = Position(12, -12),
+        }
+        C:clear()
+        N:clear()
+        L:clear()
+        K:clear()
+        S:clear()
     end)
 
-    describe('.__index', function()
-        it('should point to core', function()
-            assert.is.truthy(getmetatable(Position)._VERSION)
-        end)
-    end)
+    describe('Constructors', function ()
 
-    describe('._module', function()
-        it('should ', function()
-            assert.same('Position', Position._module)
-        end)
-    end)
-
-    describe('.new', function()
-        it('should create a new version from table', function()
-            assert.not_same(a, Position.new(a))
-            assert.same(a[1], Position.new(a).x)
+        describe('.__index', function()
+            it('should point to core', function()
+                assert.is.truthy(getmetatable(Position)._VERSION)
+            end)
         end)
 
-        it('should error if not a table', function()
-            assert.has_error(function() Position.new(1) end, "missing position argument")
+        describe('.new', function()
+            it('should create a new version from table', function()
+                assert.not_same(a1, Position.new(a1))
+                assert.same(a1[1], Position.new(a1).x)
+            end)
+
+            it('should error if not a table', function()
+                assert.has_error(function() Position.new(1) end, 'Missing position table')
+            end)
+
+            it('should have the correct metatable', function()
+                assert.same('position', getmetatable(Position.new(a1)).__class)
+            end)
+
+            it('should return itself if it is already a Position', function()
+                local b = Position.new(a1)
+                local c = Position.new(b)
+                local d = Position.new(a1)
+                setmetatable(b, nil)
+                setmetatable(c, nil)
+                setmetatable(d, nil)
+                assert.equals(b, c)
+                assert.not_equals(b, d)
+                assert.spy(N).was_called(3)
+            end)
         end)
 
-        it('should have the correct metatable', function()
-            assert.same(Position._mt, getmetatable(Position.new(a)))
+        describe('.construct', function()
+            it('should construct from parameters', function()
+                assert.same({x = -4, y = 21}, Position.construct(-4, 21))
+                assert.same(3, Position.construct(3).y) -- x copied to y
+                assert.same(3, Position.construct(1, 3).y) -- x and y
+                assert.same(0, Position.construct().y) -- empty params
+                assert.same(0, Position.construct(nil, 4).x)
+                assert.spy(C).was_called(5)
+            end)
+            it('should construct from params if self is passed as first argument', function()
+                assert.same(3, Position.construct(Position.new(a1), 1, 3).y)
+                assert.same(3, Position(1, 3).y)
+            end)
         end)
 
-        it('should return itself if it is already a Position', function()
-            local b = Position.new(a)
-            local c = Position.new(b)
-            local d = Position.new(a)
-            setmetatable(b, nil)
-            setmetatable(c, nil)
-            setmetatable(d, nil)
-            assert.equals(b, c)
-            assert.not_equals(b, d)
-            assert.spy(N).was_called(3)
-        end)
-    end)
+        describe('.__call', function()
+            it('should call the correct constructor', function()
+                local str = spy.on(Position, 'from_string')
+                Position(a1)
+                Position(1)
+                Position('1, 2')
+                Position('{1, 2}')
+                assert.spy(C).was_called(2)
+                assert.spy(N).was_called(2)
+                assert.spy(str).was_called(2)
+            end)
 
-    describe('.construct', function()
-        it('should construct from parameters', function()
-            assert.same({x = -4, y = 21}, Position.construct(-4, 21))
-            assert.same(3, Position.construct(3).y) -- x copied to y
-            assert.same(3, Position.construct(1, 3).y) -- x and y
-            assert.same(0, Position.construct().y) -- empty params
-            assert.same(0, Position.construct(nil, 4).x)
-            assert.spy(C).was_called(5)
-        end)
-        it('should construct from params if self is passed as first argument', function()
-            assert.same(3, Position.construct(Position.new(a), 1, 3).y)
-            assert.same(3, Position(1, 3).y)
-        end)
-    end)
-
-    describe('.__call', function()
-        it('should call the correct constructor', function()
-            local str = spy.on(Position, 'from_string')
-            Position(a)
-            Position(1)
-            Position('1, 2')
-            Position('{1, 2}')
-            assert.spy(C).was_called(2)
-            assert.spy(N).was_called(2)
-            assert.spy(str).was_called(2)
+            it('should create correctly', function()
+                assert.same({x = 0, y = 0}, Position())
+                assert.same({x = 1, y = 1}, Position(1, 1))
+                assert.same({x = 1, y = 1}, Position(1))
+                assert.same({x = 1, y = 1}, Position(a1))
+            end)
         end)
 
-        it('should create correctly', function()
-            assert.same({x = 0, y = 0}, Position())
-            assert.same({x = 1, y = 1}, Position(1, 1))
-            assert.same({x = 1, y = 1}, Position(1))
-            assert.same({x = 1, y = 1}, Position(a))
+        describe('.copy', function()
+            it('should copy correctly', function()
+                assert.same(Position(a1), Position(a1))
+                assert.not_equals(rawtostring(a1), rawtostring(Position(a1)))
+                local b = Position(a1)
+                local c = Position.copy(b)
+                assert.same(b, c)
+                c.x = 12
+                assert.not_same(b, c)
+                assert.not_equals(rawtostring(b), rawtostring(c))
+            end)
         end)
-    end)
 
-    describe('.copy', function()
-        it('should copy correctly', function()
-            assert.same(Position(a), Position(a))
-            assert.not_equals(setmetatable(Position(a), nil), setmetatable(Position(a), nil))
-            local b = Position(a)
-            local c = Position.copy(b)
-            assert.same(b, c)
-            c.x = 12
-            assert.not_same(b, c)
-            assert.not_equals(setmetatable(b, nil), setmetatable(c, nil))
+        describe('.from_string', function()
+            it('should construct from a string', function()
+                assert.same(a, Position.from_string('{x = 1, y = 1}'))
+                assert.spy(N).was_called(1)
+                assert.same(a, Position.from_string('{1, 1}'))
+                assert.spy(N).was_called(2)
+                assert.same({x = 1, y = 2}, Position.from_string('1, 2'))
+                assert.spy(C).was_called(1)
+            end)
         end)
-    end)
 
-    describe('.from_string', function()
-        it('should construct from a string', function()
-            assert.same(A, Position.from_string('{x = 1, y = 1}'))
-            assert.spy(N).was_called(1)
-            assert.same(A, Position.from_string('{1, 1}'))
-            assert.spy(N).was_called(2)
-            assert.same({x = 1, y = 2}, Position.from_string('1, 2'))
-            assert.spy(C).was_called(1)
+        describe('.from_key', function()
+            it('should create correctly', function()
+                assert.same({x = 1, y = 2}, Position.from_key('1,2'))
+                assert.same({x = 12, y = -3}, Position.from_key('12,-3'))
+                assert.same({x = -12, y = 3}, Position.from_key('-12,3'))
+                assert.same({x = -12, y = -3}, Position.from_key('-12,-3'))
+            end)
         end)
-    end)
 
-    describe('.from_key', function()
-        it('should create correctly', function()
-            assert.same({x = 1, y = 2}, Position.from_key('1/2'))
-            assert.same({x = 12, y = -3}, Position.from_key('12/-3'))
-            assert.same({x = -12, y = 3}, Position.from_key('-12/3'))
-            assert.same({x = -12, y = -3}, Position.from_key('-12/-3'))
-            assert.spy(N).was_called(4)
-        end)
-    end)
-
-    describe('.load', function()
-        it('should load the metatable to a valid table', function()
-            assert.same(Position._mt, getmetatable(Position.load({x = 3, y = -2})))
-            assert.has_no_error(function() Position.load({x = 1, y = -2}) end)
-        end)
-    end)
-end)
-
-describe('Position Methods', function()
-    -- Position Methods modify the position table directly unless immutable is set
-    local a, A, b, Z
-    before_each(function()
-        Position.immutable = false
-        Z = Position()
-        a = {1.25, -1.75}
-        b = {x = 1.25, y = -1.75}
-        A = Position(a)
-    end)
-
-    describe('.center', function()
-        it('should ', function()
-            assert.same({x = 1.5, y = -1.5}, A:center())
-            assert.not_same(b, A)
-        end)
-        it('returns the position centered on the tile', function()
-            local pos1 = {23, -54.64}
-            local pos2 = {23.12, -54.95}
-            local pos3 = {-23.76, 54.12}
-            local pos4 = Position.new{-23.31543265, 54}
-
-            assert.same({x = 23.5, y = -54.5}, Position.center(pos1))
-            assert.same({x = 23.5, y = -54.5}, Position.center(pos2))
-            assert.same({x = -23.5, y = 54.5}, Position.center(pos3))
-            assert.same({x = -23.5, y = 54.5}, pos4:center())
-        end)
-        it('should not mutate', function()
-            Position.immutable = true
-            assert.same(1.5, A:center().x)
-            assert.same(b, A)
+        describe('.load', function()
+            it('should load the metatable to a valid table', function()
+                assert.same('position', getmetatable(Position.load({x = 3, y = -2})).__class)
+                assert.has_no_error(function() Position.load({x = 1, y = -2}) end)
+                assert.spy(L).was.called(2)
+            end)
         end)
     end)
 
-    describe('.flip', function()
-        it('should ', function()
-            assert.same(Position(-1.75, 1.25), A:flip())
-            assert.not_same(b, A)
-        end)
-        it('should not mutate', function()
-            Position.immutable = true
-            A:flip()
-            assert.same(b, A)
-        end)
-    end)
-
-    describe('.tile_position', function()
-        it('should ', function()
-            assert.same(Position(1, -2), A:tile_position())
-            assert.same(1, A.x)
-            assert.not_same(b, A)
-        end)
-        it('should not mutate', function()
-            Position.immutable = true
-            A:tile_position()
-            assert.same(b, A)
-        end)
-    end)
-
-    describe('.chunk_position, .to_chunk_position', function()
-        it('should ', function()
-            assert.same(P(), P.chunk_position(Z))
-            assert.same(P(1, 1), P.chunk_position({32, 32}))
-            assert.same(P(0, -1), P.chunk_position({0, -32}))
-            assert.same(P(0, -1), A:chunk_position())
-            assert.not_same(b, A)
-        end)
-        it('should not mutate', function()
-            Position.immutable = true
-            assert.same(0, A:chunk_position().x)
-            assert.same(b, A)
-        end)
-    end)
-
-    describe('.from_chunk_position', function()
-        it('should ', function()
-            assert.same(32, A:from_chunk_position().x)
-            assert.not_same(b, A)
-        end)
-        it('should not mutate', function()
-            Position.immutable = true
-            assert.same(32, A:from_chunk_position().x)
-            assert.same(b, A)
-        end)
-    end)
-
-    describe('.perpendicular', function()
-        it('should ', function()
-
-        end)
-        it('should not mutate', function()
-            Position.immutable = true
-            A:perpendicular()
-            assert.same(b, A)
-        end)
-    end)
-
-    describe('.translate', function()
-        it('should ', function()
-            local pos = {1, -4}
-            assert.same({x = 1, y = -5}, Position.translate(pos, defines.direction.north, 1))
-            assert.same({x = 1, y = -6}, Position.translate(pos, defines.direction.south, -2))
-            assert.same({x = 2, y = -4}, Position.translate(pos, defines.direction.east, 1))
-            assert.same({x = -2, y = -4}, Position.translate(pos, defines.direction.west, 3))
-            assert.same({x = 2, y = -3}, Position.translate(pos, defines.direction.southeast, 1))
-            assert.same({x = 0, y = -3}, Position.translate(pos, defines.direction.southwest, 1))
-            assert.same({x = 2, y = -5}, Position.translate(pos, defines.direction.northeast, 1))
-            assert.same({x = 0, y = -5}, Position.translate(pos, defines.direction.northwest, 1))
-        end)
-        it('should mutate', function()
-            Z:translate(0, 1):translate(0, 1):translate(0, 1):translate(0, 1)
-            assert.same(Position(0, -4), Z)
-
-        end)
-        it('should not mutate', function()
-            Position.immutable = true
-            Z:translate(0, 1):translate(0, 1):translate(0, 1):translate(0, 1)
-            assert.same(Position(), Z)
-        end)
-    end)
+    describe('Position Methods', function()
 
 
-    describe('.length', function()
-        it('should ', function()
+        before_each(function ()
 
         end)
-        it('should not mutate', function()
-            Position.immutable = true
-            --assert.same(1.5, A:length().x)
-            assert.same(b, A)
-        end)
-    end)
 
-    describe('.add', function()
-        it('should ', function()
-            local pos1 = {1, -4}
-            local pos2 = {x = -5, y = 25}
-            assert.same({x = -4, y = 21}, Position.add(pos1, pos2))
-            assert.same(Position(3, -1), Z:add{3, -1})
-            assert.same(Position(6, 2), Z:add(3))
-            assert.not_same(Position(), Z)
+        --[[
+            add, subtract, multiply, divide, mod, unary, abs, center, ceil, floor, center, between,
+            perpendicular, swap, offset_along_line, translate, trim, projection, reflection,
+            average, min, mix, closest, farthest, mix_xy, max_xy
+        ]]
+        it('.add', function ()
+            assert.same(P(2, 2), P(1, 1):add(1))
+            assert.same(P(2, 3), P(1, 1):add(1, 2))
+            assert.same(P(3, -1), P(1, 1):add{2, -2})
+            assert.same(P(0, 0), P(1, 1):add(-1))
         end)
-
-        it('should not mutate', function()
-            Position.immutable = true
-            assert.same(Position(3, 3), Z:add(3))
-            assert.same(Position(), Z)
+        it('.subtract', function ()
+            assert.same(P(2, 2), P(3, 3):subtract(1))
+            assert.same(P(3, 3), P(5, 1):subtract{2, -2})
+            assert.same(P(0, 0), P(-1, -1):subtract(-1))
+        end)
+        it('.divide', function ()
+            assert.same(P(2, 4), P(4, 8):divide(2))
+            assert.same(P(2, 2), P(4, 8):divide{2, 4})
+            assert.same(P(2, -2), P(4, 8):divide{2, -4})
+        end)
+        it('.multiply', function ()
+            assert.same(P(2, 2), P(4, 4):multiply(.5))
+            assert.same(P(2, -2), P(4, 4):multiply{.5, -.5})
+        end)
+        it('.mod', function ()
+            assert.same(P(0, 0), P(4, 4):mod(2))
+            assert.same(P(0, 0), P(4, 4):mod{2, -2})
+        end)
+        it('.closest', function ()
+            assert.same(ps.a, P():closest({ps.b, ps.c, ps.d, ps.a}))
+            assert.same(ps.a, P.closest(P(zero)(), {ps.b, ps.c, ps.d, ps.a}))
+        end)
+        it('.farthest', function ()
+            assert.same(ps.b, P():farthest({ps.b, ps.c, ps.d, ps.a}))
+            assert.same(ps.b, P.farthest(P(zero)(), {ps.b, ps.c, ps.d, ps.a}))
+        end)
+        it('.unary', function ()
+            assert.same(P(2, 2), P(-2, -2):unary())
+        end)
+        it('.normalize', function ()
+            assert.same({x = 2.46, y = 4.72}, P(2.4563787, 4.723444432):normalize())
+        end)
+        it('.abs', function ()
+            assert.same(P(2, 2), P(-2, 2):abs())
+        end)
+        it('.ceil', function ()
+            assert.same(P(2, 3), P(2.4, 2.8):round())
+            assert.same(P(-2, -3), P(-2.4, -2.8):round())
+        end)
+        it('.ceil', function ()
+            assert.same(P(2, -2), P(1.24, -2.34):ceil())
+        end)
+        it('.floor', function ()
+            assert.same(P(1, -3), P(1.24, -2.34):floor())
+        end)
+        it('.center', function ()
+            assert.same(P(1.5, -1.5), P(1.23, -1.65):center())
+        end)
+        it('.between', function ()
+            assert.same(P(-6, -6), P(0, 0):between(P(-12, -12)))
+            assert.same(P(6, -6), P(0, 0):between(P(12, -12)))
+            assert.same(P(6, 6), P(0, 0):between(P(12, 12)))
+            assert.same(P(-6, 6), P(0, 0):between(P(-12, 12)))
+        end)
+        it('.perpendicular', function ()
+            assert.same(P(-12, 12), P(12, 12):perpendicular())
+        end)
+        it('.swap', function ()
+            assert.same(P(1.25, -2.55), P(-2.55, 1.25):swap())
+        end)
+        it('.trim', function ()
+            local max = P(10, 10)
+            assert.same(P(3.5355339059327378, 3.5355339059327378), max:trim(5))
+            max = P(10, 0)
+            assert.same(P(5, 0), max:trim(5))
+        end)
+        it('.lerp', function ()
+            local from, to = P(), P(-10, 0)
+            assert.same(P(-8, 0), from:lerp(to, .8))
+        end)
+        it('.offset_along_line', function ()
+            assert.same(P(4.59, 4.59), P():offset_along_line(P(6,6), 2))
+        end)
+        it('.translate', function ()
+            local pos = P{1, -4}
+            assert.same({x = 1, y = -5}, pos:translate(defines.direction.north, 1))
+            assert.same({x = 1, y = -3}, pos:translate(defines.direction.south, 2))
+            assert.same({x = 2, y = -3}, pos:translate(defines.direction.east, 1))
+            assert.same({x = -1, y = -3}, pos:translate(defines.direction.west, 3))
+            assert.same({x = 0, y = -2}, pos:translate(defines.direction.southeast, 1))
+            assert.same({x = -1, y = -1}, pos:translate(defines.direction.southwest, 1))
+            assert.same({x = 0, y = -2}, pos:translate(defines.direction.northeast, 1))
+            assert.same({x = -1, y = -3}, pos:translate(defines.direction.northwest, 1))
+            assert.same({x = -1, y = 0}, pos:translate(defines.direction.north, -3))
+        end)
+        it('projection', function ()
+            local b, c = P(5, 10), P(10, 10)
+            assert.same(P(7.5, 10), b:projection(c))
+        end)
+        it('reflection', function ()
+            local b, c = P(5, 10), P(10, 10)
+            assert.same(P(10, 5), b:reflection(c))
         end)
     end)
 
-    describe('.subtract', function()
-        it('should ', function()
-            local pos1 = {1, -4}
-            local pos2 = {x = -5, y = 25}
-            assert.same({x = 6, y = -29}, Position.subtract(pos1, pos2))
-            assert.same(Position(-3, 1), Z:subtract{3, -1})
-            assert.not_same(Position(), Z)
+    describe('New Position Methods', function ()
+        it('.average', function ()
+            assert.same(zero, P.average({sq.a, sq.b, sq.c, sq.d}))
+            assert.same(zero, sq.a:average({sq.b, sq.c, sq.d}))
         end)
-        it('should not mutate', function()
-            Position.immutable = true
-            assert.same(Position(-1, -1), Z:subtract(1))
-            assert.same(Position(), Z)
+        it('.min', function ()
+            local m = P(4, 8)
+            assert.same(m, P.min({ps.a, ps.b, ps.c, ps.d}))
+            assert.same(m, ps.a:min({ps.b, ps.c, ps.d}))
         end)
-    end)
-
-    describe('.multiply', function()
-        it('should ', function()
-
+        it('.max', function ()
+            local m = P(-12, 13)
+            assert.same(m, P.max({ps.a, ps.b, ps.c, ps.d}))
+            assert.same(m, ps.a:max({ps.b, ps.c, ps.d}))
         end)
-        it('should not mutate', function()
-            Position.immutable = true
-
-            assert.same(b, A)
+        it('.min_xy', function ()
+            local m = P(-12, -11)
+            assert.same(m, P.min_xy({ps.a, ps.b, ps.c, ps.d}))
+            assert.same(m, ps.a:min_xy({ps.b, ps.c, ps.d}))
         end)
-    end)
-
-    describe('.divide', function()
-        it('should ', function()
-
+        it('.max_xy', function ()
+            local m = P(8, 13)
+            assert.same(m, P.max_xy({ps.a, ps.b, ps.c, ps.d}))
+            assert.same(m, ps.a:max_xy({ps.b, ps.c, ps.d}))
         end)
-        it('should not mutate', function()
-            Position.immutable = true
-
-            assert.same(b, A)
+        it('.intersection', function ()
+            assert.same(P(), P.intersection(co.a, co.b, co.c, co.d))
+            assert.not_same(P(), P.intersection(co.a, co.c, co.b, co.d))
         end)
     end)
 
-    describe('.between', function()
-        it('should ', function()
-
+    describe('Position Conversion Functions', function ()
+        --[[
+            from_pixels, to_pixels, to_chunk_position, from_chunk_position,
+        ]]
+        it('.from_pixels', function ()
+            assert.same(P(2), P(64):from_pixels())
         end)
-        it('should not mutate', function()
-            Position.immutable = true
-
-            assert.same(b, A)
+        it('.to_pixels', function ()
+            assert.same(P(64), P(2):to_pixels())
         end)
-    end)
-
-    describe('.unary', function()
-        it('should ', function()
-
+        it('.to_chunk_position', function ()
+            assert.same(P(0, -1), P(16.5, -16.42):to_chunk_position())
         end)
-        it('should not mutate', function()
-            Position.immutable = true
-
-            assert.same(b, A)
+        it('.from_chunk_position', function ()
+            assert.same(P(0, -32), P(0, -1):from_chunk_position())
         end)
     end)
 
-    describe('.offset', function()
-        it('should ', function()
-            local pos = {1, -4}
-            assert.same({x = 5, y = 5}, Position.offset(pos, 4, 9))
-            assert.same({x = 1, y = -4}, Position.offset(pos, 0, 0))
-            assert.same({x = 0, y = 0}, Position.offset(pos, -1, 4))
-            assert.same(Position(-1, 4), Z:offset(-1, 4))
-            assert.not_same(Position(), Z)
+    describe('Position Functions', function()
+        --[[
+            increment, atan2, angle, cross, dot, inside, len, len_squared, to_string, to_key, unpack, pack, equals,
+            less_than, less_than_eq, distance_squared, distance, manhattan_distance,
+            is_position, is_zero, loaded, direction_to, simple_direction_to
+        ]]
+        describe('.increment', function()
+            local pos = Position()
+
+            it('should error with no position argument', function()
+                assert.has_error(function() return Position.incremement() end)
+            end)
+
+            it('should return a function closure', function()
+                local f = Position.increment(pos)
+                assert.is_true(type(f)=='function')
+            end)
+
+            it('should not increment on the first call by default', function()
+                local f = Position.increment(pos, 1)
+                assert.same(Position(), f())
+            end)
+
+            it('should increment the first call when requested', function()
+                local f = Position.increment(pos, 1, nil, true)
+                assert.same({x=1, y=0}, f())
+                assert.same({x=2, y=0}, f())
+            end)
+
+            it('should return the same position', function()
+                local f = Position.increment(pos)
+                assert.same({x=0, y=0}, f())
+                assert.same({x=0, y=0}, f())
+                local g = Position():increment(nil, nil, true)
+                assert.same({x=0, y=0}, g())
+                assert.same({x=0, y=0}, g())
+            end)
+
+            it('should increment using the defaults', function()
+                local f = Position.increment(pos, 0, -1)
+                assert.same({x=0, y=0}, f())
+                assert.same({x=0, y=-1}, f())
+            end)
+
+            it('should increment using passed values', function()
+                local f = Position.increment(pos)
+                assert.same({x=0, y=0}, f(0, -1))
+                assert.same({x=0, y=-1}, f(0, -1))
+                assert.same({x=0, y=-3}, f(0, -2))
+            end)
+
+            it('should increment using passed values with defaults set', function()
+                local f = Position.increment(pos, -1, -1)
+                assert.same({x=0, y=0}, f())
+                assert.same({x=-1, y=-1}, f())
+                assert.same({x=0, y=1}, f(1, 2))
+                assert.same({x=1, y=4}, f(1, 3))
+            end)
         end)
-        it('should not mutate', function()
-            Position.immutable = true
-
-            assert.same(b, A)
+        it('.atan2', function ()
+            assert.same(-1.5707963267948966, P(10, 0):atan2(P(5,0)))
         end)
-    end)
-end)
-
-describe('Position Functions', function()
-    describe('.increment', function()
-        local pos = Position()
-
-        it('should error with no position argument', function()
-            assert.has_error(function() return Position.incremement() end)
+        it('.angle', function ()
+            assert.same(90, P(10, 0):angle(P(0, 10)))
         end)
-
-        it('should return a function closure', function()
-            local f = Position.increment(pos)
-            assert.is_true(type(f)=="function")
+        it('.cross', function ()
+            assert.same(50, P(10, 0):cross(P(5, 5)))
         end)
-
-        it('should not increment on the first call by default', function()
-            local f = Position.increment(pos, 1)
-            assert.same(Position(), f())
+        it('.dot', function ()
+            assert.same(50, P(10, 0):dot(P(5, 5)))
         end)
-
-        it('should increment the first call when requested', function()
-            local f = Position.increment(pos, 1, nil, true)
-            assert.same({x=1, y=0}, f())
-            assert.same({x=2, y=0}, f())
+        it('.len', function ()
+            assert.same(10, P(10, 0):len())
         end)
-
-        it('should return the same position', function()
-            local f = Position.increment(pos)
-            assert.same({x=0, y=0}, f())
-            assert.same({x=0, y=0}, f())
-            local g = Position():increment(nil, nil, true)
-            assert.same({x=0, y=0}, g())
-            assert.same({x=0, y=0}, g())
+        it('.len_squared', function ()
+            assert.same(100, P(10, 0):len_squared())
         end)
-
-        it('should increment using the defaults', function()
-            local f = Position.increment(pos, 0, -1)
-            assert.same({x=0, y=0}, f())
-            assert.same({x=0, y=-1}, f())
+        it('.to_string', function ()
+            local pos = P{1, -4}
+            assert.same('{x = 1, y = -4}', Position.to_string(pos))
+            assert.has_error(function() Position.to_string() end)
         end)
-
-        it('should increment using passed values', function()
-            local f = Position.increment(pos)
-            assert.same({x=0, y=0}, f(0, -1))
-            assert.same({x=0, y=-1}, f(0, -1))
-            assert.same({x=0, y=-3}, f(0, -2))
+        it('.to_key', function ()
+            assert.same('3,-5', P(3, -5):to_key())
+            assert.same('2,0', P('2,0'):to_key())
+            assert.spy(S).was_called(1)
         end)
-
-        it('should increment using passed values with defaults set', function()
-            local f = Position.increment(pos, -1, -1)
-            assert.same({x=0, y=0}, f())
-            assert.same({x=-1, y=-1}, f())
-            assert.same({x=0, y=1}, f(1, 2))
-            assert.same({x=1, y=4}, f(1, 3))
-        end)
-    end)
-
-    describe('.equals', function()
-        it('compares shallow equality in positions', function()
-            local pos1 = {1, -4}
-            local pos2 = pos1
-
-            assert.is_true(Position.equals(pos1, pos2))
-            assert.is_false(Position.equals(pos1, nil))
-            assert.is_false(Position.equals(nil, pos2))
-            assert.is_false(Position.equals(nil, nil))
-        end)
-
-        it('compares positions', function()
-            local pos1 = {1, -4}
-            local pos2 = { x = 3, y = -2}
-            local pos3 = {-1, -4}
-            local pos4 = { x = 1, y = -4}
-
-            assert.is_true(Position.equals(pos1, pos1))
-            assert.is_false(Position.equals(pos1, pos2))
-            assert.is_false(Position.equals(pos1, pos3))
-            assert.is_true(Position.equals(pos1, pos4))
-        end)
-    end)
-
-    describe('.tostring', function()
-        it('should ', function()
-            local pos = {1, -4}
-            assert.same("{x = 1, y = -4}", Position.tostring(pos))
-            assert.has_error(function() Position.tostring() end)
-        end)
-    end)
-
-    describe('.average', function()
-        it('should ', function()
-
-        end)
-    end)
-
-    describe('.to_key', function()
-        it('should ', function()
-
-        end)
-    end)
-
-    describe('.less_than_eq', function()
-        it('should ', function()
-
-        end)
-    end)
-
-    describe('.less_than', function()
-        it('should ', function()
-
-        end)
-    end)
-
-    describe('.unpack', function()
-        it('should ', function()
+        it('.unpack', function ()
             local x, y = Position(1, 2):unpack()
             assert.same(x, 1)
             assert.same(y, 2)
         end)
-    end)
-
-    describe('.is_zero', function()
-        it('should ', function()
-            assert.is_true(Position():is_zero())
-            assert.is_not_true(Position(1, 0):is_zero())
-            assert.is_true(Position.is_zero({0, 0}))
+        it('.pack', function ()
+            assert.same({3, 4}, P(3, 4):pack())
         end)
-    end)
+        describe('.equals', function()
+            it('compares shallow equality in positions', function()
+                local pos1 = P{1, -4}
+                local pos2 = pos1
 
-    describe('.distance', function()
-        it('should validate the distance between two positions', function()
-            local pos_a = {5, -5}
-            local pos_b = {10, 0}
-            assert.same(math.sqrt(50), Position.distance(pos_a, pos_b))
-            assert.same(math.sqrt(50), Position.distance(pos_b, pos_a))
+                assert.is_true(Position.equals(pos1, pos2))
+                assert.is_false(Position.equals(pos1, nil))
+                assert.is_false(Position.equals(nil, pos2))
+                assert.is_false(Position.equals(nil, nil))
+            end)
+
+            it('compares positions', function()
+                local pos1 = P{1, -4}
+                local pos2 = P{ x = 3, y = -2}
+                local pos3 = P{-1, -4}
+                local pos4 = P{ x = 1, y = -4}
+
+                assert.is_true(Position.equals(pos1, pos1))
+                assert.is_false(Position.equals(pos1, pos2))
+                assert.is_false(Position.equals(pos1, pos3))
+                assert.is_true(Position.equals(pos1, pos4))
+            end)
         end)
-    end)
-
-    describe('.manhattan_distance', function()
-        it('should validate the manhatten distance between two positions', function()
-            local pos_a = {5, -5}
-            local pos_b = {10, 0}
-            assert.same(10, Position.manhattan_distance(pos_a, pos_b))
-            assert.same(10, Position.manhattan_distance(pos_b, pos_a))
-
-            pos_a = {1, -4}
-            pos_b = {3, -2}
-            assert.same(4, Position.manhattan_distance(pos_a, pos_b))
-            assert.same(4, Position.manhattan_distance(pos_b, pos_a))
-        end)
-    end)
-
-    describe('.distance_squared', function()
-        it('should validate the distance squared between two positions', function()
-            local pos_a = {1, -4}
-            local pos_b = {3, -2}
+        it('.distance_squared', function ()
+            local pos_a = P{1, -4}
+            local pos_b = P{3, -2}
             assert.same(8, Position.distance_squared(pos_a, pos_b))
             assert.same(8, Position.distance_squared(pos_b, pos_a))
         end)
-    end)
-end)
+        it('.distance', function ()
+            local pos_a = P{5, -5}
+            local pos_b = P{10, 0}
+            assert.same(math.sqrt(50), Position.distance(pos_a, pos_b))
+            assert.same(math.sqrt(50), Position.distance(pos_b, pos_a))
+        end)
+        it('.manhattan_distance', function ()
+            local pos_a = P{5, -5}
+            local pos_b = P{10, 0}
+            assert.same(10, Position.manhattan_distance(pos_a, pos_b))
+            assert.same(10, Position.manhattan_distance(pos_b, pos_a))
 
-describe('Area returning functions', function()
+            pos_a = P{1, -4}
+            pos_b = P{3, -2}
+            assert.same(4, Position.manhattan_distance(pos_a, pos_b))
+            assert.same(4, Position.manhattan_distance(pos_b, pos_a))
+        end)
+        it('.is_position', function ()
+            local p = P()
+            assert.is_true(P.is_position(zero))
+            assert.is_true(p:is_position())
+            assert.is_false(P.is_position(a1))
+        end)
+        it('.is_zero', function ()
+            assert.is_true(Position():is_zero())
+            assert.is_not_true(Position(1, 0):is_zero())
+            assert.is_true(Position.is_zero({x = 0, y = 0}))
+        end)
+        it('.loaded', function ()
+            local p = P()
+            assert.is_true(p.loaded(p))
+            assert.is_true(P.loaded(p))
+            assert.is_true(p:loaded())
+            assert.is_false(P.loaded(zero))
+        end)
+        it('.direction_to', function ()
+            local mid = P()
+            local b, c, d, e = P(0, -1), P(1, 0), P(0, 1), P(-1, 0)
+            assert.same(0, mid:direction_to(b))
+            assert.same(2, mid:direction_to(c))
+            assert.same(4, mid:direction_to(d))
+            assert.same(6, mid:direction_to(e))
+            local f, g, h, i = P(1, -1), P(1, -1), P(-1, 1), P(-1, -1)
+            assert.same(6, mid:direction_to(f))
+            assert.same(6, mid:direction_to(g))
+            assert.same(2, mid:direction_to(h))
+            assert.same(6, mid:direction_to(i))
+        end)
+        it('.less_than', function ()
+            local b, c, d = P(5, 10), P(10, 10), P(10, 10)
+            assert.is_true(b:less_than(c))
+            assert.is_false(c:less_than(d))
+        end)
+        it('.less_than_eq', function ()
+            local b, c, d = P(5, 10), P(10, 10), P(10, 10)
+            assert.is_true(b:less_than_eq(c))
+            assert.is_true(c:less_than_eq(d))
+        end)
+        it('.complex_direction_to', function ()
+            local mid = P()
+            local n, ne, e, se, s, sw, w, nw = P(0, -1), P(1, -1), P(1, 0), P(1, 1), P(0, 1), P(-1, 1), P(-1, 0), P(-1, -1)
+            assert.same(0, mid:complex_direction_to(n, true))
+            assert.same(1, mid:complex_direction_to(ne, true))
+            assert.same(2, mid:complex_direction_to(e, true))
+            assert.same(3, mid:complex_direction_to(se, true))
+            assert.same(4, mid:complex_direction_to(s, true))
+            assert.same(5, mid:complex_direction_to(sw, true))
+            assert.same(6, mid:complex_direction_to(w, true))
+            assert.same(7, mid:complex_direction_to(nw, true))
 
-    describe('.expand_to_tile_area, .to_tile_area', function()
-        it('should ', function()
-
+            assert.same(2, mid:complex_direction_to(ne, false))
+            assert.same(4, mid:complex_direction_to(se, false))
+            assert.same(6, mid:complex_direction_to(sw, false))
+            assert.same(0, mid:complex_direction_to(nw, false))
+        end)
+        it('.inside', function ()
+            local area = {left_top = {x = -1, y = -1}, right_bottom = {x = 0, y = 0}}
+            assert.is_true(P(-0.5, -0.7):inside(area))
+            assert.is_false(P(0.5, -0.7):inside(area))
         end)
     end)
 
-    describe('.expand_to_chunk_area, .to_chunk_area', function()
-        it('should ', function()
+    describe('Area Conversion Functions', function()
+        --[[
+            expand_to_area, to_area, to_chunk_area, to_tile_area
+        ]]
 
+        it('.to_tile_area', function()
+            local area = {left_top = {x = -1, y = -1}, right_bottom = {x = 0, y = 0}}
+            assert.same(area, P(-0.34, -0.75):to_tile_area())
         end)
-    end)
-
-    describe('.expand_to_area, .to_area', function()
-        it('should ', function()
+        it('.to_chunk_area', function()
+            local area = {left_top = {x = -32, y = -32}, right_bottom = {x = 0, y = 0}}
+            assert.same(area, P(-1, -1):to_chunk_area())
+        end)
+        it('.expand_to_area', function()
             local pos = { x = 1, y = -4}
             assert.same(pos, Position.expand_to_area(pos, 0).left_top)
             assert.same(pos, Position.expand_to_area(pos, 0).right_bottom)
@@ -540,205 +545,122 @@ describe('Area returning functions', function()
             local expanded_area = {left_top = { x = -1, y = -6}, right_bottom = { x = 3, y = -2 }}
             assert.same(expanded_area, Position.expand_to_area(pos, 2))
         end)
-    end)
-end)
-
-describe('Direction Functions', function()
-    local d = defines.direction
-
-    describe('.next_direction', function()
-        local nd = Position.next_direction
-        it('returns the next 4way direction clockwise', function()
-            for i=0, 7, 2 do
-                assert.same(i, nd(i-2))
-            end
-            assert.same(d.north, nd(d.west))
-            assert.same(d.south, nd(nd(0)))
-        end)
-
-        it('returns the next 8way direction clockwise', function()
-            for i=0, 7, 1 do
-                assert.same(i, nd(i-1, false, true))
-            end
-            assert.same(d.north, nd(d.northwest, false, true))
-        end)
-
-        it('returns the next 4way direction counter-clockwise', function()
-            for i=7, 0, 2 do
-                assert.same(i, nd(i+2))
-            end
-            assert.same(d.west, nd(d.north, true))
-        end)
-
-        it('returns the next 8way direction counter-clockwise', function()
-            for i=7, 0, 1 do
-                assert.same(i, nd(i+1), true, true)
-            end
-            assert.same(d.northwest, nd(d.north, true, true))
+        it('.to_area', function ()
+            local area = {left_top = {x = 1, y = -4}, right_bottom = {x = 6, y = 2}}
+            assert.same(area, P(1, -4):to_area(5, 6))
         end)
     end)
 
-    describe('.direction_to_orientation', function()
-        it('should ', function()
-            local dto = Position.direction_to_orientation
-            assert.same(0, dto(0))
-            assert.same(.25, dto(2))
-            assert.same(.5, dto(4))
-            assert.same(.75, dto(6))
+    describe('Position object metamethods', function()
+        --[[
+            __class, __index. __add, __sub, __mul, __div, __mod, __unm, __len, __eq, __lt, __le,
+            __tostring, __concat, __call,
+        ]]
+        local mta, mtb, mtc
+        before_each(function()
+            mta = Position() --0, 0
+            mtb = Position(1,1)
+            mtc = Position(3, 3)
+        end)
+        it('.__class', function ()
+            assert.same('Position', getmetatable(P).__class)
+            assert.same('position', getmetatable(mta).__class)
+        end)
+        it('__index', function()
+            assert.same(getmetatable(mta).__index, Position)
+        end)
+        it('.__call should copy()', function()
+            assert.same(Position.copy, getmetatable(mta).__call)
+            local b2 = mta()
+            local c2 = b2
 
-            assert.same(.125, dto(1))
-            assert.same(.375, dto(3))
-            assert.same(.625, dto(5))
-            assert.same(.875, dto(7))
+            assert.same(mta, b2)
+            -- Remove metatables for table address comparison
+            assert.not_same(rawtostring(mta), rawtostring(b2))
+            assert.same(rawtostring(b2), rawtostring(c2))
+        end)
+        it('.__add', function()
+            assert.same(Position(1, 1), mta + mtb)
+            assert.same(Position(2, 2), mta + 2)
+            assert.same(Position(2, -2), mta + {2, -2})
+            assert.same(Position(3, 3), 2 + mtb)
+            assert.same(Position(3, -1), {2, -2} + mtb)
+        end)
+        it('.__sub', function()
+            assert.same(Position(-1, -1), mta - mtb)
+            assert.same(Position(-2, -2), mta - 2)
+            assert.same(Position(-2, 2), mta - {2, -2})
+            assert.same(Position(1, 1), 2 - mtb)
+            assert.same(Position(1, -3), {2, -2} - mtb)
+        end)
+        it('.__mul', function()
+            assert.same(Position(9, 9), mtc * mtc)
+            assert.same(Position(0, 0), mta * 2)
+            assert.same(Position(2, -2), mtb * {2, -2})
+            assert.same(Position(6, 6), 2 * mtc)
+            assert.same(Position(6, -6), {2, -2} * mtc)
+        end)
+        it('.__div', function()
+            assert.same(Position(1, 1), mtc / mtc)
+            assert.same(Position(0, 0), mta / 2)
+            assert.same(Position(.5, -.5), mtb / {2, -2})
+            assert.same(Position(.66666666666666663, .66666666666666663), 2 / mtc)
+            assert.same(Position(.66666666666666663, -.66666666666666663), {2, -2} / mtc)
+        end)
+        it('.__mod', function()
+            assert.same(Position(1, 1), mtb % mtc)
+            assert.same(Position(0, 0), mtc % mtb)
+        end)
+        it('.__unm', function()
+            assert.same(Position(-1, -1), -mtb)
+            assert.same(Position(1, -3), -Position(-1, 3))
+        end)
+        it('__eq', function()
+            local mtd = mta
+            local mte = Position()
+            local mtf = Position(2,2)
+
+            assert.is_true(mta == mtd)
+            assert.is_true(mta == mte)
+            assert.not_true(mta == mtf)
+            assert.not_true(mta == 0)
+        end)
+        it('__lt', function()
+            local mte = Position(2,2)
+            local mtf = Position(-2,-2)
+
+            assert.is_true(mta < mte)
+            assert.is_true(mte > mta)
+            assert.is_false(mtf < mtb)
+        end)
+        it('__le', function()
+            local mte = Position(2,2)
+            local mtf = Position(-2,-2)
+            local mtg = Position(2,2)
+
+            assert.is_true(mta <= mte)
+            assert.is_true(mte >= mta)
+            assert.is_true(mtf <= mte)
+            assert.is_true(mta <= mtg)
+            assert.is_true(P(-10, -10) <= P(-100, -100))
+        end)
+        it('__tostring', function()
+            local b1 = Position(1,1)
+            local b2 = Position(1, 1)
+            local c1 = Position(2,2)
+
+            assert.same(tostring(b1), tostring(b2))
+            assert.not_same(tostring(mta), tostring(c1))
+        end)
+        it('__concat', function()
+            local q = Position()
+            local r = mta:copy()
+            assert.same(50, #(q .. ' is concatenated with ' .. r))
+        end)
+        it('__len ', function()
+            assert.same(50, #Position(50, 0))
+            assert.same(50, #Position(0, -50))
+            assert.same(35.355339059327378, #Position(25, -25))
         end)
     end)
-
-    describe('.opposite_direction', function()
-        it ('returns the opposite direction', function ()
-            local od = Position.opposite_direction
-            assert.same(d.west, od(d.east))
-            assert.same(d.southwest, od(d.northeast))
-        end)
-    end)
-
-    describe('.orientation_to_4way', function()
-        it('should ', function()
-            assert.same(0, Position.orientation_to_4way(.124))
-            assert.same(2, Position.orientation_to_4way(.125))
-            assert.same(4, Position.orientation_to_4way(.624))
-            assert.same(0, Position.orientation_to_4way(.875))
-        end)
-    end)
-
-    describe('.orientation_to_8way', function()
-        it('should ', function()
-            assert.same(0, Position.orientation_to_8way(.06))
-            assert.same(1, Position.orientation_to_8way(.0625))
-            assert.same(5, Position.orientation_to_8way(.628))
-            assert.same(4, Position.orientation_to_8way(.501))
-        end)
-    end)
-
-end)
-
-describe('Position object metamethods', function()
-    local a, b, c
-    before_each(function()
-        a = Position()
-        b = Position(1,1)
-        c = Position(3, 3)
-    end)
-
-    it('.__index', function()
-        assert.same(Position, getmetatable(a).__index)
-    end)
-
-    it('.__call', function()
-        assert.same(Position.copy, getmetatable(a).__call)
-        local b2 = a()
-        local c2 = b2
-
-        assert.same(a, b2)
-        -- Remove metatables for table address comparison
-        assert.not_same(tostring(setmetatable(a, nil)), tostring(setmetatable(b2, nil)))
-        assert.same(tostring(setmetatable(b2, nil)), tostring(setmetatable(c2, nil)))
-    end)
-
-    it('.__add', function()
-        assert.same(Position(1, 1), a + b)
-        assert.same(Position(2, 2), a + 2)
-        assert.same(Position(2, -2), a + {2, -2})
-        assert.same(Position(3, 3), 2 + b)
-        assert.same(Position(3, -1), {2, -2} + b)
-    end)
-
-    it('.__sub', function()
-        assert.same(Position(-1, -1), a - b)
-        assert.same(Position(-2, -2), a - 2)
-        assert.same(Position(-2, 2), a - {2, -2})
-        assert.same(Position(1, 1), 2 - b)
-        assert.same(Position(1, -3), {2, -2} - b)
-    end)
-
-    it('.__mul', function()
-        assert.same(Position(9, 9), c * c)
-        assert.same(Position(0, 0), a * 2)
-        assert.same(Position(2, -2), b * {2, -2})
-        assert.same(Position(6, 6), 2 * c)
-        assert.same(Position(6, -6), {2, -2} * c)
-    end)
-
-    it('.__div', function()
-        assert.same(Position(1, 1), c / c)
-        assert.same(Position(0, 0), a / 2)
-        assert.same(Position(.5, -.5), b / {2, -2})
-        assert.same(Position(.66666666666666663, .66666666666666663), 2 / c)
-        assert.same(Position(.66666666666666663, -.66666666666666663), {2, -2} / c)
-    end)
-
-    -- TODO ?
-    it('.__mod', function()
-        assert.same(Position(2, 2), b % c)
-        assert.same(Position(2, 2), c % b)
-        assert.same(Position(3, 3), c % a)
-    end)
-
-    it('.__unm', function()
-        assert.same(Position(-1, -1), -b)
-        assert.same(Position(1, -3), -Position(-1, 3))
-    end)
-
-    it('__eq', function()
-        local d = a
-        local e = Position()
-        local f = Position(2,2)
-
-        assert.is_true(a == d)
-        assert.is_true(a == e)
-        assert.not_true(a == f)
-        assert.not_true(a == 0)
-    end)
-
-    it('__lt', function()
-        local e = Position(2,2)
-        local f = Position(-2,-2)
-
-        assert.is_true(a < e)
-        assert.is_true(e > a)
-        assert.is_true(f < b)
-    end)
-
-    it('__le', function()
-        local e = Position(2,2)
-        local f = Position(-2,-2)
-        local g = Position(2,2)
-
-        assert.is_true(a <= e)
-        assert.is_true(e >= a)
-        assert.is_true(f <= e)
-        assert.is_true(a <= g)
-    end)
-
-    it('__tostring', function()
-        local b1 = Position(1,1)
-        local b2 = Position(1, 1)
-        local c1 = Position(2,2)
-
-        assert.same(tostring(b1), tostring(b2))
-        assert.not_same(tostring(a), tostring(c1))
-    end)
-
-    it('__concat', function()
-        local q = Position()
-        local r = a:copy()
-        assert.same(50, #(q .. " is concatenated with " .. r))
-    end)
-
-    it('__len ', function()
-        assert.same(50, #Position(50, 0))
-        assert.same(50, #Position(0, -50))
-        assert.same(35.355339059327378, #Position(25, -25))
-    end)
-
-
 end)

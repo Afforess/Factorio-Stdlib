@@ -4,22 +4,27 @@
 -- @usage local Tile = require('__stdlib__/stdlib/area/tile')
 -- @see LuaTile
 
-local Tile = {__module = 'Tile'}
-setmetatable(Tile, require('__stdlib__/stdlib/core'))
+local Tile = {
+    __module = 'Tile',
+    __index = require('__stdlib__/stdlib/core')
+}
+setmetatable(Tile, Tile)
 
 local Is = require('__stdlib__/stdlib/utils/is')
 local Game = require('__stdlib__/stdlib/game')
 local Position = require('__stdlib__/stdlib/area/position')
 
+Tile.__call = Position.__call
+
 --- Get the @{LuaTile.position|tile position} of a tile where the given position resides.
 -- @function Tile.from_position
--- @see Area.Position.tile_position
-Tile.from_position = Position.tile_position
+-- @see Area.Position.floor
+Tile.from_position = Position.floor
 
 --- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
 -- @function Tile.to_area
--- @see Area.Position.expand_to_tile_area
-Tile.to_area = Position.expand_to_tile_area
+-- @see Area.Position.to_tile_area
+Tile.to_area = Position.to_tile_area
 
 --- Creates an array of tile positions for all adjacent tiles (N, E, S, W) **OR** (N, NE, E, SE, S, SW, W, NW) if diagonal is set to true.
 -- @tparam LuaSurface surface the surface to examine for adjacent tiles
@@ -37,7 +42,7 @@ function Tile.adjacent(surface, position, diagonal, tile_name)
     end
     local adjacent_tiles = {}
     for _, offset in pairs(offsets) do
-        local adj_pos = Position.add(position, offset)
+        local adj_pos = Position.add(Position.copy(position), offset)
         if tile_name then
             local tile = surface.get_tile(adj_pos.x, adj_pos.y)
             if tile and tile.name == tile_name then
@@ -60,7 +65,7 @@ function Tile.get_data(surface, tile_pos, default_value)
     surface = Game.get_surface(surface)
     Is.Assert(surface, 'invalid surface')
 
-    local key = Position(tile_pos):tile_position():to_key()
+    local key = Position(tile_pos):floor():to_key()
 
     return Game.get_or_set_data('_tile_data', surface.index, key, false, default_value)
 end
@@ -76,7 +81,7 @@ function Tile.set_data(surface, tile_pos, value)
     surface = Game.get_surface(surface)
     Is.Assert.Valid(surface, 'invalid surface')
 
-    local key = Position(tile_pos):tile_position():to_key()
+    local key = Position(tile_pos):floor():to_key()
 
     return Game.get_or_set_data('_tile_data', surface.index, key, true, value)
 end

@@ -10,6 +10,7 @@ local math_floor = math.floor
 local math_ceil = math.ceil
 local math_min = math.min
 local math_max = math.max
+local math_huge = math.huge
 local log10 = math.log10
 local unpack = table.unpack
 
@@ -29,7 +30,7 @@ Math.MAX_INT16 = Math.MAXINT16
 Math.MIN_INT16 = Math.MININT16
 Math.MAX_UINT16 = Math.MAXUINT16
 
-Math.MAXINT =  2147483648
+Math.MAXINT = 2147483648
 Math.MAX_INT = Math.MAXINT
 Math.MAXINT32 = Math.MAXINT
 Math.MAX_INT32 = Math.MAXINT
@@ -90,7 +91,7 @@ end
 -- @treturn number ceiled to p decimal spaces.
 function Math.ceil_to(x, p)
     local e = 10 ^ (p or 0)
-    return math_ceil(x * e + 0.5) /e
+    return math_ceil(x * e + 0.5) / e
 end
 
 -- Various average (means) algorithms implementation
@@ -220,6 +221,10 @@ end
 
 function Math.pingpong(x)
     return 1 - math_abs(1 - x % 2)
+end
+
+function Math.is_number(x)
+    return x == x and x ~= math_huge
 end
 
 for k, v in pairs(math) do

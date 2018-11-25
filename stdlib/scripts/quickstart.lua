@@ -35,8 +35,19 @@ end
 local QS = require('__stdlib__/stdlib/misc/config').new(prequire('config-quickstart') or {})
 local quickstart = {}
 
+function quickstart.on_init()
+    if not game.is_multiplayer() then
+        remote.call('freeplay', 'set_skip_intro', true)
+
+        local items = QS.get('items', {})
+            -- player.clear_items_inside()
+            remote.call('freeplay', 'set_created_items', items)
+            remote.call('freeplay', 'set_respawn_items', items)
+    end
+end
+
 function quickstart.on_player_created(event)
-    if #game.players == 1 and event.player_index == 1 then
+    if not game.is_multiplayer() then
         local player = game.players[event.player_index]
         local surface = player.surface
         local force = player.force
@@ -47,39 +58,13 @@ function quickstart.on_player_created(event)
 
         player.surface.always_day = QS.get('always_day', false)
 
-        if QS.get('clear_items', false) then
-            player.clear_items_inside()
-        end
-
-        local simple_stacks = QS.get('stacks', {})
-        local qb_stacks = QS.get('quickbar', {})
-        local inv = player.get_main_inventory()
-        local qb = player.get_quickbar()
-
-        if inv then
-            for _, item in pairs(simple_stacks) do
-                if game.item_prototypes[item] then
-                    inv.insert(item)
-                end
-            end
-            for _, item in pairs(qb_stacks) do
-                if game.item_prototypes[item] then
-                    qb.insert(item)
-                end
-            end
-        end
-
-        local tool_inv = player.get_inventory(defines.inventory.player_tools)
-        if tool_inv then
-            local tool = QS.get('tool', 'steel-axe')
-            if not game.item_prototypes[tool] then
-                tool = 'steel-axe'
-                if not game.item_prototypes[tool] then
-                    tool = nil
-                end
-            end
-            if tool then
-                tool_inv.insert(tool)
+        if QS.get('cheat_mode', false) then
+            player.cheat_mode = true
+            player.force.research_all_technologies()
+            if player.character then
+                player.character_running_speed_modifier = 2
+                player.character_reach_distance_bonus = 100
+                player.character_build_distance_bonus = 100
             end
         end
 
@@ -119,7 +104,7 @@ function quickstart.on_player_created(event)
             local tiles = {}
             local floor_tile = QS.get('floor_tile')
             local floor_tile_alt = QS.get('floor_tile_alt', floor_tile)
-            for x, y in Area.spiral_iterate(area) do
+            for x, y in Area(area):spiral_iterate() do
                 if y % 2 == 0 then
                     if x % 2 == 0 then
                         tiles[#tiles + 1] = {name = floor_tile, position = {x = x, y = y}}
@@ -140,19 +125,19 @@ function quickstart.on_player_created(event)
 
         if QS.get('ore_patches', false) then
             --Top left
-            for x, y in Area.iterate({{-37.5, -27.5}, {-33.5, -3.5}}) do
+            for x, y in Area{{-37.5, -27.5}, {-33.5, -3.5}}:iterate() do
                 surface.create_entity {name = 'coal', position = {x, y}, amount = 2500}
             end
             --Top Right
-            for x, y in Area.iterate({{33.5, -27.5}, {37.5, -3.5}}) do
+            for x, y in Area{{33.5, -27.5}, {37.5, -3.5}}:iterate() do
                 surface.create_entity {name = 'iron-ore', position = {x, y}, amount = 2500}
             end
             --Bottom Right
-            for x, y in Area.iterate({{33.5, 3.5}, {37.5, 27.5}}) do
+            for x, y in Area{{33.5, 3.5}, {37.5, 27.5}}:iterate() do
                 surface.create_entity {name = 'copper-ore', position = {x, y}, amount = 2500}
             end
             --Bottom Left
-            for x, y in Area.iterate({{-37.5, 3.5}, {-33.5, 27.5}}) do
+            for x, y in Area{{-37.5, 3.5}, {-33.5, 27.5}}:iterate() do
                 surface.create_entity {name = 'stone', position = {x, y}, amount = 2500}
             end
             surface.create_entity {name = 'crude-oil', position = {-35.5, 1.5}, amount = 32000}
@@ -278,21 +263,6 @@ function quickstart.on_player_created(event)
         end
     end
 end
-Event.register(defines.events.on_player_created, quickstart.on_player_created)
-
-function quickstart.on_player_joined_game(event)
-    local player = game.players[event.player_index]
-    if QS.get('cheat_mode', false) then
-        player.cheat_mode = true
-        player.force.research_all_technologies()
-        if player.character then
-            player.character_running_speed_modifier = 2
-            player.character_reach_distance_bonus = 100
-            player.character_build_distance_bonus = 100
-        end
-    end
-end
-Event.register(defines.events.on_player_joined_game, quickstart.on_player_joined_game)
 
 quickstart.trackstring =
     [[
@@ -310,6 +280,7 @@ JxT/vVs7Merlq1sNvX5vV4fHLt4G+H359bnb742U52VKnmOqhIfwDr9+U4w==
 ]]
 
 function quickstart.register_events()
+    Event.register(Event.core_events.on_init, quickstart.on_init)
     Event.register(defines.events.on_player_created, quickstart.on_player_created)
     return quickstart
 end

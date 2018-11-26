@@ -4,7 +4,7 @@
 -- @see defines.direction
 
 local Direction = {
-    ___module = 'Direction',
+    __class = 'Direction',
     __index = require('__stdlib__/stdlib/core'),
     dir = defines.direction
 }

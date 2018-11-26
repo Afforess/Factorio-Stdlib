@@ -5,7 +5,7 @@
 -- @see LuaTile
 
 local Tile = {
-    __module = 'Tile',
+    __class = 'Tile',
     __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Tile, Tile)

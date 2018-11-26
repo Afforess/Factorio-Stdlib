@@ -5,7 +5,7 @@
 -- @see Concepts.ChunkPosition
 
 local Chunk = {
-    __module = 'Chunk',
+    __class = 'Chunk',
     __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Chunk, Chunk)

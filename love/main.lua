@@ -2,7 +2,7 @@
 local screenWidth, screenHeight
 local font
 local font_size = 20
-_G.scale = 32
+_G.scale = 64
 _G._draw_queue = {}
 local mxd, myd, mxu, myu
 
@@ -121,7 +121,6 @@ do
         --j = A(-12, -10, -6, -4)
     }
 
-    local a = P(0, 0)
     local ps = {
         a = P(4, 8),
         b = P(-12, 13),
@@ -136,7 +135,6 @@ do
     }
 
     for _, v in pairs(as) do
-        v:draw(r):floor():translate(1, 1):draw(g)
+        --v:draw(r):floor():translate(1, 1):draw(g)
     end
-
 end

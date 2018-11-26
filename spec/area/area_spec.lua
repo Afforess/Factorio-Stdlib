@@ -93,6 +93,9 @@ describe('Area', function ()
             assert.same(one, A(str))
             assert.same(one, A(str_key))
             assert.spy(S).was_called(2)
+
+            local a1 = {left_top = {x = 3, y = 3}, right_bottom = {x = 4, y = 4}}
+            assert.not_same(rs(a1), rs(A(a1, true)))
         end)
     end)
 

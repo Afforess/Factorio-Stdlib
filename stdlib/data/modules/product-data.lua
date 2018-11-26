@@ -1,5 +1,5 @@
 local table = require('stdlib/utils/table')
-
+-- luacheck: ignore
 -- Product data is the result or ingredients table and associated methods
 local ProductData = {
     _class = 'products',

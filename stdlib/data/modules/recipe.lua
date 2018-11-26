@@ -5,6 +5,8 @@ local Recipe = {
 }
 setmetatable(Recipe, Recipe)
 
+-- luacheck: ignore
+
 local Is = require('stdlib/utils/is')
 local Item = require('stdlib/data/item')
 

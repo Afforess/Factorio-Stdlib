@@ -37,7 +37,7 @@ Position.epsilon = 1.19e-07
 Position.__call = function(_, ...)
     local t = type((...))
     if t == 'table' then
-        return Position.new((...))
+        return Position.new(...)
     elseif t == 'string' then
         return Position.from_string(...)
     else

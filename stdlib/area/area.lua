@@ -25,7 +25,7 @@ local abs, floor, max = math.abs, math.floor, math.max
 Area.__call = function(_, ...)
     local t = type((...))
     if t == 'table' then
-        return Area.new((...))
+        return Area.new(...)
     elseif t == 'string' then
         return Area.from_string(...)
     else

@@ -16,6 +16,7 @@
 
 local Event = require('__stdlib__/stdlib/event/event')
 local Area = require('__stdlib__/stdlib/area/area')
+local QS = require('__stdlib__/stdlib/misc/config').new(prequire('config-quickstart') or {})
 
 if not remote.interfaces['quickstart_script'] then
     local qs_interface = {}
@@ -28,21 +29,29 @@ if not remote.interfaces['quickstart_script'] then
     qs_interface.creative_mode_quickstart_registered_to = qs_interface.registered_to
     remote.add_interface('quickstart-script', qs_interface)
 else
-    -- quickstart-script has already been registered, lets not clobber things
     return
 end
 
-local QS = require('__stdlib__/stdlib/misc/config').new(prequire('config-quickstart') or {})
 local quickstart = {}
+
+local rolling_stock = {
+    ['locomotive'] = true,
+    ['cargo-wagon'] = true,
+    ['artillery-wagon'] = true,
+    ['fluid-wagon'] = true
+}
 
 function quickstart.on_init()
     if not game.is_multiplayer() then
-        remote.call('freeplay', 'set_skip_intro', true)
-
-        local items = QS.get('items', {})
-            -- player.clear_items_inside()
+        if remote.interfaces['freeplay'] then
+            remote.call('freeplay', 'set_skip_intro', true)
+            local items = QS.get('items', {})
             remote.call('freeplay', 'set_created_items', items)
             remote.call('freeplay', 'set_respawn_items', items)
+        elseif remote.interfaces['sandbox'] then
+            remote.call('sandbox', 'set_skip_intro', true)
+            remote.call('sandbox', 'set_skip_cheat_menu', true)
+        end
     end
 end
 
@@ -54,7 +63,7 @@ function quickstart.on_player_created(event)
 
         local area = Area(QS.get('area_box', {{-100, -100}, {100, 100}})):shrink_to_surface_size(surface)
 
-        player.force.chart(surface, area)
+        player.force.chart(surface, Area(area, true) * 1.5)
 
         player.surface.always_day = QS.get('always_day', false)
 
@@ -125,26 +134,28 @@ function quickstart.on_player_created(event)
 
         if QS.get('ore_patches', false) then
             --Top left
-            for x, y in Area{{-37.5, -27.5}, {-33.5, -3.5}}:iterate() do
+            for x, y in Area {{-37.5, -27.5}, {-33.5, -3.5}}:iterate() do
                 surface.create_entity {name = 'coal', position = {x, y}, amount = 2500}
             end
             --Top Right
-            for x, y in Area{{33.5, -27.5}, {37.5, -3.5}}:iterate() do
+            for x, y in Area {{33.5, -27.5}, {37.5, -3.5}}:iterate() do
                 surface.create_entity {name = 'iron-ore', position = {x, y}, amount = 2500}
             end
             --Bottom Right
-            for x, y in Area{{33.5, 3.5}, {37.5, 27.5}}:iterate() do
+            for x, y in Area {{33.5, 3.5}, {37.5, 27.5}}:iterate() do
                 surface.create_entity {name = 'copper-ore', position = {x, y}, amount = 2500}
             end
             --Bottom Left
-            for x, y in Area{{-37.5, 3.5}, {-33.5, 27.5}}:iterate() do
+            for x, y in Area {{-37.5, 3.5}, {-33.5, 27.5}}:iterate() do
                 surface.create_entity {name = 'stone', position = {x, y}, amount = 2500}
             end
             surface.create_entity {name = 'crude-oil', position = {-35.5, 1.5}, amount = 32000}
             surface.create_entity {name = 'crude-oil', position = {-35.5, -1.5}, amount = 32000}
             surface.create_entity {name = 'crude-oil', position = {35.5, 1.5}, amount = 32000}
             surface.create_entity {name = 'crude-oil', position = {35.5, -1.5}, amount = 32000}
+        end
 
+        if QS.get('water_tiles', false) then
             local water_tiles = {}
             for x = 27.5, -27.5, -1 do
                 for y = 45.5, 50.5, 1 do
@@ -157,10 +168,6 @@ function quickstart.on_player_created(event)
                 end
             end
             surface.set_tiles(water_tiles, false)
-            surface.create_entity {name = 'offshore-pump', position = {4.5, 44.5}, force = force, direction = defines.direction.south}
-            surface.create_entity {name = 'offshore-pump', position = {-4.5, 44.5}, force = force, direction = defines.direction.south}
-            surface.create_entity {name = 'offshore-pump', position = {27.5, 44.5}, force = force, direction = defines.direction.south}
-            surface.create_entity {name = 'offshore-pump', position = {-27.5, 44.5}, force = force, direction = defines.direction.south}
         end
 
         if QS.get('chunk_bounds', false) then
@@ -178,68 +185,36 @@ function quickstart.on_player_created(event)
                     a.graphics_variation = 3
                 end
             end
-            local tiles = {}
-            for i = .5, 32.5, 1 do
-                tiles[#tiles + 1] = {name = 'hazard-concrete-left', position = {i, 32.5}}
-                tiles[#tiles + 1] = {name = 'hazard-concrete-right', position = {-i, 32.5}}
-                tiles[#tiles + 1] = {name = 'hazard-concrete-left', position = {i, -32.5}}
-                tiles[#tiles + 1] = {name = 'hazard-concrete-right', position = {-i, -32.5}}
-
-                tiles[#tiles + 1] = {name = 'hazard-concrete-left', position = {32.5, i}}
-                tiles[#tiles + 1] = {name = 'hazard-concrete-left', position = {32.5, -i}}
-                tiles[#tiles + 1] = {name = 'hazard-concrete-right', position = {-32.5, i}}
-                tiles[#tiles + 1] = {name = 'hazard-concrete-right', position = {-32.5, -i}}
-            end
-            surface.set_tiles(tiles)
         end
 
-        if QS.get('starter_tracks', false) then
-            -- Create proxy blueprint from string, read in the entities and remove it.
+        -- Create proxy blueprint from string, read in the entities and remove it.
+        local bpstring
+        local custom_string = QS.get('custom_bp_string', false)
+        if custom_string then
+            bpstring = custom_string
+        elseif QS.get('default_bp_string', false) then
+            bpstring = quickstart.bpstring
+        end
+        if bpstring then
             local bp = surface.create_entity {name = 'item-on-ground', position = {0, 0}, force = force, stack = 'blueprint'}
-            bp.stack.import_stack(quickstart.trackstring)
-            local tracks = bp.stack.get_blueprint_entities()
-            bp.destroy()
-
-            for _, track in pairs(tracks) do
-                local pos = {track.position.x + 1, track.position.y + 1}
-                local ent = surface.create_entity {name = track.name, position = pos, direction = track.direction, force = force}
-                if ent.name == 'train-stop' then
-                    if ent.position.x > 0 and ent.position.y > 0 then
-                        ent.backer_name = '#SOUTH'
-                    elseif ent.position.x < 0 and ent.position.y > 0 then
-                        ent.backer_name = '#WEST'
-                    elseif ent.position.x > 0 and ent.position.y < 0 then
-                        ent.backer_name = '#EAST'
+            bp.stack.import_stack(bpstring)
+            local revive = bp.stack.build_blueprint {surface = player.surface, force = player.force, position = {0, 0}, force_build = true, skip_fog_of_war = false, by_player = player}
+            local count = #revive
+            for i, ent in ipairs(revive) do
+                -- put rolling stock at the end.
+                if i < count and rolling_stock[ent.ghost_type] then
+                    revive[#revive + 1] = ent
+                else
+                    if ent.ghost_type == 'locomotive' then
+                        local _, loco = ent.revive()
+                        loco.burner.currently_burning = 'rocket-fuel'
+                        loco.burner.remaining_burning_fuel = 222222222
                     else
-                        ent.backer_name = '#NORTH'
+                        ent.revive()
                     end
                 end
             end
-
-            if QS.get('make_train', false) then
-                local loco = surface.create_entity {name = 'locomotive', position = {20, 39}, orientation = 0.25, direction = 2, force = force}
-                loco.orientation = .25
-                --Setting the burner this way rather than using insert allows us to not inflate the production statistics
-                loco.burner.currently_burning = 'rocket-fuel'
-                loco.burner.remaining_burning_fuel = 222222222
-                local cwag = surface.create_entity {name = 'cargo-wagon', position = {13, 39}, orientation = 0.25, direction = 2, force = force}
-                cwag.orientation = .25
-                local fwag = surface.create_entity {name = 'fluid-wagon', position = {7, 39}, orientation = 0.25, direction = 2, force = force}
-                fwag.orientation = .25
-                local awag = surface.create_entity {name = 'artillery-wagon', position = {0, 39}, orientation = 0.25, direction = 2, force = force}
-                awag.orientation = .25
-
-                local train = loco and loco.train
-                if train then
-                    local records = {}
-                    for _, name in pairs({'#SOUTH', '#EAST', '#NORTH', '#WEST'}) do
-                        records[#records + 1] = {station = name, wait_conditions = {{type = 'time', ticks = 0, compare_type = 'and'}}}
-                    end
-                    records[1].wait_conditions = {{type = 'full', compare_type = 'and'}}
-                    train.schedule = {current = 1, records = records}
-                    train.manual_mode = false
-                end
-            end
+            bp.destroy()
         end
 
         if QS.get('setup_power', false) then
@@ -264,19 +239,25 @@ function quickstart.on_player_created(event)
     end
 end
 
-quickstart.trackstring =
+quickstart.bpstring =
     [[
-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
+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
 ]]
 
 function quickstart.register_events()

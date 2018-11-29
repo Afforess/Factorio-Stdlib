@@ -531,11 +531,11 @@ end
 -- @treturn Concepts.BoundingBox the area
 function Position.expand_to_area(pos, radius)
     radius = radius or 1
+
+    local left_top = {x = pos.x - radius, y = pos.y - radius}
+    local right_bottom = {x = pos.x + radius, y = pos.y + radius}
+
     local Area = require(area_path)
-
-    local left_top = new(pos.x - radius, pos.y - radius)
-    local right_bottom = new(pos.x + radius, pos.y + radius)
-
     return Area.load {left_top = left_top, right_bottom = right_bottom}
 end
 
@@ -548,22 +548,23 @@ function Position.to_area(pos, width, height)
     width = width or 0
     height = height or width
 
-    local Area = require(area_path)
-    local right_bottom = Position.add(Position.copy(pos), width, height)
+    local left_top = {x = pos.x, y = pos.y}
+    local right_bottom = {x = pos.x + width, y = pos.y + height}
 
-    return Area.load {left_top = Position.copy(pos), right_bottom = right_bottom}
+    local Area = require(area_path)
+    return Area.load {left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
 -- @tparam LuaTile.position pos the tile position
 -- @treturn Concepts.BoundingBox the area of the tile
 function Position.to_tile_area(pos)
-    local tile_pos = Position.floor(Position.copy(pos))
+
+    local x, y = floor(pos.x), floor(pos.y)
+    local left_top = {x = x, y = y}
+    local right_bottom = {x = x + 1, y = y + 1}
+
     local Area = require(area_path)
-
-    local left_top = tile_pos
-    local right_bottom = Position.add(Position.copy(tile_pos), 1, 1)
-
     return Area.load {left_top = left_top, right_bottom = right_bottom}
 end
 
@@ -571,10 +572,10 @@ end
 -- @tparam Concepts.Position pos
 -- @treturn Concepts.BoundingBox
 function Position.to_chunk_area(pos)
-    local Area = require(area_path)
-    local left_top = Position.from_chunk_position(Position.to_chunk_position(Position.copy(pos)))
-    local right_bottom = Position.add(Position.copy(left_top), 32)
+    local left_top = {x = floor(pos.x / 32) * 32, y = floor(pos.y / 32) * 32}
+    local right_bottom = {x = left_top.x + 32, y = left_top.y + 32}
 
+    local Area = require(area_path)
     return Area.load {left_top = left_top, right_bottom = right_bottom}
 end
 

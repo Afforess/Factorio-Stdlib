@@ -42,7 +42,7 @@ function Tile.adjacent(surface, position, diagonal, tile_name)
     end
     local adjacent_tiles = {}
     for _, offset in pairs(offsets) do
-        local adj_pos = Position.add(Position.copy(position), offset)
+        local adj_pos = Position.add(position, offset)
         if tile_name then
             local tile = surface.get_tile(adj_pos.x, adj_pos.y)
             if tile and tile.name == tile_name then
@@ -65,7 +65,7 @@ function Tile.get_data(surface, tile_pos, default_value)
     surface = Game.get_surface(surface)
     Is.Assert(surface, 'invalid surface')
 
-    local key = Position(tile_pos):floor():to_key()
+    local key = Position.to_key(Position.floor(tile_pos))
 
     return Game.get_or_set_data('_tile_data', surface.index, key, false, default_value)
 end
@@ -81,7 +81,7 @@ function Tile.set_data(surface, tile_pos, value)
     surface = Game.get_surface(surface)
     Is.Assert.Valid(surface, 'invalid surface')
 
-    local key = Position(tile_pos):floor():to_key()
+    local key = Position.to_key(Position.floor(tile_pos))
 
     return Game.get_or_set_data('_tile_data', surface.index, key, true, value)
 end

@@ -11,7 +11,7 @@ local function grid(area)
 end
 
 function Area.draw(area, color)
-    local copy = area:copy()
+    local copy = area()
     assert(copy:normalized(), 'Attempt to draw non normalized area' .. copy)
     _G._draw_queue[#_G._draw_queue + 1] = function()
         color = color or {255, 255, 255}

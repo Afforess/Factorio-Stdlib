@@ -9,7 +9,7 @@ local function grid(position)
 end
 
 function Position.draw(position, color)
-    local copy = position:copy()
+    local copy = position()
     _G._draw_queue[#_G._draw_queue + 1] = function()
         color = color or _w
         local x, y = grid(copy)

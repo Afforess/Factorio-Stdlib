@@ -131,10 +131,12 @@ do
         a = P(12, 12),
         b = P(-12, 12),
         c = P(12, -12),
-        d = P(-12, -12)
     }
 
     for _, v in pairs(as) do
         --v:draw(r):floor():translate(1, 1):draw(g)
     end
+    local a = A{{x = 0, y = -5}, {x = 3, y = -3}}
+    local pos = {-0.5, 2.5}
+    a:draw(r)
 end

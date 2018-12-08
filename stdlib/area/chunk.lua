@@ -16,32 +16,26 @@ local Position = require('__stdlib__/stdlib/area/position')
 local area_path = '__stdlib__/stdlib/area/area'
 
 Chunk.__call = Position.__call
--- Chunk.__call = function(_, ...)
---     local t = type((...))
---     if t == 'table' then
---         return Position.new((...))
---     elseif t == 'string' then
---         return Position.from_string(...)
---     else
---         return Position.construct(...)
---     end
--- end
 
 --- Gets the chunk position of a chunk where the specified position resides.
 -- @function Chunk.from_position
 -- @see Area.Position.to_chunk_position
-Chunk.position = Position.to_chunk_position
+Chunk.from_position = Position.to_chunk_position
+
+--- Gets the top_left position from a chunk position.
+-- @function Chunk.to_position
+-- @see Area.Position.from_chunk_position
+Chunk.to_position = Position.from_chunk_position
 
 --- Gets the area of a chunk from the specified chunk position.
 -- @tparam Concepts.ChunkPosition pos the chunk position
 -- @treturn Concepts.BoundingBox the chunk's area
 function Chunk.to_area(pos)
-    local Area = require(area_path)
-    -- Todo, use to chunk pos
-    local left_top = Position.construct(pos.x * 32, pos.y * 32)
-    local right_bottom = Position.add(Position.copy(left_top), 32, 32)
+    local left_top = Chunk.to_position(pos)
+    local right_bottom = Position.add(left_top, 32, 32)
 
-    return Area.load {left_top = left_top, right_bottom = right_bottom}
+    local Area = require(area_path)
+    return Area.set {left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Gets the user data that is associated with a chunk.

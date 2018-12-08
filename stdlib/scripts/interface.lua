@@ -12,12 +12,12 @@ local table = require('__stdlib__/stdlib/utils/table')
 local Event = require('__stdlib__/stdlib/event/event')
 local Changes = require('__stdlib__/stdlib/event/changes')
 local Player = require('__stdlib__/stdlib/event/player')
-local Force = require('__stdlib__/stdlib/event/player')
+local Force = require('__stdlib__/stdlib/event/force')
 
 local serp_settings = {comment = false, nocode = true}
 
 interface['write_global'] = function()
-    --game.remove_path(script.mod_name)
+    --game.remove_path(script.mod_name .."/")
     game.write_file(script.mod_name .. '/global.lua', serpent.block(global, serp_settings), false)
     game.write_file(script.mod_name .. '/global-inspect.lua', inspect(global), false)
     if remote.interfaces[script.mod_name] then
@@ -30,12 +30,11 @@ interface['write_global'] = function()
 end
 
 interface['dump_all'] = function()
-    game.remove_path('Interfaces')
+    --game.remove_path('Interfaces')
     for inter, face in pairs(remote.interfaces) do
-        game.write_file('/Interfaces/' .. inter .. '.lua', serpent.block(table.keys(remote.interfaces[inter], true, true), serp_settings))
+        game.write_file('Interfaces/' .. inter .. '.lua', serpent.block(table.keys(remote.interfaces[inter], true, true), serp_settings))
         for func in pairs(face) do
             if func:find('^write%_') then
-                --if remote.interfaces[inter]['write_global'] then
                 remote.call(inter, func)
             end
         end

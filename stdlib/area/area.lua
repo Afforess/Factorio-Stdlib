@@ -650,11 +650,6 @@ local function __unm(area)
     return area
 end
 
-local function __eq(area1, area2)
-    local ori = area1.orientation == area2.orientation
-    return ori and area1.left_top == area2.left_top and area1.right_bottom == area2.right_bottom
-end
-
 --- Area tables are returned with these Metamethods attached.
 -- @table Metamethods
 metatable = {
@@ -668,7 +663,7 @@ metatable = {
     __div = __div,
     __mod = __mod,
     __unm = __unm,
-    __eq = __eq, -- Is area1 the same as area2.
+    __eq = Area.equals, -- Is area1 the same as area2.
     __lt = Area.less_than, --is the size of area1 less than number/area2.
     __le = Area.less_than_eq, --is the size of area1 less than or equal to number/area2.
     __len = Area.size, -- The size of the area.

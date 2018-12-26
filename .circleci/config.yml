@@ -14,7 +14,7 @@ jobs:
       - run: busted .
       - run: make quick
       - store_artifacts:
-        path: /root/project/.build/stdlib*/stdlib*.zip
+          path: /root/project/.build/stdlib*/stdlib*.zip
       # - run: git checkout gh-pages
       # - run: ./generate.sh
       # - run: git add .

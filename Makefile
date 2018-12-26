@@ -8,7 +8,7 @@ FILES := $(shell find . -iname '*.json' -type f -path "./stdlib/*") $(shell find
 
 all: clean test package ldoc luacheck release
 
-quick: clean package ldoc release
+quick: clean package ldoc release artifact
 
 check: clean package luacheck
 
@@ -48,3 +48,7 @@ release:
 	@echo 'Making Release'
 	@cd $(BUILD_DIR) && cp -r doc $(OUTPUT_NAME) && zip -rq $(OUTPUT_NAME).zip $(OUTPUT_NAME)
 	@echo $(OUTPUT_NAME).zip ready
+
+artifact:
+	@echo 'Making Artifacts'
+	@cd $(BUILD_DIR) && mkdir artifacts && cp $(OUTPUT_NAME).zip artifacts/$(OUTPUT_NAME).zip

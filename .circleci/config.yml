@@ -9,7 +9,12 @@ jobs:
     steps:
       - checkout
       - run: ln -s /root/project /usr/local/share/lua/5.2/__stdlib__
-      - run: make
+      - run: wget -q --no-check-certificate -O .luacheckrc https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/0.17/.luacheckrc
+      - run: luacheck .
+      - run: busted .
+      - run: make quick
+      - store_artifacts:
+        path: /root/project/.build/stdlib*/stdlib*.zip
       # - run: git checkout gh-pages
       # - run: ./generate.sh
       # - run: git add .

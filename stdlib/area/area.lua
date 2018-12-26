@@ -1,5 +1,4 @@
 --- Tools for working with bounding boxes.
--- The tables passed into the Area functions are mutated in-place.
 -- @module Area.Area
 -- @usage local Area = require('__stdlib__/stdlib/area/area')
 -- @see Area.Position
@@ -21,7 +20,6 @@ local abs, floor, max = math.abs, math.floor, math.max
 --- Constructor Methods
 -- @section Constructors
 -- ((
-
 Area.__call = function(_, ...)
     local t = type((...))
     if t == 'table' then
@@ -670,12 +668,5 @@ metatable = {
     __call = Area.new -- Return a new copy
 }
 -- ))
-
-if Area.deprecated then
-    Area.round_to_integer = Area.ceil --! Deprecated
-    Area.surface_size = Area.to_surface_size
-    Area.set_to_surface_size = Area.to_surface_size
-    Area.tile_center_points = Area.center_points
-end
 
 return Area

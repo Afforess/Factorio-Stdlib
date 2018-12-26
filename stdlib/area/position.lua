@@ -1,5 +1,4 @@
 --- Tools for working with `<x,y>` coordinates.
--- The tables passed into the Position functions are mutated in-place.
 -- @module Area.Position
 -- @usage local Position = require('__stdlib__/stdlib/area/position')
 -- @see Area.Area
@@ -801,10 +800,6 @@ end
 -- Metamethods
 -- ((
 
-local function __len(pos)
-    return pos:len()
-end
-
 --- Position tables are returned with these metamethods attached.
 -- Methods that return a position will return a NEW position without modifying the passed positions.
 -- @table Metamethods
@@ -817,7 +812,7 @@ metatable = {
     __div = Position.divide, -- Divide 2 positions. Returns a new position.
     __mod = Position.mod, -- Modulo of 2 positions. Returns a new position.
     __unm = Position.unary, -- Unary Minus of a position. Returns a new position.
-    __len = __len, -- Length of a single position.
+    __len = Position.len, -- Length of a single position.
     __eq = Position.equals, -- Are two positions at the same spot.
     __lt = Position.less_than, -- Is position1 less than position2.
     __le = Position.less_than_eq, -- Is position1 less than or equal to position2.
@@ -825,22 +820,6 @@ metatable = {
     __concat = Position.concat, -- calls tostring on both sides of concact.
     __call = Position.new -- copy the position.
 }
-
-if Position.deprecated then
-    Position.chunk_position = Position.to_chunk_position --! Deprecated
-    Position.flip = Position.unary --! Deprecated
-    Position.tile_position = Position.floor --! Deprecated
-    Position.expand_to_tile_area = Position.to_tile_area --! Deprecated
-    Position.expand_to_chunk_area = Position.to_chunk_area --! Deprecated
-    Position.opposite_direction = Direction.opposite_direction --! Deprecated
-    Position.next_direction = Direction.next_direction --! Deprecated
-    Position.orientation_to_8way = Direction.orientation_to_8way --! Deprecated
-    Position.orientation_to_4way = Direction.orientation_to_4way --! Deprecated
-    Position.to_orientation = Direction.to_orientation --! Deprecated
-    Position.offset = Position.add --! Deprecated
-    Position.tostring = Position.to_string --! Deprecated
-    Position.to_tile_position = Position.floor --! Deprecated
-end
 -- ))
 
 return Position

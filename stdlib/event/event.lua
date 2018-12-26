@@ -264,6 +264,20 @@ function Event.remove(event_id, handler, matcher, pattern)
     return Event
 end
 
+function Event.on_load(handler, matcher, pattern)
+    Event.register(Event.core_events.on_load, handler, matcher, pattern)
+end
+
+function Event.on_configuration_changed(handler, matcher, pattern)
+    Event.register(Event.core_events.on_configuration_changed, handler, matcher, pattern)
+end
+
+function Event.on_init(handler, matcher, pattern)
+    Event.register(Event.core_events.on_init, handler, matcher, pattern)
+end
+
+Event.on_event = Event.register
+
 -- Used to replace pcall in un-protected events.
 local function pcall_noop(handler, event, other)
     return true, handler(event, other)

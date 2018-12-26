@@ -3,7 +3,7 @@ jobs:
   build:
     branches:
       only:
-        - 0.17
+        - "0.17"
     docker:
       - image: nexela/factorio-lua-env:0.0.1
     steps:

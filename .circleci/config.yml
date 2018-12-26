@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  build:
+    branches:
+      only:
+        - 0.17
+    docker:
+      - image: nexela/factorio-lua-env:0.0.1
+    steps:
+      - checkout
+      - run: ln -s /root/project /usr/local/share/lua/5.2/__stdlib__
+      - run: make
+      # - run: git checkout gh-pages
+      # - run: ./generate.sh
+      # - run: git add .
+      # - run: git config user.email "bot@circleci.com"
+      # - run: git config user.name "circleci"
+      # - run: git commit -am "Automatic Github Page generation [ci skip]"
+      # - run: git push

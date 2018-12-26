@@ -46,5 +46,5 @@ luacheck:
 
 release:
 	@echo 'Making Release'
-	@cd $(BUILD_DIR) && cp -r doc $(OUTPUT_NAME) && zip -rq $(OUTPUT_NAME).zip $(OUTPUT_NAME)
+	@cd $(BUILD_DIR) && cp -r doc $(OUTPUT_NAME) && zip -rq ../$(OUTPUT_NAME).zip $(OUTPUT_NAME)
 	@echo $(OUTPUT_NAME).zip ready

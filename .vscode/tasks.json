@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Factorio",
+            "type": "shell",
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            //"command": "/e/Games/Factorio_Web/Factorio/bin/Releasex64vs2017/factorio-run.exe",
+            "command": "E:/Games/Factorio_Web/Factorio/bin/Releasex64vs2017/factorio-run.exe",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "Run love",
+            "type": "shell",
+            "isBackground": true,
+            "command": "love ${relativeFile}}",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        }
+    ]
+}

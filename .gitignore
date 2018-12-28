@@ -8,10 +8,6 @@
 mod/*
 !mod/info.json
 
-# vscode related
-.vscode/
-*.stackdump
-
 # vim swapfiles
 .*.swp
 
@@ -25,4 +21,5 @@ mod/*
 temp*.lua
 stdlib/data/modules/tester.lua
 scratchpad.lua
+*.stackdump
 *.bak.*

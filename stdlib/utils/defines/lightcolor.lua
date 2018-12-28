@@ -17,7 +17,7 @@
 -- @tfield Concepts.Color yellow defines.color.orange
 -- @tfield Concepts.Color pink defines.color.purple
 local lightcolor = {}
-local colors = require('__stdlib__/stdlib/utils/defines/colors')
+local colors = require('__stdlib__/stdlib/utils/defines/color_list')
 
 local lightcolors = {
     white = colors.lightgrey,

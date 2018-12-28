@@ -29,7 +29,7 @@
 -- @tfield Concepts.Color purple
 -- @tfield Concepts.Color brown
 local color = {}
-local colors = require('__stdlib__/stdlib/utils/defines/colors')
+local colors = require('__stdlib__/stdlib/utils/defines/color_list')
 
 local _mt = {
     __index = function(_, c)

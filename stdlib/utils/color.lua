@@ -2,7 +2,12 @@
 -- @module Utils.Color
 -- @usage local Color = require('__stdlib__/stdlib/utils/color')
 
-local Color = {}
+local Color = {
+    __class = 'Area',
+    __index = require('__stdlib__/stdlib/core'),
+    __call = function(C, ...) return C.set(...) end
+}
+setmetatable(Color, Color)
 
 local Is = require('__stdlib__/stdlib/utils/is')
 

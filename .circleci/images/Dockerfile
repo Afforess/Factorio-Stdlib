@@ -55,3 +55,9 @@ ENV LUA_PATH_5_2 \
 /usr/local/lib/lua/5.2/?.lua;\
 /usr/local/lib/lua/5.2/?/init.lua;\
 ./?.lua
+
+RUN apt-get install -y libpng-dev
+RUN git clone --recursive https://github.com/kornelski/pngquant.git /pngquant
+WORKDIR /pngquant
+RUN make && make install
+WORKDIR /

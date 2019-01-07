@@ -5,7 +5,7 @@ jobs:
       only:
         - "0.17"
     docker:
-      - image: nexela/factorio-lua-env:0.0.1
+      - image: nexela/factorio-lua-env
     steps:
       - checkout
       - run: ln -s /root/project /usr/local/share/lua/5.2/__stdlib__

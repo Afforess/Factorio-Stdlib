@@ -3,7 +3,7 @@
 -- @usage local Color = require('__stdlib__/stdlib/utils/color')
 
 local Color = {
-    __class = 'Area',
+    __class = 'Color',
     __index = require('__stdlib__/stdlib/core'),
     __call = function(C, ...) return C.set(...) end
 }

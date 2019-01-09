@@ -79,13 +79,6 @@ function Inventory.each_reverse(inventory, func, ...)
     return index and inventory[index]
 end
 
---- Get a table of a players main inventory and quickbar.
--- @tparam LuaPlayer player
--- @treturn table
-function Inventory.get_main_inventories(player)
-    return {player.get_quickbar(), player.get_main_inventory()}
-end
-
 --- Return a blueprint stack from either stack or blueprint_book
 -- @tparam LuaItemStack stack
 -- @tparam[opt] bool is_bp_setup

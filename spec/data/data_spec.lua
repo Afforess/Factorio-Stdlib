@@ -91,8 +91,8 @@ describe('Data', function()
 
         it("Flags:has()", function()
             --assert.is_true(Data("stone-furnace", "item"):Flags("hidden"))
-            assert.is_true(flg:has("goes-to-quickbar"))
-            assert.is_true(flg("goes-to-quickbar"))
+            assert.is_true(flg:has("hide-from-bonus-gui"))
+            assert.is_true(flg("hide-from-bonus-gui"))
         end)
 
         it("Flags:add()", function()
@@ -100,11 +100,11 @@ describe('Data', function()
             flg:add("mighty")
             assert.same(3, #flg)
             flg:add("goes-to-quickbar")
-            assert.same(3, #flg) --uber is in the list, no change
+            assert.same(4, #flg)
             flg = flg + "test"
-            assert.same(4, #flg)
+            assert.same(5, #flg)
             flg = flg + "hide-from-bonus-gui" --hidden is already in the list, should be no change
-            assert.same(4, #flg)
+            assert.same(5, #flg)
          end)
 
          it("Flags:remove()", function()
@@ -145,7 +145,7 @@ describe('Data', function()
         -- end)
 
         it("Flags:tostring()", function()
-            assert.same("goes-to-quickbar, hide-from-bonus-gui", Data("cliff-explosives", "capsule"):Flags():tostring())
+            assert.same("hide-from-bonus-gui", Data("cliff-explosives", "capsule"):Flags():tostring())
         end)
     end)
 end)

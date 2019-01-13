@@ -2,7 +2,6 @@
 -- @script Developer
 
 local Data = require('__stdlib__/stdlib/data/data')
-local path = '__stdlib__/stdlib/data/developer/'
 
 local Developer = {
     __index = Data
@@ -28,42 +27,6 @@ end
 -- local Developer = require('__stdlib__/stdlib/data/develper/developer')
 -- Developer.make_test_entities()
 function Developer.make_test_entities()
-    if not data.raw['simple-entity']['debug-chunk-marker'] then
-        Data {
-            type = 'simple-entity',
-            name = 'debug-chunk-marker',
-            localised_name = 'Debug Chunk Markers',
-            flags = {'placeable-off-grid'},
-            selectable_in_game = false,
-            collision_mask = {},
-            render_layer = 'light-effect',
-            max_health = 200,
-            pictures = {
-                {
-                    filename = path .. 'debug-chunk-marker.png',
-                    priority = 'extra-high-no-scale',
-                    width = 64,
-                    height = 64,
-                    shift = {0, 0}
-                },
-                {
-                    filename = path .. 'debug-chunk-marker-horizontal.png',
-                    priority = 'extra-high-no-scale',
-                    width = 64,
-                    height = 64,
-                    shift = {0, 0}
-                },
-                {
-                    filename = path .. 'debug-chunk-marker-vertical.png',
-                    priority = 'extra-high-no-scale',
-                    width = 64,
-                    height = 64,
-                    shift = {0, 0}
-                }
-            }
-        }
-    end
-
     if not data.raw['electric-energy-interface']['debug-energy-interface'] then
         Data('electric-energy-interface', 'electric-energy-interface'):copy('debug-energy-interface'):set_fields {
             flags = {'placeable-off-grid'},

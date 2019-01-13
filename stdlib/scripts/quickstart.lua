@@ -26,7 +26,6 @@ if not remote.interfaces['quickstart_script'] then
         end
         return script.mod_name
     end
-    qs_interface.creative_mode_quickstart_registered_to = qs_interface.registered_to
     remote.add_interface('quickstart-script', qs_interface)
 else
     return
@@ -171,20 +170,17 @@ function quickstart.on_player_created(event)
         end
 
         if QS.get('chunk_bounds', false) then
-            if game.entity_prototypes['debug-chunk-marker'] then
-                local a = surface.create_entity {name = 'debug-chunk-marker', position = {0, 0}}
-                a.graphics_variation = 1
-                for i = 1, 31, 2 do
-                    a = surface.create_entity {name = 'debug-chunk-marker', position = {i, 0}}
-                    a.graphics_variation = 2
-                    a = surface.create_entity {name = 'debug-chunk-marker', position = {-i, 0}}
-                    a.graphics_variation = 2
-                    a = surface.create_entity {name = 'debug-chunk-marker', position = {0, i}}
-                    a.graphics_variation = 3
-                    a = surface.create_entity {name = 'debug-chunk-marker', position = {0, -i}}
-                    a.graphics_variation = 3
-                end
-            end
+            local black = {r = 0, g = 0, b = 0}
+            -- Horizontal
+            rendering.draw_line{width = 2, color = black, from = {x = 32, y = 0}, to = {x = -32, y = 0}, surface = surface}
+            rendering.draw_line{width = 2, color = black, from = {x = 32, y = 32}, to = {x = -32, y = 32}, surface = surface}
+            rendering.draw_line{width = 2, color = black, from = {x = 32, y = -32}, to = {x = -32, y = -32}, surface = surface}
+            -- Vertical
+            rendering.draw_line{width = 2, color = black, from = {x = 0, y = 32}, to = {x = 0, y = -32}, surface = surface}
+            rendering.draw_line{width = 2, color = black, from = {x = 32, y = 32}, to = {x = 32, y = -32}, surface = surface}
+            rendering.draw_line{width = 2, color = black, from = {x = -32, y = 32}, to = {x = -32, y = -32}, surface = surface}
+            -- Center
+            rendering.draw_circle{width = 2, color = black, surface = surface, radius = 1, filled = false, target = {x = 0, y = 0}}
         end
 
         -- Create proxy blueprint from string, read in the entities and remove it.
@@ -198,7 +194,7 @@ function quickstart.on_player_created(event)
         if bpstring then
             local bp = surface.create_entity {name = 'item-on-ground', position = {0, 0}, force = force, stack = 'blueprint'}
             bp.stack.import_stack(bpstring)
-            local revive = bp.stack.build_blueprint {surface = player.surface, force = player.force, position = {0, 0}, force_build = true, skip_fog_of_war = false, by_player = player}
+            local revive = bp.stack.build_blueprint {surface = player.surface, force = player.force, position = {0, 2}, force_build = true, skip_fog_of_war = false, by_player = player}
             local count = #revive
             for i, ent in ipairs(revive) do
                 -- put rolling stock at the end.
@@ -228,13 +224,6 @@ function quickstart.on_player_created(event)
                 sb.destructible = false
                 script.raise_event(defines.events.on_built_entity, {created_entity = sb, player_index = player.index})
             end
-        end
-
-        if QS.get('setup_creative_mode', false) and game.active_mods['creative-mode'] then
-            local radar = surface.create_entity {name = 'creative-mode_super-radar', position = {3.5, -34.5}, force = force}
-            script.raise_event(defines.events.on_built_entity, {created_entity = radar, player_index = player.index})
-            local rb = surface.create_entity {name = 'creative-mode_super-roboport', position = {-4, -35}, force = force}
-            script.raise_event(defines.events.on_built_entity, {created_entity = rb, player_index = player.index})
         end
     end
 end

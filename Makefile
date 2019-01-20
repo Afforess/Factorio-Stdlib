@@ -4,8 +4,6 @@ OUTPUT_DIR := $(PACKAGE_NAME)
 OUTPUT_NAME := $(PACKAGE_NAME)_$(VERSION_STRING)
 BUILD_DIR := .build
 
-FILES := $(shell find . -iname '*.json' -type f -path "./stdlib/*") $(shell find . -iname '*.lua' -type f -path "./stdlib/*")
-
 all: clean test package ldoc luacheck release
 
 quick: clean package ldoc release artifact
@@ -23,10 +21,11 @@ test:
 	@echo 'Running tests'
 	@busted
 
-package: $(FILES)
+package:
 	@echo 'Copying files'
 	@mkdir -p $(BUILD_DIR)/$(OUTPUT_NAME)
 	@cp -r $(PACKAGE_NAME) $(BUILD_DIR)/$(OUTPUT_NAME)/$(PACKAGE_NAME)
+	@cp info.json $(BUILD_DIR)/$(OUTPUT_NAME)/info.json
 	@cp README.md $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/README.md
 	@cp LICENSE $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/LICENSE.md
 	@cp CHANGELOG.md $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/CHANGELOG.md

@@ -27,6 +27,9 @@ Chunk.from_position = Position.to_chunk_position
 -- @see Area.Position.from_chunk_position
 Chunk.to_position = Position.from_chunk_position
 
+--Chunk.to_center_position
+--Chunk.to_center_tile_position
+
 --- Gets the area of a chunk from the specified chunk position.
 -- @tparam Concepts.ChunkPosition pos the chunk position
 -- @treturn Concepts.BoundingBox the chunk's area

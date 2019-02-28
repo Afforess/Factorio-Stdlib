@@ -5,7 +5,7 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Core module</title>
+    <title>Utils.Color module</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
     <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
@@ -47,7 +47,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Position.html"><span class="module-name-item">Area.Position</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Surface.html"><span class="module-name-item">Area.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Tile.html"><span class="module-name-item">Area.Tile</span></a></div></li>
-    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Core.html"><span class="module-name-item">Core</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Core.html"><span class="module-name-item">Core</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.Pipes.html"><span class="module-name-item">Data.Pipes</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.Sprites.html"><span class="module-name-item">Data.Sprites</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.Util.html"><span class="module-name-item">Data.Util</span></a></div></li>
@@ -66,7 +66,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Logger.html"><span class="module-name-item">Misc.Logger</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Migrate.html"><span class="module-name-item">Misc.Migrate</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Queue.html"><span class="module-name-item">Misc.Queue</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color.html"><span class="module-name-item">Utils.Color</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Utils.Color.html"><span class="module-name-item">Utils.Color</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Globals.html"><span class="module-name-item">Utils.Globals</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Is.html"><span class="module-name-item">Utils.Is</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Iter.html"><span class="module-name-item">Utils.Iter</span></a></div></li>
@@ -132,9 +132,10 @@
     <!-- list of items in a module -->
     <ul class="nav nav-module-contents">
     <li class="nav-item">
-    <h4>Contents of <strong>Core</strong></h4>
+    <h4>Contents of <strong>Utils.Color</strong></h4>
     <ul class="nav">
     <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    <li class="nav-item"><a href="#Tables"><span class="fragment-hashtag">#</span> Tables</a></li>
     </ul>
     </li>
     </ul>
@@ -155,10 +156,10 @@
 
     <!-- module content header start -->
 
-    <h2><span class="body-module-name"><strong><em>Core</em></strong></span> module</h2>
-    <p>The Core module loads some helper functions and globals useful in all stages
- of a mods life cycle.</p>
-    <p> All modules have an __index method into core.</p>
+    <h2><span class="body-module-name"><strong><em>Utils.Color</em></strong></span> module</h2>
+    <p>For playing with colors.</p>
+    <p>
+</p>
 
 
     <!-- module info start -->
@@ -166,7 +167,7 @@
 
     <!-- module usage start -->
     <h3>Usage</h3>
-    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Core = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/core'</span>)</code></pre>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Color = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/utils/color'</span>)</code></pre>
     <!-- module usage end -->
 
     <!-- module content header end -->
@@ -179,8 +180,37 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#create_stdlib_globals">create_stdlib_globals([files])</a></td>
-    <td class="summary">load the stdlib into globals, by default it loads everything into an ALLCAPS name.</td>
+    <td class="name"><a href="#from_hex">from_hex(hex[, alpha=1])</a></td>
+    <td class="summary">Get a color table with a hexadecimal string.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#from_rgb">from_rgb([r=0][, g=0][, b=0][, a=255])</a></td>
+    <td class="summary">Converts a color in the rgb format to a color table</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#set">set([color=white][, alpha=1])</a></td>
+    <td class="summary">Set a value for the alpha channel in the given color table.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#to_table">to_table(c_arr)</a></td>
+    <td class="summary">Converts a color in the array format to a color in the table format.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Tables">Tables</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#anticolor">anticolor</a></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#color">color</a></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#lightcolor">lightcolor</a></td>
     </tr>
     </tbody>
     </table>
@@ -194,15 +224,15 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#create_stdlib_globals" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="create_stdlib_globals">create_stdlib_globals([files])</span>
+    <a href="#from_hex" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="from_hex">from_hex(hex[, alpha=1])</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">load the stdlib into globals, by default it loads everything into an ALLCAPS name.</p>
-    <p class="section-item-description"> Alternatively you can pass a dictionary of <code>[global names] -&gt; [require path]</code>.</p>
+    <p class="section-item-summary">Get a color table with a hexadecimal string.</p>
+    <p class="section-item-description"> Optionally provide the value for the alpha channel.</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -215,16 +245,31 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>files</em></strong>
+    <strong><em>hex</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     hexadecimal color string (#ffffff, not #fff)
+
+    </li>
 
 
 
 
-    (<em>optional</em>)
+
+    <li class="section-subitem-li">
+
+    <strong><em>alpha</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#float">float</a></span>)
+
+     the alpha value to set; such that <strong><em> 0 &#8924; value &#8924; 1 </em></strong>
+
+    (<em>default</em>: 1)
     </li>
 
 
@@ -236,7 +281,8 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><span class="type">Core</span></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+    <span class="return-text">a color table with RGB converted from Hex and with alpha</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -246,8 +292,340 @@
     <!-- see also end -->
 
     <!-- usage start -->
-    <strong>Usage:</strong>
-    <pre class="code" data-lang="Lua"><code><span class="global">require</span>('__stdlib__/stdlib/core).create_stdlib_globals()</code></pre>
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#from_rgb" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="from_rgb">from_rgb([r=0][, g=0][, b=0][, a=255])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Converts a color in the rgb format to a color table</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>r</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>)
+
+     0-255 red
+
+    (<em>default</em>: 0)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>g</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>)
+
+     0-255 green
+
+    (<em>default</em>: 0)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>b</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>)
+
+     0-255 blue
+
+    (<em>default</em>: 0)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>a</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>)
+
+     0-255 alpha
+
+    (<em>default</em>: 255)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#set" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="set">set([color=white][, alpha=1])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Set a value for the alpha channel in the given color table.</p>
+    <p class="section-item-description"> <code>color.a</code> represents the alpha channel in the given color table.
+ <ul>
+ <li>If <strong><em>alpha</em></strong> is given, set <code>color.a</code> to it.
+ <li>If <strong><em>alpha</em></strong> is not given, and if the given color table does not have a value for <code>color.a</code>, set <code>color.a</code> to 1.
+ <li>If <strong><em>alpha</em></strong> is not given, and if the given color table already has a value for <code>color.a</code>, then leave <code>color.a</code> alone.
+ </ul></p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>color</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="../modules/defines.color.html">defines.color</a> or <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+
+     the color to configure
+
+    (<em>default</em>: white)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>alpha</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#float">float</a></span>)
+
+     the alpha value 0 &ndash; 1 to set for the given color
+
+    (<em>default</em>: 1)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+    <span class="return-text">a color table that has the specified value for the alpha channel</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#to_table" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="to_table">to_table(c_arr)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Converts a color in the array format to a color in the table format.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>c_arr</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/11.1.html">array</a></span>)
+
+     the color to convert &mdash; { [1] = <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#float">float</a>, [2] = <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#float">float</a>, [3] = <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#float">float</a>, [4] = <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#float">float</a> }
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Color">Color</a></span>)
+    <span class="return-text">a converted color &mdash; { r = c_arr[1], g = c_arr[2], b = c_arr[3], a = c_arr[4] }</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Tables" class="section-title"><a href="#Tables">Tables</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#anticolor" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="anticolor">anticolor</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">
+</p>
+    <p class="section-item-description"> <a href="http://lua-api.factorio.com/latest/defines.html#defines.anticolor">defines.anticolor</a></p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#color" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="color">color</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">
+</p>
+    <p class="section-item-description"> <a href="../modules/defines.color.html">defines.color</a></p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#lightcolor" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="lightcolor">lightcolor</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">
+</p>
+    <p class="section-item-description"> <a href="http://lua-api.factorio.com/latest/defines.html#defines.lightcolor">defines.lightcolor</a></p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
     <!-- usage end -->
 
     </dd>

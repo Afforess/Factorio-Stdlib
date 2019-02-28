@@ -5,7 +5,7 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Core module</title>
+    <title>Misc.Logger module</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
     <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
@@ -47,7 +47,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Position.html"><span class="module-name-item">Area.Position</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Surface.html"><span class="module-name-item">Area.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Tile.html"><span class="module-name-item">Area.Tile</span></a></div></li>
-    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Core.html"><span class="module-name-item">Core</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Core.html"><span class="module-name-item">Core</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.Pipes.html"><span class="module-name-item">Data.Pipes</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.Sprites.html"><span class="module-name-item">Data.Sprites</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.Util.html"><span class="module-name-item">Data.Util</span></a></div></li>
@@ -63,7 +63,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Trains.html"><span class="module-name-item">Event.Trains</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Game.html"><span class="module-name-item">Game</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Config.html"><span class="module-name-item">Misc.Config</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Logger.html"><span class="module-name-item">Misc.Logger</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Misc.Logger.html"><span class="module-name-item">Misc.Logger</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Migrate.html"><span class="module-name-item">Misc.Migrate</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Queue.html"><span class="module-name-item">Misc.Queue</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color.html"><span class="module-name-item">Utils.Color</span></a></div></li>
@@ -132,9 +132,10 @@
     <!-- list of items in a module -->
     <ul class="nav nav-module-contents">
     <li class="nav-item">
-    <h4>Contents of <strong>Core</strong></h4>
+    <h4>Contents of <strong>Misc.Logger</strong></h4>
     <ul class="nav">
     <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    <li class="nav-item"><a href="#Tables"><span class="fragment-hashtag">#</span> Tables</a></li>
     </ul>
     </li>
     </ul>
@@ -155,10 +156,10 @@
 
     <!-- module content header start -->
 
-    <h2><span class="body-module-name"><strong><em>Core</em></strong></span> module</h2>
-    <p>The Core module loads some helper functions and globals useful in all stages
- of a mods life cycle.</p>
-    <p> All modules have an __index method into core.</p>
+    <h2><span class="body-module-name"><strong><em>Misc.Logger</em></strong></span> module</h2>
+    <p>For logging debug information to files.</p>
+    <p>
+</p>
 
 
     <!-- module info start -->
@@ -166,7 +167,9 @@
 
     <!-- module usage start -->
     <h3>Usage</h3>
-    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Core = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/core'</span>)</code></pre>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Logger = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/log/logger'</span>)
+<span class="comment">-- or to create a logger directly:
+</span><span class="keyword">local</span> LOGGER = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/log/logger'</span>).new(...)</code></pre>
     <!-- module usage end -->
 
     <!-- module content header end -->
@@ -179,8 +182,32 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#create_stdlib_globals">create_stdlib_globals([files])</a></td>
-    <td class="summary">load the stdlib into globals, by default it loads everything into an ALLCAPS name.</td>
+    <td class="name"><a href="#Log.log">Log.log(msg)</a></td>
+    <td class="summary">Logs a message.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Log.write">Log.write()</a></td>
+    <td class="summary">Writes out all buffered messages immediately.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get">get(...)</a></td>
+    <td class="summary">Get a saved log or create a new one if there is no saved log.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#new">new(mod_name[, log_name='main'][, debug_mode=false][, options={...}])</a></td>
+    <td class="summary">Creates a new logger object.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Tables">Tables</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#Log.options">Log.options</a></td>
+    <td class="summary">Used in the <a href="../modules/Misc.Logger.html#new">new</a> function for logging game ticks, specifying logfile extension, or forcing the logs to append to the end of the logfile.</td>
     </tr>
     </tbody>
     </table>
@@ -194,15 +221,16 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#create_stdlib_globals" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="create_stdlib_globals">create_stdlib_globals([files])</span>
+    <a href="#Log.log" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Log.log">Log.log(msg)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">load the stdlib into globals, by default it loads everything into an ALLCAPS name.</p>
-    <p class="section-item-description"> Alternatively you can pass a dictionary of <code>[global names] -&gt; [require path]</code>.</p>
+    <p class="section-item-summary">Logs a message.</p>
+    <p class="section-item-description">
+</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -215,16 +243,14 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>files</em></strong>
+    <strong><em>msg</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
 
+     the message to log. <a href="https://www.lua.org/pil/2.5.html">table</a>s will be dumped using <a href="https://github.com/pkulchenko/serpent">serpent</a> which is included in the official Factorio Lualib
 
-
-
-    (<em>optional</em>)
     </li>
 
 
@@ -236,7 +262,206 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><span class="type">Core</span></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if the message was written, false if it was queued for a later write</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <strong>See also:</strong>
+    <ul>
+    <li><a href="https://forums.factorio.com/viewtopic.php?f=25&t=23844">Debugging utilities built in to Factorio</a></li>
+    </ul>
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Log.write" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Log.write">Log.write()</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Writes out all buffered messages immediately.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if write was successful, false otherwise</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get">get(...)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Get a saved log or create a new one if there is no saved log.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>...</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#new" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="new">new(mod_name[, log_name='main'][, debug_mode=false][, options={...}])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Creates a new logger object.</p>
+    <p class="section-item-description"> In debug mode, the logger writes to file immediately, otherwise the logger buffers the lines.
+ <p>The logger flushes the logged messages every 60 seconds since the last message.
+ <p>A table of <a href="../modules/Misc.Logger.html#Log.options">options</a> may be specified when creating a logger.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>mod_name</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     [required] the name of the mod to create the logger for
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>log_name</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     the name of the logger
+
+    (<em>default</em>: 'main')
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>debug_mode</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     toggles the debug state of logger
+
+    (<em>default</em>: false)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>options</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="../modules/Misc.Logger.html#Log.options">options</a></span>)
+
+     a table with optional arguments
+
+    (<em>default</em>: {...})
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Misc.Logger.html">Logger</a></span>) the logger instance</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -247,7 +472,101 @@
 
     <!-- usage start -->
     <strong>Usage:</strong>
-    <pre class="code" data-lang="Lua"><code><span class="global">require</span>('__stdlib__/stdlib/core).create_stdlib_globals()</code></pre>
+    <pre class="code" data-lang="Lua"><code>LOGGER = Logger.new(<span class="string">'cool_mod_name'</span>)
+LOGGER.log(<span class="string">"this msg will be logged!"</span>)</code></pre>
+    <pre class="code" data-lang="Lua"><code>LOGGER = Logger.new(<span class="string">'cool_mod_name'</span>, <span class="string">'test'</span>, <span class="keyword">true</span>)
+LOGGER.log(<span class="string">"this msg will be logged and written immediately in test.log!"</span>)</code></pre>
+    <pre class="code" data-lang="Lua"><code>LOGGER = Logger.new(<span class="string">'cool_mod_name'</span>, <span class="string">'test'</span>, <span class="keyword">true</span>, { file_extension = data })
+LOGGER.log(<span class="string">"this msg will be logged and written immediately in test.data!"</span>)</code></pre>
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Tables" class="section-title"><a href="#Tables">Tables</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Log.options" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Log.options">Log.options</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Used in the <a href="../modules/Misc.Logger.html#new">new</a> function for logging game ticks, specifying logfile extension, or forcing the logs to append to the end of the logfile.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>log_ticks</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     whether to include the game tick timestamp in the logs
+
+    (<em>default</em>: false)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>file_extension</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     a string that overrides the default logfile extension
+
+    (<em>default</em>: "log")
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>force_append</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     if true, every new message appends to the current logfile instead of creating a new one
+
+    (<em>default</em>: false)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
     <!-- usage end -->
 
     </dd>

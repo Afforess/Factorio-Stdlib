@@ -5,7 +5,7 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>event.lua example</title>
+    <title>LICENSE topic</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
     <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
@@ -39,9 +39,13 @@
     <!-- sidebar navigation -->
     <ul class="nav nav-modules">
     <li class="nav-item">
-    <h2>Examples</h2>
+    <h2>Topics</h2>
     <ul class="nav">
-    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/CHANGELOG.md.html"><span class="module-name-item">CHANGELOG.md</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../topics/LICENSE.html"><span class="module-name-item">LICENSE</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/README.md.html"><span class="module-name-item">README.md</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/contributing.md.html"><span class="module-name-item">contributing.md</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/style-guide.md.html"><span class="module-name-item">style-guide.md</span></a></div></li>
     </ul>
     </li>
     </ul>
@@ -116,13 +120,9 @@
     </ul>
     <ul class="nav nav-modules">
     <li class="nav-item">
-    <h2>Topics</h2>
+    <h2>Examples</h2>
     <ul class="nav">
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/CHANGELOG.md.html"><span class="module-name-item">CHANGELOG.md</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/LICENSE.html"><span class="module-name-item">LICENSE</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/README.md.html"><span class="module-name-item">README.md</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/contributing.md.html"><span class="module-name-item">contributing.md</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/style-guide.md.html"><span class="module-name-item">style-guide.md</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a></div></li>
     </ul>
     </li>
     </ul>
@@ -130,9 +130,6 @@
 
 
     <!-- list of items in a module -->
-    </div>
-    <div class="up-to-top">
-    <a href="#">Top <i class="icon icon-upward"></i></a>
     </div>
     </div>
     <!-- sidebar end -->
@@ -147,24 +144,25 @@
 
     <!-- module content header start -->
 
-    <h2><span class="body-module-name"><strong><em>event.lua</em></strong></span> example</h2>
+    <h2><span class="body-module-name"><strong><em>LICENSE</em></strong></span> topic</h2>
     <p></p>
     <p></p>
 
-    <pre class="code" data-lang="Lua"><code><span class="comment">-- Require the event module
-</span><span class="keyword">local</span> Event = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/event/event'</span>)
+    <p>Copyright &copy; 2016, Afforess</p></p>
 
-<span class="comment">-- Register our hotkeys
-</span>
-<span class="comment">-- Pressing the fist hotkey will run both functions
-</span>Event.register(<span class="string">"stdlib-test-hotkey-1"</span>, <span class="keyword">function</span>() game.<span class="global">print</span>(<span class="string">"Test key 1"</span>) <span class="keyword">end</span>)
-Event.register(<span class="string">"stdlib-test-hotkey-1"</span>, <span class="keyword">function</span>() game.<span class="global">print</span>(<span class="string">"Test key 1 #2"</span>) <span class="keyword">end</span>)
+<p>Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.</p>
 
-<span class="comment">-- Pressing the second hotkey will just run this function
-</span>Event.register(<span class="string">"stdlib-test-hotkey-2"</span>, <span class="keyword">function</span>() game.<span class="global">print</span>(<span class="string">"Test key 2"</span>) <span class="keyword">end</span>)
+<p>THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo; AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-<span class="comment">-- Anytime we build something lets run this function
-</span>Event.register(defines.events.on_built_entity, <span class="keyword">function</span>(event) game.<span class="global">print</span>(event.created_entity.name ..<span class="string">"  was built"</span>) <span class="keyword">end</span>)</code></pre>
+
 
     <!-- module info start -->
     <!-- module info end -->
@@ -180,6 +178,8 @@ Event.register(<span class="string">"stdlib-test-hotkey-1"</span>, <span class="
     <br />
 
     <!-- section start -->
+
+    </div>
 
     <!-- section end -->
 

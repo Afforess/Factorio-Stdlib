@@ -5,7 +5,7 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>event.lua example</title>
+    <title>README.md topic</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
     <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
@@ -39,9 +39,13 @@
     <!-- sidebar navigation -->
     <ul class="nav nav-modules">
     <li class="nav-item">
-    <h2>Examples</h2>
+    <h2>Topics</h2>
     <ul class="nav">
-    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/CHANGELOG.md.html"><span class="module-name-item">CHANGELOG.md</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/LICENSE.html"><span class="module-name-item">LICENSE</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../topics/README.md.html"><span class="module-name-item">README.md</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/contributing.md.html"><span class="module-name-item">contributing.md</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/style-guide.md.html"><span class="module-name-item">style-guide.md</span></a></div></li>
     </ul>
     </li>
     </ul>
@@ -116,13 +120,9 @@
     </ul>
     <ul class="nav nav-modules">
     <li class="nav-item">
-    <h2>Topics</h2>
+    <h2>Examples</h2>
     <ul class="nav">
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/CHANGELOG.md.html"><span class="module-name-item">CHANGELOG.md</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/LICENSE.html"><span class="module-name-item">LICENSE</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/README.md.html"><span class="module-name-item">README.md</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/contributing.md.html"><span class="module-name-item">contributing.md</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/style-guide.md.html"><span class="module-name-item">style-guide.md</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../examples/event.lua.html"><span class="module-name-item">event.lua</span></a></div></li>
     </ul>
     </li>
     </ul>
@@ -130,9 +130,6 @@
 
 
     <!-- list of items in a module -->
-    </div>
-    <div class="up-to-top">
-    <a href="#">Top <i class="icon icon-upward"></i></a>
     </div>
     </div>
     <!-- sidebar end -->
@@ -147,24 +144,83 @@
 
     <!-- module content header start -->
 
-    <h2><span class="body-module-name"><strong><em>event.lua</em></strong></span> example</h2>
+    <h2><span class="body-module-name"><strong><em>README.md</em></strong></span> topic</h2>
     <p></p>
     <p></p>
 
-    <pre class="code" data-lang="Lua"><code><span class="comment">-- Require the event module
-</span><span class="keyword">local</span> Event = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/event/event'</span>)
+    <h1>Factorio-Stdlib</h1>
 
-<span class="comment">-- Register our hotkeys
-</span>
-<span class="comment">-- Pressing the fist hotkey will run both functions
-</span>Event.register(<span class="string">"stdlib-test-hotkey-1"</span>, <span class="keyword">function</span>() game.<span class="global">print</span>(<span class="string">"Test key 1"</span>) <span class="keyword">end</span>)
-Event.register(<span class="string">"stdlib-test-hotkey-1"</span>, <span class="keyword">function</span>() game.<span class="global">print</span>(<span class="string">"Test key 1 #2"</span>) <span class="keyword">end</span>)
 
-<span class="comment">-- Pressing the second hotkey will just run this function
-</span>Event.register(<span class="string">"stdlib-test-hotkey-2"</span>, <span class="keyword">function</span>() game.<span class="global">print</span>(<span class="string">"Test key 2"</span>) <span class="keyword">end</span>)
+<p>Factorio Standard Library Project</p>
 
-<span class="comment">-- Anytime we build something lets run this function
-</span>Event.register(defines.events.on_built_entity, <span class="keyword">function</span>(event) game.<span class="global">print</span>(event.created_entity.name ..<span class="string">"  was built"</span>) <span class="keyword">end</span>)</code></pre>
+
+<p><a name="About"></a></p>
+
+
+<h2>About</h2>
+
+
+<p>The Factorio Standard Library is a project to bring Factorio modders high-quality, commonly-required utilities and tools that developers have been often copying around, remixing, and rewriting poor quality copies of. Factorio mods often re-implement basic tools like logging, math calculations, and position or area manipulation. These common operations can be a subtle source of errors and their regular occurance has encouraged the creation of the Factorio Stdlib, as a toolbox and set of utilities for modders. Factorio Standard Library APIs are all unit-tested, documented, and high quality, and written to be simple and straightforward for the earliest beginners and seasoned developers alike.</p>
+
+
+<p><a name="Usage"></a></p>
+
+
+<h2>Usage</h2>
+
+
+<ol>
+<li>Download the <a href="https://github.com/Afforess/Factorio-Stdlib/releases/latest">latest release</a> of the stdlib</li>
+<li>Unpack the archive, and copy the <code>stdlib/</code> directory into your base mod directory</li>
+<li>In your <code>control.lua</code> or other lua modules, <a href="https://github.com/Afforess/Factorio-Stdlib/wiki/Layout#adding-factorio-stdlib-to-your-mod">you can import the stdlib modules you need</a>.</li>
+</ol>
+
+
+<p><a name="Documentation"></a></p>
+
+
+<h2>Documentation</h2>
+
+
+<p>See <a href="https://github.com/Afforess/Factorio-Stdlib/wiki">the wiki</a> for an introduction and usage/examples.</p>
+
+
+<p>See the <a href="http://afforess.github.io/Factorio-Stdlib/">github pages</a> for the latest generated documentation of the Factorio-stdlib</p>
+
+
+<p><a name="Generating_the_documentation_from_source"></a></p>
+
+
+<h2>Generating the documentation from source</h2>
+
+
+<ol>
+<li>Install ldoc (apt-get install lua-ldoc on debian/ubuntu), <a href="https://stevedonovan.github.io/ldoc/index.html">see project for other operating systems</a></li>
+<li>Generate the docs with <code>ldoc src/*</code>. Documentation will be placed in <code>docs/</code></li>
+</ol>
+
+
+<p><a name="Unit_Tests"></a></p>
+
+
+<h2>Unit Tests</h2>
+
+
+<p>The codebase is tested with <a href="http://olivinelabs.com/busted"><code>busted</code></a>. Test specifications are located under <code>spec/</code></p>
+
+
+<p><a name="Contributing"></a></p>
+
+
+<h2>Contributing</h2>
+
+
+<p>Contributions are welcome! Please follow general lua coding standards and include ldoc-compatible comments.</p>
+
+
+<p><a href="https://circleci.com/gh/Afforess/Factorio-Stdlib/tree/master"><img src="https://circleci.com/gh/Afforess/Factorio-Stdlib/tree/master.svg?style=svg" alt="Circle CI" /></a></p>
+
+
 
     <!-- module info start -->
     <!-- module info end -->
@@ -180,6 +236,8 @@ Event.register(<span class="string">"stdlib-test-hotkey-1"</span>, <span class="
     <br />
 
     <!-- section start -->
+
+    </div>
 
     <!-- section end -->
 

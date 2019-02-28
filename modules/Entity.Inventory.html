@@ -5,7 +5,7 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Core module</title>
+    <title>Entity.Inventory module</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
     <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
@@ -47,12 +47,12 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Position.html"><span class="module-name-item">Area.Position</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Surface.html"><span class="module-name-item">Area.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Tile.html"><span class="module-name-item">Area.Tile</span></a></div></li>
-    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Core.html"><span class="module-name-item">Core</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Core.html"><span class="module-name-item">Core</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.Pipes.html"><span class="module-name-item">Data.Pipes</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.Sprites.html"><span class="module-name-item">Data.Sprites</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Data.Util.html"><span class="module-name-item">Data.Util</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.Entity.html"><span class="module-name-item">Entity.Entity</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.Inventory.html"><span class="module-name-item">Entity.Inventory</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Entity.Inventory.html"><span class="module-name-item">Entity.Inventory</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.Resource.html"><span class="module-name-item">Entity.Resource</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Changes.html"><span class="module-name-item">Event.Changes</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Event.html"><span class="module-name-item">Event.Event</span></a></div></li>
@@ -132,7 +132,7 @@
     <!-- list of items in a module -->
     <ul class="nav nav-module-contents">
     <li class="nav-item">
-    <h4>Contents of <strong>Core</strong></h4>
+    <h4>Contents of <strong>Entity.Inventory</strong></h4>
     <ul class="nav">
     <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
     </ul>
@@ -155,10 +155,10 @@
 
     <!-- module content header start -->
 
-    <h2><span class="body-module-name"><strong><em>Core</em></strong></span> module</h2>
-    <p>The Core module loads some helper functions and globals useful in all stages
- of a mods life cycle.</p>
-    <p> All modules have an __index method into core.</p>
+    <h2><span class="body-module-name"><strong><em>Entity.Inventory</em></strong></span> module</h2>
+    <p>For working with inventories.</p>
+    <p>
+</p>
 
 
     <!-- module info start -->
@@ -166,7 +166,7 @@
 
     <!-- module usage start -->
     <h3>Usage</h3>
-    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Core = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/core'</span>)</code></pre>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Inventory = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/entity/inventory'</span>)</code></pre>
     <!-- module usage end -->
 
     <!-- module content header end -->
@@ -179,8 +179,28 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#create_stdlib_globals">create_stdlib_globals([files])</a></td>
-    <td class="summary">load the stdlib into globals, by default it loads everything into an ALLCAPS name.</td>
+    <td class="name"><a href="#copy_as_simple_stacks">copy_as_simple_stacks(src, dest[, clear=false])</a></td>
+    <td class="summary">Copies the contents of source inventory to destination inventory by using <a href="http://lua-api.factorio.com/latest/Concepts.html#SimpleItemStack">Concepts.SimpleItemStack</a>.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#each">each(inventory, func[, ...])</a></td>
+    <td class="summary">Given a function, apply it to each slot in the given inventory.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#each_reverse">each_reverse(inventory, func[, ...])</a></td>
+    <td class="summary">Given a function, apply it to each slot in the given inventory.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_blueprint">get_blueprint(stack[, is_bp_setup][, no_book])</a></td>
+    <td class="summary">Return a blueprint stack from either stack or blueprint_book</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#get_item_or_filter">get_item_or_filter(inventory, idx[, item_only][, filter_only])</a></td>
+    <td class="summary">Returns either the item at a position, or the filter at the position if there isn&rsquo;t an item there.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#is_named_bp">is_named_bp(stack, label)</a></td>
+    <td class="summary">Is the stack a blueprint with label?</td>
     </tr>
     </tbody>
     </table>
@@ -194,15 +214,16 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#create_stdlib_globals" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="create_stdlib_globals">create_stdlib_globals([files])</span>
+    <a href="#copy_as_simple_stacks" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="copy_as_simple_stacks">copy_as_simple_stacks(src, dest[, clear=false])</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">load the stdlib into globals, by default it loads everything into an ALLCAPS name.</p>
-    <p class="section-item-description"> Alternatively you can pass a dictionary of <code>[global names] -&gt; [require path]</code>.</p>
+    <p class="section-item-summary">Copies the contents of source inventory to destination inventory by using <a href="http://lua-api.factorio.com/latest/Concepts.html#SimpleItemStack">Concepts.SimpleItemStack</a>.</p>
+    <p class="section-item-description">
+</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -215,11 +236,318 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>files</em></strong>
+    <strong><em>src</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
+
+     the source inventory
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>dest</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
+
+     the destination inventory
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>clear</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     clear the contents of the source inventory
+
+    (<em>default</em>: false)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#SimpleItemStack">{SimpleItemStack,...}</a></span>)
+    <span class="return-text">an array of left over items that could not be inserted into the destination</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#each" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="each">each(inventory, func[, ...])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Given a function, apply it to each slot in the given inventory.</p>
+    <p class="section-item-description"> Passes the index of a slot as the second argument to the given function.
+ <p>Iteration is aborted if the applied function returns true for any element during iteration.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>inventory</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
+
+     the inventory to iterate
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>func</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+     the function to apply to values
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>...</em></strong>
+
+    <strong> : </strong>
+
+
+     additional arguments passed to the function
+
+    (<em>optional</em>)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaItemStack.html">LuaItemStack</a></span>)
+    <span class="return-text">the slot where the iteration was aborted <strong>OR</strong> nil if not aborted</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#each_reverse" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="each_reverse">each_reverse(inventory, func[, ...])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Given a function, apply it to each slot in the given inventory.</p>
+    <p class="section-item-description"> Passes the index of a slot as the second argument to the given function.
+ <p>Iteration is aborted if the applied function returns true for any element during iteration.
+ <p>Iteration is performed from last to first in order to support dynamically sized inventories.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>inventory</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
+
+     the inventory to iterate
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>func</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+     the function to apply to values
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>...</em></strong>
+
+    <strong> : </strong>
+
+
+     additional arguments passed to the function
+
+    (<em>optional</em>)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaItemStack.html">LuaItemStack</a></span>)
+    <span class="return-text">the slot where the iteration was aborted <strong>OR</strong> nil if not aborted</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_blueprint" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_blueprint">get_blueprint(stack[, is_bp_setup][, no_book])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Return a blueprint stack from either stack or blueprint_book</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>stack</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaItemStack.html">LuaItemStack</a></span>)
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>is_bp_setup</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">bool</span></span>)
+
+
+
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>no_book</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">bool</span></span>)
 
 
 
@@ -236,7 +564,7 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><span class="type">Core</span></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaItemStack.html">LuaItemStack</a></span>)
     </li>
     </ul>
     <!-- returns end -->
@@ -246,8 +574,192 @@
     <!-- see also end -->
 
     <!-- usage start -->
-    <strong>Usage:</strong>
-    <pre class="code" data-lang="Lua"><code><span class="global">require</span>('__stdlib__/stdlib/core).create_stdlib_globals()</code></pre>
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_item_or_filter" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_item_or_filter">get_item_or_filter(inventory, idx[, item_only][, filter_only])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns either the item at a position, or the filter at the position if there isn&rsquo;t an item there.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>inventory</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>idx</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>)
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>item_only</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">bool</span></span>)
+
+
+
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>filter_only</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">bool</span></span>)
+
+
+
+
+    (<em>optional</em>)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">the item or filter</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#is_named_bp" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="is_named_bp">is_named_bp(stack, label)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Is the stack a blueprint with label?</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>stack</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaItemStack.html">LuaItemStack</a></span>)
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>label</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">bool</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
     <!-- usage end -->
 
     </dd>

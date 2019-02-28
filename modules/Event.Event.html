@@ -5,7 +5,7 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Event.Gui module</title>
+    <title>Event.Event module</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
     <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
@@ -55,9 +55,9 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.Inventory.html"><span class="module-name-item">Entity.Inventory</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Entity.Resource.html"><span class="module-name-item">Entity.Resource</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Changes.html"><span class="module-name-item">Event.Changes</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Event.html"><span class="module-name-item">Event.Event</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Event.Event.html"><span class="module-name-item">Event.Event</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Force.html"><span class="module-name-item">Event.Force</span></a></div></li>
-    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Event.Gui.html"><span class="module-name-item">Event.Gui</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Gui.html"><span class="module-name-item">Event.Gui</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Player.html"><span class="module-name-item">Event.Player</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Surface.html"><span class="module-name-item">Event.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Trains.html"><span class="module-name-item">Event.Trains</span></a></div></li>
@@ -132,9 +132,10 @@
     <!-- list of items in a module -->
     <ul class="nav nav-module-contents">
     <li class="nav-item">
-    <h4>Contents of <strong>Event.Gui</strong></h4>
+    <h4>Contents of <strong>Event.Event</strong></h4>
     <ul class="nav">
     <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    <li class="nav-item"><a href="#Tables"><span class="fragment-hashtag">#</span> Tables</a></li>
     </ul>
     </li>
     </ul>
@@ -155,10 +156,19 @@
 
     <!-- module content header start -->
 
-    <h2><span class="body-module-name"><strong><em>Event.Gui</em></strong></span> module</h2>
-    <p>Makes monolithic Factorio GUI events more manageable.</p>
-    <p>
-</p>
+    <h2><span class="body-module-name"><strong><em>Event.Event</em></strong></span> module</h2>
+    <p>Makes working with events in Factorio a lot more simple.</p>
+    <p> <p>By default, Factorio allows you to register <strong>only one handler</strong> to an event.
+ <p>This module lets you easily register <strong>multiple handlers</strong> to an event.
+ <p>Using this module is as simple as replacing <a href="http://lua-api.factorio.com/latest/LuaBootstrap.html#LuaBootstrap.on_event">script.on_event</a> with <a href="../modules/Event.Event.html#register">Event.register</a>.
+ <blockquote>
+ Due to the way that Factorio&rsquo;s event system works, it is not recommended to intermingle <code>script.on_event</code> and <code>Event.register</code> in a mod.
+ <br>This module hooks into Factorio&rsquo;s event system, and using <code>script.on_event</code> for the same event will change which events are registered.
+ </blockquote>
+ <blockquote>
+ This module does not have many of the multiplayer protections that <code>script.on_event</code> does.
+ <br>Due to this, great care should be taken when registering events conditionally.
+ </blockquote></p>
 
 
     <!-- module info start -->
@@ -166,7 +176,7 @@
 
     <!-- module usage start -->
     <h3>Usage</h3>
-    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Gui = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/event/gui'</span>)</code></pre>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Event = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/event/event'</span>)</code></pre>
     <!-- module usage end -->
 
     <!-- module content header end -->
@@ -179,28 +189,40 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#on_checked_state_changed">on_checked_state_changed(gui_element_pattern, handler)</a></td>
-    <td class="summary">Registers a function for a given GUI element name or pattern when the element checked state changes.</td>
+    <td class="name"><a href="#dispatch">dispatch(event)</a></td>
+    <td class="summary">Calls the handlers that are registered to the given event.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#on_click">on_click(gui_element_pattern, handler)</a></td>
-    <td class="summary">Registers a function for a given gui element name or pattern when the element is clicked.</td>
+    <td class="name"><a href="#filter_entity">filter_entity(event_parameter, entity_type, matcher)</a></td>
+    <td class="summary">Filters events related to entity_type.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#on_elem_changed">on_elem_changed(gui_element_pattern, handler)</a></td>
-    <td class="summary">Registers a function for a given GUI element name or pattern when the element selection changes.</td>
+    <td class="name"><a href="#generate_event_name">generate_event_name(event_name)</a></td>
+    <td class="summary">Retrieve or Generate an event_name and store it in Event.custom_events</td>
     </tr>
     <tr>
-    <td class="name"><a href="#on_selection_state_changed">on_selection_state_changed(gui_element_pattern, handler)</a></td>
-    <td class="summary">Registers a function for a given GUI element name or pattern when the element state changes (drop down).</td>
+    <td class="name"><a href="#get_registry">get_registry()</a></td>
+    <td class="summary">Retrieve the event_registry</td>
     </tr>
     <tr>
-    <td class="name"><a href="#on_text_changed">on_text_changed(gui_element_pattern, handler)</a></td>
-    <td class="summary">Registers a function for a given GUI element name or pattern when the element text changes.</td>
+    <td class="name"><a href="#register">register(event_id, handler[, matcher=nil][, pattern=nil])</a></td>
+    <td class="summary">Registers a handler for the given events.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#on_value_changed">on_value_changed(gui_element_pattern, handler)</a></td>
-    <td class="summary">Registers a function for a given GUI element name or pattern when the element value changes (slider).</td>
+    <td class="name"><a href="#remove">remove(event_id[, handler][, matcher][, pattern])</a></td>
+    <td class="summary">Removes a handler from the given events.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Tables">Tables</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#event_data">event_data</a></td>
+    <td class="summary">The user should create a table in this format, for a table that will be passed into <a href="../modules/Event.Event.html#dispatch">Event.dispatch</a>.</td>
     </tr>
     </tbody>
     </table>
@@ -214,14 +236,150 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#on_checked_state_changed" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_checked_state_changed">on_checked_state_changed(gui_element_pattern, handler)</span>
+    <a href="#dispatch" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="dispatch">dispatch(event)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element checked state changes.</p>
+    <p class="section-item-summary">Calls the handlers that are registered to the given event.</p>
+    <p class="section-item-description"> <p>Abort calling remaining handlers if any one of them has invalid userdata.
+ <p>Handlers are dispatched in the order they were created.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>event</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="../modules/Event.Event.html#event_data">event_data</a></span>) the event data table
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <strong>See also:</strong>
+    <ul>
+    <li><a href="https://forums.factorio.com/viewtopic.php?t=32039#p202158">Invalid Event Objects</a></li>
+    </ul>
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#filter_entity" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="filter_entity">filter_entity(event_parameter, entity_type, matcher)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Filters events related to entity_type.</p>
+    <p class="section-item-description"> DEPRECATED</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>event_parameter</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     The event parameter to look inside to find the entity type
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>entity_type</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     The entity type to filter events for
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>matcher</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">callable</span></span>)
+
+     The matcher to invoke if the filter passes. The object defined in the event parameter is passed
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#generate_event_name" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="generate_event_name">generate_event_name(event_name)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Retrieve or Generate an event_name and store it in Event.custom_events</p>
     <p class="section-item-description">
 </p>
 
@@ -236,29 +394,13 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>gui_element_pattern</em></strong>
+    <strong><em>event_name</em></strong>
 
     <strong> : </strong>
 
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
 
-     the name or string regular expression to match the GUI element
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>handler</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
-
-     the function to call when GUI element checked state changes
+     the custom name for your event.
 
     </li>
 
@@ -271,7 +413,45 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Gui.html">Gui</a></span>)</span>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>)
+    <span class="return-text">the id associated with the event.</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code>Event.register(Event.generate_event_name(<span class="string">"my_custom_event"</span>), handler)</code></pre>
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#get_registry" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_registry">get_registry()</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Retrieve the event_registry</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
+    <span class="return-text">event_registry</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -287,16 +467,20 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#on_click" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_click">on_click(gui_element_pattern, handler)</span>
+    <a href="#register" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="register">register(event_id, handler[, matcher=nil][, pattern=nil])</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Registers a function for a given gui element name or pattern when the element is clicked.</p>
-    <p class="section-item-description">
-</p>
+    <p class="section-item-summary">Registers a handler for the given events.</p>
+    <p class="section-item-description"> If a <code>nil</code> handler is passed, remove the given events and stop listening to them.
+ <p>Events dispatch in the order they are registered.
+ <p>An <em>event ID</em> can be obtained via <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>,
+ <a href="http://lua-api.factorio.com/latest/LuaBootstrap.html#LuaBootstrap.generate_event_name">script.generate_event_name</a> which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>,
+ and can be a custom input name which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>.
+ <p>The <code>event_id</code> parameter takes in either a single, multiple, or mixture of <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, and <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>.</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -309,13 +493,12 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>gui_element_pattern</em></strong>
+    <strong><em>event_id</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
 
-     the name or string regular expression to match the gui element
+     (<span class="types"><a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, or {<a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>,&hellip;}</span>)
 
     </li>
 
@@ -331,8 +514,42 @@
 
     (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
 
-     the function to call when gui element is clicked
+     the function to call when the given events are triggered
 
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>matcher</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+     a function whose return determines if the handler is executed. event and pattern are passed into this
+
+    (<em>default</em>: nil)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pattern</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     an invariant that can be used in the matcher function, passed as the second parameter to your matcher
+
+    (<em>default</em>: nil)
     </li>
 
 
@@ -344,7 +561,126 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Gui.html">Gui</a></span>)</span>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code><span class="comment">-- Create an event that prints the current tick every tick.
+</span>Event.register(defines.events.on_tick, <span class="keyword">function</span>(event) <span class="global">print</span> event.tick <span class="keyword">end</span>)
+<span class="comment">-- Create an event that prints the new ID of a train.
+</span>Event.register(Trains.on_train_id_changed, <span class="keyword">function</span>(event) <span class="global">print</span>(event.new_id) <span class="keyword">end</span>)
+<span class="comment">-- Function call chaining
+</span>Event.register(event1, handler1).register(event2, handler2)</code></pre>
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#remove" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="remove">remove(event_id[, handler][, matcher][, pattern])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Removes a handler from the given events.</p>
+    <p class="section-item-description"> <p>When the last handler for an event is removed, stop listening to that event.
+ <p>An <em>event ID</em> can be obtained via <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>,
+ <a href="http://lua-api.factorio.com/latest/LuaBootstrap.html#LuaBootstrap.generate_event_name">script.generate_event_name</a> which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>,
+ and can be a custom input name which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>.
+ <p>The <code>event_id</code> parameter takes in either a single, multiple, or mixture of <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, and <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>event_id</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, or {<a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>,&hellip;}</span>)
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>handler</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+     the handler to remove, if not present remove all registered handlers for the event_id
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>matcher</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+
+
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pattern</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+
+
+
+    (<em>optional</em>)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -357,22 +693,27 @@
     <!-- usage end -->
 
     </dd>
+    </dl>
+    <h3><span id="Tables" class="section-title"><a href="#Tables">Tables</a></span></h3>
+    <dl class="section-body-container">
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#on_elem_changed" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_elem_changed">on_elem_changed(gui_element_pattern, handler)</span>
+    <a href="#event_data" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="event_data">event_data</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element selection changes.</p>
-    <p class="section-item-description">
+    <p class="section-item-summary">The user should create a table in this format, for a table that will be passed into <a href="../modules/Event.Event.html#dispatch">Event.dispatch</a>.</p>
+    <p class="section-item-description"><p> <p>In general, the user should create an event data table that is in a similar format as the one that Factorio returns.</p>
+
+<blockquote><p>The event data table <strong>MUST</strong> have either <code>name</code> or <code>input_name</code>.</p></blockquote>
 </p>
 
     <!-- parameters start -->
-    <strong>Parameters:</strong>
+    <strong>Fields:</strong>
 
     <ul>
 
@@ -382,14 +723,15 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>gui_element_pattern</em></strong>
+    <strong><em>name</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a> or <a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a></span>)
 
-     the name or string regular expression to match the GUI element
+     unique event ID generated with <a href="http://lua-api.factorio.com/latest/LuaBootstrap.html#LuaBootstrap.generate_event_name">script.generate_event_name</a> <strong><em>OR</em></strong> <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>
 
+    (<em>optional</em>)
     </li>
 
 
@@ -398,14 +740,31 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>handler</em></strong>
+    <strong><em>input_name</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
 
-     the function to call when GUI element selection changes
+     custom input name of an event
 
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>...</em></strong>
+
+    <strong> : </strong>
+
+
+     any # of additional fields with extra data, which are passed into the handler registered to an event that this table represents
+
+    (<em>optional</em>)
     </li>
 
 
@@ -414,12 +773,6 @@
     <!-- parameters end -->
 
     <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Gui.html">Gui</a></span>)</span>
-    </li>
-    </ul>
     <!-- returns end -->
 
 
@@ -427,225 +780,15 @@
     <!-- see also end -->
 
     <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#on_selection_state_changed" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_selection_state_changed">on_selection_state_changed(gui_element_pattern, handler)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element state changes (drop down).</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>gui_element_pattern</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     the name or string regular expression to match the GUI element
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>handler</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
-
-     the function to call when GUI element state changes
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Gui.html">Gui</a></span>)</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#on_text_changed" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_text_changed">on_text_changed(gui_element_pattern, handler)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element text changes.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>gui_element_pattern</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     the name or string regular expression to match the GUI element
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>handler</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
-
-     the function to call when GUI element text changes
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Gui.html">Gui</a></span>)</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#on_value_changed" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_value_changed">on_value_changed(gui_element_pattern, handler)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element value changes (slider).</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>gui_element_pattern</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     the name or string regular expression to match the GUI element
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>handler</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
-
-     the function to call when GUI element state changes
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Gui.html">Gui</a></span>)</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code><span class="comment">-- below code is from Trains module.
+</span><span class="comment">-- old_id &amp; new_id are additional fields passed into the handler that's registered to Trains.on_train_id_changed event.
+</span><span class="keyword">local</span> event_data = {
+old_id = renaming.old_id,
+new_id = renaming.new_id,
+name = Trains.on_train_id_changed
+}
+Event.dispatch(event_data)</code></pre>
     <!-- usage end -->
 
     </dd>

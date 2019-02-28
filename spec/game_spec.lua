@@ -159,75 +159,75 @@ describe("Game Spec",
             end
         )
 
-        it("Game.get_player should return mixed back if mixed is a table and a userdata and mixed.valid is true",
-            function()
-                local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
-                for player_index, player_name in ipairs(player_names) do
-                    game.players[player_index] = { player_index = player_index, name = player_name}
-                end
-                for _, player in ipairs(game.players) do
-                    assert.equal(player, Game.get_player(player))
-                    assert.same(player, Game.get_player(player))
-                end
-            end
-        )
+        -- it("Game.get_player should return mixed back if mixed is a table and a userdata and mixed.valid is true",
+        --     function()
+        --         local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
+        --         for player_index, player_name in ipairs(player_names) do
+        --             game.players[player_index] = { player_index = player_index, name = player_name}
+        --         end
+        --         for _, player in ipairs(game.players) do
+        --             assert.equal(player, Game.get_player(player))
+        --             assert.same(player, Game.get_player(player))
+        --         end
+        --     end
+        -- )
 
-        it("Game.get_player should return game.players[mixed.player_index] if mixed is a table and not a userdata and mixed.player_index exists",
-            function()
-                local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
-                for player_index, player_name in ipairs(player_names) do
-                    game.players[player_index] = { player_index = player_index, name = player_name}
-                    game.players[player_index].__self = false
-                end
-                for _, player in ipairs(game.players) do
-                    assert.equal(player, Game.get_player(player))
-                    assert.same(player, Game.get_player(player))
-                end
-            end
-        )
+        -- it("Game.get_player should return game.players[mixed.player_index] if mixed is a table and not a userdata and mixed.player_index exists",
+        --     function()
+        --         local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
+        --         for player_index, player_name in ipairs(player_names) do
+        --             game.players[player_index] = { player_index = player_index, name = player_name}
+        --             game.players[player_index].__self = false
+        --         end
+        --         for _, player in ipairs(game.players) do
+        --             assert.equal(player, Game.get_player(player))
+        --             assert.same(player, Game.get_player(player))
+        --         end
+        --     end
+        -- )
 
-        it("Game.get_player should return game.players[mixed] if mixed is not a table and is neither false nor nil and game.players[mixed].valid == true",
-            function()
-                local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
-                for player_index, player_name in ipairs(player_names) do
-                    game.players[player_index] = { player_index = player_index, name = player_name}
-                end
-                for player_index in ipairs(player_names) do
-                    assert.equal(game.players[player_index], Game.get_player(player_index))
-                    assert.same(game.players[player_index], Game.get_player(player_index))
-                end
-            end
-        )
+        -- it("Game.get_player should return game.players[mixed] if mixed is not a table and is neither false nor nil and game.players[mixed].valid == true",
+        --     function()
+        --         local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
+        --         for player_index, player_name in ipairs(player_names) do
+        --             game.players[player_index] = { player_index = player_index, name = player_name}
+        --         end
+        --         for player_index in ipairs(player_names) do
+        --             assert.equal(game.players[player_index], Game.get_player(player_index))
+        --             assert.same(game.players[player_index], Game.get_player(player_index))
+        --         end
+        --     end
+        -- )
 
-        it("Game.get_player should return nil if mixed is false or nil",
-            function()
-                assert.is_nil(Game.get_player(nil))
-                assert.is_nil(Game.get_player(false))
-            end
-        )
+        -- it("Game.get_player should return nil if mixed is false or nil",
+        --     function()
+        --         assert.is_nil(Game.get_player(nil))
+        --         assert.is_nil(Game.get_player(false))
+        --     end
+        -- )
 
-        it("Game.get_player should return false if mixed is table & userdata but mixed.valid == false",
-            function()
-                local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
-                for player_index, player_name in ipairs(player_names) do
-                    game.players[player_index] = { player_index = player_index, name = player_name, valid = false}
-                end
-                for _, player in ipairs(game.players) do
-                    assert.is_false(Game.get_player(player))
-                end
-            end
-        )
+        -- it("Game.get_player should return false if mixed is table & userdata but mixed.valid == false",
+        --     function()
+        --         local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
+        --         for player_index, player_name in ipairs(player_names) do
+        --             game.players[player_index] = { player_index = player_index, name = player_name, valid = false}
+        --         end
+        --         for _, player in ipairs(game.players) do
+        --             assert.is_false(Game.get_player(player))
+        --         end
+        --     end
+        -- )
 
-        it("Game.get_player should return nil if mixed is table, not userdata, and mixed.player_index is nil",
-            function()
-                local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
-                for player_index, player_name in ipairs(player_names) do
-                    game.players[player_index] = { player_index = nil, name = player_name, valid = false, __self = false}
-                end
-                for _, player in ipairs(game.players) do
-                    assert.is_nil(Game.get_player(player))
-                end
-            end
-        )
+        -- it("Game.get_player should return nil if mixed is table, not userdata, and mixed.player_index is nil",
+        --     function()
+        --         local player_names = {"ForceOne", "ForceTwo", "ForceThree"}
+        --         for player_index, player_name in ipairs(player_names) do
+        --             game.players[player_index] = { player_index = nil, name = player_name, valid = false, __self = false}
+        --         end
+        --         for _, player in ipairs(game.players) do
+        --             assert.is_nil(Game.get_player(player))
+        --         end
+        --     end
+        -- )
     end
 )

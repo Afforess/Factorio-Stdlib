@@ -100,11 +100,11 @@ describe('Data', function()
             flg:add("mighty")
             assert.same(3, #flg)
             flg:add("goes-to-quickbar")
-            assert.same(4, #flg)
+            assert.same(3, #flg)
             flg = flg + "test"
-            assert.same(5, #flg)
+            assert.same(4, #flg)
             flg = flg + "hide-from-bonus-gui" --hidden is already in the list, should be no change
-            assert.same(5, #flg)
+            assert.same(4, #flg)
          end)
 
          it("Flags:remove()", function()
@@ -145,7 +145,7 @@ describe('Data', function()
         -- end)
 
         it("Flags:tostring()", function()
-            assert.same("hide-from-bonus-gui", Data("cliff-explosives", "capsule"):Flags():tostring())
+            assert.same("goes-to-quickbar, hide-from-bonus-gui", Data("cliff-explosives", "capsule"):Flags():tostring())
         end)
     end)
 end)

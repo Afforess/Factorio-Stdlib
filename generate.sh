@@ -5,8 +5,8 @@ DIR=`pwd`
 mkdir /tmp/factorio_stdlib_pages
 cd /tmp/factorio_stdlib_pages
 git clone https://github.com/Afforess/Factorio-Stdlib.git .
-make
-cd build/
+make quick
+cd .build/
 cp -R doc/* "${DIR}/"
 cd $DIR
 rm -rf /tmp/factorio_stdlib_pages

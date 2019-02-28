@@ -3,7 +3,7 @@ jobs:
   build:
     branches:
       only:
-        - "0.17"
+        - master"
     docker:
       - image: nexela/factorio-lua-env
     steps:
@@ -15,10 +15,10 @@ jobs:
       - run: make quick
       - store_artifacts:
           path: /root/project/.build/artifacts
-      # - run: git checkout gh-pages
-      # - run: ./generate.sh
-      # - run: git add .
-      # - run: git config user.email "bot@circleci.com"
-      # - run: git config user.name "circleci"
-      # - run: git commit -am "Automatic Github Page generation [ci skip]"
-      # - run: git push
+      - run: git checkout gh-pages
+      - run: ./generate.sh
+      - run: git add .
+      - run: git config user.email "bot@circleci.com"
+      - run: git config user.name "circleci"
+      - run: git commit -am "Automatic Github Page generation [ci skip]"
+      - run: git push

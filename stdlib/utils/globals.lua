@@ -8,7 +8,7 @@ end
 traceback = type(debug) == 'table' and debug.traceback or _traceback
 
 serpent = serpent or require('__stdlib__/stdlib/vendor/serpent')
-inspect = inspect or require('__stdlib__/stdlib/vendor/inspect')
+inspect = require('__stdlib__/stdlib/vendor/inspect')
 
 local Math = require('__stdlib__/stdlib/utils/math')
 local Table = require('__stdlib__/stdlib/utils/table')

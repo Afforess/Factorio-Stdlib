@@ -26,6 +26,7 @@ package:
 	@mkdir -p $(BUILD_DIR)/$(OUTPUT_NAME)
 	@cp -r $(PACKAGE_NAME) $(BUILD_DIR)/$(OUTPUT_NAME)/$(PACKAGE_NAME)
 	@cp info.json $(BUILD_DIR)/$(OUTPUT_NAME)/info.json
+	@cp data.lua $(BUILD_DIR)/$(OUTPUT_NAME)/data.lua
 	@cp README.md $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/README.md
 	@cp LICENSE $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/LICENSE.md
 	@cp CHANGELOG.md $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/CHANGELOG.md

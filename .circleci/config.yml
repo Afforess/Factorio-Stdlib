@@ -15,6 +15,7 @@ jobs:
       - run: make quick
       - store_artifacts:
           path: /root/project/.build/artifacts
+      - run: rm .luacheckrc
       - run: git checkout gh-pages
       - run: ./generate.sh
       - run: git add .

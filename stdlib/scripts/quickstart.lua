@@ -79,7 +79,7 @@ function quickstart.on_player_created(event)
         local power_armor = QS.get('power_armor', 'fake')
         if player.character and game.item_prototypes[power_armor] then
             --Put on power armor, install equipment
-            player.get_inventory(defines.inventory.player_armor).insert(power_armor)
+            player.get_inventory(defines.inventory.character_armor).insert(power_armor)
             local grid = player.character.grid
             if grid then
                 for _, eq in pairs(QS.get('equipment', {'fusion-reactor-equipment'})) do

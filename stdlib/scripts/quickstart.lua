@@ -102,7 +102,7 @@ function quickstart.on_player_created(event)
         if QS.get('destroy_everything', false) then
             for _, entity in pairs(surface.find_entities(area)) do
                 -- destroying cliffs can invalidate other cliffs so .valid is needed here
-                if entity.valid and entity.name ~= 'player' then
+                if entity.valid and entity.name ~= 'character' then
                     entity.destroy()
                 end
             end

@@ -26,43 +26,50 @@ jobs:
     steps:
       - checkout
 
-      # - run: git checkout gh-pages
+      - run: git checkout gh-pages
 
-      # - run: |
-      #     git clone https://github.com/Afforess/Factorio-Stdlib.git /tmp/stdlib
-      #     cd /tmp/stdlib
-      #     git checkout release
-      #     make quick
-      #     cp -R .build/doc/* ~/stdlib/
+      - run:
+          name: Build Docs for gh-pages
+          command: |
+            git clone https://github.com/Afforess/Factorio-Stdlib.git /tmp/stdlib
+            cd /tmp/stdlib
+            git checkout release
+            make doc
+            cp -R .build/doc/* ~/stdlib/
 
-      # - store_artifacts:
-      #     path:  /tmp/stdlib/.build/artifacts
-      #     destination: files
+      - run:
+          name: Commit gh-pages
+          command: |
+            git config user.email "bot@circleci.com"
+            git config user.name "circleci"
+            git add .
+            git commit -am "Automatic Github Page generation"
+            git push
 
-      # - run: git config user.email "bot@circleci.com"
-      # - run: git config user.name "circleci"
-      # - run: git add .
-      # - run: git commit -am "Automatic Github Page generation"
-      # - run: git push
       - run: git checkout release
-      - run: |
-          NAME=$(jq -r '.name' info.json)
-          VERSION=$(jq -r '.version' info.json)
-          mkdir /tmp/upload
-          cd /tmp/upload
-          # Get a CSRF token by loading the login form
-          CSRF=$(curl -b cookiejar.txt -c cookiejar.txt -s https://mods.factorio.com/login | grep csrf_token | sed -r -e 's/.*value="(.*)".*/\1/')
-          # Authenticate with the credential secrets and the CSRF token, getting a session cookie for the authorized user
-          curl -b cookiejar.txt -c cookiejar.txt -s -F "csrf_token=${CSRF}" -F "username=${FACTORIO_USER}" -F "password=${FACTORIO_PASSWORD}" -o /dev/null https://mods.factorio.com/login
-          # Query the mod info, verify the version number we're trying to push doesn't already exist
-          curl -b cookiejar.txt -c cookiejar.txt -s "https://mods.factorio.com/api/mods/${NAME}/full" | jq -e ".releases[] | select(.version == \"${VERSION}\")"
-          # store the return code before running anything else
-          STATUS_CODE=$?
-          if [[ $STATUS_CODE -ne 4 ]]; then
-              echo "Release already exists, skipping"
-              exit 78
-          fi
-          echo "Release doesn't exist for ${TAG}, uploading"
+
+      - run: make quick
+
+      - store_artifacts:
+          path:  ~/stdlib/.build/artifacts
+          destination: files
+
+      - run:
+          name: Export Vars
+          command: |
+            echo 'export NAME=$(jq -r '.name' info.json)' >> $BASH_ENV
+            echo 'export VERSION=$(jq -r '.version' info.json)' >> $BASH_ENV
+            echo 'FILEPATH="/root/stdlib/.build/artifacts/${NAME}_${VERSION}.zip"' >> $BASH_ENV
+            echo 'FILESIZE=$(stat --printf="%s" "${FILEPATH}")' >> $BASH_ENV
+
+      - run: echo ${FILEPATH} ${FILESIZE}
+
+      - run:
+          name: Upload Release
+          command: /root/stdlib/.circleci/release.sh
+
+      - run: git tag -v${VERSION}
+      - run: git push --tags
 
 workflows:
   version: 2
@@ -75,8 +82,8 @@ workflows:
                 - gh-pages
                 - /feature-.*/
       - deploy-release:
-          # requires:
-          #   - build
+          requires:
+            - build
           filters:
             branches:
               only: release

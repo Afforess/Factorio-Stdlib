@@ -68,7 +68,7 @@ jobs:
           name: Upload Release
           command: /root/stdlib/.circleci/release.sh
 
-      - run: git tag -v${VERSION}
+      - run: git tag v${VERSION}
       - run: git push --tags
 
 workflows:

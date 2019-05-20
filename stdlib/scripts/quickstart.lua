@@ -62,7 +62,10 @@ function quickstart.on_player_created(event)
 
         local area = Area(QS.get('area_box', {{-100, -100}, {100, 100}})):shrink_to_surface_size(surface)
 
-        player.force.chart(surface, Area(area, true) * 1.5)
+        local chart_size_multiplier = QS.get('chart_size_multiplier', 0)
+        if chart_size_multiplier > 0 then
+            player.force.chart(surface, Area(area, true) * chart_size_multiplier)
+        end
 
         player.surface.always_day = QS.get('always_day', false)
 

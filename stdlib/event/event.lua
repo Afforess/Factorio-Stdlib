@@ -427,6 +427,15 @@ function Event.get_event_handler(event_id)
     }
 end
 
+function Event.set_protected_mode(bool)
+    if bool then
+        Event.protected_mode = true
+    else
+        Event.protected_mode = false
+    end
+    return Event
+end
+
 --- Retrieve the event_registry
 -- @treturn table event_registry
 function Event.get_registry()

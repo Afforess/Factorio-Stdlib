@@ -49,6 +49,10 @@ function Player.get(player)
     return player, global.players and global.players[player.index] or Player.init(player.index)
 end
 
+function Player.pdata(index)
+    return global.players and global.players[index] or Player.init(index)
+end
+
 --- Merge a copy of the passed data to all players in `global.players`.
 -- @tparam table data a table containing variables to merge
 -- @usage local data = {a = 'abc', b = 'def'}

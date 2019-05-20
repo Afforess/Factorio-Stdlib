@@ -52,8 +52,7 @@ function World.bootstrap()
     _G.log = log_buffer
 
     _G.game = nil
-    -- TODO: _G.data = something
-    _G.global = {} -- TODO: check if should be nil
+    _G.global = {}
 
     _G.remote = {
         interfaces = {},
@@ -64,6 +63,7 @@ function World.bootstrap()
     local in_event_handler = 0 -- track event callback recursion (a psuedosemaphore)
     local registry = {}
     local next_id = 200
+    _G.settings = require('__stdlib__/spec/setup/settings')
     _G.script = {
         on_event = function(eid, callback)
             registry[eid] = callback

@@ -14,6 +14,8 @@ _G.RESET = function()
     _G.defines = nil
 end
 
+_G.settings = require('__stdlib__/spec/setup/settings')
+
 _G.data = {}
 
 _G.data.extend = function(self, otherdata)

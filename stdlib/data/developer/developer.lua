@@ -27,6 +27,7 @@ end
 -- local Developer = require('__stdlib__/stdlib/data/develper/developer')
 -- Developer.make_test_entities()
 function Developer.make_test_entities()
+    log('Making developer debug entities')
     if not data.raw['electric-energy-interface']['debug-energy-interface'] then
         Data('electric-energy-interface', 'electric-energy-interface'):copy('debug-energy-interface'):set_fields {
             flags = {'placeable-off-grid'},

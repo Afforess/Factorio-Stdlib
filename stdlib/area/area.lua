@@ -40,7 +40,6 @@ end
 --- Converts an area in either array or table format to an area with a metatable.
 -- Returns itself if it already has a metatable
 -- @tparam Concepts.BoundingBox area the area to convert
--- @tparam boolean copy return a new copy
 -- @treturn Concepts.BoundingBox a converted area
 function Area.new(area)
     local left_top = Position.new(area.left_top or area[1])

@@ -32,7 +32,6 @@ setmetatable(Changes, require('__stdlib__/stdlib/core'))
     old_version :: string: Old version of the mod. May be nil if the mod wasn't previously present (i.e. it was just added).
     new_version :: string: New version of the mod. May be nil if the mod is no longer present (i.e. it was just removed).
 --]]
-
 local table = require('__stdlib__/stdlib/utils/table')
 
 local map_changes = {
@@ -106,18 +105,16 @@ function Changes.on_configuration_changed(event)
 end
 
 function Changes.on_mod_changed(this_mod_changes)
-    if Changes.mod_versions then
-        global._changes = global._changes or {}
+    global._changes = global._changes or {}
 
-        local old = this_mod_changes.old_version
-        if old then -- Find the last installed version
-            for _, path in pairs(Changes.versions) do
-                for ver, func in pairs(path) do
-                    if not global._changes[ver] then
-                        run_if_exists(func)
-                        global._changes[ver] = old
-                        log('Migration completed for version ' .. ver)
-                    end
+    local old = this_mod_changes.old_version
+    if old then -- Find the last installed version
+        for _, path in pairs(Changes.mod_versions) do
+            for ver, func in pairs(path) do
+                if not global._changes[ver] then
+                    run_if_exists(func)
+                    global._changes[ver] = old
+                    log('Migration completed for version ' .. ver)
                 end
             end
         end

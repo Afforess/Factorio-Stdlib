@@ -109,15 +109,17 @@ function Changes.on_mod_changed(this_mod_changes)
 
     local old = this_mod_changes.old_version
     if old then -- Find the last installed version
+        local vers = {}
         for _, path in pairs(Changes.mod_versions) do
             for ver, func in pairs(path) do
                 if not global._changes[ver] then
-                    run_if_exists(func)
-                    global._changes[ver] = old
+                    vers[ver] = this_mod_changes.new_version
+                    func()
                     log('Migration completed for version ' .. ver)
                 end
             end
         end
+        table.each(vers, function(v, k) global._changes[k] = v end)
     end
 end
 

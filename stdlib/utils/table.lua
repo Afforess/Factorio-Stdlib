@@ -629,6 +629,13 @@ function Table.array_to_dictionary(tbl, as_bool)
     return newtbl
 end
 
+-- Returns an array of unique values from tbl
+-- @tparam table tbl
+-- @treturn table an array of unique values.
+function Table.unique_values(tbl)
+    return Table.keys(Table.invert(tbl))
+end
+
 --- Does the table contain any elements
 -- @tparam table tbl
 -- @treturn boolean

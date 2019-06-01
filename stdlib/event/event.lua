@@ -28,6 +28,7 @@ local Event = {
     },
     custom_events = {}, -- Holds custom event ids
     protected_mode = false,
+    safe_mode = true,
     inspect_event = false,
     inspect_append = false, -- Only used for write_file, can cause desyncs elsewhere
     force_crc = false,
@@ -53,7 +54,7 @@ for name in pairs(Event._script) do
         error('Detected attempt to register an event using script.'..name..' while using the STDLIB event system '.. id and id or '')
     end
 end
--- simple protections check for pre registration
+-- Simple protections check for pre registration
 for _, define in pairs(defines.events) do
     if script.get_event_handler(define) then
         error('Detected attempt to add the STDLIB event module after using script.on_event')
@@ -102,9 +103,9 @@ end
 -- <p>The `event_id` parameter takes in either a single, multiple, or mixture of @{defines.events}, @{int}, and @{string}.
 -- @usage
 -- -- Create an event that prints the current tick every tick.
--- Event.register(defines.events.on_tick, function(event) print event.tick end)
--- -- Create an event that prints the new ID of a train.
--- Event.register(Trains.on_train_id_changed, function(event) print(event.new_id) end)
+-- Event.register(defines.events.on_tick, function(event) game.print(event.tick) end)
+-- -- Register something for Nth tick using negative numbers.
+-- Event.register(-120, function() game.print('Every 120 ticks') end
 -- -- Function call chaining
 -- Event.register(event1, handler1).register(event2, handler2)
 -- @param event_id (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
@@ -264,18 +265,34 @@ function Event.remove(event_id, handler, matcher, pattern)
     return Event
 end
 
+--- Shortcut for `Event.register(Event.core_events.on_load, function)`
+-- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.on_load(handler, matcher, pattern)
-    Event.register(Event.core_events.on_load, handler, matcher, pattern)
+    return Event.register(Event.core_events.on_load, handler, matcher, pattern)
 end
 
+--- Shortcut for `Event.register(Event.core_events.on_configuration_changed, function)`
+-- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.on_configuration_changed(handler, matcher, pattern)
-    Event.register(Event.core_events.on_configuration_changed, handler, matcher, pattern)
+    return Event.register(Event.core_events.on_configuration_changed, handler, matcher, pattern)
 end
 
+--- Shortcut for `Event.register(Event.core_events.on_init, function)`
+-- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.on_init(handler, matcher, pattern)
-    Event.register(Event.core_events.on_init, handler, matcher, pattern)
+    return Event.register(Event.core_events.on_init, handler, matcher, pattern)
 end
 
+--- Shortcut for `Event.register(-nthTick, function)`
+-- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
+function Event.on_nth_tick(nth_tick, handler, matcher, pattern)
+    Is.Positive(nth_tick, 'nth_tick must be a positive number')
+    return Event.register(-nth_tick, handler, matcher, pattern)
+end
+
+--- Shortcut for `Event.register(defines.events, handler, matcher, pattern)`
+-- @function Event.on_event
+-- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 Event.on_event = Event.register
 
 -- Used to replace pcall in un-protected events.
@@ -419,6 +436,7 @@ function Event.raise_event(...)
     script.raise_event(...)
 end
 
+--- Get event handler.
 function Event.get_event_handler(event_id)
     Is.Assert(valid_id(event_id))
     return {
@@ -427,6 +445,7 @@ function Event.get_event_handler(event_id)
     }
 end
 
+--- Set protected mode.
 function Event.set_protected_mode(bool)
     if bool then
         Event.protected_mode = true

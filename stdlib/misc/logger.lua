@@ -1,9 +1,10 @@
 --- For logging debug information to files.
 -- @module Misc.Logger
 -- @usage
--- local Logger = require('__stdlib__/stdlib/log/logger')
--- -- or to create a logger directly:
--- local LOGGER = require('__stdlib__/stdlib/log/logger').new(...)
+-- local Logger = require('__stdlib__/stdlib/misc/logger')
+-- -- or to create a new logger directly:
+-- local Log = require('__stdlib__/stdlib/misc/logger').new()
+-- -- log files are saved to script-output/modname/log.log by default
 
 local Logger = {
    __module = 'Logger',
@@ -15,6 +16,7 @@ local Logger = {
 }
 setmetatable(Logger, Logger)
 
+-- Set on the individual log object, either logs a message or writes immediatly if nil.
 local _Log_mt = {
     __call = function(self, msg)
         if msg then
@@ -25,17 +27,12 @@ local _Log_mt = {
     end
 }
 
-local Is = require('__stdlib__/stdlib/utils/is')
 local format = string.format
 
 --- Get a saved log or create a new one if there is no saved log.
 function Logger.get(...)
-    local mod_name, log_name = ...
-    Is.Assert.String(mod_name, 'Logger must be given a mod_name as the first argument')
-    log_name = log_name or 'main'
-
-    local cache = mod_name .. '-' .. log_name
-    return Logger._loggers[cache] or Logger.new(...)
+    local log_name = (...) or 'log'
+    return Logger._loggers[log_name] or Logger.new(...)
 end
 
 --- Creates a new logger object.
@@ -43,29 +40,29 @@ end
 -- <p>The logger flushes the logged messages every 60 seconds since the last message.
 -- <p>A table of @{options} may be specified when creating a logger.
 -- @usage
---LOGGER = Logger.new('cool_mod_name')
---LOGGER.log("this msg will be logged!")
+--Log = Logger.new()
+--Log("this msg will be logged in /script-output/YourModName/log.log!")
+-- -- Immediately Write everything buffered in the log file
+-- Log()
 --
 -- @usage
---LOGGER = Logger.new('cool_mod_name', 'test', true)
---LOGGER.log("this msg will be logged and written immediately in test.log!")
+--Log = Logger.new('test', true)
+--Log("this msg will be logged and written immediately in /script-output/YourModName/test.log!")
 --
 -- @usage
---LOGGER = Logger.new('cool_mod_name', 'test', true, { file_extension = data })
---LOGGER.log("this msg will be logged and written immediately in test.data!")
+--Log = Logger.new('cool_mod_name', 'test', true, { file_extension = data })
+--Log("this msg will be logged and written immediately in /script-output/YourModName/test.data!")
 --
--- @tparam string mod_name [required] the name of the mod to create the logger for
--- @tparam[opt='main'] string log_name the name of the logger
+-- @tparam[opt='log'] string log_name the name of the logger
 -- @tparam[opt=false] boolean debug_mode toggles the debug state of logger
 -- @tparam[opt={...}] options options a table with optional arguments
 -- @return (<span class="types">@{Logger}</span>) the logger instance
-function Logger.new(mod_name, log_name, debug_mode, options)
-    Is.Assert.String(mod_name, 'Logger must be given a mod_name as the first argument')
+function Logger.new(log_name, debug_mode, options)
 
-    log_name = log_name or 'main'
+    local mod_name = script and script.mod_name or 'Data'
+    log_name = log_name or 'log'
 
-    local cache = mod_name .. '-' .. log_name
-    Logger._loggers[cache] = nil
+    Logger._loggers[log_name] = nil
 
     options = options or {}
 
@@ -96,7 +93,7 @@ function Logger.new(mod_name, log_name, debug_mode, options)
 
     --- Logs a message.
     -- @tparam string|table msg the message to log. @{table}s will be dumped using [serpent](https://github.com/pkulchenko/serpent) which is included in the official Factorio Lualib
-    -- @treturn boolean true if the message was written, false if it was queued for a later write
+    -- @return (<span class="types">@{Logger}</span>) the logger instance
     -- @see https://forums.factorio.com/viewtopic.php?f=25&t=23844 Debugging utilities built in to Factorio
     function Log.log(msg)
 
@@ -130,27 +127,25 @@ function Logger.new(mod_name, log_name, debug_mode, options)
                 end
             else --log in data stage
                 log(format('%s/%s: %s', Log.mod_name, Log.log_name, msg))
-                return true
             end
         end
-        return false
+        return Log
     end
 
     --- Writes out all buffered messages immediately.
-    -- @treturn boolean true if write was successful, false otherwise
+    -- @return (<span class="types">@{Logger}</span>) the logger instance
     function Log.write()
         if _G.game and table_size(Log.buffer) > 0 then
             Log.last_written = game.tick
             game.write_file(Log.file_name, table.concat(Log.buffer), Log.ever_written)
             Log.buffer = {}
             Log.ever_written = true
-            return true
         end
-        return false
+        return Log
     end
 
     setmetatable(Log, _Log_mt)
-    Logger._loggers[cache] = Log
+    Logger._loggers[log_name] = Log
     return Log
 end
 

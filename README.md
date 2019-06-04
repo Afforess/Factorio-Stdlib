@@ -10,7 +10,7 @@ The Factorio Standard Library is a project to bring Factorio modders high-qualit
 
 1. Install the Factorio Standard Library  mod from the mod portal [latest release](https://mods.factorio.com/mod/stdlib)
 2. In your `info.json` add `stdlib` as a dependency.
-3. In your `control.lua` or other lua modules, [you can import the stdlib modules you need](https://github.com/Afforess/Factorio-Stdlib/wiki/Layout#adding-factorio-stdlib-to-your-mod).
+3. In your `control.lua` or other lua modules, [you can import the stdlib modules you need](https://github.com/Afforess/Factorio-Stdlib/wiki/Home#adding-factorio-stdlib-to-your-mod).
 
 ## Documentation
 

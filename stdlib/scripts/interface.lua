@@ -10,6 +10,7 @@ local interface = {}
 local table = require('__stdlib__/stdlib/utils/table')
 
 local Event = require('__stdlib__/stdlib/event/event')
+local Game = require('__stdlib__/stdlib/game')
 local Changes = require('__stdlib__/stdlib/event/changes')
 local Player = require('__stdlib__/stdlib/event/player')
 local Force = require('__stdlib__/stdlib/event/force')
@@ -31,14 +32,18 @@ end
 
 interface['dump_all'] = function()
     game.remove_path('Interfaces')
+    game.write_file('interfaces.lua', inspect(remote.interfaces))
     for inter, face in pairs(remote.interfaces) do
-        game.write_file('Interfaces/' .. inter .. '.lua', serpent.block(table.keys(remote.interfaces[inter], true, true), serp_settings))
+        game.write_file('Interfaces/' .. inter .. '.lua', inspect(remote.interfaces[inter]))
         for func in pairs(face) do
             if func:find('^write%_') then
                 remote.call(inter, func)
             end
         end
     end
+    Game.write_mods()
+    Game.write_surfaces()
+    Game.write_statistics()
 end
 
 interface['merge_interfaces'] = function(tab)

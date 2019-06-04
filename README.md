@@ -8,8 +8,8 @@ The Factorio Standard Library is a project to bring Factorio modders high-qualit
 
 ## Usage
 
-1. Download the [latest release](https://github.com/Afforess/Factorio-Stdlib/releases/latest) of the stdlib
-2. Unpack the archive, and copy the `stdlib/` directory into your base mod directory
+1. Install the Factorio Standard Library  mod from the mod portal [latest release](https://mods.factorio.com/mod/stdlib)
+2. In your `info.json` add `stdlib` as a dependency.
 3. In your `control.lua` or other lua modules, [you can import the stdlib modules you need](https://github.com/Afforess/Factorio-Stdlib/wiki/Layout#adding-factorio-stdlib-to-your-mod).
 
 ## Documentation
@@ -17,11 +17,6 @@ The Factorio Standard Library is a project to bring Factorio modders high-qualit
 See [the wiki](https://github.com/Afforess/Factorio-Stdlib/wiki) for an introduction and usage/examples.
 
 See the [github pages](http://afforess.github.io/Factorio-Stdlib/) for the latest generated documentation of the Factorio-stdlib
-
-## Generating the documentation from source
-
-1. Install ldoc (apt-get install lua-ldoc on debian/ubuntu), [see project for other operating systems](https://stevedonovan.github.io/ldoc/index.html)
-2. Generate the docs with `ldoc src/*`. Documentation will be placed in `docs/`
 
 ## Unit Tests
 

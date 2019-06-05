@@ -3,6 +3,7 @@ VERSION_STRING := $(shell cat 'info.json'|jq -r .version)
 OUTPUT_DIR := $(PACKAGE_NAME)
 OUTPUT_NAME := $(PACKAGE_NAME)_$(VERSION_STRING)
 BUILD_DIR := .build
+RELATIVE_PATH := $(BUILD_DIR)/$(OUTPUT_NAME)
 
 all: clean test package ldoc luacheck release
 
@@ -23,15 +24,15 @@ test:
 
 package:
 	@echo 'Copying files'
-	@mkdir -p $(BUILD_DIR)/$(OUTPUT_NAME)
-	@cp -r $(PACKAGE_NAME) $(BUILD_DIR)/$(OUTPUT_NAME)/$(PACKAGE_NAME)
-	@cp info.json $(BUILD_DIR)/$(OUTPUT_NAME)/info.json
-	@cp data.lua $(BUILD_DIR)/$(OUTPUT_NAME)/data.lua
-	@cp changelog.txt $(BUILD_DIR)/$(OUTPUT_NAME)/changelog.txt
-	@cp thumbnail.png $(BUILD_DIR)/$(OUTPUT_NAME)/thumbnail.png
-	@cp README.md $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/README.md
-	@cp LICENSE $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/LICENSE.md
-	@cp CHANGELOG.md $(BUILD_DIR)/$(OUTPUT_NAME)/stdlib/CHANGELOG.md
+	@mkdir -p $(RELATIVE_PATH)
+	@cp -r $(PACKAGE_NAME) $(RELATIVE_PATH)/$(PACKAGE_NAME)
+	@cp -r locale $(RELATIVE_PATH)
+	@cp info.json $(RELATIVE_PATH)/info.json
+	@cp *.lua $(RELATIVE_PATH)
+	@cp changelog.txt $(RELATIVE_PATH)/changelog.txt
+	@cp thumbnail.png $(RELATIVE_PATH)/thumbnail.png
+	@cp readme.md $(RELATIVE_PATH)/readme.md
+	@cp LICENSE $(RELATIVE_PATH)/LICENSE.md
 
 ldoc:
 	@echo 'Auto Generating with ldoc'
@@ -44,7 +45,7 @@ luacheck:
 	@echo 'Running luacheck on build directory'
 	@luacheck --version
 	@wget -q --no-check-certificate -O $(BUILD_DIR)/luacheckrc.luacheckrc https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/0.17/.luacheckrc
-	@cd $(BUILD_DIR)/$(OUTPUT_NAME) && luacheck --config ../luacheckrc.luacheckrc -q .
+	@cd $(RELATIVE_PATH) && luacheck --config ../luacheckrc.luacheckrc -q .
 
 release:
 	@echo 'Making Release'

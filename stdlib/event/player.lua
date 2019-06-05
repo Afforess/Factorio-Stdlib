@@ -49,6 +49,9 @@ function Player.get(player)
     return player, global.players and global.players[player.index] or Player.init(player.index)
 end
 
+--- Get the players saved data table. Creates it if it doesn't exsist.
+-- @tparam number index The player index to get data for
+-- @treturn table the player's global data
 function Player.pdata(index)
     return global.players and global.players[index] or Player.init(index)
 end

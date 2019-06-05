@@ -98,7 +98,7 @@ function Force.dump_data()
     game.write_file(Force.get_file_path('Force/global.lua'), inspect(global.forces or nil, {longkeys = true, arraykeys = true}))
 end
 
--- When forces are merged, just remove the original forces data
+--- When forces are merged, just remove the original forces data
 function Force.merged(event)
     global.forces[event.source_name] = nil
 end
@@ -108,6 +108,7 @@ function Force.register_init()
     return Force
 end
 
+--- Register Events
 function Force.register_events(do_on_init)
     Event.register(defines.events.on_force_created, Force.init)
     Event.register(defines.events.on_forces_merged, Force.merged)

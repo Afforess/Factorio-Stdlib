@@ -12,15 +12,13 @@ local Is = require('__stdlib__/stdlib/utils/is')
 -- @treturn LuaPlayer a valid player or nil
 function Game.get_player(mixed)
     if type(mixed) == 'table' then
-        if mixed.__self then
-            return mixed and mixed.valid and mixed
-        elseif mixed.player_index then
-            local player = game.get_player(mixed.player_index)
-            return player and player.valid and player
+        if mixed.player_index then
+            return game.get_player(mixed.player_index)
+        elseif mixed.__self then
+            return mixed.valid and mixed
         end
     elseif mixed then
-        local player = game.get_player(mixed)
-        return player and player.valid and player
+        return game.get_player(mixed)
     end
 end
 

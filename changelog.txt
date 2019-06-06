@@ -43,7 +43,7 @@ Date: 4.6.2019
   Breaking Changes:
     - Changes module no longer uses pcall. Changes files will need to be registered.
 
-  Tests:
+  Minor Features:
     - Added settings namespace to the test data loader.
     - Add settings namespace to the test data loader
 ---------------------------------------------------------------------------------------------------
@@ -64,21 +64,26 @@ Date: 4.6.2019
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.2
 Date: 4.6.2019
+
   Bugfixes:
-    - Something
+    - Actually include the data.lua file in the release.
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 4.6.2019
 
   Bugfixes:
-    - Something
+    - Add data.lua file to trick Factorio into thinking this mod changes the game.
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 4.6.2019
 
-  Features:
+  Major Features:
     - Initial Release as a library mod.
     - Initial Release of the Data library
+
+  Features:
+    - Added inspect available as a global function a prettier table printer.
+    - Added vendor scripts; beholder, bump, cron, enumerable, inspect, md5, memoize, middleclass, mm, semver, serpent, stateful
 
   Changes:
     - All modules and classes are local by default.
@@ -86,6 +91,7 @@ Date: 4.6.2019
     - Any module that registers events must have their register_events() function called.
     - Module locations have been moved around to have a more consistent structure. Check out the API docs.
     - Area/Position are now returned as objects.
+    - Remove marker debug entities in favor of built in rendering.
 ---------------------------------------------------------------------------------------------------
 Version: 0.8.0
 Date: 1.27.2017

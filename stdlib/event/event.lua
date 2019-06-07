@@ -383,7 +383,7 @@ function Event.dispatch(event)
             -- This is done inside the loop as other events can modify the event.
             if Event.validate_objects then
                 for _, val in pairs(event) do
-                    if type(val) and val.__self and not val.valid then
+                    if type(val) == 'table' and val.__self and not val.valid then
                         return
                     end
                 end

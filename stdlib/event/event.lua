@@ -29,12 +29,10 @@ local Event = {
     custom_events = {}, -- Holds custom event ids
     options = {
         protected_mode = false,
-        inspect_event = false,
-        force_crc = false,
-        skip_valid = false
+        skip_valid = false,
+        inspect_event = false, -- requires debug_mode to be true
+        force_crc = false -- Requires debug_mode to be true
     },
-    event_order = nil, -- Assigned when needed due to crash in 0.16.41
-    count_data = {}, -- assigned when needed
     stop_processing = {}, -- just has to be unique
     script = {
         on_event = script.on_event,
@@ -298,6 +296,17 @@ end
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 Event.on_event = Event.register
 
+-- Use option A or B if present, otherwise pass option C
+local function check_option(a, b, c)
+    if a ~= nil then
+        return a
+    elseif b ~= nil then
+        return b
+    else
+        return c
+    end
+end
+
 -- Used to replace pcall in un-protected events.
 local function no_pcall(handler, event, other)
     return true, handler(event, other)
@@ -309,8 +318,8 @@ end
 -- is thrown.
 local function dispatch_event(event, registered)
     local success, match_result, handler_result
-    local protected = event.options.protected_mode or registered.options.protected_mode or Event.options.protected_mode
-    local pcall = protected and pcall or no_pcall
+    local protected = check_option(event.options.protected_mode, registered.options.protected_mode, Event.options.protected_mode)
+    local pcall = event.tick ~= 0 and protected and pcall or no_pcall
 
     -- If we have a matcher run it first passing event, and registered.pattern as parameters
     -- If the matcher returns truthy call the handler passing event, and the result from the matcher
@@ -381,7 +390,7 @@ function Event.dispatch(event)
             -- Check for userdata and stop processing this and further handlers if not valid
             -- This is the same behavior as factorio events.
             -- This is done inside the loop as other events can modify the event.
-            if not (event.options.skip_valid or registered.options.skip_valid or Event.options.skip_valid) then
+            if not check_option(event.options.skip_valid, registered.options.skip_valid, Event.options.skip_valid) then
                 for _, val in pairs(event) do
                     if type(val) == 'table' and val.__self and not val.valid then
                         return
@@ -389,19 +398,20 @@ function Event.dispatch(event)
                 end
             end
 
-            if (event.options.inspect_event or registered.options.inspect_event or Event.options.inspect_event) and game then
+            -- Inspect things
+            if Event.debug_mode and game and check_option(event.options.inspect_event, registered.options.inspect_event, Event.options.inspect_event) then
                 local result = inspect(event) .. '\n'
                 game.write_file(Event.get_file_path('events/' .. get_event_name(event.input_name or event.name) .. '.lua'), result, inspect_append)
                 game.write_file(Event.get_file_path('events/ordered.lua'), result, inspect_append)
                 inspect_append = true
             end
 
+            -- Dispatch the event, if the event return Event.stop_processing don't process any more events
             if dispatch_event(event, registered) == Event.stop_processing then
                 return
             end
-
-            -- force a crc check if option is enabled. This is a debug option and will hamper performance if enabled
-            if (event.options.force_crc or registered.options.force_crc or Event.options.force_crc) and game then
+            -- Force a crc check if option is enabled. This is a debug option and will hamper performance if enabled
+            if Event.debug_mode and check_option(event.options.force_crc, registered.options.force_crc, Event.options.force_crc) and game then
                 log('CRC check called for event [' .. event.name .. ']')
                 game.force_crc()
             end
@@ -427,7 +437,7 @@ function Event.generate_event_name(event_name)
     return id
 end
 
--- TODO is this even needed?
+--! DEPRECATED
 function Event.set_event_name(event_name, id)
     Is.Assert.String(event_name, 'event_name must be a string')
     Is.Assert.Number(id)
@@ -435,7 +445,7 @@ function Event.set_event_name(event_name, id)
     return Event.custom_events[event_name]
 end
 
--- TODO is this even needed?
+--! DEPRECATED
 function Event.get_event_name(event_name)
     Is.Assert.String(event_name, 'event_name must be a string')
     return Event.custom_events[event_name]
@@ -456,17 +466,19 @@ function Event.get_event_handler(event_id)
 end
 
 --- Set protected mode.
+--! DEPRECATED
 function Event.set_protected_mode(bool)
-    if bool then
-        Event.options.protected_mode = true
-    else
-        Event.options.protected_mode = false
-    end
+        Event.options.protected_mode = bool and true or false
+    return Event
+end
+
+function Event.set_debug_mode(bool)
+    Event.debug_mode = bool and true or false
     return Event
 end
 
 function Event.set_option(option, bool)
-    Event.options[option] = bool or false
+    Event.options[option] = bool and true or false
     return Event
 end
 

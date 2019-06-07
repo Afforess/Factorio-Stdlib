@@ -13,10 +13,14 @@
 -- @module Event.Event
 -- @usage local Event = require('__stdlib__/stdlib/event/event')
 
+--! TODO perform pcall only once?
+--! TODO Event.validate_objects
+--! TODO validate_objects, safe_mode, protected_mode set with register
+
 require('__stdlib__/stdlib/config').control = true
 
 local Event = {
-   __module = 'Event',
+    __module = 'Event',
     core_events = {
         on_init = 'on_init',
         on_load = 'on_load',
@@ -28,7 +32,8 @@ local Event = {
     },
     custom_events = {}, -- Holds custom event ids
     protected_mode = false,
-    safe_mode = true,
+    validate_objects = true,
+    safe_mode = true, -- Currently unused
     inspect_event = false,
     inspect_append = false, -- Only used for write_file, can cause desyncs elsewhere
     force_crc = false,
@@ -51,7 +56,7 @@ Event._script = {
 -- Protections for post registrations
 for name in pairs(Event._script) do
     _G.script[name] = function(id)
-        error('Detected attempt to register an event using script.'..name..' while using the STDLIB event system '.. id and id or '')
+        error('Detected attempt to register an event using script.' .. name .. ' while using the STDLIB event system ' .. id and id or '')
     end
 end
 -- Simple protections check for pre registration
@@ -376,9 +381,11 @@ function Event.dispatch(event)
             -- Check for userdata and stop processing this and further handlers if not valid
             -- This is the same behavior as factorio events.
             -- This is done inside the loop as other events can modify the event.
-            for _, val in pairs(event) do
-                if Is.Object(val) and not val.valid then
-                    return
+            if Event.validate_objects then
+                for _, val in pairs(event) do
+                    if type(val) and val.__self and not val.valid then
+                        return
+                    end
                 end
             end
 

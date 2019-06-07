@@ -351,7 +351,10 @@ end
 -- @param event (<span class="types">@{event_data}</span>) the event data table
 -- @see https://forums.factorio.com/viewtopic.php?t=32039#p202158 Invalid Event Objects
 function Event.dispatch(event)
-    Is.Assert.Table(event, 'missing event table')
+    if type(event) ~= 'table' then
+        error('missing event table')
+    end
+
     --get the registered handlers from name, input_name, or nth_tick in that priority.
     local registry
 

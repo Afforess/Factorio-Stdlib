@@ -111,8 +111,8 @@
     <li class="nav-item">
     <h2>Topics</h2>
     <ul class="nav">
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/README.md.html"><span class="module-name-item">README.md</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/CHANGELOG.md.html"><span class="module-name-item">CHANGELOG.md</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/readme.md.html"><span class="module-name-item">readme.md</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/changelog.txt.html"><span class="module-name-item">changelog.txt</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/LICENSE.html"><span class="module-name-item">LICENSE</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/contributing.md.html"><span class="module-name-item">contributing.md</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/style-guide.md.html"><span class="module-name-item">style-guide.md</span></a></div></li>
@@ -202,8 +202,32 @@
     <td class="summary">Retrieve or Generate an event_name and store it in Event.custom_events</td>
     </tr>
     <tr>
+    <td class="name"><a href="#get_event_handler">get_event_handler(event_id)</a></td>
+    <td class="summary">Get event handler.</td>
+    </tr>
+    <tr>
     <td class="name"><a href="#get_registry">get_registry()</a></td>
     <td class="summary">Retrieve the event_registry</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#on_configuration_changed">on_configuration_changed(handler, matcher, pattern)</a></td>
+    <td class="summary">Shortcut for <code>Event.register(Event.core_events.on_configuration_changed, function)</code></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#on_event">on_event()</a></td>
+    <td class="summary">Shortcut for <code>Event.register(defines.events, handler, matcher, pattern)</code></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#on_init">on_init(handler, matcher, pattern)</a></td>
+    <td class="summary">Shortcut for <code>Event.register(Event.core_events.on_init, function)</code></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#on_load">on_load(handler, matcher, pattern)</a></td>
+    <td class="summary">Shortcut for <code>Event.register(Event.core_events.on_load, function)</code></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#on_nth_tick">on_nth_tick(nth_tick, handler, matcher, pattern)</a></td>
+    <td class="summary">Shortcut for <code>Event.register(-nthTick, function)</code></td>
     </tr>
     <tr>
     <td class="name"><a href="#register">register(event_id, handler[, matcher=nil][, pattern=nil])</a></td>
@@ -212,6 +236,10 @@
     <tr>
     <td class="name"><a href="#remove">remove(event_id[, handler][, matcher][, pattern])</a></td>
     <td class="summary">Removes a handler from the given events.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#set_protected_mode">set_protected_mode(bool)</a></td>
+    <td class="summary">Set protected mode.</td>
     </tr>
     </tbody>
     </table>
@@ -433,6 +461,56 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
+    <a href="#get_event_handler" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_event_handler">get_event_handler(event_id)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Get event handler.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>event_id</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
     <a href="#get_registry" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="get_registry">get_registry()</span>
     </div>
@@ -453,6 +531,399 @@
     <li>
     (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
     <span class="return-text">event_registry</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#on_configuration_changed" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_configuration_changed">on_configuration_changed(handler, matcher, pattern)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <code>Event.register(Event.core_events.on_configuration_changed, function)</code></p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>handler</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>matcher</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pattern</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#on_event" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_event">on_event()</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <code>Event.register(defines.events, handler, matcher, pattern)</code></p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#on_init" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_init">on_init(handler, matcher, pattern)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <code>Event.register(Event.core_events.on_init, function)</code></p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>handler</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>matcher</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pattern</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#on_load" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_load">on_load(handler, matcher, pattern)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <code>Event.register(Event.core_events.on_load, function)</code></p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>handler</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>matcher</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pattern</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#on_nth_tick" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_nth_tick">on_nth_tick(nth_tick, handler, matcher, pattern)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <code>Event.register(-nthTick, function)</code></p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>nth_tick</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>handler</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>matcher</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pattern</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -574,9 +1045,9 @@
     <!-- usage start -->
     <strong>Usage:</strong>
     <pre class="code" data-lang="Lua"><code><span class="comment">-- Create an event that prints the current tick every tick.
-</span>Event.register(defines.events.on_tick, <span class="keyword">function</span>(event) <span class="global">print</span> event.tick <span class="keyword">end</span>)
-<span class="comment">-- Create an event that prints the new ID of a train.
-</span>Event.register(Trains.on_train_id_changed, <span class="keyword">function</span>(event) <span class="global">print</span>(event.new_id) <span class="keyword">end</span>)
+</span>Event.register(defines.events.on_tick, <span class="keyword">function</span>(event) game.<span class="global">print</span>(event.tick) <span class="keyword">end</span>)
+<span class="comment">-- Register something for Nth tick using negative numbers.
+</span>Event.register(-<span class="number">120</span>, <span class="keyword">function</span>() game.<span class="global">print</span>(<span class="string">'Every 120 ticks'</span>) <span class="keyword">end</span>
 <span class="comment">-- Function call chaining
 </span>Event.register(event1, handler1).register(event2, handler2)</code></pre>
     <!-- usage end -->
@@ -684,6 +1155,56 @@
     <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
     </li>
     </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#set_protected_mode" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="set_protected_mode">set_protected_mode(bool)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Set protected mode.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>bool</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
     <!-- returns end -->
 
 
@@ -808,7 +1329,7 @@ Event.dispatch(event_data)</code></pre>
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2019-05-27 02:30:59 UTC</i>
+    <i>Last updated 2019-06-08 00:16:17 UTC</i>
     </div>
     </div>
     </div>

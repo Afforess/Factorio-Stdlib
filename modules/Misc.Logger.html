@@ -111,8 +111,8 @@
     <li class="nav-item">
     <h2>Topics</h2>
     <ul class="nav">
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/README.md.html"><span class="module-name-item">README.md</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/CHANGELOG.md.html"><span class="module-name-item">CHANGELOG.md</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/readme.md.html"><span class="module-name-item">readme.md</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/changelog.txt.html"><span class="module-name-item">changelog.txt</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/LICENSE.html"><span class="module-name-item">LICENSE</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/contributing.md.html"><span class="module-name-item">contributing.md</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../topics/style-guide.md.html"><span class="module-name-item">style-guide.md</span></a></div></li>
@@ -168,9 +168,10 @@
 
     <!-- module usage start -->
     <h3>Usage</h3>
-    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Logger = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/log/logger'</span>)
-<span class="comment">-- or to create a logger directly:
-</span><span class="keyword">local</span> LOGGER = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/log/logger'</span>).new(...)</code></pre>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Logger = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/misc/logger'</span>)
+<span class="comment">-- or to create a new logger directly:
+</span><span class="keyword">local</span> Log = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/misc/logger'</span>).new()
+<span class="comment">-- log files are saved to script-output/modname/log.log by default</span></code></pre>
     <!-- module usage end -->
 
     <!-- module content header end -->
@@ -195,7 +196,7 @@
     <td class="summary">Get a saved log or create a new one if there is no saved log.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#new">new(mod_name[, log_name='main'][, debug_mode=false][, options={...}])</a></td>
+    <td class="name"><a href="#new">new([log_name='log'][, debug_mode=false][, options={...}])</a></td>
     <td class="summary">Creates a new logger object.</td>
     </tr>
     </tbody>
@@ -263,8 +264,7 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    <span class="return-text">true if the message was written, false if it was queued for a later write</span>
+    <span class="return-text">(<span class="types"><a href="../modules/Misc.Logger.html">Logger</a></span>) the logger instance</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -302,8 +302,7 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    <span class="return-text">true if write was successful, false otherwise</span>
+    <span class="return-text">(<span class="types"><a href="../modules/Misc.Logger.html">Logger</a></span>) the logger instance</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -370,7 +369,7 @@
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
     <a href="#new" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="new">new(mod_name[, log_name='main'][, debug_mode=false][, options={...}])</span>
+    <span class="section-item-title" id="new">new([log_name='log'][, debug_mode=false][, options={...}])</span>
     </div>
     </dt>
     <dd>
@@ -392,22 +391,6 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>mod_name</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     [required] the name of the mod to create the logger for
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
     <strong><em>log_name</em></strong>
 
     <strong> : </strong>
@@ -416,7 +399,7 @@
 
      the name of the logger
 
-    (<em>default</em>: 'main')
+    (<em>default</em>: 'log')
     </li>
 
 
@@ -473,12 +456,14 @@
 
     <!-- usage start -->
     <strong>Usage:</strong>
-    <pre class="code" data-lang="Lua"><code>LOGGER = Logger.new(<span class="string">'cool_mod_name'</span>)
-LOGGER.log(<span class="string">"this msg will be logged!"</span>)</code></pre>
-    <pre class="code" data-lang="Lua"><code>LOGGER = Logger.new(<span class="string">'cool_mod_name'</span>, <span class="string">'test'</span>, <span class="keyword">true</span>)
-LOGGER.log(<span class="string">"this msg will be logged and written immediately in test.log!"</span>)</code></pre>
-    <pre class="code" data-lang="Lua"><code>LOGGER = Logger.new(<span class="string">'cool_mod_name'</span>, <span class="string">'test'</span>, <span class="keyword">true</span>, { file_extension = data })
-LOGGER.log(<span class="string">"this msg will be logged and written immediately in test.data!"</span>)</code></pre>
+    <pre class="code" data-lang="Lua"><code>Log = Logger.new()
+Log(<span class="string">"this msg will be logged in /script-output/YourModName/log.log!"</span>)
+ <span class="comment">-- Immediately Write everything buffered in the log file
+</span> Log()</code></pre>
+    <pre class="code" data-lang="Lua"><code>Log = Logger.new(<span class="string">'test'</span>, <span class="keyword">true</span>)
+Log(<span class="string">"this msg will be logged and written immediately in /script-output/YourModName/test.log!"</span>)</code></pre>
+    <pre class="code" data-lang="Lua"><code>Log = Logger.new(<span class="string">'cool_mod_name'</span>, <span class="string">'test'</span>, <span class="keyword">true</span>, { file_extension = data })
+Log(<span class="string">"this msg will be logged and written immediately in /script-output/YourModName/test.data!"</span>)</code></pre>
     <!-- usage end -->
 
     </dd>
@@ -586,7 +571,7 @@ LOGGER.log(<span class="string">"this msg will be logged and written immediately
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2019-05-27 02:30:59 UTC</i>
+    <i>Last updated 2019-06-08 00:16:17 UTC</i>
     </div>
     </div>
     </div>

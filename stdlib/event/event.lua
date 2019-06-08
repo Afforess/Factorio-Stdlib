@@ -314,12 +314,12 @@ end
 
 -- A dispatch helper function
 -- Call any matcher and as applicable the event handler.
--- When protected errors are logged to game console if game is available, otherwise a real error
--- is thrown.
+-- protected errors are logged to game console if game is available, otherwise a real error
+-- is thrown. Bootstrap events are not protected from erroring no matter the option.
 local function dispatch_event(event, registered)
     local success, match_result, handler_result
     local protected = check_option(event.options.protected_mode, registered.options.protected_mode, Event.options.protected_mode)
-    local pcall = event.tick ~= 0 and protected and pcall or no_pcall
+    local pcall = not bootstrap_register[event.name] and protected and pcall or no_pcall
 
     -- If we have a matcher run it first passing event, and registered.pattern as parameters
     -- If the matcher returns truthy call the handler passing event, and the result from the matcher
@@ -329,7 +329,7 @@ local function dispatch_event(event, registered)
             success, handler_result = pcall(registered.handler, event, match_result)
         end
     else
-        success, handler_result = pcall(registered.handler, event)
+        success, handler_result = pcall(registered.handler, event, nil)
     end
 
     -- If the handler errors lets make sure someone notices
@@ -472,11 +472,13 @@ function Event.set_protected_mode(bool)
     return Event
 end
 
+--- Set debug mode default for Event module.
 function Event.set_debug_mode(bool)
     Event.debug_mode = bool and true or false
     return Event
 end
 
+--- Set default options for the event module.
 function Event.set_option(option, bool)
     Event.options[option] = bool and true or false
     return Event

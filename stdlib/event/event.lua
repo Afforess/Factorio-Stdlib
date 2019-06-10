@@ -467,7 +467,6 @@ function Event.get_event_handler(event_id)
 end
 
 --- Set protected mode.
---! DEPRECATED
 function Event.set_protected_mode(bool)
         Event.options.protected_mode = bool and true or false
     return Event

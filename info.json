@@ -6,7 +6,7 @@
     "author": "Afforess",
     "contact": "",
     "dependencies": [
-        "base >= 0.17.35"
+        "base >= 0.17.47"
     ],
     "homepage": "https://github.com/Afforess/Factorio-Stdlib",
     "description": "The Factorio Standard Library is a project to bring Factorio modders high-quality, commonly-required utilities and tools."

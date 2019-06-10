@@ -110,6 +110,7 @@ end
 -- @tparam function handler the function to call when the given events are triggered
 -- @tparam[opt=nil] function matcher a function whose return determines if the handler is executed. event and pattern are passed into this
 -- @tparam[opt=nil] mixed pattern an invariant that can be used in the matcher function, passed as the second parameter to your matcher
+-- @tparam[opt=nil] table options a table of options that take precedence over the module options.
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.register(event_id, handler, matcher, pattern, options)
     Is.Assert(event_id, 'missing event_id argument')

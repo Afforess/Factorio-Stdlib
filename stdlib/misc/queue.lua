@@ -3,9 +3,13 @@
 -- and modified to not allow nil values, and returns nil if @{pop_first} or @{pop_last} is used when the queue is empty.
 -- @module Misc.Queue
 -- @usage local Queue = require('__stdlib__/stdlib/lists/queue')
+-- local q = Queue() -- create a new empty queue
+-- q('my value') -- push a value onto the queue
+-- q() -- pop the last value off the queue
+-- game.print(#q) -- print the number of items in the queue
 
 local Queue = {
-   __module = 'Queue',
+    __class = 'Queue',
     __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Queue, Queue)
@@ -13,22 +17,25 @@ setmetatable(Queue, Queue)
 local table = require('__stdlib__/stdlib/utils/table')
 local t_size = table.size
 
-local Is = require('__stdlib__/stdlib/utils/is')
 local Inspect = require('__stdlib__/stdlib/vendor/inspect')
 
---- Constructs a new Queue object.
--- @return (<span class="types">@{Queue}</span>) a new, empty queue
-function Queue.new(_, ...)
+local meta = {}
+
+function Queue.__call(_, ...)
     local queue = {first = 1, last = 0, objects = {}}
-    setmetatable(queue, Queue._mt)
-    for _, push in ipairs({...}) do
-        if push ~= nil then
-            queue(push)
-        end
+    setmetatable(queue, meta)
+    for _, push in pairs({...}) do
+        queue(push)
     end
     return queue
 end
-Queue.__call = Queue.new
+
+--- Constructs a new Queue object.
+-- @param ... mixed, values to push into the queue
+-- @treturn @{Queue} a new queue
+function Queue.new(...)
+    return Queue.__call(nil, ...)
+end
 
 --- Load global.queue or queues during on_load, as metatables are not persisted.
 -- <p>This is only needed if you are using the queue as an object and storing it in global.
@@ -36,60 +43,55 @@ Queue.__call = Queue.new
 -- @usage global.myqueue1 = Queue.new()
 -- script.on_load(function() Queue.load(global.myqueue))
 function Queue.load(queue)
-    if Is.Table(queue) and queue.first then
-        return setmetatable(queue, Queue._mt)
+    if type(queue) == 'table' and queue.first then
+        return setmetatable(queue, meta)
     end
 end
 
--- --- Gets the index which matches the stored data
--- TODO future direction
--- function Queue.get_index(queue, obj)
---     for i, v in pairs(queue.objects) do
---         if v == obj then
---             return i
---         end
---     end
--- end
-
--- TODO pop at index, everything after index insert at -1 dec last
--- function Queue.pop_at_index(queue, index)
---     return queue.objects[index]
--- end
-
--- TODO push at index, everything at and after index + 1 inc last
--- function Queue.push_at_index(queue, index)
---     return queue
--- end
-
 --- Push a new element to the front of the queue.
--- @param queue (<span class="types">@{Queue}</span>) the queue to push an element to
+-- @tparam Queue queue the queue to push an element to
 -- @tparam Mixed value the element to push
-function Queue.push_first(queue, value)
-    Is.Assert(value, 'must have a value to push')
-
-    local first = queue.first - 1
-    queue.first = first
-    queue.objects[first] = value
+function Queue.push_first(queue, ...)
+    for _, value in pairs({...}) do
+        queue.first = queue.first - 1
+        queue.objects[queue.first] = value
+    end
     return queue
 end
 
 --- Push a new element to the back of the queue.
--- @param queue (<span class="types">@{Queue}</span>) the queue to push an element to
--- @tparam Mixed value the element to push
-function Queue.push_last(queue, value)
-    Is.Assert(value, 'must have a value to push')
-
-    local last = queue.last + 1
-    queue.last = last
-    queue.objects[last] = value
+-- @tparam Queue queue the queue to push an element to
+-- @tparam Mixed ... the element(s) to push
+function Queue.push_last(queue, ...)
+    for _, value in pairs({...}) do
+        queue.last = queue.last + 1
+        queue.objects[queue.last] = value
+    end
     return queue
 end
+
 --- Shortcut for @{Queue.push_last}
 -- @function Queue.push
 Queue.push = Queue.push_last
 
+--- Push a new element to a specific location of the queue.
+-- @tparam Queue queue the queue to push an element to
+-- @tparam number index the index to push to.
+-- @tparam Mixed value the element to push.
+function Queue.push_at(queue, index, value)
+    if index < queue.first then
+        return Queue.push_first(queue, value)
+    elseif index > queue.last then
+        return Queue.push_last(queue, value)
+    else
+        table.insert(queue.objects, index, value)
+        queue.last = queue.last + 1
+    end
+    return queue
+end
+
 --- Retrieve the element at the front of the queue and remove it from the queue.
--- @param queue (<span class="types">@{Queue}</span>) the queue to retrieve the element from
+-- @tparam Queue queue the queue to retrieve the element from
 -- @treturn Mixed value the element at the front of the queue
 function Queue.pop_first(queue)
     if Queue.is_empty(queue) then
@@ -101,22 +103,37 @@ function Queue.pop_first(queue)
     queue.first = first + 1
     return value
 end
+
 --- Shortcut for @{Queue.pop_first}
 -- @function Queue.pop
 Queue.pop = Queue.pop_first
 
+--- Pop an element at a specific location of the queue.
+-- @tparam Queue queue the queue to push an element to
+-- @tparam number index the index to push to.
+-- @treturn Mixed value the popped element.
+function Queue.pop_at(queue, index)
+    local ret = queue.objects[index]
+    if ret then
+        table.remove(queue.objects, index)
+        queue.last = queue.last - 1
+    end
+    return ret
+end
+
 --- Return the element at the front of the queue and remove it from the queue.
--- @param queue (<span class="types">@{Queue}</span>) the queue to retrieve the element from
+-- @tparam Queue queue the queue to retrieve the element from
 -- @treturn Mixed the element at the front of the queue
 function Queue.peek_first(queue)
     return queue.objects[queue.first]
 end
+
 --- Shortcut for @{Queue.peek_first}
 -- @function Queue.peek
 Queue.peek = Queue.peek_first
 
 --- Retrieve the element at the back of the queue and remove it from the queue.
--- @param queue (<span class="types">@{Queue}</span>) the queue to retrieve the element from
+-- @tparam Queue queue the queue to retrieve the element from
 -- @treturn Mixed the element at the back of the queue
 function Queue.pop_last(queue)
     if queue.is_empty(queue) then
@@ -131,31 +148,58 @@ function Queue.pop_last(queue)
 end
 
 --- Return the element at the back of the queue.
--- @param queue (<span class="types">@{Queue}</span>) the queue to retrieve the element from
+-- @tparam Queue queue the queue to retrieve the element from
 -- @treturn Mixed the element at the back of the queue
 function Queue.peek_last(queue)
     return queue.objects[queue.last]
 end
 
+--- Returns the popped value and pushes back into the queue.
+-- @tparam Queue queue the queue
+-- @return Mixed the value that was popped.
 function Queue.pop_and_push(queue)
     local ret = queue.pop(queue)
     queue.push(queue, ret)
     return ret
 end
 
+--- Returns the queue after popping the last element and pushing it to the top.
+-- @tparam Queue queue the queue
+-- @treturn @{Queue} the queue
 function Queue.cycle(queue)
     return queue.push(queue, queue.pop(queue))
 end
 
+--- Gets the first index which matches the stored data. does not compare inside tables.
+function Queue.find(queue, find)
+    for i, v in pairs(queue) do
+        if v == find then
+            return i
+        end
+    end
+end
+
+--- sort and reorder the queue
+function Queue.sort(queue, func)
+    local sorted = {}
+    for _, v in pairs(queue) do
+        sorted[#sorted + 1] = v
+    end
+    table.sort(sorted, func)
+    queue.objects = sorted
+    queue.first, queue.last = 1, #queue.objects
+    return queue
+end
+
 --- Returns true if the given queue is empty.
--- @param queue (<span class="types">@{Queue}</span>) the queue to check
+-- @tparam Queue queue the queue to check
 -- @treturn boolean true if empty, false otherwise
 function Queue.is_empty(queue)
     return t_size(queue.objects) == 0
 end
 
 --- Returns the number of items in the queue.
--- @param queue (<span class="types">@{Queue}</span>) the queue to check
+-- @tparam Queue queue the queue to check
 -- @treturn number the number of items in the queue
 function Queue.size(queue)
     return t_size(queue.objects)
@@ -165,80 +209,111 @@ end
 -- @function Queue.count
 Queue.count = Queue.size
 
-function Queue.pairs(queue, pop)
-    local i = queue.first - 1
-    return function()
-        i = i + 1
-        local v = pop and queue.pop(queue) or queue.objects[i]
+--- Return the next element in the queue
+-- @tparam Queue queue the queue to check
+-- @tparam number|nil index if nil return the first value, else return the next index value
+-- @treturn number|nil the index
+-- @treturn Mixed|nil the value at queue index
+function Queue.next(queue, index)
+    index = not index and queue.first or (index > queue.last and queue.last or index) + 1
+    for i = index, queue.last do
+        local v = queue.objects[i]
         if v then
             return i, v
         end
     end
+    return nil, nil
 end
 
-function Queue.rpairs(queue, pop)
-    local i = queue.last + 1
-    return function()
-        i = i - 1
-        local v = pop and queue.pop_last(queue) or queue.objects[i]
+--- Return the previous element in the queue
+-- @tparam Queue queue the queue to check
+-- @tparam number|nil index if nil return the last value, else return the previous index value
+-- @treturn number|nil the index
+-- @treturn Mixed|nil the value at queue index
+function Queue.rnext(queue, index)
+    -- next returns index of next or nil and data,
+    index = not index and queue.last or (index < queue.first and queue.first or index) - 1
+    for i = index, queue.first, -1 do
+        local v = queue.objects[i]
         if v then
             return i, v
         end
     end
+    return nil, nil
 end
 
-local mt = {}
-function mt.__add(queue1, queue2)
-    local new = Queue.new()
-
-    local one = Is.Table(queue1) and getmetatable(queue1) == Queue._mt and true
-    local two = Is.Table(queue2) and getmetatable(queue2) == Queue._mt and true
-
-    if one then
-        for _, v in pairs(queue1) do
-            new:push(v)
-        end
-    else
-        new:push(queue1)
-    end
-
-    if two then
-        for _, v in pairs(queue2) do
-            new:push(v)
-        end
-    else
-        new:push(queue2)
-    end
-
-    return new
+--- Iterate the queue forward
+function Queue.pairs(queue)
+    return Queue.next, queue, queue.first - 1
 end
 
-Queue._mt = {
-    __pairs = Queue.pairs,
-    __ipairs = Queue.pairs,
-    __len = Queue.size,
+--- Iterate the queue backwards
+function Queue.rpairs(queue)
+    return Queue.rnext, queue, queue.last + 1
+end
+
+do
+    meta.__class = "queue"
+    meta.__pairs = Queue.pairs
+    meta.__ipairs = Queue.pairs
+    meta.__len = Queue.size
+    meta.__unm = Queue.pop
+    meta.__parent = Queue
+
     -- Allows queue[3] to return the item at queue.objects[3]
-    __index = function(self, k)
-        if Is.number(k) then
-            --k = self.first - 1 + k
-            return self.objects[k]
+    meta.__index = function(self, k)
+        if type(k) == 'number' then
+            return self:peek(k)
         else
             return rawget(self, k) or Queue[k]
         end
-    end,
-    __add = mt.__add,
-    __unm = Queue.pop,
-    -- Allows queue() to pop_first and queue(data) to push_last
-    __call = function(self, ...)
-        if ... then
-            return self.push(self, ...)
+    end
+
+    meta.__newindex = function(self, k, v)
+        if type(k) == 'number' then
+            if self.objects[k] then
+                self.objects[k] = v
+            else
+                self:push_at(k, v)
+            end
         else
-            return self.pop(self)
+            rawset(self, k, v)
         end
-    end,
-    __tostring = function(self)
+    end
+
+    -- Allows queue() to pop_first and queue(data) to push_last
+    meta.__call = function(self, ...)
+        if ... then
+            return self:push(...)
+        else
+            return self:pop()
+        end
+    end
+
+    meta.__tostring = function(self)
         return Inspect({first = self.first, last = self.last, objects = self.objects}, {arraykeys = true})
     end
-}
+
+    meta.__add = function(queue1, queue2)
+        local new = Queue.new()
+        local lhs = getmetatable(queue1) == meta and true
+        local rhs = getmetatable(queue2) == meta and true
+        if lhs then
+            for _, v in pairs(queue1) do
+                new:push(v)
+            end
+        else
+            new:push(queue1)
+        end
+        if rhs then
+            for _, v in pairs(queue2) do
+                new:push(v)
+            end
+        else
+            new:push(queue2)
+        end
+        return new
+    end
+end
 
 return Queue

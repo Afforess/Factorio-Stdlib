@@ -108,17 +108,32 @@ end
 -- @function Queue.pop
 Queue.pop = Queue.pop_first
 
+local function remove(queue, index)
+    local ret = queue.objects[index]
+    if ret ~= nil then
+        for i = index + 1, queue.last do
+            queue.objects[i - 1] = queue.objects[i]
+        end
+        queue.objects[queue.last] = nil
+        queue.last = queue.last - 1
+    end
+    return ret
+end
+
 --- Pop an element at a specific location of the queue.
 -- @tparam Queue queue the queue to push an element to
 -- @tparam number index the index to push to.
 -- @treturn Mixed value the popped element.
 function Queue.pop_at(queue, index)
-    local ret = queue.objects[index]
-    if ret then
-        table.remove(queue.objects, index)
-        queue.last = queue.last - 1
-    end
-    return ret
+    return remove(queue,index)
+end
+
+--- Peek at an element in the queue without disturbing the queue.
+-- @tparam Queue queue the queue to peek at
+-- @tparam number index the index in the queue to peek at
+-- @treturn Mixed the value of the peeked element
+function Queue.peek_at(queue, index)
+    return queue.objects[index]
 end
 
 --- Return the element at the front of the queue and remove it from the queue.
@@ -212,14 +227,15 @@ Queue.count = Queue.size
 --- Return the next element in the queue
 -- @tparam Queue queue the queue to check
 -- @tparam number|nil index if nil return the first value, else return the next index value
+-- @tparam boolean pop pop the value off the queue
 -- @treturn number|nil the index
 -- @treturn Mixed|nil the value at queue index
-function Queue.next(queue, index)
-    index = not index and queue.first or (index > queue.last and queue.last or index) + 1
+function Queue.next(queue, index, pop)
+    index = not index and queue.first or index + (pop and 0 or 1)
     for i = index, queue.last do
         local v = queue.objects[i]
-        if v then
-            return i, v
+        if v ~= nil then
+            return i, pop and Queue.pop_at(queue, i) or v
         end
     end
     return nil, nil
@@ -228,32 +244,41 @@ end
 --- Return the previous element in the queue
 -- @tparam Queue queue the queue to check
 -- @tparam number|nil index if nil return the last value, else return the previous index value
+-- @tparam boolean pop pop the value off the queue
 -- @treturn number|nil the index
 -- @treturn Mixed|nil the value at queue index
-function Queue.rnext(queue, index)
+function Queue.rnext(queue, index, pop)
     -- next returns index of next or nil and data,
     index = not index and queue.last or (index < queue.first and queue.first or index) - 1
     for i = index, queue.first, -1 do
         local v = queue.objects[i]
-        if v then
-            return i, v
+        if v ~= nil then
+            return i, pop and Queue.pop_at(queue, i) or v
         end
     end
     return nil, nil
 end
 
+local function next_pop(queue, index)
+    return Queue.next(queue, index, true)
+end
+
+local function rnext_pop(queue, index)
+    return Queue.rnext(queue, index, true)
+end
+
 --- Iterate the queue forward
-function Queue.pairs(queue)
-    return Queue.next, queue, queue.first - 1
+function Queue.pairs(queue, pop)
+    return pop and next_pop or Queue.next, queue, nil
 end
 
 --- Iterate the queue backwards
-function Queue.rpairs(queue)
-    return Queue.rnext, queue, queue.last + 1
+function Queue.rpairs(queue, pop)
+    return pop and rnext_pop or Queue.rnext, queue, nil
 end
 
 do
-    meta.__class = "queue"
+    meta.__class = 'queue'
     meta.__pairs = Queue.pairs
     meta.__ipairs = Queue.pairs
     meta.__len = Queue.size
@@ -263,19 +288,19 @@ do
     -- Allows queue[3] to return the item at queue.objects[3]
     meta.__index = function(self, k)
         if type(k) == 'number' then
-            return self:peek(k)
+            return self:peek_at(k)
         else
-            return rawget(self, k) or Queue[k]
+            local v = rawget(self, k)
+            if v == nil then
+                return Queue[k]
+            end
+            return v
         end
     end
 
     meta.__newindex = function(self, k, v)
         if type(k) == 'number' then
-            if self.objects[k] then
-                self.objects[k] = v
-            else
-                self:push_at(k, v)
-            end
+            self:push_at(k, v)
         else
             rawset(self, k, v)
         end

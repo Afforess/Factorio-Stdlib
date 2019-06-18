@@ -29,7 +29,7 @@ describe('Queue', function()
         end)
 
         it('should have a metatable', function()
-            assert.same(getmetatable(queue1), Queue._mt)
+            assert.truthy(getmetatable(queue1))
         end)
 
         it('__index should retrieve objects or queue', function()
@@ -250,13 +250,11 @@ describe('Queue', function()
             end
             assert.spy(s).was_called(5)
             assert.same(5, #q)
-            local i
             for k in q:pairs(true) do
-                i = k
                 s()
             end
             assert.same(0, #q)
-            assert.same(3, i)
+            assert.spy(s).was_called(10)
 
         end)
 
@@ -273,6 +271,7 @@ describe('Queue', function()
             end
             assert.same(0, #q)
             assert.same(-1, i)
+            assert.spy(s).was_called(10)
 
         end)
     end)

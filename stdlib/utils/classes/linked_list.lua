@@ -18,7 +18,7 @@ end
 -- @usage local llnode = linkedlist.append(item)
 local LinkedListNode = setmetatable(
     {
-       __module = 'linked_list',
+       __class = 'linked_list',
         _class_name = 'LinkedListNode',
         _is_LinkedListNode = true,
         _mt = {},
@@ -35,7 +35,7 @@ LinkedListNode._class = LinkedListNode
 -- @usage local LinkedList = require('stdlib.utils.classes.linked_list')
 local LinkedList = setmetatable(
     {
-       __module = 'linked_list',
+       __class = 'linked_list',
         _class_name = 'LinkedList',
         _is_LinkedList = true,
         _node_class = LinkedListNode,

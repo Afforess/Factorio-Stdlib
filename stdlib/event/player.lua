@@ -7,7 +7,7 @@
 local Event = require('__stdlib__/stdlib/event/event')
 
 local Player = {
-   __module = 'Player',
+   __class = 'Player',
     _new_player_data = {}
 }
 setmetatable(Player, require('__stdlib__/stdlib/core'))

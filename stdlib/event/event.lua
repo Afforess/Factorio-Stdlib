@@ -16,7 +16,7 @@
 require('__stdlib__/stdlib/config').control = true
 
 local Event = {
-    __module = 'Event',
+    __class = 'Event',
     core_events = {
         on_init = 'on_init',
         on_load = 'on_load',

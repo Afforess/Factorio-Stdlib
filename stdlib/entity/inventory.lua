@@ -2,7 +2,7 @@
 -- @module Entity.Inventory
 -- @usage local Inventory = require('__stdlib__/stdlib/entity/inventory')
 
-local Inventory = {_module = 'Inventory'}
+local Inventory = {__class = 'Inventory'}
 setmetatable(Inventory, require('__stdlib__/stdlib/core'))
 
 local Is = require('__stdlib__/stdlib/utils/is')

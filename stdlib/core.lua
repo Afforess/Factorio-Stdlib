@@ -29,15 +29,16 @@ local Core = {
         ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
         OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     ]],
-    __module = 'Core',
+    __class = 'Core',
     -- TODO Note what this was for!
     __call = function(t, ...)
         return t:__call(...)
     end,
-    -- TODO remove these because why?
+    --! DEPRECATED
     classes = {
         string_array = require('__stdlib__/stdlib/utils/classes/string_array')
     },
+    --? TODO globalize
     concat = function(lhs, rhs)
         --Sanitize to remove address
         return tostring(lhs):gsub('(%w+)%: %x+', '%1: (ADDR)') .. tostring(rhs):gsub('(%w+)%: %x+', '%1: (ADDR)')
@@ -55,10 +56,12 @@ function Core.log_and_print(msg)
     end
 end
 
+--! DEPRECATED
 function Core.VALID_FILTER(v)
     return v and v.valid
 end
 
+--? Todo Globalize
 function Core.get_file_path(append)
     return script.mod_name .. '/' .. append
 end
@@ -69,6 +72,7 @@ end
 -- @treturn Core
 -- @usage
 -- require('__stdlib__/stdlib/core).create_stdlib_globals()
+--? TODO globalize
 function Core.create_stdlib_globals(files)
     files =
         files or
@@ -89,7 +93,10 @@ function Core.create_stdlib_globals(files)
             EVENT = 'stdlib/event/event',
             GUI = 'stdlib/event/gui',
             PLAYER = 'stdlib/event/player',
-            FORCE = 'stdlib/event/force'
+            FORCE = 'stdlib/event/force',
+            TABLE = 'stdlib/utils/table',
+            STRING = 'stdlib/utils/string',
+            MATH = 'stdlib/utils/math'
         }
     for glob, path in pairs(files) do
         _G[glob] = require('__stdlib__/' .. (path:gsub('%.', '/'))) -- extra () required to emulate select(1)
@@ -99,7 +106,7 @@ end
 
 local function no_meta(item, path)
     if path[#path] == inspect.METATABLE then
-        return {item._class or item._module or item.__class}
+        return {item.__class}
     end
     return item
 end
@@ -111,24 +118,45 @@ end
 function Core.help(self)
     local help_string = ''
     local tab = self
-
-    while type(tab) == 'table' do
+    local pat = '^%_%_%_'
+    local function sort(a, b)
+        if b:find(pat) then
+            return false
+        end
+        return a:find(pat) or a < b
+    end
+    local function build_string()
         local keys = {}
         for key in pairs(tab) do
-            if not key:find('^%_%w') then
+            if type(key) ~= 'number' and not key:find('^%_%w') then
+                if key == '__class' then
+                    key = '___' .. tab.__class
+                end
                 keys[#keys + 1] = key
             end
         end
-        table.sort(
-            keys,
-            function(a, b)
-                return a < b
-            end
-        )
+        table.sort(keys, sort)
         help_string = help_string .. table.concat(keys, ', ') .. '\n\n'
-        local mt = getmetatable(tab)
-        tab = mt and mt.__index
     end
+
+    while (type(tab) == 'table') do
+        build_string(tab)
+
+        local old_meta = tab
+        tab = getmetatable(tab)
+
+        if tab then
+            if tab ~= old_meta then
+                build_string(tab)
+            end
+            if type(tab.__index) == 'function' then
+                tab = tab.__parent
+            elseif type(tab.__index == 'table') then
+                tab = tab.__index
+            end
+        end
+    end
+
     return help_string
 end
 

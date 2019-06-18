@@ -7,7 +7,7 @@
 -- -- log files are saved to script-output/modname/log.log by default
 
 local Logger = {
-   __module = 'Logger',
+   __class = 'Logger',
     _loggers = {},
     __call = function(self, ...)
         return self.get(...)
@@ -67,7 +67,7 @@ function Logger.new(log_name, debug_mode, options)
     options = options or {}
 
     local Log = {
-       __module = 'Log',
+       __class = 'Log',
         mod_name = mod_name,
         log_name = log_name,
         debug_mode = debug_mode,

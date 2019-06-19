@@ -195,20 +195,18 @@ function Queue.find(queue, find)
 end
 
 local function _sort_func(a, b)
-    if type(a) == 'table' then
-        return true
-    elseif type(b) == 'table' then
-        return false
-    else
-        return a < b
-    end
+    local lhs = type(a) == 'table' and '{' or tostring(a)
+    local rhs = type(b) == 'table' and '{' or tostring(b)
+    return lhs < rhs
 end
 
 --- sort and reorder the queue
 function Queue.sort(queue, func)
     local sorted = {}
     for _, v in pairs(queue) do
-        sorted[#sorted + 1] = v
+        if v ~= nil then
+            sorted[#sorted + 1] = v
+        end
     end
     table.sort(sorted, func or _sort_func)
     queue.objects = sorted

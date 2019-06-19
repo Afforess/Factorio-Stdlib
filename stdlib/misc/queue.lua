@@ -300,7 +300,11 @@ do
 
     meta.__newindex = function(self, k, v)
         if type(k) == 'number' then
-            self:push_at(k, v)
+            if v ~= nil then
+                self:push_at(k, v)
+            else
+                error('STAPLERDIDIT')
+            end
         else
             rawset(self, k, v)
         end

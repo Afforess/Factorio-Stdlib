@@ -125,7 +125,7 @@ end
 -- @tparam number index the index to push to.
 -- @treturn Mixed value the popped element.
 function Queue.pop_at(queue, index)
-    return remove(queue,index)
+    return remove(queue, index)
 end
 
 --- Peek at an element in the queue without disturbing the queue.
@@ -200,7 +200,9 @@ function Queue.sort(queue, func)
     for _, v in pairs(queue) do
         sorted[#sorted + 1] = v
     end
-    table.sort(sorted, func)
+    if #queue >= 2 then
+        table.sort(sorted, func)
+    end
     queue.objects = sorted
     queue.first, queue.last = 1, #queue.objects
     return queue

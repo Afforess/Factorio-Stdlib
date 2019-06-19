@@ -125,7 +125,7 @@ end
 -- @tparam number index the index to push to.
 -- @treturn Mixed value the popped element.
 function Queue.pop_at(queue, index)
-    return remove(queue,index)
+    return remove(queue, index)
 end
 
 --- Peek at an element in the queue without disturbing the queue.
@@ -194,13 +194,23 @@ function Queue.find(queue, find)
     end
 end
 
+local function _sort_func(a, b)
+    if type(a) == 'table' then
+        return true
+    elseif type(b) == 'table' then
+        return false
+    else
+        return a < b
+    end
+end
+
 --- sort and reorder the queue
 function Queue.sort(queue, func)
     local sorted = {}
     for _, v in pairs(queue) do
         sorted[#sorted + 1] = v
     end
-    table.sort(sorted, func)
+    table.sort(sorted, func or _sort_func)
     queue.objects = sorted
     queue.first, queue.last = 1, #queue.objects
     return queue
@@ -303,7 +313,7 @@ do
             if v ~= nil then
                 self:push_at(k, v)
             else
-                error('STAPLERDIDIT')
+                error('Attempt to modify Queue structure')
             end
         else
             rawset(self, k, v)

@@ -2,7 +2,7 @@ local table = require('stdlib/utils/table')
 
 -- Creates the middle man products table
 local Products = {
-    _class = 'Products',
+    __class = 'Products',
     __index = require('stdlib/data/data'),
     Parent = nil,
     Results = nil,
@@ -61,7 +61,7 @@ Products._mt = {
         end
         return Products[k]
     end,
-    _class = 'products'
+    __class = 'products'
 }
 --Gets a single ingredient
 function Products:__call(parent, product_type)
@@ -69,7 +69,7 @@ function Products:__call(parent, product_type)
         return parent.products[product_type]
     end
     local products = {
-        _class = 'products',
+        __class = 'products',
         parent = parent,
         ingredients = {},
         results = {}
@@ -79,14 +79,14 @@ function Products:__call(parent, product_type)
 
     local meta = {
         ingredients = {
-            _class = 'ingredients',
+            __class = 'ingredients',
             __index = products,
             __tostring = ProductData._mt.__tostring,
             __call = self.Parent,
             __len = ProductData._mt.__len
         },
         results = {
-            _class = 'results',
+            __class = 'results',
             __index = products,
             __tostring = ProductData._mt.__tostring,
             __call = self.Parent,

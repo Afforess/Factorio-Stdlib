@@ -611,7 +611,6 @@ end
 -- @tparam table table to use
 -- @treturn int size of the table
 Table.size = _G.table_size or _size
-_G.table_size = _G.table_size or Table.size
 
 --- For all string or number values in an array map them to a value = value table
 -- @usage local a = {"v1", "v2"}

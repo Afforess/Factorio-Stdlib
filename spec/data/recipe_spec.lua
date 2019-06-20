@@ -88,20 +88,20 @@ describe('Recipe', function()
     describe(':pairs()', function()
         it('should classify everything', function()
             for _, class in Recipe:pairs('recipe') do
-                assert.same('Recipe', class._class)
+                assert.same('Recipe', class.__class)
             end
         end)
 
         -- it('should work without a paramater', function()
         --     for _, class in Recipe:pairs() do
-        --         assert.same('Recipe', class._class)
+        --         assert.same('Recipe', class.__class)
         --     end
         -- end)
         it('should work on a class', function()
             local r = Recipe('stone-furnace')
             local count = 0
             for _, class in r:pairs() do
-                assert.same('Recipe', class._class)
+                assert.same('Recipe', class.__class)
                 count = count + 1
             end
             assert.same(table.size(_G.data.raw.recipe), count)

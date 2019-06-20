@@ -33,75 +33,33 @@ local Core = {
     -- TODO Note what this was for!
     __call = function(t, ...)
         return t:__call(...)
-    end,
-    --! DEPRECATED
-    classes = {
-        string_array = require('__stdlib__/stdlib/utils/classes/string_array')
-    },
-    --? TODO globalize
-    concat = function(lhs, rhs)
-        --Sanitize to remove address
-        return tostring(lhs):gsub('(%w+)%: %x+', '%1: (ADDR)') .. tostring(rhs):gsub('(%w+)%: %x+', '%1: (ADDR)')
     end
 }
 Core.__index = Core
 
+--- Prints and logs the msg
+-- @tparam string msg
+-- @treturn boolean true if the message was printed to someone
 function Core.log_and_print(msg)
     if game and #game.connected_players > 0 then
         log(msg)
-        game.print(msg)
-        return true
-    else
-        log(msg)
+            game.print(msg)
+            return true
+        else
+            log(msg)
+        end
     end
-end
 
---! DEPRECATED
-function Core.VALID_FILTER(v)
-    return v and v.valid
-end
-
---? Todo Globalize
-function Core.get_file_path(append)
-    return script.mod_name .. '/' .. append
-end
-
---- load the stdlib into globals, by default it loads everything into an ALLCAPS name.
--- Alternatively you can pass a dictionary of `[global names] -> [require path]`.
--- @tparam[opt] table files
--- @treturn Core
--- @usage
--- require('__stdlib__/stdlib/core).create_stdlib_globals()
---? TODO globalize
-function Core.create_stdlib_globals(files)
-    files =
-        files or
-        {
-            GAME = 'stdlib/game',
-            AREA = 'stdlib/area/area',
-            POSITION = 'stdlib/area/position',
-            TILE = 'stdlib/area/tile',
-            SURFACE = 'stdlib/area/surface',
-            CHUNK = 'stdlib/area/chunk',
-            COLOR = 'stdlib/utils/color',
-            ENTITY = 'stdlib/entity/entity',
-            INVENTORY = 'stdlib/entity/inventory',
-            RESOURCE = 'stdlib/entity/resource',
-            CONFIG = 'stdlib/misc/config',
-            LOGGER = 'stdlib/misc/logger',
-            QUEUE = 'stdlib/misc/queue',
-            EVENT = 'stdlib/event/event',
-            GUI = 'stdlib/event/gui',
-            PLAYER = 'stdlib/event/player',
-            FORCE = 'stdlib/event/force',
-            TABLE = 'stdlib/utils/table',
-            STRING = 'stdlib/utils/string',
-            MATH = 'stdlib/utils/math'
-        }
-    for glob, path in pairs(files) do
-        _G[glob] = require('__stdlib__/' .. (path:gsub('%.', '/'))) -- extra () required to emulate select(1)
+if script then
+    --- Simple valid check, only available in control stage.
+    --! DEPRECATED
+    function Core.VALID_FILTER(v)
+        return v and v.valid
     end
-    return Core
+
+    function Core.get_file_path(append)
+        return script.mod_name .. '/' .. append
+    end
 end
 
 local function no_meta(item, path)
@@ -111,10 +69,12 @@ local function no_meta(item, path)
     return item
 end
 
+--- Inspect the class
 function Core.inspect(self)
     return inspect(self, {process = no_meta})
 end
 
+--- Help function available on everything.
 function Core.help(self)
     local help_string = ''
     local tab = self

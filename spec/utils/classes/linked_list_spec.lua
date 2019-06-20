@@ -9,14 +9,14 @@ World.bootstrap()
 local logspy = spy.on(_G, 'log')
 
 describe('LinkedList', function()
-    it('has a _class property pointing to the LinkedList class', function()
+    it('has a __class property pointing to the LinkedList class', function()
         local l = LinkedList:new()
-        assert.are.equal(LinkedList, l._class)
+        assert.are.equal(LinkedList, l.__class)
     end)
 
-    it('has a _class_name property indicating it is a LinkedList', function()
+    it('has a __class_name property indicating it is a LinkedList', function()
         local l = LinkedList:new()
-        assert.are.equal('LinkedList', l._class_name)
+        assert.are.equal('LinkedList', l.__class_name)
     end)
 
     describe('.validate_integrity', function()
@@ -730,7 +730,7 @@ describe('LinkedList', function()
             local l2 = l1:copy()
 
             assert.is_not_equal(l1, l2)
-            assert.are.equal(l2._class, l1._class)
+            assert.are.equal(l2.__class, l1.__class)
             assert.has_no.errors(function()
                 l1:validate_integrity()
             end)
@@ -1364,7 +1364,7 @@ describe('LinkedList', function()
                 [3] = 'baz',
                 [4] = dummy,
                 [5] = 6,
-                _class = LinkedList,
+                __class = LinkedList,
                 quux = 'zzyzx',
                 next = firstnode,
                 prev = lastnode
@@ -1386,7 +1386,7 @@ describe('LinkedList', function()
                 [-1.333] = 0,
                 [0] = 'zilch',
                 [4] = dummy,
-                _class = LinkedList,
+                __class = LinkedList,
                 quux = 'zzyzx',
                 next = firstnode,
                 prev = lastnode
@@ -1780,7 +1780,7 @@ describe('LinkedList', function()
                 [1] = 'foo',
                 [2] = 'bar',
                 [3] = 'baz',
-                _class = LinkedList,
+                __class = LinkedList,
                 quux = 'zzyzx',
                 next = foo,
                 prev = baz
@@ -1829,7 +1829,7 @@ describe('LinkedList', function()
                 [3] = 'baz',
                 [4] = dummy,
                 [5] = 6,
-                _class = LinkedList,
+                __class = LinkedList,
                 quux = 'zzyzx',
                 next = firstnode,
                 prev = lastnode
@@ -1851,7 +1851,7 @@ describe('LinkedList', function()
                 [-1.333] = 0,
                 [0] = 'zilch',
                 [4] = dummy,
-                _class = LinkedList,
+                __class = LinkedList,
                 quux = 'zzyzx',
                 next = firstnode,
                 prev = lastnode
@@ -1862,7 +1862,7 @@ end)
 
 describe('LinkedListNode', function()
     it('is the _node_class of LinkedList', function()
-        assert.are.equal('LinkedListNode', LinkedList._node_class._class_name)
+        assert.are.equal('LinkedListNode', LinkedList._node_class.__class_name)
     end)
 
     describe('.remove', function()
@@ -1968,7 +1968,7 @@ describe('LinkedListNode', function()
                 local nextnode = n.next
                 -- ensure we didn't reach the end of the list or something.
                 assert.is.Not.Nil(nextnode)
-                assert.are.equal('LinkedListNode', nextnode._class_name)
+                assert.are.equal('LinkedListNode', nextnode.__class_name)
                 n:remove()
                 nextnode:remove()
             end
@@ -1992,11 +1992,11 @@ describe('LinkedListNode', function()
                 local nextnode = n.next
                 -- ensure we didn't reach the end of the list or something.
                 assert.is.Not.Nil(nextnode)
-                assert.are.equal('LinkedListNode', nextnode._class_name)
+                assert.are.equal('LinkedListNode', nextnode.__class_name)
                 local nextnextnode = nextnode.next
                 -- ensure we didn't reach the end of the list or something.
                 assert.is.Not.Nil(nextnextnode)
-                assert.are.equal('LinkedListNode', nextnextnode._class_name)
+                assert.are.equal('LinkedListNode', nextnextnode.__class_name)
                 n:remove()
                 nextnode:remove()
                 nextnextnode:remove()

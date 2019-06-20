@@ -2,7 +2,7 @@
 -- @classmod Data.Recipe
 
 local Recipe = {
-    _class = 'Recipe',
+    __class = 'Recipe',
     __index = require('__stdlib__/stdlib/data/data'),
 }
 setmetatable(Recipe, Recipe)

@@ -6,14 +6,16 @@ if _G.remote and _G.script then
     error('Data Modules can only be required in the data stage', 2)
 end
 
+require('__stdlib__/stdlib/utils/globals')
 local Core = require('__stdlib__/stdlib/core') -- Calling core up here to setup any required global stuffs
 local table = require('__stdlib__/stdlib/utils/table')
 local Is = require('__stdlib__/stdlib/utils/is')
 local Inspect = require('__stdlib__/stdlib/vendor/inspect')
 local groups = require('__stdlib__/stdlib/data/modules/groups')
+local string_array = require('__stdlib__/stdlib/utils/classes/string_array')
 
 local Data = {
-    _class = 'Data',
+    __class = 'Data',
     Sprites = require('__stdlib__/stdlib/data/modules/sprites'),
     Pipes = require('__stdlib__/stdlib/data/modules/pipes'),
     Util = require('__stdlib__/stdlib/data/modules/util'),
@@ -35,7 +37,7 @@ setmetatable(Data, Data)
 -- This is the tracing function.
 local function log_trace(self, object, object_type)
     local trace = traceback()
-    local msg = (self._class and self._class or '') .. (self.name and '/' .. self.name or '') .. ' '
+    local msg = (self.__class and self.__class or '') .. (self.name and '/' .. self.name or '') .. ' '
     msg = msg .. (object_type and (object_type .. '/') or '') .. tostring(object) .. ' does not exist.'
 
     trace = trace:gsub('stack traceback:\nz', ''):gsub('.*%(%.%.%.tail calls%.%.%.%)\n', ''):gsub(' in main chunk.*$', '')
@@ -60,9 +62,9 @@ end
 
 function Data:is_class(class)
     if class then
-        return self._class == class or false
+        return self.__class == class or false
     else
-        return self._class and true or false
+        return self.__class and true or false
     end
 end
 
@@ -78,19 +80,19 @@ end
 function Data:log(tbl)
     local reduce_spam = function(item, path)
         -- if item == self.class then
-        --     return {item._class, self._class}
+        --     return {item.__class, self.__class}
         -- end
         if item == self._object_mt then
-            return {self._class, tostring(self)}
+            return {self.__class, tostring(self)}
         end
         if path[#path] == 'parent' then
-            return {tostring(item), item._class}
+            return {tostring(item), item.__class}
         end
         if path[#path] == 'class' then
-            return {self._class, item._class}
+            return {self.__class, item.__class}
         end
         if path[#path] == Inspect.METATABLE then
-            return {self._class or item._class, item._class}
+            return {self.__class or item.__class, item.__class}
         end
         return item
     end
@@ -203,7 +205,7 @@ end
 function Data:Flags()
     if self:is_valid() then
         self.flags = self.flags or {}
-        return setmetatable(self.flags, self.classes.string_array)
+        return setmetatable(self.flags, string_array)
     end
 end
 
@@ -251,7 +253,7 @@ function Data:set_string_array(field)
     if self:is_valid() then
         local has = self[field]
         if Is.Table(has) then
-            setmetatable(has, self.classes.string_array)
+            setmetatable(has, string_array)
         end
     end
     return self
@@ -469,7 +471,7 @@ function Data:get(object, object_type, opts)
         new.overwrite = not new.extended and existing and true or false
     elseif type(object) == 'string' then
         --Get type from object_type, or fluid or item_and_fluid_types
-        local types = (object_type and {object_type}) or (self._class == 'Item' and groups.item_and_fluid)
+        local types = (object_type and {object_type}) or (self.__class == 'Item' and groups.item_and_fluid)
         if types then
             for _, type in pairs(types) do
                 new._raw = data.raw[type] and data.raw[type][object]
@@ -480,7 +482,7 @@ function Data:get(object, object_type, opts)
                 end
             end
         else
-            error('object_type is missing for ' .. (self._class or 'Unknown') .. '/' .. (object or ''), 3)
+            error('object_type is missing for ' .. (self.__class or 'Unknown') .. '/' .. (object or ''), 3)
         end
     end
 
@@ -500,7 +502,7 @@ Data.__call = Data.get
 
 -- This is the table set on new objects
 Data._object_mt = {
-    --_class = "Data",
+    --__class = "Data",
     -- index from _raw if that is not available then retrieve from the class
     __index = function(t, k)
         return rawget(t, '_raw') and t._raw[k] or t.class[k]

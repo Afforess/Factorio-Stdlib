@@ -72,7 +72,7 @@ describe('Data', function()
 
     it(':pairs()', function()
         for _, class in Data:pairs('recipe') do
-            assert.same('Data', class._class)
+            assert.same('Data', class.__class)
         end
     end)
 

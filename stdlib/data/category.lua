@@ -2,7 +2,7 @@
 -- @classmod Data.Category
 
 local Category = {
-    _class = 'Category',
+    __class = 'Category',
     __index = require('__stdlib__/stdlib/data/data'),
     __call = require('__stdlib__/stdlib/data/data').__call
 }

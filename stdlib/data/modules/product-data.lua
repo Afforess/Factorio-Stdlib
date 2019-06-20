@@ -2,7 +2,7 @@ local table = require('stdlib/utils/table')
 -- luacheck: ignore
 -- Product data is the result or ingredients table and associated methods
 local ProductData = {
-    _class = 'products',
+    __class = 'products',
 
     has = nil,
     add = nil,
@@ -73,7 +73,7 @@ end
 
 function ProductData:update()
     if self.parent.valid then
-        local class = getmetatable(self)._class
+        local class = getmetatable(self).__class
         if (self.normal or self.regular) ~= (self.parent.normal[class] or self.parent[class]) then
             if self.parent.normal then
                 self.parent.normal[class] = self.normal
@@ -125,7 +125,7 @@ end
 
 --Only using __tostring?
 ProductData._mt = {
-    _class = 'products',
+    __class = 'products',
     __index = ProductData,
     __tostring = function(self)
         local strtab = {}

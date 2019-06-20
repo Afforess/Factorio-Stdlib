@@ -2,7 +2,7 @@
 -- @classmod Data.Fluid
 
 local Fluid = {
-    _class = 'Fluid',
+    __class = 'Fluid',
     __index = require('__stdlib__/stdlib/data/data'),
 }
 setmetatable(Fluid, Fluid)

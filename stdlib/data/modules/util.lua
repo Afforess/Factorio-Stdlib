@@ -62,18 +62,7 @@ end
 -- @usage
 -- require('__stdlib__/stdlib/data/data).util.create_data_globals()
 function Util.create_data_globals(files)
-    files =
-        files or
-        {
-            RECIPE = 'stdlib/data/recipe',
-            ITEM = 'stdlib/data/item',
-            FLUID = 'stdlib/data/fluid',
-            ENTITY = 'stdlib/data/entity',
-            TECHNOLOGY = 'stdlib/data/technology',
-            CATEGORY = 'stdlib/data/category',
-            DATA = 'stdlib/data/data'
-        }
-    Util.create_stdlib_globals(files)
+    Stdlib.create_stdlib_data_globals(files)
 end
 
 return Util

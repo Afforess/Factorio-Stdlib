@@ -1,5 +1,5 @@
 local Recipe = {
-    _class = 'Recipe',
+    __class = 'Recipe',
     __index = require('stdlib/data/data'),
     __call = function(self, recipe) return self:get(recipe, 'recipe') end
 }

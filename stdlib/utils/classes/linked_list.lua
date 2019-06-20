@@ -19,7 +19,7 @@ end
 local LinkedListNode = setmetatable(
     {
        __class = 'linked_list',
-        _class_name = 'LinkedListNode',
+        __class_name = 'LinkedListNode',
         _is_LinkedListNode = true,
         _mt = {},
         _mtcopy = _mtcopy
@@ -29,14 +29,14 @@ local LinkedListNode = setmetatable(
     }
 )
 LinkedListNode._mt.__index = LinkedListNode
-LinkedListNode._class = LinkedListNode
+LinkedListNode.__class = LinkedListNode
 
 -- @module linked_list
 -- @usage local LinkedList = require('stdlib.utils.classes.linked_list')
 local LinkedList = setmetatable(
     {
        __class = 'linked_list',
-        _class_name = 'LinkedList',
+        __class_name = 'LinkedList',
         _is_LinkedList = true,
         _node_class = LinkedListNode,
         _mt = {},
@@ -46,7 +46,7 @@ local LinkedList = setmetatable(
         __index = Core.__index
     }
 )
-LinkedList._class = LinkedList
+LinkedList.__class = LinkedList
 
 function LinkedList.new(self)
     -- support LinkedList.new() syntax compatible with most stdlib classes
@@ -54,9 +54,9 @@ function LinkedList.new(self)
     -- determine if this is a class or an instance; if an instance, assume they intended
     -- to create a node and provide a hopefully-not-too-confusing error message.
     Is.Assert.Nil(self.next, function()
-        return 'Use foo:new_node(), not foo:new(), to create new ' .. self._class_name .. ' nodes'
+        return 'Use foo:new_node(), not foo:new(), to create new ' .. self.__class_name .. ' nodes'
     end)
-    local result = setmetatable({_class = self}, self._mt)
+    local result = setmetatable({__class = self}, self._mt)
     -- live_iterators is a set/bag (see _Programming_In_Lua_ 1st Ed. §11.5). It uses weak keys
     -- so garbage collected iterators will be automatically removed (see :new_node_iter below).
     result.live_iterators = setmetatable({}, {__mode = 'k'})
@@ -71,9 +71,9 @@ function LinkedList:new_node(item, prev, next)
 
     -- Retrieve the node class from the class if we are an instance
     local node_class = Is.Nil(self.next) and self._node_class
-        or self._class and self._class._node_class
+        or self.__class and self.__class._node_class
         or error('LinkedList:new_node: cannot find node class, improper invocation?')
-    local result = setmetatable({_class = node_class}, node_class._mt)
+    local result = setmetatable({__class = node_class}, node_class._mt)
     result.next = next or result
     result.prev = prev or result
     result.item = item
@@ -82,7 +82,7 @@ function LinkedList:new_node(item, prev, next)
 end
 
 function LinkedList:from_stack(stack, allow_insane_sparseness)
-    Is.Assert.Not.Nil(self._class, [[LinkedList:from_stack is a class method, not a static function; \z
+    Is.Assert.Not.Nil(self.__class, [[LinkedList:from_stack is a class method, not a static function; \z
         For example LinkedList:from_stack(stack) would be a correct invocation syntax']])
     -- since linkedlists effectively support sparse keys, ensure we can
     -- round-trip various configurations by supporting sparse pseudo-stacks
@@ -95,9 +95,9 @@ function LinkedList:from_stack(stack, allow_insane_sparseness)
         end
     end
     table.sort(sparsekeys)
-    local result = self._class:new()
+    local result = self.__class:new()
     -- subclasses could theoretically override the allow_insane_sparseness
-    -- object-level override in _class:new(), so respect their wishes here.
+    -- object-level override in __class:new(), so respect their wishes here.
     result.allow_insane_sparseness = result.allow_insane_sparseness or allow_insane_sparseness
     local lastkey = 0
     for _,k in ipairs(sparsekeys) do
@@ -186,7 +186,7 @@ LinkedList._mt.__concat = LinkedList.concatenate
 function LinkedList._mt.__index(self, k)
     if type(k) ~= 'number' or math.floor(k) ~= k or k < 1 then
         -- any non-special index goes to the class from here
-        return self._class[k]
+        return self.__class[k]
     end
     local count = 1
     local node = self.next
@@ -370,7 +370,7 @@ end
 
 function LinkedList:_copy_with(copy_fn)
     -- LinkedList.new does not permit instance:new(), so use class
-    local result = self._class:new()
+    local result = self.__class:new()
     self:_copy_with_to(copy_fn, result)
     return result
 end
@@ -452,7 +452,7 @@ end
 LinkedList._mt.__ipairs = LinkedList.ipairs
 
 function LinkedList:tostring()
-    local result = self._class_name .. ':from_stack {'
+    local result = self.__class_name .. ':from_stack {'
     local skipped = false
     local firstrep = true
     local count = 0

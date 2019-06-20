@@ -16,6 +16,8 @@ local Logger = {
 }
 setmetatable(Logger, Logger)
 
+local table = require('__stdlib__/stdlib/utils/table')
+
 -- Set on the individual log object, either logs a message or writes immediatly if nil.
 local _Log_mt = {
     __call = function(self, msg)
@@ -135,7 +137,7 @@ function Logger.new(log_name, debug_mode, options)
     --- Writes out all buffered messages immediately.
     -- @return (<span class="types">@{Logger}</span>) the logger instance
     function Log.write()
-        if _G.game and table_size(Log.buffer) > 0 then
+        if _G.game and table.size(Log.buffer) > 0 then
             Log.last_written = game.tick
             game.write_file(Log.file_name, table.concat(Log.buffer), Log.ever_written)
             Log.buffer = {}

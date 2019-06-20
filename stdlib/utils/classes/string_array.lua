@@ -128,7 +128,7 @@ end
 local metamethods = {
     __index = M, -- Index to the string array class.
     __tostring = M.tostring, -- tostring.
-    __concat = M.concat, -- adds the right hand side to the object.
+    __concat = concat, -- adds the right hand side to the object.
     __add = M.add, -- Adds a string to the string-array object.
     __sub = M.remove, -- Removes a string from the string-array object.
     __unm = M.clear, -- Clears the array.

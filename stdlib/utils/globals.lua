@@ -1,6 +1,10 @@
 --- Additional lua globals
 -- @module Utils.Globals
 
+Stdlib = {
+    config = require('__stdlib__/stdlib/config')
+}
+
 --Since debug can be overridden we define a fallback function here.
 local _traceback = function()
     return ''
@@ -10,16 +14,18 @@ traceback = type(debug) == 'table' and debug.traceback or _traceback
 serpent = serpent or require('__stdlib__/stdlib/vendor/serpent')
 inspect = require('__stdlib__/stdlib/vendor/inspect')
 
-local Math = require('__stdlib__/stdlib/utils/math')
 local Table = require('__stdlib__/stdlib/utils/table')
+local Math = require('__stdlib__/stdlib/utils/math')
 local String = require('__stdlib__/stdlib/utils/string')
 
--- Set up default stuff for testing, defines will already be available in an active mod or busted setup specs
+_G.table_size = _G.table_size or Table.size
+
+-- Set up default stuff for testing,
+-- defines will already be available in an active mod or busted setup specs
 if not _G.defines then
-    local STDLIB = require('__stdlib__/stdlib/config')
-    if STDLIB.control or STDLIB.game then
+    if Stdlib.config.control or Stdlib.config.game then
         local world = require('__stdlib__/spec/setup/world').bootstrap()
-        if STDLIB.game then
+        if Stdlib.config.game then
             world.init()
         end
     else
@@ -78,31 +84,96 @@ function inline_if(exp, t, f)
     end
 end
 
--- luacheck: globals install
-install = {}
+function concat(lhs, rhs)
+    --Sanitize to remove address
+    return tostring(lhs):gsub('(%w+)%: %x+', '%1: (ADDR)') .. tostring(rhs):gsub('(%w+)%: %x+', '%1: (ADDR)')
+end
+
+function safetostring(str)
+    return tostring(str):gsub('(%w+)%: %x+', '%1: (ADDR)')
+end
 
 --- install the Table library into global table
-function install.table()
+function Stdlib.install_table()
     for k, v in pairs(Table) do
         _G.table[k] = v
     end
 end
 
 --- Install the Math library into global math
-function install.math()
+function Stdlib.install_math()
     for k, v in pairs(Math) do
         _G.math[k] = v
     end
 end
 
 --- Install the string library into global string
-function install.string()
+function Stdlib.install_string()
     for k, v in pairs(String) do
         _G.string[k] = v
     end
     setmetatable(string, nil)
 end
 
---- Reload a module
-function install.reload()
+--- Install Math, String, Table into their global counterparts.
+function Stdlib.install_all_utils()
+    Stdlib.install.math()
+    Stdlib.install.string()
+    Stdlib.install.table()
 end
+
+--- Reload a required file, NOT IMPLEMENTED
+function Stdlib.reload_class()
+end
+
+--- load the stdlib into globals, by default it loads everything into an ALLCAPS name.
+-- Alternatively you can pass a dictionary of `[global names] -> [require path]`.
+-- @tparam[opt] table files
+-- @usage
+-- Stdlib.create_stdlib_globals()
+function Stdlib.create_stdlib_globals(files)
+    files =
+        files or
+        {
+            GAME = 'stdlib/game',
+            AREA = 'stdlib/area/area',
+            POSITION = 'stdlib/area/position',
+            TILE = 'stdlib/area/tile',
+            SURFACE = 'stdlib/area/surface',
+            CHUNK = 'stdlib/area/chunk',
+            COLOR = 'stdlib/utils/color',
+            ENTITY = 'stdlib/entity/entity',
+            INVENTORY = 'stdlib/entity/inventory',
+            RESOURCE = 'stdlib/entity/resource',
+            CONFIG = 'stdlib/misc/config',
+            LOGGER = 'stdlib/misc/logger',
+            QUEUE = 'stdlib/misc/queue',
+            EVENT = 'stdlib/event/event',
+            GUI = 'stdlib/event/gui',
+            PLAYER = 'stdlib/event/player',
+            FORCE = 'stdlib/event/force',
+            TABLE = 'stdlib/utils/table',
+            STRING = 'stdlib/utils/string',
+            MATH = 'stdlib/utils/math'
+        }
+    for glob, path in pairs(files) do
+        _G[glob] = require('__stdlib__/' .. (path:gsub('%.', '/'))) -- extra () required to emulate select(1)
+    end
+end
+
+function Stdlib.create_stdlib_data_globals(files)
+    files =
+        files or
+        {
+            RECIPE = 'stdlib/data/recipe',
+            ITEM = 'stdlib/data/item',
+            FLUID = 'stdlib/data/fluid',
+            ENTITY = 'stdlib/data/entity',
+            TECHNOLOGY = 'stdlib/data/technology',
+            CATEGORY = 'stdlib/data/category',
+            DATA = 'stdlib/data/data'
+        }
+    Stdlib.create_stdlib_globals(files)
+end
+
+return Stdlib

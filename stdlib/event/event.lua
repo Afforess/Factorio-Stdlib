@@ -24,7 +24,8 @@ local Event = {
         init = 'on_init',
         load = 'on_load',
         configuration_changed = 'on_configuration_changed',
-        init_and_config = {'on_init', 'on_configuration_changed'}
+        init_and_config = {'on_init', 'on_configuration_changed'},
+        init_and_load = {'on_init', 'on_load'}
     },
     custom_events = {}, -- Holds custom event ids
     options = {
@@ -289,8 +290,7 @@ end
 --- Shortcut for `Event.register(-nthTick, function)`
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.on_nth_tick(nth_tick, handler, matcher, pattern)
-    Is.Positive(nth_tick, 'nth_tick must be a positive number')
-    return Event.register(-nth_tick, handler, matcher, pattern)
+    return Event.register(-math.abs(nth_tick), handler, matcher, pattern)
 end
 
 --- Shortcut for `Event.register(defines.events, handler, matcher, pattern)`
@@ -439,7 +439,6 @@ function Event.generate_event_name(event_name)
     return id
 end
 
---! DEPRECATED
 function Event.set_event_name(event_name, id)
     Is.Assert.String(event_name, 'event_name must be a string')
     Is.Assert.Number(id)
@@ -447,7 +446,6 @@ function Event.set_event_name(event_name, id)
     return Event.custom_events[event_name]
 end
 
---! DEPRECATED
 function Event.get_event_name(event_name)
     Is.Assert.String(event_name, 'event_name must be a string')
     return Event.custom_events[event_name]
@@ -547,7 +545,7 @@ function Event.dump_data()
 end
 
 --- Filters events related to entity_type.
--- DEPRECATED
+-- ! DEPRECATED
 -- @tparam string event_parameter The event parameter to look inside to find the entity type
 -- @tparam string entity_type The entity type to filter events for
 -- @tparam callable matcher The matcher to invoke if the filter passes. The object defined in the event parameter is passed

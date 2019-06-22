@@ -65,6 +65,11 @@ jobs:
       - run: echo ${FILEPATH} ${FILESIZE}
 
       - run:
+          name: Check for changelog entry
+          command: |
+            grep "Version: ${VERSION}" changelog.txt
+
+      - run:
           name: Upload Release
           command: /root/stdlib/.circleci/release.sh
 

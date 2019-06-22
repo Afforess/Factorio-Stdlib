@@ -1,4 +1,17 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.2.1
+Date: 14.6.2019
+
+  Features:
+    - Added Position:flip_x, Position:flip_y
+    - Added Queue:peek_at, push_at, pop_at, next, rnext.
+    - Added Queue[i] support for pushing or overwriting items in the queue.
+    - Added STDLIB global variable containing factorio-stdlib specific scripts.
+    - Added globals concat, safetostring.
+
+  Changes:
+    - Everything is unified under __class
+---------------------------------------------------------------------------------------------------
 Version: 1.1.1
 Date: 14.6.2019
 

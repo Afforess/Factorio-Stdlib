@@ -34,18 +34,19 @@ local Event = {
         force_crc = false -- Requires debug_mode to be true
     },
     stop_processing = {}, -- just has to be unique
-    script = {
-        on_event = script.on_event,
-        on_nth_tick = script.on_nth_tick,
-        on_init = script.on_init,
-        on_load = script.on_load,
-        on_configuration_changed = script.on_configuration_changed,
-        generate_event_name = script.generate_event_name,
-        get_event_handler = script.get_event_handler
-    },
     __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Event, Event)
+
+Event.script = {
+    on_event = script.on_event,
+    on_nth_tick = script.on_nth_tick,
+    on_init = script.on_init,
+    on_load = script.on_load,
+    on_configuration_changed = script.on_configuration_changed,
+    generate_event_name = script.generate_event_name,
+    get_event_handler = script.get_event_handler
+}
 
 local table = require('__stdlib__/stdlib/utils/table')
 local Is = require('__stdlib__/stdlib/utils/is')

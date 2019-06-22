@@ -285,6 +285,16 @@ function Position.swap(pos)
     return new(pos.y, pos.x)
 end
 
+--- Flip the x sign
+function Position.flip_x(pos)
+    return new(-pos.x, pos.y)
+end
+
+--- Flip the y sign
+function Position.flip_y(pos)
+    return new(pos.x, -pos.y)
+end
+
 --- Lerp position of pos1 and pos2.
 -- @tparam Concepts.Position pos1
 -- @tparam Concepts.Position pos2

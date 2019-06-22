@@ -178,24 +178,32 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#inline_if">inline_if(exp, t, f)</a></td>
-    <td class="summary">Returns t if the expression is true.</td>
+    <td class="name"><a href="#STDLIB.create_stdlib_globals">STDLIB.create_stdlib_globals([files])</a></td>
+    <td class="summary">load the stdlib into globals, by default it loads everything into an ALLCAPS name.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#install.math">install.math()</a></td>
+    <td class="name"><a href="#STDLIB.install_all_utils">STDLIB.install_all_utils()</a></td>
+    <td class="summary">Install Math, String, Table into their global counterparts.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#STDLIB.install_math">STDLIB.install_math()</a></td>
     <td class="summary">Install the Math library into global math</td>
     </tr>
     <tr>
-    <td class="name"><a href="#install.reload">install.reload()</a></td>
-    <td class="summary">Reload a module</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#install.string">install.string()</a></td>
+    <td class="name"><a href="#STDLIB.install_string">STDLIB.install_string()</a></td>
     <td class="summary">Install the string library into global string</td>
     </tr>
     <tr>
-    <td class="name"><a href="#install.table">install.table()</a></td>
+    <td class="name"><a href="#STDLIB.install_table">STDLIB.install_table()</a></td>
     <td class="summary">install the Table library into global table</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#STDLIB.reload_class">STDLIB.reload_class()</a></td>
+    <td class="summary">Reload a required file, NOT IMPLEMENTED</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#inline_if">inline_if(exp, t, f)</a></td>
+    <td class="summary">Returns t if the expression is true.</td>
     </tr>
     <tr>
     <td class="name"><a href="#prequire">prequire(module, suppress_all)</a></td>
@@ -214,6 +222,200 @@
     <!-- section start -->
     <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
     <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#STDLIB.create_stdlib_globals" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="STDLIB.create_stdlib_globals">STDLIB.create_stdlib_globals([files])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">load the stdlib into globals, by default it loads everything into an ALLCAPS name.</p>
+    <p class="section-item-description"> Alternatively you can pass a dictionary of <code>[global names] -&gt; [require path]</code>.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>files</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
+
+
+
+
+    (<em>optional</em>)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code>STDLIB.create_stdlib_globals()</code></pre>
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#STDLIB.install_all_utils" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="STDLIB.install_all_utils">STDLIB.install_all_utils()</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Install Math, String, Table into their global counterparts.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#STDLIB.install_math" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="STDLIB.install_math">STDLIB.install_math()</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Install the Math library into global math</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#STDLIB.install_string" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="STDLIB.install_string">STDLIB.install_string()</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Install the string library into global string</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#STDLIB.install_table" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="STDLIB.install_table">STDLIB.install_table()</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">install the Table library into global table</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#STDLIB.reload_class" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="STDLIB.reload_class">STDLIB.reload_class()</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Reload a required file, NOT IMPLEMENTED</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
@@ -292,118 +494,6 @@
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
     </li>
     </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#install.math" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="install.math">install.math()</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Install the Math library into global math</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#install.reload" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="install.reload">install.reload()</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Reload a module</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#install.string" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="install.string">install.string()</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Install the string library into global string</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#install.table" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="install.table">install.table()</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">install the Table library into global table</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <!-- parameters end -->
-
-    <!-- returns start -->
     <!-- returns end -->
 
 
@@ -559,7 +649,7 @@
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2019-06-15 02:59:44 UTC</i>
+    <i>Last updated 2019-06-22 17:18:35 UTC</i>
     </div>
     </div>
     </div>

@@ -180,8 +180,20 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#create_stdlib_globals">create_stdlib_globals([files])</a></td>
-    <td class="summary">load the stdlib into globals, by default it loads everything into an ALLCAPS name.</td>
+    <td class="name"><a href="#VALID_FILTER">VALID_FILTER(v)</a></td>
+    <td class="summary">Simple valid check, only available in control stage.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#help">help(self)</a></td>
+    <td class="summary">Help function available on everything.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#inspect">inspect(self)</a></td>
+    <td class="summary">Inspect the class</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#log_and_print">log_and_print(msg)</a></td>
+    <td class="summary">Prints and logs the msg</td>
     </tr>
     </tbody>
     </table>
@@ -195,15 +207,15 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#create_stdlib_globals" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="create_stdlib_globals">create_stdlib_globals([files])</span>
+    <a href="#VALID_FILTER" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="VALID_FILTER">VALID_FILTER(v)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">load the stdlib into globals, by default it loads everything into an ALLCAPS name.</p>
-    <p class="section-item-description"> Alternatively you can pass a dictionary of <code>[global names] -&gt; [require path]</code>.</p>
+    <p class="section-item-summary">Simple valid check, only available in control stage.</p>
+    <p class="section-item-description">! DEPRECATED</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -216,16 +228,165 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>files</em></strong>
+    <strong><em>v</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#help" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="help">help(self)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Help function available on everything.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>self</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#inspect" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="inspect">inspect(self)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Inspect the class</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>self</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#log_and_print" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="log_and_print">log_and_print(msg)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Prints and logs the msg</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>msg</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
 
 
 
 
-    (<em>optional</em>)
     </li>
 
 
@@ -237,7 +398,8 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><span class="type">Core</span></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if the message was printed to someone</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -247,8 +409,6 @@
     <!-- see also end -->
 
     <!-- usage start -->
-    <strong>Usage:</strong>
-    <pre class="code" data-lang="Lua"><code><span class="global">require</span>('__stdlib__/stdlib/core).create_stdlib_globals()</code></pre>
     <!-- usage end -->
 
     </dd>
@@ -267,7 +427,7 @@
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2019-06-15 02:59:44 UTC</i>
+    <i>Last updated 2019-06-22 17:18:35 UTC</i>
     </div>
     </div>
     </div>

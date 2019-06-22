@@ -1,7 +1,7 @@
 --- Additional lua globals
 -- @module Utils.Globals
 
-Stdlib = {
+STDLIB = {
     config = require('__stdlib__/stdlib/config')
 }
 
@@ -23,9 +23,9 @@ _G.table_size = _G.table_size or Table.size
 -- Set up default stuff for testing,
 -- defines will already be available in an active mod or busted setup specs
 if not _G.defines then
-    if Stdlib.config.control or Stdlib.config.game then
+    if STDLIB.config.control or STDLIB.config.game then
         local world = require('__stdlib__/spec/setup/world').bootstrap()
-        if Stdlib.config.game then
+        if STDLIB.config.game then
             world.init()
         end
     else
@@ -94,21 +94,21 @@ function safetostring(str)
 end
 
 --- install the Table library into global table
-function Stdlib.install_table()
+function STDLIB.install_table()
     for k, v in pairs(Table) do
         _G.table[k] = v
     end
 end
 
 --- Install the Math library into global math
-function Stdlib.install_math()
+function STDLIB.install_math()
     for k, v in pairs(Math) do
         _G.math[k] = v
     end
 end
 
 --- Install the string library into global string
-function Stdlib.install_string()
+function STDLIB.install_string()
     for k, v in pairs(String) do
         _G.string[k] = v
     end
@@ -116,22 +116,22 @@ function Stdlib.install_string()
 end
 
 --- Install Math, String, Table into their global counterparts.
-function Stdlib.install_all_utils()
-    Stdlib.install.math()
-    Stdlib.install.string()
-    Stdlib.install.table()
+function STDLIB.install_all_utils()
+    STDLIB.install.math()
+    STDLIB.install.string()
+    STDLIB.install.table()
 end
 
 --- Reload a required file, NOT IMPLEMENTED
-function Stdlib.reload_class()
+function STDLIB.reload_class()
 end
 
 --- load the stdlib into globals, by default it loads everything into an ALLCAPS name.
 -- Alternatively you can pass a dictionary of `[global names] -> [require path]`.
 -- @tparam[opt] table files
 -- @usage
--- Stdlib.create_stdlib_globals()
-function Stdlib.create_stdlib_globals(files)
+-- STDLIB.create_stdlib_globals()
+function STDLIB.create_stdlib_globals(files)
     files =
         files or
         {
@@ -161,7 +161,7 @@ function Stdlib.create_stdlib_globals(files)
     end
 end
 
-function Stdlib.create_stdlib_data_globals(files)
+function STDLIB.create_stdlib_data_globals(files)
     files =
         files or
         {
@@ -173,7 +173,7 @@ function Stdlib.create_stdlib_data_globals(files)
             CATEGORY = 'stdlib/data/category',
             DATA = 'stdlib/data/data'
         }
-    Stdlib.create_stdlib_globals(files)
+    STDLIB.create_stdlib_globals(files)
 end
 
-return Stdlib
+return STDLIB

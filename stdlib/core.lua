@@ -6,7 +6,7 @@
 -- Set the global default options
 
 -- require global helper functions.
-require('__stdlib__/stdlib/utils/globals')
+local STDLIB = require('__stdlib__/stdlib/utils/globals')
 
 local Core = {
     _VERSION = '1.0.0',
@@ -33,7 +33,8 @@ local Core = {
     -- TODO Note what this was for!
     __call = function(t, ...)
         return t:__call(...)
-    end
+    end,
+    __config = STDLIB.config
 }
 Core.__index = Core
 

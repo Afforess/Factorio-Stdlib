@@ -13,7 +13,8 @@
 -- @module Event.Event
 -- @usage local Event = require('__stdlib__/stdlib/event/event')
 
-require('__stdlib__/stdlib/config').control = true
+local config = require('__stdlib__/stdlib/config')
+config.control = true
 
 local Event = {
     __class = 'Event',
@@ -56,7 +57,7 @@ local event_registry = {} --Holds the event registry
 local inspect_append = false -- Only used for write_file, can cause desyncs elsewhere
 local event_names = table.invert(defines.events)
 
-do -- Protections for post and pre registrations
+if not config.skip_script_protections then -- Protections for post and pre registrations
     for _, define in pairs(defines.events) do
         if Event.script.get_event_handler(define) then
             error('Detected attempt to add the STDLIB event module after using script.on_event')

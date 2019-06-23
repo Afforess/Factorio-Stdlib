@@ -98,26 +98,3 @@ do -- MAKE LOVE
         end
     end
 end
-
---luacheck: ignore 2..
-local A = require('area')
-local P = require('position')
-local r, g, b = {255, 0, 0}, {0, 255, 0}, {0, 0, 255}
-math.randomseed(os.time())
-------------------------------------------------------------------------------------------------------------------------------------------------------
-
-do
-
-    -- local p = P(.5, .5)
-    -- p:draw(g)
-    -- local a = p:expand_to_area(1)
-    -- for _, pos in pairs(a:positions()) do
-    --     pos:draw(r)
-    -- end
-    local a = A(-2, -2, 2, 2)
-    local c = a:center():draw(g)
-    a:draw(b)
-    for _, pos in pairs(a:spiral_positions()) do
-        pos:draw(r)
-    end
-end

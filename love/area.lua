@@ -1,16 +1,17 @@
 --luacheck: std +love
 local Area = require('__stdlib__/stdlib/area/area')
-local _r, _g, _b = {255, 0, 0}, {0, 255, 0}, {0, 0, 255}
-
-local function grid(area)
-    local x = area.left_top.x * _G.scale
-    local y = area.left_top.y * _G.scale
-    local width = math.abs(x - (area.right_bottom.x * _G.scale))
-    local height = math.abs(y - (area.right_bottom.y * _G.scale))
-    return x, y, width, height
-end
 
 function Area.draw(area, color)
+    local _r, _g, _b = {255, 0, 0}, {0, 255, 0}, {0, 0, 255}
+
+    local function grid()
+        local x = area.left_top.x * _G.scale
+        local y = area.left_top.y * _G.scale
+        local width = math.abs(x - (area.right_bottom.x * _G.scale))
+        local height = math.abs(y - (area.right_bottom.y * _G.scale))
+        return x, y, width, height
+    end
+
     local copy = area()
     assert(copy:normalized(), 'Attempt to draw non normalized area' .. copy)
     _G._draw_queue[#_G._draw_queue + 1] = function()

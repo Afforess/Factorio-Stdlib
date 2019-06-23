@@ -16,6 +16,7 @@ local Position = require('__stdlib__/stdlib/area/position')
 local math = require('__stdlib__/stdlib/utils/math')
 local string = require('__stdlib__/stdlib/utils/string')
 local abs, floor, max = math.abs, math.floor, math.max
+local round_to = math.round_to
 
 --- Constructor Methods
 -- @section Constructors
@@ -532,6 +533,16 @@ end
 -- @section Area Iterators
 -- ((
 
+function Area.positions(area)
+    local positions = {}
+    for x = area.left_top.x, area.right_bottom.x do
+        for y = area.left_top.y, area.right_bottom.y do
+            positions[#positions + 1] = Position(x, y)
+        end
+    end
+    return positions
+end
+
 --- Iterates an area.
 -- @usage
 -- for x,y in Area.iterate({{0, -5}, {3, -3}}) do
@@ -555,6 +566,30 @@ function Area.iterate(area)
     return iterator.iterate, area, 0
 end
 
+function Area.spiral_positions(area)
+    local positions = {}
+    local rx = area.right_bottom.x - area.left_top.x + 1
+    local ry = area.right_bottom.y - area.left_top.y + 1
+    local half_x = floor(rx / 2)
+    local half_y = floor(ry / 2)
+
+    local x, y, dx, dy = 0, 0, 0, -1
+
+    for _ = 1, max(rx, ry) * max(rx, ry) do
+        if -(half_x) <= x and x <= half_x and -(half_y) <= y and y <= half_y then
+            positions[#positions + 1] = Position {x, y}
+        end
+        if x == y or (x < 0 and x == -y) or (x > 0 and x == 1 - y) then
+            local temp = dx
+            dx = -(dy)
+            dy = temp
+        end
+        x = x + dx
+        y = y + dy
+    end
+    return positions
+end
+
 --- Iterates the given area in a spiral as depicted below, from innermost to the outermost location.
 -- <p>![](http://i.imgur.com/EwfO0Es.png)
 -- @usage for x, y in Area.spiral_iterate({{-2, -1}, {2, 1}}) do
@@ -571,10 +606,8 @@ function Area.spiral_iterate(area)
     local center_x = area.left_top.x + half_x
     local center_y = area.left_top.y + half_y
 
-    local x = 0
-    local y = 0
-    local dx = 0
-    local dy = -1
+    local x, y, dx, dy = 0, 0, 0, -1
+
     local iterator = {list = {}, idx = 1}
     for _ = 1, max(rx, ry) * max(rx, ry) do
         if -(half_x) <= x and x <= half_x and -(half_y) <= y and y <= half_y then
@@ -600,6 +633,20 @@ function Area.spiral_iterate(area)
     end
     return iterator.iterate, area, 0
 end
+
+
+
+function Area.spiral_iterate2(area)
+    -- for x = center.x, x_dist do
+    --     for y = center.y, y_dist do
+    --         positions[#positions + 1] = Position(x, y)
+    --     end
+    -- end
+    for _, p in pairs(positions) do
+        print(p)
+    end
+end
+
 -- ))
 --- @section end
 

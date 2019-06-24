@@ -804,6 +804,31 @@ function Position.increment(pos, inc_x, inc_y, increment_initial)
         return new(x, y)
     end
 end
+
+function Position.spiral_positions(position, radius, tile_center)
+    local positions = {}
+    local rx = radius * 2 + 1
+    local ry = radius * 2 + 1
+    local half_x = floor(rx / 2)
+    local half_y = floor(ry / 2)
+
+    local x, y, dx, dy = 0, 0, 0, -1
+
+    for _ = 1, max(rx, ry) * max(rx, ry) do
+        if -(half_x) <= x and x <= half_x and -(half_y) <= y and y <= half_y then
+            local pos = tile_center and Position(x, y):center() + position or Position(x, y) + position
+            positions[#positions + 1] = pos
+        end
+        if x == y or (x < 0 and x == -y) or (x > 0 and x == 1 - y) then
+            local temp = dx
+            dx = -(dy)
+            dy = temp
+        end
+        x = x + dx
+        y = y + dy
+    end
+    return positions
+end
 --- @section end
 -- ))
 

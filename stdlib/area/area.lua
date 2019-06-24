@@ -16,7 +16,6 @@ local Position = require('__stdlib__/stdlib/area/position')
 local math = require('__stdlib__/stdlib/utils/math')
 local string = require('__stdlib__/stdlib/utils/string')
 local abs, floor, max = math.abs, math.floor, math.max
-local round_to = math.round_to
 
 --- Constructor Methods
 -- @section Constructors
@@ -572,12 +571,18 @@ function Area.spiral_positions(area)
     local ry = area.right_bottom.y - area.left_top.y + 1
     local half_x = floor(rx / 2)
     local half_y = floor(ry / 2)
+    local center_x = area.left_top.x + half_x
+    local center_y = area.left_top.y + half_y
 
     local x, y, dx, dy = 0, 0, 0, -1
+    local a = {
+        rx, ry, half_x, half_y, center_x, center_y
+    }
+    game.print(table.concat(a, ', '))
 
     for _ = 1, max(rx, ry) * max(rx, ry) do
         if -(half_x) <= x and x <= half_x and -(half_y) <= y and y <= half_y then
-            positions[#positions + 1] = Position {x, y}
+            positions[#positions + 1] = Position(x, y)
         end
         if x == y or (x < 0 and x == -y) or (x > 0 and x == 1 - y) then
             local temp = dx
@@ -632,19 +637,6 @@ function Area.spiral_iterate(area)
         return (center_x + x2), (center_y + y2)
     end
     return iterator.iterate, area, 0
-end
-
-
-
-function Area.spiral_iterate2(area)
-    -- for x = center.x, x_dist do
-    --     for y = center.y, y_dist do
-    --         positions[#positions + 1] = Position(x, y)
-    --     end
-    -- end
-    for _, p in pairs(positions) do
-        print(p)
-    end
 end
 
 -- ))

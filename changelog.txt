@@ -3,7 +3,8 @@ Version: 1.2.1
 Date: 22.6.2019
 
   Features:
-    - Added Event.core_events.init_and_load
+    - Added Event.core_events.init_and_load.
+    - Added Direction.to_vector.
 ---------------------------------------------------------------------------------------------------
 Version: 1.2.0
 Date: 22.6.2019

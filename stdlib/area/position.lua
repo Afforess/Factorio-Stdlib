@@ -11,11 +11,11 @@ local Position = {
 }
 setmetatable(Position, Position)
 
-local Direction = require('__stdlib__/stdlib/area/direction')
-
 local string = require('__stdlib__/stdlib/utils/string')
 local math = require('__stdlib__/stdlib/utils/math')
 local area_path = '__stdlib__/stdlib/area/area'
+
+local Direction = require('__stdlib__/stdlib/area/direction')
 
 local floor, abs, atan2, round_to, round = math.floor, math.abs, math.atan2, math.round_to, math.round
 local cos, sin, ceil, sqrt, pi = math.cos, math.sin, math.ceil, math.sqrt, math.pi
@@ -74,6 +74,7 @@ end
 function Position.set(pos)
     return setmetatable(pos, metatable)
 end
+Position.load = Position.set
 
 --- Converts a position string to a position.
 -- @tparam string pos_string the position to convert
@@ -340,27 +341,8 @@ end
 -- @treturn Concepts.Position a new translated position
 function Position.translate(pos, direction, distance)
     direction = direction or 0
-    distance = distance or 0
-    local x, y = pos.x, pos.y
-
-    if direction == dirs.north then
-        y = y - distance
-    elseif direction == dirs.northeast then
-        x, y = x + distance, y - distance
-    elseif direction == dirs.east then
-        x = x + distance
-    elseif direction == dirs.southeast then
-        x, y = x + distance, y + distance
-    elseif direction == dirs.south then
-        y = y + distance
-    elseif direction == dirs.southwest then
-        x, y = x - distance, y + distance
-    elseif direction == dirs.west then
-        x = x - distance
-    elseif direction == dirs.northwest then
-        x, y = x - distance, y - distance
-    end
-    return new(x, y)
+    distance = distance or 1
+    return Position.add(pos, Direction.to_vector(direction, distance))
 end
 
 local function get_array(...)
@@ -757,6 +739,7 @@ end
 -- @tparam boolean eight_way return the eight way direction
 -- @treturn defines.direction
 function Position.complex_direction_to(pos1, pos2, eight_way)
+    --local Direction = require('__stdlib__/stdlib/area/direction')
     local o2d = eight_way and Direction.orientation_to_8way or Direction.orientation_to_4way
     return o2d((1 - (Position.atan2(pos1, pos2) / pi)) / 2)
 end

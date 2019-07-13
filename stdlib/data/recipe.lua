@@ -397,30 +397,57 @@ function Recipe:remove_result(normal, expensive, main_product)
     return self
 end
 
---- Remove a product from results, converts if needed.
+local function replace_result(results, find, replace, replace_name_only)
+	for r, result in pairs(results or {}) do
+		if result[1] == find or result.name == find then
+			if replace_name_only then
+				local amount = result[2] or result.amount
+				replace.amount = amount
+			end
+			return true
+		end
+	end
+end
+
+--- Replace a product from results, converts if needed.
 -- @tparam string|Concepts.product result_name
 -- @tparam[opt] string|Concepts.product normal
 -- @tparam[opt] string|Concepts.product|boolean expensive
 -- @tparam[opt] string main_product
 function Recipe:replace_result(result_name, normal, expensive, main_product)
+	local old_result = result_name
     if self:is_valid() and normal or expensive then
+		local n_string = type(normal) == "string"
+		local e_string = type(expensive == true and normal or expensive) == "string"
         result_name = format(result_name)
         if result_name then
             normal, expensive = get_difficulties(normal, expensive)
             self:convert_results()
             self:remove_result(result_name, expensive and result_name)
             self:set_main_product(main_product, normal, expensive)
-
-        -- if self.normal then
-        --     if normal then
-        --     end
-        --     if expensive then
-        --     end
-        -- elseif normal then
-        -- end
-        end
+		end
+			 if self.normal then
+				 if normal then
+					replace_result(self.normal.results, old_result, normal, n_string)
+					if self.normal.main_product == old_result then
+						self.normal.main_product = normal.name
+					end
+				 end
+				 if expensive then
+					replace_result(self.expensive.results, old_result, expensive, e_string)
+					if self.expensive.main_product == old_result then
+						self.expensive.main_product = expensive.name
+					end
+				 end
+			 elseif normal then
+				replace_result(self.results, old_result, normal, n_string)
+				if self.main_product == old_result then
+					self.main_product = normal.name
+				end
+			 end
     end
     return self
 end
+Recipe.rep_res = Recipe.replace_result
 
 return Recipe

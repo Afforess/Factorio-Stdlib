@@ -20,10 +20,16 @@ local serp_settings = {comment = false, nocode = true}
 interface['write_global'] = function()
     game.remove_path(script.mod_name)
     game.write_file(script.mod_name .. '/global.lua', serpent.block(global, serp_settings), false)
-    game.write_file(script.mod_name .. '/global-inspect.lua', inspect(global), false)
+    game.write_file(script.mod_name .. '/global.inspect.lua', inspect(global), false)
+    game.write_file(script.mod_name .. '/package.loaded.lua', serpent.block(table.keys(package.loaded, true), serp_settings), false)
     if remote.interfaces[script.mod_name] then
         game.write_file(script.mod_name .. '/interfaces.lua', serpent.block(table.keys(remote.interfaces[script.mod_name], true, true), serp_settings))
     end
+    local global_keys = {}
+    for k, v in pairs(_G) do
+        global_keys[k] = (type(v) == 'string' or type(v) == 'number' or type(v) == 'boolean') and v or type(v)
+    end
+    game.write_file(script.mod_name .. '/_G.lua', serpent.block(global_keys, serp_settings), false)
     Event.dump_data()
     Player.dump_data()
     Force.dump_data()

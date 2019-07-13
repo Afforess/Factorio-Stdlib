@@ -398,7 +398,7 @@ function Recipe:remove_result(normal, expensive, main_product)
 end
 
 local function replace_result(results, find, replace, replace_name_only)
-	for r, result in pairs(results or {}) do
+	for _, result in pairs(results or {}) do
 		if result[1] == find or result.name == find then
 			if replace_name_only then
 				local amount = result[2] or result.amount

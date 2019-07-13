@@ -30,6 +30,12 @@ Chunk.to_position = Position.from_chunk_position
 --Chunk.to_center_position
 --Chunk.to_center_tile_position
 
+-- Hackish function, Factorio lua doesn't allow require inside functions because...
+local function set_area(area)
+    local Area = package.loaded[area_path]
+    return Area and Area.set(area) or area
+end
+
 --- Gets the area of a chunk from the specified chunk position.
 -- @tparam Concepts.ChunkPosition pos the chunk position
 -- @treturn Concepts.BoundingBox the chunk's area
@@ -37,8 +43,7 @@ function Chunk.to_area(pos)
     local left_top = Chunk.to_position(pos)
     local right_bottom = Position.add(left_top, 32, 32)
 
-    local Area = require(area_path)
-    return Area.set {left_top = left_top, right_bottom = right_bottom}
+    return set_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Gets the user data that is associated with a chunk.

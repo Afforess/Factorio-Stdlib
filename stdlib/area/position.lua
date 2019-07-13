@@ -483,6 +483,12 @@ end
 -- @section Area Conversion Methods
 -- ((
 
+-- Hackish function, Factorio lua doesn't allow require inside functions because...
+local function set_area(area)
+    local Area = package.loaded[area_path]
+    return Area and Area.set(area) or area
+end
+
 --- Expands a position to a square area.
 -- @tparam Concepts.Position pos the position to expand into an area
 -- @tparam number radius half of the side length of the area
@@ -493,8 +499,7 @@ function Position.expand_to_area(pos, radius)
     local left_top = {x = pos.x - radius, y = pos.y - radius}
     local right_bottom = {x = pos.x + radius, y = pos.y + radius}
 
-    local Area = require(area_path)
-    return Area.set {left_top = left_top, right_bottom = right_bottom}
+    return set_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Expands a position into an area by setting pos to left_top.
@@ -509,8 +514,7 @@ function Position.to_area(pos, width, height)
     local left_top = {x = pos.x, y = pos.y}
     local right_bottom = {x = pos.x + width, y = pos.y + height}
 
-    local Area = require(area_path)
-    return Area.set {left_top = left_top, right_bottom = right_bottom}
+    return set_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
@@ -521,8 +525,7 @@ function Position.to_tile_area(pos)
     local left_top = {x = x, y = y}
     local right_bottom = {x = x + 1, y = y + 1}
 
-    local Area = require(area_path)
-    return Area.set {left_top = left_top, right_bottom = right_bottom}
+    return set_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Get the chunk area the specified position is in.
@@ -532,8 +535,7 @@ function Position.to_chunk_area(pos)
     local left_top = {x = floor(pos.x / 32) * 32, y = floor(pos.y / 32) * 32}
     local right_bottom = {x = left_top.x + 32, y = left_top.y + 32}
 
-    local Area = require(area_path)
-    return Area.set {left_top = left_top, right_bottom = right_bottom}
+    return set_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 -- ))
@@ -739,7 +741,6 @@ end
 -- @tparam boolean eight_way return the eight way direction
 -- @treturn defines.direction
 function Position.complex_direction_to(pos1, pos2, eight_way)
-    --local Direction = require('__stdlib__/stdlib/area/direction')
     local o2d = eight_way and Direction.orientation_to_8way or Direction.orientation_to_4way
     return o2d((1 - (Position.atan2(pos1, pos2) / pi)) / 2)
 end

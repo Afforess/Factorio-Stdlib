@@ -18,7 +18,7 @@ function Recipe:__call(recipe)
     return new
 end
 
-local Ingredients = Recipe
+--local Ingredients = Recipe
 
 local Results = Recipe
 

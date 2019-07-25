@@ -11,11 +11,11 @@ local Position = {
 }
 setmetatable(Position, Position)
 
-local Direction = require('__stdlib__/stdlib/area/direction')
-
 local string = require('__stdlib__/stdlib/utils/string')
 local math = require('__stdlib__/stdlib/utils/math')
 local area_path = '__stdlib__/stdlib/area/area'
+
+local Direction = require('__stdlib__/stdlib/area/direction')
 
 local floor, abs, atan2, round_to, round = math.floor, math.abs, math.atan2, math.round_to, math.round
 local cos, sin, ceil, sqrt, pi = math.cos, math.sin, math.ceil, math.sqrt, math.pi
@@ -74,6 +74,7 @@ end
 function Position.set(pos)
     return setmetatable(pos, metatable)
 end
+Position.load = Position.set
 
 --- Converts a position string to a position.
 -- @tparam string pos_string the position to convert
@@ -340,27 +341,8 @@ end
 -- @treturn Concepts.Position a new translated position
 function Position.translate(pos, direction, distance)
     direction = direction or 0
-    distance = distance or 0
-    local x, y = pos.x, pos.y
-
-    if direction == dirs.north then
-        y = y - distance
-    elseif direction == dirs.northeast then
-        x, y = x + distance, y - distance
-    elseif direction == dirs.east then
-        x = x + distance
-    elseif direction == dirs.southeast then
-        x, y = x + distance, y + distance
-    elseif direction == dirs.south then
-        y = y + distance
-    elseif direction == dirs.southwest then
-        x, y = x - distance, y + distance
-    elseif direction == dirs.west then
-        x = x - distance
-    elseif direction == dirs.northwest then
-        x, y = x - distance, y - distance
-    end
-    return new(x, y)
+    distance = distance or 1
+    return Position.add(pos, Direction.to_vector(direction, distance))
 end
 
 local function get_array(...)
@@ -501,6 +483,12 @@ end
 -- @section Area Conversion Methods
 -- ((
 
+-- Hackish function, Factorio lua doesn't allow require inside functions because...
+local function set_area(area)
+    local Area = package.loaded[area_path]
+    return Area and Area.set(area) or area
+end
+
 --- Expands a position to a square area.
 -- @tparam Concepts.Position pos the position to expand into an area
 -- @tparam number radius half of the side length of the area
@@ -511,8 +499,7 @@ function Position.expand_to_area(pos, radius)
     local left_top = {x = pos.x - radius, y = pos.y - radius}
     local right_bottom = {x = pos.x + radius, y = pos.y + radius}
 
-    local Area = require(area_path)
-    return Area.set {left_top = left_top, right_bottom = right_bottom}
+    return set_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Expands a position into an area by setting pos to left_top.
@@ -527,8 +514,7 @@ function Position.to_area(pos, width, height)
     local left_top = {x = pos.x, y = pos.y}
     local right_bottom = {x = pos.x + width, y = pos.y + height}
 
-    local Area = require(area_path)
-    return Area.set {left_top = left_top, right_bottom = right_bottom}
+    return set_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
@@ -539,8 +525,7 @@ function Position.to_tile_area(pos)
     local left_top = {x = x, y = y}
     local right_bottom = {x = x + 1, y = y + 1}
 
-    local Area = require(area_path)
-    return Area.set {left_top = left_top, right_bottom = right_bottom}
+    return set_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Get the chunk area the specified position is in.
@@ -550,8 +535,7 @@ function Position.to_chunk_area(pos)
     local left_top = {x = floor(pos.x / 32) * 32, y = floor(pos.y / 32) * 32}
     local right_bottom = {x = left_top.x + 32, y = left_top.y + 32}
 
-    local Area = require(area_path)
-    return Area.set {left_top = left_top, right_bottom = right_bottom}
+    return set_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 -- ))

@@ -8,7 +8,9 @@ local Direction = {
     __index = require('__stdlib__/stdlib/core'),
     dir = defines.direction
 }
+setmetatable(Direction, Direction)
 
+local dirs = defines.direction
 local floor = math.floor
 
 --- Returns the opposite direction &mdash; adapted from Factorio util.lua.
@@ -48,6 +50,33 @@ end
 -- @treturn float
 function Direction.direction_to_orientation(direction)
     return direction / 8
+end
+
+--- Returns a vector from a direction.
+-- @tparam defines.direction direction
+-- @tparam[opt = 1] number distance
+-- @treturn Position
+function Direction.to_vector(direction, distance)
+    distance = distance or 1
+    local x, y = 0, 0
+    if direction == dirs.north then
+        y = y - distance
+    elseif direction == dirs.northeast then
+        x, y = x + distance, y - distance
+    elseif direction == dirs.east then
+        x = x + distance
+    elseif direction == dirs.southeast then
+        x, y = x + distance, y + distance
+    elseif direction == dirs.south then
+        y = y + distance
+    elseif direction == dirs.southwest then
+        x, y = x - distance, y + distance
+    elseif direction == dirs.west then
+        x = x - distance
+    elseif direction == dirs.northwest then
+        x, y = x - distance, y - distance
+    end
+    return {x = x, y = y}
 end
 
 return Direction

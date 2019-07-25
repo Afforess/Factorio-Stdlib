@@ -1,9 +1,18 @@
 ---------------------------------------------------------------------------------------------------
-Version: 1.2.1
-Date: 22.6.2019
+Version: 1.2.2
+Date: 21.7.2019
 
   Features:
-    - Added Event.core_events.init_and_load
+    - Added Gui.on_confirmed.
+---------------------------------------------------------------------------------------------------
+Version: 1.2.1
+Date: 13.7.2019
+
+  Features:
+    - Added Event.core_events.init_and_load.
+    - Added Direction.to_vector.
+  Bugfixes:
+    - Factorio doesn't allow requiring in functions no moar.
 ---------------------------------------------------------------------------------------------------
 Version: 1.2.0
 Date: 22.6.2019

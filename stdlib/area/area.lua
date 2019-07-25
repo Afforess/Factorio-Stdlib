@@ -70,6 +70,7 @@ function Area.set(area)
     area.right_bottom = Position.set(area.right_bottom)
     return setmetatable(area, metatable)
 end
+Area.load = Area.set
 
 --- Converts an area string to an area.
 -- @tparam string area_string the area to convert
@@ -678,7 +679,6 @@ local function __mod(area1, area2)
     return area1
 end
 
---? Should this also flip left_top to right_bottom?
 local function __unm(area)
     area = Area.new(area)
     area.left_top = -area.left_top

@@ -75,6 +75,15 @@ function Gui.on_value_changed(gui_element_pattern, handler)
     return Gui
 end
 
+--- Registers a function for a given GUI element name or pattern when the element is confirmed.
+-- @tparam string gui_element_pattern the name or string regular expression to match the GUI element
+-- @tparam function handler the function to call when GUI element state changes
+-- @return (<span class="types">@{Gui}</span>)
+function Gui.on_confirmed(gui_element_pattern, handler)
+    Event.register(defines.events.on_gui_confirmed, handler, matcher, gui_element_pattern)
+    return Gui
+end
+
 Event.Gui = Gui
 
 return Gui

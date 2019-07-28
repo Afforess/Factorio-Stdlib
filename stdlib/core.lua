@@ -3,8 +3,6 @@
 -- @module Core
 -- @usage local Core = require('__stdlib__/stdlib/core')
 
--- Set the global default options
-
 -- require global helper functions.
 local STDLIB = require('__stdlib__/stdlib/utils/globals')
 
@@ -44,12 +42,12 @@ Core.__index = Core
 function Core.log_and_print(msg)
     if game and #game.connected_players > 0 then
         log(msg)
-            game.print(msg)
-            return true
-        else
-            log(msg)
-        end
+        game.print(msg)
+        return true
+    else
+        log(msg)
     end
+end
 
 if script then
     --- Simple valid check, only available in control stage.

@@ -165,11 +165,22 @@ function Area.floor(area)
     return new_area(Position.ceil(area.left_top), Position.floor(area.right_bottom), area.orientation)
 end
 
+-- When looking for tile center points, look inwards on right bottom
+-- when x or y is int. This will keep the area with only the tiles it
+-- contains.
+local function right_bottom_center(pos)
+    local x, y
+    local fx, fy = floor(pos.x), floor(pos.y)
+    x = fx == pos.x and (fx - 0.5) or (fx + 0.5)
+    y = fy == pos.y and (fy - 0.5) or (fy + 0.5)
+    return Position.construct(x, y)
+end
+
 --- Gets the center positions of the tiles where the given area's two positions reside.
 -- @tparam Concepts.BoundingBox area
 -- @treturn Concepts.BoundingBox the area with its two positions at the center of the tiles in which they reside
 function Area.center_points(area)
-    return new_area(Position.center(area.left_top), Position.center(area.right_bottom), area.orientation)
+    return new_area(Position.center(area.left_top), right_bottom_center(area.right_bottom), area.orientation)
 end
 
 --- add left_bottom and right_top to the area
@@ -212,7 +223,7 @@ function Area.non_zero(area, amount)
     return Area.size(area) == 0 and Area.expand(area, amount) or area
 end
 
---- Returns the area to the diameter from top_left
+--- Returns the area to the diameter from left_top
 -- @tparam Concepts.BoundingBox area
 -- @tparam number diameter
 -- @treturn Concepts.BoundingBox
@@ -328,7 +339,7 @@ function Area.center(area)
     local dist_x = area.right_bottom.x - area.left_top.x
     local dist_y = area.right_bottom.y - area.left_top.y
 
-    return Position.set {x = area.left_top.x + (dist_x / 2), y = area.left_top.y + (dist_y / 2)}
+    return Position.construct(area.left_top.x + (dist_x / 2), area.left_top.y + (dist_y / 2))
 end
 -- ))
 

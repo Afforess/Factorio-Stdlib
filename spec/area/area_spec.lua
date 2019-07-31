@@ -171,9 +171,10 @@ describe('Area', function ()
         end)
         it('.center_points', function ()
             local area = A{{0, -5}, {x = 3, y = -3}}
-            local center = A({{0.5, -5.5}, {3.5, -3.5}})
+            local center = A{{0.5, -4.5}, {2.5, -3.5}}
             assert.same(center, Area.center_points(area))
             area = A{{0.642, -5.123}, {x = 3.243, y = -3.6435}}
+            center = A{{0.5, -5.5},{3.5, -3.5}}
             assert.same(center, Area.center_points(area))
         end)
         it('.to_surface_size', function ()

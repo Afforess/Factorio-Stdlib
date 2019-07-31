@@ -1,23 +1,12 @@
 require('__stdlib__/love/love')
+--luacheck: ignore 211 213 A P
+local A = _G.Area
+local P = _G.Position
 local _r, _g, _b, _w = {255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 255, 255}
 
---luacheck: ignore A P
-local A = require('area')
-local P = require('position')
+local area = P(-4,0):expand_to_area(2):draw(_r):center_points()
 
---[[
-local positions = {
-    {0,0},
-    {1.1,1.1}, {-1.1, -1.1}, {-1.1, 1.1}, {1.1, -1.1},
-    {1,1}, {-1, -1}, {-1, 1}, {1, -1},
-}
-for _, pos in pairs(positions) do
-    P(pos):draw(_r):center():draw(_g)
-end
---]]
-
-local area = P(-1,-1):draw():expand_to_area(3):draw(_b)
-
-for x, y in area:spiral_iterate() do
-    P(x,y):draw(_g)
+math.randomseed(os.time())
+for pos in area:spiral() do
+    pos:draw(_g)
 end

@@ -1,9 +1,13 @@
 --luacheck: std +love
 local screenWidth, screenHeight
+local resolution_x, resolution_y = 1200, 700
 local font
-local font_size = 20
-_G.scale = 64
+local font_size = 12
+_G.scale = 48
+_G.point_size = _G.scale / 6
 _G._draw_queue = {}
+_G.Area = require('area')
+_G.Position = require('position')
 local mxd, myd, mxu, myu
 
 do -- MAKE LOVE
@@ -61,18 +65,19 @@ do -- MAKE LOVE
 
             x, y = toScale(mxu, myu)
             love.graphics.print(x .. ', ' .. y, mxu, myu)
-        --love.graphics.printf(x .. ', ' .. y, mxd, math.abs(mxd + (h* _G.scale)), w * _G.scale )
         end
     end
 
     function love.load()
-        love.window.setMode(1000, 1000)
+        love.window.setMode(resolution_x, resolution_y)
+        love.window.setPosition(300, 300, 1)
         screenWidth, screenHeight = love.graphics.getDimensions()
         font = love.graphics.newFont('CALIBRI.TTF', font_size)
     end
+
     function love.draw()
         love.graphics.translate(screenWidth * 0.5, screenHeight * 0.5)
-        love.graphics.setPointSize(_G.scale / 4)
+        love.graphics.setPointSize(_G.point_size)
         love.graphics.setFont(font)
         love.graphics.setColor(0, 255, 0)
 
@@ -93,7 +98,6 @@ do -- MAKE LOVE
             mxu, myu = love.graphics.inverseTransformPoint(x, y)
             local tlx, tly = toScale(mxd, myd)
             local rbx, rby = toScale(mxu, myu)
-            --love.system.setClipboardText('{left_top = {x = ' .. mxd .. ', y = ' .. myd .. '}, {right_bottom = {x = ' .. mxu .. ', y = ' .. myu .. '}}')
             love.system.setClipboardText(tlx .. ', ' .. tly .. ', ' .. rbx .. ', ' .. rby)
         end
     end

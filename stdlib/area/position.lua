@@ -18,7 +18,7 @@ local area_path = '__stdlib__/stdlib/area/area'
 local Direction = require('__stdlib__/stdlib/area/direction')
 
 local floor, abs, atan2, round_to, round = math.floor, math.abs, math.atan2, math.round_to, math.round
-local cos, sin, ceil, sqrt, pi = math.cos, math.sin, math.ceil, math.sqrt, math.pi
+local cos, sin, ceil, sqrt, pi, random = math.cos, math.sin, math.ceil, math.sqrt, math.pi, math.random
 local deg, acos, max, min, is_number = math.deg, math.acos, math.max, math.min, math.is_number
 local split = string.split
 local dirs = defines.direction
@@ -346,6 +346,20 @@ function Position.translate(pos, direction, distance)
     direction = direction or 0
     distance = distance or 1
     return Position.add(pos, Direction.to_vector(direction, distance))
+end
+
+--- Return a random offset of a position.
+-- @tparam Concepts.Position pos the position to randomize
+-- @tparam[opt=0] number minimum the minimum amount to offset
+-- @tparam[opt=1] number maximum the maximum amount to offset
+-- @tparam[opt=false] boolean random_tile randomize the location on the tile
+-- @treturn Concepts.Position a new random offset position
+function Position.random(pos, minimum, maximum, random_tile)
+    local rand_x = random(minimum or 0, maximum or 1)
+    local rand_y = random(minimum or 0, maximum or 1)
+    local x = pos.x + (random() >= .5 and -rand_x or rand_x) + (random_tile and random() or 0)
+    local y = pos.y + (random() >= .5 and -rand_y or rand_y) + (random_tile and random() or 0)
+    return new(x, y)
 end
 
 local function get_array(...)
@@ -790,31 +804,6 @@ function Position.increment(pos, inc_x, inc_y, increment_initial)
         end
         return new(x, y)
     end
-end
-
-function Position.spiral_positions(position, radius, tile_center)
-    local positions = {}
-    local rx = radius * 2 + 1
-    local ry = radius * 2 + 1
-    local half_x = floor(rx / 2)
-    local half_y = floor(ry / 2)
-
-    local x, y, dx, dy = 0, 0, 0, -1
-
-    for _ = 1, max(rx, ry) * max(rx, ry) do
-        if -(half_x) <= x and x <= half_x and -(half_y) <= y and y <= half_y then
-            local pos = tile_center and Position(x, y):center() + position or Position(x, y) + position
-            positions[#positions + 1] = pos
-        end
-        if x == y or (x < 0 and x == -y) or (x > 0 and x == 1 - y) then
-            local temp = dx
-            dx = -(dy)
-            dy = temp
-        end
-        x = x + dx
-        y = y + dy
-    end
-    return positions
 end
 --- @section end
 -- ))

@@ -544,67 +544,43 @@ end
 -- @section Area Iterators
 -- ((
 
-function Area.positions(area)
-    local positions = {}
-    for x = area.left_top.x, area.right_bottom.x do
-        for y = area.left_top.y, area.right_bottom.y do
-            positions[#positions + 1] = Position(x, y)
-        end
-    end
-    return positions
-end
-
 --- Iterates an area.
 -- @usage
--- for x,y in Area.iterate({{0, -5}, {3, -3}}) do
--- ...
+-- local area = {{0, -5}, {3, -3}}
+-- for x,y in Area.iterate(area) do
+--   -- return x, y values
 -- end
+-- for position in Area.iterate(area, true) do
+--   -- returns a position object
+-- end
+-- -- Iterates from left_top.x to right_bottom.x then goes down y until right_bottom.y
 -- @tparam Concepts.BoundingBox area the area to iterate
+-- @tparam[opt=false] boolean as_position return a position object
+-- @tparam[opt=false] boolean inside only return values that contain the areas tiles
+-- @tparam[opt=1] number step size to increment
 -- @treturn function an iterator
-function Area.iterate(area)
-    local iterator = {idx = 0}
+function Area.iterate(area, as_position, inside, step)
+    step = step or 1
+    local x, y = area.left_top.x, area.left_top.y
+    local max_x = area.right_bottom.x - (inside and 0.001 or 0)
+    local max_y = area.right_bottom.y - (inside and 0.001 or 0)
+    local first = true
 
-    function iterator.iterate(area) --luacheck: ignore area
-        local rx = area.right_bottom.x - area.left_top.x + 1
-        local dx = iterator.idx % rx
-        local dy = floor(iterator.idx / rx)
-        iterator.idx = iterator.idx + 1
-        if (area.left_top.y + dy) > area.right_bottom.y then
+    local function iterator()
+        if first then
+            first = false
+        elseif x <= max_x and x + step <= max_x then
+            x = x + step
+        elseif y <= max_y and y + step <= max_y then
+            x = area.left_top.x
+            y = y + step
+        else
             return
         end
-        return (area.left_top.x + dx), (area.left_top.y + dy)
+        return as_position and Position.construct(x, y) or x, not as_position and y or nil
     end
-    return iterator.iterate, area, 0
-end
 
-function Area.spiral_positions(area)
-    local positions = {}
-    local rx = area.right_bottom.x - area.left_top.x + 1
-    local ry = area.right_bottom.y - area.left_top.y + 1
-    local half_x = floor(rx / 2)
-    local half_y = floor(ry / 2)
-    local center_x = area.left_top.x + half_x
-    local center_y = area.left_top.y + half_y
-
-    local x, y, dx, dy = 0, 0, 0, -1
-    local a = {
-        rx, ry, half_x, half_y, center_x, center_y
-    }
-    game.print(table.concat(a, ', '))
-
-    for _ = 1, max(rx, ry) * max(rx, ry) do
-        if -(half_x) <= x and x <= half_x and -(half_y) <= y and y <= half_y then
-            positions[#positions + 1] = Position(x, y)
-        end
-        if x == y or (x < 0 and x == -y) or (x > 0 and x == 1 - y) then
-            local temp = dx
-            dx = -(dy)
-            dy = temp
-        end
-        x = x + dx
-        y = y + dy
-    end
-    return positions
+    return iterator
 end
 
 --- Iterates the given area in a spiral as depicted below, from innermost to the outermost location.
@@ -614,21 +590,24 @@ end
 -- end
 -- prints: (0, 0) (1, 0) (1, 1) (0, 1) (-1, 1) (-1, 0) (-1, -1) (0, -1) (1, -1) (2, -1) (2, 0) (2, 1) (-2, 1) (-2, 0) (-2, -1)
 -- @tparam Concepts.BoundingBox area the area on which to perform a spiral iteration
+-- @tparam boolean as_position return a position object instead of x, y
 -- @treturn function an iterator
-function Area.spiral_iterate(area)
+function Area.spiral_iterate(area, as_position)
     local rx = area.right_bottom.x - area.left_top.x + 1
     local ry = area.right_bottom.y - area.left_top.y + 1
     local half_x = floor(rx / 2)
     local half_y = floor(ry / 2)
     local center_x = area.left_top.x + half_x
     local center_y = area.left_top.y + half_y
+    local size = max(rx, ry) ^ 2
 
     local x, y, dx, dy = 0, 0, 0, -1
 
-    local iterator = {list = {}, idx = 1}
-    for _ = 1, max(rx, ry) * max(rx, ry) do
+    local positions = {}
+    local index = 1
+    for _ = 1, size do
         if -(half_x) <= x and x <= half_x and -(half_y) <= y and y <= half_y then
-            table.insert(iterator.list, {x, y})
+            positions[#positions + 1] = {x = x, y = y}
         end
         if x == y or (x < 0 and x == -y) or (x > 0 and x == 1 - y) then
             local temp = dx
@@ -639,19 +618,35 @@ function Area.spiral_iterate(area)
         y = y + dy
     end
 
-    function iterator.iterate()
-        if #iterator.list < iterator.idx then
+    local function iterator()
+        if index > #positions then
             return
         end
-        local x2, y2 = table.unpack(iterator.list[iterator.idx])
-        iterator.idx = iterator.idx + 1
+        local pos = positions[index]
+        index = index + 1
+        pos.x = pos.x + center_x
+        pos.y = pos.y + center_y
 
-        return (center_x + x2), (center_y + y2)
+        return as_position and Position.new(pos) or pos.x, not as_position and pos.y
     end
-    return iterator.iterate, area, 0
+    return iterator, area, 0
 end
 
 -- ))
+--- @section end
+
+--- Area Arrays
+-- @section Area Arrays
+
+function Area.positions(area, inside, step)
+    local positions = {}
+
+    for pos in Area.iterate(area, true, inside, step) do
+        positions[#positions + 1] = pos
+    end
+    return positions
+end
+
 --- @section end
 
 -- (( Metamethods

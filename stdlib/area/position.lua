@@ -263,8 +263,8 @@ function Position.center(pos)
     local x, y
     local ceil_x = ceil(pos.x)
     local ceil_y = ceil(pos.y)
-    x = pos.x >= 0 and floor(pos.x) + 0.5 or ceil_x == pos.x and ceil_x + 0.5 or ceil_x - 0.5
-    y = pos.y >= 0 and floor(pos.y) + 0.5 or ceil_y == pos.y and ceil_y + 0.5 or ceil_y - 0.5
+    x = pos.x >= 0 and floor(pos.x) + 0.5 or (ceil_x == pos.x and ceil_x + 0.5 or ceil_x - 0.5)
+    y = pos.y >= 0 and floor(pos.y) + 0.5 or (ceil_y == pos.y and ceil_y + 0.5 or ceil_y - 0.5)
     return new(x, y)
 end
 

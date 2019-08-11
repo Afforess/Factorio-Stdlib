@@ -1,121 +1,157 @@
---luacheck: std +love
-local screenWidth, screenHeight
-local resolution_x, resolution_y = 1200, 700
-local font = 'CALIBRI.TTF'
-local font_size = 12
-_G.scale = 48
-_G.point_size = _G.scale / 6
-local Core = require('__stdlib__/stdlib/core')
-local Area = require('area')
-local Position = require('position')
-local mxd, myd, mxu, myu
+--luacheck: std +love, read_globals love.handlers love.arg
 
-local classes = {
-    ['Area'] = Area,
-    ['Position'] = Position
+local Setup = require('grid')
+local Classes = require('classes')
+local Area = Classes.Area
+local Position = Classes.Position
+local Move = require('move')
+
+local Grid = Setup.Grid
+local Camera = Setup.Camera
+--local Visual = Setup.Visual
+local math = require('__stdlib__/stdlib/utils/math')
+
+local Window = {
+    position = Position(),
+    size = Position(),
+    zoom = Position(.1, 10)
 }
 
-local function draw_queue(self, clear)
-    local Main = classes[self.__class] or classes[self.__index.__class]
-    Main._draw_queue = not clear and Main._draw_queue or {}
-    for _, queue in pairs(Main._draw_queue) do
-        queue()
-    end
-end
+local Fonts = {
+    world = 8,
+    info = 12
+}
 
-local function draw_add(self, func)
-    local Main = classes[self.__class] or classes[self.__index.__class]
-    Main._draw_queue = Main._draw_queue or {}
-    Main._draw_queue[#Main._draw_queue + 1] = func
-end
+local Mouse = {
+    screen = Position(),
+    world = Position()
+    --up = Position(),
+    --down = Position(),
+}
 
-Core.draw_queue = draw_queue
-Core.draw_add = draw_add
-
-local function round_to(x, p)
-    local e = 10 ^ (p or 0)
-    return math.floor(x * e + 0.5) / e
-end
-
-local function toScale(x, y)
-    return round_to(x / _G.scale, 2), round_to(y / _G.scale, 2)
-end
-
-local function toRectangle(x1, y1, x2, y2)
-    local width = math.abs(x1 - x2)
-    local height = math.abs(y1 - y2)
-    return x1, y1, width, height
-end
-
--- Makes the grid layout we see
-local function make_grid()
-    local width, height = love.graphics.transformPoint(screenWidth, screenHeight)
+local function draw_mouse()
     love.graphics.push()
-    love.graphics.setColor(255, 255, 255)
-    love.graphics.setLineWidth(0.5)
-    for x = 0, width, _G.scale do
-        love.graphics.line(x, -height, x, height)
-        love.graphics.line(-x, -height, -x, height)
-    end
-    for y = 0, height, _G.scale do
-        love.graphics.line(-width, y, width, y)
-        love.graphics.line(-width, -y, width, -y)
+    if love.mouse.isDown(1) then
+        local area = Area(Mouse.down.x, Mouse.down.y, Mouse.world.x, Mouse.world.y):normalize()
+        local pos = Position(Grid:convertCoords('world', 'cell', Mouse.down:unpack())):normalize()
+        love.graphics.print(pos.x .. ', ' .. pos.y, Mouse.down.x, Mouse.down.y)
+        love.graphics.rectangle('line', area:rectangle())
+    elseif Mouse.up then
+        local area = Area(Mouse.down.x, Mouse.down.y, Mouse.up.x, Mouse.up.y):normalize()
+        local lt = Position(Grid:convertCoords('world', 'cell', Mouse.down:unpack())):normalize()
+        local rb = Position(Grid:convertCoords('world', 'cell', Mouse.up:unpack())):normalize()
+        local w = area:dimensions()
+        love.graphics.print(lt.x .. ', ' .. lt.y, area.left_top.x, area.left_top.y)
+        if area:size() > 0 then
+            love.graphics.rectangle('line', area:rectangle())
+            love.graphics.printf(rb.x .. ', ' .. rb.y, area.left_top.x - 64, area.right_bottom.y, w + 64, 'right')
+        else
+            love.graphics.points(area.left_top.x, area.left_top.y)
+        end
     end
     love.graphics.pop()
 end
 
-local function draw_mouse()
-    local mx, my = love.graphics.inverseTransformPoint(love.mouse.getPosition())
-    local x, y = toScale(mx, my)
-    -- Print the current mouse positions
-    love.graphics.print(x .. ', ' .. y, mx + 10, my)
+love.run = require('includes/run')
 
-    if love.mouse.isDown(1) then
-        local xs, ys = toScale(mxd, myd)
-        local area = Area(mxd, myd, mx, my):normalize()
-        love.graphics.print(xs .. ', ' .. ys, mxd, myd)
-        love.graphics.rectangle('line', toRectangle(area:unpack()))
-    elseif mxu and myu then
-        x, y = toScale(mxd, myd)
-        love.graphics.print(x .. ', ' .. y, mxd, myd)
-        local area = Area(mxd, myd, mxu, myu):normalize()
-        love.graphics.rectangle('line', toRectangle(area:unpack()))
-        x, y = toScale(mxu, myu)
-        love.graphics.print(x .. ', ' .. y, mxu, myu)
+function love.draw()
+    Grid:draw()
+    love.graphics.setFont(Fonts.info)
+    local strs = {
+        'Window Size: ' .. Window.size:str(),
+        'Grid origin: ' .. Camera.origin:normalize():str(),
+        'Camera position: ' .. Camera.pos:normalize():str(),
+        'Camera zoom: ' .. Camera.zoom,
+        --'Mouse position on Grid: ' .. Camera.mouse:normalize(),
+        'Mouse Position on Cell:' .. Camera.cell:normalize():str(),
+        'Selected Cell: ' .. Camera.cell:floor():str()
+    }
+    love.graphics.printf(table.concat(strs, '\n'), 30, 30, 800, 'left')
+
+    do
+        Grid:push()
+        love.graphics.setFont(Fonts.world)
+        love.graphics.setPointSize(4 * Camera.zoom)
+        Area:draw_queue()
+        Position:draw_queue()
+        draw_mouse()
+        Grid:pop()
     end
 end
 
 function love.load()
-    love.window.setMode(resolution_x, resolution_y)
-    love.window.setPosition(300, 300, 1)
-    screenWidth, screenHeight = love.graphics.getDimensions()
-    font = love.graphics.newFont(font, font_size)
+    --love.window.setPosition(Window.size.x - screeny, 0)
+    --love.keyboard.setKeyRepeat(true)
+    love.resize(love.graphics.getDimensions())
+    Fonts.world = love.graphics.newFont(Fonts.world)
+    Fonts.info = love.graphics.newFont(Fonts.info)
 end
 
-function love.draw()
-    love.graphics.translate(screenWidth * 0.5, screenHeight * 0.5)
-    love.graphics.setPointSize(_G.point_size)
-    love.graphics.setFont(font)
-    love.graphics.setColor(0, 255, 0)
+function love.resize(w, h)
+    Window.size:update(w, h)
+    Window.position:update(love.window.getPosition())
+end
 
-    draw_mouse()
-    make_grid()
-    Area:draw_queue()
-    Position:draw_queue()
+function love.update(dt)
+    local newmx, newmy = love.mouse.getPosition()
+    Move(Camera, Mouse, dt, newmx, newmy)
+    if love.keyboard.isDown(',') then
+        local limit = Position.draw_limit()
+        if limit > -1 then
+            Position.draw_limit(limit - 1)
+        end
+    end
+    if love.keyboard.isDown('.') then
+        Position.draw_limit(Position.draw_limit() + 1)
+    end
+
+    Camera.cell:update(Grid:convertCoords('screen', 'cell', newmx, newmy))
+    Mouse.screen:update(newmx, newmy)
+
+    local wx, wy = Grid:toWorld(newmx, newmy)
+    Mouse.world:update(wx, wy)
+    Camera.mouse:update(wx, wy)
+
+    Camera.origin:update(Grid:toScreen(0, 0))
+end
+
+function love.wheelmoved(_, y)
+    local future = math.round_to(Camera.zoom * (y > 0 and 1.05 or y < 0 and 1 / 1.05), 3)
+    if future > Window.zoom.x and future < Window.zoom.y then
+        Camera.zoom = future
+    end
+end
+
+local key = {
+    ['space'] = function()
+        Camera.zoom = 1
+        Camera.x = 0
+        Camera.y = 0
+        Camera.pos = Position()
+        Camera.angle = 0
+    end,
+    ['c'] = function()
+        print('screenshot')
+        --love.system.setClipboardText()
+        love.graphics.captureScreenshot(os.time() .. ".png")
+    end
+}
+
+function love.keypressed(pressed, _, _isrepeat)
+    if key[pressed] then
+        key[pressed]()
+    end
 end
 
 function love.mousepressed(x, y, button)
     if button == 1 then
-        mxd, myd = love.graphics.inverseTransformPoint(x, y)
-        mxu, myu = nil, nil
+        Mouse.up = nil
+        Mouse.down = Position(Grid:convertCoords('screen', 'world', x, y))
     end
 end
 
 function love.mousereleased(x, y, button)
     if button == 1 then
-        mxu, myu = love.graphics.inverseTransformPoint(x, y)
-        local tlx, tly = toScale(mxd, myd)
-        local rbx, rby = toScale(mxu, myu)
-        love.system.setClipboardText(tlx .. ', ' .. tly .. ', ' .. rbx .. ', ' .. rby)
+        Mouse.up = Position(Grid:convertCoords('screen', 'world', x, y))
     end
 end

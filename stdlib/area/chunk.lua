@@ -10,10 +10,10 @@ local Chunk = {
 }
 setmetatable(Chunk, Chunk)
 
-local Is = require('__stdlib__/stdlib/utils/is')
 local Game = require('__stdlib__/stdlib/game')
 local Position = require('__stdlib__/stdlib/area/position')
-local area_path = '__stdlib__/stdlib/area/area'
+
+local AREA_PATH = '__stdlib__/stdlib/area/area'
 
 Chunk.__call = Position.__call
 
@@ -31,9 +31,13 @@ Chunk.to_position = Position.from_chunk_position
 --Chunk.to_center_tile_position
 
 -- Hackish function, Factorio lua doesn't allow require inside functions because...
-local function set_area(area)
-    local Area = package.loaded[area_path]
-    return Area and Area.set(area) or area
+local function load_area(area)
+    local Area = package.loaded[AREA_PATH]
+    if not Area then
+        local log = log or function() end
+        log('WARNING: Area for Position not found in package.loaded')
+    end
+    return Area and Area.load(area) or area
 end
 
 --- Gets the area of a chunk from the specified chunk position.
@@ -43,8 +47,9 @@ function Chunk.to_area(pos)
     local left_top = Chunk.to_position(pos)
     local right_bottom = Position.add(left_top, 32, 32)
 
-    return set_area {left_top = left_top, right_bottom = right_bottom}
+    return load_area {left_top = left_top, right_bottom = right_bottom}
 end
+
 
 --- Gets the user data that is associated with a chunk.
 -- The user data is stored in the global object and it persists between loads.
@@ -54,7 +59,7 @@ end
 -- @treturn ?|nil|Mixed the user data **OR** *nil* if it does not exist for the chunk and if no default_value was set
 function Chunk.get_data(surface, chunk_pos, default_value)
     surface = Game.get_surface(surface)
-    Is.Assert(surface, 'invalid surface')
+    assert(surface, 'invalid surface')
 
     local key = Position(chunk_pos):to_key()
 
@@ -70,7 +75,7 @@ Chunk.get = Chunk.get_data
 -- @treturn ?|nil|Mixed the previous user data associated with the chunk **OR** *nil* if the chunk had no previous user data
 function Chunk.set_data(surface, chunk_pos, value)
     surface = Game.get_surface(surface)
-    Is.Assert(surface, 'invalid surface')
+    assert(surface, 'invalid surface')
 
     local key = Position(chunk_pos):to_key()
 

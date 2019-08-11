@@ -11,11 +11,10 @@ local Position = {
 }
 setmetatable(Position, Position)
 
+local Direction = require('__stdlib__/stdlib/area/direction')
+
 local string = require('__stdlib__/stdlib/utils/string')
 local math = require('__stdlib__/stdlib/utils/math')
-local area_path = '__stdlib__/stdlib/area/area'
-
-local Direction = require('__stdlib__/stdlib/area/direction')
 
 local floor, abs, atan2, round_to, round = math.floor, math.abs, math.atan2, math.round_to, math.round
 local cos, sin, ceil, sqrt, pi, random = math.cos, math.sin, math.ceil, math.sqrt, math.pi, math.random
@@ -23,10 +22,8 @@ local deg, acos, max, min, is_number = math.deg, math.acos, math.max, math.min, 
 local split = string.split
 local dirs = defines.direction
 
---- Machine Epsilon
--- @see wiki Machine_epsilon
--- @return epsilon
-Position.epsilon = 1.19e-07
+local AREA_PATH = '__stdlib__/stdlib/area/area'
+local EPSILON = 1.19e-07
 
 --- Constructor Methods
 -- @section Constructors
@@ -67,14 +64,23 @@ function Position.construct(...)
     return new(args[1] or 0, args[2] or args[1] or 0)
 end
 
+--- Update a position in place without returning a new position.
+-- @tparam Concepts.Position pos
+-- @tparam number x
+-- @tparam number y
+-- @return Concepts.Position the passed position updated.
+function Position.update(pos, x, y)
+    pos.x, pos.y = x, y
+    return pos
+end
+
 --- Load the metatable into the passed position without creating a new one.
 -- Always assumes a valid position is passed
 -- @tparam Concepts.Position pos the position to set the metatable onto
 -- @treturn Concepts.Position the position with metatable attached
-function Position.set(pos)
+function Position.load(pos)
     return setmetatable(pos, metatable)
 end
-Position.load = Position.set
 
 --- Converts a position string to a position.
 -- @tparam string pos_string the position to convert
@@ -228,11 +234,18 @@ function Position.unary(pos)
     return new(-pos.x, -pos.y)
 end
 
---- Normalizes a position by rounding it to 2 decimal places
+--- Normalizes a position by rounding it to 2 decimal places.
 -- @tparam Concepts.Position pos
--- @treturn Concepts.Position modified
+-- @treturn Concepts.Position a new normalized position
 function Position.normalize(pos)
     return new(round_to(pos.x, 2), round_to(pos.y, 2))
+end
+
+--- Normalizes a position by rounding it to 2 decimal places.
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position the position normalized in place
+function Position.normalized(pos)
+    pos.x, pos.y = round_to(pos.x, 2), round_to(pos.y, 2)
 end
 
 --- Abs x, y values
@@ -242,18 +255,32 @@ function Position.abs(pos)
     return new(abs(pos.x), abs(pos.y))
 end
 
---- Ceil x, y values
+--- Ceil x, y values.
 -- @tparam Concepts.Position pos
 -- @treturn Concepts.Position
 function Position.ceil(pos)
     return new(ceil(pos.x), ceil(pos.y))
 end
 
---- Floor x, y values
+--- Ceil x, y values in place.
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position the pos modified
+function Position.ceiled(pos)
+    pos.x, pos.y = ceil(pos.x), ceil(pos.y)
+    return pos
+end
+
+--- Floor x, y values.
 -- @tparam Concepts.Position pos
 -- @treturn Concepts.Position
 function Position.floor(pos)
     return new(floor(pos.x), floor(pos.y))
+end
+
+--- Floor in place.
+function Position.floored(pos)
+    pos.x, pos.y = floor(pos.x), floor(pos.y)
+    return pos
 end
 
 --- Gets the center position of the tile where the given position resides.
@@ -268,11 +295,19 @@ function Position.center(pos)
     return new(x, y)
 end
 
---- Rounds a positions points to the closes integer
+--- Rounds a positions points to the closest integer
 -- @tparam Concepts.Position pos
 -- @treturn Concepts.Position
 function Position.round(pos)
     return new(round(pos.x), round(pos.y))
+end
+
+--- Rounds a positions points to the closest integer
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position the pos rounded in place
+function Position.rounded(pos)
+    pos.x, pos.y = round(pos.x), round(pos.y)
+    return pos
 end
 
 --- Perpendicular position
@@ -501,9 +536,13 @@ end
 -- ((
 
 -- Hackish function, Factorio lua doesn't allow require inside functions because...
-local function set_area(area)
-    local Area = package.loaded[area_path]
-    return Area and Area.set(area) or area
+local function load_area(area)
+    local Area = package.loaded[AREA_PATH]
+    if not Area then
+        local log = log or function() end
+        log('WARNING: Area for Position not found in package.loaded')
+    end
+    return Area and Area.load(area) or area
 end
 
 --- Expands a position to a square area.
@@ -516,7 +555,7 @@ function Position.expand_to_area(pos, radius)
     local left_top = {x = pos.x - radius, y = pos.y - radius}
     local right_bottom = {x = pos.x + radius, y = pos.y + radius}
 
-    return set_area {left_top = left_top, right_bottom = right_bottom}
+    return load_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Expands a position into an area by setting pos to left_top.
@@ -531,7 +570,7 @@ function Position.to_area(pos, width, height)
     local left_top = {x = pos.x, y = pos.y}
     local right_bottom = {x = pos.x + width, y = pos.y + height}
 
-    return set_area {left_top = left_top, right_bottom = right_bottom}
+    return load_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
@@ -542,7 +581,7 @@ function Position.to_tile_area(pos)
     local left_top = {x = x, y = y}
     local right_bottom = {x = x + 1, y = y + 1}
 
-    return set_area {left_top = left_top, right_bottom = right_bottom}
+    return load_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Get the chunk area the specified position is in.
@@ -552,7 +591,7 @@ function Position.to_chunk_area(pos)
     local left_top = {x = floor(pos.x / 32) * 32, y = floor(pos.y / 32) * 32}
     local right_bottom = {x = left_top.x + 32, y = left_top.y + 32}
 
-    return set_area {left_top = left_top, right_bottom = right_bottom}
+    return load_area {left_top = left_top, right_bottom = right_bottom}
 end
 
 -- ))
@@ -582,6 +621,13 @@ function Position.to_string(pos)
     return '{x = ' .. pos.x .. ', y = ' .. pos.y .. '}'
 end
 
+--- Converts a position to an x, y string.
+-- @tparam Concepts.Position pos the position to convert
+-- @treturn string
+function Position.to_string_xy(pos)
+    return pos.x .. ', ' .. pos.y
+end
+
 --- Converts a position to a string suitable for using as a table index.
 -- @tparam Concepts.Position pos the position to convert
 -- @treturn string
@@ -603,13 +649,6 @@ function Position.pack(pos)
     return {pos.x, pos.y}
 end
 
---- Is this a full position
--- @tparam Concepts.Position pos
--- @treturn boolean
-function Position.is_position(pos)
-    return type(pos) == 'table' and type(pos.x) == 'number' and type(pos.y) == 'number'
-end
-
 --- Is this position {0, 0}.
 -- @tparam Concepts.Position pos
 -- @treturn boolean
@@ -617,11 +656,32 @@ function Position.is_zero(pos)
     return pos.x == 0 and pos.y == 0
 end
 
+--- Is this a simple position. {num, num}
+-- @tparam Concepts.Position pos
+-- @treturn boolean
+function Position.is_simple_position(pos)
+    return type(pos) == 'table' and type(pos[1]) == 'number' and type(pos[2]) == 'number'
+end
+
+--- Is this a complex position. {x = number, y = number}
+-- @tparam Concepts.Position pos
+-- @treturn boolean
+function Position.is_complex_position(pos)
+    return type(pos) == 'table' and type(pos.x) == 'number' and type(pos.y) == 'number'
+end
+
 --- Does the position have the class attached
 -- @tparam Concepts.Position pos
 -- @treturn boolean
-function Position.is_set(pos)
+function Position.is_Position(pos)
     return getmetatable(pos) == metatable
+end
+
+--- Is this any position
+-- @tparam Concepts.Position pos
+-- @treturn boolean
+function Position.is_position(pos)
+    return Position.is_Position(pos) or Position.is_complex_position(pos) or Position.is_simple_position(pos)
 end
 
 --- Return the atan2 of 2 positions.
@@ -670,7 +730,7 @@ function Position.equals(pos1, pos2)
         return false
     end
 
-    return abs(pos1.x - pos2.x) < Position.epsilon and abs(pos1.y - pos2.y) < Position.epsilon
+    return abs(pos1.x - pos2.x) < EPSILON and abs(pos1.y - pos2.y) < EPSILON
 end
 
 --- Is pos1 less than pos2.

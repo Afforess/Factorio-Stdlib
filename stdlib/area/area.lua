@@ -65,12 +65,11 @@ end
 --- Loads the metatable into the passed Area without creating a new one.
 -- @tparam Concepts.BoundingBox area the Area to set the metatable onto
 -- @treturn Concepts.BoundingBox the Area with metatable attached
-function Area.set(area)
-    area.left_top = Position.set(area.left_top)
-    area.right_bottom = Position.set(area.right_bottom)
+function Area.load(area)
+    area.left_top = Position.load(area.left_top)
+    area.right_bottom = Position.load(area.right_bottom)
     return setmetatable(area, metatable)
 end
-Area.load = Area.set
 
 --- Converts an area string to an area.
 -- @tparam string area_string the area to convert
@@ -115,7 +114,7 @@ end
 -- <li>Swaps the values between `right_bottom.y` & `left_top.y` **IF** `right_bottom.y` < `left_top.y`
 -- </ul>
 -- @tparam Concepts.BoundingBox area the area to normalize
--- @treturn Concepts.BoundingBox the area normalized
+-- @treturn Concepts.BoundingBox a new normalized area
 function Area.normalize(area)
     local left_top = Position.new(area.left_top, true)
     local right_bottom = Position.new(area.right_bottom, true)
@@ -128,6 +127,19 @@ function Area.normalize(area)
     end
 
     return new_area(left_top, right_bottom, area.orientation)
+end
+
+--- Normalize an area in place.
+-- @tparam Concepts.BoundingBox area the area to normalize
+function Area.normalized(area)
+    local lt, rb = area.left_top, area.right_bottom
+    if rb.x < lt.x then
+        lt.x, rb.x = rb.x, lt.x
+    end
+    if rb.y < lt.y then
+        lt.y, rb.y = rb.y, lt.y
+    end
+    return area
 end
 
 --- Convert area from pixels.
@@ -188,8 +200,8 @@ end
 -- @treturn Concepts.BoundingBox the area with left_bottom and right_top included
 function Area.corners(area)
     local lt, rb = area.left_top, area.right_bottom
-    local lb = area.left_bottom or Position.set {x = 0, y = 0}
-    local rt = area.right_top or Position.set {x = 0, y = 0}
+    local lb = area.left_bottom or Position.construct()
+    local rt = area.right_top or Position.construct()
     lb.x, lb.y = lt.x, rb.y
     rt.x, rt.y = rb.x, lt.y
     area.left_bottom = lb
@@ -366,6 +378,13 @@ function Area.to_string(area)
     return '{' .. left_top .. ', ' .. right_bottom .. orientation .. '}'
 end
 
+--- Converts an area to an ltx, lty / rbx, rby string.
+-- @tparam Concepts.BoundingBox area the area to convert
+-- @treturn string the string representation of the area
+function Area.to_string_xy(area)
+    return table.concat(area.left_top, ', ') .. ' / ' .. table.concat(area.right_bottom, ', ')
+end
+
 --- Is this a non zero sized area
 -- @tparam Concepts.BoundingBox area
 -- @treturn boolean
@@ -376,24 +395,42 @@ end
 --- Is the area normalized.
 -- @tparam Concepts.BoundingBox area
 -- @treturn boolean
-function Area.normalized(area)
-    local left_top = area.left_top
-    local right_bottom = area.right_bottom
-
-    return right_bottom.x >= left_top.x and right_bottom.y >= left_top.y
+function Area.is_normalized(area)
+    return area.right_bottom.x >= area.left_top.x and area.right_bottom.y >= area.left_top.y
 end
 
 --- Is the area non-zero and normalized.
 -- @tparam Concepts.BoundingBox area
 -- @treturn boolean
 function Area.valid(area)
-    return not Area.is_zero(area) and Area.normalized(area)
+    return Area.is_normalized(area) and Area.size(area) ~= 0
+end
+
+--- Is this a simple area. {{num, num}, {num, num}}
+-- @tparam Concepts.BoundingBox area
+-- @treturn boolean
+function Area.is_simple_area(area)
+    return Position.is_simple_position(area[1]) and Position.is_simple_position(area[2])
+end
+
+--- Is this a complex area {left_top = {x = num, y = num}, right_bottom = {x = num, y = num}}
+-- @tparam Concepts.BoundingBox area
+-- @treturn boolean
+function Area.is_complex_area(area)
+    return Position.is_complex_position(area.left_top) and Position.is_complex_position(area.right_bottom)
+end
+
+--- Is this and area of any kind.
+-- @tparam Concepts.BoundingBox area
+-- @treturn boolean
+function Area.is_area(area)
+    return Area.is_Area(area) or Area.is_complex_area(area) or Area.is_simple_area(area)
 end
 
 --- Does the area have the class attached
 -- @tparam Concepts.BoundingBox area
 -- @treturn boolean
-function Area.is_set(area)
+function Area.is_Area(area)
     return getmetatable(area) == metatable
 end
 
@@ -433,16 +470,23 @@ end
 -- @treturn number the height of the area
 -- @treturn number the perimeter of the area &mdash; (2 &times; (width + height))
 function Area.size(area)
-    area = Area.new(area)
-
-    local left_top = area.left_top
-    local right_bottom = area.right_bottom
-
-    local width = abs(left_top.x - right_bottom.x)
-    local height = abs(left_top.y - right_bottom.y)
+    local width = abs(area.left_top.x - area.right_bottom.x)
+    local height = abs(area.left_top.y - area.right_bottom.y)
     local area_size = width * height
     local perimeter = width + width + height + height
     return area_size, width, height, perimeter
+end
+
+function Area.dimensions(area)
+    local width = abs(area.left_top.x - area.right_bottom.x)
+    local height = abs(area.left_top.y - area.right_bottom.y)
+    return width, height
+end
+
+function Area.rectangle(area)
+    local width = abs(area.left_top.x - area.right_bottom.x)
+    local height = abs(area.left_top.y - area.right_bottom.y)
+    return area.left_top.x, area.left_top.y, width, height
 end
 
 --- Returns true if two areas are the same.
@@ -454,7 +498,7 @@ function Area.equals(area1, area2)
         return false
     end
     --area1, area2 = Area(area1), Area(area2)
-    local ori = area1.orientation == area2.orientation
+    local ori = area1.orientation or 0 == area2.orientation or 0
     return ori and area1.left_top == area2.left_top and area1.right_bottom == area2.right_bottom
 end
 

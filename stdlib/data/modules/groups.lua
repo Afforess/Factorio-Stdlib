@@ -73,6 +73,7 @@ groups.achievement = {
 }
 
 groups.item = {
+    'item',
     'ammo',
     'armor',
     'blueprint-book',
@@ -84,8 +85,6 @@ groups.item = {
     'item-with-inventory',
     'item-with-label',
     'item-with-tags',
-    'item',
-    'mining-tool',
     'module',
     'rail-planner',
     'repair-tool',

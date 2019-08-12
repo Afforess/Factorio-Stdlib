@@ -24,7 +24,6 @@ _G.table_size = _G.table_size or Table.size
 -- defines will already be available in an active mod or busted setup specs
 if not _G.defines then
     _G.table.unpack = _G.table.unpack or unpack
-    _G.table.pack = _G.table.pack or pack
     if STDLIB.config.control or STDLIB.config.game then
         local world = require('__stdlib__/spec/setup/world').bootstrap()
         if STDLIB.config.game then

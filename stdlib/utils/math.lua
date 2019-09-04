@@ -215,6 +215,7 @@ end
 -- @tparam number max
 -- @treturn number clamped between min and max
 function Math.clamp(x, min, max)
+    min, max = min or 0, max or 1
     return x < min and min or (x > max and max or x)
 end
 

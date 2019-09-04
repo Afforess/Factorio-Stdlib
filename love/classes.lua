@@ -1,9 +1,13 @@
--- luacheck: std +love
 local Core = require('__stdlib__/stdlib/core')
 local Area = require('__stdlib__/stdlib/area/area')
 local Position = require('__stdlib__/stdlib/area/position')
+local Color = function(...)
+    return require('__stdlib__/stdlib/utils/color2').new(...):to_array()
+end
+_G.Area = Area
+_G.Position = Position
 
-local _r, _g, _b, _w = {255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 255, 255}
+--local _r, _g, _b, _w = {255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 255, 255}
 
 local classes = {
     ['Area'] = Area,
@@ -24,23 +28,28 @@ function Core.draw_queue(self, clear)
     local Main = classes[self.__class] or classes[self.__index.__class]
     assert(Main, 'Main class not found')
     Main._draw_queue = not clear and Main._draw_queue or {}
-    local limit = Main.draw_limit()
-    for i, object in ipairs(Main._draw_queue) do
-        if limit >= 0 and i > limit then
+    local limit = Core._draw_limit
+    for _, object in ipairs(Main._draw_queue) do
+        if not (limit < 0 or Core._draw_count < limit) then
             return self
         end
         object._draw()
+        Core._draw_count = Core._draw_count + 1
     end
     return self
 end
 
-function Core.draw_limit(num)
-    if num then
-        Core._draw_limit = num
+function Core.draw_count()
+    local count = 0
+    for _, Class in pairs(classes) do
+        Class._draw_queue = Class._draw_queue or {}
+        count = count + #Class._draw_queue
     end
-    return Core._draw_limit
+    return count
 end
+
 Core._draw_limit = -1
+Core._draw_count = 0
 
 function Core.draw_add(self, func)
     local Main = classes[self.__class] or classes[self.__index.__class]
@@ -62,7 +71,7 @@ function Area.draw(area, color, coords)
     local w, h = Grid:convertCoords('cell', 'world', copy:dimensions())
     local function func()
         LG.push()
-        LG.setColor(color or _r)
+        LG.setColor(color or Color('red'))
         LG.rectangle('line', wx, wy, w, h)
         if coords then
             LG.print(ltx .. ', ' .. lty, wx, wy)
@@ -89,8 +98,8 @@ function Position.draw_to(position, color, ...) --position_to, color)
     end
     local function func()
         LG.push()
-        LG.setColor(color or _b)
-        LG.line(table.unpack(points))
+        LG.setColor(color or Color('green'))
+        LG.line(unpack(points))
         LG.pop()
     end
     copy:draw_add(func)
@@ -98,13 +107,16 @@ function Position.draw_to(position, color, ...) --position_to, color)
 end
 
 function Position.draw(position, color, coords)
-    --local copy = position()
     local copy = position()
     local wx, wy = Grid:convertCoords('cell', 'world', copy.x, copy.y)
     coords = coords == nil and true or coords
+    print('regular  ', copy:unpack())
+    print('to  World', Grid:toWorld(copy:unpack()))
+    print('to Screen', Grid:toScreen(copy:unpack()))
+    print('from func', wx, wy)
     local function func()
         LG.push()
-        LG.setColor(color or _w)
+        LG.setColor(color or Color("blue"))
         LG.points(wx, wy)
         if coords then
             LG.print(copy.x .. ', ' .. copy.y, wx, wy)
@@ -115,4 +127,7 @@ function Position.draw(position, color, coords)
     return position
 end
 
-return {Area = Area, Position = Position}
+Position._draw_queue = {}
+Area._draw_queue = {}
+
+return {Core = Core, Area = Area, Position = Position}

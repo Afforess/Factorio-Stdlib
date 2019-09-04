@@ -1,4 +1,3 @@
--- luacheck: std +love
 local function Move(Camera, Mouse, dt, mx, my)
     if love.mouse.isDown(2) then
         local s, c = math.sin(Camera.angle), math.cos(Camera.angle)

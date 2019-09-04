@@ -19,7 +19,6 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ]]
 
--- luacheck: std +love, ignore 242 211
 local lg = love.graphics
 
 local EMPTY = {}
@@ -98,7 +97,7 @@ end
 
 local function visible(camera)
     camera = checkType(camera or EMPTY, "table", "camera")
-    local camx, camy, zoom, angle, sx, sy, sw, sh = unpackCamera(camera)
+    local camx, camy, zoom, angle, _sx, _sy, sw, sh = unpackCamera(camera)
     local w, h = sw / zoom, sh / zoom
     if angle ~= 0 then
         local sin, cos = math.abs(math.sin(angle)), math.abs(math.cos(angle))
@@ -239,9 +238,9 @@ end
 local function draw(camera, visuals)
     camera = checkType(camera or EMPTY, "table", "camera")
     visuals = checkType(visuals or EMPTY, "table", "visuals")
-    local camx, camy, zoom, angle, sx, sy, sw, sh = unpackCamera(camera)
-    local size, sds, ds, color, xColor, yColor, ff, tf, hideOrigin = unpackVisuals(visuals, zoom)
-    local x1, y1, x2, y2, x3, y3, x4, y4 = getCorners(camera)
+    local _camx, _camy, zoom, angle, sx, sy, sw, sh = unpackCamera(camera)
+    local _size, sds, ds, color, xColor, yColor, ff, tf, hideOrigin = unpackVisuals(visuals, zoom)
+    local x1, y1, x2, y2, _x3, _y3, x4, y4 = getCorners(camera)
     local swapXYLabels = mod(angle + math.pi/4, math.pi) > math.pi/2
 
     lg.setScissor(sx, sy, sw, sh)

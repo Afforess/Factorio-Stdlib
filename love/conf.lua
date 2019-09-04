@@ -1,5 +1,3 @@
--- luacheck: std +love
-
 function love.conf(t)
     t.identity = "data"                    -- The name of the save directory (string)
     t.appendidentity = false            -- Search files in source directory before save directory (boolean)

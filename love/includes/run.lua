@@ -1,4 +1,3 @@
---luacheck: std +love, ignore 211, read_globals love.handlers love.arg
 local function run()
     if love.load then
         love.load(love.arg.parseGameArguments(arg), arg)

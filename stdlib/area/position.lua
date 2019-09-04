@@ -40,7 +40,7 @@ Position.__call = function(_, ...)
     end
 end
 
-local metatable = {}
+local metatable
 
 local function new(x, y)
     return setmetatable({x = x, y = y}, metatable)

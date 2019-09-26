@@ -118,9 +118,6 @@ end
 function Technology:add_pack(new_pack, count)
     if self:is_valid('technology') then
         local Item = require('__stdlib__/stdlib/data/item')
-		--log(serpent.block(self))
-		log(serpent.block(new_pack))
-		log(type(new_pack))
         if type(new_pack) == 'table' then
             count = new_pack[2] or 1
             new_pack = new_pack[1]

@@ -1,4 +1,32 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.3.0
+Date: 21.7.2019
+
+  Features:
+    - Added Position:random.
+    - Added Position:update.
+    - Added Position:to_string_xy.
+    - Added Position:normalized/ceiled/floored/rounded for modifying the position in place.
+    - Added Position:is_Position, is_simple_position, is_complex_position.
+    - Added Area:update.
+    - Added Area:to_string_xy.
+    - Added Area:is_normalized.
+    - Added Area:dimensions.
+    - Added Area:rectangle.
+    - Added Area:is_Area, is_simple_area, is_complex_area.
+
+  Bugfixes:
+    - Position:center correctly looks inwards when on a boundry.
+    - Area:center_points correctly looks inwards when on a boundry.
+
+  Changes:
+    - Area:iterate, spiral_iterate can return a position object.
+    - Removed safetostring.
+
+  Breaking Changes:
+    - Area/Position:set is now Area/Position:load.
+    - Area:normalized now normalizes the area in place.
+---------------------------------------------------------------------------------------------------
 Version: 1.2.2
 Date: 21.7.2019
 
@@ -11,6 +39,7 @@ Date: 13.7.2019
   Features:
     - Added Event.core_events.init_and_load.
     - Added Direction.to_vector.
+
   Bugfixes:
     - Factorio doesn't allow requiring in functions no moar.
 ---------------------------------------------------------------------------------------------------

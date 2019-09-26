@@ -34,7 +34,7 @@ local Core = {
     end,
     __config = STDLIB.config
 }
-Core.__index = Core
+--Core.__index = Core
 
 --- Prints and logs the msg
 -- @tparam string msg

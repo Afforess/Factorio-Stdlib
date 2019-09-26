@@ -4,6 +4,19 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
+        {
+            "type": "lua-local",
+            "request": "launch",
+            "name": "Debug LÖVE",
+            "program": {
+                "command": "love"
+            },
+            "cwd": "${workspaceRoot}",
+            "args": [
+                "${workspaceFolder}/love"
+            ]
+        },
         {
             "name": "Debug Lua File",
             "type": "lua",

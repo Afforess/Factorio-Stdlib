@@ -5,16 +5,25 @@
 
 local Math = {}
 
+for k, v in pairs(math) do
+    Math[k] = v
+end
+
 local math_abs = math.abs
 local math_floor = math.floor
 local math_ceil = math.ceil
 local math_min = math.min
 local math_max = math.max
 local math_huge = math.huge
+local math_pi = math.pi
 local log10 = math.log10
 local unpack = table.unpack
 
 --(( Math Constants
+Math.DEG2RAD = math_pi / 180
+Math.RAD2DEG = 180 / math_pi
+Math.EPSILON = 1.401298e-45
+
 Math.MAXINT8 = 128
 Math.MININT8 = -128
 Math.MAXUINT8 = 255
@@ -200,35 +209,63 @@ function Math.energetic_mean(...)
     return 10 * log10((1 / #x) * s)
 end
 
---- Returns the number x clamped between the numbers min and max
+--- Returns the number x clamped between the numbers min and max.
 -- @tparam number x
 -- @tparam number min
 -- @tparam number max
 -- @treturn number clamped between min and max
 function Math.clamp(x, min, max)
+    min, max = min or 0, max or 1
     return x < min and min or (x > max and max or x)
 end
 
+--- Linear interpolation or 2 numbers.
+-- @tparam number a
+-- @tparam number b
+-- @tparam float amount
+-- @treturn number
 function Math.lerp(a, b, amount)
     return a + (b - a) * Math.clamp(amount, 0, 1)
 end
 
+--- Smooth.
+-- @tparam number a
+-- @tparam number b
+-- @tparam float amount
+-- @treturn number
 function Math.smooth(a, b, amount)
     local t = Math.clamp(amount, 0, 1)
     local m = t * t * (3 - 2 * t)
     return a + (b - a) * m
 end
 
-function Math.pingpong(x)
-    return 1 - math_abs(1 - x % 2)
+--- Approximately the same
+-- @tparam number a
+-- @tparam number b
+-- @treturn boolean
+function Math.approximately(a, b)
+    return math_abs(b - a) < math_max(1e-6 * math_max(math_abs(a), math_abs(b)), 1.121039e-44)
 end
 
+--- Is x a number.
+-- @tparam number x
+-- @treturn boolean
 function Math.is_number(x)
     return x == x and x ~= math_huge
 end
 
-for k, v in pairs(math) do
-    Math[k] = v
+--- Is x an integer.
+-- @tparam number x
+-- @treturn boolean
+function Math.is_integer(x)
+    return x == math_ceil(x)
+end
+
+--- Is x unsigned.
+-- @tparam number x
+-- @treturn boolean
+function Math.is_unsigned(x)
+    return x >= 0
 end
 
 return Math

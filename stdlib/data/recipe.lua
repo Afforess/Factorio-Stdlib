@@ -18,10 +18,6 @@ function Recipe:__call(recipe)
     return new
 end
 
---local Ingredients = Recipe
-
-local Results = Recipe
-
 -- Returns a formated ingredient or prodcut table
 local function format(ingredient, result_count)
     local object
@@ -401,72 +397,30 @@ function Recipe:remove_result(normal, expensive, main_product)
     return self
 end
 
-local function replace_result(results, find, replace, replace_name_only)
-	--log("working")
-	--log(serpent.block(results))
-	--log(serpent.block(find))
-	--log(serpent.block(replace))
-	--log(serpent.block(replace_name_only))
-	for r, result in pairs(results or {}) do
-		if result[1] == find or result.name == find then
-			if replace_name_only then
-				local amount = result[2] or result.amount
-				replace.amount = amount
-			end
-			--log(serpent.block(replace))
-			--log(serpent.block(results))
-			results[r] = replace
-			return true
-		end
-	end
-end
-
---- Replace a product from results, converts if needed.
+--- Remove a product from results, converts if needed.
 -- @tparam string|Concepts.product result_name
 -- @tparam[opt] string|Concepts.product normal
 -- @tparam[opt] string|Concepts.product|boolean expensive
 -- @tparam[opt] string main_product
-function Results:replace(result_name, normal, expensive, main_product)
-	--log(serpent.block(result_name))
-	--log(serpent.block(normal))
-	--log(serpent.block(expensive))
-	--log(serpent.block(main_product))
-	--log(serpent.block(self._raw))
-	local old_result = result_name
+function Recipe:replace_result(result_name, normal, expensive, main_product)
     if self:is_valid() and normal or expensive then
-		local n_string = type(normal) == "string"
-		local e_string = type(expensive == true and normal or expensive) == "string"
         result_name = format(result_name)
         if result_name then
             normal, expensive = get_difficulties(normal, expensive)
             self:convert_results()
             self:remove_result(result_name, expensive and result_name)
             self:set_main_product(main_product, normal, expensive)
-		end
-			 if self.normal then
-				 if normal then
-					--replace_result(self.normal.results, old_result, normal, n_string)
-					if replace_result(self.normal.results, old_result, normal, n_string) then
-						self.normal.main_product = normal.name
-					end
-				 end
-				 if expensive then
-					--replace_result(self.expensive.results, old_result, expensive, e_string)
-					if replace_result(self.expensive.results, old_result, expensive, e_string) then
-						self.expensive.main_product = expensive.name
-					end
-				 end
-			 elseif normal then
-				--replace_result(self.results, old_result, normal, n_string)
-				--log(serpent.block(replace_result(self.results, old_result, normal, n_string)))
-				if replace_result(self.results, old_result, normal, n_string) then
-					self.main_product = normal.name
-				end
-			 end
+
+        -- if self.normal then
+        --     if normal then
+        --     end
+        --     if expensive then
+        --     end
+        -- elseif normal then
+        -- end
+        end
     end
-	--log(serpent.block(self._raw))
     return self
 end
-Results.rep = Results.replace
 
 return Recipe

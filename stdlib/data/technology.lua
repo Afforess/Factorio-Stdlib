@@ -118,10 +118,10 @@ end
 function Technology:add_pack(new_pack, count)
     if self:is_valid('technology') then
         local Item = require('__stdlib__/stdlib/data/item')
-        if self.table(new_pack) then
+        if type(new_pack) == 'table' then
             count = new_pack[2] or 1
             new_pack = new_pack[1]
-        elseif self.string(new_pack) then
+        elseif type(new_pack) == 'string' then
             count = count or 1
         else
             error('new_pack must be a table or string')

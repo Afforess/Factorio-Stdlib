@@ -18,6 +18,7 @@ Date: 21.7.2019
   Bugfixes:
     - Position:center correctly looks inwards when on a boundry.
     - Area:center_points correctly looks inwards when on a boundry.
+    - Technology:add_pack type check fix.
 
   Changes:
     - Area:iterate, spiral_iterate can return a position object.

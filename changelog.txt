@@ -6,7 +6,7 @@ Date: 21.7.2019
     - Added Position:random.
     - Added Position:update.
     - Added Position:to_string_xy.
-    - Added Position:normalized/ceiled/floored/rounded for modifying the position in place.
+    - Added Position:normalized, ceiled, floored, rounded for modifying the position in place.
     - Added Position:is_Position, is_simple_position, is_complex_position.
     - Added Area:update.
     - Added Area:to_string_xy.
@@ -14,6 +14,7 @@ Date: 21.7.2019
     - Added Area:dimensions.
     - Added Area:rectangle.
     - Added Area:is_Area, is_simple_area, is_complex_area.
+    - Added new Color module (color2).
 
   Bugfixes:
     - Position:center correctly looks inwards when on a boundry.

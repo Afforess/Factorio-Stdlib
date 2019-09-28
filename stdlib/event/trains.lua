@@ -23,7 +23,7 @@ local table = require('__stdlib__/stdlib/utils/table')
 -- @tparam uint new_id the ID of the train after the change
 -- @usage
 ---- Event.register(Trains.on_train_id_changed, my_handler)
-Trains.on_train_id_changed = script.generate_event_name()
+Trains.on_train_id_changed = Event.generate_event_name()
 
 --- Given a @{criteria|search criteria}, search for trains that match the criteria.
 -- * If ***criteria.surface*** is not supplied, this function searches through all existing surfaces.

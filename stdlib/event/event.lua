@@ -65,7 +65,7 @@ if not config.skip_script_protections then -- Protections for post and pre regis
     end
     for name in pairs(Event.script) do
         _G.script[name] = function(id)
-            error('Detected attempt to register an event using script.' .. name .. ' while using the STDLIB event system ' .. id and id or '')
+            error('Detected attempt to register an event using script.' .. name .. ' while using the STDLIB event system ' .. (id and id or ''))
         end
     end
 end

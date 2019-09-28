@@ -67,6 +67,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Migrate.html"><span class="module-name-item">Misc.Migrate</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Queue.html"><span class="module-name-item">Misc.Queue</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color.html"><span class="module-name-item">Utils.Color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color2.html"><span class="module-name-item">Utils.Color2</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Globals.html"><span class="module-name-item">Utils.Globals</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Is.html"><span class="module-name-item">Utils.Is</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Iter.html"><span class="module-name-item">Utils.Iter</span></a></div></li>
@@ -77,8 +78,6 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/moses.html"><span class="module-name-item">moses</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/vendor.allen.html"><span class="module-name-item">vendor.allen</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/vendor.version.html"><span class="module-name-item">vendor.version</span></a></div></li>
     </ul>
     </li>
@@ -138,7 +137,6 @@
     <h4>Contents of <strong>Area.Position</strong></h4>
     <ul class="nav">
     <li class="nav-item"><a href="#Tables"><span class="fragment-hashtag">#</span> Tables</a></li>
-    <li class="nav-item"><a href="#Fields"><span class="fragment-hashtag">#</span> Fields</a></li>
     <li class="nav-item"><a href="#Constructor_Methods"><span class="fragment-hashtag">#</span> Constructor Methods </a></li>
     <li class="nav-item"><a href="#Position_Methods"><span class="fragment-hashtag">#</span> Position Methods </a></li>
     <li class="nav-item"><a href="#Position_Conversion_Methods"><span class="fragment-hashtag">#</span> Position Conversion Methods </a></li>
@@ -201,18 +199,6 @@
     </table>
     <table class="section-content-list">
     <thead>
-    <h3><a href="#Fields">Fields</a></h3>
-    <span></span>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="name"><a href="#epsilon">epsilon</a></td>
-    <td class="summary">Machine Epsilon</td>
-    </tr>
-    </tbody>
-    </table>
-    <table class="section-content-list">
-    <thead>
     <h3><a href="#Constructor_Methods">Constructor Methods </a></h3>
     <span></span>
     </thead>
@@ -230,12 +216,16 @@
     <td class="summary">Converts a position string to a position.</td>
     </tr>
     <tr>
+    <td class="name"><a href="#load">load(pos)</a></td>
+    <td class="summary">Load the metatable into the passed position without creating a new one.</td>
+    </tr>
+    <tr>
     <td class="name"><a href="#new">new(pos)</a></td>
     <td class="summary">Returns a correctly formated position object.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#set">set(pos)</a></td>
-    <td class="summary">Load the metatable into the passed position without creating a new one.</td>
+    <td class="name"><a href="#update">update(pos, x, y)</a></td>
+    <td class="summary">Update a position in place without returning a new position.</td>
     </tr>
     </tbody>
     </table>
@@ -263,7 +253,11 @@
     </tr>
     <tr>
     <td class="name"><a href="#ceil">ceil(pos)</a></td>
-    <td class="summary">Ceil x, y values</td>
+    <td class="summary">Ceil x, y values.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#ceiled">ceiled(pos)</a></td>
+    <td class="summary">Ceil x, y values in place.</td>
     </tr>
     <tr>
     <td class="name"><a href="#center">center(pos)</a></td>
@@ -291,7 +285,11 @@
     </tr>
     <tr>
     <td class="name"><a href="#floor">floor(pos)</a></td>
-    <td class="summary">Floor x, y values</td>
+    <td class="summary">Floor x, y values.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#floored">floored(pos)</a></td>
+    <td class="summary">Floor in place.</td>
     </tr>
     <tr>
     <td class="name"><a href="#intersection">intersection(pos1_start, pos1_end, pos2_start, pos2_end)</a></td>
@@ -327,7 +325,11 @@
     </tr>
     <tr>
     <td class="name"><a href="#normalize">normalize(pos)</a></td>
-    <td class="summary">Normalizes a position by rounding it to 2 decimal places</td>
+    <td class="summary">Normalizes a position by rounding it to 2 decimal places.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#normalized">normalized(pos)</a></td>
+    <td class="summary">Normalizes a position by rounding it to 2 decimal places.</td>
     </tr>
     <tr>
     <td class="name"><a href="#offset_along_line">offset_along_line(pos1, pos2, distance_from_pos2)</a></td>
@@ -342,6 +344,10 @@
     <td class="summary">The projection point of two positions.</td>
     </tr>
     <tr>
+    <td class="name"><a href="#random">random(pos[, minimum=0][, maximum=1][, random_tile=false])</a></td>
+    <td class="summary">Return a random offset of a position.</td>
+    </tr>
+    <tr>
     <td class="name"><a href="#recall">recall(pos)</a></td>
     <td class="summary">Recalls the stored position.</td>
     </tr>
@@ -351,7 +357,11 @@
     </tr>
     <tr>
     <td class="name"><a href="#round">round(pos)</a></td>
-    <td class="summary">Rounds a positions points to the closes integer</td>
+    <td class="summary">Rounds a positions points to the closest integer</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#rounded">rounded(pos)</a></td>
+    <td class="summary">Rounds a positions points to the closest integer</td>
     </tr>
     <tr>
     <td class="name"><a href="#store">store(pos)</a></td>
@@ -478,12 +488,20 @@
     <td class="summary">Is a position inside of an area.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#is_position">is_position(pos)</a></td>
-    <td class="summary">Is this a full position</td>
+    <td class="name"><a href="#is_Position">is_Position(pos)</a></td>
+    <td class="summary">Does the position have the class attached</td>
     </tr>
     <tr>
-    <td class="name"><a href="#is_set">is_set(pos)</a></td>
-    <td class="summary">Does the position have the class attached</td>
+    <td class="name"><a href="#is_complex_position">is_complex_position(pos)</a></td>
+    <td class="summary">Is this a complex position.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#is_position">is_position(pos)</a></td>
+    <td class="summary">Is this any position</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#is_simple_position">is_simple_position(pos)</a></td>
+    <td class="summary">Is this a simple position.</td>
     </tr>
     <tr>
     <td class="name"><a href="#is_zero">is_zero(pos)</a></td>
@@ -520,6 +538,10 @@
     <tr>
     <td class="name"><a href="#to_string">to_string(pos)</a></td>
     <td class="summary">Converts a position to a string.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#to_string_xy">to_string_xy(pos)</a></td>
+    <td class="summary">Converts a position to an x, y string.</td>
     </tr>
     <tr>
     <td class="name"><a href="#unpack">unpack(pos)</a></td>
@@ -794,41 +816,6 @@
 
     </dd>
     </dl>
-    <h3><span id="Fields" class="section-title"><a href="#Fields">Fields</a></span></h3>
-    <dl class="section-body-container">
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#epsilon" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="epsilon">epsilon</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Machine Epsilon</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <strong>See also:</strong>
-    <ul>
-    <li><a href="https://en.wikipedia.org/wiki/Machine_epsilon">Machine_epsilon</a></li>
-    </ul>
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    </dl>
     <h3><span id="Constructor_Methods" class="section-title"><a href="#Constructor_Methods">Constructor Methods </a></span></h3>
     <dl class="section-body-container">
     <dt>
@@ -1021,6 +1008,63 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
+    <a href="#load" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="load">load(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Load the metatable into the passed position without creating a new one.</p>
+    <p class="section-item-description"> Always assumes a valid position is passed</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+     the position to set the metatable onto
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">the position with metatable attached</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
     <a href="#new" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="new">new(pos)</span>
     </div>
@@ -1080,15 +1124,16 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#set" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="set">set(pos)</span>
+    <a href="#update" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="update">update(pos, x, y)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Load the metatable into the passed position without creating a new one.</p>
-    <p class="section-item-description"> Always assumes a valid position is passed</p>
+    <p class="section-item-summary">Update a position in place without returning a new position.</p>
+    <p class="section-item-description">
+</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -1107,7 +1152,42 @@
 
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
 
-     the position to set the metatable onto
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>x</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>y</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+
+
+
 
     </li>
 
@@ -1120,8 +1200,7 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-    <span class="return-text">the position with metatable attached</span>
+    <span class="return-text">Concepts.Position the passed position updated.</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -1414,7 +1493,7 @@
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Ceil x, y values</p>
+    <p class="section-item-summary">Ceil x, y values.</p>
     <p class="section-item-description">
 </p>
 
@@ -1450,6 +1529,65 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#ceiled" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="ceiled">ceiled(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Ceil x, y values in place.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">the pos modified</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -1852,7 +1990,7 @@
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Floor x, y values</p>
+    <p class="section-item-summary">Floor x, y values.</p>
     <p class="section-item-description">
 </p>
 
@@ -1890,6 +2028,56 @@
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
     </li>
     </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#floored" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="floored">floored(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Floor in place.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
     <!-- returns end -->
 
 
@@ -2486,7 +2674,7 @@
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Normalizes a position by rounding it to 2 decimal places</p>
+    <p class="section-item-summary">Normalizes a position by rounding it to 2 decimal places.</p>
     <p class="section-item-description">
 </p>
 
@@ -2522,7 +2710,66 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-    <span class="return-text">modified</span>
+    <span class="return-text">a new normalized position</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#normalized" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="normalized">normalized(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Normalizes a position by rounding it to 2 decimal places.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">the position normalized in place</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -2763,6 +3010,115 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
+    <a href="#random" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="random">random(pos[, minimum=0][, maximum=1][, random_tile=false])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Return a random offset of a position.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+     the position to randomize
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>minimum</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+
+     the minimum amount to offset
+
+    (<em>default</em>: 0)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>maximum</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+
+     the maximum amount to offset
+
+    (<em>default</em>: 1)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>random_tile</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     randomize the location on the tile
+
+    (<em>default</em>: false)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">a new random offset position</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
     <a href="#recall" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="recall">recall(pos)</span>
     </div>
@@ -2905,7 +3261,7 @@
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Rounds a positions points to the closes integer</p>
+    <p class="section-item-summary">Rounds a positions points to the closest integer</p>
     <p class="section-item-description">
 </p>
 
@@ -2941,6 +3297,65 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#rounded" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="rounded">rounded(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Rounds a positions points to the closest integer</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">the pos rounded in place</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -4781,14 +5196,14 @@ surface.create_entity{name = <span class="string">'flying-text'</span>, text = <
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#is_position" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="is_position">is_position(pos)</span>
+    <a href="#is_Position" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="is_Position">is_Position(pos)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Is this a full position</p>
+    <p class="section-item-summary">Does the position have the class attached</p>
     <p class="section-item-description">
 </p>
 
@@ -4839,16 +5254,130 @@ surface.create_entity{name = <span class="string">'flying-text'</span>, text = <
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#is_set" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="is_set">is_set(pos)</span>
+    <a href="#is_complex_position" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="is_complex_position">is_complex_position(pos)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Does the position have the class attached</p>
+    <p class="section-item-summary">Is this a complex position.</p>
+    <p class="section-item-description"> {x = number, y = number}</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#is_position" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="is_position">is_position(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Is this any position</p>
     <p class="section-item-description">
 </p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#is_simple_position" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="is_simple_position">is_simple_position(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Is this a simple position.</p>
+    <p class="section-item-description"> {num, num}</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -5473,6 +6002,63 @@ surface.create_entity{name = <span class="string">'flying-text'</span>, text = <
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
+    <a href="#to_string_xy" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="to_string_xy">to_string_xy(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Converts a position to an x, y string.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+     the position to convert
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
     <a href="#unpack" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="unpack">unpack(pos)</span>
     </div>
@@ -5543,7 +6129,7 @@ surface.create_entity{name = <span class="string">'flying-text'</span>, text = <
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2019-07-21 22:33:07 UTC</i>
+    <i>Last updated 2019-09-28 21:37:50 UTC</i>
     </div>
     </div>
     </div>

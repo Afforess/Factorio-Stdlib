@@ -5,7 +5,10 @@
 
 local Table = {}
 
-local insert = table.insert
+-- Import base lua table into Table
+for k, v in pairs(table) do
+    Table[k] = v
+end
 
 --- Given a mapping function, creates a transformed copy of the table
 --- by calling the function for each element in the table, and using
@@ -43,7 +46,7 @@ function Table.filter(tbl, func, ...)
     for k, v in pairs(tbl) do
         if func(v, k, ...) then
             if add then
-                insert(newtbl, v)
+                Table.insert(newtbl, v)
             else
                 newtbl[k] = v
             end
@@ -124,13 +127,13 @@ function Table.flatten(tbl, level)
                     if level > 0 then
                         Table.merge(flattened, Table.flatten(value, level - 1), true)
                     else
-                        insert(flattened, value)
+                        Table.insert(flattened, value)
                     end
                 else
                     Table.merge(flattened, Table.flatten(value), true)
                 end
             else
-                insert(flattened, value)
+                Table.insert(flattened, value)
             end
         end
     )
@@ -249,7 +252,7 @@ function Table.merge(tblA, tblB, array_merge, raw)
     end
     if array_merge then
         for _, v in pairs(tblB) do
-            insert(tblA, v)
+            Table.insert(tblA, v)
         end
     else
         for k, v in pairs(tblB) do
@@ -268,7 +271,7 @@ function Table.array_combine(...)
     local new = {}
     for _, tab in pairs(tables) do
         for _, v in pairs(tab) do
-            insert(new, v)
+            Table.insert(new, v)
         end
     end
     return new
@@ -650,10 +653,6 @@ function Table.clear(tbl)
         tbl[k] = nil
     end
     return tbl
-end
-
-for k, v in pairs(table) do
-    Table[k] = v
 end
 
 return Table

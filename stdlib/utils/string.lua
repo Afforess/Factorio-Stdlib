@@ -4,7 +4,12 @@
 -- @usage local string = require('__stdlib__/stdlib/utils/string')
 
 local String = {}
+
+-- Import base lua string into String
 setmetatable(string, {__index = String})
+for k, v in pairs(string) do
+    String[k] = v
+end
 
 local concat = table.concat
 local insert = table.insert
@@ -236,10 +241,6 @@ function String.ordinal_suffix(n, prepend_number)
         end
     end
     return prepend_number and n
-end
-
-for k, v in pairs(string) do
-    String[k] = v
 end
 
 return String

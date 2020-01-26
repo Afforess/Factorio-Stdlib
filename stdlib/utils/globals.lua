@@ -1,8 +1,15 @@
 --- Additional lua globals
 -- @module Utils.Globals
 
+local Table = require('__stdlib__/stdlib/utils/table')
+local Math = require('__stdlib__/stdlib/utils/math')
+local String = require('__stdlib__/stdlib/utils/string')
+
 STDLIB = {
-    config = require('__stdlib__/stdlib/config')
+    config = require('__stdlib__/stdlib/config'),
+    Math = Math,
+    String = String,
+    Table = Table,
 }
 
 --Since debug can be overridden we define a fallback function here.
@@ -14,13 +21,9 @@ traceback = type(debug) == 'table' and debug.traceback or _traceback
 serpent = serpent or require('__stdlib__/stdlib/vendor/serpent')
 inspect = require('__stdlib__/stdlib/vendor/inspect')
 
-local Table = require('__stdlib__/stdlib/utils/table')
-local Math = require('__stdlib__/stdlib/utils/math')
-local String = require('__stdlib__/stdlib/utils/string')
-
 _G.table_size = _G.table_size or Table.size
 
--- Set up default stuff for testing,
+-- Set up default stuff for local testing,
 -- defines will already be available in an active mod or busted setup specs
 if not _G.defines then
     _G.table.unpack = _G.table.unpack or unpack
@@ -112,7 +115,7 @@ function STDLIB.install_string()
 end
 
 --- Install Math, String, Table into their global counterparts.
-function STDLIB.install_all_utils()
+function STDLIB.install_global_utils()
     STDLIB.install.math()
     STDLIB.install.string()
     STDLIB.install.table()

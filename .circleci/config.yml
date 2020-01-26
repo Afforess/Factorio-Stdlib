@@ -11,7 +11,7 @@ jobs:
     steps:
       - checkout
       - run: ln -s ~/stdlib /usr/local/share/lua/5.2/__stdlib__
-      - run: wget -q --no-check-certificate -O .luacheckrc https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/0.17/.luacheckrc
+      - run: wget -q --no-check-certificate -O .luacheckrc https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/master/.luacheckrc
       - run: luacheck .
       - run: busted .
       - run: make quick

@@ -60,4 +60,4 @@ do
     --P(1,1):draw(_g, true)
 end
 
-P():translate(7, 1):draw()
+P():translate(7, 1):draw(Color('yellow'))

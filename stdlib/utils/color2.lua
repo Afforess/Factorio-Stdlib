@@ -34,6 +34,7 @@ function Color.new(...)
         local new
         if not ... then
             new = Color.color.white
+        -- from a hex code or word color string, "red"
         elseif type(...) == 'string' then
             if (...):find('%x%x%x%x%x%x$') then
                 return Color.from_hex(...)
@@ -41,14 +42,14 @@ function Color.new(...)
                 new = Color.color[(...)] or Color.color.white
             end
         elseif type(...) == 'number' then
-            return Color.from_params(...)
+            return Color.normalize(Color.from_params(...))
         elseif type(...) == 'table' then
             if getmetatable(...) == metatable then
-                return Color.copy(...)
+                return Color.normalize(Color.copy(...))
             elseif #(...) > 0 then
-                return Color.from_array(...)
+                return Color.normalize(Color.from_array(...))
             else
-                return Color.from_table(...)
+                return Color.normalize(Color.from_table(...))
             end
         end
         return setmetatable(new, metatable)
@@ -112,6 +113,16 @@ end
 
 --- Color Methods
 -- @section Color Methods
+
+function Color.normalize(color)
+    if color.r > 1 or color.g > 1 or color.b > 1 or color.a > 1 then
+        color.r = color.r / 255
+        color.g = color.g / 255
+        color.b = color.b / 255
+        color.a = color.a / 255
+    end
+    return color
+end
 
 function Color.alpha(color, number)
     number = number or 1

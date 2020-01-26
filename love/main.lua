@@ -36,7 +36,7 @@ local Mouse = {
 
 local function draw_mouse()
     love.graphics.push()
-    love.graphics.setColor(1,0,0,1)
+    love.graphics.setColor(1, 0, 0, 1)
     if love.mouse.isDown(1) then
         local area = Area(Mouse.down.x, Mouse.down.y, Mouse.world.x, Mouse.world.y):normalize()
         local pos = Position(Grid:convertCoords('world', 'cell', Mouse.down:unpack())):normalize()
@@ -92,6 +92,7 @@ function love.load()
     --love.window.setPosition(Window.size.x - screeny, 0)
     love.keyboard.setKeyRepeat(true)
     love.resize(love.graphics.getDimensions())
+    love.graphics.setDefaultFilter("nearest", "nearest")
     Fonts.world = love.graphics.newFont(Fonts.world)
     Fonts.info = love.graphics.newFont(Fonts.info)
 end
@@ -102,7 +103,7 @@ function love.resize(w, h)
 end
 
 function love.update(dt)
-    require("includes.lovebird").update()
+    require('includes.lovebird').update()
     local newmx, newmy = love.mouse.getPosition()
     Move(Camera, Mouse, dt, newmx, newmy)
 
@@ -117,9 +118,12 @@ function love.update(dt)
 end
 
 function love.wheelmoved(_, y)
-    local future = math.round_to(Camera.zoom * (y > 0 and 1.05 or y < 0 and 1 / 1.05), 3)
-    if future > Window.zoom.x and future < Window.zoom.y then
-        Camera.zoom = future
+    if y ~= 0 then
+        local amt = y > 0 and 1.05 or 1 / 1.05
+        local future = math.round_to(Camera.zoom * amt, 3)
+        if (future > Window.zoom.x) and (future < Window.zoom.y) then
+            Camera.zoom = future
+        end
     end
 end
 
@@ -144,6 +148,9 @@ local key = {
         if Core._draw_limit < Core.draw_count() then
             Core._draw_limit = Core._draw_limit + 1
         end
+    end,
+    ['escape'] = function()
+        love.event.quit()
     end
 }
 

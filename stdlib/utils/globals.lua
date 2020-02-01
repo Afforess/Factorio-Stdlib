@@ -18,6 +18,13 @@ local _traceback = function()
 end
 traceback = type(debug) == 'table' and debug.traceback or _traceback
 
+-- Add a fake JARG __debugadapter
+_ENV.__DebugAdapter = _ENV.__DebugAdapter or {
+    print = function() end,
+    stepIgnoreAll = function() end,
+    stepIgnore = function() end
+}
+
 serpent = serpent or require('__stdlib__/stdlib/vendor/serpent')
 inspect = require('__stdlib__/stdlib/vendor/inspect')
 

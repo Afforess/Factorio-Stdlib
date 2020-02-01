@@ -28,7 +28,6 @@ package:
 	@cp -r $(PACKAGE_NAME) $(RELATIVE_PATH)/$(PACKAGE_NAME)
 	@cp -r locale $(RELATIVE_PATH)
 	@cp info.json $(RELATIVE_PATH)/info.json
-	@cp *.lua $(RELATIVE_PATH)
 	@cp changelog.txt $(RELATIVE_PATH)/changelog.txt
 	@cp thumbnail.png $(RELATIVE_PATH)/thumbnail.png
 	@cp readme.md $(RELATIVE_PATH)/readme.md

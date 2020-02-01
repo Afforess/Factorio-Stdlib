@@ -31,7 +31,7 @@ Area.__call = function(_, ...)
     end
 end
 
-local metatable = {}
+local metatable
 
 local function new_area(lt, rb, o)
     return setmetatable({left_top = lt, right_bottom = rb, orientation = o}, metatable)

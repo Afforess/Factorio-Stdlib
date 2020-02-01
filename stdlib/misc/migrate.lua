@@ -1,8 +1,11 @@
 --- Migration helper functions
 -- @module Misc.Migrate
 
-local Migrate = {}
-setmetatable(Migrate, require('__stdlib__/stdlib/core'))
+local Migrate = {
+    __class = 'Migrate',
+    __index = require('__stdlib__/stdlib/core')
+}
+setmetatable(Migrate, Migrate)
 
 local Is = require('__stdlib__/stdlib/utils/is')
 
@@ -26,7 +29,7 @@ function Migrate.all_recipes()
         for _, tech in pairs(force.technologies) do
             if tech.researched then
                 for _, unlock in pairs(tech.effects or {}) do
-                    if unlock.type == "unlock-recipe" then
+                    if unlock.type == 'unlock-recipe' then
                         force.recipes[unlock.recipe].enabled = true
                     end
                 end

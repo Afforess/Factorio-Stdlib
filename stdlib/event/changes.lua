@@ -17,9 +17,10 @@ local Event = require('__stdlib__/stdlib/event/event')
 
 local Changes = {
     __class = 'Changes',
+    __index = require('__stdlib__/stdlib/core'),
     registered_for_events = false
 }
-setmetatable(Changes, require('__stdlib__/stdlib/core'))
+setmetatable(Changes, Changes)
 
 --[[
     ConfigurationChangedData
@@ -119,7 +120,12 @@ function Changes.on_mod_changed(this_mod_changes)
                 end
             end
         end
-        table.each(vers, function(v, k) global._changes[k] = v end)
+        table.each(
+            vers,
+            function(v, k)
+                global._changes[k] = v
+            end
+        )
     end
 end
 

@@ -11,9 +11,10 @@ local Event = require('__stdlib__/stdlib/event/event')
 
 local Force = {
    __class = 'Force',
+   __index = require('__stdlib__/stdlib/core'),
     _new_force_data = {}
 }
-setmetatable(Force, require('__stdlib__/stdlib/core'))
+setmetatable(Force, Force)
 
 local Is = require('__stdlib__/stdlib/utils/is')
 local Game = require('__stdlib__/stdlib/game')

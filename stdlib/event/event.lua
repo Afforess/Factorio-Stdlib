@@ -64,8 +64,8 @@ if not config.skip_script_protections then -- Protections for post and pre regis
         end
     end
     for name in pairs(Event.script) do
-        _G.script[name] = function(id)
-            error('Detected attempt to register an event using script.' .. name .. ' while using the STDLIB event system ' .. (id and id or ''))
+        _G.script[name] = function()
+            error('Detected attempt to register an event using script.' .. name .. ' while using the STDLIB event system ')
         end
     end
 end
@@ -94,6 +94,12 @@ end
 local function get_event_name(name)
     return event_names[name] or table.invert(Event.custom_events)[name] or name or 'unknown'
 end
+
+local stupid_events = {
+    [defines.events.script_raised_revive] = 'entity',
+    [defines.events.script_raised_built] = 'entity',
+    [defines.events.on_entity_cloned] = 'destination'
+}
 
 --- Registers a handler for the given events.
 -- If a `nil` handler is passed, remove the given events and stop listening to them.
@@ -388,6 +394,11 @@ function Event.dispatch(event)
         event.tick = event.tick or (game and game.tick) or 0
         event.define_name = event_names[event.name or '']
         event.options = event.options or {}
+
+        -- Some events are just stupid and need more help
+        if stupid_events[event.name] then
+            event.created_entity = event.created_entity or event.entity or event.destination
+        end
 
         for _, registered in ipairs(registry) do
             -- Check for userdata and stop processing this and further handlers if not valid

@@ -2,8 +2,11 @@
 -- @module Game
 -- @usage local Game = require('__stdlib__/stdlib/game')
 
-local Game = {__class = 'Game'}
-setmetatable(Game, require('__stdlib__/stdlib/core'))
+local Game = {
+    __class = 'Game',
+    __index = require('__stdlib__/stdlib/core')
+}
+setmetatable(Game, Game)
 
 local Is = require('__stdlib__/stdlib/utils/is')
 

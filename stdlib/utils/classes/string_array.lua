@@ -108,24 +108,26 @@ end
 -- @tparam string|string-array rhs
 -- @treturn string-array
 function M:concat(rhs)
-    if type(self) == 'table' then
-        if type(rhs) == 'table' then
+    local type_self = type(self)
+    local type_rhs = type(rhs)
+    if type_self == 'table' then
+        if type_rhs == 'table' then
             for _, str in ipairs(rhs) do
                 self:add(str)
             end
-        elseif type(rhs) == 'string' then
+        elseif type_rhs == 'string' then
             self:add(rhs)
         end
         return self
-    elseif type(self) == 'string' then
+    elseif type_self == 'string' then
         return rhs:add(self)
     end
     return self
 end
 
 --- The following metamethods are provided.
--- @table metamethods
-local metamethods = {
+-- @table metatable
+local metatable = {
     __index = M, -- Index to the string array class.
     __tostring = M.tostring, -- tostring.
     __concat = concat, -- adds the right hand side to the object.
@@ -135,4 +137,14 @@ local metamethods = {
     __call = M.has -- Array contains this string.
 }
 
-return metamethods
+return function(tab, create_table)
+    if tab then
+        if type(tab) == 'table' then
+            return setmetatable(tab, metatable)
+        end
+    else
+        if create_table then
+            return setmetatable({}, metatable)
+        end
+    end
+end

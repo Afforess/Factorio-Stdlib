@@ -4,9 +4,10 @@
 -- @module Event.Trains
 
 local Trains = {
-   __class = 'Trains'
+    __class = 'Trains',
+    __index = require('__stdlib__/stdlib/core')
 }
-setmetatable(Trains, require('__stdlib__/stdlib/core'))
+setmetatable(Trains, Trains)
 
 local Event = require('__stdlib__/stdlib/event/event')
 local Surface = require('__stdlib__/stdlib/area/surface')

@@ -8,9 +8,10 @@ local Event = require('__stdlib__/stdlib/event/event')
 
 local Player = {
    __class = 'Player',
+   __index = require('__stdlib__/stdlib/core'),
     _new_player_data = {}
 }
-setmetatable(Player, require('__stdlib__/stdlib/core'))
+setmetatable(Player, Player)
 
 local Is = require('__stdlib__/stdlib/utils/is')
 local Game = require('__stdlib__/stdlib/game')

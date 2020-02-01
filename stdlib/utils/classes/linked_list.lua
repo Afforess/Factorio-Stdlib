@@ -25,7 +25,8 @@ local LinkedListNode = setmetatable(
         _mtcopy = _mtcopy
     },
     {
-        __index = Core.__index
+        __index = Core
+
     }
 )
 LinkedListNode._mt.__index = LinkedListNode
@@ -43,7 +44,8 @@ local LinkedList = setmetatable(
         _mtcopy = _mtcopy
     },
     {
-        __index = Core.__index
+        __index = Core
+
     }
 )
 LinkedList.__class = LinkedList

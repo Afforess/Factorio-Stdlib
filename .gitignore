@@ -1,3 +1,9 @@
+#lua files
+/control.lua
+/data.lua
+/data-updates.lua
+/data-final-fixes.lua
+
 # Exclude the build directory
 .build/
 

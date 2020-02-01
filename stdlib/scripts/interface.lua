@@ -17,6 +17,10 @@ local Force = require('__stdlib__/stdlib/event/force')
 
 local serp_settings = {comment = false, nocode = true}
 
+interface['get_global'] = function()
+    return global
+end
+
 interface['write_global'] = function()
     game.remove_path(script.mod_name)
     game.write_file(script.mod_name .. '/global.lua', serpent.block(global, serp_settings), false)
@@ -34,6 +38,18 @@ interface['write_global'] = function()
     Player.dump_data()
     Force.dump_data()
     Changes.dump_data()
+end
+
+interface['get_globals'] = function()
+    local globals = {}
+    for inter, face in pairs(remote.interfaces) do
+        for func in pairs(face) do
+            if func == 'get_global' then
+                globals[inter] = remote.call(inter, "get_global")
+            end
+        end
+    end
+    return globals
 end
 
 interface['dump_all'] = function()

@@ -2,9 +2,10 @@
 -- @module Data.Util
 
 local Util = {
-    __class = 'Util'
+    __class = 'Util',
+    __index = require('__stdlib__/stdlib/core')
 }
-setmetatable(Util, require('__stdlib__/stdlib/core'))
+setmetatable(Util, Util)
 
 local Is = require('__stdlib__/stdlib/utils/is')
 local table = require('__stdlib__/stdlib/utils/table')

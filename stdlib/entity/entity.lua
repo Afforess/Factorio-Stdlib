@@ -2,8 +2,11 @@
 -- @module Entity.Entity
 -- @usage local Entity = require('__stdlib__/stdlib/entity/entity')
 
-local Entity = {__class = 'Entity'}
-setmetatable(Entity, require('__stdlib__/stdlib/core'))
+local Entity = {
+    __class = 'Entity',
+    __index = require('__stdlib__/stdlib/core')
+}
+setmetatable(Entity, Entity)
 
 local Is = require('__stdlib__/stdlib/utils/is')
 
@@ -215,7 +218,7 @@ function Entity.revive(ghost, player_index, raise_script_event)
             local event = {
                 created_entity = revived,
                 revived = true,
-                script = true,
+                script = true
             }
 
             if raise_script_event then

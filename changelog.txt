@@ -1,12 +1,17 @@
 ---------------------------------------------------------------------------------------------------
-Version: 1.4.0
-Date: 26.1.2020
-
+Version: 1.4.1
+Date: 31.1.2020
   Bugfixes:
-    - Fix this changelog.
+    - Fix changelog formatting and errors.
+
+  Features:
+    - Added Interface.get_global and Interface.get_globals.
 
   Changes:
-    - Remove data.lua file as it is not needed for MP sync anymore.
+    - String_Array changed to a function return.
+    - Removed Core __index to itself.
+    - Standardized __index requires.
+    - Remove data.lua file as it is no longer needed.
 ---------------------------------------------------------------------------------------------------
 Version: 1.4.0
 Date: 26.1.2020
@@ -39,8 +44,6 @@ Date: 21.7.2019
   Changes:
     - Area:iterate, spiral_iterate can return a position object.
     - Removed safetostring.
-
-  Breaking Changes:
     - Area/Position:set is now Area/Position:load.
     - Area:normalized now normalizes the area in place.
 ---------------------------------------------------------------------------------------------------
@@ -98,8 +101,6 @@ Date: 4.6.2019
 
   Changes:
     - Updated the readme and wiki.
-
-  Breaking Changes:
     - Removed mod_name requirement from Logger. Any mods using this module may need to remove the mod_name paramater when creating a new logger.
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.7
@@ -110,6 +111,7 @@ Date: 4.6.2019
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.6
 Date: 4.6.2019
+
   Bugfixes:
     - Fix Changes logic.
 ---------------------------------------------------------------------------------------------------
@@ -123,13 +125,11 @@ Date: 4.6.2019
     - Added vendor script version (simple semvar).
     - Added vendor script pulsar (A* pathfinding).
 
-  Minor Features:
-    - Added thumbnail.
-
-  Breaking Changes:
+  Changes:
     - Changes module no longer uses pcall. Changes files will need to be registered.
 
   Minor Features:
+    - Added thumbnail.
     - Added settings namespace to the test data loader.
     - Add settings namespace to the test data loader
 ---------------------------------------------------------------------------------------------------
@@ -192,8 +192,6 @@ Date: 1.27.2017
     - Changed Inventory.copy_inventory to support itemstacks with durability, health or ammo
     - Changed Trains.find_filtered to support the entity type in the search criteria. Defaults to 'locomotive'
     - Changed Entity.set_data/Entity.get_data to use a unit's unit_number as a key for data, enhancing performance for entities who have unit_numbers
-
-  Deprecations:
     - Deprecated Area.adjust, due to misleading name. (use Area.normalize instead)
 
   Bugfixes:
@@ -235,8 +233,6 @@ Date: 30.9.2016
 
   Changes:
     - Changed Game.print_all to print to offline players (fixes <https://github.com/Afforess/Factorio-Stdlib/issues/49>)
-
-  Deprecations:
     - Deprecated Game.print_force (use force.print instead)
     - Deprecated Game.print_surface (use surface.print instead)
     - Deprecated Area.area, due to misleading name. (use Area.size instead)

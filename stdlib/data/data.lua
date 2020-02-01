@@ -1,21 +1,18 @@
 --- Data
 -- @classmod Data
 
---(( DATA HEADER ))--
+require('__stdlib__/stdlib/core') -- Calling core up here to setup any required global stuffs
+
 if _G.remote and _G.script then
     error('Data Modules can only be required in the data stage', 2)
 end
 
-require('__stdlib__/stdlib/utils/globals')
-local Core = require('__stdlib__/stdlib/core') -- Calling core up here to setup any required global stuffs
-local table = require('__stdlib__/stdlib/utils/table')
-local Is = require('__stdlib__/stdlib/utils/is')
-local Inspect = require('__stdlib__/stdlib/vendor/inspect')
+local Table = require('__stdlib__/stdlib/utils/table')
 local groups = require('__stdlib__/stdlib/data/modules/groups')
-local string_array = require('__stdlib__/stdlib/utils/classes/string_array')
 
 local Data = {
     __class = 'Data',
+    __index = require('__stdlib__/stdlib/core'),
     Sprites = require('__stdlib__/stdlib/data/modules/sprites'),
     Pipes = require('__stdlib__/stdlib/data/modules/pipes'),
     Util = require('__stdlib__/stdlib/data/modules/util'),
@@ -26,11 +23,10 @@ local Data = {
         ['extend'] = true, -- Extend the data
         ['skip_string_validity'] = false, -- Skip checking for valid data
         ['items_and_fluids'] = true -- consider fluids valid for Item checks
-    },
-    __index = Core
+    }
 }
 setmetatable(Data, Data)
- --))
+--))
 
 --(( Local Functions ))--
 
@@ -71,9 +67,9 @@ end
 function Data:print(...)
     local arr = {}
     for _, key in pairs({...}) do
-        arr[#arr + 1] = Inspect(self[key])
+        arr[#arr + 1] = inspect(self[key])
     end
-    print(table.unpack(arr))
+    print(Table.unpack(arr))
     return self
 end
 
@@ -91,12 +87,12 @@ function Data:log(tbl)
         if path[#path] == 'class' then
             return {self.__class, item.__class}
         end
-        if path[#path] == Inspect.METATABLE then
+        if path[#path] == inspect.METATABLE then
             return {self.__class or item.__class, item.__class}
         end
         return item
     end
-    log(Inspect(tbl and tbl or self, {process = reduce_spam}))
+    log(inspect(tbl and tbl or self, {process = reduce_spam}))
     return self
 end
 
@@ -142,7 +138,7 @@ function Data:extend(force)
         end
     end
     if force then
-        log('NOTICE: Force extend '.. self.type .. '/' .. self.name)
+        log('NOTICE: Force extend ' .. self.type .. '/' .. self.name)
     elseif not self.options.extend and not self.extended then
         log('NOTICE: Did not extend ' .. self.type .. '/' .. self.name)
     end
@@ -154,28 +150,31 @@ end
 
 --- Copies a recipe to a new recipe.
 -- @tparam string new_name The new name for the recipe.
--- @tparam string mining_result
+-- @tparam string result
+-- @tparam string new_type
 -- @tparam[opt] table opts
 -- @treturn self
-function Data:copy(new_name, mining_result, opts)
-    Is.Assert.String(new_name, 'New name is required')
+function Data:copy(new_name, result, opts)
+    assert(type(new_name) == 'string', 'new_name must be a string')
     if self:is_valid() then
-        mining_result = mining_result or new_name
-        --local from = self.name
-        local copy = table.deep_copy(rawget(self, '_raw'))
+        result = result or new_name
+        local copy = Table.deep_copy(rawget(self, '_raw'))
         copy.name = new_name
 
         -- For Entities
-        -- Need to also check mining_results!!!!!!
-        if mining_result then
-            if copy.minable and copy.minable.result then
-                copy.minable.result = mining_result
-            end
+        -- Need to also check mining results!!!!!!
+        if copy.minable and copy.minable.result then
+            copy.minable.result = result
         end
 
         -- For items
         if copy.place_result then
-            copy.place_result = new_name
+            copy.place_result = result
+        end
+
+        -- rail planners
+        if copy.placeable_by and copy.placeable_by.item then
+            copy.placeable_by.item = result
         end
 
         -- For recipes, should also to check results!!
@@ -190,11 +189,6 @@ function Data:copy(new_name, mining_result, opts)
             end
         end
 
-        -- rail planners
-        if copy.placeable_by and copy.placeable_by.item then
-            copy.placeable_by.item = mining_result
-        end
-
         return self(copy, nil, opts or self.options)
     else
         error('Cannot Copy, invalid prototype', 4)
@@ -204,8 +198,8 @@ end
 --(( Flags ))--
 function Data:Flags()
     if self:is_valid() then
-        self.flags = self.flags or {}
-        return setmetatable(self.flags, string_array)
+        self.flags = self.String_Array(self.flags, true)
+        return self.flags
     end
 end
 
@@ -251,10 +245,7 @@ end
 -- @treturn self
 function Data:set_string_array(field)
     if self:is_valid() then
-        local has = self[field]
-        if Is.Table(has) then
-            setmetatable(has, string_array)
-        end
+        self.String_Array(field)
     end
     return self
 end
@@ -307,7 +298,7 @@ function Data:get_fields(arr, as_dictionary)
         for _, name in pairs(arr) do
             values[as_dictionary and name or #values + 1] = self[name]
         end
-        return as_dictionary and values or table.unpack(values)
+        return as_dictionary and values or Table.unpack(values)
     end
 end
 
@@ -378,7 +369,7 @@ end
 -- @treturn table icons
 function Data:get_icons(copy)
     if self:is_valid() then
-        return copy and table.deep_copy(self.icons) or self.icons
+        return copy and Table.deep_copy(self.icons) or self.icons
     end
 end
 
@@ -399,7 +390,7 @@ function Data:make_icons(...)
             end
         end
         for _, icon in pairs({...}) do
-            self.icons[#self.icons + 1] = table.deep_copy(icon)
+            self.icons[#self.icons + 1] = Table.deep_copy(icon)
         end
     end
     return self
@@ -427,7 +418,8 @@ function Data:pairs(source)
     if not source and self.type then
         source = data.raw[self.type]
     else
-        source = Is.String(source) and data.raw[source] or Is.Assert.Table(source, 'Source missing')
+        local type = type(source)
+        source = type == 'string' and data.raw[source] or (assert(type == 'table', 'Source missing') and source)
     end
 
     local function _next()
@@ -446,7 +438,7 @@ end
 -- @tparam[opt] table opts options to pass
 -- @treturn Object
 function Data:get(object, object_type, opts)
-    Is.Assert(object, 'object string or table is required')
+    assert(type(object) == 'string' or type(object) == 'table', 'object string or table is required')
 
     -- Create our middle man container object
     local new = {
@@ -457,11 +449,11 @@ function Data:get(object, object_type, opts)
         valid = false,
         extended = false,
         overwrite = false,
-        options = table.merge(table.deep_copy(Data._default_options), opts or {})
+        options = Table.merge(Table.deep_copy(Data._default_options), opts or {})
     }
 
     if type(object) == 'table' then
-        Is.Assert(object.type and object.name, 'Name and Type are required')
+        assert(object.type and object.name, 'name and type are required')
 
         new._raw = object
         new.valid = object.type
@@ -489,9 +481,9 @@ function Data:get(object, object_type, opts)
     setmetatable(new, self._object_mt)
     if new.valid then
         rawset(new, '_parent', new)
-        new:set_string_array('flags')
-        new:set_string_array('crafting_categories')
-        new:set_string_array('mining_categories')
+        self.String_Array(self.flags)
+        self.String_Array(self.crafting_categories)
+        self.String_Array(self.mining_categories)
     else
         log_trace(self, object, object_type)
     end
@@ -520,5 +512,4 @@ Data._object_mt = {
     -- use Core.tostring
     __tostring = Data.tostring
 }
-
 return Data

@@ -40,6 +40,10 @@ ldoc:
 	@cp doc/spectre-icons.min.css $(BUILD_DIR)/doc/spectre-icons.min.css
 	@cd $(BUILD_DIR) && ldoc -ic ../doc/config.ld -l ../doc -s ../doc $(OUTPUT_NAME)/$(PACKAGE_NAME)
 
+in_house:
+	@echo 'Auto Generating local documentation
+	@ldoc -ic ../doc/config.ld -l ../doc -s ../doc
+
 luacheck:
 	@echo 'Running luacheck on build directory'
 	@luacheck --version

@@ -1,5 +1,5 @@
 local Position = require('__stdlib__/stdlib/area/position')
-local GridEdit = require('includes/editgrid')
+local EditGrid = require('includes/editgrid')
 
 local Camera = {
     x = 0,
@@ -25,6 +25,5 @@ local Visual = {
     interval = 32
 }
 
-local Grid = GridEdit.grid(Camera, Visual)
---return Grid
+local Grid = EditGrid.grid(Camera, Visual)
 return {Grid = Grid, Camera = Camera, Visual = Visual}

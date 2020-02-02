@@ -1,5 +1,6 @@
-require('includes/lovedebug')
-require('includes/lovebird')
+if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
+    require("lldebugger").start()
+  end
 
 local Setup = require('grid')
 local Classes = require('classes')
@@ -10,7 +11,6 @@ local Move = require('move')
 
 local Grid = Setup.Grid
 local Camera = Setup.Camera
---local Visual = Setup.Visual
 local math = require('__stdlib__/stdlib/utils/math')
 
 _G.last_pos = Position()
@@ -103,7 +103,6 @@ function love.resize(w, h)
 end
 
 function love.update(dt)
-    require('includes.lovebird').update()
     local newmx, newmy = love.mouse.getPosition()
     Move(Camera, Mouse, dt, newmx, newmy)
 

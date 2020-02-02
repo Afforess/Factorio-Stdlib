@@ -36,6 +36,7 @@ local Core = {
 }
 
 Core.String_Array = require('__stdlib__/stdlib/utils/classes/string_array')
+Core.Debugger = __DebugAdapter
 
 --- Prints and logs the msg
 -- @tparam string msg

@@ -1,6 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.4.2
+Date: ????
+
+  Features:
+    - Added Inventory.swap_inventory.
+    - Added Inventory.transfer_inventory.
+    - Replace Color with Color2 see Docs.
+---------------------------------------------------------------------------------------------------
 Version: 1.4.1
 Date: 31.1.2020
+
   Bugfixes:
     - Fix changelog formatting and errors.
 

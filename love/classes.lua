@@ -2,7 +2,7 @@ local Core = require('__stdlib__/stdlib/core')
 local Area = require('__stdlib__/stdlib/area/area')
 local Position = require('__stdlib__/stdlib/area/position')
 local Color = function(...)
-    return require('__stdlib__/stdlib/utils/color2').new(...):to_array()
+    return require('__stdlib__/stdlib/utils/color').new(...):to_array()
 end
 _G.Area = Area
 _G.Position = Position

@@ -1,7 +1,7 @@
 --luacheck: ignore 211/A 211/Color 541
 
 local Color = function(...)
-    return require('__stdlib__/stdlib/utils/color2').new(...):to_array()
+    return require('__stdlib__/stdlib/utils/color').new(...):to_array()
 end
 
 local A = require('__stdlib__/stdlib/area/area')
@@ -11,8 +11,6 @@ math.randomseed(os.time())
 P:draw_queue(true)
 A:draw_queue(true)
 
-_G._DebugSettings.LiveFile = 'script.lua'
-_G._DebugSettings.LiveAuto = false
 
 do
     -- for i = 1, 50 do

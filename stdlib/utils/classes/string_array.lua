@@ -3,7 +3,7 @@
 -- @classmod string_array
 
 local M = {
-   __class = 'string-array-class'
+    __class = 'string-array-class'
 }
 
 local Is = require('__stdlib__/stdlib/utils/is')
@@ -137,14 +137,8 @@ local metatable = {
     __call = M.has -- Array contains this string.
 }
 
-return function(tab, create_table)
-    if tab then
-        if type(tab) == 'table' then
-            return setmetatable(tab, metatable)
-        end
-    else
-        if create_table then
-            return setmetatable({}, metatable)
-        end
+return function(array)
+    if type(array) == 'table' then
+        return setmetatable(array, metatable)
     end
 end

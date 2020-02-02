@@ -23,19 +23,19 @@
                 "${workspaceFolder}/love"
             ]
         },
-        // {
-        //     "name": "Debug Lua File",
-        //     "type": "lua",
-        //     "request": "launch",
-        //     "stopOnEntry": false,
-        //     "program": "${file}",
-        //     "cwd": "${workspaceRoot}",
-        //     "path": "?.lua;${workspaceRoot}/?.lua;C:\\lua\\luarocks\\lua\\?.lua;c:\\lua\\luarocks\\systree\\share\\lua\\5.2\\?.lua;;",
-        //     // "LUA_PATH": "${workspaceRoot}/?.lua;C:\\lua\\luarocks\\lua\\?.lua;;",
-        //     // "cpath": "${workspaceRoot}/?.dll",
-        //     "cpath": "C:\\lua\\luarocks\\systree\\lib\\lua\\5.2\\?.dll",
-        //     // "arg": [],
-        //     "console": "internalConsole"
-        // }
+        {
+            "name": "Debug Lua File",
+            "type": "lua",
+            "request": "launch",
+            "stopOnEntry": false,
+            "program": "${file}",
+            "cwd": "${workspaceRoot}",
+            "path": "?.lua;${workspaceRoot}/?.lua;C:\\lua\\luarocks\\lua\\?.lua;c:\\lua\\luarocks\\systree\\share\\lua\\5.2\\?.lua;;",
+            // "LUA_PATH": "${workspaceRoot}/?.lua;C:\\lua\\luarocks\\lua\\?.lua;;",
+            // "cpath": "${workspaceRoot}/?.dll",
+            "cpath": "C:\\lua\\luarocks\\systree\\lib\\lua\\5.2\\?.dll",
+            // "arg": [],
+            "console": "internalConsole"
+        }
     ]
 }

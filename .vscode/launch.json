@@ -24,6 +24,17 @@
             ]
         },
         {
+            "type": "lua-local",
+            "request": "launch",
+            "name": "Debug Lua",
+            "program": {
+                "lua": "lua5.2",
+                //"lua": "/home/nexela/Develop/cpp/Libs/lua-5.2.1-Factorio-0.18/bin/lua",
+                "file": "${file}"
+            },
+            "cwd": "${workspaceRoot}",
+        },
+        {
             "name": "Debug Lua File",
             "type": "lua",
             "request": "launch",

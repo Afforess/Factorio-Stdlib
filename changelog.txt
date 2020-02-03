@@ -6,6 +6,7 @@ Date: ????
     - Added Inventory.swap_inventory.
     - Added Inventory.transfer_inventory.
     - Replace Color with Color2 see Docs.
+    - Added Table.all
 ---------------------------------------------------------------------------------------------------
 Version: 1.4.1
 Date: 31.1.2020

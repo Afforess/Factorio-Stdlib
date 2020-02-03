@@ -91,6 +91,24 @@ function Table.any(tbl, func, ...)
     return Table.find(tbl, func, ...) ~= nil
 end
 
+--- Given a candidate search function, iterates over the table, calling the function
+-- for each element in the table, and returns true if search function returned true
+-- for all items in the table.
+-- Passes the index as second argument to the function.
+-- @tparam table tbl the table to be searched
+-- @tparam function func the function to used to search
+-- @param[opt] ... additional arguments passed to the search function
+-- @treturn boolean true if all elements in the table return truthy
+function Table.all(tbl, func, ...)
+    for k, v in pairs(tbl) do
+        if not func(v, k, ...) then
+            return false
+        end
+    end
+
+    return true
+end
+
 --- Given a function, apply it to each element in the table.
 -- Passes the index as the second argument to the function.
 -- <p>Iteration is aborted if the applied function returns true for any element during iteration.

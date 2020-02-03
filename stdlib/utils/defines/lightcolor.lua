@@ -33,7 +33,7 @@ local lightcolors = {
 local _mt = {
     {
         __index = function(_, c)
-            return lightcolors[c] and {r = lightcolors[c]['r'], g = lightcolors[c]['g'], b = lightcolors[c]['b'], a = lightcolors[c]['a']} or {r = 1, g = 1, b = 1, a = 1}
+            return lightcolors[c] and {r = lightcolors[c]['r'], g = lightcolors[c]['g'], b = lightcolors[c]['b'], a = lightcolors[c]['a'] or 1} or {r = 1, g = 1, b = 1, a = 1}
         end,
         __pairs = function()
             local k = nil
@@ -41,7 +41,7 @@ local _mt = {
             return function()
                 local v
                 k, v = next(c, k)
-                return k, (v and {r = v['r'], g = v['g'], b = v['b'], a = v['a']}) or nil
+                return k, (v and {r = v['r'], g = v['g'], b = v['b'], a = v['a'] or 1}) or nil
             end
         end
     }

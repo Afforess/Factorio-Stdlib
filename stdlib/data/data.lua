@@ -151,7 +151,6 @@ end
 --- Copies a recipe to a new recipe.
 -- @tparam string new_name The new name for the recipe.
 -- @tparam string result
--- @tparam string new_type
 -- @tparam[opt] table opts
 -- @treturn self
 function Data:copy(new_name, result, opts)

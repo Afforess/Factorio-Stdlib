@@ -24,35 +24,28 @@ Color.lightcolor = require('__stdlib__/stdlib/utils/defines/lightcolor')
 
 --- Create a new Color object.
 -- it can be passed, A Color, a string color name, an array,
--- a list of number paramaters (RGB), a color dictionary, or hex
+-- a list of float paramaters (RGB), a color dictionary, or hex
 -- @param any
 -- @treturn Color
 function Color.new(...)
     if (...) == Color then
         return Color.new(select(2, ...))
     else
-        local new
+        local c_type = type((...) or nil)
         if not ... then
             -- from a hex code or word color string, "red"
-            new = Color.color.white
-        elseif type(...) == 'string' then
+            return Color.white()
+        elseif c_type == 'string' then
             if (...):find('%x%x%x%x%x%x$') then
                 return Color.from_hex(...)
             else
-                new = Color.color[(...)] or Color.color.white
+                return Color.from_string(...)
             end
-        elseif type(...) == 'number' then
+        elseif c_type == 'number' then
             return Color.from_params(...)
-        elseif type(...) == 'table' then
-            if getmetatable(...) == metatable then
-                return Color.copy(...)
-            elseif #(...) > 0 then
-                return Color.from_array(...)
-            else
-                return Color.from_table(...)
-            end
+        elseif c_type == 'table' then
+            return Color.copy(...)
         end
-        return setmetatable(new, metatable)
     end
 end
 Color.__call = Color.new
@@ -66,28 +59,60 @@ end
 
 --- Copies the color into a new Color.
 -- @tparam Color color
+-- @tparam[opt] float alpha Change the alpha of the copied color
 -- @treturn Color
-function Color.copy(color)
-    if Color.is_color(color) then
-        local new = {
-            r = color.r,
-            g = color.g,
-            b = color.b,
-            a = color.a
-        }
-        return setmetatable(new, metatable)
+function Color.copy(color, alpha)
+    if type(color) == 'table' then
+        if color == Color then
+            return Color.white()
+        elseif getmetatable(color) == metatable then
+            return setmetatable({r = color.r, g = color.g, b = color.b, a = alpha or color.a or 1}, metatable)
+        elseif #color > 0 then
+            return Color.from_array(color, alpha)
+        else
+            return Color.from_table(color, alpha)
+        end
+    else
+        Color.new(color, alpha)
     end
-    return Color.new(color)
+end
+
+--- Returns a white Color.
+-- @treturn Color
+function Color.white()
+    local color = {r = 1, g = 1, b = 1, a = 1}
+    return setmetatable(color, metatable)
+end
+
+--- Returns a black color.
+-- @treturn Color
+function Color.black()
+    local color = {r = 0, g = 0, b = 0, a = 1}
+    return setmetatable(color, metatable)
+end
+
+--- Returns a color from a string name if known.
+-- Returns white if color string is unknown
+-- @tparam string string_name
+-- @tparam[opt] float alpha
+-- @treturn Color
+function Color.from_string(string_name, alpha)
+    local color = Color.color[string_name]
+    if color then
+        color.a = alpha or color.a or 1
+        return setmetatable(color, metatable)
+    end
+    return Color.white()
 end
 
 --- Converts a color in the rgb format to a color table.
--- @tparam[opt=0] int r 0-255 red
--- @tparam[opt=0] int g 0-255 green
--- @tparam[opt=0] int b 0-255 blue
--- @tparam[opt=255] int a 0-255 alpha
+-- @tparam[opt=0] float r 0-255 red
+-- @tparam[opt=0] float g 0-255 green
+-- @tparam[opt=0] float b 0-255 blue
+-- @tparam[opt=255] float a 0-255 alpha
 -- @treturn Concepts.Color
 function Color.from_params(r, g, b, a)
-    local new = Color.normalize {r = r, g = g, b = b, a = a}
+    local new = Color.normalize {r = r, g = g or r, b = b or r, a = a or 1}
     return setmetatable(new, metatable)
 end
 --- @see Color.from_params
@@ -95,24 +120,27 @@ Color.from_rgb = Color.from_params
 
 --- Converts a color in the array format to a color in the table format.
 -- @tparam array color the color to convert &mdash; { [1] = @{float}, [2] = @{float}, [3] = @{float}, [4] = @{float} }
+-- @tparam[opt] float alpha
 -- @treturn Concepts.Color a converted color &mdash; { r = c\_arr[1], g = c\_arr[2], b = c\_arr[3], a = c\_arr[4] }
-function Color.from_array(color)
-    return Color.from_params(color[1], color[2], color[3], color[4])
+function Color.from_array(color, alpha)
+    return Color.from_params(color[1] or 1, color[2] or 1, color[3] or 1, alpha or color[4] or 1)
 end
 
 --- Converts a color in the dictionary format to a color in the Color format.
 -- @tparam table color the color to convert
+-- @tparam[opt] float alpha
 -- @treturn Color
-function Color.from_table(color)
-    return Color.from_params(color.r, color.g, color.b, color.a)
+function Color.from_table(color, alpha)
+    return Color.from_params(color.r or 1, color.g or 1, color.b or 1, alpha or color.a or 1)
 end
 
 --- Get a color table with a hexadecimal string.
 -- Optionally provide the value for the alpha channel.
--- @tparam string hex hexadecimal color string (#ffffff, not #fff)
+-- @tparam string color hexadecimal color string (#ffffff, not #fff)
 -- @tparam[opt=1] float alpha the alpha value to set; such that *** 0 &#8924; value &#8924; 1 ***
 -- @treturn Concepts.Color a color table with RGB converted from Hex and with alpha
 function Color.from_hex(color, alpha)
+    assert(type(color) == 'string', 'missing color hex value')
     local match = color:match('%x?%x?%x%x%x%x%x%x$')
     color = tonumber(match, 16)
     local new = {r = 0, g = 0, b = 0, a = 1}
@@ -149,31 +177,37 @@ end
 -- @tparam Color color
 -- @return Color
 function Color.normalize(color)
+    color.a = color.a or 1
     if color.r > 1 or color.g > 1 or color.b > 1 or color.a > 1 then
-        color.r = math.min(color.r, 255) / 255
-        color.g = math.min(color.g, 255) / 255
-        color.b = math.min(color.b, 255) / 255
-        color.a = math.min(color.a, 255) / 255
+        color.r = color.r > 1 and math.min(color.r, 255) / 255 or color.r
+        color.g = color.g > 1 and math.min(color.g, 255) / 255 or color.g
+        color.b = color.b > 1 and math.min(color.b, 255) / 255 or color.b
+        color.a = color.a > 1 and math.min(color.a, 255) / 255 or color.a
     end
     return color
 end
 
 --- Set the alpha channel on a color
 -- @tparam Color color
+-- @tparam[opt = 1] float alpha
 -- @treturn Color
-function Color.alpha(color, number)
-    number = number or 1
-    number = number > 1 and number / 255 or number
-    color.a = number
+function Color.alpha(color, alpha)
+    alpha = alpha or 1
+    alpha = alpha > 1 and alpha / 255 or alpha
+    color.a = alpha
     return color
 end
 
-function Color.premul_alpha(color, number)
-    number = number > 1 and math.min(number, 255) / 255 or number
+--- Premultiply alpha
+-- @tparam Color color
+-- @tparam float alpha
+-- @return Color
+function Color.premul_alpha(color, alpha)
+    alpha = alpha > 1 and math.min(alpha, 255) / 255 or alpha
     local new = {}
-    new.r = math.clamp(color.r * number)
-    new.g = math.clamp(color.g * number)
-    new.b = math.clamp(color.b * number)
+    new.r = math.clamp(color.r * alpha)
+    new.g = math.clamp(color.g * alpha)
+    new.b = math.clamp(color.b * alpha)
     new.a = color.a or 1
     return setmetatable(new, metatable)
 end
@@ -198,8 +232,8 @@ local function clamped(r, g, b, a)
 end
 
 --- Add 2 colors together.
--- @tparam lhs Color
--- @tparam rhs Color
+-- @tparam Color lhs
+-- @tparam Color rhs
 -- @return Color
 function Color.add(lhs, rhs)
     lhs, rhs = make_color(lhs, rhs)
@@ -207,8 +241,8 @@ function Color.add(lhs, rhs)
 end
 
 --- Subtract 2 colors together.
--- @tparam lhs Color
--- @tparam rhs Color
+-- @tparam Color lhs
+-- @tparam Color rhs
 -- @return Color
 function Color.subtract(lhs, rhs)
     lhs, rhs = make_color(lhs, rhs)
@@ -216,8 +250,8 @@ function Color.subtract(lhs, rhs)
 end
 
 --- Multiply 2 colors together.
--- @tparam lhs Color
--- @tparam rhs Color
+-- @tparam Color lhs
+-- @tparam Color rhs
 -- @return Color
 function Color.multiply(lhs, rhs)
     lhs, rhs = make_color(lhs, rhs)
@@ -225,8 +259,8 @@ function Color.multiply(lhs, rhs)
 end
 
 --- Add 2 colors together.
--- @tparam lhs Color
--- @tparam rhs Color
+-- @tparam Color lhs
+-- @tparam Color rhs
 -- @return Color
 function Color.divide(lhs, rhs)
     lhs, rhs = make_color(lhs, rhs)
@@ -234,20 +268,19 @@ function Color.divide(lhs, rhs)
 end
 
 --- Modulo of 2 colors.
--- @tparam lhs Color
--- @tparam rhs Color
--- @return Color
+-- @tparam Color lhs
+-- @tparam Color rhs
+-- @treturn Color
 function Color.modulo(lhs, rhs)
     lhs, rhs = make_color(lhs, rhs)
     return clamped(lhs.r % rhs.r, lhs.g % rhs.g, lhs.b % rhs.b, math.max(lhs.a, rhs.a))
 end
 
 --- Flip a color to white or black.
--- @tparam lhs Color
--- @tparam rhs Color
--- @return Color
+-- @tparam Color color
+-- @treturn Color
 function Color.unary(color)
-    return Color.len(color) < 1.5 and Color.new('white') or Color.new('black')
+    return Color.len(color) < 1.5 and Color.white() or Color.black()
 end
 
 --- @section end
@@ -313,10 +346,10 @@ Color.pack = Color.to_array
 
 --- Return the color as 4 paramaters.
 -- @tparam Color color
--- @return number
--- @return number
--- @return number
--- @return number
+-- @return float
+-- @return float
+-- @return float
+-- @return float
 function Color.to_params(color)
     return color.r, color.g, color.b, color.a
 end
@@ -384,5 +417,7 @@ metatable = {
     __tostring = Color.to_string,
     __concat = concat
 }
+
+Color.new(Color.white())
 
 return Color

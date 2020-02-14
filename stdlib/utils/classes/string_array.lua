@@ -1,4 +1,4 @@
---- String Array Metatable
+--- Unique Array class
 -- For working with string arrays without duplicate values.
 -- string arrays are mutated in place.
 -- @classmod string_array
@@ -6,24 +6,77 @@
 local M = {
     __class = 'string-array-class'
 }
-local metatable
 
-local allowed = {
+local allowed_types = {
     ['string'] = true,
     ['number'] = true
 }
 
-local function new(array, make_unique)
-    if type(array) == 'table' then
-        return setmetatable(array, metatable)
+local function add(self, dict, param)
+    rawset(self, #self + 1, param)
+    dict[param] = #self
+    return dict[param]
+end
+
+local function remove(self, dict, param)
+    table.remove(self, dict[param])
+    dict[param] = nil
+    for i, v in pairs(self) do
+        dict[v] = i
     end
 end
 
-local function index_of(self, param)
-    for index, str in ipairs(self) do
-        if param == str then
-            return index
+local function __index(self, k)
+    return getmetatable(self)._dictionary[k] or M[k]
+end
+
+local function __newindex(self, key, value)
+    if #self + 1 == key then
+        self:add(value)
+    else
+        error('Manually adding to unique string array not allowed')
+    end
+end
+
+local dict_meta = {
+    __len = _G.table_size or function(self)
+            local count = 0
+            for _ in pairs(self) do
+                count = count + 1
+            end
+            return count
         end
+}
+
+local function new(array, make_unique)
+    if type(array) == 'table' then
+        local class = {
+            __class = "string_array",
+            __index = __index,
+            __newindex = __newindex,
+            __tostring = M.tostring,
+            __concat = M.concat,
+            __add = M.add,
+            __sub = M.remove
+        }
+
+        local dictionary = M.dictionary(array)
+
+        if #dictionary ~= #array then
+            if make_unique then
+                for i = #array, 1, -1 do
+                    array[i] = nil
+                end
+                for key in pairs(dictionary) do
+                    dictionary[key] = add(array, dictionary, key)
+                end
+            else
+                error('Array does not have unique values.')
+            end
+        end
+
+        class._dictionary = dictionary
+        return setmetatable(array, class)
     end
 end
 
@@ -34,17 +87,12 @@ function M:all(...)
     local params = type(...) == 'table' and (...) or {...}
     local count = 0
     for _, param in ipairs(params) do
-        assert(allowed[type(param)], 'Paramater type not allowed.')
-        for _, str in ipairs(self) do
-            if param == str then
-                count = count + 1
-                if count == #params then
-                    return true
-                end
-            end
+        assert(allowed_types[type(param)], 'Paramater type not allowed.')
+        if getmetatable(self)._dictionary[param] then
+            count = count + 1
         end
     end
-    return false
+    return count == #params
 end
 M.has = M.all
 
@@ -54,11 +102,9 @@ M.has = M.all
 function M:any(...)
     local params = type(...) == 'table' and (...) or {...}
     for _, param in ipairs(params) do
-        assert(allowed[type(param)], 'Paramater type not allowed.')
-        for _, str in ipairs(self) do
-            if param == str then
-                return true
-            end
+        assert(allowed_types[type(param)], 'Paramater type not allowed.')
+        if getmetatable(self)._dictionary[param] then
+            return true
         end
     end
     return false
@@ -70,11 +116,9 @@ end
 function M:none(...)
     local params = type(...) == 'table' and (...) or {...}
     for _, param in ipairs(params) do
-        assert(allowed[type(param)], 'Paramater type not allowed.')
-        for _, str in ipairs(self) do
-            if param == str then
-                return false
-            end
+        assert(allowed_types[type(param)], 'Paramater type not allowed.')
+        if getmetatable(self)._dictionary[param] then
+            return false
         end
     end
     return true
@@ -85,20 +129,12 @@ end
 -- @treturn string_array
 function M:add(...)
     local params = type(...) == 'table' and (...) or {...}
-    local insert = {}
     for _, param in ipairs(params) do
-        assert(allowed[type(param)], 'Paramater type not allowed.')
-        local i = #insert + 1
-        insert[i] = param
-        for _, str in ipairs(self) do
-            if param == str then
-                insert[i] = nil
-                break
-            end
+        assert(allowed_types[type(param)], 'Paramater type not allowed.')
+        local dict = getmetatable(self)._dictionary
+        if not dict[param] then
+            add(self, dict, param)
         end
-    end
-    for _, add in ipairs(insert) do
-        rawset(self, #self + 1, add)
     end
     return self
 end
@@ -109,12 +145,10 @@ end
 function M:remove(...)
     local params = type(...) == 'table' and (...) or {...}
     for _, param in pairs(params) do
-        assert(allowed[type(param)], 'Paramater type not allowed.')
-        for i = #self, 1, -1 do
-            if param == self[i] then
-                table.remove(self, i)
-                break
-            end
+        assert(allowed_types[type(param)], 'Paramater type not allowed.')
+        local dict = getmetatable(self)._dictionary
+        if dict[param] then
+            remove(self, dict, param)
         end
     end
     return self
@@ -123,44 +157,28 @@ end
 --- Toggles the passed name in the array by adding it if not present or removing it if it is.
 -- @tparam string name
 -- @treturn self
-function M:toggle(name)
+function M:toggle(...)
     local params = type(...) == 'table' and (...) or {...}
-    local insert = {}
     for _, param in pairs(params) do
-        assert(allowed[type(param)], 'Paramater type not allowed.')
-        local index = index_of(self, param)
-        if index then
-            table.remove(self, index)
+        assert(allowed_types[type(param)], 'Paramater type not allowed.')
+        local dict = getmetatable(self)._dictionary
+        if dict[param] then
+            remove(self, dict, param)
         else
-            rawset(self, #self + 1, param)
+            add(self, dict, param)
         end
     end
     return self
-    -- local type = type(name)
-    -- if type == 'table' then
-    --     for _, str in pairs(name) do
-    --         self:toggle(str)
-    --     end
-    --     return self
-    -- end
-
-    -- assert(type == 'string', 'name must be a string')
-    -- for i, str in ipairs(self) do
-    --     if str == name then
-    --         table.remove(self, i)
-    --         return self
-    --     end
-    -- end
-    -- table.insert(self, name)
-    -- return self
 end
 
 --- Clear the array returning an empty array object
 -- @treturn self
 function M:clear()
     for i = #self, 1, -1 do
-        table.remove(self, i)
+        self[i] = nil
     end
+    local mt = getmetatable(self)
+    mt._dictionary = setmetatable({}, dict_meta)
     return self
 end
 
@@ -180,43 +198,24 @@ function M:concat(rhs)
     return ret
 end
 
-local dict_len = table_size or function(self)
-        local count = 0
-        for _ in pairs(self) do
-            count = count + 1
-        end
-        return count
-    end
-
 function M:dictionary(func, ...)
     local dict = {}
     for index, value in pairs(self) do
         dict[value] = func and func(value, index, ...) or index
     end
-    return setmetatable(dict, {__len = dict_len})
+    return setmetatable(dict, dict_meta)
 end
 
 function M:sort(comp)
     table.sort(self, comp)
+    local dict = getmetatable(self)._dictionary
+    for i, v in pairs(self) do
+        dict[v] = i
+    end
     return self
 end
 
 --- Metamethods
 -- @section Metamethods
-
-local function __newindex(self, _, v)
-    self:add(v)
-end
-
---- The following metamethods are provided.
--- @table metatable
-metatable = {
-    __index = M, -- Index to the string array class.
-    __newindex = __newindex,
-    __tostring = M.tostring, -- tostring.
-    __concat = M.concat, -- adds the right hand side to the object.
-    __add = M.add, -- Adds a string to the string-array object.
-    __sub = M.remove -- Removes a string from the string-array object.
-}
 
 return new

@@ -17,8 +17,6 @@ describe('String_array', function()
         assert(getmetatable(tab))
     end)
 
-    --local base = String_Array{'abc', 'def', 'ghi', 'jkl'}
-
     it(':all should return true if it has passed items', function()
         assert.is_true(base:all('a'))
         assert.is_true(base:all('a', 'd'))
@@ -85,14 +83,14 @@ describe('String_array', function()
         assert.same({'c'}, base)
     end)
 
-
-
-    -- it('should toggle values', function()
-    --     base:toggle('def')
-    --     assert.same('abc', base:tostring())
-    --     base:toggle({'abc', 'def', 'ghi'})
-    --     assert.same('def, ghi', base:tostring())
-    -- end)
+    it('should toggle values', function()
+        base:toggle('b')
+        assert.same({'a', 'c', 'd'}, base)
+        base:toggle({'a', 'd', 'e'})
+        assert.same({'c', 'e'}, base)
+        base:toggle('a', 'f', 'c')
+        assert.same({'e', 'a', 'f'}, base)
+    end)
 
     it('should clear all values', function()
         base:clear()

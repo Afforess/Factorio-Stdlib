@@ -7,6 +7,9 @@
 # Exclude the build directory
 .build/
 
+.trash/
+.test/
+
 # Exclude the output directory
 .output/
 

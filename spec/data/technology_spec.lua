@@ -16,7 +16,7 @@ describe(
 
         after_each(
             function()
-                RESET()
+                package.remove_stdlib()
             end
         )
 

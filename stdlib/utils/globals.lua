@@ -9,22 +9,42 @@ STDLIB = {
     config = require('__stdlib__/stdlib/config'),
     Math = Math,
     String = String,
-    Table = Table,
+    Table = Table
 }
 
 --Since debug can be overridden we define a fallback function here.
-local _traceback = function()
-    return ''
-end
-traceback = type(debug) == 'table' and debug.traceback or _traceback
+traceback = type(debug) == 'table' and debug.traceback or function()
+        return ''
+    end
 
 -- Add a fake JARG __debugadapter
-_G.__DebugAdapter = _G.__DebugAdapter or {
-    print = function() end,
-    stepIgnoreAll = function() end,
-    stepIgnore = function() end
-}
-_G.Debugger = _G.__DebugAdapter
+_G.__DebugAdapter =
+    _G.__DebugAdapter or
+    {
+        print = function()
+        end,
+        stepIgnoreAll = function()
+        end,
+        stepIgnore = function()
+        end
+    }
+
+_G.lldebugger =
+    package.loaded['lldebugger'] or
+    {
+        requestBreak = function()
+        end,
+        call = function()
+        end,
+        finish = function()
+        end,
+        runFile = function()
+        end,
+        start = function()
+        end,
+        stop = function()
+        end
+    }
 
 serpent = serpent or require('__stdlib__/stdlib/vendor/serpent')
 inspect = require('__stdlib__/stdlib/vendor/inspect')
@@ -161,7 +181,7 @@ function STDLIB.create_stdlib_globals(files)
             FORCE = 'stdlib/event/force',
             TABLE = 'stdlib/utils/table',
             STRING = 'stdlib/utils/string',
-            MATH = 'stdlib/utils/math'
+            MATH = 'stdlib/utils/math',
         }
     for glob, path in pairs(files) do
         _G[glob] = require('__stdlib__/' .. (path:gsub('%.', '/'))) -- extra () required to emulate select(1)
@@ -178,7 +198,11 @@ function STDLIB.create_stdlib_data_globals(files)
             ENTITY = 'stdlib/data/entity',
             TECHNOLOGY = 'stdlib/data/technology',
             CATEGORY = 'stdlib/data/category',
-            DATA = 'stdlib/data/data'
+            DATA = 'stdlib/data/data',
+            TABLE = 'stdlib/utils/table',
+            STRING = 'stdlib/utils/string',
+            MATH = 'stdlib/utils/math',
+            COLOR = 'stdlib/utils/color'
         }
     STDLIB.create_stdlib_globals(files)
 end

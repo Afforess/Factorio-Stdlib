@@ -15,7 +15,7 @@ describe('Data', function()
     end)
 
     after_each(function()
-        RESET()
+        package.remove_stdlib()
     end)
 
     it("should not be in global", function()

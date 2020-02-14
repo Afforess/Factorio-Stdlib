@@ -11,6 +11,7 @@ local metatable
 
 local table = require('__stdlib__/stdlib/utils/table')
 local math = require('__stdlib__/stdlib/utils/math')
+local color_list = require('__stdlib__/stdlib/utils/defines/color_list')
 
 --- @table color @{defines.color}
 Color.color = require('__stdlib__/stdlib/utils/defines/color')
@@ -66,8 +67,8 @@ function Color.copy(color, alpha)
         if color == Color then
             return Color.white()
         elseif getmetatable(color) == metatable then
-            return setmetatable({r = color.r, g = color.g, b = color.b, a = alpha or color.a or 1}, metatable)
-        elseif #color > 0 then
+            return setmetatable({r = color.r, g = color.g, b = color.b, a = alpha or color.a or 0.5}, metatable)
+        elseif type(next(color) == "number") then
             return Color.from_array(color, alpha)
         else
             return Color.from_table(color, alpha)
@@ -80,14 +81,14 @@ end
 --- Returns a white Color.
 -- @treturn Color
 function Color.white()
-    local color = {r = 1, g = 1, b = 1, a = 1}
+    local color = {r = 1, g = 1, b = 1, a = 0.5}
     return setmetatable(color, metatable)
 end
 
 --- Returns a black color.
 -- @treturn Color
 function Color.black()
-    local color = {r = 0, g = 0, b = 0, a = 1}
+    local color = {r = 0, g = 0, b = 0, a = 0.5}
     return setmetatable(color, metatable)
 end
 
@@ -99,7 +100,7 @@ end
 function Color.from_string(string_name, alpha)
     local color = Color.color[string_name]
     if color then
-        color.a = alpha or color.a or 1
+        color.a = alpha or color.a or 0.5
         return setmetatable(color, metatable)
     end
     return Color.white()
@@ -112,7 +113,7 @@ end
 -- @tparam[opt=255] float a 0-255 alpha
 -- @treturn Concepts.Color
 function Color.from_params(r, g, b, a)
-    local new = Color.normalize {r = r, g = g or r, b = b or r, a = a or 1}
+    local new = Color.normalize {r = r, g = g or r, b = b or r, a = a or 0.5}
     return setmetatable(new, metatable)
 end
 --- @see Color.from_params
@@ -123,7 +124,7 @@ Color.from_rgb = Color.from_params
 -- @tparam[opt] float alpha
 -- @treturn Concepts.Color a converted color &mdash; { r = c\_arr[1], g = c\_arr[2], b = c\_arr[3], a = c\_arr[4] }
 function Color.from_array(color, alpha)
-    return Color.from_params(color[1] or 1, color[2] or 1, color[3] or 1, alpha or color[4] or 1)
+    return Color.from_params(color[1] or 0, color[2] or 0, color[3] or 0, alpha or color[4] or 0.5)
 end
 
 --- Converts a color in the dictionary format to a color in the Color format.
@@ -131,7 +132,7 @@ end
 -- @tparam[opt] float alpha
 -- @treturn Color
 function Color.from_table(color, alpha)
-    return Color.from_params(color.r or 1, color.g or 1, color.b or 1, alpha or color.a or 1)
+    return Color.from_params(color.r or 0, color.g or 0, color.b or 0, alpha or color.a or 0.5)
 end
 
 --- Get a color table with a hexadecimal string.
@@ -153,7 +154,7 @@ function Color.from_hex(color, alpha)
         new.r = bit32.extract(color, 16, 8) / 255
         new.g = bit32.extract(color, 8, 8) / 255
         new.b = bit32.extract(color, 0, 8) / 255
-        new.a = alpha and (alpha > 1 and math.min(alpha, 255) / 255) or alpha or 1
+        new.a = alpha and (alpha > 1 and math.min(alpha, 255) / 255) or alpha or 0.5
     end
     return setmetatable(new, metatable)
 end
@@ -398,6 +399,25 @@ function Color.is_color(color)
     return Color.is_Color(color) or Color.is_complex(color)
 end
 
+local function get_color_distance(lhs, rhs)
+    local disp = {r = lhs.r - rhs.r, g = lhs.g - rhs.g, b = lhs.b - rhs.b}
+    return (disp.r * disp.r + disp.g * disp.g + disp.b * disp.b)
+end
+
+--Takes a color and table of colors, finds key of color in table that most closely matches given color
+function Color.best_color_match(color)
+    local closest
+    local min = 1
+    for color_name, compare in pairs(color_list) do
+        local distance = get_color_distance(color, compare)
+        min = (distance < min) and distance or min
+        if distance == min then
+            closest = color_name
+        end
+    end
+    return closest
+end
+
 --- @section end
 
 metatable = {
@@ -417,7 +437,5 @@ metatable = {
     __tostring = Color.to_string,
     __concat = concat
 }
-
-Color.new(Color.white())
 
 return Color

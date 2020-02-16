@@ -24,17 +24,6 @@ describe(
             ':get',
             function()
                 it(
-                    'should error with no paramaters',
-                    function()
-                        assert.has_error(
-                            function()
-                                Technology()
-                            end
-                        )
-                    end
-                )
-
-                it(
                     'should get a Technology',
                     function()
                         assert.not_nil(Technology('steel-processing-2'))

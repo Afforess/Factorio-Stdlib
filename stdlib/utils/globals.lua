@@ -56,10 +56,11 @@ if _G.settings then
 end
 
 -- if instrument-mode then __DebugAdapter will be available
-if (_G.mods or _G.script.active_mods)['debugadapter'] then
-    require('__debugadapter__/debugadapter')
+local __DebugAdapter
+if (_G.mods and _G.mods['debugadapter']) or (_G.script and _G.script.active_mods and _G.script.active_mods['debugadapter']) then
+    __DebugAdapter = require('__debugadapter__/debugadapter')
 end
-if _G.__DebugAdapter then
+if __DebugAdapter then
     if _G.settings and _G.settings.get then
         local object_info = require('__debugadapter__/luaobjectinfo.lua')
         object_info.expandKeys['LuaSettings']['get'] = {}

@@ -38,35 +38,27 @@ describe('String_array', function()
 
         it(':all should return true if it has passed items', function()
             assert.is_true(base:all('a'))
-            assert.is_true(base:all('a', 'd'))
             assert.is_true(base:all({'a', 'd'}))
 
             assert.is_false(base:all('m'))
             assert.is_false(base:all({'d', 'm'}))
-            assert.is_false(base:all('a', 'm'))
 
         end)
 
         it(':any should return true if it has any passed items', function()
             assert.is_true(base:any('a'))
-            assert.is_true(base:any('x', 'd'))
             assert.is_true(base:any({'x', 'd'}))
-            assert.is_true(base:any('b', 'x'))
 
             assert.is_false(base:any('m'))
             assert.is_false(base:any({'x', 'm'}))
-            assert.is_false(base:any('x', 'm'))
         end)
 
         it(':none should return true it does not have any passed items', function()
             assert.is_true(base:none('x'))
-            assert.is_false(base:none('x', 'd'))
             assert.is_false(base:none({'x', 'd'}))
-            assert.is_false(base:none('b', 'x'))
 
             assert.is_false(base:none('a'))
             assert.is_true(base:none({'x', 'm'}))
-            assert.is_true(base:none('x', 'm'))
         end)
 
         it('< and <= should return true if all lhs are in rhs', function()
@@ -86,8 +78,6 @@ describe('String_array', function()
         assert.same({'a', 'b', 'c', 'd', 'e', 'f'}, base)
         base:add{'g', 'h'}
         assert.same({'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}, base)
-        base:add('a', 'i')
-        assert.same({'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'}, base)
     end)
 
     it(':remove should remove items', function()
@@ -97,9 +87,9 @@ describe('String_array', function()
         assert.same({'b', 'd'}, base)
 
         base = Unique_Array{'a', 'b', 'c', 'd'}
-        base:remove('b', 'a', 'b', 'd')
+        base:remove({'b', 'a', 'b', 'd'})
         assert.same({'c'}, base)
-        base:remove('b', 'a', 'b', 'd')
+        base:remove({'b', 'a', 'b', 'd'})
         assert.same({'c'}, base)
 
         base = Unique_Array{'a', 'b', 'c', 'd'}
@@ -114,7 +104,7 @@ describe('String_array', function()
         assert.same({'a', 'c', 'd'}, base)
         base:toggle({'a', 'd', 'e'})
         assert.same({'c', 'e'}, base)
-        base:toggle('a', 'f', 'c')
+        base:toggle({'a', 'f', 'c'})
         assert.same({'e', 'a', 'f'}, base)
     end)
 
@@ -125,6 +115,7 @@ describe('String_array', function()
 
     it(':concat should concat', function()
         -- LHS -- {'a', 'b', 'c', 'd'}
+        local a = base .. 'e'
         assert.same({'a', 'b', 'c', 'd', 'e'}, base .. 'e')
         assert.same(same, base)
         assert.same({'a', 'b', 'c', 'd', 'e'}, base .. {'e'})
@@ -148,11 +139,11 @@ describe('String_array', function()
     end)
 
     it(':intersects', function()
-        assert.same({'a', 'b', 'c'}, base:intersects('g', 'a', 'b', 'f', 'c'))
+        assert.same({'a', 'b', 'c'}, base:intersects({'g', 'a', 'b', 'f', 'c'}))
     end)
 
     it(':diff', function()
-        local diff = base:diff('d', 'a', 'b', 'f', 'c', 'g')
+        local diff = base:diff({'d', 'a', 'b', 'f', 'c', 'g'})
         assert.same({'f', 'g'}, diff)
     end)
 
@@ -170,8 +161,8 @@ describe('String_array', function()
     end)
 
     it(':disjointed', function()
-        assert.is_true(base:disjointed('e', 'f', 'g'))
-        assert.is_false(base:disjointed('e', 'f', 'g', 'a'))
+        assert.is_true(base:disjointed({'e', 'f', 'g'}))
+        assert.is_false(base:disjointed({'e', 'f', 'g', 'a'}))
 
     end)
 

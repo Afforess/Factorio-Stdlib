@@ -1,6 +1,6 @@
 require('busted.runner')()
 require('__stdlib__/spec/setup/defines')
-local Color = require('__stdlib__/stdlib/utils/color')
+local Color = require('stdlib/utils/color')
 
 describe('Color', function ()
     local say = require('say')
@@ -8,6 +8,7 @@ describe('Color', function ()
     local WHITE = {r = 1, g = 1, b = 1, a = 1}
     local WHITE_HALF = {r = 1, g = 1, b = 1, a = 0.5}
     local BLACK = {r = 0, g = 0, b = 0, a = 1}
+    local BLACK_HALF = {r = 0, g = 0, b = 0, a = 0.5}
 
     local spies = {
         new = spy.on(Color, 'new'),
@@ -50,13 +51,13 @@ describe('Color', function ()
         it('should return a white color if nothing is passed', function()
             local c = Color.new()
             assert.spy(spies.white).was_called(1)
-            assert.same(WHITE, c)
+            assert.same(WHITE_HALF, c)
         end)
 
         it('should create from Hex', function()
             local c = Color.new('#FFFFFF')
             assert.spy(spies.from_hex).was_called(1)
-            assert.same(WHITE, c)
+            assert.same(WHITE_HALF, c)
             local c2 = Color.new('#FFFFFFFF')
             assert.spy(spies.from_hex).was_called(2)
             assert.same(WHITE, c2)
@@ -77,40 +78,41 @@ describe('Color', function ()
         end)
 
         it('should create from RGB Paramaters', function()
-            assert.same(WHITE, Color.new(1))
-            assert.same(WHITE, Color.new(1,1))
-            assert.same(WHITE, Color.new(1, 1, 1))
+            assert.same(WHITE_HALF, Color.new(1))
+            assert.same(WHITE_HALF, Color.new(1,1))
+            assert.same(WHITE_HALF, Color.new(1, 1, 1))
             assert.same(WHITE, Color.new(1,1,1,1))
             assert.spy(spies.from_params).was_called(4)
-            assert.same(BLACK, Color.new(0))
+            assert.same(BLACK_HALF, Color.new(0))
             assert.same(BLACK, Color.new(0,0,0,1))
             assert.spy(spies.from_params).was_called(6)
         end)
 
         it('should create from an array of rgb paramaters', function()
-            assert.same(WHITE, Color.new{1,1,1})
+            assert.same(WHITE_HALF, Color.new{1,1,1})
             assert.same(WHITE, Color.new{1,1,1,1})
             assert.spy(spies.from_array).was_called(2)
-            assert.same(BLACK, Color.new{0,0,0})
+            assert.same(BLACK_HALF, Color.new{0,0,0})
             assert.same(BLACK, Color.new{0,0,0,1})
             assert.spy(spies.from_array).was_called(4)
         end)
 
         it('should create from a color dictionary', function()
-            assert.same(WHITE, Color.new{r = 1, b = 1, g = 1, a = 1})
-            assert.same(WHITE, Color.new{r = 1, b = 1, g = 1})
+            local a = Color.new{r = 1, b = 1, g = 1, a = 1}
+            assert.same(WHITE, a)
+            assert.same(WHITE_HALF, Color.new{r = 1, b = 1, g = 1})
             assert.spy(spies.from_table).was_called(2)
             assert.same(BLACK, Color.new{r = 0, b = 0, g = 0, a = 1})
-            assert.same(BLACK, Color.new{r = 0, b = 0, g = 0})
+            assert.same(BLACK_HALF, Color.new{r = 0, b = 0, g = 0})
             assert.spy(spies.from_table).was_called(4)
         end)
 
         it('should copy from a Color or color', function()
             clear_spies(spies)
-            assert.same(WHITE, Color.new(Color.white()))
+            assert.same(WHITE_HALF, Color.new(Color.white()))
             assert.spy(spies.copy).was_called(1)
 
-            assert.same(WHITE, Color.copy(Color.white()))
+            assert.same(WHITE_HALF, Color.copy(Color.white()))
             assert.spy(spies.copy).was_called(2)
 
             assert.same(WHITE_HALF, Color.copy(Color:white(), 0.5))
@@ -148,7 +150,7 @@ describe('Color', function ()
 
         it('should return 1 as the default alpha', function ()
             local white = Color.from_hex("#ffffff")
-            assert.is_equal(white.a, 1)
+            assert.is_equal(white.a, 0.5)
         end)
 
         it('should use alpha if defined', function ()
@@ -158,7 +160,7 @@ describe('Color', function ()
 
     describe('concat', function()
         local c = Color()
-        assert.same('The color is {r = 1, g = 1, b = 1, a = 1}', 'The color is ' .. c)
+        assert.same('The color is {r = 1, g = 1, b = 1, a = 0.5}', 'The color is ' .. c)
     end)
 
 end)

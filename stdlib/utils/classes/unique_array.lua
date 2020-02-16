@@ -11,7 +11,9 @@
 -- end'
 -- @set all=true
 
-local M = {}
+local M = {
+    __class = 'unique_array'
+}
 
 local type, ipairs = type, ipairs
 local getmetatable, setmetatable, rawset = getmetatable, setmetatable, rawset
@@ -39,39 +41,11 @@ local function remove(self, class, param)
     dictionary_sort(self, class)
 end
 
--- Return a clean array of paramaters from a tuple of strings and or arrays of strings
-local function get_params(...)
-    local params = {}
-    for _, value in ipairs {...} do
-        if type(value) == 'table' then
-            for _, tvalue in ipairs(value) do
-                params[#params + 1] = tvalue
-            end
-        else
-            params[#params + 1] = value
-        end
-    end
-    --local params = type((...)) == 'table' and (...) or {...}
-    return params
-end
-
-local wrappers = {
-    __lt = function(lhs, rhs)
-        lhs, rhs = M.new(lhs), M.new(rhs)
-        return rhs:all(lhs)
-    end,
-    __add = function(lhs, rhs)
-        return M.new(lhs):add(rhs)
-    end,
-    __sub = function(lhs, rhs)
-        return M.new(lhs):remove(rhs)
-    end
-}
+local wrappers = {}
 
 local function create_class(tab)
     if type(tab) == 'table' then
         local class = {
-            __class = 'unique_array',
             __concat = M.concat,
             __tostring = M.tostring,
             __eq = M.same,
@@ -79,6 +53,7 @@ local function create_class(tab)
             __add = wrappers.__add,
             __sub = wrappers.__sub,
             __lte = wrappers.__lt,
+            __pairs = wrappers.__pairs,
             len = 0
         }
 
@@ -92,6 +67,29 @@ local function create_class(tab)
     end
 end
 
+local function unique_or_new(tab)
+    if type(tab) == table and tab.__class == 'unique_array' then
+        return tab
+    else
+        return M.new(tab)
+    end
+end
+
+wrappers.__lt = function(lhs, rhs)
+    lhs, rhs = unique_or_new(lhs), unique_or_new(rhs)
+    return rhs:all(lhs)
+end
+wrappers.__add = function(lhs, rhs)
+    return M.new(lhs):add(rhs)
+end
+wrappers.__sub = function(lhs, rhs)
+    return M.new(lhs):remove(rhs)
+end
+wrappers.__pairs = function(self)
+    local dictionary = getmetatable(self).dictionary
+    return next, dictionary, nil
+end
+
 --- Methods
 -- @section Methods
 
@@ -99,15 +97,15 @@ end
 -- @tparam unique_array|string|{string,...} ... strings to initialize the unique array with
 -- @treturn @{unique_array} new
 function M.new(...)
-    return create_class({}):add(...)
+    return create_class({}):add(type((...)) == 'table' and (...) or {...})
 end
 
 --- Add a string to the array if it doesn't exist in the array.
--- @tparam unique_array|string|{string,...} ...
+-- @tparam unique_array|string|{string,...} other
 -- @treturn @{unique_array} self
-function M:add(...)
+function M:add(other)
     local class = getmetatable(self)
-    for _, param in ipairs(get_params(...)) do
+    for _, param in ipairs(type(other) == 'table' and other or {other}) do
         if not self[param] then
             add(self, class, param)
         end
@@ -116,11 +114,11 @@ function M:add(...)
 end
 
 --- Remove the strings from the array if they exist.
--- @tparam unique_array|string|{string,...} ...
+-- @tparam unique_array|string|{string,...} other
 -- @treturn @{unique_array} self
-function M:remove(...)
+function M:remove(other)
     local class = getmetatable(self)
-    for _, param in ipairs(get_params(...)) do
+    for _, param in ipairs(type(other) == 'table' and other or {other}) do
         if self[param] then
             remove(self, class, param)
         end
@@ -129,11 +127,11 @@ function M:remove(...)
 end
 
 --- Toggles the passed name in the array by adding it if not present or removing it if it is.
--- @tparam unique_array|string|{string,...} ...
+-- @tparam unique_array|string|{string,...} other
 -- @treturn @{unique_array} self
-function M:toggle(...)
+function M:toggle(other)
     local class = getmetatable(self)
-    for _, param in ipairs(get_params(...)) do
+    for _, param in ipairs(type(other) == 'table' and other or {other}) do
         if self[param] then
             remove(self, class, param)
         else
@@ -144,10 +142,10 @@ function M:toggle(...)
 end
 
 --- Get all items that are NOT in both arrays.
--- @tparam unique_array|string|{string,...} ...
+-- @tparam unique_array|string|{string,...} other
 -- @treturn @{unique_array} new
-function M:diff(...)
-    local other = M.new(...)
+function M:diff(other)
+    other = unique_or_new(other)
     local diff = M.new()
     for _, v in ipairs(self) do
         if not other[v] then
@@ -163,10 +161,10 @@ function M:diff(...)
 end
 
 --- Get all items that are in both arrays.
--- @tparam unique_array|string|{string,...} ...
+-- @tparam unique_array|string|{string,...} other
 -- @treturn @{unique_array} new
-function M:intersects(...)
-    local other = M.new(...)
+function M:intersects(other)
+    other = unique_or_new(other)
     local intersection = M.new()
     for _, v in ipairs(self) do
         if other[v] then
@@ -195,7 +193,7 @@ end
 -- @tparam unique_array|string|{string,...} other
 -- @treturn @{unique_array} new
 function M:concat(other)
-    return M:new(self):add(other)
+    return M.new(self):add(other)
 end
 
 --- Find all members in a unique array that match the pattern.
@@ -227,10 +225,10 @@ end
 -- @section Functions
 
 --- Does this array have all of the passed strings.
--- @tparam unique_array|string|{string,...} ...
+-- @tparam unique_array|string|{string,...} other
 -- @treturn boolean every passed string is in the array
-function M:all(...)
-    local params = get_params(...)
+function M:all(other)
+    local params = type(other) == 'table' and other or {other}
     local count = 0
     for _, param in ipairs(params) do
         if self[param] then
@@ -242,10 +240,10 @@ end
 M.has = M.all
 
 --- Does this array have any of the passed strings.
--- @tparam unique_array|string|{string,...} ...
+-- @tparam unique_array|string|{string,...} other
 -- @treturn boolean any passed string is in the array
-function M:any(...)
-    for _, param in ipairs(get_params(...)) do
+function M:any(other)
+    for _, param in ipairs(type(other) == 'table' and other or {other}) do
         if self[param] then
             return true
         end
@@ -254,10 +252,10 @@ function M:any(...)
 end
 
 --- Does this array have none of the passed strings.
--- @tparam unique_array|string|{string,...} ...
+-- @tparam unique_array|string|{string,...} other
 -- @treturn boolean no passed strings are in the array
-function M:none(...)
-    for _, param in ipairs(get_params(...)) do
+function M:none(other)
+    for _, param in ipairs(type(other) == 'table' and other or {other}) do
         if self[param] then
             return false
         end
@@ -269,6 +267,7 @@ end
 -- @tparam unique_array|string|{string,...} other
 -- @treturn boolean
 function M:same(other)
+    other = unique_or_new(other)
     if #self == #other then
         for _, value in ipairs(self) do
             if not other[value] then
@@ -281,10 +280,10 @@ function M:same(other)
 end
 
 --- Do the unique arrays have no items in common
--- @tparam unique_array|string|{string,...} ...
+-- @tparam unique_array|string|{string,...} other
 -- @treturn boolean
-function M:disjointed(...)
-    return #self:intersects(...) == 0
+function M:disjointed(other)
+    return #self:intersects(other) == 0
 end
 
 --- Convert the array to a string.
@@ -309,12 +308,23 @@ end
 --- Exports
 -- @section Exports
 
+local function from_dictionary(dict)
+    local array = {}
+    local i = 0
+    for k in pairs(dict) do
+        i = i + 1
+        array[i] = k
+    end
+    return create_class(array)
+end
+
 --- These functions are available when requiring this class.
 -- @table exports
 local exports = {
     new = M.new, -- @{unique_array.new}
     set = create_class, -- set the class on an existing table
-    dictionary = M.make_dictionary -- @{unique_array.make_dictionary}
+    dictionary = M.make_dictionary, -- @{unique_array.make_dictionary}
+    from_dictionary = from_dictionary
 }
 
 setmetatable(

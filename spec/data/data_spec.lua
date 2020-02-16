@@ -1,6 +1,5 @@
 require('busted.runner')()
 require('__stdlib__/spec/setup/defines')
-local table = require('__stdlib__/stdlib/utils/table')
 
 local Data, Raw, R, F --luacheck: ignore Raw
 
@@ -92,7 +91,7 @@ describe('Data', function()
         it("Flags:has()", function()
             --assert.is_true(Data("stone-furnace", "item"):Flags("hidden"))
             assert.is_true(flg:has("hide-from-bonus-gui"))
-            assert.is_true(flg("hide-from-bonus-gui"))
+            --assert.is_true(flg("hide-from-bonus-gui"))
         end)
 
         it("Flags:add()", function()
@@ -120,9 +119,7 @@ describe('Data', function()
         end)
 
         it("Flags:clear()", function()
-            local abc = table.deepcopy(flg)
             assert.same(0, #flg:clear())
-            assert.same(0, #-abc)
         end)
 
         it("Flags:toggle()", function()

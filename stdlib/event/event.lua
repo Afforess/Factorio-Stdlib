@@ -268,10 +268,10 @@ function Event.remove(event_id, handler, matcher, pattern)
                 Event.script.on_nth_tick(math.abs(event_id), nil)
             end
         elseif not found_something then
-            log('Attempt to deregister already non-registered listener from event: ' .. event_id)
+            __DebugAdapter.print('Attempt to deregister already non-registered listener from event: ' .. event_id)
         end
     else
-        log('Attempt to deregister already non-registered listener from event: ' .. event_id)
+        __DebugAdapter.print('Attempt to deregister already non-registered listener from event: ' .. event_id)
     end
     return Event
 end

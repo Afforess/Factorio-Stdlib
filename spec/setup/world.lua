@@ -65,6 +65,7 @@ function World.bootstrap()
     local next_id = 200
     _G.settings = require('__stdlib__/spec/setup/settings')
     _G.script = {
+        active_mods = {},
         on_event = function(eid, callback)
             registry[eid] = callback
         end,

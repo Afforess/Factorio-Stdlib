@@ -68,7 +68,7 @@ function Color.copy(color, alpha)
             return Color.white()
         elseif getmetatable(color) == metatable then
             return setmetatable({r = color.r, g = color.g, b = color.b, a = alpha or color.a or 0.5}, metatable)
-        elseif type(next(color) == "number") then
+        elseif type((next(color))) == "number" then
             return Color.from_array(color, alpha)
         else
             return Color.from_table(color, alpha)

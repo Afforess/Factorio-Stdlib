@@ -1,1 +1,10 @@
-{}
+{
+    "files.exclude": {
+        "**/.build": true,
+        "**/.trash": true,
+    },
+    "search.exclude": {
+        "**/.test": true,
+        "**/api-docs": true,
+    }
+}

@@ -10,6 +10,7 @@
 
 .trash/
 .test/
+stdlib-docs/
 
 # Exclude the output directory
 .output/

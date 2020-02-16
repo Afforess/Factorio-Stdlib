@@ -9,7 +9,11 @@
             "request": "launch",
             "name": "Factorio Mod Debug",
             "modsPath": "/home/nexela/factorio/mods",
-            "factorioPath": "/home/nexela/factorio/bin/x64/factorio"
+            "factorioPath": "/home/nexela/factorio/bin/x64/factorio",
+            "factorioArgs": [],
+            "internalConsoleOptions": "openOnSessionStart",
+            "useInstrumentMode": false,
+            "manageMod": true
         },
         {
             "type": "lua-local",
@@ -31,7 +35,7 @@
                 "lua": "lua-factorio",
                 "file": "${file}"
             },
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}"
         },
         {
             "type": "lua-local",

@@ -10,7 +10,7 @@ local BUILD_DIR = "../.build/"
 
 no_lua_ref = true
 convert_opt = true
-sort = true
+sort = false
 no_space_before_args = true
 no_return_or_parms = false
 not_luadoc = true
@@ -95,3 +95,5 @@ custom_see_handler("^function$", function() return "function", lua_url:format("2
 custom_see_handler("^userdata$", function() return "userdata", lua_url:format("2.7", "") end)
 custom_see_handler("^thread$", function() return "thread", lua_url:format("9", "#CoroutineSec") end)
 custom_see_handler("^array$", function() return "array", lua_url:format("11.1", "") end)
+custom_see_handler("^sort$", function() return "sort", lua_url:format("19.3", "") end)
+custom_see_handler("^pattern$", function() return "pattern", lua_url:format("20.2", "") end)

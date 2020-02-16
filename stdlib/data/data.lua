@@ -195,26 +195,31 @@ function Data:copy(new_name, result, opts)
 end
 
 --(( Flags ))--
-function Data:Flags()
-    if self:is_valid() then
-        self.flags = Data.String_Array(self.flags or {})
-        return self.flags
+function Data:Flags(create)
+    if create then
+        self.flags = Data.Unique_Array(self.flags)
     end
+    return self.flags or Data.Unique_Array()
 end
 
 function Data:add_flag(flag)
-    self:Flags():add(flag)
+    self:Flags(true):add(flag)
     return self
 end
 
 function Data:remove_flag(flag)
-    self:Flags():remove(flag)
+    self:Flags(true):remove(flag)
     return self
 end
 
 function Data:has_flag(flag)
-    return self:Flags():has(flag)
+    return self:Flags():all(flag)
 end
+
+function Data:any_flag(flag)
+    return self:Flags():all(flag)
+end
+
 --)) Flags ((--
 
 --- Run a function if the object is valid.
@@ -239,12 +244,12 @@ function Data:get_function_results(func, ...)
     end
 end
 
---- Set the string array class to the field if the field is present
--- @tparam table field
+--- Set the unique array class to the field if the field is present
+-- @tparam table tab
 -- @treturn self
-function Data:set_string_array(field)
-    if self:is_valid() then
-        self.String_Array(field)
+function Data:set_unique_array(tab)
+    if self:is_valid() and tab then
+        self.Unique_Array(tab)
     end
     return self
 end
@@ -412,7 +417,7 @@ function Data:tostring()
     return self.valid and (self.name and self.type) and (self.type .. '/' .. self.name) or rawtostring(self)
 end
 
-function Data:pairs(source)
+function Data:pairs(source, opts)
     local index, val
     if not source and self.type then
         source = data.raw[self.type]
@@ -424,7 +429,7 @@ function Data:pairs(source)
     local function _next()
         index, val = next(source, index)
         if index then
-            return index, self(val)
+            return index, self(val, nil, opts)
         end
     end
 
@@ -437,7 +442,7 @@ end
 -- @tparam[opt] table opts options to pass
 -- @treturn Object
 function Data:get(object, object_type, opts)
-    assert(type(object) == 'string' or type(object) == 'table', 'object string or table is required')
+    --assert(type(object) == 'string' or type(object) == 'table', 'object string or table is required')
 
     -- Create our middle man container object
     local new = {
@@ -448,7 +453,7 @@ function Data:get(object, object_type, opts)
         valid = false,
         extended = false,
         overwrite = false,
-        options = Table.merge(Table.deep_copy(Data._default_options), opts or {})
+        options = Table.merge(Table.deep_copy(Data._default_options), opts or self.options or {})
     }
 
     if type(object) == 'table' then
@@ -480,11 +485,11 @@ function Data:get(object, object_type, opts)
     setmetatable(new, self._object_mt)
     if new.valid then
         rawset(new, '_parent', new)
-        self.String_Array(self.flags)
-        self.String_Array(self.crafting_categories)
-        self.String_Array(self.mining_categories)
-    else
-        log_trace(self, object, object_type)
+        self.Unique_Array.set(new.flags)
+        self.Unique_Array.set(new.crafting_categories)
+        self.Unique_Array.set(new.mining_categories)
+    elseif not new.options.silent then
+        log_trace(new, object, object_type)
     end
     return new:extend()
 end
@@ -511,4 +516,5 @@ Data._object_mt = {
     -- use Core.tostring
     __tostring = Data.tostring
 }
+
 return Data

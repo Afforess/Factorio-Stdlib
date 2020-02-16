@@ -1,8 +1,9 @@
-#lua files
-/control.lua
-/data.lua
-/data-updates.lua
-/data-final-fixes.lua
+#lua files in root
+#/control.lua
+#/data.lua
+#/data-updates.lua
+#/data-final-fixes.lua
+/*.lua
 
 # Exclude the build directory
 .build/

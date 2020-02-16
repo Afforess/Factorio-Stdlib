@@ -37,7 +37,6 @@ local Core = {
 
 Core.String_Array = require('__stdlib__/stdlib/utils/classes/string_array')
 Core.Unique_Array = require('__stdlib__/stdlib/utils/classes/unique_array')
-Core.DebugAdapter = __DebugAdapter
 
 --- Prints and logs the msg
 -- @tparam string msg
@@ -121,14 +120,5 @@ function Core.help(self)
 
     return help_string
 end
-
--- Load the debugger if debugadapter is present.
-function Core.debugger()
-    local has_debugger = (_ENV.script and _ENV.script.active_mods['debugadapter']) or _ENV.mods['debugadapter']
-    if has_debugger then
-        require('__debugadapter__/debugadapter')
-    end
-end
-
 
 return Core

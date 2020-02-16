@@ -17,35 +17,6 @@ traceback = type(debug) == 'table' and debug.traceback or function()
         return ''
     end
 
--- Add a fake JARG __debugadapter
-_G.__DebugAdapter =
-    _G.__DebugAdapter or
-    {
-        print = function()
-        end,
-        stepIgnoreAll = function()
-        end,
-        stepIgnore = function()
-        end
-    }
-
-_G.lldebugger =
-    package.loaded['lldebugger'] or
-    {
-        requestBreak = function()
-        end,
-        call = function()
-        end,
-        finish = function()
-        end,
-        runFile = function()
-        end,
-        start = function()
-        end,
-        stop = function()
-        end
-    }
-
 serpent = serpent or require('__stdlib__/stdlib/vendor/serpent')
 inspect = require('__stdlib__/stdlib/vendor/inspect')
 
@@ -73,6 +44,38 @@ require('__stdlib__/stdlib/utils/defines/color')
 require('__stdlib__/stdlib/utils/defines/anticolor')
 require('__stdlib__/stdlib/utils/defines/lightcolor')
 require('__stdlib__/stdlib/utils/defines/time')
+
+-- Settings Mutates
+if _G.settings then
+    function _G.settings.get(cat, key)
+        return _G.settings[cat][key] and _G.settings[cat][key].value
+    end
+    function _G.settings.get_startup(key)
+        return _G.settings.get('startup', key)
+    end
+end
+
+-- if instrument-mode then __DebugAdapter will be available
+if (_G.mods or _G.script.active_mods)['debugadapter'] then
+    require('__debugadapter__/debugadapter')
+end
+if _G.__DebugAdapter then
+    if _G.settings and _G.settings.get then
+        local object_info = require('__debugadapter__/luaobjectinfo.lua')
+        object_info.expandKeys['LuaSettings']['get'] = {}
+        object_info.expandKeys['LuaSettings']['get_startup'] = {}
+    end
+else
+    _G.__DebugAdapter = {
+        print = function()
+        end,
+        stepIgnoreAll = function()
+        end,
+        stepIgnore = function()
+        end,
+        skipRequire = true
+    }
+end
 
 --- Require a file that may not exist
 -- @tparam string module path to the module
@@ -181,7 +184,7 @@ function STDLIB.create_stdlib_globals(files)
             FORCE = 'stdlib/event/force',
             TABLE = 'stdlib/utils/table',
             STRING = 'stdlib/utils/string',
-            MATH = 'stdlib/utils/math',
+            MATH = 'stdlib/utils/math'
         }
     for glob, path in pairs(files) do
         _G[glob] = require('__stdlib__/' .. (path:gsub('%.', '/'))) -- extra () required to emulate select(1)

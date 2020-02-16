@@ -4,6 +4,8 @@ require('__stdlib__/spec/setup/defines')
 _G.log = function()
 end
 
+_G.mods = {}
+
 package.remove_stdlib = function()
     for name in pairs(package.loaded) do
         if name:find('%_%_stdlib%_%_') then

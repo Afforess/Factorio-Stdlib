@@ -278,32 +278,39 @@ end
 
 --- Shortcut for `Event.register(Event.core_events.on_load, function)`
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
-function Event.on_load(handler, matcher, pattern)
-    return Event.register(Event.core_events.on_load, handler, matcher, pattern)
+function Event.on_load(...)
+    return Event.register(Event.core_events.on_load, ...)
 end
 
 --- Shortcut for `Event.register(Event.core_events.on_configuration_changed, function)`
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
-function Event.on_configuration_changed(handler, matcher, pattern)
-    return Event.register(Event.core_events.on_configuration_changed, handler, matcher, pattern)
+function Event.on_configuration_changed(...)
+    return Event.register(Event.core_events.on_configuration_changed, ...)
 end
 
 --- Shortcut for `Event.register(Event.core_events.on_init, function)`
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
-function Event.on_init(handler, matcher, pattern)
-    return Event.register(Event.core_events.on_init, handler, matcher, pattern)
+function Event.on_init(...)
+    return Event.register(Event.core_events.on_init, ...)
 end
 
 --- Shortcut for `Event.register(-nthTick, function)`
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
-function Event.on_nth_tick(nth_tick, handler, matcher, pattern)
-    return Event.register(-math.abs(nth_tick), handler, matcher, pattern)
+function Event.on_nth_tick(nth_tick, ...)
+    return Event.register(-math.abs(nth_tick), ...)
 end
 
---- Shortcut for `Event.register(defines.events, handler, matcher, pattern)`
+--- Shortcut for `Event.register(defines.events, function)`
 -- @function Event.on_event
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 Event.on_event = Event.register
+
+function Event.register_if(truthy, id, ...)
+    if truthy then
+        return Event.register(id, ...)
+    end
+    return Event
+end
 
 -- Use option A or B if present, otherwise pass option C
 local function check_option(a, b, c)

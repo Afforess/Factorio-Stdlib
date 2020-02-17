@@ -1,12 +1,13 @@
 --- Additional lua globals
 -- @module Utils.Globals
 
+local config = require('__stdlib__/stdlib/config')
+
 local Table = require('__stdlib__/stdlib/utils/table')
 local Math = require('__stdlib__/stdlib/utils/math')
 local String = require('__stdlib__/stdlib/utils/string')
 
 STDLIB = {
-    config = require('__stdlib__/stdlib/config'),
     Math = Math,
     String = String,
     Table = Table
@@ -26,9 +27,9 @@ _G.table_size = _G.table_size or Table.size
 -- defines will already be available in an active mod or busted setup specs
 if not _G.defines then
     _G.table.unpack = _G.table.unpack or unpack
-    if STDLIB.config.control or STDLIB.config.game then
+    if config.control or config.game then
         local world = require('__stdlib__/spec/setup/world').bootstrap()
-        if STDLIB.config.game then
+        if config.game then
             world.init()
         end
     else

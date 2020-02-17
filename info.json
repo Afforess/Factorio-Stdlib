@@ -13,7 +13,7 @@
     "package": {
         "ignore": ["Makefile", "*.lua", "wiki/**", "spec/**", "tools/**", "doc/**", "*.sh"],
         "scripts": {
-          "prepackage": "./prepackage.sh"
+          "prepackage": ".vscode/prepackage.sh"
         }
       }
 }

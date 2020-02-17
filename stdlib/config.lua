@@ -1,3 +1,1 @@
-return {
-    DEBUG = false
-}
+return {}

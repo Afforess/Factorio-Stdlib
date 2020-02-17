@@ -4,7 +4,7 @@
 -- @usage local Core = require('__stdlib__/stdlib/core')
 
 -- require global helper functions.
-local STDLIB = require('__stdlib__/stdlib/utils/globals')
+require('__stdlib__/stdlib/utils/globals')
 
 local Core = {
     _VERSION = '1.0.0',
@@ -32,11 +32,11 @@ local Core = {
     __call = function(t, ...)
         return t:__call(...)
     end,
-    __config = STDLIB.config
+    __config = require('__stdlib__/stdlib/config')
 }
 
-Core.String_Array = require('__stdlib__/stdlib/utils/classes/string_array')
 Core.Unique_Array = require('__stdlib__/stdlib/utils/classes/unique_array')
+Core.String_Array = Core.Unique_Array
 
 --- Prints and logs the msg
 -- @tparam string msg

@@ -27,9 +27,9 @@ local table = require('__stdlib__/stdlib/utils/table')
 Trains.on_train_id_changed = Event.generate_event_name()
 
 --- Given a @{criteria|search criteria}, search for trains that match the criteria.
--- * If ***criteria.surface*** is not supplied, this function searches through all existing surfaces.
--- * If ***criteria.force*** is not supplied, this function searches through all existing forces.
--- * If ***criteria.state*** is not supplied, this function gets trains in any @{defines.train_state|state}.
+-- If ***criteria.surface*** is not supplied, this function searches through all existing surfaces.
+-- If ***criteria.force*** is not supplied, this function searches through all existing forces.
+-- If ***criteria.state*** is not supplied, this function gets trains in any @{defines.train_state|state}.
 -- @tparam criteria criteria a table used to search for trains
 -- @return (<span class="types">{@{train_details},...}</span>) an array of train IDs and LuaTrain instances
 -- @usage

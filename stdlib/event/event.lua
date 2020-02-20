@@ -564,7 +564,7 @@ function Event.dump_data()
 end
 
 --- Filters events related to entity_type.
--- ! DEPRECATED
+-- DEPRECATED
 -- @tparam string event_parameter The event parameter to look inside to find the entity type
 -- @tparam string entity_type The entity type to filter events for
 -- @tparam callable matcher The matcher to invoke if the filter passes. The object defined in the event parameter is passed

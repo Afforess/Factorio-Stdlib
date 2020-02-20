@@ -191,7 +191,7 @@ local noop = function(...)
 end
 
 --- Splits a string into an array.
--- *Note:* Empty split substrings are not included in the resulting table.
+-- Note: Empty split substrings are not included in the resulting table.
 -- <p>For example, `string.split("foo.bar...", ".", false)` results in the table `{"foo", "bar"}`.
 -- @tparam string s the string to split
 -- @tparam[opt="."] string sep the separator to use.

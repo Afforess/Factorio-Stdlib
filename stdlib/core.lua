@@ -53,7 +53,7 @@ end
 
 if script then
     --- Simple valid check, only available in control stage.
-    --! DEPRECATED
+    --  DEPRECATED
     function Core.VALID_FILTER(v)
         return v and v.valid
     end

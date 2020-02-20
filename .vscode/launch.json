@@ -10,7 +10,12 @@
             "name": "Factorio Mod Debug",
             "modsPath": "/home/nexela/factorio/mods",
             "factorioPath": "/home/nexela/factorio/bin/x64/factorio",
-            "factorioArgs": [],
+            "factorioArgs": [
+                "--disable-prototype-history",
+                "--disable-audio",
+                "--load-game",
+                "vscode"
+            ],
             "internalConsoleOptions": "openOnSessionStart",
             "useInstrumentMode": false,
             "manageMod": true

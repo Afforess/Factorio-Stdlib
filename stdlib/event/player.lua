@@ -13,10 +13,10 @@ local Player = {
 }
 setmetatable(Player, Player)
 
-local Is = require('__stdlib__/stdlib/utils/is')
 local Game = require('__stdlib__/stdlib/game')
 local table = require('__stdlib__/stdlib/utils/table')
 local merge_additional_data = require('__stdlib__/stdlib/event/modules/merge_data')
+local assert, type = assert, type
 
 -- Return new default player object consiting of index, name, force
 local function new(player_index)
@@ -32,7 +32,8 @@ end
 
 function Player.additional_data(...)
     for _, func_or_table in pairs({...}) do
-        Is.Assert(Is.Table(func_or_table) or Is.Function(func_or_table), 'Must be table or function')
+        local var_type = type(func_or_table)
+        assert(var_type == 'table' or var_type == 'function', 'Must be table or function')
         Player._new_player_data[#Player._new_player_data + 1] = func_or_table
     end
     return Player

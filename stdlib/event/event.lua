@@ -18,27 +18,30 @@ config.control = true
 
 local Event = {
     __class = 'Event',
-    core_events = {
-        on_init = 'on_init',
-        on_load = 'on_load',
-        on_configuration_changed = 'on_configuration_changed',
-        init = 'on_init',
-        load = 'on_load',
-        configuration_changed = 'on_configuration_changed',
-        init_and_config = {'on_init', 'on_configuration_changed'},
-        init_and_load = {'on_init', 'on_load'}
-    },
     custom_events = {}, -- Holds custom event ids
-    options = {
-        protected_mode = false,
-        skip_valid = false,
-        inspect_event = false, -- requires debug_mode to be true
-        force_crc = false -- Requires debug_mode to be true
-    },
     stop_processing = {}, -- just has to be unique
+    Filters = require('__stdlib__/stdlib/event/modules/event_filters'),
     __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Event, Event)
+
+Event.options = {
+    protected_mode = false,
+    skip_valid = false,
+    inspect_event = false, -- requires debug_mode to be true
+    force_crc = false -- Requires debug_mode to be true
+}
+
+Event.core_events = {
+    on_init = 'on_init',
+    on_load = 'on_load',
+    on_configuration_changed = 'on_configuration_changed',
+    init = 'on_init',
+    load = 'on_load',
+    configuration_changed = 'on_configuration_changed',
+    init_and_config = {'on_init', 'on_configuration_changed'},
+    init_and_load = {'on_init', 'on_load'}
+}
 
 Event.script = {
     on_event = script.on_event,
@@ -50,9 +53,11 @@ Event.script = {
     get_event_handler = script.get_event_handler
 }
 
+local Type = require('__stdlib__/stdlib/utils/type')
 local table = require('__stdlib__/stdlib/utils/table')
-local Is = require('__stdlib__/stdlib/utils/is')
 local inspect = require('__stdlib__/stdlib/vendor/inspect')
+
+local assert, type, tonumber = assert, type, tonumber
 local event_registry = {} --Holds the event registry
 local inspect_append = false -- Only used for write_file, can cause desyncs elsewhere
 local event_names = table.invert(defines.events)
@@ -84,11 +89,12 @@ local bootstrap_register = {
 }
 
 local function valid_id(id)
-    return (Is.Number(id) or Is.String(id)), 'Invalid Event Id, Must be string/int/defines.events, Passed in: ' .. type(id)
+    local id_type = type(id)
+    return (id_type == 'number' or id_type == 'string'), 'Invalid Event Id, Must be string/int/defines.events, Passed in: ' .. type(id)
 end
 
 local function valid_event_id(id)
-    return (tonumber(id) and id >= 0) or (Is.String(id) and not bootstrap_register[id])
+    return (tonumber(id) and id >= 0) or (Type.String(id) and not bootstrap_register[id])
 end
 
 local function get_event_name(name)
@@ -117,34 +123,34 @@ local stupid_events = {
 -- Event.register(event1, handler1).register(event2, handler2)
 -- @param event_id (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
 -- @tparam function handler the function to call when the given events are triggered
--- @tparam[opt=nil] function matcher a function whose return determines if the handler is executed. event and pattern are passed into this
--- @tparam[opt=nil] mixed pattern an invariant that can be used in the matcher function, passed as the second parameter to your matcher
+-- @tparam[opt=nil] function filter a function whose return determines if the handler is executed. event and pattern are passed into this
+-- @tparam[opt=nil] mixed pattern an invariant that can be used in the filter function, passed as the second parameter to your filter
 -- @tparam[opt=nil] table options a table of options that take precedence over the module options.
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
-function Event.register(event_id, handler, matcher, pattern, options)
-    Is.Assert(event_id, 'missing event_id argument')
-    Is.Assert(Is.Function(handler), 'handler function is missing, use Event.remove to un register events')
-    Is.Assert(Is.Nil(matcher) or Is.Function(matcher), 'matcher must be a function when present')
-    Is.assert(Is.Nil(options) or Is.Table(options), 'options must be a table when present')
+function Event.register(event_id, handler, filter, pattern, options)
+    assert(event_id, 'missing event_id argument')
+    assert(Type.Function(handler), 'handler function is missing, use Event.remove to un register events')
+    assert(filter == nil or Type.Function(filter), 'filter must be a function when present')
+    assert(options == nil or Type.Table(options), 'options must be a table when present')
 
     options = options or {}
 
     --Recursively handle event id tables
-    if Is.Table(event_id) then
+    if Type.Table(event_id) then
         for _, id in pairs(event_id) do
             Event.register(id, handler)
         end
         return Event
     end
 
-    Is.Assert(valid_id(event_id))
+    assert(valid_id(event_id), 'event_id is invalid')
 
     -- If the event_id has never been registered before make sure we call the correct script action to register
     -- our Event handler with factorio
     if not event_registry[event_id] then
         event_registry[event_id] = {}
 
-        if Is.String(event_id) then
+        if Type.String(event_id) then
             --String event ids will either be Bootstrap events or custom input events
             if bootstrap_register[event_id] then
                 Event.script[event_id](bootstrap_register[event_id])
@@ -165,7 +171,7 @@ function Event.register(event_id, handler, matcher, pattern, options)
     --If handler is already registered for this event: remove it for re-insertion at the end.
     if #registry > 0 then
         for i, registered in ipairs(registry) do
-            if registered.handler == handler and registered.pattern == pattern and registered.matcher == matcher then
+            if registered.handler == handler and registered.pattern == pattern and registered.filter == filter then
                 table.remove(registry, i)
                 local event_str = event_id .. '(' .. (event_names[event_id] or ' ') .. ')'
                 log('Same handler already registered for event ' .. event_str .. ' at position ' .. i .. ', moving it to the bottom')
@@ -175,7 +181,7 @@ function Event.register(event_id, handler, matcher, pattern, options)
     end
 
     --Finally insert the handler
-    table.insert(registry, {handler = handler, matcher = matcher, pattern = pattern, options = options})
+    table.insert(registry, {handler = handler, filter = filter, pattern = pattern, options = options})
     return Event
 end
 
@@ -187,34 +193,34 @@ end
 -- <p>The `event_id` parameter takes in either a single, multiple, or mixture of @{defines.events}, @{int}, and @{string}.
 -- @param event_id (<span class="types">@{defines.events}, @{int}, @{string}, or {@{defines.events}, @{int}, @{string},...}</span>)
 -- @tparam[opt] function handler the handler to remove, if not present remove all registered handlers for the event_id
--- @tparam[opt] function matcher
+-- @tparam[opt] function filter
 -- @tparam[opt] mixed pattern
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
-function Event.remove(event_id, handler, matcher, pattern)
-    Is.Assert(event_id, 'missing event_id argument')
+function Event.remove(event_id, handler, filter, pattern)
+    assert(event_id, 'missing event_id argument')
 
     -- Handle recursion here
-    if Is.Table(event_id) then
+    if Type.Table(event_id) then
         for _, id in pairs(event_id) do
             Event.remove(id, handler)
         end
         return Event
     end
 
-    Is.Assert(valid_id(event_id))
+    assert(valid_id(event_id), 'event_id is invalid')
 
     local registry = event_registry[event_id]
     if registry then
         local found_something = false
         for i = #registry, 1, -1 do
             local registered = registry[i]
-            if handler then -- handler, possibly matcher, possibly pattern
+            if handler then -- handler, possibly filter, possibly pattern
                 if handler == registered.handler then
-                    if not matcher and not pattern then
+                    if not filter and not pattern then
                         table.remove(registry, i)
                         found_something = true
-                    elseif matcher then
-                        if matcher == registered.matcher then
+                    elseif filter then
+                        if filter == registered.filter then
                             if not pattern then
                                 table.remove(registry, i)
                                 found_something = true
@@ -228,8 +234,8 @@ function Event.remove(event_id, handler, matcher, pattern)
                         found_something = true
                     end
                 end
-            elseif matcher then -- no handler, matcher, possibly pattern
-                if matcher == registered.matcher then
+            elseif filter then -- no handler, filter, possibly pattern
+                if filter == registered.filter then
                     if not pattern then
                         table.remove(registry, i)
                         found_something = true
@@ -238,12 +244,12 @@ function Event.remove(event_id, handler, matcher, pattern)
                         found_something = true
                     end
                 end
-            elseif pattern then -- no handler, no matcher, pattern
+            elseif pattern then -- no handler, no filter, pattern
                 if pattern == registered.pattern then
                     table.remove(registry, i)
                     found_something = true
                 end
-            else -- no handler, matcher, or pattern
+            else -- no handler, filter, or pattern
                 table.remove(registry, i)
                 found_something = true
             end
@@ -253,7 +259,7 @@ function Event.remove(event_id, handler, matcher, pattern)
             -- Clear the registry data and un subscribe if there are no registered handlers left
             event_registry[event_id] = nil
 
-            if Is.String(event_id) then
+            if Type.String(event_id) then
                 -- String event ids will either be Bootstrap events or custom input events
                 if bootstrap_register[event_id] then
                     Event.script[event_id](nil)
@@ -329,7 +335,7 @@ local function no_pcall(handler, event, other)
 end
 
 -- A dispatch helper function
--- Call any matcher and as applicable the event handler.
+-- Call any filter and as applicable the event handler.
 -- protected errors are logged to game console if game is available, otherwise a real error
 -- is thrown. Bootstrap events are not protected from erroring no matter the option.
 local function dispatch_event(event, registered)
@@ -337,10 +343,10 @@ local function dispatch_event(event, registered)
     local protected = check_option(event.options.protected_mode, registered.options.protected_mode, Event.options.protected_mode)
     local pcall = not bootstrap_register[event.name] and protected and pcall or no_pcall
 
-    -- If we have a matcher run it first passing event, and registered.pattern as parameters
-    -- If the matcher returns truthy call the handler passing event, and the result from the matcher
-    if registered.matcher then
-        success, match_result = pcall(registered.matcher, event, registered.pattern)
+    -- If we have a filter run it first passing event, and registered.pattern as parameters
+    -- If the filter returns truthy call the handler passing event, and the result from the filter
+    if registered.filter then
+        success, match_result = pcall(registered.filter, event, registered.pattern)
         if success and match_result then
             success, handler_result = pcall(registered.handler, event, match_result)
         end
@@ -446,10 +452,10 @@ end
 -- @usage
 -- Event.register(Event.generate_event_name("my_custom_event"), handler)
 function Event.generate_event_name(event_name)
-    Is.Assert.String(event_name, 'event_name must be a string.')
+    assert(Type.String(event_name), 'event_name must be a string.')
 
     local id
-    if Is.Number(Event.custom_events[event_name]) then
+    if Type.Number(Event.custom_events[event_name]) then
         id = Event.custom_events[event_name]
     else
         id = Event.script.generate_event_name()
@@ -459,14 +465,14 @@ function Event.generate_event_name(event_name)
 end
 
 function Event.set_event_name(event_name, id)
-    Is.Assert.String(event_name, 'event_name must be a string')
-    Is.Assert.Number(id)
+    assert(Type.String(event_name), 'event_name must be a string')
+    assert(Type.Number(id))
     Event.custom_events[event_name] = id
     return Event.custom_events[event_name]
 end
 
 function Event.get_event_name(event_name)
-    Is.Assert.String(event_name, 'event_name must be a string')
+    assert(Type.String(event_name), 'event_name must be a string')
     return Event.custom_events[event_name]
 end
 
@@ -477,7 +483,7 @@ end
 
 --- Get event handler.
 function Event.get_event_handler(event_id)
-    Is.Assert(valid_id(event_id))
+    assert(valid_id(event_id), 'event_id is invalid')
     return {
         script = bootstrap_register(event_id) or (valid_event_id(event_id) and Event.script.get_event_handler(event_id)),
         handlers = event_registry[event_id]
@@ -486,7 +492,7 @@ end
 
 --- Set protected mode.
 function Event.set_protected_mode(bool)
-        Event.options.protected_mode = bool and true or false
+    Event.options.protected_mode = bool and true or false
     return Event
 end
 
@@ -561,19 +567,6 @@ function Event.dump_data()
     game.write_file(Event.get_file_path('Event/factorio_registry.lua'), inspect(factorio_events, {longkeys = true, arraykeys = true}))
     game.write_file(Event.get_file_path('Event/event_registry.lua'), inspect(registry, {longkeys = true, arraykeys = true}))
     game.write_file(Event.get_file_path('Event/raw_registry.lua'), inspect(event_registry, {longkeys = true, arraykeys = true}))
-end
-
---- Filters events related to entity_type.
--- DEPRECATED
--- @tparam string event_parameter The event parameter to look inside to find the entity type
--- @tparam string entity_type The entity type to filter events for
--- @tparam callable matcher The matcher to invoke if the filter passes. The object defined in the event parameter is passed
-function Event.filter_entity(event_parameter, entity_type, matcher)
-    return function(evt)
-        if (evt[event_parameter].type == entity_type) then
-            matcher(evt[event_parameter])
-        end
-    end
 end
 
 return Event

@@ -16,10 +16,10 @@ local Force = {
 }
 setmetatable(Force, Force)
 
-local Is = require('__stdlib__/stdlib/utils/is')
 local Game = require('__stdlib__/stdlib/game')
 local table = require('__stdlib__/stdlib/utils/table')
 local merge_additional_data = require('__stdlib__/stdlib/event/modules/merge_data')
+local assert, type = assert, type
 
 -- return new default force object
 local function new(force_name)
@@ -35,7 +35,8 @@ end
 
 function Force.additional_data(...)
     for _, func_or_table in pairs({...}) do
-        Is.Assert(Is.Table(func_or_table) or Is.Function(func_or_table), 'Must be table or function')
+        local var_type = type(func_or_table)
+        assert(var_type == 'table' or var_type == 'function', 'Must be table or function')
         Force._new_force_data[#Force._new_force_data + 1] = func_or_table
     end
     return Force
@@ -52,7 +53,7 @@ end
 -- -- Returns data for the force named "player" from either a string or LuaForce object
 function Force.get(force)
     force = Game.get_force(force)
-    Is.Assert(force, 'force is missing')
+    assert(force, 'force is missing')
     return game.forces[force.name], global.forces and global.forces[force.name] or Force.init(force.name)
 end
 

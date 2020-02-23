@@ -200,7 +200,7 @@ end
 function Trains.register_events()
     -- When a locomotive is removed ...
     local train_remove_events = {defines.events.on_entity_died, defines.events.on_pre_player_mined_item, defines.events.on_robot_pre_mined}
-    Event.register(train_remove_events, Event.filter_entity('entity', 'locomotive', Trains._on_locomotive_changed))
+    Event.register(train_remove_events, Trains._on_locomotive_changed, Event.Filters.entity.type, 'locomotive')
 
     -- When a locomotive is added ...
     Event.register(defines.events.on_train_created, Trains.on_train_created)

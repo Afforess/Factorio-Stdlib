@@ -115,7 +115,6 @@ describe('String_array', function()
 
     it(':concat should concat', function()
         -- LHS -- {'a', 'b', 'c', 'd'}
-        local a = base .. 'e'
         assert.same({'a', 'b', 'c', 'd', 'e'}, base .. 'e')
         assert.same(same, base)
         assert.same({'a', 'b', 'c', 'd', 'e'}, base .. {'e'})

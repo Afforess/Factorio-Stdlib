@@ -127,6 +127,7 @@ function Math.arithmetic_mean(...)
 end
 
 Math.avg = Math.arithmetic_mean
+Math.average = Math.arithmetic_mean
 
 --- Calculates the geometric mean of a set of values.
 -- @tparam array x an array of numbers

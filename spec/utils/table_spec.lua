@@ -1,5 +1,4 @@
-require('busted.runner')()
-
+require('spec/setup/busted')()
 
 local table = require('__stdlib__/stdlib/utils/table')
 

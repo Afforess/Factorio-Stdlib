@@ -1,12 +1,11 @@
-require('busted.runner')()
-require('__stdlib__/spec/setup/defines')
+require('spec/setup/busted')()
 
 local Data, Raw, R, F --luacheck: ignore Raw
 
 describe('Data', function()
 
     before_each(function()
-        require('__stdlib__/spec/setup/dataloader')
+        require('faketorio/dataloader')
         Data = require('__stdlib__/stdlib/data/data')
         Raw = _G.data.raw["recipe"]
         R = Data("stone-furnace", "recipe")

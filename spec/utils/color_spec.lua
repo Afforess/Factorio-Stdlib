@@ -1,5 +1,5 @@
-require('busted.runner')()
-require('__stdlib__/spec/setup/defines')
+require('spec/setup/busted')()
+
 local Color = require('stdlib/utils/color')
 
 describe('Color', function ()

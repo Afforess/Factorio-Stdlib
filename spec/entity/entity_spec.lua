@@ -1,6 +1,4 @@
-require('busted.runner')()
-
-require('__stdlib__/spec/setup/defines')
+require('spec/setup/busted')()
 
 local Entity = require('__stdlib__/stdlib/entity/entity')
 

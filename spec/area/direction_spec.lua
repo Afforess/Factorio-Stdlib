@@ -1,4 +1,4 @@
-require('busted.runner')()
+require('spec/setup/busted')()
 
 local Direction = require('__stdlib__/stdlib/area/direction')
 

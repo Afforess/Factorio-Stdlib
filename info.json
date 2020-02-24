@@ -11,7 +11,7 @@
     "homepage": "https://github.com/Afforess/Factorio-Stdlib",
     "description": "The Factorio Standard Library is a project to bring Factorio modders high-quality, commonly-required utilities and tools.",
     "package": {
-        "ignore": ["Makefile", "*.lua", "wiki/**", "spec/**", "tools/**", "doc/**"],
+        "ignore": ["Makefile", "*.lua", "wiki/**", "spec/**", "tools/**", "doc/**", "faketorio/**"],
         "scripts": {
           "prepackage": ".vscode/prepackage.sh",
           "version": ".vscode/version.sh"

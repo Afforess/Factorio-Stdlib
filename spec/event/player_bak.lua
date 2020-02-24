@@ -1,10 +1,9 @@
-require('busted.runner')()
-
-require('__stdlib__/spec/setup/defines')
-require('__stdlib__/stdlib/utils/table').overwrite_global()
+require('spec/setup/busted')()
+--luacheck: ignore
 
 local Event = require('__stdlib__/stdlib/event/event')
---luacheck: ignore
+local table = require('__stdlib__/stdlib/utils/table')
+
 describe(
     'Player',
     function()

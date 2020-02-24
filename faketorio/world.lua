@@ -16,7 +16,8 @@ World.quit - Closes the world simulator
 
 note: save/load/reload haven't been tested yet.
 --]]
-require('__stdlib__/spec/setup/defines')
+require('__stdlib__/faketorio/globals')
+
 local Table = require('__stdlib__/stdlib/utils/table')
 
 local World = {
@@ -43,93 +44,15 @@ function World.bootstrap()
         error('Cannot Open, simulation already running')
     end
 
-    _G._require = _G._require or require
-
-    -- Setup Globals
-    _G.serpent = require('__stdlib__/stdlib/vendor/serpent')
-    _G.inspect = require('__stdlib__/stdlib/vendor/inspect')
-
     _G.log = log_buffer
 
     _G.game = nil
     _G.global = {}
 
-    _G.remote = {
-        interfaces = {},
-        call = function() end,
-        add_interface = function() end
-    }
-
-    local in_event_handler = 0 -- track event callback recursion (a psuedosemaphore)
-    local registry = {}
-    local next_id = 200
-    _G.settings = require('__stdlib__/spec/setup/settings')
-    _G.script = {
-        active_mods = {},
-        on_event = function(eid, callback)
-            registry[eid] = callback
-        end,
-        on_init = function(callback)
-            registry['on_init'] = callback
-        end,
-        on_load = function(callback)
-            registry['on_load'] = callback
-        end,
-        on_configuration_changed = function(callback)
-            registry['on_configuration_changed'] = callback
-        end,
-        on_nth_tick = function(tick, callback)
-            registry[-math.abs(tick)] = callback
-        end,
-        generate_event_name = function()
-            next_id = next_id + 1
-            return next_id
-        end,
-        get_event_handler = function(id)
-            return registry[id]
-        end,
-        raise_event = function(id, e)
-            -- presumably the real raise_event arguments are
-            -- not optional but it's handy for testing.
-            e = e or {}
-            id = id or 0
-            e.name = e.name or id
-            e.tick = e.tick or _G.game and _G.game.tick or 0
-            in_event_handler = in_event_handler + 1
-            if in_event_handler == 1 then
-                _G.require = function(...)
-                    -- debatable if '^spec' should be included here?
-                    -- nb: stdlib.foo is a no-no, however, this is
-                    -- not the right place to enforce that rule.
-                    if string.match((...), '^stdlib[/.]') then
-                        error('faketorio does not allow the use of the require function \z
-                              in event callbacks because it is a big stupid jerk', 2)
-                    else
-                        return _G._require(...)
-                    end
-                end
-            end
-            local ok,
-                msg =
-                xpcall(
-                function()
-                    return (registry[id] or function()
-                        end)(e)
-                end,
-                debug.traceback
-            )
-            in_event_handler = in_event_handler - 1
-            if not ok then
-                error(msg)
-            else
-                if in_event_handler == 0 then
-                    _G.require = _G._require
-                end
-                return msg
-            end
-        end,
-        mod_name = 'tests'
-    }
+    _G.commands = require('__stdlib__/faketorio/commands')
+    _G.remote = require('__stdlib__/faketorio/remote')
+    _G.settings = require('__stdlib__/faketorio/settings')
+    _G.script = require('__stdlib__/faketorio/script')
 
     return World
 end
@@ -185,8 +108,7 @@ local function fake_game(game)
     local rslt = World.fake_userdata(game)
     local rsltmeta = getmetatable(rslt)
     local rsltmetaindex = rsltmeta.__index
-    rsltmeta.__index =
-        function(_, k)
+    rsltmeta.__index = function(_, k)
         if k == 'connected_players' then
             return setmetatable(
                 {},

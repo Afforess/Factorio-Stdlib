@@ -18,22 +18,19 @@ traceback = type(debug) == 'table' and debug.traceback or function()
         return ''
     end
 
-serpent = serpent or require('__stdlib__/stdlib/vendor/serpent')
 inspect = require('__stdlib__/stdlib/vendor/inspect')
 
-_G.table_size = _G.table_size or Table.size
-
--- Set up default stuff for local testing,
--- defines will already be available in an active mod or busted setup specs
+-- Set up faketorio for local testing,
+-- defines will already be available in an active mod or busted specs
 if not _G.defines then
     _G.table.unpack = _G.table.unpack or unpack
     if config.control or config.game then
-        local world = require('__stdlib__/spec/setup/world').bootstrap()
+        local world = require('__stdlib__/faketorio/world').bootstrap()
         if config.game then
             world.init()
         end
     else
-        require('__stdlib__/spec/setup/dataloader')
+        require('__stdlib__/faketorio/dataloader')
     end
     _G.log = function(msg)
         print(msg)

@@ -1,8 +1,7 @@
-require('busted.runner')()
-require('__stdlib__/spec/setup/defines')
-local table = require('__stdlib__/stdlib/utils/table').overwrite_global()
+require('spec/setup/busted')()
 
 local Event = require('__stdlib__/stdlib/event/event')
+local table = require('__stdlib__/stdlib/utils/table').overwrite_global()
 
 describe("Force",
     function()

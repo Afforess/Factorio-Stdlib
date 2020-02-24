@@ -1,8 +1,7 @@
-require('busted.runner')()
-require('__stdlib__/spec/setup/defines')
-local table = require('__stdlib__/stdlib/utils/table')
+require('spec/setup/busted')()
 
 local Game = require('__stdlib__/stdlib/game')
+local table = require('__stdlib__/stdlib/utils/table')
 
 describe("Game Spec",
     function()

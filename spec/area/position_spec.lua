@@ -1,9 +1,8 @@
-require('busted.runner')()
-
-require('__stdlib__/spec/setup/defines')
+require('spec/setup/busted')()
 
 local Position = require('__stdlib__/stdlib/area/position')
 local P = Position
+
 describe('Position', function ()
 
     local C = spy.on(Position, 'construct')

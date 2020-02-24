@@ -1,7 +1,7 @@
-require('busted.runner')()
+require('spec/setup/busted')()
 
 _G.script = {
-    mod_name = 'tests'
+    mod_name = 'stdlib'
 }
 local Logger = require('__stdlib__/stdlib/misc/logger')
 
@@ -43,7 +43,7 @@ describe('Logger', function()
             assert.spy(s).was_not_called()
             _G.game.tick = 61 + 3600
             l.log('foo3')
-            assert.spy(s).was_called_with('tests/test.log', '00:00:00.00: foo\n00:00:01.00: foo\n00:00:01.01: foo2\n00:01:01.01: foo3\n', false)
+            assert.spy(s).was_called_with('stdlib/test.log', '00:00:00.00: foo\n00:00:01.00: foo\n00:00:01.01: foo2\n00:01:01.01: foo3\n', false)
         end)
 
         it('creates correct timestamps', function()
@@ -52,18 +52,18 @@ describe('Logger', function()
 
             local l = Logger.new('test', true, {log_ticks = false})
             l.log('foo')
-            assert.spy(s).was_called_with('tests/test.log', '00:00:00: foo\n', false)
+            assert.spy(s).was_called_with('stdlib/test.log', '00:00:00: foo\n', false)
 
             _G.game.tick = 60
             l.log('foo')
-            assert.spy(s).was_called_with('tests/test.log', '00:00:01: foo\n', true)
+            assert.spy(s).was_called_with('stdlib/test.log', '00:00:01: foo\n', true)
 
             _G.game.tick = 61
             l.log('foo2')
-            assert.spy(s).was_called_with('tests/test.log', '00:00:01: foo2\n', true)
+            assert.spy(s).was_called_with('stdlib/test.log', '00:00:01: foo2\n', true)
             _G.game.tick = 61 + 3600
             l.log('foo3')
-            assert.spy(s).was_called_with('tests/test.log', '00:01:01: foo3\n', true)
+            assert.spy(s).was_called_with('stdlib/test.log', '00:01:01: foo3\n', true)
         end)
 
         it('uses log() if _G.script is not available', function()
@@ -76,12 +76,12 @@ describe('Logger', function()
             l.log('foo')
             assert.spy(spyLog).was_called_with('Data/test: foo')
             assert.falsy(l.buffer[1]) --do not buffer in data stage
-            _G["script"] = {mod_name = 'tests'}
+            _G["script"] = {mod_name = 'stldlib'}
         end)
 
         it('buffers messages when _G.script is available', function()
             _G["game"] = nil
-            _G["script"] = {mod_name = 'tests'}
+            _G["script"] = {mod_name = 'stdlib'}
             _G["log"] = function() end
 
             local l = Logger.new('test', true)
@@ -93,7 +93,7 @@ describe('Logger', function()
             _G["game"] = { tick = 0, write_file = function() end }
             local s2 = spy.on(_G["game"], 'write_file')
             l.log('got game')
-            assert.spy(s2).was_called_with('tests/test.log', '00:00:00: no game\n00:00:00: got game\n', false)
+            assert.spy(s2).was_called_with('stdlib/test.log', '00:00:00: no game\n00:00:00: got game\n', false)
             assert.falsy(l.buffer[1])
         end)
 
@@ -106,17 +106,17 @@ describe('Logger', function()
 
             local l = Logger.new('test',true, {log_ticks = true, file_extension = 'lua'})
             l.log('foo')
-            assert.spy(s).was_called_with('tests/test.lua', '00:00:00.00: foo\n', false)
+            assert.spy(s).was_called_with('stdlib/test.lua', '00:00:00.00: foo\n', false)
 
             _G.game.tick = 60
             l.log('foo')
-            assert.spy(s).was_called_with('tests/test.lua', '00:00:01.00: foo\n', true)
+            assert.spy(s).was_called_with('stdlib/test.lua', '00:00:01.00: foo\n', true)
             assert.equals(60, l.last_written)
             l.log('foo2')
-            assert.spy(s).was_called_with('tests/test.lua', '00:00:01.00: foo2\n', true)
+            assert.spy(s).was_called_with('stdlib/test.lua', '00:00:01.00: foo2\n', true)
             _G.game.tick = 61 + 3600
             l.log('foo3')
-            assert.spy(s).was_called_with('tests/test.lua', '00:01:01.01: foo3\n', true)
+            assert.spy(s).was_called_with('stdlib/test.lua', '00:01:01.01: foo3\n', true)
 
         end)
     end)

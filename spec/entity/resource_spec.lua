@@ -1,9 +1,8 @@
-require('busted.runner')()
-require('__stdlib__/spec/setup/defines')
-local table = require('__stdlib__/stdlib/utils/table')
+require('spec/setup/busted')()
 
 local Resource = require('__stdlib__/stdlib/entity/resource')
 local Area = require('__stdlib__/stdlib/area/area')
+local table = require('__stdlib__/stdlib/utils/table')
 
 describe('Resource filtering', function()
     local resources = {}

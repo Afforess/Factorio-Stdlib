@@ -1,12 +1,10 @@
-require('busted.runner')()
+require('spec/setup/busted')()
 
-require('__stdlib__/spec/setup/defines')
+local World = require('faketorio/world')
 
 local match = require('luassert.match')
-require('__stdlib__/spec/setup/utils/matcher')
-
-local World = require('__stdlib__/spec/setup/world')
-local genstub = require('__stdlib__/spec/setup/utils/stub_factory')
+require('spec/setup/matcher')
+local genstub = require('spec/setup/stub_factory')
 
 describe('Event', function ()
     insulate('.register', function()

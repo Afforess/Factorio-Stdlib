@@ -1,7 +1,7 @@
-require('busted.runner')()
+require('spec/setup/busted')()
 
 local LinkedList = require('__stdlib__/stdlib/utils/classes/linked_list')
-local World = require('__stdlib__/spec/setup/world')
+local World = require('faketorio/world')
 
 -- bootstrap world for _G.log
 World.bootstrap()

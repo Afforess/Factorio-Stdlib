@@ -1,9 +1,8 @@
-require('busted.runner')()
-require('__stdlib__/spec/setup/defines')
-local table = require('__stdlib__/stdlib/utils/table').overwrite_global()
+require('spec/setup/busted')()
 
 local Event = require('__stdlib__/stdlib/event/event')
 local Gui = require('__stdlib__/stdlib/event/gui')
+local table = require('__stdlib__/stdlib/utils/table')
 
 local test_function = {f=function(x) _G.someVariable = x end, g=function(x) _G.someVariable = x end}
 local function_a = function(arg) test_function.f(arg.tick) end

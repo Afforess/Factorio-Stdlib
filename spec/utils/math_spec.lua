@@ -1,5 +1,4 @@
-require('busted.runner')()
-
+require('spec/setup/busted')()
 
 local math = require('__stdlib__/stdlib/utils/math')
 

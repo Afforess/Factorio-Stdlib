@@ -1,9 +1,7 @@
-require('busted.runner')()
-
-require('__stdlib__/spec/setup/defines')
-local table = require('__stdlib__/stdlib/utils/table')
+require('spec/setup/busted')()
 
 local Config = require('__stdlib__/stdlib/misc/config')
+local table = require('__stdlib__/stdlib/utils/table')
 
 --[[ the table to be duplicated for all tests. ]]--
 _G.config_template = {

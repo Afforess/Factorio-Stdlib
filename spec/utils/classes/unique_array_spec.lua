@@ -1,4 +1,4 @@
-require('busted.runner')()
+require('spec/setup/busted')()
 
 local Unique_Array = require('__stdlib__/stdlib/utils/classes/unique_array')
 local U = Unique_Array

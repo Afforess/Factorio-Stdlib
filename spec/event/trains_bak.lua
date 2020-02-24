@@ -1,12 +1,10 @@
-require('busted.runner')()
-require('__stdlib__/spec/setup/defines')
-local table = require('__stdlib__/stdlib/utils/table').overwrite_global()
+require('spec/setup/busted')()
 
 local Event = require('__stdlib__/stdlib/event/event')
+local table = require('__stdlib__/stdlib/utils/table')
 
 local Trains
---local Surface = require('__stdlib__/stdlib/area/surface')
-local Train_Spec_Fixtures = require('__stdlib__/spec/setup/fixtures/train_fixtures')
+local Train_Spec_Fixtures = require('faketorio/fixtures/train_fixtures')
 
 local entity_to_trains = function(tbl) return table.map(tbl, function(entity) return entity.train end) end
 

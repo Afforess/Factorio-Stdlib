@@ -72,7 +72,8 @@ else
         end,
         stepIgnore = function()
         end,
-        skipRequire = true
+        breakpoint = function()
+        end
     }
 end
 

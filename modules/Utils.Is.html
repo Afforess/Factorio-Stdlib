@@ -58,6 +58,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Event.html"><span class="module-name-item">Event.Event</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Force.html"><span class="module-name-item">Event.Force</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Gui.html"><span class="module-name-item">Event.Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Filters.html"><span class="module-name-item">Event.Filters</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Player.html"><span class="module-name-item">Event.Player</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Surface.html"><span class="module-name-item">Event.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Trains.html"><span class="module-name-item">Event.Trains</span></a></div></li>
@@ -67,17 +68,16 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Migrate.html"><span class="module-name-item">Misc.Migrate</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Queue.html"><span class="module-name-item">Misc.Queue</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color.html"><span class="module-name-item">Utils.Color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color2.html"><span class="module-name-item">Utils.Color2</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Globals.html"><span class="module-name-item">Utils.Globals</span></a></div></li>
     <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Utils.Is.html"><span class="module-name-item">Utils.Is</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Iter.html"><span class="module-name-item">Utils.Iter</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.math.html"><span class="module-name-item">Utils.math</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.string.html"><span class="module-name-item">Utils.string</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.table.html"><span class="module-name-item">Utils.table</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/vendor.version.html"><span class="module-name-item">vendor.version</span></a></div></li>
     </ul>
     </li>
@@ -104,6 +104,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Technology.html"><span class="module-name-item">Data.Technology</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/LinkedList.html"><span class="module-name-item">LinkedList</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/string_array.html"><span class="module-name-item">string_array</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/unique_array.html"><span class="module-name-item">unique_array</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Vendor.Enumerable.html"><span class="module-name-item">Vendor.Enumerable</span></a></div></li>
     </ul>
     </li>
@@ -136,9 +137,9 @@
     <li class="nav-item">
     <h4>Contents of <strong>Utils.Is</strong></h4>
     <ul class="nav">
+    <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions </a></li>
     <li class="nav-item"><a href="#Is_Table"><span class="fragment-hashtag">#</span> Is Table </a></li>
     <li class="nav-item"><a href="#Is_Table_Callers"><span class="fragment-hashtag">#</span> Is Table Callers </a></li>
-    <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions </a></li>
     </ul>
     </li>
     </ul>
@@ -182,6 +183,162 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <!-- module section list start -->
     <table class="section-content-list">
     <thead>
+    <h3><a href="#Functions">Functions </a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#Table">Table(var)</a></td>
+    <td class="summary">Returns the var if the passed variable is a table.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#String">String(var)</a></td>
+    <td class="summary">Returns the var if the passed variable is a string.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Number">Number(var)</a></td>
+    <td class="summary">Returns the var if the passed variable is a number.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Nil">Nil(var)</a></td>
+    <td class="summary">Returns true if the passed variable is nil.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Boolean">Boolean(var)</a></td>
+    <td class="summary">Returns true if the passed variable is a boolean.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#True">True(var)</a></td>
+    <td class="summary">Returns true if the passed variable is true</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Truthy">Truthy(var)</a></td>
+    <td class="summary">Returns the var if the passed variable is not nil or false.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#False">False(var)</a></td>
+    <td class="summary">Returns true if the passed variable is false.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Falsy">Falsy(var)</a></td>
+    <td class="summary">Returns true if the passed variable is false or nil.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Empty">Empty(var)</a></td>
+    <td class="summary">Returns true if the passed variable is nil, an empty table, or an empty string.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Positive">Positive(var)</a></td>
+    <td class="summary">Returns the passed var if it is positive.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#odd">odd(var)</a></td>
+    <td class="summary">Returns the passed var if it is odd.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#even">even(var)</a></td>
+    <td class="summary">Returns the passed var if it is even.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Negative">Negative(var)</a></td>
+    <td class="summary">Returns the passed var if it is negative.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#NaN">NaN(var)</a></td>
+    <td class="summary">Returns the passed var if it is not a number.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Finite">Finite(var)</a></td>
+    <td class="summary">Returns the passed var if it is finite.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Int">Int(var)</a></td>
+    <td class="summary">Returns the passed var if it is an int.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Int8">Int8(var)</a></td>
+    <td class="summary">Returns the passed var if it is an int8.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Int16">Int16(var)</a></td>
+    <td class="summary">Returns the passed var if it is an int16.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Int32">Int32(var)</a></td>
+    <td class="summary">Returns the passed var if it is an int32.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Unsigned">Unsigned(var)</a></td>
+    <td class="summary">Returns the passed var if it is an unsigned int.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#UInt">UInt(var)</a></td>
+    <td class="summary">Returns the passed var if it is an unsigned int.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#UInt8">UInt8(var)</a></td>
+    <td class="summary">Returns the passed var if it is an unsigned int8.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#UInt16">UInt16(var)</a></td>
+    <td class="summary">Returns the passed var if it is an unsigned int16.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#UInt32">UInt32(var)</a></td>
+    <td class="summary">Returns the passed var if it is an unsigned int32.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Float">Float(var)</a></td>
+    <td class="summary">Returns the passed var if it is a float.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Position">Position(var)</a></td>
+    <td class="summary">Returns the passed var if it is a full position.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Area">Area(var)</a></td>
+    <td class="summary">Returns the passed var if it is a full area.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Vector">Vector(var)</a></td>
+    <td class="summary">Returns the passed var if it is a simple position/vector.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#BoundingBox">BoundingBox(var)</a></td>
+    <td class="summary">Returns the passed var if it is a simple area/boundingbox.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Hex">Hex(var)</a></td>
+    <td class="summary">Returns the hex value of the passed var if it is hexadecimal.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#StrictWord">StrictWord(var)</a></td>
+    <td class="summary">Returns true if the passed variable is a single alphbetical word.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#AlphabetWord">AlphabetWord(var)</a></td>
+    <td class="summary">Returns true if the passed variable is a single alphbetical word.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#AlphanumWord">AlphanumWord(var)</a></td>
+    <td class="summary">Returns true if the passed variable is a single alphbetical word.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Object">Object(var)</a></td>
+    <td class="summary">Is this a factorio object</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Valid">Valid(var)</a></td>
+    <td class="summary">Is this factorio object valid</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#Callable">Callable(var)</a></td>
+    <td class="summary">Returns true if the passed variable is a callable function.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
     <h3><a href="#Is_Table">Is Table </a></h3>
     <span></span>
     </thead>
@@ -199,14 +356,6 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#Assert">Assert(var)</a></td>
-    <td class="summary">Assert that the test is Truthy</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Assert.Not">Assert.Not(var)</a></td>
-    <td class="summary">Assert that the test is not Truthy</td>
-    </tr>
-    <tr>
     <td class="name"><a href="#Is">Is(var)</a></td>
     <td class="summary">Is the test truthy</td>
     </tr>
@@ -214,161 +363,13 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <td class="name"><a href="#Not">Not(var)</a></td>
     <td class="summary">Is the test not truthy</td>
     </tr>
-    </tbody>
-    </table>
-    <table class="section-content-list">
-    <thead>
-    <h3><a href="#Functions">Functions </a></h3>
-    <span></span>
-    </thead>
-    <tbody>
     <tr>
-    <td class="name"><a href="#AlphabetWord">AlphabetWord(var)</a></td>
-    <td class="summary">Returns true if the passed variable is a single alphbetical word.</td>
+    <td class="name"><a href="#Assert">Assert(var)</a></td>
+    <td class="summary">Assert that the test is Truthy</td>
     </tr>
     <tr>
-    <td class="name"><a href="#AlphanumWord">AlphanumWord(var)</a></td>
-    <td class="summary">Returns true if the passed variable is a single alphbetical word.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Area">Area(var)</a></td>
-    <td class="summary">Returns the passed var if it is a full area.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Boolean">Boolean(var)</a></td>
-    <td class="summary">Returns true if the passed variable is a boolean.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#BoundingBox">BoundingBox(var)</a></td>
-    <td class="summary">Returns the passed var if it is a simple area/boundingbox.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Callable">Callable(var)</a></td>
-    <td class="summary">Returns true if the passed variable is a callable function.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Empty">Empty(var)</a></td>
-    <td class="summary">Returns true if the passed variable is nil, an empty table, or an empty string.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#False">False(var)</a></td>
-    <td class="summary">Returns true if the passed variable is false.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Falsy">Falsy(var)</a></td>
-    <td class="summary">Returns true if the passed variable is false or nil.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Finite">Finite(var)</a></td>
-    <td class="summary">Returns the passed var if it is finite.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Float">Float(var)</a></td>
-    <td class="summary">Returns the passed var if it is a float.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Hex">Hex(var)</a></td>
-    <td class="summary">Returns the hex value of the passed var if it is hexadecimal.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Int">Int(var)</a></td>
-    <td class="summary">Returns the passed var if it is an int.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Int16">Int16(var)</a></td>
-    <td class="summary">Returns the passed var if it is an int16.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Int32">Int32(var)</a></td>
-    <td class="summary">Returns the passed var if it is an int32.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Int8">Int8(var)</a></td>
-    <td class="summary">Returns the passed var if it is an int8.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#NaN">NaN(var)</a></td>
-    <td class="summary">Returns the passed var if it is not a number.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Negative">Negative(var)</a></td>
-    <td class="summary">Returns the passed var if it is negative.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Nil">Nil(var)</a></td>
-    <td class="summary">Returns true if the passed variable is nil.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Number">Number(var)</a></td>
-    <td class="summary">Returns the var if the passed variable is a number.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Object">Object(var)</a></td>
-    <td class="summary">Is this a factorio object</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Position">Position(var)</a></td>
-    <td class="summary">Returns the passed var if it is a full position.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Positive">Positive(var)</a></td>
-    <td class="summary">Returns the passed var if it is positive.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#StrictWord">StrictWord(var)</a></td>
-    <td class="summary">Returns true if the passed variable is a single alphbetical word.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#String">String(var)</a></td>
-    <td class="summary">Returns the var if the passed variable is a string.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Table">Table(var)</a></td>
-    <td class="summary">Returns the var if the passed variable is a table.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#True">True(var)</a></td>
-    <td class="summary">Returns true if the passed variable is true</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Truthy">Truthy(var)</a></td>
-    <td class="summary">Returns the var if the passed variable is not nil or false.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#UInt">UInt(var)</a></td>
-    <td class="summary">Returns the passed var if it is an unsigned int.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#UInt16">UInt16(var)</a></td>
-    <td class="summary">Returns the passed var if it is an unsigned int16.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#UInt32">UInt32(var)</a></td>
-    <td class="summary">Returns the passed var if it is an unsigned int32.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#UInt8">UInt8(var)</a></td>
-    <td class="summary">Returns the passed var if it is an unsigned int8.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Unsigned">Unsigned(var)</a></td>
-    <td class="summary">Returns the passed var if it is an unsigned int.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Valid">Valid(var)</a></td>
-    <td class="summary">Is this factorio object valid</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#Vector">Vector(var)</a></td>
-    <td class="summary">Returns the passed var if it is a simple position/vector.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#even">even(var)</a></td>
-    <td class="summary">Returns the passed var if it is even.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#odd">odd(var)</a></td>
-    <td class="summary">Returns the passed var if it is odd.</td>
+    <td class="name"><a href="#Assert.Not">Assert.Not(var)</a></td>
+    <td class="summary">Assert that the test is not Truthy</td>
     </tr>
     </tbody>
     </table>
@@ -377,441 +378,19 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <br />
 
     <!-- section start -->
-    <h3><span id="Is_Table" class="section-title"><a href="#Is_Table">Is Table </a></span></h3>
-    <dl class="section-body-container">
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Is" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Is">Is</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Is the test true.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Fields:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>Not</em></strong>
-
-    <strong> : </strong>
-
-
-     Is the test not true.
-
-    </li>
-
-
-    <li>
-    <strong><em>Assert</em> : </strong>  Assert that the test is true.
-    <ul>
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>Not</em></strong>
-
-    <strong> : </strong>
-
-
-     Assert that the test is not true.
-
-    </li>
-
-    </ul>
-    </li>
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    </dl>
-    <h3><span id="Is_Table_Callers" class="section-title"><a href="#Is_Table_Callers">Is Table Callers </a></span></h3>
-    <dl class="section-body-container">
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Assert" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Assert">Assert(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Assert that the test is Truthy</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Assert.Not" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Assert.Not">Assert.Not(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Assert that the test is not Truthy</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Is" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Is">Is(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Is the test truthy</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Not" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Not">Not(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Is the test not truthy</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    </dl>
     <h3><span id="Functions" class="section-title"><a href="#Functions">Functions </a></span></h3>
     <dl class="section-body-container">
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#AlphabetWord" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="AlphabetWord">AlphabetWord(var)</span>
+    <a href="#Table" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Table">Table(var)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns true if the passed variable is a single alphbetical word.</p>
-    <p class="section-item-description"> Allows _ and &ndash; as part of the word</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    <span class="return-text">true if the passed variable is a single alphbetical word</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#AlphanumWord" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="AlphanumWord">AlphanumWord(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns true if the passed variable is a single alphbetical word.</p>
-    <p class="section-item-description"> Must start with a letter, allows _ and &ndash; as part of the word</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    <span class="return-text">true if the passed variable is a single alphbetical word</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Area" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Area">Area(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns the passed var if it is a full area.</p>
+    <p class="section-item-summary">Returns the var if the passed variable is a table.</p>
     <p class="section-item-description">
 </p>
 
@@ -846,6 +425,177 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <ul>
     <li>
     (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#String" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="String">String(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the var if the passed variable is a string.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Number" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Number">Number(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the var if the passed variable is a number.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Nil" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Nil">Nil(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns true if the passed variable is nil.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
     </li>
     </ul>
     <!-- returns end -->
@@ -918,71 +668,14 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#BoundingBox" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="BoundingBox">BoundingBox(var)</span>
+    <a href="#True" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="True">True(var)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns the passed var if it is a simple area/boundingbox.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">mixed</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Callable" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Callable">Callable(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns true if the passed variable is a callable function.</p>
+    <p class="section-item-summary">Returns true if the passed variable is true</p>
     <p class="section-item-description">
 </p>
 
@@ -1017,7 +710,6 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    <span class="return-text">true if the passed variable is a callable function</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -1033,14 +725,14 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Empty" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Empty">Empty(var)</span>
+    <a href="#Truthy" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Truthy">Truthy(var)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns true if the passed variable is nil, an empty table, or an empty string.</p>
+    <p class="section-item-summary">Returns the var if the passed variable is not nil or false.</p>
     <p class="section-item-description">
 </p>
 
@@ -1074,7 +766,7 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    (<span class="types"><span class="type">mixed</span></span>)
     </li>
     </ul>
     <!-- returns end -->
@@ -1204,6 +896,348 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
+    <a href="#Empty" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Empty">Empty(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns true if the passed variable is nil, an empty table, or an empty string.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Positive" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Positive">Positive(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the passed var if it is positive.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#odd" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="odd">odd(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the passed var if it is odd.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#even" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="even">even(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the passed var if it is even.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Negative" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Negative">Negative(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the passed var if it is negative.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#NaN" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="NaN">NaN(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the passed var if it is not a number.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
     <a href="#Finite" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="Finite">Finite(var)</span>
     </div>
@@ -1261,120 +1295,6 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Float" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Float">Float(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns the passed var if it is a float.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">mixed</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Hex" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Hex">Hex(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns the hex value of the passed var if it is hexadecimal.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">mixed</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
     <a href="#Int" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="Int">Int(var)</span>
     </div>
@@ -1383,6 +1303,63 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <div class="section-item-body">
 
     <p class="section-item-summary">Returns the passed var if it is an int.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Int8" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Int8">Int8(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the passed var if it is an int8.</p>
     <p class="section-item-description">
 </p>
 
@@ -1546,699 +1523,14 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Int8" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Int8">Int8(var)</span>
+    <a href="#Unsigned" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Unsigned">Unsigned(var)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns the passed var if it is an int8.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">mixed</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#NaN" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="NaN">NaN(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns the passed var if it is not a number.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">mixed</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Negative" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Negative">Negative(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns the passed var if it is negative.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">mixed</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Nil" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Nil">Nil(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns true if the passed variable is nil.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Number" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Number">Number(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns the var if the passed variable is a number.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">mixed</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Object" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Object">Object(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Is this a factorio object</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaObject.html">LuaObject</a></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">mixed</span></span>)
-    <span class="return-text">the var if this is an LuaObject</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Position" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Position">Position(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns the passed var if it is a full position.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">mixed</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Positive" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Positive">Positive(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns the passed var if it is positive.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">mixed</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#StrictWord" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="StrictWord">StrictWord(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns true if the passed variable is a single alphbetical word.</p>
-    <p class="section-item-description"> Does not allow any special chars</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    <span class="return-text">true if the passed variable is a single alphbetical word</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#String" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="String">String(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns the var if the passed variable is a string.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">mixed</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Table" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Table">Table(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns the var if the passed variable is a table.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">mixed</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#True" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="True">True(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns true if the passed variable is true</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>var</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     The variable to check
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Truthy" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Truthy">Truthy(var)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns the var if the passed variable is not nil or false.</p>
+    <p class="section-item-summary">Returns the passed var if it is an unsigned int.</p>
     <p class="section-item-description">
 </p>
 
@@ -2296,6 +1588,63 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <div class="section-item-body">
 
     <p class="section-item-summary">Returns the passed var if it is an unsigned int.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#UInt8" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="UInt8">UInt8(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the passed var if it is an unsigned int8.</p>
     <p class="section-item-description">
 </p>
 
@@ -2459,14 +1808,14 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#UInt8" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="UInt8">UInt8(var)</span>
+    <a href="#Float" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Float">Float(var)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns the passed var if it is an unsigned int8.</p>
+    <p class="section-item-summary">Returns the passed var if it is a float.</p>
     <p class="section-item-description">
 </p>
 
@@ -2516,14 +1865,14 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Unsigned" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Unsigned">Unsigned(var)</span>
+    <a href="#Position" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Position">Position(var)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns the passed var if it is an unsigned int.</p>
+    <p class="section-item-summary">Returns the passed var if it is a full position.</p>
     <p class="section-item-description">
 </p>
 
@@ -2558,6 +1907,463 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <ul>
     <li>
     (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Area" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Area">Area(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the passed var if it is a full area.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Vector" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Vector">Vector(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the passed var if it is a simple position/vector.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#BoundingBox" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="BoundingBox">BoundingBox(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the passed var if it is a simple area/boundingbox.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Hex" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Hex">Hex(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the hex value of the passed var if it is hexadecimal.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#StrictWord" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="StrictWord">StrictWord(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns true if the passed variable is a single alphbetical word.</p>
+    <p class="section-item-description"> Does not allow any special chars</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if the passed variable is a single alphbetical word</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#AlphabetWord" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="AlphabetWord">AlphabetWord(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns true if the passed variable is a single alphbetical word.</p>
+    <p class="section-item-description"> Allows _ and &ndash; as part of the word</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if the passed variable is a single alphbetical word</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#AlphanumWord" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="AlphanumWord">AlphanumWord(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns true if the passed variable is a single alphbetical word.</p>
+    <p class="section-item-description"> Must start with a letter, allows _ and &ndash; as part of the word</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if the passed variable is a single alphbetical word</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Object" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Object">Object(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Is this a factorio object</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaObject.html">LuaObject</a></span>)
+
+     The variable to check
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">mixed</span></span>)
+    <span class="return-text">the var if this is an LuaObject</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -2631,14 +2437,14 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Vector" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Vector">Vector(var)</span>
+    <a href="#Callable" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Callable">Callable(var)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns the passed var if it is a simple position/vector.</p>
+    <p class="section-item-summary">Returns true if the passed variable is a callable function.</p>
     <p class="section-item-description">
 </p>
 
@@ -2672,7 +2478,142 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <strong>Returns:</strong>
     <ul>
     <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if the passed variable is a callable function</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Is_Table" class="section-title"><a href="#Is_Table">Is Table </a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Is" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Is">Is</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Is the test true.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>Not</em></strong>
+
+    <strong> : </strong>
+
+
+     Is the test not true.
+
+    </li>
+
+
+    <li>
+    <strong><em>Assert</em> : </strong>  Assert that the test is true.
+    <ul>
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>Not</em></strong>
+
+    <strong> : </strong>
+
+
+     Assert that the test is not true.
+
+    </li>
+
+    </ul>
+    </li>
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Is_Table_Callers" class="section-title"><a href="#Is_Table_Callers">Is Table Callers </a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Is" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Is">Is(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Is the test truthy</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
     (<span class="types"><span class="type">mixed</span></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
     </li>
     </ul>
     <!-- returns end -->
@@ -2688,14 +2629,14 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#even" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="even">even(var)</span>
+    <a href="#Not" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Not">Not(var)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns the passed var if it is even.</p>
+    <p class="section-item-summary">Is the test not truthy</p>
     <p class="section-item-description">
 </p>
 
@@ -2716,7 +2657,8 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
 
     (<span class="types"><span class="type">mixed</span></span>)
 
-     The variable to check
+
+
 
     </li>
 
@@ -2729,7 +2671,7 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><span class="type">mixed</span></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
     </li>
     </ul>
     <!-- returns end -->
@@ -2745,14 +2687,14 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#odd" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="odd">odd(var)</span>
+    <a href="#Assert" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Assert">Assert(var)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns the passed var if it is odd.</p>
+    <p class="section-item-summary">Assert that the test is Truthy</p>
     <p class="section-item-description">
 </p>
 
@@ -2773,7 +2715,8 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
 
     (<span class="types"><span class="type">mixed</span></span>)
 
-     The variable to check
+
+
 
     </li>
 
@@ -2786,7 +2729,65 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <strong>Returns:</strong>
     <ul>
     <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Assert.Not" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Assert.Not">Assert.Not(var)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Assert that the test is not Truthy</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>var</em></strong>
+
+    <strong> : </strong>
+
     (<span class="types"><span class="type">mixed</span></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
     </li>
     </ul>
     <!-- returns end -->
@@ -2814,7 +2815,7 @@ Is.Assert.Not.True(<span class="keyword">false</span>)</code></pre>
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-02-01 03:09:23 UTC</i>
+    <i>Last updated 2020-03-01 16:44:20 UTC</i>
     </div>
     </div>
     </div>

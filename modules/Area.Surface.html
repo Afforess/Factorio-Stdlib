@@ -58,6 +58,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Event.html"><span class="module-name-item">Event.Event</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Force.html"><span class="module-name-item">Event.Force</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Gui.html"><span class="module-name-item">Event.Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Filters.html"><span class="module-name-item">Event.Filters</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Player.html"><span class="module-name-item">Event.Player</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Surface.html"><span class="module-name-item">Event.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Trains.html"><span class="module-name-item">Event.Trains</span></a></div></li>
@@ -67,17 +68,16 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Migrate.html"><span class="module-name-item">Misc.Migrate</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Queue.html"><span class="module-name-item">Misc.Queue</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color.html"><span class="module-name-item">Utils.Color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color2.html"><span class="module-name-item">Utils.Color2</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Globals.html"><span class="module-name-item">Utils.Globals</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Is.html"><span class="module-name-item">Utils.Is</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Iter.html"><span class="module-name-item">Utils.Iter</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.math.html"><span class="module-name-item">Utils.math</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.string.html"><span class="module-name-item">Utils.string</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.table.html"><span class="module-name-item">Utils.table</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/vendor.version.html"><span class="module-name-item">vendor.version</span></a></div></li>
     </ul>
     </li>
@@ -104,6 +104,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Technology.html"><span class="module-name-item">Data.Technology</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/LinkedList.html"><span class="module-name-item">LinkedList</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/string_array.html"><span class="module-name-item">string_array</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/unique_array.html"><span class="module-name-item">unique_array</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Vendor.Enumerable.html"><span class="module-name-item">Vendor.Enumerable</span></a></div></li>
     </ul>
     </li>
@@ -185,16 +186,16 @@
     </thead>
     <tbody>
     <tr>
+    <td class="name"><a href="#lookup">lookup(surface)</a></td>
+    <td class="summary">Flexible and safe lookup function for surfaces.</td>
+    </tr>
+    <tr>
     <td class="name"><a href="#find_all_entities">find_all_entities(search_criteria)</a></td>
     <td class="summary">Given a <a href="../modules/Area.Surface.html#search_criteria">search criteria</a>, find all entities that match the criteria.</td>
     </tr>
     <tr>
     <td class="name"><a href="#get_surface_bounds">get_surface_bounds(surface)</a></td>
     <td class="summary">Gets the area which covers the entirety of a given surface.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#lookup">lookup(surface)</a></td>
-    <td class="summary">Flexible and safe lookup function for surfaces.</td>
     </tr>
     <tr>
     <td class="name"><a href="#set_daytime_thresholds">set_daytime_thresholds(surface, morning, dawn, dusk, evening)</a></td>
@@ -221,6 +222,69 @@
     <!-- section start -->
     <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
     <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#lookup" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="lookup">lookup(surface)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Flexible and safe lookup function for surfaces.</p>
+    <p class="section-item-description"> <ul>
+ <li>May be given a single surface name or an array of surface names in <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>.
+ <li>May be given a single surface object or an array of surface objects in <a href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a>.
+ <li>May also be given a <a href="https://www.lua.org/pil/2.1.html">nil</a>.
+ <li>Returns an array of surface objects of all valid and existing surfaces.
+ <li>Returns an empty array if no surfaces are given or if they are not found.
+ </ul></p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>surface</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a>, <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">{LuaSurface,...}</a></span>)
+
+     the surfaces to look up
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">{nil</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface,...}</a></span>)
+    <span class="return-text">an array of all valid surfaces or nil otherwise</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
@@ -331,69 +395,6 @@
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
     <span class="return-text">the area of a given surface</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#lookup" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="lookup">lookup(surface)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Flexible and safe lookup function for surfaces.</p>
-    <p class="section-item-description"> <ul>
- <li>May be given a single surface name or an array of surface names in <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>.
- <li>May be given a single surface object or an array of surface objects in <a href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a>.
- <li>May also be given a <a href="https://www.lua.org/pil/2.1.html">nil</a>.
- <li>Returns an array of surface objects of all valid and existing surfaces.
- <li>Returns an empty array if no surfaces are given or if they are not found.
- </ul></p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>surface</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">nil</a>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a>, <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">{LuaSurface,...}</a></span>)
-
-     the surfaces to look up
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.1.html">{nil</a> or <a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface,...}</a></span>)
-    <span class="return-text">an array of all valid surfaces or nil otherwise</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -669,7 +670,7 @@
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-02-01 03:09:23 UTC</i>
+    <i>Last updated 2020-03-01 16:44:20 UTC</i>
     </div>
     </div>
     </div>

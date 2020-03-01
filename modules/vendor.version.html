@@ -58,6 +58,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Event.html"><span class="module-name-item">Event.Event</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Force.html"><span class="module-name-item">Event.Force</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Gui.html"><span class="module-name-item">Event.Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Filters.html"><span class="module-name-item">Event.Filters</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Player.html"><span class="module-name-item">Event.Player</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Surface.html"><span class="module-name-item">Event.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Trains.html"><span class="module-name-item">Event.Trains</span></a></div></li>
@@ -67,17 +68,16 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Migrate.html"><span class="module-name-item">Misc.Migrate</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Queue.html"><span class="module-name-item">Misc.Queue</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color.html"><span class="module-name-item">Utils.Color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color2.html"><span class="module-name-item">Utils.Color2</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Globals.html"><span class="module-name-item">Utils.Globals</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Is.html"><span class="module-name-item">Utils.Is</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Iter.html"><span class="module-name-item">Utils.Iter</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.math.html"><span class="module-name-item">Utils.math</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.string.html"><span class="module-name-item">Utils.string</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.table.html"><span class="module-name-item">Utils.table</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/vendor.version.html"><span class="module-name-item">vendor.version</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
     </ul>
     </li>
@@ -104,6 +104,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Technology.html"><span class="module-name-item">Data.Technology</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/LinkedList.html"><span class="module-name-item">LinkedList</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/string_array.html"><span class="module-name-item">string_array</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/unique_array.html"><span class="module-name-item">unique_array</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Vendor.Enumerable.html"><span class="module-name-item">Vendor.Enumerable</span></a></div></li>
     </ul>
     </li>
@@ -222,20 +223,13 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#new">new(v)</a></td>
-    <td class="summary">Creates a new version object from a string.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#range">range(v1, v2)</a></td>
-    <td class="summary">Creates a version range.</td>
+    <td class="name"><a href="#ver:semver">ver:semver(v)</a></td>
+    <td class="summary">Matches a provider-version on a consumer-version based on the
+ semantic versioning specification.</td>
     </tr>
     <tr>
     <td class="name"><a href="#range:matches">range:matches(v)</a></td>
     <td class="summary">Matches a version on a range.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#set">set(v1, v2)</a></td>
-    <td class="summary">Creates a version set.</td>
     </tr>
     <tr>
     <td class="name"><a href="#set:allowed">set:allowed(v1, v2)</a></td>
@@ -250,9 +244,16 @@
     <td class="summary">Matches a version against the set of allowed and disallowed versions.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#ver:semver">ver:semver(v)</a></td>
-    <td class="summary">Matches a provider-version on a consumer-version based on the
- semantic versioning specification.</td>
+    <td class="name"><a href="#new">new(v)</a></td>
+    <td class="summary">Creates a new version object from a string.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#range">range(v1, v2)</a></td>
+    <td class="summary">Creates a version range.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#set">set(v1, v2)</a></td>
+    <td class="summary">Creates a version set.</td>
     </tr>
     </tbody>
     </table>
@@ -278,19 +279,17 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#new" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="new">new(v)</span>
+    <a href="#ver:semver" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="ver:semver">ver:semver(v)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Creates a new version object from a string.</p>
-    <p class="section-item-description"> The returned table will have
- comparison operators, eg. LT, EQ, GT. For all comparisons, any missing numbers
- will be assumed to be &ldquo;0&rdquo; on the least significant side of the version string.</p>
-
-<p> Calling on the module table is a shortcut to <code>new</code>.</p>
+    <p class="section-item-summary">Matches a provider-version on a consumer-version based on the
+ semantic versioning specification.</p>
+    <p class="section-item-description"> The implementation does not support pre-release and/or build metadata,
+ only the major, minor, and patch levels are compared.</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -308,7 +307,7 @@
     <strong> : </strong>
 
 
-     String formatted as numbers separated by dots (no limit on number of elements).
+     Version (string or <code>version</code> object) as served by the provider
 
     </li>
 
@@ -321,7 +320,7 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    <span class="return-text"><code>version</code> object, or <code>nil+err</code></span>
+    <span class="return-text"><code>true</code> or <code>false</code> whether the version matches, or <code>nil+err</code></span>
     </li>
     </ul>
     <!-- returns end -->
@@ -332,89 +331,10 @@
 
     <!-- usage start -->
     <strong>Usage:</strong>
-    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> v = version.new(<span class="string">"0.1"</span>)
-<span class="comment">-- is identical to
-</span><span class="keyword">local</span> v = version(<span class="string">"0.1"</span>)
-
-<span class="global">print</span>(v)     <span class="comment">--&gt; "0.1"
-</span><span class="global">print</span>(v[<span class="number">1</span>])  <span class="comment">--&gt; 0
-</span><span class="global">print</span>(v[<span class="number">2</span>])  <span class="comment">--&gt; 1</span></code></pre>
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#range" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="range">range(v1, v2)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Creates a version range.</p>
-    <p class="section-item-description">  A <code>range</code> object represents a range of versions.</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>v1</em></strong>
-
-    <strong> : </strong>
-
-
-     The FROM version of the range (string or <code>version</code> object). If <code>nil</code>, assumed to be 0.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>v2</em></strong>
-
-    <strong> : </strong>
-
-
-     (optional) The TO version of the range (string or <code>version</code> object). Defaults to <code>v1</code>.
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">range object with <code>from</code> and <code>to</code> fields and <code>set:matches</code> method, or <code>nil+err</code>.</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <strong>Usage:</strong>
-    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> r = version.range(<span class="string">"0.1"</span>,<span class="string">" 2.4"</span>)
-
-<span class="global">print</span>(v.from)     <span class="comment">--&gt; "0.1"
-</span><span class="global">print</span>(v.to[<span class="number">1</span>])    <span class="comment">--&gt; 2
-</span><span class="global">print</span>(v.to[<span class="number">2</span>])    <span class="comment">--&gt; 4</span></code></pre>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> consumer = <span class="string">"1.2"</span>     <span class="comment">-- consumer requested version
+</span><span class="keyword">local</span> provider = <span class="string">"1.5.2"</span>   <span class="comment">-- provider served version
+</span>
+<span class="keyword">local</span> compatible = version(consumer):semver(provider)</code></pre>
     <!-- usage end -->
 
     </dd>
@@ -462,76 +382,6 @@
     <ul>
     <li>
     <span class="return-text"><code>true</code> or <code>false</code> whether the version matches the range, or <code>nil+err</code></span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#set" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="set">set(v1, v2)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Creates a version set.</p>
-    <p class="section-item-description"> A <code>set</code> is an object that contains a number of allowed and disallowed version <code>range</code> objects.</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>v1</em></strong>
-
-    <strong> : </strong>
-
-
-     initial version/range to allow, see <code>set:allowed</code> for parameter descriptions
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>v2</em></strong>
-
-    <strong> : </strong>
-
-
-     initial version/range to allow, see <code>set:allowed</code> for parameter descriptions
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">a <code>set</code> object, with <code>ok</code> and <code>nok</code> lists and a <code>set:matches</code> method, or <code>nil+err</code></span>
     </li>
     </ul>
     <!-- returns end -->
@@ -745,17 +595,19 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#ver:semver" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="ver:semver">ver:semver(v)</span>
+    <a href="#new" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="new">new(v)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Matches a provider-version on a consumer-version based on the
- semantic versioning specification.</p>
-    <p class="section-item-description"> The implementation does not support pre-release and/or build metadata,
- only the major, minor, and patch levels are compared.</p>
+    <p class="section-item-summary">Creates a new version object from a string.</p>
+    <p class="section-item-description"> The returned table will have
+ comparison operators, eg. LT, EQ, GT. For all comparisons, any missing numbers
+ will be assumed to be &ldquo;0&rdquo; on the least significant side of the version string.</p>
+
+<p> Calling on the module table is a shortcut to <code>new</code>.</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -773,7 +625,7 @@
     <strong> : </strong>
 
 
-     Version (string or <code>version</code> object) as served by the provider
+     String formatted as numbers separated by dots (no limit on number of elements).
 
     </li>
 
@@ -786,7 +638,7 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    <span class="return-text"><code>true</code> or <code>false</code> whether the version matches, or <code>nil+err</code></span>
+    <span class="return-text"><code>version</code> object, or <code>nil+err</code></span>
     </li>
     </ul>
     <!-- returns end -->
@@ -797,10 +649,159 @@
 
     <!-- usage start -->
     <strong>Usage:</strong>
-    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> consumer = <span class="string">"1.2"</span>     <span class="comment">-- consumer requested version
-</span><span class="keyword">local</span> provider = <span class="string">"1.5.2"</span>   <span class="comment">-- provider served version
-</span>
-<span class="keyword">local</span> compatible = version(consumer):semver(provider)</code></pre>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> v = version.new(<span class="string">"0.1"</span>)
+<span class="comment">-- is identical to
+</span><span class="keyword">local</span> v = version(<span class="string">"0.1"</span>)
+
+<span class="global">print</span>(v)     <span class="comment">--&gt; "0.1"
+</span><span class="global">print</span>(v[<span class="number">1</span>])  <span class="comment">--&gt; 0
+</span><span class="global">print</span>(v[<span class="number">2</span>])  <span class="comment">--&gt; 1</span></code></pre>
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#range" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="range">range(v1, v2)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Creates a version range.</p>
+    <p class="section-item-description">  A <code>range</code> object represents a range of versions.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>v1</em></strong>
+
+    <strong> : </strong>
+
+
+     The FROM version of the range (string or <code>version</code> object). If <code>nil</code>, assumed to be 0.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>v2</em></strong>
+
+    <strong> : </strong>
+
+
+     (optional) The TO version of the range (string or <code>version</code> object). Defaults to <code>v1</code>.
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">range object with <code>from</code> and <code>to</code> fields and <code>set:matches</code> method, or <code>nil+err</code>.</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> r = version.range(<span class="string">"0.1"</span>,<span class="string">" 2.4"</span>)
+
+<span class="global">print</span>(v.from)     <span class="comment">--&gt; "0.1"
+</span><span class="global">print</span>(v.to[<span class="number">1</span>])    <span class="comment">--&gt; 2
+</span><span class="global">print</span>(v.to[<span class="number">2</span>])    <span class="comment">--&gt; 4</span></code></pre>
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#set" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="set">set(v1, v2)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Creates a version set.</p>
+    <p class="section-item-description"> A <code>set</code> is an object that contains a number of allowed and disallowed version <code>range</code> objects.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>v1</em></strong>
+
+    <strong> : </strong>
+
+
+     initial version/range to allow, see <code>set:allowed</code> for parameter descriptions
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>v2</em></strong>
+
+    <strong> : </strong>
+
+
+     initial version/range to allow, see <code>set:allowed</code> for parameter descriptions
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">a <code>set</code> object, with <code>ok</code> and <code>nok</code> lists and a <code>set:matches</code> method, or <code>nil+err</code></span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
     <!-- usage end -->
 
     </dd>
@@ -872,7 +873,7 @@
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-02-01 03:09:23 UTC</i>
+    <i>Last updated 2020-03-01 16:44:20 UTC</i>
     </div>
     </div>
     </div>

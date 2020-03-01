@@ -58,6 +58,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Event.html"><span class="module-name-item">Event.Event</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Force.html"><span class="module-name-item">Event.Force</span></a></div></li>
     <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Event.Gui.html"><span class="module-name-item">Event.Gui</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Filters.html"><span class="module-name-item">Event.Filters</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Player.html"><span class="module-name-item">Event.Player</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Surface.html"><span class="module-name-item">Event.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Trains.html"><span class="module-name-item">Event.Trains</span></a></div></li>
@@ -67,17 +68,16 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Migrate.html"><span class="module-name-item">Misc.Migrate</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Queue.html"><span class="module-name-item">Misc.Queue</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color.html"><span class="module-name-item">Utils.Color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color2.html"><span class="module-name-item">Utils.Color2</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Globals.html"><span class="module-name-item">Utils.Globals</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Is.html"><span class="module-name-item">Utils.Is</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Iter.html"><span class="module-name-item">Utils.Iter</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.math.html"><span class="module-name-item">Utils.math</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.string.html"><span class="module-name-item">Utils.string</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.table.html"><span class="module-name-item">Utils.table</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/vendor.version.html"><span class="module-name-item">vendor.version</span></a></div></li>
     </ul>
     </li>
@@ -104,6 +104,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Technology.html"><span class="module-name-item">Data.Technology</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/LinkedList.html"><span class="module-name-item">LinkedList</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/string_array.html"><span class="module-name-item">string_array</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/unique_array.html"><span class="module-name-item">unique_array</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Vendor.Enumerable.html"><span class="module-name-item">Vendor.Enumerable</span></a></div></li>
     </ul>
     </li>
@@ -181,16 +182,16 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#on_checked_state_changed">on_checked_state_changed(gui_element_pattern, handler)</a></td>
-    <td class="summary">Registers a function for a given GUI element name or pattern when the element checked state changes.</td>
-    </tr>
-    <tr>
     <td class="name"><a href="#on_click">on_click(gui_element_pattern, handler)</a></td>
     <td class="summary">Registers a function for a given gui element name or pattern when the element is clicked.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#on_confirmed">on_confirmed(gui_element_pattern, handler)</a></td>
-    <td class="summary">Registers a function for a given GUI element name or pattern when the element is confirmed.</td>
+    <td class="name"><a href="#on_checked_state_changed">on_checked_state_changed(gui_element_pattern, handler)</a></td>
+    <td class="summary">Registers a function for a given GUI element name or pattern when the element checked state changes.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#on_text_changed">on_text_changed(gui_element_pattern, handler)</a></td>
+    <td class="summary">Registers a function for a given GUI element name or pattern when the element text changes.</td>
     </tr>
     <tr>
     <td class="name"><a href="#on_elem_changed">on_elem_changed(gui_element_pattern, handler)</a></td>
@@ -201,12 +202,12 @@
     <td class="summary">Registers a function for a given GUI element name or pattern when the element state changes (drop down).</td>
     </tr>
     <tr>
-    <td class="name"><a href="#on_text_changed">on_text_changed(gui_element_pattern, handler)</a></td>
-    <td class="summary">Registers a function for a given GUI element name or pattern when the element text changes.</td>
-    </tr>
-    <tr>
     <td class="name"><a href="#on_value_changed">on_value_changed(gui_element_pattern, handler)</a></td>
     <td class="summary">Registers a function for a given GUI element name or pattern when the element value changes (slider).</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#on_confirmed">on_confirmed(gui_element_pattern, handler)</a></td>
+    <td class="summary">Registers a function for a given GUI element name or pattern when the element is confirmed.</td>
     </tr>
     </tbody>
     </table>
@@ -217,79 +218,6 @@
     <!-- section start -->
     <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
     <dl class="section-body-container">
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#on_checked_state_changed" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_checked_state_changed">on_checked_state_changed(gui_element_pattern, handler)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element checked state changes.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>gui_element_pattern</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     the name or string regular expression to match the GUI element
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>handler</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
-
-     the function to call when GUI element checked state changes
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Gui.html">Gui</a></span>)</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
@@ -366,14 +294,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#on_confirmed" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_confirmed">on_confirmed(gui_element_pattern, handler)</span>
+    <a href="#on_checked_state_changed" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_checked_state_changed">on_checked_state_changed(gui_element_pattern, handler)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element is confirmed.</p>
+    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element checked state changes.</p>
     <p class="section-item-description">
 </p>
 
@@ -410,7 +338,80 @@
 
     (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
 
-     the function to call when GUI element state changes
+     the function to call when GUI element checked state changes
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Gui.html">Gui</a></span>)</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#on_text_changed" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_text_changed">on_text_changed(gui_element_pattern, handler)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element text changes.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>gui_element_pattern</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     the name or string regular expression to match the GUI element
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>handler</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+     the function to call when GUI element text changes
 
     </li>
 
@@ -585,14 +586,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#on_text_changed" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_text_changed">on_text_changed(gui_element_pattern, handler)</span>
+    <a href="#on_value_changed" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_value_changed">on_value_changed(gui_element_pattern, handler)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element text changes.</p>
+    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element value changes (slider).</p>
     <p class="section-item-description">
 </p>
 
@@ -629,7 +630,7 @@
 
     (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
 
-     the function to call when GUI element text changes
+     the function to call when GUI element state changes
 
     </li>
 
@@ -658,14 +659,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#on_value_changed" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_value_changed">on_value_changed(gui_element_pattern, handler)</span>
+    <a href="#on_confirmed" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_confirmed">on_confirmed(gui_element_pattern, handler)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element value changes (slider).</p>
+    <p class="section-item-summary">Registers a function for a given GUI element name or pattern when the element is confirmed.</p>
     <p class="section-item-description">
 </p>
 
@@ -743,7 +744,7 @@
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-02-01 03:09:23 UTC</i>
+    <i>Last updated 2020-03-01 16:44:20 UTC</i>
     </div>
     </div>
     </div>

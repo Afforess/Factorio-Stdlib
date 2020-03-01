@@ -58,6 +58,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Event.html"><span class="module-name-item">Event.Event</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Force.html"><span class="module-name-item">Event.Force</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Gui.html"><span class="module-name-item">Event.Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Filters.html"><span class="module-name-item">Event.Filters</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Player.html"><span class="module-name-item">Event.Player</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Surface.html"><span class="module-name-item">Event.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Trains.html"><span class="module-name-item">Event.Trains</span></a></div></li>
@@ -67,17 +68,16 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Migrate.html"><span class="module-name-item">Misc.Migrate</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Queue.html"><span class="module-name-item">Misc.Queue</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color.html"><span class="module-name-item">Utils.Color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color2.html"><span class="module-name-item">Utils.Color2</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Globals.html"><span class="module-name-item">Utils.Globals</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Is.html"><span class="module-name-item">Utils.Is</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Iter.html"><span class="module-name-item">Utils.Iter</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.math.html"><span class="module-name-item">Utils.math</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.string.html"><span class="module-name-item">Utils.string</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.table.html"><span class="module-name-item">Utils.table</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/vendor.version.html"><span class="module-name-item">vendor.version</span></a></div></li>
     </ul>
     </li>
@@ -104,6 +104,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Technology.html"><span class="module-name-item">Data.Technology</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/LinkedList.html"><span class="module-name-item">LinkedList</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/string_array.html"><span class="module-name-item">string_array</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/unique_array.html"><span class="module-name-item">unique_array</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Vendor.Enumerable.html"><span class="module-name-item">Vendor.Enumerable</span></a></div></li>
     </ul>
     </li>
@@ -185,24 +186,24 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#direction_to_orientation">direction_to_orientation(direction)</a></td>
-    <td class="summary">Returns an orientation from a direction.</td>
+    <td class="name"><a href="#opposite_direction">opposite_direction(direction)</a></td>
+    <td class="summary">Returns the opposite direction &mdash; adapted from Factorio util.lua.</td>
     </tr>
     <tr>
     <td class="name"><a href="#next_direction">next_direction(direction[, reverse=false][, eight_way=false])</a></td>
     <td class="summary">Returns the next direction.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#opposite_direction">opposite_direction(direction)</a></td>
-    <td class="summary">Returns the opposite direction &mdash; adapted from Factorio util.lua.</td>
+    <td class="name"><a href="#orientation_to_8way">orientation_to_8way(orientation)</a></td>
+    <td class="summary">Returns an 8 way direction from orientation.</td>
     </tr>
     <tr>
     <td class="name"><a href="#orientation_to_4way">orientation_to_4way(orientation)</a></td>
     <td class="summary">Returns a 4 way direction from orientation.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#orientation_to_8way">orientation_to_8way(orientation)</a></td>
-    <td class="summary">Returns an 8 way direction from orientation.</td>
+    <td class="name"><a href="#direction_to_orientation">direction_to_orientation(direction)</a></td>
+    <td class="summary">Returns an orientation from a direction.</td>
     </tr>
     <tr>
     <td class="name"><a href="#to_vector">to_vector(direction, distance)</a></td>
@@ -220,14 +221,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#direction_to_orientation" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="direction_to_orientation">direction_to_orientation(direction)</span>
+    <a href="#opposite_direction" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="opposite_direction">opposite_direction(direction)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns an orientation from a direction.</p>
+    <p class="section-item-summary">Returns the opposite direction &mdash; adapted from Factorio util.lua.</p>
     <p class="section-item-description">
 </p>
 
@@ -248,8 +249,7 @@
 
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>)
 
-
-
+     the direction
 
     </li>
 
@@ -262,7 +262,8 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#float">float</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>)
+    <span class="return-text">the opposite direction</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -370,14 +371,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#opposite_direction" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="opposite_direction">opposite_direction(direction)</span>
+    <a href="#orientation_to_8way" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="orientation_to_8way">orientation_to_8way(orientation)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns the opposite direction &mdash; adapted from Factorio util.lua.</p>
+    <p class="section-item-summary">Returns an 8 way direction from orientation.</p>
     <p class="section-item-description">
 </p>
 
@@ -392,13 +393,14 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>direction</em></strong>
+    <strong><em>orientation</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#float">float</a></span>)
 
-     the direction
+
+
 
     </li>
 
@@ -412,7 +414,6 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>)
-    <span class="return-text">the opposite direction</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -486,14 +487,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#orientation_to_8way" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="orientation_to_8way">orientation_to_8way(orientation)</span>
+    <a href="#direction_to_orientation" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="direction_to_orientation">direction_to_orientation(direction)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns an 8 way direction from orientation.</p>
+    <p class="section-item-summary">Returns an orientation from a direction.</p>
     <p class="section-item-description">
 </p>
 
@@ -508,11 +509,11 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>orientation</em></strong>
+    <strong><em>direction</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#float">float</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>)
 
 
 
@@ -528,7 +529,7 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#float">float</a></span>)
     </li>
     </ul>
     <!-- returns end -->
@@ -631,7 +632,7 @@
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-02-01 03:09:23 UTC</i>
+    <i>Last updated 2020-03-01 16:44:20 UTC</i>
     </div>
     </div>
     </div>

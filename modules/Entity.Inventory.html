@@ -58,6 +58,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Event.html"><span class="module-name-item">Event.Event</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Force.html"><span class="module-name-item">Event.Force</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Gui.html"><span class="module-name-item">Event.Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Filters.html"><span class="module-name-item">Event.Filters</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Player.html"><span class="module-name-item">Event.Player</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Surface.html"><span class="module-name-item">Event.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Trains.html"><span class="module-name-item">Event.Trains</span></a></div></li>
@@ -67,17 +68,16 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Migrate.html"><span class="module-name-item">Misc.Migrate</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Queue.html"><span class="module-name-item">Misc.Queue</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color.html"><span class="module-name-item">Utils.Color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color2.html"><span class="module-name-item">Utils.Color2</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Globals.html"><span class="module-name-item">Utils.Globals</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Is.html"><span class="module-name-item">Utils.Is</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Iter.html"><span class="module-name-item">Utils.Iter</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.math.html"><span class="module-name-item">Utils.math</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.string.html"><span class="module-name-item">Utils.string</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.table.html"><span class="module-name-item">Utils.table</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/vendor.version.html"><span class="module-name-item">vendor.version</span></a></div></li>
     </ul>
     </li>
@@ -104,6 +104,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Technology.html"><span class="module-name-item">Data.Technology</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/LinkedList.html"><span class="module-name-item">LinkedList</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/string_array.html"><span class="module-name-item">string_array</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/unique_array.html"><span class="module-name-item">unique_array</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Vendor.Enumerable.html"><span class="module-name-item">Vendor.Enumerable</span></a></div></li>
     </ul>
     </li>
@@ -181,10 +182,6 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#copy_as_simple_stacks">copy_as_simple_stacks(src, dest[, clear=false])</a></td>
-    <td class="summary">Copies the contents of source inventory to destination inventory by using <a href="http://lua-api.factorio.com/latest/Concepts.html#SimpleItemStack">Concepts.SimpleItemStack</a>.</td>
-    </tr>
-    <tr>
     <td class="name"><a href="#each">each(inventory, func[, ...])</a></td>
     <td class="summary">Given a function, apply it to each slot in the given inventory.</td>
     </tr>
@@ -193,16 +190,28 @@
     <td class="summary">Given a function, apply it to each slot in the given inventory.</td>
     </tr>
     <tr>
+    <td class="name"><a href="#copy_as_simple_stacks">copy_as_simple_stacks(src, dest[, clear=false])</a></td>
+    <td class="summary">Copies the contents of source inventory to destination inventory by using <a href="http://lua-api.factorio.com/latest/Concepts.html#SimpleItemStack">Concepts.SimpleItemStack</a>.</td>
+    </tr>
+    <tr>
     <td class="name"><a href="#get_blueprint">get_blueprint(stack[, is_bp_setup][, no_book])</a></td>
     <td class="summary">Return a blueprint stack from either stack or blueprint_book</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#is_named_bp">is_named_bp(stack, label)</a></td>
+    <td class="summary">Is the stack a blueprint with label?</td>
     </tr>
     <tr>
     <td class="name"><a href="#get_item_or_filter">get_item_or_filter(inventory, idx[, item_only][, filter_only])</a></td>
     <td class="summary">Returns either the item at a position, or the filter at the position if there isn&rsquo;t an item there.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#is_named_bp">is_named_bp(stack, label)</a></td>
-    <td class="summary">Is the stack a blueprint with label?</td>
+    <td class="name"><a href="#transfer_inventory">transfer_inventory(source, destination)</a></td>
+    <td class="summary">Transfer items from 1 inventory to another.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#swap_inventory">swap_inventory(source, destination)</a></td>
+    <td class="summary">Swap items from 1 inventory to another.</td>
     </tr>
     </tbody>
     </table>
@@ -213,97 +222,6 @@
     <!-- section start -->
     <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
     <dl class="section-body-container">
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#copy_as_simple_stacks" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="copy_as_simple_stacks">copy_as_simple_stacks(src, dest[, clear=false])</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Copies the contents of source inventory to destination inventory by using <a href="http://lua-api.factorio.com/latest/Concepts.html#SimpleItemStack">Concepts.SimpleItemStack</a>.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>src</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
-
-     the source inventory
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>dest</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
-
-     the destination inventory
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>clear</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-
-     clear the contents of the source inventory
-
-    (<em>default</em>: false)
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#SimpleItemStack">{SimpleItemStack,...}</a></span>)
-    <span class="return-text">an array of left over items that could not be inserted into the destination</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
@@ -488,6 +406,97 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
+    <a href="#copy_as_simple_stacks" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="copy_as_simple_stacks">copy_as_simple_stacks(src, dest[, clear=false])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Copies the contents of source inventory to destination inventory by using <a href="http://lua-api.factorio.com/latest/Concepts.html#SimpleItemStack">Concepts.SimpleItemStack</a>.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>src</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
+
+     the source inventory
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>dest</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
+
+     the destination inventory
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>clear</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     clear the contents of the source inventory
+
+    (<em>default</em>: false)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#SimpleItemStack">{SimpleItemStack,...}</a></span>)
+    <span class="return-text">an array of left over items that could not be inserted into the destination</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
     <a href="#get_blueprint" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="get_blueprint">get_blueprint(stack[, is_bp_setup][, no_book])</span>
     </div>
@@ -567,6 +576,81 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaItemStack.html">LuaItemStack</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#is_named_bp" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="is_named_bp">is_named_bp(stack, label)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Is the stack a blueprint with label?</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>stack</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaItemStack.html">LuaItemStack</a></span>)
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>label</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">bool</span></span>)
     </li>
     </ul>
     <!-- returns end -->
@@ -693,14 +777,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#is_named_bp" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="is_named_bp">is_named_bp(stack, label)</span>
+    <a href="#transfer_inventory" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="transfer_inventory">transfer_inventory(source, destination)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Is the stack a blueprint with label?</p>
+    <p class="section-item-summary">Transfer items from 1 inventory to another.</p>
     <p class="section-item-description">
 </p>
 
@@ -715,11 +799,11 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>stack</em></strong>
+    <strong><em>source</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaItemStack.html">LuaItemStack</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
 
 
 
@@ -732,11 +816,11 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>label</em></strong>
+    <strong><em>destination</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
 
 
 
@@ -749,12 +833,75 @@
     <!-- parameters end -->
 
     <!-- returns start -->
-    <strong>Returns:</strong>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#swap_inventory" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="swap_inventory">swap_inventory(source, destination)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Swap items from 1 inventory to another.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
     <ul>
-    <li>
-    (<span class="types"><span class="type">bool</span></span>)
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>source</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
+
+
+
+
     </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>destination</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaInventory.html">LuaInventory</a></span>)
+
+
+
+
+    </li>
+
+
     </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
     <!-- returns end -->
 
 
@@ -780,7 +927,7 @@
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-02-01 03:09:23 UTC</i>
+    <i>Last updated 2020-03-01 16:44:20 UTC</i>
     </div>
     </div>
     </div>

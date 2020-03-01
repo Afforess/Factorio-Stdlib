@@ -5,7 +5,7 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Data.Recipe classmod</title>
+    <title>unique_array classmod</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../spectre.min.css" type="text/css" />
     <link rel="stylesheet" href="../spectre-icons.min.css" type="text/css" />
@@ -46,11 +46,11 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Entity.html"><span class="module-name-item">Data.Entity</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Fluid.html"><span class="module-name-item">Data.Fluid</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Item.html"><span class="module-name-item">Data.Item</span></a></div></li>
-    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../classes/Data.Recipe.html"><span class="module-name-item">Data.Recipe</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Recipe.html"><span class="module-name-item">Data.Recipe</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Technology.html"><span class="module-name-item">Data.Technology</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/LinkedList.html"><span class="module-name-item">LinkedList</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/string_array.html"><span class="module-name-item">string_array</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/unique_array.html"><span class="module-name-item">unique_array</span></a></div></li>
+    <li class="nav-item active"><div class="nav-item-block-active block"><a href="../classes/unique_array.html"><span class="module-name-item">unique_array</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Vendor.Enumerable.html"><span class="module-name-item">Vendor.Enumerable</span></a></div></li>
     </ul>
     </li>
@@ -135,9 +135,11 @@
     <!-- list of items in a module -->
     <ul class="nav nav-module-contents">
     <li class="nav-item">
-    <h4>Contents of <strong>Data.Recipe</strong></h4>
+    <h4>Contents of <strong>unique_array</strong></h4>
     <ul class="nav">
-    <li class="nav-item"><a href="#Methods"><span class="fragment-hashtag">#</span> Methods</a></li>
+    <li class="nav-item"><a href="#Methods"><span class="fragment-hashtag">#</span> Methods </a></li>
+    <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions </a></li>
+    <li class="nav-item"><a href="#Exports"><span class="fragment-hashtag">#</span> Exports </a></li>
     </ul>
     </li>
     </ul>
@@ -158,16 +160,25 @@
 
     <!-- module content header start -->
 
-    <h2><span class="body-module-name"><strong><em>Data.Recipe</em></strong></span> classmod</h2>
-    <p>Recipe class</p>
-    <p>
-</p>
+    <h2><span class="body-module-name"><strong><em>unique_array</em></strong></span> classmod</h2>
+    <p>Unique Array class
+ For working with unique string array values.</p>
+    <p> Creates an array with hash/dictionary indexing.
+ Adding or removeing values without using the provided methods can break the functionality of this class.
+ Additional methods exported by requering unique_array are .set and .make_dictionary</p>
 
 
     <!-- module info start -->
     <!-- module info end -->
 
     <!-- module usage start -->
+    <h3>Usage</h3>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> Unique_Array = <span class="global">require</span>(<span class="string">'__stdlib__/stdlib/utils/classes/unique_array'</span>)
+<span class="keyword">local</span> my_array = Unique_Array(<span class="string">'first'</span>)
+my_array:add(<span class="string">'second'</span>)
+<span class="keyword">if</span> my_array[<span class="string">'second'</span>] <span class="keyword">then</span>
+  <span class="global">print</span>(<span class="string">'its truthy'</span>)
+<span class="keyword">end</span>'</code></pre>
     <!-- module usage end -->
 
     <!-- module content header end -->
@@ -175,65 +186,97 @@
     <!-- module section list start -->
     <table class="section-content-list">
     <thead>
-    <h3><a href="#Methods">Methods</a></h3>
+    <h3><a href="#Methods">Methods </a></h3>
     <span></span>
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#Data.Recipe:add_ingredient">Data.Recipe:add_ingredient(normal[, expensive])</a></td>
-    <td class="summary">Add an ingredient to a recipe.</td>
+    <td class="name"><a href="#unique_array:new">unique_array:new(...)</a></td>
+    <td class="summary">Create a new unique array.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:remove_ingredient">Data.Recipe:remove_ingredient(normal, expensive)</a></td>
-    <td class="summary">Remove one ingredient completely.</td>
+    <td class="name"><a href="#unique_array:add">unique_array:add(other)</a></td>
+    <td class="summary">Add a string to the array if it doesn&rsquo;t exist in the array.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:replace_ingredient">Data.Recipe:replace_ingredient(replace, normal[, expensive])</a></td>
-    <td class="summary">Replace one ingredient with another.</td>
+    <td class="name"><a href="#unique_array:remove">unique_array:remove(other)</a></td>
+    <td class="summary">Remove the strings from the array if they exist.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:make_difficult">Data.Recipe:make_difficult([expensive_energy])</a></td>
-    <td class="summary">Converts a recipe to the difficulty recipe format.</td>
+    <td class="name"><a href="#unique_array:toggle">unique_array:toggle(other)</a></td>
+    <td class="summary">Toggles the passed name in the array by adding it if not present or removing it if it is.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:change_category">Data.Recipe:change_category(category_name)</a></td>
-    <td class="summary">Change the recipe category.</td>
+    <td class="name"><a href="#unique_array:diff">unique_array:diff(other)</a></td>
+    <td class="summary">Get all items that are NOT in both arrays.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:add_unlock">Data.Recipe:add_unlock(tech_name)</a></td>
-    <td class="summary">Add to technology as a recipe unlock.</td>
+    <td class="name"><a href="#unique_array:intersects">unique_array:intersects(other)</a></td>
+    <td class="summary">Get all items that are in both arrays.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:remove_unlock">Data.Recipe:remove_unlock(tech_name)</a></td>
-    <td class="summary">Remove the recipe unlock from the technology.</td>
+    <td class="name"><a href="#unique_array:sort">unique_array:sort([cmp])</a></td>
+    <td class="summary">Sort the unique_array in place.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:set_enabled">Data.Recipe:set_enabled(enabled)</a></td>
-    <td class="summary">Set the enabled status of the recipe.</td>
+    <td class="name"><a href="#unique_array:concat">unique_array:concat(other)</a></td>
+    <td class="summary">Create a new unique_array by concatenating together.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:convert_results">Data.Recipe:convert_results()</a></td>
-    <td class="summary">Convert result type to results type.</td>
+    <td class="name"><a href="#unique_array:find">unique_array:find(pattern)</a></td>
+    <td class="summary">Find all members in a unique array that match the pattern.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:set_main_product">Data.Recipe:set_main_product(main_product[, normal][, expensive])</a></td>
-    <td class="summary">Set the main product of the recipe.</td>
+    <td class="name"><a href="#unique_array:clear">unique_array:clear()</a></td>
+    <td class="summary">Clear the array returning an empty array object</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Functions">Functions </a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#unique_array:all">unique_array:all(other)</a></td>
+    <td class="summary">Does this array have all of the passed strings.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:remove_main_product">Data.Recipe:remove_main_product([for_normal=false][, for_expensive=false])</a></td>
-    <td class="summary">Remove the main product of the recipe.</td>
+    <td class="name"><a href="#unique_array:any">unique_array:any(other)</a></td>
+    <td class="summary">Does this array have any of the passed strings.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:add_result">Data.Recipe:add_result(normal[, expensive][, main_product])</a></td>
-    <td class="summary">Add a new product to results, converts if needed.</td>
+    <td class="name"><a href="#unique_array:none">unique_array:none(other)</a></td>
+    <td class="summary">Does this array have none of the passed strings.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:remove_result">Data.Recipe:remove_result([normal][, expensive][, main_product])</a></td>
-    <td class="summary">Remove a product from results, converts if needed.</td>
+    <td class="name"><a href="#unique_array:same">unique_array:same(other)</a></td>
+    <td class="summary">Do both arrays contain the same items</td>
     </tr>
     <tr>
-    <td class="name"><a href="#Data.Recipe:replace_result">Data.Recipe:replace_result(result_name[, normal][, expensive][, main_product])</a></td>
-    <td class="summary">Remove a product from results, converts if needed.</td>
+    <td class="name"><a href="#unique_array:disjointed">unique_array:disjointed(other)</a></td>
+    <td class="summary">Do the unique arrays have no items in common</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#unique_array:tostring">unique_array:tostring()</a></td>
+    <td class="summary">Convert the array to a string.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#unique_array:make_dictionary">unique_array:make_dictionary([func][, ...])</a></td>
+    <td class="summary">Return a dictionary mapping of the array.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Exports">Exports </a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#unique_array.exports">unique_array.exports</a></td>
+    <td class="summary">These functions are available when requiring this class.</td>
     </tr>
     </tbody>
     </table>
@@ -242,19 +285,19 @@
     <br />
 
     <!-- section start -->
-    <h3><span id="Methods" class="section-title"><a href="#Methods">Methods</a></span></h3>
+    <h3><span id="Methods" class="section-title"><a href="#Methods">Methods </a></span></h3>
     <dl class="section-body-container">
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Data.Recipe:add_ingredient" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:add_ingredient">Data.Recipe:add_ingredient(normal[, expensive])</span>
+    <a href="#unique_array:new" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:new">unique_array:new(...)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Add an ingredient to a recipe.</p>
+    <p class="section-item-summary">Create a new unique array.</p>
     <p class="section-item-description">
 </p>
 
@@ -269,16 +312,56 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>normal</em></strong>
+    <strong><em>...</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#ingredient">ingredient</a></span>)
+    (<span class="types"><span class="type">unique_array</span>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
 
-
-
+     strings to initialize the unique array with
 
     </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">new</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#unique_array:add" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:add">unique_array:add(other)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Add a string to the array if it doesn&rsquo;t exist in the array.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
 
 
 
@@ -286,14 +369,303 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>expensive</em></strong>
+    <strong><em>other</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#ingredient">ingredient</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    (<span class="types"><span class="type">unique_array</span>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
 
 
 
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">self</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#unique_array:remove" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:remove">unique_array:remove(other)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Remove the strings from the array if they exist.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>other</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">unique_array</span>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">self</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#unique_array:toggle" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:toggle">unique_array:toggle(other)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Toggles the passed name in the array by adding it if not present or removing it if it is.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>other</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">unique_array</span>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">self</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#unique_array:diff" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:diff">unique_array:diff(other)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Get all items that are NOT in both arrays.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>other</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">unique_array</span>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">new</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#unique_array:intersects" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:intersects">unique_array:intersects(other)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Get all items that are in both arrays.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>other</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">unique_array</span>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">new</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#unique_array:sort" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:sort">unique_array:sort([cmp])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Sort the unique_array in place.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>cmp</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+     Comparator <a href="https://www.lua.org/pil/19.3.html">sort</a> function to use
 
     (<em>optional</em>)
     </li>
@@ -307,7 +679,7 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><a class="type" href="../classes/Data.Recipe.html">Recipe</a></span>)
+    <span class="return-text">self</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -323,14 +695,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Data.Recipe:remove_ingredient" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:remove_ingredient">Data.Recipe:remove_ingredient(normal, expensive)</span>
+    <a href="#unique_array:concat" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:concat">unique_array:concat(other)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Remove one ingredient completely.</p>
+    <p class="section-item-summary">Create a new unique_array by concatenating together.</p>
     <p class="section-item-description">
 </p>
 
@@ -345,30 +717,14 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>normal</em></strong>
+    <strong><em>other</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+    (<span class="types"><span class="type">unique_array</span>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
 
 
 
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>expensive</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-
-     expensive recipe to remove, or if true remove normal recipe from both
 
     </li>
 
@@ -381,7 +737,7 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><a class="type" href="../classes/Data.Recipe.html">Recipe</a></span>)
+    <span class="return-text">new</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -397,14 +753,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Data.Recipe:replace_ingredient" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:replace_ingredient">Data.Recipe:replace_ingredient(replace, normal[, expensive])</span>
+    <a href="#unique_array:find" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:find">unique_array:find(pattern)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Replace one ingredient with another.</p>
+    <p class="section-item-summary">Find all members in a unique array that match the pattern.</p>
     <p class="section-item-description">
 </p>
 
@@ -419,158 +775,13 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>replace</em></strong>
+    <strong><em>pattern</em></strong>
 
     <strong> : </strong>
 
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
 
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>normal</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <span class="type">ingredient</span></span>)
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>expensive</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, <span class="type">ingredient</span> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-
-
-
-
-    (<em>optional</em>)
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Data.Recipe:make_difficult" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:make_difficult">Data.Recipe:make_difficult([expensive_energy])</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Converts a recipe to the difficulty recipe format.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>expensive_energy</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
-
-     crafting energy_required for the expensive recipe
-
-    (<em>optional</em>)
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">self</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Data.Recipe:change_category" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:change_category">Data.Recipe:change_category(category_name)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Change the recipe category.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>category_name</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     The new crafting category
+     Lua <a href="https://www.lua.org/pil/20.2.html">pattern</a>
 
     </li>
 
@@ -583,7 +794,7 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><span class="type">self</span></span>)
+    <span class="return-text">new unique array containing all elements that match.</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -599,14 +810,51 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Data.Recipe:add_unlock" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:add_unlock">Data.Recipe:add_unlock(tech_name)</span>
+    <a href="#unique_array:clear" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:clear">unique_array:clear()</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Add to technology as a recipe unlock.</p>
+    <p class="section-item-summary">Clear the array returning an empty array object</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">self</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Functions" class="section-title"><a href="#Functions">Functions </a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#unique_array:all" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:all">unique_array:all(other)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Does this array have all of the passed strings.</p>
     <p class="section-item-description">
 </p>
 
@@ -621,13 +869,14 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>tech_name</em></strong>
+    <strong><em>other</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+    (<span class="types"><span class="type">unique_array</span>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
 
-     Name of the technology to add the unlock too
+
+
 
     </li>
 
@@ -640,121 +889,8 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><span class="type">self</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Data.Recipe:remove_unlock" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:remove_unlock">Data.Recipe:remove_unlock(tech_name)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Remove the recipe unlock from the technology.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>tech_name</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     Name of the technology to remove the unlock from
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">self</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Data.Recipe:set_enabled" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:set_enabled">Data.Recipe:set_enabled(enabled)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Set the enabled status of the recipe.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>enabled</em></strong>
-
-    <strong> : </strong>
-
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-
-     Enable or disable the recipe
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">self</span></span>)
+    <span class="return-text">every passed string is in the array</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -770,48 +906,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Data.Recipe:convert_results" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:convert_results">Data.Recipe:convert_results()</span>
+    <a href="#unique_array:any" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:any">unique_array:any(other)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Convert result type to results type.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><span class="type">self</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Data.Recipe:set_main_product" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:set_main_product">Data.Recipe:set_main_product(main_product[, normal][, expensive])</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Set the main product of the recipe.</p>
+    <p class="section-item-summary">Does this array have any of the passed strings.</p>
     <p class="section-item-description">
 </p>
 
@@ -826,48 +928,15 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>main_product</em></strong>
+    <strong><em>other</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-
-     if boolean then use normal/expensive recipes passed as main product
-
-    </li>
+    (<span class="types"><span class="type">unique_array</span>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
 
 
 
 
-
-    <li class="section-subitem-li">
-
-    <strong><em>normal</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Product">Product</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     recipe
-
-    (<em>optional</em>)
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>expensive</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Product">Product</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     recipe
-
-    (<em>optional</em>)
     </li>
 
 
@@ -879,55 +948,38 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><span class="type">self</span></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Data.Recipe:remove_main_product" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:remove_main_product">Data.Recipe:remove_main_product([for_normal=false][, for_expensive=false])</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Remove the main product of the recipe.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>for_normal</em></strong>
-
-    <strong> : </strong>
-
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-
-
-
-
-    (<em>default</em>: false)
+    <span class="return-text">any passed string is in the array</span>
     </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#unique_array:none" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:none">unique_array:none(other)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Does this array have none of the passed strings.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
 
 
 
@@ -935,24 +987,30 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>for_expensive</em></strong>
+    <strong><em>other</em></strong>
 
     <strong> : </strong>
 
+    (<span class="types"><span class="type">unique_array</span>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-
-
-
-
-    (<em>default</em>: false)
+    <span class="return-text">no passed strings are in the array</span>
     </li>
-
-
     </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
     <!-- returns end -->
 
 
@@ -966,14 +1024,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Data.Recipe:add_result" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:add_result">Data.Recipe:add_result(normal[, expensive][, main_product])</span>
+    <a href="#unique_array:same" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:same">unique_array:same(other)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Add a new product to results, converts if needed.</p>
+    <p class="section-item-summary">Do both arrays contain the same items</p>
     <p class="section-item-description">
 </p>
 
@@ -988,51 +1046,15 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>normal</em></strong>
+    <strong><em>other</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#product">product</a></span>)
+    (<span class="types"><span class="type">unique_array</span>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
 
 
 
 
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>expensive</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#product">product</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-
-
-
-
-    (<em>optional</em>)
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>main_product</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-
-
-
-    (<em>optional</em>)
     </li>
 
 
@@ -1041,6 +1063,12 @@
     <!-- parameters end -->
 
     <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    </li>
+    </ul>
     <!-- returns end -->
 
 
@@ -1054,14 +1082,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Data.Recipe:remove_result" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:remove_result">Data.Recipe:remove_result([normal][, expensive][, main_product])</span>
+    <a href="#unique_array:disjointed" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:disjointed">unique_array:disjointed(other)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Remove a product from results, converts if needed.</p>
+    <p class="section-item-summary">Do the unique arrays have no items in common</p>
     <p class="section-item-description">
 </p>
 
@@ -1076,51 +1104,15 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>normal</em></strong>
+    <strong><em>other</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#product">product</a></span>)
+    (<span class="types"><span class="type">unique_array</span>, <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">{string,...}</a></span>)
 
 
 
 
-    (<em>optional</em>)
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>expensive</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#product">product</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-
-
-
-
-    (<em>optional</em>)
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>main_product</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     new main_product to use
-
-    (<em>optional</em>)
     </li>
 
 
@@ -1129,6 +1121,12 @@
     <!-- parameters end -->
 
     <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    </li>
+    </ul>
     <!-- returns end -->
 
 
@@ -1142,16 +1140,49 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#Data.Recipe:replace_result" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Data.Recipe:replace_result">Data.Recipe:replace_result(result_name[, normal][, expensive][, main_product])</span>
+    <a href="#unique_array:tostring" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:tostring">unique_array:tostring()</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Remove a product from results, converts if needed.</p>
+    <p class="section-item-summary">Convert the array to a string.</p>
     <p class="section-item-description">
 </p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#unique_array:make_dictionary" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array:make_dictionary">unique_array:make_dictionary([func][, ...])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Return a dictionary mapping of the array.</p>
+    <p class="section-item-description"> can be passed a function to set the value of the field.</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -1164,31 +1195,13 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>result_name</em></strong>
+    <strong><em>func</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#product">product</a></span>)
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
 
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>normal</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a> or <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#product">product</a></span>)
-
-
-
+     value, index are passed as the first two paramaters
 
     (<em>optional</em>)
     </li>
@@ -1199,16 +1212,74 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>expensive</em></strong>
+    <strong><em>...</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, <a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#product">product</a> or <a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    (<span class="types"><a class="type" href="../classes/unique_array.html#unique_array:any">any</a></span>)
 
-
-
+     additional values to pass to the function
 
     (<em>optional</em>)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">dictionary</span></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Exports" class="section-title"><a href="#Exports">Exports </a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#unique_array.exports" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="unique_array.exports">unique_array.exports</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">These functions are available when requiring this class.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>new</em></strong>
+
+    <strong> : </strong>
+
+
+    <a href="../classes/unique_array.html#unique_array:new">unique_array.new</a>
+
     </li>
 
 
@@ -1217,16 +1288,43 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>main_product</em></strong>
+    <strong><em>set</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+    set the class on an existing table
+
+    </li>
 
 
 
 
-    (<em>optional</em>)
+
+    <li class="section-subitem-li">
+
+    <strong><em>dictionary</em></strong>
+
+    <strong> : </strong>
+
+
+    <a href="../classes/unique_array.html#unique_array:make_dictionary">unique_array.make_dictionary</a>
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>from_dictionary</em></strong>
+
+
+
+
+
+
     </li>
 
 

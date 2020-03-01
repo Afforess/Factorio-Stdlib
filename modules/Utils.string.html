@@ -58,6 +58,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Event.html"><span class="module-name-item">Event.Event</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Force.html"><span class="module-name-item">Event.Force</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Gui.html"><span class="module-name-item">Event.Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Filters.html"><span class="module-name-item">Event.Filters</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Player.html"><span class="module-name-item">Event.Player</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Surface.html"><span class="module-name-item">Event.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Trains.html"><span class="module-name-item">Event.Trains</span></a></div></li>
@@ -67,17 +68,16 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Migrate.html"><span class="module-name-item">Misc.Migrate</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Queue.html"><span class="module-name-item">Misc.Queue</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color.html"><span class="module-name-item">Utils.Color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color2.html"><span class="module-name-item">Utils.Color2</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Globals.html"><span class="module-name-item">Utils.Globals</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Is.html"><span class="module-name-item">Utils.Is</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Iter.html"><span class="module-name-item">Utils.Iter</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.math.html"><span class="module-name-item">Utils.math</span></a></div></li>
     <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Utils.string.html"><span class="module-name-item">Utils.string</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.table.html"><span class="module-name-item">Utils.table</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/vendor.version.html"><span class="module-name-item">vendor.version</span></a></div></li>
     </ul>
     </li>
@@ -104,6 +104,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Technology.html"><span class="module-name-item">Data.Technology</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/LinkedList.html"><span class="module-name-item">LinkedList</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/string_array.html"><span class="module-name-item">string_array</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/unique_array.html"><span class="module-name-item">unique_array</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Vendor.Enumerable.html"><span class="module-name-item">Vendor.Enumerable</span></a></div></li>
     </ul>
     </li>
@@ -185,20 +186,24 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#String.center">String.center(s, w[, ch=' '])</a></td>
-    <td class="summary">center-justify s with width w.</td>
+    <td class="name"><a href="#String.trim">String.trim(s)</a></td>
+    <td class="summary">Returns a copy of the string with any leading or trailing whitespace from the string removed.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#String.contains">String.contains(s, contains)</a></td>
-    <td class="summary">Tests if a string contains a given substring.</td>
+    <td class="name"><a href="#String.starts_with">String.starts_with(s, start)</a></td>
+    <td class="summary">Tests if a string starts with a given substring.</td>
     </tr>
     <tr>
     <td class="name"><a href="#String.ends_with">String.ends_with(s, ends)</a></td>
     <td class="summary">Tests if a string ends with a given substring.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#String.is_alnum">String.is_alnum(s)</a></td>
-    <td class="summary">does s only contain alphanumeric characters?</td>
+    <td class="name"><a href="#String.contains">String.contains(s, contains)</a></td>
+    <td class="summary">Tests if a string contains a given substring.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#String.is_empty">String.is_empty(s)</a></td>
+    <td class="summary">Tests whether a string is empty.</td>
     </tr>
     <tr>
     <td class="name"><a href="#String.is_alpha">String.is_alpha(s)</a></td>
@@ -209,20 +214,28 @@
     <td class="summary">does s only contain digits?</td>
     </tr>
     <tr>
-    <td class="name"><a href="#String.is_empty">String.is_empty(s)</a></td>
-    <td class="summary">Tests whether a string is empty.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#String.is_lower">String.is_lower(s)</a></td>
-    <td class="summary">does s only contain lower case characters?</td>
+    <td class="name"><a href="#String.is_alnum">String.is_alnum(s)</a></td>
+    <td class="summary">does s only contain alphanumeric characters?</td>
     </tr>
     <tr>
     <td class="name"><a href="#String.is_space">String.is_space(s)</a></td>
     <td class="summary">does s only contain spaces?</td>
     </tr>
     <tr>
+    <td class="name"><a href="#String.is_lower">String.is_lower(s)</a></td>
+    <td class="summary">does s only contain lower case characters?</td>
+    </tr>
+    <tr>
     <td class="name"><a href="#String.is_upper">String.is_upper(s)</a></td>
     <td class="summary">does s only contain upper case characters?</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#String.title">String.title(s)</a></td>
+    <td class="summary">iniital word letters uppercase (&lsquo;title case&rsquo;).</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#String.shorten">String.shorten(s, w, tail)</a></td>
+    <td class="summary">Return a shortened version of a string.</td>
     </tr>
     <tr>
     <td class="name"><a href="#String.join">String.join(s, seq)</a></td>
@@ -233,32 +246,20 @@
     <td class="summary">left-justify s with width w.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#String.ordinal_suffix">String.ordinal_suffix(n, prepend_number)</a></td>
-    <td class="summary">Return the ordinal suffix for a number.</td>
-    </tr>
-    <tr>
     <td class="name"><a href="#String.rjust">String.rjust(s, w[, ch=' '])</a></td>
     <td class="summary">right-justify s with width w.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#String.shorten">String.shorten(s, w, tail)</a></td>
-    <td class="summary">Return a shortened version of a string.</td>
+    <td class="name"><a href="#String.center">String.center(s, w[, ch=' '])</a></td>
+    <td class="summary">center-justify s with width w.</td>
     </tr>
     <tr>
     <td class="name"><a href="#String.split">String.split(s[, sep="."][, pattern=false][, func])</a></td>
     <td class="summary">Splits a string into an array.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#String.starts_with">String.starts_with(s, start)</a></td>
-    <td class="summary">Tests if a string starts with a given substring.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#String.title">String.title(s)</a></td>
-    <td class="summary">iniital word letters uppercase (&lsquo;title case&rsquo;).</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#String.trim">String.trim(s)</a></td>
-    <td class="summary">Returns a copy of the string with any leading or trailing whitespace from the string removed.</td>
+    <td class="name"><a href="#String.ordinal_suffix">String.ordinal_suffix(n, prepend_number)</a></td>
+    <td class="summary">Return the ordinal suffix for a number.</td>
     </tr>
     </tbody>
     </table>
@@ -272,14 +273,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#String.center" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="String.center">String.center(s, w[, ch=' '])</span>
+    <a href="#String.trim" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="String.trim">String.trim(s)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">center-justify s with width w.</p>
+    <p class="section-item-summary">Returns a copy of the string with any leading or trailing whitespace from the string removed.</p>
     <p class="section-item-description">
 </p>
 
@@ -300,41 +301,8 @@
 
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
 
-     the string
+     the string to remove leading or trailing whitespace from
 
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>w</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>)
-
-     width of justification
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>ch</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     padding character
-
-    (<em>default</em>: ' ')
     </li>
 
 
@@ -343,6 +311,13 @@
     <!-- parameters end -->
 
     <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+    <span class="return-text">a copy of the string without leading or trailing whitespace</span>
+    </li>
+    </ul>
     <!-- returns end -->
 
 
@@ -356,14 +331,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#String.contains" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="String.contains">String.contains(s, contains)</span>
+    <a href="#String.starts_with" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="String.starts_with">String.starts_with(s, start)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Tests if a string contains a given substring.</p>
+    <p class="section-item-summary">Tests if a string starts with a given substring.</p>
     <p class="section-item-description">
 </p>
 
@@ -384,7 +359,7 @@
 
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
 
-     the string to check for the substring
+     the string to check for the start substring
 
     </li>
 
@@ -394,7 +369,7 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>contains</em></strong>
+    <strong><em>start</em></strong>
 
     <strong> : </strong>
 
@@ -414,7 +389,7 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    <span class="return-text">true if the substring was found in the string</span>
+    <span class="return-text">true if the start substring was found in the string</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -504,14 +479,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#String.is_alnum" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="String.is_alnum">String.is_alnum(s)</span>
+    <a href="#String.contains" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="String.contains">String.contains(s, contains)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">does s only contain alphanumeric characters?</p>
+    <p class="section-item-summary">Tests if a string contains a given substring.</p>
     <p class="section-item-description">
 </p>
 
@@ -532,7 +507,23 @@
 
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
 
-     a string
+     the string to check for the substring
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>contains</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     the substring to test for
 
     </li>
 
@@ -542,6 +533,71 @@
     <!-- parameters end -->
 
     <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if the substring was found in the string</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#String.is_empty" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="String.is_empty">String.is_empty(s)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Tests whether a string is empty.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>s</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     the string to test
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">true if the string is empty</span>
+    </li>
+    </ul>
     <!-- returns end -->
 
 
@@ -657,72 +713,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#String.is_empty" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="String.is_empty">String.is_empty(s)</span>
+    <a href="#String.is_alnum" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="String.is_alnum">String.is_alnum(s)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Tests whether a string is empty.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>s</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     the string to test
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    <span class="return-text">true if the string is empty</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#String.is_lower" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="String.is_lower">String.is_lower(s)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">does s only contain lower case characters?</p>
+    <p class="section-item-summary">does s only contain alphanumeric characters?</p>
     <p class="section-item-description">
 </p>
 
@@ -817,6 +815,57 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
+    <a href="#String.is_lower" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="String.is_lower">String.is_lower(s)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">does s only contain lower case characters?</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>s</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     a string
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
     <a href="#String.is_upper" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="String.is_upper">String.is_upper(s)</span>
     </div>
@@ -862,6 +911,148 @@
     <!-- see also end -->
 
     <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#String.title" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="String.title">String.title(s)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">iniital word letters uppercase (&lsquo;title case&rsquo;).</p>
+    <p class="section-item-description"> Here &lsquo;words&rsquo; mean chunks of non-space characters.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>s</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     the string
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">a string with each word&rsquo;s first letter uppercase</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#String.shorten" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="String.shorten">String.shorten(s, w, tail)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Return a shortened version of a string.</p>
+    <p class="section-item-description"> Fits string within w characters. Removed characters are marked with ellipsis.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>s</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+
+     the string
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>w</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>)
+
+     the maxinum size allowed
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>tail</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">bool</span></span>)
+
+     true if we want to show the end of the string (head otherwise)
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code>(<span class="string">'1234567890'</span>):shorten(<span class="number">8</span>) == <span class="string">'12345...'</span></code></pre>
+    <pre class="code" data-lang="Lua"><code>(<span class="string">'1234567890'</span>):shorten(<span class="number">8</span>, <span class="keyword">true</span>) == <span class="string">'...67890'</span></code></pre>
+    <pre class="code" data-lang="Lua"><code>(<span class="string">'1234567890'</span>):shorten(<span class="number">20</span>) == <span class="string">'1234567890'</span></code></pre>
     <!-- usage end -->
 
     </dd>
@@ -1020,81 +1211,6 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#String.ordinal_suffix" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="String.ordinal_suffix">String.ordinal_suffix(n, prepend_number)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Return the ordinal suffix for a number.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>n</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>prepend_number</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-
-     if the passed number should be pre-pended
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-    <span class="return-text">the ordinal suffix</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
     <a href="#String.rjust" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="String.rjust">String.rjust(s, w[, ch=' '])</span>
     </div>
@@ -1179,15 +1295,16 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#String.shorten" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="String.shorten">String.shorten(s, w, tail)</span>
+    <a href="#String.center" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="String.center">String.center(s, w[, ch=' '])</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Return a shortened version of a string.</p>
-    <p class="section-item-description"> Fits string within w characters. Removed characters are marked with ellipsis.</p>
+    <p class="section-item-summary">center-justify s with width w.</p>
+    <p class="section-item-description">
+</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -1222,7 +1339,7 @@
 
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>)
 
-     the maxinum size allowed
+     width of justification
 
     </li>
 
@@ -1232,14 +1349,15 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>tail</em></strong>
+    <strong><em>ch</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><span class="type">bool</span></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
 
-     true if we want to show the end of the string (head otherwise)
+     padding character
 
+    (<em>default</em>: ' ')
     </li>
 
 
@@ -1255,10 +1373,6 @@
     <!-- see also end -->
 
     <!-- usage start -->
-    <strong>Usage:</strong>
-    <pre class="code" data-lang="Lua"><code>(<span class="string">'1234567890'</span>):shorten(<span class="number">8</span>) == <span class="string">'12345...'</span></code></pre>
-    <pre class="code" data-lang="Lua"><code>(<span class="string">'1234567890'</span>):shorten(<span class="number">8</span>, <span class="keyword">true</span>) == <span class="string">'...67890'</span></code></pre>
-    <pre class="code" data-lang="Lua"><code>(<span class="string">'1234567890'</span>):shorten(<span class="number">20</span>) == <span class="string">'1234567890'</span></code></pre>
     <!-- usage end -->
 
     </dd>
@@ -1273,7 +1387,7 @@
     <div class="section-item-body">
 
     <p class="section-item-summary">Splits a string into an array.</p>
-    <p class="section-item-description"> <em>Note:</em> Empty split substrings are not included in the resulting table.
+    <p class="section-item-description"> Note: Empty split substrings are not included in the resulting table.
  <p>For example, <code>string.split("foo.bar...", ".", false)</code> results in the table <code>{"foo", "bar"}</code>.</p>
 
     <!-- parameters start -->
@@ -1374,14 +1488,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#String.starts_with" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="String.starts_with">String.starts_with(s, start)</span>
+    <a href="#String.ordinal_suffix" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="String.ordinal_suffix">String.ordinal_suffix(n, prepend_number)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Tests if a string starts with a given substring.</p>
+    <p class="section-item-summary">Return the ordinal suffix for a number.</p>
     <p class="section-item-description">
 </p>
 
@@ -1396,13 +1510,14 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>s</em></strong>
+    <strong><em>n</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
 
-     the string to check for the start substring
+
+
 
     </li>
 
@@ -1412,127 +1527,13 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>start</em></strong>
+    <strong><em>prepend_number</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     the substring to test for
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    <span class="return-text">true if the start substring was found in the string</span>
-    </li>
-    </ul>
-    <!-- returns end -->
 
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#String.title" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="String.title">String.title(s)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">iniital word letters uppercase (&lsquo;title case&rsquo;).</p>
-    <p class="section-item-description"> Here &lsquo;words&rsquo; mean chunks of non-space characters.</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>s</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     the string
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">a string with each word&rsquo;s first letter uppercase</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#String.trim" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="String.trim">String.trim(s)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns a copy of the string with any leading or trailing whitespace from the string removed.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>s</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     the string to remove leading or trailing whitespace from
+     if the passed number should be pre-pended
 
     </li>
 
@@ -1546,7 +1547,7 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-    <span class="return-text">a copy of the string without leading or trailing whitespace</span>
+    <span class="return-text">the ordinal suffix</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -1574,7 +1575,7 @@
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-02-01 03:09:23 UTC</i>
+    <i>Last updated 2020-03-01 16:44:20 UTC</i>
     </div>
     </div>
     </div>

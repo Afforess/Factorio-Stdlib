@@ -58,6 +58,7 @@
     <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Event.Event.html"><span class="module-name-item">Event.Event</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Force.html"><span class="module-name-item">Event.Force</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Gui.html"><span class="module-name-item">Event.Gui</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Filters.html"><span class="module-name-item">Event.Filters</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Player.html"><span class="module-name-item">Event.Player</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Surface.html"><span class="module-name-item">Event.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Event.Trains.html"><span class="module-name-item">Event.Trains</span></a></div></li>
@@ -67,17 +68,16 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Migrate.html"><span class="module-name-item">Misc.Migrate</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Misc.Queue.html"><span class="module-name-item">Misc.Queue</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color.html"><span class="module-name-item">Utils.Color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Color2.html"><span class="module-name-item">Utils.Color2</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Globals.html"><span class="module-name-item">Utils.Globals</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Is.html"><span class="module-name-item">Utils.Is</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.Iter.html"><span class="module-name-item">Utils.Iter</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.math.html"><span class="module-name-item">Utils.math</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.string.html"><span class="module-name-item">Utils.string</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Utils.table.html"><span class="module-name-item">Utils.table</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.anticolor.html"><span class="module-name-item">defines.anticolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.color.html"><span class="module-name-item">defines.color</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.lightcolor.html"><span class="module-name-item">defines.lightcolor</span></a></div></li>
-    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/defines.time.html"><span class="module-name-item">defines.time</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/vendor.version.html"><span class="module-name-item">vendor.version</span></a></div></li>
     </ul>
     </li>
@@ -104,6 +104,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Data.Technology.html"><span class="module-name-item">Data.Technology</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/LinkedList.html"><span class="module-name-item">LinkedList</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/string_array.html"><span class="module-name-item">string_array</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/unique_array.html"><span class="module-name-item">unique_array</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../classes/Vendor.Enumerable.html"><span class="module-name-item">Vendor.Enumerable</span></a></div></li>
     </ul>
     </li>
@@ -191,12 +192,36 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#dispatch">dispatch(event)</a></td>
-    <td class="summary">Calls the handlers that are registered to the given event.</td>
+    <td class="name"><a href="#register">register(event_id, handler[, filter=nil][, pattern=nil][, options=nil])</a></td>
+    <td class="summary">Registers a handler for the given events.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#filter_entity">filter_entity(event_parameter, entity_type, matcher)</a></td>
-    <td class="summary">Filters events related to entity_type.</td>
+    <td class="name"><a href="#remove">remove(event_id[, handler][, filter][, pattern])</a></td>
+    <td class="summary">Removes a handler from the given events.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#on_load">on_load(...)</a></td>
+    <td class="summary">Shortcut for <code>Event.register(Event.core_events.on_load, function)</code></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#on_configuration_changed">on_configuration_changed(...)</a></td>
+    <td class="summary">Shortcut for <code>Event.register(Event.core_events.on_configuration_changed, function)</code></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#on_init">on_init(...)</a></td>
+    <td class="summary">Shortcut for <code>Event.register(Event.core_events.on_init, function)</code></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#on_nth_tick">on_nth_tick(nth_tick, ...)</a></td>
+    <td class="summary">Shortcut for <code>Event.register(-nthTick, function)</code></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#on_event">on_event()</a></td>
+    <td class="summary">Shortcut for <code>Event.register(defines.events, function)</code></td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#dispatch">dispatch(event)</a></td>
+    <td class="summary">Calls the handlers that are registered to the given event.</td>
     </tr>
     <tr>
     <td class="name"><a href="#generate_event_name">generate_event_name(event_name)</a></td>
@@ -207,36 +232,8 @@
     <td class="summary">Get event handler.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#get_registry">get_registry()</a></td>
-    <td class="summary">Retrieve the event_registry</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#on_configuration_changed">on_configuration_changed(handler, matcher, pattern)</a></td>
-    <td class="summary">Shortcut for <code>Event.register(Event.core_events.on_configuration_changed, function)</code></td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#on_event">on_event()</a></td>
-    <td class="summary">Shortcut for <code>Event.register(defines.events, handler, matcher, pattern)</code></td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#on_init">on_init(handler, matcher, pattern)</a></td>
-    <td class="summary">Shortcut for <code>Event.register(Event.core_events.on_init, function)</code></td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#on_load">on_load(handler, matcher, pattern)</a></td>
-    <td class="summary">Shortcut for <code>Event.register(Event.core_events.on_load, function)</code></td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#on_nth_tick">on_nth_tick(nth_tick, handler, matcher, pattern)</a></td>
-    <td class="summary">Shortcut for <code>Event.register(-nthTick, function)</code></td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#register">register(event_id, handler[, matcher=nil][, pattern=nil][, options=nil])</a></td>
-    <td class="summary">Registers a handler for the given events.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#remove">remove(event_id[, handler][, matcher][, pattern])</a></td>
-    <td class="summary">Removes a handler from the given events.</td>
+    <td class="name"><a href="#set_protected_mode">set_protected_mode(bool)</a></td>
+    <td class="summary">Set protected mode.</td>
     </tr>
     <tr>
     <td class="name"><a href="#set_debug_mode">set_debug_mode(bool)</a></td>
@@ -247,8 +244,8 @@
     <td class="summary">Set default options for the event module.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#set_protected_mode">set_protected_mode(bool)</a></td>
-    <td class="summary">Set protected mode.</td>
+    <td class="name"><a href="#get_registry">get_registry()</a></td>
+    <td class="summary">Retrieve the event_registry</td>
     </tr>
     </tbody>
     </table>
@@ -271,6 +268,525 @@
     <!-- section start -->
     <h3><span id="Functions" class="section-title"><a href="#Functions">Functions</a></span></h3>
     <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#register" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="register">register(event_id, handler[, filter=nil][, pattern=nil][, options=nil])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Registers a handler for the given events.</p>
+    <p class="section-item-description"> If a <code>nil</code> handler is passed, remove the given events and stop listening to them.
+ <p>Events dispatch in the order they are registered.
+ <p>An <em>event ID</em> can be obtained via <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>,
+ <a href="http://lua-api.factorio.com/latest/LuaBootstrap.html#LuaBootstrap.generate_event_name">script.generate_event_name</a> which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>,
+ and can be a custom input name which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>.
+ <p>The <code>event_id</code> parameter takes in either a single, multiple, or mixture of <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, and <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>event_id</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, or {<a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>,&hellip;}</span>)
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>handler</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+     the function to call when the given events are triggered
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>filter</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+     a function whose return determines if the handler is executed. event and pattern are passed into this
+
+    (<em>default</em>: nil)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pattern</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+     an invariant that can be used in the filter function, passed as the second parameter to your filter
+
+    (<em>default</em>: nil)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>options</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
+
+     a table of options that take precedence over the module options.
+
+    (<em>default</em>: nil)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <strong>Usage:</strong>
+    <pre class="code" data-lang="Lua"><code><span class="comment">-- Create an event that prints the current tick every tick.
+</span>Event.register(defines.events.on_tick, <span class="keyword">function</span>(event) game.<span class="global">print</span>(event.tick) <span class="keyword">end</span>)
+<span class="comment">-- Register something for Nth tick using negative numbers.
+</span>Event.register(-<span class="number">120</span>, <span class="keyword">function</span>() game.<span class="global">print</span>(<span class="string">'Every 120 ticks'</span>) <span class="keyword">end</span>
+<span class="comment">-- Function call chaining
+</span>Event.register(event1, handler1).register(event2, handler2)</code></pre>
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#remove" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="remove">remove(event_id[, handler][, filter][, pattern])</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Removes a handler from the given events.</p>
+    <p class="section-item-description"> <p>When the last handler for an event is removed, stop listening to that event.
+ <p>An <em>event ID</em> can be obtained via <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>,
+ <a href="http://lua-api.factorio.com/latest/LuaBootstrap.html#LuaBootstrap.generate_event_name">script.generate_event_name</a> which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>,
+ and can be a custom input name which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>.
+ <p>The <code>event_id</code> parameter takes in either a single, multiple, or mixture of <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, and <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>.</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>event_id</em></strong>
+
+    <strong> : </strong>
+
+
+     (<span class="types"><a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, or {<a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>,&hellip;}</span>)
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>handler</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+     the handler to remove, if not present remove all registered handlers for the event_id
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>filter</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
+
+
+
+
+    (<em>optional</em>)
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pattern</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><span class="type">mixed</span></span>)
+
+
+
+
+    (<em>optional</em>)
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#on_load" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_load">on_load(...)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <code>Event.register(Event.core_events.on_load, function)</code></p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>...</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#on_configuration_changed" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_configuration_changed">on_configuration_changed(...)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <code>Event.register(Event.core_events.on_configuration_changed, function)</code></p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>...</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#on_init" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_init">on_init(...)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <code>Event.register(Event.core_events.on_init, function)</code></p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>...</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#on_nth_tick" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_nth_tick">on_nth_tick(nth_tick, ...)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <code>Event.register(-nthTick, function)</code></p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>nth_tick</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>...</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#on_event" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="on_event">on_event()</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Shortcut for <code>Event.register(defines.events, function)</code></p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
@@ -319,88 +835,6 @@
     <ul>
     <li><a href="https://forums.factorio.com/viewtopic.php?t=32039#p202158">Invalid Event Objects</a></li>
     </ul>
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#filter_entity" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="filter_entity">filter_entity(event_parameter, entity_type, matcher)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Filters events related to entity_type.</p>
-    <p class="section-item-description"> ! DEPRECATED</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>event_parameter</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     The event parameter to look inside to find the entity type
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>entity_type</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>)
-
-     The entity type to filter events for
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>matcher</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">callable</span></span>)
-
-     The matcher to invoke if the filter passes. The object defined in the event parameter is passed
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <!-- returns end -->
-
-
-    <!-- see also start -->
     <!-- see also end -->
 
     <!-- usage start -->
@@ -520,49 +954,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#get_registry" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="get_registry">get_registry()</span>
+    <a href="#set_protected_mode" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="set_protected_mode">set_protected_mode(bool)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Retrieve the event_registry</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
-    <span class="return-text">event_registry</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#on_configuration_changed" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_configuration_changed">on_configuration_changed(handler, matcher, pattern)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Shortcut for <code>Event.register(Event.core_events.on_configuration_changed, function)</code></p>
+    <p class="section-item-summary">Set protected mode.</p>
     <p class="section-item-description">
 </p>
 
@@ -577,37 +976,7 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>handler</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>matcher</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pattern</em></strong>
+    <strong><em>bool</em></strong>
 
 
 
@@ -622,565 +991,6 @@
     <!-- parameters end -->
 
     <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#on_event" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_event">on_event()</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Shortcut for <code>Event.register(defines.events, handler, matcher, pattern)</code></p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#on_init" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_init">on_init(handler, matcher, pattern)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Shortcut for <code>Event.register(Event.core_events.on_init, function)</code></p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>handler</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>matcher</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pattern</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#on_load" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_load">on_load(handler, matcher, pattern)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Shortcut for <code>Event.register(Event.core_events.on_load, function)</code></p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>handler</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>matcher</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pattern</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#on_nth_tick" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="on_nth_tick">on_nth_tick(nth_tick, handler, matcher, pattern)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Shortcut for <code>Event.register(-nthTick, function)</code></p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>nth_tick</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>handler</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>matcher</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pattern</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#register" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="register">register(event_id, handler[, matcher=nil][, pattern=nil][, options=nil])</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Registers a handler for the given events.</p>
-    <p class="section-item-description"> If a <code>nil</code> handler is passed, remove the given events and stop listening to them.
- <p>Events dispatch in the order they are registered.
- <p>An <em>event ID</em> can be obtained via <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>,
- <a href="http://lua-api.factorio.com/latest/LuaBootstrap.html#LuaBootstrap.generate_event_name">script.generate_event_name</a> which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>,
- and can be a custom input name which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>.
- <p>The <code>event_id</code> parameter takes in either a single, multiple, or mixture of <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, and <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>.</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>event_id</em></strong>
-
-    <strong> : </strong>
-
-
-     (<span class="types"><a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, or {<a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>,&hellip;}</span>)
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>handler</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
-
-     the function to call when the given events are triggered
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>matcher</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
-
-     a function whose return determines if the handler is executed. event and pattern are passed into this
-
-    (<em>default</em>: nil)
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pattern</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-     an invariant that can be used in the matcher function, passed as the second parameter to your matcher
-
-    (<em>default</em>: nil)
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>options</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
-
-     a table of options that take precedence over the module options.
-
-    (<em>default</em>: nil)
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <strong>Usage:</strong>
-    <pre class="code" data-lang="Lua"><code><span class="comment">-- Create an event that prints the current tick every tick.
-</span>Event.register(defines.events.on_tick, <span class="keyword">function</span>(event) game.<span class="global">print</span>(event.tick) <span class="keyword">end</span>)
-<span class="comment">-- Register something for Nth tick using negative numbers.
-</span>Event.register(-<span class="number">120</span>, <span class="keyword">function</span>() game.<span class="global">print</span>(<span class="string">'Every 120 ticks'</span>) <span class="keyword">end</span>
-<span class="comment">-- Function call chaining
-</span>Event.register(event1, handler1).register(event2, handler2)</code></pre>
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#remove" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="remove">remove(event_id[, handler][, matcher][, pattern])</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Removes a handler from the given events.</p>
-    <p class="section-item-description"> <p>When the last handler for an event is removed, stop listening to that event.
- <p>An <em>event ID</em> can be obtained via <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>,
- <a href="http://lua-api.factorio.com/latest/LuaBootstrap.html#LuaBootstrap.generate_event_name">script.generate_event_name</a> which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a></span>,
- and can be a custom input name which is in <span class="types"><a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a></span>.
- <p>The <code>event_id</code> parameter takes in either a single, multiple, or mixture of <a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, and <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>.</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>event_id</em></strong>
-
-    <strong> : </strong>
-
-
-     (<span class="types"><a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>, or {<a href="http://lua-api.factorio.com/latest/defines.html#defines.events">defines.events</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#int">int</a>, <a href="http://lua-api.factorio.com/latest/Builtin-Types.html#string">string</a>,&hellip;}</span>)
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>handler</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
-
-     the handler to remove, if not present remove all registered handlers for the event_id
-
-    (<em>optional</em>)
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>matcher</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.6.html">function</a></span>)
-
-
-
-
-    (<em>optional</em>)
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pattern</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><span class="type">mixed</span></span>)
-
-
-
-
-    (<em>optional</em>)
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">(<span class="types"><a href="../modules/Event.Event.html">Event</a></span>) Event module object allowing for call chaining</span>
-    </li>
-    </ul>
     <!-- returns end -->
 
 
@@ -1309,43 +1119,28 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#set_protected_mode" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="set_protected_mode">set_protected_mode(bool)</span>
+    <a href="#get_registry" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="get_registry">get_registry()</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Set protected mode.</p>
+    <p class="section-item-summary">Retrieve the event_registry</p>
     <p class="section-item-description">
 </p>
 
     <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>bool</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-    </ul>
-
     <!-- parameters end -->
 
     <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.5.html">table</a></span>)
+    <span class="return-text">event_registry</span>
+    </li>
+    </ul>
     <!-- returns end -->
 
 
@@ -1470,7 +1265,7 @@ Event.dispatch(event_data)</code></pre>
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-02-01 03:09:23 UTC</i>
+    <i>Last updated 2020-03-01 16:44:20 UTC</i>
     </div>
     </div>
     </div>

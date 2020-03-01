@@ -13,7 +13,7 @@
             },
             "cwd": "${workspaceRoot}",
             "args": [
-                "${workspaceFolder}/love"
+                "${workspaceFolder}/tools/love"
             ]
         },
         {

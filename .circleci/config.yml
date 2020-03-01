@@ -14,18 +14,18 @@ jobs:
       - run: wget -q --no-check-certificate -O .luacheckrc https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/master/.luacheckrc
       - run: luacheck .
       - run: busted .
-      - run: make quick
+      - run: .circleci/makedocs.sh
+      - run: .circleci/package.sh
       - store_artifacts:
-          path: ~/stdlib/.build/artifacts
+          path: .bin
           destination: files
 
-  deploy-release:
+  document:
     docker:
       - image: nexela/factorio-lua-env
     working_directory: ~/stdlib
     steps:
       - checkout
-
       - run: git checkout gh-pages
 
       - run:
@@ -33,9 +33,9 @@ jobs:
           command: |
             git clone https://github.com/Afforess/Factorio-Stdlib.git /tmp/stdlib
             cd /tmp/stdlib
-            git checkout release
-            make doc
-            cp -R .build/doc/* ~/stdlib/
+            git checkout master
+            .circleci/makedocs.sh
+            cp -R stdlib-docs/* ~/stdlib/
 
       - run:
           name: Commit gh-pages
@@ -48,10 +48,18 @@ jobs:
 
       - run: git checkout release
 
-      - run: make quick
+  deploy-release:
+    docker:
+      - image: nexela/factorio-lua-env
+    working_directory: ~/stdlib
+    steps:
+      - checkout
+
+      - run: .circleci/makedocs.sh
+      - run: .circleci/package.sh
 
       - store_artifacts:
-          path:  ~/stdlib/.build/artifacts
+          path:  .bin
           destination: files
 
       - run:
@@ -71,9 +79,9 @@ jobs:
 
       - run:
           name: Upload Release
-          command: /root/stdlib/.circleci/release.sh
+          command: .circleci/release.sh
 
-      - run: git tag v${VERSION}
+      - run: git tag ${VERSION}
       - run: git push --tags
 
 workflows:
@@ -86,6 +94,12 @@ workflows:
               ignore:
                 - gh-pages
                 - /feature-.*/
+      - document:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
       - deploy-release:
           requires:
             - build

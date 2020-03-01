@@ -46,7 +46,7 @@ jobs:
             git commit -am "Automatic Github Page generation"
             git push
 
-      - run: git checkout release
+      - run: git checkout master
 
   deploy-release:
     docker:

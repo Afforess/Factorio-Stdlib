@@ -1,19 +1,16 @@
 #lua files in root
-#/control.lua
-#/data.lua
-#/data-updates.lua
-#/data-final-fixes.lua
-/*.lua
+*.lua
 
-# Exclude the build directory
-.build/
-
-.trash/
-.test/
+# Exclude the api docs directory
 stdlib-docs/
+
+.temp/
+.trash/
+.history/
 
 # Exclude the output directory
 .output/
+.build/
 
 # vim swapfiles
 .*.swp
@@ -23,10 +20,10 @@ stdlib-docs/
 /stdlib/tags
 
 # Ignore temp.lua files
+*.ign.lua
+*.tmp.lua
 *.tmp
-temp*.lua
 *.stackdump
-*.bak.*
 
 # Compiled Lua sources
 luac.out

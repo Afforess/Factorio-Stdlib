@@ -2,9 +2,10 @@
     "files.exclude": {
         "**/.build": true,
         "**/.trash": true,
+        "**/.history": true,
     },
     "search.exclude": {
-        "**/.test": true,
-        "**/api-docs": true,
+        "**/.temp": true,
+        "**/stdlib-docs": true,
     }
 }

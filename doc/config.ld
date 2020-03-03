@@ -6,8 +6,6 @@ full_description = [[
   The Factorio Standard Library aims to extend the Factorio Lua API with well-tested, documented, and easy-to-use functions to make modding easier.
 ]]
 
-local BUILD_DIR = "../.build/"
-
 no_lua_ref = true
 convert_opt = true
 sort = false
@@ -18,9 +16,9 @@ merge = false
 backtick_references = false
 format = "discount"
 template_escape = ">"
-dir = BUILD_DIR .. "doc"
-examples = {"../doc/examples"}
-topics = {"../readme.md", "../changelog.txt", "../LICENSE", "../doc/contributing.md", "../doc/style-guide.md"}
+dir = "stdlib-docs"
+examples = {"./doc/examples"}
+topics = {"./readme.md", "./changelog.txt", "./LICENSE", "./doc/contributing.md", "./doc/style-guide.md"}
 
 new_type("event", "Events", false, "Event Parameters")
 

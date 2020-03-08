@@ -16,7 +16,7 @@ local math_min = math.min
 local math_max = math.max
 local math_huge = math.huge
 local math_pi = math.pi
-local log10 = math.log10
+local math_log = math.log
 local unpack = table.unpack
 
 --(( Math Constants
@@ -64,6 +64,10 @@ Math.MAX_UINT64 = Math.MAXUINT64
 
 local function tuple(...)
     return type(...) == 'table' and ... or {...}
+end
+
+function Math.log10(x)
+    return math_log(x, 10)
 end
 
 --- Round a number.
@@ -207,7 +211,7 @@ function Math.energetic_mean(...)
     for _, v in ipairs(x) do
         s = s + (10 ^ (v / 10))
     end
-    return 10 * log10((1 / #x) * s)
+    return 10 * Math.log10((1 / #x) * s)
 end
 
 --- Returns the number x clamped between the numbers min and max.

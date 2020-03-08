@@ -23,7 +23,7 @@ inspect = require('__stdlib__/stdlib/vendor/inspect')
 -- Set up faketorio for local testing,
 -- defines will already be available in an active mod or busted specs
 if not _G.defines then
-    _G.table.unpack = _G.table.unpack or unpack
+    _G.table.unpack = _G.table.unpack or _G.unpack
     if config.control or config.game then
         local world = require('__stdlib__/faketorio/world').bootstrap()
         if config.game then
@@ -53,12 +53,8 @@ if _G.settings then
     end
 end
 
--- if instrument-mode then __DebugAdapter will be available
-local __DebugAdapter
-if (_G.mods and _G.mods['debugadapter']) or (_G.script and _G.script.active_mods and _G.script.active_mods['debugadapter']) then
-    __DebugAdapter = require('__debugadapter__/debugadapter')
-end
-if __DebugAdapter then
+if _G.__DebugAdapter then
+    -- Add our custom mutate info to the debugadapter.
     if _G.settings and _G.settings.get then
         local object_info = require('__debugadapter__/luaobjectinfo.lua')
         object_info.expandKeys['LuaSettings']['get'] = {}

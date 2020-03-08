@@ -24,6 +24,7 @@ stdlib-docs/
 *.tmp.lua
 *.tmp
 *.stackdump
+.luacheckcache
 
 # Compiled Lua sources
 luac.out

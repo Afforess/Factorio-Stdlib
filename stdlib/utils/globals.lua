@@ -54,11 +54,13 @@ if _G.settings then
 end
 
 if _G.__DebugAdapter then
-    -- Add our custom mutate info to the debugadapter.
-    if _G.settings and _G.settings.get then
-        local object_info = require('__debugadapter__/luaobjectinfo.lua')
-        object_info.expandKeys['LuaSettings']['get'] = {}
-        object_info.expandKeys['LuaSettings']['get_startup'] = {}
+    if _G.__DebugAdapter.attach then
+        -- Add our custom mutate info to the debugadapter.
+        if _G.settings and _G.settings.get then
+            local object_info = require('__debugadapter__/luaobjectinfo.lua')
+            object_info.expandKeys['LuaSettings']['get'] = {}
+            object_info.expandKeys['LuaSettings']['get_startup'] = {}
+        end
     end
 else
     _G.__DebugAdapter = {

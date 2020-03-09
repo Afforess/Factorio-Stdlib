@@ -1,8 +1,9 @@
-local Core = require('__stdlib__/stdlib/core')
-local Area = require('__stdlib__/stdlib/area/area')
-local Position = require('__stdlib__/stdlib/area/position')
+local Core = require('stdlib/core')
+local Area = require('stdlib/area/area')
+local Position = require('stdlib/area/position')
+local Chunk = require('stdlib/area/chunk')
 local Color = function(...)
-    return require('__stdlib__/stdlib/utils/color').new(...):to_array()
+    return require('stdlib/utils/color').new(...):to_array()
 end
 _G.Area = Area
 _G.Position = Position
@@ -11,7 +12,8 @@ _G.Position = Position
 
 local classes = {
     ['Area'] = Area,
-    ['Position'] = Position
+    ['Position'] = Position,
+    ['Chunk'] = Chunk
 }
 
 for _, class in pairs(classes) do
@@ -67,8 +69,8 @@ function Area.draw(area, color, coords)
     coords = coords == nil and true or coords
     --local ltx, lty, w, h = copy:rectangle()
     local ltx, lty, rbx, rby = copy:unpack()
-    local wx, wy = Grid:convertCoords('cell', 'world', ltx, lty)
-    local w, h = Grid:convertCoords('cell', 'world', copy:dimensions())
+    local wx, wy = Grid:convertCoords('tile', 'world', ltx, lty)
+    local w, h = Grid:convertCoords('tile', 'world', copy:dimensions())
     local function func()
         LG.push()
         LG.setColor(color or Color('red'))
@@ -86,13 +88,13 @@ end
 function Position.draw_to(position, color, ...) --position_to, color)
     local copy = position()
     local points = {}
-    points[1], points[2] = Grid:convertCoords('cell', 'world', copy.x, copy.y)
+    points[1], points[2] = Grid:convertCoords('tile', 'world', copy.x, copy.y)
     local arg = (...)
     if Position.is_position(...) then
         arg = {...}
     end
     for _, point in pairs(arg) do
-        local x, y = Grid:convertCoords('cell', 'world', point.x, point.y)
+        local x, y = Grid:convertCoords('tile', 'world', point.x, point.y)
         points[#points + 1] = x
         points[#points + 1] = y
     end
@@ -108,12 +110,8 @@ end
 
 function Position.draw(position, color, coords)
     local copy = position()
-    local wx, wy = Grid:convertCoords('cell', 'world', copy.x, copy.y)
+    local wx, wy = Grid:convertCoords('tile', 'world', copy.x, copy.y)
     coords = coords == nil and true or coords
-    -- print('regular  ', copy:unpack())
-    -- print('to  World', Grid:toWorld(copy:unpack()))
-    -- print('to Screen', Grid:toScreen(copy:unpack()))
-    -- print('from func', wx, wy)
     local function func()
         LG.push()
         LG.setColor(color or Color("blue"))
@@ -130,4 +128,4 @@ end
 Position._draw_queue = {}
 Area._draw_queue = {}
 
-return {Core = Core, Area = Area, Position = Position}
+return {Core = Core, Area = Area, Position = Position, Chunk = Chunk}

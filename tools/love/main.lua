@@ -1,6 +1,11 @@
 if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
     require("lldebugger").start()
-  end
+end
+
+local raw_require = require
+_G.require = function(path)
+    return raw_require((path:gsub('__%S+__/', '')))
+end
 
 local Setup = require('grid')
 local Classes = require('classes')
@@ -11,7 +16,7 @@ local Move = require('move')
 
 local Grid = Setup.Grid
 local Camera = Setup.Camera
-local math = require('__stdlib__/stdlib/utils/math')
+local math = require('stdlib/utils/math')
 
 _G.last_pos = Position()
 _G.last_area = Area()
@@ -23,8 +28,8 @@ local Window = {
 }
 
 local Fonts = {
-    world = 8,
-    info = 12
+    world = 10,
+    info = 14
 }
 
 local Mouse = {
@@ -39,13 +44,13 @@ local function draw_mouse()
     love.graphics.setColor(1, 0, 0, 1)
     if love.mouse.isDown(1) then
         local area = Area(Mouse.down.x, Mouse.down.y, Mouse.world.x, Mouse.world.y):normalize()
-        local pos = Position(Grid:convertCoords('world', 'cell', Mouse.down:unpack())):normalize()
+        local pos = Position(Grid:convertCoords('world', 'tile', Mouse.down:unpack())):normalize()
         love.graphics.print(pos.x .. ', ' .. pos.y, Mouse.down.x, Mouse.down.y)
         love.graphics.rectangle('line', area:rectangle())
     elseif Mouse.up then
         local area = Area(Mouse.down.x, Mouse.down.y, Mouse.up.x, Mouse.up.y):normalize()
-        local lt = Position(Grid:convertCoords('world', 'cell', Mouse.down:unpack())):normalize()
-        local rb = Position(Grid:convertCoords('world', 'cell', Mouse.up:unpack())):normalize()
+        local lt = Position(Grid:convertCoords('world', 'tile', Mouse.down:unpack())):normalize()
+        local rb = Position(Grid:convertCoords('world', 'tile', Mouse.up:unpack())):normalize()
         local w = area:dimensions()
         love.graphics.print(lt.x .. ', ' .. lt.y, area.left_top.x, area.left_top.y)
         if area:size() > 0 then
@@ -64,15 +69,19 @@ function love.draw()
     Grid:draw()
     love.graphics.setFont(Fonts.info)
     local strs = {
-        'Window Size: ' .. Window.size:str(),
-        'Grid origin: ' .. Camera.origin:normalize():str(),
-        'Camera position: ' .. Camera.pos:normalize():str(),
+        --'Window Size: ' .. Window.size:str(),
+        --'Grid origin: ' .. Camera.origin:normalize():str(),
+        --'Camera position: ' .. Camera.pos:normalize():str(),
         'Camera zoom: ' .. Camera.zoom,
-        'Mouse on screen: ' .. Mouse.screen:normalize():str(),
-        'Mouse on world: ' .. Camera.mouse:normalize():str(),
+        --'Origin:' .. Camera.origin:normalize():str(),
+        'Origin tile: ' .. Camera.origin_tile:str(),
+        'Center Tile: ' .. Camera.center_tile:str(),
+        --'Mouse on screen: ' .. Mouse.screen:normalize():str(),
+        --'Mouse on world: ' .. Camera.mouse:normalize():str(),
         --'Mouse position on Grid: ' .. Camera.mouse:normalize(),
-        'Mouse Position on Cell:' .. Camera.cell:normalize():str(),
-        'Selected Cell: ' .. Camera.cell:floor():str()
+        'Selected tile:' .. Camera.tile:str(),
+        --'Selected tile: ' .. Camera.tile:center():str(),
+        'Selected Chunk:' .. Camera.tile:to_chunk_position():str()
     }
     love.graphics.printf(table.concat(strs, '\n'), 30, 30, 800, 'left')
 
@@ -106,14 +115,18 @@ function love.update(dt)
     local newmx, newmy = love.mouse.getPosition()
     Move(Camera, Mouse, dt, newmx, newmy)
 
-    Camera.cell:update(Grid:convertCoords('screen', 'cell', newmx, newmy))
-    Mouse.screen:update(newmx, newmy)
+    Camera.center_tile:update(Grid:convertCoords('world', 'tile', Camera.pos:unpack())):rounded()
+    Camera.origin:update(Grid:toScreen(0, 0))
+    local x, y = Camera.origin:unpack()
+    Camera.origin_tile:update(Grid:convertCoords('world', 'tile', x / Camera.zoom, y / Camera.zoom)):centered()
+    Camera.tile:update(Grid:convertCoords('screen', 'tile', newmx, newmy)):normalized()
 
+    Mouse.screen:update(newmx, newmy)
     local wx, wy = Grid:toWorld(newmx, newmy)
     Mouse.world:update(wx, wy)
     Camera.mouse:update(wx, wy)
 
-    Camera.origin:update(Grid:toScreen(0, 0))
+
 end
 
 function love.wheelmoved(_, y)

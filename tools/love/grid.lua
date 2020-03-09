@@ -9,7 +9,9 @@ local Camera = {
     pos = Position(),
     mouse = Position(),
     origin = Position(),
-    cell = Position(),
+    origin_tile = Position(),
+    center_tile = Position(),
+    tile = Position(),
 }
 
 local Visual = {

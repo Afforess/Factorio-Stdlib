@@ -11,7 +11,7 @@
             "program": {
                 "command": "love"
             },
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}/tools/love",
             "args": [
                 "${workspaceFolder}/tools/love"
             ]

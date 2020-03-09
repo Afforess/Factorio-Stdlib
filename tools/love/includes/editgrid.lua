@@ -143,22 +143,22 @@ local function majorInterval(camera, visuals)
     return sds * minorInterval(camera, visuals)
 end
 
-local function cellToWorld(camera, visuals, x, y)
+local function tileToWorld(camera, visuals, x, y)
     local d = minorInterval(camera, visuals)
     return x * d, y * d
 end
 
-local function cellToScreen(camera, visuals, x, y)
-    return cellToWorld(camera, visuals, toWorld(camera, x, y))
+local function tileToScreen(camera, visuals, x, y)
+    return tileToWorld(camera, visuals, toWorld(camera, x, y))
 end
 
-local function worldToCell(camera, visuals, x, y)
+local function worldToTile(camera, visuals, x, y)
     local d = minorInterval(camera, visuals)
     return x/d, y/d
 end
 
-local function screenToCell(camera, visuals, x, y)
-    return worldToCell(camera, visuals, toWorld(camera, x, y))
+local function screenToTile(camera, visuals, x, y)
+    return worldToTile(camera, visuals, toWorld(camera, x, y))
 end
 
 local function convertCoords(camera, visuals, src, dest, x, y)
@@ -167,29 +167,29 @@ local function convertCoords(camera, visuals, src, dest, x, y)
     camera = checkType(camera or EMPTY, "table", "camera")
     visuals = checkType(visuals or EMPTY, "table", "visuals")
     assert(
-        src == "screen" or src == "world" or src == "cell",
+        src == "screen" or src == "world" or src == "tile",
         "Unrecognized src " .. tostring(src) .. "."
     )
     assert(
-        dest == "screen" or dest == "world" or dest == "cell",
+        dest == "screen" or dest == "world" or dest == "tile",
         "Unrecognized dest " .. tostring(dest) .. "."
     )
     if src == dest then return x, y end
     if src == "screen" then
-        if dest == "cell" then
-            return screenToCell(camera, visuals, x, y)
+        if dest == "tile" then
+            return screenToTile(camera, visuals, x, y)
         else -- dest == "world"
             return toWorld(camera, x, y)
         end
-    elseif src == "cell" then
+    elseif src == "tile" then
         if dest == "screen" then
-            return cellToScreen(camera, visuals, x, y)
+            return tileToScreen(camera, visuals, x, y)
         else -- dest == "world"
-            return cellToWorld(camera, visuals, x, y)
+            return tileToWorld(camera, visuals, x, y)
         end
     elseif src == "world" then
-        if dest == "cell" then
-            return worldToCell(camera, visuals, x, y)
+        if dest == "tile" then
+            return worldToTile(camera, visuals, x, y)
         else -- dest == "screen"
             return toScreen(camera, x, y)
         end

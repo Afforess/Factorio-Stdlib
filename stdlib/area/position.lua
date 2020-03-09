@@ -283,7 +283,7 @@ function Position.floored(pos)
     return pos
 end
 
---- Gets the center position of the tile where the given position resides.
+--- The center position of the tile where the given position resides.
 -- @tparam Concepts.Position pos
 -- @treturn Concepts.Position the position at the center of the tile
 function Position.center(pos)
@@ -293,6 +293,17 @@ function Position.center(pos)
     x = pos.x >= 0 and floor(pos.x) + 0.5 or (ceil_x == pos.x and ceil_x + 0.5 or ceil_x - 0.5)
     y = pos.y >= 0 and floor(pos.y) + 0.5 or (ceil_y == pos.y and ceil_y + 0.5 or ceil_y - 0.5)
     return new(x, y)
+end
+
+--- The center position of the tile where the given position resides.
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position mutated.
+function Position.centered(pos)
+    local ceil_x = ceil(pos.x)
+    local ceil_y = ceil(pos.y)
+    pos.x = pos.x >= 0 and floor(pos.x) + 0.5 or (ceil_x == pos.x and ceil_x + 0.5 or ceil_x - 0.5)
+    pos.y = pos.y >= 0 and floor(pos.y) + 0.5 or (ceil_y == pos.y and ceil_y + 0.5 or ceil_y - 0.5)
+    return pos
 end
 
 --- Rounds a positions points to the closest integer

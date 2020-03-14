@@ -2,7 +2,6 @@
 -- @classmod Data.Recipe
 
 local Data = require('__stdlib__/stdlib/data/data')
-local Item = require('__stdlib__/stdlib/data/item')
 local Table = require('__stdlib__/stdlib/utils/table')
 
 local Recipe = {
@@ -20,6 +19,7 @@ setmetatable(Recipe, Recipe)
 
 -- Returns a formated ingredient or prodcut table
 local function format(ingredient, result_count)
+    local Item = require('__stdlib__/stdlib/data/item')
     local object
     if type(ingredient) == 'table' then
         if ingredient.valid and ingredient:is_valid() then
@@ -318,6 +318,7 @@ function Recipe:set_main_product(main_product, normal, expensive)
         normal, expensive = get_difficulties(normal, expensive)
         local normal_main, expensive_main
         if main_product then
+            local Item = require('__stdlib__/stdlib/data/item')
             if type(main_product) == 'string' and Item(main_product):is_valid() then
                 normal_main = normal and main_product
                 expensive_main = expensive and main_product

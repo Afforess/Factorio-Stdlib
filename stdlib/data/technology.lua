@@ -1,57 +1,20 @@
 --- Technology
 -- @classmod Data.Technology
 
+local Data = require('__stdlib__/stdlib/data/data')
+
 local Technology = {
     __class = 'Technology',
-    __index = require('__stdlib__/stdlib/data/data'),
+    __index = Data,
 }
-setmetatable(Technology, Technology)
-
-local Is = require('__stdlib__/stdlib/utils/is')
 
 function Technology:__call(tech)
     return self:get(tech, 'technology')
 end
-
---[[
-type = "technology",
-name = "military",
-icon = "__base__/graphics/technology/military.png",
-effects =
-{
-    {
-        type = "unlock-recipe",
-        recipe = "submachine-gun"
-    },
-    {
-        type = "unlock-recipe",
-        recipe = "shotgun"
-    },
-    {
-        type = "unlock-recipe",
-        recipe = "shotgun-shell"
-    }
-},
-unit =
-{
-    count = 10,
-    ingredients = {{"science-pack-1", 1}},
-    time = 15
-},
-order = "e-a-a"
-
---]]
--- local function create_technology_prototype(name)
--- local new = {
--- type = type,
--- name = name,
--- }
--- data:extend{new}
--- return true
--- end
+setmetatable(Technology, Technology)
 
 function Technology:add_effect(effect, unlock_type)
-    Is.Assert(effect)
+    assert(effect)
 
     --todo fix for non recipe types
     local add_unlock =

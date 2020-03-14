@@ -1,10 +1,12 @@
 --- Entity class
 -- @classmod Data.Entity
 
+local Data = require('__stdlib__/stdlib/data/data')
+
 local Entity = {
     __class = 'Entity',
-    __index = require('__stdlib__/stdlib/data/data'),
-    __call = require('__stdlib__/stdlib/data/data').__call
+    __index = Data,
+    __call = Data.__call
 }
 setmetatable(Entity, Entity)
 
@@ -22,6 +24,20 @@ function Entity:is_player_placeable()
         return self:Flags():any('player-creation', 'placeable-player')
     end
     return false
+end
+
+function Entity:change_lab_inputs(name, add)
+    if self:is_valid('lab') then
+        Entity.Unique_Array.set(self.inputs)
+        if add then
+            self.inputs:add(name)
+        else
+            self.inputs:remove(name)
+        end
+    else
+        log('Entity is not a lab.' .. _G.data_traceback())
+    end
+    return self
 end
 
 return Entity

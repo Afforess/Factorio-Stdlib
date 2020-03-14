@@ -1,15 +1,14 @@
 --- Recipe class
 -- @classmod Data.Recipe
 
+local Data = require('__stdlib__/stdlib/data/data')
+local Item = require('__stdlib__/stdlib/data/item')
+local Table = require('__stdlib__/stdlib/utils/table')
+
 local Recipe = {
     __class = 'Recipe',
-    __index = require('__stdlib__/stdlib/data/data'),
+    __index = Data,
 }
-setmetatable(Recipe, Recipe)
-
-local Is = require('__stdlib__/stdlib/utils/is')
-local Item = require('__stdlib__/stdlib/data/item')
-local table = require('__stdlib__/stdlib/utils/table')
 
 function Recipe:__call(recipe)
     local new = self:get(recipe, 'recipe')
@@ -17,6 +16,7 @@ function Recipe:__call(recipe)
     -- rawset(new, 'Results', {})
     return new
 end
+setmetatable(Recipe, Recipe)
 
 -- Returns a formated ingredient or prodcut table
 local function format(ingredient, result_count)
@@ -26,7 +26,7 @@ local function format(ingredient, result_count)
             return ingredient
         elseif ingredient.name then
             if Item(ingredient.name, ingredient.type):is_valid() then
-                object = table.deepcopy(ingredient)
+                object = Table.deepcopy(ingredient)
                 if not object.amount and not (object.amount_min and object.amount_max and object.probability) then
                     error('Result table requires amount or probabilities')
                 end
@@ -59,7 +59,7 @@ end
 -- Format items for difficulties
 -- If expensive is a boolean then return a copy of normal for expensive
 local function get_difficulties(normal, expensive)
-    return format(normal), format((expensive == true and table.deepcopy(normal)) or expensive)
+    return format(normal), format((expensive == true and Table.deepcopy(normal)) or expensive)
 end
 
 --- Remove an ingredient from an ingredients table.
@@ -146,7 +146,7 @@ Recipe.rem_ing = Recipe.remove_ingredient
 -- @tparam string|ingredient normal
 -- @tparam[opt] string|ingredient|boolean expensive
 function Recipe:replace_ingredient(replace, normal, expensive)
-    Is.Assert(replace, 'Missing recipe to replace')
+    assert(replace, 'Missing recipe to replace')
     if self:is_valid() then
         local n_string = type(normal) == 'string'
         local e_string = type(expensive == true and normal or expensive) == 'string'
@@ -193,14 +193,14 @@ function Recipe:make_difficult(expensive_energy)
         for _, ingredient in ipairs(self.ingredients) do
             local this = format(ingredient)
             normal[#normal + 1] = this
-            expensive[#expensive + 1] = table.deepcopy(this)
+            expensive[#expensive + 1] = Table.deepcopy(this)
         end
 
         local r_normal, r_expensive = {}, {}
         for _, ingredient in ipairs(self.results or {self.result}) do
             local this = format(ingredient)
             r_normal[#r_normal + 1] = this
-            r_expensive[#r_expensive + 1] = table.deepcopy(this)
+            r_expensive[#r_expensive + 1] = Table.deepcopy(this)
         end
 
         self.normal = {

@@ -485,6 +485,7 @@ function Data:get(object, object_type, opts)
         self.Unique_Array.set(new.flags)
         self.Unique_Array.set(new.crafting_categories)
         self.Unique_Array.set(new.mining_categories)
+        self.Unique_Array.set(new.inputs)
     elseif not new.options.silent then
         log_trace(new, object, object_type)
     end

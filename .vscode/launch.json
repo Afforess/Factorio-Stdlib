@@ -21,7 +21,7 @@
             "request": "launch",
             "name": "Debug Lua 5.2",
             "program": {
-                "lua": "lua-5.2",
+                "lua": "lua5.2",
                 "file": "${file}"
             },
             "cwd": "${workspaceFolder}",
@@ -37,6 +37,6 @@
                 "file": "${file}"
             },
             "cwd": "${workspaceFolder}"
-        },
+        }
     ]
 }

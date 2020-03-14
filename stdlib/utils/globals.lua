@@ -14,7 +14,34 @@ STDLIB = {
 }
 
 --Since debug can be overridden we define a fallback function here.
+local ignored = {
+    data_traceback = true,
+    log_trace = true
+}
 traceback = type(debug) == 'table' and debug.traceback or function()
+        return ''
+    end
+data_traceback = type(debug) == 'table' and debug.getinfo and function()
+        local str = {}
+        local level = 1
+        while true do
+            local trace = debug.getinfo(level)
+            if trace then
+                level = level + 1
+                if (trace.what == 'Lua' or trace.what == 'main') and not ignored[trace.name] then
+                    local cur = trace.source:gsub('.*__stdlib__', '__stdlib__'):gsub('.*/Factorio%-Stdlib', '__stdlib__')
+                    cur = cur .. ':' .. (trace.currentline or '0') .. ' in ' .. (trace.name or '???')
+                    str[#str + 1] = cur
+                end
+                if trace.what == 'main' then
+                    break
+                end
+            else
+                break
+            end
+        end
+        return ' [' .. table.concat(str, ', ') .. ']'
+    end or function()
         return ''
     end
 
@@ -24,6 +51,10 @@ inspect = require('__stdlib__/stdlib/vendor/inspect')
 -- defines will already be available in an active mod or busted specs
 if not _G.defines then
     _G.table.unpack = _G.table.unpack or _G.unpack
+    if _G.os and _G.os.getenv('LOCAL_LUA_DEBUGGER_VSCODE') == '1' then
+        require('__stdlib__/faketorio/require')
+        _G.package.strip_indentifier()
+    end
     if config.control or config.game then
         local world = require('__stdlib__/faketorio/world').bootstrap()
         if config.game then

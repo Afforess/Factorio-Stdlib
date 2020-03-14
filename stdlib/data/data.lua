@@ -32,14 +32,11 @@ setmetatable(Data, Data)
 
 -- This is the tracing function.
 local function log_trace(self, object, object_type)
-    local trace = traceback()
     local msg = (self.__class and self.__class or '') .. (self.name and '/' .. self.name or '') .. ' '
     msg = msg .. (object_type and (object_type .. '/') or '') .. tostring(object) .. ' does not exist.'
 
-    trace = trace:gsub('stack traceback:\n', ''):gsub('.*%(%.%.%.tail calls%.%.%.%)\n', ''):gsub(' in main chunk.*$', '')
-    trace = trace:gsub('%_%_.*%_%_%/stdlib/data.*\n', ''):gsub('\n', '->'):gsub('\t', '')
-    trace = msg .. '  [' .. trace .. ']'
-    log(trace)
+    local trace = data_traceback()
+    log(msg .. trace)
 end
 --)) END Local Functions ((--
 

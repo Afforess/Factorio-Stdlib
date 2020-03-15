@@ -1,0 +1,1 @@
+do local _={["repair-pack"]={type="repair-tool",subgroup="tool",order="b[repair]-a[repair-pack]",icon="__base__/graphics/icons/repair-pack.png",icon_size=64,name="repair-pack",stack_size=100,durability=300,speed=2,icon_mipmaps=4}};return _;end

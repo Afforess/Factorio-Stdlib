@@ -1,0 +1,1 @@
+do local _={["solar-panel-equipment"]={shape={height=1,type="full",width=1},energy_source={usage_priority="primary-output",type="electric"},sprite={width=32,filename="__base__/graphics/equipment/solar-panel-equipment.png",height=32,priority="medium"},name="solar-panel-equipment",type="solar-panel-equipment",categories={"armor"},power="30kW"}};return _;end

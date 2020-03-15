@@ -1,0 +1,1 @@
+do local _={minions={order="e[kill]-d[minions]",icon="__base__/graphics/achievement/minions.png",icon_size=128,name="minions",steam_stats_name="combat-robots",count=100,type="combat-robot-count"}};return _;end

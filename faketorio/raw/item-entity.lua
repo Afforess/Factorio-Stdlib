@@ -1,0 +1,1 @@
+do local _={["item-on-ground"]={flags={"placeable-off-grid","not-on-map"},type="item-entity",collision_box={{-0.14,-0.14},{0.14,0.14}},minable={mining_time=0.025},selection_box={{-0.17,-0.17},{0.17,0.17}},name="item-on-ground"}};return _;end

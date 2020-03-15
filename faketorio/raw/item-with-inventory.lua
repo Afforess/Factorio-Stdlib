@@ -1,0 +1,1 @@
+do local _={["item-with-inventory"]={flags={"hidden"},type="item-with-inventory",order="s[item-with-inventory]-o[item-with-inventory]",icon="__base__/graphics/icons/wooden-chest.png",icon_size=64,name="item-with-inventory",subgroup="other",stack_size=1,inventory_size=1,icon_mipmaps=4}};return _;end

@@ -1,0 +1,1 @@
+do local _={["entity-ghost"]={flags={"not-on-map"},type="entity-ghost",name="entity-ghost",minable={mining_time=0,results={}}}};return _;end

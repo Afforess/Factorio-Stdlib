@@ -1,0 +1,1 @@
+do local _={rail={type="rail-planner",subgroup="transport",straight_rail="straight-rail",curved_rail="curved-rail",order="a[train-system]-a[rail]",icon="__base__/graphics/icons/rail.png",icon_size=64,name="rail",stack_size=100,place_result="straight-rail",localised_name={"item-name.rail"},icon_mipmaps=4}};return _;end

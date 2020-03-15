@@ -1,0 +1,1 @@
+do local _={["blueprint-book"]={type="blueprint-book",order="c[automated-construction]-d[blueprint-book]",icon="__base__/graphics/icons/blueprint-book.png",icon_size=64,name="blueprint-book",subgroup="tool",stack_size=1,inventory_size=1000,icon_mipmaps=4}};return _;end

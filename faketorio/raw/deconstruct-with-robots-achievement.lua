@@ -1,0 +1,1 @@
+do local _={["automated-cleanup"]={order="b[exploration]-c[deconstruct-with-robots]",icon="__base__/graphics/achievement/automated-cleanup.png",amount=100,name="automated-cleanup",steam_stats_name="deconstructed-by-robots",type="deconstruct-with-robots-achievement",icon_size=128}};return _;end

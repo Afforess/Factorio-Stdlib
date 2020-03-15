@@ -1,0 +1,1 @@
+do local _={["fusion-reactor-equipment"]={shape={height=4,type="full",width=4},energy_source={usage_priority="primary-output",type="electric"},sprite={width=128,filename="__base__/graphics/equipment/fusion-reactor-equipment.png",height=128,priority="medium"},name="fusion-reactor-equipment",type="generator-equipment",categories={"armor"},power="750kW"}};return _;end

@@ -22,5 +22,10 @@ _G.data = {
             t[e.name] = e
         end
     end,
-    raw = require('__stdlib__/faketorio/data_raw')
+    raw = {}
+    --raw = require('__stdlib__/faketorio/raw/raw')
 }
+
+for _, k in pairs(require('__stdlib__/faketorio/raw/keys')) do
+    _G.data.raw[k] = require('__stdlib__/faketorio/raw/'..k)
+end

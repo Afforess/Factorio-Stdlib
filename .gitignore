@@ -1,5 +1,5 @@
 #lua files in root
-*.lua
+#*.lua
 
 # Exclude the api docs directory
 stdlib-docs/

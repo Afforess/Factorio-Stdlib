@@ -1,16 +1,4 @@
 ---------------------------------------------------------------------------------------------------
-Version: 1.4.2
-Date: ????
-
-  Features:
-    - Added Item:add_to_labs.
-    - Added Item:remove_from_labs.
-    - Added Entity:change_lab_inputs.
-    - Added Inventory.swap_inventory.
-    - Added Inventory.transfer_inventory.
-    - Replace Color with Color2 see Docs.
-    - Added Table.all
----------------------------------------------------------------------------------------------------
 Version: 1.4.1
 Date: 31.1.2020
 

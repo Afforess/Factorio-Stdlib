@@ -147,6 +147,7 @@ function Technology:remove_prereq(tech_name)
         for i = #pre, 1, -1 do
             if pre[i] == tech_name then
                 table.remove(pre, i)
+                break
             end
         end
         if #pre == 0 then

@@ -97,7 +97,7 @@ function Changes.on_configuration_changed(event)
             run_if_exists(Changes.mod_first)
             local this_mod_changes = event.mod_changes[script.mod_name]
             Changes.on_mod_changed(this_mod_changes)
-            log('Version changed from ' .. tostring(this_mod_changes.old_version) .. ' to ' .. tostring(this_mod_changes.new_version))
+            log(script.mod_name .. ': version changed from ' .. tostring(this_mod_changes.old_version) .. ' to ' .. tostring(this_mod_changes.new_version))
             run_if_exists(Changes.mod_last)
         end
         run_if_exists(Changes.any_last)

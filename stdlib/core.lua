@@ -43,7 +43,7 @@ Core.String_Array = Core.Unique_Array
 -- @treturn boolean true if the message was printed to someone
 function Core.log_and_print(msg)
     if game and #game.connected_players > 0 then
-        log(msg)
+        log(script.mod_name .. ':' .. msg)
         game.print(msg)
         return true
     else

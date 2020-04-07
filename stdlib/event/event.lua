@@ -18,6 +18,8 @@ config.control = true
 
 local Event = {
     __class = 'Event',
+    debug_mode = false,
+    registry = {}, -- Holds registered events
     custom_events = {}, -- Holds custom event ids
     stop_processing = {}, -- just has to be unique
     Filters = require('__stdlib__/stdlib/event/modules/event_filters'),
@@ -58,7 +60,6 @@ local table = require('__stdlib__/stdlib/utils/table')
 local inspect = require('__stdlib__/stdlib/vendor/inspect')
 
 local assert, type, tonumber = assert, type, tonumber
-local event_registry = {} --Holds the event registry
 local inspect_append = false -- Only used for write_file, can cause desyncs elsewhere
 local event_names = table.invert(defines.events)
 
@@ -75,7 +76,7 @@ if not config.skip_script_protections then -- Protections for post and pre regis
     end
 end
 
-local bootstrap_register = {
+local bootstrap_events = {
     on_init = function()
         Event.dispatch({name = 'on_init'})
     end,
@@ -94,10 +95,10 @@ local function valid_id(id)
 end
 
 local function valid_event_id(id)
-    return (tonumber(id) and id >= 0) or (Type.String(id) and not bootstrap_register[id])
+    return (tonumber(id) and id >= 0) or (Type.String(id) and not bootstrap_events[id])
 end
 
-local function get_event_name(name)
+local function id_to_name(name)
     return event_names[name] or table.invert(Event.custom_events)[name] or name or 'unknown'
 end
 
@@ -147,13 +148,13 @@ function Event.register(event_id, handler, filter, pattern, options)
 
     -- If the event_id has never been registered before make sure we call the correct script action to register
     -- our Event handler with factorio
-    if not event_registry[event_id] then
-        event_registry[event_id] = {}
+    if not Event.registry[event_id] then
+        Event.registry[event_id] = {}
 
         if Type.String(event_id) then
             --String event ids will either be Bootstrap events or custom input events
-            if bootstrap_register[event_id] then
-                Event.script[event_id](bootstrap_register[event_id])
+            if bootstrap_events[event_id] then
+                Event.script[event_id](bootstrap_events[event_id])
             else
                 Event.script.on_event(event_id, Event.dispatch)
             end
@@ -166,7 +167,7 @@ function Event.register(event_id, handler, filter, pattern, options)
         end
     end
 
-    local registry = event_registry[event_id]
+    local registry = Event.registry[event_id]
 
     --If handler is already registered for this event: remove it for re-insertion at the end.
     if #registry > 0 then
@@ -209,7 +210,7 @@ function Event.remove(event_id, handler, filter, pattern)
 
     assert(valid_id(event_id), 'event_id is invalid')
 
-    local registry = event_registry[event_id]
+    local registry = Event.registry[event_id]
     if registry then
         local found_something = false
         for i = #registry, 1, -1 do
@@ -257,11 +258,11 @@ function Event.remove(event_id, handler, filter, pattern)
 
         if found_something and table.size(registry) == 0 then
             -- Clear the registry data and un subscribe if there are no registered handlers left
-            event_registry[event_id] = nil
+            Event.registry[event_id] = nil
 
             if Type.String(event_id) then
                 -- String event ids will either be Bootstrap events or custom input events
-                if bootstrap_register[event_id] then
+                if bootstrap_events[event_id] then
                     Event.script[event_id](nil)
                 else
                     Event.script.on_event(event_id, nil)
@@ -341,7 +342,7 @@ end
 local function dispatch_event(event, registered)
     local success, match_result, handler_result
     local protected = check_option(event.options.protected_mode, registered.options.protected_mode, Event.options.protected_mode)
-    local pcall = not bootstrap_register[event.name] and protected and pcall or no_pcall
+    local pcall = not bootstrap_events[event.name] and protected and pcall or no_pcall
 
     -- If we have a filter run it first passing event, and registered.pattern as parameters
     -- If the filter returns truthy call the handler passing event, and the result from the filter
@@ -393,12 +394,12 @@ function Event.dispatch(event)
     --get the registered handlers from name, input_name, or nth_tick in that priority.
     local registry
 
-    if event.name and event_registry[event.name] then
-        registry = event_registry[event.name]
-    elseif event.input_name and event_registry[event.input_name] then
-        registry = event_registry[event.input_name]
+    if event.name and Event.registry[event.name] then
+        registry = Event.registry[event.name]
+    elseif event.input_name and Event.registry[event.input_name] then
+        registry = Event.registry[event.input_name]
     elseif event.nth_tick then
-        registry = event_registry[-event.nth_tick]
+        registry = Event.registry[-event.nth_tick]
     end
 
     if registry then
@@ -428,7 +429,7 @@ function Event.dispatch(event)
             -- Inspect things
             if Event.debug_mode and game and check_option(event.options.inspect_event, registered.options.inspect_event, Event.options.inspect_event) then
                 local result = inspect(event) .. '\n'
-                game.write_file(Event.get_file_path('events/' .. get_event_name(event.input_name or event.name) .. '.lua'), result, inspect_append)
+                game.write_file(Event.get_file_path('events/' .. id_to_name(event.input_name or event.name) .. '.lua'), result, inspect_append)
                 game.write_file(Event.get_file_path('events/ordered.lua'), result, inspect_append)
                 inspect_append = true
             end
@@ -444,6 +445,21 @@ function Event.dispatch(event)
             end
         end
     end
+end
+
+function Event.register_player(bool)
+    require('__stdlib__/stdlib/event/player').register_events(bool)
+    return Event
+end
+
+function Event.register_force(bool)
+    require('__stdlib__/stdlib/event/force').register_events(bool)
+    return Event
+end
+
+function Event.register_surface(bool)
+    require('__stdlib__/stdlib/event/surface').register_events(bool)
+    return Event
 end
 
 --- Retrieve or Generate an event_name and store it in Event.custom_events
@@ -485,8 +501,8 @@ end
 function Event.get_event_handler(event_id)
     assert(valid_id(event_id), 'event_id is invalid')
     return {
-        script = bootstrap_register(event_id) or (valid_event_id(event_id) and Event.script.get_event_handler(event_id)),
-        handlers = event_registry[event_id]
+        script = bootstrap_events(event_id) or (valid_event_id(event_id) and Event.script.get_event_handler(event_id)),
+        handlers = Event.registry[event_id]
     }
 end
 
@@ -508,65 +524,6 @@ function Event.set_option(option, bool)
     return Event
 end
 
---- Retrieve the event_registry
--- @treturn table event_registry
-function Event.get_registry()
-    return event_registry
-end
-
-local function get_registered_counts(reg_type)
-    local core, nth, on_events = 0, 0, 0
-    local events = {}
-    for id, registry in pairs(event_registry) do
-        if tonumber(id) then
-            if id < 0 then
-                nth = nth + #registry
-            else
-                on_events = on_events + #registry
-            end
-        else
-            if bootstrap_register[id] then
-                core = core + #registry
-            else
-                on_events = on_events + #registry
-            end
-        end
-        local name = get_event_name(id)
-        events[name] = (events[name] or 0) + #registry
-    end
-    local all = {
-        core = core,
-        events = events,
-        nth = nth,
-        on_events = on_events,
-        total = on_events + nth + core
-    }
-    return reg_type and all[reg_type] or all
-end
-
-function Event.dump_data()
-    local event_data = {
-        count_data = get_registered_counts(),
-        event_order = script.get_event_order(),
-        Custom_events = Event.custom_events,
-        options = {
-            protected_mode = Event.options.protected_mode,
-            force_crc = Event.options.force_crc,
-            inspect_event = Event.options.inspect_event,
-            skip_valid = Event.options.skip_valid
-        }
-    }
-    local registry, factorio_events = {}, {}
-    for event, data in pairs(event_registry) do
-        registry['[' .. event .. '] ' .. get_event_name(event)] = data
-        if valid_event_id(event) then
-            factorio_events['[' .. event .. '] ' .. get_event_name(event)] = Event.script.get_event_handler(event)
-        end
-    end
-    game.write_file(Event.get_file_path('Event/event_data.lua'), inspect(event_data))
-    game.write_file(Event.get_file_path('Event/factorio_registry.lua'), inspect(factorio_events, {longkeys = true, arraykeys = true}))
-    game.write_file(Event.get_file_path('Event/event_registry.lua'), inspect(registry, {longkeys = true, arraykeys = true}))
-    game.write_file(Event.get_file_path('Event/raw_registry.lua'), inspect(event_registry, {longkeys = true, arraykeys = true}))
-end
+Event.dump_data = require('__stdlib__/stdlib/event/modules/dump_event_data')(Event, valid_event_id, id_to_name)
 
 return Event

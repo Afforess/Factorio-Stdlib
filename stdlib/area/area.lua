@@ -753,7 +753,8 @@ metatable = {
     __lt = Area.less_than, --is the size of area1 less than number/area2.
     __le = Area.less_than_eq, --is the size of area1 less than or equal to number/area2.
     __len = Area.size, -- The size of the area.
-    __call = Area.new -- Return a new copy
+    __call = Area.new, -- Return a new copy.
+    __debugline = [[<Area>{[}left_top={left_top},right_bottom={right_bottom}{]}]]
 }
 -- ))
 

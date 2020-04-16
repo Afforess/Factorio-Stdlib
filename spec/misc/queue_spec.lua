@@ -233,16 +233,6 @@ describe('Queue', function()
             end
         )
 
-        it('__pairs and __ipairs', function ()
-            for _ in pairs(q) do
-                s()
-            end
-            for _ in ipairs(q) do
-                s()
-            end
-            assert.spy(s).was_called(10)
-        end)
-
         it('.pairs', function ()
             for _ in q:pairs() do
                 s()

@@ -53,7 +53,6 @@ local function create_class(tab)
             __add = wrappers.__add,
             __sub = wrappers.__sub,
             __lte = wrappers.__lt,
-            --__pairs = wrappers.__pairs,
             len = 0
         }
 

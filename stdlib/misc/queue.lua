@@ -292,6 +292,7 @@ do
     meta.__len = Queue.size
     meta.__unm = Queue.pop
     meta.__parent = Queue
+    meta.__debugline = [[<Queue>{[}first={first},last={last}{]}]]
 
     -- Allows queue[3] to return the item at queue.objects[3]
     meta.__index = function(self, k)

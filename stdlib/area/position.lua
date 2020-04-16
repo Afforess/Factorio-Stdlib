@@ -900,7 +900,8 @@ metatable = {
     __le = Position.less_than_eq, -- Is position1 less than or equal to position2.
     __tostring = Position.to_string, -- Returns a string representation of the position
     __concat = concat, -- calls tostring on both sides of concact.
-    __call = Position.new -- copy the position.
+    __call = Position.new, -- copy the position.
+    __debugline = [[<Position>{[}x={x},y={y}{]}]]
 }
 -- ))
 

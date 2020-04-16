@@ -90,6 +90,13 @@ function Queue.push_at(queue, index, value)
     return queue
 end
 
+function Queue.wrapper(self, func_name, ...)
+    if Queue[func_name] then
+        Queue[func_name](self, ...)
+    end
+    return self
+end
+
 --- Retrieve the element at the front of the queue and remove it from the queue.
 -- @tparam Queue queue the queue to retrieve the element from
 -- @treturn Mixed value the element at the front of the queue
@@ -287,8 +294,6 @@ end
 
 do
     meta.__class = 'queue'
-    meta.__pairs = Queue.pairs
-    meta.__ipairs = Queue.pairs
     meta.__len = Queue.size
     meta.__unm = Queue.pop
     meta.__parent = Queue

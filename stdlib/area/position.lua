@@ -12,6 +12,7 @@ local Position = {
 setmetatable(Position, Position)
 
 local Direction = require('__stdlib__/stdlib/area/direction')
+local Orientation = require('__stdlib__/stdlib/area/orientation')
 
 local string = require('__stdlib__/stdlib/utils/string')
 local math = require('__stdlib__/stdlib/utils/math')
@@ -667,6 +668,17 @@ function Position.is_zero(pos)
     return pos.x == 0 and pos.y == 0
 end
 
+--- Is a position inside of an area.
+-- @tparam Concepts.Position pos The pos to check
+-- @tparam Concepts.BoundingBox area The area to check.
+-- @treturn boolean Is the position inside of the area.
+function Position.inside(pos, area)
+    local lt = area.left_top
+    local rb = area.right_bottom
+
+    return pos.x >= lt.x and pos.y >= lt.y and pos.x <= rb.x and pos.y <= rb.y
+end
+
 --- Is this a simple position. {num, num}
 -- @tparam Concepts.Position pos
 -- @treturn boolean
@@ -812,25 +824,17 @@ function Position.direction_to(pos1, pos2)
     end
 end
 
---- Is a position inside of an area.
--- @tparam Concepts.Position pos The pos to check
--- @tparam Concepts.BoundingBox area The area to check.
--- @treturn boolean Is the position inside of the area.
-function Position.inside(pos, area)
-    local lt = area.left_top
-    local rb = area.right_bottom
-
-    return pos.x >= lt.x and pos.y >= lt.y and pos.x <= rb.x and pos.y <= rb.y
-end
-
 --- Returns the direction to a position.
 -- @tparam Concepts.Position pos1
 -- @tparam Concepts.Position pos2
 -- @tparam boolean eight_way return the eight way direction
 -- @treturn defines.direction
 function Position.complex_direction_to(pos1, pos2, eight_way)
-    local o2d = eight_way and Direction.orientation_to_8way or Direction.orientation_to_4way
-    return o2d((1 - (Position.atan2(pos1, pos2) / pi)) / 2)
+    return Orientation.to_direction(Position.orientation_to(pos1, pos2), eight_way)
+end
+
+function Position.orientation_to(pos1, pos2)
+    return (1 - (Position.atan2(pos1, pos2) / pi)) / 2
 end
 
 --- Increment a position each time it is called.

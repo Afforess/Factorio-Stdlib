@@ -1,6 +1,9 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.4.3
 Date: ????
+  Features:
+    - Add Orientation module.
+    - Add Direction module.
   Changes:
     - Added mod name to some log events.
     - Use raise_built instead of manual events.

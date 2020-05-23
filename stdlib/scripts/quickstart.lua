@@ -218,14 +218,12 @@ function quickstart.on_player_created(event)
 
         if QS.get('setup_power', false) then
             if game.entity_prototypes['debug-energy-interface'] then
-                local es = surface.create_entity {name = 'debug-energy-interface', position = {0, 0}, force = force}
+                local es = surface.create_entity {name = 'debug-energy-interface', position = {0, 0}, force = force, raise_built = true}
                 es.destructible = false
-                script.raise_event(defines.events.on_built_entity, {created_entity = es, player_index = player.index})
             end
             if game.entity_prototypes['debug-substation'] then
-                local sb = surface.create_entity {name = 'debug-substation', position = {0, 0}, force = force}
+                local sb = surface.create_entity {name = 'debug-substation', position = {0, 0}, force = force, raise_built = true}
                 sb.destructible = false
-                script.raise_event(defines.events.on_built_entity, {created_entity = sb, player_index = player.index})
             end
         end
     end

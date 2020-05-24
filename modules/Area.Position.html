@@ -44,6 +44,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Area.html"><span class="module-name-item">Area.Area</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Chunk.html"><span class="module-name-item">Area.Chunk</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Direction.html"><span class="module-name-item">Area.Direction</span></a></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Orientation.html"><span class="module-name-item">Area.Orientation</span></a></div></li>
     <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Area.Position.html"><span class="module-name-item">Area.Position</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Surface.html"><span class="module-name-item">Area.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Tile.html"><span class="module-name-item">Area.Tile</span></a></div></li>
@@ -481,6 +482,10 @@
     <td class="summary">Is this position {0, 0}.</td>
     </tr>
     <tr>
+    <td class="name"><a href="#inside">inside(pos, area)</a></td>
+    <td class="summary">Is a position inside of an area.</td>
+    </tr>
+    <tr>
     <td class="name"><a href="#is_simple_position">is_simple_position(pos)</a></td>
     <td class="summary">Is this a simple position.</td>
     </tr>
@@ -535,10 +540,6 @@
     <tr>
     <td class="name"><a href="#direction_to">direction_to(pos1, pos2)</a></td>
     <td class="summary">Returms the direction to a position using simple delta comparisons.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#inside">inside(pos, area)</a></td>
-    <td class="summary">Is a position inside of an area.</td>
     </tr>
     <tr>
     <td class="name"><a href="#complex_direction_to">complex_direction_to(pos1, pos2, eight_way)</a></td>
@@ -801,6 +802,21 @@
 
 
     copy the position.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__debugline</em></strong>
+
+
+
+
+
 
     </li>
 
@@ -4825,6 +4841,80 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
+    <a href="#inside" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="inside">inside(pos, area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Is a position inside of an area.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+     The pos to check
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+     The area to check.
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+    <span class="return-text">Is the position inside of the area.</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
     <a href="#is_simple_position" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="is_simple_position">is_simple_position(pos)</span>
     </div>
@@ -5815,80 +5905,6 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#inside" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="inside">inside(pos, area)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Is a position inside of an area.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pos</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-
-     The pos to check
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>area</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
-
-     The area to check.
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-    <span class="return-text">Is the position inside of the area.</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
     <a href="#complex_direction_to" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="complex_direction_to">complex_direction_to(pos1, pos2, eight_way)</span>
     </div>
@@ -6193,7 +6209,7 @@ surface.create_entity{name = <span class="string">'flying-text'</span>, text = <
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-04-07 00:11:53 UTC</i>
+    <i>Last updated 2020-05-24 20:21:45 UTC</i>
     </div>
     </div>
     </div>

@@ -44,6 +44,7 @@
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Area.html"><span class="module-name-item">Area.Area</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Chunk.html"><span class="module-name-item">Area.Chunk</span></a></div></li>
     <li class="nav-item active"><div class="nav-item-block-active block"><a href="../modules/Area.Direction.html"><span class="module-name-item">Area.Direction</span></a><i class="icon icon-arrow-left icon-arrow-left-custom"></i></div></li>
+    <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Orientation.html"><span class="module-name-item">Area.Orientation</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Position.html"><span class="module-name-item">Area.Position</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Surface.html"><span class="module-name-item">Area.Surface</span></a></div></li>
     <li class="nav-item"><div class="nav-item-block-inactive block"><a href="../modules/Area.Tile.html"><span class="module-name-item">Area.Tile</span></a></div></li>
@@ -138,6 +139,7 @@
     <h4>Contents of <strong>Area.Direction</strong></h4>
     <ul class="nav">
     <li class="nav-item"><a href="#Functions"><span class="fragment-hashtag">#</span> Functions</a></li>
+    <li class="nav-item"><a href="#Fields"><span class="fragment-hashtag">#</span> Fields</a></li>
     </ul>
     </li>
     </ul>
@@ -186,28 +188,64 @@
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#opposite_direction">opposite_direction(direction)</a></td>
-    <td class="summary">Returns the opposite direction &mdash; adapted from Factorio util.lua.</td>
+    <td class="name"><a href="#opposite">opposite(direction)</a></td>
+    <td class="summary">Returns the opposite direction</td>
     </tr>
     <tr>
-    <td class="name"><a href="#next_direction">next_direction(direction[, reverse=false][, eight_way=false])</a></td>
+    <td class="name"><a href="#next">next(direction[, eight_way=false])</a></td>
     <td class="summary">Returns the next direction.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#orientation_to_8way">orientation_to_8way(orientation)</a></td>
-    <td class="summary">Returns an 8 way direction from orientation.</td>
+    <td class="name"><a href="#previous">previous(direction[, eight_way=false])</a></td>
+    <td class="summary">Returns the previous direction.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#orientation_to_4way">orientation_to_4way(orientation)</a></td>
-    <td class="summary">Returns a 4 way direction from orientation.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#direction_to_orientation">direction_to_orientation(direction)</a></td>
+    <td class="name"><a href="#to_orientation">to_orientation(direction)</a></td>
     <td class="summary">Returns an orientation from a direction.</td>
     </tr>
     <tr>
     <td class="name"><a href="#to_vector">to_vector(direction, distance)</a></td>
     <td class="summary">Returns a vector from a direction.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Fields">Fields</a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#north">north</a></td>
+    <td class="summary">defines.direction.north</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#east">east</a></td>
+    <td class="summary">defines.direction.east</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#west">west</a></td>
+    <td class="summary">defines.direction.west</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#south">south</a></td>
+    <td class="summary">defines.direction.south</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#northeast">northeast</a></td>
+    <td class="summary">defines.direction.northeast</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#northwest">northwest</a></td>
+    <td class="summary">defines.direction.northwest</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#southeast">southeast</a></td>
+    <td class="summary">defines.direction.southeast</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#southwest">southwest</a></td>
+    <td class="summary">defines.direction.southwest</td>
     </tr>
     </tbody>
     </table>
@@ -221,14 +259,14 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#opposite_direction" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="opposite_direction">opposite_direction(direction)</span>
+    <a href="#opposite" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="opposite">opposite(direction)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns the opposite direction &mdash; adapted from Factorio util.lua.</p>
+    <p class="section-item-summary">Returns the opposite direction</p>
     <p class="section-item-description">
 </p>
 
@@ -279,15 +317,15 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#next_direction" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="next_direction">next_direction(direction[, reverse=false][, eight_way=false])</span>
+    <a href="#next" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="next">next(direction[, eight_way=false])</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
     <p class="section-item-summary">Returns the next direction.</p>
-    <p class="section-item-description"><blockquote><p>For entities that only support two directions, see <a href="../modules/Area.Direction.html#opposite_direction">opposite_direction</a>.</p></blockquote>
+    <p class="section-item-description"><blockquote><p>For entities that only support two directions, see <a href="../modules/Area.Direction.html#opposite">opposite</a>.</p></blockquote>
 </p>
 
     <!-- parameters start -->
@@ -309,23 +347,6 @@
 
      the starting direction
 
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>reverse</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
-
-     true to get the next direction in counter-clockwise fashion, false otherwise
-
-    (<em>default</em>: false)
     </li>
 
 
@@ -371,15 +392,15 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#orientation_to_8way" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="orientation_to_8way">orientation_to_8way(orientation)</span>
+    <a href="#previous" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="previous">previous(direction[, eight_way=false])</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Returns an 8 way direction from orientation.</p>
-    <p class="section-item-description">
+    <p class="section-item-summary">Returns the previous direction.</p>
+    <p class="section-item-description"><blockquote><p>For entities that only support two directions, see <a href="../modules/Area.Direction.html#opposite">opposite</a>.</p></blockquote>
 </p>
 
     <!-- parameters start -->
@@ -393,15 +414,31 @@
 
     <li class="section-subitem-li">
 
-    <strong><em>orientation</em></strong>
+    <strong><em>direction</em></strong>
 
     <strong> : </strong>
 
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#float">float</a></span>)
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>)
+
+     the starting direction
+
+    </li>
 
 
 
 
+
+    <li class="section-subitem-li">
+
+    <strong><em>eight_way</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#boolean">boolean</a></span>)
+
+     true to get the previous direction in 8-way (note: not many prototypes support 8-way)
+
+    (<em>default</em>: false)
     </li>
 
 
@@ -414,6 +451,7 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>)
+    <span class="return-text">the next direction</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -429,66 +467,8 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#orientation_to_4way" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="orientation_to_4way">orientation_to_4way(orientation)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Returns a 4 way direction from orientation.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>orientation</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Builtin-Types.html#float">float</a></span>)
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/defines.html#defines.direction">defines.direction</a></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#direction_to_orientation" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="direction_to_orientation">direction_to_orientation(direction)</span>
+    <a href="#to_orientation" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="to_orientation">to_orientation(direction)</span>
     </div>
     </dt>
     <dd>
@@ -618,6 +598,233 @@
 
     </dd>
     </dl>
+    <h3><span id="Fields" class="section-title"><a href="#Fields">Fields</a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#north" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="north">north</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">defines.direction.north</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#east" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="east">east</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">defines.direction.east</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#west" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="west">west</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">defines.direction.west</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#south" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="south">south</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">defines.direction.south</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#northeast" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="northeast">northeast</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">defines.direction.northeast</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#northwest" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="northwest">northwest</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">defines.direction.northwest</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#southeast" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="southeast">southeast</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">defines.direction.southeast</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#southwest" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="southwest">southwest</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">defines.direction.southwest</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
 
     <!-- section end -->
 
@@ -632,7 +839,7 @@
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-04-07 00:11:53 UTC</i>
+    <i>Last updated 2020-05-24 20:21:45 UTC</i>
     </div>
     </div>
     </div>

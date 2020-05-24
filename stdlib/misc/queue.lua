@@ -342,14 +342,14 @@ do
         local lhs = getmetatable(queue1) == meta and true
         local rhs = getmetatable(queue2) == meta and true
         if lhs then
-            for _, v in pairs(queue1) do
+            for _, v in pairs(queue1.objects) do
                 new:push(v)
             end
         else
             new:push(queue1)
         end
         if rhs then
-            for _, v in pairs(queue2) do
+            for _, v in pairs(queue2.objects) do
                 new:push(v)
             end
         else

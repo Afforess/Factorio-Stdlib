@@ -335,31 +335,6 @@ function Table.dictionary_merge(tbl_a, tbl_b)
     return new_t
 end
 
-function Table.compare(tbl_a, tbl_b)
-    if tbl_a == tbl_b then
-        return true
-    elseif type(tbl_a) ~= type(tbl_b) then
-        return false
-    end
-    for k, v in pairs(tbl_a) do
-        if type(v) == 'table' and type(tbl_b[k]) == 'table' then
-            if not Table.compare(v, tbl_b[k]) then
-                return false
-            end
-        else
-            if (v ~= tbl_b[k]) then
-                return false
-            end
-        end
-    end
-    for k in pairs(tbl_b) do
-        if tbl_a[k] == nil then
-            return false
-        end
-    end
-    return true
-end
-
 --- Compares 2 tables for inner equality.
 -- Modified from factorio/data/core/lualib/util.lua
 -- @tparam table t1

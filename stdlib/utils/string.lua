@@ -5,11 +5,12 @@
 
 local String = {}
 
--- Import base lua string into String
-setmetatable(string, {__index = String})
 for k, v in pairs(string) do
     String[k] = v
 end
+-- Allow string syntatic sugar to work with this class
+getmetatable('').__index = String
+
 
 local concat = table.concat
 local insert = table.insert
@@ -242,5 +243,44 @@ function String.ordinal_suffix(n, prepend_number)
     end
     return prepend_number and n
 end
+
+local exponent_multipliers = {
+    ['y'] = 0.000000000000000000000001,
+    ['z'] = 0.000000000000000000001,
+    ['a'] = 0.000000000000000001,
+    ['f'] = 0.000000000000001,
+    ['p'] = 0.000000000001,
+    ['n'] = 0.000000001,
+    ['u'] = 0.000001,
+    ['m'] = 0.001,
+    ['c'] = 0.01,
+    ['d'] = 0.1,
+    [' '] = 1,
+    ['h'] = 100,
+    ['k'] = 1000,
+    ['M'] = 1000000,
+    ['G'] = 1000000000,
+    ['T'] = 1000000000000,
+    ['P'] = 1000000000000000,
+    ['E'] = 1000000000000000000,
+    ['Z'] = 1000000000000000000000,
+    ['Y'] = 1000000000000000000000000
+}
+
+--- Convert a metric string prefix to a number value.
+-- @tparam string str
+-- @treturn float
+function String.exponent_number(str)
+    if type(str) == 'string' then
+        local value, exp = str:match('([%-+]?[0-9]*%.?[0-9]+)([yzafpnumcdhkMGTPEZY]?)')
+        exp = exp or ' '
+        value = (value or 0) * (exponent_multipliers[exp] or 1)
+        return value
+    elseif type(str) == 'number' then
+        return str
+    end
+    return 0
+end
+
 
 return String

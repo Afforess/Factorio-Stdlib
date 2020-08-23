@@ -92,7 +92,10 @@ function Inventory.get_blueprint(stack, is_bp_setup, no_book)
         if stack.is_blueprint then
             return not is_bp_setup and stack or stack.is_blueprint_setup() and stack
         elseif stack.is_blueprint_book and not no_book and stack.active_index then
-            return Inventory.get_blueprint(stack.get_inventory(defines.inventory.item_main)[stack.active_index], is_bp_setup)
+            local book = stack.get_inventory(defines.inventory.item_main)
+            if #book >= stack.active_index then
+                return Inventory.get_blueprint(book[stack.active_index], is_bp_setup)
+            end
         end
     end
 end

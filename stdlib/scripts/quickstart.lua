@@ -44,6 +44,7 @@ function quickstart.on_init()
     if not game.is_multiplayer() then
         if remote.interfaces['freeplay'] then
             remote.call('freeplay', 'set_skip_intro', true)
+            remote.call('freeplay', 'set_disable_crashsite', true)
             local items = QS.get('items', {})
             remote.call('freeplay', 'set_created_items', items)
             remote.call('freeplay', 'set_respawn_items', items)
@@ -74,8 +75,8 @@ function quickstart.on_player_created(event)
             player.force.research_all_technologies()
             if player.character then
                 player.character_running_speed_modifier = 2
-                player.character_reach_distance_bonus = 100
-                player.character_build_distance_bonus = 100
+                player.character_reach_distance_bonus = 200
+                player.character_build_distance_bonus = 200
             end
         end
 

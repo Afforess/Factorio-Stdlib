@@ -7,21 +7,24 @@ local Table = require('__stdlib__/stdlib/utils/table')
 local Math = require('__stdlib__/stdlib/utils/math')
 local String = require('__stdlib__/stdlib/utils/string')
 
-STDLIB = {
+local STDLIB = {
     Math = Math,
     String = String,
     Table = Table
 }
+rawset(_ENV, 'STDLIB', STDLIB)
 
 --Since debug can be overridden we define a fallback function here.
 local ignored = {
     data_traceback = true,
     log_trace = true
 }
-traceback = type(debug) == 'table' and debug.traceback or function()
+
+local traceback = type(debug) == 'table' and debug.traceback or function()
         return ''
     end
-data_traceback = type(debug) == 'table' and debug.getinfo and function()
+    rawset(_ENV, 'traceback', traceback)
+local data_traceback = type(debug) == 'table' and debug.getinfo and function()
         local str = {}
         local level = 1
         while true do
@@ -44,16 +47,17 @@ data_traceback = type(debug) == 'table' and debug.getinfo and function()
     end or function()
         return ''
     end
+rawset(_ENV, 'data_traceback', data_traceback)
 
-inspect = require('__stdlib__/stdlib/vendor/inspect')
+local inspect = require('__stdlib__/stdlib/vendor/inspect')
+rawset(_ENV, 'inspect', inspect)
 
--- Set up faketorio for local testing,
--- defines will already be available in an active mod or busted specs
-if not _G.defines then
-    _G.table.unpack = _G.table.unpack or _G.unpack
-    if _G.os and _G.os.getenv('LOCAL_LUA_DEBUGGER_VSCODE') == '1' then
+-- Set up faketorio for local testing, defines will already be available in an active mod or busted specs
+if not _ENV.defines then
+    _ENV.table.unpack = _ENV.table.unpack or _ENV.unpack
+    if _ENV.os and _ENV.os.getenv('LOCAL_LUA_DEBUGGER_VSCODE') == '1' then
         require('__stdlib__/faketorio/require')
-        _G.package.strip_indentifier()
+        _ENV.package.strip_indentifier()
     end
     if config.control or config.game then
         local world = require('__stdlib__/faketorio/world').bootstrap()
@@ -63,7 +67,7 @@ if not _G.defines then
     else
         require('__stdlib__/faketorio/dataloader')
     end
-    _G.log = function(msg)
+    _ENV.log = function(msg)
         print(msg)
     end
 end
@@ -75,26 +79,27 @@ require('__stdlib__/stdlib/utils/defines/lightcolor')
 require('__stdlib__/stdlib/utils/defines/time')
 
 -- Settings Mutates
-if _G.settings then
-    function _G.settings.get(cat, key)
-        return _G.settings[cat][key] and _G.settings[cat][key].value
+if _ENV.settings then
+    function _ENV.settings.get(cat, key)
+        return _ENV.settings[cat][key] and _ENV.settings[cat][key].value
     end
-    function _G.settings.get_startup(key)
-        return _G.settings.get('startup', key)
+    function _ENV.settings.get_startup(key)
+        return _ENV.settings.get('startup', key)
     end
 end
 
-if _G.__DebugAdapter then
-    if _G.__DebugAdapter.attach then
+-- Dubug Adapter Mutates
+if _ENV.__DebugAdapter then
+    if _ENV.__DebugAdapter.attach then
         -- Add our custom mutate info to the debugadapter.
-        if _G.settings and _G.settings.get then
+        if _ENV.settings and _ENV.settings.get then
             local object_info = require('__debugadapter__/luaobjectinfo.lua')
             object_info.expandKeys['LuaSettings']['get'] = {}
             object_info.expandKeys['LuaSettings']['get_startup'] = {}
         end
     end
 else
-    _G.__DebugAdapter = {
+    _ENV.__DebugAdapter = {
         print = function()
         end,
         stepIgnoreAll = function()
@@ -110,7 +115,7 @@ end
 -- @tparam string module path to the module
 -- @tparam boolean suppress_all suppress all errors, not just file_not_found
 -- @treturn mixed
-function prequire(module, suppress_all)
+local function prequire(module, suppress_all)
     local ok, err = pcall(require, module)
     if ok then
         return err
@@ -118,11 +123,12 @@ function prequire(module, suppress_all)
         error(err)
     end
 end
+rawset(_ENV, 'prequire', prequire)
 
 --- Temporarily removes __tostring handlers and calls tostring
 -- @tparam mixed t object to call rawtostring on
 -- @treturn string
-function rawtostring(t)
+local function rawtostring(t)
     local m = getmetatable(t)
     if m then
         local f = m.__tostring
@@ -134,23 +140,26 @@ function rawtostring(t)
         return tostring(t)
     end
 end
+rawset(_ENV, 'rawtostring', rawtostring)
 
 --- Returns t if the expression is true. f if false
 -- @tparam mixed exp The expression to evaluate
 -- @tparam mixed t the true return
 -- @tparam mixed f the false return
 -- @treturn boolean
-function inline_if(exp, t, f)
+local function inline_if(exp, t, f)
     if exp then
         return t
     else
         return f
     end
 end
+rawset(_ENV, 'inline_if', inline_if)
 
-function concat(lhs, rhs)
+local function concat(lhs, rhs)
     return tostring(lhs) .. tostring(rhs)
 end
+rawset(_ENV, 'concat', concat)
 
 --- install the Table library into global table
 function STDLIB.install_table()
@@ -216,7 +225,7 @@ function STDLIB.create_stdlib_globals(files)
             MATH = 'stdlib/utils/math'
         }
     for glob, path in pairs(files) do
-        _G[glob] = require('__stdlib__/' .. (path:gsub('%.', '/'))) -- extra () required to emulate select(1)
+        rawset(_ENV, glob, require('__stdlib__/' .. (path:gsub('%.', '/')))) -- extra () required to emulate select(1)
     end
 end
 

@@ -279,7 +279,7 @@
     </tr>
     <tr>
     <td class="name"><a href="#flip">flip(area)</a></td>
-    <td class="summary">Flip an area such that its value of the width becomes the height, and its value of the height becomes the width.</td>
+    <td class="summary">Flip an area such that the value of its width becomes its height, and the value of its height becomes its width.</td>
     </tr>
     <tr>
     <td class="name"><a href="#non_zero">non_zero(area, amount)</a></td>
@@ -288,6 +288,14 @@
     <tr>
     <td class="name"><a href="#to_diameter">to_diameter(area, diameter)</a></td>
     <td class="summary">Returns the area to the diameter from left_top</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#min">min(area, area2)</a></td>
+    <td class="summary">Returns the smallest sized area.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#max">max(area, area2)</a></td>
+    <td class="summary">Returns the largest sized area.</td>
     </tr>
     <tr>
     <td class="name"><a href="#shrink">shrink(area, amount)</a></td>
@@ -396,6 +404,26 @@
     <tr>
     <td class="name"><a href="#size">size(area)</a></td>
     <td class="summary">Gets the properties of the given area.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#rectangle">rectangle(area)</a></td>
+    <td class="summary">Return the rectangle.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#width">width(area)</a></td>
+    <td class="summary">The width of the area.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#height">height(area)</a></td>
+    <td class="summary">The height of an area.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#dimensions">dimensions(area)</a></td>
+    <td class="summary">The dimensions of an area.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#perimeter">perimeter(area)</a></td>
+    <td class="summary">The Perimiter of an area.</td>
     </tr>
     <tr>
     <td class="name"><a href="#equals">equals(area1, area2)</a></td>
@@ -1277,6 +1305,13 @@
     <!-- parameters end -->
 
     <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><span class="type">area</span></span>)
+    <span class="return-text">The area normalized in place</span>
+    </li>
+    </ul>
     <!-- returns end -->
 
 
@@ -1703,7 +1738,7 @@
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Flip an area such that its value of the width becomes the height, and its value of the height becomes the width.</p>
+    <p class="section-item-summary">Flip an area such that the value of its width becomes its height, and the value of its height becomes its width.</p>
     <p class="section-item-description">
 </p>
 
@@ -1738,7 +1773,7 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
-    <span class="return-text">the flip area</span>
+    <span class="return-text">the fliped area</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -1888,6 +1923,158 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#min" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="min">min(area, area2)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the smallest sized area.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area2</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BooundingBox">BooundingBox</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the smallest area</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#max" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="max">max(area, area2)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Returns the largest sized area.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area2</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BooundingBox">BooundingBox</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">the largest area</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -3178,8 +3365,12 @@
     <strong>Returns:</strong>
     <ul>
     <li>
-    (<span class="types"><span class="type">tuple</span></span>)
-    <span class="return-text">left_top, right_bottom</span>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">left_top</span>
+    </li>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">right_bottom</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -3366,6 +3557,317 @@
     <li>
     (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
     <span class="return-text">the perimeter of the area &mdash; (2 &times; (width + height))</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#rectangle" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="rectangle">rectangle(area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Return the rectangle.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">left_top.x</span>
+    </li>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">left_top.y</span>
+    </li>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">width</span>
+    </li>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">height</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#width" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="width">width(area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">The width of the area.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">width</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#height" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="height">height(area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">The height of an area.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">width</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#dimensions" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="dimensions">dimensions(area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">The dimensions of an area.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">width</span>
+    </li>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">height</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#perimeter" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="perimeter">perimeter(area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">The Perimiter of an area.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="https://www.lua.org/pil/2.3.html">number</a></span>)
+    <span class="return-text">width</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -4041,7 +4543,7 @@ prints: (<span class="number">0</span>, <span class="number">0</span>) (<span cl
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-08-29 23:44:20 UTC</i>
+    <i>Last updated 2020-09-22 01:48:44 UTC</i>
     </div>
     </div>
     </div>

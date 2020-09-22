@@ -141,6 +141,7 @@
     <li class="nav-item"><a href="#Tables"><span class="fragment-hashtag">#</span> Tables</a></li>
     <li class="nav-item"><a href="#Constructor_Methods"><span class="fragment-hashtag">#</span> Constructor Methods </a></li>
     <li class="nav-item"><a href="#Position_Methods"><span class="fragment-hashtag">#</span> Position Methods </a></li>
+    <li class="nav-item"><a href="#Position_Mutate_Methods"><span class="fragment-hashtag">#</span> Position Mutate Methods </a></li>
     <li class="nav-item"><a href="#Position_Conversion_Methods"><span class="fragment-hashtag">#</span> Position Conversion Methods </a></li>
     <li class="nav-item"><a href="#Area_Conversion_Methods"><span class="fragment-hashtag">#</span> Area Conversion Methods </a></li>
     <li class="nav-item"><a href="#Position_Functions"><span class="fragment-hashtag">#</span> Position Functions </a></li>
@@ -229,6 +230,14 @@
     <td class="name"><a href="#from_key">from_key(pos_string)</a></td>
     <td class="summary">Converts a string key position to a position.</td>
     </tr>
+    <tr>
+    <td class="name"><a href="#from_chunk_position">from_chunk_position(pos)</a></td>
+    <td class="summary">Gets the left top tile position of a chunk from the chunk position.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#from_pixels">from_pixels(pos)</a></td>
+    <td class="summary">Convert position from pixels</td>
+    </tr>
     </tbody>
     </table>
     <table class="section-content-list">
@@ -286,15 +295,7 @@
     <td class="summary">Recalls the stored position.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#unary">unary(pos)</a></td>
-    <td class="summary">Flip the signs of the position.</td>
-    </tr>
-    <tr>
     <td class="name"><a href="#normalize">normalize(pos)</a></td>
-    <td class="summary">Normalizes a position by rounding it to 2 decimal places.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#normalized">normalized(pos)</a></td>
     <td class="summary">Normalizes a position by rounding it to 2 decimal places.</td>
     </tr>
     <tr>
@@ -306,48 +307,36 @@
     <td class="summary">Ceil x, y values.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#ceiled">ceiled(pos)</a></td>
-    <td class="summary">Ceil x, y values in place.</td>
-    </tr>
-    <tr>
     <td class="name"><a href="#floor">floor(pos)</a></td>
     <td class="summary">Floor x, y values.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#floored">floored(pos)</a></td>
-    <td class="summary">Floor in place.</td>
     </tr>
     <tr>
     <td class="name"><a href="#center">center(pos)</a></td>
     <td class="summary">The center position of the tile where the given position resides.</td>
     </tr>
     <tr>
-    <td class="name"><a href="#centered">centered(pos)</a></td>
-    <td class="summary">The center position of the tile where the given position resides.</td>
-    </tr>
-    <tr>
     <td class="name"><a href="#round">round(pos)</a></td>
-    <td class="summary">Rounds a positions points to the closest integer</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#rounded">rounded(pos)</a></td>
-    <td class="summary">Rounds a positions points to the closest integer</td>
+    <td class="summary">Rounds a positions points to the closest integer.</td>
     </tr>
     <tr>
     <td class="name"><a href="#perpendicular">perpendicular(pos)</a></td>
-    <td class="summary">Perpendicular position</td>
+    <td class="summary">Perpendicular position.</td>
     </tr>
     <tr>
     <td class="name"><a href="#swap">swap(pos)</a></td>
     <td class="summary">Swap the x and y coordinates.</td>
     </tr>
     <tr>
+    <td class="name"><a href="#flip">flip(pos)</a></td>
+    <td class="summary">Flip the signs of the position.</td>
+    </tr>
+    <tr>
     <td class="name"><a href="#flip_x">flip_x(pos)</a></td>
-    <td class="summary">Flip the x sign</td>
+    <td class="summary">Flip the x sign.</td>
     </tr>
     <tr>
     <td class="name"><a href="#flip_y">flip_y(pos)</a></td>
-    <td class="summary">Flip the y sign</td>
+    <td class="summary">Flip the y sign.</td>
     </tr>
     <tr>
     <td class="name"><a href="#lerp">lerp(pos1, pos2, alpha)</a></td>
@@ -397,14 +386,50 @@
     </table>
     <table class="section-content-list">
     <thead>
-    <h3><a href="#Position_Conversion_Methods">Position Conversion Methods </a></h3>
+    <h3><a href="#Position_Mutate_Methods">Position Mutate Methods </a></h3>
     <span></span>
     </thead>
     <tbody>
     <tr>
-    <td class="name"><a href="#from_pixels">from_pixels(pos)</a></td>
-    <td class="summary">Convert position from pixels</td>
+    <td class="name"><a href="#normalized">normalized(pos)</a></td>
+    <td class="summary">Normalizes a position by rounding it to 2 decimal places.</td>
     </tr>
+    <tr>
+    <td class="name"><a href="#absed">absed(pos)</a></td>
+    <td class="summary">Abs x, y values</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#ceiled">ceiled(pos)</a></td>
+    <td class="summary">Ceil x, y values in place.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#floored">floored(pos)</a></td>
+    <td class="summary">Floor x, y values.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#centered">centered(pos)</a></td>
+    <td class="summary">The center position of the tile where the given position resides.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#rounded">rounded(pos)</a></td>
+    <td class="summary">Rounds a positions points to the closest integer.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#swapped">swapped(pos)</a></td>
+    <td class="summary">Swap the x and y coordinates.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#flipped">flipped(pos)</a></td>
+    <td class="summary">Flip the signs of the position.</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Position_Conversion_Methods">Position Conversion Methods </a></h3>
+    <span></span>
+    </thead>
+    <tbody>
     <tr>
     <td class="name"><a href="#to_pixels">to_pixels(pos)</a></td>
     <td class="summary">Convert to pixels from position</td>
@@ -412,10 +437,6 @@
     <tr>
     <td class="name"><a href="#to_chunk_position">to_chunk_position(pos)</a></td>
     <td class="summary">Gets the chunk position of a chunk where the specified position resides.</td>
-    </tr>
-    <tr>
-    <td class="name"><a href="#from_chunk_position">from_chunk_position(pos)</a></td>
-    <td class="summary">Gets the left top tile position of a chunk from the chunk position.</td>
     </tr>
     </tbody>
     </table>
@@ -1222,6 +1243,123 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#from_chunk_position" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="from_chunk_position">from_chunk_position(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Gets the left top tile position of a chunk from the chunk position.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#from_pixels" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="from_pixels">from_pixels(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Convert position from pixels</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">pos</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -2099,64 +2237,6 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#unary" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="unary">unary(pos)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Flip the signs of the position.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pos</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    <span class="return-text">Concenpts.position with flipped signs</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
     <a href="#normalize" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="normalize">normalize(pos)</span>
     </div>
@@ -2201,65 +2281,6 @@
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
     <span class="return-text">a new normalized position</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#normalized" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="normalized">normalized(pos)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Normalizes a position by rounding it to 2 decimal places.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pos</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-    <span class="return-text">the position normalized in place</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -2391,65 +2412,6 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#ceiled" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="ceiled">ceiled(pos)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Ceil x, y values in place.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pos</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-    <span class="return-text">the pos modified</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
     <a href="#floor" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="floor">floor(pos)</span>
     </div>
@@ -2508,56 +2470,6 @@
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#floored" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="floored">floored(pos)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Floor in place.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pos</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
     <a href="#center" class="fragment-hashtag">#</a>
     <span class="section-item-title" id="center">center(pos)</span>
     </div>
@@ -2601,66 +2513,7 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-    <span class="return-text">the position at the center of the tile</span>
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#centered" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="centered">centered(pos)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">The center position of the tile where the given position resides.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pos</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-    <span class="return-text">mutated.</span>
+    <span class="return-text">A new position at the center of the tile</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -2683,7 +2536,7 @@
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Rounds a positions points to the closest integer</p>
+    <p class="section-item-summary">Rounds a positions points to the closest integer.</p>
     <p class="section-item-description">
 </p>
 
@@ -2719,65 +2572,7 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#rounded" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="rounded">rounded(pos)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Rounds a positions points to the closest integer</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pos</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-    <span class="return-text">the pos rounded in place</span>
+    <span class="return-text">A new position rounded</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -2800,7 +2595,7 @@
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Perpendicular position</p>
+    <p class="section-item-summary">Perpendicular position.</p>
     <p class="section-item-description">
 </p>
 
@@ -2895,7 +2690,65 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-    <span class="return-text">pos flipped.</span>
+    <span class="return-text">A new position with x and y swapped</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#flip" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="flip">flip(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Flip the signs of the position.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">Concepts.Position A new position with flipped signs</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -2918,7 +2771,7 @@
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Flip the x sign</p>
+    <p class="section-item-summary">Flip the x sign.</p>
     <p class="section-item-description">
 </p>
 
@@ -2935,7 +2788,9 @@
 
     <strong><em>pos</em></strong>
 
+    <strong> : </strong>
 
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
 
 
 
@@ -2948,6 +2803,12 @@
     <!-- parameters end -->
 
     <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">Concepts.Position A new position with flipped sign on the x</span>
+    </li>
+    </ul>
     <!-- returns end -->
 
 
@@ -2968,7 +2829,7 @@
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Flip the y sign</p>
+    <p class="section-item-summary">Flip the y sign.</p>
     <p class="section-item-description">
 </p>
 
@@ -2985,7 +2846,9 @@
 
     <strong><em>pos</em></strong>
 
+    <strong> : </strong>
 
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
 
 
 
@@ -2998,6 +2861,12 @@
     <!-- parameters end -->
 
     <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">Concepts.Position A new position with flipped sign on the y</span>
+    </li>
+    </ul>
     <!-- returns end -->
 
 
@@ -3851,19 +3720,19 @@
 
     </dd>
     </dl>
-    <h3><span id="Position_Conversion_Methods" class="section-title"><a href="#Position_Conversion_Methods">Position Conversion Methods </a></span></h3>
+    <h3><span id="Position_Mutate_Methods" class="section-title"><a href="#Position_Mutate_Methods">Position Mutate Methods </a></span></h3>
     <dl class="section-body-container">
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
-    <a href="#from_pixels" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="from_pixels">from_pixels(pos)</span>
+    <a href="#normalized" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="normalized">normalized(pos)</span>
     </div>
     </dt>
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Convert position from pixels</p>
+    <p class="section-item-summary">Normalizes a position by rounding it to 2 decimal places.</p>
     <p class="section-item-description">
 </p>
 
@@ -3899,7 +3768,7 @@
     <ul>
     <li>
     (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-    <span class="return-text">pos</span>
+    <span class="return-text">the normalized position mutated</span>
     </li>
     </ul>
     <!-- returns end -->
@@ -3912,6 +3781,421 @@
     <!-- usage end -->
 
     </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#absed" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="absed">absed(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Abs x, y values</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">the absolute position mutated</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#ceiled" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="ceiled">ceiled(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Ceil x, y values in place.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">the ceiled position mutated</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#floored" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="floored">floored(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Floor x, y values.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">the floored position mutated</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#centered" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="centered">centered(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">The center position of the tile where the given position resides.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">the centered position mutated</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#rounded" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="rounded">rounded(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Rounds a positions points to the closest integer.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">the rounded position mutated</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#swapped" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="swapped">swapped(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Swap the x and y coordinates.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+    <span class="return-text">the swapped position mutated</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#flipped" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="flipped">flipped(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Flip the signs of the position.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    <span class="return-text">Concepts.Position the flipped position mutated</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Position_Conversion_Methods" class="section-title"><a href="#Position_Conversion_Methods">Position Conversion Methods </a></span></h3>
+    <dl class="section-body-container">
     <dt>
     <div class="divider divider-custom"></div>
     <div class="block section-item-header">
@@ -4028,64 +4312,6 @@
     <!-- usage start -->
     <strong>Usage:</strong>
     <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> chunk_x = Position.chunk_position(pos).x</code></pre>
-    <!-- usage end -->
-
-    </dd>
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#from_chunk_position" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="from_chunk_position">from_chunk_position(pos)</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Gets the left top tile position of a chunk from the chunk position.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Parameters:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>pos</em></strong>
-
-    <strong> : </strong>
-
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <strong>Returns:</strong>
-    <ul>
-    <li>
-    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#Position">Position</a></span>)
-    </li>
-    </ul>
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
     <!-- usage end -->
 
     </dd>
@@ -6209,7 +6435,7 @@ surface.create_entity{name = <span class="string">'flying-text'</span>, text = <
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-08-29 23:44:20 UTC</i>
+    <i>Last updated 2020-09-22 01:48:44 UTC</i>
     </div>
     </div>
     </div>

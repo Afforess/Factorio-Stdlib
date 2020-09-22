@@ -1,7 +1,12 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.4.5
 Date: ????
-  Changes:
+  Features:
+    - Added Position:flip.
+    - Added Position:swapped and Position:flipped mutates.
+    - Added Area:min, Area:max, Area:width, Area:height, Area:rectangle.
+  Bugfixes:
+    - Potential optimization with Queue.
 ---------------------------------------------------------------------------------------------------
 Version: 1.4.4
 Date: 2020-08-23

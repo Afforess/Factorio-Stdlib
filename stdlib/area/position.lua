@@ -28,7 +28,6 @@ local EPSILON = 1.19e-07
 
 --- Constructor Methods
 -- @section Constructors
--- ((
 
 Position.__call = function(_, ...)
     local t = type((...))
@@ -65,6 +64,10 @@ function Position.construct(...)
     return new(args[1] or 0, args[2] or args[1] or 0)
 end
 
+function Position.construct_xy(x, y)
+    return new(x, y)
+end
+
 --- Update a position in place without returning a new position.
 -- @tparam Concepts.Position pos
 -- @tparam number x
@@ -97,11 +100,26 @@ function Position.from_key(pos_string)
     local tab = split(pos_string, ',', false, tonumber)
     return new(tab[1], tab[2])
 end
--- ))
+
+--- Gets the left top tile position of a chunk from the chunk position.
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position
+function Position.from_chunk_position(pos)
+    local x, y = (floor(pos.x) * 32), (floor(pos.y) * 32)
+    return new(x, y)
+end
+
+--- Convert position from pixels
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position pos
+function Position.from_pixels(pos)
+    local x = pos.x / 32
+    local y = pos.y / 32
+    return new(x, y)
+end
 
 --- Position Methods
 -- @section Methods
--- ((
 
 --- Addition of two positions.
 -- @tparam Concepts.Position pos1
@@ -228,25 +246,11 @@ function Position.recall(pos)
     return rawget(getmetatable(pos), '_saved')
 end
 
---- Flip the signs of the position.
--- @tparam Concepts.Position pos
--- @return Concenpts.position with flipped signs
-function Position.unary(pos)
-    return new(-pos.x, -pos.y)
-end
-
 --- Normalizes a position by rounding it to 2 decimal places.
 -- @tparam Concepts.Position pos
 -- @treturn Concepts.Position a new normalized position
 function Position.normalize(pos)
     return new(round_to(pos.x, 2), round_to(pos.y, 2))
-end
-
---- Normalizes a position by rounding it to 2 decimal places.
--- @tparam Concepts.Position pos
--- @treturn Concepts.Position the position normalized in place
-function Position.normalized(pos)
-    pos.x, pos.y = round_to(pos.x, 2), round_to(pos.y, 2)
 end
 
 --- Abs x, y values
@@ -263,14 +267,6 @@ function Position.ceil(pos)
     return new(ceil(pos.x), ceil(pos.y))
 end
 
---- Ceil x, y values in place.
--- @tparam Concepts.Position pos
--- @treturn Concepts.Position the pos modified
-function Position.ceiled(pos)
-    pos.x, pos.y = ceil(pos.x), ceil(pos.y)
-    return pos
-end
-
 --- Floor x, y values.
 -- @tparam Concepts.Position pos
 -- @treturn Concepts.Position
@@ -278,51 +274,30 @@ function Position.floor(pos)
     return new(floor(pos.x), floor(pos.y))
 end
 
---- Floor in place.
-function Position.floored(pos)
-    pos.x, pos.y = floor(pos.x), floor(pos.y)
-    return pos
-end
-
---- The center position of the tile where the given position resides.
--- @tparam Concepts.Position pos
--- @treturn Concepts.Position the position at the center of the tile
-function Position.center(pos)
+local function pos_center(pos)
     local x, y
     local ceil_x = ceil(pos.x)
     local ceil_y = ceil(pos.y)
     x = pos.x >= 0 and floor(pos.x) + 0.5 or (ceil_x == pos.x and ceil_x + 0.5 or ceil_x - 0.5)
     y = pos.y >= 0 and floor(pos.y) + 0.5 or (ceil_y == pos.y and ceil_y + 0.5 or ceil_y - 0.5)
-    return new(x, y)
+    return x, y
 end
 
 --- The center position of the tile where the given position resides.
 -- @tparam Concepts.Position pos
--- @treturn Concepts.Position mutated.
-function Position.centered(pos)
-    local ceil_x = ceil(pos.x)
-    local ceil_y = ceil(pos.y)
-    pos.x = pos.x >= 0 and floor(pos.x) + 0.5 or (ceil_x == pos.x and ceil_x + 0.5 or ceil_x - 0.5)
-    pos.y = pos.y >= 0 and floor(pos.y) + 0.5 or (ceil_y == pos.y and ceil_y + 0.5 or ceil_y - 0.5)
-    return pos
+-- @treturn Concepts.Position A new position at the center of the tile
+function Position.center(pos)
+    return new(pos_center(pos))
 end
 
---- Rounds a positions points to the closest integer
+--- Rounds a positions points to the closest integer.
 -- @tparam Concepts.Position pos
--- @treturn Concepts.Position
+-- @treturn Concepts.Position A new position rounded
 function Position.round(pos)
     return new(round(pos.x), round(pos.y))
 end
 
---- Rounds a positions points to the closest integer
--- @tparam Concepts.Position pos
--- @treturn Concepts.Position the pos rounded in place
-function Position.rounded(pos)
-    pos.x, pos.y = round(pos.x), round(pos.y)
-    return pos
-end
-
---- Perpendicular position
+--- Perpendicular position.
 -- @tparam Concepts.Position pos
 -- @treturn Concepts.Position pos
 function Position.perpendicular(pos)
@@ -331,17 +306,29 @@ end
 
 --- Swap the x and y coordinates.
 -- @tparam Concepts.Position pos
--- @treturn Concepts.Position pos flipped.
+-- @treturn Concepts.Position A new position with x and y swapped
 function Position.swap(pos)
     return new(pos.y, pos.x)
 end
 
---- Flip the x sign
+--- Flip the signs of the position.
+-- @tparam Concepts.Position pos
+-- @return Concepts.Position A new position with flipped signs
+function Position.flip(pos)
+    return new(-pos.x, -pos.y)
+end
+Position.unary = Position.flip
+
+--- Flip the x sign.
+-- @tparam Concepts.Position pos
+-- @return Concepts.Position A new position with flipped sign on the x
 function Position.flip_x(pos)
     return new(-pos.x, pos.y)
 end
 
---- Flip the y sign
+--- Flip the y sign.
+-- @tparam Concepts.Position pos
+-- @return Concepts.Position A new position with flipped sign on the y
 function Position.flip_y(pos)
     return new(pos.x, -pos.y)
 end
@@ -501,20 +488,77 @@ function Position.intersection(pos1_start, pos1_end, pos2_start, pos2_end)
     local y = (a * (pos2_start.y - pos2_end.y) - (pos1_start.y - pos1_end.y) * b) / d
     return is_number(x) and is_number(y) and new(x, y) or pos1_start
 end
--- ))
+
+--- Position Mutate Methods
+-- @section Mutate Methods
+
+--- Normalizes a position by rounding it to 2 decimal places.
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position the normalized position mutated
+function Position.normalized(pos)
+    pos.x, pos.y = round_to(pos.x, 2), round_to(pos.y, 2)
+    return pos
+end
+
+--- Abs x, y values
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position the absolute position mutated
+function Position.absed(pos)
+    pos.x, pos.y = abs(pos.x), abs(pos.y)
+    return pos
+end
+
+--- Ceil x, y values in place.
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position the ceiled position mutated
+function Position.ceiled(pos)
+    pos.x, pos.y = ceil(pos.x), ceil(pos.y)
+    return pos
+end
+
+--- Floor x, y values.
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position the floored position mutated
+function Position.floored(pos)
+    pos.x, pos.y = floor(pos.x), floor(pos.y)
+    return pos
+end
+
+--- The center position of the tile where the given position resides.
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position the centered position mutated
+function Position.centered(pos)
+    pos.x, pos.y = pos_center(pos)
+    return pos
+end
+
+--- Rounds a positions points to the closest integer.
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position the rounded position mutated
+function Position.rounded(pos)
+    pos.x, pos.y = round(pos.x), round(pos.y)
+    return pos
+end
+
+--- Swap the x and y coordinates.
+-- @tparam Concepts.Position pos
+-- @treturn Concepts.Position the swapped position mutated
+function Position.swapped(pos)
+    pos.x, pos.y = pos.y, pos.x
+    return pos
+end
+
+--- Flip the signs of the position.
+-- @tparam Concepts.Position pos
+-- @return Concepts.Position the flipped position mutated
+function Position.flipped(pos)
+    pos.x, pos.y = -pos.x, -pos.y
+    return pos
+end
 
 --- Position Conversion Methods
 -- @section Position Conversion Methods
--- ((
-
---- Convert position from pixels
--- @tparam Concepts.Position pos
--- @treturn Concepts.Position pos
-function Position.from_pixels(pos)
-    local x = pos.x / 32
-    local y = pos.y / 32
-    return new(x, y)
-end
+-- Test Comment
 
 --- Convert to pixels from position
 -- @tparam Concepts.Position pos
@@ -534,24 +578,15 @@ function Position.to_chunk_position(pos)
     return new(x, y)
 end
 
---- Gets the left top tile position of a chunk from the chunk position.
--- @tparam Concepts.Position pos
--- @treturn Concepts.Position
-function Position.from_chunk_position(pos)
-    local x, y = (floor(pos.x) * 32), (floor(pos.y) * 32)
-    return new(x, y)
-end
--- ))
-
 --- Area Conversion Methods
 -- @section Area Conversion Methods
--- ((
 
 -- Hackish function, Factorio lua doesn't allow require inside functions because...
 local function load_area(area)
     local Area = package.loaded[AREA_PATH]
     if not Area then
-        local log = log or function() end
+        local log = log or function()
+            end
         log('WARNING: Area for Position not found in package.loaded')
     end
     return Area and Area.load(area) or area
@@ -606,11 +641,8 @@ function Position.to_chunk_area(pos)
     return load_area {left_top = left_top, right_bottom = right_bottom}
 end
 
--- ))
-
 --- Position Functions
 -- @section Functions
--- ((
 
 --- Gets the squared length of a position
 -- @tparam Concepts.Position pos
@@ -881,10 +913,8 @@ function Position.increment(pos, inc_x, inc_y, increment_initial)
     end
 end
 --- @section end
--- ))
 
 -- Metamethods
--- ((
 
 --- Position tables are returned with these metamethods attached.
 -- Methods that return a position will return a NEW position without modifying the passed positions.
@@ -897,7 +927,7 @@ metatable = {
     __mul = Position.multiply, -- Multiply 2 positions. Returns a new position.
     __div = Position.divide, -- Divide 2 positions. Returns a new position.
     __mod = Position.mod, -- Modulo of 2 positions. Returns a new position.
-    __unm = Position.unary, -- Unary Minus of a position. Returns a new position.
+    __unm = Position.flip, -- Unary Minus of a position. Returns a new position.
     __len = Position.len, -- Length of a single position.
     __eq = Position.equals, -- Are two positions at the same spot.
     __lt = Position.less_than, -- Is position1 less than position2.
@@ -907,6 +937,5 @@ metatable = {
     __call = Position.new, -- copy the position.
     __debugline = [[<Position>{[}x={x},y={y}{]}]]
 }
--- ))
 
 return Position

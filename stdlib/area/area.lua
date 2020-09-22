@@ -56,8 +56,8 @@ end
 function Area.construct(...)
     local args = type((...)) == 'table' and {select(2, ...)} or {select(1, ...)}
 
-    local lt = Position.construct(args[1], args[2])
-    local rb = Position.construct(args[3] or lt.x, args[4] or lt.y)
+    local lt = Position.construct_xy(args[1] or 0, args[2] or 0)
+    local rb = Position.construct_xy(args[3] or lt.x, args[4] or lt.y)
 
     return setmetatable({left_top = lt, right_bottom = rb}, metatable)
 end
@@ -131,6 +131,7 @@ end
 
 --- Normalize an area in place.
 -- @tparam Concepts.BoundingBox area the area to normalize
+-- @treturn area The area normalized in place
 function Area.normalized(area)
     local lt, rb = area.left_top, area.right_bottom
     if rb.x < lt.x then
@@ -185,7 +186,7 @@ local function right_bottom_center(pos)
     local fx, fy = floor(pos.x), floor(pos.y)
     x = fx == pos.x and (fx - 0.5) or (fx + 0.5)
     y = fy == pos.y and (fy - 0.5) or (fy + 0.5)
-    return Position.construct(x, y)
+    return Position.construct_xy(x, y)
 end
 
 --- Gets the center positions of the tiles where the given area's two positions reside.
@@ -200,8 +201,8 @@ end
 -- @treturn Concepts.BoundingBox the area with left_bottom and right_top included
 function Area.corners(area)
     local lt, rb = area.left_top, area.right_bottom
-    local lb = area.left_bottom or Position.construct()
-    local rt = area.right_top or Position.construct()
+    local lb = area.left_bottom or Position.construct_xy(0, 0)
+    local rt = area.right_top or Position.construct_xy(0, 0)
     lb.x, lb.y = lt.x, rb.y
     rt.x, rt.y = rb.x, lt.y
     area.left_bottom = lb
@@ -210,11 +211,11 @@ function Area.corners(area)
     return area
 end
 
---- Flip an area such that its value of the width becomes the height, and its value of the height becomes the width.
+--- Flip an area such that the value of its width becomes its height, and the value of its height becomes its width.
 -- @tparam Concepts.BoundingBox area the area to flip
--- @treturn Concepts.BoundingBox the flip area
+-- @treturn Concepts.BoundingBox the fliped area
 function Area.flip(area)
-    local _, w, h = Area.size(area)
+    local w, h = Area.dimensions(area)
     if w == h then
         return area -- no point flipping a square
     elseif h > w then
@@ -242,6 +243,22 @@ end
 function Area.to_diameter(area, diameter)
     diameter = diameter or 0.1
     return new_area(Position.new(area.left_top), Position.add(area.left_top + diameter))
+end
+
+--- Returns the smallest sized area.
+-- @tparam Concepts.BoundingBox area
+-- @tparam Concepts.BooundingBox area2
+-- @treturn Concepts.BoundingBox the smallest area
+function Area.min(area, area2)
+    return (Area.size(Area) <= Area.size(area2) and area) or area2
+end
+
+--- Returns the largest sized area.
+-- @tparam Concepts.BoundingBox area
+-- @tparam Concepts.BooundingBox area2
+-- @treturn Concepts.BoundingBox the largest area
+function Area.max(area, area2)
+    return (Area.size(area) >= Area.size(area2) and area) or area2
 end
 
 --- Shrinks the area inwards by the given amount.
@@ -351,7 +368,7 @@ function Area.center(area)
     local dist_x = area.right_bottom.x - area.left_top.x
     local dist_y = area.right_bottom.y - area.left_top.y
 
-    return Position.construct(area.left_top.x + (dist_x / 2), area.left_top.y + (dist_y / 2))
+    return Position.construct_xy(area.left_top.x + (dist_x / 2), area.left_top.y + (dist_y / 2))
 end
 -- ))
 
@@ -443,7 +460,8 @@ end
 
 --- Unpack an area into a tuple of position tables.
 -- @tparam Concepts.BoundingBox area
--- @treturn tuple left_top, right_bottom
+-- @treturn Concepts.Position left_top
+-- @treturn Concepts.Position right_bottom
 function Area.unpack_positions(area)
     return area.left_top, area.right_bottom
 end
@@ -470,23 +488,50 @@ end
 -- @treturn number the height of the area
 -- @treturn number the perimeter of the area &mdash; (2 &times; (width + height))
 function Area.size(area)
-    local width = abs(area.left_top.x - area.right_bottom.x)
-    local height = abs(area.left_top.y - area.right_bottom.y)
+    local width = Area.width(area)
+    local height = Area.height(area)
     local area_size = width * height
-    local perimeter = width + width + height + height
+    local perimeter = (width + width) * 2
     return area_size, width, height, perimeter
 end
 
-function Area.dimensions(area)
-    local width = abs(area.left_top.x - area.right_bottom.x)
-    local height = abs(area.left_top.y - area.right_bottom.y)
-    return width, height
+--- Return the rectangle.
+-- @tparam Concepts.BoundingBox area
+-- @treturn number left_top.x
+-- @treturn number left_top.y
+-- @treturn number width
+-- @treturn number height
+function Area.rectangle(area)
+    return area.left_top.x, area.left_top.y, Area.width(area), Area.height(area)
 end
 
-function Area.rectangle(area)
-    local width = abs(area.left_top.x - area.right_bottom.x)
-    local height = abs(area.left_top.y - area.right_bottom.y)
-    return area.left_top.x, area.left_top.y, width, height
+--- The width of the area.
+-- @tparam Concepts.BoundingBox area
+-- @treturn number width
+function Area.width(area)
+    return abs(area.left_top.x - area.right_bottom.x)
+end
+
+--- The height of an area.
+-- @tparam Concepts.BoundingBox area
+-- @treturn number width
+function Area.height(area)
+    return abs(area.left_top.y - area.right_bottom.y)
+end
+
+--- The dimensions of an area.
+-- @tparam Concepts.BoundingBox area
+-- @treturn number width
+-- @treturn number height
+function Area.dimensions(area)
+    return Area.width(area), Area.height(area)
+end
+
+--- The Perimiter of an area.
+-- @tparam Concepts.BoundingBox area
+-- @treturn number width
+function Area.perimeter(area)
+    return (Area.width(area) + Area.height(area)) * 2
 end
 
 --- Returns true if two areas are the same.
@@ -497,7 +542,6 @@ function Area.equals(area1, area2)
     if not (area1 and area2) then
         return false
     end
-    --area1, area2 = Area(area1), Area(area2)
     local ori = area1.orientation or 0 == area2.orientation or 0
     return ori and area1.left_top == area2.left_top and area1.right_bottom == area2.right_bottom
 end
@@ -621,7 +665,7 @@ function Area.iterate(area, as_position, inside, step)
         else
             return
         end
-        return as_position and Position.construct(x, y) or x, not as_position and y or nil
+        return (as_position and Position.construct_xy(x, y)) or x, (not as_position and y) or nil
     end
 
     return iterator
@@ -671,7 +715,7 @@ function Area.spiral_iterate(area, as_position)
         pos.x = pos.x + center_x
         pos.y = pos.y + center_y
 
-        return as_position and Position.new(pos) or pos.x, not as_position and pos.y
+        return (as_position and Position.load(pos)) or pos.x, (not as_position and pos.y) or nil
     end
     return iterator, area, 0
 end

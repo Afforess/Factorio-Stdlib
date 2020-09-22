@@ -15,7 +15,7 @@ local Queue = {
 setmetatable(Queue, Queue)
 
 local table = require('__stdlib__/stdlib/utils/table')
-local t_size = table.size
+local t_size = table_size
 
 local Inspect = require('__stdlib__/stdlib/vendor/inspect')
 
@@ -225,7 +225,7 @@ end
 -- @tparam Queue queue the queue to check
 -- @treturn boolean true if empty, false otherwise
 function Queue.is_empty(queue)
-    return t_size(queue.objects) == 0
+    return queue.first > queue.last
 end
 
 --- Returns the number of items in the queue.

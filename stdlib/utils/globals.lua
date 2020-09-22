@@ -107,8 +107,11 @@ else
         stepIgnore = function()
         end,
         breakpoint = function()
+        end,
+        levelPath = function()
         end
     }
+    _ENV.__Profiler = _ENV.DebugAdapter
 end
 
 --- Require a file that may not exist

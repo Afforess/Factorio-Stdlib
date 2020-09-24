@@ -289,6 +289,13 @@ function Event.on_load(...)
     return Event.register(Event.core_events.on_load, ...)
 end
 
+function Event.on_load_if(truthy, ...)
+    if truthy then
+        return Event.on_load(...)
+    end
+    return Event
+end
+
 --- Shortcut for `Event.register(Event.core_events.on_configuration_changed, function)`
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.on_configuration_changed(...)
@@ -299,6 +306,13 @@ end
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.on_init(...)
     return Event.register(Event.core_events.on_init, ...)
+end
+
+function Event.on_init_if(truthy, ...)
+    if truthy then
+        return Event.on_init(...)
+    end
+    return Event
 end
 
 --- Shortcut for `Event.register(-nthTick, function)`
@@ -318,6 +332,7 @@ function Event.register_if(truthy, id, ...)
     end
     return Event
 end
+Event.on_event_if = Event.register_if
 
 -- Use option A or B if present, otherwise pass option C
 local function check_option(a, b, c)

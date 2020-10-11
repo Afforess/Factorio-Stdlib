@@ -25,6 +25,10 @@ function Util.extend_style(style)
     data.raw['gui-style'].default[style.name] = style
 end
 
+function Util.extend_style_by_name(name, style)
+    data.raw['gui-style'].default[name] = style
+end
+
 --- Quickly duplicate an existing prototype into a new one.
 -- @tparam string data_type The type of the object to duplicate
 -- @tparam string orig_name The name of the object to duplicate

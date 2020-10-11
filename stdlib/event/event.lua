@@ -174,8 +174,14 @@ function Event.register(event_id, handler, filter, pattern, options)
         for i, registered in ipairs(registry) do
             if registered.handler == handler and registered.pattern == pattern and registered.filter == filter then
                 table.remove(registry, i)
-                local event_str = event_id .. '(' .. (event_names[event_id] or ' ') .. ')'
-                log('Same handler already registered for event ' .. event_str .. ' at position ' .. i .. ', moving it to the bottom')
+                local output = {
+                    '__' .. script.mod_name .. '__',
+                    ' Duplicate handler registered for event ',
+                    event_id .. '(' .. (event_names[event_id] or ' ') .. ')',
+                    ' at position ' .. i,
+                    ', moving it to the bottom.'
+                }
+                log(table.concat(output))
                 break
             end
         end

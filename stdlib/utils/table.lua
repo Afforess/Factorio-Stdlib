@@ -27,7 +27,7 @@ for k, v in pairs(table) do if not Table[k] then Table[k] = v end end
 -- @treturn table a new table containing the keys and mapped values
 function Table.map(tbl, func, ...)
     local newtbl = {}
-    for k, v in pairs(tbl) do newtbl[i] = func(v, k, ...) end
+    for k, v in pairs(tbl) do newtbl[k] = func(v, k, ...) end
     return newtbl
 end
 

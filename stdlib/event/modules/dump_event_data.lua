@@ -49,9 +49,9 @@ local function setup_event_data(Event, valid_event_id, id_to_name)
                 factorio_events['[' .. event .. '] ' .. id_to_name(event)] = Event.script.get_event_handler(event)
             end
         end
-        game.write_file(Event.get_file_path('Event/Event.lua'), inspect(event_data))
-        game.write_file(Event.get_file_path('Event/Event.registry.lua'), inspect(registry, {longkeys = true, arraykeys = true}))
-        game.write_file(Event.get_file_path('Event/Factorio.registry.lua'), inspect(factorio_events, {longkeys = true, arraykeys = true}))
+        game.write_file(Event.get_file_path('Event/Event.lua'), 'return ' .. inspect(event_data))
+        game.write_file(Event.get_file_path('Event/Event.registry.lua'), 'return ' .. inspect(registry, {longkeys = true, arraykeys = true}))
+        game.write_file(Event.get_file_path('Event/Factorio.registry.lua'), 'return ' .. inspect(factorio_events, {longkeys = true, arraykeys = true}))
     end
     return dump_data
 end

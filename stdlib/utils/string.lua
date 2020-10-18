@@ -2,15 +2,25 @@
 -- @module Utils.string
 -- @see string
 -- @usage local string = require('__stdlib__/stdlib/utils/string')
-
 local String = {}
+getmetatable('').__index = String -- Allow string syntatic sugar to work with this class
 
-for k, v in pairs(string) do
-    String[k] = v
-end
--- Allow string syntatic sugar to work with this class
-getmetatable('').__index = String
+String.find = string.find
+String.lower = string.lower
+String.gmatch = string.gmatch
+String.sub = string.sub
+String.byte = string.byte
+String.char = string.char
+String.reverse = string.reverse
+String.dump = string.dump
+String.rep = string.rep
+String.format = string.format
+String.match = string.match
+String.gsub = string.gsub
+String.len = string.len
+String.upper = string.upper
 
+for k, v in pairs(string) do if not String[k] then String[k] = v end end
 
 local concat = table.concat
 local insert = table.insert
@@ -96,12 +106,9 @@ end
 -- @string s the string
 -- @return a string with each word's first letter uppercase
 function String.title(s)
-    return (s:gsub(
-        [[(%S)(%S*)]],
-        function(f, r)
-            return f:upper() .. r:lower()
-        end
-    ))
+    return (s:gsub([[(%S)(%S*)]], function(f, r)
+        return f:upper() .. r:lower()
+    end))
 end
 
 local ellipsis = '...'
@@ -117,9 +124,7 @@ local n_ellipsis = #ellipsis
 -- @usage ('1234567890'):shorten(20) == '1234567890'
 function String.shorten(s, w, tail)
     if #s > w then
-        if w < n_ellipsis then
-            return ellipsis:sub(1, w)
-        end
+        if w < n_ellipsis then return ellipsis:sub(1, w) end
         if tail then
             local i = #s - w + 1 + n_ellipsis
             return ellipsis .. s:sub(i)
@@ -141,9 +146,7 @@ end
 local function _just(s, w, ch, left, right)
     local n = #s
     if w > n then
-        if not ch then
-            ch = ' '
-        end
+        if not ch then ch = ' ' end
         local f1, f2
         if left and right then
             local rn = ceil((w - n) / 2)
@@ -210,16 +213,12 @@ function String.split(s, sep, pattern, func)
     local last_find = 1
     while start_idx do
         local substr = s:sub(last_find, start_idx - 1)
-        if substr:len() > 0 then
-            table.insert(fields, func(s:sub(last_find, start_idx - 1)))
-        end
+        if substr:len() > 0 then table.insert(fields, func(s:sub(last_find, start_idx - 1))) end
         last_find = end_idx + 1
         start_idx, end_idx = s:find(sep, end_idx + 1)
     end
     local substr = s:sub(last_find)
-    if substr:len() > 0 then
-        insert(fields, func(s:sub(last_find)))
-    end
+    if substr:len() > 0 then insert(fields, func(s:sub(last_find))) end
     return fields
 end
 
@@ -281,6 +280,5 @@ function String.exponent_number(str)
     end
     return 0
 end
-
 
 return String

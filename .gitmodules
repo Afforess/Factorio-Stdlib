@@ -1,3 +1,6 @@
 [submodule "wiki"]
 	path = wiki
 	url = https://github.com/Afforess/Factorio-Stdlib.wiki.git
+[submodule "luacheckrc"]
+	path = luacheckrc
+	url = git@github.com:Nexela/Factorio-luacheckrc.git

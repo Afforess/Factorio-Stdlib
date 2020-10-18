@@ -174,8 +174,14 @@ function Event.register(event_id, handler, filter, pattern, options)
         for i, registered in ipairs(registry) do
             if registered.handler == handler and registered.pattern == pattern and registered.filter == filter then
                 table.remove(registry, i)
-                local event_str = event_id .. '(' .. (event_names[event_id] or ' ') .. ')'
-                log('Same handler already registered for event ' .. event_str .. ' at position ' .. i .. ', moving it to the bottom')
+                local output = {
+                    '__' .. script.mod_name .. '__',
+                    ' Duplicate handler registered for event ',
+                    event_id .. '(' .. (event_names[event_id] or ' ') .. ')',
+                    ' at position ' .. i,
+                    ', moving it to the bottom.'
+                }
+                log(table.concat(output))
                 break
             end
         end
@@ -289,6 +295,13 @@ function Event.on_load(...)
     return Event.register(Event.core_events.on_load, ...)
 end
 
+function Event.on_load_if(truthy, ...)
+    if truthy then
+        return Event.on_load(...)
+    end
+    return Event
+end
+
 --- Shortcut for `Event.register(Event.core_events.on_configuration_changed, function)`
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.on_configuration_changed(...)
@@ -299,6 +312,13 @@ end
 -- @return (<span class="types">@{Event}</span>) Event module object allowing for call chaining
 function Event.on_init(...)
     return Event.register(Event.core_events.on_init, ...)
+end
+
+function Event.on_init_if(truthy, ...)
+    if truthy then
+        return Event.on_init(...)
+    end
+    return Event
 end
 
 --- Shortcut for `Event.register(-nthTick, function)`
@@ -318,6 +338,7 @@ function Event.register_if(truthy, id, ...)
     end
     return Event
 end
+Event.on_event_if = Event.register_if
 
 -- Use option A or B if present, otherwise pass option C
 local function check_option(a, b, c)

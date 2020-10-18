@@ -120,8 +120,8 @@ function Player.update_force(event)
 end
 
 function Player.dump_data()
-    game.write_file(Player.get_file_path('Player/player_data.lua'), inspect(Player._new_player_data, {longkeys = true, arraykeys = true}))
-    game.write_file(Player.get_file_path('Player/global.lua'), inspect(global.players or nil, {longkeys = true, arraykeys = true}))
+    game.write_file(Player.get_file_path('Player/player_data.lua'), 'return ' .. inspect(Player._new_player_data, {longkeys = true, arraykeys = true}))
+    game.write_file(Player.get_file_path('Player/global.lua'), 'return ' .. inspect(global.players or nil, {longkeys = true, arraykeys = true}))
 end
 
 function Player.register_init()

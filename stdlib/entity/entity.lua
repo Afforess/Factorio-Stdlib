@@ -247,6 +247,11 @@ function Entity.is_circuit_connected(entity)
     return list and (next(list.red) or next(list.green))
 end
 
+function Entity.count_circuit_connections(entity)
+    local list = entity.circuit_connected_entities
+    return list and #list.red + #list.green
+end
+
 function Entity.has_fluidbox(entity)
     local box = entity.fluidbox
     return box and #box > 0

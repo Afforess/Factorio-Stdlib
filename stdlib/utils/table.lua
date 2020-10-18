@@ -2,40 +2,42 @@
 -- @module Utils.table
 -- @see table
 -- @usage local table = require('__stdlib__/stdlib/utils/table')
-
 local Table = {}
 
+Table.remove = table.remove
+Table.sort = table.sort
+Table.pack = table.pack
+Table.unpack = table.unpack
+Table.insert = table.insert
+Table.concat = table.concat
+
 -- Import base lua table into Table
-for k, v in pairs(table) do
-    Table[k] = v
-end
+for k, v in pairs(table) do if not Table[k] then Table[k] = v end end
 
 --- Given a mapping function, creates a transformed copy of the table
---- by calling the function for each element in the table, and using
---- the result as the new value for the key. Passes the index as second argument to the function.
---- @usage a= { 1, 2, 3, 4, 5}
----table.map(a, function(v) return v * 10 end) --produces: { 10, 20, 30, 40, 50 }
---- @usage a = {1, 2, 3, 4, 5}
----table.map(a, function(v, k, x) return v * k + x end, 100) --produces { 101, 104, 109, 116, 125}
+-- by calling the function for each element in the table, and using
+-- the result as the new value for the key. Passes the index as second argument to the function.
+-- @usage a= { 1, 2, 3, 4, 5}
+-- table.map(a, function(v) return v * 10 end) --produces: { 10, 20, 30, 40, 50 }
+-- @usage a = {1, 2, 3, 4, 5}
+-- table.map(a, function(v, k, x) return v * k + x end, 100) --produces { 101, 104, 109, 116, 125}
 -- @tparam table tbl the table to be mapped to the transform
 -- @tparam function func the function to transform values
 -- @param[opt] ... additional arguments passed to the function
 -- @treturn table a new table containing the keys and mapped values
 function Table.map(tbl, func, ...)
     local newtbl = {}
-    for i, v in pairs(tbl) do
-        newtbl[i] = func(v, i, ...)
-    end
+    for k, v in pairs(tbl) do newtbl[k] = func(v, k, ...) end
     return newtbl
 end
 
 --- Given a filter function, creates a filtered copy of the table
---- by calling the function for each element in the table, and
---- filtering out any key-value pairs for non-true results. Passes the index as second argument to the function.
---- @usage a= { 1, 2, 3, 4, 5}
----table.filter(a, function(v) return v % 2 == 0 end) --produces: { 2, 4 }
---- @usage a = {1, 2, 3, 4, 5}
----table.filter(a, function(v, k, x) return k % 2 == 1 end) --produces: { 1, 3, 5 }
+-- by calling the function for each element in the table, and
+-- filtering out any key-value pairs for non-true results. Passes the index as second argument to the function.
+-- @usage a= { 1, 2, 3, 4, 5}
+-- table.filter(a, function(v) return v % 2 == 0 end) --produces: { 2, 4 }
+-- @usage a = {1, 2, 3, 4, 5}
+-- table.filter(a, function(v, k, x) return k % 2 == 1 end) --produces: { 1, 3, 5 }
 -- @tparam table tbl the table to be filtered
 -- @tparam function func the function to filter values
 -- @param[opt] ... additional arguments passed to the function
@@ -56,22 +58,18 @@ function Table.filter(tbl, func, ...)
 end
 
 --- Given a candidate search function, iterates over the table, calling the function
---- for each element in the table, and returns the first element the search function returned true.
---- Passes the index as second argument to the function.
---- @usage a= { 1, 2, 3, 4, 5}
----table.find(a, function(v) return v % 2 == 0 end) --produces: 2
---- @usage a = {1, 2, 3, 4, 5}
----table.find(a, function(v, k, x) return k % 2 == 1 end) --produces: 1
+-- for each element in the table, and returns the first element the search function returned true.
+-- Passes the index as second argument to the function.
+-- @usage a= { 1, 2, 3, 4, 5}
+-- table.find(a, function(v) return v % 2 == 0 end) --produces: 2
+-- @usage a = {1, 2, 3, 4, 5}
+-- table.find(a, function(v, k, x) return k % 2 == 1 end) --produces: 1
 -- @tparam table tbl the table to be searched
 -- @tparam function func the function to use to search for any matching element
 -- @param[opt] ... additional arguments passed to the function
 -- @treturn ?|nil|Mixed the first found value, or nil if none was found
 function Table.find(tbl, func, ...)
-    for k, v in pairs(tbl) do
-        if func(v, k, ...) then
-            return v, k
-        end
-    end
+    for k, v in pairs(tbl) do if func(v, k, ...) then return v, k end end
     return nil
 end
 
@@ -79,10 +77,10 @@ end
 -- for each element in the table, and returns true if search function returned true.
 -- Passes the index as second argument to the function.
 -- @see table.find
---- @usage a= { 1, 2, 3, 4, 5}
----table.any(a, function(v) return v % 2 == 0 end) --produces: true
---- @usage a = {1, 2, 3, 4, 5}
----table.any(a, function(v, k, x) return k % 2 == 1 end) --produces: true
+-- @usage a= { 1, 2, 3, 4, 5}
+-- table.any(a, function(v) return v % 2 == 0 end) --produces: true
+-- @usage a = {1, 2, 3, 4, 5}
+-- table.any(a, function(v, k, x) return k % 2 == 1 end) --produces: true
 -- @tparam table tbl the table to be searched
 -- @tparam function func the function to use to search for any matching element
 -- @param[opt] ... additional arguments passed to the function
@@ -100,12 +98,7 @@ end
 -- @param[opt] ... additional arguments passed to the search function
 -- @treturn boolean true if all elements in the table return truthy
 function Table.all(tbl, func, ...)
-    for k, v in pairs(tbl) do
-        if not func(v, k, ...) then
-            return false
-        end
-    end
-
+    for k, v in pairs(tbl) do if not func(v, k, ...) then return false end end
     return true
 end
 
@@ -120,11 +113,7 @@ end
 -- @param[opt] ... additional arguments passed to the function
 -- @treturn table the table where the given function has been applied to its elements
 function Table.each(tbl, func, ...)
-    for k, v in pairs(tbl) do
-        if func(v, k, ...) then
-            break
-        end
-    end
+    for k, v in pairs(tbl) do if func(v, k, ...) then break end end
     return tbl
 end
 
@@ -137,24 +126,21 @@ end
 -- @treturn array a new array that represents the flattened contents of the given array
 function Table.flatten(tbl, level)
     local flattened = {}
-    Table.each(
-        tbl,
-        function(value)
-            if type(value) == 'table' and #value > 0 then
-                if level then
-                    if level > 0 then
-                        Table.merge(flattened, Table.flatten(value, level - 1), true)
-                    else
-                        Table.insert(flattened, value)
-                    end
+    Table.each(tbl, function(value)
+        if type(value) == 'table' and #value > 0 then
+            if level then
+                if level > 0 then
+                    Table.merge(flattened, Table.flatten(value, level - 1), true)
                 else
-                    Table.merge(flattened, Table.flatten(value), true)
+                    Table.insert(flattened, value)
                 end
             else
-                Table.insert(flattened, value)
+                Table.merge(flattened, Table.flatten(value), true)
             end
+        else
+            Table.insert(flattened, value)
         end
-    )
+    end)
     return flattened
 end
 
@@ -170,9 +156,7 @@ end
 -- @treturn ?|nil|Mixed the last element or nil
 function Table.last(tbl)
     local size = #tbl
-    if size == 0 then
-        return nil
-    end
+    if size == 0 then return nil end
     return tbl[size]
 end
 
@@ -180,14 +164,10 @@ end
 -- @tparam {number,...} tbl the array with only numeric values
 -- @treturn ?|nil|number the minimum value
 function Table.min(tbl)
-    if #tbl == 0 then
-        return nil
-    end
+    if #tbl == 0 then return nil end
 
     local min = tbl[1]
-    for _, num in pairs(tbl) do
-        min = num < min and num or min
-    end
+    for _, num in pairs(tbl) do min = num < min and num or min end
     return min
 end
 
@@ -195,14 +175,10 @@ end
 -- @tparam {number,...} tbl the array with only numeric values
 -- @treturn ?|nil|number the maximum value
 function Table.max(tbl)
-    if #tbl == 0 then
-        return nil
-    end
+    if #tbl == 0 then return nil end
 
     local max = tbl[1]
-    for _, num in pairs(tbl) do
-        max = num > max and num or max
-    end
+    for _, num in pairs(tbl) do max = num > max and num or max end
     return max
 end
 
@@ -211,9 +187,7 @@ end
 -- @treturn number the sum of the numbers or zero if the given array was empty
 function Table.sum(tbl)
     local sum = 0
-    for _, num in pairs(tbl) do
-        sum = sum + num
-    end
+    for _, num in pairs(tbl) do sum = sum + num end
     return sum
 end
 
@@ -239,9 +213,7 @@ function Table.slice(tbl, start, stop)
     stop = stop or n
     stop = stop < 0 and (n + stop + 1) or stop
 
-    if start < 1 or start > n then
-        return {}
-    end
+    if start < 1 or start > n then return {} end
 
     local k = 1
     for i = start, stop do
@@ -265,13 +237,9 @@ end
 -- @tparam[opt=false] boolean raw use rawset for associated array
 -- @treturn array|table an array or an associated array where tblA and tblB have been merged
 function Table.merge(tblA, tblB, array_merge, raw)
-    if not tblB then
-        return tblA
-    end
+    if not tblB then return tblA end
     if array_merge then
-        for _, v in pairs(tblB) do
-            Table.insert(tblA, v)
-        end
+        for _, v in pairs(tblB) do Table.insert(tblA, v) end
     else
         for k, v in pairs(tblB) do
             if raw then
@@ -287,22 +255,14 @@ end
 function Table.array_combine(...)
     local tables = {...}
     local new = {}
-    for _, tab in pairs(tables) do
-        for _, v in pairs(tab) do
-            Table.insert(new, v)
-        end
-    end
+    for _, tab in pairs(tables) do for _, v in pairs(tab) do Table.insert(new, v) end end
     return new
 end
 
 function Table.dictionary_combine(...)
     local tables = {...}
     local new = {}
-    for _, tab in pairs(tables) do
-        for k, v in pairs(tab) do
-            new[k] = v
-        end
-    end
+    for _, tab in pairs(tables) do for k, v in pairs(tab) do new[k] = v end end
     return new
 end
 
@@ -322,14 +282,8 @@ function Table.dictionary_merge(tbl_a, tbl_b)
     setmetatable(tbl_b, nil)
 
     local new_t = {}
-    for k, v in pairs(tbl_a) do
-        new_t[k] = v
-    end
-    for k, v in pairs(tbl_b or {}) do
-        if not new_t[k] then
-            new_t[k] = v
-        end
-    end
+    for k, v in pairs(tbl_a) do new_t[k] = v end
+    for k, v in pairs(tbl_b or {}) do if not new_t[k] then new_t[k] = v end end
     setmetatable(tbl_a, meta_a)
     setmetatable(tbl_b, meta_b)
     return new_t
@@ -344,31 +298,19 @@ end
 -- @author Sparr, Nexela, luacode.org
 function Table.deep_compare(t1, t2, ignore_mt)
     local ty1, ty2 = type(t1), type(t2)
-    if ty1 ~= ty2 then
-        return false
-    end
+    if ty1 ~= ty2 then return false end
     -- non-table types can be directly compared
-    if ty1 ~= 'table' and ty2 ~= 'table' then
-        return t1 == t2
-    end
+    if ty1 ~= 'table' and ty2 ~= 'table' then return t1 == t2 end
     -- as well as tables which have the metamethod __eq
     if not ignore_mt then
         local mt = getmetatable(t1)
-        if mt and mt.__eq then
-            return t1 == t2
-        end
+        if mt and mt.__eq then return t1 == t2 end
     end
     for k1, v1 in pairs(t1) do
         local v2 = t2[k1]
-        if v2 == nil or not Table.deep_compare(v1, v2) then
-            return false
-        end
+        if v2 == nil or not Table.deep_compare(v1, v2) then return false end
     end
-    for k in pairs(t2) do
-        if t1[k] == nil then
-            return false
-        end
-    end
+    for k in pairs(t2) do if t1[k] == nil then return false end end
 
     return true
 end
@@ -376,26 +318,27 @@ Table.compare = Table.deep_compare
 
 --- Creates a deep copy of table without copying Factorio objects.
 -- copied from factorio/data/core/lualib/util.lua
--- @usage local copy = table.deep_copy[data.raw.["stone-furnace"]["stone-furnace"]] -- returns a copy of the stone furnace entity
+-- @usage local copy = table.deep_copy[data.raw.["stone-furnace"]["stone-furnace"]]
+-- -- returns a copy of the stone furnace entity
 -- @tparam table object the table to copy
 -- @treturn table a copy of the table
 function Table.deep_copy(object)
     local lookup_table = {}
-    local function _copy(this_object)
-        if type(this_object) ~= 'table' then
-            return this_object
-        elseif this_object.__self then
-            return this_object
-        elseif lookup_table[this_object] then
-            return lookup_table[this_object]
+
+    local function _copy(inner)
+        if type(inner) ~= 'table' then
+            return inner
+        elseif inner.__self then
+            return inner
+        elseif lookup_table[inner] then
+            return lookup_table[inner]
         end
         local new_table = {}
-        lookup_table[this_object] = new_table
-        for index, value in pairs(this_object) do
-            new_table[_copy(index)] = _copy(value)
-        end
-        return setmetatable(new_table, getmetatable(this_object))
+        lookup_table[inner] = new_table
+        for index, value in pairs(inner) do new_table[_copy(index)] = _copy(value) end
+        return setmetatable(new_table, getmetatable(inner))
     end
+
     return _copy(object)
 end
 Table.deepcopy = Table.deep_copy
@@ -408,49 +351,50 @@ Table.deepcopy = Table.deep_copy
 -- @treturn table a copy of the table
 function Table.full_copy(object)
     local lookup_table = {}
-    local function _copy(this_object)
-        if type(this_object) ~= 'table' then
-            return this_object
-        elseif this_object.__self then
-            return this_object
-        elseif lookup_table[this_object] then
-            return _copy(lookup_table[this_object])
+
+    local function _copy(inner)
+        if type(inner) ~= 'table' then
+            return inner
+        elseif inner.__self then
+            return inner
+        elseif lookup_table[inner] then
+            return _copy(lookup_table[inner])
         end
         local new_table = {}
-        lookup_table[this_object] = new_table
-        for index, value in pairs(this_object) do
-            new_table[_copy(index)] = _copy(value)
-        end
-        return setmetatable(new_table, getmetatable(this_object))
+        lookup_table[inner] = new_table
+        for index, value in pairs(inner) do new_table[_copy(index)] = _copy(value) end
+        return setmetatable(new_table, getmetatable(inner))
     end
+
     return _copy(object)
 end
 Table.fullcopy = Table.full_copy
 
 --- Creates a flexible deep copy of an object, recursively copying sub-objects
--- @usage local copy = table.flexcopy(data.raw.["stone-furnace"]["stone-furnace"]) -- returns a copy of the stone furnace entity
+-- @usage local copy = table.flexcopy(data.raw.["stone-furnace"]["stone-furnace"])
+-- -- returns a copy of the stone furnace entity
 -- @tparam table object the table to copy
 -- @treturn table a copy of the table
 function Table.flex_copy(object)
     local lookup_table = {}
-    local function _copy(this_object)
-        if type(this_object) ~= 'table' then
-            return this_object
-        elseif this_object.__self then
-            return this_object
-        elseif lookup_table[this_object] then
-            return lookup_table[this_object]
-        elseif type(this_object._copy_with) == 'function' then
-            lookup_table[this_object] = this_object:_copy_with(_copy)
-            return lookup_table[this_object]
+
+    local function _copy(inner)
+        if type(inner) ~= 'table' then
+            return inner
+        elseif inner.__self then
+            return inner
+        elseif lookup_table[inner] then
+            return lookup_table[inner]
+        elseif type(inner._copy_with) == 'function' then
+            lookup_table[inner] = inner:_copy_with(_copy)
+            return lookup_table[inner]
         end
         local new_table = {}
-        lookup_table[this_object] = new_table
-        for index, value in pairs(this_object) do
-            new_table[_copy(index)] = _copy(value)
-        end
-        return setmetatable(new_table, getmetatable(this_object))
+        lookup_table[inner] = new_table
+        for index, value in pairs(inner) do new_table[_copy(index)] = _copy(value) end
+        return setmetatable(new_table, getmetatable(inner))
     end
+
     return _copy(object)
 end
 Table.flexcopy = Table.flex_copy
@@ -461,12 +405,10 @@ Table.flexcopy = Table.flex_copy
 -- @tparam[opt] boolean as_string whether to try and parse the values as strings, or leave them as their existing type
 -- @treturn array an array with a copy of all the values in the table
 function Table.values(tbl, sorted, as_string)
-    if not tbl then
-        return {}
-    end
+    if not tbl then return {} end
     local valueset = {}
     local n = 0
-    if as_string then --checking as_string /before/ looping is faster
+    if as_string then -- checking as_string /before/ looping is faster
         for _, v in pairs(tbl) do
             n = n + 1
             valueset[n] = tostring(v)
@@ -478,20 +420,17 @@ function Table.values(tbl, sorted, as_string)
         end
     end
     if sorted then
-        table.sort(
-            valueset,
-            function(x, y) --sorts tables with mixed index types.
-                local tx = type(x) == 'number'
-                local ty = type(y) == 'number'
-                if tx == ty then
-                    return x < y and true or false --similar type can be compared
-                elseif tx == true then
-                    return true --only x is a number and goes first
-                else
-                    return false --only y is a number and goes first
-                end
+        table.sort(valueset, function(x, y) -- sorts tables with mixed index types.
+            local tx = type(x) == 'number'
+            local ty = type(y) == 'number'
+            if tx == ty then
+                return x < y and true or false -- similar type can be compared
+            elseif tx == true then
+                return true -- only x is a number and goes first
+            else
+                return false -- only y is a number and goes first
             end
-        )
+        end)
     end
     return valueset
 end
@@ -502,12 +441,10 @@ end
 -- @tparam[opt] boolean as_string whether to try and parse the keys as strings, or leave them as their existing type
 -- @treturn array an array with a copy of all the keys in the table
 function Table.keys(tbl, sorted, as_string)
-    if not tbl then
-        return {}
-    end
+    if not tbl then return {} end
     local keyset = {}
     local n = 0
-    if as_string then --checking as_string /before/ looping is faster
+    if as_string then -- checking as_string /before/ looping is faster
         for k, _ in pairs(tbl) do
             n = n + 1
             keyset[n] = tostring(k)
@@ -519,36 +456,31 @@ function Table.keys(tbl, sorted, as_string)
         end
     end
     if sorted then
-        table.sort(
-            keyset,
-            function(x, y) --sorts tables with mixed index types.
-                local tx = type(x) == 'number'
-                local ty = type(y) == 'number'
-                if tx == ty then
-                    return x < y and true or false --similar type can be compared
-                elseif tx == true then
-                    return true --only x is a number and goes first
-                else
-                    return false --only y is a number and goes first
-                end
+        table.sort(keyset, function(x, y) -- sorts tables with mixed index types.
+            local tx = type(x) == 'number'
+            local ty = type(y) == 'number'
+            if tx == ty then
+                return x < y and true or false -- similar type can be compared
+            elseif tx == true then
+                return true -- only x is a number and goes first
+            else
+                return false -- only y is a number and goes first
             end
-        )
+        end)
     end
     return keyset
 end
 
 --- Removes keys from a table by setting the values associated with the keys to nil.
 -- @usage local a = {1, 2, 3, 4}
---table.remove_keys(a, {1,3}) --returns {nil, 2, nil, 4}
+-- table.remove_keys(a, {1,3}) --returns {nil, 2, nil, 4}
 -- @usage local b = {k1 = 1, k2 = 'foo', old_key = 'bar'}
---table.remove_keys(b, {'old_key'}) --returns {k1 = 1, k2 = 'foo'}
+-- table.remove_keys(b, {'old_key'}) --returns {k1 = 1, k2 = 'foo'}
 -- @tparam table tbl the table to remove the keys from
 -- @tparam {Mixed,...} keys an array of keys that exist in the given table
 -- @treturn table tbl without the specified keys
 function Table.remove_keys(tbl, keys)
-    for i = 1, #keys do
-        tbl[keys[i]] = nil
-    end
+    for i = 1, #keys do tbl[keys[i]] = nil end
     return tbl
 end
 
@@ -568,9 +500,7 @@ function Table.count_keys(tbl, func, ...)
         for k, v in pairs(tbl) do
             total = total + 1
             if func then
-                if func(v, k, ...) then
-                    count = count + 1
-                end
+                if func(v, k, ...) then count = count + 1 end
             else
                 count = count + 1
             end
@@ -579,26 +509,23 @@ function Table.count_keys(tbl, func, ...)
     return count, total
 end
 
---- Returns an inverted (***{[value] = key,...}***) copy of the given table. If the values are not unique, the assigned key depends on the order of pairs().
+--- Returns an inverted (***{[value] = key,...}***) copy of the given table. If the values are not unique,
+-- the assigned key depends on the order of pairs().
 -- @usage local a = {k1 = 'foo', k2 = 'bar'}
---table.invert(a) --returns {'foo' = k1, 'bar' = k2}
+-- table.invert(a) --returns {'foo' = k1, 'bar' = k2}
 -- @usage local b = {k1 = 'foo', k2 = 'bar', k3 = 'bar'}
---table.invert(b) --returns {'foo' = k1, 'bar' = ?}
+-- table.invert(b) --returns {'foo' = k1, 'bar' = ?}
 -- @tparam table tbl the table to invert
 -- @treturn table a new table with inverted mapping
 function Table.invert(tbl)
     local inverted = {}
-    for k, v in pairs(tbl) do
-        inverted[v] = k
-    end
+    for k, v in pairs(tbl) do inverted[v] = k end
     return inverted
 end
 
 local function _size(tbl)
     local count = 0
-    for _ in pairs(tbl or {}) do
-        count = count + 1
-    end
+    for _ in pairs(tbl or {}) do count = count + 1 end
     return count
 end
 
@@ -606,7 +533,7 @@ end
 -- @function size
 -- @tparam table table to use
 -- @treturn int size of the table
-Table.size = _G.table_size or _size
+Table.size = _ENV.table_size or _size
 
 --- For all string or number values in an array map them to a value = value table
 -- @usage local a = {"v1", "v2"}
@@ -617,9 +544,7 @@ Table.size = _G.table_size or _size
 function Table.array_to_dictionary(tbl, as_bool)
     local newtbl = {}
     for _, v in ipairs(tbl) do
-        if type(v) == 'string' or type(v) == 'number' then
-            newtbl[v] = as_bool and true or v
-        end
+        if type(v) == 'string' or type(v) == 'number' then newtbl[v] = as_bool and true or v end
     end
     return newtbl
 end
@@ -635,16 +560,14 @@ end
 -- @tparam table tbl
 -- @treturn boolean
 function Table.is_empty(tbl)
-    return _G.table_size and _G.table_size(tbl) == 0 or next(tbl) == nil
+    return _ENV.table_size and _ENV.table_size(tbl) == 0 or next(tbl) == nil
 end
 
 --- Clear all elements in a table
 -- @tparam table tbl the table to clear
 -- @treturn table the cleared table
 function Table.clear(tbl)
-    for k in pairs(tbl) do
-        tbl[k] = nil
-    end
+    for k in pairs(tbl) do tbl[k] = nil end
     return tbl
 end
 

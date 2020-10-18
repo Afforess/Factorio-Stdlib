@@ -107,7 +107,7 @@ function Game.get_or_set_data(sub_table, index, key, set, value)
 end
 
 function Game.write_mods()
-    game.write_file('Mods.lua', inspect(game.active_mods))
+    game.write_file('Mods.lua', 'return ' .. inspect(game.active_mods))
 end
 
 function Game.write_statistics()
@@ -127,7 +127,7 @@ end
 function Game.write_surfaces()
     game.remove_path('surfaces')
     for _, surface in pairs(game.surfaces) do
-        game.write_file('surfaces/' .. (surface.name or surface.index) .. '.lua', inspect(surface.map_gen_settings))
+        game.write_file('surfaces/' .. (surface.name or surface.index) .. '.lua', 'return ' .. inspect(surface.map_gen_settings))
     end
 end
 

@@ -410,9 +410,9 @@
     <!-- usage start -->
     <strong>Usage:</strong>
     <pre class="code" data-lang="Lua"><code>a= { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
-<span class="global">table</span>.map(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v * <span class="number">10</span> <span class="keyword">end</span>) <span class="comment">--produces: { 10, 20, 30, 40, 50 }</span></code></pre>
+ <span class="global">table</span>.map(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v * <span class="number">10</span> <span class="keyword">end</span>) <span class="comment">--produces: { 10, 20, 30, 40, 50 }</span></code></pre>
     <pre class="code" data-lang="Lua"><code>a = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
-<span class="global">table</span>.map(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> v * k + x <span class="keyword">end</span>, <span class="number">100</span>) <span class="comment">--produces { 101, 104, 109, 116, 125}</span></code></pre>
+ <span class="global">table</span>.map(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> v * k + x <span class="keyword">end</span>, <span class="number">100</span>) <span class="comment">--produces { 101, 104, 109, 116, 125}</span></code></pre>
     <!-- usage end -->
 
     </dd>
@@ -506,9 +506,9 @@
     <!-- usage start -->
     <strong>Usage:</strong>
     <pre class="code" data-lang="Lua"><code>a= { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
-<span class="global">table</span>.filter(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">--produces: { 2, 4 }</span></code></pre>
+ <span class="global">table</span>.filter(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">--produces: { 2, 4 }</span></code></pre>
     <pre class="code" data-lang="Lua"><code>a = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
-<span class="global">table</span>.filter(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> k % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">end</span>) <span class="comment">--produces: { 1, 3, 5 }</span></code></pre>
+ <span class="global">table</span>.filter(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> k % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">end</span>) <span class="comment">--produces: { 1, 3, 5 }</span></code></pre>
     <!-- usage end -->
 
     </dd>
@@ -601,9 +601,9 @@
     <!-- usage start -->
     <strong>Usage:</strong>
     <pre class="code" data-lang="Lua"><code>a= { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
-<span class="global">table</span>.find(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">--produces: 2</span></code></pre>
+ <span class="global">table</span>.find(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">--produces: 2</span></code></pre>
     <pre class="code" data-lang="Lua"><code>a = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
-<span class="global">table</span>.find(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> k % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">end</span>) <span class="comment">--produces: 1</span></code></pre>
+ <span class="global">table</span>.find(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> k % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">end</span>) <span class="comment">--produces: 1</span></code></pre>
     <!-- usage end -->
 
     </dd>
@@ -700,9 +700,9 @@
     <!-- usage start -->
     <strong>Usage:</strong>
     <pre class="code" data-lang="Lua"><code>a= { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
-<span class="global">table</span>.any(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">--produces: true</span></code></pre>
+ <span class="global">table</span>.any(a, <span class="keyword">function</span>(v) <span class="keyword">return</span> v % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">--produces: true</span></code></pre>
     <pre class="code" data-lang="Lua"><code>a = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}
-<span class="global">table</span>.any(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> k % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">end</span>) <span class="comment">--produces: true</span></code></pre>
+ <span class="global">table</span>.any(a, <span class="keyword">function</span>(v, k, x) <span class="keyword">return</span> k % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">end</span>) <span class="comment">--produces: true</span></code></pre>
     <!-- usage end -->
 
     </dd>
@@ -1746,7 +1746,8 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
 
     <!-- usage start -->
     <strong>Usage:</strong>
-    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> copy = <span class="global">table</span>.deep_copy[data.raw.[<span class="string">"stone-furnace"</span>][<span class="string">"stone-furnace"</span>]] <span class="comment">-- returns a copy of the stone furnace entity</span></code></pre>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> copy = <span class="global">table</span>.deep_copy[data.raw.[<span class="string">"stone-furnace"</span>][<span class="string">"stone-furnace"</span>]]
+ <span class="comment">-- returns a copy of the stone furnace entity</span></code></pre>
     <!-- usage end -->
 
     </dd>
@@ -1867,7 +1868,8 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
 
     <!-- usage start -->
     <strong>Usage:</strong>
-    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> copy = <span class="global">table</span>.flexcopy(data.raw.[<span class="string">"stone-furnace"</span>][<span class="string">"stone-furnace"</span>]) <span class="comment">-- returns a copy of the stone furnace entity</span></code></pre>
+    <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> copy = <span class="global">table</span>.flexcopy(data.raw.[<span class="string">"stone-furnace"</span>][<span class="string">"stone-furnace"</span>])
+ <span class="comment">-- returns a copy of the stone furnace entity</span></code></pre>
     <!-- usage end -->
 
     </dd>
@@ -2128,9 +2130,9 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
     <!-- usage start -->
     <strong>Usage:</strong>
     <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> a = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>}
-<span class="global">table</span>.remove_keys(a, {<span class="number">1</span>,<span class="number">3</span>}) <span class="comment">--returns {nil, 2, nil, 4}</span></code></pre>
+ <span class="global">table</span>.remove_keys(a, {<span class="number">1</span>,<span class="number">3</span>}) <span class="comment">--returns {nil, 2, nil, 4}</span></code></pre>
     <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> b = {k1 = <span class="number">1</span>, k2 = <span class="string">'foo'</span>, old_key = <span class="string">'bar'</span>}
-<span class="global">table</span>.remove_keys(b, {<span class="string">'old_key'</span>}) <span class="comment">--returns {k1 = 1, k2 = 'foo'}</span></code></pre>
+ <span class="global">table</span>.remove_keys(b, {<span class="string">'old_key'</span>}) <span class="comment">--returns {k1 = 1, k2 = 'foo'}</span></code></pre>
     <!-- usage end -->
 
     </dd>
@@ -2245,7 +2247,8 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
     <div class="section-item-body">
 
     <p class="section-item-summary">Returns an inverted (<strong><em>{[value] = key,&hellip;}</em></strong>) copy of the given table.</p>
-    <p class="section-item-description"> If the values are not unique, the assigned key depends on the order of pairs().</p>
+    <p class="section-item-description"> If the values are not unique,
+ the assigned key depends on the order of pairs().</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -2290,9 +2293,9 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
     <!-- usage start -->
     <strong>Usage:</strong>
     <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> a = {k1 = <span class="string">'foo'</span>, k2 = <span class="string">'bar'</span>}
-<span class="global">table</span>.invert(a) <span class="comment">--returns {'foo' = k1, 'bar' = k2}</span></code></pre>
+ <span class="global">table</span>.invert(a) <span class="comment">--returns {'foo' = k1, 'bar' = k2}</span></code></pre>
     <pre class="code" data-lang="Lua"><code><span class="keyword">local</span> b = {k1 = <span class="string">'foo'</span>, k2 = <span class="string">'bar'</span>, k3 = <span class="string">'bar'</span>}
-<span class="global">table</span>.invert(b) <span class="comment">--returns {'foo' = k1, 'bar' = ?}</span></code></pre>
+ <span class="global">table</span>.invert(b) <span class="comment">--returns {'foo' = k1, 'bar' = ?}</span></code></pre>
     <!-- usage end -->
 
     </dd>
@@ -2563,7 +2566,7 @@ some_func(<span class="number">1</span>,<span class="number">2</span>) <span cla
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2020-10-13 02:19:34 UTC</i>
+    <i>Last updated 2020-10-18 20:06:00 UTC</i>
     </div>
     </div>
     </div>

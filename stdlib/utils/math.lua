@@ -2,12 +2,39 @@
 -- @module Utils.math
 -- @see math
 -- @usage local math = require('__stdlib__/stdlib/utils/math')
-
 local Math = {}
 
-for k, v in pairs(math) do
-    Math[k] = v
-end
+Math.frexp = math.frexp
+Math.sqrt = math.sqrt
+Math.asin = math.asin
+Math.random = math.random
+Math.huge = math.huge
+Math.abs = math.abs
+Math.ldexp = math.ldexp
+Math.exp = math.exp
+Math.pow = math.pow
+Math.pi = math.pi
+Math.tan = math.tan
+Math.acos = math.acos
+Math.ceil = math.ceil
+Math.atan2 = math.atan2
+Math.tanh = math.tanh
+Math.sin = math.sin
+Math.min = math.min
+Math.deg = math.deg
+Math.sinh = math.sinh
+Math.rad = math.rad
+Math.randomseed = math.randomseed
+Math.cosh = math.cosh
+Math.modf = math.modf
+Math.cos = math.cos
+Math.atan = math.atan
+Math.max = math.max
+Math.log = math.log
+Math.fmod = math.fmod
+Math.floor = math.floor
+
+for k, v in pairs(math) do if not Math[k] then Math[k] = v end end
 
 local math_abs = math.abs
 local math_floor = math.floor
@@ -19,7 +46,7 @@ local math_pi = math.pi
 local math_log = math.log
 local unpack = table.unpack
 
---(( Math Constants
+-- (( Math Constants
 Math.DEG2RAD = math_pi / 180
 Math.RAD2DEG = 180 / math_pi
 Math.EPSILON = 1.401298e-45
@@ -60,7 +87,7 @@ Math.MAXUINT64 = 18446744073709551615
 Math.MAX_INT64 = Math.MAXINT64
 Math.MIN_INT64 = Math.MININT64
 Math.MAX_UINT64 = Math.MAXUINT64
---))
+-- ))
 
 local function tuple(...)
     return type(...) == 'table' and ... or {...}
@@ -91,9 +118,7 @@ end
 -- @tparam[opt=0] int p the number of decimal places to floor to
 -- @treturn number floored to p decimal spaces.
 function Math.floor_to(x, p)
-    if (p or 0) == 0 then
-        return math_floor(x)
-    end
+    if (p or 0) == 0 then return math_floor(x) end
     local e = 10 ^ p
     return math_floor(x * e) / e
 end
@@ -116,9 +141,7 @@ end
 function Math.sum(...)
     local x = tuple(...)
     local s = 0
-    for _, v in ipairs(x) do
-        s = s + v
-    end
+    for _, v in ipairs(x) do s = s + v end
     return s
 end
 
@@ -139,9 +162,7 @@ Math.average = Math.arithmetic_mean
 function Math.geometric_mean(...)
     local x = tuple(...)
     local prod = 1
-    for _, v in ipairs(x) do
-        prod = prod * v
-    end
+    for _, v in ipairs(x) do prod = prod * v end
     return (prod ^ (1 / #x))
 end
 
@@ -151,9 +172,7 @@ end
 function Math.harmonic_mean(...)
     local x = tuple(...)
     local s = 0
-    for _, v in ipairs(x) do
-        s = s + (1 / v)
-    end
+    for _, v in ipairs(x) do s = s + (1 / v) end
     return (#x / s)
 end
 
@@ -163,9 +182,7 @@ end
 function Math.quadratic_mean(...)
     local x = tuple(...)
     local squares = 0
-    for _, v in ipairs(x) do
-        squares = squares + (v * v)
-    end
+    for _, v in ipairs(x) do squares = squares + (v * v) end
     return math.sqrt((1 / #x) * squares)
 end
 
@@ -176,9 +193,7 @@ end
 function Math.generalized_mean(p, ...)
     local x = tuple(...)
     local sump = 0
-    for _, v in ipairs(x) do
-        sump = sump + (v ^ p)
-    end
+    for _, v in ipairs(x) do sump = sump + (v ^ p) end
     return ((1 / #x) * sump) ^ (1 / p)
 end
 
@@ -188,9 +203,7 @@ end
 -- @treturn number the weighted mean
 function Math.weighted_mean(x, w)
     local sump = 0
-    for i, v in ipairs(x) do
-        sump = sump + (v * w[i])
-    end
+    for i, v in ipairs(x) do sump = sump + (v * w[i]) end
     return sump / Math.sum(w)
 end
 
@@ -208,16 +221,14 @@ end
 function Math.energetic_mean(...)
     local x = tuple(...)
     local s = 0
-    for _, v in ipairs(x) do
-        s = s + (10 ^ (v / 10))
-    end
+    for _, v in ipairs(x) do s = s + (10 ^ (v / 10)) end
     return 10 * Math.log10((1 / #x) * s)
 end
 
 --- Returns the number x clamped between the numbers min and max.
 -- @tparam number x
--- @tparam number min
--- @tparam number max
+-- @tparam[opt=0] number min
+-- @tparam[opt=1] number max
 -- @treturn number clamped between min and max
 function Math.clamp(x, min, max)
     min, max = min or 0, max or 1

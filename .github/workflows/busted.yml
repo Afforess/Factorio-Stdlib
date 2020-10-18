@@ -1,0 +1,24 @@
+name: busted
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: leafo/gh-actions-lua@v5
+      with:
+        luaVersion: "5.2"
+
+    - uses: leafo/gh-actions-luarocks@v2
+
+    - name: setup
+      run: |
+        luarocks install busted
+
+    - name: busted
+      run: |
+        busted -o utfTerminal

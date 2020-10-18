@@ -325,18 +325,18 @@ Table.compare = Table.deep_compare
 function Table.deep_copy(object)
     local lookup_table = {}
 
-    local function _copy()
-        if type(object) ~= 'table' then
-            return object
-        elseif object.__self then
-            return object
-        elseif lookup_table[object] then
-            return lookup_table[object]
+    local function _copy(inner)
+        if type(inner) ~= 'table' then
+            return inner
+        elseif inner.__self then
+            return inner
+        elseif lookup_table[inner] then
+            return lookup_table[inner]
         end
         local new_table = {}
-        lookup_table[object] = new_table
-        for index, value in pairs(object) do new_table[_copy(index)] = _copy(value) end
-        return setmetatable(new_table, getmetatable(object))
+        lookup_table[inner] = new_table
+        for index, value in pairs(inner) do new_table[_copy(index)] = _copy(value) end
+        return setmetatable(new_table, getmetatable(inner))
     end
 
     return _copy(object)
@@ -352,18 +352,18 @@ Table.deepcopy = Table.deep_copy
 function Table.full_copy(object)
     local lookup_table = {}
 
-    local function _copy()
-        if type(object) ~= 'table' then
-            return object
-        elseif object.__self then
-            return object
-        elseif lookup_table[object] then
-            return _copy(lookup_table[object])
+    local function _copy(inner)
+        if type(inner) ~= 'table' then
+            return inner
+        elseif inner.__self then
+            return inner
+        elseif lookup_table[inner] then
+            return _copy(lookup_table[inner])
         end
         local new_table = {}
-        lookup_table[object] = new_table
-        for index, value in pairs(object) do new_table[_copy(index)] = _copy(value) end
-        return setmetatable(new_table, getmetatable(object))
+        lookup_table[inner] = new_table
+        for index, value in pairs(inner) do new_table[_copy(index)] = _copy(value) end
+        return setmetatable(new_table, getmetatable(inner))
     end
 
     return _copy(object)
@@ -378,21 +378,21 @@ Table.fullcopy = Table.full_copy
 function Table.flex_copy(object)
     local lookup_table = {}
 
-    local function _copy()
-        if type(object) ~= 'table' then
-            return object
-        elseif object.__self then
-            return object
-        elseif lookup_table[object] then
-            return lookup_table[object]
-        elseif type(object._copy_with) == 'function' then
-            lookup_table[object] = object:_copy_with(_copy)
-            return lookup_table[object]
+    local function _copy(inner)
+        if type(inner) ~= 'table' then
+            return inner
+        elseif inner.__self then
+            return inner
+        elseif lookup_table[inner] then
+            return lookup_table[inner]
+        elseif type(inner._copy_with) == 'function' then
+            lookup_table[inner] = inner:_copy_with(_copy)
+            return lookup_table[inner]
         end
         local new_table = {}
-        lookup_table[object] = new_table
-        for index, value in pairs(object) do new_table[_copy(index)] = _copy(value) end
-        return setmetatable(new_table, getmetatable(object))
+        lookup_table[inner] = new_table
+        for index, value in pairs(inner) do new_table[_copy(index)] = _copy(value) end
+        return setmetatable(new_table, getmetatable(inner))
     end
 
     return _copy(object)

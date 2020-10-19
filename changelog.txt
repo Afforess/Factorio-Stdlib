@@ -5,6 +5,8 @@ Date: ????
     - Added Entity:count_circuit_connections.
     - Added Event:on_init_if, Event:on_load_if, Event.on_event_if.
     - Added Data:Util:extend_style_by_name.
+  Changes:
+    - Inventory:transfer_inventory() returns a dictionary of filters if dest can't hold them.
 ---------------------------------------------------------------------------------------------------
 Version: 1.4.5
 Date: 2020-09-22

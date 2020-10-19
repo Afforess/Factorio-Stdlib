@@ -122,15 +122,27 @@ end
 --- Transfer items from 1 inventory to another.
 -- @tparam LuaInventory source
 -- @tparam LuaInventory destination
-function Inventory.transfer_inventory(source, destination)
+-- @tparam[opt=nil] table source_filters the filters to use if the source is not filtered/filterable
+-- @treturn nil|table the filters if the destination does not support filters
+function Inventory.transfer_inventory(source, destination, source_filters)
     local filtered = source.is_filtered()
     local destination_filterable = destination.supports_filters()
+    local filters = {}
     for i = 1, min(#destination, #source) do
         destination[i].transfer_stack(source[i])
-        if filtered and destination_filterable then
-            destination.set_filter(i, source.get_filter(i))
+        if filtered then
+            if destination_filterable then
+                destination.set_filter(i, source.get_filter(i))
+            else
+                filters[i] = source.get_filter(i)
+            end
+        elseif source_filters then
+            if destination_filterable then
+                destination.set_filter(i, source_filters[i])
+            end
         end
     end
+    return (filtered and not destination_filterable and filters) or nil
 end
 
 --- Swap items from 1 inventory to another.

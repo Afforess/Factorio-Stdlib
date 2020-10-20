@@ -1,1 +1,25 @@
-do local _={golem={order="b[exploration]-g[golem]",icon="__base__/graphics/achievement/golem.png",icon_size=128,name="golem",minimum_damage=500,steam_stats_name="surived-damage-in-one-hit",type="player-damaged-achievement",should_survive=true},["watch-your-step"]={order="b[exploration]-f[watch-your-step]",icon="__base__/graphics/achievement/watch-your-step.png",icon_size=128,name="watch-your-step",minimum_damage=0,type_of_dealer="locomotive",type="player-damaged-achievement",should_survive=false}};return _;end
+do
+    local _ = {
+        golem = {
+            name = 'golem',
+            icon = '__base__/graphics/achievement/golem.png',
+            type = 'player-damaged-achievement',
+            order = 'b[exploration]-g[golem]',
+            icon_size = 128,
+            minimum_damage = 500,
+            should_survive = true,
+            steam_stats_name = 'surived-damage-in-one-hit'
+        },
+        ['watch-your-step'] = {
+            type_of_dealer = 'locomotive',
+            icon = '__base__/graphics/achievement/watch-your-step.png',
+            type = 'player-damaged-achievement',
+            order = 'b[exploration]-f[watch-your-step]',
+            icon_size = 128,
+            minimum_damage = 0,
+            should_survive = false,
+            name = 'watch-your-step'
+        }
+    };
+    return _;
+end

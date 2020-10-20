@@ -1,1 +1,591 @@
-do local _={["storage-tank"]={flow_length_in_ticks=360,collision_box={{-1.3,-1.3},{1.3,1.3}},minable={mining_time=0.5,result="storage-tank"},max_health=500,type="storage-tank",icon_size=64,circuit_wire_connection_points={{wire={green={1.40625,0.6875},red={1.34375,0.46875}},shadow={green={1.5,0.71875},red={1.65625,0.703125}}},{wire={green={-0.984375,1},red={-0.90625,0.8125}},shadow={green={-0.828125,1.109375},red={-0.59375,1.078125}}},{wire={green={1.40625,0.6875},red={1.34375,0.46875}},shadow={green={1.5,0.71875},red={1.65625,0.703125}}},{wire={green={-0.984375,1},red={-0.90625,0.8125}},shadow={green={-0.828125,1.109375},red={-0.59375,1.078125}}}},fluid_box={pipe_connections={{position={-1,-2}},{position={2,1}},{position={1,2}},{position={-2,-1}}},base_area=250,pipe_covers={west={layers={{filename="__base__/graphics/entity/pipe-covers/pipe-cover-west.png",hr_version={filename="__base__/graphics/entity/pipe-covers/hr-pipe-cover-west.png",priority="extra-high",width=128,height=128,scale=0.5},priority="extra-high",height=64,width=64},{filename="__base__/graphics/entity/pipe-covers/pipe-cover-west-shadow.png",hr_version={filename="__base__/graphics/entity/pipe-covers/hr-pipe-cover-west-shadow.png",priority="extra-high",width=128,scale=0.5,height=128,draw_as_shadow=true},priority="extra-high",width=64,height=64,draw_as_shadow=true}}},north={layers={{filename="__base__/graphics/entity/pipe-covers/pipe-cover-north.png",hr_version={filename="__base__/graphics/entity/pipe-covers/hr-pipe-cover-north.png",priority="extra-high",width=128,height=128,scale=0.5},priority="extra-high",height=64,width=64},{filename="__base__/graphics/entity/pipe-covers/pipe-cover-north-shadow.png",hr_version={filename="__base__/graphics/entity/pipe-covers/hr-pipe-cover-north-shadow.png",priority="extra-high",width=128,scale=0.5,height=128,draw_as_shadow=true},priority="extra-high",width=64,height=64,draw_as_shadow=true}}},south={layers={{filename="__base__/graphics/entity/pipe-covers/pipe-cover-south.png",hr_version={filename="__base__/graphics/entity/pipe-covers/hr-pipe-cover-south.png",priority="extra-high",width=128,height=128,scale=0.5},priority="extra-high",height=64,width=64},{filename="__base__/graphics/entity/pipe-covers/pipe-cover-south-shadow.png",hr_version={filename="__base__/graphics/entity/pipe-covers/hr-pipe-cover-south-shadow.png",priority="extra-high",width=128,scale=0.5,height=128,draw_as_shadow=true},priority="extra-high",width=64,height=64,draw_as_shadow=true}}},east={layers={{filename="__base__/graphics/entity/pipe-covers/pipe-cover-east.png",hr_version={filename="__base__/graphics/entity/pipe-covers/hr-pipe-cover-east.png",priority="extra-high",width=128,height=128,scale=0.5},priority="extra-high",height=64,width=64},{filename="__base__/graphics/entity/pipe-covers/pipe-cover-east-shadow.png",hr_version={filename="__base__/graphics/entity/pipe-covers/hr-pipe-cover-east-shadow.png",priority="extra-high",width=128,scale=0.5,height=128,draw_as_shadow=true},priority="extra-high",width=64,height=64,draw_as_shadow=true}}}}},corpse="storage-tank-remnants",circuit_wire_max_distance=9,damaged_trigger_effect={offsets={{0,1}},entity_name="spark-explosion",damage_type_filters="fire",offset_deviation={{-0.5,-0.5},{0.5,0.5}},type="create-entity"},working_sound={max_sounds_per_type=3,match_volume_to_activity=true,apparent_volume=1.5,sound={volume=0.6,filename="__base__/sound/storage-tank.ogg"}},window_bounding_box={{-0.125,0.6875},{0.1875,1.1875}},circuit_connector_sprites={{connector_main={height=50,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",width=52,priority="low",x=156,y=150,shift={1.046875,0.609375},scale=0.5},wire_pins={height=58,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",width=62,priority="low",x=186,y=174,shift={1.046875,0.578125},scale=0.5},led_green={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",width=48,priority="low",x=144,y=138,shift={1.046875,0.578125},scale=0.5},wire_pins_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",x=210,y=162,scale=0.5,height=54,priority="low",width=70,shift={1.203125,0.703125},draw_as_shadow=true},led_blue={height=60,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",width=60,priority="low",x=180,y=180,shift={1.046875,0.578125},scale=0.5},led_light={size=0.9,intensity=0.8},red_green_led_light_offset={1.203125,0.71875},led_red={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",width=48,priority="low",x=144,y=138,shift={1.046875,0.578125},scale=0.5},led_blue_off={height=44,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",width=46,priority="low",x=138,y=132,shift={1.046875,0.578125},scale=0.5},blue_led_light_offset={1.203125,0.828125}},{connector_main={height=50,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",width=52,priority="low",x=52,y=150,shift={-1.046875,0.640625},scale=0.5},wire_pins={height=58,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",width=62,priority="low",x=62,y=174,shift={-1.046875,0.609375},scale=0.5},led_green={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",width=48,priority="low",x=48,y=138,shift={-1.046875,0.609375},scale=0.5},wire_pins_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",x=70,y=162,scale=0.5,height=54,priority="low",width=70,shift={-0.890625,0.734375},draw_as_shadow=true},led_blue={height=60,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",width=60,priority="low",x=60,y=180,shift={-1.046875,0.609375},scale=0.5},led_light={size=0.9,intensity=0.8},red_green_led_light_offset={-1.15625,0.765625},led_red={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",width=48,priority="low",x=48,y=138,shift={-1.046875,0.609375},scale=0.5},led_blue_off={height=44,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",width=46,priority="low",x=46,y=132,shift={-1.046875,0.609375},scale=0.5},blue_led_light_offset={-1.15625,0.875}},{connector_main={height=50,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",width=52,priority="low",x=156,y=150,shift={1.046875,0.609375},scale=0.5},wire_pins={height=58,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",width=62,priority="low",x=186,y=174,shift={1.046875,0.578125},scale=0.5},led_green={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",width=48,priority="low",x=144,y=138,shift={1.046875,0.578125},scale=0.5},wire_pins_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",x=210,y=162,scale=0.5,height=54,priority="low",width=70,shift={1.203125,0.703125},draw_as_shadow=true},led_blue={height=60,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",width=60,priority="low",x=180,y=180,shift={1.046875,0.578125},scale=0.5},led_light={size=0.9,intensity=0.8},red_green_led_light_offset={1.203125,0.71875},led_red={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",width=48,priority="low",x=144,y=138,shift={1.046875,0.578125},scale=0.5},led_blue_off={height=44,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",width=46,priority="low",x=138,y=132,shift={1.046875,0.578125},scale=0.5},blue_led_light_offset={1.203125,0.828125}},{connector_main={height=50,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",width=52,priority="low",x=52,y=150,shift={-1.046875,0.640625},scale=0.5},wire_pins={height=58,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",width=62,priority="low",x=62,y=174,shift={-1.046875,0.609375},scale=0.5},led_green={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",width=48,priority="low",x=48,y=138,shift={-1.046875,0.609375},scale=0.5},wire_pins_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",x=70,y=162,scale=0.5,height=54,priority="low",width=70,shift={-0.890625,0.734375},draw_as_shadow=true},led_blue={height=60,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",width=60,priority="low",x=60,y=180,shift={-1.046875,0.609375},scale=0.5},led_light={size=0.9,intensity=0.8},red_green_led_light_offset={-1.15625,0.765625},led_red={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",width=48,priority="low",x=48,y=138,shift={-1.046875,0.609375},scale=0.5},led_blue_off={height=44,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",width=46,priority="low",x=46,y=132,shift={-1.046875,0.609375},scale=0.5},blue_led_light_offset={-1.15625,0.875}}},water_reflection={orientation_to_variation=false,pictures={filename="__base__/graphics/entity/storage-tank/storage-tank-reflection.png",width=24,priority="extra-high",variation_count=1,height=24,shift={0.15625,1.09375},scale=5},rotate=false},name="storage-tank",icon="__base__/graphics/icons/storage-tank.png",selection_box={{-1.5,-1.5},{1.5,1.5}},flags={"placeable-player","player-creation"},two_direction_only=true,pictures={picture={sheets={{filename="__base__/graphics/entity/storage-tank/storage-tank.png",hr_version={filename="__base__/graphics/entity/storage-tank/hr-storage-tank.png",width=219,priority="extra-high",height=215,frames=2,shift={-0.0078125,0.1171875},scale=0.5},priority="extra-high",height=108,frames=2,shift={0,0.125},width=110},{width=146,filename="__base__/graphics/entity/storage-tank/storage-tank-shadow.png",hr_version={width=291,filename="__base__/graphics/entity/storage-tank/hr-storage-tank-shadow.png",height=153,priority="extra-high",scale=0.5,frames=2,shift={0.9296875,0.6953125},draw_as_shadow=true},priority="extra-high",height=77,frames=2,shift={0.9375,0.703125},draw_as_shadow=true}}},flow_sprite={width=160,filename="__base__/graphics/entity/pipe/fluid-flow-low-temperature.png",height=20,priority="extra-high"},fluid_background={width=32,filename="__base__/graphics/entity/storage-tank/fluid-background.png",height=15,priority="extra-high"},gas_flow={filename="__base__/graphics/entity/pipe/steam.png",hr_version={filename="__base__/graphics/entity/pipe/hr-steam.png",scale=0.5,axially_symmetrical=false,height=30,frame_count=60,priority="extra-high",width=48,line_length=10,animation_speed=0.25,direction_count=1},width=24,axially_symmetrical=false,height=15,frame_count=60,priority="extra-high",line_length=10,animation_speed=0.25,direction_count=1},window_background={filename="__base__/graphics/entity/storage-tank/window-background.png",hr_version={filename="__base__/graphics/entity/storage-tank/hr-window-background.png",priority="extra-high",width=34,height=48,scale=0.5},priority="extra-high",height=24,width=17}},dying_explosion="storage-tank-explosion",icon_mipmaps=4}};return _;end
+do
+    local _ = {
+        ['storage-tank'] = {
+            circuit_connector_sprites = {
+                {
+                    wire_pins_shadow = {
+                        draw_as_shadow = true,
+                        x = 210,
+                        height = 54,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                        width = 70,
+                        scale = 0.5,
+                        shift = {1.203125, 0.703125},
+                        priority = 'low',
+                        y = 162
+                    },
+                    led_red = {
+                        y = 138,
+                        x = 144,
+                        height = 46,
+                        shift = {1.046875, 0.578125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {1.203125, 0.828125},
+                    led_blue_off = {
+                        y = 132,
+                        x = 138,
+                        height = 44,
+                        shift = {1.046875, 0.578125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                        width = 46,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_main = {
+                        y = 150,
+                        x = 156,
+                        height = 50,
+                        shift = {1.046875, 0.609375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                        width = 52,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    wire_pins = {
+                        y = 174,
+                        x = 186,
+                        height = 58,
+                        shift = {1.046875, 0.578125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
+                        width = 62,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_blue = {
+                        y = 180,
+                        x = 180,
+                        height = 60,
+                        shift = {1.046875, 0.578125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                        width = 60,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_green = {
+                        y = 138,
+                        x = 144,
+                        height = 46,
+                        shift = {1.046875, 0.578125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    red_green_led_light_offset = {1.203125, 0.71875},
+                    led_light = {intensity = 0.8, size = 0.9}
+                }, {
+                    wire_pins_shadow = {
+                        draw_as_shadow = true,
+                        x = 70,
+                        height = 54,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                        width = 70,
+                        scale = 0.5,
+                        shift = {-0.890625, 0.734375},
+                        priority = 'low',
+                        y = 162
+                    },
+                    led_red = {
+                        y = 138,
+                        x = 48,
+                        height = 46,
+                        shift = {-1.046875, 0.609375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-1.15625, 0.875},
+                    led_blue_off = {
+                        y = 132,
+                        x = 46,
+                        height = 44,
+                        shift = {-1.046875, 0.609375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                        width = 46,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_main = {
+                        y = 150,
+                        x = 52,
+                        height = 50,
+                        shift = {-1.046875, 0.640625},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                        width = 52,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    wire_pins = {
+                        y = 174,
+                        x = 62,
+                        height = 58,
+                        shift = {-1.046875, 0.609375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
+                        width = 62,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_blue = {
+                        y = 180,
+                        x = 60,
+                        height = 60,
+                        shift = {-1.046875, 0.609375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                        width = 60,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_green = {
+                        y = 138,
+                        x = 48,
+                        height = 46,
+                        shift = {-1.046875, 0.609375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    red_green_led_light_offset = {-1.15625, 0.765625},
+                    led_light = {intensity = 0.8, size = 0.9}
+                }, {
+                    wire_pins_shadow = {
+                        draw_as_shadow = true,
+                        x = 210,
+                        height = 54,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                        width = 70,
+                        scale = 0.5,
+                        shift = {1.203125, 0.703125},
+                        priority = 'low',
+                        y = 162
+                    },
+                    led_red = {
+                        y = 138,
+                        x = 144,
+                        height = 46,
+                        shift = {1.046875, 0.578125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {1.203125, 0.828125},
+                    led_blue_off = {
+                        y = 132,
+                        x = 138,
+                        height = 44,
+                        shift = {1.046875, 0.578125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                        width = 46,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_main = {
+                        y = 150,
+                        x = 156,
+                        height = 50,
+                        shift = {1.046875, 0.609375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                        width = 52,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    wire_pins = {
+                        y = 174,
+                        x = 186,
+                        height = 58,
+                        shift = {1.046875, 0.578125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
+                        width = 62,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_blue = {
+                        y = 180,
+                        x = 180,
+                        height = 60,
+                        shift = {1.046875, 0.578125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                        width = 60,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_green = {
+                        y = 138,
+                        x = 144,
+                        height = 46,
+                        shift = {1.046875, 0.578125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    red_green_led_light_offset = {1.203125, 0.71875},
+                    led_light = {intensity = 0.8, size = 0.9}
+                }, {
+                    wire_pins_shadow = {
+                        draw_as_shadow = true,
+                        x = 70,
+                        height = 54,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                        width = 70,
+                        scale = 0.5,
+                        shift = {-0.890625, 0.734375},
+                        priority = 'low',
+                        y = 162
+                    },
+                    led_red = {
+                        y = 138,
+                        x = 48,
+                        height = 46,
+                        shift = {-1.046875, 0.609375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-1.15625, 0.875},
+                    led_blue_off = {
+                        y = 132,
+                        x = 46,
+                        height = 44,
+                        shift = {-1.046875, 0.609375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                        width = 46,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_main = {
+                        y = 150,
+                        x = 52,
+                        height = 50,
+                        shift = {-1.046875, 0.640625},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                        width = 52,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    wire_pins = {
+                        y = 174,
+                        x = 62,
+                        height = 58,
+                        shift = {-1.046875, 0.609375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
+                        width = 62,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_blue = {
+                        y = 180,
+                        x = 60,
+                        height = 60,
+                        shift = {-1.046875, 0.609375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                        width = 60,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_green = {
+                        y = 138,
+                        x = 48,
+                        height = 46,
+                        shift = {-1.046875, 0.609375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    red_green_led_light_offset = {-1.15625, 0.765625},
+                    led_light = {intensity = 0.8, size = 0.9}
+                }
+            },
+            vehicle_impact_sound = 0,
+            fluid_box = {
+                base_area = 250,
+                pipe_covers = {
+                    north = {
+                        layers = {
+                            {
+                                height = 64,
+                                filename = '__base__/graphics/entity/pipe-covers/pipe-cover-north.png',
+                                width = 64,
+                                priority = 'extra-high',
+                                hr_version = {
+                                    height = 128,
+                                    filename = '__base__/graphics/entity/pipe-covers/hr-pipe-cover-north.png',
+                                    width = 128,
+                                    priority = 'extra-high',
+                                    scale = 0.5
+                                }
+                            }, {
+                                draw_as_shadow = true,
+                                height = 64,
+                                filename = '__base__/graphics/entity/pipe-covers/pipe-cover-north-shadow.png',
+                                width = 64,
+                                priority = 'extra-high',
+                                hr_version = {
+                                    draw_as_shadow = true,
+                                    height = 128,
+                                    filename = '__base__/graphics/entity/pipe-covers/hr-pipe-cover-north-shadow.png',
+                                    width = 128,
+                                    priority = 'extra-high',
+                                    scale = 0.5
+                                }
+                            }
+                        }
+                    },
+                    east = {
+                        layers = {
+                            {
+                                height = 64,
+                                filename = '__base__/graphics/entity/pipe-covers/pipe-cover-east.png',
+                                width = 64,
+                                priority = 'extra-high',
+                                hr_version = {
+                                    height = 128,
+                                    filename = '__base__/graphics/entity/pipe-covers/hr-pipe-cover-east.png',
+                                    width = 128,
+                                    priority = 'extra-high',
+                                    scale = 0.5
+                                }
+                            }, {
+                                draw_as_shadow = true,
+                                height = 64,
+                                filename = '__base__/graphics/entity/pipe-covers/pipe-cover-east-shadow.png',
+                                width = 64,
+                                priority = 'extra-high',
+                                hr_version = {
+                                    draw_as_shadow = true,
+                                    height = 128,
+                                    filename = '__base__/graphics/entity/pipe-covers/hr-pipe-cover-east-shadow.png',
+                                    width = 128,
+                                    priority = 'extra-high',
+                                    scale = 0.5
+                                }
+                            }
+                        }
+                    },
+                    south = {
+                        layers = {
+                            {
+                                height = 64,
+                                filename = '__base__/graphics/entity/pipe-covers/pipe-cover-south.png',
+                                width = 64,
+                                priority = 'extra-high',
+                                hr_version = {
+                                    height = 128,
+                                    filename = '__base__/graphics/entity/pipe-covers/hr-pipe-cover-south.png',
+                                    width = 128,
+                                    priority = 'extra-high',
+                                    scale = 0.5
+                                }
+                            }, {
+                                draw_as_shadow = true,
+                                height = 64,
+                                filename = '__base__/graphics/entity/pipe-covers/pipe-cover-south-shadow.png',
+                                width = 64,
+                                priority = 'extra-high',
+                                hr_version = {
+                                    draw_as_shadow = true,
+                                    height = 128,
+                                    filename = '__base__/graphics/entity/pipe-covers/hr-pipe-cover-south-shadow.png',
+                                    width = 128,
+                                    priority = 'extra-high',
+                                    scale = 0.5
+                                }
+                            }
+                        }
+                    },
+                    west = {
+                        layers = {
+                            {
+                                height = 64,
+                                filename = '__base__/graphics/entity/pipe-covers/pipe-cover-west.png',
+                                width = 64,
+                                priority = 'extra-high',
+                                hr_version = {
+                                    height = 128,
+                                    filename = '__base__/graphics/entity/pipe-covers/hr-pipe-cover-west.png',
+                                    width = 128,
+                                    priority = 'extra-high',
+                                    scale = 0.5
+                                }
+                            }, {
+                                draw_as_shadow = true,
+                                height = 64,
+                                filename = '__base__/graphics/entity/pipe-covers/pipe-cover-west-shadow.png',
+                                width = 64,
+                                priority = 'extra-high',
+                                hr_version = {
+                                    draw_as_shadow = true,
+                                    height = 128,
+                                    filename = '__base__/graphics/entity/pipe-covers/hr-pipe-cover-west-shadow.png',
+                                    width = 128,
+                                    priority = 'extra-high',
+                                    scale = 0.5
+                                }
+                            }
+                        }
+                    }
+                },
+                pipe_connections = {
+                    {position = {-1, -2}}, {position = {2, 1}}, {position = {1, 2}}, {position = {-2, -1}}
+                }
+            },
+            pictures = {
+                flow_sprite = {
+                    filename = '__base__/graphics/entity/pipe/fluid-flow-low-temperature.png',
+                    width = 160,
+                    height = 20,
+                    priority = 'extra-high'
+                },
+                fluid_background = {
+                    filename = '__base__/graphics/entity/storage-tank/fluid-background.png',
+                    width = 32,
+                    height = 15,
+                    priority = 'extra-high'
+                },
+                window_background = {
+                    height = 24,
+                    filename = '__base__/graphics/entity/storage-tank/window-background.png',
+                    width = 17,
+                    priority = 'extra-high',
+                    hr_version = {
+                        height = 48,
+                        filename = '__base__/graphics/entity/storage-tank/hr-window-background.png',
+                        width = 34,
+                        priority = 'extra-high',
+                        scale = 0.5
+                    }
+                },
+                gas_flow = {
+                    height = 15,
+                    filename = '__base__/graphics/entity/pipe/steam.png',
+                    width = 24,
+                    frame_count = 60,
+                    axially_symmetrical = false,
+                    hr_version = {
+                        height = 30,
+                        filename = '__base__/graphics/entity/pipe/hr-steam.png',
+                        width = 48,
+                        scale = 0.5,
+                        frame_count = 60,
+                        axially_symmetrical = false,
+                        direction_count = 1,
+                        line_length = 10,
+                        priority = 'extra-high',
+                        animation_speed = 0.25
+                    },
+                    direction_count = 1,
+                    line_length = 10,
+                    priority = 'extra-high',
+                    animation_speed = 0.25
+                },
+                picture = {
+                    sheets = {
+                        {
+                            width = 110,
+                            height = 108,
+                            shift = {0, 0.125},
+                            filename = '__base__/graphics/entity/storage-tank/storage-tank.png',
+                            frames = 2,
+                            priority = 'extra-high',
+                            hr_version = {
+                                width = 219,
+                                height = 215,
+                                shift = {-0.0078125, 0.1171875},
+                                filename = '__base__/graphics/entity/storage-tank/hr-storage-tank.png',
+                                frames = 2,
+                                priority = 'extra-high',
+                                scale = 0.5
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            width = 146,
+                            height = 77,
+                            shift = {0.9375, 0.703125},
+                            filename = '__base__/graphics/entity/storage-tank/storage-tank-shadow.png',
+                            frames = 2,
+                            priority = 'extra-high',
+                            hr_version = {
+                                draw_as_shadow = true,
+                                width = 291,
+                                height = 153,
+                                shift = {0.9296875, 0.6953125},
+                                filename = '__base__/graphics/entity/storage-tank/hr-storage-tank-shadow.png',
+                                frames = 2,
+                                priority = 'extra-high',
+                                scale = 0.5
+                            }
+                        }
+                    }
+                }
+            },
+            icon_size = 64,
+            circuit_wire_max_distance = 9,
+            minable = {mining_time = 0.5, result = 'storage-tank'},
+            icon_mipmaps = 4,
+            circuit_wire_connection_points = {
+                {
+                    shadow = {green = {1.5, 0.71875}, red = {1.65625, 0.703125}},
+                    wire = {green = {1.40625, 0.6875}, red = {1.34375, 0.46875}}
+                }, {
+                    shadow = {green = {-0.828125, 1.109375}, red = {-0.59375, 1.078125}},
+                    wire = {green = {-0.984375, 1}, red = {-0.90625, 0.8125}}
+                }, {
+                    shadow = {green = {1.5, 0.71875}, red = {1.65625, 0.703125}},
+                    wire = {green = {1.40625, 0.6875}, red = {1.34375, 0.46875}}
+                }, {
+                    shadow = {green = {-0.828125, 1.109375}, red = {-0.59375, 1.078125}},
+                    wire = {green = {-0.984375, 1}, red = {-0.90625, 0.8125}}
+                }
+            },
+            flags = {'placeable-player', 'player-creation'},
+            max_health = 500,
+            name = 'storage-tank',
+            window_bounding_box = {{-0.125, 0.6875}, {0.1875, 1.1875}},
+            damaged_trigger_effect = {
+                entity_name = 'spark-explosion',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                damage_type_filters = 'fire',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+            },
+            dying_explosion = 'storage-tank-explosion',
+            working_sound = {
+                audible_distance_modifier = 0.5,
+                sound = {filename = '__base__/sound/storage-tank.ogg', volume = 0.6},
+                match_volume_to_activity = true,
+                max_sounds_per_type = 3
+            },
+            water_reflection = {
+                rotate = false,
+                orientation_to_variation = false,
+                pictures = {
+                    shift = {0.15625, 1.09375},
+                    height = 24,
+                    variation_count = 1,
+                    filename = '__base__/graphics/entity/storage-tank/storage-tank-reflection.png',
+                    width = 24,
+                    priority = 'extra-high',
+                    scale = 5
+                }
+            },
+            type = 'storage-tank',
+            two_direction_only = true,
+            icon = '__base__/graphics/icons/storage-tank.png',
+            collision_box = {{-1.3, -1.3}, {1.3, 1.3}},
+            selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+            open_sound = 0,
+            flow_length_in_ticks = 360,
+            close_sound = 0,
+            corpse = 'storage-tank-remnants'
+        }
+    };
+    return _;
+end

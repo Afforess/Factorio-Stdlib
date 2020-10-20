@@ -1,1 +1,16 @@
-do local _={["item-with-label"]={flags={"hidden"},order="s[item-with-label]-o[item-with-label]",icon="__base__/graphics/icons/wooden-chest.png",icon_size=64,name="item-with-label",type="item-with-label",subgroup="other",stack_size=1,icon_mipmaps=4}};return _;end
+do
+    local _ = {
+        ['item-with-label'] = {
+            name = 'item-with-label',
+            subgroup = 'other',
+            order = 's[item-with-label]-o[item-with-label]',
+            icon_size = 64,
+            icon = '__base__/graphics/icons/wooden-chest.png',
+            icon_mipmaps = 4,
+            stack_size = 1,
+            flags = {'hidden'},
+            type = 'item-with-label'
+        }
+    };
+    return _;
+end

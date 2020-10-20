@@ -1,1 +1,226 @@
-do local _={["nuclear-reactor"]={heat_lower_layer_picture={filename="__base__/graphics/entity/nuclear-reactor/reactor-pipes-heated.png",hr_version={filename="__base__/graphics/entity/nuclear-reactor/hr-reactor-pipes-heated.png",width=320,height=316,shift={-0.015625,-0.140625},scale=0.5},height=156,shift={-0.09375,-0.125},width=156},collision_box={{-2.2,-2.2},{2.2,2.2}},minable={mining_time=0.5,result="nuclear-reactor"},heat_buffer={heat_glow={filename="__base__/graphics/entity/nuclear-reactor/reactor-heat-glow.png",priority="extra-high",height=190,shift={-0.0625,-0.125},width=188},specific_heat="10MJ",heat_picture={filename="__base__/graphics/entity/nuclear-reactor/reactor-heated.png",hr_version={filename="__base__/graphics/entity/nuclear-reactor/hr-reactor-heated.png",width=216,height=256,shift={0.09375,-0.203125},scale=0.5},height=128,shift={0.03125,-0.21875},width=108},max_temperature=1000,connections={{position={-2,-2},direction=0},{position={0,-2},direction=0},{position={2,-2},direction=0},{position={2,-2},direction=2},{position={2,0},direction=2},{position={2,2},direction=2},{position={2,2},direction=4},{position={0,2},direction=4},{position={-2,2},direction=4},{position={-2,2},direction=6},{position={-2,0},direction=6},{position={-2,-2},direction=6}},minimum_glow_temperature=350,max_transfer="10GW"},working_sound={apparent_volume=1.5,fade_out_ticks=30,fade_in_ticks=10,max_sounds_per_type=3,sound={{volume=0.6,filename="__base__/sound/nuclear-reactor-1.ogg"},{volume=0.6,filename="__base__/sound/nuclear-reactor-2.ogg"}}},max_health=500,energy_source={fuel_inventory_size=1,type="burner",effectivity=1,fuel_category="nuclear",burnt_inventory_size=1},heat_connection_patches_disconnected={sheet={filename="__base__/graphics/entity/nuclear-reactor/reactor-connect-patches-heated.png",hr_version={filename="__base__/graphics/entity/nuclear-reactor/hr-reactor-connect-patches-heated.png",width=64,variation_count=12,y=64,height=64,scale=0.5},variation_count=12,y=32,height=32,width=32}},name="nuclear-reactor",consumption="40MW",corpse="nuclear-reactor-remnants",working_light_picture={filename="__base__/graphics/entity/nuclear-reactor/reactor-lights-color.png",hr_version={filename="__base__/graphics/entity/nuclear-reactor/hr-reactor-lights-color.png",width=320,height=320,blend_mode="additive",shift={-0.03125,-0.1875},scale=0.5},height=160,blend_mode="additive",shift={-0.03125,-0.1875},width=160},meltdown_action={type="direct",action_delivery={type="instant",target_effects={{smoke_name="nuclear-smoke",starting_frame_speed_deviation=5,starting_frame=3,speed_from_center=0.5,starting_frame_speed=0,starting_frame_deviation=5,repeat_count=100,offset_deviation={{-1,-1},{1,1}},type="create-trivial-smoke"},{type="create-entity",entity_name="explosion"},{damage={amount=400,type="explosion"},type="damage"},{check_buildability=true,entity_name="big-scorchmark",type="create-entity"},{type="nested-result",action={action_delivery={starting_speed=0.5,type="projectile",projectile="atomic-bomb-wave"},trigger_from_target=true,repeat_count=2000,target_entities=false,radius=35,type="area"}}}}},flags={"placeable-neutral","player-creation"},damaged_trigger_effect={offsets={{0,1}},entity_name="spark-explosion",damage_type_filters="fire",offset_deviation={{-0.5,-0.5},{0.5,0.5}},type="create-entity"},type="reactor",selection_box={{-2.5,-2.5},{2.5,2.5}},lower_layer_picture={filename="__base__/graphics/entity/nuclear-reactor/reactor-pipes.png",hr_version={filename="__base__/graphics/entity/nuclear-reactor/hr-reactor-pipes.png",width=320,height=316,shift={-0.03125,-0.15625},scale=0.5},height=156,shift={-0.0625,-0.125},width=156},picture={layers={{filename="__base__/graphics/entity/nuclear-reactor/reactor.png",hr_version={filename="__base__/graphics/entity/nuclear-reactor/hr-reactor.png",width=302,height=318,shift={-0.15625,-0.21875},scale=0.5},height=158,shift={-0.1875,-0.1875},width=154},{filename="__base__/graphics/entity/nuclear-reactor/reactor-shadow.png",hr_version={filename="__base__/graphics/entity/nuclear-reactor/hr-reactor-shadow.png",width=525,height=323,scale=0.5,shift={1.625,0},draw_as_shadow=true},width=263,height=162,shift={1.625,0},draw_as_shadow=true}}},heat_connection_patches_connected={sheet={filename="__base__/graphics/entity/nuclear-reactor/reactor-connect-patches-heated.png",hr_version={filename="__base__/graphics/entity/nuclear-reactor/hr-reactor-connect-patches-heated.png",variation_count=12,width=64,height=64,scale=0.5},variation_count=12,height=32,width=32}},neighbour_bonus=1,icon="__base__/graphics/icons/nuclear-reactor.png",light={size=9.9,intensity=0.6,color={r=0,b=0,g=1},shift={0,0}},connection_patches_connected={sheet={filename="__base__/graphics/entity/nuclear-reactor/reactor-connect-patches.png",hr_version={filename="__base__/graphics/entity/nuclear-reactor/hr-reactor-connect-patches.png",variation_count=12,width=64,height=64,scale=0.5},variation_count=12,height=32,width=32}},connection_patches_disconnected={sheet={filename="__base__/graphics/entity/nuclear-reactor/reactor-connect-patches.png",hr_version={filename="__base__/graphics/entity/nuclear-reactor/hr-reactor-connect-patches.png",width=64,variation_count=12,y=64,height=64,scale=0.5},variation_count=12,y=32,height=32,width=32}},icon_size=64,dying_explosion="nuclear-reactor-explosion",icon_mipmaps=4}};return _;end
+do
+    local _ = {
+        ['nuclear-reactor'] = {
+            close_sound = 0,
+            heat_connection_patches_connected = {
+                sheet = {
+                    height = 32,
+                    filename = '__base__/graphics/entity/nuclear-reactor/reactor-connect-patches-heated.png',
+                    width = 32,
+                    hr_version = {
+                        height = 64,
+                        filename = '__base__/graphics/entity/nuclear-reactor/hr-reactor-connect-patches-heated.png',
+                        width = 64,
+                        variation_count = 12,
+                        scale = 0.5
+                    },
+                    variation_count = 12
+                }
+            },
+            consumption = '40MW',
+            icon_size = 64,
+            working_sound = {
+                fade_in_ticks = 4,
+                fade_out_ticks = 20,
+                max_sounds_per_type = 3,
+                sound = {
+                    {filename = '__base__/sound/nuclear-reactor-1.ogg', volume = 0.55},
+                    {filename = '__base__/sound/nuclear-reactor-2.ogg', volume = 0.55}
+                }
+            },
+            energy_source = {
+                fuel_inventory_size = 1,
+                effectivity = 1,
+                burnt_inventory_size = 1,
+                type = 'burner',
+                fuel_category = 'nuclear'
+            },
+            picture = {
+                layers = {
+                    {
+                        height = 158,
+                        filename = '__base__/graphics/entity/nuclear-reactor/reactor.png',
+                        width = 154,
+                        shift = {-0.1875, -0.1875},
+                        hr_version = {
+                            height = 318,
+                            filename = '__base__/graphics/entity/nuclear-reactor/hr-reactor.png',
+                            width = 302,
+                            shift = {-0.15625, -0.21875},
+                            scale = 0.5
+                        }
+                    }, {
+                        draw_as_shadow = true,
+                        height = 162,
+                        filename = '__base__/graphics/entity/nuclear-reactor/reactor-shadow.png',
+                        width = 263,
+                        shift = {1.625, 0},
+                        hr_version = {
+                            draw_as_shadow = true,
+                            height = 323,
+                            filename = '__base__/graphics/entity/nuclear-reactor/hr-reactor-shadow.png',
+                            width = 525,
+                            shift = {1.625, 0},
+                            scale = 0.5
+                        }
+                    }
+                }
+            },
+            meltdown_action = {
+                action_delivery = {
+                    type = 'instant',
+                    target_effects = {{entity_name = 'atomic-rocket', type = 'create-entity'}}
+                },
+                type = 'direct'
+            },
+            neighbour_bonus = 1,
+            icon_mipmaps = 4,
+            working_light_picture = {
+                blend_mode = 'additive',
+                shift = {-0.03125, -0.1875},
+                filename = '__base__/graphics/entity/nuclear-reactor/reactor-lights-color.png',
+                width = 160,
+                hr_version = {
+                    blend_mode = 'additive',
+                    shift = {-0.03125, -0.1875},
+                    filename = '__base__/graphics/entity/nuclear-reactor/hr-reactor-lights-color.png',
+                    width = 320,
+                    height = 320,
+                    scale = 0.5
+                },
+                height = 160
+            },
+            heat_connection_patches_disconnected = {
+                sheet = {
+                    height = 32,
+                    hr_version = {
+                        height = 64,
+                        variation_count = 12,
+                        filename = '__base__/graphics/entity/nuclear-reactor/hr-reactor-connect-patches-heated.png',
+                        width = 64,
+                        y = 64,
+                        scale = 0.5
+                    },
+                    filename = '__base__/graphics/entity/nuclear-reactor/reactor-connect-patches-heated.png',
+                    width = 32,
+                    y = 32,
+                    variation_count = 12
+                }
+            },
+            vehicle_impact_sound = 0,
+            flags = {'placeable-neutral', 'player-creation'},
+            max_health = 500,
+            type = 'reactor',
+            name = 'nuclear-reactor',
+            light = {color = {g = 1, r = 0, b = 0}, size = 9.9, shift = {0, 0}, intensity = 0.6},
+            damaged_trigger_effect = {
+                entity_name = 'spark-explosion',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                damage_type_filters = 'fire',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+            },
+            dying_explosion = 'nuclear-reactor-explosion',
+            connection_patches_connected = {
+                sheet = {
+                    height = 32,
+                    filename = '__base__/graphics/entity/nuclear-reactor/reactor-connect-patches.png',
+                    width = 32,
+                    hr_version = {
+                        height = 64,
+                        filename = '__base__/graphics/entity/nuclear-reactor/hr-reactor-connect-patches.png',
+                        width = 64,
+                        variation_count = 12,
+                        scale = 0.5
+                    },
+                    variation_count = 12
+                }
+            },
+            heat_buffer = {
+                heat_glow = {
+                    height = 190,
+                    width = 188,
+                    filename = '__base__/graphics/entity/nuclear-reactor/reactor-heat-glow.png',
+                    tint = 0,
+                    priority = 'extra-high',
+                    shift = {-0.0625, -0.125}
+                },
+                specific_heat = '10MJ',
+                heat_picture = {
+                    height = 128,
+                    filename = '__base__/graphics/entity/nuclear-reactor/reactor-heated.png',
+                    width = 108,
+                    shift = {0.03125, -0.21875},
+                    hr_version = {
+                        height = 256,
+                        filename = '__base__/graphics/entity/nuclear-reactor/hr-reactor-heated.png',
+                        width = 216,
+                        shift = {0.09375, -0.203125},
+                        scale = 0.5
+                    }
+                },
+                connections = {
+                    {position = {-2, -2}, direction = 0}, {position = {0, -2}, direction = 0},
+                    {position = {2, -2}, direction = 0}, {position = {2, -2}, direction = 2},
+                    {position = {2, 0}, direction = 2}, {position = {2, 2}, direction = 2},
+                    {position = {2, 2}, direction = 4}, {position = {0, 2}, direction = 4},
+                    {position = {-2, 2}, direction = 4}, {position = {-2, 2}, direction = 6},
+                    {position = {-2, 0}, direction = 6}, {position = {-2, -2}, direction = 6}
+                },
+                max_transfer = '10GW',
+                max_temperature = 1000,
+                minimum_glow_temperature = 350
+            },
+            connection_patches_disconnected = {
+                sheet = {
+                    height = 32,
+                    hr_version = {
+                        height = 64,
+                        variation_count = 12,
+                        filename = '__base__/graphics/entity/nuclear-reactor/hr-reactor-connect-patches.png',
+                        width = 64,
+                        y = 64,
+                        scale = 0.5
+                    },
+                    filename = '__base__/graphics/entity/nuclear-reactor/reactor-connect-patches.png',
+                    width = 32,
+                    y = 32,
+                    variation_count = 12
+                }
+            },
+            open_sound = 0,
+            icon = '__base__/graphics/icons/nuclear-reactor.png',
+            collision_box = {{-2.2, -2.2}, {2.2, 2.2}},
+            selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
+            minable = {mining_time = 0.5, result = 'nuclear-reactor'},
+            lower_layer_picture = {
+                height = 156,
+                filename = '__base__/graphics/entity/nuclear-reactor/reactor-pipes.png',
+                width = 156,
+                shift = {-0.0625, -0.125},
+                hr_version = {
+                    height = 316,
+                    filename = '__base__/graphics/entity/nuclear-reactor/hr-reactor-pipes.png',
+                    width = 320,
+                    shift = {-0.03125, -0.15625},
+                    scale = 0.5
+                }
+            },
+            heat_lower_layer_picture = {
+                height = 156,
+                filename = '__base__/graphics/entity/nuclear-reactor/reactor-pipes-heated.png',
+                width = 156,
+                shift = {-0.09375, -0.125},
+                hr_version = {
+                    height = 316,
+                    filename = '__base__/graphics/entity/nuclear-reactor/hr-reactor-pipes-heated.png',
+                    width = 320,
+                    shift = {-0.015625, -0.140625},
+                    scale = 0.5
+                }
+            },
+            corpse = 'nuclear-reactor-remnants'
+        }
+    };
+    return _;
+end

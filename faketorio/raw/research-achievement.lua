@@ -1,1 +1,21 @@
-do local _={["eco-unfriendly"]={order="a[progress]-b[eco-unfriendly]",icon="__base__/graphics/achievement/eco-unfriendly.png",icon_size=128,name="eco-unfriendly",type="research-achievement",technology="oil-processing"},["tech-maniac"]={order="a[progress]-c[tech-maniac]",icon="__base__/graphics/achievement/tech-maniac.png",icon_size=128,name="tech-maniac",type="research-achievement",research_all=true}};return _;end
+do
+    local _ = {
+        ['eco-unfriendly'] = {
+            icon = '__base__/graphics/achievement/eco-unfriendly.png',
+            type = 'research-achievement',
+            order = 'a[progress]-b[eco-unfriendly]',
+            icon_size = 128,
+            technology = 'oil-processing',
+            name = 'eco-unfriendly'
+        },
+        ['tech-maniac'] = {
+            icon = '__base__/graphics/achievement/tech-maniac.png',
+            type = 'research-achievement',
+            order = 'a[progress]-c[tech-maniac]',
+            icon_size = 128,
+            research_all = true,
+            name = 'tech-maniac'
+        }
+    };
+    return _;
+end

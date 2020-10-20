@@ -1,1 +1,7 @@
-do local _={["basic-fluid"]={type="resource-category",name="basic-fluid"},["basic-solid"]={type="resource-category",name="basic-solid"}};return _;end
+do
+    local _ = {
+        ['basic-solid'] = {type = 'resource-category', name = 'basic-solid'},
+        ['basic-fluid'] = {type = 'resource-category', name = 'basic-fluid'}
+    };
+    return _;
+end

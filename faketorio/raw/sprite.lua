@@ -1,1 +1,290 @@
-do local _={["tooltip-category-heat"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-heat.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-heat",width=40,type="sprite",priority="extra-high-no-scale"},developer={flags={"gui-icon"},filename="__core__/graphics/icons/mip/developer.png",mipmap_count=2,scale=0.5,height=40,name="developer",width=16,type="sprite",priority="extra-high-no-scale"},["quantity-time"]={flags={"gui-icon"},filename="__core__/graphics/icons/mip/quantity-time.png",mipmap_count=2,scale=0.5,height=40,name="quantity-time",width=28,type="sprite",priority="extra-high-no-scale"},["tooltip-category-vehicle"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-vehicle.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-vehicle",width=40,type="sprite",priority="extra-high-no-scale"},["tree_view_tileset-u_r_line"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=111,y=58,scale=0.5,height=48,name="tree_view_tileset-u_r_line",width=48,type="sprite",priority="extra-high"},["tooltip-category-equipment-grid-electricity"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-equipment-grid-electricity.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-equipment-grid-electricity",width=40,type="sprite",priority="extra-high-no-scale"},["tooltip-category-chemical"]={flags={"gui-icon"},filename="__base__/graphics/icons/tooltips/tooltip-category-chemical.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-chemical",width=40,type="sprite",priority="extra-high-no-scale"},["tooltip-category-electricity"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-electricity.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-electricity",width=32,type="sprite",priority="extra-high-no-scale"},["tree_view_tileset-u_d_r_line"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=58,y=58,scale=0.5,height=48,name="tree_view_tileset-u_d_r_line",width=48,type="sprite",priority="extra-high"},["tooltip-category-equipment-grid"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-equipment-grid.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-equipment-grid",width=40,type="sprite",priority="extra-high-no-scale"},["tooltip-category-steam"]={flags={"gui-icon"},filename="__base__/graphics/icons/tooltips/tooltip-category-steam.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-steam",width=40,type="sprite",priority="extra-high-no-scale"},info={flags={"gui-icon"},filename="__core__/graphics/icons/mip/info-blue.png",mipmap_count=2,scale=0.5,height=40,name="info",width=16,type="sprite",priority="extra-high-no-scale"},info_no_border={flags={"gui-icon"},filename="__core__/graphics/icons/mip/info-blue-no-border.png",mipmap_count=2,scale=0.5,height=16,name="info_no_border",width=16,type="sprite",priority="extra-high-no-scale"},["tooltip-category-effect"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-effect.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-effect",width=40,type="sprite",priority="extra-high-no-scale"},["tree_view_tileset-square_l_d-green"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=5,y=169,scale=0.5,height=48,name="tree_view_tileset-square_l_d-green",width=48,type="sprite",priority="extra-high"},["coal-dark-background"]={filename="__base__/graphics/icons/coal-dark-background.png",name="coal-dark-background",width=64,type="sprite",height=64,scale=0.5},["tooltip-category-turret"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-turret.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-turret",width=40,type="sprite",priority="extra-high-no-scale"},["tree_view_tileset-square_no_lines-yellow"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=164,y=111,scale=0.5,height=48,name="tree_view_tileset-square_no_lines-yellow",width=48,type="sprite",priority="extra-high"},["tree_view_tileset-square_l-green"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=58,y=169,scale=0.5,height=48,name="tree_view_tileset-square_l-green",width=48,type="sprite",priority="extra-high"},["tree_view_tileset-empty"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=5,y=58,scale=0.5,height=48,name="tree_view_tileset-empty",width=48,type="sprite",priority="extra-high"},["tooltip-category-train"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-train.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-train",width=40,type="sprite",priority="extra-high-no-scale"},["tree_view_tileset-square_no_lines-normal"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=164,y=5,scale=0.5,height=48,name="tree_view_tileset-square_no_lines-normal",width=48,type="sprite",priority="extra-high"},["tree_view_tileset-square_no_lines-green"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=164,y=169,scale=0.5,height=48,name="tree_view_tileset-square_no_lines-green",width=48,type="sprite",priority="extra-high"},["tree_view_tileset-square_l_d-yellow"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=5,y=111,scale=0.5,height=48,name="tree_view_tileset-square_l_d-yellow",width=48,type="sprite",priority="extra-high"},["tree_view_tileset-square_l_d-normal"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=5,y=5,scale=0.5,height=48,name="tree_view_tileset-square_l_d-normal",width=48,type="sprite",priority="extra-high"},["tree_view_tileset-vertical_line"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=164,y=58,scale=0.5,height=48,name="tree_view_tileset-vertical_line",width=48,type="sprite",priority="extra-high"},["tree_view_tileset-square_l-yellow"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=58,y=111,scale=0.5,height=48,name="tree_view_tileset-square_l-yellow",width=48,type="sprite",priority="extra-high"},["tree_view_tileset-square_l-normal"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=58,y=5,scale=0.5,height=48,name="tree_view_tileset-square_l-normal",width=48,type="sprite",priority="extra-high"},["tree_view_tileset-square_d-normal"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=111,y=5,scale=0.5,height=48,name="tree_view_tileset-square_d-normal",width=48,type="sprite",priority="extra-high"},["tooltip-category-water"]={flags={"gui-icon"},filename="__base__/graphics/icons/tooltips/tooltip-category-water.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-water",width=40,type="sprite",priority="extra-high-no-scale"},["tree_view_tileset-square_d-green"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=111,y=169,scale=0.5,height=48,name="tree_view_tileset-square_d-green",width=48,type="sprite",priority="extra-high"},["tree_view_tileset-square_d-yellow"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=111,y=111,scale=0.5,height=48,name="tree_view_tileset-square_d-yellow",width=48,type="sprite",priority="extra-high"},["tooltip-category-vehicle-weapons"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-vehicle-weapons.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-vehicle-weapons",width=40,type="sprite",priority="extra-high-no-scale"},["tree_view_tileset-stretchy_bit"]={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=164,y=58,scale=0.5,height=1,name="tree_view_tileset-stretchy_bit",width=48,type="sprite",priority="extra-high"},["tooltip-category-thrown"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-thrown.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-thrown",width=40,type="sprite",priority="extra-high-no-scale"},quest_gui_empty_status={flags={"no-crop","trilinear-filtering"},filename="__base__/graphics/tree_view_tileset.png",x=5,y=58,scale=0.5,height=48,name="quest_gui_empty_status",width=48,type="sprite",priority="extra-high"},["tooltip-category-placed-in-equipment-grid"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-equipment-grid.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-placed-in-equipment-grid",width=40,type="sprite",priority="extra-high-no-scale"},["tooltip-category-nuclear"]={flags={"gui-icon"},filename="__base__/graphics/icons/tooltips/tooltip-category-nuclear.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-nuclear",width=40,type="sprite",priority="extra-high-no-scale"},["tooltip-category-consumes"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-consumes.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-consumes",width=40,type="sprite",priority="extra-high-no-scale"},["tooltip-category-generates"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-generates.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-generates",width=40,type="sprite",priority="extra-high-no-scale"},["tooltip-category-debug"]={flags={"gui-icon"},filename="__core__/graphics/icons/tooltips/tooltip-category-debug.png",mipmap_count=2,scale=0.5,height=40,name="tooltip-category-debug",width=40,type="sprite",priority="extra-high-no-scale"},["quantity-multiplier"]={flags={"gui-icon"},filename="__core__/graphics/icons/mip/quantity-multiplier.png",mipmap_count=2,scale=0.5,height=40,name="quantity-multiplier",width=28,type="sprite",priority="extra-high-no-scale"},infinity={flags={"gui-icon"},filename="__core__/graphics/icons/mip/infinity.png",mipmap_count=2,scale=0.5,height=32,name="infinity",width=24,type="sprite",priority="extra-high-no-scale"},restart_required={flags={"gui-icon"},filename="__core__/graphics/icons/mip/needs-restart.png",mipmap_count=2,scale=0.5,height=40,name="restart_required",width=16,type="sprite",priority="extra-high-no-scale"}};return _;end
+do
+    local _ = {
+        ['tooltip-category-effect'] = {
+            name = 'tooltip-category-effect',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-effect.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-water'] = {
+            name = 'tooltip-category-water',
+            height = 40,
+            filename = '__base__/graphics/icons/tooltips/tooltip-category-water.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-electricity'] = {
+            name = 'tooltip-category-electricity',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-electricity.png',
+            width = 32,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-nuclear'] = {
+            name = 'tooltip-category-nuclear',
+            height = 40,
+            filename = '__base__/graphics/icons/tooltips/tooltip-category-nuclear.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['quantity-multiplier'] = {
+            name = 'quantity-multiplier',
+            height = 40,
+            filename = '__core__/graphics/icons/mip/quantity-multiplier.png',
+            width = 28,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-consumes'] = {
+            name = 'tooltip-category-consumes',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-consumes.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        restart_required = {
+            name = 'restart_required',
+            height = 40,
+            filename = '__core__/graphics/icons/mip/needs-restart.png',
+            width = 16,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-thrown'] = {
+            name = 'tooltip-category-thrown',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-thrown.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        info = {
+            name = 'info',
+            height = 40,
+            filename = '__core__/graphics/icons/mip/info-blue.png',
+            width = 16,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        info_no_border = {
+            name = 'info_no_border',
+            height = 16,
+            filename = '__core__/graphics/icons/mip/info-blue-no-border.png',
+            width = 16,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-generates'] = {
+            name = 'tooltip-category-generates',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-generates.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-steam'] = {
+            name = 'tooltip-category-steam',
+            height = 40,
+            filename = '__base__/graphics/icons/tooltips/tooltip-category-steam.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-heat'] = {
+            name = 'tooltip-category-heat',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-heat.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        infinity = {
+            name = 'infinity',
+            height = 32,
+            filename = '__core__/graphics/icons/mip/infinity.png',
+            width = 24,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        developer = {
+            name = 'developer',
+            height = 40,
+            filename = '__core__/graphics/icons/mip/developer.png',
+            width = 16,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-chemical'] = {
+            name = 'tooltip-category-chemical',
+            height = 40,
+            filename = '__base__/graphics/icons/tooltips/tooltip-category-chemical.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-vehicle-weapons'] = {
+            name = 'tooltip-category-vehicle-weapons',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-vehicle-weapons.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-vehicle'] = {
+            name = 'tooltip-category-vehicle',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-vehicle.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-train'] = {
+            name = 'tooltip-category-train',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-train.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-equipment-grid'] = {
+            name = 'tooltip-category-equipment-grid',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-equipment-grid.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['warning-white'] = {
+            size = 32,
+            name = 'warning-white',
+            type = 'sprite',
+            scale = 0.5,
+            filename = '__core__/graphics/icons/mip/warning-white.png',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-placed-in-equipment-grid'] = {
+            name = 'tooltip-category-placed-in-equipment-grid',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-equipment-grid.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-equipment-grid-electricity'] = {
+            name = 'tooltip-category-equipment-grid-electricity',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-equipment-grid-electricity.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['quantity-time'] = {
+            name = 'quantity-time',
+            height = 40,
+            filename = '__core__/graphics/icons/mip/quantity-time.png',
+            width = 28,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-turret'] = {
+            name = 'tooltip-category-turret',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-turret.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        },
+        ['tooltip-category-debug'] = {
+            name = 'tooltip-category-debug',
+            height = 40,
+            filename = '__core__/graphics/icons/tooltips/tooltip-category-debug.png',
+            width = 40,
+            scale = 0.5,
+            type = 'sprite',
+            priority = 'extra-high-no-scale',
+            flags = {'gui-icon'},
+            mipmap_count = 2
+        }
+    };
+    return _;
+end

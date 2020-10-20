@@ -1,1 +1,62 @@
-do local _={["flying-text"]={flags={"not-on-map","placeable-off-grid"},type="flying-text",name="flying-text",speed=0.05,time_to_live=150},["tile-proxy"]={flags={"hidden"},icon="__base__/graphics/icons/landfill.png",icon_size=64,name="tile-proxy",type="flying-text",time_to_live=150,speed=0.05,icon_mipmaps=4},["tree-proxy"]={flags={"hidden"},icon="__base__/graphics/icons/tree-01.png",icon_size=64,name="tree-proxy",type="flying-text",time_to_live=150,speed=0.05,icon_mipmaps=4},["tree-dying-proxy"]={flags={"hidden"},type="flying-text",icon_size=64,name="tree-dying-proxy",icons={{icon="__base__/graphics/icons/tree-01.png",icon_size=64,icon_mipmaps=4},{icon_size=64,icon="__core__/graphics/cancel.png"}},time_to_live=150,speed=0.05,icon_mipmaps=4},["tutorial-flying-text"]={flags={"not-on-map","placeable-off-grid"},type="flying-text",text_alignment="center",name="tutorial-flying-text",speed=0.02,time_to_live=120}};return _;end
+do
+    local _ = {
+        ['entity-unknown'] = {
+            icon = '__core__/graphics/icons/unknown.png',
+            speed = 0,
+            type = 'flying-text',
+            icon_size = 64,
+            time_to_live = 0,
+            flags = {'hidden'},
+            name = 'entity-unknown'
+        },
+        ['tile-proxy'] = {
+            type = 'flying-text',
+            icon = '__base__/graphics/icons/landfill.png',
+            icon_mipmaps = 4,
+            time_to_live = 150,
+            icon_size = 64,
+            speed = 0.05,
+            flags = {'hidden'},
+            name = 'tile-proxy'
+        },
+        ['tree-proxy'] = {
+            type = 'flying-text',
+            icon = '__base__/graphics/icons/tree-01.png',
+            icon_mipmaps = 4,
+            time_to_live = 150,
+            icon_size = 64,
+            speed = 0.05,
+            flags = {'hidden'},
+            name = 'tree-proxy'
+        },
+        ['flying-text'] = {
+            name = 'flying-text',
+            speed = 0.05,
+            type = 'flying-text',
+            flags = {'not-on-map', 'placeable-off-grid'},
+            time_to_live = 150
+        },
+        ['tutorial-flying-text'] = {
+            name = 'tutorial-flying-text',
+            speed = 0.02,
+            type = 'flying-text',
+            time_to_live = 120,
+            flags = {'not-on-map', 'placeable-off-grid'},
+            text_alignment = 'center'
+        },
+        ['tree-dying-proxy'] = {
+            type = 'flying-text',
+            name = 'tree-dying-proxy',
+            icon_mipmaps = 4,
+            time_to_live = 150,
+            icon_size = 64,
+            icons = {
+                {icon_size = 64, icon = '__base__/graphics/icons/tree-01.png', icon_mipmaps = 4},
+                {icon_size = 64, icon = '__core__/graphics/cancel.png'}
+            },
+            flags = {'hidden'},
+            speed = 0.05
+        }
+    };
+    return _;
+end

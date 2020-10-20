@@ -1,1 +1,527 @@
-do local _={["transport-belt"]={collision_box={{-0.4,-0.4},{0.4,0.4}},minable={mining_time=0.1,result="transport-belt"},fast_replaceable_group="transport-belt",next_upgrade="fast-transport-belt",max_health=150,type="transport-belt",icon_size=64,name="transport-belt",resistances={{percent=90,type="fire"}},corpse="transport-belt-remnants",circuit_wire_max_distance=9,damaged_trigger_effect={offsets={{0,1}},entity_name="spark-explosion",damage_type_filters="fire",offset_deviation={{-0.5,-0.5},{0.5,0.5}},type="create-entity"},animation_speed_coefficient=32,working_sound={sound={volume=0.3,filename="__base__/sound/transport-belt.ogg"},persistent=true},icon="__base__/graphics/icons/transport-belt.png",speed=0.03125,selection_box={{-0.5,-0.5},{0.5,0.5}},flags={"placeable-neutral","player-creation"},dying_explosion="transport-belt-explosion",icon_mipmaps=4},["fast-transport-belt"]={collision_box={{-0.4,-0.4},{0.4,0.4}},minable={mining_time=0.1,result="fast-transport-belt"},fast_replaceable_group="transport-belt",next_upgrade="express-transport-belt",max_health=160,type="transport-belt",icon_size=64,name="fast-transport-belt",resistances={{percent=50,type="fire"}},corpse="fast-transport-belt-remnants",circuit_wire_max_distance=9,damaged_trigger_effect={offsets={{0,1}},entity_name="spark-explosion",damage_type_filters="fire",offset_deviation={{-0.5,-0.5},{0.5,0.5}},type="create-entity"},animation_speed_coefficient=32,working_sound={sound={volume=0.3,filename="__base__/sound/fast-transport-belt.ogg"},persistent=true},icon="__base__/graphics/icons/fast-transport-belt.png",speed=0.0625,selection_box={{-0.5,-0.5},{0.5,0.5}},flags={"placeable-neutral","player-creation"},dying_explosion="fast-transport-belt-explosion",icon_mipmaps=4},["express-transport-belt"]={collision_box={{-0.4,-0.4},{0.4,0.4}},minable={mining_time=0.1,result="express-transport-belt"},fast_replaceable_group="transport-belt",max_health=170,type="transport-belt",icon_size=64,circuit_wire_connection_points={{wire={green={0.671875,-0.53125},red={0.421875,-0.671875}},shadow={green={1.09375,-0.203125},red={0.8125,-0.375}}},{wire={green={0.671875,-0.53125},red={0.421875,-0.671875}},shadow={green={1.09375,-0.203125},red={0.8125,-0.375}}},{wire={green={0.671875,-0.53125},red={0.421875,-0.671875}},shadow={green={1.09375,-0.203125},red={0.8125,-0.375}}},{wire={green={0.671875,-0.53125},red={0.421875,-0.671875}},shadow={green={1.09375,-0.203125},red={0.8125,-0.375}}},{wire={green={0.5625,-0.65625},red={0.3125,-0.8125}},shadow={green={1.03125,-0.34375},red={0.734375,-0.515625}}},{wire={green={0.5625,-0.65625},red={0.3125,-0.8125}},shadow={green={1.03125,-0.34375},red={0.734375,-0.515625}}},{wire={green={0.5625,-0.65625},red={0.3125,-0.8125}},shadow={green={1.03125,-0.34375},red={0.734375,-0.515625}}},{wire={green={0.5625,-0.65625},red={0.3125,-0.8125}},shadow={green={1.03125,-0.34375},red={0.734375,-0.515625}}},{wire={green={0.671875,-0.5},red={0.40625,-0.65625}},shadow={green={1.171875,-0.1875},red={0.875,-0.359375}}},{wire={green={0.671875,-0.5},red={0.40625,-0.65625}},shadow={green={1.171875,-0.1875},red={0.875,-0.359375}}},{wire={green={0.671875,-0.5},red={0.40625,-0.65625}},shadow={green={1.171875,-0.1875},red={0.875,-0.359375}}},{wire={green={0.671875,-0.5},red={0.40625,-0.65625}},shadow={green={1.171875,-0.1875},red={0.875,-0.359375}}},{wire={green={0.640625,-0.6875},red={0.390625,-0.84375}},shadow={green={1.171875,-0.375},red={0.890625,-0.546875}}},{wire={green={0.640625,-0.6875},red={0.390625,-0.84375}},shadow={green={1.171875,-0.375},red={0.890625,-0.546875}}},{wire={green={0.640625,-0.6875},red={0.390625,-0.84375}},shadow={green={1.171875,-0.375},red={0.890625,-0.546875}}},{wire={green={0.640625,-0.6875},red={0.390625,-0.84375}},shadow={green={1.171875,-0.375},red={0.890625,-0.546875}}},{wire={green={0.578125,-0.359375},red={0.34375,-0.53125}},shadow={green={1.125,-0.03125},red={0.859375,-0.21875}}},{wire={green={0.578125,-0.359375},red={0.34375,-0.53125}},shadow={green={1.125,-0.03125},red={0.859375,-0.21875}}},{wire={green={0.578125,-0.359375},red={0.34375,-0.53125}},shadow={green={1.125,-0.03125},red={0.859375,-0.21875}}},{wire={green={0.578125,-0.359375},red={0.34375,-0.53125}},shadow={green={1.125,-0.03125},red={0.859375,-0.21875}}},{wire={green={0.625,-0.484375},red={0.359375,-0.640625}},shadow={green={1.21875,-0.15625},red={0.921875,-0.328125}}},{wire={green={0.625,-0.484375},red={0.359375,-0.640625}},shadow={green={1.21875,-0.15625},red={0.921875,-0.328125}}},{wire={green={0.625,-0.484375},red={0.359375,-0.640625}},shadow={green={1.21875,-0.15625},red={0.921875,-0.328125}}},{wire={green={0.625,-0.484375},red={0.359375,-0.640625}},shadow={green={1.21875,-0.15625},red={0.921875,-0.328125}}},{wire={green={0.65625,-0.484375},red={0.40625,-0.640625}},shadow={green={1.265625,-0.1875},red={0.953125,-0.359375}}},{wire={green={0.65625,-0.484375},red={0.40625,-0.640625}},shadow={green={1.265625,-0.1875},red={0.953125,-0.359375}}},{wire={green={0.65625,-0.484375},red={0.40625,-0.640625}},shadow={green={1.265625,-0.1875},red={0.953125,-0.359375}}},{wire={green={0.65625,-0.484375},red={0.40625,-0.640625}},shadow={green={1.265625,-0.1875},red={0.953125,-0.359375}}}},resistances={{percent=50,type="fire"}},corpse="express-transport-belt-remnants",circuit_wire_max_distance=9,damaged_trigger_effect={offsets={{0,1}},entity_name="spark-explosion",damage_type_filters="fire",offset_deviation={{-0.5,-0.5},{0.5,0.5}},type="create-entity"},animation_speed_coefficient=32,circuit_connector_sprites={{led_green={height=26,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png",width=42,priority="low",x=0,y=0,shift={0.1875,0.15625},scale=0.5},led_blue={height=44,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png",width=30,priority="low",x=0,y=0,shift={-0.28125,-0.484375},scale=0.5},led_light={size=0.9,intensity=0.8},red_green_led_light_offset={0.3125,0.140625},led_red={height=18,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png",width=34,priority="low",x=0,y=0,shift={0.203125,0.15625},scale=0.5},blue_led_light_offset={-0.28125,-0.421875}},{led_green={height=26,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png",width=42,priority="low",x=0,y=26,scale=0.5},led_blue={height=44,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png",width=30,priority="low",x=0,y=44,scale=0.5},led_light={size=0.9,intensity=0.8},red_green_led_light_offset={0.28125,0.171875},led_red={height=18,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png",width=34,priority="low",x=0,y=18,scale=0.5},blue_led_light_offset={-0.25,-0.625}},{led_green={height=26,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png",width=42,priority="low",x=0,y=52,scale=0.5},led_blue={height=44,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png",width=30,priority="low",x=0,y=88,scale=0.5},led_light={size=0.9,intensity=0.8},red_green_led_light_offset={0.34375,0.15625},led_red={height=18,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png",width=34,priority="low",x=0,y=36,scale=0.5},blue_led_light_offset={-0.28125,-0.421875}},{led_green={height=26,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png",width=42,priority="low",x=0,y=78,scale=0.5},led_blue={height=44,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png",width=30,priority="low",x=0,y=132,scale=0.5},led_light={size=0.9,intensity=0.8},red_green_led_light_offset={0.28125,0.15625},led_red={height=18,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png",width=34,priority="low",x=0,y=54,scale=0.5},blue_led_light_offset={-0.28125,-0.34375}},{led_green={height=26,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png",width=42,priority="low",x=0,y=104,scale=0.5},led_blue={height=44,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png",width=30,priority="low",x=0,y=176,scale=0.5},led_light={size=0.9,intensity=0.8},red_green_led_light_offset={0.3125,0.140625},led_red={height=18,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png",width=34,priority="low",x=0,y=72,scale=0.5},blue_led_light_offset={-0.3125,-0.640625}},{led_green={height=26,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png",width=42,priority="low",x=0,y=130,scale=0.5},led_blue={height=44,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png",width=30,priority="low",x=0,y=220,scale=0.5},led_light={size=0.9,intensity=0.8},red_green_led_light_offset={0.328125,0.140625},led_red={height=18,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png",width=34,priority="low",x=0,y=90,scale=0.5},blue_led_light_offset={-0.296875,-0.421875}},{led_green={height=26,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png",width=42,priority="low",x=0,y=156,scale=0.5},led_blue={height=44,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png",width=30,priority="low",x=0,y=264,scale=0.5},led_light={size=0.9,intensity=0.8},red_green_led_light_offset={0.046875,0.171875},led_red={height=18,filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png",width=34,priority="low",x=0,y=108,scale=0.5},blue_led_light_offset={-0.296875,-0.4375}}},working_sound={use_doppler_shift=false,sound={volume=0.4,filename="__base__/sound/express-transport-belt.ogg"},persistent=true},connector_frame_sprites={frame_main_scanner_vertical_y_scale=0.75,frame_main_scanner_cross_horizontal_start_shift={-0.3125,-0.0625},frame_main_scanner_cross_vertical_end_shift={0,0.1875},frame_main_scanner_cross_vertical_start_shift={0,-0.3125},frame_main_scanner_nw_ne={height=24,filename="__base__/graphics/entity/transport-belt/connector/transport-belt-connector-frame-main-scanner-nw-ne.png",frame_count=32,priority="low",shift={-0.03125,-0.0625},blend_mode="additive",line_length=8,width=28},frame_main_scanner_vertical_rotation=0.25,frame_main={sheet={filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04a-sequence.png",scale=0.5,height=94,frame_count=4,priority="low",variation_count=7,width=80,line_length=4,shift={0.109375,-0.15625}}},frame_main_scanner_horizontal_y_scale=0.7,frame_main_scanner_horizontal_rotation=0,frame_main_scanner_horizontal_end_shift={0.25,-0.09375},frame_back_patch={sheet={filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04a-sequence-back-patch.png",scale=0.5,height=72,frame_count=1,priority="low",variation_count=3,width=66,line_length=3,shift={0,-0.0625}}},frame_shadow={sheet={filename="__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04b-sequence-shadow.png",scale=0.5,width=160,height=112,frame_count=4,priority="low",variation_count=7,shift={0.0625,0.09375},line_length=4,draw_as_shadow=true}},frame_main_scanner_vertical_start_shift={0,-0.3125},frame_main_scanner_vertical_end_shift={0,0.1875},frame_main_scanner_cross_horizontal_end_shift={0.3125,-0.0625},frame_main_scanner_cross_vertical_rotation=0.25,frame_main_scanner_cross_vertical_y_scale=0.75,frame_main_scanner_movement_speed=0.032258064516129,frame_main_scanner_cross_horizontal_y_scale=0.6,frame_main_scanner_horizontal_start_shift={-0.25,-0.09375},frame_main_scanner={width=22,filename="__base__/graphics/entity/transport-belt/connector/hr-CCM-BELT-SPRITES-SCANNER.png",frame_count=8,priority="low",shift={0,0.015625},height=64,line_length=8,scale=0.5},frame_main_scanner_sw_se={height=28,filename="__base__/graphics/entity/transport-belt/connector/transport-belt-connector-frame-main-scanner-sw-se.png",frame_count=32,priority="low",shift={0.015625,-0.09375},blend_mode="additive",line_length=8,width=29},frame_main_scanner_cross_horizontal_rotation=0},speed=0.09375,icon="__base__/graphics/icons/express-transport-belt.png",selection_box={{-0.5,-0.5},{0.5,0.5}},name="express-transport-belt",flags={"placeable-neutral","player-creation"},dying_explosion="express-transport-belt-explosion",icon_mipmaps=4}};return _;end
+do
+    local _ = {
+        ['fast-transport-belt'] = {
+            circuit_connector_sprites = 0,
+            next_upgrade = 'express-transport-belt',
+            fast_replaceable_group = 'transport-belt',
+            icon_size = 64,
+            circuit_wire_max_distance = 9,
+            minable = {mining_time = 0.1, result = 'fast-transport-belt'},
+            icon_mipmaps = 4,
+            circuit_wire_connection_points = 0,
+            flags = {'placeable-neutral', 'player-creation'},
+            belt_animation_set = 0,
+            speed = 0.0625,
+            animation_speed_coefficient = 32,
+            type = 'transport-belt',
+            damaged_trigger_effect = {
+                entity_name = 'spark-explosion',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                damage_type_filters = 'fire',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+            },
+            dying_explosion = 'fast-transport-belt-explosion',
+            working_sound = {
+                persistent = true,
+                sound = {filename = '__base__/sound/fast-transport-belt.ogg', volume = 0.3}
+            },
+            name = 'fast-transport-belt',
+            resistances = {{percent = 50, type = 'fire'}},
+            open_sound = 0,
+            icon = '__base__/graphics/icons/fast-transport-belt.png',
+            collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
+            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+            max_health = 160,
+            close_sound = 0,
+            connector_frame_sprites = 0,
+            corpse = 'fast-transport-belt-remnants'
+        },
+        ['transport-belt'] = {
+            circuit_connector_sprites = 0,
+            next_upgrade = 'fast-transport-belt',
+            fast_replaceable_group = 'transport-belt',
+            icon_size = 64,
+            circuit_wire_max_distance = 9,
+            minable = {mining_time = 0.1, result = 'transport-belt'},
+            icon_mipmaps = 4,
+            circuit_wire_connection_points = 0,
+            flags = {'placeable-neutral', 'player-creation'},
+            belt_animation_set = 0,
+            speed = 0.03125,
+            animation_speed_coefficient = 32,
+            type = 'transport-belt',
+            damaged_trigger_effect = {
+                entity_name = 'spark-explosion',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                damage_type_filters = 'fire',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+            },
+            dying_explosion = 'transport-belt-explosion',
+            working_sound = {persistent = true, sound = {filename = '__base__/sound/transport-belt.ogg', volume = 0.17}},
+            name = 'transport-belt',
+            resistances = {{percent = 90, type = 'fire'}},
+            open_sound = 0,
+            icon = '__base__/graphics/icons/transport-belt.png',
+            collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
+            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+            max_health = 150,
+            close_sound = 0,
+            connector_frame_sprites = 0,
+            corpse = 'transport-belt-remnants'
+        },
+        ['express-transport-belt'] = {
+            circuit_connector_sprites = {
+                {
+                    led_blue = {
+                        y = 0,
+                        x = 0,
+                        height = 44,
+                        shift = {-0.28125, -0.484375},
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png',
+                        width = 30,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_green = {
+                        y = 0,
+                        x = 0,
+                        height = 26,
+                        shift = {0.1875, 0.15625},
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png',
+                        width = 42,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_red = {
+                        y = 0,
+                        x = 0,
+                        height = 18,
+                        shift = {0.203125, 0.15625},
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png',
+                        width = 34,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-0.28125, -0.421875},
+                    red_green_led_light_offset = {0.3125, 0.140625},
+                    led_light = {intensity = 0.8, size = 0.9}
+                }, {
+                    led_blue = {
+                        y = 44,
+                        x = 0,
+                        height = 44,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png',
+                        width = 30,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_green = {
+                        y = 26,
+                        x = 0,
+                        height = 26,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png',
+                        width = 42,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_red = {
+                        y = 18,
+                        x = 0,
+                        height = 18,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png',
+                        width = 34,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-0.25, -0.625},
+                    red_green_led_light_offset = {0.28125, 0.171875},
+                    led_light = {intensity = 0.8, size = 0.9}
+                }, {
+                    led_blue = {
+                        y = 88,
+                        x = 0,
+                        height = 44,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png',
+                        width = 30,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_green = {
+                        y = 52,
+                        x = 0,
+                        height = 26,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png',
+                        width = 42,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_red = {
+                        y = 36,
+                        x = 0,
+                        height = 18,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png',
+                        width = 34,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-0.28125, -0.421875},
+                    red_green_led_light_offset = {0.34375, 0.15625},
+                    led_light = {intensity = 0.8, size = 0.9}
+                }, {
+                    led_blue = {
+                        y = 132,
+                        x = 0,
+                        height = 44,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png',
+                        width = 30,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_green = {
+                        y = 78,
+                        x = 0,
+                        height = 26,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png',
+                        width = 42,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_red = {
+                        y = 54,
+                        x = 0,
+                        height = 18,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png',
+                        width = 34,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-0.28125, -0.34375},
+                    red_green_led_light_offset = {0.28125, 0.15625},
+                    led_light = {intensity = 0.8, size = 0.9}
+                }, {
+                    led_blue = {
+                        y = 176,
+                        x = 0,
+                        height = 44,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png',
+                        width = 30,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_green = {
+                        y = 104,
+                        x = 0,
+                        height = 26,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png',
+                        width = 42,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_red = {
+                        y = 72,
+                        x = 0,
+                        height = 18,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png',
+                        width = 34,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-0.3125, -0.640625},
+                    red_green_led_light_offset = {0.3125, 0.140625},
+                    led_light = {intensity = 0.8, size = 0.9}
+                }, {
+                    led_blue = {
+                        y = 220,
+                        x = 0,
+                        height = 44,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png',
+                        width = 30,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_green = {
+                        y = 130,
+                        x = 0,
+                        height = 26,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png',
+                        width = 42,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_red = {
+                        y = 90,
+                        x = 0,
+                        height = 18,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png',
+                        width = 34,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-0.296875, -0.421875},
+                    red_green_led_light_offset = {0.328125, 0.140625},
+                    led_light = {intensity = 0.8, size = 0.9}
+                }, {
+                    led_blue = {
+                        y = 264,
+                        x = 0,
+                        height = 44,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04c-LED-B.png',
+                        width = 30,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_green = {
+                        y = 156,
+                        x = 0,
+                        height = 26,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04e-LED-G.png',
+                        width = 42,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_red = {
+                        y = 108,
+                        x = 0,
+                        height = 18,
+                        shift = 0,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04d-LED-R.png',
+                        width = 34,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-0.296875, -0.4375},
+                    red_green_led_light_offset = {0, 0.125},
+                    led_light = {intensity = 0.8, size = 0.9}
+                }
+            },
+            fast_replaceable_group = 'transport-belt',
+            icon_size = 64,
+            circuit_wire_max_distance = 9,
+            minable = {mining_time = 0.1, result = 'express-transport-belt'},
+            icon_mipmaps = 4,
+            circuit_wire_connection_points = {
+                {
+                    shadow = {green = {1.09375, -0.203125}, red = {0.8125, -0.375}},
+                    wire = {green = {0.671875, -0.53125}, red = {0.421875, -0.671875}}
+                }, {
+                    shadow = {green = {1.09375, -0.203125}, red = {0.8125, -0.375}},
+                    wire = {green = {0.671875, -0.53125}, red = {0.421875, -0.671875}}
+                }, {
+                    shadow = {green = {1.09375, -0.203125}, red = {0.8125, -0.375}},
+                    wire = {green = {0.671875, -0.53125}, red = {0.421875, -0.671875}}
+                }, {
+                    shadow = {green = {1.09375, -0.203125}, red = {0.8125, -0.375}},
+                    wire = {green = {0.671875, -0.53125}, red = {0.421875, -0.671875}}
+                }, {
+                    shadow = {green = {1.03125, -0.34375}, red = {0.734375, -0.515625}},
+                    wire = {green = {0.5625, -0.65625}, red = {0.3125, -0.8125}}
+                }, {
+                    shadow = {green = {1.03125, -0.34375}, red = {0.734375, -0.515625}},
+                    wire = {green = {0.5625, -0.65625}, red = {0.3125, -0.8125}}
+                }, {
+                    shadow = {green = {1.03125, -0.34375}, red = {0.734375, -0.515625}},
+                    wire = {green = {0.5625, -0.65625}, red = {0.3125, -0.8125}}
+                }, {
+                    shadow = {green = {1.03125, -0.34375}, red = {0.734375, -0.515625}},
+                    wire = {green = {0.5625, -0.65625}, red = {0.3125, -0.8125}}
+                }, {
+                    shadow = {green = {1.171875, -0.1875}, red = {0.875, -0.359375}},
+                    wire = {green = {0.671875, -0.5}, red = {0.40625, -0.65625}}
+                }, {
+                    shadow = {green = {1.171875, -0.1875}, red = {0.875, -0.359375}},
+                    wire = {green = {0.671875, -0.5}, red = {0.40625, -0.65625}}
+                }, {
+                    shadow = {green = {1.171875, -0.1875}, red = {0.875, -0.359375}},
+                    wire = {green = {0.671875, -0.5}, red = {0.40625, -0.65625}}
+                }, {
+                    shadow = {green = {1.171875, -0.1875}, red = {0.875, -0.359375}},
+                    wire = {green = {0.671875, -0.5}, red = {0.40625, -0.65625}}
+                }, {
+                    shadow = {green = {1.171875, -0.375}, red = {0.890625, -0.546875}},
+                    wire = {green = {0.640625, -0.6875}, red = {0.390625, -0.84375}}
+                }, {
+                    shadow = {green = {1.171875, -0.375}, red = {0.890625, -0.546875}},
+                    wire = {green = {0.640625, -0.6875}, red = {0.390625, -0.84375}}
+                }, {
+                    shadow = {green = {1.171875, -0.375}, red = {0.890625, -0.546875}},
+                    wire = {green = {0.640625, -0.6875}, red = {0.390625, -0.84375}}
+                }, {
+                    shadow = {green = {1.171875, -0.375}, red = {0.890625, -0.546875}},
+                    wire = {green = {0.640625, -0.6875}, red = {0.390625, -0.84375}}
+                }, {
+                    shadow = {green = {1.125, -0.03125}, red = {0.859375, -0.21875}},
+                    wire = {green = {0.578125, -0.359375}, red = {0.34375, -0.53125}}
+                }, {
+                    shadow = {green = {1.125, -0.03125}, red = {0.859375, -0.21875}},
+                    wire = {green = {0.578125, -0.359375}, red = {0.34375, -0.53125}}
+                }, {
+                    shadow = {green = {1.125, -0.03125}, red = {0.859375, -0.21875}},
+                    wire = {green = {0.578125, -0.359375}, red = {0.34375, -0.53125}}
+                }, {
+                    shadow = {green = {1.125, -0.03125}, red = {0.859375, -0.21875}},
+                    wire = {green = {0.578125, -0.359375}, red = {0.34375, -0.53125}}
+                }, {
+                    shadow = {green = {1.21875, -0.15625}, red = {0.921875, -0.328125}},
+                    wire = {green = {0.625, -0.484375}, red = {0.359375, -0.640625}}
+                }, {
+                    shadow = {green = {1.21875, -0.15625}, red = {0.921875, -0.328125}},
+                    wire = {green = {0.625, -0.484375}, red = {0.359375, -0.640625}}
+                }, {
+                    shadow = {green = {1.21875, -0.15625}, red = {0.921875, -0.328125}},
+                    wire = {green = {0.625, -0.484375}, red = {0.359375, -0.640625}}
+                }, {
+                    shadow = {green = {1.21875, -0.15625}, red = {0.921875, -0.328125}},
+                    wire = {green = {0.625, -0.484375}, red = {0.359375, -0.640625}}
+                }, {
+                    shadow = {green = {1.265625, -0.1875}, red = {0.953125, -0.359375}},
+                    wire = {green = {0.65625, -0.484375}, red = {0.40625, -0.640625}}
+                }, {
+                    shadow = {green = {1.265625, -0.1875}, red = {0.953125, -0.359375}},
+                    wire = {green = {0.65625, -0.484375}, red = {0.40625, -0.640625}}
+                }, {
+                    shadow = {green = {1.265625, -0.1875}, red = {0.953125, -0.359375}},
+                    wire = {green = {0.65625, -0.484375}, red = {0.40625, -0.640625}}
+                }, {
+                    shadow = {green = {1.265625, -0.1875}, red = {0.953125, -0.359375}},
+                    wire = {green = {0.65625, -0.484375}, red = {0.40625, -0.640625}}
+                }
+            },
+            flags = {'placeable-neutral', 'player-creation'},
+            belt_animation_set = 0,
+            speed = 0.09375,
+            animation_speed_coefficient = 32,
+            type = 'transport-belt',
+            damaged_trigger_effect = {
+                entity_name = 'spark-explosion',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                damage_type_filters = 'fire',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+            },
+            dying_explosion = 'express-transport-belt-explosion',
+            working_sound = {
+                persistent = true,
+                sound = {filename = '__base__/sound/express-transport-belt.ogg', volume = 0.3},
+                use_doppler_shift = false
+            },
+            name = 'express-transport-belt',
+            resistances = {{percent = 50, type = 'fire'}},
+            open_sound = 0,
+            icon = '__base__/graphics/icons/express-transport-belt.png',
+            collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
+            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+            max_health = 170,
+            close_sound = 0,
+            connector_frame_sprites = {
+                frame_main_scanner_cross_horizontal_y_scale = 0.6,
+                frame_back_patch = {
+                    sheet = {
+                        height = 72,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04a-sequence-back-patch.png',
+                        width = 66,
+                        scale = 0.5,
+                        frame_count = 1,
+                        shift = {0, -0.0625},
+                        line_length = 3,
+                        priority = 'low',
+                        variation_count = 3
+                    }
+                },
+                frame_main_scanner_vertical_rotation = 0.25,
+                frame_main_scanner_cross_horizontal_start_shift = {-0.3125, -0.0625},
+                frame_main_scanner = {
+                    line_length = 8,
+                    frame_count = 8,
+                    height = 64,
+                    shift = {0, 0.015625},
+                    filename = '__base__/graphics/entity/transport-belt/connector/hr-CCM-BELT-SPRITES-SCANNER.png',
+                    width = 22,
+                    priority = 'low',
+                    scale = 0.5
+                },
+                frame_main = {
+                    sheet = {
+                        height = 94,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04a-sequence.png',
+                        width = 80,
+                        scale = 0.5,
+                        frame_count = 4,
+                        shift = {0.109375, -0.15625},
+                        line_length = 4,
+                        priority = 'low',
+                        variation_count = 7
+                    }
+                },
+                frame_main_scanner_cross_horizontal_rotation = 0,
+                frame_main_scanner_vertical_y_scale = 0.75,
+                frame_main_scanner_cross_vertical_rotation = 0.25,
+                frame_main_scanner_cross_horizontal_end_shift = {0.3125, -0.0625},
+                frame_main_scanner_cross_vertical_start_shift = {0, -0.3125},
+                frame_main_scanner_vertical_end_shift = {0, 0.1875},
+                frame_main_scanner_vertical_start_shift = {0, -0.3125},
+                frame_main_scanner_horizontal_start_shift = {-0.25, -0.09375},
+                frame_main_scanner_sw_se = {
+                    line_length = 8,
+                    frame_count = 32,
+                    blend_mode = 'additive',
+                    shift = {0.015625, -0.09375},
+                    filename = '__base__/graphics/entity/transport-belt/connector/transport-belt-connector-frame-main-scanner-sw-se.png',
+                    width = 29,
+                    priority = 'low',
+                    height = 28
+                },
+                frame_main_scanner_horizontal_rotation = 0,
+                frame_shadow = {
+                    sheet = {
+                        draw_as_shadow = true,
+                        height = 112,
+                        filename = '__base__/graphics/entity/transport-belt/connector/hr-ccm-belt-04b-sequence-shadow.png',
+                        width = 160,
+                        scale = 0.5,
+                        frame_count = 4,
+                        shift = {0.0625, 0.09375},
+                        line_length = 4,
+                        priority = 'low',
+                        variation_count = 7
+                    }
+                },
+                frame_main_scanner_horizontal_end_shift = {0.25, -0.09375},
+                frame_main_scanner_movement_speed = 0.032258064516129,
+                frame_main_scanner_horizontal_y_scale = 0.7,
+                frame_main_scanner_nw_ne = {
+                    line_length = 8,
+                    frame_count = 32,
+                    blend_mode = 'additive',
+                    shift = {-0.03125, -0.0625},
+                    filename = '__base__/graphics/entity/transport-belt/connector/transport-belt-connector-frame-main-scanner-nw-ne.png',
+                    width = 28,
+                    priority = 'low',
+                    height = 24
+                },
+                frame_main_scanner_cross_vertical_y_scale = 0.75,
+                frame_main_scanner_cross_vertical_end_shift = {0, 0.1875}
+            },
+            corpse = 'express-transport-belt-remnants'
+        }
+    };
+    return _;
+end

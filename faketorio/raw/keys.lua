@@ -1,1 +1,37 @@
-do local _={"transport-belt","armor","item","blueprint-book","artillery-turret","character","item-with-label","combat-robot","solar-panel-equipment","custom-input","gun","artillery-projectile","sprite","kill-achievement","rocket-silo-rocket-shadow","rail-chain-signal","simple-entity-with-force","mouse-cursor","storage-tank","mining-tool","offshore-pump","artillery-wagon","train-stop","deconstructible-tile-proxy","flying-text","heat-interface","dont-craft-manually-achievement","decorative","corpse","capsule","generator-equipment","land-mine","gui-style","arrow","simple-entity","energy-shield-equipment","mining-drill","item-with-tags","loader-1x1","selection-tool","map-settings","beacon","fuel-category","wall","car","active-defense-equipment","artillery-flare","shortcut","item-subgroup","ammo-turret","pipe","fluid-turret","entity-ghost","cliff","electric-energy-interface","inserter","particle","pump","roboport","heat-pipe","highlight-box","beam","optimized-particle","item-with-entity-data","burner-generator","technology","construction-robot","tutorial","rail-planner","assembling-machine","achievement","splitter","leaf-particle","deconstruction-item","autoplace-control","deconstruct-with-robots-achievement","lab","virtual-signal","tool","fluid-wagon","market","utility-constants","utility-sprites","construct-with-robots-achievement","unit-spawner","ammo-category","equipment-category","build-entity-achievement","underground-belt","explosion","trivial-smoke","trigger-target-type","god-controller","reactor","gate","combat-robot-count","upgrade-item","constant-combinator","tile-ghost","sound","power-switch","finish-the-game-achievement","electric-pole","copy-paste-tool","tile-effect","equipment-grid","belt-immunity-equipment","battery-equipment","tile","stream","tree","rocket-silo","character-corpse","boiler","deliver-by-robots-achievement","sticker","roboport-equipment","radar","ammo","train-path-achievement","solar-panel","damage-type","fish","pipe-to-ground","simple-entity-with-owner","repair-tool","font","infinity-container","resource-category","generator","research-achievement","rocket-silo-rocket","rail-signal","night-vision-equipment","spectator-controller","produce-per-hour-achievement","ambient-sound","recipe","recipe-category","rail-remnants","flame-thrower-explosion","speech-bubble","projectile","lamp","programmable-speaker","player-port","produce-achievement","logistic-container","arithmetic-combinator","noise-expression","module","smoke","particle-source","smoke-with-trigger","turret","group-attack-achievement","wind-sound","player-damaged-achievement","accumulator","electric-turret","utility-sounds","dont-use-entity-in-energy-production-achievement","map-gen-presets","dont-build-entity-achievement","locomotive","loader","module-category","noise-layer","blueprint","infinity-pipe","item-group","item-entity","cargo-wagon","furnace","item-request-proxy","movement-bonus-equipment","decider-combinator","straight-rail","fluid","resource","fire","item-with-inventory","unit","editor-controller","logistic-robot","optimized-decorative","curved-rail","container"};return _;end
+do
+    local _ = {
+        'item-entity', 'group-attack-achievement', 'autoplace-control', 'optimized-particle', 'unit', 'pipe-to-ground',
+        'arrow', 'energy-shield-equipment', 'character-corpse', 'loader-1x1', 'character', 'market', 'font', 'ammo',
+        'active-defense-equipment', 'map-settings', 'module', 'decider-combinator', 'arithmetic-combinator',
+        'highlight-box', 'item-with-label', 'train-path-achievement', 'lamp', 'land-mine', 'capsule',
+        'build-entity-achievement', 'programmable-speaker', 'electric-energy-interface', 'artillery-projectile',
+        'damage-type', 'battery-equipment', 'projectile', 'rail-planner', 'corpse', 'fluid',
+        'deliver-by-robots-achievement', 'leaf-particle', 'selection-tool', 'utility-sounds', 'smoke', 'electric-pole',
+        'flame-thrower-explosion', 'ambient-sound', 'mining-tool', 'construction-robot', 'item-subgroup', 'rocket-silo',
+        'train-stop', 'splitter', 'solar-panel-equipment', 'accumulator', 'rail-remnants', 'simple-entity-with-force',
+        'solar-panel', 'ammo-category', 'inserter', 'resource', 'armor', 'deconstruct-with-robots-achievement',
+        'stream', 'fluid-wagon', 'underground-belt', 'boiler', 'particle', 'resource-category', 'kill-achievement',
+        'logistic-container', 'dont-use-entity-in-energy-production-achievement', 'belt-immunity-equipment', 'shortcut',
+        'god-controller', 'power-switch', 'item-with-tags', 'editor-controller', 'combat-robot', 'tile-ghost',
+        'wind-sound', 'wall', 'virtual-signal', 'spidertron-remote', 'dont-build-entity-achievement', 'locomotive',
+        'utility-sprites', 'sticker', 'combat-robot-count', 'electric-turret', 'artillery-turret', 'unit-spawner',
+        'turret', 'research-achievement', 'flying-text', 'generator-equipment', 'blueprint', 'beam', 'map-gen-presets',
+        'custom-input', 'trivial-smoke', 'constant-combinator', 'generator', 'rail-chain-signal', 'spider-leg', 'tree',
+        'produce-achievement', 'equipment-grid', 'infinity-pipe', 'fluid-turret', 'spider-vehicle', 'gun', 'tool',
+        'tutorial', 'achievement', 'tile', 'technology', 'container', 'player-port', 'fire', 'ammo-turret',
+        'spectator-controller', 'rail-signal', 'pump', 'utility-constants', 'furnace', 'roboport-equipment', 'lab',
+        'assembling-machine', 'sprite', 'explosion', 'heat-interface', 'storage-tank', 'smoke-with-trigger', 'item',
+        'simple-entity-with-owner', 'simple-entity', 'rocket-silo-rocket-shadow', 'rocket-silo-rocket', 'pipe',
+        'equipment-category', 'roboport', 'repair-tool', 'recipe-category', 'item-request-proxy',
+        'movement-bonus-equipment', 'reactor', 'trigger-target-type', 'deconstructible-tile-proxy',
+        'produce-per-hour-achievement', 'artillery-wagon', 'straight-rail', 'player-damaged-achievement',
+        'particle-source', 'burner-generator', 'optimized-decorative', 'fish', 'module-category', 'offshore-pump',
+        'item-with-inventory', 'noise-expression', 'cliff', 'blueprint-book', 'dont-craft-manually-achievement',
+        'night-vision-equipment', 'recipe', 'gui-style', 'mouse-cursor', 'mining-drill', 'logistic-robot',
+        'infinity-container', 'loader', 'noise-layer', 'item-with-entity-data', 'artillery-flare', 'tile-effect',
+        'heat-pipe', 'deconstruction-item', 'transport-belt', 'entity-ghost', 'beacon', 'gate', 'fuel-category',
+        'finish-the-game-achievement', 'speech-bubble', 'item-group', 'radar', 'curved-rail', 'copy-paste-tool',
+        'construct-with-robots-achievement', 'upgrade-item', 'car', 'cargo-wagon'
+    };
+    return _;
+end

@@ -1,1 +1,25 @@
-do local _={["upgrade-planner"]={type="upgrade-item",subgroup="tool",alt_selection_mode={"cancel-upgrade"},stack_size=1,selection_cursor_box_type="not-allowed",selection_color={1,0,0},alt_selection_color={0,0,1},order="c[automated-construction]-c[upgrade-planner]",icon="__base__/graphics/icons/upgrade-planner.png",icon_size=64,mapper_count=24,selection_mode={"upgrade"},name="upgrade-planner",icon_mipmaps=4,alt_selection_cursor_box_type="not-allowed"}};return _;end
+do
+    local _ = {
+        ['upgrade-planner'] = {
+            reverse_selection_mode = {'downgrade'},
+            order = 'c[automated-construction]-c[upgrade-planner]',
+            icon_size = 64,
+            alt_selection_cursor_box_type = 'not-allowed',
+            reverse_selection_cursor_box_type = 'not-allowed',
+            icon_mipmaps = 4,
+            reverse_selection_color = {1, 0, 1},
+            stack_size = 1,
+            alt_selection_mode = {'cancel-upgrade'},
+            alt_selection_color = {0, 0, 1},
+            name = 'upgrade-planner',
+            subgroup = 'tool',
+            icon = '__base__/graphics/icons/upgrade-planner.png',
+            mapper_count = 24,
+            type = 'upgrade-item',
+            selection_mode = {'upgrade'},
+            selection_cursor_box_type = 'not-allowed',
+            selection_color = {1, 0, 0}
+        }
+    };
+    return _;
+end

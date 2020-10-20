@@ -1,1 +1,41 @@
-do local _={steamrolled={amount=10,in_vehicle=true,steam_stats_name="spawners-killed-by-impact",order="e[kill]-a[steamrolled]",icon="__base__/graphics/achievement/steamrolled.png",icon_size=128,name="steamrolled",type_to_kill="unit-spawner",type="kill-achievement",damage_type="impact",personally=true},pyromaniac={amount=10000,steam_stats_name="trees-destroyed-by-fire",order="e[kill]-b[pyromaniac]",icon="__base__/graphics/achievement/pyromaniac.png",icon_size=128,name="pyromaniac",type_to_kill="tree",damage_type="fire",type="kill-achievement"},["run-forrest-run"]={amount=100,in_vehicle=true,steam_stats_name="trees-destroyed-by-impact",order="e[kill]-c[run-forrest-run]",icon="__base__/graphics/achievement/run-forrest-run.png",icon_size=128,name="run-forrest-run",type_to_kill="tree",personally=true,type="kill-achievement"}};return _;end
+do
+    local _ = {
+        steamrolled = {
+            name = 'steamrolled',
+            order = 'e[kill]-a[steamrolled]',
+            amount = 10,
+            steam_stats_name = 'spawners-killed-by-impact',
+            icon = '__base__/graphics/achievement/steamrolled.png',
+            type = 'kill-achievement',
+            in_vehicle = true,
+            type_to_kill = 'unit-spawner',
+            personally = true,
+            icon_size = 128,
+            damage_type = 'impact'
+        },
+        ['run-forrest-run'] = {
+            name = 'run-forrest-run',
+            order = 'e[kill]-c[run-forrest-run]',
+            amount = 100,
+            steam_stats_name = 'trees-destroyed-by-impact',
+            icon = '__base__/graphics/achievement/run-forrest-run.png',
+            type = 'kill-achievement',
+            in_vehicle = true,
+            type_to_kill = 'tree',
+            personally = true,
+            icon_size = 128
+        },
+        pyromaniac = {
+            name = 'pyromaniac',
+            order = 'e[kill]-b[pyromaniac]',
+            amount = 10000,
+            steam_stats_name = 'trees-destroyed-by-fire',
+            icon = '__base__/graphics/achievement/pyromaniac.png',
+            type = 'kill-achievement',
+            type_to_kill = 'tree',
+            icon_size = 128,
+            damage_type = 'fire'
+        }
+    };
+    return _;
+end

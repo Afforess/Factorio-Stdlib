@@ -1,1 +1,24 @@
-do local _={["player-port"]={flags={"placeable-neutral","player-creation"},collision_box={{-0.9,-0.9},{0.9,0.9}},minable={mining_time=0.5,result="player-port"},type="player-port",max_health=50,icon="__base__/graphics/icons/player-port.png",icon_size=64,name="player-port",animation={height=64,filename="__base__/graphics/entity/player-port/player-port-animation.png",frame_count=2,width=64},subgroup="other",selection_box={{-1,-1},{1,1}},icon_mipmaps=4}};return _;end
+do
+    local _ = {
+        ['player-port'] = {
+            name = 'player-port',
+            subgroup = 'other',
+            icon_size = 64,
+            type = 'player-port',
+            minable = {mining_time = 0.5, result = 'player-port'},
+            icon = '__base__/graphics/icons/player-port.png',
+            collision_box = {{-0.9, -0.9}, {0.9, 0.9}},
+            selection_box = {{-1, -1}, {1, 1}},
+            animation = {
+                filename = '__base__/graphics/entity/player-port/player-port-animation.png',
+                frame_count = 2,
+                height = 64,
+                width = 64
+            },
+            icon_mipmaps = 4,
+            flags = {'placeable-neutral', 'player-creation'},
+            max_health = 50
+        }
+    };
+    return _;
+end

@@ -1,1 +1,6675 @@
-do local _={default={recipe_tooltip_cannot_craft_count_label={parent="recipe_count_label",type="label_style"},statistics_progressbar={type="progressbar_style"},featured_technology_description_scroll_pane={height=208,vertical_flow_style={type="vertical_flow_style",top_padding=4,right_padding=8,left_padding=8,parent="vertical_flow"},extra_padding_when_activated=0,graphical_set={},type="scroll_pane_style",parent="scroll_pane"},quest_item_description_uncomplete={font_color={r=1,b=1,g=1},type="label_style",parent="quest_item_description"},play_completed_tutorial_button={parent="play_tutorial_button",default_graphical_set={position={0,24},corner_size=3,filename="__core__/graphics/gui.png",scale=1},type="button_style"},technology_gui_outer_frame={use_header_filler=false,header_background={center={x=8,height=1,y=8,width=1}},top_padding=2,bottom_padding=36,type="frame_style",graphical_set={position={0,0},corner_size=8,center={}},right_padding=8,parent="outer_frame"},mods_list_box={height=350,type="list_box_style",width=300},frame_in_right_container={type="frame_style"},menu_button_continue={type="button_style",clicked_graphical_set={base={position={119,17},corner_size=8}},hovered_graphical_set={glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5},base={position={102,17},corner_size=8}},disabled_graphical_set={base={position={85,25},corner_size=8}},parent="menu_button",default_graphical_set={base={position={68,17},corner_size=8}}},research_progress_technology_table={parent="featured_technology_table",type="table_style",column_widths={{minimal_width=60,column=1},{minimal_width=288,column=2}}},compilatron_gui_message={label_style={font_color={r=255,b=24,g=174},font="compilatron-message-font",single_line=false,parent="label",type="label_style",maximal_width=500},type="speech_bubble_style",arrow_indent=2.5,close_color={0.361,0.894,0.278},arrow_graphical_set={bottom={position={465,473},size={32,24}},top={position={433,473},size={32,24}},right={position={458,441},size={24,32}},left={position={433,441},size={24,32}}},frame_style={graphical_set={position={433,424},corner_size=8,filename="__core__/graphics/gui-new.png",scale=0.5},type="frame_style",padding=12},pass_through_mouse=false},map_gen_row_label={type="label_style",top_padding=-2,bottom_padding=2},clickable_label={type="label_style"},not_accessible_station_in_station_selection={type="button_style",selected_font_color={61,3,0},hovered_font_color={61,3,0},parent="list_box_item",selected_hovered_font_color={61,3,0},selected_clicked_font_color={61,3,0}},permissions_groups_list_box={type="list_box_style",size={250,400}},control_settings_section_button={parent="tool_button",default_graphical_set={position={68,0},corner_size=8},type="button_style"},shield_progressbar={parent="health_progressbar",color={0.8,0.2,0.8},type="progressbar_style"},disabled_preview_technology_slot={height=200,ingredients_padding=32,parent="disabled_technology_slot",type="technology_slot_style",width=136},info_label={single_line=false,font_color={128,206,240},font="default",type="label_style"},black_squashable_label_with_left_padding={parent="black_label_with_left_padding",horizontally_squashable="on",type="label_style"},blueprint_settings_frame={parent="a_inner_frame",type="frame_style",width=472},dark_rounded_button={default_graphical_set={base={position={2,738},size=76,border=4},shadow={position={378,103},corner_size=16,draw_type="outer",left_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4,top_outer_border_shift=4}},type="button_style",clicked_graphical_set={base={position={162,738},size=76,border=4},shadow={position={378,103},corner_size=16,draw_type="outer",left_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4,top_outer_border_shift=4}},hovered_graphical_set={glow={position={240,736},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},shadow={position={378,103},corner_size=16,draw_type="outer",left_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4,top_outer_border_shift=4},base={position={82,738},size=76,border=4}}},switch={hover_background={position={64,96},size={64,32}},right_button_position=16,left_button_position=2,disabled_background={position={0,96},size={64,32}},button={left_click_sound={{volume=0.7,filename="__core__/sound/gui-switch.ogg"}},height=14,clicked_graphical_set={position={184,96},size=28},hovered_graphical_set={position={156,96},size=28},default_graphical_set={position={128,96},size=28},disabled_graphical_set={position={128,96},size=28},type="button_style",width=14},active_label={font_color={241,190,100},font="default-bold",type="label_style"},middle_button_position=9,height=16,padding=0,width=32,type="switch_style",inactive_label={hovered_font_color={255,230,192},type="label_style",font="default"},default_background={position={0,96},size={64,32}}},list_box_under_subheader={type="list_box_style",scroll_pane_style={graphical_set={base={position={17,0},corner_size=8,draw_type="outer",left_top={},top={},center={position={42,8},size=1},right_top={}}},type="scroll_pane_style",parent="list_box_scroll_pane"}},health_progressbar={horizontally_stretchable="on",bar_background={position={224,0},filename="__core__/graphics/gui.png",size={1,13},scale=1},bar={position={223,0},filename="__core__/graphics/gui.png",size={1,11},scale=1},bar_width=13,type="progressbar_style",color={g=1}},changelog_tabbed_pane={tab_content_frame={type="frame_style",padding=12,graphical_set={base={bottom={position={76,9},size={1,8}},top={position={76,0},size={1,8}},center={position={76,8},size={1,1}}},shadow={draw_type="outer",top={position={208,128},size={1,8}},center={position={208,136},size={1,1}},scale=0.5}},right_padding=16,left_padding=16},parent="tabbed_pane",top_padding=12,type="tabbed_pane_style"},black_clickable_squashable_label={parent="black_clickable_label",horizontally_squashable="on",type="label_style"},recipe_slot_button={type="button_style",size=36,clicked_graphical_set={position={185,144},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},hovered_graphical_set={position={148,144},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},pie_progress_color={0.98,0.66,0.22,0.5},parent="slot_button",padding=1,default_graphical_set={filename="__core__/graphics/gui.png",size=36,x=111,y=144,scale=1,border=1}},centering_flow={vertical_align="center",type="flow_style"},menu_button={font="default-dialog-button",minimal_height=50,type="button_style",maximal_width=320,bottom_padding=4,parent="button",top_padding=4,minimal_width=320},list_box_scroll_pane={background_graphical_set={overall_tiling_horizontal_padding=4,corner_size=8,overall_tiling_vertical_spacing=8,overall_tiling_vertical_padding=4,position={282,17},overall_tiling_vertical_size=20},padding=0,extra_padding_when_activated=0,graphical_set={base={position={17,0},corner_size=8,center={position={42,8},size=1},draw_type="outer"}},type="scroll_pane_style"},graphicless_frame={type="frame_style",graphical_set={}},tutorial_icon_image={type="image_style",size=96},entity_info_frame_on_cursor={parent="tooltip_generated_from_description_frame",maximal_width=356,type="frame_style"},load_game_subheader_caption_label={parent="subheader_caption_label",maximal_width=800,type="label_style"},quest_item_table={cell_padding=0,odd_row_graphical_set={base={position={324,8},size={1,1}}},horizontally_stretchable="on",type="table_style",top_padding=0,bottom_padding=4,vertical_spacing=0,left_padding=4,right_padding=4,parent="table"},blurry_frame={type="frame_style",top_padding=8,bottom_padding=12,graphical_set={base={background_blur=true,center={position={336,0},size={1,1}},opacity=0.75}},right_padding=12,left_padding=12},squashable_label_with_left_padding={parent="label_with_left_padding",horizontally_squashable="on",type="label_style"},other_settings_gui_textbox={horizontal_align="center",type="textbox_style",width=120},quick_bar_slot_button={left_click_sound={{volume=1,filename="__core__/sound/gui-click.ogg"}},selected_hovered_graphical_set={glow={position={240,736},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},shadow={position={240,736},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},base={position={80,736},size=80,border=4}},default_graphical_set={base={position={0,736},size=80,border=4},shadow={position={240,736},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},selected_clicked_graphical_set={base={position={160,736},size=80,border=4},shadow={position={240,736},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},type="button_style",size=40,draw_shadow_under_picture=true,clicked_graphical_set={base={position={160,736},size=80,border=4},shadow={position={240,736},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},hovered_graphical_set={glow={position={240,736},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},shadow={position={240,736},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},base={position={80,736},size=80,border=4}},pie_progress_color={0.98,0.66,0.22,0.5},parent="button",selected_graphical_set={base={position={80,736},size=80,border=4},shadow={position={240,736},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},padding=0},conditionally_available_technology_slot={hovered_ingredients_background={position={364,136},corner_size=8},default_ingredients_background={position={347,153},corner_size=8},default_graphical_set={base={position={296,153},corner_size=8}},selected_clicked_graphical_set={base={position={312,153},corner_size=8}},hovered_level_range_band={position={397,153},corner_size=8},clicked_overlay={left={position={456,152},size={16,1}},bottom={position={432,153},size={1,16}},right={position={473,152},size={16,1}},left_top={position={456,136},size={16,16}},top={position={472,136},size={1,16}},left_bottom={position={416,153},size={16,16}},right_bottom={position={433,153},size={16,16}},center={position={472,152},size={1,1}},right_top={position={473,136},size={16,16}}},clicked_graphical_set={base={position={312,153},corner_size=8}},hovered_graphical_set={base={position={312,153},corner_size=8}},highlighted_ingredients_background={position={364,136},corner_size=8},parent="technology_slot",highlighted_graphical_set={base={position={330,153},corner_size=8}},level_band={position={381,153},corner_size=8},level_font_color={95,68,32},level_range_band={position={397,153},corner_size=8},hovered_level_band={position={381,153},corner_size=8},disabled_graphical_set={base={position={296,153},corner_size=8}},clicked_ingredients_background={position={364,136},corner_size=8},type="technology_slot_style",selected_hovered_graphical_set={base={position={312,153},corner_size=8}},disabled_ingredients_background={position={364,136},corner_size=8},hovered_level_font_color={95,68,32},selected_graphical_set={base={position={312,153},corner_size=8}},level_range_font_color={255,234,206},hovered_level_range_font_color={255,234,206}},quest_item_description_complete={font_color={r=210,b=145,g=253},type="label_style",parent="quest_item_description"},changelog_subheader_frame={horizontally_stretchable="on",type="frame_style",top_padding=4,right_padding=12,left_padding=12,parent="subheader_frame"},recipe_tooltip_cannot_craft_label={parent="description_value_label",type="label_style"},button_with_shadow={default_graphical_set={base={position={0,17},corner_size=8}},type="button_style",clicked_graphical_set={base={position={51,17},corner_size=8}},hovered_graphical_set={glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5},base={position={34,17},corner_size=8}}},confirm_in_load_game_button={parent="confirm_button",type="button_style",minimal_width=300},quick_bar_inner_panel={horizontal_flow_style={horizontal_spacing=4,type="horizontal_flow_style"},padding=0,graphical_set={base={center={position={42,8},size={1,1}}},shadow={position={440,24},corner_size=8,draw_type="outer"}},vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},type="frame_style"},quest_gui_entry_wrapper_common={vertical_align="top",type="horizontal_flow_style",horizontal_spacing=2,minimal_height=24},quest_item_description_failed={font_color={r=250,b=90,g=90},type="label_style",parent="quest_item_description"},featured_technology_inner_table={type="table_style",parent="slot_table",top_padding=4,bottom_padding=4},completed_tutorial_card_frame={type="frame_style",parent="unlocked_achievement_in_sidebar_frame"},draggable_space_in_shortcut_list={right_margin=0,parent="draggable_space",type="empty_widget_style",width=20},disabled_technology_slot={hovered_ingredients_background={position={347,619},corner_size=8},default_ingredients_background={position={364,619},corner_size=8},default_graphical_set={base={position={313,619},corner_size=8}},selected_clicked_graphical_set={base={position={330,619},corner_size=8}},hovered_level_range_band={position={448,602},corner_size=8},clicked_overlay={left={position={456,152},size={16,1}},bottom={position={432,204},size={1,16}},right={position={473,152},size={16,1}},left_top={position={456,136},size={16,16}},top={position={472,136},size={1,16}},left_bottom={position={416,204},size={16,16}},right_bottom={position={433,204},size={16,16}},center={position={472,152},size={1,1}},right_top={position={473,136},size={16,16}}},clicked_graphical_set={base={position={330,619},corner_size=8}},hovered_graphical_set={base={position={330,619},corner_size=8}},highlighted_ingredients_background={position={347,619},corner_size=8},parent="technology_slot",highlighted_graphical_set={base={position={381,619},corner_size=8}},level_band={position={398,619},corner_size=8},level_font_color={132,132,132},level_range_band={position={415,619},corner_size=8},hovered_level_band={position={433,602},corner_size=8},disabled_graphical_set={base={position={313,619},corner_size=8}},clicked_ingredients_background={position={347,619},corner_size=8},type="technology_slot_style",selected_hovered_graphical_set={base={position={330,619},corner_size=8}},disabled_ingredients_background={position={364,619},corner_size=8},hovered_level_font_color={255,255,255},selected_graphical_set={base={position={330,619},corner_size=8}},level_range_font_color={132,132,132},hovered_level_range_font_color={255,255,255}},mods_gui_left_pane_vertical_flow={type="vertical_flow_style",maximal_width=724,maximal_height=692,natural_height=692,vertical_spacing=12,natural_width=724},quest_hint_description_wrapper={type="horizontal_flow_style",parent="quest_gui_entry_wrapper_common"},speech_bubble={label_style={font_color={r=0,b=0,g=0},font="scenario-message-dialog",single_line=false,parent="label",type="label_style",width=400},type="speech_bubble_style",arrow_indent=7,close_color={0,0,0},arrow_graphical_set={bottom={filename="__core__/graphics/arrows/hint-orange-arrow-down.png",height=35,width=71},top={filename="__core__/graphics/arrows/hint-orange-arrow-up.png",height=37,width=62},right={filename="__core__/graphics/arrows/hint-orange-arrow-right.png",height=73,width=38},left={filename="__core__/graphics/arrows/hint-orange-arrow-left.png",height=73,width=43}},frame_style={type="frame_style",top_padding=0,bottom_padding=10,graphical_set={position={0,0},corner_size={13,13},type="composition",filename="__core__/graphics/arrows/hint-orange-box.png"},right_padding=0,left_padding=5},pass_through_mouse=false},camera={type="camera_style",graphical_set={}},working_weapon_button={type="button_style",parent="green_slot_button"},invalid_mod_label={type="label_style"},circuit_buttons_in_frame_title_flow={type="horizontal_flow_style"},quest_item_icons_label={parent="label",font="default",type="label_style"},shortcut_bar_expand_button={parent="frame_button",height=16,top_padding=4,bottom_padding=4,type="button_style",left_padding=2,right_padding=2,width=8},browse_games_right_part_vertical_flow={width=400,type="vertical_flow_style"},mod_thumbnail_image={stretch_image_to_widget_size=true,size=144,right_margin=4,graphical_set={base={position={85,0},corner_size=8,draw_type="outer"}},type="image_style"},manage_players_table={type="table_style",cell_padding=4,top_padding=5,vertical_spacing=5,selected_row_color={a=0},left_padding=10,horizontal_spacing=20,hovered_row_color={a=0}},disabled_index_technology_slot={hovered_ingredients_background={position={347,639},corner_size=8},default_ingredients_background={position={364,639},corner_size=8},default_graphical_set={base={position={313,639},corner_size=8}},selected_clicked_graphical_set={base={position={330,639},corner_size=8}},hovered_level_range_band={position={398,639},corner_size=8},clicked_overlay={left={position={456,152},size={16,1}},bottom={position={432,204},size={1,16}},right={position={473,152},size={16,1}},left_top={position={456,136},size={16,16}},top={position={472,136},size={1,16}},left_bottom={position={416,204},size={16,16}},right_bottom={position={433,204},size={16,16}},center={position={472,152},size={1,1}},right_top={position={473,136},size={16,16}}},clicked_graphical_set={base={position={330,639},corner_size=8}},hovered_graphical_set={base={position={330,639},corner_size=8}},highlighted_ingredients_background={position={347,639},corner_size=8},parent="technology_slot",highlighted_graphical_set={base={position={381,639},corner_size=8}},level_band={position={466,639},corner_size=8},level_font_color={132,132,132},level_range_band={position={415,639},corner_size=8},hovered_level_band={position={381,639},corner_size=8},disabled_graphical_set={base={position={313,639},corner_size=8}},clicked_ingredients_background={position={347,639},corner_size=8},type="technology_slot_style",selected_hovered_graphical_set={base={position={330,639},corner_size=8}},disabled_ingredients_background={position={364,639},corner_size=8},hovered_level_font_color={255,255,255},selected_graphical_set={base={position={330,639},corner_size=8}},level_range_font_color={132,132,132},hovered_level_range_font_color={255,255,255}},textbox={active_background={base={position={265,0},corner_size=8},shadow={position={240,783},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},minimal_height=28,selection_background_color={241,190,100},default_background={base={position={248,0},corner_size=8}},type="textbox_style",rich_text_highlight_error_color={r=166,b=10,g=10},rich_text_highlight_warning_color={r=255,b=0,g=90},selected_rich_text_highlight_error_color={r=166,b=10,g=10},right_padding=2,selected_rich_text_highlight_warning_color={r=182,b=4,g=62},disabled_background={base={position={282,0},corner_size=8}},top_padding=0,width=200,selected_rich_text_highlight_ok_color={r=50,b=0,g=80},font_color={},rich_text_setting="enabled",bottom_padding=0,rich_text_highlight_ok_color={r=63,b=0,g=105},left_padding=3,disabled_font_color={r=0.5,a=0.5,b=0.5,g=0.5},font="default"},main_menu_version_label={font="default-game",type="label_style"},draggable_space_in_train_schedule={left_margin=0,parent="draggable_space",right_margin=-4,graphical_set={base={center_tiling_horizontal=true,top={position={192,8},size={8,7}},bottom={position={208,8},size={8,8}},bottom_tiling=true,center={position={200,8},size={8,8}},top_tiling=true},glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}},type="empty_widget_style",width=60},label={font="default",single_line=true,font_color={1,1,1},rich_text_setting="enabled",rich_text_highlight_error_color={r=255,b=0,g=0},type="label_style",rich_text_highlight_ok_color={r=0,b=0,g=255},disabled_font_color={1,1,1,0.5},rich_text_highlight_warning_color={r=255,b=0,g=255}},mod_info_vertical_flow={width=500,type="vertical_flow_style"},packed_horizontal_flow={horizontal_spacing=0,type="horizontal_flow_style"},blurry_scroll_pane={type="scroll_pane_style",padding=8,extra_padding_when_activated=-4,graphical_set={base={}},vertical_scrollbar_style={type="vertical_scrollbar_style",background_graphical_set={position={0,72},blend_mode="multiplicative-with-alpha",opacity=0.7,corner_size=8}}},outer_frame_without_shadow={graphical_set={},type="frame_style",parent="outer_frame"},naked_frame={type="frame_style",parent="inner_frame"},research_progress_inner_frame_active={graphical_set={base={position={68,0},corner_size=8}},type="frame_style",parent="research_progress_inner_frame"},map_generator_13_notch_slider={parent="map_generator_notched_slider",type="slider_style",width=108},other_settings_gui_button={parent="button",type="button_style",width=120},confirm_button={type="button_style",clicked_graphical_set={base={left_top={position={119,17},size=8},left={position={119,25},size={8,1}},left_bottom={position={119,26},size=8},center={position={312,296},size={1,64}},right={position={312,296},size={24,64}}}},hovered_graphical_set={base={left_top={position={102,17},size=8},left={position={102,25},size={8,1}},left_bottom={position={102,26},size=8},center={position={216,296},size={1,64}},right={position={216,296},size={24,64}}},glow={tint={135,216,139,128},left_top={position={200,128},size=8},draw_type="outer",left={position={200,136},size={8,1}},left_bottom={position={200,137},size=8},right_outer_border_shift=-12,center={position={336,424},size={1,80}},right={position={336,424},size={32,80}}}},parent="dialog_button",disabled_graphical_set={base={left_top={position={85,17},size=8},left={position={85,25},size={8,1}},left_bottom={position={85,26},size=8},center={position={120,296},size={1,64}},right={position={120,296},size={24,64}}},glow={left_top={position={200,128},size=8},draw_type="outer",left={position={200,136},size={8,1}},left_bottom={position={200,137},size=8},right_outer_border_shift=-12,center={position={336,424},size={1,80}},right={position={336,424},size={32,80}}}},horizontal_align="right",default_graphical_set={base={left_top={position={68,17},size=8},left={position={68,25},size={8,1}},left_bottom={position={68,26},size=8},center={position={24,296},size={1,64}},right={position={24,296},size={24,64}}},shadow={left_top={position={200,128},size=8},draw_type="outer",left={position={200,136},size={8,1}},left_bottom={position={200,137},size=8},right_outer_border_shift=-12,center={position={336,424},size={1,80}},right={position={336,424},size={32,80}}}}},technology_list_container={type="vertical_flow_style",padding=0},image_frame={type="frame_style",graphical_set={position={0,40},corner_size=3,filename="__core__/graphics/gui.png",scale=1},parent="frame",padding=0},unlocked_tutorial_card_frame={parent="locked_achievement_in_sidebar_frame",type="frame_style",bottom_padding=4},inside_deep_frame={type="frame_style",padding=0,graphical_set={base={position={17,0},corner_size=8,center={position={42,8},size={1,1}},draw_type="outer"}},vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},parent="frame"},tutorial_list_frame={parent="frame",type="frame_style",minimal_width=300},train_schedule_item_select_button={type="button_style",parent="dark_rounded_button",size=28,padding=-3},info_box_activity_bar={width=300,type="activity_bar_style"},black_squashable_label={parent="black_label",horizontally_squashable="on",type="label_style"},achievement_failed_reason_label={type="label_style",font_color={r=0.88627450980392,b=0.85882352941176,g=0.85882352941176},font="default-small",parent="label"},train_schedule_non_existent_stop_label={hovered_font_color={255,138,138},font_color={255,138,138},horizontally_squashable="on",type="label_style"},number_input_textbox={horizontal_align="right",type="textbox_style",minimal_width=50},tutorial_completed_title_label={parent="tutorial_title_label",type="label_style"},forward_button={type="button_style",clicked_graphical_set={base={left_top={position={51,17},size=8},left={position={51,25},size={8,1}},left_bottom={position={51,26},size=8},center={position={312,232},size={1,64}},right={position={312,232},size={24,64}}}},hovered_graphical_set={base={left_top={position={34,17},size=8},left={position={34,25},size={8,1}},left_bottom={position={34,26},size=8},center={position={216,232},size={1,64}},right={position={216,232},size={24,64}}},glow={left_top={position={200,128},size=8},draw_type="outer",left={position={200,136},size={8,1}},left_bottom={position={200,137},size=8},right_outer_border_shift=-12,center={position={336,424},size={1,80}},right={position={336,424},size={32,80}}}},parent="dialog_button",disabled_graphical_set={base={left_top={position={17,17},size=8},left={position={17,25},size={8,1}},left_bottom={position={17,26},size=8},center={position={120,232},size={1,64}},right={position={120,232},size={24,64}}},glow={left_top={position={200,128},size=8},draw_type="outer",left={position={200,136},size={8,1}},left_bottom={position={200,137},size=8},right_outer_border_shift=-12,center={position={336,424},size={1,80}},right={position={336,424},size={32,80}}}},horizontal_align="right",default_graphical_set={base={left_top={position={0,17},size=8},left={position={0,25},size={8,1}},left_bottom={position={0,26},size=8},center={position={24,232},size={1,64}},right={position={24,232},size={24,64}}},shadow={left_top={position={200,128},size=8},draw_type="outer",left={position={200,136},size={8,1}},left_bottom={position={200,137},size=8},right_outer_border_shift=-12,center={position={336,424},size={1,80}},right={position={336,424},size={32,80}}}}},squashable_label={horizontally_squashable="on",type="label_style"},console_input_textfield={active_background={position={8,16},filename="__core__/graphics/gui.png",top_border=2,size=1,bottom_border=2,scale=1},selected_rich_text_highlight_ok_color={r=0,b=0,g=255},selection_background_color={241,190,100},default_background={position={8,16},filename="__core__/graphics/gui.png",top_border=2,size=1,bottom_border=2,scale=1},type="textbox_style",rich_text_highlight_error_color={r=255,b=0,g=0},rich_text_highlight_warning_color={r=255,b=0,g=255},selected_rich_text_highlight_error_color={r=255,b=0,g=0},right_padding=3,top_padding=0,rich_text_setting="highlight",bottom_padding=0,selected_rich_text_highlight_warning_color={r=255,b=0,g=255},left_padding=3,rich_text_highlight_ok_color={r=0,b=0,g=255},font="default-game"},tooltip_title_label={type="label_style",font="default-bold",minimal_width=50,parent="description_label",maximal_width=356},logistic_networks_dropdown={parent="dropdown",type="dropdown_style",minimal_width=200},a_inner_paddingless_frame={vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},parent="a_inner_frame",type="frame_style",padding=0},browse_games_gui_toggle_favorite_off_button={size=16,clicked_graphical_set={filename="__core__/graphics/favourite-grey-hovered.png",size=64,scale=1},hovered_graphical_set={filename="__core__/graphics/favourite-grey-hovered.png",size=64,scale=1},disabled_graphical_set={filename="__core__/graphics/favourite-grey.png",size=64,scale=1},type="button_style",default_graphical_set={filename="__core__/graphics/favourite-grey.png",size=64,scale=1}},default_permission_group_list_box_item={type="button_style",default_font_color={0.55,0.55,1},selected_hovered_font_color={0.2,0.2,0.8},hovered_font_color={0.8,0.8,1},parent="list_box_item",selected_font_color={0.2,0.2,0.8},selected_clicked_font_color={0.2,0.2,0.8}},machine_right_part_vertical_flow={vertical_spacing=5,type="vertical_flow_style"},mod_dependency_vertical_flow={vertical_spacing=1,type="vertical_flow_style"},removed_content_table={column_alignments={{column=2,alignment="middle-right"}},type="table_style",odd_row_graphical_set={position={472,25},filename="__core__/graphics/gui-new.png",size=1},column_widths={{minimal_width=332,column=1},{minimal_width=72,column=2}},left_cell_padding=8,right_cell_padding=8,border={vertical_line={position={0,40},size={8,1}},top_right_corner={position={16,40},size={8,8}},horizontal_line={position={8,40},size={1,8}},top_t={position={64,40},size={8,8}},bottom_right_corner={position={24,40},size={8,8}},bottom_left_corner={position={32,40},size={8,8}},left_t={position={56,40},size={8,8}},right_t={position={72,40},size={8,8}},bottom_t={position={48,40},size={8,8}},left_end={position={112,40},size={8,8}},top_end={position={88,40},size={8,8}},right_end={position={96,40},size={8,8}},top_left_coner={position={40,40},size={8,8}},cross={position={80,40},size={8,8}},bottom_end={position={104,40},size={8,8}},border_width=8}},bold_clickable_red_label={parent="bold_red_label",type="label_style"},multi_tooltip_invisible_frame={horizontal_flow_style={horizontal_spacing=0,type="horizontal_flow_style"},padding=0,graphical_set={},vertical_flow_style={vertical_spacing=4,type="vertical_flow_style"},type="frame_style"},dark_line={type="line_style",border={vertical_line={position={208,40},size={8,1}},top_end={position={200,40},size=8},bottom_end={position={216,40},size=8},border_width=8}},available_technology_slot={selected_hovered_graphical_set={base={position={312,136},corner_size=8}},default_graphical_set={base={position={296,136},corner_size=8}},selected_clicked_graphical_set={base={position={312,136},corner_size=8}},hovered_level_range_band={position={397,136},corner_size=8},clicked_overlay={left={position={456,152},size={16,1}},bottom={position={432,136},size={1,16}},right={position={473,152},size={16,1}},left_top={position={456,136},size={16,16}},top={position={472,136},size={1,16}},left_bottom={position={416,136},size={16,16}},right_bottom={position={433,136},size={16,16}},center={position={472,152},size={1,1}},right_top={position={473,136},size={16,16}}},clicked_graphical_set={base={position={312,136},corner_size=8},shadow={position={200,128},corner_size=8,draw_type="outer",tint={0,0,0,0.35},scale=0.5}},hovered_graphical_set={base={position={312,136},corner_size=8}},parent="technology_slot",highlighted_graphical_set={base={position={330,136},corner_size=8}},level_band={position={381,136},corner_size=8},level_font_color={77,71,48},level_range_band={position={397,136},corner_size=8},hovered_level_band={position={381,136},corner_size=8},disabled_graphical_set={base={position={296,136},corner_size=8}},type="technology_slot_style",hovered_level_font_color={77,71,48},selected_graphical_set={base={position={312,136},corner_size=8}},level_range_font_color={255,241,183},hovered_level_range_font_color={255,241,183}},slot_table_spacing_horizontal_flow={horizontal_spacing=2,type="horizontal_flow_style"},quest_item_subheading={font_color={r=255,b=192,g=230},font="default-semibold",single_line=true,horizontal_align="left",type="label_style",left_padding=3},vertical_flow={vertical_spacing=4,type="vertical_flow_style"},hoverable_bold_label={hovered_font_color={r=0.99,b=0.61,g=0.83},type="label_style",font="default-bold"},heading_3_label_yellow={parent="heading_3_label",type="label_style"},mods_table={selected_hovered_graphical_set={position={369,17},corner_size=8},apply_row_graphical_set_per_column=true,left_cell_padding=8,bottom_cell_padding=2,selected_graphical_set={position={51,17},corner_size=8},top_cell_padding=2,type="table_style",clicked_graphical_set={position={51,17},corner_size=8},hovered_graphical_set={position={34,17},corner_size=8},selected_clicked_graphical_set={position={352,17},corner_size=8},default_row_graphical_set={position={208,17},corner_size=8},right_cell_padding=8,horizontal_spacing=0},default_sprite_scale=0.5,scroll_pane_light={type="scroll_pane_style",graphical_set={base={position={85,0},corner_size=8,draw_type="outer"}}},achievement_image={type="image_style",size=100},draggable_space_header={right_margin=0,parent="draggable_space",type="empty_widget_style"},mining_progressbar={parent="health_progressbar",type="progressbar_style"},browse_games_gui_toggle_favorite_on_button={size=16,clicked_graphical_set={filename="__core__/graphics/favourite-hovered.png",size=64,scale=1},hovered_graphical_set={filename="__core__/graphics/favourite-hovered.png",size=64,scale=1},disabled_graphical_set={filename="__core__/graphics/favourite.png",size=64,scale=1},type="button_style",default_graphical_set={filename="__core__/graphics/favourite.png",size=64,scale=1}},color_indicator={graphical_set={position={195,72},corner_size=8},type="empty_widget_style",size=28},double_slider={draw_notches=false,empty_bar={base={right={position={65,72},size={8,8}},center={position={64,72},size={1,8}},left={position={56,72},size={8,8}}}},button={type="button_style",parent="left_slider_button"},high_button={type="button_style",parent="right_slider_button"},height=12,type="double_slider_style",minimal_width=160,notch={base={position={138,200},size={4,16}},shadow={position={146,192},size={20,32},draw_type="outer",left_outer_border_shift=-4,top_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4}},full_bar_disabled={base={position={90,72},corner_size=8}},empty_bar_disabled={base={right={position={65,80},size={8,8}},center={position={65,80},size={1,8}},left={position={56,80},size={8,8}}}},full_bar={base={position={73,72},corner_size=8}}},dialog_button={clicked_font_color={28,28,28},font="default-dialog-button",type="button_style",height=32,bottom_padding=2,parent="button",disabled_font_color={0.5,0.5,0.5},minimal_width=112},achievement_locked_description_label={type="label_style",parent="achievement_description_label"},quest_gui_frame={use_header_filler=false,right_padding=8,parent="frame",horizontally_stretchable="on",type="frame_style",top_padding=0,bottom_padding=4,right_margin=10,left_padding=8,padding=0,bottom_margin=10},quest_item_description_info={font_color={r=128,b=240,g=206},type="label_style",parent="quest_item_description"},red_circuit_network_content_slot={parent="slot_button",default_graphical_set={position={111,36},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},type="button_style"},draggable_space={right_margin=8,graphical_set={base={center_tiling_horizontal=true,top={position={192,8},size={8,7}},bottom={position={208,8},size={8,8}},bottom_tiling=true,center={position={200,8},size={8,8}},top_tiling=true},shadow={position={200,128},corner_size=8,draw_type="outer",tint={15,7,3,56},scale=0.5}},type="empty_widget_style",left_margin=8},slider={draw_notches=false,empty_bar={base={right={position={65,72},size={8,8}},center={position={64,72},size={1,8}},left={position={56,72},size={8,8}}}},button={left_click_sound={{volume=1,filename="__core__/sound/gui-click.ogg"}},default_graphical_set={base={position={64,48},size={40,24}}},disabled_graphical_set={base={position={104,48},size={40,24}}},width=20,height=12,clicked_graphical_set={base={position={184,48},size={40,24}}},hovered_graphical_set={base={position={144,48},size={40,24}},glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}},parent="slider_button",type="button_style",padding=0},height=12,type="slider_style",minimal_width=160,notch={base={position={138,200},size={4,16}},shadow={position={146,192},size={20,32},draw_type="outer",left_outer_border_shift=-4,top_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4}},full_bar_disabled={base={position={90,72},corner_size=8}},empty_bar_disabled={base={right={position={65,80},size={8,8}},center={position={65,80},size={1,8}},left={position={56,80},size={8,8}}}},full_bar={base={position={73,72},corner_size=8}}},horizontal_flow={horizontal_spacing=4,type="horizontal_flow_style"},description_title_label={parent="description_label",font="default-bold",type="label_style"},train_schedule_comparison_type_frame_indented={left_margin=-8,padding=0,right_margin=8,type="frame_style",top_margin=-20,bottom_margin=20},shortcut_bar_window_frame={use_header_filler=false,left_padding=4,type="frame_style",right_padding=0},red_button={type="button_style",clicked_graphical_set={base={position={187,17},corner_size=8}},hovered_graphical_set={glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5},base={position={170,17},corner_size=8}},disabled_graphical_set={base={position={153,17},corner_size=8}},parent="button",default_graphical_set={base={position={136,17},corner_size=8}}},mod_disabled_label={type="label_style",font_color={r=0.5,b=0.5,g=0.5}},trash_slots_scroll_pane={vertically_squashable="off",type="scroll_pane_style",maximal_height=100},load_game_mod_invalid_label={type="label_style"},shortcut_bar_button_red={type="button_style",clicked_graphical_set={base={position={363,776},corner_size=8},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},hovered_graphical_set={glow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4,tint={236,130,130,127}},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},base={position={346,776},corner_size=8}},parent="shortcut_bar_button",default_graphical_set={base={position={312,776},corner_size=8},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}}},main_menu_login_notice_label={maximal_width=400,type="label_style"},campaigns_list_box={type="list_box_style",maximal_width=400,minimal_height=450,vertically_stretchable="on",minimal_width=300},b_inner_frame={type="frame_style",graphical_set={base={position={17,0},corner_size=8,center={position={76,8},size={1,1}},draw_type="outer"}}},a_inner_frame={type="frame_style",graphical_set={base={position={17,0},corner_size=8,draw_type="outer"},shadow={position={183,128},corner_size=8,draw_type="inner",tint={0,0,0,1},scale=0.5}}},blueprint_shelf_flow={type="vertical_flow_style",padding=5},achievement_failed_title_label={font_color={r=0.56078431372549,b=0.46274509803922,g=0.46274509803922},type="label_style",parent="achievement_title_label"},right_bottom_container_frame={parent="outer_frame",vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},type="frame_style"},achievement_unlocked_description_label={type="label_style",parent="achievement_description_label"},red_back_button={parent="dialog_button",type="button_style",clicked_graphical_set={base={left={position={288,360},size={24,64}},right_top={position={196,17},size=8},right_bottom={position={196,26},size=8},center={position={312,360},size={1,64}},right={position={196,25},size={8,1}}}},hovered_graphical_set={base={left={position={192,360},size={24,64}},right_top={position={179,17},size=8},right_bottom={position={179,26},size=8},center={position={216,360},size={1,64}},right={position={179,25},size={8,1}}},glow={tint={254,90,90,128},right_top={position={209,128},size=8},draw_type="outer",left={position={304,424},size={32,80}},left_outer_border_shift=12,right_bottom={position={209,137},size=8},center={position={336,424},size={1,80}},right={position={209,136},size={8,1}}}},horizontal_align="left",disabled_graphical_set={base={left={position={96,360},size={24,64}},right_top={position={162,17},size=8},right_bottom={position={162,26},size=8},center={position={120,360},size={1,64}},right={position={162,25},size={8,1}}},glow={right_top={position={209,128},size=8},draw_type="outer",left={position={304,424},size={32,80}},left_outer_border_shift=12,right_bottom={position={209,137},size=8},center={position={336,424},size={1,80}},right={position={209,136},size={8,1}}}},disabled_font_color={0.5,0.5,0.5},default_graphical_set={base={left={position={0,360},size={24,64}},right_top={position={145,17},size=8},right_bottom={position={145,26},size=8},center={position={24,360},size={1,64}},right={position={145,25},size={8,1}}},shadow={right_top={position={209,128},size=8},draw_type="outer",left={position={304,424},size={32,80}},left_outer_border_shift=12,right_bottom={position={209,137},size=8},center={position={336,424},size={1,80}},right={position={209,136},size={8,1}}}}},neutral_message_frame={type="frame_style",graphical_set={base={position={386,17},corner_size=8}}},quest_hint_info_sprite={stretch_image_to_widget_size=true,height=8,width=8,right_margin=4,type="image_style",left_margin=8,top_margin=6},train_station_schedule_list_box={type="list_box_style",minimal_height=50,maximal_height=800},saved_research_label={type="label_style",left_padding=4},frame_subheading_label={type="label_style",parent="description_label",font="default",top_padding=4},technology_gui_inner_frame={use_header_filler=false,type="frame_style",padding=0,graphical_set={center={position={8,8},size=1}},vertical_flow_style={vertical_spacing=8,type="vertical_flow_style"},parent="inner_frame_in_outer_frame"},locale_dropdown={list_box_style={scroll_pane_style={extra_padding_when_activated=0,graphical_set={},type="scroll_pane_style",padding=0},type="list_box_style",item_style={parent="button",font="locale-pick",type="button_style"},maximal_height=400},parent="dropdown",type="dropdown_style"},slot_with_filter_button={type="button_style",clicked_graphical_set={position={221,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},hovered_graphical_set={position={221,72},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},parent="slot_button",default_graphical_set={position={221,36},filename="__core__/graphics/gui.png",size=36,scale=1,border=1}},finished_game_table={parent="removed_content_table",type="table_style",column_widths={}},browse_games_scroll_pane={type="scroll_pane_style"},window_content_frame_deep={graphical_set={base={position={17,0},corner_size=8,center={position={42,8},size={1,1}},draw_type="outer"}},type="frame_style",padding=4},packed_padded_vertical_flow={parent="packed_vertical_flow",type="vertical_flow_style",padding=4},inner_frame={type="frame_style",graphical_set={},title_style={parent="frame_title",type="label_style",bottom_padding=5},padding=0},tutorial_notice_name_label={type="label_style",font_color={r=1,b=1,g=1},font="default-large",parent="label"},search_mods_button={parent="button",type="button_style",padding=2},icon_button={size=38,default_graphical_set={position={8,0},corner_size=3,filename="__core__/graphics/gui.png",scale=1},right_padding=0,type="button_style",default_font_color={},bottom_padding=1,left_padding=0,top_padding=1,parent="button"},invalid_selected_mod_label={type="label_style",font_color={115,0,0}},black_clickable_label={hovered_font_color={1,0.74,0.4},clicked_font_color={r=0.98,b=0.22,g=0.66},type="label_style",parent="black_label"},map_generator_notched_slider={type="slider_style",width=100,parent="notched_slider",top_margin=-4,bottom_margin=4},achievement_locked_title_label={parent="achievement_title_label",type="label_style"},research_progress_inner_frame={top_padding=3,type="frame_style"},locomotive_minimap_button={parent="button",height=150,type="button_style",width=200},default_sprite_priority="extra-high-no-scale",dark_frame={type="frame_style",graphical_set={base={position={68,0},corner_size=8}}},featured_technology_effects_flow={parent="flow",horizontal_spacing=8,type="flow_style"},dropdown_button={left_click_sound={{volume=1,filename="__core__/sound/gui-click.ogg"}},type="button_style",font="default-dropdown",padding=0,horizontal_align="left"},bordered_table={type="table_style",cell_padding=4,left_cell_padding=8,border={vertical_line={position={0,40},size={8,1}},top_right_corner={position={16,40},size={8,8}},horizontal_line={position={8,40},size={1,8}},top_t={position={64,40},size={8,8}},bottom_right_corner={position={24,40},size={8,8}},bottom_left_corner={position={32,40},size={8,8}},left_t={position={56,40},size={8,8}},right_t={position={72,40},size={8,8}},bottom_t={position={48,40},size={8,8}},left_end={position={112,40},size={8,8}},top_end={position={88,40},size={8,8}},right_end={position={96,40},size={8,8}},top_left_coner={position={40,40},size={8,8}},cross={position={80,40},size={8,8}},bottom_end={position={104,40},size={8,8}},border_width=8}},bold_green_label={font_color={0,1,0},type="label_style",parent="bold_label"},multiplayer_activity_bar={type="activity_bar_style"},play_locked_tutorial_button={parent="play_tutorial_button",default_graphical_set={position={0,32},corner_size=3,filename="__core__/graphics/gui.png",scale=1},type="button_style"},side_menu_button_hovered={parent="icon_button",default_graphical_set={position={0,8},corner_size=3,filename="__core__/graphics/gui.png",scale=1},type="button_style"},quest_item_description_wrapper={type="horizontal_flow_style",parent="quest_gui_entry_wrapper_common"},other_settings_slider={parent="slider",type="slider_style",minimal_width=250},removed_content_scroll_pane={graphical_set={base={position={17,0},corner_size=8,center={position={76,8},size=1},draw_type="outer"}},type="scroll_pane_style",parent="scroll_pane"},research_progress_inner_frame_inactive={graphical_set={base={position={34,0},corner_size=8}},type="frame_style",parent="research_progress_inner_frame"},electric_usage_label={parent="label",type="label_style",width=60},electric_satisfaction_progressbar={other_colors={{color={1,0,0},less_than=0.5},{color={1,1,0},less_than=1}},type="progressbar_style"},open_close_hints_button={height=28,default_graphical_set={base={position={0,0},corner_size=8}},padding=0,right_margin=12,font="heading-2",type="button_style",width=28},radiobutton={selected_hovered_graphical_set={base={position={24,160},size={24,24}},shadow={center={position={123,156},size={34,34},scale=0.5},stretch_monolith_image_to_size=false}},default_graphical_set={base={position={0,160},size={24,24}},shadow={center={position={123,156},size={34,34},scale=0.5},stretch_monolith_image_to_size=false}},disabled_graphical_set={base={position={96,160},size={24,24}},shadow={center={position={123,156},size={34,34},scale=0.5},stretch_monolith_image_to_size=false}},type="radiobutton_style",clicked_graphical_set={base={position={48,160},size={24,24}},shadow={center={position={123,156},size={34,34},scale=0.5},stretch_monolith_image_to_size=false}},hovered_graphical_set={base={position={24,160},size={24,24}},shadow={center={position={123,156},size={34,34},scale=0.5},stretch_monolith_image_to_size=false}},selected_clicked_graphical_set={base={position={48,160},size={24,24}},shadow={center={position={123,156},size={34,34},scale=0.5},stretch_monolith_image_to_size=false}},selected_graphical_set={base={position={72,160},size={24,24}},shadow={center={position={123,156},size={34,34},scale=0.5},stretch_monolith_image_to_size=false}},text_padding=8,font="default"},mod_updates_available_list_box_item={type="button_style",default_font_color={0.9,0.9,0},selected_hovered_font_color={1,1,0},hovered_font_color={1,1,0},parent="list_box_item",selected_font_color={1,1,0},selected_clicked_font_color={1,1,0}},technology_gui_left_frame={horizontally_stretchable="off",type="frame_style",right_padding=12,left_padding=8,parent="technology_gui_inner_frame"},big_dropdown={right_padding=44,type="dropdown_style",horizontally_stretchable="on",height=36,top_padding=6,bottom_padding=4,parent="dropdown",left_padding=36,minimal_width=300,button_style={height=36,type="button_style",width=36}},locomotive_minimap_widget={type="empty_widget_style",graphical_set={shadow={top={position={191,128},size={1,8},draw_type="inner"}}}},progressbar={bar_background={base={position={296,48},corner_size=8}},bar={position={313,48},corner_size=8},type="progressbar_style",font_color={1,1,1},color={g=1},bar_width=7,other_colors={},natural_width=200,minimal_width=10,font="default"},button={icon_horizontal_align="center",clicked_font_color={},default_graphical_set={base={position={0,17},corner_size=8}},minimal_height=28,horizontal_align="center",strikethrough_color={0.5,0.5,0.5},clicked_graphical_set={base={position={51,17},corner_size=8}},hovered_graphical_set={glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5},base={position={34,17},corner_size=8}},pie_progress_color={1,1,1},vertical_align="center",type="button_style",top_padding=0,selected_hovered_graphical_set={base={position={369,17},corner_size=8}},selected_graphical_set={base={position={225,17},corner_size=8}},right_padding=8,selected_clicked_graphical_set={base={position={352,17},corner_size=8}},disabled_graphical_set={base={position={17,17},corner_size=8}},minimal_width=108,font="default-semibold",left_click_sound={{volume=1,filename="__core__/sound/gui-click.ogg"}},default_font_color={},bottom_padding=0,left_padding=8,disabled_font_color={179,179,179},clicked_vertical_offset=1},minimap={type="minimap_style",graphical_set={},minimal_width=256,minimal_height=256},train_schedule_action_button={type="button_style",disabled_graphical_set={base={position={153,17},corner_size=8}},size=28,padding=0},entity_variation_button={size=100,top_padding=2,bottom_padding=5,left_padding=2,type="button_style",right_padding=5},connect_gui_frame={type="frame_style",horizontal_flow_style={vertical_align="center",type="horizontal_flow_style"},parent="b_inner_frame",padding=12},achievement_pinned_card_progressbar={type="progressbar_style",parent="achievement_card_progressbar",font="default-small-semibold",right_padding=3},tool_equip_gui_label={type="label_style",parent="description_label"},clickable_squashable_label={parent="clickable_label",horizontally_squashable="on",type="label_style"},blueprint_record_slot_button={parent="button",type="button_style",size=76},mini_button={size=16,type="button_style",padding=0},map_settings_dropdown={parent="dropdown",type="dropdown_style",minimal_width=200},control_settings_bordered_table={left_margin=-4,type="table_style",right_margin=-4,parent="bordered_table",top_margin=4,bottom_margin=-4},slider_value_textfield={horizontal_align="center",type="textbox_style",parent="short_number_textfield"},drop_target_button={clicked_font_color={r=1,b=1,g=1},default_graphical_set={position={0,0},corner_size=9,bottom_width=9,center_height=9,bottom_tiling=true,left_tiling=true,top_tiling=true,center_width=9,top_width=9,left_height=9,right_tiling=true,right_height=9,filename="__core__/graphics/blueprint-slot-tileset.png"},disabled_graphical_set={position={0,0},corner_size=9,bottom_width=9,center_height=9,bottom_tiling=true,left_tiling=true,top_tiling=true,center_width=9,top_width=9,left_height=9,right_tiling=true,right_height=9,filename="__core__/graphics/blueprint-slot-tileset.png"},padding=5,pie_progress_color={r=1,b=1,g=1},type="button_style",clicked_graphical_set={position={27,0},corner_size=9,bottom_width=9,center_height=9,bottom_tiling=true,left_tiling=true,top_tiling=true,center_width=9,top_width=9,left_height=9,right_tiling=true,right_height=9,filename="__core__/graphics/blueprint-slot-tileset.png"},hovered_graphical_set={position={27,0},corner_size=9,bottom_width=9,center_height=9,bottom_tiling=true,left_tiling=true,top_tiling=true,center_width=9,top_width=9,left_height=9,right_tiling=true,right_height=9,filename="__core__/graphics/blueprint-slot-tileset.png"},hovered_font_color={r=1,b=1,g=1},font="default",disabled_font_color={r=0.5,b=0.5,g=0.5},default_font_color={r=1,b=1,g=1}},save_as_horizontal_flow={left_padding=4,type="horizontal_flow_style",parent="player_input_horizontal_flow"},disabled_preview_index_technology_slot={height=200,ingredients_padding=32,parent="disabled_index_technology_slot",type="technology_slot_style",width=136},activity_bar={bar_background={position={222,0},filename="__core__/graphics/gui.png",size={1,7},scale=1},bar={position={221,0},filename="__core__/graphics/gui.png",size={1,5},scale=1},speed=0.01,bar_size_ratio=0.07,color={g=1},bar_width=7,type="activity_bar_style",natural_width=200,minimal_width=10},technology_card={vertical_spacing=0,type="vertical_flow_style"},tooltip_panel_background={horizontally_stretchable="on",type="frame_style",top_padding=0,bottom_padding=0,vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},graphical_set={background_blur_sigma=4,corner_size=8,opacity=0.88,position={403,0}},right_padding=4,left_padding=4},map_generator_preset_description={margin=16,default_background={base={position={51,0},corner_size=8,center={position={76,8},size=1},draw_type="outer"}},width=0,horizontally_stretchable="on",height=56,padding=8,parent="textbox",type="textbox_style"},achievements_vertical_flow={vertical_spacing=0,type="vertical_flow_style"},changelog_subheader_space={type="flow_style",left_padding=4,horizontal_spacing=0,padding=0},train_schedule_fullfilled_condition_frame={type="frame_style",graphical_set={base={position={412,86},corner_size=8}},horizontal_flow_style={type="horizontal_flow_style",parent="player_input_horizontal_flow"},padding=0},research_queue_first_slot_flow={type="horizontal_flow_style",padding=0},heading_3_label={parent="label",font="heading-3",type="label_style"},mod_dependency_invalid_label={parent="label",type="label_style"},technology_list_scroll_pane={background_graphical_set={position={282,17},corner_size=8,overall_tiling_vertical_size=100,overall_tiling_horizontal_size=72},extra_padding_when_activated=0,graphical_set={base={position={34,0},corner_size=8}},type="scroll_pane_style",parent="scroll_pane"},logistic_button_slot={type="button_style",parent="slot_button"},bordered_frame={type="frame_style",graphical_set={},right_padding=4,border={vertical_line={position={0,40},size={8,1}},top_right_corner={position={16,40},size={8,8}},horizontal_line={position={8,40},size={1,8}},top_t={position={64,40},size={8,8}},bottom_right_corner={position={24,40},size={8,8}},bottom_left_corner={position={32,40},size={8,8}},left_t={position={56,40},size={8,8}},right_t={position={72,40},size={8,8}},bottom_t={position={48,40},size={8,8}},left_end={position={112,40},size={8,8}},top_end={position={88,40},size={8,8}},right_end={position={96,40},size={8,8}},top_left_coner={position={40,40},size={8,8}},cross={position={80,40},size={8,8}},bottom_end={position={104,40},size={8,8}},border_width=8}},control_settings_scroll_pane={background_graphical_set={overall_tiling_horizontal_padding=4,corner_size=8,overall_tiling_vertical_spacing=8,overall_tiling_vertical_padding=4,position={282,17},overall_tiling_vertical_size=32},type="scroll_pane_style",graphical_set={base={position={17,0},corner_size=8,draw_type="outer",left_top={},top={},center={position={42,8},size=1},right_top={}}}},technology_gui_right_top_frame={type="frame_style",horizontal_flow_style={vertical_align="center",type="horizontal_flow_style"},parent="technology_gui_inner_frame",bottom_padding=4},description_property_name_label={parent="label",font="default-semibold",type="label_style"},changelog_dropdown={left_margin=8,type="dropdown_style",parent="dropdown"},subheader_frame={horizontal_flow_style={vertical_align="center",type="horizontal_flow_style"},right_padding=4,vertically_stretchable="off",vertical_align="center",height=36,top_padding=3,bottom_padding=1,type="frame_style",graphical_set={base={bottom={position={256,26},size={1,8}},center={position={256,25},size={1,1}}},shadow={draw_type="outer",bottom={position={208,137},size={1,8}},center={position={208,136},size={1,1}},scale=0.5}},parent="frame",left_padding=4},research_queue_active_glow_outer={type="glow_style",image_set={glow={position={200,128},corner_size=8,scale=0.5,draw_type="outer",left_outer_border_shift=-4,top_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,tint={r=2,b=2,g=255}}}},researched_technology_slot={hovered_ingredients_background={position={364,187},corner_size=8},default_ingredients_background={position={347,187},corner_size=8},default_graphical_set={base={position={296,187},corner_size=8}},selected_clicked_graphical_set={base={position={312,187},corner_size=8}},hovered_level_range_band={position={397,187},corner_size=8},clicked_overlay={left={position={456,152},size={16,1}},bottom={position={432,187},size={1,16}},right={position={473,152},size={16,1}},left_top={position={456,136},size={16,16}},top={position={472,136},size={1,16}},left_bottom={position={416,187},size={16,16}},right_bottom={position={433,187},size={16,16}},center={position={472,152},size={1,1}},right_top={position={473,136},size={16,16}}},clicked_graphical_set={base={position={312,187},corner_size=8}},hovered_graphical_set={base={position={312,187},corner_size=8}},highlighted_ingredients_background={position={364,187},corner_size=8},parent="technology_slot",highlighted_graphical_set={base={position={330,187},corner_size=8}},level_band={position={381,187},corner_size=8},level_font_color={0,84,5},level_range_band={position={397,187},corner_size=8},hovered_level_band={position={381,187},corner_size=8},disabled_graphical_set={base={position={296,187},corner_size=8}},clicked_ingredients_background={position={364,187},corner_size=8},type="technology_slot_style",selected_hovered_graphical_set={base={position={312,187},corner_size=8}},disabled_ingredients_background={position={364,187},corner_size=8},hovered_level_font_color={0,84,5},selected_graphical_set={base={position={312,187},corner_size=8}},level_range_font_color={165,255,171},hovered_level_range_font_color={165,255,171}},subfooter_frame={type="frame_style",horizontal_flow_style={type="horizontal_flow_style"},top_padding=1,bottom_padding=3,right_padding=4,graphical_set={base={center={position={256,25},size={1,1}},top={position={256,17},size={1,8}}}},parent="frame",left_padding=4},confirm_double_arrow_button={type="button_style",clicked_graphical_set={base={right={position={312,296},size={24,64}},center={position={312,296},size={1,64}},left={position={336,296},size={24,64}}}},hovered_graphical_set={base={right={position={216,296},size={24,64}},center={position={216,296},size={1,64}},left={position={240,296},size={24,64}}},glow={left={position={305,504},size={32,80}},right={position={336,424},size={32,80}},top_outer_border_shift=-4,draw_type="outer",left_outer_border_shift=12,right_outer_border_shift=-12,bottom_outer_border_shift=4,center={position={336,424},size={1,80}}}},parent="dialog_button",disabled_graphical_set={base={right={position={120,296},size={24,64}},center={position={120,296},size={1,64}},left={position={144,296},size={24,64}}},glow={left={position={305,504},size={32,80}},right={position={336,424},size={32,80}},top_outer_border_shift=-4,draw_type="outer",left_outer_border_shift=12,right_outer_border_shift=-12,bottom_outer_border_shift=4,center={position={336,424},size={1,80}}}},horizontal_align="right",default_graphical_set={base={right={position={24,296},size={24,64}},center={position={24,296},size={1,64}},left={position={48,296},size={24,64}}},shadow={left={position={305,504},size={32,80}},right={position={336,424},size={32,80}},top_outer_border_shift=-4,draw_type="outer",left_outer_border_shift=12,right_outer_border_shift=-12,bottom_outer_border_shift=4,center={position={336,424},size={1,80}}}}},quest_item_description_first={parent="quest_item_description",type="label_style"},frame_title={type="label_style",font="heading-1",bottom_padding=0,top_padding=0,left_padding=0,right_padding=0,parent="label"},changelog_scroll_pane={horizontally_stretchable="on",type="scroll_pane_style",maximal_width=0,minimal_width=850,parent="scroll_pane",graphical_set={base={position={85,0},corner_size=8,center={position={321,79},size=1},draw_type="outer"}},padding=0,margin=0},window_content_frame={graphical_set={base={position={17,0},corner_size=8,center={position={76,8},size={1,1}},draw_type="outer"}},type="frame_style",padding=4},green_slider={type="slider_style",full_bar={base={position={257,71},corner_size=8}}},achievement_title_label={type="label_style",font_color={r=1,b=1,g=1},font="default-bold",parent="label"},label_table={type="table_style",horizontal_spacing=4,vertical_spacing=0},recipe_tooltip_transitive_craft_label={parent="description_value_label",type="label_style"},blueprint_library_frame={height=600,type="frame_style",parent="outer_frame"},inside_deep_frame_for_tabs={parent="inside_deep_frame",top_padding=12,type="frame_style"},inset_frame_container_table={type="table_style",parent="table",horizontal_spacing=12,vertical_spacing=12},dialog_buttons_horizontal_flow={type="horizontal_flow_style",top_padding=8,vertically_stretchable="off"},technology_tooltip_effects_flow={parent="featured_technology_effects_flow",type="flow_style",bottom_padding=4},overloaded_crafting_machine_slot_button={type="button_style",clicked_graphical_set={position={185,72},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},hovered_graphical_set={position={148,72},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},parent="slot_button",default_graphical_set={position={111,72},filename="__core__/graphics/gui.png",size=36,scale=1,border=1}},saves_list_box_under_subheader={parent="saves_list_box",type="list_box_style",scroll_pane_style={graphical_set={base={position={17,0},corner_size=8,draw_type="outer",left_top={},top={},center={position={42,8},size=1},right_top={}}},type="scroll_pane_style",parent="list_box_scroll_pane"}},quest_hint_row={horizontally_stretchable="on",type="horizontal_flow_style",top_padding=0,bottom_padding=0,vertically_stretchable="off",left_padding=0,horizontal_spacing=2,right_padding=0},vehicle_health_progressbar={parent="health_progressbar",color={0.8,0.8,0.8},type="progressbar_style"},tooltip_title_frame_light={horizontally_stretchable="on",type="frame_style",top_padding=0,bottom_padding=0,vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},graphical_set={background_blur_sigma=4,corner_size=8,opacity=0.88,position={352,0}},right_padding=4,left_padding=4},mod_manager_label={single_line=false,parent="label",maximal_width=350,type="label_style"},downloading_mod_label={type="label_style",font_color={255,255,50}},electric_network_sections_table={cell_padding=5,vertical_spacing=0,type="table_style",horizontal_spacing=0,column_graphical_set={position={8,0},corner_size=3,filename="__core__/graphics/gui.png",scale=1}},close_button={parent="frame_button",type="button_style",size=16},minimap_frame={parent="frame_in_right_container",type="frame_style",minimal_height=256},machine_ingredients_scroll_pane={vertically_squashable="off",type="scroll_pane_style",maximal_height=100},inner_frame_in_outer_frame={type="frame_style",graphical_set={base={position={0,0},corner_size=8}}},menu_message={type="label_style",font="default-bold"},failed_achievement_in_sidebar_frame={type="frame_style",graphical_set={position={0,32},corner_size=3,filename="__core__/graphics/gui.png",scale=1},top_padding=4,parent="frame"},red_icon_button={type="button_style",parent="red_button",size=28,padding=2},achievement_locked_progress_label={parent="label",font="default-semibold",type="label_style"},tooltip_horizontal_line={type="line_style",border={right_end={position={257,40},size={8,8}},left_end={position={248,40},size={8,8}},horizontal_line={position={256,40},size={1,8}},border_width=8}},horizontal_scrollbar={type="horizontal_scrollbar_style",background_graphical_set={position={0,72},corner_size=8},height=12,thumb_button_style={left_click_sound={{volume=1,filename="__core__/sound/gui-click.ogg"}},height=10,clicked_graphical_set={base={center_tiling_horizontal=true,right={position={288,48},size={8,20}},center={position={280,48},size={8,20}},left={position={272,48},size={8,20}}}},hovered_graphical_set={base={center_tiling_horizontal=true,right={position={264,48},size={8,20}},center={position={256,48},size={8,20}},left={position={248,48},size={8,20}}},glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}},type="button_style",default_graphical_set={base={center_tiling_horizontal=true,right={position={240,48},size={8,20}},center={position={232,48},size={8,20}},left={position={224,48},size={8,20}}}}}},player_online_label={font_color={0,1,0},type="label_style",parent="bold_label"},browse_games_on_lan_table={parent="browse_games_table",type="table_style",column_widths={{width=310,column=1},{width=100,column=2},{width=100,column=3}}},custom_games_list_box={type="list_box_style",size={300,250}},small_slot_button={parent="slot_button",type="button_style",size=20},train_schedule_fulfilled_delete_button={parent="train_schedule_delete_button",default_graphical_set={base={position={412,86},corner_size=8},shadow={position={429,86},corner_size=8,draw_type="outer"}},type="button_style"},achievement_card_progressbar={font_color={r=0.81960784313725,b=0.55686274509804,g=0.77254901960784},bar={position={3,1},filename="__core__/graphics/scrollbar-mini.png",size={1,5},scale=2},right_padding=10,parent="achievement_progressbar",type="progressbar_style",font="default-semibold"},electric_satisfaction_in_description_progressbar={type="progressbar_style",height=9,top_padding=2,parent="electric_satisfaction_progressbar"},valid_hovered_mod_label={font_color={29,29,29},disabled_font_color={0,0,0,0.5},type="label_style"},dialog_frame={parent="frame",type="frame_style",bottom_padding=8},train_schedule_comparison_type_frame_extra_indented={right_margin=28,left_margin=-28,type="frame_style",parent="train_schedule_comparison_type_frame"},recipe_count_label={parent="label",font="default-bold",type="label_style"},quest_item_description={font="default",single_line=false,horizontal_align="left",font_color={r=1,b=1,g=1},maximal_width=250,type="label_style",left_padding=3,top_padding=2,rich_text_setting="enabled"},saves_list_box={type="list_box_style",width=332,minimal_height=100},draggable_space_with_no_left_margin={left_margin=0,type="empty_widget_style",parent="draggable_space"},technology_slot={hovered_ingredients_background={position={364,136},corner_size=8},level_range_font="technology-slot-level-font",default_graphical_set={position={282,17},corner_size=8},progress_bar_shadow={right={position={473,152},size={16,1}},center={position={472,152},size={1,1}},left={position={456,152},size={16,1}}},horizontal_align="center",progress_bar_color={g=1},hovered_level_range_band={position={397,136},corner_size=8},height=100,ingredients_height=20,pie_progress_color={1,0,0},highlighted_graphical_set={position={282,17},corner_size=8},level_band={position={381,136},corner_size=8},level_font_color={0,0,0},level_range_band={position={397,136},corner_size=8},hovered_level_band={position={381,136},corner_size=8},disabled_graphical_set={position={282,17},corner_size=8},clicked_ingredients_background={position={364,136},corner_size=8},ingredients_padding=0,font="default-dialog-button",disabled_ingredients_background={position={364,136},corner_size=8},hovered_level_font_color={0,0,0},type="technology_slot_style",strikethrough_color={0.5,0.5,0.5},selected_hovered_graphical_set={position={282,17},corner_size=8},selected_hovered_font_color={1,1,1},clicked_font_color={1,1,1},selected_font_color={1,1,1},selected_graphical_set={position={282,17},corner_size=8},selected_clicked_font_color={1,1,1},selected_clicked_graphical_set={position={282,17},corner_size=8},ingredient_icon_overlap=4,progress_bar_background={position={296,39},corner_size=4},level_band_width=28,clicked_overlay={left={position={456,152},size={16,1}},bottom={position={432,136},size={1,16}},right={position={473,152},size={16,1}},left_top={position={456,136},size={16,16}},top={position={472,136},size={1,16}},left_bottom={position={416,136},size={16,16}},right_bottom={position={433,136},size={16,16}},center={position={472,152},size={1,1}},right_top={position={473,136},size={16,16}}},clicked_graphical_set={position={282,17},corner_size=8},hovered_graphical_set={position={282,17},corner_size=8},highlighted_ingredients_background={position={364,136},corner_size=8},hovered_level_range_font_color={1,1,1},level_range_offset_x=-4,default_background_shadow={position={392,328},size=88},level_font="technology-slot-level-font",level_range_font_color={1,1,1},level_offset_y=-2.5,level_offset_x=12,progress_bar={position={305,39},corner_size=4},level_band_height=12,left_click_sound={{volume=1,filename="__core__/sound/gui-click.ogg"}},width=72,ingredient_icon_size=16,progress_bar_height=4,default_font_color={1,1,1},level_range_offset_y=-2.5,hovered_font_color={1,1,1},vertical_align="center",disabled_font_color={1,1,1},default_ingredients_background={position={347,136},corner_size=8}},checkbox={selected_hovered_graphical_set={base={position={56,132},size={28,28}},glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}},default_graphical_set={base={position={0,132},size={28,28}}},checkmark={position={112,132},size={28,28}},disabled_graphical_set={base={position={28,132},size={28,28}}},type="checkbox_style",intermediate_mark={position={456,160},size={28,28}},disabled_checkmark={position={456,188},size={28,28}},font_color={1,1,1},clicked_graphical_set={base={position={84,132},size={28,28}},glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}},hovered_graphical_set={base={position={56,132},size={28,28}},glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}},selected_graphical_set={base={position={56,132},size={28,28}}},selected_clicked_graphical_set={base={position={84,132},size={28,28}},glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}},text_padding=8,font="default"},crafting_queue_slot={pie_progress_color={0.98,0.66,0.22,0.5},parent="slot_button",type="button_style"},recipe_tooltip_transitive_craft_count_label={parent="recipe_count_label",type="label_style"},quest_item_description_progressing={font_color={r=255,b=0,g=204},type="label_style",parent="quest_item_description"},count_label={parent="description_label",font="count-font",type="label_style"},not_available_slot_button={type="button_style",clicked_graphical_set={position={185,36},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},hovered_graphical_set={position={148,36},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},parent="slot_button",default_graphical_set={position={111,36},filename="__core__/graphics/gui.png",size=36,scale=1,border=1}},shortcut_selection_row={use_header_filler=false,horizontal_flow_style={vertical_align="center",type="horizontal_flow_style"},padding=0,graphical_set={position={208,17},corner_size=8},type="frame_style"},inline_icon_slot={size=16,clicked_graphical_set={position={0,34},corner_size=1},hovered_graphical_set={position={0,34},corner_size=1},type="button_style",parent="slot_button",padding=0,default_graphical_set={position={0,34},corner_size=1}},selected_slot_button={type="button_style",clicked_graphical_set={position={75,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},hovered_graphical_set={position={75,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},parent="slot_button",default_graphical_set={position={75,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1}},table_with_selection={vertical_spacing=5,cell_padding=1,top_padding=5,odd_row_graphical_set={position={78,18},filename="__core__/graphics/gui.png",size=1,opacity=0.7,scale=1},type="table_style",horizontal_spacing=20,hovered_row_color={r=0.98,a=0.7,b=0.22,g=0.66}},blue_slider={type="slider_style",full_bar={base={position={274,71},corner_size=8},shadow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}}},entity_button_base={type="empty_widget_style",size=100},mod_info_frame={type="frame_style",graphical_set={base={position={68,0},corner_size=8}}},install_mod_status_image={stretch_image_to_widget_size=true,size={16,16},type="image_style"},captionless_frame={parent="frame",type="frame_style",padding=3},map_view_options_button={type="button_style",parent="icon_button"},inset_frame_container_horizontal_flow={horizontal_spacing=12,type="horizontal_flow_style"},burning_progressbar={color={r=1},type="progressbar_style"},dropdown={list_box_style={type="list_box_style",scroll_pane_style={extra_padding_when_activated=0,graphical_set={},type="scroll_pane_style",padding=0},maximal_height=400},minimal_height=28,type="dropdown_style",selector_and_title_spacing=8,icon={flags={"gui-icon"},filename="__core__/graphics/icons/mip/dropdown.png",priority="extra-high-no-scale",mipmap_count=2,size=32,scale=0.5},top_padding=-1,bottom_padding=1,right_padding=4,left_padding=8,minimal_width=116,button_style={type="button_style",parent="dropdown_button"}},slot_group_frame={type="frame_style",top_padding=2,bottom_padding=2,left_padding=0,parent="bordered_frame"},conditionally_available_preview_technology_slot={height=200,ingredients_padding=32,parent="conditionally_available_technology_slot",type="technology_slot_style",width=136},invalid_label={parent="label",type="label_style"},image_tab_slot={size=68,clicked_graphical_set={position={111,144},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},hovered_graphical_set={position={148,144},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},parent="slot_button",type="button_style",default_graphical_set={center={position={111,144},filename="__core__/graphics/gui.png",size=36,scale=1},border=1}},player_offline_label={font_color={1,1,1},type="label_style",parent="bold_label"},new_game_info_image={stretch_image_to_widget_size=true,parent="map_info_image",type="image_style",size={500,285}},goal_frame={type="frame_style",left_padding=2,top_padding=2,parent="frame"},description_value_label={parent="label",font="default",type="label_style"},browse_games_table={cell_padding=1,vertical_spacing=1,horizontal_spacing=20,type="table_style",top_padding=1,parent="table_with_selection",left_padding=10,hovered_row_color={r=0.98,a=0.7,b=0.22,g=0.66},column_widths={{width=20,column=1},{width=310,column=2},{width=100,column=3},{width=100,column=4}}},tracked_achievements_vertical_flow={vertical_spacing=0,type="vertical_flow_style"},circuit_condition_comparator_dropdown={list_box_style={scroll_pane_style={extra_padding_when_activated=0,graphical_set={},type="scroll_pane_style",padding=0},type="list_box_style",item_style={type="button_style",left_padding=4,parent="list_box_item",right_padding=4},maximal_height=400},type="dropdown_style",minimal_width=0,left_padding=4,right_padding=0,button_style={selected_hovered_graphical_set={base={position={369,17},corner_size=8}},default_graphical_set={base={position={0,17},corner_size=8}},disabled_graphical_set={base={position={17,17},corner_size=8}},type="button_style",clicked_graphical_set={base={position={51,17},corner_size=8}},hovered_graphical_set={base={position={34,17},corner_size=8},glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}},parent="dropdown_button",selected_graphical_set={base={position={225,17},corner_size=8}},selected_clicked_graphical_set={base={position={352,17},corner_size=8}}}},browse_games_gui_favorites_header_image={type="image_style",size=16},heading_1_label={single_line=true,type="label_style",font="heading-1"},map_info_image={type="image_style",graphical_set={shadow={top={position={191,128},size={1,8},draw_type="inner"}}}},achievement_unlocked_title_label={parent="achievement_title_label",type="label_style"},tooltip_generated_from_description_blueprint_frame={parent="tooltip_generated_from_description_frame",maximal_width=600,type="frame_style"},campaign_levels_list_box={height=140,maximal_width=280,type="list_box_style"},black_label={type="label_style",font_color={0,0,0}},shortcut_bar_column={vertical_spacing=0,type="vertical_flow_style"},subpanel_frame={type="frame_style",graphical_set={base={position={68,0},corner_size=8}},left_padding=4,right_padding=4},mod_info_table={parent="bordered_table",type="table_style",column_widths={{minimal_width=116,column=1}}},tile_variation_button={size=100,type="button_style",padding=2},blurry_panel_horizontal_line={bottom_padding=4,type="line_style",top_padding=4,border={right_end={position={341,0},size={4,4}},left_end={position={336,0},size={4,4}},horizontal_line={position={340,0},size={1,4}},border_width=4}},map_preview_scroll_pane={type="scroll_pane_style",graphical_set={base={left_bottom={x=17,height=8,y=9,width=8},draw_type="outer",left={x=17,height=1,y=8,width=8},bottom={x=25,height=8,y=9,width=1},right_bottom={x=26,height=8,y=9,width=8},center={x=25,height=1,y=8,width=1},right={x=26,height=1,y=8,width=8}}}},editor_lua_textbox={horizontally_stretchable="on",height=300,maximal_width=600,parent="textbox",type="textbox_style"},frame_button={selected_graphical_set={base={position={272,169},corner_size=8},shadow={position={440,24},corner_size=8,draw_type="outer"}},type="button_style",clicked_graphical_set={base={position={51,17},corner_size=8},shadow={position={440,24},corner_size=8,draw_type="outer"}},hovered_graphical_set={glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5},shadow={position={440,24},corner_size=8,draw_type="outer"},base={position={34,17},corner_size=8}},parent="button",disabled_graphical_set={base={position={17,17},corner_size=8},shadow={position={440,24},corner_size=8,draw_type="outer"}},padding=-4,default_graphical_set={base={position={0,0},corner_size=8},shadow={position={440,24},corner_size=8,draw_type="outer"}}},achievement_percent_label={type="label_style",font_color={r=0.58823529411765,b=0.50980392156863,g=0.8078431372549},font="default-large-semibold",parent="label"},slot_table_spacing_flow={type="flow_style",horizontal_spacing=2,vertical_spacing=2},tooltip_frame={type="frame_style",top_padding=0,bottom_padding=0,vertical_flow_style={vertical_spacing=2,type="vertical_flow_style"},graphical_set={base={background_blur_sigma=4,corner_size=8,opacity=0.88,position={403,0}}},right_padding=4,left_padding=4},tutorial_title_label={type="label_style",font="default-large-bold",parent="label",width=364},research_progressbar={type="progressbar_style",bar_width=24},train_schedule_temporary_station_frame={graphical_set={base={position={446,86},corner_size=8}},type="frame_style",parent="train_schedule_station_frame"},logistic_gui_scroll_pane={type="scroll_pane_style",size={400,570}},locked_achievement_frame={parent="locked_achievement_in_sidebar_frame",type="frame_style",width=400},machine_frame={horizontal_flow_style={horizontal_spacing=5,type="horizontal_flow_style"},type="frame_style",parent="inner_frame_in_outer_frame"},line={type="line_style",border={vertical_line={position={0,40},size={8,1}},top_right_corner={position={16,40},size={8,8}},horizontal_line={position={8,40},size={1,8}},top_t={position={64,40},size={8,8}},bottom_right_corner={position={24,40},size={8,8}},bottom_left_corner={position={32,40},size={8,8}},left_t={position={56,40},size={8,8}},right_t={position={72,40},size={8,8}},bottom_t={position={48,40},size={8,8}},left_end={position={112,40},size={8,8}},top_end={position={88,40},size={8,8}},right_end={position={96,40},size={8,8}},top_left_coner={position={40,40},size={8,8}},cross={position={80,40},size={8,8}},bottom_end={position={104,40},size={8,8}},border_width=8}},new_game_header_list_box_item={default_graphical_set={position={17,17},corner_size=8},disabled_graphical_set={position={17,17},corner_size=8},type="button_style",hovered_graphical_set={position={17,17},corner_size=8},parent="list_box_item",font="heading-2"},browse_mods_scroll_pane={type="scroll_pane_style"},train_schedule_comparison_type_frame={top_margin=-20,type="frame_style",padding=0,bottom_margin=20},left_slider_button={left_click_sound={},type="button_style",clicked_graphical_set={base={position={489,72},size={40,24}},shadow={top_outer_border_shift=-4,draw_type="outer",left_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,center={position={481,96},size={56,40}}}},hovered_graphical_set={base={position={489,48},size={40,24}},glow={top_outer_border_shift=-4,draw_type="outer",left_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,center={position={481,96},size={56,40}}}},disabled_graphical_set={base={position={489,24},size={40,24}},shadow={top_outer_border_shift=-4,draw_type="outer",left_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,center={position={481,96},size={56,40}}}},parent="slider_button",default_graphical_set={base={position={489,0},size={40,24}},shadow={top_outer_border_shift=-4,draw_type="outer",left_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,center={position={481,96},size={56,40}}}}},wide_slider_value_textfield={parent="slider_value_textfield",type="textbox_style",width=100},void_inventory_frame={height=0,top_padding=0,bottom_padding=0,graphical_set={},type="frame_style",title_style={type="label_style",parent="frame_title",top_padding=0,bottom_padding=0}},tool_button={size=28,type="button_style",padding=2},partially_promised_crafting_queue_slot={type="button_style",clicked_graphical_set={position={257,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},hovered_graphical_set={position={257,72},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},parent="crafting_queue_slot",default_graphical_set={position={257,36},filename="__core__/graphics/gui.png",size=36,scale=1,border=1}},vertical_scrollbar={width=12,background_graphical_set={position={0,72},corner_size=8},type="vertical_scrollbar_style",thumb_button_style={left_click_sound={{volume=0,filename="__core__/sound/gui-click.ogg"}},type="button_style",clicked_graphical_set={base={bottom={position={40,63},size={20,7}},top={position={40,48},size={20,7}},center={position={40,55},size={20,8}},center_tiling_vertical=true}},hovered_graphical_set={base={bottom={position={20,63},size={20,7}},top={position={20,48},size={20,7}},center={position={20,55},size={20,8}},center_tiling_vertical=true},glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}},default_graphical_set={base={bottom={position={0,63},size={20,7}},top={position={0,48},size={20,7}},center={position={0,55},size={20,8}},center_tiling_vertical=true}},width=10}},valid_selected_mod_label={font_color={29,29,29},disabled_font_color={0,0,0,0.5},type="label_style"},battery_progressbar={height=33,bar={position={223,0},filename="__core__/graphics/gui.png",size={1,11},scale=1},bar_width=13,type="progressbar_style",other_colors={{color={r=1},less_than=0.33},{color={r=1,b=0.25,g=0.5},less_than=0.66},{color={g=1},less_than=1}},color={g=1}},valid_mod_label={type="label_style"},tutorial_list_description_label={parent="label",font="default",type="label_style"},floating_train_station_list_box={type="list_box_style",maximal_height=800},unlocked_achievement_in_sidebar_frame={type="frame_style",graphical_set={position={0,24},corner_size=3,filename="__core__/graphics/gui.png",scale=1},top_padding=4,parent="frame"},unlocked_achievement_frame={parent="unlocked_achievement_in_sidebar_frame",type="frame_style",width=400},unavailable_technology_slot={hovered_ingredients_background={position={364,170},corner_size=8},default_ingredients_background={position={347,170},corner_size=8},default_graphical_set={base={position={296,170},corner_size=8}},selected_clicked_graphical_set={base={position={312,170},corner_size=8}},hovered_level_range_band={position={397,170},corner_size=8},clicked_overlay={left={position={456,152},size={16,1}},bottom={position={432,170},size={1,16}},right={position={473,152},size={16,1}},left_top={position={456,136},size={16,16}},top={position={472,136},size={1,16}},left_bottom={position={416,170},size={16,16}},right_bottom={position={433,170},size={16,16}},center={position={472,152},size={1,1}},right_top={position={473,136},size={16,16}}},clicked_graphical_set={base={position={312,170},corner_size=8}},hovered_graphical_set={base={position={312,170},corner_size=8}},highlighted_ingredients_background={position={364,170},corner_size=8},parent="technology_slot",highlighted_graphical_set={base={position={330,170},corner_size=8}},level_band={position={381,170},corner_size=8},level_font_color={116,34,32},level_range_band={position={397,170},corner_size=8},hovered_level_band={position={381,170},corner_size=8},disabled_graphical_set={base={position={296,170},corner_size=8}},clicked_ingredients_background={position={364,170},corner_size=8},type="technology_slot_style",selected_hovered_graphical_set={base={position={312,170},corner_size=8}},disabled_ingredients_background={position={364,170},corner_size=8},hovered_level_font_color={116,34,32},selected_graphical_set={base={position={312,170},corner_size=8}},level_range_font_color={255,214,213},hovered_level_range_font_color={255,214,213}},unavailable_preview_technology_slot={height=200,ingredients_padding=32,parent="unavailable_technology_slot",type="technology_slot_style",width=136},type="gui-style",tutorial_notice_title_label={font_color={r=1,b=1,g=1},font="default-large-bold",parent="label",type="label_style",width=250},partially_accessible_station_in_station_selection={type="button_style",default_font_color={110,179,255},selected_hovered_font_color={0,23,84},hovered_font_color={0,23,84},parent="list_box_item",selected_font_color={0,23,84},selected_clicked_font_color={0,23,84}},heading_2_label={parent="label",font="heading-2",type="label_style"},tutorial_locked_title_label={type="label_style",parent="tutorial_title_label"},tutorial_description_label={font_color={r=1,b=1,g=1},font="default",parent="label",type="label_style",width=364},research_queue_table={type="table_style",horizontal_spacing=0,padding=0},info_box_progressbar={width=300,type="progressbar_style"},achievement_description_label={type="label_style",font_color={r=1,b=1,g=1},font="default",parent="label"},transparent_slot={type="button_style",draw_shadow_under_picture=true,clicked_graphical_set={},hovered_graphical_set={},size=32,parent="slot_button",padding=0,default_graphical_set={}},train_stop_frame={parent="inner_frame_in_outer_frame",type="frame_style",title_style={parent="frame_title",maximal_width=800,type="label_style"}},player_not_in_game_state_label={font_color={0.5,0.5,0.5},type="label_style",parent="bold_label"},train_station_list_box={type="list_box_style",maximal_width=1000,maximal_height=400,minimal_width=300,minimal_height=130},not_working_weapon_button={type="button_style",parent="red_slot_button"},compilatron_speech_bubble={label_style={font_color={r=255,b=113,g=246},font="compilatron-message-font",single_line=false,parent="label",type="label_style",maximal_width=500},type="speech_bubble_style",arrow_indent=0,close_color={0.361,0.894,0.278},arrow_graphical_set={bottom={position={465,551},size={32,20}},top={position={433,547},size={32,24}},right={position={458,516},size={24,32}},left={position={433,516},size={24,32}}},frame_style={graphical_set={position={450,498},corner_size=8,filename="__core__/graphics/gui-new.png",opacity=0.15,scale=0.5},type="frame_style",padding=12},pass_through_mouse=true},train_schedule_unavailable_stop_label={font_color={255,138,138},horizontally_squashable="on",type="label_style"},default_tileset="__core__/graphics/gui-new.png",train_schedule_temporary_station_delete_button={parent="train_schedule_delete_button",default_graphical_set={base={position={446,86},corner_size=8},shadow={position={463,86},corner_size=8,draw_type="outer"}},type="button_style"},train_schedule_station_frame={horizontal_flow_style={type="horizontal_flow_style",parent="player_input_horizontal_flow"},padding=0,parent="dark_frame",type="frame_style",width=392},image={stretch_image_to_widget_size=false,graphical_set={},type="image_style"},logistic_button_selected_slot={type="button_style",clicked_graphical_set={position={75,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},hovered_graphical_set={position={75,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},parent="slot_button",default_graphical_set={position={75,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1}},promised_crafting_queue_slot={type="button_style",clicked_graphical_set={position={221,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},hovered_graphical_set={position={221,72},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},parent="crafting_queue_slot",default_graphical_set={position={221,36},filename="__core__/graphics/gui.png",size=36,scale=1,border=1}},research_queue_border={type="frame_style",graphical_set={position={17,0},corner_size=8},parent="inner_frame_in_outer_frame",padding=0},player_input_horizontal_flow={type="horizontal_flow_style",horizontal_spacing=8,vertical_align="center"},quest_item_icons_wrapper={type="horizontal_flow_style",horizontal_align="left",parent="quest_gui_entry_wrapper_common",left_padding=15},circuit_condition_sign_button={type="button_style",bottom_padding=1,left_padding=5,right_padding=5,parent="button"},changelog_frame={graphical_set={base={position={17,0},corner_size=8,center={position={42,8},size=1},draw_type="outer"}},type="frame_style",parent="window_content_frame_packed"},train_schedule_scroll_pane={background_graphical_set={overall_tiling_horizontal_padding=4,corner_size=8,overall_tiling_horizontal_spacing=8,overall_tiling_vertical_spacing=12,overall_tiling_vertical_padding=4,position={282,17},overall_tiling_vertical_size=28,custom_horizontal_tiling_sizes={28,56,288}},type="scroll_pane_style",parent="scroll_pane_with_dark_background_under_subheader"},train_schedule_mode_switch_horizontal_flow={type="horizontal_flow_style",left_margin=8},train_schedule_fulfilled_item_select_button={type="button_style",clicked_graphical_set={base={position={162,736},size=76,border=4},shadow={position={412,103},corner_size=16,draw_type="outer",left_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4,top_outer_border_shift=4}},hovered_graphical_set={glow={position={240,736},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},shadow={position={412,103},corner_size=16,draw_type="outer",left_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4,top_outer_border_shift=4},base={position={82,738},size=76,border=4}},parent="train_schedule_item_select_button",default_graphical_set={base={position={2,738},size=76,border=4},shadow={position={412,103},corner_size=16,draw_type="outer",left_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4,top_outer_border_shift=4}}},train_schedule_delete_button={type="button_style",parent="dark_button",size={16,28},padding=-4},train_schedule_condition_time_selection_button={width=84,type="button_style"},train_schedule_condition_frame={horizontal_flow_style={type="horizontal_flow_style",parent="player_input_horizontal_flow"},padding=0,parent="dark_frame",type="frame_style",width=288},machine_outputs_scroll_pane={vertically_squashable="off",type="scroll_pane_style",maximal_height=100},quest_gui_inner_frame={type="frame_style",padding=0,top_margin=4,graphical_set={base={position={17,0},corner_size=8,center={position={76,8},size={1,1}},draw_type="outer"}},parent="frame",bottom_margin=4},window_content_frame_packed={horizontal_flow_style={horizontal_spacing=0,type="horizontal_flow_style"},padding=0,parent="window_content_frame",vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},type="frame_style"},train_schedule_comparison_type_button={height=28,right_padding=4,left_padding=4,type="button_style",width=56},train_schedule_add_wait_condition_button={height=36,parent="button_with_shadow",horizontal_align="left",type="button_style",width=288},mod_list_label={font_color={0.9,0.9,0.1},font="default-bold",minimal_width=210,parent="label",type="label_style"},train_schedule_add_station_button={height=36,parent="button_with_shadow",horizontal_align="left",type="button_style",width=392},tracking_on_button={type="button_style",parent="tracking_off_button",default_graphical_set={position={0,40},corner_size=3,filename="__core__/graphics/gui.png",scale=1},hovered_graphical_set={position={0,48},corner_size=3,filename="__core__/graphics/gui.png",scale=1}},graphics_settings_table={parent="bordered_table",type="table_style",minimal_width=364},number_input_frame={left_padding=8,type="frame_style",padding=0},tracking_off_button={type="button_style",parent="button",size=22,padding=0},tooltip_panel_background_category={horizontally_stretchable="on",type="frame_style",vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},right_padding=4},research_queue_active_glow_dark={type="glow_style",image_set={glow={position={333,17},corner_size=8,draw_type="outer"}}},map_details_frame={type="frame_style",parent="blurry_frame",vertical_flow_style={type="vertical_flow_style"},width=220},red_slot_button={type="button_style",clicked_graphical_set={position={185,36},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},hovered_graphical_set={position={148,36},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},parent="slot_button",default_graphical_set={position={111,36},filename="__core__/graphics/gui.png",size=36,scale=1,border=1}},empty_widget={type="empty_widget_style",graphical_set={}},tooltip_label={type="label_style",parent="description_label",maximal_width=356,minimal_width=50},tooltip_heading_label_category={font_color={1,0.8275,0.29},font="default-bold",type="label_style"},list_box_item={default_graphical_set={position={208,17},corner_size=8},disabled_graphical_set={position={17,17},corner_size=8},minimal_width=0,type="button_style",clicked_graphical_set={position={51,17},corner_size=8},hovered_graphical_set={base={position={34,17},corner_size=8}},horizontal_align="left",font="default-listbox",disabled_font_color={179,179,179}},tooltip_heading_label={font_color={0,0,0},font="default-bold",single_line=false,horizontally_squashable="on",type="label_style"},caption_checkbox={font_color={255,230,192},font="default-bold",type="checkbox_style"},failed_achievement_frame={parent="failed_achievement_in_sidebar_frame",type="frame_style",width=400},tooltip_generated_from_description_frame={horizontal_flow_style={horizontal_spacing=0,type="horizontal_flow_style"},maximal_width=356,padding=0,graphical_set={},vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},type="frame_style"},scroll_pane_with_dark_background_under_subheader={extra_padding_when_activated=0,graphical_set={base={position={17,0},corner_size=8,draw_type="outer",left_top={},top={},center={position={42,8},size=1},right_top={}}},type="scroll_pane_style",padding=4},tool_bar_frame={type="frame_style",top_padding=0,bottom_padding=0,left_padding=4,right_padding=0},to_be_downloaded_mod_label={type="label_style",font_color={50,255,255}},tips_inner_flow={vertical_spacing=2,left_padding=25,type="flow_style",right_padding=25},large_caption_label={parent="caption_label",font="default-large-bold",type="label_style"},achievement_notification_frame={type="frame_style",padding=0,graphical_set={},parent="frame",width=400},tips_frame={type="frame_style",minimal_height=576,parent="frame",left_padding=30,right_padding=30,width=704},technology_slot_table={type="table_style",horizontal_spacing=0,vertical_spacing=0},technology_preview_frame={type="frame_style",parent="inner_frame_in_outer_frame"},shortcut_bar_button={type="button_style",size=40,clicked_graphical_set={base={position={363,744},corner_size=8},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},hovered_graphical_set={glow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},base={position={346,744},corner_size=8}},parent="button",disabled_graphical_set={base={position={329,744},corner_size=8},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},padding=8,default_graphical_set={base={position={312,744},corner_size=8},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}}},target_station_in_schedule_in_train_view_list_box_item={type="button_style",selected_font_color={0.97,0.54,0.15},hovered_font_color={0.97,0.54,0.15},parent="list_box_item",selected_hovered_font_color={0.97,0.54,0.15},selected_clicked_font_color={0.97,0.54,0.15}},table_spacing_vertical_flow={vertical_spacing=5,type="vertical_flow_style"},negative_message_frame={type="frame_style",graphical_set={base={position={403,17},corner_size=8}}},table_spacing_flow={type="flow_style",horizontal_spacing=5,vertical_spacing=5},table={inactive_column_ordering_ascending_button_style={size={8,8},clicked_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-up-white.png",size={16,16},scale=0.5},hovered_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-up-hover.png",size={16,16},scale=0.5},disabled_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-up-white.png",size={16,16},scale=0.5},type="button_style",default_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-up-white.png",size={16,16},scale=0.5}},type="table_style",column_ordering_ascending_button_style={size={8,8},clicked_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-up-active.png",size={16,16},scale=0.5},hovered_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-up-hover.png",size={16,16},scale=0.5},type="button_style",disabled_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-up-white.png",size={16,16},scale=0.5},padding=0,default_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-up-active.png",size={16,16},scale=0.5}},vertical_spacing=4,inactive_column_ordering_descending_button_style={size={8,8},clicked_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-down-white.png",size={16,16},scale=0.5},hovered_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-down-hover.png",size={16,16},scale=0.5},disabled_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-down-white.png",size={16,16},scale=0.5},type="button_style",default_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-down-white.png",size={16,16},scale=0.5}},column_ordering_descending_button_style={size={8,8},clicked_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-down-active.png",size={16,16},scale=0.5},hovered_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-down-hover.png",size={16,16},scale=0.5},disabled_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-down-white.png",size={16,16},scale=0.5},type="button_style",default_graphical_set={filename="__core__/graphics/arrows/table-header-sort-arrow-down-active.png",size={16,16},scale=0.5}},horizontal_spacing=4,border={}},glow={type="glow_style",image_set={position={200,128},corner_size=8,draw_type="outer"}},frame_with_even_paddings={type="frame_style",top_padding=8,bottom_padding=8},tab_scroll_pane={type="scroll_pane_style",extra_left_margin_when_activated=8,graphical_set={base={position={85,0},corner_size=8,draw_type="outer"}},extra_right_margin_when_activated=-4},tab={default_graphical_set={base={position={102,0},corner_size=8},shadow={left={position={200,136},size={8,1}},scale=0.5,right={position={209,136},size={8,1}},top={position={208,128},size={1,8}},left_top={position={216,0},size=16},draw_type="outer",left_outer_border_shift=4,right_outer_border_shift=-4,top_outer_border_shift=4,right_top={position={232,0},size=16}}},press_badge_graphical_set={base={position={296,71},corner_size=8}},badge_font="default-tiny-bold",horizontal_align="center",selected_badge_font_color={64,64,64},disabled_badge_graphical_set={base={position={176,72},corner_size=8}},minimal_width=84,default_badge_font_color={142,142,142},hover_graphical_set={base={position={153,0},corner_size=8},glow={left={position={200,136},size={8,1}},scale=0.5,right={position={209,136},size={8,1}},top={position={208,128},size={1,8}},left_top={position={216,0},size=16},draw_type="outer",left_outer_border_shift=4,right_outer_border_shift=-4,top_outer_border_shift=4,right_top={position={232,0},size=16}}},vertical_align="center",type="tab_style",selected_graphical_set={base={position={136,0},corner_size=8},shadow={left={position={200,136},size={8,1}},scale=0.5,right={position={209,136},size={8,1}},top={position={208,128},size={1,8}},left_top={position={216,0},size=16},draw_type="outer",left_outer_border_shift=4,right_outer_border_shift=-4,top_outer_border_shift=4,right_top={position={232,0},size=16}}},selected_badge_graphical_set={base={position={296,71},corner_size=8}},right_padding=8,disabled_graphical_set={base={position={119,0},corner_size=8},shadow={left={position={200,136},size={8,1}},scale=0.5,right={position={209,136},size={8,1}},top={position={208,128},size={1,8}},left_top={position={216,0},size=16},draw_type="outer",left_outer_border_shift=4,right_outer_border_shift=-4,top_outer_border_shift=4,right_top={position={232,0},size=16}}},press_graphical_set={base={position={170,0},corner_size=8},shadow={left={position={200,136},size={8,1}},scale=0.5,right={position={209,136},size={8,1}},top={position={208,128},size={1,8}},left_top={position={216,0},size=16},draw_type="outer",left_outer_border_shift=4,right_outer_border_shift=-4,top_outer_border_shift=4,right_top={position={232,0},size=16}}},default_badge_graphical_set={base={position={176,72},corner_size=8}},badge_horizontal_spacing=4,hover_badge_graphical_set={base={position={176,72},corner_size=8}},top_padding=8,bottom_padding=8,font="default-bold",left_padding=8,disabled_font_color={1,1,1,0.5},disabled_badge_font_color={1,1,1,0.5}},subpanel_inset_frame={graphical_set={base={position={85,0},corner_size=8,draw_type="outer"}},type="frame_style",padding=0},subheader_caption_label={type="label_style",font="heading-2",left_padding=8,parent="label"},subfooter_frame_with_left_edge={graphical_set={base={left_top={position={248,17},size={8,8}},left={position={248,25},size={8,1}},left_bottom={position={248,26},size={8,8}},top={position={256,17},size={1,8}},center={position={256,25},size={1,1}}}},type="frame_style",parent="subfooter_frame"},flow={vertical_spacing=4,type="flow_style",horizontal_spacing=4,max_on_row=0},stretchable_textfield={horizontally_stretchable="on",type="textbox_style",maximal_width=0},research_queue_inner_frame={horizontal_flow_style={type="horizontal_flow_style",horizontal_spacing=12,padding=0},padding=0,graphical_set={left={x=265,height=1,y=25,width=8},bottom={x=273,height=8,y=26,width=1},right={x=274,height=1,y=25,width=8},left_top={x=265,height=8,y=17,width=8},top={x=273,height=8,y=17,width=1},left_bottom={x=265,height=8,y=26,width=8},right_bottom={x=274,height=8,y=26,width=8},center={x=273,height=1,y=24,width=1},right_top={x=274,height=8,y=17,width=8}},type="frame_style",parent="inner_frame_in_outer_frame"},name="default",blueprint_drop_slot_button={type="empty_widget_style",size=76},slot_table_spacing_vertical_flow={vertical_spacing=2,type="vertical_flow_style"},map_view_options_frame={horizontal_flow_style={horizontal_spacing=2,type="horizontal_flow_style"},right_padding=4,left_padding=4,type="frame_style",parent="captionless_frame"},slot_button={left_click_sound={{volume=1,filename="__core__/sound/gui-click.ogg"}},size=36,default_graphical_set={position={111,0},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},type="button_style",clicked_graphical_set={filename="__core__/graphics/gui.png",x=185,size=36,scale=1,border=1},hovered_graphical_set={position={148,0},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},pie_progress_color={0.98,0.66,0.22,0.5},parent="button",padding=1},slider_button={left_click_sound={{volume=1,filename="__core__/sound/gui-click.ogg"}},default_graphical_set={base={position={64,48},size={40,24}}},disabled_graphical_set={base={position={104,48},size={40,24}}},width=20,height=12,clicked_graphical_set={base={position={184,48},size={40,24}}},hovered_graphical_set={base={position={144,48},size={40,24}},glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}},type="button_style",padding=0},schedule_in_train_view_list_box={height=80,type="list_box_style",width=200},reader_textbox={type="textbox_style",height=500,parent="textbox",minimal_width=600},side_menu_frame={horizontally_stretchable="on",horizontal_flow_style={horizontal_spacing=2,type="horizontal_flow_style"},right_padding=4,vertically_stretchable="on",left_padding=4,type="frame_style",parent="captionless_frame"},shortcut_bar_name_label={maximal_width=360,type="label_style"},side_menu_button={type="button_style",parent="icon_button"},description_label={parent="label",font="default",type="label_style"},shortcut_bar_selection_scroll_pane={extra_padding_when_activated=0,parent="scroll_pane",vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},type="scroll_pane_style"},a_inner_frame_for_subheader_with_paddings={parent="a_inner_frame",top_padding=0,type="frame_style"},shortcut_bar_inner_panel={background_graphical_set={overall_tiling_horizontal_padding=8,corner_size=8,overall_tiling_horizontal_spacing=16,overall_tiling_vertical_spacing=16,overall_tiling_vertical_padding=8,position={282,17},overall_tiling_vertical_size=24,overall_tiling_horizontal_size=24},padding=0,parent="quick_bar_inner_panel",type="frame_style",horizontal_flow_style={horizontal_spacing=0,type="horizontal_flow_style"}},shortcut_bar_button_small={type="button_style",parent="shortcut_bar_button",size=20,padding=0},battery_widget={type="empty_widget_style",size={21,54}},back_button={type="button_style",clicked_graphical_set={base={left={position={288,232},size={24,64}},right_top={position={60,17},size=8},right_bottom={position={60,26},size=8},center={position={312,232},size={1,64}},right={position={60,25},size={8,1}}}},hovered_graphical_set={base={left={position={192,232},size={24,64}},right_top={position={43,17},size=8},right_bottom={position={43,26},size=8},center={position={216,232},size={1,64}},right={position={43,25},size={8,1}}},glow={tint={225,177,106,255},right_top={position={209,128},size=8},draw_type="outer",left={position={304,424},size={32,80}},left_outer_border_shift=12,right_bottom={position={209,137},size=8},center={position={336,424},size={1,80}},right={position={209,136},size={8,1}}}},parent="dialog_button",disabled_graphical_set={base={left={position={96,232},size={24,64}},right_top={position={26,17},size=8},right_bottom={position={26,26},size=8},center={position={120,232},size={1,64}},right={position={26,25},size={8,1}}},glow={right_top={position={209,128},size=8},draw_type="outer",left={position={304,424},size={32,80}},left_outer_border_shift=12,right_bottom={position={209,137},size=8},center={position={336,424},size={1,80}},right={position={209,136},size={8,1}}}},horizontal_align="left",default_graphical_set={base={left={position={0,232},size={24,64}},right_top={position={9,17},size=8},right_bottom={position={9,26},size=8},center={position={24,232},size={1,64}},right={position={9,25},size={8,1}}},shadow={tint={15,7,3,100},right_top={position={209,128},size=8},draw_type="outer",left={position={304,424},size={32,80}},left_outer_border_shift=12,right_bottom={position={209,137},size=8},center={position={336,424},size={1,80}},right={position={209,136},size={8,1}}}}},shortcut_bar_button_green={type="button_style",clicked_graphical_set={base={position={363,792},corner_size=8},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},hovered_graphical_set={glow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4,tint={110,164,104,127}},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},base={position={346,792},corner_size=8}},parent="shortcut_bar_button",default_graphical_set={base={position={312,792},corner_size=8},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}}},dark_button={default_graphical_set={base={position={68,0},corner_size=8},shadow={position={395,86},corner_size=8,draw_type="outer"}},type="button_style"},shortcut_bar_button_blue={type="button_style",clicked_graphical_set={base={position={363,759},corner_size=8},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},hovered_graphical_set={glow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4,tint={132,177,198,127}},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},base={position={346,759},corner_size=8}},parent="shortcut_bar_button",default_graphical_set={base={position={312,759},corner_size=8},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}}},technology_card_frame={graphical_set={base={position={34,0},corner_size=8}},type="frame_style",padding=0},research_queue_cancel_button={type="button_style",parent="red_button",size={72,20},padding=-4},draggable_space_in_temporary_train_station={graphical_set={base={center_tiling_horizontal=true,top={position={446,78},size={8,7}},bottom={position={462,78},size={8,8}},bottom_tiling=true,center={position={454,78},size={8,8}},top_tiling=true},shadow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}},type="empty_widget_style",parent="draggable_space_in_train_schedule"},search_textfield_with_fixed_width={width=150,type="textbox_style"},search_button={parent="slot_button",type="button_style",size=24},tooltip_category_line={type="line_style",border={right_end={position={192,40},size=8},left_end={position={184,40},size=8},horizontal_line={position={176,40},size={1,8}},border_width=8}},scroll_pane_under_subheader={extra_padding_when_activated=0,graphical_set={},type="scroll_pane_style",padding=4},scroll_pane={vertical_flow_style={type="vertical_flow_style"},vertically_squashable="on",vertical_scrollbar_style={type="vertical_scrollbar_style"},background_graphical_set={},type="scroll_pane_style",extra_padding_when_activated=4,graphical_set={base={position={17,0},corner_size=8,draw_type="outer"}},horizontally_squashable="on",horizontal_scrollbar_style={type="horizontal_scrollbar_style"}},rounded_button={type="button_style",selected_hovered_graphical_set={base={position={236,200},corner_size=8},shadow={position={256,191},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},clicked_graphical_set={base={position={219,200},corner_size=8},shadow={position={256,191},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},hovered_graphical_set={glow={position={256,191},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},shadow={position={256,191},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},base={position={202,200},corner_size=8}},selected_graphical_set={base={position={236,200},corner_size=8},shadow={position={256,191},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},disabled_graphical_set={base={position={185,200},corner_size=8},shadow={position={256,191},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},selected_clicked_graphical_set={base={position={236,200},corner_size=8},shadow={position={256,191},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},default_graphical_set={base={position={168,200},corner_size=8},shadow={position={256,191},corner_size=16,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}}},right_slider_button={left_click_sound={},type="button_style",clicked_graphical_set={base={position={529,72},size={40,24}},shadow={top_outer_border_shift=-4,draw_type="outer",left_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,center={position={537,96},size={56,40}}}},hovered_graphical_set={base={position={529,48},size={40,24}},glow={top_outer_border_shift=-4,draw_type="outer",left_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,center={position={537,96},size={56,40}}}},disabled_graphical_set={base={position={529,24},size={40,24}},shadow={top_outer_border_shift=-4,draw_type="outer",left_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,center={position={537,96},size={56,40}}}},parent="slider_button",default_graphical_set={base={position={529,0},size={40,24}},shadow={top_outer_border_shift=-4,draw_type="outer",left_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,center={position={537,96},size={56,40}}}}},highlighted_tool_button={parent="tool_button",default_graphical_set={glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5},base={position={34,17},corner_size=8}},type="button_style"},right_container_frame={parent="outer_frame",vertical_flow_style={type="vertical_flow_style",vertical_spacing=0,minimal_width=10},type="frame_style"},goal_label={font_color={1,1,1},font="scenario-message-dialog",parent="label",type="label_style",width=364},researched_preview_technology_slot={height=200,ingredients_padding=32,parent="researched_technology_slot",type="technology_slot_style",width=136},research_queue_active_glow_light={type="glow_style",image_set={glow={position={316,17},corner_size=8,draw_type="outer"}}},long_number_textfield={width=150,type="textbox_style"},omitted_technology_slot={size={10,8},default_graphical_set={},hovered_graphical_set={},type="button_style",padding=0},rename_train_stop_frame={parent="frame",type="frame_style",title_style={parent="frame_title",maximal_width=800,type="label_style"}},red_slider={type="slider_style",full_bar={base={position={240,71},corner_size=8}}},red_confirm_button={parent="dialog_button",type="button_style",clicked_graphical_set={base={left_top={position={187,17},size=8},left={position={187,25},size={8,1}},left_bottom={position={187,26},size=8},center={position={312,360},size={1,64}},right={position={312,360},size={24,64}}}},hovered_graphical_set={base={left_top={position={170,17},size=8},left={position={170,25},size={8,1}},left_bottom={position={170,26},size=8},center={position={216,360},size={1,64}},right={position={216,360},size={24,64}}},glow={left_top={position={200,128},size=8},draw_type="outer",left={position={200,136},size={8,1}},left_bottom={position={200,137},size=8},right_outer_border_shift=-12,center={position={336,424},size={1,80}},right={position={336,424},size={32,80}}}},horizontal_align="right",disabled_graphical_set={base={left_top={position={153,17},size=8},left={position={153,25},size={8,1}},left_bottom={position={153,26},size=8},center={position={120,360},size={1,64}},right={position={120,360},size={24,64}}},glow={left_top={position={200,128},size=8},draw_type="outer",left={position={200,136},size={8,1}},left_bottom={position={200,137},size=8},right_outer_border_shift=-12,center={position={336,424},size={1,80}},right={position={336,424},size={32,80}}}},disabled_font_color={0.5,0.5,0.5},default_graphical_set={base={left_top={position={136,17},size=8},left={position={136,25},size={8,1}},left_bottom={position={136,26},size=8},center={position={24,360},size={1,64}},right={position={24,360},size={24,64}}},shadow={left_top={position={200,128},size=8},draw_type="outer",left={position={200,136},size={8,1}},left_bottom={position={200,137},size=8},right_outer_border_shift=-12,center={position={336,424},size={1,80}},right={position={336,424},size={32,80}}}}},quickbar_holder_flow={type="vertical_flow_style",minimal_height=96,vertical_align="bottom",vertical_spacing=0,minimal_width=468},quick_bar_window_frame={use_header_filler=false,header_flow_style={type="horizontal_flow_style",bottom_padding=8},padding=4,type="frame_style",horizontal_flow_style={horizontal_spacing=8,type="horizontal_flow_style"}},quick_bar_slot_table={type="table_style",horizontal_spacing=0,vertical_spacing=0},bold_red_label={font_color={1,0,0},type="label_style",parent="bold_label"},quick_bar_page_button={size=40,default_graphical_set={base={position={312,744},corner_size=8},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},disabled_graphical_set={base={position={329,744},corner_size=8},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},margin=0,type="button_style",clicked_graphical_set={base={position={363,744},corner_size=8},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4}},hovered_graphical_set={glow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},shadow={position={280,736},corner_size=16,scale=0.5,draw_type="outer",left_outer_border_shift=4,top_outer_border_shift=4,right_outer_border_shift=-4,bottom_outer_border_shift=-4},base={position={346,744},corner_size=8}},padding=0,parent="button",font="default-bold"},quick_bar_naked_frame={vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},horizontal_flow_style={horizontal_spacing=0,type="horizontal_flow_style"},type="frame_style",parent="naked_frame"},module_inventory_scroll_pane={vertically_squashable="off",type="scroll_pane_style",maximal_height=100},packed_vertical_flow={vertical_spacing=0,type="vertical_flow_style"},quest_hint_description={type="label_style",font_color={r=255,b=255,g=255},font="default",rich_text_setting="enabled",single_line=false,horizontal_align="left",maximal_width=350,left_padding=3},tutorial_notice_label={font_color={r=1,b=1,g=1},type="label_style",parent="label"},map_generator_frequency_table={cell_padding=8,type="table_style",parent="bordered_table",column_alignments={{column=1,alignment="middle-left"},{column=2,alignment="middle-center"},{column=3,alignment="middle-center"},{column=4,alignment="middle-center"}},column_widths={{minimal_width=116,column=1}}},black_label_with_left_padding={font_color={0,0,0},type="label_style",left_padding=4},production_progressbar={type="progressbar_style"},mod_invalid_label={type="label_style"},list_box={type="list_box_style",item_style={type="button_style",parent="list_box_item"},scroll_pane_style={type="scroll_pane_style",parent="list_box_scroll_pane"}},positive_message_frame={type="frame_style",graphical_set={base={position={420,17},corner_size=8}}},caption_label={parent="bold_label",type="label_style"},control_input_shortcut_label={font_color={128,206,240},font="default-semibold",type="label_style"},play_tutorial_button={parent="button",font="default",type="button_style"},permissions_players_list_box={type="list_box_style",size={250,400}},quest_item_count_wrapper={left_padding=4,type="horizontal_flow_style",parent="quest_gui_entry_wrapper_common"},outer_frame={horizontal_flow_style={horizontal_spacing=0,type="horizontal_flow_style"},padding=0,graphical_set={},vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},type="frame_style"},mod_startup_settings_mismatch_notice_box={parent="notice_textbox",type="textbox_style",width=400},orange_label={type="label_style",font="default-bold"},only_inner_shadow_scroll_pane={type="scroll_pane_style",graphical_set={}},notice_textbox={type="textbox_style",maximal_width=450,minimal_width=0,parent="textbox",default_background={opacity=0,type="none"},padding=0},frame_without_footer={type="frame_style",bottom_padding=8},notched_slider={draw_notches=true,type="slider_style",parent="slider",button={left_click_sound={{volume=1,filename="__core__/sound/gui-click.ogg"}},default_graphical_set={base={position={0,189},size={24,35}},shadow={top_outer_border_shift=-2,draw_type="outer",left_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,center={position={96,184},size={40,48}}}},disabled_graphical_set={base={position={24,189},size={24,35}},shadow={top_outer_border_shift=-2,draw_type="outer",left_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,center={position={96,184},size={40,48}}}},width=12,height=17,clicked_graphical_set={base={position={72,189},size={24,35}},shadow={top_outer_border_shift=-2,draw_type="outer",left_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,center={position={96,184},size={40,48}}}},hovered_graphical_set={base={position={48,189},size={24,35}},glow={top_outer_border_shift=-2,draw_type="outer",left_outer_border_shift=-4,right_outer_border_shift=4,bottom_outer_border_shift=4,center={position={96,184},size={40,48}}}},type="button_style",padding=0},height=20},out_of_date_mod_label={type="label_style",font_color={0.9,0.9,0}},new_game_subheader_caption_label={parent="subheader_caption_label",maximal_width=400,type="label_style"},available_preview_technology_slot={height=200,ingredients_padding=32,parent="available_technology_slot",type="technology_slot_style",width=136},new_game_information_vertical_flow={type="vertical_flow_style",top_padding=4,bottom_padding=4,vertically_stretchable="on",left_padding=8,right_padding=8,parent="vertical_flow"},new_game_info_frame={parent="a_inner_paddingless_frame",type="frame_style",size={500,616}},centering_horizontal_flow={vertical_align="center",type="horizontal_flow_style"},image_tab_selected_slot={size=68,clicked_graphical_set={position={75,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},hovered_graphical_set={position={75,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},parent="image_tab_slot",type="button_style",default_graphical_set={position={75,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1}},achievement_failed_description_label={font_color={r=0.56078431372549,b=0.46274509803922,g=0.46274509803922},type="label_style",parent="achievement_description_label"},steam_friend_label={type="label_style",font_color={r=0.28,b=0.7,g=0.58}},invalid_value_textfield={default_background={position={16,16},corner_size=3,filename="__core__/graphics/gui.png",scale=1},type="textbox_style"},naked_frame_with_no_spacing={vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},horizontal_flow_style={horizontal_spacing=0,type="horizontal_flow_style"},type="frame_style",parent="naked_frame"},mods_scroll_pane={type="scroll_pane_style",background_graphical_set={overall_tiling_horizontal_padding=4,corner_size=8,overall_tiling_vertical_spacing=8,overall_tiling_vertical_padding=4,position={282,17},overall_tiling_vertical_size=20},parent="scroll_pane_under_subheader",padding=0},frame={use_header_filler=true,header_flow_style={type="horizontal_flow_style",vertical_align="center",bottom_padding=4},right_padding=8,flow_style={type="flow_style"},drag_by_title=true,vertical_flow_style={type="vertical_flow_style"},border={},type="frame_style",title_style={type="label_style",parent="frame_title"},top_padding=4,bottom_padding=4,left_padding=8,graphical_set={base={position={0,0},corner_size=8}},horizontal_flow_style={type="horizontal_flow_style"},header_filler_style={height=24,type="empty_widget_style",parent="draggable_space_header"}},mod_updates_status_image={stretch_image_to_widget_size=true,size={16,16},type="image_style"},no_path_station_in_schedule_in_train_view_list_box_item={type="button_style",default_font_color={1,0.2,0.3},selected_hovered_font_color={0.8,0.15,0.12},hovered_font_color={0.8,0.15,0.12},parent="list_box_item",selected_font_color={0.8,0.15,0.12},selected_clicked_font_color={0.8,0.15,0.12}},mod_optional_dependency_invalid_label={parent="label",type="label_style"},featured_technology_table={type="table_style",vertical_spacing=0,column_widths={{minimal_width=60,column=1},{minimal_width=364,column=2}},horizontal_spacing=12,border={right_end={position={8,40},size={1,8}},left_end={position={112,40},size=8},horizontal_line={position={8,40},size={1,8}},border_width=4}},mod_gui_button={height=36,minimal_width=36,parent="button",type="button_style",padding=1},menu_frame={type="frame_style",bottom_padding=8},slot_table={type="table_style",horizontal_spacing=2,vertical_spacing=2},map_generator_preview_button={icon_horizontal_align="left",type="button_style",maximal_width=250,parent="forward_button",natural_width=136},green_slot_button={type="button_style",clicked_graphical_set={center={position={185,108},filename="__core__/graphics/gui.png",size={36,36},scale=1},border=1},hovered_graphical_set={center={position={148,108},filename="__core__/graphics/gui.png",size={36,36},scale=1},border=1},parent="slot_button",default_graphical_set={center={position={111,108},filename="__core__/graphics/gui.png",size={36,36},scale=1},border=1}},featured_technology_description_label={parent="label",font="var",type="label_style"},map_generator_notched_slider_wide={right_margin=4,left_margin=4,type="slider_style",parent="map_generator_notched_slider"},map_generator_confirm_button={parent="confirm_double_arrow_button",type="button_style",width=208},draggable_space_with_no_right_margin={right_margin=0,parent="draggable_space",type="empty_widget_style"},map_generator_close_preview_button={icon_horizontal_align="left",parent="back_button",type="button_style",width=160},bold_label={font="default-bold",type="label_style"},locked_tutorial_card_frame={type="frame_style",parent="failed_achievement_in_sidebar_frame"},locked_achievement_in_sidebar_frame={parent="frame",top_padding=4,type="frame_style"},window_content_frame_in_tabbed_panne={left_margin=8,vertical_flow_style={vertical_spacing=0,type="vertical_flow_style"},padding=0,right_margin=8,graphical_set={base={position={85,0},corner_size=8,center={position={42,8},size=1},draw_type="outer"}},type="frame_style",bottom_margin=4},green_circuit_network_content_slot={parent="slot_button",default_graphical_set={position={111,108},filename="__core__/graphics/gui.png",size=36,scale=1,border=1},type="button_style"},invalid_hovered_mod_label={type="label_style",font_color={61,3,0}},installed_mod_label={type="label_style",font_color={0,0.9,0}},dialog_frame_no_header_filler={use_header_filler=false,parent="dialog_frame",type="frame_style"},incompatible_mod_label={type="label_style",font_color={255,142,142}},icon_back_button={type="button_style",parent="back_button"},compilatron_speech_bubble_wrapper={effect="compilatron-hologram",type="flow_style"},quest_gui_inner_scroll_pane={type="scroll_pane_style",top_margin=4,graphical_set={base={position={17,0},corner_size=8,center={position={76,8},size={1,1}},draw_type="outer"}},parent="scroll_pane",bottom_margin=4},bonus_progressbar={parent="production_progressbar",color={0.8,0.8,0},type="progressbar_style"},label_with_left_padding={type="label_style",left_padding=4},graph={vertical_lable_style={type="label_style",font="default-small",right_padding=4,left_padding=0,parent="label"},grid_lines_color={r=0.15,b=0.15,g=0.15},horizontal_lable_style={type="label_style",parent="label",font="default-small",right_padding=0},vertical_labels_margin=32,selection_dot_radius=3,type="graph_style",guide_lines_color={r=0.9,b=0.9,g=0.9},data_line_highlight_distance=20,natural_width=550,height=200,minimal_vertical_label_spacing=22,minimal_horizontal_label_spacing=25,background_color={r=0.05,a=0.9,b=0.05,g=0.05},line_colors={{0.22,0.41,0.69},{0.85,0.48,0.18},{0.24,0.58,0.31},{0.8,0.1,0.16},{0.553,0.365,0.675},{0.87,0.72,0},{0,0.667,0.7},{0.47,0.47,0.47},{0.816,0.533,0.72},{0.565,0.33,0.22},{0.49,0.7,0},{0.58,0.69,0.898},{0.937,0.714,0.604},{0.518,0.753,0.592},{1,0.57,0.565},{0.78,0.682,0.87},{0.945,0.86,0.467},{0.514,0.843,0.81},{0.733,0.733,0.733},{0.906,0.733,0.84},{0.67,0.855,0.486},{0.72,0.604,0.553}},horizontal_labels_margin=16,graph_top_margin=5},goal_holder_vertical_flow={vertical_spacing=0,type="vertical_flow_style"},fulfilled_draggable_space_in_train_schedule={graphical_set={base={center_tiling_horizontal=true,top={position={412,78},size={8,7}},bottom={position={428,78},size={8,8}},bottom_tiling=true,center={position={420,78},size={8,8}},top_tiling=true},glow={position={200,128},corner_size=8,draw_type="outer",scale=0.5}},type="empty_widget_style",parent="draggable_space_in_train_schedule"},tabbed_pane={tab_content_frame={type="frame_style",top_padding=8,bottom_padding=8,left_padding=4,right_padding=4},type="tabbed_pane_style",padding=0,tab_container={type="horizontal_flow_style",left_padding=12,horizontal_spacing=0,right_padding=12},vertical_spacing=0},mods_gui_right_pane_vertical_flow={type="vertical_flow_style",maximal_width=664,maximal_height=692,natural_height=692,vertical_spacing=12,natural_width=664},achievement_progressbar={bar_background={position={1,0},filename="__core__/graphics/scrollbar-mini.png",size={1,7},scale=1},bar={position={4,1},filename="__core__/graphics/scrollbar-mini.png",size={1,5},scale=1},type="progressbar_style",color={r=1,b=1,g=1},bar_width=7,other_colors={},minimal_width=300,font="default-large-semibold"},featured_technology_slot_frame={parent="frame",type="frame_style",padding=0},entity_info_frame={parent="tooltip_generated_from_description_frame",maximal_width=356,type="frame_style"},short_number_textfield={width=80,type="textbox_style"},control_settings_button={parent="rounded_button",horizontal_align="left",type="button_style",width=225},player_input_table={column_alignments={{column=1,alignment="middle-left"},{column=2,alignment="middle-left"},{column=3,alignment="middle-left"}},horizontal_spacing=8,type="table_style"},hyperlink_label={hovered_font_color={154,250,255},font_color={110,179,255},type="label_style"},changelog_textbox={active_background={},disabled_background={},default_background={},selection_background_color={241,190,100},type="textbox_style",font_color={},rich_text_setting="disabled",bottom_padding=4,top_padding=4,vertically_stretchable="on",disabled_font_color={r=0.5,a=0.5,b=0.5,g=0.5},padding=8},machine_right_part_flow={vertical_spacing=5,type="flow_style"},b_inner_frame_for_subheader_with_paddings={type="frame_style",top_padding=0,right_padding=4,left_padding=4,parent="b_inner_frame"},finished_game_subheader_frame={type="frame_style",top_padding=6,bottom_padding=5,left_padding=12,right_padding=12,parent="subheader_frame"}}};return _;end
+do
+    local _ = {
+        default = {
+            only_inner_shadow_scroll_pane = {
+                extra_padding_when_activated = 0,
+                type = 'scroll_pane_style',
+                graphical_set = {shadow = 0}
+            },
+            slot_count_change_button = {
+                size = {40, 20},
+                parent = 'button',
+                type = 'button_style',
+                left_click_sound = {{filename = '__core__/sound/gui-tool-button.ogg', volume = 1}}
+            },
+            slot_table = {vertical_spacing = 0, horizontal_spacing = 0, type = 'table_style'},
+            browse_games_scroll_pane = {type = 'scroll_pane_style'},
+            tutorial_list_scroll_pane = {padding = 0, type = 'scroll_pane_style', graphical_set = {}},
+            frame_title = {
+                font_color = 0,
+                type = 'label_style',
+                top_padding = -3,
+                parent = 'label',
+                font = 'heading-1',
+                bottom_padding = 3
+            },
+            table_with_extra_margins = {type = 'table_style', left_margin = 8, right_margin = 0, top_margin = 4},
+            changelog_textbox = {
+                disabled_background = {},
+                default_background = {},
+                selection_background_color = {241, 190, 100},
+                active_background = {},
+                disabled_font_color = {g = 0.5, r = 0.5, a = 0.5, b = 0.5},
+                font_color = {},
+                type = 'textbox_style',
+                top_padding = 4,
+                vertically_stretchable = 'on',
+                rich_text_setting = 'disabled',
+                padding = 8,
+                bottom_padding = 4
+            },
+            black_squashable_label = {horizontally_squashable = 'on', parent = 'black_label', type = 'label_style'},
+            map_generator_confirm_button = {parent = 'confirm_double_arrow_button', type = 'button_style', width = 208},
+            browse_games_gui_toggle_favorite_off_button = {
+                size = 16,
+                type = 'button_style',
+                disabled_graphical_set = {filename = '__core__/graphics/favourite-grey.png', size = 64, scale = 1},
+                clicked_graphical_set = {
+                    filename = '__core__/graphics/favourite-grey-hovered.png',
+                    size = 64,
+                    scale = 1
+                },
+                hovered_graphical_set = {
+                    filename = '__core__/graphics/favourite-grey-hovered.png',
+                    size = 64,
+                    scale = 1
+                },
+                default_graphical_set = {filename = '__core__/graphics/favourite-grey.png', size = 64, scale = 1}
+            },
+            production_progressbar = {type = 'progressbar_style'},
+            invalid_selected_mod_label = {type = 'label_style', font_color = {115, 0, 0}},
+            constant_combinator_invisible_frame_with_title = {
+                right_margin = -12,
+                top_padding = 4,
+                type = 'frame_style',
+                left_margin = -12,
+                parent = 'invisible_frame_with_title_for_inventory',
+                bottom_padding = -4
+            },
+            clickable_squashable_label = {
+                horizontally_squashable = 'on',
+                parent = 'clickable_label',
+                type = 'label_style'
+            },
+            neutral_message_frame = {
+                type = 'frame_style',
+                graphical_set = {shadow = 0, base = {position = {386, 17}, corner_size = 8}}
+            },
+            goal_label = {type = 'label_style', single_line = false},
+            no_path_station_in_schedule_in_train_view_list_box_item = {
+                type = 'button_style',
+                default_font_color = {1, 0.2, 0.3},
+                clicked_font_color = {135, 0, 17},
+                hovered_font_color = {135, 0, 17},
+                selected_hovered_font_color = {135, 0, 17},
+                parent = 'list_box_item',
+                selected_font_color = {135, 0, 17},
+                selected_clicked_font_color = {135, 0, 17}
+            },
+            machine_frame = {
+                parent = 'inner_frame_in_outer_frame',
+                horizontal_flow_style = {horizontal_spacing = 4, type = 'horizontal_flow_style'},
+                type = 'frame_style'
+            },
+            image = {type = 'image_style', stretch_image_to_widget_size = false, graphical_set = {}},
+            shortcut_bar_button_green = {parent = 'slot_sized_button_green', type = 'button_style', padding = 8},
+            blueprint_drop_slot_button = {size = 76, type = 'empty_widget_style'},
+            omitted_technology_slot = {
+                size = {10, 8},
+                type = 'button_style',
+                padding = 0,
+                hovered_graphical_set = {},
+                default_graphical_set = {}
+            },
+            tool_button_red = {
+                size = 28,
+                type = 'button_style',
+                padding = 2,
+                parent = 'red_button',
+                left_click_sound = {{filename = '__core__/sound/gui-tool-button.ogg', volume = 1}}
+            },
+            textbox = {
+                disabled_background = {shadow = 0, base = {position = {282, 0}, corner_size = 8}},
+                selection_background_color = {241, 190, 100},
+                disabled_font_color = {g = 0.5, r = 0.5, a = 0.5, b = 0.5},
+                font_color = {},
+                selected_rich_text_highlight_ok_color = {g = 80, r = 50, b = 0},
+                right_padding = 2,
+                rich_text_setting = 'enabled',
+                selected_rich_text_highlight_warning_color = {g = 62, r = 182, b = 4},
+                default_background = {shadow = 0, base = {position = {248, 0}, corner_size = 8}},
+                rich_text_highlight_error_color = {g = 10, r = 166, b = 10},
+                width = 200,
+                font = 'default',
+                active_background = {shadow = 0, base = {position = {265, 0}, corner_size = 8}},
+                minimal_height = 28,
+                selected_rich_text_highlight_error_color = {g = 10, r = 166, b = 10},
+                type = 'textbox_style',
+                top_padding = 0,
+                rich_text_highlight_warning_color = {g = 90, r = 255, b = 0},
+                rich_text_highlight_ok_color = {g = 105, r = 63, b = 0},
+                left_padding = 3,
+                bottom_padding = 0
+            },
+            quick_bar_inner_panel = {
+                type = 'frame_style',
+                padding = 0,
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                horizontal_flow_style = {horizontal_spacing = 4, type = 'horizontal_flow_style'},
+                graphical_set = {
+                    shadow = {corner_size = 8, position = {440, 24}, draw_type = 'outer'},
+                    base = {center = {size = {1, 1}, position = {42, 8}}}
+                }
+            },
+            vehicle_health_progressbar = {
+                color = {0.8, 0.8, 0.8},
+                parent = 'health_progressbar',
+                type = 'progressbar_style'
+            },
+            slider_value_textfield = {
+                horizontal_align = 'center',
+                type = 'textbox_style',
+                parent = 'short_number_textfield'
+            },
+            failed_achievement_in_sidebar_frame = {
+                top_padding = 4,
+                parent = 'frame',
+                type = 'frame_style',
+                graphical_set = {shadow = 0, base = {position = {403, 17}, corner_size = 8}}
+            },
+            horizontal_scrollbar = {
+                type = 'horizontal_scrollbar_style',
+                thumb_button_style = {
+                    height = 10,
+                    type = 'button_style',
+                    left_click_sound = {},
+                    clicked_graphical_set = {
+                        shadow = 0,
+                        base = {
+                            center_tiling_horizontal = true,
+                            left = {size = {8, 20}, position = {272, 48}},
+                            right = {size = {8, 20}, position = {288, 48}},
+                            center = {size = {8, 20}, position = {280, 48}}
+                        }
+                    },
+                    hovered_graphical_set = {
+                        glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                        base = {
+                            center_tiling_horizontal = true,
+                            left = {size = {8, 20}, position = {248, 48}},
+                            right = {size = {8, 20}, position = {264, 48}},
+                            center = {size = {8, 20}, position = {256, 48}}
+                        }
+                    },
+                    default_graphical_set = {
+                        shadow = 0,
+                        base = {
+                            center_tiling_horizontal = true,
+                            left = {size = {8, 20}, position = {224, 48}},
+                            right = {size = {8, 20}, position = {240, 48}},
+                            center = {size = {8, 20}, position = {232, 48}}
+                        }
+                    }
+                },
+                height = 12,
+                background_graphical_set = {position = {0, 72}, corner_size = 8}
+            },
+            description_value_label = {parent = 'label', font = 'default', type = 'label_style'},
+            tooltip_title_frame_light = {
+                left_padding = 4,
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                top_padding = 0,
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                right_padding = 4,
+                graphical_set = {position = {352, 0}, background_blur_sigma = 4, opacity = 0.88, corner_size = 8},
+                bottom_padding = 0
+            },
+            logistics_scroll_pane_background_frame = {
+                minimal_height = 120,
+                parent = 'filter_scroll_pane_background_frame',
+                type = 'frame_style'
+            },
+            locked_achievement_in_sidebar_frame = {parent = 'frame', type = 'frame_style', top_padding = 4},
+            blueprint_library_frame = {parent = 'outer_frame', height = 600, type = 'frame_style'},
+            achievement_locked_description_label = {type = 'label_style', parent = 'achievement_description_label'},
+            unlocked_tutorial_card_frame = {
+                parent = 'locked_achievement_in_sidebar_frame',
+                type = 'frame_style',
+                bottom_padding = 4
+            },
+            subheader_frame_with_top_border = {
+                height = 35,
+                top_padding = -1,
+                type = 'frame_style',
+                parent = 'subheader_frame',
+                top_margin = 1,
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        top = {size = {1, 8}, position = {42, 0}},
+                        bottom = {size = {1, 8}, position = {256, 26}},
+                        center = {size = {1, 1}, position = {256, 25}}
+                    },
+                    glow = {top = {size = {1, 8}, position = {93, 0}}, draw_type = 'outer'}
+                }
+            },
+            inside_shallow_frame_with_padding_line = {left_margin = -12, right_margin = -12, type = 'line_style'},
+            research_queue_active_glow_outer = {
+                type = 'glow_style',
+                image_set = {
+                    glow = {
+                        left_outer_border_shift = -4,
+                        position = {200, 128},
+                        scale = 0.5,
+                        bottom_outer_border_shift = 4,
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        tint = {g = 255, r = 2, b = 2},
+                        right_outer_border_shift = 4,
+                        top_outer_border_shift = -4
+                    }
+                }
+            },
+            tutorial_notice_label = {font_color = {g = 1, r = 1, b = 1}, type = 'label_style', parent = 'label'},
+            achievement_failed_reason_label = {
+                type = 'label_style',
+                font_color = {g = 0.85882352941176, r = 0.88627450980392, b = 0.85882352941176},
+                font = 'default-small',
+                parent = 'label'
+            },
+            quick_bar_window_frame = {
+                use_header_filler = false,
+                type = 'frame_style',
+                padding = 4,
+                header_flow_style = {type = 'horizontal_flow_style', bottom_padding = 8},
+                horizontal_flow_style = {horizontal_spacing = 8, type = 'horizontal_flow_style'}
+            },
+            color_indicator = {
+                size = 28,
+                type = 'empty_widget_style',
+                graphical_set = {position = {195, 72}, corner_size = 8}
+            },
+            caption_checkbox = {font_color = {255, 230, 192}, font = 'default-bold', type = 'checkbox_style'},
+            control_settings_section_button = {
+                parent = 'tool_button',
+                type = 'button_style',
+                default_graphical_set = {position = {68, 0}, corner_size = 8}
+            },
+            menu_button_continue = {
+                type = 'button_style',
+                disabled_graphical_set = {shadow = 0, base = {position = {85, 25}, corner_size = 8}},
+                parent = 'menu_button',
+                clicked_graphical_set = {shadow = 0, base = {position = {119, 17}, corner_size = 8}},
+                hovered_graphical_set = {
+                    shadow = 0,
+                    base = {position = {102, 17}, corner_size = 8},
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5}
+                },
+                default_graphical_set = {shadow = 0, base = {position = {68, 17}, corner_size = 8}}
+            },
+            frame_button = {
+                padding = 0,
+                selected_graphical_set = {
+                    shadow = {corner_size = 8, position = {440, 24}, draw_type = 'outer'},
+                    base = {position = {272, 169}, corner_size = 8}
+                },
+                clicked_graphical_set = {
+                    shadow = {corner_size = 8, position = {440, 24}, draw_type = 'outer'},
+                    base = {position = {51, 17}, corner_size = 8}
+                },
+                type = 'button_style',
+                disabled_graphical_set = {
+                    shadow = {corner_size = 8, position = {440, 24}, draw_type = 'outer'},
+                    base = {position = {17, 17}, corner_size = 8}
+                },
+                selected_hovered_graphical_set = {
+                    shadow = {corner_size = 8, position = {440, 24}, draw_type = 'outer'},
+                    base = {position = {369, 17}, corner_size = 8}
+                },
+                hovered_graphical_set = {
+                    shadow = {corner_size = 8, position = {440, 24}, draw_type = 'outer'},
+                    base = {position = {34, 17}, corner_size = 8},
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5}
+                },
+                parent = 'button',
+                default_graphical_set = {
+                    shadow = {corner_size = 8, position = {440, 24}, draw_type = 'outer'},
+                    base = {position = {0, 0}, corner_size = 8}
+                }
+            },
+            blueprint_settings_frame = {
+                left_padding = 8,
+                parent = 'inside_shallow_frame',
+                horizontal_flow_style = {type = 'horizontal_flow_style'},
+                type = 'frame_style',
+                top_padding = 4,
+                width = 436,
+                vertical_flow_style = {type = 'vertical_flow_style'},
+                right_padding = 8,
+                bottom_padding = 4
+            },
+            tooltip_generated_from_description_frame = {
+                type = 'frame_style',
+                padding = 0,
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                maximal_width = 356,
+                horizontal_flow_style = {horizontal_spacing = 0, type = 'horizontal_flow_style'},
+                graphical_set = {shadow = 0}
+            },
+            custom_games_list_box = {size = {300, 250}, type = 'list_box_style'},
+            disabled_technology_slot = {
+                clicked_ingredients_background = {position = {347, 619}, corner_size = 8},
+                hovered_level_band = {position = {433, 602}, corner_size = 8},
+                clicked_graphical_set = {shadow = 0, base = {position = {330, 619}, corner_size = 8}},
+                default_ingredients_background = {position = {364, 619}, corner_size = 8},
+                hovered_level_range_font_color = {255, 255, 255},
+                disabled_graphical_set = {shadow = 0, base = {position = {313, 619}, corner_size = 8}},
+                hovered_ingredients_background = {position = {347, 619}, corner_size = 8},
+                highlighted_graphical_set = {shadow = 0, base = {position = {381, 619}, corner_size = 8}},
+                type = 'technology_slot_style',
+                selected_hovered_graphical_set = {shadow = 0, base = {position = {330, 619}, corner_size = 8}},
+                selected_clicked_graphical_set = {shadow = 0, base = {position = {330, 619}, corner_size = 8}},
+                selected_graphical_set = {shadow = 0, base = {position = {330, 619}, corner_size = 8}},
+                level_range_band = {position = {415, 619}, corner_size = 8},
+                parent = 'technology_slot',
+                hovered_level_font_color = {255, 255, 255},
+                level_range_font_color = {132, 132, 132},
+                clicked_overlay = {
+                    left_bottom = {size = {16, 16}, position = {416, 204}},
+                    bottom = {size = {1, 16}, position = {432, 204}},
+                    top = {size = {1, 16}, position = {472, 136}},
+                    right = {size = {16, 1}, position = {473, 152}},
+                    left_top = {size = {16, 16}, position = {456, 136}},
+                    right_bottom = {size = {16, 16}, position = {433, 204}},
+                    left = {size = {16, 1}, position = {456, 152}},
+                    right_top = {size = {16, 16}, position = {473, 136}},
+                    center = {size = {1, 1}, position = {472, 152}}
+                },
+                level_font_color = {132, 132, 132},
+                highlighted_ingredients_background = {position = {347, 619}, corner_size = 8},
+                level_band = {position = {398, 619}, corner_size = 8},
+                hovered_level_range_band = {position = {448, 602}, corner_size = 8},
+                disabled_ingredients_background = {position = {364, 619}, corner_size = 8},
+                hovered_graphical_set = {shadow = 0, base = {position = {330, 619}, corner_size = 8}},
+                default_graphical_set = {shadow = 0, base = {position = {313, 619}, corner_size = 8}}
+            },
+            right_bottom_container_frame = {
+                parent = 'outer_frame',
+                type = 'frame_style',
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0}
+            },
+            table_with_selection = {
+                hovered_row_color = {g = 0.66, r = 0.98, a = 0.7, b = 0.22},
+                type = 'table_style',
+                horizontal_spacing = 20,
+                top_padding = 5,
+                odd_row_graphical_set = {
+                    size = 1,
+                    opacity = 0.7,
+                    filename = '__core__/graphics/gui.png',
+                    position = {78, 18},
+                    scale = 1
+                },
+                selected_row_color = 0,
+                vertical_spacing = 5,
+                cell_padding = 1
+            },
+            red_slot = {
+                type = 'button_style',
+                parent = 'slot',
+                selected_graphical_set = {base = {size = 80, position = {320, 816}, border = 4}},
+                clicked_graphical_set = {base = {size = 80, position = {400, 816}, border = 4}},
+                hovered_graphical_set = {base = {size = 80, position = {320, 816}, border = 4}},
+                default_graphical_set = {base = {size = 80, position = {240, 816}, border = 4}}
+            },
+            graphicless_frame = {type = 'frame_style', graphical_set = {}},
+            frame_division_fake_horizontal_line = {
+                bottom_margin = -4,
+                height = 8,
+                border = {
+                    right_end = {size = {8, 8}, position = {257, 40}},
+                    left_end = {size = {8, 8}, position = {248, 40}},
+                    horizontal_line = {size = {1, 8}, position = {256, 40}},
+                    border_width = 8
+                },
+                top_margin = -4,
+                type = 'line_style'
+            },
+            default_tileset = '__core__/graphics/gui-new.png',
+            mod_gui_spacing_horizontal_flow = {horizontal_spacing = 2, type = 'horizontal_flow_style'},
+            bonus_card_frame = {
+                minimal_height = 112,
+                minimal_width = 192,
+                padding = 4,
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 8},
+                parent = 'subpanel_frame',
+                type = 'frame_style',
+                graphical_set = {shadow = 0, base = {position = {68, 0}, corner_size = 8}}
+            },
+            achievement_failed_description_label = {
+                font_color = {g = 0.46274509803922, r = 0.56078431372549, b = 0.46274509803922},
+                type = 'label_style',
+                parent = 'achievement_description_label'
+            },
+            slot_button = {
+                draw_shadow_under_picture = true,
+                selected_clicked_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {160, 736}, border = 4}
+                },
+                padding = 0,
+                selected_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {80, 736}, border = 4}
+                },
+                clicked_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {160, 736}, border = 4}
+                },
+                left_click_sound = {{filename = '__core__/sound/gui-inventory-slot-button.ogg', volume = 0.6}},
+                pie_progress_color = {0.98, 0.66, 0.22, 0.5},
+                type = 'button_style',
+                size = 40,
+                selected_hovered_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {80, 736}, border = 4},
+                    glow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                hovered_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {80, 736}, border = 4},
+                    glow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                parent = 'button',
+                default_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {0, 736}, border = 4}
+                }
+            },
+            train_schedule_item_select_button = {
+                size = 28,
+                parent = 'dark_rounded_button',
+                type = 'button_style',
+                padding = -3
+            },
+            technology_card_frame = {
+                padding = 0,
+                type = 'frame_style',
+                graphical_set = {shadow = 0, base = {position = {34, 0}, corner_size = 8}}
+            },
+            train_stop_frame = {
+                title_style = {maximal_width = 800, type = 'label_style', parent = 'frame_title'},
+                parent = 'inner_frame_in_outer_frame',
+                type = 'frame_style'
+            },
+            tooltip_heading_label_category = {
+                font_color = {1, 0.8275, 0.29},
+                font = 'default-bold',
+                type = 'label_style'
+            },
+            subheader_caption_label = {
+                left_padding = 8,
+                font_color = 0,
+                type = 'label_style',
+                parent = 'label',
+                font = 'heading-2'
+            },
+            tutorial_completed_title_label = {
+                font_color = {210, 253, 145},
+                type = 'label_style',
+                parent = 'tutorial_title_label'
+            },
+            achievements_vertical_flow = {type = 'vertical_flow_style', vertical_spacing = 0},
+            blueprint_icon_preview = {size = 64, type = 'empty_widget_style'},
+            main_progressbar_frame = {use_header_filler = false, type = 'frame_style', width = 400},
+            black_squashable_label_with_left_padding = {
+                horizontally_squashable = 'on',
+                parent = 'black_label_with_left_padding',
+                type = 'label_style'
+            },
+            description_title_label = {font_color = 0, type = 'label_style', parent = 'bold_label'},
+            activity_bar = {
+                color = {g = 1},
+                minimal_width = 10,
+                bar_size_ratio = 0.07,
+                type = 'activity_bar_style',
+                speed = 0.01,
+                natural_width = 200,
+                bar_width = 7,
+                bar_background = {filename = '__core__/graphics/gui.png', position = {222, 0}, size = {1, 7}, scale = 1},
+                bar = {filename = '__core__/graphics/gui.png', position = {221, 0}, size = {1, 5}, scale = 1}
+            },
+            unavailable_technology_slot = {
+                clicked_ingredients_background = {position = {364, 170}, corner_size = 8},
+                hovered_level_band = {position = {381, 170}, corner_size = 8},
+                clicked_graphical_set = {shadow = 0, base = {position = {312, 170}, corner_size = 8}},
+                default_ingredients_background = {position = {347, 170}, corner_size = 8},
+                hovered_level_range_font_color = {255, 214, 213},
+                disabled_graphical_set = {shadow = 0, base = {position = {296, 170}, corner_size = 8}},
+                hovered_ingredients_background = {position = {364, 170}, corner_size = 8},
+                highlighted_graphical_set = {shadow = 0, base = {position = {330, 170}, corner_size = 8}},
+                type = 'technology_slot_style',
+                selected_hovered_graphical_set = {shadow = 0, base = {position = {312, 170}, corner_size = 8}},
+                selected_graphical_set = {shadow = 0, base = {position = {312, 170}, corner_size = 8}},
+                selected_clicked_graphical_set = {shadow = 0, base = {position = {312, 170}, corner_size = 8}},
+                level_range_band = {position = {397, 170}, corner_size = 8},
+                level_range_font_color = {255, 214, 213},
+                parent = 'technology_slot',
+                hovered_level_font_color = {116, 34, 32},
+                left_click_sound = {{filename = '__core__/sound/gui-technology-slot-unavailable.ogg', volume = 1}},
+                clicked_overlay = {
+                    left_bottom = {size = {16, 16}, position = {416, 170}},
+                    bottom = {size = {1, 16}, position = {432, 170}},
+                    top = {size = {1, 16}, position = {472, 136}},
+                    right = {size = {16, 1}, position = {473, 152}},
+                    left_top = {size = {16, 16}, position = {456, 136}},
+                    right_bottom = {size = {16, 16}, position = {433, 170}},
+                    left = {size = {16, 1}, position = {456, 152}},
+                    right_top = {size = {16, 16}, position = {473, 136}},
+                    center = {size = {1, 1}, position = {472, 152}}
+                },
+                level_font_color = {116, 34, 32},
+                highlighted_ingredients_background = {position = {364, 170}, corner_size = 8},
+                level_band = {position = {381, 170}, corner_size = 8},
+                hovered_level_range_band = {position = {397, 170}, corner_size = 8},
+                disabled_ingredients_background = {position = {364, 170}, corner_size = 8},
+                hovered_graphical_set = {shadow = 0, base = {position = {312, 170}, corner_size = 8}},
+                default_graphical_set = {shadow = 0, base = {position = {296, 170}, corner_size = 8}}
+            },
+            confirm_double_arrow_button = {
+                parent = 'dialog_button',
+                type = 'button_style',
+                disabled_graphical_set = {
+                    glow = {
+                        left_outer_border_shift = 12,
+                        tint = 0,
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        top_outer_border_shift = -4,
+                        right_outer_border_shift = -12,
+                        left = {size = {32, 80}, position = {305, 504}},
+                        right = {size = {32, 80}, position = {336, 424}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {24, 64}, position = {120, 296}},
+                        left = {size = {24, 64}, position = {144, 296}},
+                        center = {size = {1, 64}, position = {120, 296}}
+                    }
+                },
+                hovered_graphical_set = {
+                    glow = {
+                        left_outer_border_shift = 12,
+                        tint = 0,
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        top_outer_border_shift = -4,
+                        right_outer_border_shift = -12,
+                        left = {size = {32, 80}, position = {305, 504}},
+                        right = {size = {32, 80}, position = {336, 424}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {24, 64}, position = {216, 296}},
+                        left = {size = {24, 64}, position = {240, 296}},
+                        center = {size = {1, 64}, position = {216, 296}}
+                    }
+                },
+                clicked_graphical_set = {
+                    base = {
+                        right = {size = {24, 64}, position = {312, 296}},
+                        left = {size = {24, 64}, position = {336, 296}},
+                        center = {size = {1, 64}, position = {312, 296}}
+                    }
+                },
+                horizontal_align = 'right',
+                default_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 12,
+                        tint = 0,
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        top_outer_border_shift = -4,
+                        right_outer_border_shift = -12,
+                        left = {size = {32, 80}, position = {305, 504}},
+                        right = {size = {32, 80}, position = {336, 424}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {24, 64}, position = {24, 296}},
+                        left = {size = {24, 64}, position = {48, 296}},
+                        center = {size = {1, 64}, position = {24, 296}}
+                    }
+                }
+            },
+            control_settings_button = {
+                width = 225,
+                horizontal_align = 'left',
+                type = 'button_style',
+                parent = 'rounded_button'
+            },
+            image_tab_selected_slot = {size = 68, parent = 'slot_sized_button_pressed', type = 'button_style'},
+            notched_slider = {
+                height = 20,
+                type = 'slider_style',
+                parent = 'slider',
+                button = {
+                    height = 17,
+                    padding = 0,
+                    clicked_graphical_set = {
+                        shadow = {
+                            bottom_outer_border_shift = 4,
+                            draw_type = 'outer',
+                            top_outer_border_shift = -2,
+                            right_outer_border_shift = 4,
+                            tint = 0,
+                            left_outer_border_shift = -4,
+                            center = {size = {40, 48}, position = {96, 184}}
+                        },
+                        base = {size = {24, 35}, position = {72, 189}}
+                    },
+                    left_click_sound = {{filename = '__core__/sound/gui-slider.ogg', volume = 1}},
+                    type = 'button_style',
+                    disabled_graphical_set = {
+                        shadow = {
+                            bottom_outer_border_shift = 4,
+                            draw_type = 'outer',
+                            top_outer_border_shift = -2,
+                            right_outer_border_shift = 4,
+                            tint = 0,
+                            left_outer_border_shift = -4,
+                            center = {size = {40, 48}, position = {96, 184}}
+                        },
+                        base = {size = {24, 35}, position = {24, 189}}
+                    },
+                    hovered_graphical_set = {
+                        glow = {
+                            bottom_outer_border_shift = 4,
+                            draw_type = 'outer',
+                            top_outer_border_shift = -2,
+                            right_outer_border_shift = 4,
+                            tint = 0,
+                            left_outer_border_shift = -4,
+                            center = {size = {40, 48}, position = {96, 184}}
+                        },
+                        base = {size = {24, 35}, position = {48, 189}}
+                    },
+                    width = 12,
+                    default_graphical_set = {
+                        shadow = {
+                            bottom_outer_border_shift = 4,
+                            draw_type = 'outer',
+                            top_outer_border_shift = -2,
+                            right_outer_border_shift = 4,
+                            tint = 0,
+                            left_outer_border_shift = -4,
+                            center = {size = {40, 48}, position = {96, 184}}
+                        },
+                        base = {size = {24, 35}, position = {0, 189}}
+                    }
+                },
+                draw_notches = true
+            },
+            invalid_label = {font_color = {255, 142, 142}, type = 'label_style', parent = 'label'},
+            researched_technology_slot = {
+                clicked_ingredients_background = {position = {364, 187}, corner_size = 8},
+                hovered_level_band = {position = {381, 187}, corner_size = 8},
+                clicked_graphical_set = {shadow = 0, base = {position = {312, 187}, corner_size = 8}},
+                default_ingredients_background = {position = {347, 187}, corner_size = 8},
+                hovered_level_range_font_color = {165, 255, 171},
+                disabled_graphical_set = {shadow = 0, base = {position = {296, 187}, corner_size = 8}},
+                hovered_ingredients_background = {position = {364, 187}, corner_size = 8},
+                highlighted_graphical_set = {shadow = 0, base = {position = {330, 187}, corner_size = 8}},
+                type = 'technology_slot_style',
+                selected_hovered_graphical_set = {shadow = 0, base = {position = {312, 187}, corner_size = 8}},
+                selected_graphical_set = {shadow = 0, base = {position = {312, 187}, corner_size = 8}},
+                selected_clicked_graphical_set = {shadow = 0, base = {position = {312, 187}, corner_size = 8}},
+                level_range_band = {position = {397, 187}, corner_size = 8},
+                level_range_font_color = {165, 255, 171},
+                parent = 'technology_slot',
+                hovered_level_font_color = {0, 84, 5},
+                left_click_sound = {{filename = '__core__/sound/gui-technology-slot-researched.ogg', volume = 0.7}},
+                clicked_overlay = {
+                    left_bottom = {size = {16, 16}, position = {416, 187}},
+                    bottom = {size = {1, 16}, position = {432, 187}},
+                    top = {size = {1, 16}, position = {472, 136}},
+                    right = {size = {16, 1}, position = {473, 152}},
+                    left_top = {size = {16, 16}, position = {456, 136}},
+                    right_bottom = {size = {16, 16}, position = {433, 187}},
+                    left = {size = {16, 1}, position = {456, 152}},
+                    right_top = {size = {16, 16}, position = {473, 136}},
+                    center = {size = {1, 1}, position = {472, 152}}
+                },
+                level_font_color = {0, 84, 5},
+                highlighted_ingredients_background = {position = {364, 187}, corner_size = 8},
+                level_band = {position = {381, 187}, corner_size = 8},
+                hovered_level_range_band = {position = {397, 187}, corner_size = 8},
+                disabled_ingredients_background = {position = {364, 187}, corner_size = 8},
+                hovered_graphical_set = {shadow = 0, base = {position = {312, 187}, corner_size = 8}},
+                default_graphical_set = {shadow = 0, base = {position = {296, 187}, corner_size = 8}}
+            },
+            invisible_frame_with_title = {
+                use_header_filler = false,
+                type = 'frame_style',
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 4},
+                title_style = {type = 'label_style', parent = 'heading_2_label'},
+                header_flow_style = {
+                    left_padding = 0,
+                    type = 'horizontal_flow_style',
+                    top_padding = 4,
+                    right_padding = 0,
+                    bottom_padding = 4
+                },
+                horizontal_flow_style = {horizontal_spacing = 4, type = 'horizontal_flow_style'},
+                parent = 'invisible_frame'
+            },
+            search_popup_textfield = {type = 'textbox_style', width = 104},
+            minimap = {minimal_height = 256, type = 'minimap_style', minimal_width = 256, graphical_set = {}},
+            frame_tabbed_pane_corner = {
+                bottom_margin = -4,
+                type = 'frame_style',
+                width = 8,
+                vertically_stretchable = 'on',
+                graphical_set = {
+                    shadow = {
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        top = {size = {1, 8}, position = {208, 128}},
+                        scale = 0.5,
+                        tint = 0,
+                        right_top = {size = {8, 8}, position = {209, 128}},
+                        center = {size = {1, 1}, position = {208, 136}}
+                    },
+                    base = {
+                        right = {size = {8, 1}, position = {9, 8}},
+                        right_bottom = {size = {8, 8}, position = {17, 9}},
+                        bottom = {size = {1, 1}, position = {8, 8}},
+                        top = {size = {1, 8}, position = {8, 0}},
+                        right_top = {size = {8, 8}, position = {9, 0}},
+                        center = {size = {1, 1}, position = {8, 8}}
+                    }
+                }
+            },
+            research_queue_active_glow_light = {
+                type = 'glow_style',
+                image_set = {glow = {corner_size = 8, position = {316, 17}, draw_type = 'outer'}}
+            },
+            mod_info_table = {
+                column_widths = {{column = 1, minimal_width = 116}},
+                parent = 'bordered_table',
+                type = 'table_style'
+            },
+            goal_frame = {
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                maximal_width = 564,
+                use_header_filler = false,
+                parent = 'frame'
+            },
+            vertical_flow = {type = 'vertical_flow_style', vertical_spacing = 4},
+            armor_frame = {
+                left_padding = 12,
+                type = 'frame_style',
+                top_padding = 12,
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 4},
+                parent = 'inventory_frame',
+                right_padding = 12,
+                bottom_padding = 4
+            },
+            changelog_tabbed_pane = {
+                top_padding = 12,
+                parent = 'tabbed_pane',
+                type = 'tabbed_pane_style',
+                tab_content_frame = {
+                    left_padding = 16,
+                    type = 'frame_style',
+                    padding = 12,
+                    right_padding = 16,
+                    graphical_set = {
+                        shadow = {
+                            draw_type = 'outer',
+                            top = {size = {1, 8}, position = {208, 128}},
+                            tint = 0,
+                            scale = 0.5,
+                            center = {size = {1, 1}, position = {208, 136}}
+                        },
+                        base = {
+                            top = {size = {1, 8}, position = {76, 0}},
+                            bottom = {size = {1, 8}, position = {76, 9}},
+                            center = {size = {1, 1}, position = {76, 8}}
+                        }
+                    }
+                }
+            },
+            load_game_mod_invalid_label = {type = 'label_style', font_color = 0},
+            valid_hovered_mod_label = {
+                disabled_font_color = {0, 0, 0, 0.5},
+                font_color = {29, 29, 29},
+                type = 'label_style'
+            },
+            search_bar_horizontal_flow = {type = 'horizontal_flow_style', vertical_align = 'top'},
+            auto_trash_frame = {
+                title_style = {type = 'label_style', parent = 'heading_3_label'},
+                parent = 'invisible_frame_with_title_for_inventory',
+                type = 'frame_style'
+            },
+            changelog_subheader_frame = {
+                left_padding = 12,
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                top_padding = 4,
+                parent = 'subheader_frame',
+                right_padding = 12
+            },
+            button = {
+                left_padding = 8,
+                hovered_font_color = 0,
+                selected_graphical_set = {shadow = 0, base = {position = {225, 17}, corner_size = 8}},
+                clicked_graphical_set = {shadow = 0, base = {position = {51, 17}, corner_size = 8}},
+                minimal_height = 28,
+                disabled_font_color = {179, 179, 179},
+                selected_font_color = 0,
+                strikethrough_color = {0.5, 0.5, 0.5},
+                disabled_graphical_set = {shadow = 0, base = {position = {17, 17}, corner_size = 8}},
+                type = 'button_style',
+                horizontal_align = 'center',
+                vertical_align = 'center',
+                selected_hovered_graphical_set = {shadow = 0, base = {position = {369, 17}, corner_size = 8}},
+                selected_hovered_font_color = 0,
+                default_font_color = {},
+                minimal_width = 108,
+                selected_clicked_graphical_set = {shadow = 0, base = {position = {352, 17}, corner_size = 8}},
+                selected_clicked_font_color = 0,
+                right_padding = 8,
+                font = 'default-semibold',
+                left_click_sound = {{filename = '__core__/sound/gui-click.ogg', volume = 1}},
+                icon_horizontal_align = 'center',
+                pie_progress_color = {1, 1, 1},
+                clicked_font_color = {},
+                top_padding = 0,
+                default_graphical_set = {shadow = 0, base = {position = {0, 17}, corner_size = 8}},
+                hovered_graphical_set = {
+                    shadow = 0,
+                    base = {position = {34, 17}, corner_size = 8},
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5}
+                },
+                clicked_vertical_offset = 1,
+                bottom_padding = 0
+            },
+            save_as_horizontal_flow = {
+                left_padding = 4,
+                parent = 'player_input_horizontal_flow',
+                type = 'horizontal_flow_style'
+            },
+            control_settings_section_frame = {
+                parent = 'subpanel_inset_frame',
+                type = 'frame_style',
+                graphical_set = {base = {corner_size = 8, position = {85, 0}, draw_type = 'outer'}}
+            },
+            tab_scroll_pane_with_extra_padding = {
+                left_padding = 8,
+                parent = 'tab_scroll_pane',
+                type = 'scroll_pane_style',
+                right_padding = 8
+            },
+            achievement_percent_label = {
+                type = 'label_style',
+                font_color = {g = 0.8078431372549, r = 0.58823529411765, b = 0.50980392156863},
+                font = 'default-large-semibold',
+                parent = 'label'
+            },
+            machine_outputs_scroll_pane = {
+                vertically_squashable = 'off',
+                parent = 'scroll_pane_in_shallow_frame',
+                maximal_height = 100,
+                type = 'scroll_pane_style'
+            },
+            map_generator_frequency_table = {
+                type = 'table_style',
+                column_alignments = {
+                    {alignment = 'middle-left', column = 1}, {alignment = 'middle-center', column = 2},
+                    {alignment = 'middle-center', column = 3}, {alignment = 'middle-center', column = 4}
+                },
+                column_widths = {{column = 1, minimal_width = 116}},
+                parent = 'bordered_table',
+                cell_padding = 8
+            },
+            featured_technology_inner_table = {
+                top_padding = 4,
+                parent = 'compact_slot_table',
+                type = 'table_style',
+                bottom_padding = 4
+            },
+            yellow_logistic_slot_button = {type = 'button_style', parent = 'yellow_slot_button'},
+            line = {
+                type = 'line_style',
+                border = {
+                    top_t = {size = {8, 8}, position = {64, 40}},
+                    bottom_left_corner = {size = {8, 8}, position = {32, 40}},
+                    bottom_right_corner = {size = {8, 8}, position = {24, 40}},
+                    border_width = 8,
+                    right_end = {size = {8, 8}, position = {96, 40}},
+                    vertical_line = {size = {8, 1}, position = {0, 40}},
+                    top_right_corner = {size = {8, 8}, position = {16, 40}},
+                    left_t = {size = {8, 8}, position = {56, 40}},
+                    cross = {size = {8, 8}, position = {80, 40}},
+                    right_t = {size = {8, 8}, position = {72, 40}},
+                    top_end = {size = {8, 8}, position = {88, 40}},
+                    left_end = {size = {8, 8}, position = {112, 40}},
+                    top_left_coner = {size = {8, 8}, position = {40, 40}},
+                    bottom_t = {size = {8, 8}, position = {48, 40}},
+                    horizontal_line = {size = {1, 8}, position = {8, 40}},
+                    bottom_end = {size = {8, 8}, position = {104, 40}}
+                }
+            },
+            dropdown_button = {
+                type = 'button_style',
+                padding = 0,
+                horizontal_align = 'left',
+                font = 'default-dropdown',
+                left_click_sound = {{filename = '__core__/sound/gui-click.ogg', volume = 1}}
+            },
+            compact_slot_sized_button = {size = 36, parent = 'slot_sized_button', type = 'button_style'},
+            finished_game_subheader_frame = {
+                left_padding = 12,
+                type = 'frame_style',
+                top_padding = 6,
+                parent = 'subheader_frame',
+                right_padding = 12,
+                bottom_padding = 5
+            },
+            machine_ingredients_scroll_pane = {
+                vertically_squashable = 'off',
+                parent = 'scroll_pane_in_shallow_frame',
+                maximal_height = 100,
+                type = 'scroll_pane_style'
+            },
+            dark_rounded_button = {
+                hovered_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        right_outer_border_shift = -4,
+                        position = {378, 103},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 76, position = {82, 738}, border = 4},
+                    glow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                clicked_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        right_outer_border_shift = -4,
+                        position = {378, 103},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 76, position = {162, 738}, border = 4}
+                },
+                type = 'button_style',
+                default_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        right_outer_border_shift = -4,
+                        position = {378, 103},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 76, position = {2, 738}, border = 4}
+                }
+            },
+            shortcut_bar_button_small = {
+                size = 20,
+                type = 'button_style',
+                padding = 0,
+                parent = 'slot_sized_button',
+                left_click_sound = {{filename = '__core__/sound/gui-button-mini.ogg', volume = 1}}
+            },
+            research_queue_inner_frame = {
+                type = 'frame_style',
+                padding = 0,
+                parent = 'inner_frame_in_outer_frame',
+                horizontal_flow_style = {type = 'horizontal_flow_style', horizontal_spacing = 12, padding = 0},
+                graphical_set = {
+                    left_bottom = {y = 26, width = 8, height = 8, x = 265},
+                    bottom = {y = 26, width = 1, height = 8, x = 273},
+                    top = {y = 17, width = 1, height = 8, x = 273},
+                    right = {y = 25, width = 8, height = 1, x = 274},
+                    left_top = {y = 17, width = 8, height = 8, x = 265},
+                    right_bottom = {y = 26, width = 8, height = 8, x = 274},
+                    left = {y = 25, width = 8, height = 1, x = 265},
+                    right_top = {y = 17, width = 8, height = 8, x = 274},
+                    center = {y = 24, width = 1, height = 1, x = 273}
+                }
+            },
+            orange_label = {font_color = 0, font = 'default-bold', type = 'label_style'},
+            frame_action_button = {
+                size = 24,
+                parent = 'frame_button',
+                type = 'button_style',
+                left_click_sound = {{filename = '__core__/sound/gui-tool-button.ogg', volume = 1}}
+            },
+            shortcut_bar_selection_scroll_pane = {
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                extra_padding_when_activated = 0,
+                type = 'scroll_pane_style',
+                parent = 'scroll_pane'
+            },
+            production_graph = {type = 'graph_style', width = 556},
+            inventory_scroll_pane = {
+                left_padding = 12,
+                parent = 'scroll_pane',
+                vertically_stretchable = 'stretch_and_expand',
+                extra_padding_when_activated = 0,
+                type = 'scroll_pane_style',
+                background_graphical_set = {
+                    position = {256, 136},
+                    corner_size = 16,
+                    overall_tiling_horizontal_size = 24,
+                    overall_tiling_vertical_spacing = 16,
+                    overall_tiling_vertical_padding = 8,
+                    overall_tiling_horizontal_padding = 8,
+                    overall_tiling_horizontal_spacing = 16,
+                    overall_tiling_vertical_size = 24
+                },
+                right_padding = 12,
+                extra_right_padding_when_activated = -12,
+                horizontally_stretchable = 'stretch_and_expand',
+                graphical_set = {
+                    shadow = {
+                        draw_type = 'inner',
+                        bottom = {size = {1, 8}, position = {191, 137}},
+                        tint = 0,
+                        top = {size = {1, 8}, position = {191, 128}},
+                        scale = 0.5
+                    },
+                    base = {
+                        draw_type = 'outer',
+                        bottom = {size = {1, 8}, position = {76, 0}},
+                        top = {size = {1, 8}, position = {76, 9}}
+                    }
+                }
+            },
+            locale_dropdown = {
+                parent = 'dropdown',
+                list_box_style = {
+                    item_style = {parent = 'button', font = 'locale-pick', type = 'button_style'},
+                    scroll_pane_style = {
+                        padding = 0,
+                        extra_padding_when_activated = 0,
+                        type = 'scroll_pane_style',
+                        graphical_set = {shadow = 0}
+                    },
+                    maximal_height = 400,
+                    type = 'list_box_style'
+                },
+                type = 'dropdown_style'
+            },
+            player_not_in_game_state_label = {font_color = {0.5, 0.5, 0.5}, type = 'label_style', parent = 'bold_label'},
+            filter_group_button_tab = {
+                left_padding = 3,
+                selected_clicked_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {363, 744}, corner_size = 8}
+                },
+                selected_hovered_font_color = 0,
+                selected_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {363, 744}, corner_size = 8}
+                },
+                parent = 'button',
+                top_padding = 4,
+                selected_clicked_font_color = 0,
+                size = {71, 72},
+                selected_font_color = 0,
+                type = 'button_style',
+                disabled_graphical_set = {shadow = 0, base = {position = {208, 17}, corner_size = 8}},
+                right_padding = 4,
+                selected_hovered_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {363, 744}, corner_size = 8}
+                },
+                clicked_vertical_offset = 0,
+                bottom_padding = 4
+            },
+            padded_vertical_flow = {type = 'vertical_flow_style', padding = 4},
+            deep_frame_in_shallow_frame_with_margin = {
+                parent = 'deep_frame_in_shallow_frame',
+                type = 'frame_style',
+                margin = 12
+            },
+            browse_games_table = {
+                left_padding = 10,
+                hovered_row_color = {g = 0.66, r = 0.98, a = 0.7, b = 0.22},
+                column_widths = {
+                    {column = 1, width = 20}, {column = 2, width = 310}, {column = 3, width = 100},
+                    {column = 4, width = 100}
+                },
+                parent = 'table_with_selection',
+                vertical_spacing = 1,
+                cell_padding = 1,
+                horizontal_spacing = 20,
+                top_padding = 1,
+                type = 'table_style',
+                selected_row_color = 0
+            },
+            train_schedule_fulfilled_item_select_button = {
+                type = 'button_style',
+                parent = 'train_schedule_item_select_button',
+                clicked_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        right_outer_border_shift = -4,
+                        position = {412, 103},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 76, position = {162, 736}, border = 4}
+                },
+                hovered_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        right_outer_border_shift = -4,
+                        position = {412, 103},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 76, position = {82, 738}, border = 4},
+                    glow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                default_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        right_outer_border_shift = -4,
+                        position = {412, 103},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 76, position = {2, 738}, border = 4}
+                }
+            },
+            car_top_part_frame = {
+                left_padding = 12,
+                type = 'frame_style',
+                margin = 0,
+                top_padding = 0,
+                right_padding = 12,
+                graphical_set = {},
+                bottom_padding = 4
+            },
+            blueprint_header_frame = {
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                margin = 8,
+                parent = 'frame',
+                padding = 12,
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {51, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = {1, 1}, position = {76, 8}}
+                    }
+                }
+            },
+            unlocked_achievement_frame = {
+                parent = 'unlocked_achievement_in_sidebar_frame',
+                type = 'frame_style',
+                width = 400
+            },
+            train_schedule_add_wait_condition_button = {
+                height = 36,
+                width = 288,
+                horizontal_align = 'left',
+                type = 'button_style',
+                parent = 'button_with_shadow'
+            },
+            technology_gui_right_top_frame = {
+                type = 'frame_style',
+                parent = 'technology_gui_inner_frame',
+                horizontal_flow_style = {type = 'horizontal_flow_style', vertical_align = 'center'},
+                bottom_padding = 4
+            },
+            wide_slider_value_textfield = {parent = 'slider_value_textfield', type = 'textbox_style', width = 100},
+            battery_widget = {size = {27, 47}, type = 'empty_widget_style'},
+            checkbox = {
+                disabled_checkmark = {size = {28, 28}, position = {456, 188}},
+                vertical_align = 'center',
+                selected_clicked_graphical_set = {
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {size = {28, 28}, position = {84, 132}}
+                },
+                type = 'checkbox_style',
+                selected_graphical_set = {shadow = 0, base = {size = {28, 28}, position = {56, 132}}},
+                clicked_graphical_set = {
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {size = {28, 28}, position = {84, 132}}
+                },
+                font = 'default',
+                left_click_sound = {filename = '__core__/sound/gui-checkbox-click.ogg'},
+                text_padding = 8,
+                font_color = {1, 1, 1},
+                checkmark = {size = {28, 28}, position = {112, 132}},
+                disabled_graphical_set = {shadow = 0, base = {size = {28, 28}, position = {28, 132}}},
+                selected_hovered_graphical_set = {
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {size = {28, 28}, position = {56, 132}}
+                },
+                hovered_graphical_set = {
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {size = {28, 28}, position = {56, 132}}
+                },
+                intermediate_mark = {size = {28, 28}, position = {456, 160}},
+                default_graphical_set = {shadow = 0, base = {size = {28, 28}, position = {0, 132}}}
+            },
+            frame_without_right_side = {
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = {
+                        left_bottom = {size = {8, 8}, position = {200, 137}},
+                        bottom = {size = {1, 8}, position = {208, 137}},
+                        tint = 0,
+                        scale = 0.5,
+                        draw_type = 'outer',
+                        top = {size = {1, 8}, position = {208, 128}},
+                        left = {size = {8, 1}, position = {200, 136}},
+                        left_top = {size = {8, 8}, position = {200, 128}},
+                        center = {size = {1, 1}, position = {208, 136}}
+                    },
+                    base = {
+                        left_bottom = {size = {8, 8}, position = {0, 9}},
+                        bottom = {size = {1, 8}, position = {8, 9}},
+                        top = {size = {1, 8}, position = {8, 0}},
+                        left = {size = {8, 1}, position = {0, 8}},
+                        left_top = {size = {8, 8}, position = {0, 0}},
+                        center = {size = {1, 1}, position = {8, 8}}
+                    }
+                }
+            },
+            finished_game_table = {column_widths = {}, parent = 'removed_content_table', type = 'table_style'},
+            description_property_name_label = {
+                type = 'label_style',
+                font_color = 0,
+                font = 'default-semibold',
+                parent = 'label'
+            },
+            negative_message_frame = {
+                type = 'frame_style',
+                graphical_set = {shadow = 0, base = {position = {403, 17}, corner_size = 8}}
+            },
+            map_generator_preview_button = {
+                icon_horizontal_align = 'left',
+                type = 'button_style',
+                natural_width = 136,
+                maximal_width = 250,
+                parent = 'forward_button'
+            },
+            very_short_number_textfield = {type = 'textbox_style', width = 40},
+            trash_slots_scroll_pane = {
+                type = 'scroll_pane_style',
+                parent = 'inventory_scroll_pane',
+                maximal_height = 120,
+                vertically_stretchable = 'off'
+            },
+            icon_button = {
+                left_padding = 0,
+                default_font_color = {},
+                parent = 'button',
+                left_click_sound = {{filename = '__core__/sound/gui-square-button.ogg', volume = 1}},
+                size = 38,
+                type = 'button_style',
+                top_padding = 1,
+                right_padding = 0,
+                default_graphical_set = {
+                    filename = '__core__/graphics/gui.png',
+                    corner_size = 3,
+                    position = {8, 0},
+                    scale = 1
+                },
+                bottom_padding = 1
+            },
+            achievement_unlocked_description_label = {type = 'label_style', parent = 'achievement_description_label'},
+            valid_mod_label = {type = 'label_style'},
+            dialog_buttons_horizontal_flow = {
+                vertically_stretchable = 'off',
+                type = 'horizontal_flow_style',
+                top_padding = 8
+            },
+            black_clickable_label = {
+                type = 'label_style',
+                parent = 'black_label',
+                clicked_font_color = {g = 0.66, r = 0.98, b = 0.22},
+                hovered_font_color = {1, 0.74, 0.4}
+            },
+            slider_button = {
+                height = 12,
+                padding = 0,
+                clicked_graphical_set = {shadow = 0, base = {size = {40, 24}, position = {184, 48}}},
+                left_click_sound = {{filename = '__core__/sound/gui-click.ogg', volume = 1}},
+                type = 'button_style',
+                disabled_graphical_set = {shadow = 0, base = {size = {40, 24}, position = {104, 48}}},
+                hovered_graphical_set = {
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {size = {40, 24}, position = {144, 48}}
+                },
+                width = 20,
+                default_graphical_set = {shadow = 0, base = {size = {40, 24}, position = {64, 48}}}
+            },
+            squashable_label_with_left_padding = {
+                horizontally_squashable = 'on',
+                parent = 'label_with_left_padding',
+                type = 'label_style'
+            },
+            production_gui_search_textfield = {
+                parent = 'titlebar_search_textfield',
+                type = 'textbox_style',
+                width = 336
+            },
+            slider = {
+                full_bar_disabled = {shadow = 0, base = {position = {90, 72}, corner_size = 8}},
+                height = 12,
+                button = {
+                    height = 12,
+                    padding = 0,
+                    clicked_graphical_set = {shadow = 0, base = {size = {40, 24}, position = {184, 48}}},
+                    left_click_sound = {{filename = '__core__/sound/gui-slider.ogg', volume = 1}},
+                    type = 'button_style',
+                    disabled_graphical_set = {shadow = 0, base = {size = {40, 24}, position = {104, 48}}},
+                    width = 20,
+                    hovered_graphical_set = {
+                        glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                        base = {size = {40, 24}, position = {144, 48}}
+                    },
+                    parent = 'slider_button',
+                    default_graphical_set = {shadow = 0, base = {size = {40, 24}, position = {64, 48}}}
+                },
+                notch = {
+                    shadow = {
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        left_outer_border_shift = -4,
+                        tint = 0,
+                        size = {20, 32},
+                        position = {146, 192},
+                        right_outer_border_shift = 4,
+                        top_outer_border_shift = -4
+                    },
+                    base = {size = {4, 16}, position = {138, 200}}
+                },
+                empty_bar = {
+                    shadow = 0,
+                    base = {
+                        right = {size = {8, 8}, position = {65, 72}},
+                        left = {size = {8, 8}, position = {56, 72}},
+                        center = {size = {1, 8}, position = {64, 72}}
+                    }
+                },
+                full_bar = {shadow = 0, base = {position = {73, 72}, corner_size = 8}},
+                type = 'slider_style',
+                minimal_width = 160,
+                empty_bar_disabled = {
+                    shadow = 0,
+                    base = {
+                        right = {size = {8, 8}, position = {65, 80}},
+                        left = {size = {8, 8}, position = {56, 80}},
+                        center = {size = {1, 8}, position = {65, 80}}
+                    }
+                },
+                draw_notches = false
+            },
+            dark_line = {
+                type = 'line_style',
+                border = {
+                    top_end = {size = 8, position = {200, 40}},
+                    vertical_line = {size = {8, 1}, position = {208, 40}},
+                    bottom_end = {size = 8, position = {216, 40}},
+                    border_width = 8
+                }
+            },
+            electric_satisfaction_table = {
+                type = 'table_style',
+                bottom_cell_padding = 0,
+                top_padding = 8,
+                top_cell_padding = 0,
+                parent = 'bordered_table',
+                right_cell_padding = 0,
+                bottom_padding = 8
+            },
+            naked_frame_with_no_spacing = {
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                parent = 'naked_frame',
+                horizontal_flow_style = {horizontal_spacing = 0, type = 'horizontal_flow_style'},
+                type = 'frame_style'
+            },
+            tutorial_notice_name_label = {
+                type = 'label_style',
+                font_color = {g = 1, r = 1, b = 1},
+                font = 'default-large',
+                parent = 'label'
+            },
+            locked_tutorial_card_frame = {type = 'frame_style', parent = 'failed_achievement_in_sidebar_frame'},
+            draggable_space_with_no_right_margin = {
+                parent = 'draggable_space',
+                right_margin = 0,
+                type = 'empty_widget_style'
+            },
+            yellow_slot_button = {
+                type = 'button_style',
+                parent = 'slot_button',
+                clicked_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {160, 656}, border = 4}
+                },
+                hovered_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {80, 656}, border = 4},
+                    glow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                default_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {0, 656}, border = 4}
+                }
+            },
+            new_game_info_image = {
+                type = 'image_style',
+                natural_size = {500, 285},
+                right_margin = -8,
+                stretch_image_to_widget_size = true,
+                left_margin = -8,
+                top_margin = -4,
+                parent = 'map_info_image'
+            },
+            goal_inner_frame = {
+                top_padding = 8,
+                parent = 'inside_shallow_frame_with_padding',
+                type = 'frame_style',
+                bottom_padding = 8
+            },
+            mods_list_box = {width = 300, height = 350, type = 'list_box_style'},
+            item_and_count_select_confirm = {
+                size = 28,
+                type = 'button_style',
+                padding = 0,
+                parent = 'green_button',
+                top_margin = 1
+            },
+            filter_slot_table = {vertical_spacing = 0, type = 'table_style', horizontal_spacing = 0, padding = 0},
+            slot_sized_button_pressed = {
+                size = 40,
+                parent = 'button',
+                type = 'button_style',
+                disabled_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {329, 744}, corner_size = 8}
+                },
+                padding = 0,
+                clicked_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {363, 744}, corner_size = 8}
+                },
+                hovered_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {363, 744}, corner_size = 8}
+                },
+                default_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {363, 744}, corner_size = 8}
+                }
+            },
+            bonus_card_labels_flow_with_scroll_pane = {
+                left_padding = 8,
+                parent = 'packed_vertical_flow',
+                type = 'vertical_flow_style'
+            },
+            research_progress_inner_frame_inactive = {
+                parent = 'research_progress_inner_frame',
+                type = 'frame_style',
+                graphical_set = {base = {position = {34, 0}, corner_size = 8}}
+            },
+            invalid_hovered_mod_label = {type = 'label_style', font_color = {61, 3, 0}},
+            shortcut_bar_window_frame = {
+                left_padding = 4,
+                use_header_filler = false,
+                type = 'frame_style',
+                right_padding = 0,
+                bottom_padding = 4
+            },
+            transparent_slot = {
+                draw_shadow_under_picture = true,
+                padding = 0,
+                clicked_graphical_set = {},
+                left_click_sound = {},
+                pie_progress_color = {0.98, 0.66, 0.22, 0.5},
+                type = 'button_style',
+                size = 32,
+                parent = 'button',
+                hovered_graphical_set = {},
+                default_graphical_set = {},
+                clicked_vertical_offset = 0
+            },
+            graphics_settings_table = {parent = 'bordered_table', minimal_width = 364, type = 'table_style'},
+            achievement_locked_title_label = {font_color = 0, type = 'label_style', parent = 'achievement_title_label'},
+            container_inside_shallow_frame = {
+                type = 'frame_style',
+                parent = 'inside_shallow_frame',
+                minimal_width = 184,
+                top_padding = 12
+            },
+            shortcut_bar_column = {type = 'vertical_flow_style', vertical_spacing = 0},
+            back_button = {
+                parent = 'dialog_button',
+                type = 'button_style',
+                disabled_graphical_set = {
+                    glow = {
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        tint = 0,
+                        left_outer_border_shift = 12,
+                        right_bottom = {size = 8, position = {209, 137}},
+                        left = {size = {32, 80}, position = {304, 424}},
+                        right_top = {size = 8, position = {209, 128}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {8, 1}, position = {26, 25}},
+                        right_bottom = {size = 8, position = {26, 26}},
+                        left = {size = {24, 64}, position = {96, 232}},
+                        right_top = {size = 8, position = {26, 17}},
+                        center = {size = {1, 64}, position = {120, 232}}
+                    }
+                },
+                hovered_graphical_set = {
+                    glow = {
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        tint = {225, 177, 106, 255},
+                        left_outer_border_shift = 12,
+                        right_bottom = {size = 8, position = {209, 137}},
+                        left = {size = {32, 80}, position = {304, 424}},
+                        right_top = {size = 8, position = {209, 128}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {8, 1}, position = {43, 25}},
+                        right_bottom = {size = 8, position = {43, 26}},
+                        left = {size = {24, 64}, position = {192, 232}},
+                        right_top = {size = 8, position = {43, 17}},
+                        center = {size = {1, 64}, position = {216, 232}}
+                    }
+                },
+                clicked_graphical_set = {
+                    base = {
+                        right = {size = {8, 1}, position = {60, 25}},
+                        right_bottom = {size = 8, position = {60, 26}},
+                        left = {size = {24, 64}, position = {288, 232}},
+                        right_top = {size = 8, position = {60, 17}},
+                        center = {size = {1, 64}, position = {312, 232}}
+                    }
+                },
+                horizontal_align = 'left',
+                default_graphical_set = {
+                    shadow = {
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        tint = {15, 7, 3, 100},
+                        left_outer_border_shift = 12,
+                        right_bottom = {size = 8, position = {209, 137}},
+                        left = {size = {32, 80}, position = {304, 424}},
+                        right_top = {size = 8, position = {209, 128}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {8, 1}, position = {9, 25}},
+                        right_bottom = {size = 8, position = {9, 26}},
+                        left = {size = {24, 64}, position = {0, 232}},
+                        right_top = {size = 8, position = {9, 17}},
+                        center = {size = {1, 64}, position = {24, 232}}
+                    }
+                }
+            },
+            borderless_frame = {margin = 0, padding = 0, type = 'frame_style', graphical_set = {}},
+            changelog_dropdown = {left_margin = 8, type = 'dropdown_style', parent = 'dropdown'},
+            browse_games_gui_toggle_favorite_on_button = {
+                size = 16,
+                type = 'button_style',
+                disabled_graphical_set = {filename = '__core__/graphics/favourite.png', size = 64, scale = 1},
+                clicked_graphical_set = {filename = '__core__/graphics/favourite-hovered.png', size = 64, scale = 1},
+                hovered_graphical_set = {filename = '__core__/graphics/favourite-hovered.png', size = 64, scale = 1},
+                default_graphical_set = {filename = '__core__/graphics/favourite.png', size = 64, scale = 1}
+            },
+            red_slider = {
+                type = 'slider_style',
+                full_bar = {shadow = 0, base = {position = {240, 71}, corner_size = 8}}
+            },
+            slot_sized_button_blue = {
+                type = 'button_style',
+                parent = 'slot_sized_button',
+                clicked_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {363, 760}, corner_size = 8}
+                },
+                hovered_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {346, 760}, corner_size = 8},
+                    glow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = {132, 177, 198, 127},
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                default_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {312, 760}, corner_size = 8}
+                }
+            },
+            slot_button_deep_frame = {
+                type = 'frame_style',
+                background_graphical_set = {
+                    position = {282, 17},
+                    corner_size = 8,
+                    overall_tiling_horizontal_size = 32,
+                    overall_tiling_vertical_spacing = 8,
+                    overall_tiling_vertical_padding = 4,
+                    overall_tiling_horizontal_padding = 4,
+                    overall_tiling_horizontal_spacing = 8,
+                    overall_tiling_vertical_size = 32
+                },
+                parent = 'deep_frame_in_shallow_frame',
+                horizontal_flow_style = {horizontal_spacing = 0, type = 'horizontal_flow_style'},
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0}
+            },
+            fulfilled_draggable_space_in_train_schedule = {
+                parent = 'draggable_space_in_train_schedule',
+                type = 'empty_widget_style',
+                graphical_set = {
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {
+                        bottom_tiling = true,
+                        bottom = {size = {8, 8}, position = {428, 78}},
+                        top_tiling = true,
+                        center_tiling_horizontal = true,
+                        top = {size = {8, 7}, position = {412, 78}},
+                        center = {size = {8, 8}, position = {420, 78}}
+                    }
+                }
+            },
+            compilatron_speech_bubble_wrapper = {type = 'flow_style', effect = 'compilatron-hologram'},
+            tab = {
+                left_padding = 8,
+                right_padding = 8,
+                left_edge_selected_graphical_set = {},
+                selected_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        tint = 0,
+                        scale = 0.5,
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        left_top = {size = 16, position = {216, 0}},
+                        top = {size = {1, 8}, position = {208, 128}},
+                        right_outer_border_shift = -4,
+                        left = {size = {8, 1}, position = {200, 136}},
+                        right_top = {size = 16, position = {232, 0}},
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {136, 0}, corner_size = 8}
+                },
+                type = 'tab_style',
+                font = 'default-bold',
+                selected_font_color = 0,
+                disabled_font_color = {1, 1, 1, 0.5},
+                disabled_badge_font_color = {1, 1, 1, 0.5},
+                hover_badge_graphical_set = {base = {position = {176, 72}, corner_size = 8}},
+                disabled_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        tint = 0,
+                        scale = 0.5,
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        left_top = {size = 16, position = {216, 0}},
+                        top = {size = {1, 8}, position = {208, 128}},
+                        right_outer_border_shift = -4,
+                        left = {size = {8, 1}, position = {200, 136}},
+                        right_top = {size = 16, position = {232, 0}},
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {119, 0}, corner_size = 8}
+                },
+                default_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        tint = 0,
+                        scale = 0.5,
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        left_top = {size = 16, position = {216, 0}},
+                        top = {size = {1, 8}, position = {208, 128}},
+                        right_outer_border_shift = -4,
+                        left = {size = {8, 1}, position = {200, 136}},
+                        right_top = {size = 16, position = {232, 0}},
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {102, 0}, corner_size = 8}
+                },
+                horizontal_align = 'center',
+                vertical_align = 'center',
+                right_edge_selected_graphical_set = {},
+                press_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        tint = 0,
+                        scale = 0.5,
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        left_top = {size = 16, position = {216, 0}},
+                        top = {size = {1, 8}, position = {208, 128}},
+                        right_outer_border_shift = -4,
+                        left = {size = {8, 1}, position = {200, 136}},
+                        right_top = {size = 16, position = {232, 0}},
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {170, 0}, corner_size = 8}
+                },
+                default_font_color = 0,
+                minimal_width = 84,
+                press_badge_graphical_set = {base = {position = {296, 71}, corner_size = 8}},
+                override_graphics_on_edges = false,
+                left_click_sound = {{filename = '__core__/sound/gui-tab.ogg', volume = 1}},
+                default_badge_graphical_set = {base = {position = {176, 72}, corner_size = 8}},
+                default_badge_font_color = {142, 142, 142},
+                hover_graphical_set = {
+                    glow = {
+                        left_outer_border_shift = 4,
+                        tint = 0,
+                        scale = 0.5,
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        left_top = {size = 16, position = {216, 0}},
+                        top = {size = {1, 8}, position = {208, 128}},
+                        right_outer_border_shift = -4,
+                        left = {size = {8, 1}, position = {200, 136}},
+                        right_top = {size = 16, position = {232, 0}},
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {153, 0}, corner_size = 8}
+                },
+                selected_badge_graphical_set = {base = {position = {296, 71}, corner_size = 8}},
+                badge_horizontal_spacing = 4,
+                top_padding = 7,
+                badge_font = 'default-tiny-bold',
+                disabled_badge_graphical_set = {base = {position = {176, 72}, corner_size = 8}},
+                selected_badge_font_color = {64, 64, 64},
+                bottom_padding = 9
+            },
+            electric_usage_label = {parent = 'label', type = 'label_style', width = 60},
+            research_queue_cancel_button = {size = {72, 20}, parent = 'red_button', type = 'button_style', padding = -4},
+            blurry_frame = {
+                left_padding = 12,
+                type = 'frame_style',
+                top_padding = 8,
+                right_padding = 12,
+                graphical_set = {
+                    shadow = 0,
+                    base = {opacity = 0.75, center = {size = {1, 1}, position = {336, 0}}, background_blur = true}
+                },
+                bottom_padding = 12
+            },
+            compact_slot_table = {vertical_spacing = 2, horizontal_spacing = 2, type = 'table_style'},
+            entity_info_frame = {
+                maximal_width = 356,
+                type = 'frame_style',
+                parent = 'tooltip_generated_from_description_frame'
+            },
+            recipe_tooltip_cannot_craft_count_label = {
+                font_color = 0,
+                type = 'label_style',
+                parent = 'recipe_count_label'
+            },
+            draggable_space_in_train_schedule = {
+                right_margin = -4,
+                width = 60,
+                type = 'empty_widget_style',
+                left_margin = 0,
+                parent = 'draggable_space',
+                graphical_set = {
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {
+                        bottom_tiling = true,
+                        bottom = {size = {8, 8}, position = {208, 8}},
+                        top_tiling = true,
+                        center_tiling_horizontal = true,
+                        top = {size = {8, 7}, position = {192, 8}},
+                        center = {size = {8, 8}, position = {200, 8}}
+                    }
+                }
+            },
+            subpanel_inset_frame = {
+                padding = 0,
+                type = 'frame_style',
+                graphical_set = {shadow = 0, base = {corner_size = 8, position = {85, 0}, draw_type = 'outer'}}
+            },
+            subpanel_frame_packed = {parent = 'subpanel_frame', type = 'frame_style', padding = 0},
+            draggable_space_in_shortcut_list = {
+                width = 20,
+                parent = 'draggable_space',
+                right_margin = 0,
+                type = 'empty_widget_style'
+            },
+            shortcut_bar_button = {parent = 'slot_sized_button', type = 'button_style', padding = 8},
+            working_weapon_button = {parent = 'green_slot', type = 'button_style', left_click_sound = {}},
+            featured_technology_effects_flow = {parent = 'flow', horizontal_spacing = 8, type = 'flow_style'},
+            bonus_card_related_items_frame = {parent = 'bordered_frame', type = 'frame_style', padding = 0},
+            window_content_frame_packed = {
+                type = 'frame_style',
+                padding = 0,
+                parent = 'window_content_frame',
+                horizontal_flow_style = {horizontal_spacing = 0, type = 'horizontal_flow_style'},
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0}
+            },
+            disabled_preview_index_technology_slot = {
+                height = 200,
+                width = 136,
+                parent = 'disabled_index_technology_slot',
+                ingredients_padding = 32,
+                type = 'technology_slot_style'
+            },
+            player_input_table = {
+                type = 'table_style',
+                horizontal_spacing = 8,
+                column_alignments = {
+                    {alignment = 'middle-left', column = 1}, {alignment = 'middle-left', column = 2},
+                    {alignment = 'middle-left', column = 3}
+                }
+            },
+            inside_shallow_frame = {
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                padding = 0,
+                parent = 'frame',
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {17, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = {1, 1}, position = {76, 8}}
+                    }
+                }
+            },
+            tool_button = {
+                size = 28,
+                padding = 2,
+                type = 'button_style',
+                left_click_sound = {{filename = '__core__/sound/gui-tool-button.ogg', volume = 1}}
+            },
+            map_info_image = {
+                type = 'image_style',
+                graphical_set = {shadow = {top = {size = {1, 8}, draw_type = 'inner', tint = 0, position = {191, 128}}}}
+            },
+            naked_scroll_pane = {extra_padding_when_activated = 0, type = 'scroll_pane_style', graphical_set = {}},
+            blueprint_record_selection_button = {size = 80, parent = 'slot_button', type = 'button_style', padding = 8},
+            research_progressbar = {type = 'progressbar_style', bar_width = 24},
+            tutorial_icon_image = {size = 96, type = 'image_style'},
+            slot_sized_button_green = {
+                type = 'button_style',
+                parent = 'slot_sized_button',
+                clicked_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {363, 792}, corner_size = 8}
+                },
+                hovered_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {346, 792}, corner_size = 8},
+                    glow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = {110, 164, 104, 127},
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                default_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {312, 792}, corner_size = 8}
+                }
+            },
+            permissions_groups_list_box = {size = {250, 400}, type = 'list_box_style'},
+            bonus_card_flow = {max_on_row = 5, type = 'flow_style'},
+            bordered_table = {
+                cell_padding = 4,
+                left_cell_padding = 8,
+                type = 'table_style',
+                border = {
+                    top_t = {size = {8, 8}, position = {64, 40}},
+                    bottom_left_corner = {size = {8, 8}, position = {32, 40}},
+                    bottom_right_corner = {size = {8, 8}, position = {24, 40}},
+                    border_width = 8,
+                    right_end = {size = {8, 8}, position = {96, 40}},
+                    vertical_line = {size = {8, 1}, position = {0, 40}},
+                    top_right_corner = {size = {8, 8}, position = {16, 40}},
+                    left_t = {size = {8, 8}, position = {56, 40}},
+                    cross = {size = {8, 8}, position = {80, 40}},
+                    right_t = {size = {8, 8}, position = {72, 40}},
+                    top_end = {size = {8, 8}, position = {88, 40}},
+                    left_end = {size = {8, 8}, position = {112, 40}},
+                    top_left_coner = {size = {8, 8}, position = {40, 40}},
+                    bottom_t = {size = {8, 8}, position = {48, 40}},
+                    horizontal_line = {size = {1, 8}, position = {8, 40}},
+                    bottom_end = {size = {8, 8}, position = {104, 40}}
+                }
+            },
+            hyperlink_label = {font_color = {110, 179, 255}, type = 'label_style', hovered_font_color = {154, 250, 255}},
+            double_slider = {
+                full_bar_disabled = {shadow = 0, base = {position = {90, 72}, corner_size = 8}},
+                height = 12,
+                button = {type = 'button_style', parent = 'left_slider_button'},
+                high_button = {type = 'button_style', parent = 'right_slider_button'},
+                notch = {
+                    shadow = {
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        left_outer_border_shift = -4,
+                        tint = 0,
+                        size = {20, 32},
+                        position = {146, 192},
+                        right_outer_border_shift = 4,
+                        top_outer_border_shift = -4
+                    },
+                    base = {size = {4, 16}, position = {138, 200}}
+                },
+                empty_bar = {
+                    shadow = 0,
+                    base = {
+                        right = {size = {8, 8}, position = {65, 72}},
+                        left = {size = {8, 8}, position = {56, 72}},
+                        center = {size = {1, 8}, position = {64, 72}}
+                    }
+                },
+                full_bar = {shadow = 0, base = {position = {73, 72}, corner_size = 8}},
+                type = 'double_slider_style',
+                minimal_width = 160,
+                empty_bar_disabled = {
+                    shadow = 0,
+                    base = {
+                        right = {size = {8, 8}, position = {65, 80}},
+                        left = {size = {8, 8}, position = {56, 80}},
+                        center = {size = {1, 8}, position = {65, 80}}
+                    }
+                },
+                draw_notches = false
+            },
+            camera = {type = 'camera_style', graphical_set = {}},
+            connect_gui_frame = {
+                type = 'frame_style',
+                parent = 'b_inner_frame',
+                horizontal_flow_style = {type = 'horizontal_flow_style', vertical_align = 'center'},
+                padding = 12
+            },
+            bordered_frame = {
+                right_padding = 4,
+                graphical_set = {},
+                type = 'frame_style',
+                border = {
+                    top_t = {size = {8, 8}, position = {64, 40}},
+                    bottom_left_corner = {size = {8, 8}, position = {32, 40}},
+                    bottom_right_corner = {size = {8, 8}, position = {24, 40}},
+                    border_width = 8,
+                    right_end = {size = {8, 8}, position = {96, 40}},
+                    vertical_line = {size = {8, 1}, position = {0, 40}},
+                    top_right_corner = {size = {8, 8}, position = {16, 40}},
+                    left_t = {size = {8, 8}, position = {56, 40}},
+                    cross = {size = {8, 8}, position = {80, 40}},
+                    right_t = {size = {8, 8}, position = {72, 40}},
+                    top_end = {size = {8, 8}, position = {88, 40}},
+                    left_end = {size = {8, 8}, position = {112, 40}},
+                    top_left_coner = {size = {8, 8}, position = {40, 40}},
+                    bottom_t = {size = {8, 8}, position = {48, 40}},
+                    horizontal_line = {size = {1, 8}, position = {8, 40}},
+                    bottom_end = {size = {8, 8}, position = {104, 40}}
+                }
+            },
+            mod_optional_dependency_invalid_label = {font_color = 0, type = 'label_style', parent = 'label'},
+            shortcut_selection_row = {
+                use_header_filler = false,
+                type = 'frame_style',
+                padding = 0,
+                horizontal_flow_style = {type = 'horizontal_flow_style', vertical_align = 'center'},
+                graphical_set = {position = {208, 17}, corner_size = 8}
+            },
+            filter_scroll_pane_background_frame_no_background = {
+                parent = 'filter_scroll_pane_background_frame',
+                type = 'frame_style',
+                background_graphical_set = {}
+            },
+            description_label = {parent = 'label', font = 'default', type = 'label_style'},
+            multi_tooltip_invisible_frame = {
+                type = 'frame_style',
+                padding = 0,
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 4},
+                horizontal_flow_style = {horizontal_spacing = 0, type = 'horizontal_flow_style'},
+                graphical_set = {}
+            },
+            dark_button = {
+                type = 'button_style',
+                default_graphical_set = {
+                    shadow = {corner_size = 8, position = {395, 86}, draw_type = 'outer'},
+                    base = {position = {68, 0}, corner_size = 8}
+                }
+            },
+            research_progress_inner_frame = {type = 'frame_style', top_padding = 3},
+            partially_accessible_station_in_station_selection = {
+                default_font_color = {110, 179, 255},
+                type = 'button_style',
+                hovered_font_color = {0, 23, 84},
+                selected_hovered_font_color = {0, 23, 84},
+                parent = 'list_box_item',
+                selected_font_color = {0, 23, 84},
+                selected_clicked_font_color = {0, 23, 84}
+            },
+            mod_manager_label = {single_line = false, maximal_width = 350, type = 'label_style', parent = 'label'},
+            available_technology_slot = {
+                hovered_level_band = {position = {381, 136}, corner_size = 8},
+                clicked_graphical_set = {
+                    shadow = {
+                        corner_size = 8,
+                        tint = {0, 0, 0, 0.35},
+                        position = {200, 128},
+                        draw_type = 'outer',
+                        scale = 0.5
+                    },
+                    base = {position = {312, 136}, corner_size = 8}
+                },
+                hovered_level_range_font_color = {255, 241, 183},
+                disabled_graphical_set = {shadow = 0, base = {position = {296, 136}, corner_size = 8}},
+                highlighted_graphical_set = {shadow = 0, base = {position = {330, 136}, corner_size = 8}},
+                selected_clicked_graphical_set = {shadow = 0, base = {position = {312, 136}, corner_size = 8}},
+                type = 'technology_slot_style',
+                selected_hovered_graphical_set = {shadow = 0, base = {position = {312, 136}, corner_size = 8}},
+                parent = 'technology_slot',
+                hovered_level_font_color = {77, 71, 48},
+                level_range_font_color = {255, 241, 183},
+                clicked_overlay = {
+                    left_bottom = {size = {16, 16}, position = {416, 136}},
+                    bottom = {size = {1, 16}, position = {432, 136}},
+                    top = {size = {1, 16}, position = {472, 136}},
+                    right = {size = {16, 1}, position = {473, 152}},
+                    left_top = {size = {16, 16}, position = {456, 136}},
+                    right_bottom = {size = {16, 16}, position = {433, 136}},
+                    left = {size = {16, 1}, position = {456, 152}},
+                    right_top = {size = {16, 16}, position = {473, 136}},
+                    center = {size = {1, 1}, position = {472, 152}}
+                },
+                selected_graphical_set = {shadow = 0, base = {position = {312, 136}, corner_size = 8}},
+                level_band = {position = {381, 136}, corner_size = 8},
+                level_range_band = {position = {397, 136}, corner_size = 8},
+                hovered_level_range_band = {position = {397, 136}, corner_size = 8},
+                hovered_graphical_set = {shadow = 0, base = {position = {312, 136}, corner_size = 8}},
+                level_font_color = {77, 71, 48},
+                default_graphical_set = {shadow = 0, base = {position = {296, 136}, corner_size = 8}}
+            },
+            inside_deep_frame_for_tabs = {parent = 'inside_deep_frame', type = 'frame_style', top_padding = 12},
+            compilatron_speech_bubble = {
+                arrow_indent = 0,
+                arrow_graphical_set = {
+                    right = {size = {24, 32}, position = {458, 516}},
+                    left = {size = {24, 32}, position = {433, 516}},
+                    bottom = {size = {32, 20}, position = {465, 551}},
+                    top = {size = {32, 24}, position = {433, 547}}
+                },
+                frame_style = {
+                    padding = 12,
+                    type = 'frame_style',
+                    graphical_set = {
+                        corner_size = 8,
+                        filename = '__core__/graphics/gui-new.png',
+                        position = {450, 498},
+                        opacity = 0.15,
+                        scale = 0.5
+                    }
+                },
+                close_color = {0.361, 0.894, 0.278},
+                type = 'speech_bubble_style',
+                pass_through_mouse = true,
+                label_style = {
+                    font_color = {g = 246, r = 255, b = 113},
+                    type = 'label_style',
+                    single_line = false,
+                    maximal_width = 500,
+                    font = 'compilatron-message-font',
+                    parent = 'label'
+                }
+            },
+            packed_horizontal_flow = {horizontal_spacing = 0, type = 'horizontal_flow_style'},
+            control_settings_scroll_pane = {
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        corner_size = 8,
+                        top = {},
+                        draw_type = 'outer',
+                        position = {17, 0},
+                        left_top = {},
+                        right_top = {},
+                        center = {size = 1, position = {42, 8}}
+                    }
+                },
+                type = 'scroll_pane_style',
+                background_graphical_set = {
+                    corner_size = 8,
+                    overall_tiling_vertical_spacing = 8,
+                    position = {282, 17},
+                    overall_tiling_horizontal_padding = 4,
+                    overall_tiling_vertical_padding = 4,
+                    overall_tiling_vertical_size = 36
+                }
+            },
+            burning_progressbar = {color = {r = 1}, type = 'progressbar_style'},
+            changelog_frame = {
+                parent = 'window_content_frame_packed',
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {17, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = 1, position = {42, 8}}
+                    }
+                }
+            },
+            slot_sized_button = {
+                padding = 0,
+                clicked_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {363, 744}, corner_size = 8}
+                },
+                left_click_sound = {{filename = '__core__/sound/gui-square-button.ogg', volume = 1}},
+                size = 40,
+                type = 'button_style',
+                disabled_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {329, 744}, corner_size = 8}
+                },
+                hovered_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {346, 744}, corner_size = 8},
+                    glow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                parent = 'button',
+                default_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {312, 744}, corner_size = 8}
+                }
+            },
+            map_view_options_frame = {
+                left_padding = 4,
+                type = 'frame_style',
+                parent = 'captionless_frame',
+                horizontal_flow_style = {horizontal_spacing = 2, type = 'horizontal_flow_style'},
+                right_padding = 4
+            },
+            blue_slot = {
+                type = 'button_style',
+                parent = 'slot',
+                clicked_graphical_set = {base = {size = 80, position = {160, 504}, border = 4}},
+                hovered_graphical_set = {base = {size = 80, position = {80, 504}, border = 4}},
+                default_graphical_set = {base = {size = 80, position = {0, 504}, border = 4}}
+            },
+            frame_tabbed_pane = {
+                type = 'tabbed_pane_style',
+                tab_container = {
+                    left_padding = 0,
+                    horizontally_stretchable = 'on',
+                    horizontal_spacing = 0,
+                    type = 'horizontal_flow_style',
+                    right_padding = 0
+                },
+                vertically_squashable = 'on',
+                top_padding = 0,
+                tab_content_frame = {
+                    vertically_squashable = 'on',
+                    parent = 'frame_without_left_side',
+                    type = 'frame_style',
+                    graphical_set = {
+                        shadow = 0,
+                        base = {
+                            right = {size = {8, 1}, position = {9, 8}},
+                            right_bottom = {size = {8, 8}, position = {9, 9}},
+                            bottom = {size = {1, 8}, position = {8, 9}},
+                            top = {size = {1, 8}, position = {8, 0}},
+                            right_top = {size = {8, 8}, position = {9, 0}},
+                            center = {size = {1, 1}, position = {8, 8}}
+                        }
+                    }
+                }
+            },
+            featured_technology_description_label = {
+                type = 'label_style',
+                font_color = 0,
+                font = 'var',
+                parent = 'label'
+            },
+            statistics_scroll_pane = {
+                extra_padding_when_activated = 0,
+                type = 'scroll_pane_style',
+                background_graphical_set = {
+                    position = {282, 17},
+                    corner_size = 8,
+                    overall_tiling_horizontal_size = 278,
+                    overall_tiling_vertical_spacing = 12,
+                    overall_tiling_vertical_padding = 8,
+                    overall_tiling_horizontal_padding = 8,
+                    overall_tiling_horizontal_spacing = 12,
+                    overall_tiling_vertical_size = 44
+                },
+                parent = 'scroll_pane',
+                graphical_set = {shadow = 0, base = {center = {position = {42, 8}, height = 1, width = 1}}}
+            },
+            deep_frame_in_shallow_frame_for_tabs = {
+                parent = 'deep_frame_in_shallow_frame',
+                type = 'frame_style',
+                top_padding = 12
+            },
+            compact_slot = {
+                pie_progress_color = {0.98, 0.66, 0.22, 0.5},
+                size = 36,
+                type = 'button_style',
+                padding = 1,
+                parent = 'button',
+                clicked_graphical_set = {
+                    size = 36,
+                    x = 185,
+                    border = 1,
+                    filename = '__core__/graphics/gui.png',
+                    scale = 1
+                },
+                hovered_graphical_set = {
+                    size = 36,
+                    border = 1,
+                    filename = '__core__/graphics/gui.png',
+                    position = {148, 0},
+                    scale = 1
+                },
+                default_graphical_set = {
+                    size = 36,
+                    border = 1,
+                    filename = '__core__/graphics/gui.png',
+                    position = {111, 0},
+                    scale = 1
+                }
+            },
+            color_picker_label = {type = 'label_style', maximal_width = 24},
+            tutorial_card_button_flow = {horizontal_align = 'right', type = 'horizontal_flow_style', bottom_padding = 4},
+            research_queue_table = {type = 'table_style', horizontal_spacing = 0, padding = 0},
+            closed_inventory_slot = {
+                left_click_sound = {},
+                type = 'button_style',
+                parent = 'slot',
+                selected_graphical_set = {base = {size = 80, position = {504, 456}, border = 4}},
+                clicked_graphical_set = {base = {size = 80, position = {504, 536}, border = 4}},
+                hovered_graphical_set = {base = {size = 80, position = {504, 456}, border = 4}},
+                default_graphical_set = {base = {size = 80, position = {504, 376}, border = 4}}
+            },
+            conditionally_available_technology_slot = {
+                clicked_ingredients_background = {position = {364, 136}, corner_size = 8},
+                hovered_level_band = {position = {381, 153}, corner_size = 8},
+                clicked_graphical_set = {shadow = 0, base = {position = {312, 153}, corner_size = 8}},
+                default_ingredients_background = {position = {347, 153}, corner_size = 8},
+                hovered_level_range_font_color = {255, 234, 206},
+                disabled_graphical_set = {shadow = 0, base = {position = {296, 153}, corner_size = 8}},
+                hovered_ingredients_background = {position = {364, 136}, corner_size = 8},
+                highlighted_graphical_set = {shadow = 0, base = {position = {330, 153}, corner_size = 8}},
+                type = 'technology_slot_style',
+                selected_hovered_graphical_set = {shadow = 0, base = {position = {312, 153}, corner_size = 8}},
+                selected_clicked_graphical_set = {shadow = 0, base = {position = {312, 153}, corner_size = 8}},
+                selected_graphical_set = {shadow = 0, base = {position = {312, 153}, corner_size = 8}},
+                level_range_band = {position = {397, 153}, corner_size = 8},
+                parent = 'technology_slot',
+                hovered_level_font_color = {95, 68, 32},
+                level_range_font_color = {255, 234, 206},
+                clicked_overlay = {
+                    left_bottom = {size = {16, 16}, position = {416, 153}},
+                    bottom = {size = {1, 16}, position = {432, 153}},
+                    top = {size = {1, 16}, position = {472, 136}},
+                    right = {size = {16, 1}, position = {473, 152}},
+                    left_top = {size = {16, 16}, position = {456, 136}},
+                    right_bottom = {size = {16, 16}, position = {433, 153}},
+                    left = {size = {16, 1}, position = {456, 152}},
+                    right_top = {size = {16, 16}, position = {473, 136}},
+                    center = {size = {1, 1}, position = {472, 152}}
+                },
+                level_font_color = {95, 68, 32},
+                highlighted_ingredients_background = {position = {364, 136}, corner_size = 8},
+                level_band = {position = {381, 153}, corner_size = 8},
+                hovered_level_range_band = {position = {397, 153}, corner_size = 8},
+                disabled_ingredients_background = {position = {364, 136}, corner_size = 8},
+                hovered_graphical_set = {shadow = 0, base = {position = {312, 153}, corner_size = 8}},
+                default_graphical_set = {shadow = 0, base = {position = {296, 153}, corner_size = 8}}
+            },
+            description_title_indented_label = {
+                parent = 'description_label',
+                font = 'default-bold',
+                type = 'label_style'
+            },
+            campaign_levels_list_box = {maximal_width = 280, height = 140, type = 'list_box_style'},
+            invalid_mod_label = {type = 'label_style', font_color = 0},
+            valid_selected_mod_label = {
+                disabled_font_color = {0, 0, 0, 0.5},
+                font_color = {29, 29, 29},
+                type = 'label_style'
+            },
+            negative_subheader_frame = {
+                parent = 'subheader_frame',
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = {
+                        draw_type = 'outer',
+                        bottom = {size = {1, 8}, position = {208, 137}},
+                        tint = 0,
+                        scale = 0.5,
+                        center = {size = {1, 1}, position = {208, 136}}
+                    },
+                    base = {
+                        bottom = {size = {1, 8}, position = {411, 26}},
+                        center = {size = {1, 1}, position = {411, 25}}
+                    }
+                }
+            },
+            bonus_card_with_scroll_frame = {parent = 'bonus_card_frame', type = 'frame_style', padding = -4},
+            browse_games_gui_favorites_header_image = {size = 16, type = 'image_style'},
+            clickable_label = {type = 'label_style', clicked_font_color = 0, hovered_font_color = 0},
+            inventory_slot = {
+                selected_clicked_graphical_set = {base = {size = 80, position = {160, 504}, border = 4}},
+                type = 'button_style',
+                selected_graphical_set = {base = {size = 80, position = {160, 504}, border = 4}},
+                parent = 'slot',
+                selected_hovered_graphical_set = {base = {size = 80, position = {160, 504}, border = 4}},
+                left_click_sound = {}
+            },
+            battery_widget_old = {size = {21, 54}, type = 'empty_widget_style'},
+            slightly_smaller_tab = {minimal_width = 64, type = 'tab_style'},
+            play_tutorial_button = {
+                type = 'button_style',
+                parent = 'button',
+                font = 'default',
+                left_click_sound = {{filename = '__core__/sound/gui-menu-small.ogg', volume = 1}}
+            },
+            mods_scroll_pane = {
+                padding = 0,
+                parent = 'scroll_pane_under_subheader',
+                type = 'scroll_pane_style',
+                background_graphical_set = {
+                    corner_size = 8,
+                    overall_tiling_vertical_spacing = 8,
+                    position = {282, 17},
+                    overall_tiling_horizontal_padding = 4,
+                    overall_tiling_vertical_padding = 4,
+                    overall_tiling_vertical_size = 20
+                }
+            },
+            black_label = {type = 'label_style', font_color = {0, 0, 0}},
+            empty_bonus_card_frame = {
+                parent = 'bonus_card_frame',
+                type = 'frame_style',
+                graphical_set = {base = {position = {282, 17}, corner_size = 8}}
+            },
+            inset_frame_container_frame = {
+                vertical_flow_style = {type = 'vertical_flow_style', parent = 'inset_frame_container_vertical_flow'},
+                parent = 'frame',
+                horizontal_flow_style = {
+                    type = 'horizontal_flow_style',
+                    parent = 'inset_frame_container_horizontal_flow'
+                },
+                type = 'frame_style'
+            },
+            logistic_networks_dropdown = {parent = 'dropdown', minimal_width = 200, type = 'dropdown_style'},
+            compilatron_gui_message = {
+                arrow_indent = 2.5,
+                arrow_graphical_set = {
+                    right = {size = {24, 32}, position = {458, 441}},
+                    left = {size = {24, 32}, position = {433, 441}},
+                    bottom = {size = {32, 24}, position = {465, 473}},
+                    top = {size = {32, 24}, position = {433, 473}}
+                },
+                frame_style = {
+                    padding = 12,
+                    type = 'frame_style',
+                    graphical_set = {
+                        filename = '__core__/graphics/gui-new.png',
+                        corner_size = 8,
+                        position = {433, 424},
+                        scale = 0.5
+                    }
+                },
+                close_color = {0.361, 0.894, 0.278},
+                type = 'speech_bubble_style',
+                pass_through_mouse = false,
+                label_style = {
+                    font_color = {g = 174, r = 255, b = 24},
+                    type = 'label_style',
+                    single_line = false,
+                    maximal_width = 500,
+                    font = 'compilatron-message-font',
+                    parent = 'label'
+                }
+            },
+            statistics_table_item_frame = {
+                type = 'frame_style',
+                parent = 'subpanel_frame',
+                horizontal_flow_style = {type = 'horizontal_flow_style', vertical_align = 'center'},
+                graphical_set = {shadow = 0, base = {position = {68, 0}, corner_size = 8}}
+            },
+            side_menu_button = {top_padding = 0, parent = 'icon_button', type = 'button_style', bottom_padding = 0},
+            container_invisible_frame_with_title = {
+                parent = 'invisible_frame_with_title_for_inventory',
+                type = 'frame_style',
+                bottom_padding = 8
+            },
+            menu_message = {font_color = 0, font = 'default-bold', type = 'label_style'},
+            caption_label = {font_color = 0, type = 'label_style', parent = 'bold_label'},
+            notched_double_slider = {type = 'double_slider_style', draw_notches = true, height = 20},
+            achievement_locked_progress_label = {
+                type = 'label_style',
+                font_color = 0,
+                font = 'default-semibold',
+                parent = 'label'
+            },
+            highlighted_tool_button = {
+                parent = 'tool_button',
+                type = 'button_style',
+                default_graphical_set = {
+                    shadow = 0,
+                    base = {position = {34, 17}, corner_size = 8},
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5}
+                }
+            },
+            achievement_unlocked_title_label = {
+                font_color = 0,
+                type = 'label_style',
+                parent = 'achievement_title_label'
+            },
+            black_clickable_squashable_label = {
+                horizontally_squashable = 'on',
+                parent = 'black_clickable_label',
+                type = 'label_style'
+            },
+            manage_players_table = {
+                left_padding = 10,
+                hovered_row_color = {a = 0},
+                horizontal_spacing = 20,
+                top_padding = 5,
+                type = 'table_style',
+                selected_row_color = {a = 0},
+                vertical_spacing = 5,
+                cell_padding = 4
+            },
+            inset_frame_container_horizontal_flow = {horizontal_spacing = 12, type = 'horizontal_flow_style'},
+            list_box_under_subheader = {
+                type = 'list_box_style',
+                scroll_pane_style = {
+                    parent = 'list_box_scroll_pane',
+                    type = 'scroll_pane_style',
+                    graphical_set = {
+                        shadow = 0,
+                        base = {
+                            corner_size = 8,
+                            top = {},
+                            draw_type = 'outer',
+                            position = {17, 0},
+                            left_top = {},
+                            right_top = {},
+                            center = {size = 1, position = {42, 8}}
+                        }
+                    }
+                }
+            },
+            map_generator_close_preview_button = {
+                icon_horizontal_align = 'left',
+                parent = 'back_button',
+                type = 'button_style',
+                width = 160
+            },
+            train_schedule_temporary_station_delete_button = {
+                parent = 'train_schedule_delete_button',
+                type = 'button_style',
+                default_graphical_set = {
+                    shadow = {corner_size = 8, position = {463, 86}, draw_type = 'outer'},
+                    base = {position = {446, 86}, corner_size = 8}
+                }
+            },
+            achievement_image = {size = 100, type = 'image_style'},
+            blueprint_book_edit_frame = {minimal_width = 500, type = 'frame_style'},
+            centering_flow = {type = 'flow_style', vertical_align = 'center'},
+            short_number_textfield = {type = 'textbox_style', width = 80},
+            control_behavior_window_line = {type = 'line_style', left_margin = -12, right_margin = -12, top_margin = 8},
+            list_box_in_shallow_frame = {
+                type = 'list_box_style',
+                scroll_pane_style = {type = 'scroll_pane_style', parent = 'list_box_in_shallow_frame_scroll_pane'}
+            },
+            changelog_scroll_pane = {
+                type = 'scroll_pane_style',
+                horizontally_stretchable = 'on',
+                minimal_width = 850,
+                margin = 0,
+                parent = 'scroll_pane',
+                maximal_width = 0,
+                padding = 0,
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {85, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = 1, position = {321, 79}}
+                    }
+                }
+            },
+            campaigns_list_box = {
+                minimal_width = 300,
+                natural_height = 450,
+                maximal_width = 400,
+                type = 'list_box_style',
+                vertically_stretchable = 'on'
+            },
+            blue_slider = {
+                type = 'slider_style',
+                full_bar = {
+                    shadow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {position = {274, 71}, corner_size = 8}
+                }
+            },
+            centering_horizontal_flow = {
+                horizontal_align = 'center',
+                type = 'horizontal_flow_style',
+                vertical_align = 'center'
+            },
+            image_tab_slot = {size = 68, parent = 'slot_sized_button', type = 'button_style'},
+            side_progressbar_frame = {use_header_filler = false, type = 'frame_style', width = 400},
+            dropdown = {
+                left_padding = 8,
+                minimal_width = 116,
+                list_box_style = {
+                    scroll_pane_style = {
+                        padding = 0,
+                        extra_padding_when_activated = 0,
+                        type = 'scroll_pane_style',
+                        graphical_set = {shadow = 0}
+                    },
+                    maximal_height = 400,
+                    type = 'list_box_style'
+                },
+                selector_and_title_spacing = 8,
+                minimal_height = 28,
+                icon = {
+                    size = 32,
+                    scale = 0.5,
+                    filename = '__core__/graphics/icons/mip/dropdown.png',
+                    priority = 'extra-high-no-scale',
+                    flags = {'gui-icon'},
+                    mipmap_count = 2
+                },
+                type = 'dropdown_style',
+                button_style = {type = 'button_style', parent = 'dropdown_button'},
+                top_padding = -1,
+                right_padding = 4,
+                opened_sound = {filename = '__core__/sound/gui-dropdown-open.ogg'},
+                bottom_padding = 1
+            },
+            map_view_options_button = {type = 'button_style', parent = 'icon_button'},
+            other_settings_gui_button = {parent = 'button', type = 'button_style', width = 120},
+            editor_mode_selection_table = {
+                horizontal_spacing = 0,
+                background_graphical_set = {
+                    position = {282, 17},
+                    corner_size = 8,
+                    overall_tiling_horizontal_size = 63,
+                    overall_tiling_vertical_spacing = 12,
+                    overall_tiling_vertical_padding = 6,
+                    overall_tiling_horizontal_padding = 6,
+                    overall_tiling_horizontal_spacing = 12,
+                    overall_tiling_vertical_size = 64
+                },
+                type = 'table_style',
+                vertical_spacing = 0,
+                padding = 0
+            },
+            health_progressbar = {
+                color = {g = 1},
+                horizontally_stretchable = 'on',
+                type = 'progressbar_style',
+                bar_width = 13,
+                bar_background = {
+                    filename = '__core__/graphics/gui.png',
+                    position = {224, 0},
+                    size = {1, 13},
+                    scale = 1
+                },
+                bar = {filename = '__core__/graphics/gui.png', position = {223, 0}, size = {1, 11}, scale = 1}
+            },
+            blueprint_preview = {size = 64, type = 'empty_widget_style'},
+            slot_sized_button_red = {
+                type = 'button_style',
+                parent = 'slot_sized_button',
+                clicked_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {363, 776}, corner_size = 8}
+                },
+                hovered_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {346, 776}, corner_size = 8},
+                    glow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = {236, 130, 130, 127},
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                default_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {312, 776}, corner_size = 8}
+                }
+            },
+            disabled_preview_technology_slot = {
+                height = 200,
+                width = 136,
+                parent = 'disabled_technology_slot',
+                ingredients_padding = 32,
+                type = 'technology_slot_style'
+            },
+            notice_textbox = {
+                font_color = 0,
+                minimal_width = 0,
+                default_background = {type = 'none', opacity = 0},
+                type = 'textbox_style',
+                maximal_width = 450,
+                parent = 'textbox',
+                padding = 0
+            },
+            electric_satisfaction_in_description_progressbar = {
+                type = 'progressbar_style',
+                parent = 'electric_satisfaction_progressbar',
+                height = 9,
+                top_padding = 2
+            },
+            count_label = {parent = 'description_label', font = 'count-font', type = 'label_style'},
+            tutorial_list_frame = {parent = 'frame', minimal_width = 300, type = 'frame_style'},
+            label = {
+                rich_text_highlight_ok_color = {g = 255, r = 0, b = 0},
+                rich_text_highlight_error_color = {g = 0, r = 255, b = 0},
+                font = 'default',
+                disabled_font_color = {1, 1, 1, 0.5},
+                font_color = {1, 1, 1},
+                type = 'label_style',
+                single_line = true,
+                rich_text_highlight_warning_color = {g = 255, r = 255, b = 0},
+                rich_text_setting = 'enabled'
+            },
+            logistic_gui_scroll_pane = {
+                left_padding = 4,
+                minimal_width = 400,
+                maximal_width = 600,
+                extra_padding_when_activated = 0,
+                type = 'scroll_pane_style',
+                top_padding = 4,
+                right_padding = 16,
+                extra_right_padding_when_activated = -12,
+                parent = 'scroll_pane_in_shallow_frame',
+                bottom_padding = 4
+            },
+            b_inner_frame = {
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {17, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = {1, 1}, position = {76, 8}}
+                    }
+                }
+            },
+            main_menu_login_notice_label = {type = 'label_style', maximal_width = 400},
+            a_inner_frame = {
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = {
+                        corner_size = 8,
+                        tint = {0, 0, 0, 1},
+                        position = {183, 128},
+                        draw_type = 'inner',
+                        scale = 0.5
+                    },
+                    base = {corner_size = 8, position = {17, 0}, draw_type = 'outer'}
+                }
+            },
+            schedule_in_train_view_list_box = {
+                width = 200,
+                parent = 'list_box_in_shallow_frame',
+                height = 84,
+                type = 'list_box_style'
+            },
+            entity_info_frame_on_cursor = {
+                maximal_width = 356,
+                type = 'frame_style',
+                parent = 'tooltip_generated_from_description_frame'
+            },
+            achievement_failed_title_label = {
+                font_color = {g = 0.46274509803922, r = 0.56078431372549, b = 0.46274509803922},
+                type = 'label_style',
+                parent = 'achievement_title_label'
+            },
+            inset_frame_container_vertical_flow = {type = 'vertical_flow_style', vertical_spacing = 12},
+            red_circuit_network_content_slot = {
+                parent = 'compact_slot',
+                type = 'button_style',
+                default_graphical_set = {
+                    size = 36,
+                    border = 1,
+                    filename = '__core__/graphics/gui.png',
+                    position = {111, 36},
+                    scale = 1
+                }
+            },
+            recipe_tooltip_transitive_craft_label = {
+                font_color = 0,
+                type = 'label_style',
+                parent = 'description_value_label'
+            },
+            confirm_button = {
+                parent = 'dialog_button',
+                type = 'button_style',
+                disabled_graphical_set = {
+                    glow = {
+                        right = {size = {32, 80}, position = {336, 424}},
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -12,
+                        left_top = {size = 8, position = {200, 128}},
+                        left = {size = {8, 1}, position = {200, 136}},
+                        left_bottom = {size = 8, position = {200, 137}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {24, 64}, position = {120, 296}},
+                        left_bottom = {size = 8, position = {85, 26}},
+                        left = {size = {8, 1}, position = {85, 25}},
+                        left_top = {size = 8, position = {85, 17}},
+                        center = {size = {1, 64}, position = {120, 296}}
+                    }
+                },
+                hovered_graphical_set = {
+                    glow = {
+                        right = {size = {32, 80}, position = {336, 424}},
+                        draw_type = 'outer',
+                        tint = {135, 216, 139, 128},
+                        right_outer_border_shift = -12,
+                        left_top = {size = 8, position = {200, 128}},
+                        left = {size = {8, 1}, position = {200, 136}},
+                        left_bottom = {size = 8, position = {200, 137}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {24, 64}, position = {216, 296}},
+                        left_bottom = {size = 8, position = {102, 26}},
+                        left = {size = {8, 1}, position = {102, 25}},
+                        left_top = {size = 8, position = {102, 17}},
+                        center = {size = {1, 64}, position = {216, 296}}
+                    }
+                },
+                clicked_graphical_set = {
+                    base = {
+                        right = {size = {24, 64}, position = {312, 296}},
+                        left_bottom = {size = 8, position = {119, 26}},
+                        left = {size = {8, 1}, position = {119, 25}},
+                        left_top = {size = 8, position = {119, 17}},
+                        center = {size = {1, 64}, position = {312, 296}}
+                    }
+                },
+                horizontal_align = 'right',
+                default_graphical_set = {
+                    shadow = {
+                        right = {size = {32, 80}, position = {336, 424}},
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -12,
+                        left_top = {size = 8, position = {200, 128}},
+                        left = {size = {8, 1}, position = {200, 136}},
+                        left_bottom = {size = 8, position = {200, 137}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {24, 64}, position = {24, 296}},
+                        left_bottom = {size = 8, position = {68, 26}},
+                        left = {size = {8, 1}, position = {68, 25}},
+                        left_top = {size = 8, position = {68, 17}},
+                        center = {size = {1, 64}, position = {24, 296}}
+                    }
+                }
+            },
+            technology_slot = {
+                level_font = 'technology-slot-level-font',
+                clicked_ingredients_background = {position = {364, 136}, corner_size = 8},
+                default_ingredients_background = {position = {347, 136}, corner_size = 8},
+                ingredients_padding = 0,
+                hovered_level_range_font_color = {1, 1, 1},
+                level_band_width = 28,
+                type = 'technology_slot_style',
+                strikethrough_color = {0.5, 0.5, 0.5},
+                progress_bar_color = {g = 1},
+                default_font_color = {1, 1, 1},
+                selected_hovered_graphical_set = {position = {282, 17}, corner_size = 8},
+                ingredient_icon_size = 16,
+                level_range_offset_x = -4,
+                selected_hovered_font_color = {1, 1, 1},
+                font = 'default-dialog-button',
+                left_click_sound = {{filename = '__core__/sound/gui-technology-slot.ogg', volume = 1}},
+                selected_graphical_set = {position = {282, 17}, corner_size = 8},
+                selected_font_color = {1, 1, 1},
+                highlighted_ingredients_background = {position = {364, 136}, corner_size = 8},
+                selected_clicked_graphical_set = {position = {282, 17}, corner_size = 8},
+                hovered_level_range_band = {position = {397, 136}, corner_size = 8},
+                selected_clicked_font_color = {1, 1, 1},
+                level_offset_x = 12,
+                pie_progress_color = {1, 0, 0},
+                level_band = {position = {381, 136}, corner_size = 8},
+                progress_bar_shadow = {
+                    right = {size = {16, 1}, position = {473, 152}},
+                    left = {size = {16, 1}, position = {456, 152}},
+                    center = {size = {1, 1}, position = {472, 152}}
+                },
+                progress_bar = {position = {305, 39}, corner_size = 4},
+                progress_bar_background = {position = {296, 39}, corner_size = 4},
+                hovered_level_band = {position = {381, 136}, corner_size = 8},
+                clicked_graphical_set = {position = {282, 17}, corner_size = 8},
+                level_band_height = 12,
+                level_range_offset_y = -2.5,
+                disabled_font_color = {1, 1, 1},
+                ingredient_icon_overlap = 4,
+                default_background_shadow = {size = 88, position = {392, 328}},
+                disabled_graphical_set = {position = {282, 17}, corner_size = 8},
+                hovered_ingredients_background = {position = {364, 136}, corner_size = 8},
+                highlighted_graphical_set = {position = {282, 17}, corner_size = 8},
+                vertical_align = 'center',
+                hovered_font_color = {1, 1, 1},
+                level_range_band = {position = {397, 136}, corner_size = 8},
+                level_offset_y = -2.5,
+                height = 100,
+                level_font_color = {0, 0, 0},
+                progress_bar_height = 4,
+                width = 72,
+                hovered_graphical_set = {position = {282, 17}, corner_size = 8},
+                level_range_font_color = {1, 1, 1},
+                clicked_overlay = {
+                    left_bottom = {size = {16, 16}, position = {416, 136}},
+                    bottom = {size = {1, 16}, position = {432, 136}},
+                    top = {size = {1, 16}, position = {472, 136}},
+                    right = {size = {16, 1}, position = {473, 152}},
+                    left_top = {size = {16, 16}, position = {456, 136}},
+                    right_bottom = {size = {16, 16}, position = {433, 136}},
+                    left = {size = {16, 1}, position = {456, 152}},
+                    right_top = {size = {16, 16}, position = {473, 136}},
+                    center = {size = {1, 1}, position = {472, 152}}
+                },
+                hovered_level_font_color = {0, 0, 0},
+                clicked_font_color = {1, 1, 1},
+                ingredients_height = 20,
+                level_range_font = 'technology-slot-level-font',
+                disabled_ingredients_background = {position = {364, 136}, corner_size = 8},
+                horizontal_align = 'center',
+                default_graphical_set = {position = {282, 17}, corner_size = 8}
+            },
+            shortcut_bar_expand_button = {
+                left_padding = 2,
+                height = 16,
+                parent = 'frame_button',
+                left_click_sound = {{filename = '__core__/sound/gui-shortcut-expand.ogg', volume = 1}},
+                type = 'button_style',
+                top_padding = 4,
+                width = 8,
+                right_padding = 2,
+                bottom_padding = 4
+            },
+            new_game_info_frame = {
+                type = 'frame_style',
+                parent = 'a_inner_frame',
+                natural_size = {484, 616},
+                bottom_padding = 4
+            },
+            drop_target_button = {
+                default_font_color = {g = 1, r = 1, b = 1},
+                hovered_font_color = {g = 1, r = 1, b = 1},
+                clicked_graphical_set = {
+                    bottom_tiling = true,
+                    top_tiling = true,
+                    filename = '__core__/graphics/blueprint-slot-tileset.png',
+                    position = {27, 0},
+                    right_height = 9,
+                    right_tiling = true,
+                    corner_size = 9,
+                    center_height = 9,
+                    bottom_width = 9,
+                    left_height = 9,
+                    center_width = 9,
+                    top_width = 9,
+                    left_tiling = true
+                },
+                font = 'default',
+                left_click_sound = {{filename = '__core__/sound/gui-drop-target.ogg', volume = 1}},
+                disabled_font_color = {g = 0.5, r = 0.5, b = 0.5},
+                type = 'button_style',
+                clicked_font_color = {g = 1, r = 1, b = 1},
+                disabled_graphical_set = {
+                    bottom_tiling = true,
+                    top_tiling = true,
+                    filename = '__core__/graphics/blueprint-slot-tileset.png',
+                    position = {0, 0},
+                    right_height = 9,
+                    right_tiling = true,
+                    corner_size = 9,
+                    center_height = 9,
+                    bottom_width = 9,
+                    left_height = 9,
+                    center_width = 9,
+                    top_width = 9,
+                    left_tiling = true
+                },
+                pie_progress_color = {g = 1, r = 1, b = 1},
+                hovered_graphical_set = {
+                    bottom_tiling = true,
+                    top_tiling = true,
+                    filename = '__core__/graphics/blueprint-slot-tileset.png',
+                    position = {27, 0},
+                    right_height = 9,
+                    right_tiling = true,
+                    corner_size = 9,
+                    center_height = 9,
+                    bottom_width = 9,
+                    left_height = 9,
+                    center_width = 9,
+                    top_width = 9,
+                    left_tiling = true
+                },
+                padding = 5,
+                default_graphical_set = {
+                    bottom_tiling = true,
+                    top_tiling = true,
+                    filename = '__core__/graphics/blueprint-slot-tileset.png',
+                    position = {0, 0},
+                    right_height = 9,
+                    right_tiling = true,
+                    corner_size = 9,
+                    center_height = 9,
+                    bottom_width = 9,
+                    left_height = 9,
+                    center_width = 9,
+                    top_width = 9,
+                    left_tiling = true
+                }
+            },
+            train_schedule_comparison_type_frame_extra_indented = {
+                type = 'frame_style',
+                left_margin = -28,
+                right_margin = 28,
+                parent = 'train_schedule_comparison_type_frame'
+            },
+            inner_frame_in_outer_frame = {
+                type = 'frame_style',
+                graphical_set = {base = {position = {0, 0}, corner_size = 8}}
+            },
+            menu_button = {
+                default_font_color = 0,
+                minimal_width = 320,
+                hovered_font_color = 0,
+                maximal_width = 320,
+                font = 'default-dialog-button',
+                minimal_height = 50,
+                clicked_font_color = 0,
+                top_padding = 4,
+                type = 'button_style',
+                parent = 'button',
+                bottom_padding = 4
+            },
+            yellow_slot = {
+                type = 'button_style',
+                parent = 'slot',
+                selected_graphical_set = {base = {size = 80, position = {80, 816}, border = 4}},
+                clicked_graphical_set = {base = {size = 80, position = {160, 816}, border = 4}},
+                hovered_graphical_set = {base = {size = 80, position = {80, 816}, border = 4}},
+                default_graphical_set = {base = {size = 80, position = {0, 816}, border = 4}}
+            },
+            statistics_progressbar = {type = 'progressbar_style'},
+            invisible_frame = {
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                parent = 'borderless_frame',
+                horizontal_flow_style = {horizontal_spacing = 0, type = 'horizontal_flow_style'},
+                type = 'frame_style'
+            },
+            filter_group_table = {
+                horizontal_spacing = 0,
+                background_graphical_set = {
+                    position = {282, 17},
+                    corner_size = 8,
+                    overall_tiling_horizontal_size = 48,
+                    overall_tiling_vertical_spacing = 24,
+                    overall_tiling_vertical_padding = 12,
+                    overall_tiling_horizontal_padding = 12,
+                    overall_tiling_horizontal_spacing = 23,
+                    overall_tiling_vertical_size = 48
+                },
+                type = 'table_style',
+                vertical_spacing = 0,
+                padding = 0
+            },
+            table = {
+                column_ordering_descending_button_style = {
+                    size = {8, 8},
+                    type = 'button_style',
+                    disabled_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-down-white.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    },
+                    clicked_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-down-active.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    },
+                    hovered_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-down-hover.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    },
+                    default_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-down-active.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    }
+                },
+                vertical_spacing = 4,
+                horizontal_spacing = 4,
+                border = {},
+                type = 'table_style',
+                column_ordering_ascending_button_style = {
+                    size = {8, 8},
+                    type = 'button_style',
+                    disabled_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-up-white.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    },
+                    padding = 0,
+                    clicked_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-up-active.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    },
+                    hovered_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-up-hover.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    },
+                    default_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-up-active.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    }
+                },
+                inactive_column_ordering_ascending_button_style = {
+                    size = {8, 8},
+                    type = 'button_style',
+                    disabled_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-up-white.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    },
+                    clicked_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-up-white.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    },
+                    hovered_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-up-hover.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    },
+                    default_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-up-white.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    }
+                },
+                inactive_column_ordering_descending_button_style = {
+                    size = {8, 8},
+                    type = 'button_style',
+                    disabled_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-down-white.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    },
+                    clicked_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-down-white.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    },
+                    hovered_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-down-hover.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    },
+                    default_graphical_set = {
+                        filename = '__core__/graphics/arrows/table-header-sort-arrow-down-white.png',
+                        size = {16, 16},
+                        scale = 0.5
+                    }
+                }
+            },
+            window_content_frame_deep = {
+                padding = 4,
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {17, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = {1, 1}, position = {42, 8}}
+                    }
+                }
+            },
+            window_content_frame = {
+                padding = 4,
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {17, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = {1, 1}, position = {76, 8}}
+                    }
+                }
+            },
+            wide_activity_bar = {type = 'activity_bar_style', bar_width = 24},
+            void_inventory_frame = {
+                height = 0,
+                top_padding = 0,
+                title_style = {top_padding = 0, parent = 'frame_title', type = 'label_style', bottom_padding = 0},
+                type = 'frame_style',
+                graphical_set = {},
+                bottom_padding = 0
+            },
+            draggable_space = {
+                type = 'empty_widget_style',
+                left_margin = 8,
+                right_margin = 8,
+                graphical_set = {
+                    shadow = {
+                        corner_size = 8,
+                        tint = {15, 7, 3, 56},
+                        position = {200, 128},
+                        draw_type = 'outer',
+                        scale = 0.5
+                    },
+                    base = {
+                        bottom_tiling = true,
+                        bottom = {size = {8, 8}, position = {208, 8}},
+                        top_tiling = true,
+                        center_tiling_horizontal = true,
+                        top = {size = {8, 7}, position = {192, 8}},
+                        center = {size = {8, 8}, position = {200, 8}}
+                    }
+                }
+            },
+            conditionally_available_preview_technology_slot = {
+                height = 200,
+                width = 136,
+                parent = 'conditionally_available_technology_slot',
+                ingredients_padding = 32,
+                type = 'technology_slot_style'
+            },
+            goal_holder_vertical_flow = {type = 'vertical_flow_style', vertical_spacing = 0},
+            inside_shallow_frame_with_padding = {parent = 'inside_shallow_frame', type = 'frame_style', padding = 12},
+            vertical_flow_with_extra_margins = {
+                type = 'vertical_flow_style',
+                left_margin = 8,
+                right_margin = 0,
+                top_margin = 4
+            },
+            unlocked_achievement_in_sidebar_frame = {
+                top_padding = 4,
+                parent = 'frame',
+                type = 'frame_style',
+                graphical_set = {shadow = 0, base = {position = {420, 17}, corner_size = 8}}
+            },
+            unavailable_preview_technology_slot = {
+                height = 200,
+                width = 136,
+                parent = 'unavailable_technology_slot',
+                ingredients_padding = 32,
+                type = 'technology_slot_style'
+            },
+            character_gui_entity_button = {size = 92, type = 'empty_widget_style'},
+            default_sprite_priority = 'extra-high-no-scale',
+            tutorial_description_label = {
+                font_color = {g = 1, r = 1, b = 1},
+                type = 'label_style',
+                parent = 'label',
+                font = 'default',
+                width = 364
+            },
+            dark_frame = {
+                type = 'frame_style',
+                graphical_set = {shadow = 0, base = {position = {68, 0}, corner_size = 8}}
+            },
+            saved_research_label = {left_padding = 4, type = 'label_style'},
+            tutorial_notice_title_label = {
+                font_color = {g = 1, r = 1, b = 1},
+                type = 'label_style',
+                parent = 'label',
+                font = 'default-large-bold',
+                width = 250
+            },
+            tutorial_locked_title_label = {
+                font_color = {255, 136, 136},
+                type = 'label_style',
+                parent = 'tutorial_title_label'
+            },
+            green_slider = {
+                type = 'slider_style',
+                full_bar = {shadow = 0, base = {position = {257, 71}, corner_size = 8}}
+            },
+            circuit_condition_comparator_dropdown = {
+                left_padding = 4,
+                minimal_width = 0,
+                button_style = {
+                    selected_clicked_graphical_set = {glow = 0, base = {position = {352, 17}, corner_size = 8}},
+                    selected_graphical_set = {glow = 0, base = {position = {225, 17}, corner_size = 8}},
+                    clicked_graphical_set = {glow = 0, base = {position = {51, 17}, corner_size = 8}},
+                    type = 'button_style',
+                    disabled_graphical_set = {glow = 0, base = {position = {17, 17}, corner_size = 8}},
+                    selected_hovered_graphical_set = {glow = 0, base = {position = {369, 17}, corner_size = 8}},
+                    hovered_graphical_set = {
+                        glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                        base = {position = {34, 17}, corner_size = 8}
+                    },
+                    parent = 'dropdown_button',
+                    default_graphical_set = {glow = 0, base = {position = {0, 17}, corner_size = 8}}
+                },
+                type = 'dropdown_style',
+                list_box_style = {
+                    item_style = {left_padding = 4, parent = 'list_box_item', type = 'button_style', right_padding = 4},
+                    scroll_pane_style = {
+                        padding = 0,
+                        extra_padding_when_activated = 0,
+                        type = 'scroll_pane_style',
+                        graphical_set = {shadow = 0}
+                    },
+                    maximal_height = 400,
+                    type = 'list_box_style'
+                },
+                right_padding = 0
+            },
+            tabbed_pane_frame = {
+                left_padding = 4,
+                type = 'frame_style',
+                top_padding = 8,
+                right_padding = 4,
+                graphical_set = 0,
+                bottom_padding = 4
+            },
+            tutorial_list_description_label = {type = 'label_style', font_color = 0, font = 'default', parent = 'label'},
+            subheader_frame_that_cuts_to_sides = {
+                left_padding = 12,
+                height = 0,
+                parent = 'subheader_frame',
+                right_margin = -4,
+                top_padding = 12,
+                type = 'frame_style',
+                left_margin = -4,
+                right_padding = 12,
+                graphical_set = {shadow = 0, base = {center = {size = {1, 1}, position = {256, 25}}}}
+            },
+            type = 'gui-style',
+            tutorial_card_items_and_button_flow = {type = 'horizontal_flow_style', vertical_align = 'bottom'},
+            character_gui_left_side = {
+                right_padding = 4,
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = {
+                        draw_type = 'outer',
+                        top = {size = {1, 8}, position = {208, 128}},
+                        tint = 0,
+                        scale = 0.5,
+                        left = {size = {1, 8}, position = {250, 105}},
+                        left_top = {size = {8, 8}, position = {200, 128}},
+                        center = {size = {1, 1}, position = {208, 136}}
+                    },
+                    base = {
+                        left_bottom = {size = {8, 8}, position = {0, 9}},
+                        bottom = {size = {1, 8}, position = {8, 9}},
+                        top = {size = {1, 8}, position = {8, 0}},
+                        left = {size = {8, 1}, position = {0, 8}},
+                        left_top = {size = {8, 8}, position = {0, 0}},
+                        center = {size = {1, 1}, position = {8, 8}}
+                    }
+                }
+            },
+            frame_tabbed_pane_frame_header = {
+                bottom_margin = -4,
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                vertically_stretchable = 'on',
+                left_padding = 0,
+                header_flow_style = {vertical_align = 'top', horizontal_spacing = 4, type = 'horizontal_flow_style'},
+                graphical_set = {
+                    shadow = {
+                        tint = 0,
+                        scale = 0.5,
+                        right = {size = {1, 8}, position = {250, 105}},
+                        draw_type = 'outer',
+                        top = {size = {1, 8}, position = {208, 128}},
+                        left_top = {size = {8, 8}, position = {200, 128}},
+                        left = {size = {8, 1}, position = {200, 136}},
+                        right_top = {size = {8, 8}, position = {209, 128}},
+                        center = {size = {1, 1}, position = {208, 136}}
+                    },
+                    base = {
+                        left_bottom = {size = {8, 8}, position = {26, 9}},
+                        bottom = {size = {1, 1}, position = {8, 8}},
+                        top = {size = {1, 8}, position = {8, 0}},
+                        right = {size = {8, 1}, position = {9, 8}},
+                        left_top = {size = {8, 8}, position = {0, 0}},
+                        right_bottom = {size = {8, 1}, position = {9, 8}},
+                        left = {size = {8, 1}, position = {0, 8}},
+                        right_top = {size = {8, 8}, position = {9, 0}},
+                        center = {size = {1, 1}, position = {8, 8}}
+                    }
+                },
+                bottom_padding = 4
+            },
+            available_preview_technology_slot = {
+                height = 200,
+                width = 136,
+                parent = 'available_technology_slot',
+                ingredients_padding = 32,
+                type = 'technology_slot_style'
+            },
+            train_schedule_unavailable_stop_label = {
+                horizontally_squashable = 'on',
+                font_color = {255, 138, 138},
+                type = 'label_style',
+                hovered_font_color = 0
+            },
+            tabbed_pane_with_no_side_padding_and_tabs_hidden = {
+                parent = 'tabbed_pane_with_no_side_padding',
+                type = 'tabbed_pane_style',
+                tab_content_frame = {
+                    left_padding = 0,
+                    type = 'frame_style',
+                    top_padding = -4,
+                    right_padding = 0,
+                    graphical_set = {
+                        shadow = 0,
+                        base = {top = {size = {1, 8}, position = {76, 0}}, center = {size = {1, 1}, position = {76, 8}}}
+                    },
+                    bottom_padding = 0
+                }
+            },
+            train_schedule_station_frame = {
+                type = 'frame_style',
+                padding = 0,
+                parent = 'dark_frame',
+                horizontal_flow_style = {type = 'horizontal_flow_style', parent = 'player_input_horizontal_flow'},
+                width = 380
+            },
+            train_schedule_scroll_pane = {
+                parent = 'scroll_pane_with_dark_background_under_subheader',
+                type = 'scroll_pane_style',
+                background_graphical_set = {
+                    position = {282, 17},
+                    corner_size = 8,
+                    overall_tiling_vertical_padding = 4,
+                    overall_tiling_vertical_spacing = 12,
+                    custom_horizontal_tiling_sizes = {28, 44, 288},
+                    overall_tiling_horizontal_padding = 4,
+                    overall_tiling_horizontal_spacing = 8,
+                    overall_tiling_vertical_size = 28
+                }
+            },
+            train_inventory_fake_window = {
+                use_header_filler = false,
+                type = 'frame_style',
+                padding = 0,
+                header_flow_style = {
+                    left_padding = 12,
+                    horizontally_stretchable = 'on',
+                    type = 'horizontal_flow_style',
+                    right_padding = 12,
+                    bottom_padding = 4
+                },
+                graphical_set = {}
+            },
+            crafting_frame = {
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                parent = 'inside_deep_frame',
+                vertical_flow_style = {
+                    horizontally_stretchable = 'on',
+                    type = 'vertical_flow_style',
+                    vertical_spacing = 0,
+                    horizontal_align = 'center',
+                    vertical_align = 'center',
+                    vertically_stretchable = 'on'
+                },
+                vertically_stretchable = 'on'
+            },
+            train_schedule_mode_switch_horizontal_flow = {type = 'horizontal_flow_style', left_margin = 8},
+            draggable_space_header = {
+                type = 'empty_widget_style',
+                left_margin = 4,
+                right_margin = 0,
+                parent = 'draggable_space'
+            },
+            train_schedule_fullfilled_condition_frame = {
+                type = 'frame_style',
+                padding = 0,
+                horizontal_flow_style = {type = 'horizontal_flow_style', parent = 'player_input_horizontal_flow'},
+                graphical_set = {shadow = 0, base = {position = {412, 86}, corner_size = 8}}
+            },
+            train_schedule_fulfilled_delete_button = {
+                parent = 'train_schedule_delete_button',
+                type = 'button_style',
+                default_graphical_set = {
+                    shadow = {corner_size = 8, position = {429, 86}, draw_type = 'outer'},
+                    base = {position = {412, 86}, corner_size = 8}
+                }
+            },
+            train_schedule_condition_time_selection_button = {
+                width = 84,
+                type = 'button_style',
+                left_click_sound = {{filename = '__core__/sound/gui-menu-small.ogg', volume = 1}}
+            },
+            armor_info_table = {
+                horizontal_spacing = 16,
+                type = 'table_style',
+                column_widths = {{column = 1, minimal_width = 188}},
+                parent = 'bordered_table',
+                vertical_spacing = 8,
+                left_cell_padding = 0
+            },
+            switch = {
+                disabled_background = {size = {64, 32}, position = {0, 96}},
+                middle_button_position = 9,
+                height = 16,
+                default_background = {size = {64, 32}, position = {0, 96}},
+                width = 32,
+                button = {
+                    width = 14,
+                    type = 'button_style',
+                    height = 14,
+                    disabled_graphical_set = {size = 28, position = {128, 96}},
+                    left_click_sound = {{filename = '__core__/sound/gui-switch.ogg', volume = 0.7}},
+                    clicked_graphical_set = {size = 28, position = {184, 96}},
+                    hovered_graphical_set = {size = 28, position = {156, 96}},
+                    default_graphical_set = {size = 28, position = {128, 96}}
+                },
+                inactive_label = {
+                    type = 'label_style',
+                    font_color = 0,
+                    font = 'default',
+                    hovered_font_color = {255, 230, 192}
+                },
+                active_label = {font_color = {241, 190, 100}, font = 'default-bold', type = 'label_style'},
+                right_button_position = 16,
+                type = 'switch_style',
+                hover_background = {size = {64, 32}, position = {64, 96}},
+                padding = 0,
+                left_button_position = 2
+            },
+            character_info_scroll_pane = {type = 'scroll_pane_style', extra_padding_when_activated = 0},
+            flow_with_no_spacing = {vertical_spacing = 0, horizontal_spacing = 0, type = 'flow_style'},
+            failed_achievement_frame = {
+                parent = 'failed_achievement_in_sidebar_frame',
+                type = 'frame_style',
+                width = 400
+            },
+            train_schedule_delete_button = {
+                size = {16, 28},
+                type = 'button_style',
+                padding = 0,
+                parent = 'dark_button',
+                left_click_sound = {{filename = '__core__/sound/gui-tool-button.ogg', volume = 1}}
+            },
+            subfooter_frame = {
+                left_padding = 4,
+                right_padding = 4,
+                type = 'frame_style',
+                top_padding = 1,
+                graphical_set = {
+                    shadow = 0,
+                    base = {top = {size = {1, 8}, position = {256, 17}}, center = {size = {1, 1}, position = {256, 25}}}
+                },
+                parent = 'frame',
+                horizontal_flow_style = {type = 'horizontal_flow_style'},
+                bottom_padding = 3
+            },
+            saves_list_box = {minimal_height = 100, width = 332, type = 'list_box_style'},
+            install_mod_status_image = {size = {16, 16}, stretch_image_to_widget_size = true, type = 'image_style'},
+            train_schedule_comparison_type_frame_indented = {
+                bottom_margin = 20,
+                right_margin = 8,
+                padding = 0,
+                left_margin = -8,
+                top_margin = -20,
+                type = 'frame_style'
+            },
+            train_schedule_comparison_type_frame = {
+                bottom_margin = 20,
+                type = 'frame_style',
+                top_margin = -20,
+                padding = 0
+            },
+            tile_variation_button = {size = 100, type = 'button_style', padding = 2},
+            blueprint_header_holder_frame = {
+                graphical_set = {
+                    base = {bottom = {size = {1, 8}, position = {42, 9}}, center = {size = {1, 1}, position = {42, 8}}}
+                },
+                padding = 4,
+                type = 'frame_style',
+                bottom_padding = 0
+            },
+            permissions_players_list_box = {size = {250, 400}, type = 'list_box_style'},
+            research_progress_inner_frame_active = {
+                parent = 'research_progress_inner_frame',
+                type = 'frame_style',
+                graphical_set = {base = {position = {68, 0}, corner_size = 8}}
+            },
+            player_online_label = {font_color = {0, 1, 0}, type = 'label_style', parent = 'bold_label'},
+            train_schedule_add_station_button = {
+                height = 36,
+                width = 380,
+                horizontal_align = 'left',
+                type = 'button_style',
+                parent = 'button_with_shadow'
+            },
+            train_schedule_action_button = {
+                size = 28,
+                type = 'button_style',
+                disabled_graphical_set = {shadow = 0, base = {position = {153, 17}, corner_size = 8}},
+                padding = 0,
+                left_click_sound = {{filename = '__core__/sound/gui-tool-button.ogg', volume = 1}}
+            },
+            train_inventory_frame = {
+                type = 'frame_style',
+                right_margin = -4,
+                top_padding = 0,
+                parent = 'inventory_frame',
+                left_margin = -4,
+                graphical_set = {base = {center = {size = {1, 1}, position = {76, 8}}}},
+                bottom_padding = 0
+            },
+            inside_deep_frame = {
+                type = 'frame_style',
+                padding = 0,
+                parent = 'frame',
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {17, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = {1, 1}, position = {42, 8}}
+                    }
+                }
+            },
+            train_schedule_non_existent_stop_label = {
+                horizontally_squashable = 'on',
+                font_color = {255, 138, 138},
+                type = 'label_style',
+                hovered_font_color = {255, 138, 138}
+            },
+            slot_button_that_fits_textline = {size = 28, parent = 'slot_sized_button', type = 'button_style'},
+            tracking_on_button = {
+                type = 'button_style',
+                parent = 'tracking_off_button',
+                clicked_graphical_set = {shadow = 0, base = {position = {352, 17}, corner_size = 8}},
+                hovered_graphical_set = {shadow = 0, base = {position = {369, 17}, corner_size = 8}},
+                default_graphical_set = {shadow = 0, base = {position = {225, 17}, corner_size = 8}}
+            },
+            rename_train_stop_frame = {
+                title_style = {maximal_width = 800, type = 'label_style', parent = 'frame_title'},
+                parent = 'frame',
+                type = 'frame_style'
+            },
+            tracking_off_button = {
+                size = 24,
+                type = 'button_style',
+                padding = 0,
+                parent = 'button',
+                left_click_sound = {{filename = '__core__/sound/gui-tool-button.ogg', volume = 1}}
+            },
+            tracked_achievements_vertical_flow = {type = 'vertical_flow_style', vertical_spacing = 0},
+            tooltip_title_label = {
+                minimal_width = 50,
+                type = 'label_style',
+                maximal_width = 356,
+                font = 'default-bold',
+                parent = 'description_label'
+            },
+            featured_technology_description_scroll_pane = {
+                extra_padding_when_activated = 0,
+                height = 208,
+                vertical_flow_style = {
+                    left_padding = 8,
+                    type = 'vertical_flow_style',
+                    top_padding = 4,
+                    parent = 'vertical_flow',
+                    right_padding = 8
+                },
+                parent = 'scroll_pane',
+                type = 'scroll_pane_style',
+                graphical_set = {shadow = 0}
+            },
+            tabbed_pane_with_no_side_padding = {
+                type = 'tabbed_pane_style',
+                tab_content_frame = {
+                    left_padding = 0,
+                    type = 'frame_style',
+                    top_padding = 8,
+                    right_padding = 0,
+                    graphical_set = {
+                        shadow = 0,
+                        base = {top = {size = {1, 8}, position = {76, 0}}, center = {size = {1, 1}, position = {76, 8}}}
+                    },
+                    bottom_padding = 0
+                }
+            },
+            right_container_frame = {
+                parent = 'outer_frame',
+                type = 'frame_style',
+                vertical_flow_style = {vertical_spacing = 0, minimal_width = 10, type = 'vertical_flow_style'}
+            },
+            tooltip_label = {
+                type = 'label_style',
+                maximal_width = 356,
+                minimal_width = 50,
+                parent = 'description_label'
+            },
+            padded_container_equipment_grid_flow = {
+                left_padding = 12,
+                parent = 'container_equipment_grid_flow',
+                type = 'vertical_flow_style',
+                right_padding = 12
+            },
+            editor_mode_selection_frame = {
+                padding = 0,
+                type = 'frame_style',
+                graphical_set = {
+                    base = {
+                        draw_type = 'outer',
+                        top = {size = {1, 8}, position = {74, 9}},
+                        center = {size = {1, 1}, position = {42, 8}}
+                    }
+                }
+            },
+            tooltip_horizontal_line = {
+                type = 'line_style',
+                border = {
+                    right_end = {size = {8, 8}, position = {257, 40}},
+                    left_end = {size = {8, 8}, position = {248, 40}},
+                    horizontal_line = {size = {1, 8}, position = {256, 40}},
+                    border_width = 8
+                }
+            },
+            tooltip_heading_label = {
+                font_color = {0, 0, 0},
+                type = 'label_style',
+                horizontally_squashable = 'on',
+                single_line = false,
+                font = 'default-bold'
+            },
+            new_game_header_list_box_item = {
+                default_font_color = 0,
+                hovered_font_color = 0,
+                parent = 'list_box_item',
+                font = 'heading-2',
+                selected_clicked_font_color = 0,
+                disabled_font_color = 0,
+                selected_font_color = 0,
+                type = 'button_style',
+                disabled_graphical_set = {position = {17, 17}, corner_size = 8},
+                hovered_graphical_set = {position = {17, 17}, corner_size = 8},
+                selected_hovered_font_color = 0,
+                default_graphical_set = {position = {17, 17}, corner_size = 8}
+            },
+            scroll_pane = {
+                horizontal_scrollbar_style = {type = 'horizontal_scrollbar_style'},
+                vertically_squashable = 'on',
+                extra_padding_when_activated = 4,
+                type = 'scroll_pane_style',
+                background_graphical_set = {},
+                horizontally_squashable = 'on',
+                vertical_scrollbar_style = {type = 'vertical_scrollbar_style'},
+                vertical_flow_style = {type = 'vertical_flow_style'},
+                graphical_set = {shadow = 0, base = {corner_size = 8, position = {17, 0}, draw_type = 'outer'}}
+            },
+            mods_gui_right_pane_vertical_flow = {
+                natural_height = 692,
+                vertical_spacing = 12,
+                natural_width = 664,
+                maximal_width = 664,
+                maximal_height = 692,
+                type = 'vertical_flow_style'
+            },
+            tooltip_frame = {
+                left_padding = 4,
+                type = 'frame_style',
+                top_padding = 0,
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 2},
+                right_padding = 4,
+                graphical_set = {
+                    shadow = 0,
+                    base = {position = {403, 0}, background_blur_sigma = 4, opacity = 0.88, corner_size = 8}
+                },
+                bottom_padding = 0
+            },
+            horizontal_flow = {horizontal_spacing = 4, type = 'horizontal_flow_style'},
+            research_queue_first_slot_flow = {type = 'horizontal_flow_style', padding = 0},
+            tooltip_category_line = {
+                type = 'line_style',
+                border = {
+                    right_end = {size = 8, position = {192, 40}},
+                    left_end = {size = 8, position = {184, 40}},
+                    horizontal_line = {size = {1, 8}, position = {176, 40}},
+                    border_width = 8
+                }
+            },
+            quickbar_holder_flow = {
+                minimal_height = 96,
+                minimal_width = 468,
+                vertical_spacing = 0,
+                vertical_align = 'bottom',
+                type = 'vertical_flow_style'
+            },
+            tool_button_blue = {
+                type = 'button_style',
+                parent = 'tool_button',
+                clicked_graphical_set = {shadow = 0, base = {position = {363, 48}, corner_size = 8}},
+                hovered_graphical_set = {
+                    shadow = 0,
+                    base = {position = {346, 48}, corner_size = 8},
+                    glow = {
+                        corner_size = 8,
+                        tint = {110, 101, 164, 127},
+                        position = {200, 128},
+                        draw_type = 'outer',
+                        scale = 0.5
+                    }
+                },
+                default_graphical_set = {shadow = 0, base = {position = {329, 48}, corner_size = 8}}
+            },
+            tool_bar_frame = {
+                left_padding = 4,
+                type = 'frame_style',
+                top_padding = 0,
+                right_padding = 0,
+                bottom_padding = 0
+            },
+            electric_statistics_progressbar = {
+                other_colors = {},
+                parent = 'electric_satisfaction_statistics_progressbar',
+                type = 'progressbar_style'
+            },
+            side_menu_frame = {
+                left_padding = 4,
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                right_padding = 4,
+                parent = 'captionless_frame',
+                horizontal_flow_style = {horizontal_spacing = 2, type = 'horizontal_flow_style'},
+                vertically_stretchable = 'on'
+            },
+            locked_achievement_frame = {
+                parent = 'locked_achievement_in_sidebar_frame',
+                type = 'frame_style',
+                width = 400
+            },
+            technology_tooltip_effects_flow = {
+                parent = 'featured_technology_effects_flow',
+                type = 'flow_style',
+                bottom_padding = 4
+            },
+            player_offline_label = {font_color = {1, 1, 1}, type = 'label_style', parent = 'bold_label'},
+            not_working_weapon_button = {parent = 'red_slot', type = 'button_style', left_click_sound = {}},
+            technology_slot_table = {vertical_spacing = 0, horizontal_spacing = 0, type = 'table_style'},
+            technology_list_scroll_pane = {
+                extra_padding_when_activated = 0,
+                type = 'scroll_pane_style',
+                background_graphical_set = {
+                    position = {282, 17},
+                    corner_size = 8,
+                    overall_tiling_horizontal_size = 72,
+                    overall_tiling_vertical_size = 100
+                },
+                parent = 'scroll_pane',
+                graphical_set = {shadow = 0, base = {position = {34, 0}, corner_size = 8}}
+            },
+            technology_gui_outer_frame = {
+                right_padding = 8,
+                header_background = {center = {y = 8, width = 1, height = 1, x = 8}},
+                type = 'frame_style',
+                top_padding = 2,
+                use_header_filler = false,
+                parent = 'outer_frame',
+                graphical_set = {corner_size = 8, position = {0, 0}, center = {}},
+                bottom_padding = 36
+            },
+            subfooter_frame_with_left_edge = {
+                parent = 'subfooter_frame',
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        left_bottom = {size = {8, 8}, position = {248, 26}},
+                        top = {size = {1, 8}, position = {256, 17}},
+                        left = {size = {8, 1}, position = {248, 25}},
+                        left_top = {size = {8, 8}, position = {248, 17}},
+                        center = {size = {1, 1}, position = {256, 25}}
+                    }
+                }
+            },
+            borderless_deep_frame = {
+                parent = 'invisible_frame',
+                type = 'frame_style',
+                graphical_set = {base = {center = {size = {1, 1}, position = {42, 8}}}}
+            },
+            slot_table_spacing_vertical_flow = {type = 'vertical_flow_style', vertical_spacing = 0},
+            forward_button = {
+                left_click_sound = {{filename = '__core__/sound/gui-forward-button-click.ogg', volume = 0.8}},
+                parent = 'dialog_button',
+                type = 'button_style',
+                disabled_graphical_set = {
+                    glow = {
+                        right = {size = {32, 80}, position = {336, 424}},
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -12,
+                        left_top = {size = 8, position = {200, 128}},
+                        left = {size = {8, 1}, position = {200, 136}},
+                        left_bottom = {size = 8, position = {200, 137}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {24, 64}, position = {120, 232}},
+                        left_bottom = {size = 8, position = {17, 26}},
+                        left = {size = {8, 1}, position = {17, 25}},
+                        left_top = {size = 8, position = {17, 17}},
+                        center = {size = {1, 64}, position = {120, 232}}
+                    }
+                },
+                hovered_graphical_set = {
+                    glow = {
+                        right = {size = {32, 80}, position = {336, 424}},
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -12,
+                        left_top = {size = 8, position = {200, 128}},
+                        left = {size = {8, 1}, position = {200, 136}},
+                        left_bottom = {size = 8, position = {200, 137}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {24, 64}, position = {216, 232}},
+                        left_bottom = {size = 8, position = {34, 26}},
+                        left = {size = {8, 1}, position = {34, 25}},
+                        left_top = {size = 8, position = {34, 17}},
+                        center = {size = {1, 64}, position = {216, 232}}
+                    }
+                },
+                clicked_graphical_set = {
+                    base = {
+                        right = {size = {24, 64}, position = {312, 232}},
+                        left_bottom = {size = 8, position = {51, 26}},
+                        left = {size = {8, 1}, position = {51, 25}},
+                        left_top = {size = 8, position = {51, 17}},
+                        center = {size = {1, 64}, position = {312, 232}}
+                    }
+                },
+                horizontal_align = 'right',
+                default_graphical_set = {
+                    shadow = {
+                        right = {size = {32, 80}, position = {336, 424}},
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -12,
+                        left_top = {size = 8, position = {200, 128}},
+                        left = {size = {8, 1}, position = {200, 136}},
+                        left_bottom = {size = 8, position = {200, 137}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {24, 64}, position = {24, 232}},
+                        left_bottom = {size = 8, position = {0, 26}},
+                        left = {size = {8, 1}, position = {0, 25}},
+                        left_top = {size = 8, position = {0, 17}},
+                        center = {size = {1, 64}, position = {24, 232}}
+                    }
+                }
+            },
+            technology_card = {type = 'vertical_flow_style', vertical_spacing = 0},
+            target_station_in_schedule_in_train_view_list_box_item = {
+                type = 'button_style',
+                default_font_color = 0,
+                clicked_font_color = {82, 47, 0},
+                hovered_font_color = {82, 47, 0},
+                selected_hovered_font_color = {82, 47, 0},
+                parent = 'list_box_item',
+                selected_font_color = {82, 47, 0},
+                selected_clicked_font_color = {82, 47, 0}
+            },
+            battery_progressbar = {
+                color = {g = 1},
+                height = 33,
+                other_colors = {
+                    {color = {r = 1}, less_than = 0.33}, {color = {g = 0.5, r = 1, b = 0.25}, less_than = 0.66},
+                    {color = {g = 1}, less_than = 1}
+                },
+                type = 'progressbar_style',
+                bar_width = 13,
+                bar = {filename = '__core__/graphics/gui.png', position = {223, 0}, size = {1, 11}, scale = 1}
+            },
+            naked_frame = {type = 'frame_style', parent = 'inner_frame'},
+            window_content_frame_in_tabbed_panne = {
+                bottom_margin = 4,
+                right_margin = 8,
+                padding = 0,
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                left_margin = 8,
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {85, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = 1, position = {42, 8}}
+                    }
+                }
+            },
+            electric_satisfaction_progressbar = {
+                color = {43, 227, 39},
+                type = 'progressbar_style',
+                other_colors = {{color = {218, 69, 53}, less_than = 0.5}, {color = {219, 176, 22}, less_than = 1}},
+                horizontal_align = 'right',
+                right_padding = 8,
+                filled_font_color = {0, 0, 0}
+            },
+            train_schedule_temporary_station_frame = {
+                parent = 'train_schedule_station_frame',
+                type = 'frame_style',
+                graphical_set = {shadow = 0, base = {position = {446, 86}, corner_size = 8}}
+            },
+            achievement_progressbar = {
+                color = {g = 1, r = 1, b = 1},
+                minimal_width = 300,
+                other_colors = {},
+                font = 'default-large-semibold',
+                font_color = 0,
+                type = 'progressbar_style',
+                bar_width = 7,
+                bar_background = {
+                    filename = '__core__/graphics/scrollbar-mini.png',
+                    position = {1, 0},
+                    size = {1, 7},
+                    scale = 1
+                },
+                bar = {filename = '__core__/graphics/scrollbar-mini.png', position = {4, 1}, size = {1, 5}, scale = 1}
+            },
+            tabbed_pane_with_extra_padding = {
+                type = 'tabbed_pane_style',
+                tab_content_frame = {
+                    left_padding = 12,
+                    parent = 'tabbed_pane_frame',
+                    type = 'frame_style',
+                    right_padding = 12
+                }
+            },
+            map_generator_notched_slider_wide = {
+                type = 'slider_style',
+                left_margin = 4,
+                right_margin = 4,
+                parent = 'map_generator_notched_slider'
+            },
+            a_inner_frame_for_subheader_with_paddings = {
+                parent = 'a_inner_frame',
+                type = 'frame_style',
+                top_padding = 0
+            },
+            frame_without_left_and_right_side = {
+                right_padding = 4,
+                type = 'frame_style',
+                graphical_set = {
+                    base = {
+                        top = {size = {1, 8}, position = {8, 0}},
+                        bottom = {size = {1, 8}, position = {8, 9}},
+                        center = {size = {1, 1}, position = {8, 8}}
+                    }
+                }
+            },
+            tutorial_list_subheader_frame = {
+                left_padding = 8,
+                height = 0,
+                width = 508,
+                parent = 'subheader_frame',
+                type = 'frame_style',
+                right_padding = 8
+            },
+            a_inner_paddingless_frame = {
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                parent = 'a_inner_frame',
+                type = 'frame_style',
+                padding = 0
+            },
+            tabbed_pane = {
+                type = 'tabbed_pane_style',
+                padding = 0,
+                tab_content_frame = {type = 'frame_style', parent = 'tabbed_pane_frame'},
+                vertical_spacing = 0,
+                tab_container = {
+                    left_padding = 12,
+                    type = 'horizontal_flow_style',
+                    horizontal_spacing = 0,
+                    right_padding = 12
+                }
+            },
+            recipe_count_label = {parent = 'label', font = 'default-bold', type = 'label_style'},
+            rounded_button = {
+                type = 'button_style',
+                selected_hovered_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {256, 191},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {236, 200}, corner_size = 8}
+                },
+                selected_clicked_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {256, 191},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {236, 200}, corner_size = 8}
+                },
+                disabled_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {256, 191},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {185, 200}, corner_size = 8}
+                },
+                selected_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {256, 191},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {236, 200}, corner_size = 8}
+                },
+                clicked_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {256, 191},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {219, 200}, corner_size = 8}
+                },
+                hovered_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {256, 191},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {202, 200}, corner_size = 8},
+                    glow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {256, 191},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                default_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {256, 191},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {168, 200}, corner_size = 8}
+                }
+            },
+            filter_scroll_pane_background_frame = {
+                minimal_height = 200,
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                background_graphical_set = {
+                    position = {282, 17},
+                    corner_size = 8,
+                    overall_tiling_horizontal_size = 32,
+                    overall_tiling_vertical_spacing = 8,
+                    overall_tiling_vertical_padding = 4,
+                    overall_tiling_horizontal_padding = 4,
+                    overall_tiling_horizontal_spacing = 8,
+                    overall_tiling_vertical_size = 32
+                },
+                parent = 'slot_container_frame',
+                vertically_stretchable = 'on'
+            },
+            suggested_tutorial_card_slot_frame = {parent = 'bordered_frame', type = 'frame_style', padding = 4},
+            subpanel_inset_frame_packed = {
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                parent = 'subpanel_inset_frame',
+                horizontal_flow_style = {horizontal_spacing = 0, type = 'horizontal_flow_style'},
+                type = 'frame_style'
+            },
+            item_and_count_select_background = {
+                parent = 'inside_shallow_frame_with_padding',
+                horizontal_flow_style = {type = 'horizontal_flow_style', parent = 'player_input_horizontal_flow'},
+                type = 'frame_style'
+            },
+            achievement_pinned_card_progressbar = {
+                right_padding = 3,
+                parent = 'achievement_card_progressbar',
+                font = 'default-small-semibold',
+                type = 'progressbar_style'
+            },
+            frame_with_even_small_even_paddings = {type = 'frame_style', padding = 4},
+            subheader_right_aligned_label = {right_padding = 8, parent = 'label', type = 'label_style'},
+            subheader_frame = {
+                left_padding = 4,
+                height = 36,
+                parent = 'frame',
+                horizontal_flow_style = {type = 'horizontal_flow_style', vertical_align = 'center'},
+                vertically_stretchable = 'off',
+                type = 'frame_style',
+                top_padding = 3,
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        bottom = {size = {1, 8}, position = {256, 26}},
+                        center = {size = {1, 1}, position = {256, 25}}
+                    }
+                },
+                right_padding = 4,
+                vertical_align = 'center',
+                bottom_padding = 1
+            },
+            shortcut_bar_button_blue = {parent = 'slot_sized_button_blue', type = 'button_style', padding = 8},
+            mod_disabled_label = {type = 'label_style', font_color = {g = 0.5, r = 0.5, b = 0.5}},
+            editor_inner_frame = {
+                left_padding = 12,
+                use_header_filler = false,
+                vertically_stretchable = 'on',
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                top_padding = 6,
+                right_padding = 12,
+                graphical_set = 0,
+                bottom_padding = 4
+            },
+            floating_train_station_list_box = {maximal_height = 800, type = 'list_box_style'},
+            technology_gui_left_frame = {
+                left_padding = 8,
+                horizontally_stretchable = 'off',
+                type = 'frame_style',
+                parent = 'technology_gui_inner_frame',
+                right_padding = 12
+            },
+            train_schedule_condition_frame = {
+                type = 'frame_style',
+                padding = 0,
+                parent = 'dark_frame',
+                horizontal_flow_style = {type = 'horizontal_flow_style', parent = 'player_input_horizontal_flow'},
+                width = 288
+            },
+            filter_inventory_slot = {parent = 'blue_slot', type = 'button_style', left_click_sound = {}},
+            map_gen_row_label = {top_padding = -2, type = 'label_style', bottom_padding = 2},
+            other_settings_slider = {parent = 'slider', minimal_width = 250, type = 'slider_style'},
+            left_slider_button = {
+                parent = 'slider_button',
+                type = 'button_style',
+                disabled_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        top_outer_border_shift = -4,
+                        right_outer_border_shift = 4,
+                        tint = 0,
+                        left_outer_border_shift = -4,
+                        center = {size = {56, 40}, position = {481, 96}}
+                    },
+                    base = {size = {40, 24}, position = {489, 24}}
+                },
+                left_click_sound = {{filename = '__core__/sound/gui-slider.ogg', volume = 1}},
+                clicked_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        top_outer_border_shift = -4,
+                        right_outer_border_shift = 4,
+                        tint = 0,
+                        left_outer_border_shift = -4,
+                        center = {size = {56, 40}, position = {481, 96}}
+                    },
+                    base = {size = {40, 24}, position = {489, 72}}
+                },
+                hovered_graphical_set = {
+                    glow = {
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        top_outer_border_shift = -4,
+                        right_outer_border_shift = 4,
+                        tint = 0,
+                        left_outer_border_shift = -4,
+                        center = {size = {56, 40}, position = {481, 96}}
+                    },
+                    base = {size = {40, 24}, position = {489, 48}}
+                },
+                default_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        top_outer_border_shift = -4,
+                        right_outer_border_shift = 4,
+                        tint = 0,
+                        left_outer_border_shift = -4,
+                        center = {size = {56, 40}, position = {481, 96}}
+                    },
+                    base = {size = {40, 24}, position = {489, 0}}
+                }
+            },
+            statistics_time_buttons_frame = {
+                left_padding = 4,
+                type = 'frame_style',
+                right_padding = 4,
+                graphical_set = {
+                    base = {
+                        position = {68, 9},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = {1, 1}, position = {42, 8}}
+                    }
+                },
+                bottom_padding = 4
+            },
+            statistics_slot_button = {type = 'button_style', parent = 'slot_button_in_shallow_frame'},
+            not_suggested_yet_tutorial_card_slot_frame = {
+                parent = 'suggested_tutorial_card_slot_frame',
+                type = 'frame_style',
+                border = {
+                    bottom_left_corner = {size = {8, 8}, position = {32, 1024}},
+                    bottom_right_corner = {size = {8, 8}, position = {24, 1024}},
+                    border_width = 8,
+                    top_left_coner = {size = {8, 8}, position = {40, 1024}},
+                    vertical_line = {size = {8, 1}, position = {0, 1024}},
+                    horizontal_line = {size = {1, 8}, position = {8, 1024}},
+                    top_right_corner = {size = {8, 8}, position = {16, 1024}}
+                }
+            },
+            electric_satisfaction_statistics_progressbar = {
+                height = 28,
+                type = 'progressbar_style',
+                embed_text_in_bar = true,
+                parent = 'electric_satisfaction_progressbar',
+                bar_width = 28
+            },
+            statistics_frame = {
+                use_header_filler = false,
+                type = 'frame_style',
+                padding = 12,
+                title_style = {parent = 'heading_3_label', type = 'label_style', bottom_padding = 4},
+                parent = 'subpanel_frame',
+                top_padding = 4,
+                graphical_set = {shadow = 0, base = {position = {68, 0}, corner_size = 8}}
+            },
+            filter_group_button_tab_slightly_larger = {
+                size = {75, 76},
+                parent = 'filter_group_button_tab',
+                type = 'button_style'
+            },
+            statistics_element_table = {vertical_spacing = 0, type = 'table_style', horizontal_spacing = 0, padding = 0},
+            achievement_title_label = {
+                type = 'label_style',
+                font_color = {g = 1, r = 1, b = 1},
+                font = 'default-bold',
+                parent = 'label'
+            },
+            outer_frame = {parent = 'invisible_frame', type = 'frame_style', graphical_set = {shadow = 0}},
+            slot_container_frame = {
+                parent = 'invisible_frame',
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {85, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = {1, 1}, position = {42, 8}}
+                    }
+                }
+            },
+            squashable_label = {horizontally_squashable = 'on', type = 'label_style'},
+            speech_bubble = {
+                arrow_indent = 7,
+                arrow_graphical_set = {
+                    right = {filename = '__core__/graphics/arrows/hint-orange-arrow-right.png', width = 38, height = 73},
+                    left = {filename = '__core__/graphics/arrows/hint-orange-arrow-left.png', width = 43, height = 73},
+                    bottom = {filename = '__core__/graphics/arrows/hint-orange-arrow-down.png', width = 71, height = 35},
+                    top = {filename = '__core__/graphics/arrows/hint-orange-arrow-up.png', width = 62, height = 37}
+                },
+                frame_style = {
+                    left_padding = 5,
+                    type = 'frame_style',
+                    top_padding = 0,
+                    right_padding = 0,
+                    graphical_set = {
+                        filename = '__core__/graphics/arrows/hint-orange-box.png',
+                        corner_size = {13, 13},
+                        type = 'composition',
+                        position = {0, 0}
+                    },
+                    bottom_padding = 10
+                },
+                close_color = 0,
+                type = 'speech_bubble_style',
+                pass_through_mouse = false,
+                label_style = {
+                    type = 'label_style',
+                    width = 400,
+                    parent = 'label',
+                    font = 'scenario-message-dialog',
+                    single_line = false
+                }
+            },
+            inset_frame_container_table = {
+                vertical_spacing = 12,
+                parent = 'table',
+                horizontal_spacing = 12,
+                type = 'table_style'
+            },
+            blueprint_record_slot_button = {size = 80, parent = 'inventory_slot', type = 'button_style', padding = 8},
+            special_label_under_widget = {font_color = 0, type = 'label_style', parent = 'label_under_widget'},
+            technology_gui_inner_frame = {
+                use_header_filler = false,
+                type = 'frame_style',
+                padding = 0,
+                parent = 'inner_frame_in_outer_frame',
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 8},
+                graphical_set = {center = {size = 1, position = {8, 8}}}
+            },
+            player_input_horizontal_flow = {
+                minimal_height = 28,
+                vertical_align = 'center',
+                horizontal_spacing = 8,
+                type = 'horizontal_flow_style'
+            },
+            slot_group_frame = {
+                left_padding = 0,
+                type = 'frame_style',
+                top_padding = 2,
+                parent = 'bordered_frame',
+                bottom_padding = 2
+            },
+            locomotive_minimap_button = {
+                height = 150,
+                padding = 4,
+                parent = 'button',
+                width = 200,
+                type = 'button_style'
+            },
+            slot_button_in_shallow_frame = {
+                selected_clicked_graphical_set = {shadow = 0, base = {size = 80, position = {160, 736}, border = 4}},
+                selected_graphical_set = {shadow = 0, base = {size = 80, position = {80, 736}, border = 4}},
+                clicked_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        right_outer_border_shift = -4,
+                        position = {345, 103},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {160, 736}, border = 4}
+                },
+                left_click_sound = {{filename = '__core__/sound/gui-square-button.ogg', volume = 1}},
+                type = 'button_style',
+                selected_hovered_graphical_set = {shadow = 0, base = {size = 80, position = {80, 736}, border = 4}},
+                hovered_graphical_set = {shadow = 0, base = {size = 80, position = {80, 736}, border = 4}},
+                parent = 'slot_button',
+                default_graphical_set = {shadow = 0, base = {size = 80, position = {0, 736}, border = 4}}
+            },
+            slot = {
+                padding = 0,
+                clicked_graphical_set = {base = {size = 80, position = {160, 424}, border = 4}},
+                left_click_sound = {{filename = '__core__/sound/gui-inventory-slot-button.ogg', volume = 0.6}},
+                pie_progress_color = {0.98, 0.66, 0.22, 0.5},
+                type = 'button_style',
+                size = 40,
+                hovered_graphical_set = {base = {size = 80, position = {80, 424}, border = 4}},
+                parent = 'button',
+                default_graphical_set = {base = {size = 80, position = {0, 424}, border = 4}}
+            },
+            shortcut_bar_name_label = {type = 'label_style', maximal_width = 360},
+            shortcut_bar_inner_panel = {
+                type = 'frame_style',
+                background_graphical_set = {
+                    position = {282, 17},
+                    corner_size = 8,
+                    overall_tiling_horizontal_size = 24,
+                    overall_tiling_vertical_spacing = 16,
+                    overall_tiling_vertical_padding = 8,
+                    overall_tiling_horizontal_padding = 8,
+                    overall_tiling_horizontal_spacing = 16,
+                    overall_tiling_vertical_size = 24
+                },
+                parent = 'quick_bar_inner_panel',
+                horizontal_flow_style = {horizontal_spacing = 0, type = 'horizontal_flow_style'},
+                padding = 0
+            },
+            shortcut_bar_button_small_red = {
+                size = 20,
+                type = 'button_style',
+                padding = 0,
+                parent = 'slot_sized_button_red',
+                left_click_sound = {{filename = '__core__/sound/gui-button-mini.ogg', volume = 1}}
+            },
+            bordered_frame_with_extra_side_margins = {
+                right_padding = 4,
+                right_margin = 8,
+                border = {
+                    top_t = {size = {8, 8}, position = {64, 40}},
+                    bottom_left_corner = {size = {8, 8}, position = {32, 40}},
+                    bottom_right_corner = {size = {8, 8}, position = {24, 40}},
+                    border_width = 8,
+                    right_end = {size = {8, 8}, position = {96, 40}},
+                    vertical_line = {size = {8, 1}, position = {0, 40}},
+                    top_right_corner = {size = {8, 8}, position = {16, 40}},
+                    left_t = {size = {8, 8}, position = {56, 40}},
+                    cross = {size = {8, 8}, position = {80, 40}},
+                    right_t = {size = {8, 8}, position = {72, 40}},
+                    top_end = {size = {8, 8}, position = {88, 40}},
+                    left_end = {size = {8, 8}, position = {112, 40}},
+                    top_left_coner = {size = {8, 8}, position = {40, 40}},
+                    bottom_t = {size = {8, 8}, position = {48, 40}},
+                    horizontal_line = {size = {1, 8}, position = {8, 40}},
+                    bottom_end = {size = {8, 8}, position = {104, 40}}
+                },
+                left_margin = 8,
+                type = 'frame_style',
+                graphical_set = {}
+            },
+            shortcut_bar_button_small_green = {
+                size = 20,
+                type = 'button_style',
+                padding = 0,
+                parent = 'slot_sized_button_green',
+                left_click_sound = {{filename = '__core__/sound/gui-button-mini.ogg', volume = 1}}
+            },
+            outer_frame_without_top_shadow = {
+                parent = 'outer_frame',
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = {
+                        left_bottom = {size = {8, 8}, position = {200, 137}},
+                        bottom = {size = {1, 8}, position = {208, 137}},
+                        tint = 0,
+                        scale = 0.5,
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        left = {size = {8, 1}, position = {200, 136}},
+                        right_bottom = {size = {8, 8}, position = {209, 137}},
+                        center = {size = {1, 1}, position = {208, 136}}
+                    }
+                }
+            },
+            default_permission_group_list_box_item = {
+                default_font_color = {0.55, 0.55, 1},
+                type = 'button_style',
+                hovered_font_color = {0.8, 0.8, 1},
+                selected_hovered_font_color = {0.2, 0.2, 0.8},
+                parent = 'list_box_item',
+                selected_font_color = {0.2, 0.2, 0.8},
+                selected_clicked_font_color = {0.2, 0.2, 0.8}
+            },
+            shortcut_bar_button_small_blue = {
+                size = 20,
+                type = 'button_style',
+                padding = 0,
+                parent = 'slot_sized_button_blue',
+                left_click_sound = {{filename = '__core__/sound/gui-button-mini.ogg', volume = 1}}
+            },
+            reader_textbox = {
+                height = 500,
+                type = 'textbox_style',
+                maximal_width = 0,
+                parent = 'textbox',
+                minimal_width = 600
+            },
+            shield_progressbar = {color = {0.8, 0.2, 0.8}, parent = 'health_progressbar', type = 'progressbar_style'},
+            search_textfield_with_fixed_width = {type = 'textbox_style', width = 150},
+            inner_frame = {
+                title_style = {parent = 'frame_title', type = 'label_style', bottom_padding = 5},
+                padding = 0,
+                type = 'frame_style',
+                graphical_set = {}
+            },
+            search_popup_frame = {parent = 'frame', type = 'frame_style', padding = 2},
+            achievement_description_label = {
+                type = 'label_style',
+                font_color = {g = 1, r = 1, b = 1},
+                font = 'default',
+                parent = 'label'
+            },
+            inventory_limit_slot_button = {
+                type = 'button_style',
+                selected_hovered_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {36, 896}, corner_size = 8},
+                    glow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = {236, 130, 130, 127},
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                selected_clicked_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {36, 896}, corner_size = 8}
+                },
+                parent = 'slot_sized_button',
+                selected_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {36, 896}, corner_size = 8}
+                },
+                clicked_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {36, 896}, corner_size = 8}
+                },
+                hovered_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {18, 896}, corner_size = 8},
+                    glow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = {236, 130, 130, 127},
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                default_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {0, 896}, corner_size = 8}
+                }
+            },
+            glow = {type = 'glow_style', image_set = {corner_size = 8, position = {200, 128}, draw_type = 'outer'}},
+            scroll_pane_under_subheader = {
+                padding = 4,
+                extra_padding_when_activated = 0,
+                type = 'scroll_pane_style',
+                graphical_set = {}
+            },
+            scroll_pane_in_shallow_frame = {
+                type = 'scroll_pane_style',
+                dont_force_clipping_rect_for_contents = true,
+                graphical_set = {shadow = 0, base = {corner_size = 8, position = {85, 0}, draw_type = 'outer'}}
+            },
+            tooltip_generated_from_description_blueprint_frame = {
+                maximal_width = 600,
+                type = 'frame_style',
+                parent = 'tooltip_generated_from_description_frame'
+            },
+            saves_list_box_under_subheader = {
+                parent = 'saves_list_box',
+                type = 'list_box_style',
+                scroll_pane_style = {
+                    parent = 'list_box_scroll_pane',
+                    type = 'scroll_pane_style',
+                    graphical_set = {
+                        shadow = 0,
+                        base = {
+                            corner_size = 8,
+                            top = {},
+                            draw_type = 'outer',
+                            position = {17, 0},
+                            left_top = {},
+                            right_top = {},
+                            center = {size = 1, position = {42, 8}}
+                        }
+                    }
+                }
+            },
+            tutorial_title_label = {
+                font_color = 0,
+                type = 'label_style',
+                parent = 'label',
+                font = 'default-large-bold',
+                width = 364
+            },
+            tab_scroll_pane = {
+                extra_left_margin_when_activated = 8,
+                extra_right_margin_when_activated = -4,
+                type = 'scroll_pane_style',
+                graphical_set = {shadow = 0, base = {corner_size = 8, position = {85, 0}, draw_type = 'outer'}}
+            },
+            quick_bar_slot_table = {vertical_spacing = 0, horizontal_spacing = 0, type = 'table_style'},
+            controller_logistics_scroll_pane = {
+                parent = 'filter_scroll_pane',
+                type = 'scroll_pane_style',
+                vertically_stretchable = 'on'
+            },
+            tooltip_panel_background = {
+                left_padding = 4,
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                top_padding = 0,
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                right_padding = 4,
+                graphical_set = {position = {403, 0}, background_blur_sigma = 4, opacity = 0.88, corner_size = 8},
+                bottom_padding = 0
+            },
+            researched_preview_technology_slot = {
+                height = 200,
+                width = 136,
+                parent = 'researched_technology_slot',
+                ingredients_padding = 32,
+                type = 'technology_slot_style'
+            },
+            research_queue_active_glow_dark = {
+                type = 'glow_style',
+                image_set = {glow = {corner_size = 8, position = {333, 17}, draw_type = 'outer'}}
+            },
+            removed_content_table = {
+                type = 'table_style',
+                odd_row_graphical_set = {filename = '__core__/graphics/gui-new.png', position = {472, 25}, size = 1},
+                border = {
+                    top_t = {size = {8, 8}, position = {64, 40}},
+                    bottom_left_corner = {size = {8, 8}, position = {32, 40}},
+                    bottom_right_corner = {size = {8, 8}, position = {24, 40}},
+                    border_width = 8,
+                    right_end = {size = {8, 8}, position = {96, 40}},
+                    vertical_line = {size = {8, 1}, position = {0, 40}},
+                    top_right_corner = {size = {8, 8}, position = {16, 40}},
+                    left_t = {size = {8, 8}, position = {56, 40}},
+                    cross = {size = {8, 8}, position = {80, 40}},
+                    right_t = {size = {8, 8}, position = {72, 40}},
+                    top_end = {size = {8, 8}, position = {88, 40}},
+                    left_end = {size = {8, 8}, position = {112, 40}},
+                    top_left_coner = {size = {8, 8}, position = {40, 40}},
+                    bottom_t = {size = {8, 8}, position = {48, 40}},
+                    horizontal_line = {size = {1, 8}, position = {8, 40}},
+                    bottom_end = {size = {8, 8}, position = {104, 40}}
+                },
+                column_widths = {{column = 1, minimal_width = 332}, {column = 2, minimal_width = 72}},
+                right_cell_padding = 8,
+                column_alignments = {{alignment = 'middle-right', column = 2}},
+                left_cell_padding = 8
+            },
+            removed_content_scroll_pane = {
+                parent = 'scroll_pane',
+                type = 'scroll_pane_style',
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {17, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = 1, position = {76, 8}}
+                    }
+                }
+            },
+            draggable_space_in_temporary_train_station = {
+                parent = 'draggable_space_in_train_schedule',
+                type = 'empty_widget_style',
+                graphical_set = {
+                    shadow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {
+                        bottom_tiling = true,
+                        bottom = {size = {8, 8}, position = {462, 78}},
+                        top_tiling = true,
+                        center_tiling_horizontal = true,
+                        top = {size = {8, 7}, position = {446, 78}},
+                        center = {size = {8, 8}, position = {454, 78}}
+                    }
+                }
+            },
+            map_generator_preset_description = {
+                height = 56,
+                default_background = {
+                    shadow = 0,
+                    base = {
+                        position = {51, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = 1, position = {76, 8}}
+                    }
+                },
+                parent = 'textbox',
+                font_color = 0,
+                type = 'textbox_style',
+                margin = 16,
+                width = 0,
+                padding = 8,
+                horizontally_stretchable = 'on'
+            },
+            red_logistic_slot_button = {type = 'button_style', parent = 'red_slot_button'},
+            achievement_notification_frame = {
+                type = 'frame_style',
+                padding = 0,
+                parent = 'frame',
+                width = 400,
+                graphical_set = {}
+            },
+            logistic_gui_tabbed_pane = {
+                parent = 'tabbed_pane',
+                type = 'tabbed_pane_style',
+                tab_content_frame = {
+                    left_padding = 4,
+                    type = 'frame_style',
+                    top_padding = 0,
+                    right_padding = 4,
+                    graphical_set = 0,
+                    bottom_padding = 8
+                }
+            },
+            promised_crafting_queue_slot = {
+                type = 'button_style',
+                parent = 'crafting_queue_slot',
+                clicked_graphical_set = {
+                    size = 36,
+                    border = 1,
+                    filename = '__core__/graphics/gui.png',
+                    position = {221, 108},
+                    scale = 1
+                },
+                hovered_graphical_set = {
+                    size = 36,
+                    border = 1,
+                    filename = '__core__/graphics/gui.png',
+                    position = {221, 72},
+                    scale = 1
+                },
+                default_graphical_set = {
+                    size = 36,
+                    border = 1,
+                    filename = '__core__/graphics/gui.png',
+                    position = {221, 36},
+                    scale = 1
+                }
+            },
+            control_settings_bordered_table = {
+                bottom_margin = -4,
+                right_margin = -4,
+                type = 'table_style',
+                left_margin = -4,
+                top_margin = 4,
+                parent = 'bordered_table'
+            },
+            red_back_button = {
+                disabled_font_color = {0.5, 0.5, 0.5},
+                parent = 'dialog_button',
+                type = 'button_style',
+                disabled_graphical_set = {
+                    glow = {
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        tint = 0,
+                        left_outer_border_shift = 12,
+                        right_bottom = {size = 8, position = {209, 137}},
+                        left = {size = {32, 80}, position = {304, 424}},
+                        right_top = {size = 8, position = {209, 128}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {8, 1}, position = {162, 25}},
+                        right_bottom = {size = 8, position = {162, 26}},
+                        left = {size = {24, 64}, position = {96, 360}},
+                        right_top = {size = 8, position = {162, 17}},
+                        center = {size = {1, 64}, position = {120, 360}}
+                    }
+                },
+                hovered_graphical_set = {
+                    glow = {
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        tint = {254, 90, 90, 128},
+                        left_outer_border_shift = 12,
+                        right_bottom = {size = 8, position = {209, 137}},
+                        left = {size = {32, 80}, position = {304, 424}},
+                        right_top = {size = 8, position = {209, 128}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {8, 1}, position = {179, 25}},
+                        right_bottom = {size = 8, position = {179, 26}},
+                        left = {size = {24, 64}, position = {192, 360}},
+                        right_top = {size = 8, position = {179, 17}},
+                        center = {size = {1, 64}, position = {216, 360}}
+                    }
+                },
+                clicked_graphical_set = {
+                    base = {
+                        right = {size = {8, 1}, position = {196, 25}},
+                        right_bottom = {size = 8, position = {196, 26}},
+                        left = {size = {24, 64}, position = {288, 360}},
+                        right_top = {size = 8, position = {196, 17}},
+                        center = {size = {1, 64}, position = {312, 360}}
+                    }
+                },
+                horizontal_align = 'left',
+                default_graphical_set = {
+                    shadow = {
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        tint = 0,
+                        left_outer_border_shift = 12,
+                        right_bottom = {size = 8, position = {209, 137}},
+                        left = {size = {32, 80}, position = {304, 424}},
+                        right_top = {size = 8, position = {209, 128}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {8, 1}, position = {145, 25}},
+                        right_bottom = {size = 8, position = {145, 26}},
+                        left = {size = {24, 64}, position = {0, 360}},
+                        right_top = {size = 8, position = {145, 17}},
+                        center = {size = {1, 64}, position = {24, 360}}
+                    }
+                }
+            },
+            recipe_tooltip_transitive_craft_count_label = {
+                font_color = 0,
+                type = 'label_style',
+                parent = 'recipe_count_label'
+            },
+            recipe_tooltip_cannot_craft_label = {
+                font_color = 0,
+                type = 'label_style',
+                parent = 'description_value_label'
+            },
+            logistics_scroll_pane = {
+                minimal_height = 120,
+                type = 'scroll_pane_style',
+                parent = 'filter_scroll_pane',
+                maximal_height = 160,
+                vertically_stretchable = 'off'
+            },
+            shortcut_bar_button_red = {parent = 'slot_sized_button_red', type = 'button_style', padding = 8},
+            completed_tutorial_card_frame = {type = 'frame_style', parent = 'unlocked_achievement_in_sidebar_frame'},
+            radiobutton = {
+                selected_clicked_graphical_set = {
+                    shadow = {
+                        stretch_monolith_image_to_size = false,
+                        center = {size = {34, 34}, position = {123, 156}, tint = 0, scale = 0.5}
+                    },
+                    base = {size = {24, 24}, position = {48, 160}}
+                },
+                selected_graphical_set = {
+                    shadow = {
+                        stretch_monolith_image_to_size = false,
+                        center = {size = {34, 34}, position = {123, 156}, tint = 0, scale = 0.5}
+                    },
+                    base = {size = {24, 24}, position = {72, 160}}
+                },
+                clicked_graphical_set = {
+                    shadow = {
+                        stretch_monolith_image_to_size = false,
+                        center = {size = {34, 34}, position = {123, 156}, tint = 0, scale = 0.5}
+                    },
+                    base = {size = {24, 24}, position = {48, 160}}
+                },
+                font = 'default',
+                left_click_sound = {{filename = '__core__/sound/gui-radio-button.ogg', volume = 1}},
+                font_color = 0,
+                type = 'radiobutton_style',
+                disabled_graphical_set = {
+                    shadow = {
+                        stretch_monolith_image_to_size = false,
+                        center = {size = {34, 34}, position = {123, 156}, tint = 0, scale = 0.5}
+                    },
+                    base = {size = {24, 24}, position = {96, 160}}
+                },
+                text_padding = 8,
+                hovered_graphical_set = {
+                    shadow = {
+                        stretch_monolith_image_to_size = false,
+                        center = {size = {34, 34}, position = {123, 156}, tint = 0, scale = 0.5}
+                    },
+                    base = {size = {24, 24}, position = {24, 160}}
+                },
+                selected_hovered_graphical_set = {
+                    shadow = {
+                        stretch_monolith_image_to_size = false,
+                        center = {size = {34, 34}, position = {123, 156}, tint = 0, scale = 0.5}
+                    },
+                    base = {size = {24, 24}, position = {24, 160}}
+                },
+                default_graphical_set = {
+                    shadow = {
+                        stretch_monolith_image_to_size = false,
+                        center = {size = {34, 34}, position = {123, 156}, tint = 0, scale = 0.5}
+                    },
+                    base = {size = {24, 24}, position = {0, 160}}
+                }
+            },
+            tool_button_green = {
+                type = 'button_style',
+                parent = 'tool_button',
+                clicked_graphical_set = {shadow = 0, base = {position = {465, 48}, corner_size = 8}},
+                hovered_graphical_set = {
+                    shadow = 0,
+                    base = {position = {448, 48}, corner_size = 8},
+                    glow = {
+                        corner_size = 8,
+                        tint = {110, 164, 104, 127},
+                        position = {200, 128},
+                        draw_type = 'outer',
+                        scale = 0.5
+                    }
+                },
+                default_graphical_set = {shadow = 0, base = {position = {431, 48}, corner_size = 8}}
+            },
+            browse_games_right_part_vertical_flow = {type = 'vertical_flow_style', width = 400},
+            right_slider_button = {
+                parent = 'slider_button',
+                type = 'button_style',
+                disabled_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        top_outer_border_shift = -4,
+                        right_outer_border_shift = 4,
+                        tint = 0,
+                        left_outer_border_shift = -4,
+                        center = {size = {56, 40}, position = {537, 96}}
+                    },
+                    base = {size = {40, 24}, position = {529, 24}}
+                },
+                left_click_sound = {{filename = '__core__/sound/gui-slider.ogg', volume = 1}},
+                clicked_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        top_outer_border_shift = -4,
+                        right_outer_border_shift = 4,
+                        tint = 0,
+                        left_outer_border_shift = -4,
+                        center = {size = {56, 40}, position = {537, 96}}
+                    },
+                    base = {size = {40, 24}, position = {529, 72}}
+                },
+                hovered_graphical_set = {
+                    glow = {
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        top_outer_border_shift = -4,
+                        right_outer_border_shift = 4,
+                        tint = 0,
+                        left_outer_border_shift = -4,
+                        center = {size = {56, 40}, position = {537, 96}}
+                    },
+                    base = {size = {40, 24}, position = {529, 48}}
+                },
+                default_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = 4,
+                        draw_type = 'outer',
+                        top_outer_border_shift = -4,
+                        right_outer_border_shift = 4,
+                        tint = 0,
+                        left_outer_border_shift = -4,
+                        center = {size = {56, 40}, position = {537, 96}}
+                    },
+                    base = {size = {40, 24}, position = {529, 0}}
+                }
+            },
+            quick_bar_slot_button = {type = 'button_style', parent = 'slot_button'},
+            frame = {
+                left_padding = 8,
+                use_header_filler = true,
+                vertical_flow_style = {type = 'vertical_flow_style'},
+                header_filler_style = {
+                    horizontally_stretchable = 'on',
+                    height = 24,
+                    parent = 'draggable_space_header',
+                    type = 'empty_widget_style',
+                    vertically_stretchable = 'on'
+                },
+                type = 'frame_style',
+                horizontal_flow_style = {type = 'horizontal_flow_style'},
+                top_padding = 4,
+                right_padding = 8,
+                drag_by_title = true,
+                flow_style = {type = 'flow_style'},
+                border = {},
+                title_style = {type = 'label_style', parent = 'frame_title'},
+                header_flow_style = {
+                    type = 'horizontal_flow_style',
+                    horizontally_stretchable = 'on',
+                    horizontal_spacing = 8,
+                    bottom_padding = 4
+                },
+                graphical_set = {shadow = 0, base = {position = {0, 0}, corner_size = 8}},
+                bottom_padding = 8
+            },
+            entity_variation_button = {
+                left_padding = 2,
+                type = 'button_style',
+                top_padding = 2,
+                size = 100,
+                right_padding = 5,
+                bottom_padding = 5
+            },
+            red_button = {
+                parent = 'button',
+                type = 'button_style',
+                disabled_graphical_set = {shadow = 0, base = {position = {153, 17}, corner_size = 8}},
+                left_click_sound = {{filename = '__core__/sound/gui-red-button.ogg', volume = 0.5}},
+                clicked_graphical_set = {shadow = 0, base = {position = {187, 17}, corner_size = 8}},
+                hovered_graphical_set = {
+                    shadow = 0,
+                    base = {position = {170, 17}, corner_size = 8},
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5}
+                },
+                default_graphical_set = {shadow = 0, base = {position = {136, 17}, corner_size = 8}}
+            },
+            progressbar = {
+                color = {g = 1},
+                minimal_width = 10,
+                other_colors = {},
+                font = 'default',
+                font_color = {1, 1, 1},
+                type = 'progressbar_style',
+                bar_width = 7,
+                natural_width = 200,
+                embed_text_in_bar = false,
+                bar_background = {shadow = 0, base = {position = {296, 48}, corner_size = 8}},
+                bar = {position = {313, 48}, corner_size = 8}
+            },
+            production_gui_tabbed_pane = {
+                type = 'tabbed_pane_style',
+                tab_content_frame = {
+                    left_padding = 0,
+                    type = 'frame_style',
+                    top_padding = 8,
+                    right_padding = 0,
+                    graphical_set = {
+                        shadow = 0,
+                        base = {top = {size = {1, 8}, position = {76, 0}}, center = {size = {1, 1}, position = {76, 8}}}
+                    },
+                    bottom_padding = 0
+                }
+            },
+            long_number_textfield = {type = 'textbox_style', width = 150},
+            button_with_shadow = {
+                type = 'button_style',
+                left_click_sound = {{filename = '__core__/sound/gui-menu-small.ogg', volume = 1}},
+                clicked_graphical_set = {shadow = 0, base = {position = {51, 17}, corner_size = 8}},
+                hovered_graphical_set = {
+                    shadow = 0,
+                    base = {position = {34, 17}, corner_size = 8},
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5}
+                },
+                default_graphical_set = {shadow = 0, base = {position = {0, 17}, corner_size = 8}}
+            },
+            positive_message_frame = {
+                type = 'frame_style',
+                graphical_set = {shadow = 0, base = {position = {420, 17}, corner_size = 8}}
+            },
+            slot_table_spacing_horizontal_flow = {horizontal_spacing = 0, type = 'horizontal_flow_style'},
+            play_locked_tutorial_button = {
+                parent = 'play_tutorial_button',
+                type = 'button_style',
+                default_graphical_set = {
+                    filename = '__core__/graphics/gui.png',
+                    corner_size = 3,
+                    position = {0, 32},
+                    scale = 1
+                }
+            },
+            play_completed_tutorial_button = {type = 'button_style', parent = 'play_tutorial_button'},
+            edit_blueprint_description_textbox = {
+                type = 'textbox_style',
+                horizontally_stretchable = 'on',
+                height = 120,
+                maximal_width = 0
+            },
+            train_schedule_comparison_type_button = {
+                left_padding = 4,
+                height = 28,
+                type = 'button_style',
+                width = 56,
+                right_padding = 4,
+                left_click_sound = {{filename = '__core__/sound/gui-menu-small.ogg', volume = 1}}
+            },
+            achievement_card_progressbar = {
+                right_padding = 10,
+                font_color = {g = 0.77254901960784, r = 0.81960784313725, b = 0.55686274509804},
+                type = 'progressbar_style',
+                parent = 'achievement_progressbar',
+                font = 'default-semibold',
+                bar = {filename = '__core__/graphics/scrollbar-mini.png', position = {3, 1}, size = {1, 5}, scale = 2}
+            },
+            packed_vertical_flow = {type = 'vertical_flow_style', vertical_spacing = 0},
+            outer_frame_without_shadow = {parent = 'outer_frame', type = 'frame_style', graphical_set = {}},
+            map_details_frame = {
+                width = 220,
+                parent = 'blurry_frame',
+                type = 'frame_style',
+                vertical_flow_style = {type = 'vertical_flow_style'}
+            },
+            default_sprite_scale = 0.5,
+            steam_friend_label = {type = 'label_style', font_color = {g = 0.58, r = 0.28, b = 0.7}},
+            other_settings_gui_textbox = {horizontal_align = 'center', type = 'textbox_style', width = 120},
+            open_armor_button = {height = 38, padding = 7, parent = 'forward_button', width = 76, type = 'button_style'},
+            number_input_frame = {left_padding = 8, type = 'frame_style', padding = 0},
+            browse_games_on_lan_table = {
+                column_widths = {{column = 1, width = 310}, {column = 2, width = 100}, {column = 3, width = 100}},
+                parent = 'browse_games_table',
+                type = 'table_style'
+            },
+            not_accessible_station_in_station_selection = {
+                default_font_color = 0,
+                type = 'button_style',
+                hovered_font_color = {61, 3, 0},
+                selected_hovered_font_color = {61, 3, 0},
+                parent = 'list_box_item',
+                selected_font_color = {61, 3, 0},
+                selected_clicked_font_color = {61, 3, 0}
+            },
+            no_header_filler_frame = {type = 'frame_style', use_header_filler = false},
+            changelog_subheader_space = {left_padding = 4, type = 'flow_style', horizontal_spacing = 0, padding = 0},
+            name = 'default',
+            locomotive_minimap_widget = {
+                type = 'empty_widget_style',
+                graphical_set = {shadow = {top = {size = {1, 8}, draw_type = 'inner', tint = 0, position = {191, 128}}}}
+            },
+            module_inventory_scroll_pane = {
+                extra_padding_when_activated = 0,
+                type = 'scroll_pane_style',
+                vertically_squashable = 'off',
+                parent = 'scroll_pane_in_shallow_frame',
+                maximal_height = 100
+            },
+            green_slot = {
+                type = 'button_style',
+                parent = 'slot',
+                clicked_graphical_set = {base = {size = 80, position = {504, 296}, border = 4}},
+                hovered_graphical_set = {base = {size = 80, position = {504, 216}, border = 4}},
+                default_graphical_set = {base = {size = 80, position = {504, 136}, border = 4}}
+            },
+            mods_gui_left_pane_vertical_flow = {
+                natural_height = 692,
+                vertical_spacing = 12,
+                natural_width = 724,
+                maximal_width = 724,
+                maximal_height = 692,
+                type = 'vertical_flow_style'
+            },
+            mod_updates_status_image = {size = {16, 16}, stretch_image_to_widget_size = true, type = 'image_style'},
+            mod_thumbnail_image = {
+                size = 144,
+                right_margin = 4,
+                type = 'image_style',
+                stretch_image_to_widget_size = true,
+                graphical_set = {shadow = 0, base = {corner_size = 8, position = {85, 0}, draw_type = 'outer'}}
+            },
+            mod_startup_settings_mismatch_notice_box = {parent = 'notice_textbox', type = 'textbox_style', width = 400},
+            label_with_left_padding = {left_padding = 4, type = 'label_style'},
+            red_slot_button = {
+                type = 'button_style',
+                parent = 'slot_button',
+                clicked_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {400, 656}, border = 4}
+                },
+                hovered_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {320, 656}, border = 4},
+                    glow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = {255, 166, 123, 128},
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                default_graphical_set = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 736},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {size = 80, position = {240, 656}, border = 4}
+                }
+            },
+            control_input_shortcut_label = {
+                font_color = {128, 206, 240},
+                font = 'default-semibold',
+                type = 'label_style'
+            },
+            mod_dependency_invalid_label = {font_color = 0, type = 'label_style', parent = 'label'},
+            container_equipment_grid_flow = {type = 'vertical_flow_style', vertical_spacing = 8},
+            mining_progressbar = {color = 0, parent = 'health_progressbar', type = 'progressbar_style'},
+            minimap_frame = {minimal_height = 256, parent = 'frame_with_even_paddings', type = 'frame_style'},
+            mini_button_aligned_to_text_vertically_when_centered = {
+                size = 16,
+                type = 'button_style',
+                padding = 0,
+                top_margin = 1,
+                left_click_sound = {{filename = '__core__/sound/gui-button-mini.ogg', volume = 1}}
+            },
+            list_box_item = {
+                default_font_color = 0,
+                minimal_width = 0,
+                clicked_graphical_set = {position = {51, 17}, corner_size = 8},
+                font = 'default-listbox',
+                disabled_font_color = {179, 179, 179},
+                type = 'button_style',
+                disabled_graphical_set = {position = {17, 17}, corner_size = 8},
+                horizontal_align = 'left',
+                hovered_graphical_set = {base = {position = {34, 17}, corner_size = 8}},
+                default_graphical_set = {position = {208, 17}, corner_size = 8}
+            },
+            disabled_index_technology_slot = {
+                clicked_ingredients_background = {position = {347, 639}, corner_size = 8},
+                hovered_level_band = {position = {381, 639}, corner_size = 8},
+                clicked_graphical_set = {shadow = 0, base = {position = {330, 639}, corner_size = 8}},
+                default_ingredients_background = {position = {364, 639}, corner_size = 8},
+                hovered_level_range_font_color = {255, 255, 255},
+                disabled_graphical_set = {shadow = 0, base = {position = {313, 639}, corner_size = 8}},
+                hovered_ingredients_background = {position = {347, 639}, corner_size = 8},
+                highlighted_graphical_set = {shadow = 0, base = {position = {381, 639}, corner_size = 8}},
+                type = 'technology_slot_style',
+                selected_hovered_graphical_set = {shadow = 0, base = {position = {330, 639}, corner_size = 8}},
+                selected_clicked_graphical_set = {shadow = 0, base = {position = {330, 639}, corner_size = 8}},
+                selected_graphical_set = {shadow = 0, base = {position = {330, 639}, corner_size = 8}},
+                level_range_band = {position = {415, 639}, corner_size = 8},
+                parent = 'technology_slot',
+                hovered_level_font_color = {255, 255, 255},
+                level_range_font_color = {132, 132, 132},
+                clicked_overlay = {
+                    left_bottom = {size = {16, 16}, position = {416, 204}},
+                    bottom = {size = {1, 16}, position = {432, 204}},
+                    top = {size = {1, 16}, position = {472, 136}},
+                    right = {size = {16, 1}, position = {473, 152}},
+                    left_top = {size = {16, 16}, position = {456, 136}},
+                    right_bottom = {size = {16, 16}, position = {433, 204}},
+                    left = {size = {16, 1}, position = {456, 152}},
+                    right_top = {size = {16, 16}, position = {473, 136}},
+                    center = {size = {1, 1}, position = {472, 152}}
+                },
+                level_font_color = {132, 132, 132},
+                highlighted_ingredients_background = {position = {347, 639}, corner_size = 8},
+                level_band = {position = {466, 639}, corner_size = 8},
+                hovered_level_range_band = {position = {398, 639}, corner_size = 8},
+                disabled_ingredients_background = {position = {364, 639}, corner_size = 8},
+                hovered_graphical_set = {shadow = 0, base = {position = {330, 639}, corner_size = 8}},
+                default_graphical_set = {shadow = 0, base = {position = {313, 639}, corner_size = 8}}
+            },
+            list_box = {
+                item_style = {type = 'button_style', parent = 'list_box_item'},
+                scroll_pane_style = {type = 'scroll_pane_style', parent = 'list_box_scroll_pane'},
+                type = 'list_box_style'
+            },
+            heading_2_label = {type = 'label_style', font_color = 0, font = 'heading-2', parent = 'label'},
+            mini_button = {
+                size = 16,
+                padding = 0,
+                type = 'button_style',
+                left_click_sound = {{filename = '__core__/sound/gui-button-mini.ogg', volume = 1}}
+            },
+            green_button = {
+                type = 'button_style',
+                disabled_graphical_set = {shadow = 0, base = {position = {85, 17}, corner_size = 8}},
+                parent = 'button',
+                clicked_graphical_set = {shadow = 0, base = {position = {119, 17}, corner_size = 8}},
+                hovered_graphical_set = {
+                    shadow = 0,
+                    base = {position = {102, 17}, corner_size = 8},
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5}
+                },
+                default_graphical_set = {shadow = 0, base = {position = {68, 17}, corner_size = 8}}
+            },
+            map_preview_scroll_pane = {
+                type = 'scroll_pane_style',
+                graphical_set = {
+                    base = {
+                        right = {y = 8, width = 8, height = 1, x = 26},
+                        draw_type = 'outer',
+                        bottom = {y = 9, width = 1, height = 8, x = 25},
+                        right_bottom = {y = 9, width = 8, height = 8, x = 26},
+                        left = {y = 8, width = 8, height = 1, x = 17},
+                        left_bottom = {y = 9, width = 8, height = 8, x = 17},
+                        center = {y = 8, width = 1, height = 1, x = 25}
+                    }
+                }
+            },
+            map_generator_notched_slider = {
+                bottom_margin = 4,
+                type = 'slider_style',
+                parent = 'notched_slider',
+                top_margin = -4,
+                width = 100
+            },
+            recipe_slot_button = {type = 'button_style', parent = 'slot_button'},
+            blurry_panel_horizontal_line = {
+                bottom_padding = 4,
+                top_padding = 4,
+                type = 'line_style',
+                border = {
+                    right_end = {size = {4, 4}, position = {341, 0}},
+                    left_end = {size = {4, 4}, position = {336, 0}},
+                    horizontal_line = {size = {1, 4}, position = {340, 0}},
+                    border_width = 4
+                }
+            },
+            filter_scroll_pane = {
+                bottom_margin = 4,
+                left_padding = 12,
+                parent = 'scroll_pane',
+                top_margin = 4,
+                vertically_stretchable = 'stretch_and_expand',
+                right_padding = 12,
+                extra_padding_when_activated = 0,
+                type = 'scroll_pane_style',
+                background_graphical_set = {},
+                horizontally_stretchable = 'stretch_and_expand',
+                extra_right_padding_when_activated = -12,
+                dont_force_clipping_rect_for_contents = true,
+                graphical_set = {
+                    shadow = {
+                        draw_type = 'inner',
+                        bottom = {size = {1, 8}, position = {191, 137}},
+                        tint = 0,
+                        top = {size = {1, 8}, position = {191, 128}},
+                        scale = 0.5
+                    },
+                    base = {
+                        draw_type = 'outer',
+                        bottom = {size = {1, 8}, position = {76, 0}},
+                        top = {size = {1, 8}, position = {76, 9}}
+                    }
+                }
+            },
+            stretchable_textfield = {horizontally_stretchable = 'on', type = 'textbox_style', maximal_width = 0},
+            main_menu_version_label = {font = 'default-game', type = 'label_style'},
+            crafting_queue_slot = {
+                pie_progress_color = {0.98, 0.66, 0.22, 0.5},
+                parent = 'compact_slot',
+                type = 'button_style'
+            },
+            invisible_frame_with_title_for_inventory = {
+                type = 'frame_style',
+                vertical_flow_style = {horizontal_align = 'center', type = 'vertical_flow_style', vertical_spacing = 0},
+                header_flow_style = {
+                    left_padding = 12,
+                    type = 'horizontal_flow_style',
+                    top_padding = 8,
+                    right_padding = 12,
+                    bottom_padding = 8
+                },
+                horizontal_flow_style = {horizontal_spacing = 0, type = 'horizontal_flow_style'},
+                parent = 'invisible_frame_with_title'
+            },
+            logistics_slot_table = {vertical_spacing = 0, type = 'table_style', horizontal_spacing = 0, padding = 0},
+            map_generator_13_notch_slider = {
+                parent = 'map_generator_notched_slider',
+                type = 'slider_style',
+                width = 108
+            },
+            filter_group_tab = {
+                left_padding = 8,
+                left_edge_selected_graphical_set = {
+                    shadow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {
+                        left_bottom = {size = {8, 8}, position = {68, 4}},
+                        bottom = {size = {1, 8}, position = {144, 9}},
+                        top = {size = {1, 8}, position = {76, 0}},
+                        right = {size = {8, 1}, position = {77, 8}},
+                        left_top = {size = {8, 8}, position = {68, 0}},
+                        right_bottom = {size = {8, 8}, position = {145, 9}},
+                        left = {size = {8, 1}, position = {68, 8}},
+                        right_top = {size = {8, 8}, position = {77, 0}},
+                        center = {size = {1, 1}, position = {76, 8}}
+                    }
+                },
+                selected_graphical_set = {
+                    shadow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {
+                        left_bottom = {size = {8, 8}, position = {136, 9}},
+                        bottom = {size = {1, 8}, position = {144, 9}},
+                        top = {size = {1, 8}, position = {76, 0}},
+                        right = {size = {8, 1}, position = {77, 8}},
+                        left_top = {size = {8, 8}, position = {68, 0}},
+                        right_bottom = {size = {8, 8}, position = {145, 9}},
+                        left = {size = {8, 1}, position = {68, 8}},
+                        right_top = {size = {8, 8}, position = {77, 0}},
+                        center = {size = {1, 1}, position = {76, 8}}
+                    }
+                },
+                horizontally_stretchable = 'on',
+                disabled_graphical_set = {
+                    shadow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {position = {208, 17}, corner_size = 8}
+                },
+                height = 64,
+                press_graphical_set = {
+                    shadow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {position = {51, 17}, corner_size = 8}
+                },
+                override_graphics_on_edges = true,
+                left_click_sound = {{filename = '__core__/sound/gui-square-button-large.ogg', volume = 1}},
+                right_padding = 8,
+                right_edge_selected_graphical_set = {
+                    shadow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {
+                        left_bottom = {size = {8, 8}, position = {136, 9}},
+                        bottom = {size = {1, 8}, position = {144, 9}},
+                        top = {size = {1, 8}, position = {76, 0}},
+                        right = {size = {8, 1}, position = {77, 8}},
+                        left_top = {size = {8, 8}, position = {68, 0}},
+                        right_bottom = {size = {8, 1}, position = {77, 8}},
+                        left = {size = {8, 1}, position = {68, 8}},
+                        right_top = {size = {8, 8}, position = {77, 0}},
+                        center = {size = {1, 1}, position = {76, 8}}
+                    }
+                },
+                type = 'tab_style',
+                top_padding = 8,
+                minimal_width = 64,
+                hover_graphical_set = {
+                    glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {
+                        left_bottom = {size = {8, 1}, position = {34, 25}},
+                        bottom = {size = {1, 1}, position = {42, 25}},
+                        top = {size = {1, 8}, position = {42, 17}},
+                        right = {size = {8, 1}, position = {43, 25}},
+                        left_top = {size = {8, 8}, position = {34, 17}},
+                        right_bottom = {size = {8, 1}, position = {43, 25}},
+                        left = {size = {8, 1}, position = {34, 25}},
+                        right_top = {size = {8, 8}, position = {43, 17}},
+                        center = {size = {1, 1}, position = {42, 25}}
+                    }
+                },
+                default_graphical_set = {
+                    shadow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                    base = {
+                        left_bottom = {size = {8, 1}, position = {0, 25}},
+                        bottom = {size = {1, 1}, position = {8, 25}},
+                        top = {size = {1, 8}, position = {8, 17}},
+                        right = {size = {8, 1}, position = {9, 25}},
+                        left_top = {size = {8, 8}, position = {0, 17}},
+                        right_bottom = {size = {8, 1}, position = {9, 25}},
+                        left = {size = {8, 1}, position = {0, 25}},
+                        right_top = {size = {8, 8}, position = {9, 17}},
+                        center = {size = {1, 1}, position = {8, 25}}
+                    }
+                },
+                bottom_padding = 8
+            },
+            red_confirm_button = {
+                clicked_graphical_set = {
+                    base = {
+                        right = {size = {24, 64}, position = {312, 360}},
+                        left_bottom = {size = 8, position = {187, 26}},
+                        left = {size = {8, 1}, position = {187, 25}},
+                        left_top = {size = 8, position = {187, 17}},
+                        center = {size = {1, 64}, position = {312, 360}}
+                    }
+                },
+                left_click_sound = {{filename = '__core__/sound/gui-red-confirm.ogg', volume = 0.7}},
+                disabled_font_color = {0.5, 0.5, 0.5},
+                type = 'button_style',
+                disabled_graphical_set = {
+                    glow = {
+                        right = {size = {32, 80}, position = {336, 424}},
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -12,
+                        left_top = {size = 8, position = {200, 128}},
+                        left = {size = {8, 1}, position = {200, 136}},
+                        left_bottom = {size = 8, position = {200, 137}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {24, 64}, position = {120, 360}},
+                        left_bottom = {size = 8, position = {153, 26}},
+                        left = {size = {8, 1}, position = {153, 25}},
+                        left_top = {size = 8, position = {153, 17}},
+                        center = {size = {1, 64}, position = {120, 360}}
+                    }
+                },
+                parent = 'dialog_button',
+                horizontal_align = 'right',
+                hovered_graphical_set = {
+                    glow = {
+                        right = {size = {32, 80}, position = {336, 424}},
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -12,
+                        left_top = {size = 8, position = {200, 128}},
+                        left = {size = {8, 1}, position = {200, 136}},
+                        left_bottom = {size = 8, position = {200, 137}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {24, 64}, position = {216, 360}},
+                        left_bottom = {size = 8, position = {170, 26}},
+                        left = {size = {8, 1}, position = {170, 25}},
+                        left_top = {size = 8, position = {170, 17}},
+                        center = {size = {1, 64}, position = {216, 360}}
+                    }
+                },
+                default_graphical_set = {
+                    shadow = {
+                        right = {size = {32, 80}, position = {336, 424}},
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -12,
+                        left_top = {size = 8, position = {200, 128}},
+                        left = {size = {8, 1}, position = {200, 136}},
+                        left_bottom = {size = 8, position = {200, 137}},
+                        center = {size = {1, 80}, position = {336, 424}}
+                    },
+                    base = {
+                        right = {size = {24, 64}, position = {24, 360}},
+                        left_bottom = {size = 8, position = {136, 26}},
+                        left = {size = {8, 1}, position = {136, 25}},
+                        left_top = {size = 8, position = {136, 17}},
+                        center = {size = {1, 64}, position = {24, 360}}
+                    }
+                }
+            },
+            titlebar_search_textfield = {top_margin = -2, type = 'textbox_style'},
+            filter_tabbed_pane = {
+                tab_content_frame = {
+                    left_padding = 0,
+                    type = 'frame_style',
+                    top_padding = 4,
+                    right_padding = 0,
+                    graphical_set = 0,
+                    bottom_padding = 4
+                },
+                parent = 'tabbed_pane',
+                type = 'tabbed_pane_style',
+                tab_container = {
+                    left_padding = 0,
+                    horizontally_stretchable = 'on',
+                    horizontal_spacing = 0,
+                    type = 'horizontal_flow_style',
+                    right_padding = 0
+                }
+            },
+            mini_button_aligned_to_text_vertically = {
+                size = 16,
+                type = 'button_style',
+                padding = 0,
+                top_margin = 3,
+                left_click_sound = {{filename = '__core__/sound/gui-button-mini.ogg', volume = 1}}
+            },
+            list_box_in_shallow_frame_scroll_pane = {
+                parent = 'list_box_scroll_pane',
+                type = 'scroll_pane_style',
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {85, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = 1, position = {42, 8}}
+                    }
+                }
+            },
+            label_under_widget = {
+                bottom_margin = 4,
+                height = 40,
+                single_line = false,
+                top_margin = -4,
+                type = 'label_style'
+            },
+            frame_subheading_label = {
+                type = 'label_style',
+                parent = 'description_label',
+                font = 'default',
+                top_padding = 4
+            },
+            subpanel_frame = {
+                left_padding = 4,
+                type = 'frame_style',
+                right_padding = 4,
+                graphical_set = {base = {position = {68, 0}, corner_size = 8}},
+                bottom_padding = 4
+            },
+            inventory_frame = {
+                use_header_filler = false,
+                parent = 'inside_shallow_frame',
+                vertically_stretchable = 'on',
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                top_padding = 12,
+                title_style = {type = 'label_style', parent = 'heading_3_label'},
+                header_flow_style = {
+                    left_padding = 12,
+                    type = 'horizontal_flow_style',
+                    top_padding = 8,
+                    right_padding = 12,
+                    bottom_padding = 8
+                },
+                vertical_flow_style = {
+                    vertical_spacing = 0,
+                    type = 'vertical_flow_style',
+                    vertically_stretchable = 'on'
+                },
+                bottom_padding = 12
+            },
+            invalid_value_textfield = {
+                default_background = {shadow = 0, base = {position = {0, 913}, corner_size = 8}},
+                type = 'textbox_style',
+                active_background = {
+                    shadow = {
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        position = {240, 783},
+                        left_outer_border_shift = 4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {0, 913}, corner_size = 8}
+                }
+            },
+            vertical_scrollbar = {
+                width = 12,
+                thumb_button_style = {
+                    type = 'button_style',
+                    width = 10,
+                    left_click_sound = {},
+                    clicked_graphical_set = {
+                        shadow = 0,
+                        base = {
+                            top = {size = {20, 7}, position = {40, 48}},
+                            center_tiling_vertical = true,
+                            bottom = {size = {20, 7}, position = {40, 63}},
+                            center = {size = {20, 8}, position = {40, 55}}
+                        }
+                    },
+                    hovered_graphical_set = {
+                        glow = {corner_size = 8, tint = 0, position = {200, 128}, draw_type = 'outer', scale = 0.5},
+                        base = {
+                            top = {size = {20, 7}, position = {20, 48}},
+                            center_tiling_vertical = true,
+                            bottom = {size = {20, 7}, position = {20, 63}},
+                            center = {size = {20, 8}, position = {20, 55}}
+                        }
+                    },
+                    default_graphical_set = {
+                        shadow = 0,
+                        base = {
+                            top = {size = {20, 7}, position = {0, 48}},
+                            center_tiling_vertical = true,
+                            bottom = {size = {20, 7}, position = {0, 63}},
+                            center = {size = {20, 8}, position = {0, 55}}
+                        }
+                    }
+                },
+                type = 'vertical_scrollbar_style',
+                background_graphical_set = {position = {0, 72}, corner_size = 8}
+            },
+            completed_tutorial_card_slot_frame = {
+                parent = 'suggested_tutorial_card_slot_frame',
+                type = 'frame_style',
+                border = {
+                    bottom_left_corner = {size = {8, 8}, position = {32, 1016}},
+                    bottom_right_corner = {size = {8, 8}, position = {24, 1016}},
+                    border_width = 8,
+                    top_left_coner = {size = {8, 8}, position = {40, 1016}},
+                    vertical_line = {size = {8, 1}, position = {0, 1016}},
+                    horizontal_line = {size = {1, 8}, position = {8, 1016}},
+                    top_right_corner = {size = {8, 8}, position = {16, 1016}}
+                }
+            },
+            heading_3_label_yellow = {font_color = 0, type = 'label_style', parent = 'heading_3_label'},
+            heading_3_label = {type = 'label_style', font_color = 0, font = 'heading-3', parent = 'label'},
+            frame_without_left_side = {
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = {
+                        right_bottom = {size = {8, 8}, position = {209, 137}},
+                        bottom = {size = {1, 8}, position = {208, 137}},
+                        tint = 0,
+                        scale = 0.5,
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        top = {size = {1, 8}, position = {208, 128}},
+                        right_top = {size = {8, 8}, position = {209, 128}},
+                        center = {size = {1, 1}, position = {208, 136}}
+                    },
+                    base = {
+                        right = {size = {8, 1}, position = {9, 8}},
+                        right_bottom = {size = {8, 8}, position = {9, 9}},
+                        bottom = {size = {1, 8}, position = {8, 9}},
+                        top = {size = {1, 8}, position = {8, 0}},
+                        right_top = {size = {8, 8}, position = {9, 0}},
+                        center = {size = {1, 1}, position = {8, 8}}
+                    }
+                }
+            },
+            mods_table = {
+                apply_row_graphical_set_per_column = true,
+                selected_graphical_set = {position = {51, 17}, corner_size = 8},
+                clicked_graphical_set = {position = {51, 17}, corner_size = 8},
+                type = 'table_style',
+                left_cell_padding = 8,
+                horizontal_spacing = 0,
+                selected_hovered_graphical_set = {position = {369, 17}, corner_size = 8},
+                bottom_cell_padding = 2,
+                selected_clicked_graphical_set = {position = {352, 17}, corner_size = 8},
+                default_row_graphical_set = {position = {208, 17}, corner_size = 8},
+                hovered_graphical_set = {position = {34, 17}, corner_size = 8},
+                right_cell_padding = 8,
+                top_cell_padding = 2
+            },
+            green_circuit_network_content_slot = {
+                parent = 'compact_slot',
+                type = 'button_style',
+                default_graphical_set = {
+                    size = 36,
+                    border = 1,
+                    filename = '__core__/graphics/gui.png',
+                    position = {111, 108},
+                    scale = 1
+                }
+            },
+            graph = {
+                horizontal_labels_margin = 24,
+                vertical_labels_margin = 36,
+                horizontal_label_style = {
+                    right_padding = 0,
+                    font_color = {100, 100, 100},
+                    type = 'label_style',
+                    parent = 'label',
+                    font = 'default-small'
+                },
+                selection_dot_radius = 3,
+                minimal_vertical_label_spacing = 22,
+                graph_top_margin = 12,
+                background_color = {g = 0.05, r = 0.05, a = 0.9, b = 0.05},
+                height = 200,
+                vertical_label_style = {
+                    left_padding = 0,
+                    font_color = {100, 100, 100},
+                    type = 'label_style',
+                    parent = 'label',
+                    font = 'default-small',
+                    right_padding = 4
+                },
+                graph_right_margin = 12,
+                data_line_highlight_distance = 20,
+                line_colors = {
+                    {0, 109, 255}, {255, 100, 0}, {80, 178, 14}, {204, 25, 40}, {212, 158, 27}, {232, 0, 213},
+                    {0, 159, 173}, {133, 69, 40}, {137, 0, 161}, {83, 117, 59}, {224, 127, 126}, {142, 106, 169},
+                    {98, 172, 101}, {73, 123, 155}, {134, 129, 78}, {133, 104, 49}, {208, 104, 0}, {145, 75, 75}
+                },
+                grid_lines_color = {g = 0.15, r = 0.15, b = 0.15},
+                natural_width = 550,
+                minimal_horizontal_label_spacing = 25,
+                guide_lines_color = {g = 0.9, r = 0.9, b = 0.9},
+                type = 'graph_style'
+            },
+            scroll_pane_with_dark_background_under_subheader = {
+                padding = 4,
+                extra_padding_when_activated = 0,
+                type = 'scroll_pane_style',
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        corner_size = 8,
+                        top = {},
+                        draw_type = 'outer',
+                        position = {17, 0},
+                        left_top = {},
+                        right_top = {},
+                        center = {size = 1, position = {42, 8}}
+                    }
+                }
+            },
+            bonus_list_scroll_pane = {
+                extra_padding_when_activated = 0,
+                type = 'scroll_pane_style',
+                graphical_set = {shadow = 0, base = {position = {34, 0}, corner_size = 8}}
+            },
+            heading_1_label = {type = 'label_style', font_color = 0, font = 'heading-1', single_line = true},
+            frame_with_even_paddings = {type = 'frame_style', top_padding = 8},
+            blurry_scroll_pane = {
+                extra_padding_when_activated = -4,
+                type = 'scroll_pane_style',
+                padding = 8,
+                vertical_scrollbar_style = {
+                    type = 'vertical_scrollbar_style',
+                    background_graphical_set = {
+                        position = {0, 72},
+                        corner_size = 8,
+                        blend_mode = 'multiplicative-with-alpha',
+                        opacity = 0.7
+                    }
+                },
+                graphical_set = {shadow = 0, base = {}}
+            },
+            blueprint_record_selection_background_frame = {
+                minimal_height = 240,
+                minimal_width = 480,
+                background_graphical_set = {
+                    position = {282, 17},
+                    corner_size = 8,
+                    overall_tiling_horizontal_size = 72,
+                    overall_tiling_vertical_spacing = 48,
+                    overall_tiling_vertical_padding = 40,
+                    overall_tiling_horizontal_padding = 4,
+                    overall_tiling_horizontal_spacing = 8,
+                    overall_tiling_vertical_size = 72
+                },
+                parent = 'slot_container_frame',
+                type = 'frame_style',
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {17, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = {1, 1}, position = {42, 8}}
+                    }
+                }
+            },
+            train_station_list_box = {
+                minimal_height = 130,
+                minimal_width = 300,
+                maximal_width = 1000,
+                maximal_height = 400,
+                type = 'list_box_style'
+            },
+            bonus_progressbar = {color = {0.8, 0.8, 0}, parent = 'production_progressbar', type = 'progressbar_style'},
+            frame_tab = {
+                height = 32,
+                top_padding = 6,
+                selected_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        tint = 0,
+                        scale = 0.5,
+                        right = {size = {8, 1}, position = {209, 136}},
+                        draw_type = 'outer',
+                        left_top = {size = 16, position = {216, 0}},
+                        top = {size = {1, 8}, position = {208, 128}},
+                        right_outer_border_shift = -4,
+                        left = {size = {8, 1}, position = {200, 136}},
+                        right_top = {size = 16, position = {232, 0}},
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {448, 103}, corner_size = 8}
+                },
+                parent = 'tab',
+                type = 'tab_style',
+                bottom_padding = 6
+            },
+            quick_bar_page_button = {
+                default_font_color = 0,
+                padding = 0,
+                clicked_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {363, 744}, corner_size = 8}
+                },
+                font = 'default-bold',
+                left_click_sound = {{filename = '__core__/sound/gui-square-button.ogg', volume = 1}},
+                size = 40,
+                type = 'button_style',
+                disabled_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {329, 744}, corner_size = 8}
+                },
+                parent = 'button',
+                hovered_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {346, 744}, corner_size = 8},
+                    glow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    }
+                },
+                margin = 0,
+                default_graphical_set = {
+                    shadow = {
+                        left_outer_border_shift = 4,
+                        position = {280, 736},
+                        scale = 0.5,
+                        bottom_outer_border_shift = -4,
+                        corner_size = 16,
+                        draw_type = 'outer',
+                        tint = 0,
+                        right_outer_border_shift = -4,
+                        top_outer_border_shift = 4
+                    },
+                    base = {position = {312, 744}, corner_size = 8}
+                }
+            },
+            flow = {max_on_row = 0, vertical_spacing = 4, horizontal_spacing = 4, type = 'flow_style'},
+            list_box_scroll_pane = {
+                extra_padding_when_activated = 0,
+                type = 'scroll_pane_style',
+                background_graphical_set = {
+                    corner_size = 8,
+                    overall_tiling_vertical_spacing = 8,
+                    position = {282, 17},
+                    overall_tiling_horizontal_padding = 4,
+                    overall_tiling_vertical_padding = 4,
+                    overall_tiling_vertical_size = 20
+                },
+                padding = 0,
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {17, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = 1, position = {42, 8}}
+                    }
+                }
+            },
+            yellow_label = {type = 'label_style', font_color = 0},
+            logistic_slot_button = {type = 'button_style', parent = 'slot_button'},
+            filter_frame = {
+                left_padding = 0,
+                horizontally_stretchable = 'on',
+                type = 'frame_style',
+                top_padding = 6,
+                vertically_stretchable = 'on',
+                right_padding = 0,
+                graphical_set = 0,
+                bottom_padding = 4
+            },
+            equipment_grid_scroll_pane = {type = 'scroll_pane_style', extra_padding_when_activated = 0},
+            quick_bar_naked_frame = {
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                parent = 'naked_frame',
+                horizontal_flow_style = {horizontal_spacing = 0, type = 'horizontal_flow_style'},
+                type = 'frame_style'
+            },
+            entity_button_base = {size = 100, type = 'empty_widget_style'},
+            empty_widget = {type = 'empty_widget_style', graphical_set = {}},
+            electric_gui_search_textfield = {parent = 'titlebar_search_textfield', type = 'textbox_style', width = 328},
+            confirm_in_load_game_button = {
+                horizontally_squashable = 'on',
+                parent = 'confirm_button',
+                type = 'button_style',
+                natural_width = 300
+            },
+            bold_red_label = {font_color = {1, 0, 0}, type = 'label_style', parent = 'bold_label'},
+            mod_info_frame = {type = 'frame_style', graphical_set = {base = {position = {68, 0}, corner_size = 8}}},
+            dialog_button = {
+                default_font_color = 0,
+                height = 32,
+                hovered_font_color = 0,
+                parent = 'button',
+                font = 'default-dialog-button',
+                disabled_font_color = {0.5, 0.5, 0.5},
+                clicked_font_color = {28, 28, 28},
+                type = 'button_style',
+                minimal_width = 112,
+                bottom_padding = 2
+            },
+            deep_frame_in_shallow_frame = {
+                type = 'frame_style',
+                padding = 0,
+                parent = 'frame',
+                vertical_flow_style = {type = 'vertical_flow_style', vertical_spacing = 0},
+                graphical_set = {
+                    shadow = 0,
+                    base = {
+                        position = {85, 0},
+                        corner_size = 8,
+                        draw_type = 'outer',
+                        center = {size = {1, 1}, position = {42, 8}}
+                    }
+                }
+            },
+            deconstruction_planner_tabbed_pane = {
+                type = 'tabbed_pane_style',
+                padding = 0,
+                vertical_spacing = 0,
+                parent = 'tabbed_pane',
+                top_margin = 12,
+                tab_content_frame = {
+                    left_padding = 12,
+                    type = 'frame_style',
+                    top_padding = 4,
+                    right_padding = 12,
+                    graphical_set = 0,
+                    bottom_padding = 8
+                }
+            },
+            machine_right_part_vertical_flow = {type = 'vertical_flow_style', vertical_spacing = 4},
+            black_label_with_left_padding = {left_padding = 4, font_color = {0, 0, 0}, type = 'label_style'},
+            mod_gui_button = {height = 36, padding = 1, parent = 'button', type = 'button_style', minimal_width = 36},
+            console_input_textfield = {
+                left_padding = 3,
+                selection_background_color = {241, 190, 100},
+                font_color = 0,
+                selected_rich_text_highlight_error_color = {g = 0, r = 255, b = 0},
+                default_background = {
+                    size = 1,
+                    top_border = 2,
+                    filename = '__core__/graphics/gui.png',
+                    bottom_border = 2,
+                    position = {8, 16},
+                    scale = 1
+                },
+                rich_text_highlight_error_color = {g = 0, r = 255, b = 0},
+                right_padding = 3,
+                font = 'default-game',
+                active_background = {
+                    size = 1,
+                    top_border = 2,
+                    filename = '__core__/graphics/gui.png',
+                    bottom_border = 2,
+                    position = {8, 16},
+                    scale = 1
+                },
+                selected_rich_text_highlight_warning_color = {g = 255, r = 255, b = 0},
+                selected_rich_text_highlight_ok_color = {g = 255, r = 0, b = 0},
+                type = 'textbox_style',
+                top_padding = 0,
+                rich_text_setting = 'highlight',
+                rich_text_highlight_warning_color = {g = 255, r = 255, b = 0},
+                rich_text_highlight_ok_color = {g = 255, r = 0, b = 0},
+                bottom_padding = 0
+            },
+            editor_lua_textbox = {
+                horizontally_stretchable = 'on',
+                height = 300,
+                maximal_width = 600,
+                type = 'textbox_style',
+                parent = 'textbox'
+            },
+            info_label = {type = 'label_style', font_color = {128, 206, 240}, font = 'default', single_line = false},
+            compact_red_slot = {
+                type = 'button_style',
+                parent = 'compact_slot',
+                left_click_sound = {{filename = '__core__/sound/gui-slot-unavailable.ogg', volume = 1}},
+                clicked_graphical_set = {
+                    size = 36,
+                    border = 1,
+                    filename = '__core__/graphics/gui.png',
+                    position = {185, 36},
+                    scale = 1
+                },
+                hovered_graphical_set = {
+                    size = 36,
+                    border = 1,
+                    filename = '__core__/graphics/gui.png',
+                    position = {148, 36},
+                    scale = 1
+                },
+                default_graphical_set = {
+                    size = 36,
+                    border = 1,
+                    filename = '__core__/graphics/gui.png',
+                    position = {111, 36},
+                    scale = 1
+                }
+            },
+            character_logistics_frame = {
+                left_padding = 0,
+                type = 'frame_style',
+                top_padding = 0,
+                header_flow_style = {top_padding = 8, type = 'horizontal_flow_style', bottom_padding = 4},
+                parent = 'inventory_frame'
+            },
+            captionless_frame = {parent = 'frame', type = 'frame_style', padding = 3},
+            draggable_space_with_no_left_margin = {
+                left_margin = 0,
+                type = 'empty_widget_style',
+                parent = 'draggable_space'
+            },
+            bold_label = {font = 'default-bold', type = 'label_style'},
+            bold_green_label = {font_color = {0, 1, 0}, type = 'label_style', parent = 'bold_label'},
+            b_inner_frame_for_subheader_with_paddings = {
+                left_padding = 4,
+                type = 'frame_style',
+                top_padding = 0,
+                parent = 'b_inner_frame',
+                right_padding = 4
+            }
+        }
+    };
+    return _;
+end

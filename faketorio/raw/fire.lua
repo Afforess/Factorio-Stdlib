@@ -1,1 +1,4338 @@
-do local _={["acid-splash-fire-worm-behemoth"]={emissions_per_second=0,limit_overlapping_particles=true,render_layer="lower-object-above-shadow",name="acid-splash-fire-worm-behemoth",add_fuel_cooldown=10,fade_in_duration=1,secondary_picture_fade_out_duration=60,lifetime_increase_cooldown=4,burnt_patch_lifetime=0,damage_multiplier_increase_per_added_fuel=1,damage_per_tick={amount=0,type="acid"},pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.6,height=224,frame_count=26,width=210,shift={-0.45,-0.3},direction_count=1,line_length=8},scale=1.2,height=116,frame_count=26,width=106,shift={-0.45,-0.375},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.6,height=188,frame_count=26,width=266,shift={0.075,0.075},line_length=8,direction_count=1,draw_as_shadow=true},scale=1.2,height=98,frame_count=26,width=134,shift={0.075,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.6,height=150,frame_count=29,width=174,shift={-0.3375,-0.6375},direction_count=1,line_length=8},scale=1.2,height=76,frame_count=29,width=88,shift={-0.375,-0.675},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.6,height=266,frame_count=29,width=238,shift={0.225,1.0875},line_length=8,direction_count=1,draw_as_shadow=true},scale=1.2,height=136,frame_count=29,width=120,shift={0.225,1.05},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.6,height=208,frame_count=29,width=236,shift={0.825,-0.6},direction_count=1,line_length=8},scale=1.2,height=104,frame_count=29,width=118,shift={0.825,-0.6},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.6,height=140,frame_count=29,width=214,shift={0.6375,0.075},line_length=8,direction_count=1,draw_as_shadow=true},scale=1.2,height=70,frame_count=29,width=110,shift={0.6,0.075},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.6,height=154,frame_count=24,width=252,shift={0.6375,-0.7125},direction_count=1,line_length=8},scale=1.2,height=80,frame_count=24,width=128,shift={0.6,-0.75},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.6,height=160,frame_count=24,width=248,shift={0.675,-0.6},line_length=8,direction_count=1,draw_as_shadow=true},scale=1.2,height=80,frame_count=24,width=124,shift={0.675,-0.6},line_length=8,direction_count=1,draw_as_shadow=true}}}},initial_render_layer="object",secondary_picture_fade_out_start=30,maximum_spread_count=100,damage_multiplier_decrease_per_tick=0.005,uses_alternative_behavior=true,type="fire",flags={"placeable-off-grid","not-on-map"},on_damage_tick_effect={action_delivery={type="instant",target_effects={{sticker="acid-sticker-behemoth",type="create-sticker",show_in_tooltip=true},{apply_damage_to_trees=false,type="damage",damage={amount=1.2,type="acid"}}}},type="direct",trigger_target_mask={"ground-unit"},force="enemy",ignore_collision_condition=true,filter_enabled=true},initial_lifetime=1920,spread_delay_deviation=180,delay_between_initial_flames=10,spread_delay=300,maximum_damage_multiplier=3,initial_flame_count=1,fade_out_duration=30,secondary_pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.39,height=224,frame_count=26,width=210,shift={-0.2925,-0.195},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.78,height=116,frame_count=26,width=106,shift={-0.2925,-0.24375},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.39,height=188,frame_count=26,width=266,shift={0.04875,0.04875},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.78,height=98,frame_count=26,width=134,shift={0.04875,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.39,height=150,frame_count=29,width=174,shift={-0.219375,-0.414375},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.78,height=76,frame_count=29,width=88,shift={-0.24375,-0.43875},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.39,height=266,frame_count=29,width=238,shift={0.14625,0.706875},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.78,height=136,frame_count=29,width=120,shift={0.14625,0.6825},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.39,height=208,frame_count=29,width=236,shift={0.53625,-0.39},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.78,height=104,frame_count=29,width=118,shift={0.53625,-0.39},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.39,height=140,frame_count=29,width=214,shift={0.414375,0.04875},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.78,height=70,frame_count=29,width=110,shift={0.39,0.04875},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.39,height=154,frame_count=24,width=252,shift={0.414375,-0.463125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.78,height=80,frame_count=24,width=128,shift={0.39,-0.4875},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.39,height=160,frame_count=24,width=248,shift={0.43875,-0.39},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.78,height=80,frame_count=24,width=124,shift={0.43875,-0.39},line_length=8,direction_count=1,draw_as_shadow=true}}}},particle_alpha_blend_duration=300,lifetime_increase_by=0,particle_alpha=0.6,maximum_lifetime=1800,localised_name={"entity-name.acid-splash"},secondary_render_layer="higher-object-above"},["fire-flame-on-tree"]={spawn_entity="fire-flame-on-tree",emissions_per_second=0.005,maximum_spread_count=100,spread_delay_deviation=180,light={size=20,intensity=1},name="fire-flame-on-tree",tree_dying_factor=0.8,fade_in_duration=120,flags={"placeable-off-grid","not-on-map"},flame_alpha_deviation=0.05,small_tree_fire_pictures={{flags={"compressed"},filename="__base__/graphics/entity/fire-flame/tree-fire-flame-01-a.png",blend_mode="additive",width=38,scale=0.525,axially_symmetrical=false,height=110,frame_count=32,line_length=8,shift={-0.01640625,-0.7875},tint={r=1,a=1,b=1,g=1},animation_speed=0.5,direction_count=1},{filename="__base__/graphics/entity/fire-flame/tree-fire-flame-01-b.png",blend_mode="additive",width=39,scale=0.525,axially_symmetrical=false,height=111,frame_count=32,line_length=8,shift={-0.041015625,-0.7957005},animation_speed=0.5,direction_count=1},{filename="__base__/graphics/entity/fire-flame/tree-fire-flame-01-c.png",blend_mode="additive",width=44,scale=0.525,axially_symmetrical=false,height=108,frame_count=32,line_length=8,shift={-0.08203125,-0.7875},animation_speed=0.5,direction_count=1},{filename="__base__/graphics/entity/fire-flame/tree-fire-flame-03-a.png",blend_mode="additive",width=38,scale=0.525,axially_symmetrical=false,height=110,frame_count=23,line_length=8,shift={-0.01640625,-0.7875},animation_speed=0.5,direction_count=1},{filename="__base__/graphics/entity/fire-flame/tree-fire-flame-03-b.png",blend_mode="additive",width=34,scale=0.525,axially_symmetrical=false,height=98,frame_count=23,line_length=8,shift={-0.01640625,-0.70546875},animation_speed=0.5,direction_count=1},{filename="__base__/graphics/entity/fire-flame/tree-fire-flame-03-c.png",blend_mode="additive",width=39,scale=0.525,axially_symmetrical=false,height=111,frame_count=23,line_length=8,shift={-0.041015625,-0.7957005},animation_speed=0.5,direction_count=1}},smoke_fade_in_duration=100,delay_between_initial_flames=20,working_sound={sound={filename="__base__/sound/fire-1.ogg"},max_sounds_per_type=2},type="fire",spread_delay=300,fade_out_duration=100,damage_per_tick={amount=0.58333333333333,type="fire"},smoke_source_pictures={{filename="__base__/graphics/entity/fire-flame/fire-smoke-source-1.png",scale=0.6,height=138,frame_count=31,width=101,shift={-0.065625,-0.7125},tint={r=0.75,a=0.75,b=0.75,g=0.75},animation_speed=0.5,line_length=8},{filename="__base__/graphics/entity/fire-flame/fire-smoke-source-2.png",scale=0.6,height=138,frame_count=31,width=99,shift={-0.121875,-0.73125},tint={r=0.75,a=0.75,b=0.75,g=0.75},animation_speed=0.5,line_length=8}},flame_alpha=0.35,smoke_fade_out_duration=130,pictures={{flags={"compressed"},filename="__base__/graphics/entity/fire-flame/fire-flame-13.png",blend_mode="additive",width=60,scale=0.625,axially_symmetrical=false,height=118,frame_count=25,line_length=8,shift={-0.0244140625,-0.56640625},tint={r=1,a=1,b=1,g=1},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-12.png",blend_mode="additive",width=63,scale=0.625,axially_symmetrical=false,height=116,frame_count=25,line_length=8,shift={-0.009765625,-0.571290625},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-11.png",blend_mode="additive",width=61,scale=0.625,axially_symmetrical=false,height=122,frame_count=25,line_length=8,shift={-0.0048828125,-0.56640625},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-10.png",blend_mode="additive",width=65,scale=0.625,axially_symmetrical=false,height=108,frame_count=25,line_length=8,shift={-0.0390625,-0.405275},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-09.png",blend_mode="additive",width=64,scale=0.625,axially_symmetrical=false,height=101,frame_count=25,line_length=8,shift={-0.01953125,-0.434571875},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-08.png",blend_mode="additive",width=50,scale=0.625,axially_symmetrical=false,height=98,frame_count=32,line_length=8,shift={-0.0341796875,-0.4834},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-07.png",blend_mode="additive",width=54,scale=0.625,axially_symmetrical=false,height=84,frame_count=32,line_length=8,shift={0.009765625,-0.400390625},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-06.png",blend_mode="additive",width=65,scale=0.625,axially_symmetrical=false,height=92,frame_count=32,line_length=8,shift={0,-0.5224625},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-05.png",blend_mode="additive",width=59,scale=0.625,axially_symmetrical=false,height=103,frame_count=32,line_length=8,shift={0.01953125,-0.551759375},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-04.png",blend_mode="additive",width=67,scale=0.625,axially_symmetrical=false,height=130,frame_count=32,line_length=8,shift={0.009765625,-0.693359375},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-03.png",blend_mode="additive",width=74,scale=0.625,axially_symmetrical=false,height=117,frame_count=32,line_length=8,shift={0.029296875,-0.615234375},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-02.png",blend_mode="additive",width=74,scale=0.625,axially_symmetrical=false,height=114,frame_count=32,line_length=8,shift={0.0048828125,-0.60546875},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-01.png",blend_mode="additive",width=66,scale=0.625,axially_symmetrical=false,height=119,frame_count=32,line_length=8,shift={-0.0439453125,-0.649415625},animation_speed=1,direction_count=1}},localised_name={"entity-name.fire-flame"},smoke={{position={0,-0.8},height=-0.5,starting_vertical_speed=0.008,name="fire-smoke-without-glow",deviation={0.5,0.5},starting_vertical_speed_deviation=0.05,starting_frame_deviation=60,frequency=0.125}}},["fire-flame"]={light={size=20,intensity=1},type="fire",delay_between_initial_flames=10,spawn_entity="fire-flame-on-tree",burnt_patch_alpha_variations={{tile="stone-path",alpha=0.26},{tile="concrete",alpha=0.24}},maximum_spread_count=100,spread_delay_deviation=180,smoke_source_pictures={{filename="__base__/graphics/entity/fire-flame/fire-smoke-source-1.png",frame_count=31,height=138,shift={-0.109375,-1.1875},line_length=8,animation_speed=0.5,width=101},{filename="__base__/graphics/entity/fire-flame/fire-smoke-source-2.png",frame_count=31,height=138,shift={-0.203125,-1.21875},line_length=8,animation_speed=0.5,width=99}},smoke={{position={0,-0.8},vertical_speed_slowdown=0.99,height=-0.5,starting_vertical_speed=0.05,name="fire-smoke",deviation={0.5,0.5},starting_vertical_speed_deviation=0.005,starting_frame_deviation=60,frequency=0.125}},damage_multiplier_decrease_per_tick=0.005,emissions_per_second=0.005,name="fire-flame",on_fuel_added_action={type="direct",action_delivery={type="instant",target_effects={{smoke_name="fire-smoke-on-adding-fuel",offset_deviation={{-0.5,-0.5},{0.5,0.5}},type="create-trivial-smoke",speed_from_center=0.01}}}},maximum_lifetime=1800,add_fuel_cooldown=10,fade_in_duration=30,flags={"placeable-off-grid","not-on-map"},flame_alpha_deviation=0.05,initial_lifetime=120,maximum_damage_multiplier=6,burnt_patch_lifetime=1800,working_sound={sound={{volume=0.7,filename="__base__/sound/fire-1.ogg"},{volume=0.7,filename="__base__/sound/fire-2.ogg"}},fade_in_ticks=10,max_sounds_per_type=3,fade_out_ticks=90},lifetime_increase_cooldown=4,damage_multiplier_increase_per_added_fuel=1,fade_out_duration=30,burnt_patch_pictures={{filename="__base__/graphics/entity/fire-flame/burnt-patch.png",height=56,x=0,y=0,shift={-0.09375,0.125},width=115},{filename="__base__/graphics/entity/fire-flame/burnt-patch.png",height=56,x=115,y=0,width=115},{filename="__base__/graphics/entity/fire-flame/burnt-patch.png",height=56,x=230,y=0,width=115},{filename="__base__/graphics/entity/fire-flame/burnt-patch.png",height=56,x=0,y=56,width=115},{filename="__base__/graphics/entity/fire-flame/burnt-patch.png",height=56,x=115,y=56,width=115},{filename="__base__/graphics/entity/fire-flame/burnt-patch.png",height=56,x=230,y=56,width=115},{filename="__base__/graphics/entity/fire-flame/burnt-patch.png",height=56,x=0,y=112,width=115},{filename="__base__/graphics/entity/fire-flame/burnt-patch.png",height=56,x=115,y=112,width=115},{filename="__base__/graphics/entity/fire-flame/burnt-patch.png",height=56,x=230,y=112,width=115}},burnt_patch_alpha_default=0.4,flame_alpha=0.35,lifetime_increase_by=150,pictures={{flags={"compressed"},filename="__base__/graphics/entity/fire-flame/fire-flame-13.png",blend_mode="normal",width=60,scale=0.5,axially_symmetrical=false,height=118,frame_count=25,line_length=8,shift={-0.01953125,-0.453125},tint={r=1,a=1,b=1,g=1},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-12.png",blend_mode="normal",width=63,scale=0.5,axially_symmetrical=false,height=116,frame_count=25,line_length=8,shift={-0.0078125,-0.4570325},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-11.png",blend_mode="normal",width=61,scale=0.5,axially_symmetrical=false,height=122,frame_count=25,line_length=8,shift={-0.00390625,-0.453125},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-10.png",blend_mode="normal",width=65,scale=0.5,axially_symmetrical=false,height=108,frame_count=25,line_length=8,shift={-0.03125,-0.32422},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-09.png",blend_mode="normal",width=64,scale=0.5,axially_symmetrical=false,height=101,frame_count=25,line_length=8,shift={-0.015625,-0.3476575},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-08.png",blend_mode="normal",width=50,scale=0.5,axially_symmetrical=false,height=98,frame_count=32,line_length=8,shift={-0.02734375,-0.38672},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-07.png",blend_mode="normal",width=54,scale=0.5,axially_symmetrical=false,height=84,frame_count=32,line_length=8,shift={0.0078125,-0.3203125},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-06.png",blend_mode="normal",width=65,scale=0.5,axially_symmetrical=false,height=92,frame_count=32,line_length=8,shift={0,-0.41797},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-05.png",blend_mode="normal",width=59,scale=0.5,axially_symmetrical=false,height=103,frame_count=32,line_length=8,shift={0.015625,-0.4414075},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-04.png",blend_mode="normal",width=67,scale=0.5,axially_symmetrical=false,height=130,frame_count=32,line_length=8,shift={0.0078125,-0.5546875},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-03.png",blend_mode="normal",width=74,scale=0.5,axially_symmetrical=false,height=117,frame_count=32,line_length=8,shift={0.0234375,-0.4921875},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-02.png",blend_mode="normal",width=74,scale=0.5,axially_symmetrical=false,height=114,frame_count=32,line_length=8,shift={0.00390625,-0.484375},animation_speed=1,direction_count=1},{filename="__base__/graphics/entity/fire-flame/fire-flame-01.png",blend_mode="normal",width=66,scale=0.5,axially_symmetrical=false,height=119,frame_count=32,line_length=8,shift={-0.03515625,-0.5195325},animation_speed=1,direction_count=1}},spread_delay=300,damage_per_tick={amount=0.21666666666667,type="fire"}},["acid-splash-fire-worm-big"]={emissions_per_second=0,limit_overlapping_particles=true,render_layer="lower-object-above-shadow",name="acid-splash-fire-worm-big",add_fuel_cooldown=10,fade_in_duration=1,secondary_picture_fade_out_duration=60,lifetime_increase_cooldown=4,burnt_patch_lifetime=0,damage_multiplier_increase_per_added_fuel=1,damage_per_tick={amount=0,type="acid"},pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.5,height=224,frame_count=26,width=210,shift={-0.375,-0.25},direction_count=1,line_length=8},scale=1,height=116,frame_count=26,width=106,shift={-0.375,-0.3125},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.5,height=188,frame_count=26,width=266,shift={0.0625,0.0625},line_length=8,direction_count=1,draw_as_shadow=true},scale=1,height=98,frame_count=26,width=134,shift={0.0625,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.5,height=150,frame_count=29,width=174,shift={-0.28125,-0.53125},direction_count=1,line_length=8},scale=1,height=76,frame_count=29,width=88,shift={-0.3125,-0.5625},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.5,height=266,frame_count=29,width=238,shift={0.1875,0.90625},line_length=8,direction_count=1,draw_as_shadow=true},scale=1,height=136,frame_count=29,width=120,shift={0.1875,0.875},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.5,height=208,frame_count=29,width=236,shift={0.6875,-0.5},direction_count=1,line_length=8},scale=1,height=104,frame_count=29,width=118,shift={0.6875,-0.5},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.5,height=140,frame_count=29,width=214,shift={0.53125,0.0625},line_length=8,direction_count=1,draw_as_shadow=true},scale=1,height=70,frame_count=29,width=110,shift={0.5,0.0625},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.5,height=154,frame_count=24,width=252,shift={0.53125,-0.59375},direction_count=1,line_length=8},scale=1,height=80,frame_count=24,width=128,shift={0.5,-0.625},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.5,height=160,frame_count=24,width=248,shift={0.5625,-0.5},line_length=8,direction_count=1,draw_as_shadow=true},scale=1,height=80,frame_count=24,width=124,shift={0.5625,-0.5},line_length=8,direction_count=1,draw_as_shadow=true}}}},initial_render_layer="object",secondary_picture_fade_out_start=30,maximum_spread_count=100,damage_multiplier_decrease_per_tick=0.005,uses_alternative_behavior=true,type="fire",flags={"placeable-off-grid","not-on-map"},on_damage_tick_effect={action_delivery={type="instant",target_effects={{sticker="acid-sticker-big",type="create-sticker",show_in_tooltip=true},{apply_damage_to_trees=false,type="damage",damage={amount=0.6,type="acid"}}}},type="direct",trigger_target_mask={"ground-unit"},force="enemy",ignore_collision_condition=true,filter_enabled=true},initial_lifetime=1920,spread_delay_deviation=180,delay_between_initial_flames=10,spread_delay=300,maximum_damage_multiplier=3,initial_flame_count=1,fade_out_duration=30,secondary_pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.325,height=224,frame_count=26,width=210,shift={-0.24375,-0.1625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.65,height=116,frame_count=26,width=106,shift={-0.24375,-0.203125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.325,height=188,frame_count=26,width=266,shift={0.040625,0.040625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.65,height=98,frame_count=26,width=134,shift={0.040625,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.325,height=150,frame_count=29,width=174,shift={-0.1828125,-0.3453125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.65,height=76,frame_count=29,width=88,shift={-0.203125,-0.365625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.325,height=266,frame_count=29,width=238,shift={0.121875,0.5890625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.65,height=136,frame_count=29,width=120,shift={0.121875,0.56875},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.325,height=208,frame_count=29,width=236,shift={0.446875,-0.325},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.65,height=104,frame_count=29,width=118,shift={0.446875,-0.325},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.325,height=140,frame_count=29,width=214,shift={0.3453125,0.040625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.65,height=70,frame_count=29,width=110,shift={0.325,0.040625},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.325,height=154,frame_count=24,width=252,shift={0.3453125,-0.3859375},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.65,height=80,frame_count=24,width=128,shift={0.325,-0.40625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.325,height=160,frame_count=24,width=248,shift={0.365625,-0.325},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.65,height=80,frame_count=24,width=124,shift={0.365625,-0.325},line_length=8,direction_count=1,draw_as_shadow=true}}}},particle_alpha_blend_duration=300,lifetime_increase_by=0,particle_alpha=0.6,maximum_lifetime=1800,localised_name={"entity-name.acid-splash"},secondary_render_layer="higher-object-above"},["acid-splash-fire-worm-small"]={emissions_per_second=0,limit_overlapping_particles=true,render_layer="lower-object-above-shadow",name="acid-splash-fire-worm-small",add_fuel_cooldown=10,fade_in_duration=1,secondary_picture_fade_out_duration=60,lifetime_increase_cooldown=4,burnt_patch_lifetime=0,damage_multiplier_increase_per_added_fuel=1,damage_per_tick={amount=0,type="acid"},pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.325,height=224,frame_count=26,width=210,shift={-0.24375,-0.1625},direction_count=1,line_length=8},scale=0.65,height=116,frame_count=26,width=106,shift={-0.24375,-0.203125},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.325,height=188,frame_count=26,width=266,shift={0.040625,0.040625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.65,height=98,frame_count=26,width=134,shift={0.040625,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.325,height=150,frame_count=29,width=174,shift={-0.1828125,-0.3453125},direction_count=1,line_length=8},scale=0.65,height=76,frame_count=29,width=88,shift={-0.203125,-0.365625},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.325,height=266,frame_count=29,width=238,shift={0.121875,0.5890625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.65,height=136,frame_count=29,width=120,shift={0.121875,0.56875},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.325,height=208,frame_count=29,width=236,shift={0.446875,-0.325},direction_count=1,line_length=8},scale=0.65,height=104,frame_count=29,width=118,shift={0.446875,-0.325},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.325,height=140,frame_count=29,width=214,shift={0.3453125,0.040625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.65,height=70,frame_count=29,width=110,shift={0.325,0.040625},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.325,height=154,frame_count=24,width=252,shift={0.3453125,-0.3859375},direction_count=1,line_length=8},scale=0.65,height=80,frame_count=24,width=128,shift={0.325,-0.40625},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.325,height=160,frame_count=24,width=248,shift={0.365625,-0.325},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.65,height=80,frame_count=24,width=124,shift={0.365625,-0.325},line_length=8,direction_count=1,draw_as_shadow=true}}}},initial_render_layer="object",secondary_picture_fade_out_start=30,maximum_spread_count=100,damage_multiplier_decrease_per_tick=0.005,uses_alternative_behavior=true,type="fire",flags={"placeable-off-grid","not-on-map"},on_damage_tick_effect={action_delivery={type="instant",target_effects={{sticker="acid-sticker-small",type="create-sticker",show_in_tooltip=true},{apply_damage_to_trees=false,type="damage",damage={amount=0.1,type="acid"}}}},type="direct",trigger_target_mask={"ground-unit"},force="enemy",ignore_collision_condition=true,filter_enabled=true},initial_lifetime=1920,spread_delay_deviation=180,delay_between_initial_flames=10,spread_delay=300,maximum_damage_multiplier=3,initial_flame_count=1,fade_out_duration=30,secondary_pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.21125,height=224,frame_count=26,width=210,shift={-0.1584375,-0.105625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.4225,height=116,frame_count=26,width=106,shift={-0.1584375,-0.13203125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.21125,height=188,frame_count=26,width=266,shift={0.02640625,0.02640625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.4225,height=98,frame_count=26,width=134,shift={0.02640625,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.21125,height=150,frame_count=29,width=174,shift={-0.118828125,-0.224453125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.4225,height=76,frame_count=29,width=88,shift={-0.13203125,-0.23765625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.21125,height=266,frame_count=29,width=238,shift={0.07921875,0.382890625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.4225,height=136,frame_count=29,width=120,shift={0.07921875,0.3696875},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.21125,height=208,frame_count=29,width=236,shift={0.29046875,-0.21125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.4225,height=104,frame_count=29,width=118,shift={0.29046875,-0.21125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.21125,height=140,frame_count=29,width=214,shift={0.224453125,0.02640625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.4225,height=70,frame_count=29,width=110,shift={0.21125,0.02640625},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.21125,height=154,frame_count=24,width=252,shift={0.224453125,-0.250859375},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.4225,height=80,frame_count=24,width=128,shift={0.21125,-0.2640625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.21125,height=160,frame_count=24,width=248,shift={0.23765625,-0.21125},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.4225,height=80,frame_count=24,width=124,shift={0.23765625,-0.21125},line_length=8,direction_count=1,draw_as_shadow=true}}}},particle_alpha_blend_duration=300,lifetime_increase_by=0,particle_alpha=0.6,maximum_lifetime=1800,localised_name={"entity-name.acid-splash"},secondary_render_layer="higher-object-above"},["acid-splash-fire-spitter-big"]={emissions_per_second=0,limit_overlapping_particles=true,render_layer="lower-object-above-shadow",name="acid-splash-fire-spitter-big",add_fuel_cooldown=10,fade_in_duration=1,secondary_picture_fade_out_duration=60,lifetime_increase_cooldown=4,burnt_patch_lifetime=0,damage_multiplier_increase_per_added_fuel=1,damage_per_tick={amount=0,type="acid"},pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.5,height=224,frame_count=26,width=210,shift={-0.375,-0.25},direction_count=1,line_length=8},scale=1,height=116,frame_count=26,width=106,shift={-0.375,-0.3125},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.5,height=188,frame_count=26,width=266,shift={0.0625,0.0625},line_length=8,direction_count=1,draw_as_shadow=true},scale=1,height=98,frame_count=26,width=134,shift={0.0625,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.5,height=150,frame_count=29,width=174,shift={-0.28125,-0.53125},direction_count=1,line_length=8},scale=1,height=76,frame_count=29,width=88,shift={-0.3125,-0.5625},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.5,height=266,frame_count=29,width=238,shift={0.1875,0.90625},line_length=8,direction_count=1,draw_as_shadow=true},scale=1,height=136,frame_count=29,width=120,shift={0.1875,0.875},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.5,height=208,frame_count=29,width=236,shift={0.6875,-0.5},direction_count=1,line_length=8},scale=1,height=104,frame_count=29,width=118,shift={0.6875,-0.5},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.5,height=140,frame_count=29,width=214,shift={0.53125,0.0625},line_length=8,direction_count=1,draw_as_shadow=true},scale=1,height=70,frame_count=29,width=110,shift={0.5,0.0625},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.5,height=154,frame_count=24,width=252,shift={0.53125,-0.59375},direction_count=1,line_length=8},scale=1,height=80,frame_count=24,width=128,shift={0.5,-0.625},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.5,height=160,frame_count=24,width=248,shift={0.5625,-0.5},line_length=8,direction_count=1,draw_as_shadow=true},scale=1,height=80,frame_count=24,width=124,shift={0.5625,-0.5},line_length=8,direction_count=1,draw_as_shadow=true}}}},initial_render_layer="object",secondary_picture_fade_out_start=30,maximum_spread_count=100,damage_multiplier_decrease_per_tick=0.005,uses_alternative_behavior=true,type="fire",flags={"placeable-off-grid","not-on-map"},on_damage_tick_effect={action_delivery={type="instant",target_effects={{sticker="acid-sticker-big",type="create-sticker",show_in_tooltip=true},{apply_damage_to_trees=false,type="damage",damage={amount=0.6,type="acid"}}}},type="direct",trigger_target_mask={"ground-unit"},force="enemy",ignore_collision_condition=true,filter_enabled=true},initial_lifetime=1920,spread_delay_deviation=180,delay_between_initial_flames=10,spread_delay=300,maximum_damage_multiplier=3,initial_flame_count=1,fade_out_duration=30,secondary_pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.325,height=224,frame_count=26,width=210,shift={-0.24375,-0.1625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.65,height=116,frame_count=26,width=106,shift={-0.24375,-0.203125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.325,height=188,frame_count=26,width=266,shift={0.040625,0.040625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.65,height=98,frame_count=26,width=134,shift={0.040625,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.325,height=150,frame_count=29,width=174,shift={-0.1828125,-0.3453125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.65,height=76,frame_count=29,width=88,shift={-0.203125,-0.365625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.325,height=266,frame_count=29,width=238,shift={0.121875,0.5890625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.65,height=136,frame_count=29,width=120,shift={0.121875,0.56875},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.325,height=208,frame_count=29,width=236,shift={0.446875,-0.325},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.65,height=104,frame_count=29,width=118,shift={0.446875,-0.325},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.325,height=140,frame_count=29,width=214,shift={0.3453125,0.040625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.65,height=70,frame_count=29,width=110,shift={0.325,0.040625},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.325,height=154,frame_count=24,width=252,shift={0.3453125,-0.3859375},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.65,height=80,frame_count=24,width=128,shift={0.325,-0.40625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.325,height=160,frame_count=24,width=248,shift={0.365625,-0.325},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.65,height=80,frame_count=24,width=124,shift={0.365625,-0.325},line_length=8,direction_count=1,draw_as_shadow=true}}}},particle_alpha_blend_duration=300,lifetime_increase_by=0,particle_alpha=0.6,maximum_lifetime=1800,localised_name={"entity-name.acid-splash"},secondary_render_layer="higher-object-above"},["acid-splash-fire-worm-medium"]={emissions_per_second=0,limit_overlapping_particles=true,render_layer="lower-object-above-shadow",name="acid-splash-fire-worm-medium",add_fuel_cooldown=10,fade_in_duration=1,secondary_picture_fade_out_duration=60,lifetime_increase_cooldown=4,burnt_patch_lifetime=0,damage_multiplier_increase_per_added_fuel=1,damage_per_tick={amount=0,type="acid"},pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.415,height=224,frame_count=26,width=210,shift={-0.31125,-0.2075},direction_count=1,line_length=8},scale=0.83,height=116,frame_count=26,width=106,shift={-0.31125,-0.259375},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.415,height=188,frame_count=26,width=266,shift={0.051875,0.051875},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.83,height=98,frame_count=26,width=134,shift={0.051875,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.415,height=150,frame_count=29,width=174,shift={-0.2334375,-0.4409375},direction_count=1,line_length=8},scale=0.83,height=76,frame_count=29,width=88,shift={-0.259375,-0.466875},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.415,height=266,frame_count=29,width=238,shift={0.155625,0.7521875},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.83,height=136,frame_count=29,width=120,shift={0.155625,0.72625},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.415,height=208,frame_count=29,width=236,shift={0.570625,-0.415},direction_count=1,line_length=8},scale=0.83,height=104,frame_count=29,width=118,shift={0.570625,-0.415},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.415,height=140,frame_count=29,width=214,shift={0.4409375,0.051875},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.83,height=70,frame_count=29,width=110,shift={0.415,0.051875},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.415,height=154,frame_count=24,width=252,shift={0.4409375,-0.4928125},direction_count=1,line_length=8},scale=0.83,height=80,frame_count=24,width=128,shift={0.415,-0.51875},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.415,height=160,frame_count=24,width=248,shift={0.466875,-0.415},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.83,height=80,frame_count=24,width=124,shift={0.466875,-0.415},line_length=8,direction_count=1,draw_as_shadow=true}}}},initial_render_layer="object",secondary_picture_fade_out_start=30,maximum_spread_count=100,damage_multiplier_decrease_per_tick=0.005,uses_alternative_behavior=true,type="fire",flags={"placeable-off-grid","not-on-map"},on_damage_tick_effect={action_delivery={type="instant",target_effects={{sticker="acid-sticker-medium",type="create-sticker",show_in_tooltip=true},{apply_damage_to_trees=false,type="damage",damage={amount=0.2,type="acid"}}}},type="direct",trigger_target_mask={"ground-unit"},force="enemy",ignore_collision_condition=true,filter_enabled=true},initial_lifetime=1920,spread_delay_deviation=180,delay_between_initial_flames=10,spread_delay=300,maximum_damage_multiplier=3,initial_flame_count=1,fade_out_duration=30,secondary_pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.26975,height=224,frame_count=26,width=210,shift={-0.2023125,-0.134875},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.5395,height=116,frame_count=26,width=106,shift={-0.2023125,-0.16859375},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.26975,height=188,frame_count=26,width=266,shift={0.03371875,0.03371875},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.5395,height=98,frame_count=26,width=134,shift={0.03371875,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.26975,height=150,frame_count=29,width=174,shift={-0.151734375,-0.286609375},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.5395,height=76,frame_count=29,width=88,shift={-0.16859375,-0.30346875},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.26975,height=266,frame_count=29,width=238,shift={0.10115625,0.488921875},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.5395,height=136,frame_count=29,width=120,shift={0.10115625,0.4720625},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.26975,height=208,frame_count=29,width=236,shift={0.37090625,-0.26975},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.5395,height=104,frame_count=29,width=118,shift={0.37090625,-0.26975},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.26975,height=140,frame_count=29,width=214,shift={0.286609375,0.03371875},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.5395,height=70,frame_count=29,width=110,shift={0.26975,0.03371875},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.26975,height=154,frame_count=24,width=252,shift={0.286609375,-0.320328125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.5395,height=80,frame_count=24,width=128,shift={0.26975,-0.3371875},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.26975,height=160,frame_count=24,width=248,shift={0.30346875,-0.26975},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.5395,height=80,frame_count=24,width=124,shift={0.30346875,-0.26975},line_length=8,direction_count=1,draw_as_shadow=true}}}},particle_alpha_blend_duration=300,lifetime_increase_by=0,particle_alpha=0.6,maximum_lifetime=1800,localised_name={"entity-name.acid-splash"},secondary_render_layer="higher-object-above"},["acid-splash-fire-spitter-small"]={emissions_per_second=0,limit_overlapping_particles=true,render_layer="lower-object-above-shadow",name="acid-splash-fire-spitter-small",add_fuel_cooldown=10,fade_in_duration=1,secondary_picture_fade_out_duration=60,lifetime_increase_cooldown=4,burnt_patch_lifetime=0,damage_multiplier_increase_per_added_fuel=1,damage_per_tick={amount=0,type="acid"},pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.25,height=224,frame_count=26,width=210,shift={-0.1875,-0.125},direction_count=1,line_length=8},scale=0.5,height=116,frame_count=26,width=106,shift={-0.1875,-0.15625},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.25,height=188,frame_count=26,width=266,shift={0.03125,0.03125},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.5,height=98,frame_count=26,width=134,shift={0.03125,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.25,height=150,frame_count=29,width=174,shift={-0.140625,-0.265625},direction_count=1,line_length=8},scale=0.5,height=76,frame_count=29,width=88,shift={-0.15625,-0.28125},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.25,height=266,frame_count=29,width=238,shift={0.09375,0.453125},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.5,height=136,frame_count=29,width=120,shift={0.09375,0.4375},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.25,height=208,frame_count=29,width=236,shift={0.34375,-0.25},direction_count=1,line_length=8},scale=0.5,height=104,frame_count=29,width=118,shift={0.34375,-0.25},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.25,height=140,frame_count=29,width=214,shift={0.265625,0.03125},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.5,height=70,frame_count=29,width=110,shift={0.25,0.03125},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.25,height=154,frame_count=24,width=252,shift={0.265625,-0.296875},direction_count=1,line_length=8},scale=0.5,height=80,frame_count=24,width=128,shift={0.25,-0.3125},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.25,height=160,frame_count=24,width=248,shift={0.28125,-0.25},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.5,height=80,frame_count=24,width=124,shift={0.28125,-0.25},line_length=8,direction_count=1,draw_as_shadow=true}}}},initial_render_layer="object",secondary_picture_fade_out_start=30,maximum_spread_count=100,damage_multiplier_decrease_per_tick=0.005,uses_alternative_behavior=true,type="fire",flags={"placeable-off-grid","not-on-map"},on_damage_tick_effect={action_delivery={type="instant",target_effects={{sticker="acid-sticker-small",type="create-sticker",show_in_tooltip=true},{apply_damage_to_trees=false,type="damage",damage={amount=0.1,type="acid"}}}},type="direct",trigger_target_mask={"ground-unit"},force="enemy",ignore_collision_condition=true,filter_enabled=true},initial_lifetime=1920,spread_delay_deviation=180,delay_between_initial_flames=10,spread_delay=300,maximum_damage_multiplier=3,initial_flame_count=1,fade_out_duration=30,secondary_pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.1625,height=224,frame_count=26,width=210,shift={-0.121875,-0.08125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.325,height=116,frame_count=26,width=106,shift={-0.121875,-0.1015625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.1625,height=188,frame_count=26,width=266,shift={0.0203125,0.0203125},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.325,height=98,frame_count=26,width=134,shift={0.0203125,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.1625,height=150,frame_count=29,width=174,shift={-0.09140625,-0.17265625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.325,height=76,frame_count=29,width=88,shift={-0.1015625,-0.1828125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.1625,height=266,frame_count=29,width=238,shift={0.0609375,0.29453125},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.325,height=136,frame_count=29,width=120,shift={0.0609375,0.284375},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.1625,height=208,frame_count=29,width=236,shift={0.2234375,-0.1625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.325,height=104,frame_count=29,width=118,shift={0.2234375,-0.1625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.1625,height=140,frame_count=29,width=214,shift={0.17265625,0.0203125},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.325,height=70,frame_count=29,width=110,shift={0.1625,0.0203125},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.1625,height=154,frame_count=24,width=252,shift={0.17265625,-0.19296875},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.325,height=80,frame_count=24,width=128,shift={0.1625,-0.203125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.1625,height=160,frame_count=24,width=248,shift={0.1828125,-0.1625},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.325,height=80,frame_count=24,width=124,shift={0.1828125,-0.1625},line_length=8,direction_count=1,draw_as_shadow=true}}}},particle_alpha_blend_duration=300,lifetime_increase_by=0,particle_alpha=0.6,maximum_lifetime=1800,localised_name={"entity-name.acid-splash"},secondary_render_layer="higher-object-above"},["acid-splash-fire-spitter-medium"]={emissions_per_second=0,limit_overlapping_particles=true,render_layer="lower-object-above-shadow",name="acid-splash-fire-spitter-medium",add_fuel_cooldown=10,fade_in_duration=1,secondary_picture_fade_out_duration=60,lifetime_increase_cooldown=4,burnt_patch_lifetime=0,damage_multiplier_increase_per_added_fuel=1,damage_per_tick={amount=0,type="acid"},pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.35,height=224,frame_count=26,width=210,shift={-0.2625,-0.175},direction_count=1,line_length=8},scale=0.7,height=116,frame_count=26,width=106,shift={-0.2625,-0.21875},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.35,height=188,frame_count=26,width=266,shift={0.04375,0.04375},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.7,height=98,frame_count=26,width=134,shift={0.04375,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.35,height=150,frame_count=29,width=174,shift={-0.196875,-0.371875},direction_count=1,line_length=8},scale=0.7,height=76,frame_count=29,width=88,shift={-0.21875,-0.39375},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.35,height=266,frame_count=29,width=238,shift={0.13125,0.634375},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.7,height=136,frame_count=29,width=120,shift={0.13125,0.6125},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.35,height=208,frame_count=29,width=236,shift={0.48125,-0.35},direction_count=1,line_length=8},scale=0.7,height=104,frame_count=29,width=118,shift={0.48125,-0.35},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.35,height=140,frame_count=29,width=214,shift={0.371875,0.04375},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.7,height=70,frame_count=29,width=110,shift={0.35,0.04375},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.35,height=154,frame_count=24,width=252,shift={0.371875,-0.415625},direction_count=1,line_length=8},scale=0.7,height=80,frame_count=24,width=128,shift={0.35,-0.4375},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.35,height=160,frame_count=24,width=248,shift={0.39375,-0.35},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.7,height=80,frame_count=24,width=124,shift={0.39375,-0.35},line_length=8,direction_count=1,draw_as_shadow=true}}}},initial_render_layer="object",secondary_picture_fade_out_start=30,maximum_spread_count=100,damage_multiplier_decrease_per_tick=0.005,uses_alternative_behavior=true,type="fire",flags={"placeable-off-grid","not-on-map"},on_damage_tick_effect={action_delivery={type="instant",target_effects={{sticker="acid-sticker-medium",type="create-sticker",show_in_tooltip=true},{apply_damage_to_trees=false,type="damage",damage={amount=0.2,type="acid"}}}},type="direct",trigger_target_mask={"ground-unit"},force="enemy",ignore_collision_condition=true,filter_enabled=true},initial_lifetime=1920,spread_delay_deviation=180,delay_between_initial_flames=10,spread_delay=300,maximum_damage_multiplier=3,initial_flame_count=1,fade_out_duration=30,secondary_pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.2275,height=224,frame_count=26,width=210,shift={-0.170625,-0.11375},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.455,height=116,frame_count=26,width=106,shift={-0.170625,-0.1421875},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.2275,height=188,frame_count=26,width=266,shift={0.0284375,0.0284375},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.455,height=98,frame_count=26,width=134,shift={0.0284375,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.2275,height=150,frame_count=29,width=174,shift={-0.12796875,-0.24171875},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.455,height=76,frame_count=29,width=88,shift={-0.1421875,-0.2559375},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.2275,height=266,frame_count=29,width=238,shift={0.0853125,0.41234375},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.455,height=136,frame_count=29,width=120,shift={0.0853125,0.398125},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.2275,height=208,frame_count=29,width=236,shift={0.3128125,-0.2275},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.455,height=104,frame_count=29,width=118,shift={0.3128125,-0.2275},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.2275,height=140,frame_count=29,width=214,shift={0.24171875,0.0284375},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.455,height=70,frame_count=29,width=110,shift={0.2275,0.0284375},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.2275,height=154,frame_count=24,width=252,shift={0.24171875,-0.27015625},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.455,height=80,frame_count=24,width=128,shift={0.2275,-0.284375},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.2275,height=160,frame_count=24,width=248,shift={0.2559375,-0.2275},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.455,height=80,frame_count=24,width=124,shift={0.2559375,-0.2275},line_length=8,direction_count=1,draw_as_shadow=true}}}},particle_alpha_blend_duration=300,lifetime_increase_by=0,particle_alpha=0.6,maximum_lifetime=1800,localised_name={"entity-name.acid-splash"},secondary_render_layer="higher-object-above"},["acid-splash-fire-spitter-behemoth"]={emissions_per_second=0,limit_overlapping_particles=true,render_layer="lower-object-above-shadow",name="acid-splash-fire-spitter-behemoth",add_fuel_cooldown=10,fade_in_duration=1,secondary_picture_fade_out_duration=60,lifetime_increase_cooldown=4,burnt_patch_lifetime=0,damage_multiplier_increase_per_added_fuel=1,damage_per_tick={amount=0,type="acid"},pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.6,height=224,frame_count=26,width=210,shift={-0.45,-0.3},tint={r=1,a=1,b=0.512,g=0.992},direction_count=1,line_length=8},scale=1.2,height=116,frame_count=26,width=106,shift={-0.45,-0.375},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.6,height=188,frame_count=26,width=266,shift={0.075,0.075},line_length=8,direction_count=1,draw_as_shadow=true},scale=1.2,height=98,frame_count=26,width=134,shift={0.075,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.6,height=150,frame_count=29,width=174,shift={-0.3375,-0.6375},direction_count=1,line_length=8},scale=1.2,height=76,frame_count=29,width=88,shift={-0.375,-0.675},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.6,height=266,frame_count=29,width=238,shift={0.225,1.0875},line_length=8,direction_count=1,draw_as_shadow=true},scale=1.2,height=136,frame_count=29,width=120,shift={0.225,1.05},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.6,height=208,frame_count=29,width=236,shift={0.825,-0.6},direction_count=1,line_length=8},scale=1.2,height=104,frame_count=29,width=118,shift={0.825,-0.6},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.6,height=140,frame_count=29,width=214,shift={0.6375,0.075},line_length=8,direction_count=1,draw_as_shadow=true},scale=1.2,height=70,frame_count=29,width=110,shift={0.6,0.075},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.6,height=154,frame_count=24,width=252,shift={0.6375,-0.7125},direction_count=1,line_length=8},scale=1.2,height=80,frame_count=24,width=128,shift={0.6,-0.75},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.6,height=160,frame_count=24,width=248,shift={0.675,-0.6},line_length=8,direction_count=1,draw_as_shadow=true},scale=1.2,height=80,frame_count=24,width=124,shift={0.675,-0.6},line_length=8,direction_count=1,draw_as_shadow=true}}}},initial_render_layer="object",secondary_picture_fade_out_start=30,maximum_spread_count=100,damage_multiplier_decrease_per_tick=0.005,uses_alternative_behavior=true,type="fire",flags={"placeable-off-grid","not-on-map"},on_damage_tick_effect={action_delivery={type="instant",target_effects={{sticker="acid-sticker-behemoth",type="create-sticker",show_in_tooltip=true},{apply_damage_to_trees=false,type="damage",damage={amount=1,type="acid"}}}},type="direct",trigger_target_mask={"ground-unit"},force="enemy",ignore_collision_condition=true,filter_enabled=true},initial_lifetime=1920,spread_delay_deviation=180,delay_between_initial_flames=10,spread_delay=300,maximum_damage_multiplier=3,initial_flame_count=1,fade_out_duration=30,secondary_pictures={{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-1.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1.png",scale=0.39,height=224,frame_count=26,width=210,shift={-0.2925,-0.195},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.78,height=116,frame_count=26,width=106,shift={-0.2925,-0.24375},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png",scale=0.39,height=188,frame_count=26,width=266,shift={0.04875,0.04875},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.78,height=98,frame_count=26,width=134,shift={0.04875,0},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-2.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2.png",scale=0.39,height=150,frame_count=29,width=174,shift={-0.219375,-0.414375},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.78,height=76,frame_count=29,width=88,shift={-0.24375,-0.43875},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png",scale=0.39,height=266,frame_count=29,width=238,shift={0.14625,0.706875},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.78,height=136,frame_count=29,width=120,shift={0.14625,0.6825},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-3.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3.png",scale=0.39,height=208,frame_count=29,width=236,shift={0.53625,-0.39},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.78,height=104,frame_count=29,width=118,shift={0.53625,-0.39},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png",scale=0.39,height=140,frame_count=29,width=214,shift={0.414375,0.04875},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.78,height=70,frame_count=29,width=110,shift={0.39,0.04875},line_length=8,direction_count=1,draw_as_shadow=true}}},{layers={{filename="__base__/graphics/entity/acid-splash/acid-splash-4.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4.png",scale=0.39,height=154,frame_count=24,width=252,shift={0.414375,-0.463125},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},scale=0.78,height=80,frame_count=24,width=128,shift={0.39,-0.4875},tint={0.7,0.6944,0.3584,0.7},direction_count=1,line_length=8},{filename="__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png",hr_version={filename="__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png",scale=0.39,height=160,frame_count=24,width=248,shift={0.43875,-0.39},line_length=8,direction_count=1,draw_as_shadow=true},scale=0.78,height=80,frame_count=24,width=124,shift={0.43875,-0.39},line_length=8,direction_count=1,draw_as_shadow=true}}}},particle_alpha_blend_duration=300,lifetime_increase_by=0,particle_alpha=0.6,maximum_lifetime=1800,localised_name={"entity-name.acid-splash"},secondary_render_layer="higher-object-above"}};return _;end
+do
+    local _ = {
+        ['acid-splash-fire-worm-behemoth'] = {
+            initial_render_layer = 'object',
+            pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = 0,
+                            scale = 1.2,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.45, -0.375},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = 0,
+                                scale = 0.6,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.45, -0.3},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 1.2,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.075, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.6,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.075, 0.075},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = 0,
+                            scale = 1.2,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.375, -0.675},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = 0,
+                                scale = 0.6,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.3375, -0.6375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 1.2,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.225, 1.05},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.6,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.225, 1.0875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = 0,
+                            scale = 1.2,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.825, -0.6},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = 0,
+                                scale = 0.6,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.825, -0.6},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 1.2,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.6, 0.075},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.6,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.6375, 0.075},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = 0,
+                            scale = 1.2,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.6, -0.75},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = 0,
+                                scale = 0.6,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.6375, -0.7125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 1.2,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.675, -0.6},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.6,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.675, -0.6},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            spread_delay_deviation = 180,
+            spread_delay = 300,
+            fade_out_duration = 30,
+            secondary_render_layer = 'higher-object-above',
+            initial_lifetime = 1920,
+            render_layer = 'lower-object-above-shadow',
+            damage_multiplier_decrease_per_tick = 0.005,
+            localised_name = {'entity-name.acid-splash'},
+            type = 'fire',
+            add_fuel_cooldown = 10,
+            emissions_per_second = 0,
+            secondary_picture_fade_out_start = 30,
+            particle_alpha = 0.6,
+            lifetime_increase_by = 0,
+            on_damage_tick_effect = {
+                ignore_collision_condition = true,
+                trigger_target_mask = {'ground-unit'},
+                force = 'enemy',
+                filter_enabled = true,
+                action_delivery = {
+                    type = 'instant',
+                    target_effects = {
+                        {sticker = 'acid-sticker-behemoth', show_in_tooltip = true, type = 'create-sticker'},
+                        {type = 'damage', apply_damage_to_trees = false, damage = {amount = 1.2, type = 'acid'}}
+                    }
+                },
+                type = 'direct'
+            },
+            damage_per_tick = {amount = 0, type = 'acid'},
+            secondary_pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.78,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.2925, -0.24375},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.39,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.2925, -0.195},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 0.78,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.04875, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.39,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.04875, 0.04875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.78,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.24375, -0.43875},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.39,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.219375, -0.414375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 0.78,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.14625, 0.6825},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.39,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.14625, 0.706875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.78,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.53625, -0.39},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.39,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.53625, -0.39},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 0.78,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.39, 0.04875},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.39,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.414375, 0.04875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.78,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.39, -0.4875},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.39,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.414375, -0.463125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 0.78,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.43875, -0.39},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.39,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.43875, -0.39},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            burnt_patch_lifetime = 0,
+            flags = {'placeable-off-grid', 'not-on-map'},
+            name = 'acid-splash-fire-worm-behemoth',
+            fade_in_duration = 1,
+            secondary_picture_fade_out_duration = 60,
+            maximum_damage_multiplier = 3,
+            particle_alpha_blend_duration = 300,
+            initial_flame_count = 1,
+            uses_alternative_behavior = true,
+            maximum_spread_count = 100,
+            limit_overlapping_particles = true,
+            lifetime_increase_cooldown = 4,
+            delay_between_initial_flames = 10,
+            maximum_lifetime = 1800,
+            damage_multiplier_increase_per_added_fuel = 1
+        },
+        ['acid-splash-fire-spitter-medium'] = {
+            initial_render_layer = 'object',
+            pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = 0,
+                            scale = 0.7,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.2625, -0.21875},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = 0,
+                                scale = 0.35,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.2625, -0.175},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 0.7,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.04375, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.35,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.04375, 0.04375},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = 0,
+                            scale = 0.7,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.21875, -0.39375},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = 0,
+                                scale = 0.35,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.196875, -0.371875},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 0.7,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.13125, 0.6125},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.35,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.13125, 0.634375},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = 0,
+                            scale = 0.7,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.48125, -0.35},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = 0,
+                                scale = 0.35,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.48125, -0.35},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 0.7,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.35, 0.04375},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.35,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.371875, 0.04375},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = 0,
+                            scale = 0.7,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.35, -0.4375},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = 0,
+                                scale = 0.35,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.371875, -0.415625},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 0.7,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.39375, -0.35},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.35,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.39375, -0.35},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            spread_delay_deviation = 180,
+            spread_delay = 300,
+            fade_out_duration = 30,
+            secondary_render_layer = 'higher-object-above',
+            initial_lifetime = 1920,
+            render_layer = 'lower-object-above-shadow',
+            damage_multiplier_decrease_per_tick = 0.005,
+            localised_name = {'entity-name.acid-splash'},
+            type = 'fire',
+            add_fuel_cooldown = 10,
+            emissions_per_second = 0,
+            secondary_picture_fade_out_start = 30,
+            particle_alpha = 0.6,
+            lifetime_increase_by = 0,
+            on_damage_tick_effect = {
+                ignore_collision_condition = true,
+                trigger_target_mask = {'ground-unit'},
+                force = 'enemy',
+                filter_enabled = true,
+                action_delivery = {
+                    type = 'instant',
+                    target_effects = {
+                        {sticker = 'acid-sticker-medium', show_in_tooltip = true, type = 'create-sticker'},
+                        {type = 'damage', apply_damage_to_trees = false, damage = {amount = 0.2, type = 'acid'}}
+                    }
+                },
+                type = 'direct'
+            },
+            damage_per_tick = {amount = 0, type = 'acid'},
+            secondary_pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.455,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.170625, -0.1421875},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.2275,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.170625, -0.11375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 0.455,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.0284375, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.2275,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.0284375, 0.0284375},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.455,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.1421875, -0.2559375},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.2275,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.12796875, -0.24171875},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 0.455,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.0853125, 0.398125},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.2275,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.0853125, 0.41234375},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.455,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.3128125, -0.2275},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.2275,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.3128125, -0.2275},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 0.455,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.2275, 0.0284375},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.2275,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.24171875, 0.0284375},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.455,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.2275, -0.284375},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.2275,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.24171875, -0.27015625},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 0.455,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.2559375, -0.2275},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.2275,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.2559375, -0.2275},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            burnt_patch_lifetime = 0,
+            flags = {'placeable-off-grid', 'not-on-map'},
+            name = 'acid-splash-fire-spitter-medium',
+            fade_in_duration = 1,
+            secondary_picture_fade_out_duration = 60,
+            maximum_damage_multiplier = 3,
+            particle_alpha_blend_duration = 300,
+            initial_flame_count = 1,
+            uses_alternative_behavior = true,
+            maximum_spread_count = 100,
+            limit_overlapping_particles = true,
+            lifetime_increase_cooldown = 4,
+            delay_between_initial_flames = 10,
+            maximum_lifetime = 1800,
+            damage_multiplier_increase_per_added_fuel = 1
+        },
+        ['acid-splash-fire-spitter-behemoth'] = {
+            initial_render_layer = 'object',
+            pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = 0,
+                            scale = 1.2,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.45, -0.375},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = {g = 0.992, r = 1, a = 1, b = 0.512},
+                                scale = 0.6,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.45, -0.3},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 1.2,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.075, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.6,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.075, 0.075},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = 0,
+                            scale = 1.2,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.375, -0.675},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = 0,
+                                scale = 0.6,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.3375, -0.6375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 1.2,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.225, 1.05},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.6,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.225, 1.0875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = 0,
+                            scale = 1.2,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.825, -0.6},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = 0,
+                                scale = 0.6,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.825, -0.6},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 1.2,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.6, 0.075},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.6,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.6375, 0.075},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = 0,
+                            scale = 1.2,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.6, -0.75},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = 0,
+                                scale = 0.6,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.6375, -0.7125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 1.2,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.675, -0.6},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.6,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.675, -0.6},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            spread_delay_deviation = 180,
+            spread_delay = 300,
+            fade_out_duration = 30,
+            secondary_render_layer = 'higher-object-above',
+            initial_lifetime = 1920,
+            render_layer = 'lower-object-above-shadow',
+            damage_multiplier_decrease_per_tick = 0.005,
+            localised_name = {'entity-name.acid-splash'},
+            type = 'fire',
+            add_fuel_cooldown = 10,
+            emissions_per_second = 0,
+            secondary_picture_fade_out_start = 30,
+            particle_alpha = 0.6,
+            lifetime_increase_by = 0,
+            on_damage_tick_effect = {
+                ignore_collision_condition = true,
+                trigger_target_mask = {'ground-unit'},
+                force = 'enemy',
+                filter_enabled = true,
+                action_delivery = {
+                    type = 'instant',
+                    target_effects = {
+                        {sticker = 'acid-sticker-behemoth', show_in_tooltip = true, type = 'create-sticker'},
+                        {type = 'damage', apply_damage_to_trees = false, damage = {amount = 1, type = 'acid'}}
+                    }
+                },
+                type = 'direct'
+            },
+            damage_per_tick = {amount = 0, type = 'acid'},
+            secondary_pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.78,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.2925, -0.24375},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.39,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.2925, -0.195},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 0.78,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.04875, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.39,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.04875, 0.04875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.78,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.24375, -0.43875},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.39,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.219375, -0.414375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 0.78,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.14625, 0.6825},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.39,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.14625, 0.706875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.78,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.53625, -0.39},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.39,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.53625, -0.39},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 0.78,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.39, 0.04875},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.39,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.414375, 0.04875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.78,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.39, -0.4875},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.39,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.414375, -0.463125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 0.78,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.43875, -0.39},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.39,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.43875, -0.39},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            burnt_patch_lifetime = 0,
+            flags = {'placeable-off-grid', 'not-on-map'},
+            name = 'acid-splash-fire-spitter-behemoth',
+            fade_in_duration = 1,
+            secondary_picture_fade_out_duration = 60,
+            maximum_damage_multiplier = 3,
+            particle_alpha_blend_duration = 300,
+            initial_flame_count = 1,
+            uses_alternative_behavior = true,
+            maximum_spread_count = 100,
+            limit_overlapping_particles = true,
+            lifetime_increase_cooldown = 4,
+            delay_between_initial_flames = 10,
+            maximum_lifetime = 1800,
+            damage_multiplier_increase_per_added_fuel = 1
+        },
+        ['acid-splash-fire-worm-medium'] = {
+            initial_render_layer = 'object',
+            pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = 0,
+                            scale = 0.83,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.31125, -0.259375},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = 0,
+                                scale = 0.415,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.31125, -0.2075},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 0.83,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.051875, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.415,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.051875, 0.051875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = 0,
+                            scale = 0.83,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.259375, -0.466875},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = 0,
+                                scale = 0.415,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.2334375, -0.4409375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 0.83,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.155625, 0.72625},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.415,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.155625, 0.7521875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = 0,
+                            scale = 0.83,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.570625, -0.415},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = 0,
+                                scale = 0.415,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.570625, -0.415},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 0.83,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.415, 0.051875},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.415,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.4409375, 0.051875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = 0,
+                            scale = 0.83,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.415, -0.51875},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = 0,
+                                scale = 0.415,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.4409375, -0.4928125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 0.83,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.466875, -0.415},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.415,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.466875, -0.415},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            spread_delay_deviation = 180,
+            spread_delay = 300,
+            fade_out_duration = 30,
+            secondary_render_layer = 'higher-object-above',
+            initial_lifetime = 1920,
+            render_layer = 'lower-object-above-shadow',
+            damage_multiplier_decrease_per_tick = 0.005,
+            localised_name = {'entity-name.acid-splash'},
+            type = 'fire',
+            add_fuel_cooldown = 10,
+            emissions_per_second = 0,
+            secondary_picture_fade_out_start = 30,
+            particle_alpha = 0.6,
+            lifetime_increase_by = 0,
+            on_damage_tick_effect = {
+                ignore_collision_condition = true,
+                trigger_target_mask = {'ground-unit'},
+                force = 'enemy',
+                filter_enabled = true,
+                action_delivery = {
+                    type = 'instant',
+                    target_effects = {
+                        {sticker = 'acid-sticker-medium', show_in_tooltip = true, type = 'create-sticker'},
+                        {type = 'damage', apply_damage_to_trees = false, damage = {amount = 0.2, type = 'acid'}}
+                    }
+                },
+                type = 'direct'
+            },
+            damage_per_tick = {amount = 0, type = 'acid'},
+            secondary_pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.5395,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.2023125, -0.16859375},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.26975,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.2023125, -0.134875},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 0.5395,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.03371875, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.26975,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.03371875, 0.03371875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.5395,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.16859375, -0.30346875},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.26975,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.151734375, -0.286609375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 0.5395,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.10115625, 0.4720625},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.26975,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.10115625, 0.488921875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.5395,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.37090625, -0.26975},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.26975,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.37090625, -0.26975},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 0.5395,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.26975, 0.03371875},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.26975,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.286609375, 0.03371875},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.5395,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.26975, -0.3371875},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.26975,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.286609375, -0.320328125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 0.5395,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.30346875, -0.26975},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.26975,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.30346875, -0.26975},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            burnt_patch_lifetime = 0,
+            flags = {'placeable-off-grid', 'not-on-map'},
+            name = 'acid-splash-fire-worm-medium',
+            fade_in_duration = 1,
+            secondary_picture_fade_out_duration = 60,
+            maximum_damage_multiplier = 3,
+            particle_alpha_blend_duration = 300,
+            initial_flame_count = 1,
+            uses_alternative_behavior = true,
+            maximum_spread_count = 100,
+            limit_overlapping_particles = true,
+            lifetime_increase_cooldown = 4,
+            delay_between_initial_flames = 10,
+            maximum_lifetime = 1800,
+            damage_multiplier_increase_per_added_fuel = 1
+        },
+        ['acid-splash-fire-worm-big'] = {
+            initial_render_layer = 'object',
+            pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = 0,
+                            scale = 1,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.375, -0.3125},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = 0,
+                                scale = 0.5,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.375, -0.25},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 1,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.0625, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.5,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.0625, 0.0625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = 0,
+                            scale = 1,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.3125, -0.5625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = 0,
+                                scale = 0.5,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.28125, -0.53125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 1,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.1875, 0.875},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.5,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.1875, 0.90625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = 0,
+                            scale = 1,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.6875, -0.5},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = 0,
+                                scale = 0.5,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.6875, -0.5},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 1,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.5, 0.0625},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.5,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.53125, 0.0625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = 0,
+                            scale = 1,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.5, -0.625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = 0,
+                                scale = 0.5,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.53125, -0.59375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 1,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.5625, -0.5},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.5,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.5625, -0.5},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            spread_delay_deviation = 180,
+            spread_delay = 300,
+            fade_out_duration = 30,
+            secondary_render_layer = 'higher-object-above',
+            initial_lifetime = 1920,
+            render_layer = 'lower-object-above-shadow',
+            damage_multiplier_decrease_per_tick = 0.005,
+            localised_name = {'entity-name.acid-splash'},
+            type = 'fire',
+            add_fuel_cooldown = 10,
+            emissions_per_second = 0,
+            secondary_picture_fade_out_start = 30,
+            particle_alpha = 0.6,
+            lifetime_increase_by = 0,
+            on_damage_tick_effect = {
+                ignore_collision_condition = true,
+                trigger_target_mask = {'ground-unit'},
+                force = 'enemy',
+                filter_enabled = true,
+                action_delivery = {
+                    type = 'instant',
+                    target_effects = {
+                        {sticker = 'acid-sticker-big', show_in_tooltip = true, type = 'create-sticker'},
+                        {type = 'damage', apply_damage_to_trees = false, damage = {amount = 0.6, type = 'acid'}}
+                    }
+                },
+                type = 'direct'
+            },
+            damage_per_tick = {amount = 0, type = 'acid'},
+            secondary_pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.65,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.24375, -0.203125},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.325,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.24375, -0.1625},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 0.65,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.040625, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.325,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.040625, 0.040625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.65,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.203125, -0.365625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.325,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.1828125, -0.3453125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 0.65,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.121875, 0.56875},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.325,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.121875, 0.5890625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.65,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.446875, -0.325},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.325,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.446875, -0.325},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 0.65,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.325, 0.040625},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.325,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.3453125, 0.040625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.65,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.325, -0.40625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.325,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.3453125, -0.3859375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 0.65,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.365625, -0.325},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.325,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.365625, -0.325},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            burnt_patch_lifetime = 0,
+            flags = {'placeable-off-grid', 'not-on-map'},
+            name = 'acid-splash-fire-worm-big',
+            fade_in_duration = 1,
+            secondary_picture_fade_out_duration = 60,
+            maximum_damage_multiplier = 3,
+            particle_alpha_blend_duration = 300,
+            initial_flame_count = 1,
+            uses_alternative_behavior = true,
+            maximum_spread_count = 100,
+            limit_overlapping_particles = true,
+            lifetime_increase_cooldown = 4,
+            delay_between_initial_flames = 10,
+            maximum_lifetime = 1800,
+            damage_multiplier_increase_per_added_fuel = 1
+        },
+        ['fire-flame'] = {
+            working_sound = {
+                match_volume_to_activity = true,
+                sound = {
+                    {filename = '__base__/sound/fire-1.ogg', volume = 0.7},
+                    {filename = '__base__/sound/fire-2.ogg', volume = 0.7}
+                }
+            },
+            type = 'fire',
+            spread_delay = 300,
+            pictures = {
+                {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-13.png',
+                    tint = {g = 1, r = 1, a = 1, b = 1},
+                    scale = 0.5,
+                    width = 60,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.01953125, -0.453125},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 118,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-12.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 63,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.0078125, -0.4570325},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 116,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-11.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 61,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.00390625, -0.453125},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 122,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-10.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 65,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.03125, -0.32422},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 108,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-09.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 64,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.015625, -0.3476575},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 101,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-08.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 50,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {-0.02734375, -0.38672},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 98,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-07.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 54,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.0078125, -0.3203125},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 84,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-06.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 65,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0, -0.41797},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 92,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-05.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 59,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.015625, -0.4414075},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 103,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-04.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 67,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.0078125, -0.5546875},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 130,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-03.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 74,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.0234375, -0.4921875},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 117,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-02.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 74,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.00390625, -0.484375},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 114,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-01.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 66,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {-0.03515625, -0.5195325},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 119,
+                    animation_speed = 1
+                }
+            },
+            spread_delay_deviation = 180,
+            spawn_entity = 'fire-flame-on-tree',
+            burnt_patch_alpha_variations = {{tile = 'stone-path', alpha = 0.26}, {tile = 'concrete', alpha = 0.24}},
+            lifetime_increase_by = 150,
+            fade_out_duration = 30,
+            smoke_source_pictures = {
+                {
+                    scale = 1,
+                    frame_count = 31,
+                    height = 138,
+                    shift = {-0.109375, -1.1875},
+                    filename = '__base__/graphics/entity/fire-flame/fire-smoke-source-1.png',
+                    width = 101,
+                    line_length = 8,
+                    animation_speed = 0.5
+                }, {
+                    scale = 1,
+                    frame_count = 31,
+                    height = 138,
+                    shift = {-0.203125, -1.21875},
+                    filename = '__base__/graphics/entity/fire-flame/fire-smoke-source-2.png',
+                    width = 99,
+                    line_length = 8,
+                    animation_speed = 0.5
+                }
+            },
+            damage_per_tick = {amount = 0.21666666666667, type = 'fire'},
+            on_fuel_added_action = {
+                action_delivery = {
+                    type = 'instant',
+                    target_effects = {
+                        {
+                            offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                            speed_from_center = 0.01,
+                            type = 'create-trivial-smoke',
+                            smoke_name = 'fire-smoke-on-adding-fuel'
+                        }
+                    }
+                },
+                type = 'direct'
+            },
+            smoke = {
+                {
+                    deviation = {0.5, 0.5},
+                    name = 'fire-smoke',
+                    frequency = 0.125,
+                    position = {0, -0.8},
+                    vertical_speed_slowdown = 0.99,
+                    starting_frame_deviation = 60,
+                    starting_vertical_speed = 0.05,
+                    height = -0.5,
+                    starting_vertical_speed_deviation = 0.005
+                }
+            },
+            burnt_patch_lifetime = 1800,
+            flags = {'placeable-off-grid', 'not-on-map'},
+            emissions_per_second = 0.005,
+            initial_lifetime = 120,
+            name = 'fire-flame',
+            light = {intensity = 1, size = 20},
+            burnt_patch_pictures = {
+                {
+                    x = 0,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 0,
+                    shift = {-0.09375, 0.125}
+                },
+                {
+                    x = 115,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 0,
+                    shift = 0
+                },
+                {
+                    x = 230,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 0,
+                    shift = 0
+                },
+                {
+                    x = 0,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 56,
+                    shift = 0
+                }, {
+                    x = 115,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 56,
+                    shift = 0
+                }, {
+                    x = 230,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 56,
+                    shift = 0
+                },
+                {
+                    x = 0,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 112,
+                    shift = 0
+                }, {
+                    x = 115,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 112,
+                    shift = 0
+                }, {
+                    x = 230,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 112,
+                    shift = 0
+                }
+            },
+            maximum_lifetime = 1800,
+            damage_multiplier_decrease_per_tick = 0.005,
+            maximum_damage_multiplier = 6,
+            flame_alpha_deviation = 0.05,
+            burnt_patch_alpha_default = 0.4,
+            lifetime_increase_cooldown = 4,
+            maximum_spread_count = 100,
+            fade_in_duration = 30,
+            add_fuel_cooldown = 10,
+            delay_between_initial_flames = 10,
+            flame_alpha = 0.35,
+            damage_multiplier_increase_per_added_fuel = 1
+        },
+        ['fire-flame-on-tree'] = {
+            tree_dying_factor = 0.8,
+            pictures = {
+                {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-13.png',
+                    tint = {g = 1, r = 1, a = 1, b = 1},
+                    scale = 0.625,
+                    width = 60,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.0244140625, -0.56640625},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 118,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-12.png',
+                    tint = 0,
+                    scale = 0.625,
+                    width = 63,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.009765625, -0.571290625},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 116,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-11.png',
+                    tint = 0,
+                    scale = 0.625,
+                    width = 61,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.0048828125, -0.56640625},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 122,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-10.png',
+                    tint = 0,
+                    scale = 0.625,
+                    width = 65,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.0390625, -0.405275},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 108,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-09.png',
+                    tint = 0,
+                    scale = 0.625,
+                    width = 64,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.01953125, -0.434571875},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 101,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-08.png',
+                    tint = 0,
+                    scale = 0.625,
+                    width = 50,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {-0.0341796875, -0.4834},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 98,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-07.png',
+                    tint = 0,
+                    scale = 0.625,
+                    width = 54,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.009765625, -0.400390625},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 84,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-06.png',
+                    tint = 0,
+                    scale = 0.625,
+                    width = 65,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0, -0.5224625},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 92,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-05.png',
+                    tint = 0,
+                    scale = 0.625,
+                    width = 59,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.01953125, -0.551759375},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 103,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-04.png',
+                    tint = 0,
+                    scale = 0.625,
+                    width = 67,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.009765625, -0.693359375},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 130,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-03.png',
+                    tint = 0,
+                    scale = 0.625,
+                    width = 74,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.029296875, -0.615234375},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 117,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-02.png',
+                    tint = 0,
+                    scale = 0.625,
+                    width = 74,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.0048828125, -0.60546875},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 114,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-01.png',
+                    tint = 0,
+                    scale = 0.625,
+                    width = 66,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {-0.0439453125, -0.649415625},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 119,
+                    animation_speed = 1
+                }
+            },
+            spread_delay_deviation = 180,
+            spread_delay = 300,
+            fade_out_duration = 100,
+            smoke_fade_out_duration = 130,
+            damage_per_tick = {amount = 0.58333333333333, type = 'fire'},
+            smoke = {
+                {
+                    deviation = {0.5, 0.5},
+                    name = 'fire-smoke-without-glow',
+                    frequency = 0.125,
+                    height = -0.5,
+                    starting_vertical_speed = 0.008,
+                    position = {0, -0.8},
+                    starting_frame_deviation = 60,
+                    starting_vertical_speed_deviation = 0.05
+                }
+            },
+            flags = {'placeable-off-grid', 'not-on-map'},
+            name = 'fire-flame-on-tree',
+            light = {intensity = 1, size = 20},
+            spawn_entity = 'fire-flame-on-tree',
+            type = 'fire',
+            working_sound = {max_sounds_per_type = 2, sound = {filename = '__base__/sound/fire-1.ogg'}},
+            smoke_fade_in_duration = 100,
+            flame_alpha_deviation = 0.05,
+            smoke_source_pictures = {
+                {
+                    height = 138,
+                    filename = '__base__/graphics/entity/fire-flame/fire-smoke-source-1.png',
+                    tint = {g = 0.75, r = 0.75, a = 0.75, b = 0.75},
+                    scale = 0.6,
+                    frame_count = 31,
+                    shift = {-0.065625, -0.7125},
+                    width = 101,
+                    line_length = 8,
+                    animation_speed = 0.5
+                }, {
+                    height = 138,
+                    filename = '__base__/graphics/entity/fire-flame/fire-smoke-source-2.png',
+                    tint = 0,
+                    scale = 0.6,
+                    frame_count = 31,
+                    shift = {-0.121875, -0.73125},
+                    width = 99,
+                    line_length = 8,
+                    animation_speed = 0.5
+                }
+            },
+            localised_name = {'entity-name.fire-flame'},
+            maximum_spread_count = 100,
+            small_tree_fire_pictures = {
+                {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/tree-fire-flame-01-a.png',
+                    tint = {g = 1, r = 1, a = 1, b = 1},
+                    width = 38,
+                    scale = 0.525,
+                    shift = {-0.01640625, -0.7875},
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    line_length = 8,
+                    direction_count = 1,
+                    height = 110,
+                    flags = {'compressed'},
+                    animation_speed = 0.5
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/tree-fire-flame-01-b.png',
+                    tint = 0,
+                    width = 39,
+                    scale = 0.525,
+                    shift = {-0.041015625, -0.7957005},
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    line_length = 8,
+                    direction_count = 1,
+                    height = 111,
+                    flags = 0,
+                    animation_speed = 0.5
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/tree-fire-flame-01-c.png',
+                    tint = 0,
+                    width = 44,
+                    scale = 0.525,
+                    shift = {-0.08203125, -0.7875},
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    line_length = 8,
+                    direction_count = 1,
+                    height = 108,
+                    flags = 0,
+                    animation_speed = 0.5
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/tree-fire-flame-03-a.png',
+                    tint = 0,
+                    width = 38,
+                    scale = 0.525,
+                    shift = {-0.01640625, -0.7875},
+                    frame_count = 23,
+                    axially_symmetrical = false,
+                    line_length = 8,
+                    direction_count = 1,
+                    height = 110,
+                    flags = 0,
+                    animation_speed = 0.5
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/tree-fire-flame-03-b.png',
+                    tint = 0,
+                    width = 34,
+                    scale = 0.525,
+                    shift = {-0.01640625, -0.70546875},
+                    frame_count = 23,
+                    axially_symmetrical = false,
+                    line_length = 8,
+                    direction_count = 1,
+                    height = 98,
+                    flags = 0,
+                    animation_speed = 0.5
+                }, {
+                    blend_mode = 'additive',
+                    filename = '__base__/graphics/entity/fire-flame/tree-fire-flame-03-c.png',
+                    tint = 0,
+                    width = 39,
+                    scale = 0.525,
+                    shift = {-0.041015625, -0.7957005},
+                    frame_count = 23,
+                    axially_symmetrical = false,
+                    line_length = 8,
+                    direction_count = 1,
+                    height = 111,
+                    flags = 0,
+                    animation_speed = 0.5
+                }
+            },
+            fade_in_duration = 120,
+            delay_between_initial_flames = 20,
+            flame_alpha = 0.35,
+            emissions_per_second = 0.005
+        },
+        ['acid-splash-fire-spitter-small'] = {
+            initial_render_layer = 'object',
+            pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = 0,
+                            scale = 0.5,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.1875, -0.15625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = 0,
+                                scale = 0.25,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.1875, -0.125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 0.5,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.03125, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.25,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.03125, 0.03125},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = 0,
+                            scale = 0.5,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.15625, -0.28125},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = 0,
+                                scale = 0.25,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.140625, -0.265625},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 0.5,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.09375, 0.4375},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.25,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.09375, 0.453125},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = 0,
+                            scale = 0.5,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.34375, -0.25},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = 0,
+                                scale = 0.25,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.34375, -0.25},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 0.5,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.25, 0.03125},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.25,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.265625, 0.03125},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = 0,
+                            scale = 0.5,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.25, -0.3125},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = 0,
+                                scale = 0.25,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.265625, -0.296875},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 0.5,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.28125, -0.25},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.25,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.28125, -0.25},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            spread_delay_deviation = 180,
+            spread_delay = 300,
+            fade_out_duration = 30,
+            secondary_render_layer = 'higher-object-above',
+            initial_lifetime = 1920,
+            render_layer = 'lower-object-above-shadow',
+            damage_multiplier_decrease_per_tick = 0.005,
+            localised_name = {'entity-name.acid-splash'},
+            type = 'fire',
+            add_fuel_cooldown = 10,
+            emissions_per_second = 0,
+            secondary_picture_fade_out_start = 30,
+            particle_alpha = 0.6,
+            lifetime_increase_by = 0,
+            on_damage_tick_effect = {
+                ignore_collision_condition = true,
+                trigger_target_mask = {'ground-unit'},
+                force = 'enemy',
+                filter_enabled = true,
+                action_delivery = {
+                    type = 'instant',
+                    target_effects = {
+                        {sticker = 'acid-sticker-small', show_in_tooltip = true, type = 'create-sticker'},
+                        {type = 'damage', apply_damage_to_trees = false, damage = {amount = 0.1, type = 'acid'}}
+                    }
+                },
+                type = 'direct'
+            },
+            damage_per_tick = {amount = 0, type = 'acid'},
+            secondary_pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.325,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.121875, -0.1015625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.1625,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.121875, -0.08125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 0.325,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.0203125, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.1625,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.0203125, 0.0203125},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.325,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.1015625, -0.1828125},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.1625,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.09140625, -0.17265625},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 0.325,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.0609375, 0.284375},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.1625,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.0609375, 0.29453125},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.325,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.2234375, -0.1625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.1625,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.2234375, -0.1625},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 0.325,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.1625, 0.0203125},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.1625,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.17265625, 0.0203125},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.325,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.1625, -0.203125},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.1625,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.17265625, -0.19296875},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 0.325,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.1828125, -0.1625},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.1625,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.1828125, -0.1625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            burnt_patch_lifetime = 0,
+            flags = {'placeable-off-grid', 'not-on-map'},
+            name = 'acid-splash-fire-spitter-small',
+            fade_in_duration = 1,
+            secondary_picture_fade_out_duration = 60,
+            maximum_damage_multiplier = 3,
+            particle_alpha_blend_duration = 300,
+            initial_flame_count = 1,
+            uses_alternative_behavior = true,
+            maximum_spread_count = 100,
+            limit_overlapping_particles = true,
+            lifetime_increase_cooldown = 4,
+            delay_between_initial_flames = 10,
+            maximum_lifetime = 1800,
+            damage_multiplier_increase_per_added_fuel = 1
+        },
+        ['acid-splash-fire-worm-small'] = {
+            initial_render_layer = 'object',
+            pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = 0,
+                            scale = 0.65,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.24375, -0.203125},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = 0,
+                                scale = 0.325,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.24375, -0.1625},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 0.65,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.040625, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.325,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.040625, 0.040625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = 0,
+                            scale = 0.65,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.203125, -0.365625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = 0,
+                                scale = 0.325,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.1828125, -0.3453125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 0.65,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.121875, 0.56875},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.325,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.121875, 0.5890625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = 0,
+                            scale = 0.65,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.446875, -0.325},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = 0,
+                                scale = 0.325,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.446875, -0.325},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 0.65,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.325, 0.040625},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.325,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.3453125, 0.040625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = 0,
+                            scale = 0.65,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.325, -0.40625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = 0,
+                                scale = 0.325,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.3453125, -0.3859375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 0.65,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.365625, -0.325},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.325,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.365625, -0.325},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            spread_delay_deviation = 180,
+            spread_delay = 300,
+            fade_out_duration = 30,
+            secondary_render_layer = 'higher-object-above',
+            initial_lifetime = 1920,
+            render_layer = 'lower-object-above-shadow',
+            damage_multiplier_decrease_per_tick = 0.005,
+            localised_name = {'entity-name.acid-splash'},
+            type = 'fire',
+            add_fuel_cooldown = 10,
+            emissions_per_second = 0,
+            secondary_picture_fade_out_start = 30,
+            particle_alpha = 0.6,
+            lifetime_increase_by = 0,
+            on_damage_tick_effect = {
+                ignore_collision_condition = true,
+                trigger_target_mask = {'ground-unit'},
+                force = 'enemy',
+                filter_enabled = true,
+                action_delivery = {
+                    type = 'instant',
+                    target_effects = {
+                        {sticker = 'acid-sticker-small', show_in_tooltip = true, type = 'create-sticker'},
+                        {type = 'damage', apply_damage_to_trees = false, damage = {amount = 0.1, type = 'acid'}}
+                    }
+                },
+                type = 'direct'
+            },
+            damage_per_tick = {amount = 0, type = 'acid'},
+            secondary_pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.4225,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.1584375, -0.13203125},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.21125,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.1584375, -0.105625},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 0.4225,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.02640625, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.21125,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.02640625, 0.02640625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.4225,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.13203125, -0.23765625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.21125,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.118828125, -0.224453125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 0.4225,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.07921875, 0.3696875},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.21125,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.07921875, 0.382890625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.4225,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.29046875, -0.21125},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.21125,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.29046875, -0.21125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 0.4225,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.21125, 0.02640625},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.21125,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.224453125, 0.02640625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.4225,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.21125, -0.2640625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.21125,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.224453125, -0.250859375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 0.4225,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.23765625, -0.21125},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.21125,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.23765625, -0.21125},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            burnt_patch_lifetime = 0,
+            flags = {'placeable-off-grid', 'not-on-map'},
+            name = 'acid-splash-fire-worm-small',
+            fade_in_duration = 1,
+            secondary_picture_fade_out_duration = 60,
+            maximum_damage_multiplier = 3,
+            particle_alpha_blend_duration = 300,
+            initial_flame_count = 1,
+            uses_alternative_behavior = true,
+            maximum_spread_count = 100,
+            limit_overlapping_particles = true,
+            lifetime_increase_cooldown = 4,
+            delay_between_initial_flames = 10,
+            maximum_lifetime = 1800,
+            damage_multiplier_increase_per_added_fuel = 1
+        },
+        ['crash-site-fire-flame'] = {
+            working_sound = {
+                match_volume_to_activity = true,
+                sound = {
+                    {filename = '__base__/sound/fire-1.ogg', volume = 0.7},
+                    {filename = '__base__/sound/fire-2.ogg', volume = 0.7}
+                }
+            },
+            type = 'fire',
+            pictures = {
+                {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-13.png',
+                    tint = {g = 1, r = 1, a = 1, b = 1},
+                    scale = 0.5,
+                    width = 60,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.01953125, -0.453125},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 118,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-12.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 63,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.0078125, -0.4570325},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 116,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-11.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 61,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.00390625, -0.453125},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 122,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-10.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 65,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.03125, -0.32422},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 108,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-09.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 64,
+                    frame_count = 25,
+                    axially_symmetrical = false,
+                    shift = {-0.015625, -0.3476575},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 101,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-08.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 50,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {-0.02734375, -0.38672},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 98,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-07.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 54,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.0078125, -0.3203125},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 84,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-06.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 65,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0, -0.41797},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 92,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-05.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 59,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.015625, -0.4414075},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 103,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-04.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 67,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.0078125, -0.5546875},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 130,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-03.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 74,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.0234375, -0.4921875},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 117,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-02.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 74,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {0.00390625, -0.484375},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 114,
+                    animation_speed = 1
+                }, {
+                    blend_mode = 'normal',
+                    filename = '__base__/graphics/entity/fire-flame/fire-flame-01.png',
+                    tint = 0,
+                    scale = 0.5,
+                    width = 66,
+                    frame_count = 32,
+                    axially_symmetrical = false,
+                    shift = {-0.03515625, -0.5195325},
+                    direction_count = 1,
+                    line_length = 8,
+                    height = 119,
+                    animation_speed = 1
+                }
+            },
+            spread_delay_deviation = 180,
+            spread_delay = 300,
+            burnt_patch_alpha_variations = {{tile = 'stone-path', alpha = 0.26}, {tile = 'concrete', alpha = 0.24}},
+            lifetime_increase_by = 150,
+            fade_out_duration = 30,
+            smoke_source_pictures = {
+                {
+                    scale = 1,
+                    frame_count = 31,
+                    height = 138,
+                    shift = {-0.109375, -1.1875},
+                    filename = '__base__/graphics/entity/fire-flame/fire-smoke-source-1.png',
+                    width = 101,
+                    line_length = 8,
+                    animation_speed = 0.5
+                }, {
+                    scale = 1,
+                    frame_count = 31,
+                    height = 138,
+                    shift = {-0.203125, -1.21875},
+                    filename = '__base__/graphics/entity/fire-flame/fire-smoke-source-2.png',
+                    width = 99,
+                    line_length = 8,
+                    animation_speed = 0.5
+                }
+            },
+            damage_per_tick = {amount = 0.016666666666667, type = 'fire'},
+            on_fuel_added_action = {
+                action_delivery = {
+                    type = 'instant',
+                    target_effects = {
+                        {
+                            offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                            speed_from_center = 0.01,
+                            type = 'create-trivial-smoke',
+                            smoke_name = 'fire-smoke-on-adding-fuel'
+                        }
+                    }
+                },
+                type = 'direct'
+            },
+            smoke = {
+                {
+                    deviation = {0.5, 0.5},
+                    name = 'fire-smoke',
+                    frequency = 0.125,
+                    position = {0, -0.8},
+                    vertical_speed_slowdown = 0.99,
+                    starting_frame_deviation = 60,
+                    starting_vertical_speed = 0.05,
+                    height = -0.5,
+                    starting_vertical_speed_deviation = 0.005
+                }
+            },
+            burnt_patch_lifetime = 1800,
+            flags = {'placeable-off-grid', 'not-on-map'},
+            emissions_per_second = 0,
+            initial_lifetime = 300,
+            name = 'crash-site-fire-flame',
+            light = {intensity = 1, size = 20},
+            burnt_patch_pictures = {
+                {
+                    x = 0,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 0,
+                    shift = {-0.09375, 0.125}
+                },
+                {
+                    x = 115,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 0,
+                    shift = 0
+                },
+                {
+                    x = 230,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 0,
+                    shift = 0
+                },
+                {
+                    x = 0,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 56,
+                    shift = 0
+                }, {
+                    x = 115,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 56,
+                    shift = 0
+                }, {
+                    x = 230,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 56,
+                    shift = 0
+                },
+                {
+                    x = 0,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 112,
+                    shift = 0
+                }, {
+                    x = 115,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 112,
+                    shift = 0
+                }, {
+                    x = 230,
+                    height = 56,
+                    filename = '__base__/graphics/entity/fire-flame/burnt-patch.png',
+                    width = 115,
+                    y = 112,
+                    shift = 0
+                }
+            },
+            maximum_lifetime = 1800,
+            damage_multiplier_decrease_per_tick = 0,
+            maximum_damage_multiplier = 1,
+            flame_alpha_deviation = 0.05,
+            burnt_patch_alpha_default = 0.4,
+            lifetime_increase_cooldown = 4,
+            maximum_spread_count = 100,
+            fade_in_duration = 30,
+            add_fuel_cooldown = 10,
+            delay_between_initial_flames = 10,
+            flame_alpha = 0.35,
+            damage_multiplier_increase_per_added_fuel = 0
+        },
+        ['acid-splash-fire-spitter-big'] = {
+            initial_render_layer = 'object',
+            pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = 0,
+                            scale = 1,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.375, -0.3125},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = 0,
+                                scale = 0.5,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.375, -0.25},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 1,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.0625, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.5,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.0625, 0.0625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = 0,
+                            scale = 1,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.3125, -0.5625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = 0,
+                                scale = 0.5,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.28125, -0.53125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 1,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.1875, 0.875},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.5,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.1875, 0.90625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = 0,
+                            scale = 1,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.6875, -0.5},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = 0,
+                                scale = 0.5,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.6875, -0.5},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 1,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.5, 0.0625},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.5,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.53125, 0.0625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = 0,
+                            scale = 1,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.5, -0.625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = 0,
+                                scale = 0.5,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.53125, -0.59375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 1,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.5625, -0.5},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.5,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.5625, -0.5},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            spread_delay_deviation = 180,
+            spread_delay = 300,
+            fade_out_duration = 30,
+            secondary_render_layer = 'higher-object-above',
+            initial_lifetime = 1920,
+            render_layer = 'lower-object-above-shadow',
+            damage_multiplier_decrease_per_tick = 0.005,
+            localised_name = {'entity-name.acid-splash'},
+            type = 'fire',
+            add_fuel_cooldown = 10,
+            emissions_per_second = 0,
+            secondary_picture_fade_out_start = 30,
+            particle_alpha = 0.6,
+            lifetime_increase_by = 0,
+            on_damage_tick_effect = {
+                ignore_collision_condition = true,
+                trigger_target_mask = {'ground-unit'},
+                force = 'enemy',
+                filter_enabled = true,
+                action_delivery = {
+                    type = 'instant',
+                    target_effects = {
+                        {sticker = 'acid-sticker-big', show_in_tooltip = true, type = 'create-sticker'},
+                        {type = 'damage', apply_damage_to_trees = false, damage = {amount = 0.6, type = 'acid'}}
+                    }
+                },
+                type = 'direct'
+            },
+            damage_per_tick = {amount = 0, type = 'acid'},
+            secondary_pictures = {
+                {
+                    layers = {
+                        {
+                            height = 116,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.65,
+                            frame_count = 26,
+                            width = 106,
+                            direction_count = 1,
+                            shift = {-0.24375, -0.203125},
+                            line_length = 8,
+                            hr_version = {
+                                height = 224,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.325,
+                                frame_count = 26,
+                                direction_count = 1,
+                                width = 210,
+                                shift = {-0.24375, -0.1625},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 98,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-1-shadow.png',
+                            width = 134,
+                            scale = 0.65,
+                            frame_count = 26,
+                            direction_count = 1,
+                            shift = {0.040625, 0},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 188,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-1-shadow.png',
+                                width = 266,
+                                scale = 0.325,
+                                frame_count = 26,
+                                direction_count = 1,
+                                shift = {0.040625, 0.040625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 76,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.65,
+                            frame_count = 29,
+                            width = 88,
+                            direction_count = 1,
+                            shift = {-0.203125, -0.365625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 150,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.325,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 174,
+                                shift = {-0.1828125, -0.3453125},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 136,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-2-shadow.png',
+                            width = 120,
+                            scale = 0.65,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.121875, 0.56875},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 266,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-2-shadow.png',
+                                width = 238,
+                                scale = 0.325,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.121875, 0.5890625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 104,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.65,
+                            frame_count = 29,
+                            width = 118,
+                            direction_count = 1,
+                            shift = {0.446875, -0.325},
+                            line_length = 8,
+                            hr_version = {
+                                height = 208,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.325,
+                                frame_count = 29,
+                                direction_count = 1,
+                                width = 236,
+                                shift = {0.446875, -0.325},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 70,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-3-shadow.png',
+                            width = 110,
+                            scale = 0.65,
+                            frame_count = 29,
+                            direction_count = 1,
+                            shift = {0.325, 0.040625},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 140,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-3-shadow.png',
+                                width = 214,
+                                scale = 0.325,
+                                frame_count = 29,
+                                direction_count = 1,
+                                shift = {0.3453125, 0.040625},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4.png',
+                            tint = {0.7, 0.6944, 0.3584, 0.7},
+                            scale = 0.65,
+                            frame_count = 24,
+                            width = 128,
+                            direction_count = 1,
+                            shift = {0.325, -0.40625},
+                            line_length = 8,
+                            hr_version = {
+                                height = 154,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4.png',
+                                tint = {0.7, 0.6944, 0.3584, 0.7},
+                                scale = 0.325,
+                                frame_count = 24,
+                                direction_count = 1,
+                                width = 252,
+                                shift = {0.3453125, -0.3859375},
+                                line_length = 8
+                            }
+                        }, {
+                            draw_as_shadow = true,
+                            height = 80,
+                            filename = '__base__/graphics/entity/acid-splash/acid-splash-4-shadow.png',
+                            width = 124,
+                            scale = 0.65,
+                            frame_count = 24,
+                            direction_count = 1,
+                            shift = {0.365625, -0.325},
+                            line_length = 8,
+                            hr_version = {
+                                draw_as_shadow = true,
+                                height = 160,
+                                filename = '__base__/graphics/entity/acid-splash/hr-acid-splash-4-shadow.png',
+                                width = 248,
+                                scale = 0.325,
+                                frame_count = 24,
+                                direction_count = 1,
+                                shift = {0.365625, -0.325},
+                                line_length = 8
+                            }
+                        }
+                    }
+                }
+            },
+            burnt_patch_lifetime = 0,
+            flags = {'placeable-off-grid', 'not-on-map'},
+            name = 'acid-splash-fire-spitter-big',
+            fade_in_duration = 1,
+            secondary_picture_fade_out_duration = 60,
+            maximum_damage_multiplier = 3,
+            particle_alpha_blend_duration = 300,
+            initial_flame_count = 1,
+            uses_alternative_behavior = true,
+            maximum_spread_count = 100,
+            limit_overlapping_particles = true,
+            lifetime_increase_cooldown = 4,
+            delay_between_initial_flames = 10,
+            maximum_lifetime = 1800,
+            damage_multiplier_increase_per_added_fuel = 1
+        }
+    };
+    return _;
+end

@@ -1,1 +1,798 @@
-do local _={["rail-chain-signal"]={rail_piece={axially_symmetrical=false,filename="__base__/graphics/entity/rail-chain-signal/rail-chain-signal-metal.png",frame_count=10,height=192,hr_version={axially_symmetrical=false,filename="__base__/graphics/entity/rail-chain-signal/hr-rail-chain-signal-metal.png",frame_count=10,width=384,height=384,line_length=10,scale=0.5},line_length=10,width=192},collision_box={{-0.2,-0.2},{0.2,0.2}},minable={mining_time=0.1,result="rail-chain-signal"},default_green_output_signal={type="virtual",name="signal-green"},selection_box_offsets={{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0}},max_health=100,type="rail-chain-signal",icon_size=64,circuit_wire_connection_points={{wire={green={-0.328125,0.21875},red={-0.40625,0.421875}},shadow={green={-0.1875,0.328125},red={-0.28125,0.515625}}},{wire={green={-0.46875,0.0625},red={-0.640625,0.1875}},shadow={green={-0.296875,0.1875},red={-0.53125,0.3125}}},{wire={green={-0.375,0.09375},red={-0.640625,0.09375}},shadow={green={-0.203125,0.234375},red={-0.453125,0.21875}}},{wire={green={0.59375,0.15625},red={0.421875,0.03125}},shadow={green={0.765625,0.28125},red={0.578125,0.15625}}},{wire={green={0.453125,0.3125},red={0.390625,0.125}},shadow={green={0.609375,0.4375},red={0.53125,0.234375}}},{wire={green={0,0.4375},red={0.15625,0.328125}},shadow={green={0.140625,0.546875},red={0.3125,0.4375}}},{wire={green={-0.5,0.4375},red={-0.265625,0.4375}},shadow={green={-0.40625,0.5},red={-0.1875,0.484375}}},{wire={green={-0.171875,0.328125},red={-0.03125,0.4375}},shadow={green={-0.078125,0.40625},red={0.09375,0.53125}}}},default_blue_output_signal={type="virtual",name="signal-blue"},corpse="rail-chain-signal-remnants",selection_box={{-0.5,-0.5},{0.5,0.5}},circuit_wire_max_distance=9,red_light={intensity=0.3,color={r=0.784314,b=0.431373,g=0.431373},size=4},damaged_trigger_effect={offsets={{0,1}},entity_name="spark-explosion",damage_type_filters="fire",offset_deviation={{-0.5,-0.5},{0.5,0.5}},type="create-entity"},orange_light={intensity=0.3,color={r=0.815686,b=0.431373,g=0.670588},size=4},name="rail-chain-signal",circuit_connector_sprites={{wire_pins_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",x=420,y=0,scale=0.5,height=54,priority="low",width=70,shift={0.09375,0.671875},draw_as_shadow=true},connector_main={height=50,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",width=52,priority="low",x=312,y=0,shift={-0.0625,0.578125},scale=0.5},wire_pins={height=58,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",width=62,priority="low",x=372,y=0,shift={-0.0625,0.546875},scale=0.5},led_green={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",width=48,priority="low",x=288,y=0,shift={-0.0625,0.546875},scale=0.5},red_green_led_light_offset={-0.078125,0.375},led_blue={height=60,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",width=60,priority="low",x=360,y=0,shift={-0.0625,0.546875},scale=0.5},led_light={size=0.9,intensity=0.8},led_red={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",width=48,priority="low",x=288,y=0,shift={-0.0625,0.546875},scale=0.5},connector_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png",x=372,y=0,scale=0.5,height=46,priority="low",width=62,shift={0.015625,0.625},draw_as_shadow=true},led_blue_off={height=44,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",width=46,priority="low",x=276,y=0,shift={-0.0625,0.546875},scale=0.5},blue_led_light_offset={-0.078125,0.25}},{wire_pins_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",x=350,y=0,scale=0.5,height=54,priority="low",width=70,shift={-0.28125,0.59375},draw_as_shadow=true},connector_main={height=50,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",width=52,priority="low",x=260,y=0,shift={-0.4375,0.5},scale=0.5},wire_pins={height=58,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",width=62,priority="low",x=310,y=0,shift={-0.4375,0.46875},scale=0.5},led_green={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",width=48,priority="low",x=240,y=0,shift={-0.4375,0.46875},scale=0.5},red_green_led_light_offset={-0.390625,0.296875},led_blue={height=60,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",width=60,priority="low",x=300,y=0,shift={-0.4375,0.46875},scale=0.5},led_light={size=0.9,intensity=0.8},led_red={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",width=48,priority="low",x=240,y=0,shift={-0.4375,0.46875},scale=0.5},connector_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png",x=310,y=0,scale=0.5,height=46,priority="low",width=62,shift={-0.359375,0.546875},draw_as_shadow=true},led_blue_off={height=44,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",width=46,priority="low",x=230,y=0,shift={-0.4375,0.46875},scale=0.5},blue_led_light_offset={-0.28125,0.21875}},{wire_pins_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",x=280,y=0,scale=0.5,height=54,priority="low",width=70,shift={-0.515625,0.5625},draw_as_shadow=true},connector_main={height=50,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",width=52,priority="low",x=208,y=0,shift={-0.671875,0.46875},scale=0.5},wire_pins={height=58,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",width=62,priority="low",x=248,y=0,shift={-0.671875,0.4375},scale=0.5},led_green={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",width=48,priority="low",x=192,y=0,shift={-0.671875,0.4375},scale=0.5},red_green_led_light_offset={-0.59375,0.296875},led_blue={height=60,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",width=60,priority="low",x=240,y=0,shift={-0.671875,0.4375},scale=0.5},led_light={size=0.9,intensity=0.8},led_red={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",width=48,priority="low",x=192,y=0,shift={-0.671875,0.4375},scale=0.5},connector_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png",x=248,y=0,scale=0.5,height=46,priority="low",width=62,shift={-0.59375,0.515625},draw_as_shadow=true},led_blue_off={height=44,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",width=46,priority="low",x=184,y=0,shift={-0.671875,0.4375},scale=0.5},blue_led_light_offset={-0.4375,0.296875}},{wire_pins_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",x=210,y=0,scale=0.5,height=54,priority="low",width=70,shift={0.328125,0.40625},draw_as_shadow=true},connector_main={height=50,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",width=52,priority="low",x=156,y=0,shift={0.171875,0.3125},scale=0.5},wire_pins={height=58,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",width=62,priority="low",x=186,y=0,shift={0.171875,0.28125},scale=0.5},led_green={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",width=48,priority="low",x=144,y=0,shift={0.171875,0.28125},scale=0.5},red_green_led_light_offset={0.25,0.171875},led_blue={height=60,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",width=60,priority="low",x=180,y=0,shift={0.171875,0.28125},scale=0.5},led_light={size=0.9,intensity=0.8},led_red={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",width=48,priority="low",x=144,y=0,shift={0.171875,0.28125},scale=0.5},connector_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png",x=186,y=0,scale=0.5,height=46,priority="low",width=62,shift={0.25,0.359375},draw_as_shadow=true},led_blue_off={height=44,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",width=46,priority="low",x=138,y=0,shift={0.171875,0.28125},scale=0.5},blue_led_light_offset={0.34375,0.25}},{wire_pins_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",x=140,y=0,scale=0.5,height=54,priority="low",width=70,shift={0.265625,0.359375},draw_as_shadow=true},connector_main={height=50,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",width=52,priority="low",x=104,y=0,shift={0.109375,0.265625},scale=0.5},wire_pins={height=58,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",width=62,priority="low",x=124,y=0,shift={0.109375,0.234375},scale=0.5},led_green={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",width=48,priority="low",x=96,y=0,shift={0.109375,0.234375},scale=0.5},red_green_led_light_offset={0.140625,0.15625},led_blue={height=60,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",width=60,priority="low",x=120,y=0,shift={0.109375,0.234375},scale=0.5},led_light={size=0.9,intensity=0.8},led_red={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",width=48,priority="low",x=96,y=0,shift={0.109375,0.234375},scale=0.5},connector_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png",x=124,y=0,scale=0.5,height=46,priority="low",width=62,shift={0.1875,0.3125},draw_as_shadow=true},led_blue_off={height=44,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",width=46,priority="low",x=92,y=0,shift={0.109375,0.234375},scale=0.5},blue_led_light_offset={0.140625,0.265625}},{wire_pins_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",x=70,y=0,scale=0.5,height=54,priority="low",width=70,shift={0.109375,0.375},draw_as_shadow=true},connector_main={height=50,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",width=52,priority="low",x=52,y=0,shift={-0.046875,0.28125},scale=0.5},wire_pins={height=58,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",width=62,priority="low",x=62,y=0,shift={-0.046875,0.25},scale=0.5},led_green={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",width=48,priority="low",x=48,y=0,shift={-0.046875,0.25},scale=0.5},red_green_led_light_offset={-0.078125,0.171875},led_blue={height=60,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",width=60,priority="low",x=60,y=0,shift={-0.046875,0.25},scale=0.5},led_light={size=0.9,intensity=0.8},led_red={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",width=48,priority="low",x=48,y=0,shift={-0.046875,0.25},scale=0.5},connector_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png",x=62,y=0,scale=0.5,height=46,priority="low",width=62,shift={0.03125,0.328125},draw_as_shadow=true},led_blue_off={height=44,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",width=46,priority="low",x=46,y=0,shift={-0.046875,0.25},scale=0.5},blue_led_light_offset={-0.1875,0.234375}},{wire_pins_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",x=0,y=0,scale=0.5,height=54,priority="low",width=70,shift={-0.09375,0.359375},draw_as_shadow=true},connector_main={height=50,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",width=52,priority="low",x=0,y=0,shift={-0.25,0.265625},scale=0.5},wire_pins={height=58,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",width=62,priority="low",x=0,y=0,shift={-0.25,0.234375},scale=0.5},led_green={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",width=48,priority="low",x=0,y=0,shift={-0.25,0.234375},scale=0.5},red_green_led_light_offset={-0.3125,0.125},led_blue={height=60,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",width=60,priority="low",x=0,y=0,shift={-0.25,0.234375},scale=0.5},led_light={size=0.9,intensity=0.8},led_red={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",width=48,priority="low",x=0,y=0,shift={-0.25,0.234375},scale=0.5},connector_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png",x=0,y=0,scale=0.5,height=46,priority="low",width=62,shift={-0.171875,0.3125},draw_as_shadow=true},led_blue_off={height=44,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",width=46,priority="low",x=0,y=0,shift={-0.25,0.234375},scale=0.5},blue_led_light_offset={-0.46875,0.125}},{wire_pins_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png",x=490,y=0,scale=0.5,height=54,priority="low",width=70,shift={0.40625,0.515625},draw_as_shadow=true},connector_main={height=50,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png",width=52,priority="low",x=364,y=0,shift={0.25,0.421875},scale=0.5},wire_pins={height=58,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png",width=62,priority="low",x=434,y=0,shift={0.25,0.390625},scale=0.5},led_green={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png",width=48,priority="low",x=336,y=0,shift={0.25,0.390625},scale=0.5},red_green_led_light_offset={0.1875,0.234375},led_blue={height=60,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png",width=60,priority="low",x=420,y=0,shift={0.25,0.390625},scale=0.5},led_light={size=0.9,intensity=0.8},led_red={height=46,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png",width=48,priority="low",x=336,y=0,shift={0.25,0.390625},scale=0.5},connector_shadow={filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png",x=434,y=0,scale=0.5,height=46,priority="low",width=62,shift={0.328125,0.46875},draw_as_shadow=true},led_blue_off={height=44,filename="__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png",width=46,priority="low",x=322,y=0,shift={0.25,0.390625},scale=0.5},blue_led_light_offset={0.078125,0.15625}}},icon_mipmaps=4,flags={"placeable-neutral","player-creation","building-direction-8-way","filter-directions","fast-replaceable-no-build-while-moving"},default_orange_output_signal={type="virtual",name="signal-yellow"},icon="__base__/graphics/icons/rail-chain-signal.png",blue_light={intensity=0.3,color={r=0.431373,b=0.623529,g=0.694118},size=4},default_red_output_signal={type="virtual",name="signal-red"},animation={filename="__base__/graphics/entity/rail-chain-signal/rail-chain-signal.png",hr_version={filename="__base__/graphics/entity/rail-chain-signal/hr-rail-chain-signal.png",scale=0.5,axially_symmetrical=false,height=320,frame_count=5,priority="high",width=320,direction_count=8,line_length=5},width=160,axially_symmetrical=false,height=160,frame_count=5,priority="high",direction_count=8,line_length=5},fast_replaceable_group="rail-signal",dying_explosion="rail-chain-signal-explosion",green_light={intensity=0.3,color={r=0.592157,b=0.117647,g=1},size=4}}};return _;end
+do
+    local _ = {
+        ['rail-chain-signal'] = {
+            circuit_connector_sprites = {
+                {
+                    wire_pins_shadow = {
+                        draw_as_shadow = true,
+                        x = 420,
+                        height = 54,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                        width = 70,
+                        scale = 0.5,
+                        shift = {0.09375, 0.671875},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_red = {
+                        y = 0,
+                        x = 288,
+                        height = 46,
+                        shift = {-0.0625, 0.546875},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-0.078125, 0.25},
+                    led_blue_off = {
+                        y = 0,
+                        x = 276,
+                        height = 44,
+                        shift = {-0.0625, 0.546875},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                        width = 46,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_main = {
+                        y = 0,
+                        x = 312,
+                        height = 50,
+                        shift = {-0.0625, 0.578125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                        width = 52,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    wire_pins = {
+                        y = 0,
+                        x = 372,
+                        height = 58,
+                        shift = {-0.0625, 0.546875},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
+                        width = 62,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_shadow = {
+                        draw_as_shadow = true,
+                        x = 372,
+                        height = 46,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png',
+                        width = 62,
+                        scale = 0.5,
+                        shift = {0.015625, 0.625},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_green = {
+                        y = 0,
+                        x = 288,
+                        height = 46,
+                        shift = {-0.0625, 0.546875},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_light = {intensity = 0.8, size = 0.9},
+                    red_green_led_light_offset = {-0.078125, 0.375},
+                    led_blue = {
+                        y = 0,
+                        x = 360,
+                        height = 60,
+                        shift = {-0.0625, 0.546875},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                        width = 60,
+                        priority = 'low',
+                        scale = 0.5
+                    }
+                }, {
+                    wire_pins_shadow = {
+                        draw_as_shadow = true,
+                        x = 350,
+                        height = 54,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                        width = 70,
+                        scale = 0.5,
+                        shift = {-0.28125, 0.59375},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_red = {
+                        y = 0,
+                        x = 240,
+                        height = 46,
+                        shift = {-0.4375, 0.46875},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-0.28125, 0.21875},
+                    led_blue_off = {
+                        y = 0,
+                        x = 230,
+                        height = 44,
+                        shift = {-0.4375, 0.46875},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                        width = 46,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_main = {
+                        y = 0,
+                        x = 260,
+                        height = 50,
+                        shift = {-0.4375, 0.5},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                        width = 52,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    wire_pins = {
+                        y = 0,
+                        x = 310,
+                        height = 58,
+                        shift = {-0.4375, 0.46875},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
+                        width = 62,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_shadow = {
+                        draw_as_shadow = true,
+                        x = 310,
+                        height = 46,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png',
+                        width = 62,
+                        scale = 0.5,
+                        shift = {-0.359375, 0.546875},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_green = {
+                        y = 0,
+                        x = 240,
+                        height = 46,
+                        shift = {-0.4375, 0.46875},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_light = {intensity = 0.8, size = 0.9},
+                    red_green_led_light_offset = {-0.390625, 0.296875},
+                    led_blue = {
+                        y = 0,
+                        x = 300,
+                        height = 60,
+                        shift = {-0.4375, 0.46875},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                        width = 60,
+                        priority = 'low',
+                        scale = 0.5
+                    }
+                }, {
+                    wire_pins_shadow = {
+                        draw_as_shadow = true,
+                        x = 280,
+                        height = 54,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                        width = 70,
+                        scale = 0.5,
+                        shift = {-0.515625, 0.5625},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_red = {
+                        y = 0,
+                        x = 192,
+                        height = 46,
+                        shift = {-0.671875, 0.4375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-0.4375, 0.296875},
+                    led_blue_off = {
+                        y = 0,
+                        x = 184,
+                        height = 44,
+                        shift = {-0.671875, 0.4375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                        width = 46,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_main = {
+                        y = 0,
+                        x = 208,
+                        height = 50,
+                        shift = {-0.671875, 0.46875},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                        width = 52,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    wire_pins = {
+                        y = 0,
+                        x = 248,
+                        height = 58,
+                        shift = {-0.671875, 0.4375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
+                        width = 62,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_shadow = {
+                        draw_as_shadow = true,
+                        x = 248,
+                        height = 46,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png',
+                        width = 62,
+                        scale = 0.5,
+                        shift = {-0.59375, 0.515625},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_green = {
+                        y = 0,
+                        x = 192,
+                        height = 46,
+                        shift = {-0.671875, 0.4375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_light = {intensity = 0.8, size = 0.9},
+                    red_green_led_light_offset = {-0.59375, 0.296875},
+                    led_blue = {
+                        y = 0,
+                        x = 240,
+                        height = 60,
+                        shift = {-0.671875, 0.4375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                        width = 60,
+                        priority = 'low',
+                        scale = 0.5
+                    }
+                }, {
+                    wire_pins_shadow = {
+                        draw_as_shadow = true,
+                        x = 210,
+                        height = 54,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                        width = 70,
+                        scale = 0.5,
+                        shift = {0.328125, 0.40625},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_red = {
+                        y = 0,
+                        x = 144,
+                        height = 46,
+                        shift = {0.171875, 0.28125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {0.34375, 0.25},
+                    led_blue_off = {
+                        y = 0,
+                        x = 138,
+                        height = 44,
+                        shift = {0.171875, 0.28125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                        width = 46,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_main = {
+                        y = 0,
+                        x = 156,
+                        height = 50,
+                        shift = {0.171875, 0.3125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                        width = 52,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    wire_pins = {
+                        y = 0,
+                        x = 186,
+                        height = 58,
+                        shift = {0.171875, 0.28125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
+                        width = 62,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_shadow = {
+                        draw_as_shadow = true,
+                        x = 186,
+                        height = 46,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png',
+                        width = 62,
+                        scale = 0.5,
+                        shift = {0.25, 0.359375},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_green = {
+                        y = 0,
+                        x = 144,
+                        height = 46,
+                        shift = {0.171875, 0.28125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_light = {intensity = 0.8, size = 0.9},
+                    red_green_led_light_offset = {0.25, 0.171875},
+                    led_blue = {
+                        y = 0,
+                        x = 180,
+                        height = 60,
+                        shift = {0.171875, 0.28125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                        width = 60,
+                        priority = 'low',
+                        scale = 0.5
+                    }
+                }, {
+                    wire_pins_shadow = {
+                        draw_as_shadow = true,
+                        x = 140,
+                        height = 54,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                        width = 70,
+                        scale = 0.5,
+                        shift = {0.265625, 0.359375},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_red = {
+                        y = 0,
+                        x = 96,
+                        height = 46,
+                        shift = {0.109375, 0.234375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {0.140625, 0.265625},
+                    led_blue_off = {
+                        y = 0,
+                        x = 92,
+                        height = 44,
+                        shift = {0.109375, 0.234375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                        width = 46,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_main = {
+                        y = 0,
+                        x = 104,
+                        height = 50,
+                        shift = {0.109375, 0.265625},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                        width = 52,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    wire_pins = {
+                        y = 0,
+                        x = 124,
+                        height = 58,
+                        shift = {0.109375, 0.234375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
+                        width = 62,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_shadow = {
+                        draw_as_shadow = true,
+                        x = 124,
+                        height = 46,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png',
+                        width = 62,
+                        scale = 0.5,
+                        shift = {0.1875, 0.3125},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_green = {
+                        y = 0,
+                        x = 96,
+                        height = 46,
+                        shift = {0.109375, 0.234375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_light = {intensity = 0.8, size = 0.9},
+                    red_green_led_light_offset = {0.140625, 0.15625},
+                    led_blue = {
+                        y = 0,
+                        x = 120,
+                        height = 60,
+                        shift = {0.109375, 0.234375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                        width = 60,
+                        priority = 'low',
+                        scale = 0.5
+                    }
+                }, {
+                    wire_pins_shadow = {
+                        draw_as_shadow = true,
+                        x = 70,
+                        height = 54,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                        width = 70,
+                        scale = 0.5,
+                        shift = {0.109375, 0.375},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_red = {
+                        y = 0,
+                        x = 48,
+                        height = 46,
+                        shift = {-0.046875, 0.25},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-0.1875, 0.234375},
+                    led_blue_off = {
+                        y = 0,
+                        x = 46,
+                        height = 44,
+                        shift = {-0.046875, 0.25},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                        width = 46,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_main = {
+                        y = 0,
+                        x = 52,
+                        height = 50,
+                        shift = {-0.046875, 0.28125},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                        width = 52,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    wire_pins = {
+                        y = 0,
+                        x = 62,
+                        height = 58,
+                        shift = {-0.046875, 0.25},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
+                        width = 62,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_shadow = {
+                        draw_as_shadow = true,
+                        x = 62,
+                        height = 46,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png',
+                        width = 62,
+                        scale = 0.5,
+                        shift = {0.03125, 0.328125},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_green = {
+                        y = 0,
+                        x = 48,
+                        height = 46,
+                        shift = {-0.046875, 0.25},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_light = {intensity = 0.8, size = 0.9},
+                    red_green_led_light_offset = {-0.078125, 0.171875},
+                    led_blue = {
+                        y = 0,
+                        x = 60,
+                        height = 60,
+                        shift = {-0.046875, 0.25},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                        width = 60,
+                        priority = 'low',
+                        scale = 0.5
+                    }
+                }, {
+                    wire_pins_shadow = {
+                        draw_as_shadow = true,
+                        x = 0,
+                        height = 54,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                        width = 70,
+                        scale = 0.5,
+                        shift = {-0.09375, 0.359375},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_red = {
+                        y = 0,
+                        x = 0,
+                        height = 46,
+                        shift = {-0.25, 0.234375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {-0.46875, 0.125},
+                    led_blue_off = {
+                        y = 0,
+                        x = 0,
+                        height = 44,
+                        shift = {-0.25, 0.234375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                        width = 46,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_main = {
+                        y = 0,
+                        x = 0,
+                        height = 50,
+                        shift = {-0.25, 0.265625},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                        width = 52,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    wire_pins = {
+                        y = 0,
+                        x = 0,
+                        height = 58,
+                        shift = {-0.25, 0.234375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
+                        width = 62,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_shadow = {
+                        draw_as_shadow = true,
+                        x = 0,
+                        height = 46,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png',
+                        width = 62,
+                        scale = 0.5,
+                        shift = {-0.171875, 0.3125},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_green = {
+                        y = 0,
+                        x = 0,
+                        height = 46,
+                        shift = {-0.25, 0.234375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_light = {intensity = 0.8, size = 0.9},
+                    red_green_led_light_offset = {-0.3125, 0.125},
+                    led_blue = {
+                        y = 0,
+                        x = 0,
+                        height = 60,
+                        shift = {-0.25, 0.234375},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                        width = 60,
+                        priority = 'low',
+                        scale = 0.5
+                    }
+                }, {
+                    wire_pins_shadow = {
+                        draw_as_shadow = true,
+                        x = 490,
+                        height = 54,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                        width = 70,
+                        scale = 0.5,
+                        shift = {0.40625, 0.515625},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_red = {
+                        y = 0,
+                        x = 336,
+                        height = 46,
+                        shift = {0.25, 0.390625},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    blue_led_light_offset = {0.078125, 0.15625},
+                    led_blue_off = {
+                        y = 0,
+                        x = 322,
+                        height = 44,
+                        shift = {0.25, 0.390625},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                        width = 46,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_main = {
+                        y = 0,
+                        x = 364,
+                        height = 50,
+                        shift = {0.25, 0.421875},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                        width = 52,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    wire_pins = {
+                        y = 0,
+                        x = 434,
+                        height = 58,
+                        shift = {0.25, 0.390625},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
+                        width = 62,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    connector_shadow = {
+                        draw_as_shadow = true,
+                        x = 434,
+                        height = 46,
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png',
+                        width = 62,
+                        scale = 0.5,
+                        shift = {0.328125, 0.46875},
+                        priority = 'low',
+                        y = 0
+                    },
+                    led_green = {
+                        y = 0,
+                        x = 336,
+                        height = 46,
+                        shift = {0.25, 0.390625},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                        width = 48,
+                        priority = 'low',
+                        scale = 0.5
+                    },
+                    led_light = {intensity = 0.8, size = 0.9},
+                    red_green_led_light_offset = {0.1875, 0.234375},
+                    led_blue = {
+                        y = 0,
+                        x = 420,
+                        height = 60,
+                        shift = {0.25, 0.390625},
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                        width = 60,
+                        priority = 'low',
+                        scale = 0.5
+                    }
+                }
+            },
+            fast_replaceable_group = 'rail-signal',
+            icon_size = 64,
+            type = 'rail-chain-signal',
+            selection_box_offsets = {{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}},
+            circuit_wire_max_distance = 9,
+            minable = {mining_time = 0.1, result = 'rail-chain-signal'},
+            dying_explosion = 'rail-chain-signal-explosion',
+            icon_mipmaps = 4,
+            red_light = {color = {g = 0.431373, r = 0.784314, b = 0.431373}, size = 4, intensity = 0.3},
+            circuit_wire_connection_points = {
+                {
+                    shadow = {green = {-0.1875, 0.328125}, red = {-0.28125, 0.515625}},
+                    wire = {green = {-0.328125, 0.21875}, red = {-0.40625, 0.421875}}
+                }, {
+                    shadow = {green = {-0.296875, 0.1875}, red = {-0.53125, 0.3125}},
+                    wire = {green = {-0.46875, 0.0625}, red = {-0.640625, 0.1875}}
+                }, {
+                    shadow = {green = {-0.203125, 0.234375}, red = {-0.453125, 0.21875}},
+                    wire = {green = {-0.375, 0.09375}, red = {-0.640625, 0.09375}}
+                }, {
+                    shadow = {green = {0.765625, 0.28125}, red = {0.578125, 0.15625}},
+                    wire = {green = {0.59375, 0.15625}, red = {0.421875, 0.03125}}
+                }, {
+                    shadow = {green = {0.609375, 0.4375}, red = {0.53125, 0.234375}},
+                    wire = {green = {0.453125, 0.3125}, red = {0.390625, 0.125}}
+                }, {
+                    shadow = {green = {0.140625, 0.546875}, red = {0.3125, 0.4375}},
+                    wire = {green = {0, 0.4375}, red = {0.15625, 0.328125}}
+                }, {
+                    shadow = {green = {-0.40625, 0.5}, red = {-0.1875, 0.484375}},
+                    wire = {green = {-0.5, 0.4375}, red = {-0.265625, 0.4375}}
+                }, {
+                    shadow = {green = {-0.078125, 0.40625}, red = {0.09375, 0.53125}},
+                    wire = {green = {-0.171875, 0.328125}, red = {-0.03125, 0.4375}}
+                }
+            },
+            default_blue_output_signal = {type = 'virtual', name = 'signal-blue'},
+            blue_light = {color = {g = 0.694118, r = 0.431373, b = 0.623529}, size = 4, intensity = 0.3},
+            max_health = 100,
+            rail_piece = {
+                frame_count = 10,
+                axially_symmetrical = false,
+                line_length = 10,
+                filename = '__base__/graphics/entity/rail-chain-signal/rail-chain-signal-metal.png',
+                width = 192,
+                hr_version = {
+                    frame_count = 10,
+                    axially_symmetrical = false,
+                    height = 384,
+                    filename = '__base__/graphics/entity/rail-chain-signal/hr-rail-chain-signal-metal.png',
+                    width = 384,
+                    line_length = 10,
+                    scale = 0.5
+                },
+                height = 192
+            },
+            name = 'rail-chain-signal',
+            orange_light = {color = {g = 0.670588, r = 0.815686, b = 0.431373}, size = 4, intensity = 0.3},
+            damaged_trigger_effect = {
+                entity_name = 'spark-explosion',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                damage_type_filters = 'fire',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+            },
+            default_orange_output_signal = {type = 'virtual', name = 'signal-yellow'},
+            green_light = {color = {g = 1, r = 0.592157, b = 0.117647}, size = 4, intensity = 0.3},
+            default_red_output_signal = {type = 'virtual', name = 'signal-red'},
+            open_sound = 0,
+            flags = {
+                'placeable-neutral', 'player-creation', 'building-direction-8-way', 'filter-directions',
+                'fast-replaceable-no-build-while-moving'
+            },
+            icon = '__base__/graphics/icons/rail-chain-signal.png',
+            collision_box = {{-0.2, -0.2}, {0.2, 0.2}},
+            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+            animation = {
+                height = 160,
+                filename = '__base__/graphics/entity/rail-chain-signal/rail-chain-signal.png',
+                width = 160,
+                frame_count = 5,
+                axially_symmetrical = false,
+                direction_count = 8,
+                line_length = 5,
+                priority = 'high',
+                hr_version = {
+                    height = 320,
+                    filename = '__base__/graphics/entity/rail-chain-signal/hr-rail-chain-signal.png',
+                    width = 320,
+                    scale = 0.5,
+                    frame_count = 5,
+                    axially_symmetrical = false,
+                    direction_count = 8,
+                    priority = 'high',
+                    line_length = 5
+                }
+            },
+            default_green_output_signal = {type = 'virtual', name = 'signal-green'},
+            close_sound = 0,
+            corpse = 'rail-chain-signal-remnants'
+        }
+    };
+    return _;
+end

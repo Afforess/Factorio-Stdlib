@@ -1,1 +1,17 @@
-do local _={["dummy-steel-axe"]={flags={"hidden"},type="mining-tool",order="a[mining]-b[steel-axe]",icon="__base__/graphics/icons/steel-axe.png",icon_size=64,name="dummy-steel-axe",subgroup="tool",durability=1,stack_size=1,icon_mipmaps=4}};return _;end
+do
+    local _ = {
+        ['dummy-steel-axe'] = {
+            name = 'dummy-steel-axe',
+            subgroup = 'tool',
+            order = 'a[mining]-b[steel-axe]',
+            icon_size = 64,
+            icon = '__base__/graphics/icons/steel-axe.png',
+            durability = 1,
+            stack_size = 1,
+            type = 'mining-tool',
+            flags = {'hidden'},
+            icon_mipmaps = 4
+        }
+    };
+    return _;
+end

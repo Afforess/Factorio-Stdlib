@@ -18,7 +18,6 @@ config.control = true
 
 local Event = {
     __class = 'Event',
-    debug_mode = false,
     registry = {}, -- Holds registered events
     custom_events = {}, -- Holds custom event ids
     stop_processing = {}, -- just has to be unique
@@ -30,9 +29,9 @@ setmetatable(Event, Event)
 Event.options = {
     protected_mode = false,
     skip_valid = false,
-    inspect_event = false, -- requires debug_mode to be true
     force_crc = false -- Requires debug_mode to be true
 }
+local Event_options_meta = {__index = Event.options}
 
 Event.core_events = {
     on_init = 'on_init',
@@ -57,10 +56,8 @@ Event.script = {
 
 local Type = require('__stdlib__/stdlib/utils/type')
 local table = require('__stdlib__/stdlib/utils/table')
-local inspect = require('__stdlib__/stdlib/vendor/inspect')
 
 local assert, type, tonumber = assert, type, tonumber
-local inspect_append = false -- Only used for write_file, can cause desyncs elsewhere
 local event_names = table.invert(defines.events)
 
 if not config.skip_script_protections then -- Protections for post and pre registrations
@@ -134,7 +131,7 @@ function Event.register(event_id, handler, filter, pattern, options)
     assert(filter == nil or Type.Function(filter), 'filter must be a function when present')
     assert(options == nil or Type.Table(options), 'options must be a table when present')
 
-    options = options or {}
+    options = setmetatable(options or {}, Event_options_meta)
 
     --Recursively handle event id tables
     if Type.Table(event_id) then
@@ -340,20 +337,9 @@ function Event.register_if(truthy, id, ...)
 end
 Event.on_event_if = Event.register_if
 
--- Use option A or B if present, otherwise pass option C
-local function check_option(a, b, c)
-    if a ~= nil then
-        return a
-    elseif b ~= nil then
-        return b
-    else
-        return c
-    end
-end
-
 -- Used to replace pcall in un-protected events.
-local function no_pcall(handler, event, other)
-    return true, handler(event, other)
+local function no_pcall(handler, ...)
+    return true, handler(...)
 end
 
 -- A dispatch helper function
@@ -362,7 +348,7 @@ end
 -- is thrown. Bootstrap events are not protected from erroring no matter the option.
 local function dispatch_event(event, registered)
     local success, match_result, handler_result
-    local protected = check_option(event.options.protected_mode, registered.options.protected_mode, Event.options.protected_mode)
+    local protected = event.options.protected_mode
     local pcall = not bootstrap_events[event.name] and protected and pcall or no_pcall
 
     -- If we have a filter run it first passing event, and registered.pattern as parameters
@@ -436,10 +422,11 @@ function Event.dispatch(event)
         end
 
         for _, registered in ipairs(registry) do
+            event.options = setmetatable(event.options, {__index = registered.options})
             -- Check for userdata and stop processing this and further handlers if not valid
             -- This is the same behavior as factorio events.
             -- This is done inside the loop as other events can modify the event.
-            if not check_option(event.options.skip_valid, registered.options.skip_valid, Event.options.skip_valid) then
+            if not event.options.skip_valid then
                 for _, val in pairs(event) do
                     if type(val) == 'table' and val.__self and not val.valid then
                         return
@@ -447,20 +434,12 @@ function Event.dispatch(event)
                 end
             end
 
-            -- Inspect things
-            if Event.debug_mode and game and check_option(event.options.inspect_event, registered.options.inspect_event, Event.options.inspect_event) then
-                local result = inspect(event) .. '\n'
-                game.write_file(Event.get_file_path('events/' .. id_to_name(event.input_name or event.name) .. '.lua'), result, inspect_append)
-                game.write_file(Event.get_file_path('events/ordered.lua'), result, inspect_append)
-                inspect_append = true
-            end
-
             -- Dispatch the event, if the event return Event.stop_processing don't process any more events
             if dispatch_event(event, registered) == Event.stop_processing then
                 return
             end
             -- Force a crc check if option is enabled. This is a debug option and will hamper performance if enabled
-            if Event.debug_mode and check_option(event.options.force_crc, registered.options.force_crc, Event.options.force_crc) and game then
+            if game and event.options.force_crc then
                 log('CRC check called for event [' .. event.name .. ']')
                 game.force_crc()
             end
@@ -546,5 +525,7 @@ function Event.set_option(option, bool)
 end
 
 Event.dump_data = require('__stdlib__/stdlib/event/modules/dump_event_data')(Event, valid_event_id, id_to_name)
+
+__DebugAdapter.stepIgnore(Event)
 
 return Event

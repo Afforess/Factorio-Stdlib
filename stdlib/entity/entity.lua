@@ -8,15 +8,13 @@ local Entity = {
 }
 setmetatable(Entity, Entity)
 
-local Is = require('__stdlib__/stdlib/utils/is')
-
 --- Tests whether an entity has access to a given field.
 -- @tparam LuaEntity entity the entity to test the access to a field
 -- @tparam string field_name the field name
 -- @treturn boolean true if the entity has access to the field, false if the entity threw an exception when trying to access the field
 function Entity.has(entity, field_name)
-    Is.Assert(entity, 'missing entity argument')
-    Is.Assert(field_name, 'missing field name argument')
+    assert(entity, 'missing entity argument')
+    assert(field_name, 'missing field name argument')
 
     local status =
         pcall(
@@ -33,7 +31,7 @@ end
 -- @tparam LuaEntity entity the entity to look up
 -- @treturn ?|nil|Mixed the user data, or nil if no data exists for the entity
 function Entity.get_data(entity)
-    Is.Assert(entity, 'missing entity argument')
+    assert(entity, 'missing entity argument')
     if not global._entity_data then
         return nil
     end
@@ -64,7 +62,7 @@ end
 -- @tparam ?|nil|Mixed data the data to set, or nil to delete the data associated with the entity
 -- @treturn ?|nil|Mixed the previous data associated with the entity, or nil if the entity had no previous data
 function Entity.set_data(entity, data)
-    Is.Assert(entity, 'missing entity argument')
+    assert(entity, 'missing entity argument')
 
     if not global._entity_data then
         global._entity_data = {}
@@ -108,7 +106,7 @@ end
 -- @tparam[opt=true] boolean mode if true, freezes the entity, if false, unfreezes the entity. If not specified, it is set to true
 -- @treturn LuaEntity the entity that has been frozen or unfrozen
 function Entity.set_frozen(entity, mode)
-    Is.Assert(entity, 'missing entity argument')
+    assert(entity, 'missing entity argument')
     mode = mode == false and true or false
     entity.active = mode
     entity.operable = mode
@@ -121,7 +119,7 @@ end
 -- @tparam[opt=true] boolean mode if true, makes the entity indestructible, if false, makes the entity destructable
 -- @treturn LuaEntity the entity that has been made indestructable or destructable
 function Entity.set_indestructible(entity, mode)
-    Is.Assert(entity, 'missing entity argument')
+    assert(entity, 'missing entity argument')
     mode = mode == false and true or false
     entity.minable = mode
     entity.destructible = mode
@@ -145,102 +143,24 @@ function Entity._are_equal(entity_a, entity_b)
     end
 end
 
---- Functions that raise events
--- @section Raise-Events
--- from @{https://github.com/aubergine10/lifecycle-events lifecycle-events}
--- <br>Used for raising `on_built and on_died` events for other mods
-
---- Destroy an entity by first raising the event.
---> Some entities can't be destroyed, such as the rails with trains on them.
--- @tparam LuaEntity entity the entity to be destroyed
--- @tparam[opt=false] boolean died raise on_entity_died event
--- @tparam[opt] LuaEntity cause the entity if available that did the killing for on_entity_died
--- @tparam[opt] LuaForce force the force if any that did the killing
--- @treturn boolean was the entity destroyed?
-function Entity.destroy_entity(entity, died, cause, force)
-    if entity and entity.valid and entity.can_be_destroyed then
-        local event = {
-            name = died and defines.events.on_entity_died or defines.events.script_raised_destroy,
-            entity = entity,
-            cause = cause,
-            force = force,
-            script = true
+function Entity.find_resources(entity, all)
+    if entity.type == 'mining-drill' then
+        local radius = entity.prototype.mining_drill_radius
+        local name = (not all and (entity.mining_target and entity.mining_target.name)) or nil
+        return entity.surface.count_entities_filtered {
+            type = 'resource',
+            name = name,
+            position = entity.position,
+            radius = radius,
         }
-        -- If no event name is passed, assume script_raised_destroy, otherwise raise the event
-        -- with the passed event name. ie. defines.events.on_preplayer_mined_item
-        script.raise_event(event.name, event)
-        return entity.destroy()
     end
+    return 0
 end
 
---- Create an entity and raise a build event.
--- @tparam LuaSurface surface the surface to create the entity on
--- @tparam table settings settings to pass to create_entity see @{LuaSurface.create_entity}
--- @tparam[opt] uint player_index the index of the player, when not present and not raise_script_event pass a fake robot
--- @tparam[opt] boolean raise_script_event raise script_raised_built
--- @treturn LuaEntity the created entity
-function Entity.create_entity(surface, settings, player_index, raise_script_event)
-    surface = game.surfaces[surface]
-    local entity = surface.create_entity(settings)
-    if entity then
-        local event = {
-            created_entity = entity,
-            script = true
-        }
-
-        if raise_script_event then
-            event.name = defines.events.script_raised_built
-            event.player_index = player_index
-        elseif player_index then
-            event.name = defines.events.on_built_entity
-            event.player_index = player_index
-        else
-            event.name = defines.events.on_robot_built_entity
-            event.robot = {}
-        end
-
-        script.raise_event(event.name, event)
-        return entity
-    end
+function Entity.is_damaged(entity)
+    return entity.get_health_ratio() < 1
 end
-
---- Revivie an entity ghost and raise the `on_built` or `on_robot_built` event.
--- @tparam LuaEntity ghost the ghost entity to revivie
--- @tparam[opt] uint player_index if present, raise `on_built_entity` with player_index, if not present raise `on_robot_built_entity`
--- @tparam[opt] boolean raise_script_event, if true raise script_raised_built as the event
--- @treturn table the item stacks this entity collided with
--- @treturn LuaEntity the new revived entity
--- @treturn LuaEntity the item request proxy if present
-function Entity.revive(ghost, player_index, raise_script_event)
-    if ghost and ghost.valid then
-        local collided, revived, proxy = ghost.revive(true)
-        if revived then
-            local event = {
-                created_entity = revived,
-                revived = true,
-                script = true
-            }
-
-            if raise_script_event then
-                event.name = defines.events.script_raised_built
-                event.player_index = player_index
-            elseif player_index then
-                event.name = defines.events.on_built_entity
-                event.player_index = player_index
-            else
-                event.name = defines.events.on_robot_built_entity
-                event.robot = {}
-            end
-
-            script.raise_event(event.name, event)
-            return collided, revived, proxy
-        end
-    end
-end
-
-function Entity.damaged(entity)
-    return entity.health and entity.prototype.max_health and entity.health < entity.prototype.max_health
-end
+Entity.damaged = Entity.is_damaged
 
 function Entity.is_circuit_connected(entity)
     local list = entity.circuit_connected_entities

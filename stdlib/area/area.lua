@@ -17,12 +17,17 @@ local math = require('__stdlib__/stdlib/utils/math')
 local string = require('__stdlib__/stdlib/utils/string')
 local abs, floor, max = math.abs, math.floor, math.max
 
+local metatable
+
 --- Constructor Methods
 -- @section Constructors
 -- ((
 Area.__call = function(_, ...)
     local t = type((...))
     if t == 'table' then
+        if t.left_top and t.right_bottom then
+            return Area.load(...)
+        end
         return Area.new(...)
     elseif t == 'string' then
         return Area.from_string(...)
@@ -30,8 +35,6 @@ Area.__call = function(_, ...)
         return Area.construct(...)
     end
 end
-
-local metatable
 
 local function new_area(lt, rb, o)
     return setmetatable({left_top = lt, right_bottom = rb, orientation = o}, metatable)

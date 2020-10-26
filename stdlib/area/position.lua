@@ -26,12 +26,16 @@ local dirs = defines.direction
 local AREA_PATH = '__stdlib__/stdlib/area/area'
 local EPSILON = 1.19e-07
 
+local metatable
 --- Constructor Methods
 -- @section Constructors
 
 Position.__call = function(_, ...)
     local t = type((...))
     if t == 'table' then
+        if t.x and t.y then
+            return Position.load(...)
+        end
         return Position.new(...)
     elseif t == 'string' then
         return Position.from_string(...)
@@ -40,7 +44,7 @@ Position.__call = function(_, ...)
     end
 end
 
-local metatable
+
 
 local function new(x, y)
     return setmetatable({x = x, y = y}, metatable)

@@ -1,8 +1,8 @@
 do
     local _ = {
-        productivity = {type = 'module-category', name = 'productivity'},
-        speed = {type = 'module-category', name = 'speed'},
-        effectivity = {type = 'module-category', name = 'effectivity'}
+        productivity = {name = 'productivity', type = 'module-category'},
+        effectivity = {name = 'effectivity', type = 'module-category'},
+        speed = {name = 'speed', type = 'module-category'}
     };
     return _;
 end

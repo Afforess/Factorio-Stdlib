@@ -1,64 +1,64 @@
 do
     local _ = {
-        ['default-large-semibold'] = {
-            size = 18,
-            from = 'default-semibold',
-            type = 'font',
-            name = 'default-large-semibold'
-        },
-        ['compilatron-message-font'] = {
-            size = 18,
-            from = 'default-semibold',
-            type = 'font',
-            name = 'compilatron-message-font'
-        },
-        ['default-listbox'] = {size = 14, from = 'default', type = 'font', name = 'default-listbox'},
-        compi = {size = 20, from = 'default', type = 'font', name = 'compi'},
-        default = {size = 14, from = 'default', type = 'font', name = 'default'},
-        ['default-small-bold'] = {size = 12, from = 'default-bold', type = 'font', name = 'default-small-bold'},
-        ['heading-2'] = {size = 15, from = 'default-bold', type = 'font', name = 'heading-2'},
+        ['default-bold'] = {from = 'default-bold', size = 14, name = 'default-bold', type = 'font'},
+        ['default-listbox'] = {from = 'default', size = 14, name = 'default-listbox', type = 'font'},
+        ['locale-pick'] = {from = 'locale-pick', size = 14, name = 'locale-pick', type = 'font'},
+        compi = {from = 'default', size = 20, name = 'compi', type = 'font'},
         ['default-game'] = {
+            border = true,
+            border_color = {},
+            from = 'default',
             size = 18,
             name = 'default-game',
-            type = 'font',
-            border = true,
-            from = 'default',
-            border_color = {}
+            type = 'font'
         },
-        ['default-large-bold'] = {size = 18, from = 'default-bold', type = 'font', name = 'default-large-bold'},
-        var = {size = 14, name = 'var', type = 'font', border = false, from = 'default-bold'},
-        ['default-bold'] = {size = 14, from = 'default-bold', type = 'font', name = 'default-bold'},
-        ['default-small-semibold'] = {
-            size = 12,
+        ['default-semibold'] = {from = 'default-semibold', size = 14, name = 'default-semibold', type = 'font'},
+        ['compilatron-message-font'] = {
             from = 'default-semibold',
-            type = 'font',
-            name = 'default-small-semibold'
+            size = 18,
+            name = 'compilatron-message-font',
+            type = 'font'
         },
-        ['heading-3'] = {size = 14, from = 'default-semibold', type = 'font', name = 'heading-3'},
-        ['scenario-message-dialog'] = {size = 16, from = 'default', type = 'font', name = 'scenario-message-dialog'},
-        ['heading-1'] = {size = 18, from = 'default-bold', type = 'font', name = 'heading-1'},
-        ['locale-pick'] = {size = 14, from = 'locale-pick', type = 'font', name = 'locale-pick'},
-        ['technology-slot-level-font'] = {
-            size = 11,
-            name = 'technology-slot-level-font',
-            type = 'font',
-            border = false,
-            from = 'default-bold'
-        },
-        ['default-large'] = {size = 18, from = 'default', type = 'font', name = 'default-large'},
-        ['default-tiny-bold'] = {size = 10, from = 'default-bold', type = 'font', name = 'default-tiny-bold'},
-        ['default-semibold'] = {size = 14, from = 'default-semibold', type = 'font', name = 'default-semibold'},
-        ['default-small'] = {size = 12, from = 'default', type = 'font', name = 'default-small'},
         ['count-font'] = {
+            border = true,
+            border_color = {},
+            from = 'default-bold',
             size = 13,
             name = 'count-font',
-            type = 'font',
-            border = true,
-            from = 'default-bold',
-            border_color = {}
+            type = 'font'
         },
-        ['default-dialog-button'] = {size = 18, from = 'default-bold', type = 'font', name = 'default-dialog-button'},
-        ['default-dropdown'] = {size = 14, from = 'default-semibold', type = 'font', name = 'default-dropdown'}
+        ['default-dropdown'] = {from = 'default-semibold', size = 14, name = 'default-dropdown', type = 'font'},
+        var = {border = false, from = 'default-bold', size = 14, name = 'var', type = 'font'},
+        ['default-small-bold'] = {from = 'default-bold', size = 12, name = 'default-small-bold', type = 'font'},
+        ['scenario-message-dialog'] = {from = 'default', size = 16, name = 'scenario-message-dialog', type = 'font'},
+        ['default-large-semibold'] = {
+            from = 'default-semibold',
+            size = 18,
+            name = 'default-large-semibold',
+            type = 'font'
+        },
+        ['technology-slot-level-font'] = {
+            border = false,
+            from = 'default-bold',
+            size = 11,
+            name = 'technology-slot-level-font',
+            type = 'font'
+        },
+        ['heading-3'] = {from = 'default-semibold', size = 14, name = 'heading-3', type = 'font'},
+        default = {from = 'default', size = 14, name = 'default', type = 'font'},
+        ['heading-1'] = {from = 'default-bold', size = 18, name = 'heading-1', type = 'font'},
+        ['heading-2'] = {from = 'default-bold', size = 15, name = 'heading-2', type = 'font'},
+        ['default-large'] = {from = 'default', size = 18, name = 'default-large', type = 'font'},
+        ['default-dialog-button'] = {from = 'default-bold', size = 18, name = 'default-dialog-button', type = 'font'},
+        ['default-tiny-bold'] = {from = 'default-bold', size = 10, name = 'default-tiny-bold', type = 'font'},
+        ['default-small-semibold'] = {
+            from = 'default-semibold',
+            size = 12,
+            name = 'default-small-semibold',
+            type = 'font'
+        },
+        ['default-small'] = {from = 'default', size = 12, name = 'default-small', type = 'font'},
+        ['default-large-bold'] = {from = 'default-bold', size = 18, name = 'default-large-bold', type = 'font'}
     };
     return _;
 end

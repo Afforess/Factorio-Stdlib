@@ -1,26 +1,52 @@
 do
     local _ = {
         ['artillery-wagon'] = {
-            connection_distance = 3,
+            minable = {mining_time = 0.5, result = 'artillery-wagon'},
+            working_sound = {
+                sound = {volume = 0.3, filename = '__base__/sound/train-wheels.ogg'},
+                match_volume_to_activity = true
+            },
+            vehicle_impact_sound = 0,
+            crash_trigger = {type = 'play-sound', sound = {{volume = 0, filename = '__base__/sound/car-crash.ogg'}}},
+            ammo_stack_limit = 100,
+            cannon_barrel_recoil_shiftings = {
+                {y = 0.04, z = -0, x = -0}, {y = 0.037, z = -0.351, x = -0.789}, {y = 0.035, z = -0.702, x = -1.578},
+                {y = 0.033, z = -1.054, x = -2.367}, {y = 0.031, z = -1.405, x = -3.155},
+                {y = 0.028, z = -1.756, x = -3.944}, {y = 0.028, z = -1.75, x = -3.931},
+                {y = 0.028, z = -1.737, x = -3.901}, {y = 0.029, z = -1.716, x = -3.854},
+                {y = 0.029, z = -1.688, x = -3.79}, {y = 0.029, z = -1.652, x = -3.711},
+                {y = 0.029, z = -1.61, x = -3.617}, {y = 0.03, z = -1.562, x = -3.508},
+                {y = 0.03, z = -1.507, x = -3.385}, {y = 0.03, z = -1.447, x = -3.249},
+                {y = 0.031, z = -1.381, x = -3.102}, {y = 0.031, z = -1.311, x = -2.944},
+                {y = 0.032, z = -1.236, x = -2.776}, {y = 0.032, z = -1.157, x = -2.599},
+                {y = 0.033, z = -1.076, x = -2.416}, {y = 0.033, z = -0.991, x = -2.226},
+                {y = 0.034, z = -0.905, x = -2.032}, {y = 0.034, z = -0.817, x = -1.835},
+                {y = 0.035, z = -0.728, x = -1.635}, {y = 0.035, z = -0.639, x = -1.436},
+                {y = 0.036, z = -0.551, x = -1.238}, {y = 0.037, z = -0.464, x = -1.042},
+                {y = 0.037, z = -0.379, x = -0.851}, {y = 0.038, z = -0.296, x = -0.665},
+                {y = 0.038, z = -0.216, x = -0.485}, {y = 0.039, z = -0.14, x = -0.314},
+                {y = 0.039, z = -0.068, x = -0.152}
+            },
+            drive_over_tie_trigger = {
+                type = 'play-sound',
+                sound = {
+                    {volume = 0.4, filename = '__base__/sound/train-tie-1.ogg'},
+                    {volume = 0.4, filename = '__base__/sound/train-tie-2.ogg'},
+                    {volume = 0.4, filename = '__base__/sound/train-tie-3.ogg'},
+                    {volume = 0.4, filename = '__base__/sound/train-tie-4.ogg'},
+                    {volume = 0.4, filename = '__base__/sound/train-tie-5.ogg'},
+                    {volume = 0.4, filename = '__base__/sound/train-tie-6.ogg'}
+                }
+            },
             pictures = {
                 layers = {
                     {
-                        height = 206,
-                        dice = 4,
-                        width = 238,
-                        allow_low_quality_rotation = true,
-                        line_length = 4,
-                        shift = {0, -0.84375},
+                        direction_count = 256,
                         hr_version = {
-                            height = 410,
-                            dice = 4,
-                            width = 476,
-                            allow_low_quality_rotation = true,
-                            line_length = 4,
-                            shift = {0.015625, -0.859375},
-                            scale = 0.5,
                             direction_count = 256,
-                            lines_per_file = 4,
+                            width = 476,
+                            dice = 4,
+                            allow_low_quality_rotation = true,
                             priority = 'very-low',
                             filenames = {
                                 '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-base-1.png',
@@ -39,10 +65,16 @@ do
                                 '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-base-14.png',
                                 '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-base-15.png',
                                 '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-base-16.png'
-                            }
+                            },
+                            height = 410,
+                            scale = 0.5,
+                            line_length = 4,
+                            lines_per_file = 4,
+                            shift = {0.015625, -0.859375}
                         },
-                        direction_count = 256,
-                        lines_per_file = 4,
+                        width = 238,
+                        dice = 4,
+                        allow_low_quality_rotation = true,
                         priority = 'very-low',
                         filenames = {
                             '__base__/graphics/entity/artillery-wagon/artillery-wagon-base-1.png',
@@ -61,26 +93,18 @@ do
                             '__base__/graphics/entity/artillery-wagon/artillery-wagon-base-14.png',
                             '__base__/graphics/entity/artillery-wagon/artillery-wagon-base-15.png',
                             '__base__/graphics/entity/artillery-wagon/artillery-wagon-base-16.png'
-                        }
-                    }, {
-                        draw_as_shadow = true,
-                        height = 240,
-                        dice = 4,
-                        width = 300,
-                        allow_low_quality_rotation = true,
+                        },
+                        height = 206,
                         line_length = 4,
-                        shift = {1.15625, 0.1875},
+                        lines_per_file = 4,
+                        shift = {0, -0.84375}
+                    }, {
+                        direction_count = 256,
                         hr_version = {
-                            draw_as_shadow = true,
-                            height = 480,
-                            dice = 4,
-                            width = 598,
-                            allow_low_quality_rotation = true,
-                            line_length = 4,
-                            shift = {1.140625, 0.203125},
-                            scale = 0.5,
                             direction_count = 256,
-                            lines_per_file = 4,
+                            width = 598,
+                            dice = 4,
+                            allow_low_quality_rotation = true,
                             priority = 'very-low',
                             filenames = {
                                 '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-base-shadow-1.png',
@@ -99,10 +123,17 @@ do
                                 '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-base-shadow-14.png',
                                 '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-base-shadow-15.png',
                                 '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-base-shadow-16.png'
-                            }
+                            },
+                            height = 480,
+                            scale = 0.5,
+                            line_length = 4,
+                            draw_as_shadow = true,
+                            shift = {1.140625, 0.203125},
+                            lines_per_file = 4
                         },
-                        direction_count = 256,
-                        lines_per_file = 4,
+                        width = 300,
+                        dice = 4,
+                        allow_low_quality_rotation = true,
                         priority = 'very-low',
                         filenames = {
                             '__base__/graphics/entity/artillery-wagon/artillery-wagon-base-shadow-1.png',
@@ -121,75 +152,384 @@ do
                             '__base__/graphics/entity/artillery-wagon/artillery-wagon-base-shadow-14.png',
                             '__base__/graphics/entity/artillery-wagon/artillery-wagon-base-shadow-15.png',
                             '__base__/graphics/entity/artillery-wagon/artillery-wagon-base-shadow-16.png'
-                        }
+                        },
+                        height = 240,
+                        line_length = 4,
+                        draw_as_shadow = true,
+                        shift = {1.15625, 0.1875},
+                        lines_per_file = 4
                     }
                 }
             },
-            icon_size = 64,
-            back_light = {
-                {
-                    color = {g = 0.1, r = 1, a = 0, b = 0.05},
-                    minimum_darkness = 0.3,
-                    shift = {-0.6, 3.5},
-                    size = 2,
-                    intensity = 0.6,
-                    add_perspective = true
-                }, {
-                    color = {g = 0.1, r = 1, a = 0, b = 0.05},
-                    minimum_darkness = 0.3,
-                    shift = {0.6, 3.5},
-                    size = 2,
-                    intensity = 0.6,
-                    add_perspective = true
-                }
-            },
-            drive_over_tie_trigger = {
-                sound = {
-                    {filename = '__base__/sound/train-tie-1.ogg', volume = 0.4},
-                    {filename = '__base__/sound/train-tie-2.ogg', volume = 0.4},
-                    {filename = '__base__/sound/train-tie-3.ogg', volume = 0.4},
-                    {filename = '__base__/sound/train-tie-4.ogg', volume = 0.4},
-                    {filename = '__base__/sound/train-tie-5.ogg', volume = 0.4},
-                    {filename = '__base__/sound/train-tie-6.ogg', volume = 0.4}
-                },
-                type = 'play-sound'
-            },
-            minable = {mining_time = 0.5, result = 'artillery-wagon'},
-            air_resistance = 0.015,
-            icon_mipmaps = 4,
-            rotating_sound = {sound = {filename = '__base__/sound/fight/artillery-rotation-loop.ogg', volume = 0.2}},
-            cannon_parking_speed = 0.25,
-            turret_rotation_speed = 0.001,
-            color = {g = 0.23, r = 0.43, a = 0.5, b = 0},
-            damaged_trigger_effect = {
-                entity_name = 'spark-explosion',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                damage_type_filters = 'fire',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
-            },
+            weight = 4000,
+            cannon_barrel_light_direction = {0.5976251, 0.0242053, -0.8014102},
+            rotating_sound = {sound = {volume = 0.2, filename = '__base__/sound/fight/artillery-rotation-loop.ogg'}},
+            collision_box = {{-0.6, -2.4}, {0.6, 2.4}},
+            dying_explosion = 'artillery-wagon-explosion',
+            braking_force = 3,
             stand_by_light = {
                 {
-                    color = {g = 0.2, r = 0.05, a = 0, b = 1},
-                    minimum_darkness = 0.3,
+                    color = {a = 0, b = 1, g = 0.2, r = 0.05},
+                    size = 2,
                     shift = {-0.6, -3.5},
-                    size = 2,
+                    add_perspective = true,
                     intensity = 0.5,
-                    add_perspective = true
+                    minimum_darkness = 0.3
                 }, {
-                    color = {g = 0.2, r = 0.05, a = 0, b = 1},
-                    minimum_darkness = 0.3,
-                    shift = {0.6, -3.5},
+                    color = {a = 0, b = 1, g = 0.2, r = 0.05},
                     size = 2,
+                    shift = {0.6, -3.5},
+                    add_perspective = true,
                     intensity = 0.5,
-                    add_perspective = true
+                    minimum_darkness = 0.3
                 }
             },
-            working_sound = {
-                match_volume_to_activity = true,
-                sound = {filename = '__base__/sound/train-wheels.ogg', volume = 0.3}
+            wheels = {
+                direction_count = 256,
+                height = 115,
+                width = 115,
+                priority = 'very-low',
+                line_length = 8,
+                lines_per_file = 16,
+                hr_version = {
+                    direction_count = 256,
+                    height = 227,
+                    scale = 0.5,
+                    width = 229,
+                    line_length = 4,
+                    lines_per_file = 8,
+                    priority = 'very-low',
+                    filenames = {
+                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-1.png',
+                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-2.png',
+                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-3.png',
+                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-4.png',
+                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-5.png',
+                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-6.png',
+                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-7.png',
+                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-8.png'
+                    }
+                },
+                filenames = {
+                    '__base__/graphics/entity/diesel-locomotive/train-wheels-01.png',
+                    '__base__/graphics/entity/diesel-locomotive/train-wheels-02.png'
+                }
             },
+            turret_rotation_speed = 0.001,
+            icon_mipmaps = 4,
+            back_light = {
+                {
+                    color = {a = 0, b = 0.05, g = 0.1, r = 1},
+                    size = 2,
+                    shift = {-0.6, 3.5},
+                    add_perspective = true,
+                    intensity = 0.6,
+                    minimum_darkness = 0.3
+                }, {
+                    color = {a = 0, b = 0.05, g = 0.1, r = 1},
+                    size = 2,
+                    shift = {0.6, 3.5},
+                    add_perspective = true,
+                    intensity = 0.6,
+                    minimum_darkness = 0.3
+                }
+            },
+            vertical_selection_shift = -0.796875,
+            open_sound = 0,
             type = 'artillery-wagon',
+            water_reflection = {
+                rotate = true,
+                orientation_to_variation = false,
+                pictures = {
+                    filename = '__base__/graphics/entity/artillery-wagon/artillery-wagon-reflection.png',
+                    scale = 5,
+                    width = 32,
+                    variation_count = 1,
+                    priority = 'extra-high',
+                    shift = {0, 1.25},
+                    height = 52
+                }
+            },
+            turn_after_shooting_cooldown = 60,
+            cannon_base_pictures = {
+                layers = {
+                    {
+                        direction_count = 256,
+                        hr_version = {
+                            direction_count = 256,
+                            width = 358,
+                            priority = 'very-low',
+                            filenames = {
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-1.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-2.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-3.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-4.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-5.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-6.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-7.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-8.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-9.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-10.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-11.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-12.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-13.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-14.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-15.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-16.png'
+                            },
+                            height = 270,
+                            scale = 0.5,
+                            line_length = 4,
+                            lines_per_file = 4,
+                            shift = {0, -1.265625}
+                        },
+                        width = 180,
+                        priority = 'very-low',
+                        filenames = {
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-1.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-2.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-3.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-4.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-5.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-6.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-7.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-8.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-9.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-10.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-11.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-12.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-13.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-14.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-15.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-16.png'
+                        },
+                        height = 136,
+                        line_length = 4,
+                        lines_per_file = 4,
+                        shift = {0, -1.25}
+                    }, {
+                        direction_count = 256,
+                        hr_version = {
+                            direction_count = 256,
+                            width = 476,
+                            priority = 'very-low',
+                            filenames = {
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-1.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-2.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-3.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-4.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-5.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-6.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-7.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-8.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-9.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-10.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-11.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-12.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-13.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-14.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-15.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-16.png'
+                            },
+                            height = 340,
+                            scale = 0.5,
+                            line_length = 4,
+                            draw_as_shadow = true,
+                            shift = {3.515625, 1.40625},
+                            lines_per_file = 4
+                        },
+                        width = 238,
+                        priority = 'very-low',
+                        filenames = {
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-1.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-2.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-3.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-4.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-5.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-6.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-7.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-8.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-9.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-10.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-11.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-12.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-13.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-14.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-15.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-16.png'
+                        },
+                        height = 170,
+                        line_length = 4,
+                        draw_as_shadow = true,
+                        shift = {3.5, 1.40625},
+                        lines_per_file = 4
+                    }
+                }
+            },
+            cannon_barrel_pictures = {
+                layers = {
+                    {
+                        direction_count = 256,
+                        hr_version = {
+                            direction_count = 256,
+                            width = 530,
+                            priority = 'very-low',
+                            filenames = {
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-1.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-2.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-3.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-4.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-5.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-6.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-7.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-8.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-9.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-10.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-11.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-12.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-13.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-14.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-15.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-16.png'
+                            },
+                            height = 384,
+                            scale = 0.5,
+                            line_length = 4,
+                            lines_per_file = 4,
+                            shift = {0, -1.75}
+                        },
+                        width = 266,
+                        priority = 'very-low',
+                        filenames = {
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-1.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-2.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-3.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-4.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-5.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-6.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-7.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-8.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-9.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-10.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-11.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-12.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-13.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-14.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-15.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-16.png'
+                        },
+                        height = 192,
+                        line_length = 4,
+                        lines_per_file = 4,
+                        shift = {0, -1.75}
+                    }, {
+                        direction_count = 256,
+                        hr_version = {
+                            direction_count = 256,
+                            width = 906,
+                            priority = 'very-low',
+                            filenames = {
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-1.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-2.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-3.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-4.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-5.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-6.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-7.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-8.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-9.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-10.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-11.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-12.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-13.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-14.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-15.png',
+                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-16.png'
+                            },
+                            height = 626,
+                            scale = 0.5,
+                            line_length = 4,
+                            draw_as_shadow = true,
+                            shift = {1.703125, 1.671875},
+                            lines_per_file = 4
+                        },
+                        width = 454,
+                        priority = 'very-low',
+                        filenames = {
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-1.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-2.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-3.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-4.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-5.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-6.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-7.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-8.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-9.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-10.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-11.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-12.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-13.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-14.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-15.png',
+                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-16.png'
+                        },
+                        height = 314,
+                        line_length = 4,
+                        draw_as_shadow = true,
+                        shift = {1.71875, 1.6875},
+                        lines_per_file = 4
+                    }
+                }
+            },
+            sound_minimum_speed = 0.1,
+            selection_box = {{-1, -2.703125}, {1, 3.296875}},
+            cannon_barrel_recoil_shiftings_load_correction_matrix = {{0, 0.25, 0}, {-0.25, 0, 0}, {0, 0, 0.25}},
+            selected_minimap_representation = {
+                flags = {'icon'},
+                filename = '__base__/graphics/entity/artillery-wagon/artillery-wagon-selected-minimap-representation.png',
+                scale = 0.5,
+                size = {20, 40}
+            },
+            close_sound = 0,
+            friction_force = 0.5,
+            manual_range_modifier = 2.5,
+            minimap_representation = {
+                flags = {'icon'},
+                filename = '__base__/graphics/entity/artillery-wagon/artillery-wagon-minimap-representation.png',
+                scale = 0.5,
+                size = {20, 40}
+            },
+            corpse = 'artillery-wagon-remnants',
+            energy_per_hit_point = 2,
+            cannon_parking_frame_count = 8,
+            tie_distance = 50,
+            max_speed = 1.5,
+            air_resistance = 0.015,
+            mined_sound = {volume = 0.8, filename = '__core__/sound/deconstruct-large.ogg'},
+            max_health = 600,
+            icon_size = 64,
+            rotating_stopped_sound = {filename = '__base__/sound/fight/artillery-rotation-stop.ogg'},
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                entity_name = 'spark-explosion'
+            },
+            resistances = {
+                {percent = 50, type = 'fire', decrease = 15}, {percent = 30, type = 'physical', decrease = 15},
+                {percent = 50, type = 'impact', decrease = 50}, {percent = 30, type = 'explosion', decrease = 15},
+                {percent = 20, type = 'acid', decrease = 3}
+            },
+            icon = '__base__/graphics/icons/artillery-wagon.png',
+            connection_distance = 3,
+            color = {a = 0.5, b = 0, g = 0.23, r = 0.43},
+            flags = {'placeable-neutral', 'player-creation', 'placeable-off-grid'},
+            gun = 'artillery-wagon-cannon',
+            joint_distance = 4,
+            inventory_size = 1,
+            cannon_parking_speed = 0.25,
+            name = 'artillery-wagon',
             cannon_base_shiftings = {
                 {0, 0.609375}, {-0.046875, 0.59375}, {-0.109375, 0.59375}, {-0.171875, 0.578125}, {-0.234375, 0.578125},
                 {-0.28125, 0.5625}, {-0.34375, 0.546875}, {-0.40625, 0.546875}, {-0.46875, 0.53125},
@@ -250,347 +590,7 @@ do
                 {0.71875, 0.46875}, {0.65625, 0.484375}, {0.59375, 0.5}, {0.546875, 0.515625}, {0.484375, 0.53125},
                 {0.421875, 0.546875}, {0.359375, 0.5625}, {0.3125, 0.5625}, {0.25, 0.578125}, {0.1875, 0.59375},
                 {0.125, 0.59375}
-            },
-            weight = 4000,
-            cannon_barrel_light_direction = {0.5976251, 0.0242053, -0.8014102},
-            gun = 'artillery-wagon-cannon',
-            water_reflection = {
-                rotate = true,
-                orientation_to_variation = false,
-                pictures = {
-                    shift = {0, 1.25},
-                    height = 52,
-                    variation_count = 1,
-                    filename = '__base__/graphics/entity/artillery-wagon/artillery-wagon-reflection.png',
-                    width = 32,
-                    priority = 'extra-high',
-                    scale = 5
-                }
-            },
-            minimap_representation = {
-                filename = '__base__/graphics/entity/artillery-wagon/artillery-wagon-minimap-representation.png',
-                size = {20, 40},
-                flags = {'icon'},
-                scale = 0.5
-            },
-            mined_sound = {filename = '__core__/sound/deconstruct-large.ogg', volume = 0.8},
-            vehicle_impact_sound = 0,
-            close_sound = 0,
-            turn_after_shooting_cooldown = 60,
-            cannon_base_pictures = {
-                layers = {
-                    {
-                        height = 136,
-                        hr_version = {
-                            height = 270,
-                            width = 358,
-                            filenames = {
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-1.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-2.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-3.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-4.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-5.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-6.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-7.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-8.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-9.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-10.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-11.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-12.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-13.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-14.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-15.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-16.png'
-                            },
-                            line_length = 4,
-                            shift = {0, -1.265625},
-                            direction_count = 256,
-                            scale = 0.5,
-                            priority = 'very-low',
-                            lines_per_file = 4
-                        },
-                        width = 180,
-                        filenames = {
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-1.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-2.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-3.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-4.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-5.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-6.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-7.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-8.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-9.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-10.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-11.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-12.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-13.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-14.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-15.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-16.png'
-                        },
-                        line_length = 4,
-                        direction_count = 256,
-                        shift = {0, -1.25},
-                        priority = 'very-low',
-                        lines_per_file = 4
-                    }, {
-                        draw_as_shadow = true,
-                        height = 170,
-                        hr_version = {
-                            draw_as_shadow = true,
-                            height = 340,
-                            width = 476,
-                            filenames = {
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-1.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-2.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-3.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-4.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-5.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-6.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-7.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-8.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-9.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-10.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-11.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-12.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-13.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-14.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-15.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-base-shadow-16.png'
-                            },
-                            line_length = 4,
-                            shift = {3.515625, 1.40625},
-                            direction_count = 256,
-                            scale = 0.5,
-                            priority = 'very-low',
-                            lines_per_file = 4
-                        },
-                        width = 238,
-                        filenames = {
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-1.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-2.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-3.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-4.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-5.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-6.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-7.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-8.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-9.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-10.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-11.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-12.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-13.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-14.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-15.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-base-shadow-16.png'
-                        },
-                        line_length = 4,
-                        direction_count = 256,
-                        shift = {3.5, 1.40625},
-                        priority = 'very-low',
-                        lines_per_file = 4
-                    }
-                }
-            },
-            vertical_selection_shift = -0.796875,
-            cannon_barrel_recoil_shiftings = {
-                {x = -0, y = 0.04, z = -0}, {x = -0.789, y = 0.037, z = -0.351}, {x = -1.578, y = 0.035, z = -0.702},
-                {x = -2.367, y = 0.033, z = -1.054}, {x = -3.155, y = 0.031, z = -1.405},
-                {x = -3.944, y = 0.028, z = -1.756}, {x = -3.931, y = 0.028, z = -1.75},
-                {x = -3.901, y = 0.028, z = -1.737}, {x = -3.854, y = 0.029, z = -1.716},
-                {x = -3.79, y = 0.029, z = -1.688}, {x = -3.711, y = 0.029, z = -1.652},
-                {x = -3.617, y = 0.029, z = -1.61}, {x = -3.508, y = 0.03, z = -1.562},
-                {x = -3.385, y = 0.03, z = -1.507}, {x = -3.249, y = 0.03, z = -1.447},
-                {x = -3.102, y = 0.031, z = -1.381}, {x = -2.944, y = 0.031, z = -1.311},
-                {x = -2.776, y = 0.032, z = -1.236}, {x = -2.599, y = 0.032, z = -1.157},
-                {x = -2.416, y = 0.033, z = -1.076}, {x = -2.226, y = 0.033, z = -0.991},
-                {x = -2.032, y = 0.034, z = -0.905}, {x = -1.835, y = 0.034, z = -0.817},
-                {x = -1.635, y = 0.035, z = -0.728}, {x = -1.436, y = 0.035, z = -0.639},
-                {x = -1.238, y = 0.036, z = -0.551}, {x = -1.042, y = 0.037, z = -0.464},
-                {x = -0.851, y = 0.037, z = -0.379}, {x = -0.665, y = 0.038, z = -0.296},
-                {x = -0.485, y = 0.038, z = -0.216}, {x = -0.314, y = 0.039, z = -0.14},
-                {x = -0.152, y = 0.039, z = -0.068}
-            },
-            cannon_parking_frame_count = 8,
-            wheels = {
-                lines_per_file = 16,
-                line_length = 8,
-                height = 115,
-                hr_version = {
-                    lines_per_file = 8,
-                    line_length = 4,
-                    height = 227,
-                    scale = 0.5,
-                    direction_count = 256,
-                    width = 229,
-                    priority = 'very-low',
-                    filenames = {
-                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-1.png',
-                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-2.png',
-                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-3.png',
-                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-4.png',
-                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-5.png',
-                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-6.png',
-                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-7.png',
-                        '__base__/graphics/entity/diesel-locomotive/hr-train-wheels-8.png'
-                    }
-                },
-                direction_count = 256,
-                width = 115,
-                priority = 'very-low',
-                filenames = {
-                    '__base__/graphics/entity/diesel-locomotive/train-wheels-01.png',
-                    '__base__/graphics/entity/diesel-locomotive/train-wheels-02.png'
-                }
-            },
-            tie_distance = 50,
-            sound_minimum_speed = 0.1,
-            selection_box = {{-1, -2.703125}, {1, 3.296875}},
-            selected_minimap_representation = {
-                filename = '__base__/graphics/entity/artillery-wagon/artillery-wagon-selected-minimap-representation.png',
-                size = {20, 40},
-                flags = {'icon'},
-                scale = 0.5
-            },
-            rotating_stopped_sound = {filename = '__base__/sound/fight/artillery-rotation-stop.ogg'},
-            cannon_barrel_pictures = {
-                layers = {
-                    {
-                        height = 192,
-                        hr_version = {
-                            height = 384,
-                            width = 530,
-                            filenames = {
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-1.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-2.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-3.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-4.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-5.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-6.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-7.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-8.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-9.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-10.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-11.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-12.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-13.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-14.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-15.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-16.png'
-                            },
-                            line_length = 4,
-                            shift = {0, -1.75},
-                            direction_count = 256,
-                            scale = 0.5,
-                            priority = 'very-low',
-                            lines_per_file = 4
-                        },
-                        width = 266,
-                        filenames = {
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-1.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-2.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-3.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-4.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-5.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-6.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-7.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-8.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-9.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-10.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-11.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-12.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-13.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-14.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-15.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-16.png'
-                        },
-                        line_length = 4,
-                        direction_count = 256,
-                        shift = {0, -1.75},
-                        priority = 'very-low',
-                        lines_per_file = 4
-                    }, {
-                        draw_as_shadow = true,
-                        height = 314,
-                        hr_version = {
-                            draw_as_shadow = true,
-                            height = 626,
-                            width = 906,
-                            filenames = {
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-1.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-2.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-3.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-4.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-5.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-6.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-7.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-8.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-9.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-10.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-11.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-12.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-13.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-14.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-15.png',
-                                '__base__/graphics/entity/artillery-wagon/hr-artillery-wagon-cannon-barrel-shadow-16.png'
-                            },
-                            line_length = 4,
-                            shift = {1.703125, 1.671875},
-                            direction_count = 256,
-                            scale = 0.5,
-                            priority = 'very-low',
-                            lines_per_file = 4
-                        },
-                        width = 454,
-                        filenames = {
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-1.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-2.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-3.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-4.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-5.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-6.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-7.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-8.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-9.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-10.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-11.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-12.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-13.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-14.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-15.png',
-                            '__base__/graphics/entity/artillery-wagon/artillery-wagon-cannon-barrel-shadow-16.png'
-                        },
-                        line_length = 4,
-                        direction_count = 256,
-                        shift = {1.71875, 1.6875},
-                        priority = 'very-low',
-                        lines_per_file = 4
-                    }
-                }
-            },
-            joint_distance = 4,
-            energy_per_hit_point = 2,
-            max_health = 600,
-            resistances = {
-                {decrease = 15, percent = 50, type = 'fire'}, {decrease = 15, percent = 30, type = 'physical'},
-                {decrease = 50, percent = 50, type = 'impact'}, {decrease = 15, percent = 30, type = 'explosion'},
-                {decrease = 3, percent = 20, type = 'acid'}
-            },
-            name = 'artillery-wagon',
-            open_sound = 0,
-            max_speed = 1.5,
-            cannon_barrel_recoil_shiftings_load_correction_matrix = {{0, 0.25, 0}, {-0.25, 0, 0}, {0, 0, 0.25}},
-            crash_trigger = {sound = {{filename = '__base__/sound/car-crash.ogg', volume = 0}}, type = 'play-sound'},
-            manual_range_modifier = 2.5,
-            braking_force = 3,
-            inventory_size = 1,
-            icon = '__base__/graphics/icons/artillery-wagon.png',
-            friction_force = 0.5,
-            flags = {'placeable-neutral', 'player-creation', 'placeable-off-grid'},
-            dying_explosion = 'artillery-wagon-explosion',
-            ammo_stack_limit = 100,
-            collision_box = {{-0.6, -2.4}, {0.6, 2.4}},
-            corpse = 'artillery-wagon-remnants'
+            }
         }
     };
     return _;

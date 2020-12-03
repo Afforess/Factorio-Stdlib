@@ -1,31 +1,31 @@
 do
     local _ = {
-        ['spidertron-equipment-grid'] = {
-            name = 'spidertron-equipment-grid',
-            height = 6,
-            equipment_categories = {'armor'},
+        ['large-equipment-grid'] = {
+            height = 10,
             width = 10,
+            equipment_categories = {'armor'},
+            name = 'large-equipment-grid',
             type = 'equipment-grid'
         },
         ['medium-equipment-grid'] = {
-            name = 'medium-equipment-grid',
             height = 7,
-            equipment_categories = {'armor'},
             width = 7,
+            equipment_categories = {'armor'},
+            name = 'medium-equipment-grid',
             type = 'equipment-grid'
         },
         ['small-equipment-grid'] = {
-            name = 'small-equipment-grid',
             height = 5,
-            equipment_categories = {'armor'},
             width = 5,
+            equipment_categories = {'armor'},
+            name = 'small-equipment-grid',
             type = 'equipment-grid'
         },
-        ['large-equipment-grid'] = {
-            name = 'large-equipment-grid',
-            height = 10,
-            equipment_categories = {'armor'},
+        ['spidertron-equipment-grid'] = {
+            height = 6,
             width = 10,
+            equipment_categories = {'armor'},
+            name = 'spidertron-equipment-grid',
             type = 'equipment-grid'
         }
     };

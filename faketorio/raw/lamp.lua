@@ -1,210 +1,209 @@
 do
     local _ = {
         ['small-lamp'] = {
+            minable = {mining_time = 0.1, result = 'small-lamp'},
             circuit_connector_sprites = {
-                wire_pins_shadow = {
-                    draw_as_shadow = true,
-                    x = 140,
-                    height = 54,
-                    filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
-                    width = 70,
-                    scale = 0.5,
-                    shift = {0.296875, 0.359375},
-                    priority = 'low',
-                    y = 162
-                },
-                led_red = {
-                    y = 138,
-                    x = 96,
-                    height = 46,
-                    shift = {0.140625, 0.234375},
-                    filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
-                    width = 48,
-                    priority = 'low',
-                    scale = 0.5
-                },
                 blue_led_light_offset = {0.171875, 0.53125},
+                wire_pins_shadow = {
+                    y = 162,
+                    width = 70,
+                    x = 140,
+                    priority = 'low',
+                    filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04d-wire-shadow-sequence.png',
+                    scale = 0.5,
+                    draw_as_shadow = true,
+                    shift = {0.296875, 0.359375},
+                    height = 54
+                },
                 led_blue_off = {
                     y = 132,
-                    x = 92,
-                    height = 44,
-                    shift = {0.140625, 0.234375},
                     filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04f-blue-LED-off-sequence.png',
+                    scale = 0.5,
+                    x = 92,
                     width = 46,
                     priority = 'low',
-                    scale = 0.5
+                    shift = {0.140625, 0.234375},
+                    height = 44
                 },
-                connector_main = {
-                    y = 150,
-                    x = 104,
-                    height = 50,
-                    shift = {0.140625, 0.265625},
-                    filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
-                    width = 52,
+                led_blue = {
+                    y = 180,
+                    width = 60,
+                    x = 120,
                     priority = 'low',
-                    scale = 0.5
+                    filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
+                    scale = 0.5,
+                    height = 60,
+                    shift = {0.140625, 0.234375},
+                    draw_as_glow = true
                 },
                 wire_pins = {
                     y = 174,
-                    x = 124,
-                    height = 58,
-                    shift = {0.140625, 0.234375},
                     filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04c-wire-sequence.png',
-                    width = 62,
-                    priority = 'low',
-                    scale = 0.5
-                },
-                connector_shadow = {
-                    draw_as_shadow = true,
-                    x = 124,
-                    height = 46,
-                    filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png',
-                    width = 62,
                     scale = 0.5,
-                    shift = {0.1875, 0.3125},
+                    x = 124,
+                    width = 62,
                     priority = 'low',
-                    y = 138
+                    shift = {0.140625, 0.234375},
+                    height = 58
                 },
+                connector_main = {
+                    y = 150,
+                    filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04a-base-sequence.png',
+                    scale = 0.5,
+                    x = 104,
+                    width = 52,
+                    priority = 'low',
+                    shift = {0.140625, 0.265625},
+                    height = 50
+                },
+                led_red = {
+                    y = 138,
+                    width = 48,
+                    x = 96,
+                    priority = 'low',
+                    filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04i-red-LED-sequence.png',
+                    scale = 0.5,
+                    height = 46,
+                    shift = {0.140625, 0.234375},
+                    draw_as_glow = true
+                },
+                led_light = {intensity = 0, size = 0.9},
+                connector_shadow = {
+                    y = 138,
+                    width = 62,
+                    x = 124,
+                    priority = 'low',
+                    filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04b-base-shadow-sequence.png',
+                    scale = 0.5,
+                    draw_as_shadow = true,
+                    shift = {0.1875, 0.3125},
+                    height = 46
+                },
+                red_green_led_light_offset = {0.15625, 0.421875},
                 led_green = {
                     y = 138,
+                    width = 48,
                     x = 96,
+                    priority = 'low',
+                    filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
+                    scale = 0.5,
                     height = 46,
                     shift = {0.140625, 0.234375},
-                    filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04h-green-LED-sequence.png',
-                    width = 48,
-                    priority = 'low',
-                    scale = 0.5
-                },
-                led_light = {intensity = 0.8, size = 0.9},
-                red_green_led_light_offset = {0.15625, 0.421875},
-                led_blue = {
-                    y = 180,
-                    x = 120,
-                    height = 60,
-                    shift = {0.140625, 0.234375},
-                    filename = '__base__/graphics/entity/circuit-connector/hr-ccm-universal-04e-blue-LED-on-sequence.png',
-                    width = 60,
-                    priority = 'low',
-                    scale = 0.5
+                    draw_as_glow = true
                 }
             },
-            vehicle_impact_sound = 0,
-            working_sound = {
-                audible_distance_modifier = 0.5,
-                sound = {filename = '__base__/sound/lamp-working.ogg', volume = 0.4},
-                max_sounds_per_type = 3,
-                use_doppler_shift = false
-            },
-            icon_size = 64,
-            type = 'lamp',
-            energy_source = {type = 'electric', usage_priority = 'lamp'},
-            circuit_wire_max_distance = 9,
-            minable = {mining_time = 0.1, result = 'small-lamp'},
-            darkness_for_all_lamps_on = 0.5,
-            icon_mipmaps = 4,
-            glow_color_intensity = 0.135,
-            darkness_for_all_lamps_off = 0.3,
-            energy_usage_per_tick = '5KW',
+            glow_color_intensity = 1,
             flags = {'placeable-neutral', 'player-creation'},
-            max_health = 100,
-            light_when_colored = {color = {g = 1, r = 1, b = 1}, size = 6, intensity = 1},
-            name = 'small-lamp',
-            light = {color = {g = 1, r = 1, b = 1}, size = 40, intensity = 0.9},
-            damaged_trigger_effect = {
-                entity_name = 'spark-explosion',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                damage_type_filters = 'fire',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
-            },
-            dying_explosion = 'lamp-explosion',
+            icon = '__base__/graphics/icons/small-lamp.png',
+            close_sound = 0,
+            circuit_wire_max_distance = 9,
+            vehicle_impact_sound = 0,
+            energy_source = {usage_priority = 'lamp', type = 'electric'},
+            glow_size = 6,
+            corpse = 'lamp-remnants',
             signal_to_color_mapping = {
-                {color = {g = 0, r = 1, b = 0}, name = 'signal-red', type = 'virtual'},
-                {color = {g = 1, r = 0, b = 0}, name = 'signal-green', type = 'virtual'},
-                {color = {g = 0, r = 0, b = 1}, name = 'signal-blue', type = 'virtual'},
-                {color = {g = 1, r = 1, b = 0}, name = 'signal-yellow', type = 'virtual'},
-                {color = {g = 0, r = 1, b = 1}, name = 'signal-pink', type = 'virtual'},
-                {color = {g = 1, r = 0, b = 1}, name = 'signal-cyan', type = 'virtual'}
+                {color = {b = 0, g = 0, r = 1}, type = 'virtual', name = 'signal-red'},
+                {color = {b = 0, g = 1, r = 0}, type = 'virtual', name = 'signal-green'},
+                {color = {b = 1, g = 0, r = 0}, type = 'virtual', name = 'signal-blue'},
+                {color = {b = 0, g = 1, r = 1}, type = 'virtual', name = 'signal-yellow'},
+                {color = {b = 1, g = 0, r = 1}, type = 'virtual', name = 'signal-pink'},
+                {color = {b = 1, g = 1, r = 0}, type = 'virtual', name = 'signal-cyan'},
+                {color = {b = 1, g = 1, r = 1}, type = 'virtual', name = 'signal-white'}
             },
-            picture_off = {
-                layers = {
-                    {
-                        height = 36,
-                        filename = '__base__/graphics/entity/small-lamp/lamp.png',
-                        width = 42,
-                        frame_count = 1,
-                        axially_symmetrical = false,
-                        direction_count = 1,
-                        shift = {0, 0.09375},
-                        priority = 'high',
-                        hr_version = {
-                            height = 70,
-                            filename = '__base__/graphics/entity/small-lamp/hr-lamp.png',
-                            width = 83,
-                            scale = 0.5,
-                            frame_count = 1,
-                            axially_symmetrical = false,
-                            direction_count = 1,
-                            priority = 'high',
-                            shift = {0.0078125, 0.09375}
-                        }
-                    }, {
-                        draw_as_shadow = true,
-                        height = 24,
-                        filename = '__base__/graphics/entity/small-lamp/lamp-shadow.png',
-                        width = 38,
-                        frame_count = 1,
-                        axially_symmetrical = false,
-                        direction_count = 1,
-                        shift = {0.125, 0.15625},
-                        priority = 'high',
-                        hr_version = {
-                            draw_as_shadow = true,
-                            height = 47,
-                            filename = '__base__/graphics/entity/small-lamp/hr-lamp-shadow.png',
-                            width = 76,
-                            scale = 0.5,
-                            frame_count = 1,
-                            axially_symmetrical = false,
-                            direction_count = 1,
-                            priority = 'high',
-                            shift = {0.125, 0.1484375}
-                        }
-                    }
-                }
+            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
+            darkness_for_all_lamps_off = 0.3,
+            picture_on = {
+                direction_count = 1,
+                hr_version = {
+                    direction_count = 1,
+                    width = 90,
+                    axially_symmetrical = false,
+                    filename = '__base__/graphics/entity/small-lamp/hr-lamp-light.png',
+                    scale = 0.5,
+                    priority = 'high',
+                    frame_count = 1,
+                    shift = {0, -0.21875},
+                    height = 78
+                },
+                width = 46,
+                axially_symmetrical = false,
+                filename = '__base__/graphics/entity/small-lamp/lamp-light.png',
+                priority = 'high',
+                frame_count = 1,
+                shift = {0, -0.21875},
+                height = 40
             },
+            energy_usage_per_tick = '5KW',
             circuit_wire_connection_point = {
                 shadow = {green = {0.546875, 0.609375}, red = {0.765625, 0.5625}},
                 wire = {green = {0.5, 0.515625}, red = {0.4375, 0.28125}}
             },
-            picture_on = {
-                height = 40,
-                filename = '__base__/graphics/entity/small-lamp/lamp-light.png',
-                width = 46,
-                frame_count = 1,
-                axially_symmetrical = false,
-                direction_count = 1,
-                shift = {0, -0.21875},
-                priority = 'high',
-                hr_version = {
-                    height = 78,
-                    filename = '__base__/graphics/entity/small-lamp/hr-lamp-light.png',
-                    width = 90,
-                    scale = 0.5,
-                    frame_count = 1,
-                    axially_symmetrical = false,
-                    direction_count = 1,
-                    priority = 'high',
-                    shift = {0, -0.21875}
+            picture_off = {
+                layers = {
+                    {
+                        direction_count = 1,
+                        hr_version = {
+                            direction_count = 1,
+                            width = 83,
+                            axially_symmetrical = false,
+                            filename = '__base__/graphics/entity/small-lamp/hr-lamp.png',
+                            scale = 0.5,
+                            priority = 'high',
+                            frame_count = 1,
+                            shift = {0.0078125, 0.09375},
+                            height = 70
+                        },
+                        width = 42,
+                        axially_symmetrical = false,
+                        filename = '__base__/graphics/entity/small-lamp/lamp.png',
+                        priority = 'high',
+                        frame_count = 1,
+                        shift = {0, 0.09375},
+                        height = 36
+                    }, {
+                        direction_count = 1,
+                        hr_version = {
+                            direction_count = 1,
+                            width = 76,
+                            axially_symmetrical = false,
+                            filename = '__base__/graphics/entity/small-lamp/hr-lamp-shadow.png',
+                            scale = 0.5,
+                            height = 47,
+                            priority = 'high',
+                            draw_as_shadow = true,
+                            shift = {0.125, 0.1484375},
+                            frame_count = 1
+                        },
+                        width = 38,
+                        axially_symmetrical = false,
+                        filename = '__base__/graphics/entity/small-lamp/lamp-shadow.png',
+                        height = 24,
+                        priority = 'high',
+                        draw_as_shadow = true,
+                        shift = {0.125, 0.15625},
+                        frame_count = 1
+                    }
                 }
             },
-            icon = '__base__/graphics/icons/small-lamp.png',
-            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
-            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
-            glow_size = 6,
+            dying_explosion = 'lamp-explosion',
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                entity_name = 'spark-explosion'
+            },
+            icon_size = 64,
+            light_when_colored = {color = {b = 0.75, g = 1, r = 1}, size = 6, intensity = 0},
+            glow_render_mode = 'multiplicative',
+            icon_mipmaps = 4,
+            light = {color = {b = 0.75, g = 1, r = 1}, size = 40, intensity = 0.9},
+            max_health = 100,
             open_sound = 0,
-            close_sound = 0,
-            corpse = 'lamp-remnants'
+            type = 'lamp',
+            name = 'small-lamp',
+            darkness_for_all_lamps_on = 0.5
         }
     };
     return _;

@@ -1,18 +1,18 @@
 do
     local _ = {
         ['fusion-reactor-equipment'] = {
-            name = 'fusion-reactor-equipment',
-            type = 'generator-equipment',
-            shape = {width = 4, height = 4, type = 'full'},
-            categories = {'armor'},
+            power = '750kW',
+            energy_source = {usage_priority = 'primary-output', type = 'electric'},
             sprite = {
+                priority = 'medium',
                 filename = '__base__/graphics/equipment/fusion-reactor-equipment.png',
                 width = 128,
-                height = 128,
-                priority = 'medium'
+                height = 128
             },
-            energy_source = {type = 'electric', usage_priority = 'primary-output'},
-            power = '750kW'
+            categories = {'armor'},
+            type = 'generator-equipment',
+            name = 'fusion-reactor-equipment',
+            shape = {height = 4, width = 4, type = 'full'}
         }
     };
     return _;

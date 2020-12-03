@@ -1,43 +1,43 @@
 do
     local _ = {
-        coal = {name = 'coal', type = 'autoplace-control', order = 'b-d', category = 'resource', richness = true},
-        stone = {name = 'stone', type = 'autoplace-control', order = 'b-c', category = 'resource', richness = true},
-        trees = {name = 'trees', type = 'autoplace-control', order = 'c-y', category = 'terrain', richness = true},
-        ['crude-oil'] = {
-            name = 'crude-oil',
-            type = 'autoplace-control',
-            order = 'b-f',
+        ['uranium-ore'] = {
+            order = 'b-e',
+            richness = true,
             category = 'resource',
-            richness = true
+            type = 'autoplace-control',
+            name = 'uranium-ore'
         },
         ['copper-ore'] = {
-            name = 'copper-ore',
-            type = 'autoplace-control',
             order = 'b-b',
+            richness = true,
             category = 'resource',
-            richness = true
-        },
-        ['enemy-base'] = {
-            name = 'enemy-base',
             type = 'autoplace-control',
+            name = 'copper-ore'
+        },
+        ['crude-oil'] = {
+            order = 'b-f',
+            richness = true,
+            category = 'resource',
+            type = 'autoplace-control',
+            name = 'crude-oil'
+        },
+        trees = {order = 'c-y', richness = true, category = 'terrain', type = 'autoplace-control', name = 'trees'},
+        stone = {order = 'b-c', richness = true, category = 'resource', type = 'autoplace-control', name = 'stone'},
+        ['enemy-base'] = {
             order = 'c-z',
+            richness = false,
             category = 'enemy',
-            richness = false
+            type = 'autoplace-control',
+            name = 'enemy-base'
         },
         ['iron-ore'] = {
-            name = 'iron-ore',
-            type = 'autoplace-control',
             order = 'b-a',
+            richness = true,
             category = 'resource',
-            richness = true
-        },
-        ['uranium-ore'] = {
-            name = 'uranium-ore',
             type = 'autoplace-control',
-            order = 'b-e',
-            category = 'resource',
-            richness = true
-        }
+            name = 'iron-ore'
+        },
+        coal = {order = 'b-d', richness = true, category = 'resource', type = 'autoplace-control', name = 'coal'}
     };
     return _;
 end

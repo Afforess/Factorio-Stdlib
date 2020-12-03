@@ -26,8 +26,10 @@ for k, v in pairs(raw) do
     local file = io.open('faketorio/raw/'..k..'.lua', 'w')
     file:write(serpent.dump(v))
     file:close()
+    os.execute('lua-format -i faketorio/raw/' ..k..'.lua')
 end
 
 local key_file = io.open('faketorio/raw/keys.lua', 'w')
 key_file:write(serpent.dump(keys))
 key_file:close()
+os.remove('tools/data_raw/data_raw.lua')

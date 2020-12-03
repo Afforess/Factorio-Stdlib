@@ -1,431 +1,467 @@
 do
     local _ = {
-        ['explosive-uranium-cannon-shell'] = {
-            name = 'explosive-uranium-cannon-shell',
-            subgroup = 'ammo',
-            order = 'd[explosive-cannon-shell]-c[uranium]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/explosive-uranium-cannon-shell.png',
-            icon_mipmaps = 4,
-            stack_size = 200,
-            ammo_type = {
-                category = 'cannon-shell',
-                action = {
-                    action_delivery = {
-                        direction_deviation = 0.1,
-                        starting_speed = 1,
-                        type = 'projectile',
-                        source_effects = {entity_name = 'explosion-gunshot', type = 'create-explosion'},
-                        max_range = 30,
-                        range_deviation = 0.1,
-                        min_range = 5,
-                        projectile = 'explosive-uranium-cannon-projectile'
-                    },
-                    type = 'direct'
-                },
-                target_type = 'direction'
-            },
-            type = 'ammo'
-        },
-        ['cannon-shell'] = {
-            name = 'cannon-shell',
-            subgroup = 'ammo',
-            order = 'd[cannon-shell]-a[basic]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/cannon-shell.png',
-            icon_mipmaps = 4,
-            stack_size = 200,
-            ammo_type = {
-                category = 'cannon-shell',
-                action = {
-                    action_delivery = {
-                        direction_deviation = 0.1,
-                        starting_speed = 1,
-                        type = 'projectile',
-                        source_effects = {entity_name = 'explosion-gunshot', type = 'create-explosion'},
-                        max_range = 30,
-                        range_deviation = 0.1,
-                        min_range = 5,
-                        projectile = 'cannon-projectile'
-                    },
-                    type = 'direct'
-                },
-                target_type = 'direction'
-            },
-            type = 'ammo'
-        },
-        ['uranium-cannon-shell'] = {
-            name = 'uranium-cannon-shell',
-            subgroup = 'ammo',
-            order = 'd[cannon-shell]-c[uranium]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/uranium-cannon-shell.png',
-            icon_mipmaps = 4,
-            stack_size = 200,
-            ammo_type = {
-                category = 'cannon-shell',
-                action = {
-                    action_delivery = {
-                        direction_deviation = 0.1,
-                        starting_speed = 1,
-                        type = 'projectile',
-                        source_effects = {entity_name = 'explosion-gunshot', type = 'create-explosion'},
-                        max_range = 30,
-                        range_deviation = 0.1,
-                        min_range = 5,
-                        projectile = 'uranium-cannon-projectile'
-                    },
-                    type = 'direct'
-                },
-                target_type = 'direction'
-            },
-            type = 'ammo'
-        },
-        ['atomic-bomb'] = {
-            name = 'atomic-bomb',
-            subgroup = 'ammo',
-            order = 'd[rocket-launcher]-c[atomic-bomb]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/atomic-bomb.png',
-            icon_mipmaps = 4,
-            stack_size = 10,
-            ammo_type = {
-                action = {
-                    action_delivery = {
-                        source_effects = {entity_name = 'explosion-hit', type = 'create-entity'},
-                        type = 'projectile',
-                        starting_speed = 0.05,
-                        projectile = 'atomic-rocket'
-                    },
-                    type = 'direct'
-                },
-                cooldown_modifier = 10,
-                category = 'rocket',
-                target_type = 'position',
-                range_modifier = 1.5
-            },
-            type = 'ammo'
-        },
-        ['uranium-rounds-magazine'] = {
-            name = 'uranium-rounds-magazine',
-            subgroup = 'ammo',
-            magazine_size = 10,
-            icon_size = 64,
-            icon = '__base__/graphics/icons/uranium-rounds-magazine.png',
-            icon_mipmaps = 4,
-            stack_size = 200,
-            type = 'ammo',
-            ammo_type = {
-                category = 'bullet',
-                action = {
-                    action_delivery = {
-                        source_effects = {entity_name = 'explosion-gunshot', type = 'create-explosion'},
-                        type = 'instant',
-                        target_effects = {
-                            {
-                                entity_name = 'explosion-hit',
-                                type = 'create-entity',
-                                offsets = {{0, 1}},
-                                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
-                            }, {type = 'damage', damage = {amount = 24, type = 'physical'}}
-                        }
-                    },
-                    type = 'direct'
-                }
-            },
-            order = 'a[basic-clips]-c[uranium-rounds-magazine]'
-        },
-        ['piercing-rounds-magazine'] = {
-            name = 'piercing-rounds-magazine',
-            subgroup = 'ammo',
-            magazine_size = 10,
-            icon_size = 64,
-            icon = '__base__/graphics/icons/piercing-rounds-magazine.png',
-            icon_mipmaps = 4,
-            stack_size = 200,
-            type = 'ammo',
-            ammo_type = {
-                category = 'bullet',
-                action = {
-                    action_delivery = {
-                        source_effects = {entity_name = 'explosion-gunshot', type = 'create-explosion'},
-                        type = 'instant',
-                        target_effects = {
-                            {
-                                entity_name = 'explosion-hit',
-                                type = 'create-entity',
-                                offsets = {{0, 1}},
-                                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
-                            }, {type = 'damage', damage = {amount = 8, type = 'physical'}}
-                        }
-                    },
-                    type = 'direct'
-                }
-            },
-            order = 'a[basic-clips]-b[piercing-rounds-magazine]'
-        },
         ['explosive-rocket'] = {
-            name = 'explosive-rocket',
-            subgroup = 'ammo',
             order = 'd[rocket-launcher]-b[explosive]',
             icon_size = 64,
-            icon = '__base__/graphics/icons/explosive-rocket.png',
-            icon_mipmaps = 4,
-            stack_size = 200,
             ammo_type = {
-                category = 'rocket',
                 action = {
+                    type = 'direct',
                     action_delivery = {
                         source_effects = {entity_name = 'explosion-hit', type = 'create-entity'},
                         type = 'projectile',
-                        starting_speed = 0.1,
-                        projectile = 'explosive-rocket'
-                    },
-                    type = 'direct'
-                }
+                        projectile = 'explosive-rocket',
+                        starting_speed = 0.1
+                    }
+                },
+                category = 'rocket'
             },
-            type = 'ammo'
-        },
-        ['flamethrower-ammo'] = {
-            name = 'flamethrower-ammo',
+            icon = '__base__/graphics/icons/explosive-rocket.png',
+            stack_size = 200,
             subgroup = 'ammo',
-            magazine_size = 100,
-            icon_size = 64,
-            icon = '__base__/graphics/icons/flamethrower-ammo.png',
             icon_mipmaps = 4,
-            stack_size = 100,
             type = 'ammo',
+            name = 'explosive-rocket'
+        },
+        rocket = {
+            order = 'd[rocket-launcher]-a[basic]',
+            icon_size = 64,
             ammo_type = {
-                {
-                    action = {
-                        action_delivery = {stream = 'handheld-flamethrower-fire-stream', type = 'stream'},
-                        type = 'direct'
-                    },
-                    source_type = 'default',
-                    clamp_position = true,
-                    category = 'flamethrower',
-                    target_type = 'position'
-                }, {
-                    action = {
-                        action_delivery = {stream = 'tank-flamethrower-fire-stream', type = 'stream'},
-                        type = 'direct'
-                    },
-                    consumption_modifier = 1.125,
-                    clamp_position = true,
-                    category = 'flamethrower',
-                    target_type = 'position',
-                    source_type = 'vehicle'
-                }
+                action = {
+                    type = 'direct',
+                    action_delivery = {
+                        source_effects = {entity_name = 'explosion-hit', type = 'create-entity'},
+                        type = 'projectile',
+                        projectile = 'rocket',
+                        starting_speed = 0.1
+                    }
+                },
+                category = 'rocket'
             },
-            order = 'e[flamethrower]'
+            icon = '__base__/graphics/icons/rocket.png',
+            stack_size = 200,
+            subgroup = 'ammo',
+            icon_mipmaps = 4,
+            type = 'ammo',
+            name = 'rocket'
         },
         ['piercing-shotgun-shell'] = {
-            name = 'piercing-shotgun-shell',
-            subgroup = 'ammo',
-            magazine_size = 10,
+            order = 'b[shotgun]-b[piercing]',
             icon_size = 64,
-            icon = '__base__/graphics/icons/piercing-shotgun-shell.png',
-            icon_mipmaps = 4,
-            stack_size = 200,
-            type = 'ammo',
             ammo_type = {
-                category = 'shotgun-shell',
                 action = {
                     {
+                        type = 'direct',
                         action_delivery = {
                             source_effects = {{entity_name = 'explosion-gunshot', type = 'create-explosion'}},
                             type = 'instant'
-                        },
-                        type = 'direct'
+                        }
                     }, {
-                        action_delivery = {
-                            direction_deviation = 0.3,
-                            type = 'projectile',
-                            starting_speed_deviation = 0.1,
-                            max_range = 15,
-                            range_deviation = 0.3,
-                            starting_speed = 1,
-                            projectile = 'piercing-shotgun-pellet'
-                        },
                         repeat_count = 16,
-                        type = 'direct'
+                        type = 'direct',
+                        action_delivery = {
+                            range_deviation = 0.3,
+                            max_range = 15,
+                            projectile = 'piercing-shotgun-pellet',
+                            starting_speed_deviation = 0.1,
+                            type = 'projectile',
+                            direction_deviation = 0.3,
+                            starting_speed = 1
+                        }
                     }
                 },
                 target_type = 'direction',
+                category = 'shotgun-shell',
                 clamp_position = true
             },
-            order = 'b[shotgun]-b[piercing]'
+            icon = '__base__/graphics/icons/piercing-shotgun-shell.png',
+            stack_size = 200,
+            subgroup = 'ammo',
+            icon_mipmaps = 4,
+            type = 'ammo',
+            magazine_size = 10,
+            name = 'piercing-shotgun-shell'
+        },
+        ['explosive-cannon-shell'] = {
+            order = 'd[cannon-shell]-c[explosive]',
+            icon_size = 64,
+            ammo_type = {
+                action = {
+                    type = 'direct',
+                    action_delivery = {
+                        projectile = 'explosive-cannon-projectile',
+                        range_deviation = 0.1,
+                        max_range = 30,
+                        starting_speed = 1,
+                        source_effects = {entity_name = 'explosion-gunshot', type = 'create-explosion'},
+                        type = 'projectile',
+                        direction_deviation = 0.1,
+                        min_range = 5
+                    }
+                },
+                category = 'cannon-shell',
+                target_type = 'direction'
+            },
+            icon = '__base__/graphics/icons/explosive-cannon-shell.png',
+            stack_size = 200,
+            subgroup = 'ammo',
+            icon_mipmaps = 4,
+            type = 'ammo',
+            name = 'explosive-cannon-shell'
         },
         ['firearm-magazine'] = {
-            name = 'firearm-magazine',
-            subgroup = 'ammo',
-            magazine_size = 10,
+            order = 'a[basic-clips]-a[firearm-magazine]',
             icon_size = 64,
-            icon = '__base__/graphics/icons/firearm-magazine.png',
-            icon_mipmaps = 4,
-            stack_size = 200,
-            type = 'ammo',
             ammo_type = {
-                category = 'bullet',
                 action = {
                     {
+                        type = 'direct',
                         action_delivery = {
                             {
                                 source_effects = {{entity_name = 'explosion-gunshot', type = 'create-explosion'}},
                                 type = 'instant',
                                 target_effects = {
                                     {
-                                        entity_name = 'explosion-hit',
-                                        type = 'create-entity',
                                         offsets = {{0, 1}},
+                                        type = 'create-entity',
+                                        entity_name = 'explosion-hit',
                                         offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
                                     }, {type = 'damage', damage = {amount = 5, type = 'physical'}}
                                 }
                             }
-                        },
-                        type = 'direct'
+                        }
+                    }
+                },
+                category = 'bullet'
+            },
+            icon = '__base__/graphics/icons/firearm-magazine.png',
+            stack_size = 200,
+            subgroup = 'ammo',
+            icon_mipmaps = 4,
+            type = 'ammo',
+            magazine_size = 10,
+            name = 'firearm-magazine'
+        },
+        ['flamethrower-ammo'] = {
+            order = 'e[flamethrower]',
+            icon_size = 64,
+            ammo_type = {
+                {
+                    action = {
+                        type = 'direct',
+                        action_delivery = {stream = 'handheld-flamethrower-fire-stream', type = 'stream'}
+                    },
+                    source_type = 'default',
+                    category = 'flamethrower',
+                    target_type = 'position',
+                    clamp_position = true
+                }, {
+                    action = {
+                        type = 'direct',
+                        action_delivery = {stream = 'tank-flamethrower-fire-stream', type = 'stream'}
+                    },
+                    source_type = 'vehicle',
+                    category = 'flamethrower',
+                    target_type = 'position',
+                    consumption_modifier = 1.125,
+                    clamp_position = true
+                }
+            },
+            icon = '__base__/graphics/icons/flamethrower-ammo.png',
+            stack_size = 100,
+            subgroup = 'ammo',
+            icon_mipmaps = 4,
+            type = 'ammo',
+            magazine_size = 100,
+            name = 'flamethrower-ammo'
+        },
+        ['uranium-rounds-magazine'] = {
+            order = 'a[basic-clips]-c[uranium-rounds-magazine]',
+            icon_size = 64,
+            ammo_type = {
+                action = {
+                    type = 'direct',
+                    action_delivery = {
+                        source_effects = {entity_name = 'explosion-gunshot', type = 'create-explosion'},
+                        type = 'instant',
+                        target_effects = {
+                            {
+                                offsets = {{0, 1}},
+                                type = 'create-entity',
+                                entity_name = 'explosion-hit',
+                                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+                            }, {type = 'damage', damage = {amount = 24, type = 'physical'}}
+                        }
+                    }
+                },
+                category = 'bullet'
+            },
+            icon = '__base__/graphics/icons/uranium-rounds-magazine.png',
+            stack_size = 200,
+            subgroup = 'ammo',
+            icon_mipmaps = 4,
+            pictures = {
+                layers = {
+                    {
+                        size = 64,
+                        filename = '__base__/graphics/icons/uranium-rounds-magazine.png',
+                        scale = 0.25,
+                        mipmap_count = 4
+                    }, {
+                        filename = '__base__/graphics/icons/uranium-rounds-magazine-light.png',
+                        scale = 0.25,
+                        mipmap_count = 4,
+                        flags = {'light'},
+                        size = 64,
+                        draw_as_light = true
                     }
                 }
             },
-            order = 'a[basic-clips]-a[firearm-magazine]'
-        },
-        ['explosive-cannon-shell'] = {
-            name = 'explosive-cannon-shell',
-            subgroup = 'ammo',
-            order = 'd[cannon-shell]-c[explosive]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/explosive-cannon-shell.png',
-            icon_mipmaps = 4,
-            stack_size = 200,
-            ammo_type = {
-                category = 'cannon-shell',
-                action = {
-                    action_delivery = {
-                        direction_deviation = 0.1,
-                        starting_speed = 1,
-                        type = 'projectile',
-                        source_effects = {entity_name = 'explosion-gunshot', type = 'create-explosion'},
-                        max_range = 30,
-                        range_deviation = 0.1,
-                        min_range = 5,
-                        projectile = 'explosive-cannon-projectile'
-                    },
-                    type = 'direct'
-                },
-                target_type = 'direction'
-            },
-            type = 'ammo'
+            type = 'ammo',
+            magazine_size = 10,
+            name = 'uranium-rounds-magazine'
         },
         ['artillery-shell'] = {
-            name = 'artillery-shell',
-            subgroup = 'ammo',
             order = 'd[explosive-cannon-shell]-d[artillery]',
             icon_size = 64,
-            icon = '__base__/graphics/icons/artillery-shell.png',
-            icon_mipmaps = 4,
-            stack_size = 1,
             ammo_type = {
-                category = 'artillery-shell',
                 action = {
+                    type = 'direct',
                     action_delivery = {
-                        direction_deviation = 0,
-                        type = 'artillery',
                         range_deviation = 0,
+                        projectile = 'artillery-projectile',
                         source_effects = {entity_name = 'artillery-cannon-muzzle-flash', type = 'create-explosion'},
-                        starting_speed = 1,
-                        projectile = 'artillery-projectile'
-                    },
-                    type = 'direct'
+                        type = 'artillery',
+                        direction_deviation = 0,
+                        starting_speed = 1
+                    }
                 },
+                category = 'artillery-shell',
                 target_type = 'position'
             },
-            type = 'ammo'
-        },
-        rocket = {
-            name = 'rocket',
+            icon = '__base__/graphics/icons/artillery-shell.png',
+            stack_size = 1,
             subgroup = 'ammo',
-            order = 'd[rocket-launcher]-a[basic]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/rocket.png',
             icon_mipmaps = 4,
-            stack_size = 200,
-            ammo_type = {
-                category = 'rocket',
-                action = {
-                    action_delivery = {
-                        source_effects = {entity_name = 'explosion-hit', type = 'create-entity'},
-                        type = 'projectile',
-                        starting_speed = 0.1,
-                        projectile = 'rocket'
-                    },
-                    type = 'direct'
-                }
-            },
-            type = 'ammo'
+            type = 'ammo',
+            name = 'artillery-shell'
         },
         ['shotgun-shell'] = {
-            name = 'shotgun-shell',
-            subgroup = 'ammo',
-            magazine_size = 10,
+            order = 'b[shotgun]-a[basic]',
             icon_size = 64,
-            icon = '__base__/graphics/icons/shotgun-shell.png',
-            icon_mipmaps = 4,
-            stack_size = 200,
-            type = 'ammo',
             ammo_type = {
-                category = 'shotgun-shell',
                 action = {
                     {
+                        type = 'direct',
                         action_delivery = {
                             source_effects = {{entity_name = 'explosion-gunshot', type = 'create-explosion'}},
                             type = 'instant'
-                        },
-                        type = 'direct'
+                        }
                     }, {
-                        action_delivery = {
-                            direction_deviation = 0.3,
-                            type = 'projectile',
-                            starting_speed_deviation = 0.1,
-                            max_range = 15,
-                            range_deviation = 0.3,
-                            starting_speed = 1,
-                            projectile = 'shotgun-pellet'
-                        },
                         repeat_count = 12,
-                        type = 'direct'
+                        type = 'direct',
+                        action_delivery = {
+                            range_deviation = 0.3,
+                            max_range = 15,
+                            projectile = 'shotgun-pellet',
+                            starting_speed_deviation = 0.1,
+                            type = 'projectile',
+                            direction_deviation = 0.3,
+                            starting_speed = 1
+                        }
                     }
                 },
                 target_type = 'direction',
+                category = 'shotgun-shell',
                 clamp_position = true
             },
-            order = 'b[shotgun]-a[basic]'
-        },
-        ['railgun-dart'] = {
-            name = 'railgun-dart',
+            icon = '__base__/graphics/icons/shotgun-shell.png',
+            stack_size = 200,
             subgroup = 'ammo',
-            magazine_size = 4,
-            icon_size = 64,
-            icon = '__base__/graphics/icons/railgun-ammo.png',
             icon_mipmaps = 4,
             type = 'ammo',
-            stack_size = 200,
-            order = 'c[railgun]',
+            magazine_size = 10,
+            name = 'shotgun-shell'
+        },
+        ['piercing-rounds-magazine'] = {
+            order = 'a[basic-clips]-b[piercing-rounds-magazine]',
+            icon_size = 64,
             ammo_type = {
-                category = 'railgun',
                 action = {
-                    source_effects = {entity_name = 'railgun-beam', type = 'create-explosion'},
-                    range = 25,
-                    type = 'line',
+                    type = 'direct',
                     action_delivery = {
+                        source_effects = {entity_name = 'explosion-gunshot', type = 'create-explosion'},
                         type = 'instant',
-                        target_effects = {type = 'damage', damage = {amount = 100, type = 'physical'}}
-                    },
-                    width = 0.5
+                        target_effects = {
+                            {
+                                offsets = {{0, 1}},
+                                type = 'create-entity',
+                                entity_name = 'explosion-hit',
+                                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+                            }, {type = 'damage', damage = {amount = 8, type = 'physical'}}
+                        }
+                    }
                 },
-                target_type = 'direction',
-                clamp_position = true
+                category = 'bullet'
             },
-            flags = {'hidden'}
+            icon = '__base__/graphics/icons/piercing-rounds-magazine.png',
+            stack_size = 200,
+            subgroup = 'ammo',
+            icon_mipmaps = 4,
+            type = 'ammo',
+            magazine_size = 10,
+            name = 'piercing-rounds-magazine'
+        },
+        ['uranium-cannon-shell'] = {
+            order = 'd[cannon-shell]-c[uranium]',
+            icon_size = 64,
+            ammo_type = {
+                action = {
+                    type = 'direct',
+                    action_delivery = {
+                        projectile = 'uranium-cannon-projectile',
+                        range_deviation = 0.1,
+                        max_range = 30,
+                        starting_speed = 1,
+                        source_effects = {entity_name = 'explosion-gunshot', type = 'create-explosion'},
+                        type = 'projectile',
+                        direction_deviation = 0.1,
+                        min_range = 5
+                    }
+                },
+                category = 'cannon-shell',
+                target_type = 'direction'
+            },
+            icon = '__base__/graphics/icons/uranium-cannon-shell.png',
+            stack_size = 200,
+            subgroup = 'ammo',
+            icon_mipmaps = 4,
+            type = 'ammo',
+            name = 'uranium-cannon-shell',
+            pictures = {
+                layers = {
+                    {
+                        size = 64,
+                        filename = '__base__/graphics/icons/uranium-cannon-shell.png',
+                        scale = 0.25,
+                        mipmap_count = 4
+                    }, {
+                        filename = '__base__/graphics/icons/uranium-cannon-shell-light.png',
+                        scale = 0.25,
+                        mipmap_count = 4,
+                        flags = {'light'},
+                        size = 64,
+                        draw_as_light = true
+                    }
+                }
+            }
+        },
+        ['atomic-bomb'] = {
+            order = 'd[rocket-launcher]-c[atomic-bomb]',
+            icon_size = 64,
+            ammo_type = {
+                action = {
+                    type = 'direct',
+                    action_delivery = {
+                        source_effects = {entity_name = 'explosion-hit', type = 'create-entity'},
+                        type = 'projectile',
+                        projectile = 'atomic-rocket',
+                        starting_speed = 0.05
+                    }
+                },
+                category = 'rocket',
+                cooldown_modifier = 10,
+                range_modifier = 1.5,
+                target_type = 'position'
+            },
+            icon = '__base__/graphics/icons/atomic-bomb.png',
+            stack_size = 10,
+            subgroup = 'ammo',
+            icon_mipmaps = 4,
+            type = 'ammo',
+            name = 'atomic-bomb',
+            pictures = {
+                layers = {
+                    {size = 64, filename = '__base__/graphics/icons/atomic-bomb.png', scale = 0.25, mipmap_count = 4}, {
+                        filename = '__base__/graphics/icons/atomic-bomb-light.png',
+                        scale = 0.25,
+                        mipmap_count = 4,
+                        flags = {'light'},
+                        size = 64,
+                        draw_as_light = true
+                    }
+                }
+            }
+        },
+        ['explosive-uranium-cannon-shell'] = {
+            order = 'd[explosive-cannon-shell]-c[uranium]',
+            icon_size = 64,
+            ammo_type = {
+                action = {
+                    type = 'direct',
+                    action_delivery = {
+                        projectile = 'explosive-uranium-cannon-projectile',
+                        range_deviation = 0.1,
+                        max_range = 30,
+                        starting_speed = 1,
+                        source_effects = {entity_name = 'explosion-gunshot', type = 'create-explosion'},
+                        type = 'projectile',
+                        direction_deviation = 0.1,
+                        min_range = 5
+                    }
+                },
+                category = 'cannon-shell',
+                target_type = 'direction'
+            },
+            icon = '__base__/graphics/icons/explosive-uranium-cannon-shell.png',
+            stack_size = 200,
+            subgroup = 'ammo',
+            icon_mipmaps = 4,
+            type = 'ammo',
+            name = 'explosive-uranium-cannon-shell',
+            pictures = {
+                layers = {
+                    {
+                        size = 64,
+                        filename = '__base__/graphics/icons/explosive-uranium-cannon-shell.png',
+                        scale = 0.25,
+                        mipmap_count = 4
+                    }, {
+                        filename = '__base__/graphics/icons/uranium-cannon-shell-light.png',
+                        scale = 0.25,
+                        mipmap_count = 4,
+                        flags = {'light'},
+                        size = 64,
+                        draw_as_light = true
+                    }
+                }
+            }
+        },
+        ['cannon-shell'] = {
+            order = 'd[cannon-shell]-a[basic]',
+            icon_size = 64,
+            ammo_type = {
+                action = {
+                    type = 'direct',
+                    action_delivery = {
+                        projectile = 'cannon-projectile',
+                        range_deviation = 0.1,
+                        max_range = 30,
+                        starting_speed = 1,
+                        source_effects = {entity_name = 'explosion-gunshot', type = 'create-explosion'},
+                        type = 'projectile',
+                        direction_deviation = 0.1,
+                        min_range = 5
+                    }
+                },
+                category = 'cannon-shell',
+                target_type = 'direction'
+            },
+            icon = '__base__/graphics/icons/cannon-shell.png',
+            stack_size = 200,
+            subgroup = 'ammo',
+            icon_mipmaps = 4,
+            type = 'ammo',
+            name = 'cannon-shell'
         }
     };
     return _;

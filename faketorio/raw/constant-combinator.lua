@@ -1,271 +1,8 @@
 do
     local _ = {
         ['constant-combinator'] = {
-            close_sound = 0,
-            vehicle_impact_sound = 0,
-            sprites = {
-                north = {
-                    layers = {
-                        {
-                            x = 0,
-                            height = 52,
-                            filename = '__base__/graphics/entity/combinator/constant-combinator.png',
-                            width = 58,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                x = 0,
-                                height = 102,
-                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator.png',
-                                width = 114,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }, {
-                            draw_as_shadow = true,
-                            x = 0,
-                            height = 34,
-                            filename = '__base__/graphics/entity/combinator/constant-combinator-shadow.png',
-                            width = 50,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                draw_as_shadow = true,
-                                x = 0,
-                                height = 66,
-                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator-shadow.png',
-                                width = 98,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }
-                    }
-                },
-                east = {
-                    layers = {
-                        {
-                            x = 58,
-                            height = 52,
-                            filename = '__base__/graphics/entity/combinator/constant-combinator.png',
-                            width = 58,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = {0, 0.15625},
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                x = 114,
-                                height = 102,
-                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator.png',
-                                width = 114,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = {0, 0.15625},
-                                priority = 'high',
-                                y = 0
-                            }
-                        }, {
-                            draw_as_shadow = true,
-                            x = 50,
-                            height = 34,
-                            filename = '__base__/graphics/entity/combinator/constant-combinator-shadow.png',
-                            width = 50,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = {0.28125, 0.1875},
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                draw_as_shadow = true,
-                                x = 98,
-                                height = 66,
-                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator-shadow.png',
-                                width = 98,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = {0.265625, 0.171875},
-                                priority = 'high',
-                                y = 0
-                            }
-                        }
-                    }
-                },
-                south = {
-                    layers = {
-                        {
-                            x = 116,
-                            height = 52,
-                            filename = '__base__/graphics/entity/combinator/constant-combinator.png',
-                            width = 58,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                x = 228,
-                                height = 102,
-                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator.png',
-                                width = 114,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }, {
-                            draw_as_shadow = true,
-                            x = 100,
-                            height = 34,
-                            filename = '__base__/graphics/entity/combinator/constant-combinator-shadow.png',
-                            width = 50,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                draw_as_shadow = true,
-                                x = 196,
-                                height = 66,
-                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator-shadow.png',
-                                width = 98,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }
-                    }
-                },
-                west = {
-                    layers = {
-                        {
-                            x = 174,
-                            height = 52,
-                            filename = '__base__/graphics/entity/combinator/constant-combinator.png',
-                            width = 58,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                x = 342,
-                                height = 102,
-                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator.png',
-                                width = 114,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }, {
-                            draw_as_shadow = true,
-                            x = 150,
-                            height = 34,
-                            filename = '__base__/graphics/entity/combinator/constant-combinator-shadow.png',
-                            width = 50,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                draw_as_shadow = true,
-                                x = 294,
-                                height = 66,
-                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator-shadow.png',
-                                width = 98,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }
-                    }
-                }
-            },
-            icon_size = 64,
-            activity_led_sprites = {
-                north = {
-                    frame_count = 1,
-                    height = 6,
-                    filename = '__base__/graphics/entity/combinator/activity-leds/constant-combinator-LED-N.png',
-                    width = 8,
-                    shift = {0.28125, -0.375},
-                    hr_version = {
-                        frame_count = 1,
-                        height = 12,
-                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-constant-combinator-LED-N.png',
-                        width = 14,
-                        shift = {0.28125, -0.359375},
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    frame_count = 1,
-                    height = 8,
-                    filename = '__base__/graphics/entity/combinator/activity-leds/constant-combinator-LED-E.png',
-                    width = 8,
-                    shift = {0.25, 0},
-                    hr_version = {
-                        frame_count = 1,
-                        height = 14,
-                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-constant-combinator-LED-E.png',
-                        width = 14,
-                        shift = {0.234375, -0.015625},
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    frame_count = 1,
-                    height = 8,
-                    filename = '__base__/graphics/entity/combinator/activity-leds/constant-combinator-LED-S.png',
-                    width = 8,
-                    shift = {-0.28125, 0.0625},
-                    hr_version = {
-                        frame_count = 1,
-                        height = 16,
-                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-constant-combinator-LED-S.png',
-                        width = 14,
-                        shift = {-0.28125, 0.078125},
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    frame_count = 1,
-                    height = 8,
-                    filename = '__base__/graphics/entity/combinator/activity-leds/constant-combinator-LED-W.png',
-                    width = 8,
-                    shift = {-0.21875, -0.46875},
-                    hr_version = {
-                        frame_count = 1,
-                        height = 16,
-                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-constant-combinator-LED-W.png',
-                        width = 14,
-                        shift = {-0.21875, -0.46875},
-                        scale = 0.5
-                    }
-                }
-            },
             minable = {mining_time = 0.1, result = 'constant-combinator'},
-            icon_mipmaps = 4,
+            vehicle_impact_sound = 0,
             circuit_wire_connection_points = {
                 {
                     shadow = {green = {0.71875, -0.1875}, red = {0.21875, -0.1875}},
@@ -282,29 +19,300 @@ do
                     wire = {green = {-0.46875, -0.421875}, red = {-0.46875, -0.015625}}
                 }
             },
-            activity_led_light_offsets = {
-                {0.296875, -0.40625}, {0.25, -0.03125}, {-0.296875, -0.078125}, {-0.21875, -0.46875}
-            },
             flags = {'placeable-neutral', 'player-creation'},
-            max_health = 120,
-            name = 'constant-combinator',
+            icon = '__base__/graphics/icons/constant-combinator.png',
+            close_sound = 0,
+            activity_led_sprites = {
+                south = {
+                    filename = '__base__/graphics/entity/combinator/activity-leds/constant-combinator-LED-S.png',
+                    width = 8,
+                    height = 8,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-constant-combinator-LED-S.png',
+                        scale = 0.5,
+                        width = 14,
+                        height = 16,
+                        frame_count = 1,
+                        shift = {-0.28125, 0.078125},
+                        draw_as_glow = true
+                    },
+                    frame_count = 1,
+                    shift = {-0.28125, 0.0625},
+                    draw_as_glow = true
+                },
+                north = {
+                    filename = '__base__/graphics/entity/combinator/activity-leds/constant-combinator-LED-N.png',
+                    width = 8,
+                    height = 6,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-constant-combinator-LED-N.png',
+                        scale = 0.5,
+                        width = 14,
+                        height = 12,
+                        frame_count = 1,
+                        shift = {0.28125, -0.359375},
+                        draw_as_glow = true
+                    },
+                    frame_count = 1,
+                    shift = {0.28125, -0.375},
+                    draw_as_glow = true
+                },
+                west = {
+                    filename = '__base__/graphics/entity/combinator/activity-leds/constant-combinator-LED-W.png',
+                    width = 8,
+                    height = 8,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-constant-combinator-LED-W.png',
+                        scale = 0.5,
+                        width = 14,
+                        height = 16,
+                        frame_count = 1,
+                        shift = {-0.21875, -0.46875},
+                        draw_as_glow = true
+                    },
+                    frame_count = 1,
+                    shift = {-0.21875, -0.46875},
+                    draw_as_glow = true
+                },
+                east = {
+                    filename = '__base__/graphics/entity/combinator/activity-leds/constant-combinator-LED-E.png',
+                    width = 8,
+                    height = 8,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-constant-combinator-LED-E.png',
+                        scale = 0.5,
+                        width = 14,
+                        height = 14,
+                        frame_count = 1,
+                        shift = {0.234375, -0.015625},
+                        draw_as_glow = true
+                    },
+                    frame_count = 1,
+                    shift = {0.25, 0},
+                    draw_as_glow = true
+                }
+            },
+            corpse = 'constant-combinator-remnants',
+            activity_led_light = {color = {b = 1, g = 1, r = 1}, size = 1, intensity = 0},
+            collision_box = {{-0.35, -0.35}, {0.35, 0.35}},
+            sprites = {
+                south = {
+                    layers = {
+                        {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 114,
+                                x = 228,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator.png',
+                                scale = 0.5,
+                                frame_count = 1,
+                                shift = 0,
+                                height = 102
+                            },
+                            width = 58,
+                            x = 116,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/constant-combinator.png',
+                            scale = 1,
+                            frame_count = 1,
+                            shift = 0,
+                            height = 52
+                        }, {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 98,
+                                x = 196,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator-shadow.png',
+                                scale = 0.5,
+                                height = 66,
+                                draw_as_shadow = true,
+                                shift = 0,
+                                frame_count = 1
+                            },
+                            width = 50,
+                            x = 100,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/constant-combinator-shadow.png',
+                            scale = 1,
+                            height = 34,
+                            draw_as_shadow = true,
+                            shift = 0,
+                            frame_count = 1
+                        }
+                    }
+                },
+                north = {
+                    layers = {
+                        {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 114,
+                                x = 0,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator.png',
+                                scale = 0.5,
+                                frame_count = 1,
+                                shift = 0,
+                                height = 102
+                            },
+                            width = 58,
+                            x = 0,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/constant-combinator.png',
+                            scale = 1,
+                            frame_count = 1,
+                            shift = 0,
+                            height = 52
+                        }, {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 98,
+                                x = 0,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator-shadow.png',
+                                scale = 0.5,
+                                height = 66,
+                                draw_as_shadow = true,
+                                shift = 0,
+                                frame_count = 1
+                            },
+                            width = 50,
+                            x = 0,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/constant-combinator-shadow.png',
+                            scale = 1,
+                            height = 34,
+                            draw_as_shadow = true,
+                            shift = 0,
+                            frame_count = 1
+                        }
+                    }
+                },
+                west = {
+                    layers = {
+                        {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 114,
+                                x = 342,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator.png',
+                                scale = 0.5,
+                                frame_count = 1,
+                                shift = 0,
+                                height = 102
+                            },
+                            width = 58,
+                            x = 174,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/constant-combinator.png',
+                            scale = 1,
+                            frame_count = 1,
+                            shift = 0,
+                            height = 52
+                        }, {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 98,
+                                x = 294,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator-shadow.png',
+                                scale = 0.5,
+                                height = 66,
+                                draw_as_shadow = true,
+                                shift = 0,
+                                frame_count = 1
+                            },
+                            width = 50,
+                            x = 150,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/constant-combinator-shadow.png',
+                            scale = 1,
+                            height = 34,
+                            draw_as_shadow = true,
+                            shift = 0,
+                            frame_count = 1
+                        }
+                    }
+                },
+                east = {
+                    layers = {
+                        {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 114,
+                                x = 114,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator.png',
+                                scale = 0.5,
+                                frame_count = 1,
+                                shift = {0, 0.15625},
+                                height = 102
+                            },
+                            width = 58,
+                            x = 58,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/constant-combinator.png',
+                            scale = 1,
+                            frame_count = 1,
+                            shift = {0, 0.15625},
+                            height = 52
+                        }, {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 98,
+                                x = 98,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-constant-combinator-shadow.png',
+                                scale = 0.5,
+                                height = 66,
+                                draw_as_shadow = true,
+                                shift = {0.265625, 0.171875},
+                                frame_count = 1
+                            },
+                            width = 50,
+                            x = 50,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/constant-combinator-shadow.png',
+                            scale = 1,
+                            height = 34,
+                            draw_as_shadow = true,
+                            shift = {0.28125, 0.1875},
+                            frame_count = 1
+                        }
+                    }
+                }
+            },
+            icon_size = 64,
+            dying_explosion = 'constant-combinator-explosion',
             damaged_trigger_effect = {
-                entity_name = 'spark-explosion',
+                damage_type_filters = 'fire',
                 offsets = {{0, 1}},
                 type = 'create-entity',
-                damage_type_filters = 'fire',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                entity_name = 'spark-explosion'
             },
-            dying_explosion = 'constant-combinator-explosion',
-            type = 'constant-combinator',
+            item_slot_count = 20,
             selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
-            icon = '__base__/graphics/icons/constant-combinator.png',
-            collision_box = {{-0.35, -0.35}, {0.35, 0.35}},
-            activity_led_light = {color = {g = 1, r = 1, b = 1}, size = 1, intensity = 0.8},
-            open_sound = 0,
+            icon_mipmaps = 4,
             circuit_wire_max_distance = 9,
-            item_slot_count = 18,
-            corpse = 'constant-combinator-remnants'
+            max_health = 120,
+            open_sound = 0,
+            type = 'constant-combinator',
+            name = 'constant-combinator',
+            activity_led_light_offsets = {
+                {0.296875, -0.40625}, {0.25, -0.03125}, {-0.296875, -0.078125}, {-0.21875, -0.46875}
+            }
         }
     };
     return _;

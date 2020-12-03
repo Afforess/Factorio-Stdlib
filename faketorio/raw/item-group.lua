@@ -1,75 +1,85 @@
 do
     local _ = {
-        enemies = {
-            icon = '__core__/graphics/enemy-force-icon.png',
-            type = 'item-group',
-            order = 'aa',
-            icon_size = 64,
-            name = 'enemies'
-        },
-        signals = {
-            icon = '__base__/graphics/item-group/signals.png',
-            type = 'item-group',
-            order = 'f',
-            icon_size = 64,
-            name = 'signals'
-        },
-        other = {
-            icon = '__core__/graphics/questionmark.png',
-            type = 'item-group',
-            order = 'z',
-            icon_size = 64,
-            name = 'other'
-        },
-        logistics = {
-            icon = '__base__/graphics/item-group/logistics.png',
-            type = 'item-group',
-            order = 'aaa',
-            icon_size = 64,
-            name = 'logistics'
+        combat = {
+            order = 'd',
+            icon_mipmaps = 2,
+            icon_size = 128,
+            icon = '__base__/graphics/item-group/military.png',
+            name = 'combat',
+            type = 'item-group'
         },
         fluids = {
-            icon = '__base__/graphics/item-group/fluids.png',
-            type = 'item-group',
             order = 'e',
-            icon_size = 64,
-            name = 'fluids'
+            icon_mipmaps = 2,
+            icon_size = 128,
+            icon = '__base__/graphics/item-group/fluids.png',
+            name = 'fluids',
+            type = 'item-group'
         },
-        combat = {
-            icon = '__base__/graphics/item-group/military.png',
-            type = 'item-group',
-            order = 'd',
-            icon_size = 64,
-            name = 'combat'
-        },
-        effects = {
-            icon = '__base__/graphics/item-group/effects.png',
-            type = 'item-group',
-            order = 'y',
-            icon_size = 64,
-            name = 'effects'
-        },
-        ['intermediate-products'] = {
-            icon = '__base__/graphics/item-group/intermediate-products.png',
-            type = 'item-group',
-            order = 'c',
-            icon_size = 64,
-            name = 'intermediate-products',
-            order_in_recipe = '0'
-        },
-        production = {
-            icon = '__base__/graphics/item-group/production.png',
-            type = 'item-group',
-            order = 'b',
-            icon_size = 64,
-            name = 'production'
+        other = {
+            order = 'z',
+            icon_mipmaps = 2,
+            icon_size = 128,
+            icon = '__core__/graphics/icons/category/unsorted.png',
+            name = 'other',
+            type = 'item-group'
         },
         environment = {
-            icon = '__core__/graphics/treex64-provisional.png',
-            type = 'item-group',
+            order = 'h',
+            icon_mipmaps = 2,
+            icon_size = 128,
+            icon = '__core__/graphics/icons/category/environment.png',
+            name = 'environment',
+            type = 'item-group'
+        },
+        ['intermediate-products'] = {
+            order = 'c',
+            icon_mipmaps = 2,
+            icon_size = 128,
+            order_in_recipe = '0',
+            icon = '__base__/graphics/item-group/intermediate-products.png',
+            name = 'intermediate-products',
+            type = 'item-group'
+        },
+        production = {
+            order = 'b',
+            icon_mipmaps = 2,
+            icon_size = 128,
+            icon = '__base__/graphics/item-group/production.png',
+            name = 'production',
+            type = 'item-group'
+        },
+        enemies = {
+            order = 'g',
+            icon_mipmaps = 2,
+            icon_size = 128,
+            icon = '__core__/graphics/icons/category/enemies.png',
+            name = 'enemies',
+            type = 'item-group'
+        },
+        signals = {
+            order = 'f',
+            icon_mipmaps = 2,
+            icon_size = 128,
+            icon = '__base__/graphics/item-group/signals.png',
+            name = 'signals',
+            type = 'item-group'
+        },
+        logistics = {
             order = 'a',
-            icon_size = 64,
-            name = 'environment'
+            icon_mipmaps = 2,
+            icon_size = 128,
+            icon = '__base__/graphics/item-group/logistics.png',
+            name = 'logistics',
+            type = 'item-group'
+        },
+        effects = {
+            order = 'y',
+            icon_mipmaps = 2,
+            icon_size = 128,
+            icon = '__base__/graphics/item-group/effects.png',
+            name = 'effects',
+            type = 'item-group'
         }
     };
     return _;

@@ -1,45 +1,45 @@
 do
     local _ = {
         ['simple-entity-with-force'] = {
-            name = 'simple-entity-with-force',
-            order = 's-e-w-f',
+            minable = {mining_time = 0.1, result = 'simple-entity-with-force'},
             icon_size = 64,
+            flags = {'placeable-neutral', 'player-creation'},
+            icon = '__base__/graphics/icons/steel-chest.png',
             type = 'simple-entity-with-force',
-            render_layer = 'object',
+            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+            name = 'simple-entity-with-force',
+            icon_mipmaps = 4,
             picture = {
-                height = 40,
                 filename = '__base__/graphics/entity/steel-chest/steel-chest.png',
                 width = 32,
                 priority = 'extra-high',
-                shift = {-0.34375, 0.140625}
+                shift = {-0.34375, 0.140625},
+                height = 40
             },
-            minable = {mining_time = 0.1, result = 'simple-entity-with-force'},
-            icon = '__base__/graphics/icons/steel-chest.png',
+            corpse = 'small-remnants',
+            order = 's-e-w-f',
+            render_layer = 'object',
             collision_box = {{-0.35, -0.35}, {0.35, 0.35}},
-            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
-            max_health = 100,
-            icon_mipmaps = 4,
-            flags = {'placeable-neutral', 'player-creation'},
-            corpse = 'small-remnants'
+            max_health = 100
         },
         ['spidertron-military-target'] = {
-            name = 'spidertron-military-target',
-            collision_mask = {},
             icon_size = 64,
+            icon = '__base__/graphics/icons/steel-chest.png',
+            collision_mask = {},
+            name = 'spidertron-military-target',
+            icon_mipmaps = 4,
+            selection_box = {{-1, -1}, {1, 1}},
+            corpse = 'small-remnants',
             picture = {
-                height = 40,
                 filename = '__base__/graphics/entity/steel-chest/steel-chest.png',
                 width = 32,
                 priority = 'extra-high',
-                shift = {-0.34375, 0.140625}
+                shift = {-0.34375, 0.140625},
+                height = 40
             },
-            icon = '__base__/graphics/icons/steel-chest.png',
-            collision_box = {{-1, -1}, {1, 1}},
-            selection_box = {{-1, -1}, {1, 1}},
             type = 'simple-entity-with-force',
-            max_health = 3000,
-            icon_mipmaps = 4,
-            corpse = 'small-remnants'
+            collision_box = {{-1, -1}, {1, 1}},
+            max_health = 3000
         }
     };
     return _;

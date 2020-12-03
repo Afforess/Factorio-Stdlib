@@ -1,217 +1,337 @@
 do
     local _ = {
         ['decider-combinator'] = {
-            screen_light_offsets = {
-                {0.015625, -0.265625}, {0.015625, -0.359375}, {0.015625, -0.265625}, {0.015625, -0.359375}
-            },
-            input_connection_bounding_box = {{-0.5, 0}, {0.5, 1}},
-            icon_size = 64,
-            screen_light = {color = {g = 1, r = 1, b = 1}, size = 0.6, intensity = 0.3},
-            energy_source = {type = 'electric', usage_priority = 'secondary-input'},
             minable = {mining_time = 0.1, result = 'decider-combinator'},
-            icon_mipmaps = 4,
-            less_symbol_sprites = {
-                north = {
-                    x = 15,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 30,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 15,
-                    height = 11,
-                    shift = {0, -0.421875},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 30,
-                        height = 22,
-                        shift = {0, -0.421875},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
+            working_sound = {
+                fade_out_ticks = 20,
+                fade_in_ticks = 4,
+                sound = {volume = 0.45, filename = '__base__/sound/combinator.ogg'},
+                audible_distance_modifier = 0.2,
+                match_speed_to_activity = true
+            },
+            vehicle_impact_sound = 0,
+            equal_symbol_sprites = {
                 south = {
-                    x = 15,
-                    height = 11,
-                    shift = {0, -0.140625},
+                    y = 22,
                     filename = '__base__/graphics/entity/combinator/combinator-displays.png',
                     width = 15,
-                    y = 22,
+                    x = 30,
+                    height = 11,
                     hr_version = {
-                        x = 30,
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 60,
+                        width = 30,
                         height = 22,
                         shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 30,
+                    height = 11,
+                    hr_version = {
                         y = 44,
-                        scale = 0.5
-                    }
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 60,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
                 },
                 west = {
-                    x = 15,
-                    height = 11,
-                    shift = {0, -0.421875},
+                    y = 22,
                     filename = '__base__/graphics/entity/combinator/combinator-displays.png',
                     width = 15,
-                    y = 22,
+                    x = 30,
+                    height = 11,
                     hr_version = {
-                        x = 30,
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 60,
+                        width = 30,
                         height = 22,
                         shift = {0, -0.421875},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.421875},
+                    draw_as_glow = true
+                },
+                east = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 30,
+                    height = 11,
+                    hr_version = {
                         y = 44,
-                        scale = 0.5
-                    }
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 60,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.421875},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.421875},
+                    draw_as_glow = true
                 }
             },
+            icon = '__base__/graphics/icons/decider-combinator.png',
+            activity_led_sprites = {
+                south = {
+                    filename = '__base__/graphics/entity/combinator/activity-leds/decider-combinator-LED-S.png',
+                    width = 8,
+                    height = 8,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-decider-combinator-LED-S.png',
+                        scale = 0.5,
+                        width = 16,
+                        height = 14,
+                        frame_count = 1,
+                        shift = {-0.25, 0.140625},
+                        draw_as_glow = true
+                    },
+                    frame_count = 1,
+                    shift = {-0.25, 0.15625},
+                    draw_as_glow = true
+                },
+                north = {
+                    filename = '__base__/graphics/entity/combinator/activity-leds/decider-combinator-LED-N.png',
+                    width = 8,
+                    height = 8,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-decider-combinator-LED-N.png',
+                        scale = 0.5,
+                        width = 16,
+                        height = 14,
+                        frame_count = 1,
+                        shift = {0.265625, -0.40625},
+                        draw_as_glow = true
+                    },
+                    frame_count = 1,
+                    shift = {0.25, -0.40625},
+                    draw_as_glow = true
+                },
+                west = {
+                    filename = '__base__/graphics/entity/combinator/activity-leds/decider-combinator-LED-W.png',
+                    width = 8,
+                    height = 8,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-decider-combinator-LED-W.png',
+                        scale = 0.5,
+                        width = 16,
+                        height = 16,
+                        frame_count = 1,
+                        shift = {-0.46875, -0.578125},
+                        draw_as_glow = true
+                    },
+                    frame_count = 1,
+                    shift = {-0.46875, -0.59375},
+                    draw_as_glow = true
+                },
+                east = {
+                    filename = '__base__/graphics/entity/combinator/activity-leds/decider-combinator-LED-E.png',
+                    width = 8,
+                    height = 8,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-decider-combinator-LED-E.png',
+                        scale = 0.5,
+                        width = 16,
+                        height = 16,
+                        frame_count = 1,
+                        shift = {0.5, -0.125},
+                        draw_as_glow = true
+                    },
+                    frame_count = 1,
+                    shift = {0.5, -0.125},
+                    draw_as_glow = true
+                }
+            },
+            corpse = 'decider-combinator-remnants',
+            greater_or_equal_symbol_sprites = {
+                south = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 75,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 150,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 75,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 150,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 75,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 150,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.421875},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.421875},
+                    draw_as_glow = true
+                },
+                east = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 75,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 150,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.421875},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.421875},
+                    draw_as_glow = true
+                }
+            },
+            collision_box = {{-0.35, -0.65}, {0.35, 0.65}},
             not_equal_symbol_sprites = {
-                north = {
-                    x = 45,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 90,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 45,
-                    height = 11,
-                    shift = {0, -0.421875},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 90,
-                        height = 22,
-                        shift = {0, -0.421875},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
                 south = {
-                    x = 45,
-                    height = 11,
-                    shift = {0, -0.140625},
+                    y = 22,
                     filename = '__base__/graphics/entity/combinator/combinator-displays.png',
                     width = 15,
-                    y = 22,
+                    x = 45,
+                    height = 11,
                     hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
                         x = 90,
+                        width = 30,
                         height = 22,
                         shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 45,
+                    height = 11,
+                    hr_version = {
                         y = 44,
-                        scale = 0.5
-                    }
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 90,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
                 },
                 west = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
                     x = 45,
                     height = 11,
-                    shift = {0, -0.421875},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
                     hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
                         x = 90,
+                        width = 30,
                         height = 22,
                         shift = {0, -0.421875},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                }
-            },
-            greater_symbol_sprites = {
-                north = {
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.421875},
+                    draw_as_glow = true
                 },
                 east = {
-                    height = 11,
-                    shift = {0, -0.421875},
+                    y = 22,
                     filename = '__base__/graphics/entity/combinator/combinator-displays.png',
                     width = 15,
-                    y = 22,
+                    x = 45,
+                    height = 11,
                     hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 90,
+                        width = 30,
                         height = 22,
                         shift = {0, -0.421875},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    height = 11,
+                        draw_as_glow = true
+                    },
                     shift = {0, -0.421875},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        height = 22,
-                        shift = {0, -0.421875},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
+                    draw_as_glow = true
                 }
             },
+            output_connection_bounding_box = {{-0.5, -1}, {0.5, 0}},
+            active_energy_usage = '1KW',
+            dying_explosion = 'decider-combinator-explosion',
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                entity_name = 'spark-explosion'
+            },
+            icon_mipmaps = 4,
+            open_sound = 0,
+            type = 'decider-combinator',
+            input_connection_bounding_box = {{-0.5, 0}, {0.5, 1}},
+            flags = {'placeable-neutral', 'player-creation'},
             output_connection_points = {
                 {
                     shadow = {green = {0.828125, -0.296875}, red = {0.21875, -0.296875}},
@@ -227,153 +347,8 @@ do
                     wire = {green = {-0.671875, -0.53125}, red = {-0.671875, -0.125}}
                 }
             },
-            damaged_trigger_effect = {
-                entity_name = 'spark-explosion',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                damage_type_filters = 'fire',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
-            },
-            collision_box = {{-0.35, -0.65}, {0.35, 0.65}},
-            selection_box = {{-0.5, -1}, {0.5, 1}},
             close_sound = 0,
-            vehicle_impact_sound = 0,
-            activity_led_sprites = {
-                north = {
-                    frame_count = 1,
-                    height = 8,
-                    filename = '__base__/graphics/entity/combinator/activity-leds/decider-combinator-LED-N.png',
-                    width = 8,
-                    shift = {0.25, -0.40625},
-                    hr_version = {
-                        frame_count = 1,
-                        height = 14,
-                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-decider-combinator-LED-N.png',
-                        width = 16,
-                        shift = {0.265625, -0.40625},
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    frame_count = 1,
-                    height = 8,
-                    filename = '__base__/graphics/entity/combinator/activity-leds/decider-combinator-LED-E.png',
-                    width = 8,
-                    shift = {0.5, -0.125},
-                    hr_version = {
-                        frame_count = 1,
-                        height = 16,
-                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-decider-combinator-LED-E.png',
-                        width = 16,
-                        shift = {0.5, -0.125},
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    frame_count = 1,
-                    height = 8,
-                    filename = '__base__/graphics/entity/combinator/activity-leds/decider-combinator-LED-S.png',
-                    width = 8,
-                    shift = {-0.25, 0.15625},
-                    hr_version = {
-                        frame_count = 1,
-                        height = 14,
-                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-decider-combinator-LED-S.png',
-                        width = 16,
-                        shift = {-0.25, 0.140625},
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    frame_count = 1,
-                    height = 8,
-                    filename = '__base__/graphics/entity/combinator/activity-leds/decider-combinator-LED-W.png',
-                    width = 8,
-                    shift = {-0.46875, -0.59375},
-                    hr_version = {
-                        frame_count = 1,
-                        height = 16,
-                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-decider-combinator-LED-W.png',
-                        width = 16,
-                        shift = {-0.46875, -0.578125},
-                        scale = 0.5
-                    }
-                }
-            },
-            equal_symbol_sprites = {
-                north = {
-                    x = 30,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 60,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 30,
-                    height = 11,
-                    shift = {0, -0.421875},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 60,
-                        height = 22,
-                        shift = {0, -0.421875},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    x = 30,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 60,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    x = 30,
-                    height = 11,
-                    shift = {0, -0.421875},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 60,
-                        height = 22,
-                        shift = {0, -0.421875},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                }
-            },
-            activity_led_light_offsets = {
-                {0.265625, -0.53125}, {0.515625, -0.078125}, {-0.25, 0.03125}, {-0.46875, -0.5}
-            },
-            flags = {'placeable-neutral', 'player-creation'},
+            energy_source = {usage_priority = 'secondary-input', type = 'electric'},
             input_connection_points = {
                 {
                     shadow = {green = {0.828125, 0.859375}, red = {0.25, 0.875}},
@@ -389,362 +364,443 @@ do
                     wire = {green = {0.78125, -0.59375}, red = {0.796875, -0.125}}
                 }
             },
-            name = 'decider-combinator',
+            activity_led_light = {color = {b = 1, g = 1, r = 1}, size = 1, intensity = 0},
             sprites = {
+                south = {
+                    layers = {
+                        {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 156,
+                                x = 312,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-decider-combinator.png',
+                                scale = 0.5,
+                                frame_count = 1,
+                                shift = 0,
+                                height = 132
+                            },
+                            width = 78,
+                            x = 156,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/decider-combinator.png',
+                            scale = 1,
+                            frame_count = 1,
+                            shift = 0,
+                            height = 66
+                        }, {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 156,
+                                x = 312,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-decider-combinator-shadow.png',
+                                scale = 0.5,
+                                height = 158,
+                                draw_as_shadow = true,
+                                shift = 0,
+                                frame_count = 1
+                            },
+                            width = 78,
+                            x = 156,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/decider-combinator-shadow.png',
+                            scale = 1,
+                            height = 80,
+                            draw_as_shadow = true,
+                            shift = 0,
+                            frame_count = 1
+                        }
+                    }
+                },
                 north = {
                     layers = {
                         {
-                            x = 0,
-                            height = 66,
-                            filename = '__base__/graphics/entity/combinator/decider-combinator.png',
-                            width = 78,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
                             y = 0,
-                            priority = 'high',
                             hr_version = {
+                                y = 0,
+                                width = 156,
                                 x = 0,
-                                height = 132,
+                                priority = 'high',
                                 filename = '__base__/graphics/entity/combinator/hr-decider-combinator.png',
-                                width = 156,
                                 scale = 0.5,
                                 frame_count = 1,
                                 shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }, {
-                            draw_as_shadow = true,
-                            x = 0,
-                            height = 80,
-                            filename = '__base__/graphics/entity/combinator/decider-combinator-shadow.png',
+                                height = 132
+                            },
                             width = 78,
+                            x = 0,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/decider-combinator.png',
                             scale = 1,
                             frame_count = 1,
                             shift = 0,
+                            height = 66
+                        }, {
                             y = 0,
-                            priority = 'high',
                             hr_version = {
-                                draw_as_shadow = true,
-                                x = 0,
-                                height = 158,
-                                filename = '__base__/graphics/entity/combinator/hr-decider-combinator-shadow.png',
+                                y = 0,
                                 width = 156,
+                                x = 0,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-decider-combinator-shadow.png',
+                                scale = 0.5,
+                                height = 158,
+                                draw_as_shadow = true,
+                                shift = 0,
+                                frame_count = 1
+                            },
+                            width = 78,
+                            x = 0,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/decider-combinator-shadow.png',
+                            scale = 1,
+                            height = 80,
+                            draw_as_shadow = true,
+                            shift = 0,
+                            frame_count = 1
+                        }
+                    }
+                },
+                west = {
+                    layers = {
+                        {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 156,
+                                x = 468,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-decider-combinator.png',
                                 scale = 0.5,
                                 frame_count = 1,
                                 shift = 0,
+                                height = 132
+                            },
+                            width = 78,
+                            x = 234,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/decider-combinator.png',
+                            scale = 1,
+                            frame_count = 1,
+                            shift = 0,
+                            height = 66
+                        }, {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 156,
+                                x = 468,
                                 priority = 'high',
-                                y = 0
-                            }
+                                filename = '__base__/graphics/entity/combinator/hr-decider-combinator-shadow.png',
+                                scale = 0.5,
+                                height = 158,
+                                draw_as_shadow = true,
+                                shift = 0,
+                                frame_count = 1
+                            },
+                            width = 78,
+                            x = 234,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/decider-combinator-shadow.png',
+                            scale = 1,
+                            height = 80,
+                            draw_as_shadow = true,
+                            shift = 0,
+                            frame_count = 1
                         }
                     }
                 },
                 east = {
                     layers = {
                         {
-                            x = 78,
-                            height = 66,
-                            filename = '__base__/graphics/entity/combinator/decider-combinator.png',
-                            width = 78,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = {0, 0.21875},
                             y = 0,
-                            priority = 'high',
                             hr_version = {
-                                x = 156,
-                                height = 132,
-                                filename = '__base__/graphics/entity/combinator/hr-decider-combinator.png',
+                                y = 0,
                                 width = 156,
+                                x = 156,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-decider-combinator.png',
                                 scale = 0.5,
                                 frame_count = 1,
                                 shift = {0.015625, 0.234375},
-                                priority = 'high',
-                                y = 0
-                            }
-                        }, {
-                            draw_as_shadow = true,
+                                height = 132
+                            },
+                            width = 78,
                             x = 78,
-                            height = 80,
-                            filename = '__base__/graphics/entity/combinator/decider-combinator-shadow.png',
-                            width = 78,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/decider-combinator.png',
                             scale = 1,
                             frame_count = 1,
-                            shift = {0.375, 0.75},
+                            shift = {0, 0.21875},
+                            height = 66
+                        }, {
                             y = 0,
-                            priority = 'high',
                             hr_version = {
-                                draw_as_shadow = true,
+                                y = 0,
+                                width = 156,
                                 x = 156,
-                                height = 158,
+                                priority = 'high',
                                 filename = '__base__/graphics/entity/combinator/hr-decider-combinator-shadow.png',
-                                width = 156,
                                 scale = 0.5,
-                                frame_count = 1,
+                                height = 158,
+                                draw_as_shadow = true,
                                 shift = {0.375, 0.75},
-                                priority = 'high',
-                                y = 0
-                            }
-                        }
-                    }
-                },
-                south = {
-                    layers = {
-                        {
-                            x = 156,
-                            height = 66,
-                            filename = '__base__/graphics/entity/combinator/decider-combinator.png',
+                                frame_count = 1
+                            },
                             width = 78,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
+                            x = 78,
                             priority = 'high',
-                            hr_version = {
-                                x = 312,
-                                height = 132,
-                                filename = '__base__/graphics/entity/combinator/hr-decider-combinator.png',
-                                width = 156,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }, {
-                            draw_as_shadow = true,
-                            x = 156,
-                            height = 80,
                             filename = '__base__/graphics/entity/combinator/decider-combinator-shadow.png',
-                            width = 78,
                             scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                draw_as_shadow = true,
-                                x = 312,
-                                height = 158,
-                                filename = '__base__/graphics/entity/combinator/hr-decider-combinator-shadow.png',
-                                width = 156,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }
-                    }
-                },
-                west = {
-                    layers = {
-                        {
-                            x = 234,
-                            height = 66,
-                            filename = '__base__/graphics/entity/combinator/decider-combinator.png',
-                            width = 78,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                x = 468,
-                                height = 132,
-                                filename = '__base__/graphics/entity/combinator/hr-decider-combinator.png',
-                                width = 156,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }, {
-                            draw_as_shadow = true,
-                            x = 234,
                             height = 80,
-                            filename = '__base__/graphics/entity/combinator/decider-combinator-shadow.png',
-                            width = 78,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                draw_as_shadow = true,
-                                x = 468,
-                                height = 158,
-                                filename = '__base__/graphics/entity/combinator/hr-decider-combinator-shadow.png',
-                                width = 156,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
+                            draw_as_shadow = true,
+                            shift = {0.375, 0.75},
+                            frame_count = 1
                         }
                     }
                 }
             },
-            type = 'decider-combinator',
-            dying_explosion = 'decider-combinator-explosion',
-            working_sound = {
-                audible_distance_modifier = 0.2,
-                fade_in_ticks = 4,
-                fade_out_ticks = 20,
-                sound = {filename = '__base__/sound/combinator.ogg', volume = 0.45},
-                match_speed_to_activity = true
-            },
-            output_connection_bounding_box = {{-0.5, -1}, {0.5, 0}},
-            open_sound = 0,
-            max_health = 150,
-            icon = '__base__/graphics/icons/decider-combinator.png',
-            less_or_equal_symbol_sprites = {
-                north = {
-                    x = 60,
-                    height = 11,
-                    shift = {0, -0.140625},
+            icon_size = 64,
+            selection_box = {{-0.5, -1}, {0.5, 1}},
+            greater_symbol_sprites = {
+                south = {
+                    y = 22,
                     filename = '__base__/graphics/entity/combinator/combinator-displays.png',
                     width = 15,
-                    y = 22,
+                    height = 11,
                     hr_version = {
-                        x = 120,
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        width = 30,
                         height = 22,
                         shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    height = 11,
+                    hr_version = {
                         y = 44,
-                        scale = 0.5
-                    }
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.421875},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.421875},
+                    draw_as_glow = true
                 },
                 east = {
-                    x = 60,
-                    height = 11,
-                    shift = {0, -0.421875},
+                    y = 22,
                     filename = '__base__/graphics/entity/combinator/combinator-displays.png',
                     width = 15,
-                    y = 22,
+                    height = 11,
                     hr_version = {
-                        x = 120,
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        width = 30,
                         height = 22,
                         shift = {0, -0.421875},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    x = 60,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 120,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    x = 60,
-                    height = 11,
+                        draw_as_glow = true
+                    },
                     shift = {0, -0.421875},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 120,
-                        height = 22,
-                        shift = {0, -0.421875},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
+                    draw_as_glow = true
                 }
             },
-            activity_led_light = {color = {g = 1, r = 1, b = 1}, size = 1, intensity = 0.8},
-            active_energy_usage = '1KW',
-            greater_or_equal_symbol_sprites = {
-                north = {
-                    x = 75,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 150,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 75,
-                    height = 11,
-                    shift = {0, -0.421875},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 150,
-                        height = 22,
-                        shift = {0, -0.421875},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    x = 75,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 150,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    x = 75,
-                    height = 11,
-                    shift = {0, -0.421875},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 22,
-                    hr_version = {
-                        x = 150,
-                        height = 22,
-                        shift = {0, -0.421875},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 44,
-                        scale = 0.5
-                    }
-                }
+            screen_light_offsets = {
+                {0.015625, -0.265625}, {0.015625, -0.359375}, {0.015625, -0.265625}, {0.015625, -0.359375}
             },
+            screen_light = {color = {b = 1, g = 1, r = 1}, size = 0.6, intensity = 0},
             circuit_wire_max_distance = 9,
-            corpse = 'decider-combinator-remnants'
+            max_health = 150,
+            less_symbol_sprites = {
+                south = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 30,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 30,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 30,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.421875},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.421875},
+                    draw_as_glow = true
+                },
+                east = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 30,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.421875},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.421875},
+                    draw_as_glow = true
+                }
+            },
+            less_or_equal_symbol_sprites = {
+                south = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 60,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 120,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 60,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 120,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 60,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 120,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.421875},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.421875},
+                    draw_as_glow = true
+                },
+                east = {
+                    y = 22,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 60,
+                    height = 11,
+                    hr_version = {
+                        y = 44,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 120,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.421875},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.421875},
+                    draw_as_glow = true
+                }
+            },
+            name = 'decider-combinator',
+            activity_led_light_offsets = {
+                {0.265625, -0.53125}, {0.515625, -0.078125}, {-0.25, 0.03125}, {-0.46875, -0.5}
+            }
         }
     };
     return _;

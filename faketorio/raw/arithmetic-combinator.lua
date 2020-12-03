@@ -1,74 +1,484 @@
 do
     local _ = {
         ['arithmetic-combinator'] = {
-            multiply_symbol_sprites = {
-                north = {
-                    x = 45,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.140625},
-                    hr_version = {
-                        x = 90,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.140625},
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 45,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.328125},
-                    hr_version = {
-                        x = 90,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.328125},
-                        scale = 0.5
-                    }
-                },
+            minable = {mining_time = 0.1, result = 'arithmetic-combinator'},
+            working_sound = {
+                fade_out_ticks = 20,
+                fade_in_ticks = 4,
+                sound = {volume = 0.45, filename = '__base__/sound/combinator.ogg'},
+                audible_distance_modifier = 0.2,
+                match_speed_to_activity = true
+            },
+            vehicle_impact_sound = 0,
+            icon = '__base__/graphics/icons/arithmetic-combinator.png',
+            activity_led_sprites = {
                 south = {
-                    x = 45,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.140625},
+                    filename = '__base__/graphics/entity/combinator/activity-leds/arithmetic-combinator-LED-S.png',
+                    width = 8,
+                    height = 8,
                     hr_version = {
-                        x = 90,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.140625},
-                        scale = 0.5
-                    }
+                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-arithmetic-combinator-LED-S.png',
+                        scale = 0.5,
+                        width = 16,
+                        height = 16,
+                        frame_count = 1,
+                        shift = {-0.25, 0.234375},
+                        draw_as_glow = true
+                    },
+                    frame_count = 1,
+                    shift = {-0.25, 0.21875},
+                    draw_as_glow = true
+                },
+                north = {
+                    filename = '__base__/graphics/entity/combinator/activity-leds/arithmetic-combinator-LED-N.png',
+                    width = 8,
+                    height = 8,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-arithmetic-combinator-LED-N.png',
+                        scale = 0.5,
+                        width = 16,
+                        height = 14,
+                        frame_count = 1,
+                        shift = {0.265625, -0.390625},
+                        draw_as_glow = true
+                    },
+                    frame_count = 1,
+                    shift = {0.25, -0.375},
+                    draw_as_glow = true
                 },
                 west = {
-                    x = 45,
-                    height = 11,
+                    filename = '__base__/graphics/entity/combinator/activity-leds/arithmetic-combinator-LED-W.png',
+                    width = 8,
+                    height = 8,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-arithmetic-combinator-LED-W.png',
+                        scale = 0.5,
+                        width = 14,
+                        height = 14,
+                        frame_count = 1,
+                        shift = {-0.5, -0.390625},
+                        draw_as_glow = true
+                    },
+                    frame_count = 1,
+                    shift = {-0.5, -0.375},
+                    draw_as_glow = true
+                },
+                east = {
+                    filename = '__base__/graphics/entity/combinator/activity-leds/arithmetic-combinator-LED-E.png',
+                    width = 8,
+                    height = 8,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-arithmetic-combinator-LED-E.png',
+                        scale = 0.5,
+                        width = 14,
+                        height = 14,
+                        frame_count = 1,
+                        shift = {0.515625, -0.03125},
+                        draw_as_glow = true
+                    },
+                    frame_count = 1,
+                    shift = {0.53125, -0.03125},
+                    draw_as_glow = true
+                }
+            },
+            corpse = 'arithmetic-combinator-remnants',
+            xor_symbol_sprites = {
+                south = {
+                    y = 11,
                     filename = '__base__/graphics/entity/combinator/combinator-displays.png',
                     width = 15,
-                    shift = {0, -0.328125},
+                    x = 75,
+                    height = 11,
                     hr_version = {
-                        x = 90,
-                        height = 22,
+                        y = 22,
                         filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 150,
                         width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 75,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 150,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 75,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 150,
+                        width = 30,
+                        height = 22,
                         shift = {0, -0.328125},
-                        scale = 0.5
-                    }
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                },
+                east = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 75,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 150,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                }
+            },
+            collision_box = {{-0.35, -0.65}, {0.35, 0.65}},
+            output_connection_bounding_box = {{-0.5, -1}, {0.5, 0}},
+            active_energy_usage = '1KW',
+            dying_explosion = 'arithmetic-combinator-explosion',
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                entity_name = 'spark-explosion'
+            },
+            right_shift_symbol_sprites = {
+                south = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 30,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 60,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 30,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 60,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 30,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 60,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                },
+                east = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 30,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 60,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                }
+            },
+            icon_mipmaps = 4,
+            and_symbol_sprites = {
+                south = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 45,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 90,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 45,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 90,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 45,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 90,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                },
+                east = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 45,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 90,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                }
+            },
+            type = 'arithmetic-combinator',
+            power_symbol_sprites = {
+                south = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                },
+                east = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
                 }
             },
             input_connection_bounding_box = {{-0.5, 0}, {0.5, 1}},
-            icon_size = 64,
-            screen_light = {color = {g = 1, r = 1, b = 1}, size = 0.6, intensity = 0.3},
-            energy_source = {type = 'electric', usage_priority = 'secondary-input'},
-            minable = {mining_time = 0.1, result = 'arithmetic-combinator'},
-            icon_mipmaps = 4,
+            or_symbol_sprites = {
+                south = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 60,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 120,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 60,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 120,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 60,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 120,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                },
+                east = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 60,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 120,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                }
+            },
+            flags = {'placeable-neutral', 'player-creation'},
             output_connection_points = {
                 {
                     shadow = {green = {0.734375, -0.375}, red = {0.125, -0.390625}},
@@ -84,670 +494,8 @@ do
                     wire = {green = {-0.703125, -0.375}, red = {-0.703125, 0.03125}}
                 }
             },
-            divide_symbol_sprites = {
-                north = {
-                    x = 60,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.140625},
-                    hr_version = {
-                        x = 120,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.140625},
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 60,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.328125},
-                    hr_version = {
-                        x = 120,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.328125},
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    x = 60,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.140625},
-                    hr_version = {
-                        x = 120,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.140625},
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    x = 60,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.328125},
-                    hr_version = {
-                        x = 120,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.328125},
-                        scale = 0.5
-                    }
-                }
-            },
-            damaged_trigger_effect = {
-                entity_name = 'spark-explosion',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                damage_type_filters = 'fire',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
-            },
-            collision_box = {{-0.35, -0.65}, {0.35, 0.65}},
-            selection_box = {{-0.5, -1}, {0.5, 1}},
-            or_symbol_sprites = {
-                north = {
-                    x = 60,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 120,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 60,
-                    height = 11,
-                    shift = {0, -0.328125},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 120,
-                        height = 22,
-                        shift = {0, -0.328125},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    x = 60,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 120,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    x = 60,
-                    height = 11,
-                    shift = {0, -0.328125},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 120,
-                        height = 22,
-                        shift = {0, -0.328125},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                }
-            },
             close_sound = 0,
-            vehicle_impact_sound = 0,
-            power_symbol_sprites = {
-                north = {
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    height = 11,
-                    shift = {0, -0.328125},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        height = 22,
-                        shift = {0, -0.328125},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    height = 11,
-                    shift = {0, -0.328125},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        height = 22,
-                        shift = {0, -0.328125},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                }
-            },
-            activity_led_sprites = {
-                north = {
-                    frame_count = 1,
-                    height = 8,
-                    filename = '__base__/graphics/entity/combinator/activity-leds/arithmetic-combinator-LED-N.png',
-                    width = 8,
-                    shift = {0.25, -0.375},
-                    hr_version = {
-                        frame_count = 1,
-                        height = 14,
-                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-arithmetic-combinator-LED-N.png',
-                        width = 16,
-                        shift = {0.265625, -0.390625},
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    frame_count = 1,
-                    height = 8,
-                    filename = '__base__/graphics/entity/combinator/activity-leds/arithmetic-combinator-LED-E.png',
-                    width = 8,
-                    shift = {0.53125, -0.03125},
-                    hr_version = {
-                        frame_count = 1,
-                        height = 14,
-                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-arithmetic-combinator-LED-E.png',
-                        width = 14,
-                        shift = {0.515625, -0.03125},
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    frame_count = 1,
-                    height = 8,
-                    filename = '__base__/graphics/entity/combinator/activity-leds/arithmetic-combinator-LED-S.png',
-                    width = 8,
-                    shift = {-0.25, 0.21875},
-                    hr_version = {
-                        frame_count = 1,
-                        height = 16,
-                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-arithmetic-combinator-LED-S.png',
-                        width = 16,
-                        shift = {-0.25, 0.234375},
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    frame_count = 1,
-                    height = 8,
-                    filename = '__base__/graphics/entity/combinator/activity-leds/arithmetic-combinator-LED-W.png',
-                    width = 8,
-                    shift = {-0.5, -0.375},
-                    hr_version = {
-                        frame_count = 1,
-                        height = 14,
-                        filename = '__base__/graphics/entity/combinator/activity-leds/hr-arithmetic-combinator-LED-W.png',
-                        width = 14,
-                        shift = {-0.5, -0.390625},
-                        scale = 0.5
-                    }
-                }
-            },
-            xor_symbol_sprites = {
-                north = {
-                    x = 75,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 150,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 75,
-                    height = 11,
-                    shift = {0, -0.328125},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 150,
-                        height = 22,
-                        shift = {0, -0.328125},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    x = 75,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 150,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    x = 75,
-                    height = 11,
-                    shift = {0, -0.328125},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 150,
-                        height = 22,
-                        shift = {0, -0.328125},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                }
-            },
-            modulo_symbol_sprites = {
-                north = {
-                    x = 75,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.140625},
-                    hr_version = {
-                        x = 150,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.140625},
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 75,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.328125},
-                    hr_version = {
-                        x = 150,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.328125},
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    x = 75,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.140625},
-                    hr_version = {
-                        x = 150,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.140625},
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    x = 75,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.328125},
-                    hr_version = {
-                        x = 150,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.328125},
-                        scale = 0.5
-                    }
-                }
-            },
-            plus_symbol_sprites = {
-                north = {
-                    x = 15,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.140625},
-                    hr_version = {
-                        x = 30,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.140625},
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 15,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.328125},
-                    hr_version = {
-                        x = 30,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.328125},
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    x = 15,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.140625},
-                    hr_version = {
-                        x = 30,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.140625},
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    x = 15,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.328125},
-                    hr_version = {
-                        x = 30,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.328125},
-                        scale = 0.5
-                    }
-                }
-            },
-            type = 'arithmetic-combinator',
-            sprites = {
-                north = {
-                    layers = {
-                        {
-                            x = 0,
-                            height = 64,
-                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator.png',
-                            width = 74,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                x = 0,
-                                height = 124,
-                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator.png',
-                                width = 144,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }, {
-                            draw_as_shadow = true,
-                            x = 0,
-                            height = 78,
-                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator-shadow.png',
-                            width = 76,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                draw_as_shadow = true,
-                                x = 0,
-                                height = 156,
-                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator-shadow.png',
-                                width = 148,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }
-                    }
-                },
-                east = {
-                    layers = {
-                        {
-                            x = 74,
-                            height = 64,
-                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator.png',
-                            width = 74,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = {0.03125, 0.25},
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                x = 144,
-                                height = 124,
-                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator.png',
-                                width = 144,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = {0.015625, 0.234375},
-                                priority = 'high',
-                                y = 0
-                            }
-                        }, {
-                            draw_as_shadow = true,
-                            x = 76,
-                            height = 78,
-                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator-shadow.png',
-                            width = 76,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = {0.4375, 0.75},
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                draw_as_shadow = true,
-                                x = 148,
-                                height = 156,
-                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator-shadow.png',
-                                width = 148,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = {0.421875, 0.765625},
-                                priority = 'high',
-                                y = 0
-                            }
-                        }
-                    }
-                },
-                south = {
-                    layers = {
-                        {
-                            x = 148,
-                            height = 64,
-                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator.png',
-                            width = 74,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                x = 288,
-                                height = 124,
-                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator.png',
-                                width = 144,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }, {
-                            draw_as_shadow = true,
-                            x = 152,
-                            height = 78,
-                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator-shadow.png',
-                            width = 76,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                draw_as_shadow = true,
-                                x = 296,
-                                height = 156,
-                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator-shadow.png',
-                                width = 148,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }
-                    }
-                },
-                west = {
-                    layers = {
-                        {
-                            x = 222,
-                            height = 64,
-                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator.png',
-                            width = 74,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                x = 432,
-                                height = 124,
-                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator.png',
-                                width = 144,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }, {
-                            draw_as_shadow = true,
-                            x = 228,
-                            height = 78,
-                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator-shadow.png',
-                            width = 76,
-                            scale = 1,
-                            frame_count = 1,
-                            shift = 0,
-                            y = 0,
-                            priority = 'high',
-                            hr_version = {
-                                draw_as_shadow = true,
-                                x = 444,
-                                height = 156,
-                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator-shadow.png',
-                                width = 148,
-                                scale = 0.5,
-                                frame_count = 1,
-                                shift = 0,
-                                priority = 'high',
-                                y = 0
-                            }
-                        }
-                    }
-                }
-            },
-            activity_led_light_offsets = {
-                {0.234375, -0.484375}, {0.5, 0}, {-0.265625, 0.140625}, {-0.453125, -0.359375}
-            },
-            flags = {'placeable-neutral', 'player-creation'},
+            energy_source = {usage_priority = 'secondary-input', type = 'electric'},
             input_connection_points = {
                 {
                     shadow = {green = {0.765625, 0.8125}, red = {0.15625, 0.8125}},
@@ -763,298 +511,646 @@ do
                     wire = {green = {0.8125, -0.453125}, red = {0.8125, -0.03125}}
                 }
             },
+            activity_led_light = {color = {b = 1, g = 1, r = 1}, size = 1, intensity = 0},
+            plus_symbol_sprites = {
+                south = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 15,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 30,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 15,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 30,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 15,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 30,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                },
+                east = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 15,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 30,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                }
+            },
+            minus_symbol_sprites = {
+                south = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 30,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 60,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 30,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 60,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 30,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 60,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                },
+                east = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 30,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 60,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                }
+            },
+            sprites = {
+                south = {
+                    layers = {
+                        {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 144,
+                                x = 288,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator.png',
+                                scale = 0.5,
+                                frame_count = 1,
+                                shift = 0,
+                                height = 124
+                            },
+                            width = 74,
+                            x = 148,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator.png',
+                            scale = 1,
+                            frame_count = 1,
+                            shift = 0,
+                            height = 64
+                        }, {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 148,
+                                x = 296,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator-shadow.png',
+                                scale = 0.5,
+                                height = 156,
+                                draw_as_shadow = true,
+                                shift = 0,
+                                frame_count = 1
+                            },
+                            width = 76,
+                            x = 152,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator-shadow.png',
+                            scale = 1,
+                            height = 78,
+                            draw_as_shadow = true,
+                            shift = 0,
+                            frame_count = 1
+                        }
+                    }
+                },
+                north = {
+                    layers = {
+                        {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 144,
+                                x = 0,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator.png',
+                                scale = 0.5,
+                                frame_count = 1,
+                                shift = 0,
+                                height = 124
+                            },
+                            width = 74,
+                            x = 0,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator.png',
+                            scale = 1,
+                            frame_count = 1,
+                            shift = 0,
+                            height = 64
+                        }, {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 148,
+                                x = 0,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator-shadow.png',
+                                scale = 0.5,
+                                height = 156,
+                                draw_as_shadow = true,
+                                shift = 0,
+                                frame_count = 1
+                            },
+                            width = 76,
+                            x = 0,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator-shadow.png',
+                            scale = 1,
+                            height = 78,
+                            draw_as_shadow = true,
+                            shift = 0,
+                            frame_count = 1
+                        }
+                    }
+                },
+                west = {
+                    layers = {
+                        {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 144,
+                                x = 432,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator.png',
+                                scale = 0.5,
+                                frame_count = 1,
+                                shift = 0,
+                                height = 124
+                            },
+                            width = 74,
+                            x = 222,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator.png',
+                            scale = 1,
+                            frame_count = 1,
+                            shift = 0,
+                            height = 64
+                        }, {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 148,
+                                x = 444,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator-shadow.png',
+                                scale = 0.5,
+                                height = 156,
+                                draw_as_shadow = true,
+                                shift = 0,
+                                frame_count = 1
+                            },
+                            width = 76,
+                            x = 228,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator-shadow.png',
+                            scale = 1,
+                            height = 78,
+                            draw_as_shadow = true,
+                            shift = 0,
+                            frame_count = 1
+                        }
+                    }
+                },
+                east = {
+                    layers = {
+                        {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 144,
+                                x = 144,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator.png',
+                                scale = 0.5,
+                                frame_count = 1,
+                                shift = {0.015625, 0.234375},
+                                height = 124
+                            },
+                            width = 74,
+                            x = 74,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator.png',
+                            scale = 1,
+                            frame_count = 1,
+                            shift = {0.03125, 0.25},
+                            height = 64
+                        }, {
+                            y = 0,
+                            hr_version = {
+                                y = 0,
+                                width = 148,
+                                x = 148,
+                                priority = 'high',
+                                filename = '__base__/graphics/entity/combinator/hr-arithmetic-combinator-shadow.png',
+                                scale = 0.5,
+                                height = 156,
+                                draw_as_shadow = true,
+                                shift = {0.421875, 0.765625},
+                                frame_count = 1
+                            },
+                            width = 76,
+                            x = 76,
+                            priority = 'high',
+                            filename = '__base__/graphics/entity/combinator/arithmetic-combinator-shadow.png',
+                            scale = 1,
+                            height = 78,
+                            draw_as_shadow = true,
+                            shift = {0.4375, 0.75},
+                            frame_count = 1
+                        }
+                    }
+                }
+            },
+            divide_symbol_sprites = {
+                south = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 60,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 120,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 60,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 120,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 60,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 120,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                },
+                east = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 60,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 120,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                }
+            },
+            icon_size = 64,
+            selection_box = {{-0.5, -1}, {0.5, 1}},
+            left_shift_symbol_sprites = {
+                south = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 30,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 30,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 30,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                },
+                east = {
+                    y = 11,
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 15,
+                    height = 11,
+                    hr_version = {
+                        y = 22,
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 30,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                }
+            },
             screen_light_offsets = {
                 {0.015625, -0.234375}, {0.015625, -0.296875}, {0.015625, -0.234375}, {0.015625, -0.296875}
             },
-            name = 'arithmetic-combinator',
-            and_symbol_sprites = {
-                north = {
-                    x = 45,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 90,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 45,
-                    height = 11,
-                    shift = {0, -0.328125},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 90,
-                        height = 22,
-                        shift = {0, -0.328125},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    x = 45,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 90,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    x = 45,
-                    height = 11,
-                    shift = {0, -0.328125},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 90,
-                        height = 22,
-                        shift = {0, -0.328125},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                }
-            },
-            right_shift_symbol_sprites = {
-                north = {
-                    x = 30,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 60,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 30,
-                    height = 11,
-                    shift = {0, -0.328125},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 60,
-                        height = 22,
-                        shift = {0, -0.328125},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    x = 30,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 60,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    x = 30,
-                    height = 11,
-                    shift = {0, -0.328125},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 60,
-                        height = 22,
-                        shift = {0, -0.328125},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                }
-            },
-            dying_explosion = 'arithmetic-combinator-explosion',
-            working_sound = {
-                audible_distance_modifier = 0.2,
-                fade_in_ticks = 4,
-                fade_out_ticks = 20,
-                sound = {filename = '__base__/sound/combinator.ogg', volume = 0.45},
-                match_speed_to_activity = true
-            },
-            output_connection_bounding_box = {{-0.5, -1}, {0.5, 0}},
+            screen_light = {color = {b = 1, g = 1, r = 1}, size = 0.6, intensity = 0},
             open_sound = 0,
-            minus_symbol_sprites = {
-                north = {
-                    x = 30,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.140625},
-                    hr_version = {
-                        x = 60,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.140625},
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 30,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.328125},
-                    hr_version = {
-                        x = 60,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.328125},
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    x = 30,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.140625},
-                    hr_version = {
-                        x = 60,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.140625},
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    x = 30,
-                    height = 11,
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    shift = {0, -0.328125},
-                    hr_version = {
-                        x = 60,
-                        height = 22,
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        shift = {0, -0.328125},
-                        scale = 0.5
-                    }
-                }
-            },
-            icon = '__base__/graphics/icons/arithmetic-combinator.png',
-            max_health = 150,
-            activity_led_light = {color = {g = 1, r = 1, b = 1}, size = 1, intensity = 0.8},
-            active_energy_usage = '1KW',
-            left_shift_symbol_sprites = {
-                north = {
-                    x = 15,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 30,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                east = {
-                    x = 15,
-                    height = 11,
-                    shift = {0, -0.328125},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 30,
-                        height = 22,
-                        shift = {0, -0.328125},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                south = {
-                    x = 15,
-                    height = 11,
-                    shift = {0, -0.140625},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 30,
-                        height = 22,
-                        shift = {0, -0.140625},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                },
-                west = {
-                    x = 15,
-                    height = 11,
-                    shift = {0, -0.328125},
-                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
-                    width = 15,
-                    y = 11,
-                    hr_version = {
-                        x = 30,
-                        height = 22,
-                        shift = {0, -0.328125},
-                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
-                        width = 30,
-                        y = 22,
-                        scale = 0.5
-                    }
-                }
-            },
             circuit_wire_max_distance = 9,
-            corpse = 'arithmetic-combinator-remnants'
+            max_health = 150,
+            multiply_symbol_sprites = {
+                south = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 45,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 90,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 45,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 90,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 45,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 90,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                },
+                east = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 45,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 90,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                }
+            },
+            modulo_symbol_sprites = {
+                south = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 75,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 150,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                north = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 75,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 150,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.140625},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.140625},
+                    draw_as_glow = true
+                },
+                west = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 75,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 150,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                },
+                east = {
+                    filename = '__base__/graphics/entity/combinator/combinator-displays.png',
+                    width = 15,
+                    x = 75,
+                    height = 11,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/combinator/hr-combinator-displays.png',
+                        scale = 0.5,
+                        x = 150,
+                        width = 30,
+                        height = 22,
+                        shift = {0, -0.328125},
+                        draw_as_glow = true
+                    },
+                    shift = {0, -0.328125},
+                    draw_as_glow = true
+                }
+            },
+            name = 'arithmetic-combinator',
+            activity_led_light_offsets = {
+                {0.234375, -0.484375}, {0.5, 0}, {-0.265625, 0.140625}, {-0.453125, -0.359375}
+            }
         }
     };
     return _;

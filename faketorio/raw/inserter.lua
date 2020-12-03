@@ -1,453 +1,441 @@
 do
     local _ = {
         ['burner-inserter'] = {
+            minable = {mining_time = 0.1, result = 'burner-inserter'},
+            working_sound = {
+                sound = {
+                    {volume = 0.5, filename = '__base__/sound/inserter-basic-1.ogg'},
+                    {volume = 0.5, filename = '__base__/sound/inserter-basic-2.ogg'},
+                    {volume = 0.5, filename = '__base__/sound/inserter-basic-3.ogg'},
+                    {volume = 0.5, filename = '__base__/sound/inserter-basic-4.ogg'},
+                    {volume = 0.5, filename = '__base__/sound/inserter-basic-5.ogg'}
+                },
+                audible_distance_modifier = 0.3,
+                match_progress_to_activity = true
+            },
             circuit_connector_sprites = {
                 {
-                    wire_pins_shadow = {
-                        draw_as_shadow = true,
-                        x = 128,
-                        height = 46,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-shadow.png',
-                        width = 64,
-                        scale = 0.5,
-                        shift = {0.34375, 0.109375},
-                        y = 0,
-                        flags = {'low-object'},
-                        priority = 'extra-high'
-                    },
-                    led_red = {
-                        x = 108,
-                        height = 50,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-R-sequence.png',
-                        width = 54,
-                        scale = 0.5,
-                        shift = {-0.09375, 0.015625},
-                        y = 0,
-                        flags = {'low-object'},
-                        priority = 'extra-high'
-                    },
                     blue_led_light_offset = {-0.296875, 0.203125},
+                    wire_pins_shadow = {
+                        y = 0,
+                        width = 64,
+                        x = 128,
+                        flags = {'low-object'},
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-shadow.png',
+                        scale = 0.5,
+                        draw_as_shadow = true,
+                        shift = {0.34375, 0.109375},
+                        height = 46
+                    },
                     led_blue_off = {
+                        y = 0,
+                        width = 46,
                         x = 92,
-                        height = 26,
+                        flags = {'low-object'},
+                        priority = 'extra-high',
                         filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-off-sequence.png',
-                        width = 46,
                         scale = 0.5,
                         shift = {-0.046875, 0.0625},
-                        y = 0,
-                        flags = {'low-object'},
-                        priority = 'extra-high'
+                        height = 26
                     },
-                    connector_main = {
-                        x = 104,
-                        height = 40,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-sequence.png',
-                        width = 52,
-                        scale = 0.5,
-                        shift = {0, 0.015625},
-                        y = 0,
-                        flags = {'low-object'},
-                        priority = 'extra-high'
-                    },
-                    wire_pins = {
-                        x = 124,
-                        height = 46,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-sequence.png',
-                        width = 62,
-                        scale = 0.5,
-                        shift = {0.0625, -0.09375},
-                        y = 0,
-                        flags = {'low-object'},
-                        priority = 'extra-high'
-                    },
-                    connector_shadow = {
-                        draw_as_shadow = true,
-                        x = 112,
-                        height = 36,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-shadow.png',
-                        width = 56,
-                        scale = 0.5,
-                        shift = {0.171875, 0.15625},
-                        y = 0,
-                        flags = {'low-object'},
-                        priority = 'extra-high'
-                    },
-                    led_green = {
-                        x = 108,
-                        height = 50,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-G-sequence.png',
-                        width = 54,
-                        scale = 0.5,
-                        shift = {-0.09375, 0.015625},
-                        y = 0,
-                        flags = {'low-object'},
-                        priority = 'extra-high'
-                    },
-                    led_light = {intensity = 0.8, size = 0.9},
-                    red_green_led_light_offset = {-0.375, 0.140625},
                     led_blue = {
+                        y = 0,
+                        width = 60,
                         x = 120,
-                        height = 42,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-on-sequence.png',
-                        width = 60,
-                        scale = 0.5,
-                        shift = {-0.046875, 0.0625},
-                        y = 0,
                         flags = {'low-object'},
-                        priority = 'extra-high'
-                    }
-                }, {
-                    wire_pins_shadow = {
-                        draw_as_shadow = true,
-                        x = 192,
-                        height = 46,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-shadow.png',
-                        width = 64,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-on-sequence.png',
                         scale = 0.5,
-                        shift = {0.34375, 0.109375},
+                        height = 42,
+                        shift = {-0.046875, 0.0625},
+                        draw_as_glow = true
+                    },
+                    wire_pins = {
                         y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
+                        width = 62,
+                        x = 124,
+                        flags = {'low-object'},
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-sequence.png',
+                        scale = 0.5,
+                        shift = {0.0625, -0.09375},
+                        height = 46
+                    },
+                    connector_main = {
+                        y = 0,
+                        width = 52,
+                        x = 104,
+                        flags = {'low-object'},
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-sequence.png',
+                        scale = 0.5,
+                        shift = {0, 0.015625},
+                        height = 40
                     },
                     led_red = {
-                        x = 162,
-                        height = 50,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-R-sequence.png',
-                        width = 54,
-                        scale = 0.5,
-                        shift = {-0.09375, 0.015625},
                         y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
+                        width = 54,
+                        x = 108,
+                        flags = {'low-object'},
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-R-sequence.png',
+                        scale = 0.5,
+                        height = 50,
+                        shift = {-0.09375, 0.015625},
+                        draw_as_glow = true
                     },
+                    led_light = {intensity = 0, size = 0.9},
+                    connector_shadow = {
+                        y = 0,
+                        width = 56,
+                        x = 112,
+                        flags = {'low-object'},
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-shadow.png',
+                        scale = 0.5,
+                        draw_as_shadow = true,
+                        shift = {0.171875, 0.15625},
+                        height = 36
+                    },
+                    red_green_led_light_offset = {-0.375, 0.140625},
+                    led_green = {
+                        y = 0,
+                        width = 54,
+                        x = 108,
+                        flags = {'low-object'},
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-G-sequence.png',
+                        scale = 0.5,
+                        height = 50,
+                        shift = {-0.09375, 0.015625},
+                        draw_as_glow = true
+                    }
+                }, {
                     blue_led_light_offset = {-0.125, 0.28125},
+                    wire_pins_shadow = {
+                        y = 0,
+                        width = 64,
+                        x = 192,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-shadow.png',
+                        scale = 0.5,
+                        draw_as_shadow = true,
+                        shift = {0.34375, 0.109375},
+                        height = 46
+                    },
                     led_blue_off = {
+                        y = 0,
+                        width = 46,
                         x = 138,
-                        height = 26,
+                        flags = 0,
+                        priority = 'extra-high',
                         filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-off-sequence.png',
-                        width = 46,
                         scale = 0.5,
                         shift = {-0.046875, 0.0625},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
+                        height = 26
                     },
-                    connector_main = {
-                        x = 156,
-                        height = 40,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-sequence.png',
-                        width = 52,
-                        scale = 0.5,
-                        shift = {0, 0.015625},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
-                    },
-                    wire_pins = {
-                        x = 186,
-                        height = 46,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-sequence.png',
-                        width = 62,
-                        scale = 0.5,
-                        shift = {0.0625, -0.09375},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
-                    },
-                    connector_shadow = {
-                        draw_as_shadow = true,
-                        x = 168,
-                        height = 36,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-shadow.png',
-                        width = 56,
-                        scale = 0.5,
-                        shift = {0.171875, 0.15625},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
-                    },
-                    led_green = {
-                        x = 162,
-                        height = 50,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-G-sequence.png',
-                        width = 54,
-                        scale = 0.5,
-                        shift = {-0.09375, 0.015625},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
-                    },
-                    led_light = {intensity = 0.8, size = 0.9},
-                    red_green_led_light_offset = {-0.234375, 0.25},
                     led_blue = {
+                        y = 0,
+                        width = 60,
                         x = 180,
-                        height = 42,
+                        flags = 0,
+                        priority = 'extra-high',
                         filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-on-sequence.png',
-                        width = 60,
                         scale = 0.5,
+                        height = 42,
                         shift = {-0.046875, 0.0625},
+                        draw_as_glow = true
+                    },
+                    wire_pins = {
                         y = 0,
+                        width = 62,
+                        x = 186,
                         flags = 0,
-                        priority = 'extra-high'
-                    }
-                }, {
-                    wire_pins_shadow = {
-                        draw_as_shadow = true,
-                        x = 0,
-                        height = 46,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-shadow.png',
-                        width = 64,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-sequence.png',
                         scale = 0.5,
-                        shift = {0.34375, 0.109375},
+                        shift = {0.0625, -0.09375},
+                        height = 46
+                    },
+                    connector_main = {
                         y = 0,
+                        width = 52,
+                        x = 156,
                         flags = 0,
-                        priority = 'extra-high'
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-sequence.png',
+                        scale = 0.5,
+                        shift = {0, 0.015625},
+                        height = 40
                     },
                     led_red = {
-                        x = 0,
-                        height = 50,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-R-sequence.png',
-                        width = 54,
-                        scale = 0.5,
-                        shift = {-0.09375, 0.015625},
                         y = 0,
+                        width = 54,
+                        x = 162,
                         flags = 0,
-                        priority = 'extra-high'
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-R-sequence.png',
+                        scale = 0.5,
+                        height = 50,
+                        shift = {-0.09375, 0.015625},
+                        draw_as_glow = true
                     },
+                    led_light = {intensity = 0, size = 0.9},
+                    connector_shadow = {
+                        y = 0,
+                        width = 56,
+                        x = 168,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-shadow.png',
+                        scale = 0.5,
+                        draw_as_shadow = true,
+                        shift = {0.171875, 0.15625},
+                        height = 36
+                    },
+                    red_green_led_light_offset = {-0.234375, 0.25},
+                    led_green = {
+                        y = 0,
+                        width = 54,
+                        x = 162,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-G-sequence.png',
+                        scale = 0.5,
+                        height = 50,
+                        shift = {-0.09375, 0.015625},
+                        draw_as_glow = true
+                    }
+                }, {
                     blue_led_light_offset = {-0.375, -0.03125},
-                    led_blue_off = {
+                    wire_pins_shadow = {
+                        y = 0,
+                        width = 64,
                         x = 0,
-                        height = 26,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-off-sequence.png',
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-shadow.png',
+                        scale = 0.5,
+                        draw_as_shadow = true,
+                        shift = {0.34375, 0.109375},
+                        height = 46
+                    },
+                    led_blue_off = {
+                        y = 0,
                         width = 46,
+                        x = 0,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-off-sequence.png',
                         scale = 0.5,
                         shift = {-0.046875, 0.0625},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
+                        height = 26
                     },
-                    connector_main = {
-                        x = 0,
-                        height = 40,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-sequence.png',
-                        width = 52,
-                        scale = 0.5,
-                        shift = {0, 0.015625},
+                    led_blue = {
                         y = 0,
+                        width = 60,
+                        x = 0,
                         flags = 0,
-                        priority = 'extra-high'
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-on-sequence.png',
+                        scale = 0.5,
+                        height = 42,
+                        shift = {-0.046875, 0.0625},
+                        draw_as_glow = true
                     },
                     wire_pins = {
-                        x = 0,
-                        height = 46,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-sequence.png',
+                        y = 0,
                         width = 62,
+                        x = 0,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-sequence.png',
                         scale = 0.5,
                         shift = {0.0625, -0.09375},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
+                        height = 46
                     },
-                    connector_shadow = {
-                        draw_as_shadow = true,
+                    connector_main = {
+                        y = 0,
+                        width = 52,
                         x = 0,
-                        height = 36,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-shadow.png',
-                        width = 56,
-                        scale = 0.5,
-                        shift = {0.171875, 0.15625},
-                        y = 0,
                         flags = 0,
-                        priority = 'extra-high'
-                    },
-                    led_green = {
-                        x = 0,
-                        height = 50,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-G-sequence.png',
-                        width = 54,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-sequence.png',
                         scale = 0.5,
-                        shift = {-0.09375, 0.015625},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
-                    },
-                    led_light = {intensity = 0.8, size = 0.9},
-                    red_green_led_light_offset = {-0.328125, -0.140625},
-                    led_blue = {
-                        x = 0,
-                        height = 42,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-on-sequence.png',
-                        width = 60,
-                        scale = 0.5,
-                        shift = {-0.046875, 0.0625},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
-                    }
-                }, {
-                    wire_pins_shadow = {
-                        draw_as_shadow = true,
-                        x = 64,
-                        height = 46,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-shadow.png',
-                        width = 64,
-                        scale = 0.5,
-                        shift = {0.34375, 0.109375},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
+                        shift = {0, 0.015625},
+                        height = 40
                     },
                     led_red = {
-                        x = 54,
-                        height = 50,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-R-sequence.png',
-                        width = 54,
-                        scale = 0.5,
-                        shift = {-0.09375, 0.015625},
                         y = 0,
+                        width = 54,
+                        x = 0,
                         flags = 0,
-                        priority = 'extra-high'
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-R-sequence.png',
+                        scale = 0.5,
+                        height = 50,
+                        shift = {-0.09375, 0.015625},
+                        draw_as_glow = true
                     },
+                    led_light = {intensity = 0, size = 0.9},
+                    connector_shadow = {
+                        y = 0,
+                        width = 56,
+                        x = 0,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-shadow.png',
+                        scale = 0.5,
+                        draw_as_shadow = true,
+                        shift = {0.171875, 0.15625},
+                        height = 36
+                    },
+                    red_green_led_light_offset = {-0.328125, -0.140625},
+                    led_green = {
+                        y = 0,
+                        width = 54,
+                        x = 0,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-G-sequence.png',
+                        scale = 0.5,
+                        height = 50,
+                        shift = {-0.09375, 0.015625},
+                        draw_as_glow = true
+                    }
+                }, {
                     blue_led_light_offset = {0.21875, 0.234375},
+                    wire_pins_shadow = {
+                        y = 0,
+                        width = 64,
+                        x = 64,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-shadow.png',
+                        scale = 0.5,
+                        draw_as_shadow = true,
+                        shift = {0.34375, 0.109375},
+                        height = 46
+                    },
                     led_blue_off = {
-                        x = 46,
-                        height = 26,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-off-sequence.png',
+                        y = 0,
                         width = 46,
+                        x = 46,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-off-sequence.png',
                         scale = 0.5,
                         shift = {-0.046875, 0.0625},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
+                        height = 26
                     },
-                    connector_main = {
-                        x = 52,
-                        height = 40,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-sequence.png',
-                        width = 52,
-                        scale = 0.5,
-                        shift = {0, 0.015625},
+                    led_blue = {
                         y = 0,
+                        width = 60,
+                        x = 60,
                         flags = 0,
-                        priority = 'extra-high'
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-on-sequence.png',
+                        scale = 0.5,
+                        height = 42,
+                        shift = {-0.046875, 0.0625},
+                        draw_as_glow = true
                     },
                     wire_pins = {
-                        x = 62,
-                        height = 46,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-sequence.png',
+                        y = 0,
                         width = 62,
+                        x = 62,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-wire-sequence.png',
                         scale = 0.5,
                         shift = {0.0625, -0.09375},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
+                        height = 46
                     },
-                    connector_shadow = {
-                        draw_as_shadow = true,
-                        x = 56,
-                        height = 36,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-shadow.png',
-                        width = 56,
+                    connector_main = {
+                        y = 0,
+                        width = 52,
+                        x = 52,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-sequence.png',
                         scale = 0.5,
-                        shift = {0.171875, 0.15625},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
+                        shift = {0, 0.015625},
+                        height = 40
                     },
-                    led_green = {
-                        x = 54,
-                        height = 50,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-G-sequence.png',
+                    led_red = {
+                        y = 0,
                         width = 54,
+                        x = 54,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-R-sequence.png',
                         scale = 0.5,
+                        height = 50,
                         shift = {-0.09375, 0.015625},
-                        y = 0,
-                        flags = 0,
-                        priority = 'extra-high'
+                        draw_as_glow = true
                     },
-                    led_light = {intensity = 0.8, size = 0.9},
-                    red_green_led_light_offset = {0.109375, 0.296875},
-                    led_blue = {
-                        x = 60,
-                        height = 42,
-                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-B-on-sequence.png',
-                        width = 60,
-                        scale = 0.5,
-                        shift = {-0.046875, 0.0625},
+                    led_light = {intensity = 0, size = 0.9},
+                    connector_shadow = {
                         y = 0,
+                        width = 56,
+                        x = 56,
                         flags = 0,
-                        priority = 'extra-high'
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-base-shadow.png',
+                        scale = 0.5,
+                        draw_as_shadow = true,
+                        shift = {0.171875, 0.15625},
+                        height = 36
+                    },
+                    red_green_led_light_offset = {0.109375, 0.296875},
+                    led_green = {
+                        y = 0,
+                        width = 54,
+                        x = 54,
+                        flags = 0,
+                        priority = 'extra-high',
+                        filename = '__base__/graphics/entity/circuit-connector/hr-ccm-inserter-01-LED-G-sequence.png',
+                        scale = 0.5,
+                        height = 50,
+                        shift = {-0.09375, 0.015625},
+                        draw_as_glow = true
                     }
                 }
             },
+            insert_position = {0, 1.2},
+            default_stack_control_input_signal = {name = 'signal-S', type = 'virtual'},
+            circuit_wire_max_distance = 9,
+            corpse = 'burner-inserter-remnants',
+            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
             fast_replaceable_group = 'inserter',
-            icon_size = 64,
-            energy_source = {
-                fuel_inventory_size = 1,
-                effectivity = 1,
-                fuel_category = 'chemical',
-                type = 'burner',
-                smoke = {{deviation = {0.1, 0.1}, name = 'smoke', frequency = 9}}
-            },
-            hand_open_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-open-shadow.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open-shadow.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            icon_mipmaps = 4,
-            energy_per_rotation = '50KJ',
+            dying_explosion = 'burner-inserter-explosion',
             damaged_trigger_effect = {
-                entity_name = 'spark-explosion',
+                damage_type_filters = 'fire',
                 offsets = {{0, 1}},
                 type = 'create-entity',
-                damage_type_filters = 'fire',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                entity_name = 'spark-explosion'
             },
-            platform_picture = {
-                sheet = {
-                    height = 46,
-                    shift = {0.09375, 0},
-                    filename = '__base__/graphics/entity/burner-inserter/burner-inserter-platform.png',
-                    width = 46,
-                    priority = 'extra-high',
-                    hr_version = {
-                        height = 79,
-                        shift = {0.046875, 0.203125},
-                        filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-platform.png',
-                        width = 105,
-                        priority = 'extra-high',
-                        scale = 0.5
-                    }
-                }
-            },
-            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
-            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
-            close_sound = 0,
-            vehicle_impact_sound = 0,
-            circuit_wire_max_distance = 9,
-            default_stack_control_input_signal = {type = 'virtual', name = 'signal-S'},
+            extension_speed = 0.0214,
+            energy_per_rotation = '50KJ',
             open_sound = 0,
-            hand_open_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-open.png',
+            pickup_position = {0, -1},
+            hand_closed_picture = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed.png',
                 width = 18,
                 priority = 'extra-high',
                 hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open.png',
-                    width = 72,
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed.png',
+                    scale = 0.25,
                     priority = 'extra-high',
-                    scale = 0.25
-                }
+                    width = 72,
+                    height = 164
+                },
+                height = 41
             },
+            rotation_speed = 0.01,
             circuit_wire_connection_points = {
                 {
                     shadow = {green = {0.65625, 0.484375}, red = {0.75, 0.328125}},
@@ -463,908 +451,933 @@ do
                     wire = {green = {0.375, -0.25}, red = {0.203125, -0.34375}}
                 }
             },
-            rotation_speed = 0.01,
             flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
-            max_health = 100,
-            type = 'inserter',
-            name = 'burner-inserter',
-            resistances = {{percent = 90, type = 'fire'}},
-            energy_per_movement = '50KJ',
-            dying_explosion = 'burner-inserter-explosion',
-            working_sound = {
-                audible_distance_modifier = 0.3,
-                sound = {
-                    {filename = '__base__/sound/inserter-basic-1.ogg', volume = 0.5},
-                    {filename = '__base__/sound/inserter-basic-2.ogg', volume = 0.5},
-                    {filename = '__base__/sound/inserter-basic-3.ogg', volume = 0.5},
-                    {filename = '__base__/sound/inserter-basic-4.ogg', volume = 0.5},
-                    {filename = '__base__/sound/inserter-basic-5.ogg', volume = 0.5}
-                },
-                match_progress_to_activity = true
+            close_sound = 0,
+            energy_source = {
+                fuel_category = 'chemical',
+                smoke = {{frequency = 9, name = 'smoke', deviation = {0.1, 0.1}}},
+                effectivity = 1,
+                type = 'burner',
+                fuel_inventory_size = 1,
+                light_flicker = {color = {0, 0, 0}}
             },
-            pickup_position = {0, -1},
-            minable = {mining_time = 0.1, result = 'burner-inserter'},
-            extension_speed = 0.0214,
-            icon = '__base__/graphics/icons/burner-inserter.png',
-            insert_position = {0, 1.2},
-            hand_closed_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed-shadow.png',
+            hand_open_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-open-shadow.png',
                 width = 18,
                 priority = 'extra-high',
                 hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed-shadow.png',
-                    width = 72,
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open-shadow.png',
+                    scale = 0.25,
                     priority = 'extra-high',
-                    scale = 0.25
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            platform_picture = {
+                sheet = {
+                    filename = '__base__/graphics/entity/burner-inserter/burner-inserter-platform.png',
+                    width = 46,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-platform.png',
+                        scale = 0.5,
+                        width = 105,
+                        priority = 'extra-high',
+                        shift = {0.046875, 0.203125},
+                        height = 79
+                    },
+                    priority = 'extra-high',
+                    shift = {0.09375, 0},
+                    height = 46
                 }
             },
+            icon_size = 64,
+            vehicle_impact_sound = 0,
+            type = 'inserter',
+            resistances = {{type = 'fire', percent = 90}},
+            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
             hand_base_shadow = {
-                height = 33,
                 filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
                 width = 8,
                 priority = 'extra-high',
                 hr_version = {
-                    height = 132,
                     filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
-                    width = 32,
+                    scale = 0.25,
                     priority = 'extra-high',
-                    scale = 0.25
-                }
+                    width = 32,
+                    height = 132
+                },
+                height = 33
             },
-            hand_closed_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed.png',
+            name = 'burner-inserter',
+            icon = '__base__/graphics/icons/burner-inserter.png',
+            icon_mipmaps = 4,
+            max_health = 100,
+            hand_open_picture = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-open.png',
                 width = 18,
                 priority = 'extra-high',
                 hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed.png',
-                    width = 72,
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open.png',
+                    scale = 0.25,
                     priority = 'extra-high',
-                    scale = 0.25
-                }
+                    width = 72,
+                    height = 164
+                },
+                height = 41
             },
+            hand_closed_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed-shadow.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            energy_per_movement = '50KJ',
             hand_base_picture = {
-                height = 34,
                 filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base.png',
                 width = 8,
                 priority = 'extra-high',
                 hr_version = {
-                    height = 136,
                     filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
                     width = 32,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            corpse = 'burner-inserter-remnants'
-        },
-        ['filter-inserter'] = {
-            circuit_connector_sprites = 0,
-            fast_replaceable_group = 'inserter',
-            icon_size = 64,
-            energy_source = {usage_priority = 'secondary-input', type = 'electric', drain = '0.5kW'},
-            hand_open_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-open-shadow.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open-shadow.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            icon_mipmaps = 4,
-            filter_count = 5,
-            energy_per_rotation = '8KJ',
-            damaged_trigger_effect = {
-                entity_name = 'spark-explosion',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                damage_type_filters = 'fire',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
-            },
-            platform_picture = {
-                sheet = {
-                    height = 46,
-                    shift = {0.09375, 0},
-                    filename = '__base__/graphics/entity/filter-inserter/filter-inserter-platform.png',
-                    width = 46,
-                    priority = 'extra-high',
-                    hr_version = {
-                        height = 79,
-                        shift = {0.046875, 0.203125},
-                        filename = '__base__/graphics/entity/filter-inserter/hr-filter-inserter-platform.png',
-                        width = 105,
-                        priority = 'extra-high',
-                        scale = 0.5
-                    }
-                }
-            },
-            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
-            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
-            close_sound = 0,
-            vehicle_impact_sound = 0,
-            circuit_wire_max_distance = 9,
-            default_stack_control_input_signal = 0,
-            open_sound = 0,
-            hand_open_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/filter-inserter/filter-inserter-hand-open.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/filter-inserter/hr-filter-inserter-hand-open.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            circuit_wire_connection_points = 0,
-            rotation_speed = 0.04,
-            flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
-            max_health = 150,
-            type = 'inserter',
-            name = 'filter-inserter',
-            resistances = {{percent = 90, type = 'fire'}},
-            energy_per_movement = '8KJ',
-            dying_explosion = 'filter-inserter-explosion',
-            working_sound = 0,
-            pickup_position = {0, -1},
-            minable = {mining_time = 0.1, result = 'filter-inserter'},
-            extension_speed = 0.07,
-            icon = '__base__/graphics/icons/filter-inserter.png',
-            insert_position = {0, 1.2},
-            hand_closed_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed-shadow.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed-shadow.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_base_shadow = {
-                height = 33,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
-                width = 8,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 132,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
-                    width = 32,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_closed_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/filter-inserter/filter-inserter-hand-closed.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/filter-inserter/hr-filter-inserter-hand-closed.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_base_picture = {
-                height = 34,
-                filename = '__base__/graphics/entity/filter-inserter/filter-inserter-hand-base.png',
-                width = 8,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 136,
-                    filename = '__base__/graphics/entity/filter-inserter/hr-filter-inserter-hand-base.png',
-                    width = 32,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            corpse = 'filter-inserter-remnants'
-        },
-        ['stack-inserter'] = {
-            circuit_connector_sprites = 0,
-            fast_replaceable_group = 'inserter',
-            icon_size = 64,
-            energy_source = {usage_priority = 'secondary-input', type = 'electric', drain = '1kW'},
-            hand_open_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-open-shadow.png',
-                width = 32,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-open-shadow.png',
-                    width = 130,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            icon_mipmaps = 4,
-            energy_per_rotation = '20KJ',
-            damaged_trigger_effect = {
-                entity_name = 'spark-explosion',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                damage_type_filters = 'fire',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
-            },
-            platform_picture = {
-                sheet = {
-                    height = 46,
-                    shift = {0.09375, 0},
-                    filename = '__base__/graphics/entity/stack-inserter/stack-inserter-platform.png',
-                    width = 46,
-                    priority = 'extra-high',
-                    hr_version = {
-                        height = 79,
-                        shift = {0.046875, 0.203125},
-                        filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-platform.png',
-                        width = 105,
-                        priority = 'extra-high',
-                        scale = 0.5
-                    }
-                }
-            },
-            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
-            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
-            close_sound = 0,
-            vehicle_impact_sound = 0,
-            stack = true,
-            circuit_wire_max_distance = 9,
-            default_stack_control_input_signal = 0,
-            open_sound = 0,
-            hand_open_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-open.png',
-                width = 32,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-open.png',
-                    width = 130,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            circuit_wire_connection_points = 0,
-            rotation_speed = 0.04,
-            flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
-            max_health = 160,
-            type = 'inserter',
-            name = 'stack-inserter',
-            resistances = {{percent = 90, type = 'fire'}},
-            energy_per_movement = '20KJ',
-            dying_explosion = 'stack-inserter-explosion',
-            working_sound = 0,
-            pickup_position = {0, -1},
-            minable = {mining_time = 0.1, result = 'stack-inserter'},
-            extension_speed = 0.07,
-            icon = '__base__/graphics/icons/stack-inserter.png',
-            insert_position = {0, 1.2},
-            hand_closed_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-closed-shadow.png',
-                width = 24,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-closed-shadow.png',
-                    width = 100,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_base_shadow = {
-                height = 33,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
-                width = 8,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 132,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
-                    width = 32,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_closed_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-closed.png',
-                width = 24,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-closed.png',
-                    width = 100,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_base_picture = {
-                height = 34,
-                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-base.png',
-                width = 8,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 136,
-                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-base.png',
-                    width = 32,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            corpse = 'stack-inserter-remnants'
-        },
-        ['stack-filter-inserter'] = {
-            circuit_connector_sprites = 0,
-            fast_replaceable_group = 'inserter',
-            icon_size = 64,
-            energy_source = {usage_priority = 'secondary-input', type = 'electric', drain = '1kW'},
-            hand_open_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-open-shadow.png',
-                width = 32,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-open-shadow.png',
-                    width = 130,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            icon_mipmaps = 4,
-            filter_count = 1,
-            energy_per_rotation = '20KJ',
-            damaged_trigger_effect = {
-                entity_name = 'spark-explosion',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                damage_type_filters = 'fire',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
-            },
-            platform_picture = {
-                sheet = {
-                    height = 46,
-                    shift = {0.09375, 0},
-                    filename = '__base__/graphics/entity/stack-filter-inserter/stack-filter-inserter-platform.png',
-                    width = 46,
-                    priority = 'extra-high',
-                    hr_version = {
-                        height = 79,
-                        shift = {0.046875, 0.203125},
-                        filename = '__base__/graphics/entity/stack-filter-inserter/hr-stack-filter-inserter-platform.png',
-                        width = 105,
-                        priority = 'extra-high',
-                        scale = 0.5
-                    }
-                }
-            },
-            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
-            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
-            close_sound = 0,
-            vehicle_impact_sound = 0,
-            stack = true,
-            circuit_wire_max_distance = 9,
-            default_stack_control_input_signal = 0,
-            open_sound = 0,
-            hand_open_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/stack-filter-inserter/stack-filter-inserter-hand-open.png',
-                width = 32,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/stack-filter-inserter/hr-stack-filter-inserter-hand-open.png',
-                    width = 130,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            circuit_wire_connection_points = 0,
-            rotation_speed = 0.04,
-            flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
-            max_health = 160,
-            type = 'inserter',
-            name = 'stack-filter-inserter',
-            resistances = {{percent = 90, type = 'fire'}},
-            energy_per_movement = '20KJ',
-            dying_explosion = 'stack-filter-inserter-explosion',
-            working_sound = 0,
-            pickup_position = {0, -1},
-            minable = {mining_time = 0.1, result = 'stack-filter-inserter'},
-            extension_speed = 0.07,
-            icon = '__base__/graphics/icons/stack-filter-inserter.png',
-            insert_position = {0, 1.2},
-            hand_closed_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-closed-shadow.png',
-                width = 24,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-closed-shadow.png',
-                    width = 100,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_base_shadow = {
-                height = 33,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
-                width = 8,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 132,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
-                    width = 32,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_closed_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/stack-filter-inserter/stack-filter-inserter-hand-closed.png',
-                width = 24,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/stack-filter-inserter/hr-stack-filter-inserter-hand-closed.png',
-                    width = 100,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_base_picture = {
-                height = 34,
-                filename = '__base__/graphics/entity/stack-filter-inserter/stack-filter-inserter-hand-base.png',
-                width = 8,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 136,
-                    filename = '__base__/graphics/entity/stack-filter-inserter/hr-stack-filter-inserter-hand-base.png',
-                    width = 32,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            corpse = 'stack-filter-inserter-remnants'
-        },
-        ['long-handed-inserter'] = {
-            circuit_connector_sprites = 0,
-            fast_replaceable_group = 'long-handed-inserter',
-            icon_size = 64,
-            energy_source = {usage_priority = 'secondary-input', type = 'electric', drain = '0.4kW'},
-            hand_open_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-open-shadow.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open-shadow.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            icon_mipmaps = 4,
-            energy_per_rotation = '5KJ',
-            damaged_trigger_effect = {
-                entity_name = 'spark-explosion',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                damage_type_filters = 'fire',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
-            },
-            hand_size = 1.5,
-            platform_picture = {
-                sheet = {
-                    height = 46,
-                    shift = {0.09375, 0},
-                    filename = '__base__/graphics/entity/long-handed-inserter/long-handed-inserter-platform.png',
-                    width = 46,
-                    priority = 'extra-high',
-                    hr_version = {
-                        height = 79,
-                        shift = {0.046875, 0.203125},
-                        filename = '__base__/graphics/entity/long-handed-inserter/hr-long-handed-inserter-platform.png',
-                        width = 105,
-                        priority = 'extra-high',
-                        scale = 0.5
-                    }
-                }
-            },
-            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
-            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
-            close_sound = 0,
-            vehicle_impact_sound = 0,
-            circuit_wire_max_distance = 9,
-            default_stack_control_input_signal = 0,
-            open_sound = 0,
-            hand_open_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/long-handed-inserter/long-handed-inserter-hand-open.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/long-handed-inserter/hr-long-handed-inserter-hand-open.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            circuit_wire_connection_points = 0,
-            rotation_speed = 0.02,
-            flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
-            max_health = 160,
-            type = 'inserter',
-            name = 'long-handed-inserter',
-            resistances = {{percent = 90, type = 'fire'}},
-            energy_per_movement = '5KJ',
-            dying_explosion = 'long-handed-inserter-explosion',
-            working_sound = {
-                audible_distance_modifier = 0.5,
-                sound = {
-                    {filename = '__base__/sound/inserter-long-handed-1.ogg', volume = 0.5},
-                    {filename = '__base__/sound/inserter-long-handed-2.ogg', volume = 0.5},
-                    {filename = '__base__/sound/inserter-long-handed-3.ogg', volume = 0.5},
-                    {filename = '__base__/sound/inserter-long-handed-4.ogg', volume = 0.5},
-                    {filename = '__base__/sound/inserter-long-handed-5.ogg', volume = 0.5}
+                    height = 136
                 },
-                match_progress_to_activity = true
-            },
-            pickup_position = {0, -2},
-            minable = {mining_time = 0.1, result = 'long-handed-inserter'},
-            extension_speed = 0.0457,
-            icon = '__base__/graphics/icons/long-handed-inserter.png',
-            insert_position = {0, 2.2},
-            hand_closed_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed-shadow.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed-shadow.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_base_shadow = {
-                height = 33,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
-                width = 8,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 132,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
-                    width = 32,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_closed_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/long-handed-inserter/long-handed-inserter-hand-closed.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/long-handed-inserter/hr-long-handed-inserter-hand-closed.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_base_picture = {
-                height = 34,
-                filename = '__base__/graphics/entity/long-handed-inserter/long-handed-inserter-hand-base.png',
-                width = 8,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 136,
-                    filename = '__base__/graphics/entity/long-handed-inserter/hr-long-handed-inserter-hand-base.png',
-                    width = 32,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            corpse = 'long-handed-inserter-remnants'
-        },
-        inserter = {
-            circuit_connector_sprites = 0,
-            next_upgrade = 'fast-inserter',
-            fast_replaceable_group = 'inserter',
-            icon_size = 64,
-            energy_source = {usage_priority = 'secondary-input', type = 'electric', drain = '0.4kW'},
-            hand_open_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-open-shadow.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open-shadow.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            icon_mipmaps = 4,
-            energy_per_rotation = '5kJ',
-            damaged_trigger_effect = {
-                entity_name = 'spark-explosion',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                damage_type_filters = 'fire',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
-            },
-            platform_picture = {
-                sheet = {
-                    height = 46,
-                    shift = {0.09375, 0},
-                    filename = '__base__/graphics/entity/inserter/inserter-platform.png',
-                    width = 46,
-                    priority = 'extra-high',
-                    hr_version = {
-                        height = 79,
-                        shift = {0.046875, 0.203125},
-                        filename = '__base__/graphics/entity/inserter/hr-inserter-platform.png',
-                        width = 105,
-                        priority = 'extra-high',
-                        scale = 0.5
-                    }
-                }
-            },
-            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
-            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
-            close_sound = 0,
-            vehicle_impact_sound = 0,
-            circuit_wire_max_distance = 9,
-            default_stack_control_input_signal = 0,
-            open_sound = 0,
-            hand_open_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/inserter/inserter-hand-open.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/inserter/hr-inserter-hand-open.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            circuit_wire_connection_points = 0,
-            rotation_speed = 0.014,
-            flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
-            max_health = 150,
-            type = 'inserter',
-            name = 'inserter',
-            resistances = {{percent = 90, type = 'fire'}},
-            energy_per_movement = '5kJ',
-            dying_explosion = 'inserter-explosion',
-            working_sound = 0,
-            pickup_position = {0, -1},
-            minable = {mining_time = 0.1, result = 'inserter'},
-            extension_speed = 0.03,
-            icon = '__base__/graphics/icons/inserter.png',
-            insert_position = {0, 1.2},
-            hand_closed_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed-shadow.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed-shadow.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_base_shadow = {
-                height = 33,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
-                width = 8,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 132,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
-                    width = 32,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_closed_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/inserter/inserter-hand-closed.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/inserter/hr-inserter-hand-closed.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            hand_base_picture = {
-                height = 33,
-                filename = '__base__/graphics/entity/inserter/inserter-hand-base.png',
-                width = 8,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 136,
-                    filename = '__base__/graphics/entity/inserter/hr-inserter-hand-base.png',
-                    width = 32,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            corpse = 'inserter-remnants'
+                height = 34
+            }
         },
         ['fast-inserter'] = {
-            circuit_connector_sprites = 0,
-            next_upgrade = 'stack-inserter',
-            fast_replaceable_group = 'inserter',
-            icon_size = 64,
-            energy_source = {usage_priority = 'secondary-input', type = 'electric', drain = '0.5kW'},
-            hand_open_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-open-shadow.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open-shadow.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            icon_mipmaps = 4,
-            energy_per_rotation = '7KJ',
-            damaged_trigger_effect = {
-                entity_name = 'spark-explosion',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                damage_type_filters = 'fire',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
-            },
-            platform_picture = {
-                sheet = {
-                    height = 46,
-                    shift = {0.09375, 0},
-                    filename = '__base__/graphics/entity/fast-inserter/fast-inserter-platform.png',
-                    width = 46,
-                    priority = 'extra-high',
-                    hr_version = {
-                        height = 79,
-                        shift = {0.046875, 0.203125},
-                        filename = '__base__/graphics/entity/fast-inserter/hr-fast-inserter-platform.png',
-                        width = 105,
-                        priority = 'extra-high',
-                        scale = 0.5
-                    }
-                }
-            },
-            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
-            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
-            close_sound = 0,
-            vehicle_impact_sound = 0,
-            circuit_wire_max_distance = 9,
-            default_stack_control_input_signal = 0,
-            open_sound = 0,
-            hand_open_picture = {
-                height = 41,
-                filename = '__base__/graphics/entity/fast-inserter/fast-inserter-hand-open.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/fast-inserter/hr-fast-inserter-hand-open.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
-            circuit_wire_connection_points = 0,
-            rotation_speed = 0.04,
-            flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
-            max_health = 150,
-            type = 'inserter',
-            name = 'fast-inserter',
-            resistances = {{percent = 90, type = 'fire'}},
-            energy_per_movement = '7KJ',
-            dying_explosion = 'fast-inserter-explosion',
+            minable = {mining_time = 0.1, result = 'fast-inserter'},
             working_sound = {
-                audible_distance_modifier = 0.3,
                 sound = {
-                    {filename = '__base__/sound/inserter-fast-1.ogg', volume = 0.5},
-                    {filename = '__base__/sound/inserter-fast-2.ogg', volume = 0.5},
-                    {filename = '__base__/sound/inserter-fast-3.ogg', volume = 0.5},
-                    {filename = '__base__/sound/inserter-fast-4.ogg', volume = 0.5},
-                    {filename = '__base__/sound/inserter-fast-5.ogg', volume = 0.5}
+                    {volume = 0.5, filename = '__base__/sound/inserter-fast-1.ogg'},
+                    {volume = 0.5, filename = '__base__/sound/inserter-fast-2.ogg'},
+                    {volume = 0.5, filename = '__base__/sound/inserter-fast-3.ogg'},
+                    {volume = 0.5, filename = '__base__/sound/inserter-fast-4.ogg'},
+                    {volume = 0.5, filename = '__base__/sound/inserter-fast-5.ogg'}
                 },
+                audible_distance_modifier = 0.3,
                 match_progress_to_activity = true
             },
-            pickup_position = {0, -1},
-            minable = {mining_time = 0.1, result = 'fast-inserter'},
-            extension_speed = 0.07,
-            icon = '__base__/graphics/icons/fast-inserter.png',
+            circuit_connector_sprites = 0,
             insert_position = {0, 1.2},
-            hand_closed_shadow = {
-                height = 41,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed-shadow.png',
-                width = 18,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 164,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed-shadow.png',
-                    width = 72,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
+            default_stack_control_input_signal = 0,
+            circuit_wire_max_distance = 9,
+            corpse = 'fast-inserter-remnants',
+            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
+            fast_replaceable_group = 'inserter',
+            dying_explosion = 'fast-inserter-explosion',
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                entity_name = 'spark-explosion'
             },
-            hand_base_shadow = {
-                height = 33,
-                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
-                width = 8,
-                priority = 'extra-high',
-                hr_version = {
-                    height = 132,
-                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
-                    width = 32,
-                    priority = 'extra-high',
-                    scale = 0.25
-                }
-            },
+            extension_speed = 0.07,
+            energy_per_rotation = '7KJ',
+            open_sound = 0,
+            pickup_position = {0, -1},
             hand_closed_picture = {
-                height = 41,
                 filename = '__base__/graphics/entity/fast-inserter/fast-inserter-hand-closed.png',
                 width = 18,
                 priority = 'extra-high',
                 hr_version = {
-                    height = 164,
                     filename = '__base__/graphics/entity/fast-inserter/hr-fast-inserter-hand-closed.png',
-                    width = 72,
+                    scale = 0.25,
                     priority = 'extra-high',
-                    scale = 0.25
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            rotation_speed = 0.04,
+            circuit_wire_connection_points = 0,
+            flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
+            close_sound = 0,
+            energy_source = {type = 'electric', drain = '0.5kW', usage_priority = 'secondary-input'},
+            hand_open_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-open-shadow.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            next_upgrade = 'stack-inserter',
+            platform_picture = {
+                sheet = {
+                    filename = '__base__/graphics/entity/fast-inserter/fast-inserter-platform.png',
+                    width = 46,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/fast-inserter/hr-fast-inserter-platform.png',
+                        scale = 0.5,
+                        width = 105,
+                        priority = 'extra-high',
+                        shift = {0.046875, 0.203125},
+                        height = 79
+                    },
+                    priority = 'extra-high',
+                    shift = {0.09375, 0},
+                    height = 46
                 }
             },
+            icon_size = 64,
+            vehicle_impact_sound = 0,
+            type = 'inserter',
+            resistances = {{type = 'fire', percent = 90}},
+            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
+            hand_base_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
+                width = 8,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 32,
+                    height = 132
+                },
+                height = 33
+            },
+            name = 'fast-inserter',
+            icon = '__base__/graphics/icons/fast-inserter.png',
+            icon_mipmaps = 4,
+            max_health = 150,
+            hand_open_picture = {
+                filename = '__base__/graphics/entity/fast-inserter/fast-inserter-hand-open.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/fast-inserter/hr-fast-inserter-hand-open.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            hand_closed_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed-shadow.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            energy_per_movement = '7KJ',
             hand_base_picture = {
-                height = 34,
                 filename = '__base__/graphics/entity/fast-inserter/fast-inserter-hand-base.png',
                 width = 8,
                 priority = 'extra-high',
                 hr_version = {
-                    height = 136,
                     filename = '__base__/graphics/entity/fast-inserter/hr-fast-inserter-hand-base.png',
-                    width = 32,
+                    scale = 0.25,
                     priority = 'extra-high',
-                    scale = 0.25
+                    width = 32,
+                    height = 136
+                },
+                height = 34
+            }
+        },
+        ['long-handed-inserter'] = {
+            minable = {mining_time = 0.1, result = 'long-handed-inserter'},
+            working_sound = {
+                sound = {
+                    {volume = 0.5, filename = '__base__/sound/inserter-long-handed-1.ogg'},
+                    {volume = 0.5, filename = '__base__/sound/inserter-long-handed-2.ogg'},
+                    {volume = 0.5, filename = '__base__/sound/inserter-long-handed-3.ogg'},
+                    {volume = 0.5, filename = '__base__/sound/inserter-long-handed-4.ogg'},
+                    {volume = 0.5, filename = '__base__/sound/inserter-long-handed-5.ogg'}
+                },
+                audible_distance_modifier = 0.5,
+                match_progress_to_activity = true
+            },
+            circuit_connector_sprites = 0,
+            insert_position = {0, 2.2},
+            default_stack_control_input_signal = 0,
+            circuit_wire_max_distance = 9,
+            corpse = 'long-handed-inserter-remnants',
+            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
+            fast_replaceable_group = 'long-handed-inserter',
+            dying_explosion = 'long-handed-inserter-explosion',
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                entity_name = 'spark-explosion'
+            },
+            extension_speed = 0.0457,
+            energy_per_rotation = '5KJ',
+            open_sound = 0,
+            pickup_position = {0, -2},
+            hand_closed_picture = {
+                filename = '__base__/graphics/entity/long-handed-inserter/long-handed-inserter-hand-closed.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/long-handed-inserter/hr-long-handed-inserter-hand-closed.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            rotation_speed = 0.02,
+            circuit_wire_connection_points = 0,
+            flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
+            close_sound = 0,
+            energy_source = {type = 'electric', drain = '0.4kW', usage_priority = 'secondary-input'},
+            hand_open_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-open-shadow.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            vehicle_impact_sound = 0,
+            platform_picture = {
+                sheet = {
+                    filename = '__base__/graphics/entity/long-handed-inserter/long-handed-inserter-platform.png',
+                    width = 46,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/long-handed-inserter/hr-long-handed-inserter-platform.png',
+                        scale = 0.5,
+                        width = 105,
+                        priority = 'extra-high',
+                        shift = {0.046875, 0.203125},
+                        height = 79
+                    },
+                    priority = 'extra-high',
+                    shift = {0.09375, 0},
+                    height = 46
                 }
             },
-            corpse = 'fast-inserter-remnants'
+            icon_size = 64,
+            type = 'inserter',
+            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
+            resistances = {{type = 'fire', percent = 90}},
+            name = 'long-handed-inserter',
+            hand_base_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
+                width = 8,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 32,
+                    height = 132
+                },
+                height = 33
+            },
+            hand_size = 1.5,
+            icon_mipmaps = 4,
+            icon = '__base__/graphics/icons/long-handed-inserter.png',
+            max_health = 160,
+            hand_open_picture = {
+                filename = '__base__/graphics/entity/long-handed-inserter/long-handed-inserter-hand-open.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/long-handed-inserter/hr-long-handed-inserter-hand-open.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            hand_closed_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed-shadow.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            energy_per_movement = '5KJ',
+            hand_base_picture = {
+                filename = '__base__/graphics/entity/long-handed-inserter/long-handed-inserter-hand-base.png',
+                width = 8,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/long-handed-inserter/hr-long-handed-inserter-hand-base.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 32,
+                    height = 136
+                },
+                height = 34
+            }
+        },
+        ['stack-inserter'] = {
+            minable = {mining_time = 0.1, result = 'stack-inserter'},
+            working_sound = 0,
+            circuit_connector_sprites = 0,
+            insert_position = {0, 1.2},
+            default_stack_control_input_signal = 0,
+            circuit_wire_max_distance = 9,
+            corpse = 'stack-inserter-remnants',
+            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
+            fast_replaceable_group = 'inserter',
+            dying_explosion = 'stack-inserter-explosion',
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                entity_name = 'spark-explosion'
+            },
+            extension_speed = 0.07,
+            energy_per_rotation = '20KJ',
+            stack = true,
+            open_sound = 0,
+            pickup_position = {0, -1},
+            hand_closed_picture = {
+                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-closed.png',
+                width = 24,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-closed.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 100,
+                    height = 164
+                },
+                height = 41
+            },
+            rotation_speed = 0.04,
+            circuit_wire_connection_points = 0,
+            flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
+            close_sound = 0,
+            energy_source = {type = 'electric', drain = '1kW', usage_priority = 'secondary-input'},
+            hand_open_shadow = {
+                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-open-shadow.png',
+                width = 32,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-open-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 130,
+                    height = 164
+                },
+                height = 41
+            },
+            platform_picture = {
+                sheet = {
+                    filename = '__base__/graphics/entity/stack-inserter/stack-inserter-platform.png',
+                    width = 46,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-platform.png',
+                        scale = 0.5,
+                        width = 105,
+                        priority = 'extra-high',
+                        shift = {0.046875, 0.203125},
+                        height = 79
+                    },
+                    priority = 'extra-high',
+                    shift = {0.09375, 0},
+                    height = 46
+                }
+            },
+            icon_size = 64,
+            vehicle_impact_sound = 0,
+            type = 'inserter',
+            resistances = {{type = 'fire', percent = 90}},
+            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
+            hand_base_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
+                width = 8,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 32,
+                    height = 132
+                },
+                height = 33
+            },
+            name = 'stack-inserter',
+            icon = '__base__/graphics/icons/stack-inserter.png',
+            icon_mipmaps = 4,
+            max_health = 160,
+            hand_open_picture = {
+                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-open.png',
+                width = 32,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-open.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 130,
+                    height = 164
+                },
+                height = 41
+            },
+            hand_closed_shadow = {
+                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-closed-shadow.png',
+                width = 24,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-closed-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 100,
+                    height = 164
+                },
+                height = 41
+            },
+            energy_per_movement = '20KJ',
+            hand_base_picture = {
+                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-base.png',
+                width = 8,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-base.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 32,
+                    height = 136
+                },
+                height = 34
+            }
+        },
+        ['stack-filter-inserter'] = {
+            minable = {mining_time = 0.1, result = 'stack-filter-inserter'},
+            working_sound = 0,
+            circuit_connector_sprites = 0,
+            insert_position = {0, 1.2},
+            default_stack_control_input_signal = 0,
+            circuit_wire_max_distance = 9,
+            corpse = 'stack-filter-inserter-remnants',
+            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
+            fast_replaceable_group = 'inserter',
+            dying_explosion = 'stack-filter-inserter-explosion',
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                entity_name = 'spark-explosion'
+            },
+            extension_speed = 0.07,
+            energy_per_rotation = '20KJ',
+            stack = true,
+            open_sound = 0,
+            pickup_position = {0, -1},
+            hand_closed_picture = {
+                filename = '__base__/graphics/entity/stack-filter-inserter/stack-filter-inserter-hand-closed.png',
+                width = 24,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/stack-filter-inserter/hr-stack-filter-inserter-hand-closed.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 100,
+                    height = 164
+                },
+                height = 41
+            },
+            rotation_speed = 0.04,
+            circuit_wire_connection_points = 0,
+            flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
+            close_sound = 0,
+            energy_source = {type = 'electric', drain = '1kW', usage_priority = 'secondary-input'},
+            hand_open_shadow = {
+                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-open-shadow.png',
+                width = 32,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-open-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 130,
+                    height = 164
+                },
+                height = 41
+            },
+            vehicle_impact_sound = 0,
+            platform_picture = {
+                sheet = {
+                    filename = '__base__/graphics/entity/stack-filter-inserter/stack-filter-inserter-platform.png',
+                    width = 46,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/stack-filter-inserter/hr-stack-filter-inserter-platform.png',
+                        scale = 0.5,
+                        width = 105,
+                        priority = 'extra-high',
+                        shift = {0.046875, 0.203125},
+                        height = 79
+                    },
+                    priority = 'extra-high',
+                    shift = {0.09375, 0},
+                    height = 46
+                }
+            },
+            icon_size = 64,
+            type = 'inserter',
+            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
+            resistances = {{type = 'fire', percent = 90}},
+            name = 'stack-filter-inserter',
+            hand_base_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
+                width = 8,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 32,
+                    height = 132
+                },
+                height = 33
+            },
+            hand_open_picture = {
+                filename = '__base__/graphics/entity/stack-filter-inserter/stack-filter-inserter-hand-open.png',
+                width = 32,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/stack-filter-inserter/hr-stack-filter-inserter-hand-open.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 130,
+                    height = 164
+                },
+                height = 41
+            },
+            icon_mipmaps = 4,
+            icon = '__base__/graphics/icons/stack-filter-inserter.png',
+            max_health = 160,
+            hand_closed_shadow = {
+                filename = '__base__/graphics/entity/stack-inserter/stack-inserter-hand-closed-shadow.png',
+                width = 24,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/stack-inserter/hr-stack-inserter-hand-closed-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 100,
+                    height = 164
+                },
+                height = 41
+            },
+            hand_base_picture = {
+                filename = '__base__/graphics/entity/stack-filter-inserter/stack-filter-inserter-hand-base.png',
+                width = 8,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/stack-filter-inserter/hr-stack-filter-inserter-hand-base.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 32,
+                    height = 136
+                },
+                height = 34
+            },
+            energy_per_movement = '20KJ',
+            filter_count = 1
+        },
+        ['filter-inserter'] = {
+            minable = {mining_time = 0.1, result = 'filter-inserter'},
+            working_sound = 0,
+            circuit_connector_sprites = 0,
+            insert_position = {0, 1.2},
+            default_stack_control_input_signal = 0,
+            circuit_wire_max_distance = 9,
+            corpse = 'filter-inserter-remnants',
+            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
+            fast_replaceable_group = 'inserter',
+            dying_explosion = 'filter-inserter-explosion',
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                entity_name = 'spark-explosion'
+            },
+            extension_speed = 0.07,
+            energy_per_rotation = '8KJ',
+            open_sound = 0,
+            pickup_position = {0, -1},
+            hand_closed_picture = {
+                filename = '__base__/graphics/entity/filter-inserter/filter-inserter-hand-closed.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/filter-inserter/hr-filter-inserter-hand-closed.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            rotation_speed = 0.04,
+            circuit_wire_connection_points = 0,
+            flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
+            close_sound = 0,
+            energy_source = {type = 'electric', drain = '0.5kW', usage_priority = 'secondary-input'},
+            hand_open_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-open-shadow.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            vehicle_impact_sound = 0,
+            platform_picture = {
+                sheet = {
+                    filename = '__base__/graphics/entity/filter-inserter/filter-inserter-platform.png',
+                    width = 46,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/filter-inserter/hr-filter-inserter-platform.png',
+                        scale = 0.5,
+                        width = 105,
+                        priority = 'extra-high',
+                        shift = {0.046875, 0.203125},
+                        height = 79
+                    },
+                    priority = 'extra-high',
+                    shift = {0.09375, 0},
+                    height = 46
+                }
+            },
+            icon_size = 64,
+            type = 'inserter',
+            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
+            resistances = {{type = 'fire', percent = 90}},
+            name = 'filter-inserter',
+            hand_base_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
+                width = 8,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 32,
+                    height = 132
+                },
+                height = 33
+            },
+            hand_open_picture = {
+                filename = '__base__/graphics/entity/filter-inserter/filter-inserter-hand-open.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/filter-inserter/hr-filter-inserter-hand-open.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            icon_mipmaps = 4,
+            icon = '__base__/graphics/icons/filter-inserter.png',
+            max_health = 150,
+            hand_closed_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed-shadow.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            hand_base_picture = {
+                filename = '__base__/graphics/entity/filter-inserter/filter-inserter-hand-base.png',
+                width = 8,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/filter-inserter/hr-filter-inserter-hand-base.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 32,
+                    height = 136
+                },
+                height = 34
+            },
+            energy_per_movement = '8KJ',
+            filter_count = 5
+        },
+        inserter = {
+            minable = {mining_time = 0.1, result = 'inserter'},
+            working_sound = 0,
+            circuit_connector_sprites = 0,
+            insert_position = {0, 1.2},
+            default_stack_control_input_signal = 0,
+            circuit_wire_max_distance = 9,
+            corpse = 'inserter-remnants',
+            collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
+            fast_replaceable_group = 'inserter',
+            dying_explosion = 'inserter-explosion',
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                offsets = {{0, 1}},
+                type = 'create-entity',
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
+                entity_name = 'spark-explosion'
+            },
+            extension_speed = 0.03,
+            energy_per_rotation = '5kJ',
+            open_sound = 0,
+            pickup_position = {0, -1},
+            hand_closed_picture = {
+                filename = '__base__/graphics/entity/inserter/inserter-hand-closed.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/inserter/hr-inserter-hand-closed.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            rotation_speed = 0.014,
+            circuit_wire_connection_points = 0,
+            flags = {'placeable-neutral', 'placeable-player', 'player-creation'},
+            close_sound = 0,
+            energy_source = {type = 'electric', drain = '0.4kW', usage_priority = 'secondary-input'},
+            hand_open_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-open-shadow.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-open-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            next_upgrade = 'fast-inserter',
+            platform_picture = {
+                sheet = {
+                    filename = '__base__/graphics/entity/inserter/inserter-platform.png',
+                    width = 46,
+                    hr_version = {
+                        filename = '__base__/graphics/entity/inserter/hr-inserter-platform.png',
+                        scale = 0.5,
+                        width = 105,
+                        priority = 'extra-high',
+                        shift = {0.046875, 0.203125},
+                        height = 79
+                    },
+                    priority = 'extra-high',
+                    shift = {0.09375, 0},
+                    height = 46
+                }
+            },
+            icon_size = 64,
+            vehicle_impact_sound = 0,
+            type = 'inserter',
+            resistances = {{type = 'fire', percent = 90}},
+            selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
+            hand_base_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-base-shadow.png',
+                width = 8,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-base-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 32,
+                    height = 132
+                },
+                height = 33
+            },
+            name = 'inserter',
+            icon = '__base__/graphics/icons/inserter.png',
+            icon_mipmaps = 4,
+            max_health = 150,
+            hand_open_picture = {
+                filename = '__base__/graphics/entity/inserter/inserter-hand-open.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/inserter/hr-inserter-hand-open.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            hand_closed_shadow = {
+                filename = '__base__/graphics/entity/burner-inserter/burner-inserter-hand-closed-shadow.png',
+                width = 18,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/burner-inserter/hr-burner-inserter-hand-closed-shadow.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 72,
+                    height = 164
+                },
+                height = 41
+            },
+            energy_per_movement = '5kJ',
+            hand_base_picture = {
+                filename = '__base__/graphics/entity/inserter/inserter-hand-base.png',
+                width = 8,
+                priority = 'extra-high',
+                hr_version = {
+                    filename = '__base__/graphics/entity/inserter/hr-inserter-hand-base.png',
+                    scale = 0.25,
+                    priority = 'extra-high',
+                    width = 32,
+                    height = 136
+                },
+                height = 33
+            }
         }
     };
     return _;

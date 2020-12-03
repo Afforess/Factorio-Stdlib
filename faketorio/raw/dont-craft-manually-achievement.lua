@@ -1,12 +1,12 @@
 do
     local _ = {
         ['lazy-bastard'] = {
-            icon = '__base__/graphics/achievement/lazy-bastard.png',
-            type = 'dont-craft-manually-achievement',
             order = 'f[limitation]-a[lazy-bastard]',
+            icon_size = 128,
             amount = 111,
+            icon = '__base__/graphics/achievement/lazy-bastard.png',
             name = 'lazy-bastard',
-            icon_size = 128
+            type = 'dont-craft-manually-achievement'
         }
     };
     return _;

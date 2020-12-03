@@ -1,7 +1,7 @@
 do
     local _ = {
-        chemical = {type = 'fuel-category', name = 'chemical'},
-        nuclear = {type = 'fuel-category', name = 'nuclear'}
+        chemical = {name = 'chemical', type = 'fuel-category'},
+        nuclear = {name = 'nuclear', type = 'fuel-category'}
     };
     return _;
 end

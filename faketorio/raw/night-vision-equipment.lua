@@ -1,26 +1,26 @@
 do
     local _ = {
         ['night-vision-equipment'] = {
-            name = 'night-vision-equipment',
+            shape = {height = 2, width = 2, type = 'full'},
+            activate_sound = {volume = 0.5, filename = '__base__/sound/nightvision-on.ogg'},
+            energy_input = '10kW',
             color_lookup = {{0.5, '__core__/graphics/color_luts/nightvision.png'}},
-            activate_sound = {filename = '__base__/sound/nightvision-on.ogg', volume = 0.5},
-            categories = {'armor'},
             energy_source = {
                 buffer_capacity = '120kJ',
-                input_flow_limit = '240kW',
                 type = 'electric',
+                input_flow_limit = '240kW',
                 usage_priority = 'primary-input'
             },
-            type = 'night-vision-equipment',
-            shape = {width = 2, height = 2, type = 'full'},
             sprite = {
+                priority = 'medium',
                 filename = '__base__/graphics/equipment/night-vision-equipment.png',
                 width = 64,
-                height = 64,
-                priority = 'medium'
+                height = 64
             },
-            energy_input = '10kW',
-            deactivate_sound = {filename = '__base__/sound/nightvision-off.ogg', volume = 0.5},
+            categories = {'armor'},
+            name = 'night-vision-equipment',
+            type = 'night-vision-equipment',
+            deactivate_sound = {volume = 0.5, filename = '__base__/sound/nightvision-off.ogg'},
             darkness_to_turn_on = 0.5
         }
     };

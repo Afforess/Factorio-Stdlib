@@ -1,24 +1,23 @@
 do
     local _ = {
         ['dummy-flame-thrower-explosion'] = {
-            name = 'dummy-flame-thrower-explosion',
             light = {intensity = 0.2, size = 20},
-            smoke_count = 1,
-            animations = {
-                {
-                    frame_count = 6,
-                    height = 1,
-                    filename = '__base__/graphics/entity/blue-beam/blue-beam.png',
-                    width = 187,
-                    priority = 'extra-high'
-                }
-            },
-            slow_down_factor = 1,
-            type = 'flame-thrower-explosion',
-            damage = {amount = 0.25, type = 'fire'},
-            smoke = 'smoke-fast',
             flags = {'not-on-map'},
-            smoke_slow_down_factor = 0.95
+            type = 'flame-thrower-explosion',
+            smoke = 'smoke-fast',
+            smoke_slow_down_factor = 0.95,
+            slow_down_factor = 1,
+            damage = {amount = 0.25, type = 'fire'},
+            smoke_count = 1,
+            name = 'dummy-flame-thrower-explosion',
+            animations = {
+                direction_count = 1,
+                filename = '__core__/graphics/empty.png',
+                width = 1,
+                frame_count = 1,
+                priority = 'extra-high',
+                height = 1
+            }
         }
     };
     return _;

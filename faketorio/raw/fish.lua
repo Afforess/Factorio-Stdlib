@@ -1,40 +1,40 @@
 do
     local _ = {
         fish = {
-            minable = {result = 'raw-fish', mining_time = 0.4, count = 5},
-            icon_size = 64,
-            name = 'fish',
-            flags = {'placeable-neutral', 'not-on-map'},
-            icon = '__base__/graphics/icons/fish.png',
-            subgroup = 'creatures',
-            selection_box = {{-0.5, -0.3}, {0.5, 0.3}},
             autoplace = {influence = 0.01},
+            max_health = 20,
             icon_mipmaps = 4,
+            subgroup = 'creatures',
+            type = 'fish',
+            icon = '__base__/graphics/icons/fish.png',
+            order = 'b-a',
+            flags = {'placeable-neutral', 'not-on-map'},
             pictures = {
                 {
-                    priority = 'extra-high',
                     filename = '__base__/graphics/entity/fish/fish-1.png',
                     width = 22,
+                    priority = 'extra-high',
                     height = 36
                 },
                 {
-                    priority = 'extra-high',
                     filename = '__base__/graphics/entity/fish/fish-2.png',
                     width = 32,
+                    priority = 'extra-high',
                     height = 32
                 }
             },
-            max_health = 20,
-            order = 'b-a',
-            type = 'fish',
-            collision_box = {{-0.75, -0.75}, {0.75, 0.75}},
+            name = 'fish',
             mined_sound = {
-                {volume = 0.8, filename = '__core__/sound/mine-fish.ogg'},
-                {volume = 0.8, filename = '__core__/sound/mine-fish-1.ogg'},
-                {volume = 0.8, filename = '__core__/sound/mine-fish-2.ogg'},
-                {volume = 0.8, filename = '__core__/sound/mine-fish-3.ogg'},
-                {volume = 0.8, filename = '__core__/sound/mine-fish-4.ogg'}
-            }
+                {filename = '__core__/sound/mine-fish.ogg', volume = 0.8},
+                {filename = '__core__/sound/mine-fish-1.ogg', volume = 0.8},
+                {filename = '__core__/sound/mine-fish-2.ogg', volume = 0.8},
+                {filename = '__core__/sound/mine-fish-3.ogg', volume = 0.8},
+                {filename = '__core__/sound/mine-fish-4.ogg', volume = 0.8}
+            },
+            selection_box = {{-0.5, -0.3}, {0.5, 0.3}},
+            collision_box = {{-0.75, -0.75}, {0.75, 0.75}},
+            icon_size = 64,
+            minable = {result = 'raw-fish', count = 5, mining_time = 0.4}
         }
     };
     return _;

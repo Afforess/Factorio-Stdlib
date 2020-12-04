@@ -1,21 +1,21 @@
 do
     local _ = {
         ['selection-tool'] = {
-            alt_selection_color = {b = 0, g = 1, r = 0},
-            alt_selection_cursor_box_type = 'copy',
-            icon_size = 64,
-            flags = {'hidden', 'not-stackable', 'spawnable'},
             icon = '__base__/graphics/icons/blueprint.png',
-            stack_size = 1,
-            selection_color = {b = 255, g = 255, r = 255},
-            alt_selection_mode = {'blueprint'},
+            alt_selection_color = {r = 0, g = 1, b = 0},
             icon_mipmaps = 4,
-            subgroup = 'other',
-            selection_mode = {'blueprint'},
-            order = 'e[automated-construction]-a[blueprint]',
+            selection_cursor_box_type = 'copy',
             type = 'selection-tool',
+            subgroup = 'other',
+            order = 'e[automated-construction]-a[blueprint]',
+            flags = {'hidden', 'not-stackable', 'spawnable'},
+            icon_size = 64,
+            selection_mode = {'blueprint'},
+            alt_selection_mode = {'blueprint'},
+            selection_color = {r = 255, g = 255, b = 255},
             name = 'selection-tool',
-            selection_cursor_box_type = 'copy'
+            stack_size = 1,
+            alt_selection_cursor_box_type = 'copy'
         }
     };
     return _;

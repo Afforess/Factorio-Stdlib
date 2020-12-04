@@ -1,456 +1,456 @@
 do
     local _ = {
-        ['fast-underground-belt'] = {
-            minable = {mining_time = 0.1, result = 'fast-underground-belt'},
-            working_sound = {
-                max_sounds_per_type = 2,
-                persistent = true,
-                use_doppler_shift = false,
-                sound = {volume = 0.27, filename = '__base__/sound/fast-underground-belt.ogg'},
-                audible_distance_modifier = 0.5
-            },
-            flags = {'placeable-neutral', 'player-creation'},
-            icon = '__base__/graphics/icons/fast-underground-belt.png',
-            close_sound = 0,
-            belt_animation_set = 0,
-            structure = {
-                front_patch = {
-                    sheet = {
-                        filename = '__base__/graphics/entity/fast-underground-belt/fast-underground-belt-structure-front-patch.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            filename = '__base__/graphics/entity/fast-underground-belt/hr-fast-underground-belt-structure-front-patch.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
-                direction_out_side_loading = {
-                    sheet = {
-                        y = 192,
-                        filename = '__base__/graphics/entity/fast-underground-belt/fast-underground-belt-structure.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            y = 384,
-                            filename = '__base__/graphics/entity/fast-underground-belt/hr-fast-underground-belt-structure.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
-                direction_in_side_loading = {
-                    sheet = {
-                        y = 288,
-                        filename = '__base__/graphics/entity/fast-underground-belt/fast-underground-belt-structure.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            y = 576,
-                            filename = '__base__/graphics/entity/fast-underground-belt/hr-fast-underground-belt-structure.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
-                back_patch = {
-                    sheet = {
-                        filename = '__base__/graphics/entity/fast-underground-belt/fast-underground-belt-structure-back-patch.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            filename = '__base__/graphics/entity/fast-underground-belt/hr-fast-underground-belt-structure-back-patch.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
-                direction_in = {
-                    sheet = {
-                        y = 96,
-                        filename = '__base__/graphics/entity/fast-underground-belt/fast-underground-belt-structure.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            y = 192,
-                            filename = '__base__/graphics/entity/fast-underground-belt/hr-fast-underground-belt-structure.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
-                direction_out = {
-                    sheet = {
-                        filename = '__base__/graphics/entity/fast-underground-belt/fast-underground-belt-structure.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            filename = '__base__/graphics/entity/fast-underground-belt/hr-fast-underground-belt-structure.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                }
-            },
-            corpse = 'fast-underground-belt-remnants',
-            collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
-            underground_sprite = {
-                filename = '__core__/graphics/arrows/underground-lines.png',
-                scale = 0.5,
-                x = 64,
-                priority = 'high',
-                width = 64,
-                height = 64
-            },
-            fast_replaceable_group = 'transport-belt',
-            underground_remove_belts_sprite = {
-                filename = '__core__/graphics/arrows/underground-lines-remove.png',
-                scale = 0.5,
-                x = 64,
-                priority = 'high',
-                width = 64,
-                height = 64
-            },
-            icon_size = 64,
-            name = 'fast-underground-belt',
-            dying_explosion = 'fast-underground-belt-explosion',
-            damaged_trigger_effect = {
-                damage_type_filters = 'fire',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
-                entity_name = 'spark-explosion'
-            },
-            speed = 0.0625,
-            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
-            resistances = {{type = 'fire', percent = 60}, {type = 'impact', percent = 30}},
-            icon_mipmaps = 4,
-            next_upgrade = 'express-underground-belt',
-            max_health = 160,
-            open_sound = 0,
-            type = 'underground-belt',
-            animation_speed_coefficient = 32,
-            max_distance = 7
-        },
-        ['express-underground-belt'] = {
-            minable = {mining_time = 0.1, result = 'express-underground-belt'},
-            working_sound = {
-                max_sounds_per_type = 2,
-                persistent = true,
-                use_doppler_shift = false,
-                sound = {volume = 0.35, filename = '__base__/sound/express-underground-belt.ogg'},
-                audible_distance_modifier = 0.5
-            },
-            flags = {'placeable-neutral', 'player-creation'},
-            icon = '__base__/graphics/icons/express-underground-belt.png',
-            close_sound = 0,
-            belt_animation_set = 0,
-            structure = {
-                front_patch = {
-                    sheet = {
-                        filename = '__base__/graphics/entity/express-underground-belt/express-underground-belt-structure-front-patch.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            filename = '__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure-front-patch.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
-                direction_out_side_loading = {
-                    sheet = {
-                        y = 192,
-                        filename = '__base__/graphics/entity/express-underground-belt/express-underground-belt-structure.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            y = 384,
-                            filename = '__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
-                direction_in_side_loading = {
-                    sheet = {
-                        y = 288,
-                        filename = '__base__/graphics/entity/express-underground-belt/express-underground-belt-structure.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            y = 576,
-                            filename = '__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
-                back_patch = {
-                    sheet = {
-                        filename = '__base__/graphics/entity/express-underground-belt/express-underground-belt-structure-back-patch.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            filename = '__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure-back-patch.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
-                direction_in = {
-                    sheet = {
-                        y = 96,
-                        filename = '__base__/graphics/entity/express-underground-belt/express-underground-belt-structure.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            y = 192,
-                            filename = '__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
-                direction_out = {
-                    sheet = {
-                        filename = '__base__/graphics/entity/express-underground-belt/express-underground-belt-structure.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            filename = '__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                }
-            },
-            corpse = 'express-underground-belt-remnants',
-            collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
-            fast_replaceable_group = 'transport-belt',
-            underground_sprite = {
-                filename = '__core__/graphics/arrows/underground-lines.png',
-                scale = 0.5,
-                x = 64,
-                priority = 'high',
-                width = 64,
-                height = 64
-            },
-            icon_size = 64,
-            underground_remove_belts_sprite = {
-                filename = '__core__/graphics/arrows/underground-lines-remove.png',
-                scale = 0.5,
-                x = 64,
-                priority = 'high',
-                width = 64,
-                height = 64
-            },
-            dying_explosion = 'express-underground-belt-explosion',
-            damaged_trigger_effect = {
-                damage_type_filters = 'fire',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
-                entity_name = 'spark-explosion'
-            },
-            name = 'express-underground-belt',
-            speed = 0.09375,
-            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
-            icon_mipmaps = 4,
-            resistances = {{type = 'fire', percent = 60}, {type = 'impact', percent = 30}},
-            max_health = 170,
-            open_sound = 0,
-            type = 'underground-belt',
-            animation_speed_coefficient = 32,
-            max_distance = 9
-        },
         ['underground-belt'] = {
-            minable = {mining_time = 0.1, result = 'underground-belt'},
-            working_sound = {
-                max_sounds_per_type = 2,
-                persistent = true,
-                use_doppler_shift = false,
-                sound = {volume = 0.2, filename = '__base__/sound/underground-belt.ogg'},
-                audible_distance_modifier = 0.5
-            },
-            flags = {'placeable-neutral', 'player-creation'},
             icon = '__base__/graphics/icons/underground-belt.png',
-            close_sound = 0,
-            belt_animation_set = 0,
+            animation_speed_coefficient = 32,
             structure = {
-                front_patch = {
-                    sheet = {
-                        filename = '__base__/graphics/entity/underground-belt/underground-belt-structure-front-patch.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            filename = '__base__/graphics/entity/underground-belt/hr-underground-belt-structure-front-patch.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
-                direction_out_side_loading = {
-                    sheet = {
-                        y = 192,
-                        filename = '__base__/graphics/entity/underground-belt/underground-belt-structure.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            y = 384,
-                            filename = '__base__/graphics/entity/underground-belt/hr-underground-belt-structure.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
-                direction_in_side_loading = {
-                    sheet = {
-                        y = 288,
-                        filename = '__base__/graphics/entity/underground-belt/underground-belt-structure.png',
-                        width = 96,
-                        priority = 'extra-high',
-                        hr_version = {
-                            y = 576,
-                            filename = '__base__/graphics/entity/underground-belt/hr-underground-belt-structure.png',
-                            scale = 0.5,
-                            priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
-                    }
-                },
                 back_patch = {
                     sheet = {
                         filename = '__base__/graphics/entity/underground-belt/underground-belt-structure-back-patch.png',
-                        width = 96,
                         priority = 'extra-high',
+                        height = 96,
+                        width = 96,
                         hr_version = {
                             filename = '__base__/graphics/entity/underground-belt/hr-underground-belt-structure-back-patch.png',
-                            scale = 0.5,
                             priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
+                            scale = 0.5,
+                            height = 192,
+                            width = 192
+                        }
+                    }
+                },
+                direction_out_side_loading = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/underground-belt/underground-belt-structure.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        y = 192,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/underground-belt/hr-underground-belt-structure.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            y = 384,
+                            width = 192
+                        }
                     }
                 },
                 direction_in = {
                     sheet = {
-                        y = 96,
                         filename = '__base__/graphics/entity/underground-belt/underground-belt-structure.png',
-                        width = 96,
                         priority = 'extra-high',
+                        height = 96,
+                        y = 96,
+                        width = 96,
                         hr_version = {
-                            y = 192,
                             filename = '__base__/graphics/entity/underground-belt/hr-underground-belt-structure.png',
-                            scale = 0.5,
                             priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
+                            scale = 0.5,
+                            height = 192,
+                            y = 192,
+                            width = 192
+                        }
+                    }
+                },
+                front_patch = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/underground-belt/underground-belt-structure-front-patch.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/underground-belt/hr-underground-belt-structure-front-patch.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            width = 192
+                        }
                     }
                 },
                 direction_out = {
                     sheet = {
                         filename = '__base__/graphics/entity/underground-belt/underground-belt-structure.png',
-                        width = 96,
                         priority = 'extra-high',
+                        height = 96,
+                        width = 96,
                         hr_version = {
                             filename = '__base__/graphics/entity/underground-belt/hr-underground-belt-structure.png',
-                            scale = 0.5,
                             priority = 'extra-high',
-                            width = 192,
-                            height = 192
-                        },
-                        height = 96
+                            scale = 0.5,
+                            height = 192,
+                            width = 192
+                        }
+                    }
+                },
+                direction_in_side_loading = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/underground-belt/underground-belt-structure.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        y = 288,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/underground-belt/hr-underground-belt-structure.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            y = 576,
+                            width = 192
+                        }
                     }
                 }
             },
-            corpse = 'underground-belt-remnants',
+            close_sound = 0,
+            next_upgrade = 'fast-underground-belt',
+            fast_replaceable_group = 'transport-belt',
+            working_sound = {
+                audible_distance_modifier = 0.5,
+                max_sounds_per_type = 2,
+                persistent = true,
+                use_doppler_shift = false,
+                sound = {filename = '__base__/sound/underground-belt.ogg', volume = 0.2}
+            },
             collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
+            belt_animation_set = 0,
             underground_sprite = {
                 filename = '__core__/graphics/arrows/underground-lines.png',
-                scale = 0.5,
-                x = 64,
                 priority = 'high',
-                width = 64,
-                height = 64
+                scale = 0.5,
+                height = 64,
+                x = 64,
+                width = 64
             },
-            fast_replaceable_group = 'transport-belt',
             underground_remove_belts_sprite = {
                 filename = '__core__/graphics/arrows/underground-lines-remove.png',
-                scale = 0.5,
-                x = 64,
                 priority = 'high',
-                width = 64,
-                height = 64
+                scale = 0.5,
+                height = 64,
+                x = 64,
+                width = 64
             },
-            icon_size = 64,
-            name = 'underground-belt',
             dying_explosion = 'underground-belt-explosion',
+            icon_mipmaps = 4,
+            max_health = 150,
+            speed = 0.03125,
+            type = 'underground-belt',
+            resistances = {{percent = 60, type = 'fire'}, {percent = 30, type = 'impact'}},
+            icon_size = 64,
+            flags = {'placeable-neutral', 'player-creation'},
+            max_distance = 5,
+            name = 'underground-belt',
+            corpse = 'underground-belt-remnants',
+            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+            open_sound = 0,
             damaged_trigger_effect = {
                 damage_type_filters = 'fire',
-                offsets = {{0, 1}},
+                entity_name = 'spark-explosion',
                 type = 'create-entity',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
-                entity_name = 'spark-explosion'
+                offsets = {{0, 1}},
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
             },
-            speed = 0.03125,
-            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
-            resistances = {{type = 'fire', percent = 60}, {type = 'impact', percent = 30}},
-            icon_mipmaps = 4,
-            next_upgrade = 'fast-underground-belt',
-            max_health = 150,
-            open_sound = 0,
-            type = 'underground-belt',
+            minable = {mining_time = 0.1, result = 'underground-belt'}
+        },
+        ['fast-underground-belt'] = {
+            icon = '__base__/graphics/icons/fast-underground-belt.png',
             animation_speed_coefficient = 32,
-            max_distance = 5
+            structure = {
+                back_patch = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/fast-underground-belt/fast-underground-belt-structure-back-patch.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/fast-underground-belt/hr-fast-underground-belt-structure-back-patch.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            width = 192
+                        }
+                    }
+                },
+                direction_out_side_loading = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/fast-underground-belt/fast-underground-belt-structure.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        y = 192,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/fast-underground-belt/hr-fast-underground-belt-structure.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            y = 384,
+                            width = 192
+                        }
+                    }
+                },
+                direction_in = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/fast-underground-belt/fast-underground-belt-structure.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        y = 96,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/fast-underground-belt/hr-fast-underground-belt-structure.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            y = 192,
+                            width = 192
+                        }
+                    }
+                },
+                front_patch = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/fast-underground-belt/fast-underground-belt-structure-front-patch.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/fast-underground-belt/hr-fast-underground-belt-structure-front-patch.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            width = 192
+                        }
+                    }
+                },
+                direction_out = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/fast-underground-belt/fast-underground-belt-structure.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/fast-underground-belt/hr-fast-underground-belt-structure.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            width = 192
+                        }
+                    }
+                },
+                direction_in_side_loading = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/fast-underground-belt/fast-underground-belt-structure.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        y = 288,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/fast-underground-belt/hr-fast-underground-belt-structure.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            y = 576,
+                            width = 192
+                        }
+                    }
+                }
+            },
+            close_sound = 0,
+            next_upgrade = 'express-underground-belt',
+            fast_replaceable_group = 'transport-belt',
+            working_sound = {
+                audible_distance_modifier = 0.5,
+                max_sounds_per_type = 2,
+                persistent = true,
+                use_doppler_shift = false,
+                sound = {filename = '__base__/sound/fast-underground-belt.ogg', volume = 0.27}
+            },
+            collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
+            belt_animation_set = 0,
+            underground_sprite = {
+                filename = '__core__/graphics/arrows/underground-lines.png',
+                priority = 'high',
+                scale = 0.5,
+                height = 64,
+                x = 64,
+                width = 64
+            },
+            underground_remove_belts_sprite = {
+                filename = '__core__/graphics/arrows/underground-lines-remove.png',
+                priority = 'high',
+                scale = 0.5,
+                height = 64,
+                x = 64,
+                width = 64
+            },
+            dying_explosion = 'fast-underground-belt-explosion',
+            icon_mipmaps = 4,
+            max_health = 160,
+            speed = 0.0625,
+            type = 'underground-belt',
+            resistances = {{percent = 60, type = 'fire'}, {percent = 30, type = 'impact'}},
+            icon_size = 64,
+            flags = {'placeable-neutral', 'player-creation'},
+            max_distance = 7,
+            name = 'fast-underground-belt',
+            corpse = 'fast-underground-belt-remnants',
+            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+            open_sound = 0,
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                entity_name = 'spark-explosion',
+                type = 'create-entity',
+                offsets = {{0, 1}},
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+            },
+            minable = {mining_time = 0.1, result = 'fast-underground-belt'}
+        },
+        ['express-underground-belt'] = {
+            icon = '__base__/graphics/icons/express-underground-belt.png',
+            animation_speed_coefficient = 32,
+            structure = {
+                back_patch = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/express-underground-belt/express-underground-belt-structure-back-patch.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure-back-patch.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            width = 192
+                        }
+                    }
+                },
+                direction_out_side_loading = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/express-underground-belt/express-underground-belt-structure.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        y = 192,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            y = 384,
+                            width = 192
+                        }
+                    }
+                },
+                direction_in = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/express-underground-belt/express-underground-belt-structure.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        y = 96,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            y = 192,
+                            width = 192
+                        }
+                    }
+                },
+                front_patch = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/express-underground-belt/express-underground-belt-structure-front-patch.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure-front-patch.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            width = 192
+                        }
+                    }
+                },
+                direction_out = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/express-underground-belt/express-underground-belt-structure.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            width = 192
+                        }
+                    }
+                },
+                direction_in_side_loading = {
+                    sheet = {
+                        filename = '__base__/graphics/entity/express-underground-belt/express-underground-belt-structure.png',
+                        priority = 'extra-high',
+                        height = 96,
+                        y = 288,
+                        width = 96,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure.png',
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            y = 576,
+                            width = 192
+                        }
+                    }
+                }
+            },
+            close_sound = 0,
+            fast_replaceable_group = 'transport-belt',
+            working_sound = {
+                audible_distance_modifier = 0.5,
+                max_sounds_per_type = 2,
+                persistent = true,
+                use_doppler_shift = false,
+                sound = {filename = '__base__/sound/express-underground-belt.ogg', volume = 0.35}
+            },
+            collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
+            belt_animation_set = 0,
+            underground_sprite = {
+                filename = '__core__/graphics/arrows/underground-lines.png',
+                priority = 'high',
+                scale = 0.5,
+                height = 64,
+                x = 64,
+                width = 64
+            },
+            underground_remove_belts_sprite = {
+                filename = '__core__/graphics/arrows/underground-lines-remove.png',
+                priority = 'high',
+                scale = 0.5,
+                height = 64,
+                x = 64,
+                width = 64
+            },
+            dying_explosion = 'express-underground-belt-explosion',
+            icon_mipmaps = 4,
+            max_health = 170,
+            speed = 0.09375,
+            type = 'underground-belt',
+            resistances = {{percent = 60, type = 'fire'}, {percent = 30, type = 'impact'}},
+            icon_size = 64,
+            flags = {'placeable-neutral', 'player-creation'},
+            max_distance = 9,
+            name = 'express-underground-belt',
+            corpse = 'express-underground-belt-remnants',
+            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+            open_sound = 0,
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                entity_name = 'spark-explosion',
+                type = 'create-entity',
+                offsets = {{0, 1}},
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+            },
+            minable = {mining_time = 0.1, result = 'express-underground-belt'}
         }
     };
     return _;

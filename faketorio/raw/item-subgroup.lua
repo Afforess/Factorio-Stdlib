@@ -1,245 +1,245 @@
 do
     local _ = {
-        ['virtual-signal'] = {order = 'e', type = 'item-subgroup', group = 'signals', name = 'virtual-signal'},
-        ['inserter-explosions'] = {
-            order = 'ac',
+        ['smelting-machine'] = {type = 'item-subgroup', name = 'smelting-machine', order = 'd', group = 'production'},
+        belt = {type = 'item-subgroup', name = 'belt', order = 'b', group = 'logistics'},
+        ['virtual-signal-number'] = {
             type = 'item-subgroup',
-            group = 'effects',
-            name = 'inserter-explosions'
+            name = 'virtual-signal-number',
+            order = 'b',
+            group = 'signals'
         },
-        ['logistic-network-remnants'] = {
-            order = 'dg',
+        ['energy-pipe-distribution-remnants'] = {
             type = 'item-subgroup',
-            group = 'environment',
-            name = 'logistic-network-remnants'
+            name = 'energy-pipe-distribution-remnants',
+            order = 'dd',
+            group = 'environment'
         },
-        ['energy-pipe-distribution-explosions'] = {
-            order = 'ad',
-            type = 'item-subgroup',
-            group = 'effects',
-            name = 'energy-pipe-distribution-explosions'
-        },
-        other = {order = 'z', type = 'item-subgroup', group = 'other', name = 'other'},
-        ['belt-remnants'] = {order = 'db', type = 'item-subgroup', group = 'environment', name = 'belt-remnants'},
+        explosions = {type = 'item-subgroup', name = 'explosions', order = 'de', group = 'effects'},
         ['decorative-explosions'] = {
+            type = 'item-subgroup',
+            name = 'decorative-explosions',
             order = 'dc',
-            type = 'item-subgroup',
-            group = 'effects',
-            name = 'decorative-explosions'
+            group = 'effects'
         },
-        ['circuit-network-remnants'] = {
-            order = 'dh',
+        ['storage-remnants'] = {type = 'item-subgroup', name = 'storage-remnants', order = 'da', group = 'environment'},
+        ['circuit-network'] = {type = 'item-subgroup', name = 'circuit-network', order = 'h', group = 'logistics'},
+        fluid = {type = 'item-subgroup', name = 'fluid', order = 'a', group = 'fluids'},
+        cliffs = {type = 'item-subgroup', name = 'cliffs', order = 'a', group = 'environment'},
+        ['capsule-explosions'] = {type = 'item-subgroup', name = 'capsule-explosions', order = 'cc', group = 'effects'},
+        ['transport-remnants'] = {
             type = 'item-subgroup',
-            group = 'environment',
-            name = 'circuit-network-remnants'
+            name = 'transport-remnants',
+            order = 'df',
+            group = 'environment'
         },
-        ['military-equipment'] = {order = 'f', type = 'item-subgroup', group = 'combat', name = 'military-equipment'},
-        tool = {order = 'a', type = 'item-subgroup', group = 'production', name = 'tool'},
-        armor = {order = 'd', type = 'item-subgroup', group = 'combat', name = 'armor'},
-        fluid = {order = 'a', type = 'item-subgroup', group = 'fluids', name = 'fluid'},
-        ['logistic-network-explosions'] = {
-            order = 'ag',
+        ammo = {type = 'item-subgroup', name = 'ammo', order = 'b', group = 'combat'},
+        ['virtual-signal'] = {type = 'item-subgroup', name = 'virtual-signal', order = 'e', group = 'signals'},
+        ['crash-site'] = {type = 'item-subgroup', name = 'crash-site', order = 'x', group = 'production'},
+        ['extraction-machine-explosions'] = {
             type = 'item-subgroup',
-            group = 'effects',
-            name = 'logistic-network-explosions'
+            name = 'extraction-machine-explosions',
+            order = 'bb',
+            group = 'effects'
         },
-        ['fill-barrel'] = {order = 'e', type = 'item-subgroup', group = 'intermediate-products', name = 'fill-barrel'},
-        ['raw-material'] = {order = 'c', type = 'item-subgroup', group = 'intermediate-products', name = 'raw-material'},
-        energy = {order = 'b', type = 'item-subgroup', group = 'production', name = 'energy'},
-        enemies = {order = 'a', type = 'item-subgroup', group = 'enemies', name = 'enemies'},
-        transport = {order = 'f', type = 'item-subgroup', group = 'logistics', name = 'transport'},
-        ['energy-explosions'] = {order = 'ba', type = 'item-subgroup', group = 'effects', name = 'energy-explosions'},
-        ['intermediate-product'] = {
-            order = 'g',
+        wrecks = {type = 'item-subgroup', name = 'wrecks', order = 'e', group = 'environment'},
+        ['circuit-network-explosions'] = {
             type = 'item-subgroup',
-            group = 'intermediate-products',
-            name = 'intermediate-product'
+            name = 'circuit-network-explosions',
+            order = 'ah',
+            group = 'effects'
         },
-        ['inserter-remnants'] = {
-            order = 'dc',
+        ['fill-barrel'] = {type = 'item-subgroup', name = 'fill-barrel', order = 'e', group = 'intermediate-products'},
+        ['gun-explosions'] = {type = 'item-subgroup', name = 'gun-explosions', order = 'ca', group = 'effects'},
+        corpses = {type = 'item-subgroup', name = 'corpses', order = 'c', group = 'environment'},
+        ['science-pack'] = {type = 'item-subgroup', name = 'science-pack', order = 'h', group = 'intermediate-products'},
+        ['rock-explosions'] = {type = 'item-subgroup', name = 'rock-explosions', order = 'da', group = 'effects'},
+        ['campaign-explosions'] = {
             type = 'item-subgroup',
-            group = 'environment',
-            name = 'inserter-remnants'
+            name = 'campaign-explosions',
+            order = 'bf',
+            group = 'effects'
         },
         ['defensive-structure-remnants'] = {
+            type = 'item-subgroup',
+            name = 'defensive-structure-remnants',
             order = 'dl',
-            type = 'item-subgroup',
-            group = 'environment',
-            name = 'defensive-structure-remnants'
+            group = 'environment'
         },
-        ['generic-remnants'] = {order = 'dl', type = 'item-subgroup', group = 'environment', name = 'generic-remnants'},
-        ['campaign-explosions'] = {
-            order = 'bf',
+        ['empty-barrel'] = {type = 'item-subgroup', name = 'empty-barrel', order = 'f', group = 'intermediate-products'},
+        ['circuit-network-remnants'] = {
             type = 'item-subgroup',
-            group = 'effects',
-            name = 'campaign-explosions'
+            name = 'circuit-network-remnants',
+            order = 'dh',
+            group = 'environment'
         },
-        ['module-explosions'] = {order = 'be', type = 'item-subgroup', group = 'effects', name = 'module-explosions'},
-        ['defensive-structure'] = {order = 'g', type = 'item-subgroup', group = 'combat', name = 'defensive-structure'},
-        ['belt-explosions'] = {order = 'ab', type = 'item-subgroup', group = 'effects', name = 'belt-explosions'},
-        corpses = {order = 'c', type = 'item-subgroup', group = 'environment', name = 'corpses'},
-        ['energy-pipe-distribution'] = {
-            order = 'd',
+        ['module-explosions'] = {type = 'item-subgroup', name = 'module-explosions', order = 'be', group = 'effects'},
+        creatures = {type = 'item-subgroup', name = 'creatures', order = 'a', group = 'environment'},
+        ['inserter-explosions'] = {
             type = 'item-subgroup',
-            group = 'logistics',
-            name = 'energy-pipe-distribution'
+            name = 'inserter-explosions',
+            order = 'ac',
+            group = 'effects'
         },
-        explosions = {order = 'de', type = 'item-subgroup', group = 'effects', name = 'explosions'},
-        wrecks = {order = 'e', type = 'item-subgroup', group = 'environment', name = 'wrecks'},
-        remnants = {order = 'dz', type = 'item-subgroup', group = 'environment', name = 'remnants'},
-        ['crash-site'] = {order = 'x', type = 'item-subgroup', group = 'production', name = 'crash-site'},
-        ['circuit-network-explosions'] = {
-            order = 'ah',
+        ['production-machine'] = {
             type = 'item-subgroup',
-            group = 'effects',
-            name = 'circuit-network-explosions'
+            name = 'production-machine',
+            order = 'e',
+            group = 'production'
         },
-        capsule = {order = 'c', type = 'item-subgroup', group = 'combat', name = 'capsule'},
-        grass = {order = 'b', type = 'item-subgroup', group = 'environment', name = 'grass'},
-        ['tree-explosions'] = {order = 'cd', type = 'item-subgroup', group = 'effects', name = 'tree-explosions'},
-        cliffs = {order = 'a', type = 'item-subgroup', group = 'environment', name = 'cliffs'},
-        ['rock-explosions'] = {order = 'da', type = 'item-subgroup', group = 'effects', name = 'rock-explosions'},
-        ['gun-explosions'] = {order = 'ca', type = 'item-subgroup', group = 'effects', name = 'gun-explosions'},
-        ['logistic-network'] = {order = 'g', type = 'item-subgroup', group = 'logistics', name = 'logistic-network'},
-        inserter = {order = 'c', type = 'item-subgroup', group = 'logistics', name = 'inserter'},
-        ['virtual-signal-special'] = {
-            order = 'a',
+        enemies = {type = 'item-subgroup', name = 'enemies', order = 'a', group = 'enemies'},
+        ['military-equipment'] = {type = 'item-subgroup', name = 'military-equipment', order = 'f', group = 'combat'},
+        ['train-transport'] = {type = 'item-subgroup', name = 'train-transport', order = 'e', group = 'logistics'},
+        ['energy-explosions'] = {type = 'item-subgroup', name = 'energy-explosions', order = 'ba', group = 'effects'},
+        ['energy-remnants'] = {type = 'item-subgroup', name = 'energy-remnants', order = 'di', group = 'environment'},
+        ['energy-pipe-distribution-explosions'] = {
             type = 'item-subgroup',
-            group = 'signals',
-            name = 'virtual-signal-special'
+            name = 'energy-pipe-distribution-explosions',
+            order = 'ad',
+            group = 'effects'
         },
-        ['virtual-signal-number'] = {
-            order = 'b',
+        ['logistic-network'] = {type = 'item-subgroup', name = 'logistic-network', order = 'g', group = 'logistics'},
+        ['generic-remnants'] = {type = 'item-subgroup', name = 'generic-remnants', order = 'dl', group = 'environment'},
+        armor = {type = 'item-subgroup', name = 'armor', order = 'd', group = 'combat'},
+        equipment = {type = 'item-subgroup', name = 'equipment', order = 'e', group = 'combat'},
+        barrel = {type = 'item-subgroup', name = 'barrel', order = 'd', group = 'intermediate-products'},
+        module = {type = 'item-subgroup', name = 'module', order = 'f', group = 'production'},
+        ['production-machine-remnants'] = {
             type = 'item-subgroup',
-            group = 'signals',
-            name = 'virtual-signal-number'
+            name = 'production-machine-remnants',
+            order = 'dk',
+            group = 'environment'
         },
-        ['extraction-machine-explosions'] = {
-            order = 'bb',
-            type = 'item-subgroup',
-            group = 'effects',
-            name = 'extraction-machine-explosions'
-        },
+        particles = {type = 'item-subgroup', name = 'particles', order = 'e', group = 'effects'},
         ['virtual-signal-letter'] = {
-            order = 'c',
             type = 'item-subgroup',
-            group = 'signals',
-            name = 'virtual-signal-letter'
+            name = 'virtual-signal-letter',
+            order = 'c',
+            group = 'signals'
         },
         ['virtual-signal-color'] = {
+            type = 'item-subgroup',
+            name = 'virtual-signal-color',
             order = 'd',
-            type = 'item-subgroup',
-            group = 'signals',
-            name = 'virtual-signal-color'
-        },
-        barrel = {order = 'd', type = 'item-subgroup', group = 'intermediate-products', name = 'barrel'},
-        ['science-pack'] = {order = 'h', type = 'item-subgroup', group = 'intermediate-products', name = 'science-pack'},
-        ['circuit-network'] = {order = 'h', type = 'item-subgroup', group = 'logistics', name = 'circuit-network'},
-        trees = {order = 'aa', type = 'item-subgroup', group = 'environment', name = 'trees'},
-        ['smelting-machine'] = {order = 'd', type = 'item-subgroup', group = 'production', name = 'smelting-machine'},
-        creatures = {order = 'a', type = 'item-subgroup', group = 'environment', name = 'creatures'},
-        ['production-machine'] = {
-            order = 'e',
-            type = 'item-subgroup',
-            group = 'production',
-            name = 'production-machine'
-        },
-        ['ground-explosions'] = {order = 'db', type = 'item-subgroup', group = 'effects', name = 'ground-explosions'},
-        ['transport-remnants'] = {
-            order = 'df',
-            type = 'item-subgroup',
-            group = 'environment',
-            name = 'transport-remnants'
-        },
-        ['transport-explosions'] = {
-            order = 'af',
-            type = 'item-subgroup',
-            group = 'effects',
-            name = 'transport-explosions'
-        },
-        ammo = {order = 'b', type = 'item-subgroup', group = 'combat', name = 'ammo'},
-        terrain = {order = 'i', type = 'item-subgroup', group = 'logistics', name = 'terrain'},
-        ['smelting-machine-remnants'] = {
-            order = 'dj',
-            type = 'item-subgroup',
-            group = 'environment',
-            name = 'smelting-machine-remnants'
-        },
-        ['train-transport-remnants'] = {
-            order = 'de',
-            type = 'item-subgroup',
-            group = 'environment',
-            name = 'train-transport-remnants'
-        },
-        storage = {order = 'a', type = 'item-subgroup', group = 'logistics', name = 'storage'},
-        ['extraction-machine'] = {
-            order = 'c',
-            type = 'item-subgroup',
-            group = 'production',
-            name = 'extraction-machine'
-        },
-        ['hit-effects'] = {order = 'e', type = 'item-subgroup', group = 'effects', name = 'hit-effects'},
-        ['train-transport'] = {order = 'e', type = 'item-subgroup', group = 'logistics', name = 'train-transport'},
-        ['storage-remnants'] = {order = 'da', type = 'item-subgroup', group = 'environment', name = 'storage-remnants'},
-        ['storage-explosions'] = {order = 'aa', type = 'item-subgroup', group = 'effects', name = 'storage-explosions'},
-        ['train-transport-explosions'] = {
-            order = 'ae',
-            type = 'item-subgroup',
-            group = 'effects',
-            name = 'train-transport-explosions'
-        },
-        ['capsule-explosions'] = {order = 'cc', type = 'item-subgroup', group = 'effects', name = 'capsule-explosions'},
-        ['smelting-machine-explosions'] = {
-            order = 'bc',
-            type = 'item-subgroup',
-            group = 'effects',
-            name = 'smelting-machine-explosions'
-        },
-        scorchmarks = {order = 'dm', type = 'item-subgroup', group = 'environment', name = 'scorchmarks'},
-        ['raw-resource'] = {order = 'b', type = 'item-subgroup', group = 'intermediate-products', name = 'raw-resource'},
-        ['energy-remnants'] = {order = 'di', type = 'item-subgroup', group = 'environment', name = 'energy-remnants'},
-        belt = {order = 'b', type = 'item-subgroup', group = 'logistics', name = 'belt'},
-        ['defensive-structure-explosions'] = {
-            order = 'cb',
-            type = 'item-subgroup',
-            group = 'effects',
-            name = 'defensive-structure-explosions'
-        },
-        ['production-machine-remnants'] = {
-            order = 'dk',
-            type = 'item-subgroup',
-            group = 'environment',
-            name = 'production-machine-remnants'
+            group = 'signals'
         },
         ['production-machine-explosions'] = {
+            type = 'item-subgroup',
+            name = 'production-machine-explosions',
             order = 'bd',
-            type = 'item-subgroup',
-            group = 'effects',
-            name = 'production-machine-explosions'
+            group = 'effects'
         },
-        particles = {order = 'e', type = 'item-subgroup', group = 'effects', name = 'particles'},
-        module = {order = 'f', type = 'item-subgroup', group = 'production', name = 'module'},
-        ['empty-barrel'] = {order = 'f', type = 'item-subgroup', group = 'intermediate-products', name = 'empty-barrel'},
-        ['energy-pipe-distribution-remnants'] = {
-            order = 'dd',
+        trees = {type = 'item-subgroup', name = 'trees', order = 'aa', group = 'environment'},
+        ['transport-explosions'] = {
             type = 'item-subgroup',
-            group = 'environment',
-            name = 'energy-pipe-distribution-remnants'
+            name = 'transport-explosions',
+            order = 'af',
+            group = 'effects'
         },
-        gun = {order = 'a', type = 'item-subgroup', group = 'combat', name = 'gun'},
-        ['fluid-recipes'] = {
+        ['tree-explosions'] = {type = 'item-subgroup', name = 'tree-explosions', order = 'cd', group = 'effects'},
+        transport = {type = 'item-subgroup', name = 'transport', order = 'f', group = 'logistics'},
+        ['defensive-structure'] = {type = 'item-subgroup', name = 'defensive-structure', order = 'g', group = 'combat'},
+        ['hit-effects'] = {type = 'item-subgroup', name = 'hit-effects', order = 'e', group = 'effects'},
+        ['train-transport-remnants'] = {
+            type = 'item-subgroup',
+            name = 'train-transport-remnants',
+            order = 'de',
+            group = 'environment'
+        },
+        ['logistic-network-remnants'] = {
+            type = 'item-subgroup',
+            name = 'logistic-network-remnants',
+            order = 'dg',
+            group = 'environment'
+        },
+        ['train-transport-explosions'] = {
+            type = 'item-subgroup',
+            name = 'train-transport-explosions',
+            order = 'ae',
+            group = 'effects'
+        },
+        ['defensive-structure-explosions'] = {
+            type = 'item-subgroup',
+            name = 'defensive-structure-explosions',
+            order = 'cb',
+            group = 'effects'
+        },
+        tool = {type = 'item-subgroup', name = 'tool', order = 'a', group = 'production'},
+        terrain = {type = 'item-subgroup', name = 'terrain', order = 'i', group = 'logistics'},
+        storage = {type = 'item-subgroup', name = 'storage', order = 'a', group = 'logistics'},
+        energy = {type = 'item-subgroup', name = 'energy', order = 'b', group = 'production'},
+        ['storage-explosions'] = {type = 'item-subgroup', name = 'storage-explosions', order = 'aa', group = 'effects'},
+        grass = {type = 'item-subgroup', name = 'grass', order = 'b', group = 'environment'},
+        ['belt-explosions'] = {type = 'item-subgroup', name = 'belt-explosions', order = 'ab', group = 'effects'},
+        ['extraction-machine'] = {
+            type = 'item-subgroup',
+            name = 'extraction-machine',
+            order = 'c',
+            group = 'production'
+        },
+        capsule = {type = 'item-subgroup', name = 'capsule', order = 'c', group = 'combat'},
+        ['smelting-machine-explosions'] = {
+            type = 'item-subgroup',
+            name = 'smelting-machine-explosions',
+            order = 'bc',
+            group = 'effects'
+        },
+        scorchmarks = {type = 'item-subgroup', name = 'scorchmarks', order = 'dm', group = 'environment'},
+        ['energy-pipe-distribution'] = {
+            type = 'item-subgroup',
+            name = 'energy-pipe-distribution',
+            order = 'd',
+            group = 'logistics'
+        },
+        remnants = {type = 'item-subgroup', name = 'remnants', order = 'dz', group = 'environment'},
+        ['raw-resource'] = {type = 'item-subgroup', name = 'raw-resource', order = 'b', group = 'intermediate-products'},
+        inserter = {type = 'item-subgroup', name = 'inserter', order = 'c', group = 'logistics'},
+        other = {type = 'item-subgroup', name = 'other', order = 'z', group = 'other'},
+        ['virtual-signal-special'] = {
+            type = 'item-subgroup',
+            name = 'virtual-signal-special',
             order = 'a',
+            group = 'signals'
+        },
+        ['logistic-network-explosions'] = {
             type = 'item-subgroup',
-            group = 'intermediate-products',
-            name = 'fluid-recipes'
+            name = 'logistic-network-explosions',
+            order = 'ag',
+            group = 'effects'
         },
         ['extraction-machine-remnants'] = {
-            order = 'di',
             type = 'item-subgroup',
-            group = 'environment',
-            name = 'extraction-machine-remnants'
+            name = 'extraction-machine-remnants',
+            order = 'di',
+            group = 'environment'
         },
-        equipment = {order = 'e', type = 'item-subgroup', group = 'combat', name = 'equipment'}
+        ['intermediate-product'] = {
+            type = 'item-subgroup',
+            name = 'intermediate-product',
+            order = 'g',
+            group = 'intermediate-products'
+        },
+        ['inserter-remnants'] = {
+            type = 'item-subgroup',
+            name = 'inserter-remnants',
+            order = 'dc',
+            group = 'environment'
+        },
+        ['raw-material'] = {type = 'item-subgroup', name = 'raw-material', order = 'c', group = 'intermediate-products'},
+        gun = {type = 'item-subgroup', name = 'gun', order = 'a', group = 'combat'},
+        ['belt-remnants'] = {type = 'item-subgroup', name = 'belt-remnants', order = 'db', group = 'environment'},
+        ['fluid-recipes'] = {
+            type = 'item-subgroup',
+            name = 'fluid-recipes',
+            order = 'a',
+            group = 'intermediate-products'
+        },
+        ['smelting-machine-remnants'] = {
+            type = 'item-subgroup',
+            name = 'smelting-machine-remnants',
+            order = 'dj',
+            group = 'environment'
+        },
+        ['ground-explosions'] = {type = 'item-subgroup', name = 'ground-explosions', order = 'db', group = 'effects'}
     };
     return _;
 end

@@ -1,9 +1,9 @@
 do
     local _ = {
         ['wind-1'] = {
-            sound = {volume = 0.8, filename = '__base__/sound/wind/wind.ogg'},
             name = 'wind-1',
-            type = 'wind-sound'
+            type = 'wind-sound',
+            sound = {filename = '__base__/sound/wind/wind.ogg', volume = 0.8}
         }
     };
     return _;

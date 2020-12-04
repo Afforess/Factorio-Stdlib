@@ -1,13 +1,13 @@
 do
     local _ = {
-        poison = {name = 'poison', type = 'damage-type'},
-        fire = {name = 'fire', type = 'damage-type'},
-        acid = {name = 'acid', type = 'damage-type'},
-        impact = {name = 'impact', type = 'damage-type'},
-        laser = {name = 'laser', type = 'damage-type'},
-        physical = {name = 'physical', type = 'damage-type'},
-        explosion = {name = 'explosion', type = 'damage-type'},
-        electric = {name = 'electric', type = 'damage-type'}
+        poison = {type = 'damage-type', name = 'poison'},
+        electric = {type = 'damage-type', name = 'electric'},
+        impact = {type = 'damage-type', name = 'impact'},
+        physical = {type = 'damage-type', name = 'physical'},
+        laser = {type = 'damage-type', name = 'laser'},
+        fire = {type = 'damage-type', name = 'fire'},
+        acid = {type = 'damage-type', name = 'acid'},
+        explosion = {type = 'damage-type', name = 'explosion'}
     };
     return _;
 end

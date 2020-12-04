@@ -1,4 +1,4 @@
 do
-    local _ = {default = {type = 'spectator-controller', name = 'default', movement_speed = 0.5}};
+    local _ = {default = {name = 'default', type = 'spectator-controller', movement_speed = 0.5}};
     return _;
 end

@@ -2,22 +2,22 @@ do
     local _ = {
         ['dummy-flame-thrower-explosion'] = {
             light = {intensity = 0.2, size = 20},
-            flags = {'not-on-map'},
-            type = 'flame-thrower-explosion',
             smoke = 'smoke-fast',
-            smoke_slow_down_factor = 0.95,
             slow_down_factor = 1,
-            damage = {amount = 0.25, type = 'fire'},
-            smoke_count = 1,
-            name = 'dummy-flame-thrower-explosion',
+            type = 'flame-thrower-explosion',
+            flags = {'not-on-map'},
+            smoke_slow_down_factor = 0.95,
             animations = {
-                direction_count = 1,
                 filename = '__core__/graphics/empty.png',
-                width = 1,
+                direction_count = 1,
                 frame_count = 1,
-                priority = 'extra-high',
-                height = 1
-            }
+                height = 1,
+                width = 1,
+                priority = 'extra-high'
+            },
+            smoke_count = 1,
+            damage = {type = 'fire', amount = 0.25},
+            name = 'dummy-flame-thrower-explosion'
         }
     };
     return _;

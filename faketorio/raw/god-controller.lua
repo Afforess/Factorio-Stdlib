@@ -1,15 +1,15 @@
 do
     local _ = {
         default = {
-            mining_categories = {'basic-solid'},
-            item_pickup_distance = 1,
-            mining_speed = 1,
+            name = 'default',
             loot_pickup_distance = 2,
-            movement_speed = 0.5,
-            inventory_size = 80,
             type = 'god-controller',
             crafting_categories = {'crafting'},
-            name = 'default'
+            item_pickup_distance = 1,
+            movement_speed = 0.5,
+            mining_categories = {'basic-solid'},
+            mining_speed = 1,
+            inventory_size = 80
         }
     };
     return _;

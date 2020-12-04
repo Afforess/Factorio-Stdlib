@@ -1,4 +1,4 @@
 do
-    local _ = {['particle-for-migration'] = {name = 'particle-for-migration', type = 'particle'}};
+    local _ = {['particle-for-migration'] = {type = 'particle', name = 'particle-for-migration'}};
     return _;
 end

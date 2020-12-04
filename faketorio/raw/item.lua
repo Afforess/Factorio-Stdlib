@@ -1,1918 +1,1918 @@
 do
     local _ = {
-        ['electric-engine-unit'] = {
-            order = 'i[electric-engine-unit]',
+        ['rail-signal'] = {
+            icon = '__base__/graphics/icons/rail-signal.png',
+            name = 'rail-signal',
             icon_mipmaps = 4,
-            icon_size = 64,
             type = 'item',
-            subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/electric-engine-unit.png',
-            name = 'electric-engine-unit',
-            stack_size = 50
-        },
-        pump = {
-            order = 'b[pipe]-c[pump]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/pump.png',
+            place_result = 'rail-signal',
+            order = 'a[train-system]-d[rail-signal]',
+            subgroup = 'train-transport',
             stack_size = 50,
-            subgroup = 'energy-pipe-distribution',
-            icon_mipmaps = 4,
-            place_result = 'pump',
-            type = 'item',
-            name = 'pump'
-        },
-        ['logistic-robot'] = {
-            order = 'a[robot]-a[logistic-robot]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/logistic-robot.png',
-            stack_size = 50,
-            subgroup = 'logistic-network',
-            icon_mipmaps = 4,
-            place_result = 'logistic-robot',
-            type = 'item',
-            name = 'logistic-robot'
-        },
-        ['big-electric-pole'] = {
-            order = 'a[energy]-c[big-electric-pole]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/big-electric-pole.png',
-            stack_size = 50,
-            subgroup = 'energy-pipe-distribution',
-            icon_mipmaps = 4,
-            place_result = 'big-electric-pole',
-            type = 'item',
-            name = 'big-electric-pole'
-        },
-        ['water-barrel'] = {
-            order = 'b[water-barrel]',
-            icon_size = 64,
-            localised_name = {'item-name.filled-barrel', {'fluid-name.water'}},
-            stack_size = 10,
-            icons = {
-                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_size = 64, icon_mipmaps = 4},
-                {
-                    tint = {a = 0.75, b = 0.6, g = 0.34, r = 0},
-                    icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }, {
-                    tint = {a = 0.75, b = 0.7, g = 0.7, r = 0.7},
-                    icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'water-barrel',
-            subgroup = 'barrel'
-        },
-        ['burner-mining-drill'] = {
-            order = 'a[items]-a[burner-mining-drill]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/burner-mining-drill.png',
-            stack_size = 50,
-            subgroup = 'extraction-machine',
-            icon_mipmaps = 4,
-            place_result = 'burner-mining-drill',
-            type = 'item',
-            name = 'burner-mining-drill'
-        },
-        ['steel-plate'] = {
-            order = 'd[steel-plate]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'raw-material',
-            icon = '__base__/graphics/icons/steel-plate.png',
-            name = 'steel-plate',
-            stack_size = 100
-        },
-        ['refined-hazard-concrete'] = {
-            order = 'b[concrete]-d[refined-hazard]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/refined-hazard-concrete.png',
-            stack_size = 100,
-            subgroup = 'terrain',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'refined-hazard-concrete',
-            place_as_tile = {condition = {'water-tile'}, condition_size = 1, result = 'refined-hazard-concrete-left'}
-        },
-        ['decider-combinator'] = {
-            order = 'c[combinators]-b[decider-combinator]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/decider-combinator.png',
-            stack_size = 50,
-            subgroup = 'circuit-network',
-            icon_mipmaps = 4,
-            place_result = 'decider-combinator',
-            type = 'item',
-            name = 'decider-combinator'
-        },
-        ['battery-mk2-equipment'] = {
-            order = 'b[battery]-b[battery-equipment-mk2]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/battery-mk2-equipment.png',
-            stack_size = 20,
-            subgroup = 'equipment',
-            icon_mipmaps = 4,
-            localised_description = {'item-description.battery-equipment'},
-            default_request_amount = 5,
-            type = 'item',
-            name = 'battery-mk2-equipment',
-            placed_as_equipment_result = 'battery-mk2-equipment'
-        },
-        ['flying-robot-frame'] = {
-            order = 'l[flying-robot-frame]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/flying-robot-frame.png',
-            name = 'flying-robot-frame',
-            stack_size = 50
-        },
-        ['logistic-chest-storage'] = {
-            order = 'b[storage]-c[logistic-chest-storage]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/logistic-chest-storage.png',
-            stack_size = 50,
-            subgroup = 'logistic-network',
-            icon_mipmaps = 4,
-            place_result = 'logistic-chest-storage',
-            type = 'item',
-            name = 'logistic-chest-storage'
-        },
-        wood = {
-            order = 'a[wood]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/wood.png',
-            stack_size = 100,
-            fuel_category = 'chemical',
-            icon_mipmaps = 4,
-            subgroup = 'raw-resource',
-            type = 'item',
-            fuel_value = '2MJ',
-            name = 'wood'
-        },
-        ['advanced-circuit'] = {
-            order = 'f[advanced-circuit]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/advanced-circuit.png',
-            name = 'advanced-circuit',
-            stack_size = 200
-        },
-        ['assembling-machine-3'] = {
-            order = 'c[assembling-machine-3]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/assembling-machine-3.png',
-            stack_size = 50,
-            subgroup = 'production-machine',
-            icon_mipmaps = 4,
-            place_result = 'assembling-machine-3',
-            type = 'item',
-            name = 'assembling-machine-3'
-        },
-        ['electric-mining-drill'] = {
-            order = 'a[items]-b[electric-mining-drill]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/electric-mining-drill.png',
-            stack_size = 50,
-            subgroup = 'extraction-machine',
-            icon_mipmaps = 4,
-            place_result = 'electric-mining-drill',
-            type = 'item',
-            name = 'electric-mining-drill'
-        },
-        satellite = {
-            order = 'm[satellite]',
-            icon_size = 64,
-            rocket_launch_product = {'space-science-pack', 1000},
-            icon = '__base__/graphics/icons/satellite.png',
-            stack_size = 1,
-            subgroup = 'intermediate-product',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'satellite'
-        },
-        coal = {
-            order = 'b[coal]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/coal.png',
-            stack_size = 50,
-            fuel_category = 'chemical',
-            icon_mipmaps = 4,
-            name = 'coal',
-            subgroup = 'raw-resource',
-            pictures = {
-                {size = 64, filename = '__base__/graphics/icons/coal.png', scale = 0.25, mipmap_count = 4},
-                {size = 64, filename = '__base__/graphics/icons/coal-1.png', scale = 0.25, mipmap_count = 4},
-                {size = 64, filename = '__base__/graphics/icons/coal-2.png', scale = 0.25, mipmap_count = 4},
-                {size = 64, filename = '__base__/graphics/icons/coal-3.png', scale = 0.25, mipmap_count = 4}
-            },
-            type = 'item',
-            fuel_value = '4MJ',
-            dark_background_icon = '__base__/graphics/icons/coal-dark-background.png'
-        },
-        beacon = {
-            order = 'a[beacon]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/beacon.png',
-            stack_size = 10,
-            subgroup = 'module',
-            icon_mipmaps = 4,
-            place_result = 'beacon',
-            type = 'item',
-            name = 'beacon'
-        },
-        pumpjack = {
-            order = 'b[fluids]-b[pumpjack]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/pumpjack.png',
-            stack_size = 20,
-            subgroup = 'extraction-machine',
-            icon_mipmaps = 4,
-            place_result = 'pumpjack',
-            type = 'item',
-            name = 'pumpjack'
-        },
-        battery = {
-            order = 'h[battery]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'raw-material',
-            icon = '__base__/graphics/icons/battery.png',
-            name = 'battery',
-            stack_size = 200
-        },
-        ['used-up-uranium-fuel-cell'] = {
-            order = 'r[used-up-uranium-fuel-cell]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/used-up-uranium-fuel-cell.png',
-            name = 'used-up-uranium-fuel-cell',
-            stack_size = 50
-        },
-        ['copper-cable'] = {
-            order = 'a[copper-cable]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/copper-cable.png',
-            stack_size = 200,
-            subgroup = 'intermediate-product',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'copper-cable',
-            wire_count = 1
-        },
-        ['solid-fuel'] = {
-            order = 'c[solid-fuel]',
-            fuel_top_speed_multiplier = 1.05,
-            icon = '__base__/graphics/icons/solid-fuel.png',
-            fuel_acceleration_multiplier = 1.2,
-            fuel_category = 'chemical',
-            icon_mipmaps = 4,
-            name = 'solid-fuel',
-            subgroup = 'raw-material',
-            stack_size = 50,
-            type = 'item',
-            fuel_value = '12MJ',
             icon_size = 64
         },
-        ['night-vision-equipment'] = {
-            order = 'f[night-vision]-a[night-vision-equipment]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/night-vision-equipment.png',
-            stack_size = 20,
-            subgroup = 'equipment',
-            icon_mipmaps = 4,
-            default_request_amount = 1,
-            type = 'item',
-            name = 'night-vision-equipment',
-            placed_as_equipment_result = 'night-vision-equipment'
-        },
-        ['logistic-chest-requester'] = {
-            order = 'b[storage]-e[logistic-chest-requester]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/logistic-chest-requester.png',
-            stack_size = 50,
-            subgroup = 'logistic-network',
-            icon_mipmaps = 4,
-            place_result = 'logistic-chest-requester',
-            type = 'item',
-            name = 'logistic-chest-requester'
-        },
-        ['electric-energy-interface'] = {
-            order = 'a[electric-energy-interface]-b[electric-energy-interface]',
-            icon_size = 64,
-            flags = {'hidden'},
-            stack_size = 50,
-            icons = {{tint = {a = 1, b = 1, g = 0.8, r = 1}, icon = '__base__/graphics/icons/accumulator.png'}},
-            icon_mipmaps = 4,
-            place_result = 'electric-energy-interface',
-            type = 'item',
-            name = 'electric-energy-interface',
-            subgroup = 'other'
-        },
-        ['chemical-plant'] = {
-            order = 'e[chemical-plant]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/chemical-plant.png',
-            stack_size = 10,
-            subgroup = 'production-machine',
-            icon_mipmaps = 4,
-            place_result = 'chemical-plant',
-            type = 'item',
-            name = 'chemical-plant'
-        },
-        ['heavy-oil-barrel'] = {
-            order = 'b[heavy-oil-barrel]',
-            icon_size = 64,
-            localised_name = {'item-name.filled-barrel', {'fluid-name.heavy-oil'}},
-            stack_size = 10,
-            icons = {
-                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_size = 64, icon_mipmaps = 4},
-                {
-                    tint = {a = 0.75, b = 0, g = 0.04, r = 0.5},
-                    icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }, {
-                    tint = {a = 0.75, b = 0.3, g = 0.6, r = 0.85},
-                    icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'heavy-oil-barrel',
-            subgroup = 'barrel'
-        },
-        coin = {
-            order = 'y',
-            icon_size = 64,
-            flags = {'hidden'},
-            icon = '__base__/graphics/icons/coin.png',
-            stack_size = 100000,
-            subgroup = 'science-pack',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'coin'
-        },
-        ['plastic-bar'] = {
-            order = 'f[plastic-bar]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'raw-material',
-            icon = '__base__/graphics/icons/plastic-bar.png',
-            name = 'plastic-bar',
-            stack_size = 100
-        },
-        ['uranium-fuel-cell'] = {
-            order = 'r[uranium-processing]-a[uranium-fuel-cell]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/uranium-fuel-cell.png',
-            stack_size = 50,
-            burnt_result = 'used-up-uranium-fuel-cell',
-            fuel_category = 'nuclear',
-            icon_mipmaps = 4,
-            pictures = {
-                layers = {
-                    {
-                        size = 64,
-                        filename = '__base__/graphics/icons/uranium-fuel-cell.png',
-                        scale = 0.25,
-                        mipmap_count = 4
-                    }, {
-                        filename = '__base__/graphics/icons/uranium-fuel-cell-light.png',
-                        scale = 0.25,
-                        mipmap_count = 4,
-                        flags = {'light'},
-                        size = 64,
-                        draw_as_light = true
-                    }
-                }
-            },
-            subgroup = 'intermediate-product',
-            type = 'item',
-            fuel_value = '8GJ',
-            name = 'uranium-fuel-cell'
-        },
-        pipe = {
-            order = 'a[pipe]-a[pipe]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/pipe.png',
-            stack_size = 100,
-            subgroup = 'energy-pipe-distribution',
-            icon_mipmaps = 4,
-            place_result = 'pipe',
-            type = 'item',
-            name = 'pipe'
-        },
-        ['solar-panel'] = {
-            order = 'd[solar-panel]-a[solar-panel]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/solar-panel.png',
-            stack_size = 50,
-            subgroup = 'energy',
-            icon_mipmaps = 4,
-            place_result = 'solar-panel',
-            type = 'item',
-            name = 'solar-panel'
-        },
-        ['linked-chest'] = {
-            order = 'a[items]-a[linked-chest]',
-            icon_size = 64,
-            flags = {'hidden'},
-            icon = '__base__/graphics/icons/linked-chest-icon.png',
-            stack_size = 10,
-            subgroup = 'other',
-            icon_mipmaps = 4,
-            place_result = 'linked-chest',
-            type = 'item',
-            name = 'linked-chest'
-        },
-        inserter = {
-            order = 'b[inserter]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/inserter.png',
-            stack_size = 50,
-            subgroup = 'inserter',
-            icon_mipmaps = 4,
-            place_result = 'inserter',
-            type = 'item',
-            name = 'inserter'
-        },
-        ['infinity-pipe'] = {
-            order = 'd[item]-o[infinity-pipe]',
-            icon_size = 64,
-            flags = {'hidden'},
-            stack_size = 10,
-            icons = {{tint = {b = 1, g = 0.5, r = 0.5}, icon = '__base__/graphics/icons/pipe.png'}},
-            icon_mipmaps = 4,
-            place_result = 'infinity-pipe',
-            type = 'item',
-            name = 'infinity-pipe',
-            subgroup = 'other'
-        },
-        ['low-density-structure'] = {
-            order = 'o[low-density-structure]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/low-density-structure.png',
-            name = 'low-density-structure',
-            stack_size = 10
-        },
-        ['fast-loader'] = {
-            order = 'd[loader]-b[fast-loader]',
-            icon_size = 64,
-            flags = {'hidden'},
-            icon = '__base__/graphics/icons/fast-loader.png',
-            stack_size = 50,
-            subgroup = 'belt',
-            icon_mipmaps = 4,
-            place_result = 'fast-loader',
-            type = 'item',
-            name = 'fast-loader'
-        },
-        ['iron-gear-wheel'] = {
-            order = 'c[iron-gear-wheel]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/iron-gear-wheel.png',
-            name = 'iron-gear-wheel',
-            stack_size = 100
-        },
-        ['burner-inserter'] = {
-            order = 'a[burner-inserter]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/burner-inserter.png',
-            stack_size = 50,
-            subgroup = 'inserter',
-            icon_mipmaps = 4,
-            place_result = 'burner-inserter',
-            type = 'item',
-            name = 'burner-inserter'
-        },
-        ['oil-refinery'] = {
-            order = 'd[refinery]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/oil-refinery.png',
-            stack_size = 10,
-            subgroup = 'production-machine',
-            icon_mipmaps = 4,
-            place_result = 'oil-refinery',
-            type = 'item',
-            name = 'oil-refinery'
-        },
-        accumulator = {
-            order = 'e[accumulator]-a[accumulator]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/accumulator.png',
-            stack_size = 50,
-            subgroup = 'energy',
-            icon_mipmaps = 4,
-            place_result = 'accumulator',
-            type = 'item',
-            name = 'accumulator'
-        },
-        ['hazard-concrete'] = {
-            order = 'b[concrete]-b[hazard]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/hazard-concrete.png',
-            stack_size = 100,
-            subgroup = 'terrain',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'hazard-concrete',
-            place_as_tile = {condition = {'water-tile'}, condition_size = 1, result = 'hazard-concrete-left'}
-        },
-        ['fast-transport-belt'] = {
-            order = 'a[transport-belt]-b[fast-transport-belt]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/fast-transport-belt.png',
-            stack_size = 100,
-            subgroup = 'belt',
-            icon_mipmaps = 4,
-            place_result = 'fast-transport-belt',
-            type = 'item',
-            name = 'fast-transport-belt'
-        },
-        ['fast-underground-belt'] = {
-            order = 'b[underground-belt]-b[fast-underground-belt]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/fast-underground-belt.png',
-            stack_size = 50,
-            subgroup = 'belt',
-            icon_mipmaps = 4,
-            place_result = 'fast-underground-belt',
-            type = 'item',
-            name = 'fast-underground-belt'
-        },
-        ['battery-equipment'] = {
-            order = 'b[battery]-a[battery-equipment]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/battery-equipment.png',
-            stack_size = 20,
-            subgroup = 'equipment',
-            icon_mipmaps = 4,
-            default_request_amount = 5,
-            type = 'item',
-            name = 'battery-equipment',
-            placed_as_equipment_result = 'battery-equipment'
-        },
-        ['uranium-ore'] = {
-            order = 'g[uranium-ore]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/uranium-ore.png',
-            stack_size = 50,
-            subgroup = 'raw-resource',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'uranium-ore',
-            pictures = {
-                {
-                    layers = {
-                        {
-                            size = 64,
-                            filename = '__base__/graphics/icons/uranium-ore.png',
-                            scale = 0.25,
-                            mipmap_count = 4
-                        }, {
-                            filename = '__base__/graphics/icons/uranium-ore.png',
-                            scale = 0.25,
-                            mipmap_count = 4,
-                            tint = {a = 0.3, b = 0.3, g = 0.3, r = 0.3},
-                            size = 64,
-                            draw_as_light = true,
-                            blend_mode = 'additive'
-                        }
-                    }
-                }, {
-                    layers = {
-                        {
-                            size = 64,
-                            filename = '__base__/graphics/icons/uranium-ore-1.png',
-                            scale = 0.25,
-                            mipmap_count = 4
-                        }, {
-                            filename = '__base__/graphics/icons/uranium-ore-1.png',
-                            scale = 0.25,
-                            mipmap_count = 4,
-                            tint = {a = 0.3, b = 0.3, g = 0.3, r = 0.3},
-                            size = 64,
-                            draw_as_light = true,
-                            blend_mode = 'additive'
-                        }
-                    }
-                }, {
-                    layers = {
-                        {
-                            size = 64,
-                            filename = '__base__/graphics/icons/uranium-ore-2.png',
-                            scale = 0.25,
-                            mipmap_count = 4
-                        }, {
-                            filename = '__base__/graphics/icons/uranium-ore-2.png',
-                            scale = 0.25,
-                            mipmap_count = 4,
-                            tint = {a = 0.3, b = 0.3, g = 0.3, r = 0.3},
-                            size = 64,
-                            draw_as_light = true,
-                            blend_mode = 'additive'
-                        }
-                    }
-                }, {
-                    layers = {
-                        {
-                            size = 64,
-                            filename = '__base__/graphics/icons/uranium-ore-3.png',
-                            scale = 0.25,
-                            mipmap_count = 4
-                        }, {
-                            filename = '__base__/graphics/icons/uranium-ore-3.png',
-                            scale = 0.25,
-                            mipmap_count = 4,
-                            tint = {a = 0.3, b = 0.3, g = 0.3, r = 0.3},
-                            size = 64,
-                            draw_as_light = true,
-                            blend_mode = 'additive'
-                        }
-                    }
-                }
-            }
-        },
-        ['stack-filter-inserter'] = {
-            order = 'g[stack-filter-inserter]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/stack-filter-inserter.png',
-            stack_size = 50,
-            subgroup = 'inserter',
-            icon_mipmaps = 4,
-            place_result = 'stack-filter-inserter',
-            type = 'item',
-            name = 'stack-filter-inserter'
-        },
-        ['express-loader'] = {
-            order = 'd[loader]-c[express-loader]',
-            icon_size = 64,
-            flags = {'hidden'},
-            icon = '__base__/graphics/icons/express-loader.png',
-            stack_size = 50,
-            subgroup = 'belt',
-            icon_mipmaps = 4,
-            place_result = 'express-loader',
-            type = 'item',
-            name = 'express-loader'
-        },
-        gate = {
-            order = 'a[wall]-b[gate]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/gate.png',
-            stack_size = 50,
-            subgroup = 'defensive-structure',
-            icon_mipmaps = 4,
-            place_result = 'gate',
-            type = 'item',
-            name = 'gate'
-        },
-        ['player-port'] = {
-            order = 'z[not-used]',
-            icon_size = 64,
-            flags = {'hidden'},
-            icon = '__base__/graphics/icons/player-port.png',
-            stack_size = 50,
-            subgroup = 'defensive-structure',
-            icon_mipmaps = 4,
-            place_result = 'player-port',
-            type = 'item',
-            name = 'player-port'
-        },
-        ['crude-oil-barrel'] = {
-            order = 'b[crude-oil-barrel]',
-            icon_size = 64,
-            localised_name = {'item-name.filled-barrel', {'fluid-name.crude-oil'}},
-            stack_size = 10,
-            icons = {
-                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_size = 64, icon_mipmaps = 4},
-                {
-                    tint = {a = 0.75, b = 0, g = 0, r = 0},
-                    icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }, {
-                    tint = {a = 0.75, b = 0.5, g = 0.5, r = 0.5},
-                    icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'crude-oil-barrel',
-            subgroup = 'barrel'
-        },
-        ['steel-chest'] = {
-            order = 'a[items]-c[steel-chest]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/steel-chest.png',
-            stack_size = 50,
-            subgroup = 'storage',
-            icon_mipmaps = 4,
-            place_result = 'steel-chest',
-            type = 'item',
-            name = 'steel-chest'
-        },
-        ['construction-robot'] = {
-            order = 'a[robot]-b[construction-robot]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/construction-robot.png',
-            stack_size = 50,
-            subgroup = 'logistic-network',
-            icon_mipmaps = 4,
-            place_result = 'construction-robot',
-            type = 'item',
-            name = 'construction-robot'
-        },
-        ['filter-inserter'] = {
-            order = 'e[filter-inserter]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/filter-inserter.png',
-            stack_size = 50,
-            subgroup = 'inserter',
-            icon_mipmaps = 4,
-            place_result = 'filter-inserter',
-            type = 'item',
-            name = 'filter-inserter'
-        },
-        ['engine-unit'] = {
-            order = 'h[engine-unit]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/engine-unit.png',
-            name = 'engine-unit',
-            stack_size = 50
-        },
-        ['gun-turret'] = {
-            order = 'b[turret]-a[gun-turret]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/gun-turret.png',
-            stack_size = 50,
-            subgroup = 'defensive-structure',
-            icon_mipmaps = 4,
-            place_result = 'gun-turret',
-            type = 'item',
-            name = 'gun-turret'
-        },
-        ['steam-turbine'] = {
-            order = 'f[nuclear-energy]-d[steam-turbine]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/steam-turbine.png',
-            stack_size = 10,
-            subgroup = 'energy',
-            icon_mipmaps = 4,
-            place_result = 'steam-turbine',
-            type = 'item',
-            name = 'steam-turbine'
-        },
-        ['heat-pipe'] = {
-            order = 'f[nuclear-energy]-b[heat-pipe]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/heat-pipe.png',
-            stack_size = 50,
-            subgroup = 'energy',
-            icon_mipmaps = 4,
-            place_result = 'heat-pipe',
-            type = 'item',
-            name = 'heat-pipe'
-        },
-        ['simple-entity-with-owner'] = {
-            order = 's[simple-entity-with-owner]-o[simple-entity-with-owner]',
-            icon_size = 64,
-            flags = {'hidden'},
-            icon = '__base__/graphics/icons/wooden-chest.png',
-            stack_size = 50,
-            subgroup = 'other',
-            icon_mipmaps = 4,
-            place_result = 'simple-entity-with-owner',
-            type = 'item',
-            name = 'simple-entity-with-owner'
-        },
-        ['rocket-part'] = {
-            order = 'q[rocket-part]',
-            icon_size = 64,
-            flags = {'hidden'},
-            icon = '__base__/graphics/icons/rocket-part.png',
-            stack_size = 5,
-            subgroup = 'intermediate-product',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'rocket-part'
-        },
-        ['medium-electric-pole'] = {
-            order = 'a[energy]-b[medium-electric-pole]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/medium-electric-pole.png',
-            stack_size = 50,
-            subgroup = 'energy-pipe-distribution',
-            icon_mipmaps = 4,
-            place_result = 'medium-electric-pole',
-            type = 'item',
-            name = 'medium-electric-pole'
-        },
-        ['burner-generator'] = {
-            order = 't[item]-o[burner-generator]',
-            icon_size = 64,
-            flags = {'hidden'},
-            icon = '__base__/graphics/icons/steam-engine.png',
-            stack_size = 10,
-            subgroup = 'other',
-            icon_mipmaps = 4,
-            place_result = 'burner-generator',
-            type = 'item',
-            name = 'burner-generator'
-        },
-        sulfur = {
-            order = 'g[sulfur]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'raw-material',
-            icon = '__base__/graphics/icons/sulfur.png',
-            name = 'sulfur',
-            stack_size = 50
-        },
         ['copper-plate'] = {
-            order = 'c[copper-plate]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'raw-material',
             icon = '__base__/graphics/icons/copper-plate.png',
             name = 'copper-plate',
-            stack_size = 100
-        },
-        ['express-transport-belt'] = {
-            order = 'a[transport-belt]-c[express-transport-belt]',
+            icon_mipmaps = 4,
             icon_size = 64,
-            icon = '__base__/graphics/icons/express-transport-belt.png',
+            subgroup = 'raw-material',
+            type = 'item',
             stack_size = 100,
-            subgroup = 'belt',
-            icon_mipmaps = 4,
-            place_result = 'express-transport-belt',
-            type = 'item',
-            name = 'express-transport-belt'
+            order = 'c[copper-plate]'
         },
-        ['logistic-chest-active-provider'] = {
-            order = 'b[storage]-c[logistic-chest-active-provider]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/logistic-chest-active-provider.png',
+        ['stack-inserter'] = {
+            icon = '__base__/graphics/icons/stack-inserter.png',
+            name = 'stack-inserter',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'stack-inserter',
+            order = 'f[stack-inserter]',
+            subgroup = 'inserter',
             stack_size = 50,
-            subgroup = 'logistic-network',
-            icon_mipmaps = 4,
-            place_result = 'logistic-chest-active-provider',
-            type = 'item',
-            name = 'logistic-chest-active-provider'
+            icon_size = 64
         },
-        ['green-wire'] = {
-            order = 'b[wires]-b[green-wire]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/green-wire.png',
-            stack_size = 200,
-            subgroup = 'circuit-network',
+        ['personal-roboport-mk2-equipment'] = {
+            icon = '__base__/graphics/icons/personal-roboport-mk2-equipment.png',
+            name = 'personal-roboport-mk2-equipment',
+            icon_mipmaps = 4,
+            localised_description = {'item-description.personal-roboport-equipment'},
+            type = 'item',
+            order = 'e[robotics]-b[personal-roboport-mk2-equipment]',
+            default_request_amount = 1,
+            subgroup = 'equipment',
+            placed_as_equipment_result = 'personal-roboport-mk2-equipment',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['energy-shield-mk2-equipment'] = {
+            icon = '__base__/graphics/icons/energy-shield-mk2-equipment.png',
+            name = 'energy-shield-mk2-equipment',
+            icon_mipmaps = 4,
+            localised_description = {'item-description.energy-shield-equipment'},
+            type = 'item',
+            order = 'a[shield]-b[energy-shield-equipment-mk2]',
+            default_request_amount = 5,
+            subgroup = 'military-equipment',
+            placed_as_equipment_result = 'energy-shield-mk2-equipment',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['copper-ore'] = {
+            icon = '__base__/graphics/icons/copper-ore.png',
+            name = 'copper-ore',
             icon_mipmaps = 4,
             type = 'item',
-            name = 'green-wire',
-            wire_count = 1
+            order = 'f[copper-ore]',
+            subgroup = 'raw-resource',
+            pictures = {
+                {filename = '__base__/graphics/icons/copper-ore.png', size = 64, mipmap_count = 4, scale = 0.25},
+                {filename = '__base__/graphics/icons/copper-ore-1.png', size = 64, mipmap_count = 4, scale = 0.25},
+                {filename = '__base__/graphics/icons/copper-ore-2.png', size = 64, mipmap_count = 4, scale = 0.25},
+                {filename = '__base__/graphics/icons/copper-ore-3.png', size = 64, mipmap_count = 4, scale = 0.25}
+            },
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['iron-chest'] = {
+            icon = '__base__/graphics/icons/iron-chest.png',
+            name = 'iron-chest',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'iron-chest',
+            order = 'a[items]-b[iron-chest]',
+            subgroup = 'storage',
+            stack_size = 50,
+            icon_size = 64
         },
         boiler = {
-            order = 'b[steam-power]-a[boiler]',
-            icon_size = 64,
             icon = '__base__/graphics/icons/boiler.png',
-            stack_size = 50,
-            subgroup = 'energy',
+            name = 'boiler',
             icon_mipmaps = 4,
+            type = 'item',
             place_result = 'boiler',
-            type = 'item',
-            name = 'boiler'
-        },
-        ['processing-unit'] = {
-            order = 'g[processing-unit]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/processing-unit.png',
-            name = 'processing-unit',
-            stack_size = 100
-        },
-        ['fusion-reactor-equipment'] = {
-            order = 'a[energy-source]-b[fusion-reactor]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/fusion-reactor-equipment.png',
-            stack_size = 20,
-            subgroup = 'equipment',
-            icon_mipmaps = 4,
-            default_request_amount = 1,
-            type = 'item',
-            name = 'fusion-reactor-equipment',
-            placed_as_equipment_result = 'fusion-reactor-equipment'
+            order = 'b[steam-power]-a[boiler]',
+            subgroup = 'energy',
+            stack_size = 50,
+            icon_size = 64
         },
         ['nuclear-fuel'] = {
-            order = 'q[uranium-rocket-fuel]',
-            fuel_top_speed_multiplier = 1.15,
             icon = '__base__/graphics/icons/nuclear-fuel.png',
-            fuel_acceleration_multiplier = 2.5,
             name = 'nuclear-fuel',
-            fuel_category = 'chemical',
             icon_mipmaps = 4,
+            fuel_acceleration_multiplier = 2.5,
+            type = 'item',
+            fuel_top_speed_multiplier = 1.15,
+            order = 'q[uranium-rocket-fuel]',
+            fuel_category = 'chemical',
             subgroup = 'intermediate-product',
-            stack_size = 1,
+            icon_size = 64,
             pictures = {
                 layers = {
-                    {size = 64, filename = '__base__/graphics/icons/nuclear-fuel.png', scale = 0.25, mipmap_count = 4},
+                    {filename = '__base__/graphics/icons/nuclear-fuel.png', size = 64, mipmap_count = 4, scale = 0.25},
                     {
                         filename = '__base__/graphics/icons/nuclear-fuel-light.png',
                         scale = 0.25,
                         mipmap_count = 4,
+                        size = 64,
                         flags = {'light'},
+                        draw_as_light = true
+                    }
+                }
+            },
+            stack_size = 1,
+            fuel_value = '1.21GJ'
+        },
+        ['heat-pipe'] = {
+            icon = '__base__/graphics/icons/heat-pipe.png',
+            name = 'heat-pipe',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'heat-pipe',
+            order = 'f[nuclear-energy]-b[heat-pipe]',
+            subgroup = 'energy',
+            stack_size = 50,
+            icon_size = 64
+        },
+        explosives = {
+            icon = '__base__/graphics/icons/explosives.png',
+            name = 'explosives',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'raw-material',
+            type = 'item',
+            stack_size = 50,
+            order = 'j[explosives]'
+        },
+        ['fast-inserter'] = {
+            icon = '__base__/graphics/icons/fast-inserter.png',
+            name = 'fast-inserter',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'fast-inserter',
+            order = 'd[fast-inserter]',
+            subgroup = 'inserter',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['crude-oil-barrel'] = {
+            name = 'crude-oil-barrel',
+            icon_mipmaps = 4,
+            localised_name = {'item-name.filled-barrel', {'fluid-name.crude-oil'}},
+            type = 'item',
+            icons = {
+                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_mipmaps = 4, icon_size = 64},
+                {
+                    icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
+                    tint = {a = 0.75, r = 0, g = 0, b = 0},
+                    icon_mipmaps = 4,
+                    icon_size = 64
+                }, {
+                    icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
+                    tint = {a = 0.75, r = 0.5, g = 0.5, b = 0.5},
+                    icon_mipmaps = 4,
+                    icon_size = 64
+                }
+            },
+            subgroup = 'barrel',
+            order = 'b[crude-oil-barrel]',
+            stack_size = 10,
+            icon_size = 64
+        },
+        sulfur = {
+            icon = '__base__/graphics/icons/sulfur.png',
+            name = 'sulfur',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'raw-material',
+            type = 'item',
+            stack_size = 50,
+            order = 'g[sulfur]'
+        },
+        ['nuclear-reactor'] = {
+            icon = '__base__/graphics/icons/nuclear-reactor.png',
+            name = 'nuclear-reactor',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'nuclear-reactor',
+            order = 'f[nuclear-energy]-a[reactor]',
+            subgroup = 'energy',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['hazard-concrete'] = {
+            icon = '__base__/graphics/icons/hazard-concrete.png',
+            name = 'hazard-concrete',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'b[concrete]-b[hazard]',
+            subgroup = 'terrain',
+            place_as_tile = {condition_size = 1, result = 'hazard-concrete-left', condition = {'water-tile'}},
+            stack_size = 100,
+            icon_size = 64
+        },
+        ['constant-combinator'] = {
+            icon = '__base__/graphics/icons/constant-combinator.png',
+            name = 'constant-combinator',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'constant-combinator',
+            order = 'c[combinators]-c[constant-combinator]',
+            subgroup = 'circuit-network',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['electric-energy-interface'] = {
+            name = 'electric-energy-interface',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'electric-energy-interface',
+            icons = {{icon = '__base__/graphics/icons/accumulator.png', tint = {a = 1, r = 1, g = 0.8, b = 1}}},
+            flags = {'hidden'},
+            subgroup = 'other',
+            order = 'a[electric-energy-interface]-b[electric-energy-interface]',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['linked-chest'] = {
+            icon = '__base__/graphics/icons/linked-chest-icon.png',
+            name = 'linked-chest',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'linked-chest',
+            order = 'a[items]-a[linked-chest]',
+            flags = {'hidden'},
+            subgroup = 'other',
+            stack_size = 10,
+            icon_size = 64
+        },
+        battery = {
+            icon = '__base__/graphics/icons/battery.png',
+            name = 'battery',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'raw-material',
+            type = 'item',
+            stack_size = 200,
+            order = 'h[battery]'
+        },
+        loader = {
+            icon = '__base__/graphics/icons/loader.png',
+            name = 'loader',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'loader',
+            order = 'd[loader]-a[basic-loader]',
+            flags = {'hidden'},
+            subgroup = 'belt',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['long-handed-inserter'] = {
+            icon = '__base__/graphics/icons/long-handed-inserter.png',
+            name = 'long-handed-inserter',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'long-handed-inserter',
+            order = 'c[long-handed-inserter]',
+            subgroup = 'inserter',
+            stack_size = 50,
+            icon_size = 64
+        },
+        coal = {
+            icon = '__base__/graphics/icons/coal.png',
+            name = 'coal',
+            dark_background_icon = '__base__/graphics/icons/coal-dark-background.png',
+            fuel_value = '4MJ',
+            type = 'item',
+            order = 'b[coal]',
+            fuel_category = 'chemical',
+            subgroup = 'raw-resource',
+            icon_size = 64,
+            pictures = {
+                {filename = '__base__/graphics/icons/coal.png', size = 64, mipmap_count = 4, scale = 0.25},
+                {filename = '__base__/graphics/icons/coal-1.png', size = 64, mipmap_count = 4, scale = 0.25},
+                {filename = '__base__/graphics/icons/coal-2.png', size = 64, mipmap_count = 4, scale = 0.25},
+                {filename = '__base__/graphics/icons/coal-3.png', size = 64, mipmap_count = 4, scale = 0.25}
+            },
+            stack_size = 50,
+            icon_mipmaps = 4
+        },
+        ['fast-loader'] = {
+            icon = '__base__/graphics/icons/fast-loader.png',
+            name = 'fast-loader',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'fast-loader',
+            order = 'd[loader]-b[fast-loader]',
+            flags = {'hidden'},
+            subgroup = 'belt',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['steam-turbine'] = {
+            icon = '__base__/graphics/icons/steam-turbine.png',
+            name = 'steam-turbine',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'steam-turbine',
+            order = 'f[nuclear-energy]-d[steam-turbine]',
+            subgroup = 'energy',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['iron-gear-wheel'] = {
+            icon = '__base__/graphics/icons/iron-gear-wheel.png',
+            name = 'iron-gear-wheel',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            type = 'item',
+            stack_size = 100,
+            order = 'c[iron-gear-wheel]'
+        },
+        coin = {
+            icon = '__base__/graphics/icons/coin.png',
+            name = 'coin',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'y',
+            flags = {'hidden'},
+            subgroup = 'science-pack',
+            stack_size = 100000,
+            icon_size = 64
+        },
+        ['programmable-speaker'] = {
+            icon = '__base__/graphics/icons/programmable-speaker.png',
+            name = 'programmable-speaker',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'programmable-speaker',
+            order = 'd[other]-b[programmable-speaker]',
+            subgroup = 'circuit-network',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['small-lamp'] = {
+            icon = '__base__/graphics/icons/small-lamp.png',
+            name = 'small-lamp',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'small-lamp',
+            order = 'a[light]-a[small-lamp]',
+            subgroup = 'circuit-network',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['oil-refinery'] = {
+            icon = '__base__/graphics/icons/oil-refinery.png',
+            name = 'oil-refinery',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'oil-refinery',
+            order = 'd[refinery]',
+            subgroup = 'production-machine',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['discharge-defense-equipment'] = {
+            icon = '__base__/graphics/icons/discharge-defense-equipment.png',
+            name = 'discharge-defense-equipment',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'b[active-defense]-b[discharge-defense-equipment]-a[equipment]',
+            default_request_amount = 1,
+            subgroup = 'military-equipment',
+            placed_as_equipment_result = 'discharge-defense-equipment',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['infinity-pipe'] = {
+            name = 'infinity-pipe',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'infinity-pipe',
+            icons = {{icon = '__base__/graphics/icons/pipe.png', tint = {r = 0.5, g = 0.5, b = 1}}},
+            flags = {'hidden'},
+            subgroup = 'other',
+            order = 'd[item]-o[infinity-pipe]',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['night-vision-equipment'] = {
+            icon = '__base__/graphics/icons/night-vision-equipment.png',
+            name = 'night-vision-equipment',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'f[night-vision]-a[night-vision-equipment]',
+            default_request_amount = 1,
+            subgroup = 'equipment',
+            placed_as_equipment_result = 'night-vision-equipment',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['battery-equipment'] = {
+            icon = '__base__/graphics/icons/battery-equipment.png',
+            name = 'battery-equipment',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'b[battery]-a[battery-equipment]',
+            default_request_amount = 5,
+            subgroup = 'equipment',
+            placed_as_equipment_result = 'battery-equipment',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['green-wire'] = {
+            icon = '__base__/graphics/icons/green-wire.png',
+            name = 'green-wire',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'b[wires]-b[green-wire]',
+            wire_count = 1,
+            subgroup = 'circuit-network',
+            stack_size = 200,
+            icon_size = 64
+        },
+        ['laser-turret'] = {
+            icon = '__base__/graphics/icons/laser-turret.png',
+            name = 'laser-turret',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'laser-turret',
+            order = 'b[turret]-b[laser-turret]',
+            subgroup = 'defensive-structure',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['train-stop'] = {
+            icon = '__base__/graphics/icons/train-stop.png',
+            name = 'train-stop',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'train-stop',
+            order = 'a[train-system]-c[train-stop]',
+            subgroup = 'train-transport',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['engine-unit'] = {
+            icon = '__base__/graphics/icons/engine-unit.png',
+            name = 'engine-unit',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            type = 'item',
+            stack_size = 50,
+            order = 'h[engine-unit]'
+        },
+        ['underground-belt'] = {
+            icon = '__base__/graphics/icons/underground-belt.png',
+            name = 'underground-belt',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'underground-belt',
+            order = 'b[underground-belt]-a[underground-belt]',
+            subgroup = 'belt',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['advanced-circuit'] = {
+            icon = '__base__/graphics/icons/advanced-circuit.png',
+            name = 'advanced-circuit',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            type = 'item',
+            stack_size = 200,
+            order = 'f[advanced-circuit]'
+        },
+        ['burner-generator'] = {
+            icon = '__base__/graphics/icons/steam-engine.png',
+            name = 'burner-generator',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'burner-generator',
+            order = 't[item]-o[burner-generator]',
+            flags = {'hidden'},
+            subgroup = 'other',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['simple-entity-with-owner'] = {
+            icon = '__base__/graphics/icons/wooden-chest.png',
+            name = 'simple-entity-with-owner',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'simple-entity-with-owner',
+            order = 's[simple-entity-with-owner]-o[simple-entity-with-owner]',
+            flags = {'hidden'},
+            subgroup = 'other',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['flamethrower-turret'] = {
+            icon = '__base__/graphics/icons/flamethrower-turret.png',
+            name = 'flamethrower-turret',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'flamethrower-turret',
+            order = 'b[turret]-c[flamethrower-turret]',
+            subgroup = 'defensive-structure',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['water-barrel'] = {
+            name = 'water-barrel',
+            icon_mipmaps = 4,
+            localised_name = {'item-name.filled-barrel', {'fluid-name.water'}},
+            type = 'item',
+            icons = {
+                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_mipmaps = 4, icon_size = 64},
+                {
+                    icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
+                    tint = {a = 0.75, r = 0, g = 0.34, b = 0.6},
+                    icon_mipmaps = 4,
+                    icon_size = 64
+                }, {
+                    icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
+                    tint = {a = 0.75, r = 0.7, g = 0.7, b = 0.7},
+                    icon_mipmaps = 4,
+                    icon_size = 64
+                }
+            },
+            subgroup = 'barrel',
+            order = 'b[water-barrel]',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['plastic-bar'] = {
+            icon = '__base__/graphics/icons/plastic-bar.png',
+            name = 'plastic-bar',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'raw-material',
+            type = 'item',
+            stack_size = 100,
+            order = 'f[plastic-bar]'
+        },
+        ['medium-electric-pole'] = {
+            icon = '__base__/graphics/icons/medium-electric-pole.png',
+            name = 'medium-electric-pole',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'medium-electric-pole',
+            order = 'a[energy]-b[medium-electric-pole]',
+            subgroup = 'energy-pipe-distribution',
+            stack_size = 50,
+            icon_size = 64
+        },
+        concrete = {
+            icon = '__base__/graphics/icons/concrete.png',
+            name = 'concrete',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'b[concrete]-a[plain]',
+            subgroup = 'terrain',
+            place_as_tile = {condition_size = 1, result = 'concrete', condition = {'water-tile'}},
+            stack_size = 100,
+            icon_size = 64
+        },
+        ['solar-panel-equipment'] = {
+            icon = '__base__/graphics/icons/solar-panel-equipment.png',
+            name = 'solar-panel-equipment',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'a[energy-source]-a[solar-panel]',
+            subgroup = 'equipment',
+            placed_as_equipment_result = 'solar-panel-equipment',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['infinity-chest'] = {
+            icon = '__base__/graphics/icons/infinity-chest.png',
+            name = 'infinity-chest',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'infinity-chest',
+            order = 'c[item]-o[infinity-chest]',
+            flags = {'hidden'},
+            subgroup = 'other',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['heat-interface'] = {
+            icon = '__base__/graphics/icons/heat-interface.png',
+            name = 'heat-interface',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'heat-interface',
+            order = 'b[heat-interface]',
+            flags = {'hidden'},
+            subgroup = 'other',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['personal-roboport-equipment'] = {
+            icon = '__base__/graphics/icons/personal-roboport-equipment.png',
+            name = 'personal-roboport-equipment',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'e[robotics]-a[personal-roboport-equipment]',
+            default_request_amount = 1,
+            subgroup = 'equipment',
+            placed_as_equipment_result = 'personal-roboport-equipment',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['land-mine'] = {
+            icon = '__base__/graphics/icons/land-mine.png',
+            name = 'land-mine',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'land-mine',
+            order = 'f[land-mine]',
+            subgroup = 'gun',
+            stack_size = 100,
+            icon_size = 64
+        },
+        ['express-splitter'] = {
+            icon = '__base__/graphics/icons/express-splitter.png',
+            name = 'express-splitter',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'express-splitter',
+            order = 'c[splitter]-c[express-splitter]',
+            subgroup = 'belt',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['item-unknown'] = {
+            flags = {'hidden'},
+            name = 'item-unknown',
+            icon_size = 64,
+            type = 'item',
+            stack_size = 1,
+            icon = '__core__/graphics/icons/unknown.png'
+        },
+        ['construction-robot'] = {
+            icon = '__base__/graphics/icons/construction-robot.png',
+            name = 'construction-robot',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'construction-robot',
+            order = 'a[robot]-b[construction-robot]',
+            subgroup = 'logistic-network',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['chemical-plant'] = {
+            icon = '__base__/graphics/icons/chemical-plant.png',
+            name = 'chemical-plant',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'chemical-plant',
+            order = 'e[chemical-plant]',
+            subgroup = 'production-machine',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['used-up-uranium-fuel-cell'] = {
+            icon = '__base__/graphics/icons/used-up-uranium-fuel-cell.png',
+            name = 'used-up-uranium-fuel-cell',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            type = 'item',
+            stack_size = 50,
+            order = 'r[used-up-uranium-fuel-cell]'
+        },
+        stone = {
+            icon = '__base__/graphics/icons/stone.png',
+            name = 'stone',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'd[stone]',
+            subgroup = 'raw-resource',
+            pictures = {
+                {filename = '__base__/graphics/icons/stone.png', size = 64, mipmap_count = 4, scale = 0.25},
+                {filename = '__base__/graphics/icons/stone-1.png', size = 64, mipmap_count = 4, scale = 0.25},
+                {filename = '__base__/graphics/icons/stone-2.png', size = 64, mipmap_count = 4, scale = 0.25},
+                {filename = '__base__/graphics/icons/stone-3.png', size = 64, mipmap_count = 4, scale = 0.25}
+            },
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['copper-cable'] = {
+            icon = '__base__/graphics/icons/copper-cable.png',
+            name = 'copper-cable',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'a[copper-cable]',
+            wire_count = 1,
+            subgroup = 'intermediate-product',
+            stack_size = 200,
+            icon_size = 64
+        },
+        centrifuge = {
+            icon = '__base__/graphics/icons/centrifuge.png',
+            name = 'centrifuge',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'centrifuge',
+            order = 'g[centrifuge]',
+            subgroup = 'production-machine',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['flying-robot-frame'] = {
+            icon = '__base__/graphics/icons/flying-robot-frame.png',
+            name = 'flying-robot-frame',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            type = 'item',
+            stack_size = 50,
+            order = 'l[flying-robot-frame]'
+        },
+        ['personal-laser-defense-equipment'] = {
+            icon = '__base__/graphics/icons/personal-laser-defense-equipment.png',
+            name = 'personal-laser-defense-equipment',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'b[active-defense]-a[personal-laser-defense-equipment]',
+            default_request_amount = 5,
+            subgroup = 'military-equipment',
+            placed_as_equipment_result = 'personal-laser-defense-equipment',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['transport-belt'] = {
+            icon = '__base__/graphics/icons/transport-belt.png',
+            name = 'transport-belt',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'transport-belt',
+            order = 'a[transport-belt]-a[transport-belt]',
+            subgroup = 'belt',
+            stack_size = 100,
+            icon_size = 64
+        },
+        landfill = {
+            icon = '__base__/graphics/icons/landfill.png',
+            name = 'landfill',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'c[landfill]-a[dirt]',
+            subgroup = 'terrain',
+            place_as_tile = {condition_size = 1, result = 'landfill', condition = {'ground-tile'}},
+            stack_size = 100,
+            icon_size = 64
+        },
+        ['electric-engine-unit'] = {
+            icon = '__base__/graphics/icons/electric-engine-unit.png',
+            name = 'electric-engine-unit',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            type = 'item',
+            stack_size = 50,
+            order = 'i[electric-engine-unit]'
+        },
+        ['rail-chain-signal'] = {
+            icon = '__base__/graphics/icons/rail-chain-signal.png',
+            name = 'rail-chain-signal',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'rail-chain-signal',
+            order = 'a[train-system]-e[rail-signal-chain]',
+            subgroup = 'train-transport',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['express-loader'] = {
+            icon = '__base__/graphics/icons/express-loader.png',
+            name = 'express-loader',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'express-loader',
+            order = 'd[loader]-c[express-loader]',
+            flags = {'hidden'},
+            subgroup = 'belt',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['logistic-chest-buffer'] = {
+            icon = '__base__/graphics/icons/logistic-chest-buffer.png',
+            name = 'logistic-chest-buffer',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'logistic-chest-buffer',
+            order = 'b[storage]-d[logistic-chest-buffer]',
+            subgroup = 'logistic-network',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['processing-unit'] = {
+            icon = '__base__/graphics/icons/processing-unit.png',
+            name = 'processing-unit',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            type = 'item',
+            stack_size = 100,
+            order = 'g[processing-unit]'
+        },
+        ['fusion-reactor-equipment'] = {
+            icon = '__base__/graphics/icons/fusion-reactor-equipment.png',
+            name = 'fusion-reactor-equipment',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'a[energy-source]-b[fusion-reactor]',
+            default_request_amount = 1,
+            subgroup = 'equipment',
+            placed_as_equipment_result = 'fusion-reactor-equipment',
+            stack_size = 20,
+            icon_size = 64
+        },
+        accumulator = {
+            icon = '__base__/graphics/icons/accumulator.png',
+            name = 'accumulator',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'accumulator',
+            order = 'e[accumulator]-a[accumulator]',
+            subgroup = 'energy',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['assembling-machine-3'] = {
+            icon = '__base__/graphics/icons/assembling-machine-3.png',
+            name = 'assembling-machine-3',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'assembling-machine-3',
+            order = 'c[assembling-machine-3]',
+            subgroup = 'production-machine',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['artillery-turret'] = {
+            icon = '__base__/graphics/icons/artillery-turret.png',
+            name = 'artillery-turret',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'artillery-turret',
+            order = 'b[turret]-d[artillery-turret]-a[turret]',
+            subgroup = 'defensive-structure',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['power-switch'] = {
+            icon = '__base__/graphics/icons/power-switch.png',
+            name = 'power-switch',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'power-switch',
+            order = 'd[other]-a[power-switch]',
+            subgroup = 'circuit-network',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['empty-barrel'] = {
+            icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png',
+            name = 'empty-barrel',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            type = 'item',
+            stack_size = 10,
+            order = 'd[empty-barrel]'
+        },
+        pumpjack = {
+            icon = '__base__/graphics/icons/pumpjack.png',
+            name = 'pumpjack',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'pumpjack',
+            order = 'b[fluids]-b[pumpjack]',
+            subgroup = 'extraction-machine',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['petroleum-gas-barrel'] = {
+            name = 'petroleum-gas-barrel',
+            icon_mipmaps = 4,
+            localised_name = {'item-name.filled-barrel', {'fluid-name.petroleum-gas'}},
+            type = 'item',
+            icons = {
+                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_mipmaps = 4, icon_size = 64},
+                {
+                    icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
+                    tint = {a = 0.75, r = 0.3, g = 0.1, b = 0.3},
+                    icon_mipmaps = 4,
+                    icon_size = 64
+                }, {
+                    icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
+                    tint = {a = 0.75, r = 0.8, g = 0.8, b = 0.8},
+                    icon_mipmaps = 4,
+                    icon_size = 64
+                }
+            },
+            subgroup = 'barrel',
+            order = 'b[petroleum-gas-barrel]',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['rocket-silo'] = {
+            icon = '__base__/graphics/icons/rocket-silo.png',
+            name = 'rocket-silo',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'rocket-silo',
+            order = 'e[rocket-silo]',
+            subgroup = 'defensive-structure',
+            stack_size = 1,
+            icon_size = 64
+        },
+        ['big-electric-pole'] = {
+            icon = '__base__/graphics/icons/big-electric-pole.png',
+            name = 'big-electric-pole',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'big-electric-pole',
+            order = 'a[energy]-c[big-electric-pole]',
+            subgroup = 'energy-pipe-distribution',
+            stack_size = 50,
+            icon_size = 64
+        },
+        radar = {
+            icon = '__base__/graphics/icons/radar.png',
+            name = 'radar',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'radar',
+            order = 'd[radar]-a[radar]',
+            subgroup = 'defensive-structure',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['belt-immunity-equipment'] = {
+            icon = '__base__/graphics/icons/belt-immunity-equipment.png',
+            name = 'belt-immunity-equipment',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'c[belt-immunity]-a[belt-immunity]',
+            default_request_amount = 1,
+            subgroup = 'equipment',
+            placed_as_equipment_result = 'belt-immunity-equipment',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['lubricant-barrel'] = {
+            name = 'lubricant-barrel',
+            icon_mipmaps = 4,
+            localised_name = {'item-name.filled-barrel', {'fluid-name.lubricant'}},
+            type = 'item',
+            icons = {
+                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_mipmaps = 4, icon_size = 64},
+                {
+                    icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
+                    tint = {a = 0.75, r = 0.15, g = 0.32, b = 0.03},
+                    icon_mipmaps = 4,
+                    icon_size = 64
+                }, {
+                    icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
+                    tint = {a = 0.75, r = 0.43, g = 0.75, b = 0.31},
+                    icon_mipmaps = 4,
+                    icon_size = 64
+                }
+            },
+            subgroup = 'barrel',
+            order = 'b[lubricant-barrel]',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['refined-concrete'] = {
+            icon = '__base__/graphics/icons/refined-concrete.png',
+            name = 'refined-concrete',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'b[concrete]-c[refined]',
+            subgroup = 'terrain',
+            place_as_tile = {condition_size = 1, result = 'refined-concrete', condition = {'water-tile'}},
+            stack_size = 100,
+            icon_size = 64
+        },
+        wood = {
+            icon = '__base__/graphics/icons/wood.png',
+            name = 'wood',
+            icon_mipmaps = 4,
+            fuel_value = '2MJ',
+            type = 'item',
+            order = 'a[wood]',
+            fuel_category = 'chemical',
+            subgroup = 'raw-resource',
+            stack_size = 100,
+            icon_size = 64
+        },
+        ['storage-tank'] = {
+            icon = '__base__/graphics/icons/storage-tank.png',
+            name = 'storage-tank',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'storage-tank',
+            order = 'b[fluid]-a[storage-tank]',
+            subgroup = 'storage',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['uranium-fuel-cell'] = {
+            icon = '__base__/graphics/icons/uranium-fuel-cell.png',
+            name = 'uranium-fuel-cell',
+            icon_mipmaps = 4,
+            fuel_value = '8GJ',
+            type = 'item',
+            order = 'r[uranium-processing]-a[uranium-fuel-cell]',
+            burnt_result = 'used-up-uranium-fuel-cell',
+            subgroup = 'intermediate-product',
+            icon_size = 64,
+            pictures = {
+                layers = {
+                    {
+                        filename = '__base__/graphics/icons/uranium-fuel-cell.png',
+                        size = 64,
+                        mipmap_count = 4,
+                        scale = 0.25
+                    }, {
+                        filename = '__base__/graphics/icons/uranium-fuel-cell-light.png',
+                        scale = 0.25,
+                        mipmap_count = 4,
+                        size = 64,
+                        flags = {'light'},
+                        draw_as_light = true
+                    }
+                }
+            },
+            stack_size = 50,
+            fuel_category = 'nuclear'
+        },
+        ['assembling-machine-1'] = {
+            icon = '__base__/graphics/icons/assembling-machine-1.png',
+            name = 'assembling-machine-1',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'assembling-machine-1',
+            order = 'a[assembling-machine-1]',
+            subgroup = 'production-machine',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['uranium-238'] = {
+            icon = '__base__/graphics/icons/uranium-238.png',
+            name = 'uranium-238',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            type = 'item',
+            stack_size = 100,
+            order = 'r[uranium-238]'
+        },
+        ['uranium-235'] = {
+            icon = '__base__/graphics/icons/uranium-235.png',
+            name = 'uranium-235',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'r[uranium-235]',
+            subgroup = 'intermediate-product',
+            pictures = {
+                layers = {
+                    {filename = '__base__/graphics/icons/uranium-235.png', size = 64, mipmap_count = 4, scale = 0.25}, {
+                        filename = '__base__/graphics/icons/uranium-235.png',
+                        blend_mode = 'additive',
+                        scale = 0.25,
+                        mipmap_count = 4,
+                        tint = {a = 0.3, r = 0.3, g = 0.3, b = 0.3},
                         size = 64,
                         draw_as_light = true
                     }
                 }
             },
-            type = 'item',
-            fuel_value = '1.21GJ',
+            stack_size = 100,
             icon_size = 64
         },
-        lab = {
-            order = 'g[lab]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/lab.png',
-            stack_size = 10,
-            subgroup = 'production-machine',
-            icon_mipmaps = 4,
-            place_result = 'lab',
-            type = 'item',
-            name = 'lab'
-        },
-        loader = {
-            order = 'd[loader]-a[basic-loader]',
-            icon_size = 64,
-            flags = {'hidden'},
-            icon = '__base__/graphics/icons/loader.png',
-            stack_size = 50,
-            subgroup = 'belt',
-            icon_mipmaps = 4,
-            place_result = 'loader',
-            type = 'item',
-            name = 'loader'
-        },
-        ['transport-belt'] = {
-            order = 'a[transport-belt]-a[transport-belt]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/transport-belt.png',
-            stack_size = 100,
-            subgroup = 'belt',
-            icon_mipmaps = 4,
-            place_result = 'transport-belt',
-            type = 'item',
-            name = 'transport-belt'
-        },
-        ['refined-concrete'] = {
-            order = 'b[concrete]-c[refined]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/refined-concrete.png',
-            stack_size = 100,
-            subgroup = 'terrain',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'refined-concrete',
-            place_as_tile = {condition = {'water-tile'}, condition_size = 1, result = 'refined-concrete'}
-        },
-        ['express-underground-belt'] = {
-            order = 'b[underground-belt]-c[express-underground-belt]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/express-underground-belt.png',
-            stack_size = 50,
-            subgroup = 'belt',
-            icon_mipmaps = 4,
-            place_result = 'express-underground-belt',
-            type = 'item',
-            name = 'express-underground-belt'
-        },
-        ['long-handed-inserter'] = {
-            order = 'c[long-handed-inserter]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/long-handed-inserter.png',
-            stack_size = 50,
-            subgroup = 'inserter',
-            icon_mipmaps = 4,
-            place_result = 'long-handed-inserter',
-            type = 'item',
-            name = 'long-handed-inserter'
-        },
-        ['stone-brick'] = {
-            order = 'a[stone-brick]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/stone-brick.png',
-            stack_size = 100,
-            subgroup = 'terrain',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'stone-brick',
-            place_as_tile = {condition = {'water-tile'}, condition_size = 1, result = 'stone-path'}
-        },
-        ['logistic-chest-buffer'] = {
-            order = 'b[storage]-d[logistic-chest-buffer]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/logistic-chest-buffer.png',
-            stack_size = 50,
-            subgroup = 'logistic-network',
-            icon_mipmaps = 4,
-            place_result = 'logistic-chest-buffer',
-            type = 'item',
-            name = 'logistic-chest-buffer'
-        },
-        ['iron-ore'] = {
-            order = 'e[iron-ore]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/iron-ore.png',
-            stack_size = 50,
-            subgroup = 'raw-resource',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'iron-ore',
-            pictures = {
-                {size = 64, filename = '__base__/graphics/icons/iron-ore.png', scale = 0.25, mipmap_count = 4},
-                {size = 64, filename = '__base__/graphics/icons/iron-ore-1.png', scale = 0.25, mipmap_count = 4},
-                {size = 64, filename = '__base__/graphics/icons/iron-ore-2.png', scale = 0.25, mipmap_count = 4},
-                {size = 64, filename = '__base__/graphics/icons/iron-ore-3.png', scale = 0.25, mipmap_count = 4}
-            }
-        },
-        ['wooden-chest'] = {
-            order = 'a[items]-a[wooden-chest]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/wooden-chest.png',
-            stack_size = 50,
-            subgroup = 'storage',
-            icon_mipmaps = 4,
-            place_result = 'wooden-chest',
-            type = 'item',
-            name = 'wooden-chest'
-        },
-        ['uranium-238'] = {
-            order = 'r[uranium-238]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/uranium-238.png',
-            name = 'uranium-238',
-            stack_size = 100
-        },
-        ['electronic-circuit'] = {
-            order = 'e[electronic-circuit]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/electronic-circuit.png',
-            name = 'electronic-circuit',
-            stack_size = 200
-        },
-        centrifuge = {
-            order = 'g[centrifuge]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/centrifuge.png',
-            stack_size = 50,
-            subgroup = 'production-machine',
-            icon_mipmaps = 4,
-            place_result = 'centrifuge',
-            type = 'item',
-            name = 'centrifuge'
-        },
-        ['pipe-to-ground'] = {
-            order = 'a[pipe]-b[pipe-to-ground]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/pipe-to-ground.png',
-            stack_size = 50,
-            subgroup = 'energy-pipe-distribution',
-            icon_mipmaps = 4,
-            place_result = 'pipe-to-ground',
-            type = 'item',
-            name = 'pipe-to-ground'
-        },
-        ['energy-shield-mk2-equipment'] = {
-            order = 'a[shield]-b[energy-shield-equipment-mk2]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/energy-shield-mk2-equipment.png',
-            stack_size = 20,
-            subgroup = 'military-equipment',
-            icon_mipmaps = 4,
-            localised_description = {'item-description.energy-shield-equipment'},
-            default_request_amount = 5,
-            type = 'item',
-            name = 'energy-shield-mk2-equipment',
-            placed_as_equipment_result = 'energy-shield-mk2-equipment'
-        },
-        ['logistic-chest-passive-provider'] = {
-            order = 'b[storage]-c[logistic-chest-passive-provider]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/logistic-chest-passive-provider.png',
-            stack_size = 50,
-            subgroup = 'logistic-network',
-            icon_mipmaps = 4,
-            place_result = 'logistic-chest-passive-provider',
-            type = 'item',
-            name = 'logistic-chest-passive-provider'
-        },
-        ['uranium-235'] = {
-            order = 'r[uranium-235]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/uranium-235.png',
-            stack_size = 100,
-            subgroup = 'intermediate-product',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'uranium-235',
-            pictures = {
-                layers = {
-                    {size = 64, filename = '__base__/graphics/icons/uranium-235.png', scale = 0.25, mipmap_count = 4}, {
-                        filename = '__base__/graphics/icons/uranium-235.png',
-                        scale = 0.25,
-                        mipmap_count = 4,
-                        tint = {a = 0.3, b = 0.3, g = 0.3, r = 0.3},
-                        size = 64,
-                        draw_as_light = true,
-                        blend_mode = 'additive'
-                    }
-                }
-            }
-        },
-        radar = {
-            order = 'd[radar]-a[radar]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/radar.png',
-            stack_size = 50,
-            subgroup = 'defensive-structure',
-            icon_mipmaps = 4,
-            place_result = 'radar',
-            type = 'item',
-            name = 'radar'
-        },
-        ['programmable-speaker'] = {
-            order = 'd[other]-b[programmable-speaker]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/programmable-speaker.png',
-            stack_size = 50,
-            subgroup = 'circuit-network',
-            icon_mipmaps = 4,
-            place_result = 'programmable-speaker',
-            type = 'item',
-            name = 'programmable-speaker'
-        },
-        ['assembling-machine-2'] = {
-            order = 'b[assembling-machine-2]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/assembling-machine-2.png',
-            stack_size = 50,
-            subgroup = 'production-machine',
-            icon_mipmaps = 4,
-            place_result = 'assembling-machine-2',
-            type = 'item',
-            name = 'assembling-machine-2'
-        },
-        ['artillery-turret'] = {
-            order = 'b[turret]-d[artillery-turret]-a[turret]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/artillery-turret.png',
-            stack_size = 10,
-            subgroup = 'defensive-structure',
-            icon_mipmaps = 4,
-            place_result = 'artillery-turret',
-            type = 'item',
-            name = 'artillery-turret'
-        },
-        ['train-stop'] = {
-            order = 'a[train-system]-c[train-stop]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/train-stop.png',
-            stack_size = 10,
-            subgroup = 'train-transport',
-            icon_mipmaps = 4,
-            place_result = 'train-stop',
-            type = 'item',
-            name = 'train-stop'
-        },
-        ['rail-signal'] = {
-            order = 'a[train-system]-d[rail-signal]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/rail-signal.png',
-            stack_size = 50,
-            subgroup = 'train-transport',
-            icon_mipmaps = 4,
-            place_result = 'rail-signal',
-            type = 'item',
-            name = 'rail-signal'
-        },
-        ['electric-furnace'] = {
-            order = 'c[electric-furnace]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/electric-furnace.png',
-            stack_size = 50,
-            subgroup = 'smelting-machine',
-            icon_mipmaps = 4,
-            place_result = 'electric-furnace',
-            type = 'item',
-            name = 'electric-furnace'
-        },
-        ['rocket-silo'] = {
-            order = 'e[rocket-silo]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/rocket-silo.png',
-            stack_size = 1,
-            subgroup = 'defensive-structure',
-            icon_mipmaps = 4,
-            place_result = 'rocket-silo',
-            type = 'item',
-            name = 'rocket-silo'
-        },
         ['sulfuric-acid-barrel'] = {
-            order = 'b[sulfuric-acid-barrel]',
-            icon_size = 64,
+            name = 'sulfuric-acid-barrel',
+            icon_mipmaps = 4,
             localised_name = {'item-name.filled-barrel', {'fluid-name.sulfuric-acid'}},
-            stack_size = 10,
+            type = 'item',
             icons = {
-                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_size = 64, icon_mipmaps = 4},
+                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_mipmaps = 4, icon_size = 64},
                 {
-                    tint = {a = 0.75, b = 0.1, g = 0.65, r = 0.75},
                     icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
+                    tint = {a = 0.75, r = 0.75, g = 0.65, b = 0.1},
+                    icon_mipmaps = 4,
+                    icon_size = 64
                 }, {
-                    tint = {a = 0.75, b = 0.1, g = 1, r = 0.7},
                     icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
+                    tint = {a = 0.75, r = 0.7, g = 1, b = 0.1},
+                    icon_mipmaps = 4,
+                    icon_size = 64
                 }
             },
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'sulfuric-acid-barrel',
-            subgroup = 'barrel'
-        },
-        ['assembling-machine-1'] = {
-            order = 'a[assembling-machine-1]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/assembling-machine-1.png',
-            stack_size = 50,
-            subgroup = 'production-machine',
-            icon_mipmaps = 4,
-            place_result = 'assembling-machine-1',
-            type = 'item',
-            name = 'assembling-machine-1'
+            subgroup = 'barrel',
+            order = 'b[sulfuric-acid-barrel]',
+            stack_size = 10,
+            icon_size = 64
         },
         substation = {
-            order = 'a[energy]-d[substation]',
-            icon_size = 64,
             icon = '__base__/graphics/icons/substation.png',
-            stack_size = 50,
-            subgroup = 'energy-pipe-distribution',
+            name = 'substation',
             icon_mipmaps = 4,
+            type = 'item',
             place_result = 'substation',
-            type = 'item',
-            name = 'substation'
-        },
-        ['storage-tank'] = {
-            order = 'b[fluid]-a[storage-tank]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/storage-tank.png',
+            order = 'a[energy]-d[substation]',
+            subgroup = 'energy-pipe-distribution',
             stack_size = 50,
-            subgroup = 'storage',
-            icon_mipmaps = 4,
-            place_result = 'storage-tank',
-            type = 'item',
-            name = 'storage-tank'
+            icon_size = 64
         },
-        ['rocket-fuel'] = {
-            order = 'p[rocket-fuel]',
-            fuel_top_speed_multiplier = 1.15,
-            icon = '__base__/graphics/icons/rocket-fuel.png',
-            fuel_acceleration_multiplier = 1.8,
-            fuel_category = 'chemical',
+        ['uranium-ore'] = {
+            icon = '__base__/graphics/icons/uranium-ore.png',
+            name = 'uranium-ore',
             icon_mipmaps = 4,
-            name = 'rocket-fuel',
-            subgroup = 'intermediate-product',
-            stack_size = 10,
             type = 'item',
-            fuel_value = '100MJ',
+            order = 'g[uranium-ore]',
+            subgroup = 'raw-resource',
+            pictures = {
+                {
+                    layers = {
+                        {
+                            filename = '__base__/graphics/icons/uranium-ore.png',
+                            size = 64,
+                            mipmap_count = 4,
+                            scale = 0.25
+                        }, {
+                            filename = '__base__/graphics/icons/uranium-ore.png',
+                            blend_mode = 'additive',
+                            scale = 0.25,
+                            mipmap_count = 4,
+                            tint = {a = 0.3, r = 0.3, g = 0.3, b = 0.3},
+                            size = 64,
+                            draw_as_light = true
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            filename = '__base__/graphics/icons/uranium-ore-1.png',
+                            size = 64,
+                            mipmap_count = 4,
+                            scale = 0.25
+                        }, {
+                            filename = '__base__/graphics/icons/uranium-ore-1.png',
+                            blend_mode = 'additive',
+                            scale = 0.25,
+                            mipmap_count = 4,
+                            tint = {a = 0.3, r = 0.3, g = 0.3, b = 0.3},
+                            size = 64,
+                            draw_as_light = true
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            filename = '__base__/graphics/icons/uranium-ore-2.png',
+                            size = 64,
+                            mipmap_count = 4,
+                            scale = 0.25
+                        }, {
+                            filename = '__base__/graphics/icons/uranium-ore-2.png',
+                            blend_mode = 'additive',
+                            scale = 0.25,
+                            mipmap_count = 4,
+                            tint = {a = 0.3, r = 0.3, g = 0.3, b = 0.3},
+                            size = 64,
+                            draw_as_light = true
+                        }
+                    }
+                }, {
+                    layers = {
+                        {
+                            filename = '__base__/graphics/icons/uranium-ore-3.png',
+                            size = 64,
+                            mipmap_count = 4,
+                            scale = 0.25
+                        }, {
+                            filename = '__base__/graphics/icons/uranium-ore-3.png',
+                            blend_mode = 'additive',
+                            scale = 0.25,
+                            mipmap_count = 4,
+                            tint = {a = 0.3, r = 0.3, g = 0.3, b = 0.3},
+                            size = 64,
+                            draw_as_light = true
+                        }
+                    }
+                }
+            },
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['gun-turret'] = {
+            icon = '__base__/graphics/icons/gun-turret.png',
+            name = 'gun-turret',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'gun-turret',
+            order = 'b[turret]-a[gun-turret]',
+            subgroup = 'defensive-structure',
+            stack_size = 50,
             icon_size = 64
         },
         ['stone-wall'] = {
-            order = 'a[stone-wall]-a[stone-wall]',
-            icon_size = 64,
             icon = '__base__/graphics/icons/wall.png',
-            stack_size = 100,
-            subgroup = 'defensive-structure',
+            name = 'stone-wall',
             icon_mipmaps = 4,
-            place_result = 'stone-wall',
             type = 'item',
-            name = 'stone-wall'
+            place_result = 'stone-wall',
+            order = 'a[stone-wall]-a[stone-wall]',
+            subgroup = 'defensive-structure',
+            stack_size = 100,
+            icon_size = 64
+        },
+        ['fast-transport-belt'] = {
+            icon = '__base__/graphics/icons/fast-transport-belt.png',
+            name = 'fast-transport-belt',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'fast-transport-belt',
+            order = 'a[transport-belt]-b[fast-transport-belt]',
+            subgroup = 'belt',
+            stack_size = 100,
+            icon_size = 64
+        },
+        ['pipe-to-ground'] = {
+            icon = '__base__/graphics/icons/pipe-to-ground.png',
+            name = 'pipe-to-ground',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'pipe-to-ground',
+            order = 'a[pipe]-b[pipe-to-ground]',
+            subgroup = 'energy-pipe-distribution',
+            stack_size = 50,
+            icon_size = 64
         },
         ['iron-plate'] = {
-            order = 'b[iron-plate]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'raw-material',
             icon = '__base__/graphics/icons/iron-plate.png',
             name = 'iron-plate',
-            stack_size = 100
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'raw-material',
+            type = 'item',
+            stack_size = 100,
+            order = 'b[iron-plate]'
         },
         ['stone-furnace'] = {
-            order = 'a[stone-furnace]',
-            icon_size = 64,
             icon = '__base__/graphics/icons/stone-furnace.png',
-            stack_size = 50,
-            subgroup = 'smelting-machine',
+            name = 'stone-furnace',
             icon_mipmaps = 4,
-            place_result = 'stone-furnace',
             type = 'item',
-            name = 'stone-furnace'
+            place_result = 'stone-furnace',
+            order = 'a[stone-furnace]',
+            subgroup = 'smelting-machine',
+            stack_size = 50,
+            icon_size = 64
         },
         ['exoskeleton-equipment'] = {
-            order = 'd[exoskeleton]-a[exoskeleton-equipment]',
-            icon_size = 64,
             icon = '__base__/graphics/icons/exoskeleton-equipment.png',
-            stack_size = 20,
-            subgroup = 'equipment',
-            icon_mipmaps = 4,
-            default_request_amount = 5,
-            type = 'item',
             name = 'exoskeleton-equipment',
-            placed_as_equipment_result = 'exoskeleton-equipment'
-        },
-        stone = {
-            order = 'd[stone]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/stone.png',
-            stack_size = 50,
-            subgroup = 'raw-resource',
             icon_mipmaps = 4,
             type = 'item',
-            name = 'stone',
-            pictures = {
-                {size = 64, filename = '__base__/graphics/icons/stone.png', scale = 0.25, mipmap_count = 4},
-                {size = 64, filename = '__base__/graphics/icons/stone-1.png', scale = 0.25, mipmap_count = 4},
-                {size = 64, filename = '__base__/graphics/icons/stone-2.png', scale = 0.25, mipmap_count = 4},
-                {size = 64, filename = '__base__/graphics/icons/stone-3.png', scale = 0.25, mipmap_count = 4}
-            }
-        },
-        ['flamethrower-turret'] = {
-            order = 'b[turret]-c[flamethrower-turret]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/flamethrower-turret.png',
-            stack_size = 50,
-            subgroup = 'defensive-structure',
-            icon_mipmaps = 4,
-            place_result = 'flamethrower-turret',
-            type = 'item',
-            name = 'flamethrower-turret'
-        },
-        ['energy-shield-equipment'] = {
-            order = 'a[shield]-a[energy-shield-equipment]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/energy-shield-equipment.png',
-            stack_size = 20,
-            subgroup = 'military-equipment',
-            icon_mipmaps = 4,
+            order = 'd[exoskeleton]-a[exoskeleton-equipment]',
             default_request_amount = 5,
-            type = 'item',
-            name = 'energy-shield-equipment',
-            placed_as_equipment_result = 'energy-shield-equipment'
+            subgroup = 'equipment',
+            placed_as_equipment_result = 'exoskeleton-equipment',
+            stack_size = 20,
+            icon_size = 64
         },
-        ['heat-exchanger'] = {
-            order = 'f[nuclear-energy]-c[heat-exchanger]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/heat-boiler.png',
-            stack_size = 50,
-            subgroup = 'energy',
+        ['burner-inserter'] = {
+            icon = '__base__/graphics/icons/burner-inserter.png',
+            name = 'burner-inserter',
             icon_mipmaps = 4,
-            place_result = 'heat-exchanger',
             type = 'item',
-            name = 'heat-exchanger'
+            place_result = 'burner-inserter',
+            order = 'a[burner-inserter]',
+            subgroup = 'inserter',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['stone-brick'] = {
+            icon = '__base__/graphics/icons/stone-brick.png',
+            name = 'stone-brick',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'a[stone-brick]',
+            subgroup = 'terrain',
+            place_as_tile = {condition_size = 1, result = 'stone-path', condition = {'water-tile'}},
+            stack_size = 100,
+            icon_size = 64
+        },
+        beacon = {
+            icon = '__base__/graphics/icons/beacon.png',
+            name = 'beacon',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'beacon',
+            order = 'a[beacon]',
+            subgroup = 'module',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['steel-plate'] = {
+            icon = '__base__/graphics/icons/steel-plate.png',
+            name = 'steel-plate',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'raw-material',
+            type = 'item',
+            stack_size = 100,
+            order = 'd[steel-plate]'
+        },
+        ['logistic-chest-passive-provider'] = {
+            icon = '__base__/graphics/icons/logistic-chest-passive-provider.png',
+            name = 'logistic-chest-passive-provider',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'logistic-chest-passive-provider',
+            order = 'b[storage]-c[logistic-chest-passive-provider]',
+            subgroup = 'logistic-network',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['steel-chest'] = {
+            icon = '__base__/graphics/icons/steel-chest.png',
+            name = 'steel-chest',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'steel-chest',
+            order = 'a[items]-c[steel-chest]',
+            subgroup = 'storage',
+            stack_size = 50,
+            icon_size = 64
         },
         ['steam-engine'] = {
-            order = 'b[steam-power]-b[steam-engine]',
-            icon_size = 64,
             icon = '__base__/graphics/icons/steam-engine.png',
-            stack_size = 10,
-            subgroup = 'energy',
+            name = 'steam-engine',
             icon_mipmaps = 4,
+            type = 'item',
             place_result = 'steam-engine',
-            type = 'item',
-            name = 'steam-engine'
-        },
-        ['infinity-chest'] = {
-            order = 'c[item]-o[infinity-chest]',
-            icon_size = 64,
-            flags = {'hidden'},
-            icon = '__base__/graphics/icons/infinity-chest.png',
+            order = 'b[steam-power]-b[steam-engine]',
+            subgroup = 'energy',
             stack_size = 10,
-            subgroup = 'other',
-            icon_mipmaps = 4,
-            place_result = 'infinity-chest',
-            type = 'item',
-            name = 'infinity-chest'
-        },
-        ['stack-inserter'] = {
-            order = 'f[stack-inserter]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/stack-inserter.png',
-            stack_size = 50,
-            subgroup = 'inserter',
-            icon_mipmaps = 4,
-            place_result = 'stack-inserter',
-            type = 'item',
-            name = 'stack-inserter'
-        },
-        splitter = {
-            order = 'c[splitter]-a[splitter]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/splitter.png',
-            stack_size = 50,
-            subgroup = 'belt',
-            icon_mipmaps = 4,
-            place_result = 'splitter',
-            type = 'item',
-            name = 'splitter'
-        },
-        ['personal-laser-defense-equipment'] = {
-            order = 'b[active-defense]-a[personal-laser-defense-equipment]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/personal-laser-defense-equipment.png',
-            stack_size = 20,
-            subgroup = 'military-equipment',
-            icon_mipmaps = 4,
-            default_request_amount = 5,
-            type = 'item',
-            name = 'personal-laser-defense-equipment',
-            placed_as_equipment_result = 'personal-laser-defense-equipment'
-        },
-        ['fast-splitter'] = {
-            order = 'c[splitter]-b[fast-splitter]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/fast-splitter.png',
-            stack_size = 50,
-            subgroup = 'belt',
-            icon_mipmaps = 4,
-            place_result = 'fast-splitter',
-            type = 'item',
-            name = 'fast-splitter'
-        },
-        ['petroleum-gas-barrel'] = {
-            order = 'b[petroleum-gas-barrel]',
-            icon_size = 64,
-            localised_name = {'item-name.filled-barrel', {'fluid-name.petroleum-gas'}},
-            stack_size = 10,
-            icons = {
-                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_size = 64, icon_mipmaps = 4},
-                {
-                    tint = {a = 0.75, b = 0.3, g = 0.1, r = 0.3},
-                    icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }, {
-                    tint = {a = 0.75, b = 0.8, g = 0.8, r = 0.8},
-                    icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'petroleum-gas-barrel',
-            subgroup = 'barrel'
-        },
-        ['small-lamp'] = {
-            order = 'a[light]-a[small-lamp]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/small-lamp.png',
-            stack_size = 50,
-            subgroup = 'circuit-network',
-            icon_mipmaps = 4,
-            place_result = 'small-lamp',
-            type = 'item',
-            name = 'small-lamp'
-        },
-        ['iron-chest'] = {
-            order = 'a[items]-b[iron-chest]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/iron-chest.png',
-            stack_size = 50,
-            subgroup = 'storage',
-            icon_mipmaps = 4,
-            place_result = 'iron-chest',
-            type = 'item',
-            name = 'iron-chest'
-        },
-        ['simple-entity-with-force'] = {
-            order = 's[simple-entity-with-force]-f[simple-entity-with-force]',
-            icon_size = 64,
-            flags = {'hidden'},
-            icon = '__base__/graphics/icons/steel-chest.png',
-            stack_size = 50,
-            subgroup = 'other',
-            icon_mipmaps = 4,
-            place_result = 'simple-entity-with-force',
-            type = 'item',
-            name = 'simple-entity-with-force'
-        },
-        ['rocket-control-unit'] = {
-            order = 'n[rocket-control-unit]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/rocket-control-unit.png',
-            name = 'rocket-control-unit',
-            stack_size = 10
-        },
-        ['heat-interface'] = {
-            order = 'b[heat-interface]',
-            icon_size = 64,
-            flags = {'hidden'},
-            icon = '__base__/graphics/icons/heat-interface.png',
-            stack_size = 20,
-            subgroup = 'other',
-            icon_mipmaps = 4,
-            place_result = 'heat-interface',
-            type = 'item',
-            name = 'heat-interface'
-        },
-        roboport = {
-            order = 'c[signal]-a[roboport]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/roboport.png',
-            stack_size = 10,
-            subgroup = 'logistic-network',
-            icon_mipmaps = 4,
-            place_result = 'roboport',
-            type = 'item',
-            name = 'roboport'
+            icon_size = 64
         },
         ['red-wire'] = {
-            order = 'b[wires]-a[red-wire]',
-            icon_size = 64,
             icon = '__base__/graphics/icons/red-wire.png',
-            stack_size = 200,
-            subgroup = 'circuit-network',
-            icon_mipmaps = 4,
-            type = 'item',
             name = 'red-wire',
-            wire_count = 1
-        },
-        ['rail-chain-signal'] = {
-            order = 'a[train-system]-e[rail-signal-chain]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/rail-chain-signal.png',
-            stack_size = 50,
-            subgroup = 'train-transport',
             icon_mipmaps = 4,
-            place_result = 'rail-chain-signal',
             type = 'item',
-            name = 'rail-chain-signal'
+            order = 'b[wires]-a[red-wire]',
+            wire_count = 1,
+            subgroup = 'circuit-network',
+            stack_size = 200,
+            icon_size = 64
+        },
+        splitter = {
+            icon = '__base__/graphics/icons/splitter.png',
+            name = 'splitter',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'splitter',
+            order = 'c[splitter]-a[splitter]',
+            subgroup = 'belt',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['solid-fuel'] = {
+            icon = '__base__/graphics/icons/solid-fuel.png',
+            name = 'solid-fuel',
+            icon_mipmaps = 4,
+            fuel_acceleration_multiplier = 1.2,
+            type = 'item',
+            fuel_top_speed_multiplier = 1.05,
+            order = 'c[solid-fuel]',
+            fuel_category = 'chemical',
+            subgroup = 'raw-material',
+            icon_size = 64,
+            stack_size = 50,
+            fuel_value = '12MJ'
+        },
+        satellite = {
+            icon = '__base__/graphics/icons/satellite.png',
+            name = 'satellite',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'm[satellite]',
+            subgroup = 'intermediate-product',
+            icon_size = 64,
+            stack_size = 1,
+            rocket_launch_product = {'space-science-pack', 1000}
         },
         ['arithmetic-combinator'] = {
-            order = 'c[combinators]-a[arithmetic-combinator]',
-            icon_size = 64,
             icon = '__base__/graphics/icons/arithmetic-combinator.png',
-            stack_size = 50,
-            subgroup = 'circuit-network',
+            name = 'arithmetic-combinator',
             icon_mipmaps = 4,
+            type = 'item',
             place_result = 'arithmetic-combinator',
-            type = 'item',
-            name = 'arithmetic-combinator'
-        },
-        ['underground-belt'] = {
-            order = 'b[underground-belt]-a[underground-belt]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/underground-belt.png',
-            stack_size = 50,
-            subgroup = 'belt',
-            icon_mipmaps = 4,
-            place_result = 'underground-belt',
-            type = 'item',
-            name = 'underground-belt'
-        },
-        ['power-switch'] = {
-            order = 'd[other]-a[power-switch]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/power-switch.png',
-            stack_size = 50,
+            order = 'c[combinators]-a[arithmetic-combinator]',
             subgroup = 'circuit-network',
-            icon_mipmaps = 4,
-            place_result = 'power-switch',
-            type = 'item',
-            name = 'power-switch'
-        },
-        ['personal-roboport-mk2-equipment'] = {
-            order = 'e[robotics]-b[personal-roboport-mk2-equipment]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/personal-roboport-mk2-equipment.png',
-            stack_size = 20,
-            subgroup = 'equipment',
-            icon_mipmaps = 4,
-            localised_description = {'item-description.personal-roboport-equipment'},
-            default_request_amount = 1,
-            type = 'item',
-            name = 'personal-roboport-mk2-equipment',
-            placed_as_equipment_result = 'personal-roboport-mk2-equipment'
-        },
-        ['belt-immunity-equipment'] = {
-            order = 'c[belt-immunity]-a[belt-immunity]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/belt-immunity-equipment.png',
-            stack_size = 20,
-            subgroup = 'equipment',
-            icon_mipmaps = 4,
-            default_request_amount = 1,
-            type = 'item',
-            name = 'belt-immunity-equipment',
-            placed_as_equipment_result = 'belt-immunity-equipment'
-        },
-        ['personal-roboport-equipment'] = {
-            order = 'e[robotics]-a[personal-roboport-equipment]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/personal-roboport-equipment.png',
-            stack_size = 20,
-            subgroup = 'equipment',
-            icon_mipmaps = 4,
-            default_request_amount = 1,
-            type = 'item',
-            name = 'personal-roboport-equipment',
-            placed_as_equipment_result = 'personal-roboport-equipment'
-        },
-        ['solar-panel-equipment'] = {
-            order = 'a[energy-source]-a[solar-panel]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/solar-panel-equipment.png',
-            stack_size = 20,
-            subgroup = 'equipment',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'solar-panel-equipment',
-            placed_as_equipment_result = 'solar-panel-equipment'
-        },
-        ['fast-inserter'] = {
-            order = 'd[fast-inserter]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/fast-inserter.png',
             stack_size = 50,
-            subgroup = 'inserter',
-            icon_mipmaps = 4,
-            place_result = 'fast-inserter',
-            type = 'item',
-            name = 'fast-inserter'
+            icon_size = 64
         },
-        ['nuclear-reactor'] = {
-            order = 'f[nuclear-energy]-a[reactor]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/nuclear-reactor.png',
-            stack_size = 10,
-            subgroup = 'energy',
-            icon_mipmaps = 4,
-            place_result = 'nuclear-reactor',
-            type = 'item',
-            name = 'nuclear-reactor'
-        },
-        ['lubricant-barrel'] = {
-            order = 'b[lubricant-barrel]',
-            icon_size = 64,
-            localised_name = {'item-name.filled-barrel', {'fluid-name.lubricant'}},
-            stack_size = 10,
-            icons = {
-                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_size = 64, icon_mipmaps = 4},
-                {
-                    tint = {a = 0.75, b = 0.03, g = 0.32, r = 0.15},
-                    icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }, {
-                    tint = {a = 0.75, b = 0.31, g = 0.75, r = 0.43},
-                    icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }
-            },
+        gate = {
+            icon = '__base__/graphics/icons/gate.png',
+            name = 'gate',
             icon_mipmaps = 4,
             type = 'item',
-            name = 'lubricant-barrel',
-            subgroup = 'barrel'
-        },
-        ['land-mine'] = {
-            order = 'f[land-mine]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/land-mine.png',
-            stack_size = 100,
-            subgroup = 'gun',
-            icon_mipmaps = 4,
-            place_result = 'land-mine',
-            type = 'item',
-            name = 'land-mine'
-        },
-        ['copper-ore'] = {
-            order = 'f[copper-ore]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/copper-ore.png',
-            stack_size = 50,
-            subgroup = 'raw-resource',
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'copper-ore',
-            pictures = {
-                {size = 64, filename = '__base__/graphics/icons/copper-ore.png', scale = 0.25, mipmap_count = 4},
-                {size = 64, filename = '__base__/graphics/icons/copper-ore-1.png', scale = 0.25, mipmap_count = 4},
-                {size = 64, filename = '__base__/graphics/icons/copper-ore-2.png', scale = 0.25, mipmap_count = 4},
-                {size = 64, filename = '__base__/graphics/icons/copper-ore-3.png', scale = 0.25, mipmap_count = 4}
-            }
-        },
-        ['light-oil-barrel'] = {
-            order = 'b[light-oil-barrel]',
-            icon_size = 64,
-            localised_name = {'item-name.filled-barrel', {'fluid-name.light-oil'}},
-            stack_size = 10,
-            icons = {
-                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_size = 64, icon_mipmaps = 4},
-                {
-                    tint = {a = 0.75, b = 0, g = 0.33, r = 0.57},
-                    icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }, {
-                    tint = {a = 0.75, b = 0.07, g = 0.73, r = 1},
-                    icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
-                    icon_size = 64,
-                    icon_mipmaps = 4
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'item',
-            name = 'light-oil-barrel',
-            subgroup = 'barrel'
-        },
-        ['laser-turret'] = {
-            order = 'b[turret]-b[laser-turret]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/laser-turret.png',
-            stack_size = 50,
+            place_result = 'gate',
+            order = 'a[wall]-b[gate]',
             subgroup = 'defensive-structure',
-            icon_mipmaps = 4,
-            place_result = 'laser-turret',
-            type = 'item',
-            name = 'laser-turret'
+            stack_size = 50,
+            icon_size = 64
         },
-        concrete = {
-            order = 'b[concrete]-a[plain]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/concrete.png',
-            stack_size = 100,
-            subgroup = 'terrain',
+        ['solar-panel'] = {
+            icon = '__base__/graphics/icons/solar-panel.png',
+            name = 'solar-panel',
             icon_mipmaps = 4,
             type = 'item',
-            name = 'concrete',
-            place_as_tile = {condition = {'water-tile'}, condition_size = 1, result = 'concrete'}
+            place_result = 'solar-panel',
+            order = 'd[solar-panel]-a[solar-panel]',
+            subgroup = 'energy',
+            stack_size = 50,
+            icon_size = 64
         },
-        landfill = {
-            order = 'c[landfill]-a[dirt]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/landfill.png',
-            stack_size = 100,
-            subgroup = 'terrain',
+        ['logistic-robot'] = {
+            icon = '__base__/graphics/icons/logistic-robot.png',
+            name = 'logistic-robot',
             icon_mipmaps = 4,
             type = 'item',
-            name = 'landfill',
-            place_as_tile = {condition = {'ground-tile'}, condition_size = 1, result = 'landfill'}
+            place_result = 'logistic-robot',
+            order = 'a[robot]-a[logistic-robot]',
+            subgroup = 'logistic-network',
+            stack_size = 50,
+            icon_size = 64
         },
-        ['item-unknown'] = {
-            icon_size = 64,
+        ['simple-entity-with-force'] = {
+            icon = '__base__/graphics/icons/steel-chest.png',
+            name = 'simple-entity-with-force',
+            icon_mipmaps = 4,
             type = 'item',
+            place_result = 'simple-entity-with-force',
+            order = 's[simple-entity-with-force]-f[simple-entity-with-force]',
             flags = {'hidden'},
-            icon = '__core__/graphics/icons/unknown.png',
-            name = 'item-unknown',
-            stack_size = 1
-        },
-        ['iron-stick'] = {
-            order = 'b[iron-stick]',
-            icon_mipmaps = 4,
-            icon_size = 64,
-            type = 'item',
-            subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/iron-stick.png',
-            name = 'iron-stick',
-            stack_size = 100
-        },
-        ['small-electric-pole'] = {
-            order = 'a[energy]-a[small-electric-pole]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/small-electric-pole.png',
+            subgroup = 'other',
             stack_size = 50,
-            subgroup = 'energy-pipe-distribution',
-            icon_mipmaps = 4,
-            place_result = 'small-electric-pole',
-            type = 'item',
-            name = 'small-electric-pole'
+            icon_size = 64
         },
-        ['offshore-pump'] = {
-            order = 'b[fluids]-a[offshore-pump]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/offshore-pump.png',
-            stack_size = 20,
-            subgroup = 'extraction-machine',
-            icon_mipmaps = 4,
-            place_result = 'offshore-pump',
-            type = 'item',
-            name = 'offshore-pump'
-        },
-        ['empty-barrel'] = {
-            order = 'd[empty-barrel]',
+        ['low-density-structure'] = {
+            icon = '__base__/graphics/icons/low-density-structure.png',
+            name = 'low-density-structure',
             icon_mipmaps = 4,
             icon_size = 64,
-            type = 'item',
             subgroup = 'intermediate-product',
-            icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png',
-            name = 'empty-barrel',
-            stack_size = 10
+            type = 'item',
+            stack_size = 10,
+            order = 'o[low-density-structure]'
         },
-        ['express-splitter'] = {
-            order = 'c[splitter]-c[express-splitter]',
+        ['electronic-circuit'] = {
+            icon = '__base__/graphics/icons/electronic-circuit.png',
+            name = 'electronic-circuit',
+            icon_mipmaps = 4,
             icon_size = 64,
-            icon = '__base__/graphics/icons/express-splitter.png',
-            stack_size = 50,
+            subgroup = 'intermediate-product',
+            type = 'item',
+            stack_size = 200,
+            order = 'e[electronic-circuit]'
+        },
+        ['express-underground-belt'] = {
+            icon = '__base__/graphics/icons/express-underground-belt.png',
+            name = 'express-underground-belt',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'express-underground-belt',
+            order = 'b[underground-belt]-c[express-underground-belt]',
             subgroup = 'belt',
-            icon_mipmaps = 4,
-            place_result = 'express-splitter',
-            type = 'item',
-            name = 'express-splitter'
-        },
-        ['constant-combinator'] = {
-            order = 'c[combinators]-c[constant-combinator]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/constant-combinator.png',
             stack_size = 50,
-            subgroup = 'circuit-network',
+            icon_size = 64
+        },
+        ['rocket-fuel'] = {
+            icon = '__base__/graphics/icons/rocket-fuel.png',
+            name = 'rocket-fuel',
             icon_mipmaps = 4,
-            place_result = 'constant-combinator',
+            fuel_acceleration_multiplier = 1.8,
             type = 'item',
-            name = 'constant-combinator'
+            fuel_top_speed_multiplier = 1.15,
+            order = 'p[rocket-fuel]',
+            fuel_category = 'chemical',
+            subgroup = 'intermediate-product',
+            icon_size = 64,
+            stack_size = 10,
+            fuel_value = '100MJ'
         },
         ['steel-furnace'] = {
-            order = 'b[steel-furnace]',
-            icon_size = 64,
             icon = '__base__/graphics/icons/steel-furnace.png',
-            stack_size = 50,
-            subgroup = 'smelting-machine',
+            name = 'steel-furnace',
             icon_mipmaps = 4,
+            type = 'item',
             place_result = 'steel-furnace',
-            type = 'item',
-            name = 'steel-furnace'
+            order = 'b[steel-furnace]',
+            subgroup = 'smelting-machine',
+            stack_size = 50,
+            icon_size = 64
         },
-        explosives = {
-            order = 'j[explosives]',
+        roboport = {
+            icon = '__base__/graphics/icons/roboport.png',
+            name = 'roboport',
             icon_mipmaps = 4,
-            icon_size = 64,
             type = 'item',
-            subgroup = 'raw-material',
-            icon = '__base__/graphics/icons/explosives.png',
-            name = 'explosives',
-            stack_size = 50
+            place_result = 'roboport',
+            order = 'c[signal]-a[roboport]',
+            subgroup = 'logistic-network',
+            stack_size = 10,
+            icon_size = 64
         },
-        ['discharge-defense-equipment'] = {
-            order = 'b[active-defense]-b[discharge-defense-equipment]-a[equipment]',
-            icon_size = 64,
-            icon = '__base__/graphics/icons/discharge-defense-equipment.png',
+        ['refined-hazard-concrete'] = {
+            icon = '__base__/graphics/icons/refined-hazard-concrete.png',
+            name = 'refined-hazard-concrete',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'b[concrete]-d[refined-hazard]',
+            subgroup = 'terrain',
+            place_as_tile = {condition_size = 1, result = 'refined-hazard-concrete-left', condition = {'water-tile'}},
+            stack_size = 100,
+            icon_size = 64
+        },
+        ['stack-filter-inserter'] = {
+            icon = '__base__/graphics/icons/stack-filter-inserter.png',
+            name = 'stack-filter-inserter',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'stack-filter-inserter',
+            order = 'g[stack-filter-inserter]',
+            subgroup = 'inserter',
+            stack_size = 50,
+            icon_size = 64
+        },
+        pump = {
+            icon = '__base__/graphics/icons/pump.png',
+            name = 'pump',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'pump',
+            order = 'b[pipe]-c[pump]',
+            subgroup = 'energy-pipe-distribution',
+            stack_size = 50,
+            icon_size = 64
+        },
+        lab = {
+            icon = '__base__/graphics/icons/lab.png',
+            name = 'lab',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'lab',
+            order = 'g[lab]',
+            subgroup = 'production-machine',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['logistic-chest-requester'] = {
+            icon = '__base__/graphics/icons/logistic-chest-requester.png',
+            name = 'logistic-chest-requester',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'logistic-chest-requester',
+            order = 'b[storage]-e[logistic-chest-requester]',
+            subgroup = 'logistic-network',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['logistic-chest-storage'] = {
+            icon = '__base__/graphics/icons/logistic-chest-storage.png',
+            name = 'logistic-chest-storage',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'logistic-chest-storage',
+            order = 'b[storage]-c[logistic-chest-storage]',
+            subgroup = 'logistic-network',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['fast-underground-belt'] = {
+            icon = '__base__/graphics/icons/fast-underground-belt.png',
+            name = 'fast-underground-belt',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'fast-underground-belt',
+            order = 'b[underground-belt]-b[fast-underground-belt]',
+            subgroup = 'belt',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['player-port'] = {
+            icon = '__base__/graphics/icons/player-port.png',
+            name = 'player-port',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'player-port',
+            order = 'z[not-used]',
+            flags = {'hidden'},
+            subgroup = 'defensive-structure',
+            stack_size = 50,
+            icon_size = 64
+        },
+        pipe = {
+            icon = '__base__/graphics/icons/pipe.png',
+            name = 'pipe',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'pipe',
+            order = 'a[pipe]-a[pipe]',
+            subgroup = 'energy-pipe-distribution',
+            stack_size = 100,
+            icon_size = 64
+        },
+        ['offshore-pump'] = {
+            icon = '__base__/graphics/icons/offshore-pump.png',
+            name = 'offshore-pump',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'offshore-pump',
+            order = 'b[fluids]-a[offshore-pump]',
+            subgroup = 'extraction-machine',
             stack_size = 20,
-            subgroup = 'military-equipment',
+            icon_size = 64
+        },
+        ['battery-mk2-equipment'] = {
+            icon = '__base__/graphics/icons/battery-mk2-equipment.png',
+            name = 'battery-mk2-equipment',
             icon_mipmaps = 4,
-            default_request_amount = 1,
+            localised_description = {'item-description.battery-equipment'},
             type = 'item',
-            name = 'discharge-defense-equipment',
-            placed_as_equipment_result = 'discharge-defense-equipment'
+            order = 'b[battery]-b[battery-equipment-mk2]',
+            default_request_amount = 5,
+            subgroup = 'equipment',
+            placed_as_equipment_result = 'battery-mk2-equipment',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['wooden-chest'] = {
+            icon = '__base__/graphics/icons/wooden-chest.png',
+            name = 'wooden-chest',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'wooden-chest',
+            order = 'a[items]-a[wooden-chest]',
+            subgroup = 'storage',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['small-electric-pole'] = {
+            icon = '__base__/graphics/icons/small-electric-pole.png',
+            name = 'small-electric-pole',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'small-electric-pole',
+            order = 'a[energy]-a[small-electric-pole]',
+            subgroup = 'energy-pipe-distribution',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['rocket-control-unit'] = {
+            icon = '__base__/graphics/icons/rocket-control-unit.png',
+            name = 'rocket-control-unit',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            type = 'item',
+            stack_size = 10,
+            order = 'n[rocket-control-unit]'
+        },
+        ['logistic-chest-active-provider'] = {
+            icon = '__base__/graphics/icons/logistic-chest-active-provider.png',
+            name = 'logistic-chest-active-provider',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'logistic-chest-active-provider',
+            order = 'b[storage]-c[logistic-chest-active-provider]',
+            subgroup = 'logistic-network',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['heat-exchanger'] = {
+            icon = '__base__/graphics/icons/heat-boiler.png',
+            name = 'heat-exchanger',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'heat-exchanger',
+            order = 'f[nuclear-energy]-c[heat-exchanger]',
+            subgroup = 'energy',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['light-oil-barrel'] = {
+            name = 'light-oil-barrel',
+            icon_mipmaps = 4,
+            localised_name = {'item-name.filled-barrel', {'fluid-name.light-oil'}},
+            type = 'item',
+            icons = {
+                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_mipmaps = 4, icon_size = 64},
+                {
+                    icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
+                    tint = {a = 0.75, r = 0.57, g = 0.33, b = 0},
+                    icon_mipmaps = 4,
+                    icon_size = 64
+                }, {
+                    icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
+                    tint = {a = 0.75, r = 1, g = 0.73, b = 0.07},
+                    icon_mipmaps = 4,
+                    icon_size = 64
+                }
+            },
+            subgroup = 'barrel',
+            order = 'b[light-oil-barrel]',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['iron-stick'] = {
+            icon = '__base__/graphics/icons/iron-stick.png',
+            name = 'iron-stick',
+            icon_mipmaps = 4,
+            icon_size = 64,
+            subgroup = 'intermediate-product',
+            type = 'item',
+            stack_size = 100,
+            order = 'b[iron-stick]'
+        },
+        ['iron-ore'] = {
+            icon = '__base__/graphics/icons/iron-ore.png',
+            name = 'iron-ore',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'e[iron-ore]',
+            subgroup = 'raw-resource',
+            pictures = {
+                {filename = '__base__/graphics/icons/iron-ore.png', size = 64, mipmap_count = 4, scale = 0.25},
+                {filename = '__base__/graphics/icons/iron-ore-1.png', size = 64, mipmap_count = 4, scale = 0.25},
+                {filename = '__base__/graphics/icons/iron-ore-2.png', size = 64, mipmap_count = 4, scale = 0.25},
+                {filename = '__base__/graphics/icons/iron-ore-3.png', size = 64, mipmap_count = 4, scale = 0.25}
+            },
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['assembling-machine-2'] = {
+            icon = '__base__/graphics/icons/assembling-machine-2.png',
+            name = 'assembling-machine-2',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'assembling-machine-2',
+            order = 'b[assembling-machine-2]',
+            subgroup = 'production-machine',
+            stack_size = 50,
+            icon_size = 64
+        },
+        inserter = {
+            icon = '__base__/graphics/icons/inserter.png',
+            name = 'inserter',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'inserter',
+            order = 'b[inserter]',
+            subgroup = 'inserter',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['heavy-oil-barrel'] = {
+            name = 'heavy-oil-barrel',
+            icon_mipmaps = 4,
+            localised_name = {'item-name.filled-barrel', {'fluid-name.heavy-oil'}},
+            type = 'item',
+            icons = {
+                {icon = '__base__/graphics/icons/fluid/barreling/empty-barrel.png', icon_mipmaps = 4, icon_size = 64},
+                {
+                    icon = '__base__/graphics/icons/fluid/barreling/barrel-side-mask.png',
+                    tint = {a = 0.75, r = 0.5, g = 0.04, b = 0},
+                    icon_mipmaps = 4,
+                    icon_size = 64
+                }, {
+                    icon = '__base__/graphics/icons/fluid/barreling/barrel-hoop-top-mask.png',
+                    tint = {a = 0.75, r = 0.85, g = 0.6, b = 0.3},
+                    icon_mipmaps = 4,
+                    icon_size = 64
+                }
+            },
+            subgroup = 'barrel',
+            order = 'b[heavy-oil-barrel]',
+            stack_size = 10,
+            icon_size = 64
+        },
+        ['filter-inserter'] = {
+            icon = '__base__/graphics/icons/filter-inserter.png',
+            name = 'filter-inserter',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'filter-inserter',
+            order = 'e[filter-inserter]',
+            subgroup = 'inserter',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['burner-mining-drill'] = {
+            icon = '__base__/graphics/icons/burner-mining-drill.png',
+            name = 'burner-mining-drill',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'burner-mining-drill',
+            order = 'a[items]-a[burner-mining-drill]',
+            subgroup = 'extraction-machine',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['fast-splitter'] = {
+            icon = '__base__/graphics/icons/fast-splitter.png',
+            name = 'fast-splitter',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'fast-splitter',
+            order = 'c[splitter]-b[fast-splitter]',
+            subgroup = 'belt',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['rocket-part'] = {
+            icon = '__base__/graphics/icons/rocket-part.png',
+            name = 'rocket-part',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'q[rocket-part]',
+            flags = {'hidden'},
+            subgroup = 'intermediate-product',
+            stack_size = 5,
+            icon_size = 64
+        },
+        ['express-transport-belt'] = {
+            icon = '__base__/graphics/icons/express-transport-belt.png',
+            name = 'express-transport-belt',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'express-transport-belt',
+            order = 'a[transport-belt]-c[express-transport-belt]',
+            subgroup = 'belt',
+            stack_size = 100,
+            icon_size = 64
+        },
+        ['energy-shield-equipment'] = {
+            icon = '__base__/graphics/icons/energy-shield-equipment.png',
+            name = 'energy-shield-equipment',
+            icon_mipmaps = 4,
+            type = 'item',
+            order = 'a[shield]-a[energy-shield-equipment]',
+            default_request_amount = 5,
+            subgroup = 'military-equipment',
+            placed_as_equipment_result = 'energy-shield-equipment',
+            stack_size = 20,
+            icon_size = 64
+        },
+        ['electric-mining-drill'] = {
+            icon = '__base__/graphics/icons/electric-mining-drill.png',
+            name = 'electric-mining-drill',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'electric-mining-drill',
+            order = 'a[items]-b[electric-mining-drill]',
+            subgroup = 'extraction-machine',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['electric-furnace'] = {
+            icon = '__base__/graphics/icons/electric-furnace.png',
+            name = 'electric-furnace',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'electric-furnace',
+            order = 'c[electric-furnace]',
+            subgroup = 'smelting-machine',
+            stack_size = 50,
+            icon_size = 64
+        },
+        ['decider-combinator'] = {
+            icon = '__base__/graphics/icons/decider-combinator.png',
+            name = 'decider-combinator',
+            icon_mipmaps = 4,
+            type = 'item',
+            place_result = 'decider-combinator',
+            order = 'c[combinators]-b[decider-combinator]',
+            subgroup = 'circuit-network',
+            stack_size = 50,
+            icon_size = 64
         }
     };
     return _;

@@ -1,45 +1,45 @@
 do
     local _ = {
         ['heat-interface'] = {
-            minable = {mining_time = 0.1, result = 'heat-interface'},
+            icon = '__base__/graphics/icons/heat-interface.png',
+            max_health = 150,
+            icon_mipmaps = 4,
+            type = 'heat-interface',
             heat_buffer = {
-                max_temperature = 1000,
+                specific_heat = '10MJ',
                 max_transfer = '10GW',
                 connections = {
                     {direction = 0, position = {0, 0}}, {direction = 2, position = {0, 0}},
                     {direction = 4, position = {0, 0}}, {direction = 6, position = {0, 0}}
                 },
-                specific_heat = '10MJ'
+                max_temperature = 1000
             },
             icon_size = 64,
-            flags = {'placeable-neutral', 'player-creation'},
-            icon = '__base__/graphics/icons/heat-interface.png',
-            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
             resistances = {
-                {type = 'fire', percent = 100}, {type = 'impact', percent = 100}, {type = 'physical', percent = 100},
-                {type = 'explosion', percent = 100}
+                {percent = 100, type = 'fire'}, {percent = 100, type = 'impact'}, {percent = 100, type = 'physical'},
+                {percent = 100, type = 'explosion'}
             },
+            flags = {'placeable-neutral', 'player-creation'},
             picture = {
                 filename = '__base__/graphics/icons/heat-interface.png',
                 width = 32,
+                height = 32,
                 x = 64,
-                flags = {'no-crop'},
                 hr_version = {
                     filename = '__base__/graphics/icons/heat-interface.png',
                     scale = 0.5,
-                    flags = {'no-crop'},
+                    height = 64,
                     width = 64,
-                    height = 64
+                    flags = {'no-crop'}
                 },
-                height = 32
+                flags = {'no-crop'}
             },
-            gui_mode = 'admins',
             name = 'heat-interface',
-            corpse = 'small-remnants',
-            max_health = 150,
-            type = 'heat-interface',
+            gui_mode = 'admins',
+            selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
             collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
-            icon_mipmaps = 4
+            corpse = 'small-remnants',
+            minable = {mining_time = 0.1, result = 'heat-interface'}
         }
     };
     return _;

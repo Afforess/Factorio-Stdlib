@@ -1,4 +1,4 @@
 do
-    local _ = {armor = {name = 'armor', type = 'equipment-category'}};
+    local _ = {armor = {type = 'equipment-category', name = 'armor'}};
     return _;
 end

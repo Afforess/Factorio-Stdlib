@@ -1,29 +1,29 @@
 do
     local _ = {
         ['battery-equipment'] = {
-            shape = {height = 2, width = 1, type = 'full'},
-            energy_source = {buffer_capacity = '20MJ', type = 'electric', usage_priority = 'tertiary'},
+            categories = {'armor'},
             sprite = {
-                priority = 'medium',
                 filename = '__base__/graphics/equipment/battery-equipment.png',
                 width = 32,
+                priority = 'medium',
                 height = 64
             },
-            categories = {'armor'},
             type = 'battery-equipment',
+            energy_source = {buffer_capacity = '20MJ', usage_priority = 'tertiary', type = 'electric'},
+            shape = {height = 2, type = 'full', width = 1},
             name = 'battery-equipment'
         },
         ['battery-mk2-equipment'] = {
-            shape = {height = 2, width = 1, type = 'full'},
-            energy_source = {buffer_capacity = '100MJ', type = 'electric', usage_priority = 'tertiary'},
+            categories = {'armor'},
             sprite = {
-                priority = 'medium',
                 filename = '__base__/graphics/equipment/battery-mk2-equipment.png',
                 width = 32,
+                priority = 'medium',
                 height = 64
             },
-            categories = {'armor'},
             type = 'battery-equipment',
+            energy_source = {buffer_capacity = '100MJ', usage_priority = 'tertiary', type = 'electric'},
+            shape = {height = 2, type = 'full', width = 1},
             name = 'battery-mk2-equipment'
         }
     };

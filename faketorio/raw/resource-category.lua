@@ -1,7 +1,7 @@
 do
     local _ = {
-        ['basic-fluid'] = {name = 'basic-fluid', type = 'resource-category'},
-        ['basic-solid'] = {name = 'basic-solid', type = 'resource-category'}
+        ['basic-fluid'] = {type = 'resource-category', name = 'basic-fluid'},
+        ['basic-solid'] = {type = 'resource-category', name = 'basic-solid'}
     };
     return _;
 end

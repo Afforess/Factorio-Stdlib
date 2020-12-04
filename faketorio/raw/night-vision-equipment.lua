@@ -1,27 +1,27 @@
 do
     local _ = {
         ['night-vision-equipment'] = {
-            shape = {height = 2, width = 2, type = 'full'},
-            activate_sound = {volume = 0.5, filename = '__base__/sound/nightvision-on.ogg'},
-            energy_input = '10kW',
-            color_lookup = {{0.5, '__core__/graphics/color_luts/nightvision.png'}},
-            energy_source = {
-                buffer_capacity = '120kJ',
-                type = 'electric',
-                input_flow_limit = '240kW',
-                usage_priority = 'primary-input'
-            },
+            activate_sound = {filename = '__base__/sound/nightvision-on.ogg', volume = 0.5},
+            name = 'night-vision-equipment',
             sprite = {
-                priority = 'medium',
                 filename = '__base__/graphics/equipment/night-vision-equipment.png',
                 width = 64,
+                priority = 'medium',
                 height = 64
             },
-            categories = {'armor'},
-            name = 'night-vision-equipment',
+            energy_input = '10kW',
             type = 'night-vision-equipment',
-            deactivate_sound = {volume = 0.5, filename = '__base__/sound/nightvision-off.ogg'},
-            darkness_to_turn_on = 0.5
+            darkness_to_turn_on = 0.5,
+            color_lookup = {{0.5, '__core__/graphics/color_luts/nightvision.png'}},
+            categories = {'armor'},
+            energy_source = {
+                usage_priority = 'primary-input',
+                buffer_capacity = '120kJ',
+                type = 'electric',
+                input_flow_limit = '240kW'
+            },
+            deactivate_sound = {filename = '__base__/sound/nightvision-off.ogg', volume = 0.5},
+            shape = {height = 2, type = 'full', width = 2}
         }
     };
     return _;

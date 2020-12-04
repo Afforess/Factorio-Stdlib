@@ -1,16 +1,16 @@
 do
     local _ = {
         ['item-with-inventory'] = {
-            order = 's[item-with-inventory]-o[item-with-inventory]',
-            icon_size = 64,
-            flags = {'hidden'},
             icon = '__base__/graphics/icons/wooden-chest.png',
-            stack_size = 1,
-            subgroup = 'other',
+            name = 'item-with-inventory',
             icon_mipmaps = 4,
-            inventory_size = 1,
             type = 'item-with-inventory',
-            name = 'item-with-inventory'
+            order = 's[item-with-inventory]-o[item-with-inventory]',
+            flags = {'hidden'},
+            subgroup = 'other',
+            icon_size = 64,
+            stack_size = 1,
+            inventory_size = 1
         }
     };
     return _;

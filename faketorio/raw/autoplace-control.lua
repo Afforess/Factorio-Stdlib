@@ -1,43 +1,43 @@
 do
     local _ = {
         ['uranium-ore'] = {
-            order = 'b-e',
+            name = 'uranium-ore',
             richness = true,
+            type = 'autoplace-control',
             category = 'resource',
-            type = 'autoplace-control',
-            name = 'uranium-ore'
-        },
-        ['copper-ore'] = {
-            order = 'b-b',
-            richness = true,
-            category = 'resource',
-            type = 'autoplace-control',
-            name = 'copper-ore'
-        },
-        ['crude-oil'] = {
-            order = 'b-f',
-            richness = true,
-            category = 'resource',
-            type = 'autoplace-control',
-            name = 'crude-oil'
-        },
-        trees = {order = 'c-y', richness = true, category = 'terrain', type = 'autoplace-control', name = 'trees'},
-        stone = {order = 'b-c', richness = true, category = 'resource', type = 'autoplace-control', name = 'stone'},
-        ['enemy-base'] = {
-            order = 'c-z',
-            richness = false,
-            category = 'enemy',
-            type = 'autoplace-control',
-            name = 'enemy-base'
+            order = 'b-e'
         },
         ['iron-ore'] = {
-            order = 'b-a',
+            name = 'iron-ore',
             richness = true,
-            category = 'resource',
             type = 'autoplace-control',
-            name = 'iron-ore'
+            category = 'resource',
+            order = 'b-a'
         },
-        coal = {order = 'b-d', richness = true, category = 'resource', type = 'autoplace-control', name = 'coal'}
+        stone = {name = 'stone', richness = true, type = 'autoplace-control', category = 'resource', order = 'b-c'},
+        coal = {name = 'coal', richness = true, type = 'autoplace-control', category = 'resource', order = 'b-d'},
+        trees = {name = 'trees', richness = true, type = 'autoplace-control', category = 'terrain', order = 'c-y'},
+        ['crude-oil'] = {
+            name = 'crude-oil',
+            richness = true,
+            type = 'autoplace-control',
+            category = 'resource',
+            order = 'b-f'
+        },
+        ['enemy-base'] = {
+            name = 'enemy-base',
+            richness = false,
+            type = 'autoplace-control',
+            category = 'enemy',
+            order = 'c-z'
+        },
+        ['copper-ore'] = {
+            name = 'copper-ore',
+            richness = true,
+            type = 'autoplace-control',
+            category = 'resource',
+            order = 'b-b'
+        }
     };
     return _;
 end

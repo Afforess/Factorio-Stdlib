@@ -1,335 +1,173 @@
 do
     local _ = {
-        ['spidertron-rocket-launcher-4'] = {
-            order = 'z[spider]-a[rocket-launcher]',
-            icon_size = 64,
-            attack_parameters = {
-                projectile_orientation_offset = 0.0625,
-                type = 'projectile',
-                range = 36,
-                projectile_creation_distance = -0.5,
-                cooldown = 60,
-                sound = {{volume = 0.7, filename = '__base__/sound/fight/rocket-launcher.ogg'}},
-                ammo_category = 'rocket',
-                projectile_center = {0, 0.3}
-            },
-            icon = '__base__/graphics/icons/rocket-launcher.png',
-            stack_size = 1,
-            subgroup = 'gun',
-            icon_mipmaps = 4,
-            localised_name = {'item-name.spidertron-rocket-launcher'},
-            type = 'gun',
-            name = 'spidertron-rocket-launcher-4',
-            flags = {'hidden'}
-        },
         ['combat-shotgun'] = {
-            order = 'b[shotgun]-a[combat]',
-            icon_size = 64,
-            attack_parameters = {
-                movement_slow_down_factor = 0.5,
-                type = 'projectile',
-                range = 15,
-                damage_modifier = 1.2,
-                cooldown = 30,
-                sound = {
-                    {volume = 0.37, filename = '__base__/sound/fight/pump-shotgun-1.ogg'},
-                    {volume = 0.37, filename = '__base__/sound/fight/pump-shotgun-2.ogg'},
-                    {volume = 0.37, filename = '__base__/sound/fight/pump-shotgun-3.ogg'},
-                    {volume = 0.37, filename = '__base__/sound/fight/pump-shotgun-4.ogg'},
-                    {volume = 0.37, filename = '__base__/sound/fight/pump-shotgun-5.ogg'}
-                },
-                ammo_category = 'shotgun-shell',
-                projectile_creation_distance = 1.125
-            },
             icon = '__base__/graphics/icons/combat-shotgun.png',
-            stack_size = 5,
-            subgroup = 'gun',
+            name = 'combat-shotgun',
             icon_mipmaps = 4,
-            type = 'gun',
-            name = 'combat-shotgun'
-        },
-        flamethrower = {
-            order = 'e[flamethrower]',
-            icon_size = 64,
             attack_parameters = {
-                movement_slow_down_factor = 0.4,
-                gun_center_shift = {0, -1},
-                gun_barrel_length = 0.8,
-                cyclic_sound = {
-                    begin_sound = {{volume = 0.7, filename = '__base__/sound/fight/flamethrower-start.ogg'}},
-                    middle_sound = {{volume = 0.7, filename = '__base__/sound/fight/flamethrower-mid.ogg'}},
-                    end_sound = {{volume = 0.7, filename = '__base__/sound/fight/flamethrower-end.ogg'}}
+                type = 'projectile',
+                sound = {
+                    {filename = '__base__/sound/fight/pump-shotgun-1.ogg', volume = 0.37},
+                    {filename = '__base__/sound/fight/pump-shotgun-2.ogg', volume = 0.37},
+                    {filename = '__base__/sound/fight/pump-shotgun-3.ogg', volume = 0.37},
+                    {filename = '__base__/sound/fight/pump-shotgun-4.ogg', volume = 0.37},
+                    {filename = '__base__/sound/fight/pump-shotgun-5.ogg', volume = 0.37}
                 },
                 range = 15,
-                cooldown = 1,
-                type = 'stream',
-                ammo_category = 'flamethrower',
-                min_range = 3
-            },
-            icon = '__base__/graphics/icons/flamethrower.png',
-            stack_size = 5,
-            subgroup = 'gun',
-            icon_mipmaps = 4,
-            type = 'gun',
-            name = 'flamethrower'
-        },
-        ['rocket-launcher'] = {
-            order = 'd[rocket-launcher]',
-            icon_size = 64,
-            attack_parameters = {
-                movement_slow_down_factor = 0.8,
-                type = 'projectile',
-                range = 36,
-                projectile_creation_distance = 0.6,
-                cooldown = 60,
-                sound = {{volume = 0.7, filename = '__base__/sound/fight/rocket-launcher.ogg'}},
-                ammo_category = 'rocket',
-                projectile_center = {-0.17, 0}
-            },
-            icon = '__base__/graphics/icons/rocket-launcher.png',
-            stack_size = 5,
-            subgroup = 'gun',
-            icon_mipmaps = 4,
-            type = 'gun',
-            name = 'rocket-launcher'
-        },
-        ['vehicle-machine-gun'] = {
-            order = 'a[basic-clips]-b[vehicle-machine-gun]',
-            icon_size = 64,
-            attack_parameters = {
-                movement_slow_down_factor = 0.7,
-                type = 'projectile',
-                range = 20,
-                projectile_creation_distance = 0.65,
-                cooldown = 4,
-                sound = 0,
-                ammo_category = 'bullet',
-                shell_particle = {
-                    starting_frame_speed_deviation = 0.1,
-                    speed_deviation = 0.03,
-                    creation_distance = -0.6875,
-                    name = 'shell-particle',
-                    speed = 0.1,
-                    center = {0, 0},
-                    direction_deviation = 0.1,
-                    starting_frame_speed = 0.4
-                }
-            },
-            icon = '__base__/graphics/icons/submachine-gun.png',
-            stack_size = 1,
-            subgroup = 'gun',
-            icon_mipmaps = 4,
-            type = 'gun',
-            name = 'vehicle-machine-gun',
-            flags = {'hidden'}
-        },
-        pistol = {
-            order = 'a[basic-clips]-a[pistol]',
-            icon_size = 64,
-            attack_parameters = {
-                movement_slow_down_factor = 0.2,
-                type = 'projectile',
-                range = 15,
+                movement_slow_down_factor = 0.5,
+                ammo_category = 'shotgun-shell',
                 projectile_creation_distance = 1.125,
-                cooldown = 15,
-                sound = {
-                    {volume = 0.6, filename = '__base__/sound/fight/light-gunshot-1.ogg'},
-                    {volume = 0.6, filename = '__base__/sound/fight/light-gunshot-2.ogg'},
-                    {volume = 0.6, filename = '__base__/sound/fight/light-gunshot-3.ogg'},
-                    {volume = 0.6, filename = '__base__/sound/fight/light-gunshot-4.ogg'},
-                    {volume = 0.6, filename = '__base__/sound/fight/light-gunshot-5.ogg'},
-                    {volume = 0.6, filename = '__base__/sound/fight/light-gunshot-6.ogg'},
-                    {volume = 0.6, filename = '__base__/sound/fight/light-gunshot-7.ogg'}
-                },
-                ammo_category = 'bullet',
-                shell_particle = {
-                    starting_frame_speed_deviation = 0.1,
-                    speed_deviation = 0.03,
-                    creation_distance = -0.5,
-                    name = 'shell-particle',
-                    speed = 0.1,
-                    center = {0, 0.1},
-                    direction_deviation = 0.1,
-                    starting_frame_speed = 0.4
-                }
+                cooldown = 30,
+                damage_modifier = 1.2
             },
-            icon = '__base__/graphics/icons/pistol.png',
+            type = 'gun',
+            order = 'b[shotgun]-a[combat]',
+            subgroup = 'gun',
             stack_size = 5,
-            subgroup = 'gun',
-            icon_mipmaps = 4,
-            type = 'gun',
-            name = 'pistol'
-        },
-        ['tank-machine-gun'] = {
-            order = 'a[basic-clips]-b[tank-machine-gun]',
-            icon_size = 64,
-            attack_parameters = {
-                movement_slow_down_factor = 0.7,
-                sound = {
-                    {volume = 0.4, filename = '__base__/sound/fight/heavy-gunshot-1.ogg'},
-                    {volume = 0.4, filename = '__base__/sound/fight/heavy-gunshot-2.ogg'},
-                    {volume = 0.4, filename = '__base__/sound/fight/heavy-gunshot-3.ogg'},
-                    {volume = 0.4, filename = '__base__/sound/fight/heavy-gunshot-4.ogg'}
-                },
-                projectile_center = {-0.15625, -0.07812},
-                range = 20,
-                projectile_creation_distance = 1,
-                cooldown = 4,
-                type = 'projectile',
-                ammo_category = 'bullet',
-                shell_particle = {
-                    starting_frame_speed_deviation = 0.1,
-                    speed_deviation = 0.03,
-                    creation_distance = -0.6875,
-                    name = 'shell-particle',
-                    speed = 0.1,
-                    center = {0, 0},
-                    direction_deviation = 0.1,
-                    starting_frame_speed = 0.4
-                }
-            },
-            icon = '__base__/graphics/icons/submachine-gun.png',
-            stack_size = 1,
-            subgroup = 'gun',
-            icon_mipmaps = 4,
-            type = 'gun',
-            name = 'tank-machine-gun',
-            flags = {'hidden'}
+            icon_size = 64
         },
         ['tank-flamethrower'] = {
-            order = 'b[flamethrower]-b[tank-flamethrower]',
-            icon_size = 64,
-            attack_parameters = {
-                gun_barrel_length = 1.4,
-                cyclic_sound = {
-                    begin_sound = {{volume = 1, filename = '__base__/sound/fight/flamethrower-start.ogg'}},
-                    middle_sound = {{volume = 1, filename = '__base__/sound/fight/flamethrower-mid.ogg'}},
-                    end_sound = {{volume = 1, filename = '__base__/sound/fight/flamethrower-end.ogg'}}
-                },
-                range = 9,
-                gun_center_shift = {-0.17, -1.15},
-                cooldown = 1,
-                type = 'stream',
-                ammo_category = 'flamethrower',
-                min_range = 3
-            },
             icon = '__base__/graphics/icons/flamethrower.png',
-            stack_size = 1,
-            subgroup = 'gun',
-            icon_mipmaps = 4,
-            type = 'gun',
             name = 'tank-flamethrower',
-            flags = {'hidden'}
-        },
-        ['tank-cannon'] = {
-            order = 'z[tank]-a[cannon]',
-            icon_size = 64,
-            attack_parameters = {
-                movement_slow_down_factor = 0,
-                type = 'projectile',
-                range = 25,
-                projectile_creation_distance = 1.6,
-                cooldown = 90,
-                sound = {
-                    {volume = 0.57, filename = '__base__/sound/fight/tank-cannon-1.ogg'},
-                    {volume = 0.57, filename = '__base__/sound/fight/tank-cannon-2.ogg'},
-                    {volume = 0.57, filename = '__base__/sound/fight/tank-cannon-3.ogg'},
-                    {volume = 0.57, filename = '__base__/sound/fight/tank-cannon-4.ogg'},
-                    {volume = 0.57, filename = '__base__/sound/fight/tank-cannon-5.ogg'}
-                },
-                ammo_category = 'cannon-shell',
-                projectile_center = {-0.15625, -0.07812}
-            },
-            icon = '__base__/graphics/icons/tank-cannon.png',
-            stack_size = 5,
-            subgroup = 'gun',
             icon_mipmaps = 4,
-            type = 'gun',
-            name = 'tank-cannon',
-            flags = {'hidden'}
-        },
-        ['submachine-gun'] = {
-            order = 'a[basic-clips]-b[submachine-gun]',
-            icon_size = 64,
             attack_parameters = {
-                movement_slow_down_factor = 0.7,
-                type = 'projectile',
-                range = 18,
-                projectile_creation_distance = 1.125,
-                cooldown = 6,
-                sound = {
-                    {volume = 0.6, filename = '__base__/sound/fight/submachine-gunshot-1.ogg'},
-                    {volume = 0.6, filename = '__base__/sound/fight/submachine-gunshot-2.ogg'},
-                    {volume = 0.6, filename = '__base__/sound/fight/submachine-gunshot-3.ogg'}
+                gun_center_shift = {-0.17, -1.15},
+                gun_barrel_length = 1.4,
+                cooldown = 1,
+                cyclic_sound = {
+                    begin_sound = {{filename = '__base__/sound/fight/flamethrower-start.ogg', volume = 1}},
+                    middle_sound = {{filename = '__base__/sound/fight/flamethrower-mid.ogg', volume = 1}},
+                    end_sound = {{filename = '__base__/sound/fight/flamethrower-end.ogg', volume = 1}}
                 },
-                ammo_category = 'bullet',
+                ammo_category = 'flamethrower',
+                type = 'stream',
+                min_range = 3,
+                range = 9
+            },
+            type = 'gun',
+            order = 'b[flamethrower]-b[tank-flamethrower]',
+            flags = {'hidden'},
+            subgroup = 'gun',
+            stack_size = 1,
+            icon_size = 64
+        },
+        ['vehicle-machine-gun'] = {
+            icon = '__base__/graphics/icons/submachine-gun.png',
+            name = 'vehicle-machine-gun',
+            icon_mipmaps = 4,
+            attack_parameters = {
+                type = 'projectile',
+                sound = 0,
                 shell_particle = {
                     starting_frame_speed_deviation = 0.1,
-                    speed_deviation = 0.03,
-                    creation_distance = -0.5,
                     name = 'shell-particle',
+                    starting_frame_speed = 0.4,
+                    creation_distance = -0.6875,
+                    center = {0, 0},
+                    speed_deviation = 0.03,
                     speed = 0.1,
-                    center = {0, 0.1},
-                    direction_deviation = 0.1,
-                    starting_frame_speed = 0.4
-                }
+                    direction_deviation = 0.1
+                },
+                range = 20,
+                ammo_category = 'bullet',
+                projectile_creation_distance = 0.65,
+                cooldown = 4,
+                movement_slow_down_factor = 0.7
             },
-            icon = '__base__/graphics/icons/submachine-gun.png',
-            stack_size = 5,
-            subgroup = 'gun',
-            icon_mipmaps = 4,
             type = 'gun',
-            name = 'submachine-gun'
-        },
-        ['spidertron-rocket-launcher-1'] = {
-            order = 'z[spider]-a[rocket-launcher]',
-            icon_size = 64,
-            attack_parameters = {
-                projectile_orientation_offset = -0.0625,
-                type = 'projectile',
-                range = 36,
-                projectile_creation_distance = -0.5,
-                cooldown = 60,
-                sound = {{volume = 0.7, filename = '__base__/sound/fight/rocket-launcher.ogg'}},
-                ammo_category = 'rocket',
-                projectile_center = {0, 0.3}
-            },
-            icon = '__base__/graphics/icons/rocket-launcher.png',
+            order = 'a[basic-clips]-b[vehicle-machine-gun]',
+            flags = {'hidden'},
+            subgroup = 'gun',
             stack_size = 1,
-            subgroup = 'gun',
+            icon_size = 64
+        },
+        ['tank-machine-gun'] = {
+            icon = '__base__/graphics/icons/submachine-gun.png',
+            name = 'tank-machine-gun',
             icon_mipmaps = 4,
-            localised_name = {'item-name.spidertron-rocket-launcher'},
+            attack_parameters = {
+                ammo_category = 'bullet',
+                projectile_creation_distance = 1,
+                movement_slow_down_factor = 0.7,
+                type = 'projectile',
+                sound = {
+                    {filename = '__base__/sound/fight/heavy-gunshot-1.ogg', volume = 0.4},
+                    {filename = '__base__/sound/fight/heavy-gunshot-2.ogg', volume = 0.4},
+                    {filename = '__base__/sound/fight/heavy-gunshot-3.ogg', volume = 0.4},
+                    {filename = '__base__/sound/fight/heavy-gunshot-4.ogg', volume = 0.4}
+                },
+                projectile_center = {-0.15625, -0.07812},
+                shell_particle = {
+                    starting_frame_speed_deviation = 0.1,
+                    name = 'shell-particle',
+                    starting_frame_speed = 0.4,
+                    creation_distance = -0.6875,
+                    center = {0, 0},
+                    speed_deviation = 0.03,
+                    speed = 0.1,
+                    direction_deviation = 0.1
+                },
+                range = 20,
+                cooldown = 4
+            },
             type = 'gun',
-            name = 'spidertron-rocket-launcher-1',
-            flags = {'hidden'}
+            order = 'a[basic-clips]-b[tank-machine-gun]',
+            flags = {'hidden'},
+            subgroup = 'gun',
+            stack_size = 1,
+            icon_size = 64
+        },
+        ['spidertron-rocket-launcher-2'] = {
+            icon = '__base__/graphics/icons/rocket-launcher.png',
+            name = 'spidertron-rocket-launcher-2',
+            icon_mipmaps = 4,
+            attack_parameters = {
+                type = 'projectile',
+                sound = {{filename = '__base__/sound/fight/rocket-launcher.ogg', volume = 0.7}},
+                cooldown = 60,
+                projectile_orientation_offset = -0.03125,
+                ammo_category = 'rocket',
+                projectile_creation_distance = -0.5,
+                projectile_center = {0, 0.3},
+                range = 36
+            },
+            type = 'gun',
+            order = 'z[spider]-a[rocket-launcher]',
+            flags = {'hidden'},
+            subgroup = 'gun',
+            localised_name = {'item-name.spidertron-rocket-launcher'},
+            stack_size = 1,
+            icon_size = 64
         },
         ['artillery-wagon-cannon'] = {
-            order = 'z[artillery]-a[cannon]',
-            icon_size = 64,
+            icon = '__base__/graphics/icons/tank-cannon.png',
+            name = 'artillery-wagon-cannon',
+            icon_mipmaps = 4,
             attack_parameters = {
+                ammo_category = 'artillery-shell',
+                projectile_creation_distance = 1.6,
                 movement_slow_down_factor = 0,
-                sound = {{volume = 0.7, filename = '__base__/sound/fight/artillery-shoots-1.ogg'}},
-                projectile_center = {-0.15625, -0.07812},
                 type = 'projectile',
+                sound = {{filename = '__base__/sound/fight/artillery-shoots-1.ogg', volume = 0.7}},
                 shell_particle = {
-                    speed_deviation = 0.1,
-                    speed = 0.1,
+                    name = 'artillery-shell-particle',
+                    direction = 0.4,
+                    center = {0, -0.5},
                     vertical_speed_deviation = 0.01,
                     vertical_speed = 0.05,
                     use_source_position = true,
                     starting_frame_speed_deviation = 0.5,
-                    creation_distance_orientation = 0.4,
-                    height = 1,
+                    speed_deviation = 0.1,
+                    starting_frame_speed = 0.5,
                     creation_distance = 0.5,
                     direction_deviation = 0.05,
-                    name = 'artillery-shell-particle',
-                    center = {0, -0.5},
-                    direction = 0.4,
-                    starting_frame_speed = 0.5
+                    speed = 0.1,
+                    height = 1,
+                    creation_distance_orientation = 0.4
                 },
+                min_range = 32,
+                projectile_center = {-0.15625, -0.07812},
                 range = 224,
-                projectile_creation_distance = 1.6,
-                cooldown = 200,
                 projectile_creation_parameters = {
                     {0, {-0, -4.53125}}, {0.004, {0.109375, -4.515625}}, {0.008, {0.203125, -4.515625}},
                     {0.012, {0.296875, -4.515625}}, {0.016, {0.390625, -4.515625}}, {0.019, {0.484375, -4.5}},
@@ -417,80 +255,242 @@ do
                     {0.978, {-0.546875, -4.5}}, {0.982, {-0.453125, -4.5}}, {0.985, {-0.359375, -4.515625}},
                     {0.989, {-0.265625, -4.515625}}, {0.993, {-0.171875, -4.515625}}, {0.997, {-0.078125, -4.53125}}
                 },
-                ammo_category = 'artillery-shell',
-                min_range = 32
+                cooldown = 200
             },
-            icon = '__base__/graphics/icons/tank-cannon.png',
-            stack_size = 1,
-            subgroup = 'gun',
-            icon_mipmaps = 4,
             type = 'gun',
-            name = 'artillery-wagon-cannon',
-            flags = {'hidden'}
+            order = 'z[artillery]-a[cannon]',
+            flags = {'hidden'},
+            subgroup = 'gun',
+            stack_size = 1,
+            icon_size = 64
         },
-        ['spidertron-rocket-launcher-2'] = {
-            order = 'z[spider]-a[rocket-launcher]',
-            icon_size = 64,
-            attack_parameters = {
-                projectile_orientation_offset = -0.03125,
-                type = 'projectile',
-                range = 36,
-                projectile_creation_distance = -0.5,
-                cooldown = 60,
-                sound = {{volume = 0.7, filename = '__base__/sound/fight/rocket-launcher.ogg'}},
-                ammo_category = 'rocket',
-                projectile_center = {0, 0.3}
-            },
+        ['spidertron-rocket-launcher-4'] = {
             icon = '__base__/graphics/icons/rocket-launcher.png',
-            stack_size = 1,
-            subgroup = 'gun',
+            name = 'spidertron-rocket-launcher-4',
             icon_mipmaps = 4,
-            localised_name = {'item-name.spidertron-rocket-launcher'},
+            attack_parameters = {
+                type = 'projectile',
+                sound = {{filename = '__base__/sound/fight/rocket-launcher.ogg', volume = 0.7}},
+                cooldown = 60,
+                projectile_orientation_offset = 0.0625,
+                ammo_category = 'rocket',
+                projectile_creation_distance = -0.5,
+                projectile_center = {0, 0.3},
+                range = 36
+            },
             type = 'gun',
-            name = 'spidertron-rocket-launcher-2',
-            flags = {'hidden'}
+            order = 'z[spider]-a[rocket-launcher]',
+            flags = {'hidden'},
+            subgroup = 'gun',
+            localised_name = {'item-name.spidertron-rocket-launcher'},
+            stack_size = 1,
+            icon_size = 64
+        },
+        pistol = {
+            icon = '__base__/graphics/icons/pistol.png',
+            name = 'pistol',
+            icon_mipmaps = 4,
+            attack_parameters = {
+                type = 'projectile',
+                sound = {
+                    {filename = '__base__/sound/fight/light-gunshot-1.ogg', volume = 0.6},
+                    {filename = '__base__/sound/fight/light-gunshot-2.ogg', volume = 0.6},
+                    {filename = '__base__/sound/fight/light-gunshot-3.ogg', volume = 0.6},
+                    {filename = '__base__/sound/fight/light-gunshot-4.ogg', volume = 0.6},
+                    {filename = '__base__/sound/fight/light-gunshot-5.ogg', volume = 0.6},
+                    {filename = '__base__/sound/fight/light-gunshot-6.ogg', volume = 0.6},
+                    {filename = '__base__/sound/fight/light-gunshot-7.ogg', volume = 0.6}
+                },
+                shell_particle = {
+                    starting_frame_speed_deviation = 0.1,
+                    name = 'shell-particle',
+                    starting_frame_speed = 0.4,
+                    creation_distance = -0.5,
+                    center = {0, 0.1},
+                    speed_deviation = 0.03,
+                    speed = 0.1,
+                    direction_deviation = 0.1
+                },
+                range = 15,
+                ammo_category = 'bullet',
+                projectile_creation_distance = 1.125,
+                cooldown = 15,
+                movement_slow_down_factor = 0.2
+            },
+            type = 'gun',
+            order = 'a[basic-clips]-a[pistol]',
+            subgroup = 'gun',
+            stack_size = 5,
+            icon_size = 64
+        },
+        ['submachine-gun'] = {
+            icon = '__base__/graphics/icons/submachine-gun.png',
+            name = 'submachine-gun',
+            icon_mipmaps = 4,
+            attack_parameters = {
+                type = 'projectile',
+                sound = {
+                    {filename = '__base__/sound/fight/submachine-gunshot-1.ogg', volume = 0.6},
+                    {filename = '__base__/sound/fight/submachine-gunshot-2.ogg', volume = 0.6},
+                    {filename = '__base__/sound/fight/submachine-gunshot-3.ogg', volume = 0.6}
+                },
+                shell_particle = {
+                    starting_frame_speed_deviation = 0.1,
+                    name = 'shell-particle',
+                    starting_frame_speed = 0.4,
+                    creation_distance = -0.5,
+                    center = {0, 0.1},
+                    speed_deviation = 0.03,
+                    speed = 0.1,
+                    direction_deviation = 0.1
+                },
+                range = 18,
+                ammo_category = 'bullet',
+                projectile_creation_distance = 1.125,
+                cooldown = 6,
+                movement_slow_down_factor = 0.7
+            },
+            type = 'gun',
+            order = 'a[basic-clips]-b[submachine-gun]',
+            subgroup = 'gun',
+            stack_size = 5,
+            icon_size = 64
         },
         ['spidertron-rocket-launcher-3'] = {
-            order = 'z[spider]-a[rocket-launcher]',
-            icon_size = 64,
-            attack_parameters = {
-                projectile_orientation_offset = 0.03125,
-                type = 'projectile',
-                range = 36,
-                projectile_creation_distance = -0.5,
-                cooldown = 60,
-                sound = {{volume = 0.7, filename = '__base__/sound/fight/rocket-launcher.ogg'}},
-                ammo_category = 'rocket',
-                projectile_center = {0, 0.3}
-            },
             icon = '__base__/graphics/icons/rocket-launcher.png',
-            stack_size = 1,
-            subgroup = 'gun',
-            icon_mipmaps = 4,
-            localised_name = {'item-name.spidertron-rocket-launcher'},
-            type = 'gun',
             name = 'spidertron-rocket-launcher-3',
-            flags = {'hidden'}
+            icon_mipmaps = 4,
+            attack_parameters = {
+                type = 'projectile',
+                sound = {{filename = '__base__/sound/fight/rocket-launcher.ogg', volume = 0.7}},
+                cooldown = 60,
+                projectile_orientation_offset = 0.03125,
+                ammo_category = 'rocket',
+                projectile_creation_distance = -0.5,
+                projectile_center = {0, 0.3},
+                range = 36
+            },
+            type = 'gun',
+            order = 'z[spider]-a[rocket-launcher]',
+            flags = {'hidden'},
+            subgroup = 'gun',
+            localised_name = {'item-name.spidertron-rocket-launcher'},
+            stack_size = 1,
+            icon_size = 64
+        },
+        ['spidertron-rocket-launcher-1'] = {
+            icon = '__base__/graphics/icons/rocket-launcher.png',
+            name = 'spidertron-rocket-launcher-1',
+            icon_mipmaps = 4,
+            attack_parameters = {
+                type = 'projectile',
+                sound = {{filename = '__base__/sound/fight/rocket-launcher.ogg', volume = 0.7}},
+                cooldown = 60,
+                projectile_orientation_offset = -0.0625,
+                ammo_category = 'rocket',
+                projectile_creation_distance = -0.5,
+                projectile_center = {0, 0.3},
+                range = 36
+            },
+            type = 'gun',
+            order = 'z[spider]-a[rocket-launcher]',
+            flags = {'hidden'},
+            subgroup = 'gun',
+            localised_name = {'item-name.spidertron-rocket-launcher'},
+            stack_size = 1,
+            icon_size = 64
+        },
+        ['rocket-launcher'] = {
+            icon = '__base__/graphics/icons/rocket-launcher.png',
+            name = 'rocket-launcher',
+            icon_mipmaps = 4,
+            attack_parameters = {
+                type = 'projectile',
+                sound = {{filename = '__base__/sound/fight/rocket-launcher.ogg', volume = 0.7}},
+                range = 36,
+                projectile_center = {-0.17, 0},
+                ammo_category = 'rocket',
+                projectile_creation_distance = 0.6,
+                cooldown = 60,
+                movement_slow_down_factor = 0.8
+            },
+            type = 'gun',
+            order = 'd[rocket-launcher]',
+            subgroup = 'gun',
+            stack_size = 5,
+            icon_size = 64
         },
         shotgun = {
-            order = 'b[shotgun]-a[basic]',
-            icon_size = 64,
+            icon = '__base__/graphics/icons/shotgun.png',
+            name = 'shotgun',
+            icon_mipmaps = 4,
             attack_parameters = {
-                movement_slow_down_factor = 0.6,
                 type = 'projectile',
+                sound = 0,
                 range = 15,
+                min_range = 1,
+                ammo_category = 'shotgun-shell',
                 projectile_creation_distance = 1.125,
                 cooldown = 60,
-                sound = 0,
-                ammo_category = 'shotgun-shell',
-                min_range = 1
+                movement_slow_down_factor = 0.6
             },
-            icon = '__base__/graphics/icons/shotgun.png',
-            stack_size = 5,
-            subgroup = 'gun',
-            icon_mipmaps = 4,
             type = 'gun',
-            name = 'shotgun'
+            order = 'b[shotgun]-a[basic]',
+            subgroup = 'gun',
+            stack_size = 5,
+            icon_size = 64
+        },
+        flamethrower = {
+            icon = '__base__/graphics/icons/flamethrower.png',
+            name = 'flamethrower',
+            icon_mipmaps = 4,
+            attack_parameters = {
+                gun_center_shift = {0, -1},
+                gun_barrel_length = 0.8,
+                ammo_category = 'flamethrower',
+                type = 'stream',
+                movement_slow_down_factor = 0.4,
+                cyclic_sound = {
+                    begin_sound = {{filename = '__base__/sound/fight/flamethrower-start.ogg', volume = 0.7}},
+                    middle_sound = {{filename = '__base__/sound/fight/flamethrower-mid.ogg', volume = 0.7}},
+                    end_sound = {{filename = '__base__/sound/fight/flamethrower-end.ogg', volume = 0.7}}
+                },
+                range = 15,
+                min_range = 3,
+                cooldown = 1
+            },
+            type = 'gun',
+            order = 'e[flamethrower]',
+            subgroup = 'gun',
+            stack_size = 5,
+            icon_size = 64
+        },
+        ['tank-cannon'] = {
+            icon = '__base__/graphics/icons/tank-cannon.png',
+            name = 'tank-cannon',
+            icon_mipmaps = 4,
+            attack_parameters = {
+                type = 'projectile',
+                sound = {
+                    {filename = '__base__/sound/fight/tank-cannon-1.ogg', volume = 0.57},
+                    {filename = '__base__/sound/fight/tank-cannon-2.ogg', volume = 0.57},
+                    {filename = '__base__/sound/fight/tank-cannon-3.ogg', volume = 0.57},
+                    {filename = '__base__/sound/fight/tank-cannon-4.ogg', volume = 0.57},
+                    {filename = '__base__/sound/fight/tank-cannon-5.ogg', volume = 0.57}
+                },
+                range = 25,
+                projectile_center = {-0.15625, -0.07812},
+                ammo_category = 'cannon-shell',
+                projectile_creation_distance = 1.6,
+                cooldown = 90,
+                movement_slow_down_factor = 0
+            },
+            type = 'gun',
+            order = 'z[tank]-a[cannon]',
+            flags = {'hidden'},
+            subgroup = 'gun',
+            stack_size = 5,
+            icon_size = 64
         }
     };
     return _;

@@ -1,35 +1,35 @@
 do
     local _ = {
-        ['game-interaction'] = {
-            order = 'a-[game-interaction]',
+        ['electric-network'] = {
+            name = 'electric-network',
             type = 'tips-and-tricks-item-category',
-            name = 'game-interaction'
+            order = 'd-[electric-network]'
         },
-        ['fast-replace'] = {order = 'k-[fast-replace]', type = 'tips-and-tricks-item-category', name = 'fast-replace'},
-        belts = {order = 'c-[belts]', type = 'tips-and-tricks-item-category', name = 'belts'},
+        ['copy-paste'] = {name = 'copy-paste', type = 'tips-and-tricks-item-category', order = 'e-[copy-paste]'},
         ['ghost-building'] = {
-            order = 'j-[ghost-building]',
+            name = 'ghost-building',
             type = 'tips-and-tricks-item-category',
-            name = 'ghost-building'
+            order = 'j-[ghost-building]'
+        },
+        inserters = {name = 'inserters', type = 'tips-and-tricks-item-category', order = 'b-[inserters]'},
+        ['logistic-network'] = {
+            name = 'logistic-network',
+            type = 'tips-and-tricks-item-category',
+            order = 'i-[logistic-network]'
+        },
+        trains = {name = 'trains', type = 'tips-and-tricks-item-category', order = 'h-[trains]'},
+        ['game-interaction'] = {
+            name = 'game-interaction',
+            type = 'tips-and-tricks-item-category',
+            order = 'a-[game-interaction]'
         },
         ['drag-building'] = {
-            order = 'f-[drag-building]',
+            name = 'drag-building',
             type = 'tips-and-tricks-item-category',
-            name = 'drag-building'
+            order = 'f-[drag-building]'
         },
-        inserters = {order = 'b-[inserters]', type = 'tips-and-tricks-item-category', name = 'inserters'},
-        ['copy-paste'] = {order = 'e-[copy-paste]', type = 'tips-and-tricks-item-category', name = 'copy-paste'},
-        ['electric-network'] = {
-            order = 'd-[electric-network]',
-            type = 'tips-and-tricks-item-category',
-            name = 'electric-network'
-        },
-        trains = {order = 'h-[trains]', type = 'tips-and-tricks-item-category', name = 'trains'},
-        ['logistic-network'] = {
-            order = 'i-[logistic-network]',
-            type = 'tips-and-tricks-item-category',
-            name = 'logistic-network'
-        }
+        belts = {name = 'belts', type = 'tips-and-tricks-item-category', order = 'c-[belts]'},
+        ['fast-replace'] = {name = 'fast-replace', type = 'tips-and-tricks-item-category', order = 'k-[fast-replace]'}
     };
     return _;
 end

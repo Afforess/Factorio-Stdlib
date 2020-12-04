@@ -1,2750 +1,2750 @@
 do
     local _ = {
         ['straight-rail'] = {
-            minable = {mining_time = 0.2, result = 'rail'},
-            walking_sound = 0,
-            icon_size = 64,
             icon = '__base__/graphics/icons/rail.png',
             dying_explosion = 'rail-explosion',
-            damaged_trigger_effect = {
-                damage_type_filters = 'fire',
-                offsets = {{0, 1}},
-                type = 'create-entity',
-                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}},
-                entity_name = 'wall-damaged-explosion'
-            },
-            selection_box = {{-0.7, -0.8}, {0.7, 0.8}},
-            resistances = {{type = 'fire', percent = 100}, {type = 'acid', percent = 80}},
+            icon_mipmaps = 4,
+            walking_sound = 0,
+            icon_size = 64,
+            type = 'straight-rail',
+            resistances = {{percent = 100, type = 'fire'}, {percent = 80, type = 'acid'}},
             pictures = {
-                curved_rail_vertical_left_bottom = {
-                    metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-metals.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 288
-                    },
-                    segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-segment-visualisation-ending-2.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 288
-                    },
-                    stone_path = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-stone-path.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 288
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-backplates.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 288
-                    },
-                    segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-segment-visualisation-middle.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 288
-                    },
+                curved_rail_vertical_left_top = {
                     segment_visualisation_continuing_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-segment-visualisation-continuing-1.png',
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-segment-visualisation-continuing-1.png',
                         width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
                         priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 288
-                    },
-                    segment_visualisation_continuing_back = {
+                        shift = {0.5, 0.5},
+                        height = 288,
                         variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-segment-visualisation-continuing-2.png',
-                        width = 192,
                         hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-segment-visualisation-continuing-1.png',
                             width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-segment-visualisation-continuing-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
                             priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 288
-                    },
-                    ties = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-ties.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-ties.png',
                             scale = 0.5,
+                            height = 576,
                             variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 576
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
                         },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 288
-                    },
-                    stone_path_background = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-stone-path-background.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 288
+                        flags = {'low-object'}
                     },
                     segment_visualisation_ending_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-segment-visualisation-ending-1.png',
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-segment-visualisation-ending-1.png',
                         width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
                         priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 288
+                        shift = {0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-segment-visualisation-ending-1.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-metals.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-metals.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_ending_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-segment-visualisation-ending-2.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-segment-visualisation-ending-2.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-segment-visualisation-middle.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-segment-visualisation-middle.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    backplates = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-backplates.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-backplates.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-segment-visualisation-continuing-2.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-segment-visualisation-continuing-2.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-ties.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-ties.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-stone-path.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-stone-path.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-stone-path-background.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-stone-path-background.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
                     }
                 },
                 straight_rail_vertical = {
-                    metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-metals.png',
-                        width = 128,
-                        hr_version = {
-                            width = 256,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0, 0},
-                            height = 128
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0, 0},
-                        height = 64
-                    },
-                    segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-segment-visualisation-ending-2.png',
-                        width = 128,
-                        hr_version = {
-                            width = 256,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0, 0},
-                            height = 128
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0, 0},
-                        height = 64
-                    },
-                    stone_path = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-stone-path.png',
-                        width = 128,
-                        hr_version = {
-                            width = 256,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0, 0},
-                            height = 128
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0, 0},
-                        height = 64
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-backplates.png',
-                        width = 128,
-                        hr_version = {
-                            width = 256,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0, 0},
-                            height = 128
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0, 0},
-                        height = 64
-                    },
-                    segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-segment-visualisation-middle.png',
-                        width = 128,
-                        hr_version = {
-                            width = 256,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0, 0},
-                            height = 128
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0, 0},
-                        height = 64
-                    },
                     segment_visualisation_continuing_front = {
-                        variation_count = 1,
                         filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-segment-visualisation-continuing-1.png',
                         width = 128,
-                        hr_version = {
-                            width = 256,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0, 0},
-                            height = 128
-                        },
-                        flags = {'low-object'},
                         priority = 'extra-high',
                         shift = {0, 0},
-                        height = 64
-                    },
-                    segment_visualisation_continuing_back = {
+                        height = 64,
                         variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-segment-visualisation-continuing-2.png',
-                        width = 128,
                         hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-segment-visualisation-continuing-1.png',
                             width = 256,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-segment-visualisation-continuing-2.png',
+                            priority = 'extra-high',
                             scale = 0.5,
+                            height = 128,
                             variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
                             shift = {0, 0},
-                            height = 128
+                            flags = {'low-object'}
                         },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0, 0},
-                        height = 64
-                    },
-                    ties = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-ties.png',
-                        width = 128,
-                        hr_version = {
-                            width = 256,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-ties.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0, 0},
-                            height = 128
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0, 0},
-                        height = 64
-                    },
-                    stone_path_background = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-stone-path-background.png',
-                        width = 128,
-                        hr_version = {
-                            width = 256,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0, 0},
-                            height = 128
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0, 0},
-                        height = 64
+                        flags = {'low-object'}
                     },
                     segment_visualisation_ending_front = {
-                        variation_count = 1,
                         filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-segment-visualisation-ending-1.png',
                         width = 128,
+                        priority = 'extra-high',
+                        shift = {0, 0},
+                        height = 64,
+                        variation_count = 1,
                         hr_version = {
-                            width = 256,
                             filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
+                            width = 256,
                             priority = 'extra-high',
+                            scale = 0.5,
+                            height = 128,
+                            variation_count = 1,
                             shift = {0, 0},
-                            height = 128
+                            flags = {'low-object'}
                         },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0, 0},
-                        height = 64
-                    }
-                },
-                straight_rail_horizontal = {
+                        flags = {'low-object'}
+                    },
                     metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-metals.png',
-                        width = 64,
-                        hr_version = {
-                            width = 128,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0, 0},
-                            height = 256
-                        },
-                        flags = {'trilinear-filtering'},
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-metals.png',
+                        width = 128,
                         priority = 'extra-high',
                         shift = {0, 0},
-                        height = 128
+                        height = 64,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-metals.png',
+                            width = 256,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 128,
+                            variation_count = 1,
+                            shift = {0, 0},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
                     },
                     segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-segment-visualisation-ending-2.png',
-                        width = 64,
-                        hr_version = {
-                            width = 128,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0, 0},
-                            height = 256
-                        },
-                        flags = {'low-object'},
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-segment-visualisation-ending-2.png',
+                        width = 128,
                         priority = 'extra-high',
                         shift = {0, 0},
-                        height = 128
-                    },
-                    stone_path = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-stone-path.png',
-                        width = 64,
+                        height = 64,
+                        variation_count = 1,
                         hr_version = {
-                            width = 128,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-segment-visualisation-ending-2.png',
+                            width = 256,
                             priority = 'extra-high',
+                            scale = 0.5,
+                            height = 128,
+                            variation_count = 1,
                             shift = {0, 0},
-                            height = 256
+                            flags = {'low-object'}
                         },
-                        flags = {'low-object'},
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-segment-visualisation-middle.png',
+                        width = 128,
                         priority = 'extra-high',
                         shift = {0, 0},
-                        height = 128
+                        height = 64,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-segment-visualisation-middle.png',
+                            width = 256,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 128,
+                            variation_count = 1,
+                            shift = {0, 0},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
                     },
                     backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-backplates.png',
-                        width = 64,
-                        hr_version = {
-                            width = 128,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0, 0},
-                            height = 256
-                        },
-                        flags = {'trilinear-filtering'},
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-backplates.png',
+                        width = 128,
                         priority = 'extra-high',
                         shift = {0, 0},
-                        height = 128
-                    },
-                    segment_visualisation_middle = {
+                        height = 64,
                         variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-segment-visualisation-middle.png',
-                        width = 64,
                         hr_version = {
-                            width = 128,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-backplates.png',
+                            width = 256,
                             priority = 'extra-high',
+                            scale = 0.5,
+                            height = 128,
+                            variation_count = 1,
                             shift = {0, 0},
-                            height = 256
+                            flags = {'trilinear-filtering'}
                         },
-                        flags = {'low-object'},
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-segment-visualisation-continuing-2.png',
+                        width = 128,
                         priority = 'extra-high',
                         shift = {0, 0},
-                        height = 128
-                    },
-                    segment_visualisation_continuing_front = {
+                        height = 64,
                         variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-segment-visualisation-continuing-1.png',
-                        width = 64,
                         hr_version = {
-                            width = 128,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-segment-visualisation-continuing-2.png',
+                            width = 256,
                             priority = 'extra-high',
+                            scale = 0.5,
+                            height = 128,
+                            variation_count = 1,
                             shift = {0, 0},
-                            height = 256
+                            flags = {'low-object'}
                         },
-                        flags = {'low-object'},
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-ties.png',
+                        width = 128,
                         priority = 'extra-high',
                         shift = {0, 0},
-                        height = 128
-                    },
-                    segment_visualisation_continuing_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-segment-visualisation-continuing-2.png',
-                        width = 64,
+                        height = 64,
+                        variation_count = 3,
                         hr_version = {
-                            width = 128,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-segment-visualisation-continuing-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-ties.png',
+                            width = 256,
                             priority = 'extra-high',
+                            scale = 0.5,
+                            height = 128,
+                            variation_count = 3,
                             shift = {0, 0},
-                            height = 256
+                            flags = {'low-object'}
                         },
-                        flags = {'low-object'},
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-stone-path.png',
+                        width = 128,
                         priority = 'extra-high',
                         shift = {0, 0},
-                        height = 128
-                    },
-                    ties = {
+                        height = 64,
                         variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-ties.png',
-                        width = 64,
                         hr_version = {
-                            width = 128,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-ties.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-stone-path.png',
+                            width = 256,
                             priority = 'extra-high',
+                            scale = 0.5,
+                            height = 128,
+                            variation_count = 3,
                             shift = {0, 0},
-                            height = 256
+                            flags = {'low-object'}
                         },
-                        flags = {'low-object'},
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-vertical-stone-path-background.png',
+                        width = 128,
                         priority = 'extra-high',
                         shift = {0, 0},
-                        height = 128
-                    },
-                    stone_path_background = {
+                        height = 64,
                         variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-stone-path-background.png',
-                        width = 64,
                         hr_version = {
-                            width = 128,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-vertical-stone-path-background.png',
+                            width = 256,
                             priority = 'extra-high',
+                            scale = 0.5,
+                            height = 128,
+                            variation_count = 3,
                             shift = {0, 0},
-                            height = 256
+                            flags = {'low-object'}
                         },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0, 0},
-                        height = 128
-                    },
-                    segment_visualisation_ending_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-segment-visualisation-ending-1.png',
-                        width = 64,
-                        hr_version = {
-                            width = 128,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0, 0},
-                            height = 256
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0, 0},
-                        height = 128
-                    }
-                },
-                curved_rail_horizontal_left_bottom = {
-                    metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-metals.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 192
-                    },
-                    segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-segment-visualisation-ending-2.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 192
-                    },
-                    stone_path = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-stone-path.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 192
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-backplates.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 192
-                    },
-                    segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-segment-visualisation-middle.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 192
-                    },
-                    segment_visualisation_continuing_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-segment-visualisation-continuing-1.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 192
-                    },
-                    segment_visualisation_continuing_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-segment-visualisation-continuing-2.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-segment-visualisation-continuing-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 192
-                    },
-                    ties = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-ties.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-ties.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 192
-                    },
-                    stone_path_background = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-stone-path-background.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 192
-                    },
-                    segment_visualisation_ending_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-segment-visualisation-ending-1.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 192
-                    }
-                },
-                curved_rail_horizontal_right_top = {
-                    metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-metals.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 192
-                    },
-                    segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-segment-visualisation-ending-2.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 192
-                    },
-                    stone_path = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-stone-path.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 192
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-backplates.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 192
-                    },
-                    segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-segment-visualisation-middle.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 192
-                    },
-                    segment_visualisation_continuing_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-segment-visualisation-continuing-1.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 192
-                    },
-                    segment_visualisation_continuing_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-segment-visualisation-continuing-2.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-segment-visualisation-continuing-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 192
-                    },
-                    ties = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-ties.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-ties.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 192
-                    },
-                    stone_path_background = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-stone-path-background.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 192
-                    },
-                    segment_visualisation_ending_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-segment-visualisation-ending-1.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 192
-                    }
-                },
-                straight_rail_diagonal_right_top = {
-                    metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-metals.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 96
-                    },
-                    segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-segment-visualisation-ending-2.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 96
-                    },
-                    stone_path = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-stone-path.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 96
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-backplates.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 96
-                    },
-                    segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-segment-visualisation-middle.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 96
-                    },
-                    segment_visualisation_continuing_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-segment-visualisation-continuing-1.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 96
-                    },
-                    segment_visualisation_continuing_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-segment-visualisation-continuing-2.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-segment-visualisation-continuing-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 96
-                    },
-                    ties = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-ties.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-ties.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 96
-                    },
-                    stone_path_background = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-stone-path-background.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 96
-                    },
-                    segment_visualisation_ending_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-segment-visualisation-ending-1.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 96
-                    }
-                },
-                curved_rail_vertical_right_top = {
-                    metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-metals.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 288
-                    },
-                    segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-segment-visualisation-ending-2.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 288
-                    },
-                    stone_path = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-stone-path.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 288
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-backplates.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 288
-                    },
-                    segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-segment-visualisation-middle.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 288
-                    },
-                    segment_visualisation_continuing_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-segment-visualisation-continuing-1.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 288
-                    },
-                    segment_visualisation_continuing_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-segment-visualisation-continuing-2.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-segment-visualisation-continuing-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 288
-                    },
-                    ties = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-ties.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-ties.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 288
-                    },
-                    stone_path_background = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-stone-path-background.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 288
-                    },
-                    segment_visualisation_ending_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-segment-visualisation-ending-1.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, 0.5},
-                        height = 288
-                    }
-                },
-                curved_rail_horizontal_right_bottom = {
-                    metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-metals.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 192
-                    },
-                    segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-segment-visualisation-ending-2.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 192
-                    },
-                    stone_path = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-stone-path.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 192
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-backplates.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 192
-                    },
-                    segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-segment-visualisation-middle.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 192
-                    },
-                    segment_visualisation_continuing_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-segment-visualisation-continuing-1.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 192
-                    },
-                    segment_visualisation_continuing_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-segment-visualisation-continuing-2.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-segment-visualisation-continuing-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 192
-                    },
-                    ties = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-ties.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-ties.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 192
-                    },
-                    stone_path_background = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-stone-path-background.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 192
-                    },
-                    segment_visualisation_ending_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-segment-visualisation-ending-1.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 192
-                    }
-                },
-                straight_rail_diagonal_left_top = {
-                    metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-metals.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 96
-                    },
-                    segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-segment-visualisation-ending-2.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 96
-                    },
-                    stone_path = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-stone-path.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 96
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-backplates.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 96
-                    },
-                    segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-segment-visualisation-middle.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 96
-                    },
-                    segment_visualisation_continuing_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-segment-visualisation-continuing-1.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 96
-                    },
-                    segment_visualisation_continuing_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-segment-visualisation-continuing-2.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-segment-visualisation-continuing-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 96
-                    },
-                    ties = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-ties.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-ties.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 96
-                    },
-                    stone_path_background = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-stone-path-background.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 96
-                    },
-                    segment_visualisation_ending_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-segment-visualisation-ending-1.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 96
-                    }
-                },
-                straight_rail_diagonal_left_bottom = {
-                    metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-metals.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 96
-                    },
-                    segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-segment-visualisation-ending-2.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 96
-                    },
-                    stone_path = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-stone-path.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 96
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-backplates.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 96
-                    },
-                    segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-segment-visualisation-middle.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 96
-                    },
-                    segment_visualisation_continuing_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-segment-visualisation-continuing-1.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 96
-                    },
-                    segment_visualisation_continuing_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-segment-visualisation-continuing-2.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-segment-visualisation-continuing-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 96
-                    },
-                    ties = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-ties.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-ties.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 96
-                    },
-                    stone_path_background = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-stone-path-background.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 96
-                    },
-                    segment_visualisation_ending_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-segment-visualisation-ending-1.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, -0.5},
-                        height = 96
-                    }
-                },
-                curved_rail_horizontal_left_top = {
-                    metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-metals.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 192
-                    },
-                    segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-segment-visualisation-ending-2.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 192
-                    },
-                    stone_path = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-stone-path.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 192
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-backplates.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 192
-                    },
-                    segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-segment-visualisation-middle.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 192
-                    },
-                    segment_visualisation_continuing_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-segment-visualisation-continuing-1.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 192
-                    },
-                    segment_visualisation_continuing_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-segment-visualisation-continuing-2.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-segment-visualisation-continuing-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 192
-                    },
-                    ties = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-ties.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-ties.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 192
-                    },
-                    stone_path_background = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-stone-path-background.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 192
-                    },
-                    segment_visualisation_ending_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-segment-visualisation-ending-1.png',
-                        width = 288,
-                        hr_version = {
-                            width = 576,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 384
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 192
+                        flags = {'low-object'}
                     }
                 },
                 curved_rail_vertical_right_bottom = {
-                    metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-metals.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 288
-                    },
-                    segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-segment-visualisation-ending-2.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 288
-                    },
-                    stone_path = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-stone-path.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 288
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-backplates.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 288
-                    },
-                    segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-segment-visualisation-middle.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 288
-                    },
                     segment_visualisation_continuing_front = {
-                        variation_count = 1,
                         filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-segment-visualisation-continuing-1.png',
                         width = 192,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
                         hr_version = {
-                            width = 384,
                             filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 288
-                    },
-                    segment_visualisation_continuing_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-segment-visualisation-continuing-2.png',
-                        width = 192,
-                        hr_version = {
                             width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-segment-visualisation-continuing-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
                             priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 288
-                    },
-                    ties = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-ties.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-ties.png',
                             scale = 0.5,
+                            height = 576,
                             variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
                             shift = {-0.5, -0.5},
-                            height = 576
+                            flags = {'low-object'}
                         },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 288
-                    },
-                    stone_path_background = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-stone-path-background.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 288
+                        flags = {'low-object'}
                     },
                     segment_visualisation_ending_front = {
-                        variation_count = 1,
                         filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-segment-visualisation-ending-1.png',
                         width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
                         priority = 'extra-high',
                         shift = {-0.5, -0.5},
-                        height = 288
-                    }
-                },
-                curved_rail_vertical_left_top = {
-                    metals = {
+                        height = 288,
                         variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-metals.png',
-                        width = 192,
                         hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-segment-visualisation-ending-1.png',
                             width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
                             priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 576
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
                         },
-                        flags = {'trilinear-filtering'},
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-metals.png',
+                        width = 192,
                         priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 288
+                        shift = {-0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-metals.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
                     },
                     segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-segment-visualisation-ending-2.png',
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-segment-visualisation-ending-2.png',
                         width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
                         priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 288
-                    },
-                    stone_path = {
+                        shift = {-0.5, -0.5},
+                        height = 288,
                         variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-stone-path.png',
-                        width = 192,
                         hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-segment-visualisation-ending-2.png',
                             width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
                             priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 288
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-backplates.png',
-                        width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-backplates.png',
                             scale = 0.5,
+                            height = 576,
                             variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 576
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
                         },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 288
+                        flags = {'low-object'}
                     },
                     segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-segment-visualisation-middle.png',
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-segment-visualisation-middle.png',
                         width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
                         priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 288
+                        shift = {-0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-segment-visualisation-middle.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
                     },
-                    segment_visualisation_continuing_front = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-segment-visualisation-continuing-1.png',
+                    backplates = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-backplates.png',
                         width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
                         priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 288
+                        shift = {-0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-backplates.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
                     },
                     segment_visualisation_continuing_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-segment-visualisation-continuing-2.png',
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-segment-visualisation-continuing-2.png',
                         width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-segment-visualisation-continuing-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
                         priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 288
+                        shift = {-0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-segment-visualisation-continuing-2.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
                     },
                     ties = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-ties.png',
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-ties.png',
                         width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-ties.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
                         priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 288
+                        shift = {-0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-ties.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-stone-path.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-stone-path.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
                     },
                     stone_path_background = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-stone-path-background.png',
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-bottom-stone-path-background.png',
                         width = 192,
-                        hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 576
-                        },
-                        flags = {'low-object'},
                         priority = 'extra-high',
-                        shift = {0.5, 0.5},
-                        height = 288
+                        shift = {-0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-bottom-stone-path-background.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    }
+                },
+                straight_rail_diagonal_left_bottom = {
+                    segment_visualisation_continuing_front = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-segment-visualisation-continuing-1.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-segment-visualisation-continuing-1.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
                     },
                     segment_visualisation_ending_front = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-segment-visualisation-ending-1.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 96,
                         variation_count = 1,
-                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-top-segment-visualisation-ending-1.png',
-                        width = 192,
                         hr_version = {
-                            width = 384,
-                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-top-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-segment-visualisation-ending-1.png',
+                            width = 192,
                             priority = 'extra-high',
-                            shift = {0.5, 0.5},
-                            height = 576
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
                         },
-                        flags = {'low-object'},
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-metals.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-metals.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_ending_back = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-segment-visualisation-ending-2.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-segment-visualisation-ending-2.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-segment-visualisation-middle.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-segment-visualisation-middle.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    backplates = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-backplates.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-backplates.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-segment-visualisation-continuing-2.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-segment-visualisation-continuing-2.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-ties.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 96,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-ties.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 3,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-stone-path.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 96,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-stone-path.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 3,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-bottom-stone-path-background.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 96,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-bottom-stone-path-background.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 3,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    }
+                },
+                straight_rail_horizontal = {
+                    segment_visualisation_continuing_front = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-segment-visualisation-continuing-1.png',
+                        width = 64,
+                        priority = 'extra-high',
+                        shift = {0, 0},
+                        height = 128,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-segment-visualisation-continuing-1.png',
+                            width = 128,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 256,
+                            variation_count = 1,
+                            shift = {0, 0},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_ending_front = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-segment-visualisation-ending-1.png',
+                        width = 64,
+                        priority = 'extra-high',
+                        shift = {0, 0},
+                        height = 128,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-segment-visualisation-ending-1.png',
+                            width = 128,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 256,
+                            variation_count = 1,
+                            shift = {0, 0},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-metals.png',
+                        width = 64,
+                        priority = 'extra-high',
+                        shift = {0, 0},
+                        height = 128,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-metals.png',
+                            width = 128,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 256,
+                            variation_count = 1,
+                            shift = {0, 0},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_ending_back = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-segment-visualisation-ending-2.png',
+                        width = 64,
+                        priority = 'extra-high',
+                        shift = {0, 0},
+                        height = 128,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-segment-visualisation-ending-2.png',
+                            width = 128,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 256,
+                            variation_count = 1,
+                            shift = {0, 0},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-segment-visualisation-middle.png',
+                        width = 64,
+                        priority = 'extra-high',
+                        shift = {0, 0},
+                        height = 128,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-segment-visualisation-middle.png',
+                            width = 128,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 256,
+                            variation_count = 1,
+                            shift = {0, 0},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    backplates = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-backplates.png',
+                        width = 64,
+                        priority = 'extra-high',
+                        shift = {0, 0},
+                        height = 128,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-backplates.png',
+                            width = 128,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 256,
+                            variation_count = 1,
+                            shift = {0, 0},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-segment-visualisation-continuing-2.png',
+                        width = 64,
+                        priority = 'extra-high',
+                        shift = {0, 0},
+                        height = 128,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-segment-visualisation-continuing-2.png',
+                            width = 128,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 256,
+                            variation_count = 1,
+                            shift = {0, 0},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-ties.png',
+                        width = 64,
+                        priority = 'extra-high',
+                        shift = {0, 0},
+                        height = 128,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-ties.png',
+                            width = 128,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 256,
+                            variation_count = 3,
+                            shift = {0, 0},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-stone-path.png',
+                        width = 64,
+                        priority = 'extra-high',
+                        shift = {0, 0},
+                        height = 128,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-stone-path.png',
+                            width = 128,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 256,
+                            variation_count = 3,
+                            shift = {0, 0},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-horizontal-stone-path-background.png',
+                        width = 64,
+                        priority = 'extra-high',
+                        shift = {0, 0},
+                        height = 128,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-horizontal-stone-path-background.png',
+                            width = 128,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 256,
+                            variation_count = 3,
+                            shift = {0, 0},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    }
+                },
+                straight_rail_diagonal_left_top = {
+                    segment_visualisation_continuing_front = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-segment-visualisation-continuing-1.png',
+                        width = 96,
                         priority = 'extra-high',
                         shift = {0.5, 0.5},
-                        height = 288
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-segment-visualisation-continuing-1.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_ending_front = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-segment-visualisation-ending-1.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-segment-visualisation-ending-1.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-metals.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-metals.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_ending_back = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-segment-visualisation-ending-2.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-segment-visualisation-ending-2.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-segment-visualisation-middle.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-segment-visualisation-middle.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    backplates = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-backplates.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-backplates.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-segment-visualisation-continuing-2.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-segment-visualisation-continuing-2.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-ties.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 96,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-ties.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 3,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-stone-path.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 96,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-stone-path.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 3,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-left-top-stone-path-background.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 96,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-left-top-stone-path-background.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 3,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    }
+                },
+                curved_rail_horizontal_right_bottom = {
+                    segment_visualisation_continuing_front = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-segment-visualisation-continuing-1.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-segment-visualisation-continuing-1.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_ending_front = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-segment-visualisation-ending-1.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-segment-visualisation-ending-1.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-metals.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-metals.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_ending_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-segment-visualisation-ending-2.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-segment-visualisation-ending-2.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-segment-visualisation-middle.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-segment-visualisation-middle.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    backplates = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-backplates.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-backplates.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-segment-visualisation-continuing-2.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-segment-visualisation-continuing-2.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-ties.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-ties.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-stone-path.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-stone-path.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-bottom-stone-path-background.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-bottom-stone-path-background.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    }
+                },
+                straight_rail_diagonal_right_top = {
+                    segment_visualisation_continuing_front = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-segment-visualisation-continuing-1.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-segment-visualisation-continuing-1.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_ending_front = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-segment-visualisation-ending-1.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-segment-visualisation-ending-1.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-metals.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-metals.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_ending_back = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-segment-visualisation-ending-2.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-segment-visualisation-ending-2.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-segment-visualisation-middle.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-segment-visualisation-middle.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    backplates = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-backplates.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-backplates.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-segment-visualisation-continuing-2.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-segment-visualisation-continuing-2.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-ties.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 96,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-ties.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 3,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-stone-path.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 96,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-stone-path.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 3,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-top-stone-path-background.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 96,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-top-stone-path-background.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 3,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
                     }
                 },
                 straight_rail_diagonal_right_bottom = {
-                    metals = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-metals.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-metals.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 96
-                    },
-                    segment_visualisation_ending_back = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-segment-visualisation-ending-2.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-segment-visualisation-ending-2.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 96
-                    },
-                    stone_path = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-stone-path.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-stone-path.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 96
-                    },
-                    backplates = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-backplates.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-backplates.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'trilinear-filtering'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'trilinear-filtering'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 96
-                    },
-                    segment_visualisation_middle = {
-                        variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-segment-visualisation-middle.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-segment-visualisation-middle.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 96
-                    },
                     segment_visualisation_continuing_front = {
-                        variation_count = 1,
                         filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-segment-visualisation-continuing-1.png',
                         width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-segment-visualisation-continuing-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
                         priority = 'extra-high',
                         shift = {-0.5, -0.5},
-                        height = 96
-                    },
-                    segment_visualisation_continuing_back = {
+                        height = 96,
                         variation_count = 1,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-segment-visualisation-continuing-2.png',
-                        width = 96,
                         hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-segment-visualisation-continuing-1.png',
                             width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-segment-visualisation-continuing-2.png',
+                            priority = 'extra-high',
                             scale = 0.5,
+                            height = 192,
                             variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
                             shift = {-0.5, -0.5},
-                            height = 192
+                            flags = {'low-object'}
                         },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 96
-                    },
-                    ties = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-ties.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-ties.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 96
-                    },
-                    stone_path_background = {
-                        variation_count = 3,
-                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-stone-path-background.png',
-                        width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-stone-path-background.png',
-                            scale = 0.5,
-                            variation_count = 3,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
-                        priority = 'extra-high',
-                        shift = {-0.5, -0.5},
-                        height = 96
+                        flags = {'low-object'}
                     },
                     segment_visualisation_ending_front = {
-                        variation_count = 1,
                         filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-segment-visualisation-ending-1.png',
                         width = 96,
-                        hr_version = {
-                            width = 192,
-                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-segment-visualisation-ending-1.png',
-                            scale = 0.5,
-                            variation_count = 1,
-                            flags = {'low-object'},
-                            priority = 'extra-high',
-                            shift = {-0.5, -0.5},
-                            height = 192
-                        },
-                        flags = {'low-object'},
                         priority = 'extra-high',
                         shift = {-0.5, -0.5},
-                        height = 96
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-segment-visualisation-ending-1.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-metals.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-metals.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_ending_back = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-segment-visualisation-ending-2.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-segment-visualisation-ending-2.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-segment-visualisation-middle.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-segment-visualisation-middle.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    backplates = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-backplates.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-backplates.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-segment-visualisation-continuing-2.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 96,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-segment-visualisation-continuing-2.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 1,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-ties.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 96,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-ties.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 3,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-stone-path.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 96,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-stone-path.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 3,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/straight-rail/straight-rail-diagonal-right-bottom-stone-path-background.png',
+                        width = 96,
+                        priority = 'extra-high',
+                        shift = {-0.5, -0.5},
+                        height = 96,
+                        variation_count = 3,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/straight-rail/hr-straight-rail-diagonal-right-bottom-stone-path-background.png',
+                            width = 192,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 192,
+                            variation_count = 3,
+                            shift = {-0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    }
+                },
+                curved_rail_horizontal_left_top = {
+                    segment_visualisation_continuing_front = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-segment-visualisation-continuing-1.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-segment-visualisation-continuing-1.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_ending_front = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-segment-visualisation-ending-1.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-segment-visualisation-ending-1.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-metals.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-metals.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_ending_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-segment-visualisation-ending-2.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-segment-visualisation-ending-2.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-segment-visualisation-middle.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-segment-visualisation-middle.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    backplates = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-backplates.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-backplates.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-segment-visualisation-continuing-2.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-segment-visualisation-continuing-2.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-ties.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-ties.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-stone-path.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-stone-path.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-top-stone-path-background.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-top-stone-path-background.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    }
+                },
+                curved_rail_horizontal_right_top = {
+                    segment_visualisation_continuing_front = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-segment-visualisation-continuing-1.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-segment-visualisation-continuing-1.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_ending_front = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-segment-visualisation-ending-1.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-segment-visualisation-ending-1.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-metals.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-metals.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_ending_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-segment-visualisation-ending-2.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-segment-visualisation-ending-2.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-segment-visualisation-middle.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-segment-visualisation-middle.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    backplates = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-backplates.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-backplates.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-segment-visualisation-continuing-2.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-segment-visualisation-continuing-2.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-ties.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-ties.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-stone-path.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-stone-path.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-right-top-stone-path-background.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-right-top-stone-path-background.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
                     }
                 },
                 rail_endings = {
                     sheets = {
                         {
                             filename = '__base__/graphics/entity/rail-endings/rail-endings-background.png',
-                            width = 128,
-                            flags = {'low-object'},
                             priority = 'high',
+                            height = 128,
+                            width = 128,
                             hr_version = {
                                 filename = '__base__/graphics/entity/rail-endings/hr-rail-endings-background.png',
-                                scale = 0.5,
-                                flags = {'low-object'},
                                 priority = 'high',
+                                scale = 0.5,
+                                height = 256,
                                 width = 256,
-                                height = 256
+                                flags = {'low-object'}
                             },
-                            height = 128
+                            flags = {'low-object'}
                         }, {
                             filename = '__base__/graphics/entity/rail-endings/rail-endings-metals.png',
-                            width = 128,
-                            flags = {'trilinear-filtering'},
                             priority = 'high',
+                            height = 128,
+                            width = 128,
                             hr_version = {
                                 filename = '__base__/graphics/entity/rail-endings/hr-rail-endings-metals.png',
-                                scale = 0.5,
-                                flags = {'trilinear-filtering'},
                                 priority = 'high',
+                                scale = 0.5,
+                                height = 256,
                                 width = 256,
-                                height = 256
+                                flags = {'trilinear-filtering'}
                             },
-                            height = 128
+                            flags = {'trilinear-filtering'}
                         }
+                    }
+                },
+                curved_rail_horizontal_left_bottom = {
+                    segment_visualisation_continuing_front = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-segment-visualisation-continuing-1.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-segment-visualisation-continuing-1.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_ending_front = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-segment-visualisation-ending-1.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-segment-visualisation-ending-1.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-metals.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-metals.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_ending_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-segment-visualisation-ending-2.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-segment-visualisation-ending-2.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-segment-visualisation-middle.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-segment-visualisation-middle.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    backplates = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-backplates.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-backplates.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-segment-visualisation-continuing-2.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-segment-visualisation-continuing-2.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-ties.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-ties.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-stone-path.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-stone-path.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-horizontal-left-bottom-stone-path-background.png',
+                        width = 288,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 192,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-horizontal-left-bottom-stone-path-background.png',
+                            width = 576,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 384,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    }
+                },
+                curved_rail_vertical_right_top = {
+                    segment_visualisation_continuing_front = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-segment-visualisation-continuing-1.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-segment-visualisation-continuing-1.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_ending_front = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-segment-visualisation-ending-1.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-segment-visualisation-ending-1.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-metals.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-metals.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_ending_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-segment-visualisation-ending-2.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-segment-visualisation-ending-2.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-segment-visualisation-middle.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-segment-visualisation-middle.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    backplates = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-backplates.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-backplates.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-segment-visualisation-continuing-2.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-segment-visualisation-continuing-2.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-ties.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-ties.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-stone-path.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-stone-path.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-right-top-stone-path-background.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {-0.5, 0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-right-top-stone-path-background.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {-0.5, 0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    }
+                },
+                curved_rail_vertical_left_bottom = {
+                    segment_visualisation_continuing_front = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-segment-visualisation-continuing-1.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-segment-visualisation-continuing-1.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_ending_front = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-segment-visualisation-ending-1.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-segment-visualisation-ending-1.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    metals = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-metals.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-metals.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_ending_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-segment-visualisation-ending-2.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-segment-visualisation-ending-2.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    segment_visualisation_middle = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-segment-visualisation-middle.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-segment-visualisation-middle.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    backplates = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-backplates.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-backplates.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'trilinear-filtering'}
+                        },
+                        flags = {'trilinear-filtering'}
+                    },
+                    segment_visualisation_continuing_back = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-segment-visualisation-continuing-2.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-segment-visualisation-continuing-2.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    ties = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-ties.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-ties.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-stone-path.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-stone-path.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
+                    },
+                    stone_path_background = {
+                        filename = '__base__/graphics/entity/curved-rail/curved-rail-vertical-left-bottom-stone-path-background.png',
+                        width = 192,
+                        priority = 'extra-high',
+                        shift = {0.5, -0.5},
+                        height = 288,
+                        variation_count = 1,
+                        hr_version = {
+                            filename = '__base__/graphics/entity/curved-rail/hr-curved-rail-vertical-left-bottom-stone-path-background.png',
+                            width = 384,
+                            priority = 'extra-high',
+                            scale = 0.5,
+                            height = 576,
+                            variation_count = 1,
+                            shift = {0.5, -0.5},
+                            flags = {'low-object'}
+                        },
+                        flags = {'low-object'}
                     }
                 }
             },
-            icon_mipmaps = 4,
+            flags = {'placeable-neutral', 'player-creation', 'building-direction-8-way'},
             name = 'straight-rail',
-            corpse = 'straight-rail-remnants',
+            damaged_trigger_effect = {
+                damage_type_filters = 'fire',
+                entity_name = 'wall-damaged-explosion',
+                type = 'create-entity',
+                offsets = {{0, 1}},
+                offset_deviation = {{-0.5, -0.5}, {0.5, 0.5}}
+            },
             max_health = 100,
-            type = 'straight-rail',
+            selection_box = {{-0.7, -0.8}, {0.7, 0.8}},
             collision_box = {{-1, -1}, {1, 1}},
-            flags = {'placeable-neutral', 'player-creation', 'building-direction-8-way'}
+            corpse = 'straight-rail-remnants',
+            minable = {mining_time = 0.2, result = 'rail'}
         }
     };
     return _;

@@ -1,4212 +1,4212 @@
 do
     local _ = {
-        ['advanced-electronics'] = {
-            order = 'a-d-b',
-            effects = {{type = 'unlock-recipe', recipe = 'advanced-circuit'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/advanced-electronics.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 15,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 200
+        ['logistics-2'] = {
+            icon = '__base__/graphics/technology/logistics-2.png',
+            effects = {
+                {recipe = 'fast-transport-belt', type = 'unlock-recipe'},
+                {recipe = 'fast-underground-belt', type = 'unlock-recipe'},
+                {recipe = 'fast-splitter', type = 'unlock-recipe'}
             },
-            type = 'technology',
-            name = 'advanced-electronics',
-            prerequisites = {'plastics'}
-        },
-        ['utility-science-pack'] = {
-            order = 'c-a',
-            effects = {{type = 'unlock-recipe', recipe = 'utility-science-pack'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/utility-science-pack.png',
             icon_mipmaps = 4,
+            type = 'technology',
+            order = 'a-f-b',
             unit = {
-                time = 30,
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'logistics', 'logistic-science-pack'},
+            name = 'logistics-2',
+            icon_size = 256
+        },
+        ['nuclear-power'] = {
+            icon = '__base__/graphics/technology/nuclear-power.png',
+            effects = {
+                {recipe = 'nuclear-reactor', type = 'unlock-recipe'},
+                {recipe = 'heat-exchanger', type = 'unlock-recipe'}, {recipe = 'heat-pipe', type = 'unlock-recipe'},
+                {recipe = 'steam-turbine', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-p-b-c',
+            unit = {
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
                 },
-                count = 100
+                count = 800,
+                time = 30
             },
-            type = 'technology',
-            name = 'utility-science-pack',
-            prerequisites = {'robotics', 'advanced-electronics-2', 'low-density-structure'}
+            prerequisites = {'uranium-processing'},
+            name = 'nuclear-power',
+            icon_size = 256
         },
-        tank = {
-            order = 'e-c-c',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'tank'}, {type = 'unlock-recipe', recipe = 'cannon-shell'},
-                {type = 'unlock-recipe', recipe = 'explosive-cannon-shell'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/tank.png',
+        ['research-speed-6'] = {
+            effects = {{modifier = 0.6, type = 'laboratory-speed'}},
             icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/research-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-m-d',
             unit = {
-                time = 30,
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 500,
+                time = 30
+            },
+            prerequisites = {'research-speed-5'},
+            name = 'research-speed-6',
+            icon_size = 256
+        },
+        ['braking-force-3'] = {
+            effects = {{modifier = 0.15, type = 'train-braking-force-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/braking-force.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'b-f-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 250,
+                time = 30
+            },
+            prerequisites = {'braking-force-2'},
+            name = 'braking-force-3',
+            icon_size = 256
+        },
+        ['circuit-network'] = {
+            icon = '__base__/graphics/technology/circuit-network.png',
+            effects = {
+                {recipe = 'red-wire', type = 'unlock-recipe'}, {recipe = 'green-wire', type = 'unlock-recipe'},
+                {recipe = 'arithmetic-combinator', type = 'unlock-recipe'},
+                {recipe = 'decider-combinator', type = 'unlock-recipe'},
+                {recipe = 'constant-combinator', type = 'unlock-recipe'},
+                {recipe = 'power-switch', type = 'unlock-recipe'},
+                {recipe = 'programmable-speaker', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'a-d-d',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 15
+            },
+            prerequisites = {'electronics', 'logistic-science-pack'},
+            name = 'circuit-network',
+            icon_size = 256
+        },
+        ['coal-liquefaction'] = {
+            icon = '__base__/graphics/technology/coal-liquefaction.png',
+            effects = {{recipe = 'coal-liquefaction', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'd-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'advanced-oil-processing', 'production-science-pack'},
+            name = 'coal-liquefaction',
+            icon_size = 256
+        },
+        ['kovarex-enrichment-process'] = {
+            icon = '__base__/graphics/technology/kovarex-enrichment-process.png',
+            effects = {
+                {recipe = 'kovarex-enrichment-process', type = 'unlock-recipe'},
+                {recipe = 'nuclear-fuel', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-p-b-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 1500,
+                time = 30
+            },
+            prerequisites = {'production-science-pack', 'uranium-processing', 'rocket-fuel'},
+            name = 'kovarex-enrichment-process',
+            icon_size = 256
+        },
+        ['energy-shield-mk2-equipment'] = {
+            effects = {{recipe = 'energy-shield-mk2-equipment', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            icons = {
+                {
+                    icon = '__base__/graphics/technology/energy-shield-mk2-equipment.png',
+                    icon_mipmaps = 4,
+                    icon_size = 256
+                }, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'g-e-b',
+            unit = {
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'military-science-pack', 1}
                 },
-                count = 250
+                count = 200,
+                time = 30
             },
-            type = 'technology',
-            name = 'tank',
-            prerequisites = {'automobilism', 'military-3', 'explosives'}
+            prerequisites = {'energy-shield-equipment', 'military-3', 'low-density-structure', 'power-armor'},
+            name = 'energy-shield-mk2-equipment',
+            icon_size = 256
         },
-        ['power-armor-mk2'] = {
-            order = 'g-c-b',
-            effects = {{type = 'unlock-recipe', recipe = 'power-armor-mk2'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/power-armor-mk2.png',
+        ['effectivity-module'] = {
+            icon = '__base__/graphics/technology/effectivity-module-1.png',
+            effects = {{recipe = 'effectivity-module', type = 'unlock-recipe'}},
             icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 400
-            },
             type = 'technology',
-            name = 'power-armor-mk2',
-            prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'effectivity-module-2'}
+            upgrade = true,
+            order = 'i-g-a',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50, time = 30},
+            prerequisites = {'modules'},
+            name = 'effectivity-module',
+            icon_size = 256
         },
-        ['automation-2'] = {
-            order = 'a-b-b',
-            effects = {{type = 'unlock-recipe', recipe = 'assembling-machine-2'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/automation-2.png',
-            icon_mipmaps = 4,
-            localised_description = {'technology-description.automation-2'},
-            unit = {time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 40},
-            type = 'technology',
-            name = 'automation-2',
-            prerequisites = {'electronics', 'steel-processing', 'logistic-science-pack'}
-        },
-        flammables = {
-            order = 'e-c-a',
-            icon_mipmaps = 4,
-            icon_size = 256,
-            unit = {time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50},
-            type = 'technology',
-            icon = '__base__/graphics/technology/flammables.png',
-            name = 'flammables',
-            prerequisites = {'oil-processing'}
-        },
-        ['energy-weapons-damage-7'] = {
-            order = 'e-l-f',
+        ['military-2'] = {
+            icon = '__base__/graphics/technology/military.png',
             effects = {
-                {type = 'ammo-damage', ammo_category = 'laser', modifier = 0.7},
-                {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.3}
+                {recipe = 'piercing-rounds-magazine', type = 'unlock-recipe'},
+                {recipe = 'grenade', type = 'unlock-recipe'}
             },
-            icon_size = 256,
-            prerequisites = {'energy-weapons-damage-6', 'space-science-pack'},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-a-b',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 20, time = 15},
+            prerequisites = {'military', 'steel-processing', 'logistic-science-pack'},
+            name = 'military-2',
+            icon_size = 256
+        },
+        ['uranium-processing'] = {
+            icon = '__base__/graphics/technology/uranium-processing.png',
+            effects = {
+                {recipe = 'centrifuge', type = 'unlock-recipe'},
+                {recipe = 'uranium-processing', type = 'unlock-recipe'},
+                {recipe = 'uranium-fuel-cell', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-p-b-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'chemical-science-pack', 'concrete'},
+            name = 'uranium-processing',
+            icon_size = 256
+        },
+        ['weapon-shooting-speed-1'] = {
+            effects = {
+                {ammo_category = 'bullet', type = 'gun-speed', modifier = 0.1},
+                {ammo_category = 'shotgun-shell', type = 'gun-speed', modifier = 0.1}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
             icons = {
-                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_size = 256, icon_mipmaps = 4}, {
+                {icon = '__base__/graphics/technology/weapon-shooting-speed-1.png', icon_mipmaps = 4, icon_size = 256},
+                {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
+            order = 'e-j-a',
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 100, time = 30},
+            prerequisites = {'military'},
+            name = 'weapon-shooting-speed-1',
+            icon_size = 256
+        },
+        ['automated-rail-transportation'] = {
+            icon = '__base__/graphics/technology/automated-rail-transportation.png',
+            effects = {{recipe = 'train-stop', type = 'unlock-recipe'}},
             icon_mipmaps = 4,
-            upgrade = true,
+            type = 'technology',
+            order = 'c-g-b',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 75, time = 30},
+            prerequisites = {'railway'},
+            name = 'automated-rail-transportation',
+            icon_size = 256
+        },
+        ['advanced-material-processing-2'] = {
+            icon = '__base__/graphics/technology/advanced-material-processing-2.png',
+            effects = {{recipe = 'electric-furnace', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-c-b',
             unit = {
-                time = 60,
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 250,
+                time = 30
+            },
+            prerequisites = {'advanced-material-processing', 'chemical-science-pack'},
+            name = 'advanced-material-processing-2',
+            icon_size = 256
+        },
+        explosives = {
+            icon = '__base__/graphics/technology/explosives.png',
+            effects = {{recipe = 'explosives', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'a-e-d',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 15
+            },
+            prerequisites = {'sulfur-processing'},
+            name = 'explosives',
+            icon_size = 256
+        },
+        ['fast-inserter'] = {
+            icon = '__base__/graphics/technology/fast-inserter.png',
+            effects = {
+                {recipe = 'fast-inserter', type = 'unlock-recipe'}, {recipe = 'filter-inserter', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'a-d-a',
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 30, time = 15},
+            prerequisites = {'electronics'},
+            name = 'fast-inserter',
+            icon_size = 256
+        },
+        ['braking-force-5'] = {
+            effects = {{modifier = 0.15, type = 'train-braking-force-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/braking-force.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'b-f-e',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 450,
+                time = 35
+            },
+            prerequisites = {'braking-force-4'},
+            name = 'braking-force-5',
+            icon_size = 256
+        },
+        ['worker-robots-speed-3'] = {
+            effects = {{modifier = 0.45, type = 'worker-robot-speed'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/worker-robots-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-movement-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-f-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'utility-science-pack', 1}
+                },
+                count = 150,
+                time = 60
+            },
+            prerequisites = {'worker-robots-speed-2'},
+            name = 'worker-robots-speed-3',
+            icon_size = 256
+        },
+        ['military-3'] = {
+            icon = '__base__/graphics/technology/military.png',
+            effects = {
+                {recipe = 'poison-capsule', type = 'unlock-recipe'},
+                {recipe = 'slowdown-capsule', type = 'unlock-recipe'},
+                {recipe = 'combat-shotgun', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-a-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}
+                },
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'chemical-science-pack', 'military-science-pack'},
+            name = 'military-3',
+            icon_size = 256
+        },
+        ['energy-weapons-damage-7'] = {
+            effects = {
+                {ammo_category = 'laser', type = 'ammo-damage', modifier = 0.7},
+                {ammo_category = 'beam', type = 'ammo-damage', modifier = 0.3}
+            },
+            icon_mipmaps = 4,
+            max_level = 'infinite',
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-f',
+            unit = {
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'military-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
                 },
-                count_formula = '2^(L-7)*1000'
+                count_formula = '2^(L-7)*1000',
+                time = 60
             },
-            max_level = 'infinite',
+            prerequisites = {'energy-weapons-damage-6', 'space-science-pack'},
             name = 'energy-weapons-damage-7',
-            type = 'technology'
+            icon_size = 256
         },
-        ['worker-robots-storage-3'] = {
-            order = 'c-k-g-c',
-            effects = {{type = 'worker-robot-storage', modifier = 1}},
-            icon_size = 256,
-            prerequisites = {'worker-robots-storage-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/worker-robots-storage.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'worker-robots-storage-3',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 450
-            }
-        },
-        ['nuclear-fuel-reprocessing'] = {
-            order = 'e-p-b-c',
-            effects = {{type = 'unlock-recipe', recipe = 'nuclear-fuel-reprocessing'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/nuclear-fuel-reprocessing.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
-                },
-                count = 50
-            },
-            type = 'technology',
-            name = 'nuclear-fuel-reprocessing',
-            prerequisites = {'nuclear-power', 'production-science-pack'}
-        },
-        ['advanced-material-processing-2'] = {
-            order = 'c-c-b',
-            effects = {{type = 'unlock-recipe', recipe = 'electric-furnace'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/advanced-material-processing-2.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 250
-            },
-            type = 'technology',
-            name = 'advanced-material-processing-2',
-            prerequisites = {'advanced-material-processing', 'chemical-science-pack'}
-        },
-        automobilism = {
-            order = 'e-b',
-            effects = {{type = 'unlock-recipe', recipe = 'car'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/automobilism.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            },
-            type = 'technology',
-            name = 'automobilism',
-            prerequisites = {'logistics-2', 'engine'}
-        },
-        ['cliff-explosives'] = {
-            order = 'z-c-d',
-            effects = {{type = 'unlock-recipe', recipe = 'cliff-explosives'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/cliff-explosives.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 15,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 200
-            },
-            type = 'technology',
-            name = 'cliff-explosives',
-            prerequisites = {'explosives', 'military-2'}
-        },
-        ['refined-flammables-3'] = {
-            order = 'e-l-c',
+        ['physical-projectile-damage-4'] = {
             effects = {
-                {type = 'ammo-damage', ammo_category = 'flamethrower', modifier = 0.2},
-                {type = 'turret-attack', turret_id = 'flamethrower-turret', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'refined-flammables-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/refined-flammables.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
+                {ammo_category = 'bullet', type = 'ammo-damage', modifier = 0.2},
+                {modifier = 0.2, turret_id = 'gun-turret', type = 'turret-attack'},
+                {ammo_category = 'shotgun-shell', type = 'ammo-damage', modifier = 0.2}
             },
             icon_mipmaps = 4,
+            type = 'technology',
             upgrade = true,
-            type = 'technology',
-            name = 'refined-flammables-3',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
-                    {'chemical-science-pack', 1}
-                },
-                count = 300
-            }
-        },
-        ['advanced-electronics-2'] = {
-            order = 'a-d-c',
-            effects = {{type = 'unlock-recipe', recipe = 'processing-unit'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/advanced-electronics-2.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 300
-            },
-            type = 'technology',
-            name = 'advanced-electronics-2',
-            prerequisites = {'chemical-science-pack'}
-        },
-        ['battery-mk2-equipment'] = {
-            order = 'g-i-b',
-            effects = {{type = 'unlock-recipe', recipe = 'battery-mk2-equipment'}},
-            icon_size = 256,
-            prerequisites = {'battery-equipment', 'low-density-structure', 'power-armor'},
-            icons = {
-                {icon = '__base__/graphics/technology/battery-mk2-equipment.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'battery-mk2-equipment',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 100
-            }
-        },
-        ['uranium-processing'] = {
-            order = 'e-p-b-c',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'centrifuge'},
-                {type = 'unlock-recipe', recipe = 'uranium-processing'},
-                {type = 'unlock-recipe', recipe = 'uranium-fuel-cell'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/uranium-processing.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 200
-            },
-            type = 'technology',
-            name = 'uranium-processing',
-            prerequisites = {'chemical-science-pack', 'concrete'}
-        },
-        ['laser-shooting-speed-5'] = {
-            order = 'e-n-l',
-            effects = {{type = 'gun-speed', ammo_category = 'laser', modifier = 0.4}},
-            icon_size = 256,
-            prerequisites = {'laser-shooting-speed-4'},
-            icons = {
-                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'laser-shooting-speed-5',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 200
-            }
-        },
-        ['follower-robot-count-2'] = {
-            order = 'e-p-b-c',
-            effects = {{type = 'maximum-following-robots-count', modifier = 5}},
-            icon_size = 256,
-            prerequisites = {'follower-robot-count-1'},
-            icons = {
-                {icon = '__base__/graphics/technology/follower-robots.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-count.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'follower-robot-count-2',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
-                },
-                count = 300
-            }
-        },
-        ['fast-inserter'] = {
-            order = 'a-d-a',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'fast-inserter'}, {type = 'unlock-recipe', recipe = 'filter-inserter'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/fast-inserter.png',
-            icon_mipmaps = 4,
-            unit = {time = 15, ingredients = {{'automation-science-pack', 1}}, count = 30},
-            type = 'technology',
-            name = 'fast-inserter',
-            prerequisites = {'electronics'}
-        },
-        ['advanced-oil-processing'] = {
-            order = 'd-b',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'advanced-oil-processing'},
-                {type = 'unlock-recipe', recipe = 'heavy-oil-cracking'},
-                {type = 'unlock-recipe', recipe = 'light-oil-cracking'},
-                {type = 'unlock-recipe', recipe = 'solid-fuel-from-heavy-oil'},
-                {type = 'unlock-recipe', recipe = 'solid-fuel-from-light-oil'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/oil-processing.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 75
-            },
-            type = 'technology',
-            name = 'advanced-oil-processing',
-            prerequisites = {'chemical-science-pack'}
-        },
-        ['discharge-defense-equipment'] = {
-            order = 'g-o',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'discharge-defense-equipment'},
-                {type = 'unlock-recipe', recipe = 'discharge-defense-remote'}
-            },
-            icon_size = 256,
-            prerequisites = {'laser-turret', 'military-3', 'power-armor', 'solar-panel-equipment'},
-            icons = {
-                {
-                    icon = '__base__/graphics/technology/discharge-defense-equipment.png',
-                    icon_size = 256,
-                    icon_mipmaps = 4
-                }, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'discharge-defense-equipment',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}
-                },
-                count = 100
-            }
-        },
-        ['energy-weapons-damage-3'] = {
-            order = 'e-l-c',
-            effects = {{type = 'ammo-damage', ammo_category = 'laser', modifier = 0.3}},
-            icon_size = 256,
-            prerequisites = {'energy-weapons-damage-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'energy-weapons-damage-3',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
-                    {'chemical-science-pack', 1}
-                },
-                count = 300
-            }
-        },
-        ['oil-processing'] = {
-            order = 'd-a',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'pumpjack'}, {type = 'unlock-recipe', recipe = 'oil-refinery'},
-                {type = 'unlock-recipe', recipe = 'chemical-plant'},
-                {type = 'unlock-recipe', recipe = 'basic-oil-processing'},
-                {type = 'unlock-recipe', recipe = 'solid-fuel-from-petroleum-gas'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/oil-gathering.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            },
-            type = 'technology',
-            name = 'oil-processing',
-            prerequisites = {'fluid-handling'}
-        },
-        battery = {
-            order = 'b-c',
-            effects = {{type = 'unlock-recipe', recipe = 'battery'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/battery.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 150
-            },
-            type = 'technology',
-            name = 'battery',
-            prerequisites = {'sulfur-processing'}
-        },
-        ['electric-energy-accumulators'] = {
-            order = 'c-e-a',
-            effects = {{type = 'unlock-recipe', recipe = 'accumulator'}},
-            icon_size = 256,
-            localised_name = {'technology-name.electric-energy-accumulators-1'},
-            icon = '__base__/graphics/technology/electric-energy-acumulators.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 150
-            },
-            type = 'technology',
-            name = 'electric-energy-accumulators',
-            prerequisites = {'electric-energy-distribution-1', 'battery'}
-        },
-        rocketry = {
-            order = 'e-g',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'rocket-launcher'}, {type = 'unlock-recipe', recipe = 'rocket'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/rocketry.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 15,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
-                },
-                count = 120
-            },
-            type = 'technology',
-            name = 'rocketry',
-            prerequisites = {'explosives', 'flammables', 'military-science-pack'}
-        },
-        ['stronger-explosives-1'] = {
-            order = 'e-j-a',
-            effects = {{type = 'ammo-damage', ammo_category = 'grenade', modifier = 0.25}},
-            icon_size = 256,
-            prerequisites = {'military-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/stronger-explosives-1.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'stronger-explosives-1',
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            }
-        },
-        ['inserter-capacity-bonus-1'] = {
-            order = 'c-o-b',
-            effects = {{type = 'stack-inserter-capacity-bonus', modifier = 1}},
-            icon_size = 256,
-            prerequisites = {'stack-inserter'},
-            icons = {
-                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'inserter-capacity-bonus-1',
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 200
-            }
-        },
-        ['inserter-capacity-bonus-2'] = {
-            order = 'c-o-c',
-            effects = {
-                {type = 'inserter-stack-size-bonus', modifier = 1},
-                {type = 'stack-inserter-capacity-bonus', modifier = 1}
-            },
-            icon_size = 256,
-            prerequisites = {'inserter-capacity-bonus-1'},
-            icons = {
-                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'inserter-capacity-bonus-2',
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 250
-            }
-        },
-        artillery = {
-            order = 'd-e-f',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'artillery-wagon'},
-                {type = 'unlock-recipe', recipe = 'artillery-turret'},
-                {type = 'unlock-recipe', recipe = 'artillery-shell'},
-                {type = 'unlock-recipe', recipe = 'artillery-targeting-remote'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/artillery.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 2000
-            },
-            type = 'technology',
-            name = 'artillery',
-            prerequisites = {'military-4', 'tank'}
-        },
-        landfill = {
-            order = 'b-d',
-            effects = {{type = 'unlock-recipe', recipe = 'landfill'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/landfill.png',
-            icon_mipmaps = 4,
-            unit = {time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50},
-            type = 'technology',
-            name = 'landfill',
-            prerequisites = {'logistic-science-pack'}
-        },
-        ['mining-productivity-3'] = {
-            order = 'c-k-f-e',
-            effects = {{type = 'mining-drill-productivity-bonus', modifier = 0.1}},
-            icon_size = 256,
-            prerequisites = {'mining-productivity-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/mining-productivity.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-mining-productivity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'mining-productivity-3',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = '1000'
-            }
-        },
-        ['braking-force-1'] = {
-            order = 'b-f-a',
-            effects = {{type = 'train-braking-force-bonus', modifier = 0.1}},
-            icon_size = 256,
-            prerequisites = {'railway', 'chemical-science-pack'},
-            icons = {
-                {icon = '__base__/graphics/technology/braking-force.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'braking-force-1',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 100
-            }
-        },
-        ['follower-robot-count-3'] = {
-            order = 'e-p-b-c',
-            effects = {{type = 'maximum-following-robots-count', modifier = 5}},
-            icon_size = 256,
-            prerequisites = {'follower-robot-count-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/follower-robots.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-count.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'follower-robot-count-3',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}
-                },
-                count = 400
-            }
-        },
-        ['mining-productivity-2'] = {
-            order = 'c-k-f-e',
-            effects = {{type = 'mining-drill-productivity-bonus', modifier = 0.1}},
-            icon_size = 256,
-            prerequisites = {'mining-productivity-1'},
-            icons = {
-                {icon = '__base__/graphics/technology/mining-productivity.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-mining-productivity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'mining-productivity-2',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = '500'
-            }
-        },
-        ['electric-engine'] = {
-            order = 'b-b',
-            effects = {{type = 'unlock-recipe', recipe = 'electric-engine-unit'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/electric-engine.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 50
-            },
-            type = 'technology',
-            name = 'electric-engine',
-            prerequisites = {'lubricant'}
-        },
-        electronics = {
-            order = 'a-d-a',
-            icon_mipmaps = 4,
-            icon_size = 256,
-            unit = {time = 15, ingredients = {{'automation-science-pack', 1}}, count = 30},
-            type = 'technology',
-            icon = '__base__/graphics/technology/electronics.png',
-            name = 'electronics',
-            prerequisites = {'automation'}
-        },
-        ['refined-flammables-5'] = {
-            order = 'e-l-e',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'flamethrower', modifier = 0.3},
-                {type = 'turret-attack', turret_id = 'flamethrower-turret', modifier = 0.3}
-            },
-            icon_size = 256,
-            prerequisites = {'refined-flammables-4'},
-            icons = {
-                {icon = '__base__/graphics/technology/refined-flammables.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'refined-flammables-5',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
-                    {'chemical-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 500
-            }
-        },
-        ['solar-energy'] = {
-            order = 'a-h-c',
-            effects = {{type = 'unlock-recipe', recipe = 'solar-panel'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/solar-energy.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 250
-            },
-            type = 'technology',
-            name = 'solar-energy',
-            prerequisites = {'optics', 'electronics', 'steel-processing', 'logistic-science-pack'}
-        },
-        ['productivity-module-3'] = {
-            order = 'i-e-c',
-            effects = {{type = 'unlock-recipe', recipe = 'productivity-module-3'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/productivity-module-3.png',
-            icon_mipmaps = 4,
-            upgrade = true,
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
-                },
-                count = 300
-            },
-            type = 'technology',
-            name = 'productivity-module-3',
-            prerequisites = {'productivity-module-2', 'production-science-pack'}
-        },
-        ['braking-force-6'] = {
-            order = 'b-f-f',
-            effects = {{type = 'train-braking-force-bonus', modifier = 0.15}},
-            icon_size = 256,
-            prerequisites = {'braking-force-5'},
-            icons = {
-                {icon = '__base__/graphics/technology/braking-force.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'braking-force-6',
-            unit = {
-                time = 45,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 550
-            }
-        },
-        ['worker-robots-speed-4'] = {
-            order = 'c-k-f-d',
-            effects = {{type = 'worker-robot-speed', modifier = 0.55}},
-            icon_size = 256,
-            prerequisites = {'worker-robots-speed-3'},
-            icons = {
-                {icon = '__base__/graphics/technology/worker-robots-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-movement-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'worker-robots-speed-4',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'utility-science-pack', 1}
-                },
-                count = 250
-            }
-        },
-        ['low-density-structure'] = {
-            order = 'k-a',
-            effects = {{type = 'unlock-recipe', recipe = 'low-density-structure'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/low-density-structure.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 45,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 300
-            },
-            type = 'technology',
-            name = 'low-density-structure',
-            prerequisites = {'advanced-material-processing', 'chemical-science-pack'}
-        },
-        ['laser-turret'] = {
-            order = 'a-j-b',
-            effects = {{type = 'unlock-recipe', recipe = 'laser-turret'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/laser-turret.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
-                    {'chemical-science-pack', 1}
-                },
-                count = 150
-            },
-            type = 'technology',
-            name = 'laser-turret',
-            prerequisites = {'laser', 'military-science-pack'}
-        },
-        ['mining-productivity-4'] = {
-            order = 'c-k-f-e',
-            effects = {{type = 'mining-drill-productivity-bonus', modifier = 0.1}},
-            icon_size = 256,
-            prerequisites = {'mining-productivity-3', 'space-science-pack'},
-            icons = {
-                {icon = '__base__/graphics/technology/mining-productivity.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-mining-productivity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
-                },
-                count_formula = '2500*(L - 3)'
-            },
-            max_level = 'infinite',
-            name = 'mining-productivity-4',
-            type = 'technology'
-        },
-        ['circuit-network'] = {
-            order = 'a-d-d',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'red-wire'}, {type = 'unlock-recipe', recipe = 'green-wire'},
-                {type = 'unlock-recipe', recipe = 'arithmetic-combinator'},
-                {type = 'unlock-recipe', recipe = 'decider-combinator'},
-                {type = 'unlock-recipe', recipe = 'constant-combinator'},
-                {type = 'unlock-recipe', recipe = 'power-switch'},
-                {type = 'unlock-recipe', recipe = 'programmable-speaker'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/circuit-network.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 15,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            },
-            type = 'technology',
-            name = 'circuit-network',
-            prerequisites = {'electronics', 'logistic-science-pack'}
-        },
-        ['atomic-bomb'] = {
-            order = 'e-a-b',
-            effects = {{type = 'unlock-recipe', recipe = 'atomic-bomb'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/atomic-bomb.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 45,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 5000
-            },
-            type = 'technology',
-            name = 'atomic-bomb',
-            prerequisites = {'military-4', 'kovarex-enrichment-process', 'rocket-control-unit', 'rocketry'}
-        },
-        optics = {
-            order = 'a-h-a',
-            effects = {{type = 'unlock-recipe', recipe = 'small-lamp'}},
-            icon_size = 256,
-            unit = {time = 15, ingredients = {{'automation-science-pack', 1}}, count = 10},
-            type = 'technology',
-            icon = '__base__/graphics/technology/lamp.png',
-            name = 'optics',
-            icon_mipmaps = 4
-        },
-        ['battery-equipment'] = {
-            order = 'g-i-a',
-            effects = {{type = 'unlock-recipe', recipe = 'battery-equipment'}},
-            icon_size = 256,
-            prerequisites = {'battery', 'solar-panel-equipment'},
-            icons = {
-                {icon = '__base__/graphics/technology/battery-equipment.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'battery-equipment',
-            unit = {time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50}
-        },
-        ['military-3'] = {
-            order = 'e-a-c',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'poison-capsule'},
-                {type = 'unlock-recipe', recipe = 'slowdown-capsule'},
-                {type = 'unlock-recipe', recipe = 'combat-shotgun'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/military.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}
-                },
-                count = 100
-            },
-            type = 'technology',
-            name = 'military-3',
-            prerequisites = {'chemical-science-pack', 'military-science-pack'}
-        },
-        ['logistic-system'] = {
-            order = 'c-k-d',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'logistic-chest-active-provider'},
-                {type = 'unlock-recipe', recipe = 'logistic-chest-requester'},
-                {type = 'unlock-recipe', recipe = 'logistic-chest-buffer'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/logistic-system.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'utility-science-pack', 1}
-                },
-                count = 500
-            },
-            type = 'technology',
-            name = 'logistic-system',
-            prerequisites = {'utility-science-pack', 'logistic-robotics'}
-        },
-        ['worker-robots-storage-1'] = {
-            order = 'c-k-g-a',
-            effects = {{type = 'worker-robot-storage', modifier = 1}},
-            icon_size = 256,
-            prerequisites = {'robotics'},
-            icons = {
-                {icon = '__base__/graphics/technology/worker-robots-storage.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'worker-robots-storage-1',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 200
-            }
-        },
-        gate = {
-            order = 'a-l-a',
-            effects = {{type = 'unlock-recipe', recipe = 'gate'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/gate.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            },
-            type = 'technology',
-            name = 'gate',
-            prerequisites = {'stone-wall', 'military-2'}
-        },
-        ['physical-projectile-damage-2'] = {
-            order = 'e-l-b',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'bullet', modifier = 0.1},
-                {type = 'turret-attack', turret_id = 'gun-turret', modifier = 0.1},
-                {type = 'ammo-damage', ammo_category = 'shotgun-shell', modifier = 0.1}
-            },
-            icon_size = 256,
-            prerequisites = {'physical-projectile-damage-1'},
             icons = {
                 {
                     icon = '__base__/graphics/technology/physical-projectile-damage-1.png',
-                    icon_size = 256,
-                    icon_mipmaps = 4
+                    icon_mipmaps = 4,
+                    icon_size = 256
                 }, {
-                    shift = {100, 100},
                     icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'physical-projectile-damage-2',
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 200
-            }
-        },
-        ['laser-shooting-speed-4'] = {
-            order = 'e-n-k',
-            effects = {{type = 'gun-speed', ammo_category = 'laser', modifier = 0.3}},
-            icon_size = 256,
-            prerequisites = {'laser-shooting-speed-3'},
-            icons = {
-                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_size = 256, icon_mipmaps = 4}, {
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'laser-shooting-speed-4',
+            order = 'e-l-d',
             unit = {
-                time = 60,
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
+                },
+                count = 400,
+                time = 60
+            },
+            prerequisites = {'physical-projectile-damage-3'},
+            name = 'physical-projectile-damage-4',
+            icon_size = 256
+        },
+        ['effectivity-module-3'] = {
+            icon = '__base__/graphics/technology/effectivity-module-3.png',
+            effects = {{recipe = 'effectivity-module-3', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            order = 'i-g-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 300,
+                time = 60
+            },
+            prerequisites = {'effectivity-module-2', 'production-science-pack'},
+            name = 'effectivity-module-3',
+            icon_size = 256
+        },
+        ['mining-productivity-2'] = {
+            effects = {{modifier = 0.1, type = 'mining-drill-productivity-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/mining-productivity.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-mining-productivity.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-f-e',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = '500',
+                time = 60
+            },
+            prerequisites = {'mining-productivity-1'},
+            name = 'mining-productivity-2',
+            icon_size = 256
+        },
+        ['nuclear-fuel-reprocessing'] = {
+            icon = '__base__/graphics/technology/nuclear-fuel-reprocessing.png',
+            effects = {{recipe = 'nuclear-fuel-reprocessing', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-p-b-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 50,
+                time = 30
+            },
+            prerequisites = {'nuclear-power', 'production-science-pack'},
+            name = 'nuclear-fuel-reprocessing',
+            icon_size = 256
+        },
+        defender = {
+            icon = '__base__/graphics/technology/defender.png',
+            effects = {
+                {recipe = 'defender-capsule', type = 'unlock-recipe'},
+                {modifier = 4, type = 'maximum-following-robots-count'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-p-a',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
+                },
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'military-science-pack'},
+            name = 'defender',
+            icon_size = 256
+        },
+        ['military-4'] = {
+            icon = '__base__/graphics/technology/military.png',
+            effects = {
+                {recipe = 'piercing-shotgun-shell', type = 'unlock-recipe'},
+                {recipe = 'cluster-grenade', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-a-e',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 150,
+                time = 45
+            },
+            prerequisites = {'military-3', 'utility-science-pack', 'explosives'},
+            name = 'military-4',
+            icon_size = 256
+        },
+        ['production-science-pack'] = {
+            icon = '__base__/graphics/technology/production-science-pack.png',
+            effects = {{recipe = 'production-science-pack', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-a',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'productivity-module', 'advanced-material-processing-2', 'railway'},
+            name = 'production-science-pack',
+            icon_size = 256
+        },
+        ['rail-signals'] = {
+            icon = '__base__/graphics/technology/rail-signals.png',
+            effects = {
+                {recipe = 'rail-signal', type = 'unlock-recipe'}, {recipe = 'rail-chain-signal', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-g-c',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'automated-rail-transportation'},
+            name = 'rail-signals',
+            icon_size = 256
+        },
+        ['advanced-electronics-2'] = {
+            icon = '__base__/graphics/technology/advanced-electronics-2.png',
+            effects = {{recipe = 'processing-unit', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'a-d-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 300,
+                time = 30
+            },
+            prerequisites = {'chemical-science-pack'},
+            name = 'advanced-electronics-2',
+            icon_size = 256
+        },
+        battery = {
+            icon = '__base__/graphics/technology/battery.png',
+            effects = {{recipe = 'battery', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'b-c',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 150,
+                time = 30
+            },
+            prerequisites = {'sulfur-processing'},
+            name = 'battery',
+            icon_size = 256
+        },
+        ['worker-robots-speed-5'] = {
+            effects = {{modifier = 0.65, type = 'worker-robot-speed'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/worker-robots-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-movement-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-f-e',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 500,
+                time = 60
+            },
+            prerequisites = {'worker-robots-speed-4'},
+            name = 'worker-robots-speed-5',
+            icon_size = 256
+        },
+        destroyer = {
+            icon = '__base__/graphics/technology/destroyer.png',
+            effects = {{recipe = 'destroyer-capsule', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-p-b-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 300,
+                time = 30
+            },
+            prerequisites = {'military-4', 'distractor', 'speed-module'},
+            name = 'destroyer',
+            icon_size = 256
+        },
+        ['logistic-science-pack'] = {
+            icon = '__base__/graphics/technology/logistic-science-pack.png',
+            effects = {{recipe = 'logistic-science-pack', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            localised_description = {'technology-description.logistic-science-pack'},
+            localised_name = {'technology-name.logistic-science-pack'},
+            type = 'technology',
+            order = 'c-a',
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 75, time = 5},
+            name = 'logistic-science-pack',
+            icon_size = 256
+        },
+        ['effectivity-module-2'] = {
+            icon = '__base__/graphics/technology/effectivity-module-2.png',
+            effects = {{recipe = 'effectivity-module-2', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            order = 'i-g-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 75,
+                time = 30
+            },
+            prerequisites = {'effectivity-module', 'advanced-electronics-2'},
+            name = 'effectivity-module-2',
+            icon_size = 256
+        },
+        ['braking-force-1'] = {
+            effects = {{modifier = 0.1, type = 'train-braking-force-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/braking-force.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'b-f-a',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'railway', 'chemical-science-pack'},
+            name = 'braking-force-1',
+            icon_size = 256
+        },
+        ['mining-productivity-1'] = {
+            effects = {{modifier = 0.1, type = 'mining-drill-productivity-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/mining-productivity.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-mining-productivity.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-f-e',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = '250',
+                time = 60
+            },
+            prerequisites = {'advanced-electronics'},
+            name = 'mining-productivity-1',
+            icon_size = 256
+        },
+        ['braking-force-6'] = {
+            effects = {{modifier = 0.15, type = 'train-braking-force-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/braking-force.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'b-f-f',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 550,
+                time = 45
+            },
+            prerequisites = {'braking-force-5'},
+            name = 'braking-force-6',
+            icon_size = 256
+        },
+        ['steel-processing'] = {
+            icon = '__base__/graphics/technology/steel-processing.png',
+            effects = {
+                {recipe = 'steel-plate', type = 'unlock-recipe'}, {recipe = 'steel-chest', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            icon_size = 256,
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 50, time = 5},
+            type = 'technology',
+            name = 'steel-processing',
+            order = 'c-a'
+        },
+        ['advanced-electronics'] = {
+            icon = '__base__/graphics/technology/advanced-electronics.png',
+            effects = {{recipe = 'advanced-circuit', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'a-d-b',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 200,
+                time = 15
+            },
+            prerequisites = {'plastics'},
+            name = 'advanced-electronics',
+            icon_size = 256
+        },
+        tank = {
+            icon = '__base__/graphics/technology/tank.png',
+            effects = {
+                {recipe = 'tank', type = 'unlock-recipe'}, {recipe = 'cannon-shell', type = 'unlock-recipe'},
+                {recipe = 'explosive-cannon-shell', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-c-c',
+            unit = {
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'military-science-pack', 1}
                 },
-                count = 200
-            }
+                count = 250,
+                time = 30
+            },
+            prerequisites = {'automobilism', 'military-3', 'explosives'},
+            name = 'tank',
+            icon_size = 256
         },
-        ['automated-rail-transportation'] = {
-            order = 'c-g-b',
-            effects = {{type = 'unlock-recipe', recipe = 'train-stop'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/automated-rail-transportation.png',
+        ['automation-3'] = {
+            icon = '__base__/graphics/technology/automation-3.png',
+            effects = {{recipe = 'assembling-machine-3', type = 'unlock-recipe'}},
             icon_mipmaps = 4,
-            unit = {time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 75},
+            localised_description = {'technology-description.automation-3'},
             type = 'technology',
-            name = 'automated-rail-transportation',
-            prerequisites = {'railway'}
-        },
-        ['power-armor'] = {
-            order = 'g-c-a',
-            effects = {{type = 'unlock-recipe', recipe = 'power-armor'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/power-armor.png',
-            icon_mipmaps = 4,
+            order = 'a-b-c',
             unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 200
-            },
-            type = 'technology',
-            name = 'power-armor',
-            prerequisites = {'modular-armor', 'electric-engine', 'advanced-electronics-2'}
-        },
-        ['energy-shield-equipment'] = {
-            order = 'g-e-a',
-            effects = {{type = 'unlock-recipe', recipe = 'energy-shield-equipment'}},
-            icon_size = 256,
-            prerequisites = {'solar-panel-equipment', 'military-science-pack'},
-            icons = {
-                {icon = '__base__/graphics/technology/energy-shield-equipment.png', icon_size = 256, icon_mipmaps = 4},
-                {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'energy-shield-equipment',
-            unit = {
-                time = 15,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
-                },
-                count = 150
-            }
-        },
-        ['construction-robotics'] = {
-            order = 'c-k-a',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'roboport'},
-                {type = 'unlock-recipe', recipe = 'logistic-chest-passive-provider'},
-                {type = 'unlock-recipe', recipe = 'logistic-chest-storage'},
-                {type = 'unlock-recipe', recipe = 'construction-robot'},
-                {type = 'ghost-time-to-live', modifier = 36288000}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/construction-robotics.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 100
-            },
-            type = 'technology',
-            name = 'construction-robotics',
-            prerequisites = {'robotics'}
-        },
-        ['military-4'] = {
-            order = 'e-a-e',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'piercing-shotgun-shell'},
-                {type = 'unlock-recipe', recipe = 'cluster-grenade'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/military.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 45,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 150
-            },
-            type = 'technology',
-            name = 'military-4',
-            prerequisites = {'military-3', 'utility-science-pack', 'explosives'}
-        },
-        ['steel-processing'] = {
-            order = 'c-a',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'steel-plate'}, {type = 'unlock-recipe', recipe = 'steel-chest'}
-            },
-            icon_size = 256,
-            unit = {time = 5, ingredients = {{'automation-science-pack', 1}}, count = 50},
-            type = 'technology',
-            icon = '__base__/graphics/technology/steel-processing.png',
-            name = 'steel-processing',
-            icon_mipmaps = 4
-        },
-        ['worker-robots-speed-5'] = {
-            order = 'c-k-f-e',
-            effects = {{type = 'worker-robot-speed', modifier = 0.65}},
-            icon_size = 256,
-            prerequisites = {'worker-robots-speed-4'},
-            icons = {
-                {icon = '__base__/graphics/technology/worker-robots-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-movement-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'worker-robots-speed-5',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 500
-            }
-        },
-        ['inserter-capacity-bonus-4'] = {
-            order = 'c-o-e',
-            effects = {{type = 'stack-inserter-capacity-bonus', modifier = 1}},
-            icon_size = 256,
-            prerequisites = {'inserter-capacity-bonus-3'},
-            icons = {
-                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'inserter-capacity-bonus-4',
-            unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'production-science-pack', 1}
                 },
-                count = 250
-            }
+                count = 150,
+                time = 60
+            },
+            prerequisites = {'speed-module', 'production-science-pack'},
+            name = 'automation-3',
+            icon_size = 256
         },
-        ['artillery-shell-speed-1'] = {
-            order = 'e-k-k',
+        automation = {
+            icon = '__base__/graphics/technology/automation-1.png',
             effects = {
-                {
-                    icon_mipmaps = 2,
-                    icon_size = 64,
-                    modifier = 1,
-                    icon = '__base__/graphics/icons/artillery-shell.png',
-                    ammo_category = 'artillery-shell',
-                    type = 'gun-speed'
-                }
-            },
-            icon_size = 256,
-            prerequisites = {'artillery', 'space-science-pack'},
-            icons = {
-                {icon = '__base__/graphics/technology/artillery-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
+                {recipe = 'assembling-machine-1', type = 'unlock-recipe'},
+                {recipe = 'long-handed-inserter', type = 'unlock-recipe'}
             },
             icon_mipmaps = 4,
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
-                },
-                count_formula = '1000+3^(L-1)*1000'
-            },
-            max_level = 'infinite',
-            name = 'artillery-shell-speed-1',
-            type = 'technology'
-        },
-        ['braking-force-3'] = {
-            order = 'b-f-c',
-            effects = {{type = 'train-braking-force-bonus', modifier = 0.15}},
-            icon_size = 256,
-            prerequisites = {'braking-force-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/braking-force.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
+            ignore_tech_cost_multiplier = true,
             type = 'technology',
-            name = 'braking-force-3',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
-                },
-                count = 250
-            }
-        },
-        ['research-speed-1'] = {
-            order = 'c-m-a',
-            effects = {{type = 'laboratory-speed', modifier = 0.2}},
-            icon_size = 256,
-            prerequisites = {'automation-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/research-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'research-speed-1',
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            }
-        },
-        ['artillery-shell-range-1'] = {
-            order = 'e-k-d',
-            effects = {{type = 'artillery-range', modifier = 0.3}},
-            icon_size = 256,
-            prerequisites = {'artillery', 'space-science-pack'},
-            icons = {
-                {icon = '__base__/graphics/technology/artillery-range.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-range.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
-                },
-                count_formula = '2^L*1000'
-            },
-            max_level = 'infinite',
-            name = 'artillery-shell-range-1',
-            type = 'technology'
-        },
-        ['mining-productivity-1'] = {
-            order = 'c-k-f-e',
-            effects = {{type = 'mining-drill-productivity-bonus', modifier = 0.1}},
-            icon_size = 256,
-            prerequisites = {'advanced-electronics'},
-            icons = {
-                {icon = '__base__/graphics/technology/mining-productivity.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-mining-productivity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'mining-productivity-1',
-            unit = {
-                time = 60,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = '250'
-            }
-        },
-        ['gun-turret'] = {
-            order = 'a-j-a',
-            effects = {{type = 'unlock-recipe', recipe = 'gun-turret'}},
-            icon_size = 256,
-            unit = {time = 10, ingredients = {{'automation-science-pack', 1}}, count = 10},
-            type = 'technology',
-            icon = '__base__/graphics/technology/gun-turret.png',
-            name = 'gun-turret',
-            icon_mipmaps = 4
-        },
-        ['productivity-module-2'] = {
-            order = 'i-e-b',
-            effects = {{type = 'unlock-recipe', recipe = 'productivity-module-2'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/productivity-module-2.png',
-            icon_mipmaps = 4,
-            upgrade = true,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 75
-            },
-            type = 'technology',
-            name = 'productivity-module-2',
-            prerequisites = {'productivity-module', 'advanced-electronics-2'}
-        },
-        ['rail-signals'] = {
-            order = 'c-g-c',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'rail-signal'}, {type = 'unlock-recipe', recipe = 'rail-chain-signal'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/rail-signals.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            },
-            type = 'technology',
-            name = 'rail-signals',
-            prerequisites = {'automated-rail-transportation'}
-        },
-        ['weapon-shooting-speed-1'] = {
-            order = 'e-j-a',
-            effects = {
-                {type = 'gun-speed', ammo_category = 'bullet', modifier = 0.1},
-                {type = 'gun-speed', ammo_category = 'shotgun-shell', modifier = 0.1}
-            },
-            icon_size = 256,
-            prerequisites = {'military'},
-            icons = {
-                {icon = '__base__/graphics/technology/weapon-shooting-speed-1.png', icon_size = 256, icon_mipmaps = 4},
-                {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'weapon-shooting-speed-1',
-            unit = {time = 30, ingredients = {{'automation-science-pack', 1}}, count = 100}
-        },
-        ['worker-robots-speed-3'] = {
-            order = 'c-k-f-c',
-            effects = {{type = 'worker-robot-speed', modifier = 0.45}},
-            icon_size = 256,
-            prerequisites = {'worker-robots-speed-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/worker-robots-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-movement-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'worker-robots-speed-3',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'utility-science-pack', 1}
-                },
-                count = 150
-            }
-        },
-        ['worker-robots-speed-2'] = {
-            order = 'c-k-f-b',
-            effects = {{type = 'worker-robot-speed', modifier = 0.4}},
-            icon_size = 256,
-            prerequisites = {'worker-robots-speed-1'},
-            icons = {
-                {icon = '__base__/graphics/technology/worker-robots-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-movement-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'worker-robots-speed-2',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 100
-            }
-        },
-        ['research-speed-2'] = {
-            order = 'c-m-b',
-            effects = {{type = 'laboratory-speed', modifier = 0.3}},
-            icon_size = 256,
-            prerequisites = {'research-speed-1'},
-            icons = {
-                {icon = '__base__/graphics/technology/research-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'research-speed-2',
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 200
-            }
-        },
-        toolbelt = {
-            order = 'c-k-m',
-            effects = {{type = 'character-inventory-slots-bonus', modifier = 10}},
-            icon_size = 256,
-            prerequisites = {'logistic-science-pack'},
-            icons = {
-                {icon = '__base__/graphics/technology/toolbelt.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'toolbelt',
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            }
-        },
-        ['weapon-shooting-speed-6'] = {
-            order = 'e-l-f',
-            effects = {
-                {type = 'gun-speed', ammo_category = 'bullet', modifier = 0.4},
-                {type = 'gun-speed', ammo_category = 'shotgun-shell', modifier = 0.4},
-                {type = 'gun-speed', ammo_category = 'cannon-shell', modifier = 1.5},
-                {type = 'gun-speed', ammo_category = 'rocket', modifier = 1.3}
-            },
-            icon_size = 256,
-            prerequisites = {'weapon-shooting-speed-5'},
-            icons = {
-                {icon = '__base__/graphics/technology/weapon-shooting-speed-3.png', icon_size = 256, icon_mipmaps = 4},
-                {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'weapon-shooting-speed-6',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 600
-            }
-        },
-        lubricant = {
-            order = 'b-b',
-            effects = {{type = 'unlock-recipe', recipe = 'lubricant'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/lubricant.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 50
-            },
-            type = 'technology',
-            name = 'lubricant',
-            prerequisites = {'advanced-oil-processing'}
-        },
-        ['inserter-capacity-bonus-3'] = {
-            order = 'c-o-d',
-            effects = {{type = 'stack-inserter-capacity-bonus', modifier = 1}},
-            icon_size = 256,
-            prerequisites = {'inserter-capacity-bonus-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'inserter-capacity-bonus-3',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 250
-            }
+            order = 'a-b-a',
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 10, time = 10},
+            name = 'automation',
+            icon_size = 256
         },
         ['weapon-shooting-speed-3'] = {
+            effects = {
+                {ammo_category = 'bullet', type = 'gun-speed', modifier = 0.2},
+                {ammo_category = 'shotgun-shell', type = 'gun-speed', modifier = 0.2},
+                {ammo_category = 'rocket', type = 'gun-speed', modifier = 0.5}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/weapon-shooting-speed-2.png', icon_mipmaps = 4, icon_size = 256},
+                {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
             order = 'e-l-c',
-            effects = {
-                {type = 'gun-speed', ammo_category = 'bullet', modifier = 0.2},
-                {type = 'gun-speed', ammo_category = 'shotgun-shell', modifier = 0.2},
-                {type = 'gun-speed', ammo_category = 'rocket', modifier = 0.5}
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
+                },
+                count = 300,
+                time = 60
             },
-            icon_size = 256,
             prerequisites = {'weapon-shooting-speed-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/weapon-shooting-speed-2.png', icon_size = 256, icon_mipmaps = 4},
-                {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
             name = 'weapon-shooting-speed-3',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
-                },
-                count = 300
-            }
+            icon_size = 256
         },
-        ['weapon-shooting-speed-4'] = {
-            order = 'e-l-d',
-            effects = {
-                {type = 'gun-speed', ammo_category = 'bullet', modifier = 0.3},
-                {type = 'gun-speed', ammo_category = 'shotgun-shell', modifier = 0.3},
-                {type = 'gun-speed', ammo_category = 'rocket', modifier = 0.7}
+        ['cliff-explosives'] = {
+            icon = '__base__/graphics/technology/cliff-explosives.png',
+            effects = {{recipe = 'cliff-explosives', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'z-c-d',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 200,
+                time = 15
             },
-            icon_size = 256,
-            prerequisites = {'weapon-shooting-speed-3'},
+            prerequisites = {'explosives', 'military-2'},
+            name = 'cliff-explosives',
+            icon_size = 256
+        },
+        ['chemical-science-pack'] = {
+            icon = '__base__/graphics/technology/chemical-science-pack.png',
+            effects = {{recipe = 'chemical-science-pack', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            localised_description = {'technology-description.chemical-science-pack'},
+            localised_name = {'technology-name.chemical-science-pack'},
+            type = 'technology',
+            order = 'c-a',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 75, time = 10},
+            prerequisites = {'advanced-electronics', 'sulfur-processing'},
+            name = 'chemical-science-pack',
+            icon_size = 256
+        },
+        ['discharge-defense-equipment'] = {
+            effects = {
+                {recipe = 'discharge-defense-equipment', type = 'unlock-recipe'},
+                {recipe = 'discharge-defense-remote', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
             icons = {
-                {icon = '__base__/graphics/technology/weapon-shooting-speed-2.png', icon_size = 256, icon_mipmaps = 4},
                 {
+                    icon = '__base__/graphics/technology/discharge-defense-equipment.png',
+                    icon_mipmaps = 4,
+                    icon_size = 256
+                }, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'weapon-shooting-speed-4',
+            order = 'g-o',
             unit = {
-                time = 60,
                 ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}
                 },
-                count = 400
-            }
-        },
-        ['logistic-robotics'] = {
-            order = 'c-k-c',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'roboport'},
-                {type = 'unlock-recipe', recipe = 'logistic-chest-passive-provider'},
-                {type = 'unlock-recipe', recipe = 'logistic-chest-storage'},
-                {type = 'unlock-recipe', recipe = 'logistic-robot'},
-                {type = 'character-logistic-requests', modifier = true},
-                {type = 'character-logistic-trash-slots', modifier = 30}
+                count = 100,
+                time = 30
             },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/logistic-robotics.png',
+            prerequisites = {'laser-turret', 'military-3', 'power-armor', 'solar-panel-equipment'},
+            name = 'discharge-defense-equipment',
+            icon_size = 256
+        },
+        ['fluid-handling'] = {
+            icon = '__base__/graphics/technology/fluid-handling.png',
+            effects = {
+                {recipe = 'storage-tank', type = 'unlock-recipe'}, {recipe = 'pump', type = 'unlock-recipe'},
+                {recipe = 'empty-barrel', type = 'unlock-recipe'},
+                {recipe = 'fill-water-barrel', type = 'unlock-recipe'},
+                {recipe = 'empty-water-barrel', type = 'unlock-recipe'},
+                {recipe = 'fill-sulfuric-acid-barrel', type = 'unlock-recipe'},
+                {recipe = 'empty-sulfuric-acid-barrel', type = 'unlock-recipe'},
+                {recipe = 'fill-crude-oil-barrel', type = 'unlock-recipe'},
+                {recipe = 'empty-crude-oil-barrel', type = 'unlock-recipe'},
+                {recipe = 'fill-heavy-oil-barrel', type = 'unlock-recipe'},
+                {recipe = 'empty-heavy-oil-barrel', type = 'unlock-recipe'},
+                {recipe = 'fill-light-oil-barrel', type = 'unlock-recipe'},
+                {recipe = 'empty-light-oil-barrel', type = 'unlock-recipe'},
+                {recipe = 'fill-petroleum-gas-barrel', type = 'unlock-recipe'},
+                {recipe = 'empty-petroleum-gas-barrel', type = 'unlock-recipe'},
+                {recipe = 'fill-lubricant-barrel', type = 'unlock-recipe'},
+                {recipe = 'empty-lubricant-barrel', type = 'unlock-recipe'}
+            },
             icon_mipmaps = 4,
+            type = 'technology',
+            order = 'd-a-a',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50, time = 15},
+            prerequisites = {'automation-2', 'engine'},
+            name = 'fluid-handling',
+            icon_size = 256
+        },
+        ['explosive-rocketry'] = {
+            icon = '__base__/graphics/technology/explosive-rocketry.png',
+            effects = {{recipe = 'explosive-rocket', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-h',
             unit = {
-                time = 30,
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}
+                },
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'rocketry', 'military-3'},
+            name = 'explosive-rocketry',
+            icon_size = 256
+        },
+        military = {
+            icon = '__base__/graphics/technology/military.png',
+            effects = {
+                {recipe = 'submachine-gun', type = 'unlock-recipe'}, {recipe = 'shotgun', type = 'unlock-recipe'},
+                {recipe = 'shotgun-shell', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            icon_size = 256,
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 10, time = 15},
+            type = 'technology',
+            name = 'military',
+            order = 'e-a-a'
+        },
+        logistics = {
+            icon = '__base__/graphics/technology/logistics-1.png',
+            effects = {
+                {recipe = 'underground-belt', type = 'unlock-recipe'}, {recipe = 'splitter', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            icon_size = 256,
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 20, time = 15},
+            type = 'technology',
+            name = 'logistics',
+            order = 'a-f-a'
+        },
+        ['energy-weapons-damage-5'] = {
+            effects = {
+                {ammo_category = 'laser', type = 'ammo-damage', modifier = 0.5},
+                {ammo_category = 'beam', type = 'ammo-damage', modifier = 0.4}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-e',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 500,
+                time = 60
+            },
+            prerequisites = {'energy-weapons-damage-4'},
+            name = 'energy-weapons-damage-5',
+            icon_size = 256
+        },
+        ['battery-equipment'] = {
+            effects = {{recipe = 'battery-equipment', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            icons = {
+                {icon = '__base__/graphics/technology/battery-equipment.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'g-i-a',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50, time = 15},
+            prerequisites = {'battery', 'solar-panel-equipment'},
+            name = 'battery-equipment',
+            icon_size = 256
+        },
+        ['electric-energy-distribution-1'] = {
+            icon = '__base__/graphics/technology/electric-energy-distribution-1.png',
+            effects = {
+                {recipe = 'medium-electric-pole', type = 'unlock-recipe'},
+                {recipe = 'big-electric-pole', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-e-b',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 120,
+                time = 30
+            },
+            prerequisites = {'electronics', 'steel-processing', 'logistic-science-pack'},
+            name = 'electric-energy-distribution-1',
+            icon_size = 256
+        },
+        ['laser-shooting-speed-6'] = {
+            effects = {{ammo_category = 'laser', type = 'gun-speed', modifier = 0.4}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-n-m',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 350,
+                time = 60
+            },
+            prerequisites = {'laser-shooting-speed-5'},
+            name = 'laser-shooting-speed-6',
+            icon_size = 256
+        },
+        ['laser-shooting-speed-3'] = {
+            effects = {{ammo_category = 'laser', type = 'gun-speed', modifier = 0.3}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-n-j',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}
+                },
+                count = 200,
+                time = 60
+            },
+            prerequisites = {'laser-shooting-speed-2'},
+            name = 'laser-shooting-speed-3',
+            icon_size = 256
+        },
+        ['uranium-ammo'] = {
+            icon = '__base__/graphics/technology/uranium-ammo.png',
+            effects = {
+                {recipe = 'uranium-rounds-magazine', type = 'unlock-recipe'},
+                {recipe = 'uranium-cannon-shell', type = 'unlock-recipe'},
+                {recipe = 'explosive-uranium-cannon-shell', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-a-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 1000,
+                time = 45
+            },
+            prerequisites = {'uranium-processing', 'military-4', 'tank'},
+            name = 'uranium-ammo',
+            icon_size = 256
+        },
+        ['fluid-wagon'] = {
+            icon = '__base__/graphics/technology/fluid-wagon.png',
+            effects = {{recipe = 'fluid-wagon', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-g-a-b',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'railway', 'fluid-handling'},
+            name = 'fluid-wagon',
+            icon_size = 256
+        },
+        ['worker-robots-storage-1'] = {
+            effects = {{modifier = 1, type = 'worker-robot-storage'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/worker-robots-storage.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-g-a',
+            unit = {
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
                 },
-                count = 250
+                count = 200,
+                time = 30
             },
-            type = 'technology',
-            name = 'logistic-robotics',
-            prerequisites = {'robotics'}
+            prerequisites = {'robotics'},
+            name = 'worker-robots-storage-1',
+            icon_size = 256
         },
-        ['chemical-science-pack'] = {
-            order = 'c-a',
-            effects = {{type = 'unlock-recipe', recipe = 'chemical-science-pack'}},
-            icon_size = 256,
-            localised_name = {'technology-name.chemical-science-pack'},
-            icon = '__base__/graphics/technology/chemical-science-pack.png',
+        ['advanced-oil-processing'] = {
+            icon = '__base__/graphics/technology/oil-processing.png',
+            effects = {
+                {recipe = 'advanced-oil-processing', type = 'unlock-recipe'},
+                {recipe = 'heavy-oil-cracking', type = 'unlock-recipe'},
+                {recipe = 'light-oil-cracking', type = 'unlock-recipe'},
+                {recipe = 'solid-fuel-from-heavy-oil', type = 'unlock-recipe'},
+                {recipe = 'solid-fuel-from-light-oil', type = 'unlock-recipe'}
+            },
             icon_mipmaps = 4,
-            localised_description = {'technology-description.chemical-science-pack'},
-            unit = {time = 10, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 75},
             type = 'technology',
-            name = 'chemical-science-pack',
-            prerequisites = {'advanced-electronics', 'sulfur-processing'}
+            order = 'd-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 75,
+                time = 30
+            },
+            prerequisites = {'chemical-science-pack'},
+            name = 'advanced-oil-processing',
+            icon_size = 256
         },
-        ['advanced-material-processing'] = {
-            order = 'c-c-a',
-            effects = {{type = 'unlock-recipe', recipe = 'steel-furnace'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/advanced-material-processing.png',
+        electronics = {
+            icon = '__base__/graphics/technology/electronics.png',
+            name = 'electronics',
             icon_mipmaps = 4,
-            unit = {time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 75},
             type = 'technology',
-            name = 'advanced-material-processing',
-            prerequisites = {'steel-processing', 'logistic-science-pack'}
-        },
-        ['laser-shooting-speed-1'] = {
-            order = 'e-n-h',
-            effects = {{type = 'gun-speed', ammo_category = 'laser', modifier = 0.1}},
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 30, time = 15},
+            prerequisites = {'automation'},
             icon_size = 256,
-            prerequisites = {'laser'},
+            order = 'a-d-a'
+        },
+        ['energy-weapons-damage-1'] = {
+            effects = {{ammo_category = 'laser', type = 'ammo-damage', modifier = 0.2}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
             icons = {
-                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_size = 256, icon_mipmaps = 4}, {
+                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'laser-shooting-speed-1',
+            order = 'e-j-a',
             unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
                     {'chemical-science-pack', 1}
                 },
-                count = 50
-            }
-        },
-        ['stack-inserter'] = {
-            order = 'c-o-a',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'stack-inserter'},
-                {type = 'unlock-recipe', recipe = 'stack-filter-inserter'},
-                {type = 'stack-inserter-capacity-bonus', modifier = 1}
+                count = 100,
+                time = 30
             },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/stack-inserter.png',
+            prerequisites = {'laser', 'military-science-pack'},
+            name = 'energy-weapons-damage-1',
+            icon_size = 256
+        },
+        concrete = {
+            icon = '__base__/graphics/technology/concrete.png',
+            effects = {
+                {recipe = 'concrete', type = 'unlock-recipe'}, {recipe = 'hazard-concrete', type = 'unlock-recipe'},
+                {recipe = 'refined-concrete', type = 'unlock-recipe'},
+                {recipe = 'refined-hazard-concrete', type = 'unlock-recipe'}
+            },
             icon_mipmaps = 4,
-            upgrade = true,
+            type = 'technology',
+            order = 'c-c-c',
             unit = {
-                time = 30,
                 ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 150
+                count = 250,
+                time = 30
             },
-            type = 'technology',
-            name = 'stack-inserter',
-            prerequisites = {'fast-inserter', 'logistics-2', 'advanced-electronics'}
+            prerequisites = {'advanced-material-processing', 'automation-2'},
+            name = 'concrete',
+            icon_size = 256
         },
-        ['effectivity-module-3'] = {
-            order = 'i-g-c',
-            effects = {{type = 'unlock-recipe', recipe = 'effectivity-module-3'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/effectivity-module-3.png',
+        ['follower-robot-count-2'] = {
+            effects = {{modifier = 5, type = 'maximum-following-robots-count'}},
             icon_mipmaps = 4,
+            type = 'technology',
             upgrade = true,
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
-                },
-                count = 300
-            },
-            type = 'technology',
-            name = 'effectivity-module-3',
-            prerequisites = {'effectivity-module-2', 'production-science-pack'}
-        },
-        ['uranium-ammo'] = {
-            order = 'e-a-b',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'uranium-rounds-magazine'},
-                {type = 'unlock-recipe', recipe = 'uranium-cannon-shell'},
-                {type = 'unlock-recipe', recipe = 'explosive-uranium-cannon-shell'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/uranium-ammo.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 45,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 1000
-            },
-            type = 'technology',
-            name = 'uranium-ammo',
-            prerequisites = {'uranium-processing', 'military-4', 'tank'}
-        },
-        ['stronger-explosives-4'] = {
-            order = 'e-l-d',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'rocket', modifier = 0.4},
-                {type = 'ammo-damage', ammo_category = 'grenade', modifier = 0.2},
-                {type = 'ammo-damage', ammo_category = 'landmine', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'stronger-explosives-3'},
             icons = {
-                {icon = '__base__/graphics/technology/stronger-explosives-3.png', icon_size = 256, icon_mipmaps = 4}, {
+                {icon = '__base__/graphics/technology/follower-robots.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-count.png',
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'stronger-explosives-4',
+            order = 'e-p-b-c',
             unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
-                    {'chemical-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 400
-            }
-        },
-        ['logistics-2'] = {
-            order = 'a-f-b',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'fast-transport-belt'},
-                {type = 'unlock-recipe', recipe = 'fast-underground-belt'},
-                {type = 'unlock-recipe', recipe = 'fast-splitter'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/logistics-2.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 200
-            },
-            type = 'technology',
-            name = 'logistics-2',
-            prerequisites = {'logistics', 'logistic-science-pack'}
-        },
-        ['worker-robots-speed-1'] = {
-            order = 'c-k-f-a',
-            effects = {{type = 'worker-robot-speed', modifier = 0.35}},
-            icon_size = 256,
-            prerequisites = {'robotics'},
-            icons = {
-                {icon = '__base__/graphics/technology/worker-robots-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-movement-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'worker-robots-speed-1',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 50
-            }
-        },
-        ['refined-flammables-2'] = {
-            order = 'e-l-b',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'flamethrower', modifier = 0.2},
-                {type = 'turret-attack', turret_id = 'flamethrower-turret', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'refined-flammables-1'},
-            icons = {
-                {icon = '__base__/graphics/technology/refined-flammables.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'refined-flammables-2',
-            unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
                 },
-                count = 200
-            }
-        },
-        robotics = {
-            order = 'c-i',
-            effects = {{type = 'unlock-recipe', recipe = 'flying-robot-frame'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/robotics.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 75
+                count = 300,
+                time = 30
             },
-            type = 'technology',
-            name = 'robotics',
-            prerequisites = {'electric-engine', 'battery'}
+            prerequisites = {'follower-robot-count-1'},
+            name = 'follower-robot-count-2',
+            icon_size = 256
         },
-        ['inserter-capacity-bonus-6'] = {
-            order = 'c-o-g',
-            effects = {{type = 'stack-inserter-capacity-bonus', modifier = 2}},
-            icon_size = 256,
-            prerequisites = {'inserter-capacity-bonus-5'},
+        ['inserter-capacity-bonus-4'] = {
+            effects = {{modifier = 1, type = 'stack-inserter-capacity-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
             icons = {
-                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
+                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_mipmaps = 4, icon_size = 256}, {
                     icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'inserter-capacity-bonus-6',
+            order = 'c-o-e',
             unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'production-science-pack', 1}
                 },
-                count = 400
-            }
+                count = 250,
+                time = 30
+            },
+            prerequisites = {'inserter-capacity-bonus-3'},
+            name = 'inserter-capacity-bonus-4',
+            icon_size = 256
         },
-        ['stronger-explosives-7'] = {
-            order = 'e-l-f',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'rocket', modifier = 0.5},
-                {type = 'ammo-damage', ammo_category = 'grenade', modifier = 0.2},
-                {type = 'ammo-damage', ammo_category = 'landmine', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'stronger-explosives-6', 'space-science-pack'},
-            icons = {
-                {icon = '__base__/graphics/technology/stronger-explosives-3.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
+        ['energy-weapons-damage-2'] = {
+            effects = {{ammo_category = 'laser', type = 'ammo-damage', modifier = 0.2}},
             icon_mipmaps = 4,
-            upgrade = true,
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
-                },
-                count_formula = '2^(L-7)*1000'
-            },
-            max_level = 'infinite',
-            name = 'stronger-explosives-7',
-            type = 'technology'
-        },
-        ['stronger-explosives-6'] = {
-            order = 'e-l-f',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'rocket', modifier = 0.6},
-                {type = 'ammo-damage', ammo_category = 'grenade', modifier = 0.2},
-                {type = 'ammo-damage', ammo_category = 'landmine', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'stronger-explosives-5'},
-            icons = {
-                {icon = '__base__/graphics/technology/stronger-explosives-3.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
             type = 'technology',
-            name = 'stronger-explosives-6',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 600
-            }
-        },
-        ['stronger-explosives-5'] = {
-            order = 'e-l-e',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'rocket', modifier = 0.5},
-                {type = 'ammo-damage', ammo_category = 'grenade', modifier = 0.2},
-                {type = 'ammo-damage', ammo_category = 'landmine', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'stronger-explosives-4'},
+            upgrade = true,
             icons = {
-                {icon = '__base__/graphics/technology/stronger-explosives-3.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
+                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_mipmaps = 4, icon_size = 256}, {
                     icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'stronger-explosives-5',
+            order = 'e-l-b',
             unit = {
-                time = 60,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
-                    {'chemical-science-pack', 1}, {'utility-science-pack', 1}
+                    {'chemical-science-pack', 1}
                 },
-                count = 500
-            }
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'energy-weapons-damage-1'},
+            name = 'energy-weapons-damage-2',
+            icon_size = 256
         },
-        ['physical-projectile-damage-7'] = {
-            order = 'e-l-f',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'bullet', modifier = 0.4},
-                {type = 'turret-attack', turret_id = 'gun-turret', modifier = 0.7},
-                {type = 'ammo-damage', ammo_category = 'shotgun-shell', modifier = 0.4},
-                {type = 'ammo-damage', ammo_category = 'cannon-shell', modifier = 1}
-            },
-            icon_size = 256,
-            prerequisites = {'physical-projectile-damage-6', 'space-science-pack'},
-            icons = {
-                {
-                    icon = '__base__/graphics/technology/physical-projectile-damage-2.png',
-                    icon_size = 256,
-                    icon_mipmaps = 4
-                }, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
+        ['land-mine'] = {
+            icon = '__base__/graphics/technology/land-mine.png',
+            effects = {{recipe = 'land-mine', type = 'unlock-recipe'}},
             icon_mipmaps = 4,
-            upgrade = true,
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
-                },
-                count_formula = '2^(L-7)*1000'
-            },
-            max_level = 'infinite',
-            name = 'physical-projectile-damage-7',
-            type = 'technology'
-        },
-        ['stronger-explosives-2'] = {
-            order = 'e-l-b',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'grenade', modifier = 0.2},
-                {type = 'ammo-damage', ammo_category = 'landmine', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'stronger-explosives-1'},
-            icons = {
-                {icon = '__base__/graphics/technology/stronger-explosives-2.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
+            localised_description = {'technology-description.land-mine'},
             type = 'technology',
-            name = 'stronger-explosives-2',
+            order = 'e-e',
             unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
                 },
-                count = 200
-            }
-        },
-        ['energy-weapons-damage-6'] = {
-            order = 'e-l-f',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'laser', modifier = 0.7},
-                {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.6}
+                count = 100,
+                time = 30
             },
-            icon_size = 256,
-            prerequisites = {'energy-weapons-damage-5'},
+            prerequisites = {'explosives', 'military-science-pack'},
+            name = 'land-mine',
+            icon_size = 256
+        },
+        ['productivity-module'] = {
+            icon = '__base__/graphics/technology/productivity-module-1.png',
+            effects = {{recipe = 'productivity-module', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            order = 'i-e-a',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50, time = 30},
+            prerequisites = {'modules'},
+            name = 'productivity-module',
+            icon_size = 256
+        },
+        ['electric-engine'] = {
+            icon = '__base__/graphics/technology/electric-engine.png',
+            effects = {{recipe = 'electric-engine-unit', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'b-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 50,
+                time = 30
+            },
+            prerequisites = {'lubricant'},
+            name = 'electric-engine',
+            icon_size = 256
+        },
+        ['follower-robot-count-5'] = {
+            effects = {{modifier = 10, type = 'maximum-following-robots-count'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
             icons = {
-                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_size = 256, icon_mipmaps = 4}, {
+                {icon = '__base__/graphics/technology/follower-robots.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-count.png',
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'energy-weapons-damage-6',
+            order = 'e-p-b-c',
             unit = {
-                time = 60,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'military-science-pack', 1}, {'utility-science-pack', 1}
                 },
-                count = 600
-            }
+                count = 800,
+                time = 30
+            },
+            prerequisites = {'follower-robot-count-4', 'destroyer'},
+            name = 'follower-robot-count-5',
+            icon_size = 256
         },
-        ['stone-wall'] = {
-            order = 'a-k-a',
-            effects = {{type = 'unlock-recipe', recipe = 'stone-wall'}},
-            icon_size = 256,
-            unit = {time = 10, ingredients = {{'automation-science-pack', 1}}, count = 10},
+        ['steel-axe'] = {
+            icon = '__base__/graphics/technology/steel-axe.png',
+            effects = {{modifier = 1, type = 'character-mining-speed'}},
+            icon_mipmaps = 4,
             type = 'technology',
-            icon = '__base__/graphics/technology/stone-wall.png',
-            name = 'stone-wall',
-            icon_mipmaps = 4
+            order = 'c-c-a',
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 50, time = 30},
+            prerequisites = {'steel-processing'},
+            name = 'steel-axe',
+            icon_size = 256
+        },
+        ['effect-transmission'] = {
+            icon = '__base__/graphics/technology/effect-transmission.png',
+            effects = {{recipe = 'beacon', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'i-i',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 75,
+                time = 30
+            },
+            prerequisites = {'advanced-electronics-2', 'production-science-pack'},
+            name = 'effect-transmission',
+            icon_size = 256
+        },
+        ['worker-robots-storage-2'] = {
+            effects = {{modifier = 1, type = 'worker-robot-storage'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/worker-robots-storage.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-g-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 300,
+                time = 60
+            },
+            prerequisites = {'worker-robots-storage-1'},
+            name = 'worker-robots-storage-2',
+            icon_size = 256
+        },
+        ['inserter-capacity-bonus-1'] = {
+            effects = {{modifier = 1, type = 'stack-inserter-capacity-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-o-b',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'stack-inserter'},
+            name = 'inserter-capacity-bonus-1',
+            icon_size = 256
+        },
+        distractor = {
+            icon = '__base__/graphics/technology/distractor.png',
+            effects = {{recipe = 'distractor-capsule', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-p-b-a',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}
+                },
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'defender', 'military-3', 'laser'},
+            name = 'distractor',
+            icon_size = 256
         },
         ['worker-robots-speed-6'] = {
-            order = 'c-k-f-e',
-            effects = {{type = 'worker-robot-speed', modifier = 0.65}},
-            icon_size = 256,
-            prerequisites = {'worker-robots-speed-5', 'space-science-pack'},
+            effects = {{modifier = 0.65, type = 'worker-robot-speed'}},
+            icon_mipmaps = 4,
+            max_level = 'infinite',
+            type = 'technology',
+            upgrade = true,
             icons = {
-                {icon = '__base__/graphics/technology/worker-robots-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
+                {icon = '__base__/graphics/technology/worker-robots-speed.png', icon_mipmaps = 4, icon_size = 256}, {
                     icon = '__core__/graphics/icons/technology/constants/constant-movement-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
+            order = 'c-k-f-e',
             unit = {
-                time = 60,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
                 },
-                count_formula = '2^(L-6)*1000'
+                count_formula = '2^(L-6)*1000',
+                time = 60
             },
-            max_level = 'infinite',
+            prerequisites = {'worker-robots-speed-5', 'space-science-pack'},
             name = 'worker-robots-speed-6',
-            type = 'technology'
+            icon_size = 256
         },
-        ['steel-axe'] = {
-            order = 'c-c-a',
-            effects = {{type = 'character-mining-speed', modifier = 1}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/steel-axe.png',
+        ['inserter-capacity-bonus-5'] = {
+            effects = {{modifier = 2, type = 'stack-inserter-capacity-bonus'}},
             icon_mipmaps = 4,
-            unit = {time = 30, ingredients = {{'automation-science-pack', 1}}, count = 50},
             type = 'technology',
-            name = 'steel-axe',
-            prerequisites = {'steel-processing'}
-        },
-        ['braking-force-7'] = {
-            order = 'b-f-g',
-            effects = {{type = 'train-braking-force-bonus', modifier = 0.15}},
-            icon_size = 256,
-            prerequisites = {'braking-force-6'},
+            upgrade = true,
             icons = {
-                {icon = '__base__/graphics/technology/braking-force.png', icon_size = 256, icon_mipmaps = 4}, {
+                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'braking-force-7',
+            order = 'c-o-f',
             unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 650
-            }
-        },
-        engine = {
-            order = 'b-a',
-            effects = {{type = 'unlock-recipe', recipe = 'engine-unit'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/engine.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 15,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            },
-            type = 'technology',
-            name = 'engine',
-            prerequisites = {'steel-processing', 'logistic-science-pack'}
-        },
-        ['energy-weapons-damage-2'] = {
-            order = 'e-l-b',
-            effects = {{type = 'ammo-damage', ammo_category = 'laser', modifier = 0.2}},
-            icon_size = 256,
-            prerequisites = {'energy-weapons-damage-1'},
-            icons = {
-                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'energy-weapons-damage-2',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
-                    {'chemical-science-pack', 1}
-                },
-                count = 200
-            }
-        },
-        ['kovarex-enrichment-process'] = {
-            order = 'e-p-b-c',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'kovarex-enrichment-process'},
-                {type = 'unlock-recipe', recipe = 'nuclear-fuel'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/kovarex-enrichment-process.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'production-science-pack', 1}
                 },
-                count = 1500
+                count = 300,
+                time = 30
             },
+            prerequisites = {'inserter-capacity-bonus-4'},
+            name = 'inserter-capacity-bonus-5',
+            icon_size = 256
+        },
+        ['worker-robots-speed-4'] = {
+            effects = {{modifier = 0.55, type = 'worker-robot-speed'}},
+            icon_mipmaps = 4,
             type = 'technology',
-            name = 'kovarex-enrichment-process',
-            prerequisites = {'production-science-pack', 'uranium-processing', 'rocket-fuel'}
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/worker-robots-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-movement-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-f-d',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'utility-science-pack', 1}
+                },
+                count = 250,
+                time = 60
+            },
+            prerequisites = {'worker-robots-speed-3'},
+            name = 'worker-robots-speed-4',
+            icon_size = 256
+        },
+        ['logistic-system'] = {
+            icon = '__base__/graphics/technology/logistic-system.png',
+            effects = {
+                {recipe = 'logistic-chest-active-provider', type = 'unlock-recipe'},
+                {recipe = 'logistic-chest-requester', type = 'unlock-recipe'},
+                {recipe = 'logistic-chest-buffer', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-k-d',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'utility-science-pack', 1}
+                },
+                count = 500,
+                time = 30
+            },
+            prerequisites = {'utility-science-pack', 'logistic-robotics'},
+            name = 'logistic-system',
+            icon_size = 256
+        },
+        flamethrower = {
+            icon = '__base__/graphics/technology/flamethrower.png',
+            effects = {
+                {recipe = 'flamethrower', type = 'unlock-recipe'},
+                {recipe = 'flamethrower-ammo', type = 'unlock-recipe'},
+                {recipe = 'flamethrower-turret', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-c-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
+                },
+                count = 50,
+                time = 30
+            },
+            prerequisites = {'flammables', 'military-science-pack'},
+            name = 'flamethrower',
+            icon_size = 256
+        },
+        ['worker-robots-speed-2'] = {
+            effects = {{modifier = 0.4, type = 'worker-robot-speed'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/worker-robots-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-movement-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-f-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'worker-robots-speed-1'},
+            name = 'worker-robots-speed-2',
+            icon_size = 256
+        },
+        ['personal-laser-defense-equipment'] = {
+            effects = {{recipe = 'personal-laser-defense-equipment', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            icons = {
+                {
+                    icon = '__base__/graphics/technology/personal-laser-defense-equipment.png',
+                    icon_mipmaps = 4,
+                    icon_size = 256
+                }, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'g-m',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}
+                },
+                count = 100,
+                time = 30
+            },
+            prerequisites = {
+                'laser-turret', 'military-3', 'low-density-structure', 'power-armor', 'solar-panel-equipment'
+            },
+            name = 'personal-laser-defense-equipment',
+            icon_size = 256
+        },
+        ['worker-robots-speed-1'] = {
+            effects = {{modifier = 0.35, type = 'worker-robot-speed'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/worker-robots-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-movement-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-f-a',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 50,
+                time = 30
+            },
+            prerequisites = {'robotics'},
+            name = 'worker-robots-speed-1',
+            icon_size = 256
+        },
+        landfill = {
+            icon = '__base__/graphics/technology/landfill.png',
+            effects = {{recipe = 'landfill', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'b-d',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50, time = 30},
+            prerequisites = {'logistic-science-pack'},
+            name = 'landfill',
+            icon_size = 256
+        },
+        ['modular-armor'] = {
+            icon = '__base__/graphics/technology/armor-making.png',
+            effects = {{recipe = 'modular-armor', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'g-a-c',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'heavy-armor', 'advanced-electronics'},
+            name = 'modular-armor',
+            icon_size = 256
+        },
+        ['physical-projectile-damage-6'] = {
+            effects = {
+                {ammo_category = 'bullet', type = 'ammo-damage', modifier = 0.4},
+                {modifier = 0.4, turret_id = 'gun-turret', type = 'turret-attack'},
+                {ammo_category = 'shotgun-shell', type = 'ammo-damage', modifier = 0.4},
+                {ammo_category = 'cannon-shell', type = 'ammo-damage', modifier = 1.3}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {
+                    icon = '__base__/graphics/technology/physical-projectile-damage-2.png',
+                    icon_mipmaps = 4,
+                    icon_size = 256
+                }, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-f',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 600,
+                time = 60
+            },
+            prerequisites = {'physical-projectile-damage-5'},
+            name = 'physical-projectile-damage-6',
+            icon_size = 256
+        },
+        ['weapon-shooting-speed-5'] = {
+            effects = {
+                {ammo_category = 'bullet', type = 'gun-speed', modifier = 0.3},
+                {ammo_category = 'shotgun-shell', type = 'gun-speed', modifier = 0.4},
+                {ammo_category = 'cannon-shell', type = 'gun-speed', modifier = 0.8},
+                {ammo_category = 'rocket', type = 'gun-speed', modifier = 0.9}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/weapon-shooting-speed-3.png', icon_mipmaps = 4, icon_size = 256},
+                {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-e',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}
+                },
+                count = 500,
+                time = 60
+            },
+            prerequisites = {'weapon-shooting-speed-4'},
+            name = 'weapon-shooting-speed-5',
+            icon_size = 256
+        },
+        flammables = {
+            icon = '__base__/graphics/technology/flammables.png',
+            name = 'flammables',
+            icon_mipmaps = 4,
+            type = 'technology',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50, time = 30},
+            prerequisites = {'oil-processing'},
+            icon_size = 256,
+            order = 'e-c-a'
+        },
+        ['refined-flammables-4'] = {
+            effects = {
+                {ammo_category = 'flamethrower', type = 'ammo-damage', modifier = 0.3},
+                {modifier = 0.3, turret_id = 'flamethrower-turret', type = 'turret-attack'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/refined-flammables.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-d',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
+                    {'chemical-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 400,
+                time = 60
+            },
+            prerequisites = {'refined-flammables-3'},
+            name = 'refined-flammables-4',
+            icon_size = 256
+        },
+        ['refined-flammables-2'] = {
+            effects = {
+                {ammo_category = 'flamethrower', type = 'ammo-damage', modifier = 0.2},
+                {modifier = 0.2, turret_id = 'flamethrower-turret', type = 'turret-attack'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/refined-flammables.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
+                },
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'refined-flammables-1'},
+            name = 'refined-flammables-2',
+            icon_size = 256
+        },
+        plastics = {
+            icon = '__base__/graphics/technology/plastics.png',
+            effects = {{recipe = 'plastic-bar', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'd-e',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'oil-processing'},
+            name = 'plastics',
+            icon_size = 256
+        },
+        ['follower-robot-count-6'] = {
+            effects = {{modifier = 10, type = 'maximum-following-robots-count'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/follower-robots.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-count.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-p-b-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 1000,
+                time = 30
+            },
+            prerequisites = {'follower-robot-count-5'},
+            name = 'follower-robot-count-6',
+            icon_size = 256
+        },
+        ['follower-robot-count-3'] = {
+            effects = {{modifier = 5, type = 'maximum-following-robots-count'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/follower-robots.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-count.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-p-b-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}
+                },
+                count = 400,
+                time = 30
+            },
+            prerequisites = {'follower-robot-count-2'},
+            name = 'follower-robot-count-3',
+            icon_size = 256
+        },
+        toolbelt = {
+            effects = {{modifier = 10, type = 'character-inventory-slots-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            icons = {
+                {icon = '__base__/graphics/technology/toolbelt.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-m',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'logistic-science-pack'},
+            name = 'toolbelt',
+            icon_size = 256
+        },
+        ['sulfur-processing'] = {
+            icon = '__base__/graphics/technology/sulfur-processing.png',
+            effects = {{recipe = 'sulfuric-acid', type = 'unlock-recipe'}, {recipe = 'sulfur', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'd-d',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 150,
+                time = 30
+            },
+            prerequisites = {'oil-processing'},
+            name = 'sulfur-processing',
+            icon_size = 256
+        },
+        rocketry = {
+            icon = '__base__/graphics/technology/rocketry.png',
+            effects = {
+                {recipe = 'rocket-launcher', type = 'unlock-recipe'}, {recipe = 'rocket', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-g',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
+                },
+                count = 120,
+                time = 15
+            },
+            prerequisites = {'explosives', 'flammables', 'military-science-pack'},
+            name = 'rocketry',
+            icon_size = 256
         },
         spidertron = {
-            order = 'd-e-g',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'spidertron'}, {type = 'unlock-recipe', recipe = 'spidertron-remote'}
-            },
-            icon_size = 256,
             icon = '__base__/graphics/technology/spidertron.png',
+            effects = {
+                {recipe = 'spidertron', type = 'unlock-recipe'}, {recipe = 'spidertron-remote', type = 'unlock-recipe'}
+            },
             icon_mipmaps = 4,
+            type = 'technology',
+            order = 'd-e-g',
             unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
                     {'chemical-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}
                 },
-                count = 2500
+                count = 2500,
+                time = 30
             },
-            type = 'technology',
-            name = 'spidertron',
             prerequisites = {
                 'military-4', 'exoskeleton-equipment', 'fusion-reactor-equipment', 'rocketry', 'rocket-control-unit',
                 'effectivity-module-3'
-            }
+            },
+            name = 'spidertron',
+            icon_size = 256
         },
-        ['inserter-capacity-bonus-5'] = {
-            order = 'c-o-f',
-            effects = {{type = 'stack-inserter-capacity-bonus', modifier = 2}},
-            icon_size = 256,
-            prerequisites = {'inserter-capacity-bonus-4'},
+        ['fusion-reactor-equipment'] = {
+            effects = {{recipe = 'fusion-reactor-equipment', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
             icons = {
-                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_size = 256, icon_mipmaps = 4}, {
+                {icon = '__base__/graphics/technology/fusion-reactor-equipment.png', icon_mipmaps = 4, icon_size = 256},
+                {
+                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'inserter-capacity-bonus-5',
+            order = 'g-l',
             unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
-                },
-                count = 300
-            }
-        },
-        ['follower-robot-count-5'] = {
-            order = 'e-p-b-c',
-            effects = {{type = 'maximum-following-robots-count', modifier = 10}},
-            icon_size = 256,
-            prerequisites = {'follower-robot-count-4', 'destroyer'},
-            icons = {
-                {icon = '__base__/graphics/technology/follower-robots.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-count.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'follower-robot-count-5',
-            unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'military-science-pack', 1}, {'utility-science-pack', 1}
                 },
-                count = 800
-            }
-        },
-        ['speed-module-3'] = {
-            order = 'i-c-c',
-            effects = {{type = 'unlock-recipe', recipe = 'speed-module-3'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/speed-module-3.png',
-            icon_mipmaps = 4,
-            upgrade = true,
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
-                },
-                count = 300
+                count = 200,
+                time = 30
             },
-            type = 'technology',
-            name = 'speed-module-3',
-            prerequisites = {'speed-module-2', 'production-science-pack'}
+            prerequisites = {'utility-science-pack', 'power-armor', 'military-science-pack'},
+            name = 'fusion-reactor-equipment',
+            icon_size = 256
         },
-        ['speed-module-2'] = {
-            order = 'i-c-b',
-            effects = {{type = 'unlock-recipe', recipe = 'speed-module-2'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/speed-module-2.png',
+        ['utility-science-pack'] = {
+            icon = '__base__/graphics/technology/utility-science-pack.png',
+            effects = {{recipe = 'utility-science-pack', type = 'unlock-recipe'}},
             icon_mipmaps = 4,
-            upgrade = true,
+            type = 'technology',
+            order = 'c-a',
             unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
                 },
-                count = 75
+                count = 100,
+                time = 30
             },
-            type = 'technology',
-            name = 'speed-module-2',
-            prerequisites = {'speed-module', 'advanced-electronics-2'}
+            prerequisites = {'robotics', 'advanced-electronics-2', 'low-density-structure'},
+            name = 'utility-science-pack',
+            icon_size = 256
         },
-        ['logistics-3'] = {
-            order = 'a-f-c',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'express-transport-belt'},
-                {type = 'unlock-recipe', recipe = 'express-underground-belt'},
-                {type = 'unlock-recipe', recipe = 'express-splitter'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/logistics-3.png',
+        ['productivity-module-2'] = {
+            icon = '__base__/graphics/technology/productivity-module-2.png',
+            effects = {{recipe = 'productivity-module-2', type = 'unlock-recipe'}},
             icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            order = 'i-e-b',
             unit = {
-                time = 15,
                 ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
                 },
-                count = 300
+                count = 75,
+                time = 30
             },
-            type = 'technology',
-            name = 'logistics-3',
-            prerequisites = {'production-science-pack', 'lubricant'}
+            prerequisites = {'productivity-module', 'advanced-electronics-2'},
+            name = 'productivity-module-2',
+            icon_size = 256
         },
-        ['logistic-science-pack'] = {
-            order = 'c-a',
-            effects = {{type = 'unlock-recipe', recipe = 'logistic-science-pack'}},
-            icon_size = 256,
-            localised_name = {'technology-name.logistic-science-pack'},
-            icon = '__base__/graphics/technology/logistic-science-pack.png',
-            icon_mipmaps = 4,
-            localised_description = {'technology-description.logistic-science-pack'},
-            type = 'technology',
-            name = 'logistic-science-pack',
-            unit = {time = 5, ingredients = {{'automation-science-pack', 1}}, count = 75}
-        },
-        ['space-science-pack'] = {
-            order = 'c-a',
-            effects = {{type = 'unlock-recipe', recipe = 'satellite'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/space-science-pack.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 2000
-            },
-            type = 'technology',
-            name = 'space-science-pack',
-            prerequisites = {'rocket-silo', 'electric-energy-accumulators', 'solar-energy'}
-        },
-        ['solar-panel-equipment'] = {
-            order = 'g-k',
-            effects = {{type = 'unlock-recipe', recipe = 'solar-panel-equipment'}},
-            icon_size = 256,
-            prerequisites = {'modular-armor', 'solar-energy'},
-            icons = {
-                {icon = '__base__/graphics/technology/solar-panel-equipment.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
+        ['personal-roboport-equipment'] = {
+            effects = {{recipe = 'personal-roboport-equipment', type = 'unlock-recipe'}},
             icon_mipmaps = 4,
             type = 'technology',
-            name = 'solar-panel-equipment',
-            unit = {
-                time = 15,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            }
-        },
-        plastics = {
-            order = 'd-e',
-            effects = {{type = 'unlock-recipe', recipe = 'plastic-bar'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/plastics.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 200
-            },
-            type = 'technology',
-            name = 'plastics',
-            prerequisites = {'oil-processing'}
-        },
-        ['coal-liquefaction'] = {
-            order = 'd-c',
-            effects = {{type = 'unlock-recipe', recipe = 'coal-liquefaction'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/coal-liquefaction.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
-                },
-                count = 200
-            },
-            type = 'technology',
-            name = 'coal-liquefaction',
-            prerequisites = {'advanced-oil-processing', 'production-science-pack'}
-        },
-        ['physical-projectile-damage-6'] = {
-            order = 'e-l-f',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'bullet', modifier = 0.4},
-                {type = 'turret-attack', turret_id = 'gun-turret', modifier = 0.4},
-                {type = 'ammo-damage', ammo_category = 'shotgun-shell', modifier = 0.4},
-                {type = 'ammo-damage', ammo_category = 'cannon-shell', modifier = 1.3}
-            },
-            icon_size = 256,
-            prerequisites = {'physical-projectile-damage-5'},
             icons = {
                 {
-                    icon = '__base__/graphics/technology/physical-projectile-damage-2.png',
-                    icon_size = 256,
-                    icon_mipmaps = 4
+                    icon = '__base__/graphics/technology/personal-roboport-equipment.png',
+                    icon_mipmaps = 4,
+                    icon_size = 256
                 }, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'physical-projectile-damage-6',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 600
-            }
-        },
-        ['rocket-control-unit'] = {
-            order = 'k-a',
-            effects = {{type = 'unlock-recipe', recipe = 'rocket-control-unit'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/rocket-control-unit.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 45,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'utility-science-pack', 1}
-                },
-                count = 300
-            },
-            type = 'technology',
-            name = 'rocket-control-unit',
-            prerequisites = {'utility-science-pack', 'speed-module'}
-        },
-        ['sulfur-processing'] = {
-            order = 'd-d',
-            effects = {{type = 'unlock-recipe', recipe = 'sulfuric-acid'}, {type = 'unlock-recipe', recipe = 'sulfur'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/sulfur-processing.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 150
-            },
-            type = 'technology',
-            name = 'sulfur-processing',
-            prerequisites = {'oil-processing'}
-        },
-        ['research-speed-6'] = {
-            order = 'c-m-d',
-            effects = {{type = 'laboratory-speed', modifier = 0.6}},
-            icon_size = 256,
-            prerequisites = {'research-speed-5'},
-            icons = {
-                {icon = '__base__/graphics/technology/research-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'research-speed-6',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 500
-            }
-        },
-        ['laser-shooting-speed-7'] = {
-            order = 'e-n-n',
-            effects = {{type = 'gun-speed', ammo_category = 'laser', modifier = 0.5}},
-            icon_size = 256,
-            prerequisites = {'laser-shooting-speed-6'},
-            icons = {
-                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'laser-shooting-speed-7',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 450
-            }
-        },
-        ['research-speed-5'] = {
-            order = 'c-m-d',
-            effects = {{type = 'laboratory-speed', modifier = 0.5}},
-            icon_size = 256,
-            prerequisites = {'research-speed-4'},
-            icons = {
-                {icon = '__base__/graphics/technology/research-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'research-speed-5',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
-                },
-                count = 500
-            }
-        },
-        ['research-speed-4'] = {
-            order = 'c-m-d',
-            effects = {{type = 'laboratory-speed', modifier = 0.5}},
-            icon_size = 256,
-            prerequisites = {'research-speed-3'},
-            icons = {
-                {icon = '__base__/graphics/technology/research-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'research-speed-4',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 500
-            }
-        },
-        ['research-speed-3'] = {
-            order = 'c-m-c',
-            effects = {{type = 'laboratory-speed', modifier = 0.4}},
-            icon_size = 256,
-            prerequisites = {'research-speed-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/research-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'research-speed-3',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 250
-            }
-        },
-        ['refined-flammables-7'] = {
-            order = 'e-l-f',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'flamethrower', modifier = 0.2},
-                {type = 'turret-attack', turret_id = 'flamethrower-turret', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'refined-flammables-6', 'space-science-pack'},
-            icons = {
-                {icon = '__base__/graphics/technology/refined-flammables.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
-                },
-                count_formula = '2^(L-7)*1000'
-            },
-            max_level = 'infinite',
-            name = 'refined-flammables-7',
-            type = 'technology'
-        },
-        ['energy-shield-mk2-equipment'] = {
-            order = 'g-e-b',
-            effects = {{type = 'unlock-recipe', recipe = 'energy-shield-mk2-equipment'}},
-            icon_size = 256,
-            prerequisites = {'energy-shield-equipment', 'military-3', 'low-density-structure', 'power-armor'},
-            icons = {
-                {
-                    icon = '__base__/graphics/technology/energy-shield-mk2-equipment.png',
-                    icon_size = 256,
-                    icon_mipmaps = 4
-                }, {
-                    shift = {100, 100},
                     icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'energy-shield-mk2-equipment',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}
-                },
-                count = 200
-            }
-        },
-        ['refined-flammables-6'] = {
-            order = 'e-l-f',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'flamethrower', modifier = 0.4},
-                {type = 'turret-attack', turret_id = 'flamethrower-turret', modifier = 0.4}
-            },
-            icon_size = 256,
-            prerequisites = {'refined-flammables-5'},
-            icons = {
-                {icon = '__base__/graphics/technology/refined-flammables.png', icon_size = 256, icon_mipmaps = 4}, {
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'refined-flammables-6',
+            order = 'c-k-d-zz',
             unit = {
-                time = 60,
                 ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
                 },
-                count = 600
-            }
+                count = 50,
+                time = 30
+            },
+            prerequisites = {'construction-robotics', 'solar-panel-equipment'},
+            name = 'personal-roboport-equipment',
+            icon_size = 256
         },
-        ['refined-flammables-4'] = {
+        ['energy-shield-equipment'] = {
+            effects = {{recipe = 'energy-shield-equipment', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            icons = {
+                {icon = '__base__/graphics/technology/energy-shield-equipment.png', icon_mipmaps = 4, icon_size = 256},
+                {
+                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'g-e-a',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
+                },
+                count = 150,
+                time = 15
+            },
+            prerequisites = {'solar-panel-equipment', 'military-science-pack'},
+            name = 'energy-shield-equipment',
+            icon_size = 256
+        },
+        ['stronger-explosives-4'] = {
+            effects = {
+                {ammo_category = 'rocket', type = 'ammo-damage', modifier = 0.4},
+                {ammo_category = 'grenade', type = 'ammo-damage', modifier = 0.2},
+                {ammo_category = 'landmine', type = 'ammo-damage', modifier = 0.2}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/stronger-explosives-3.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
             order = 'e-l-d',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'flamethrower', modifier = 0.3},
-                {type = 'turret-attack', turret_id = 'flamethrower-turret', modifier = 0.3}
-            },
-            icon_size = 256,
-            prerequisites = {'refined-flammables-3'},
-            icons = {
-                {icon = '__base__/graphics/technology/refined-flammables.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'refined-flammables-4',
             unit = {
-                time = 60,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
                     {'chemical-science-pack', 1}, {'utility-science-pack', 1}
                 },
-                count = 400
-            }
+                count = 400,
+                time = 60
+            },
+            prerequisites = {'stronger-explosives-3'},
+            name = 'stronger-explosives-4',
+            icon_size = 256
         },
-        ['energy-weapons-damage-1'] = {
-            order = 'e-j-a',
-            effects = {{type = 'ammo-damage', ammo_category = 'laser', modifier = 0.2}},
-            icon_size = 256,
-            prerequisites = {'laser', 'military-science-pack'},
-            icons = {
-                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
+        ['stronger-explosives-3'] = {
+            effects = {
+                {ammo_category = 'rocket', type = 'ammo-damage', modifier = 0.3},
+                {ammo_category = 'grenade', type = 'ammo-damage', modifier = 0.2},
+                {ammo_category = 'landmine', type = 'ammo-damage', modifier = 0.2}
             },
             icon_mipmaps = 4,
-            upgrade = true,
             type = 'technology',
-            name = 'energy-weapons-damage-1',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/stronger-explosives-3.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-c',
             unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
                     {'chemical-science-pack', 1}
                 },
-                count = 100
-            }
-        },
-        flamethrower = {
-            order = 'e-c-b',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'flamethrower'},
-                {type = 'unlock-recipe', recipe = 'flamethrower-ammo'},
-                {type = 'unlock-recipe', recipe = 'flamethrower-turret'}
+                count = 300,
+                time = 60
             },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/flamethrower.png',
+            prerequisites = {'stronger-explosives-2'},
+            name = 'stronger-explosives-3',
+            icon_size = 256
+        },
+        ['artillery-shell-range-1'] = {
+            effects = {{modifier = 0.3, type = 'artillery-range'}},
             icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
-                },
-                count = 50
-            },
+            max_level = 'infinite',
             type = 'technology',
-            name = 'flamethrower',
-            prerequisites = {'flammables', 'military-science-pack'}
-        },
-        ['refined-flammables-1'] = {
-            order = 'e-j-a',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'flamethrower', modifier = 0.2},
-                {type = 'turret-attack', turret_id = 'flamethrower-turret', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'flamethrower'},
             icons = {
-                {icon = '__base__/graphics/technology/refined-flammables.png', icon_size = 256, icon_mipmaps = 4}, {
+                {icon = '__base__/graphics/technology/artillery-range.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-range.png',
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'refined-flammables-1',
+            order = 'e-k-d',
             unit = {
-                time = 30,
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
+                },
+                count_formula = '2^L*1000',
+                time = 60
+            },
+            prerequisites = {'artillery', 'space-science-pack'},
+            name = 'artillery-shell-range-1',
+            icon_size = 256
+        },
+        ['stronger-explosives-2'] = {
+            effects = {
+                {ammo_category = 'grenade', type = 'ammo-damage', modifier = 0.2},
+                {ammo_category = 'landmine', type = 'ammo-damage', modifier = 0.2}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/stronger-explosives-2.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-b',
+            unit = {
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
                 },
-                count = 100
-            }
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'stronger-explosives-1'},
+            name = 'stronger-explosives-2',
+            icon_size = 256
         },
-        defender = {
-            order = 'e-p-a',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'defender-capsule'},
-                {type = 'maximum-following-robots-count', modifier = 4}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/defender.png',
+        ['research-speed-1'] = {
+            effects = {{modifier = 0.2, type = 'laboratory-speed'}},
             icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
-                },
-                count = 100
-            },
             type = 'technology',
-            name = 'defender',
-            prerequisites = {'military-science-pack'}
-        },
-        railway = {
-            order = 'c-g-a',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'rail'}, {type = 'unlock-recipe', recipe = 'locomotive'},
-                {type = 'unlock-recipe', recipe = 'cargo-wagon'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/railway.png',
-            icon_mipmaps = 4,
-            unit = {time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 75},
-            type = 'technology',
-            name = 'railway',
-            prerequisites = {'logistics-2', 'engine'}
-        },
-        ['productivity-module'] = {
-            order = 'i-e-a',
-            effects = {{type = 'unlock-recipe', recipe = 'productivity-module'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/productivity-module-1.png',
-            icon_mipmaps = 4,
             upgrade = true,
-            unit = {time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50},
-            type = 'technology',
-            name = 'productivity-module',
-            prerequisites = {'modules'}
-        },
-        ['production-science-pack'] = {
-            order = 'c-a',
-            effects = {{type = 'unlock-recipe', recipe = 'production-science-pack'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/production-science-pack.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 100
+            icons = {
+                {icon = '__base__/graphics/technology/research-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
             },
-            type = 'technology',
-            name = 'production-science-pack',
-            prerequisites = {'productivity-module', 'advanced-material-processing-2', 'railway'}
-        },
-        ['rocket-silo'] = {
-            order = 'k-a',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'rocket-silo'}, {type = 'unlock-recipe', recipe = 'rocket-part'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/rocket-silo.png',
-            icon_mipmaps = 4,
+            order = 'c-m-a',
             unit = {
-                time = 60,
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'automation-2'},
+            name = 'research-speed-1',
+            icon_size = 256
+        },
+        ['stronger-explosives-1'] = {
+            effects = {{ammo_category = 'grenade', type = 'ammo-damage', modifier = 0.25}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/stronger-explosives-1.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-j-a',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'military-2'},
+            name = 'stronger-explosives-1',
+            icon_size = 256
+        },
+        ['stone-wall'] = {
+            icon = '__base__/graphics/technology/stone-wall.png',
+            effects = {{recipe = 'stone-wall', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            icon_size = 256,
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 10, time = 10},
+            type = 'technology',
+            name = 'stone-wall',
+            order = 'a-k-a'
+        },
+        ['worker-robots-storage-3'] = {
+            effects = {{modifier = 1, type = 'worker-robot-storage'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/worker-robots-storage.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-g-c',
+            unit = {
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'production-science-pack', 1}, {'utility-science-pack', 1}
                 },
-                count = 1000
+                count = 450,
+                time = 60
             },
-            type = 'technology',
-            name = 'rocket-silo',
-            prerequisites = {
-                'concrete', 'speed-module-3', 'productivity-module-3', 'rocket-fuel', 'rocket-control-unit'
-            }
+            prerequisites = {'worker-robots-storage-2'},
+            name = 'worker-robots-storage-3',
+            icon_size = 256
         },
-        ['braking-force-2'] = {
-            order = 'b-f-b',
-            effects = {{type = 'train-braking-force-bonus', modifier = 0.15}},
-            icon_size = 256,
-            prerequisites = {'braking-force-1'},
-            icons = {
-                {icon = '__base__/graphics/technology/braking-force.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
+        ['laser-shooting-speed-2'] = {
+            effects = {{ammo_category = 'laser', type = 'gun-speed', modifier = 0.2}},
             icon_mipmaps = 4,
+            type = 'technology',
             upgrade = true,
-            type = 'technology',
-            name = 'braking-force-2',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 200
-            }
-        },
-        ['nuclear-power'] = {
-            order = 'e-p-b-c',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'nuclear-reactor'},
-                {type = 'unlock-recipe', recipe = 'heat-exchanger'}, {type = 'unlock-recipe', recipe = 'heat-pipe'},
-                {type = 'unlock-recipe', recipe = 'steam-turbine'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/nuclear-power.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 800
-            },
-            type = 'technology',
-            name = 'nuclear-power',
-            prerequisites = {'uranium-processing'}
-        },
-        ['laser-shooting-speed-3'] = {
-            order = 'e-n-j',
-            effects = {{type = 'gun-speed', ammo_category = 'laser', modifier = 0.3}},
-            icon_size = 256,
-            prerequisites = {'laser-shooting-speed-2'},
             icons = {
-                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
+                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_mipmaps = 4, icon_size = 256}, {
                     icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'laser-shooting-speed-3',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}
-                },
-                count = 200
-            }
-        },
-        ['stronger-explosives-3'] = {
-            order = 'e-l-c',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'rocket', modifier = 0.3},
-                {type = 'ammo-damage', ammo_category = 'grenade', modifier = 0.2},
-                {type = 'ammo-damage', ammo_category = 'landmine', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'stronger-explosives-2'},
-            icons = {
-                {icon = '__base__/graphics/technology/stronger-explosives-3.png', icon_size = 256, icon_mipmaps = 4}, {
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'stronger-explosives-3',
+            order = 'e-n-i',
             unit = {
-                time = 60,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
                     {'chemical-science-pack', 1}
                 },
-                count = 300
-            }
-        },
-        ['rocket-fuel'] = {
-            order = 'k-a',
-            effects = {{type = 'unlock-recipe', recipe = 'rocket-fuel'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/rocket-fuel.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 45,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 300
+                count = 100,
+                time = 30
             },
-            type = 'technology',
-            name = 'rocket-fuel',
-            prerequisites = {'flammables', 'advanced-oil-processing'}
+            prerequisites = {'laser-shooting-speed-1'},
+            name = 'laser-shooting-speed-2',
+            icon_size = 256
         },
-        ['physical-projectile-damage-5'] = {
-            order = 'e-l-e',
+        ['refined-flammables-6'] = {
             effects = {
-                {type = 'ammo-damage', ammo_category = 'bullet', modifier = 0.2},
-                {type = 'turret-attack', turret_id = 'gun-turret', modifier = 0.2},
-                {type = 'ammo-damage', ammo_category = 'shotgun-shell', modifier = 0.2},
-                {type = 'ammo-damage', ammo_category = 'cannon-shell', modifier = 0.9}
+                {ammo_category = 'flamethrower', type = 'ammo-damage', modifier = 0.4},
+                {modifier = 0.4, turret_id = 'flamethrower-turret', type = 'turret-attack'}
             },
-            icon_size = 256,
-            prerequisites = {'physical-projectile-damage-4'},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
             icons = {
-                {
-                    icon = '__base__/graphics/technology/physical-projectile-damage-2.png',
-                    icon_size = 256,
-                    icon_mipmaps = 4
-                }, {
-                    shift = {100, 100},
+                {icon = '__base__/graphics/technology/refined-flammables.png', icon_mipmaps = 4, icon_size = 256}, {
                     icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'physical-projectile-damage-5',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}
-                },
-                count = 500
-            }
-        },
-        ['physical-projectile-damage-4'] = {
-            order = 'e-l-d',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'bullet', modifier = 0.2},
-                {type = 'turret-attack', turret_id = 'gun-turret', modifier = 0.2},
-                {type = 'ammo-damage', ammo_category = 'shotgun-shell', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'physical-projectile-damage-3'},
-            icons = {
-                {
-                    icon = '__base__/graphics/technology/physical-projectile-damage-1.png',
-                    icon_size = 256,
-                    icon_mipmaps = 4
-                }, {
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'physical-projectile-damage-4',
+            order = 'e-l-f',
             unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
-                },
-                count = 400
-            }
-        },
-        ['physical-projectile-damage-3'] = {
-            order = 'e-l-c',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'bullet', modifier = 0.2},
-                {type = 'turret-attack', turret_id = 'gun-turret', modifier = 0.2},
-                {type = 'ammo-damage', ammo_category = 'shotgun-shell', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'physical-projectile-damage-2'},
-            icons = {
-                {
-                    icon = '__base__/graphics/technology/physical-projectile-damage-1.png',
-                    icon_size = 256,
-                    icon_mipmaps = 4
-                }, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'physical-projectile-damage-3',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
-                },
-                count = 300
-            }
-        },
-        distractor = {
-            order = 'e-p-b-a',
-            effects = {{type = 'unlock-recipe', recipe = 'distractor-capsule'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/distractor.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}
-                },
-                count = 200
-            },
-            type = 'technology',
-            name = 'distractor',
-            prerequisites = {'defender', 'military-3', 'laser'}
-        },
-        ['braking-force-5'] = {
-            order = 'b-f-e',
-            effects = {{type = 'train-braking-force-bonus', modifier = 0.15}},
-            icon_size = 256,
-            prerequisites = {'braking-force-4'},
-            icons = {
-                {icon = '__base__/graphics/technology/braking-force.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'braking-force-5',
-            unit = {
-                time = 35,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
-                },
-                count = 450
-            }
-        },
-        ['follower-robot-count-6'] = {
-            order = 'e-p-b-c',
-            effects = {{type = 'maximum-following-robots-count', modifier = 10}},
-            icon_size = 256,
-            prerequisites = {'follower-robot-count-5'},
-            icons = {
-                {icon = '__base__/graphics/technology/follower-robots.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-count.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'follower-robot-count-6',
-            unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'military-science-pack', 1}, {'utility-science-pack', 1}
                 },
-                count = 1000
-            }
+                count = 600,
+                time = 60
+            },
+            prerequisites = {'refined-flammables-5'},
+            name = 'refined-flammables-6',
+            icon_size = 256
         },
-        automation = {
-            order = 'a-b-a',
+        ['stack-inserter'] = {
+            icon = '__base__/graphics/technology/stack-inserter.png',
             effects = {
-                {type = 'unlock-recipe', recipe = 'assembling-machine-1'},
-                {type = 'unlock-recipe', recipe = 'long-handed-inserter'}
+                {recipe = 'stack-inserter', type = 'unlock-recipe'},
+                {recipe = 'stack-filter-inserter', type = 'unlock-recipe'},
+                {modifier = 1, type = 'stack-inserter-capacity-bonus'}
             },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/automation-1.png',
             icon_mipmaps = 4,
-            unit = {time = 10, ingredients = {{'automation-science-pack', 1}}, count = 10},
-            ignore_tech_cost_multiplier = true,
-            name = 'automation',
-            type = 'technology'
-        },
-        ['electric-energy-distribution-1'] = {
-            order = 'c-e-b',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'medium-electric-pole'},
-                {type = 'unlock-recipe', recipe = 'big-electric-pole'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/electric-energy-distribution-1.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 120
-            },
             type = 'technology',
-            name = 'electric-energy-distribution-1',
-            prerequisites = {'electronics', 'steel-processing', 'logistic-science-pack'}
-        },
-        ['physical-projectile-damage-1'] = {
-            order = 'e-l-a',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'bullet', modifier = 0.1},
-                {type = 'turret-attack', turret_id = 'gun-turret', modifier = 0.1},
-                {type = 'ammo-damage', ammo_category = 'shotgun-shell', modifier = 0.1}
+            upgrade = true,
+            order = 'c-o-a',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 150,
+                time = 30
             },
+            prerequisites = {'fast-inserter', 'logistics-2', 'advanced-electronics'},
+            name = 'stack-inserter',
+            icon_size = 256
+        },
+        ['atomic-bomb'] = {
+            icon = '__base__/graphics/technology/atomic-bomb.png',
+            effects = {{recipe = 'atomic-bomb', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-a-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 5000,
+                time = 45
+            },
+            prerequisites = {'military-4', 'kovarex-enrichment-process', 'rocket-control-unit', 'rocketry'},
+            name = 'atomic-bomb',
+            icon_size = 256
+        },
+        ['speed-module-3'] = {
+            icon = '__base__/graphics/technology/speed-module-3.png',
+            effects = {{recipe = 'speed-module-3', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            order = 'i-c-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 300,
+                time = 60
+            },
+            prerequisites = {'speed-module-2', 'production-science-pack'},
+            name = 'speed-module-3',
+            icon_size = 256
+        },
+        robotics = {
+            icon = '__base__/graphics/technology/robotics.png',
+            effects = {{recipe = 'flying-robot-frame', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-i',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 75,
+                time = 30
+            },
+            prerequisites = {'electric-engine', 'battery'},
+            name = 'robotics',
+            icon_size = 256
+        },
+        modules = {
+            icon = '__base__/graphics/technology/module.png',
+            name = 'modules',
+            icon_mipmaps = 4,
+            type = 'technology',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'advanced-electronics'},
             icon_size = 256,
-            prerequisites = {'military'},
+            order = 'i-a'
+        },
+        ['inserter-capacity-bonus-7'] = {
+            effects = {
+                {modifier = 1, type = 'inserter-stack-size-bonus'},
+                {modifier = 2, type = 'stack-inserter-capacity-bonus'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-o-h',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 600,
+                time = 30
+            },
+            prerequisites = {'inserter-capacity-bonus-6'},
+            name = 'inserter-capacity-bonus-7',
+            icon_size = 256
+        },
+        ['power-armor'] = {
+            icon = '__base__/graphics/technology/power-armor.png',
+            effects = {{recipe = 'power-armor', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'g-c-a',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'modular-armor', 'electric-engine', 'advanced-electronics-2'},
+            name = 'power-armor',
+            icon_size = 256
+        },
+        ['belt-immunity-equipment'] = {
+            effects = {{recipe = 'belt-immunity-equipment', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            icons = {
+                {icon = '__base__/graphics/technology/belt-immunity-equipment.png', icon_mipmaps = 4, icon_size = 256},
+                {
+                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'g-g-g',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50, time = 15},
+            prerequisites = {'solar-panel-equipment'},
+            name = 'belt-immunity-equipment',
+            icon_size = 256
+        },
+        ['advanced-material-processing'] = {
+            icon = '__base__/graphics/technology/advanced-material-processing.png',
+            effects = {{recipe = 'steel-furnace', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-c-a',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 75, time = 30},
+            prerequisites = {'steel-processing', 'logistic-science-pack'},
+            name = 'advanced-material-processing',
+            icon_size = 256
+        },
+        ['rocket-fuel'] = {
+            icon = '__base__/graphics/technology/rocket-fuel.png',
+            effects = {{recipe = 'rocket-fuel', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'k-a',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 300,
+                time = 45
+            },
+            prerequisites = {'flammables', 'advanced-oil-processing'},
+            name = 'rocket-fuel',
+            icon_size = 256
+        },
+        ['artillery-shell-speed-1'] = {
+            effects = {
+                {
+                    icon = '__base__/graphics/icons/artillery-shell.png',
+                    icon_mipmaps = 2,
+                    ammo_category = 'artillery-shell',
+                    type = 'gun-speed',
+                    modifier = 1,
+                    icon_size = 64
+                }
+            },
+            icon_mipmaps = 4,
+            max_level = 'infinite',
+            type = 'technology',
+            icons = {
+                {icon = '__base__/graphics/technology/artillery-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-k-k',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
+                },
+                count_formula = '1000+3^(L-1)*1000',
+                time = 60
+            },
+            prerequisites = {'artillery', 'space-science-pack'},
+            name = 'artillery-shell-speed-1',
+            icon_size = 256
+        },
+        ['space-science-pack'] = {
+            icon = '__base__/graphics/technology/space-science-pack.png',
+            effects = {{recipe = 'satellite', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-a',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 2000,
+                time = 30
+            },
+            prerequisites = {'rocket-silo', 'electric-energy-accumulators', 'solar-energy'},
+            name = 'space-science-pack',
+            icon_size = 256
+        },
+        ['solar-panel-equipment'] = {
+            effects = {{recipe = 'solar-panel-equipment', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            icons = {
+                {icon = '__base__/graphics/technology/solar-panel-equipment.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'g-k',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 15
+            },
+            prerequisites = {'modular-armor', 'solar-energy'},
+            name = 'solar-panel-equipment',
+            icon_size = 256
+        },
+        artillery = {
+            icon = '__base__/graphics/technology/artillery.png',
+            effects = {
+                {recipe = 'artillery-wagon', type = 'unlock-recipe'},
+                {recipe = 'artillery-turret', type = 'unlock-recipe'},
+                {recipe = 'artillery-shell', type = 'unlock-recipe'},
+                {recipe = 'artillery-targeting-remote', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'd-e-f',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 2000,
+                time = 30
+            },
+            prerequisites = {'military-4', 'tank'},
+            name = 'artillery',
+            icon_size = 256
+        },
+        ['automation-2'] = {
+            icon = '__base__/graphics/technology/automation-2.png',
+            effects = {{recipe = 'assembling-machine-2', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            localised_description = {'technology-description.automation-2'},
+            type = 'technology',
+            order = 'a-b-b',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 40, time = 15},
+            prerequisites = {'electronics', 'steel-processing', 'logistic-science-pack'},
+            name = 'automation-2',
+            icon_size = 256
+        },
+        ['solar-energy'] = {
+            icon = '__base__/graphics/technology/solar-energy.png',
+            effects = {{recipe = 'solar-panel', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'a-h-c',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 250,
+                time = 30
+            },
+            prerequisites = {'optics', 'electronics', 'steel-processing', 'logistic-science-pack'},
+            name = 'solar-energy',
+            icon_size = 256
+        },
+        ['rocket-silo'] = {
+            icon = '__base__/graphics/technology/rocket-silo.png',
+            effects = {
+                {recipe = 'rocket-silo', type = 'unlock-recipe'}, {recipe = 'rocket-part', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'k-a',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 1000,
+                time = 60
+            },
+            prerequisites = {
+                'concrete', 'speed-module-3', 'productivity-module-3', 'rocket-fuel', 'rocket-control-unit'
+            },
+            name = 'rocket-silo',
+            icon_size = 256
+        },
+        ['laser-shooting-speed-4'] = {
+            effects = {{ammo_category = 'laser', type = 'gun-speed', modifier = 0.3}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-n-k',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}
+                },
+                count = 200,
+                time = 60
+            },
+            prerequisites = {'laser-shooting-speed-3'},
+            name = 'laser-shooting-speed-4',
+            icon_size = 256
+        },
+        ['braking-force-4'] = {
+            effects = {{modifier = 0.15, type = 'train-braking-force-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/braking-force.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'b-f-d',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 350,
+                time = 30
+            },
+            prerequisites = {'braking-force-3'},
+            name = 'braking-force-4',
+            icon_size = 256
+        },
+        ['speed-module'] = {
+            icon = '__base__/graphics/technology/speed-module-1.png',
+            effects = {{recipe = 'speed-module', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            order = 'i-c-a',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50, time = 30},
+            prerequisites = {'modules'},
+            name = 'speed-module',
+            icon_size = 256
+        },
+        ['mining-productivity-3'] = {
+            effects = {{modifier = 0.1, type = 'mining-drill-productivity-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/mining-productivity.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-mining-productivity.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-f-e',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = '1000',
+                time = 60
+            },
+            prerequisites = {'mining-productivity-2'},
+            name = 'mining-productivity-3',
+            icon_size = 256
+        },
+        ['gun-turret'] = {
+            icon = '__base__/graphics/technology/gun-turret.png',
+            effects = {{recipe = 'gun-turret', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            icon_size = 256,
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 10, time = 10},
+            type = 'technology',
+            name = 'gun-turret',
+            order = 'a-j-a'
+        },
+        ['speed-module-2'] = {
+            icon = '__base__/graphics/technology/speed-module-2.png',
+            effects = {{recipe = 'speed-module-2', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            order = 'i-c-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 75,
+                time = 30
+            },
+            prerequisites = {'speed-module', 'advanced-electronics-2'},
+            name = 'speed-module-2',
+            icon_size = 256
+        },
+        ['logistic-robotics'] = {
+            icon = '__base__/graphics/technology/logistic-robotics.png',
+            effects = {
+                {recipe = 'roboport', type = 'unlock-recipe'},
+                {recipe = 'logistic-chest-passive-provider', type = 'unlock-recipe'},
+                {recipe = 'logistic-chest-storage', type = 'unlock-recipe'},
+                {recipe = 'logistic-robot', type = 'unlock-recipe'},
+                {modifier = true, type = 'character-logistic-requests'},
+                {modifier = 30, type = 'character-logistic-trash-slots'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-k-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 250,
+                time = 30
+            },
+            prerequisites = {'robotics'},
+            name = 'logistic-robotics',
+            icon_size = 256
+        },
+        ['braking-force-7'] = {
+            effects = {{modifier = 0.15, type = 'train-braking-force-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/braking-force.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'b-f-g',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 650,
+                time = 60
+            },
+            prerequisites = {'braking-force-6'},
+            name = 'braking-force-7',
+            icon_size = 256
+        },
+        ['research-speed-5'] = {
+            effects = {{modifier = 0.5, type = 'laboratory-speed'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/research-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-m-d',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 500,
+                time = 30
+            },
+            prerequisites = {'research-speed-4'},
+            name = 'research-speed-5',
+            icon_size = 256
+        },
+        ['research-speed-4'] = {
+            effects = {{modifier = 0.5, type = 'laboratory-speed'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/research-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-m-d',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 500,
+                time = 30
+            },
+            prerequisites = {'research-speed-3'},
+            name = 'research-speed-4',
+            icon_size = 256
+        },
+        ['exoskeleton-equipment'] = {
+            effects = {{recipe = 'exoskeleton-equipment', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            icons = {
+                {icon = '__base__/graphics/technology/exoskeleton-equipment.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'g-h',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 50,
+                time = 30
+            },
+            prerequisites = {'advanced-electronics-2', 'electric-engine', 'solar-panel-equipment'},
+            name = 'exoskeleton-equipment',
+            icon_size = 256
+        },
+        ['braking-force-2'] = {
+            effects = {{modifier = 0.15, type = 'train-braking-force-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/braking-force.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'b-f-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'braking-force-1'},
+            name = 'braking-force-2',
+            icon_size = 256
+        },
+        ['research-speed-3'] = {
+            effects = {{modifier = 0.4, type = 'laboratory-speed'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/research-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-m-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 250,
+                time = 30
+            },
+            prerequisites = {'research-speed-2'},
+            name = 'research-speed-3',
+            icon_size = 256
+        },
+        ['productivity-module-3'] = {
+            icon = '__base__/graphics/technology/productivity-module-3.png',
+            effects = {{recipe = 'productivity-module-3', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            order = 'i-e-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 300,
+                time = 60
+            },
+            prerequisites = {'productivity-module-2', 'production-science-pack'},
+            name = 'productivity-module-3',
+            icon_size = 256
+        },
+        ['laser-shooting-speed-7'] = {
+            effects = {{ammo_category = 'laser', type = 'gun-speed', modifier = 0.5}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-n-n',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 450,
+                time = 60
+            },
+            prerequisites = {'laser-shooting-speed-6'},
+            name = 'laser-shooting-speed-7',
+            icon_size = 256
+        },
+        ['research-speed-2'] = {
+            effects = {{modifier = 0.3, type = 'laboratory-speed'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/research-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-m-b',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'research-speed-1'},
+            name = 'research-speed-2',
+            icon_size = 256
+        },
+        ['refined-flammables-7'] = {
+            effects = {
+                {ammo_category = 'flamethrower', type = 'ammo-damage', modifier = 0.2},
+                {modifier = 0.2, turret_id = 'flamethrower-turret', type = 'turret-attack'}
+            },
+            icon_mipmaps = 4,
+            max_level = 'infinite',
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/refined-flammables.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-f',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
+                },
+                count_formula = '2^(L-7)*1000',
+                time = 60
+            },
+            prerequisites = {'refined-flammables-6', 'space-science-pack'},
+            name = 'refined-flammables-7',
+            icon_size = 256
+        },
+        ['refined-flammables-5'] = {
+            effects = {
+                {ammo_category = 'flamethrower', type = 'ammo-damage', modifier = 0.3},
+                {modifier = 0.3, turret_id = 'flamethrower-turret', type = 'turret-attack'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/refined-flammables.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-e',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
+                    {'chemical-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 500,
+                time = 60
+            },
+            prerequisites = {'refined-flammables-4'},
+            name = 'refined-flammables-5',
+            icon_size = 256
+        },
+        ['weapon-shooting-speed-2'] = {
+            effects = {
+                {ammo_category = 'bullet', type = 'gun-speed', modifier = 0.2},
+                {ammo_category = 'shotgun-shell', type = 'gun-speed', modifier = 0.2}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/weapon-shooting-speed-1.png', icon_mipmaps = 4, icon_size = 256},
+                {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-b',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'weapon-shooting-speed-1'},
+            name = 'weapon-shooting-speed-2',
+            icon_size = 256
+        },
+        ['follower-robot-count-1'] = {
+            effects = {{modifier = 5, type = 'maximum-following-robots-count'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/follower-robots.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-count.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-p-b-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
+                },
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'defender'},
+            name = 'follower-robot-count-1',
+            icon_size = 256
+        },
+        ['refined-flammables-3'] = {
+            effects = {
+                {ammo_category = 'flamethrower', type = 'ammo-damage', modifier = 0.2},
+                {modifier = 0.2, turret_id = 'flamethrower-turret', type = 'turret-attack'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/refined-flammables.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
+                    {'chemical-science-pack', 1}
+                },
+                count = 300,
+                time = 60
+            },
+            prerequisites = {'refined-flammables-2'},
+            name = 'refined-flammables-3',
+            icon_size = 256
+        },
+        ['electric-energy-accumulators'] = {
+            icon = '__base__/graphics/technology/electric-energy-acumulators.png',
+            effects = {{recipe = 'accumulator', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            localised_name = {'technology-name.electric-energy-accumulators-1'},
+            type = 'technology',
+            order = 'c-e-a',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 150,
+                time = 30
+            },
+            prerequisites = {'electric-energy-distribution-1', 'battery'},
+            name = 'electric-energy-accumulators',
+            icon_size = 256
+        },
+        ['refined-flammables-1'] = {
+            effects = {
+                {ammo_category = 'flamethrower', type = 'ammo-damage', modifier = 0.2},
+                {modifier = 0.2, turret_id = 'flamethrower-turret', type = 'turret-attack'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/refined-flammables.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-j-a',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
+                },
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'flamethrower'},
+            name = 'refined-flammables-1',
+            icon_size = 256
+        },
+        gate = {
+            icon = '__base__/graphics/technology/gate.png',
+            effects = {{recipe = 'gate', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'a-l-a',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'stone-wall', 'military-2'},
+            name = 'gate',
+            icon_size = 256
+        },
+        railway = {
+            icon = '__base__/graphics/technology/railway.png',
+            effects = {
+                {recipe = 'rail', type = 'unlock-recipe'}, {recipe = 'locomotive', type = 'unlock-recipe'},
+                {recipe = 'cargo-wagon', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-g-a',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 75, time = 30},
+            prerequisites = {'logistics-2', 'engine'},
+            name = 'railway',
+            icon_size = 256
+        },
+        ['power-armor-mk2'] = {
+            icon = '__base__/graphics/technology/power-armor-mk2.png',
+            effects = {{recipe = 'power-armor-mk2', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'g-c-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 400,
+                time = 30
+            },
+            prerequisites = {'power-armor', 'military-4', 'speed-module-2', 'effectivity-module-2'},
+            name = 'power-armor-mk2',
+            icon_size = 256
+        },
+        ['physical-projectile-damage-7'] = {
+            effects = {
+                {ammo_category = 'bullet', type = 'ammo-damage', modifier = 0.4},
+                {modifier = 0.7, turret_id = 'gun-turret', type = 'turret-attack'},
+                {ammo_category = 'shotgun-shell', type = 'ammo-damage', modifier = 0.4},
+                {ammo_category = 'cannon-shell', type = 'ammo-damage', modifier = 1}
+            },
+            icon_mipmaps = 4,
+            max_level = 'infinite',
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {
+                    icon = '__base__/graphics/technology/physical-projectile-damage-2.png',
+                    icon_mipmaps = 4,
+                    icon_size = 256
+                }, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-f',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
+                },
+                count_formula = '2^(L-7)*1000',
+                time = 60
+            },
+            prerequisites = {'physical-projectile-damage-6', 'space-science-pack'},
+            name = 'physical-projectile-damage-7',
+            icon_size = 256
+        },
+        ['low-density-structure'] = {
+            icon = '__base__/graphics/technology/low-density-structure.png',
+            effects = {{recipe = 'low-density-structure', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'k-a',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 300,
+                time = 45
+            },
+            prerequisites = {'advanced-material-processing', 'chemical-science-pack'},
+            name = 'low-density-structure',
+            icon_size = 256
+        },
+        ['physical-projectile-damage-5'] = {
+            effects = {
+                {ammo_category = 'bullet', type = 'ammo-damage', modifier = 0.2},
+                {modifier = 0.2, turret_id = 'gun-turret', type = 'turret-attack'},
+                {ammo_category = 'shotgun-shell', type = 'ammo-damage', modifier = 0.2},
+                {ammo_category = 'cannon-shell', type = 'ammo-damage', modifier = 0.9}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {
+                    icon = '__base__/graphics/technology/physical-projectile-damage-2.png',
+                    icon_mipmaps = 4,
+                    icon_size = 256
+                }, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-e',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}
+                },
+                count = 500,
+                time = 60
+            },
+            prerequisites = {'physical-projectile-damage-4'},
+            name = 'physical-projectile-damage-5',
+            icon_size = 256
+        },
+        ['laser-shooting-speed-1'] = {
+            effects = {{ammo_category = 'laser', type = 'gun-speed', modifier = 0.1}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-n-h',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
+                    {'chemical-science-pack', 1}
+                },
+                count = 50,
+                time = 30
+            },
+            prerequisites = {'laser'},
+            name = 'laser-shooting-speed-1',
+            icon_size = 256
+        },
+        ['physical-projectile-damage-3'] = {
+            effects = {
+                {ammo_category = 'bullet', type = 'ammo-damage', modifier = 0.2},
+                {modifier = 0.2, turret_id = 'gun-turret', type = 'turret-attack'},
+                {ammo_category = 'shotgun-shell', type = 'ammo-damage', modifier = 0.2}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
             icons = {
                 {
                     icon = '__base__/graphics/technology/physical-projectile-damage-1.png',
-                    icon_size = 256,
-                    icon_mipmaps = 4
+                    icon_mipmaps = 4,
+                    icon_size = 256
                 }, {
-                    shift = {100, 100},
                     icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'physical-projectile-damage-1',
-            unit = {time = 30, ingredients = {{'automation-science-pack', 1}}, count = 100}
+            order = 'e-l-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
+                },
+                count = 300,
+                time = 60
+            },
+            prerequisites = {'physical-projectile-damage-2'},
+            name = 'physical-projectile-damage-3',
+            icon_size = 256
         },
-        ['effectivity-module'] = {
-            order = 'i-g-a',
-            effects = {{type = 'unlock-recipe', recipe = 'effectivity-module'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/effectivity-module-1.png',
+        ['follower-robot-count-4'] = {
+            effects = {{modifier = 10, type = 'maximum-following-robots-count'}},
             icon_mipmaps = 4,
-            upgrade = true,
-            unit = {time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50},
             type = 'technology',
-            name = 'effectivity-module',
-            prerequisites = {'modules'}
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/follower-robots.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-count.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-p-b-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}
+                },
+                count = 600,
+                time = 30
+            },
+            prerequisites = {'follower-robot-count-3'},
+            name = 'follower-robot-count-4',
+            icon_size = 256
+        },
+        ['electric-energy-distribution-2'] = {
+            icon = '__base__/graphics/technology/electric-energy-distribution-2.png',
+            effects = {{recipe = 'substation', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-e-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 100,
+                time = 45
+            },
+            prerequisites = {'electric-energy-distribution-1', 'chemical-science-pack'},
+            name = 'electric-energy-distribution-2',
+            icon_size = 256
+        },
+        automobilism = {
+            icon = '__base__/graphics/technology/automobilism.png',
+            effects = {{recipe = 'car', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'e-b',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'logistics-2', 'engine'},
+            name = 'automobilism',
+            icon_size = 256
+        },
+        ['physical-projectile-damage-1'] = {
+            effects = {
+                {ammo_category = 'bullet', type = 'ammo-damage', modifier = 0.1},
+                {modifier = 0.1, turret_id = 'gun-turret', type = 'turret-attack'},
+                {ammo_category = 'shotgun-shell', type = 'ammo-damage', modifier = 0.1}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {
+                    icon = '__base__/graphics/technology/physical-projectile-damage-1.png',
+                    icon_mipmaps = 4,
+                    icon_size = 256
+                }, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-a',
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 100, time = 30},
+            prerequisites = {'military'},
+            name = 'physical-projectile-damage-1',
+            icon_size = 256
         },
         ['personal-roboport-mk2-equipment'] = {
-            order = 'c-k-d-zz',
-            effects = {{type = 'unlock-recipe', recipe = 'personal-roboport-mk2-equipment'}},
-            icon_size = 256,
-            prerequisites = {'personal-roboport-equipment', 'utility-science-pack'},
+            effects = {{recipe = 'personal-roboport-mk2-equipment', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
             icons = {
                 {
                     icon = '__base__/graphics/technology/personal-roboport-mk2-equipment.png',
-                    icon_size = 256,
-                    icon_mipmaps = 4
+                    icon_mipmaps = 4,
+                    icon_size = 256
                 }, {
-                    shift = {100, 100},
                     icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'personal-roboport-mk2-equipment',
+            order = 'c-k-d-zz',
             unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'utility-science-pack', 1}
                 },
-                count = 250
-            }
-        },
-        ['personal-roboport-equipment'] = {
-            order = 'c-k-d-zz',
-            effects = {{type = 'unlock-recipe', recipe = 'personal-roboport-equipment'}},
-            icon_size = 256,
-            prerequisites = {'construction-robotics', 'solar-panel-equipment'},
-            icons = {
-                {
-                    icon = '__base__/graphics/technology/personal-roboport-equipment.png',
-                    icon_size = 256,
-                    icon_mipmaps = 4
-                }, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
+                count = 250,
+                time = 30
             },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'personal-roboport-equipment',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 50
-            }
+            prerequisites = {'personal-roboport-equipment', 'utility-science-pack'},
+            name = 'personal-roboport-mk2-equipment',
+            icon_size = 256
         },
-        ['personal-laser-defense-equipment'] = {
-            order = 'g-m',
-            effects = {{type = 'unlock-recipe', recipe = 'personal-laser-defense-equipment'}},
-            icon_size = 256,
-            prerequisites = {
-                'laser-turret', 'military-3', 'low-density-structure', 'power-armor', 'solar-panel-equipment'
-            },
-            icons = {
-                {
-                    icon = '__base__/graphics/technology/personal-laser-defense-equipment.png',
-                    icon_size = 256,
-                    icon_mipmaps = 4
-                }, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'personal-laser-defense-equipment',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}
-                },
-                count = 100
-            }
-        },
-        ['follower-robot-count-1'] = {
-            order = 'e-p-b-c',
-            effects = {{type = 'maximum-following-robots-count', modifier = 5}},
-            icon_size = 256,
-            prerequisites = {'defender'},
-            icons = {
-                {icon = '__base__/graphics/technology/follower-robots.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-count.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'follower-robot-count-1',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
-                },
-                count = 200
-            }
-        },
-        ['night-vision-equipment'] = {
-            order = 'g-g',
-            effects = {{type = 'unlock-recipe', recipe = 'night-vision-equipment'}},
-            icon_size = 256,
-            prerequisites = {'solar-panel-equipment'},
-            icons = {
-                {icon = '__base__/graphics/technology/night-vision-equipment.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'night-vision-equipment',
-            unit = {time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50}
-        },
-        modules = {
-            order = 'i-a',
-            icon_mipmaps = 4,
-            icon_size = 256,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            },
-            type = 'technology',
-            icon = '__base__/graphics/technology/module.png',
-            name = 'modules',
-            prerequisites = {'advanced-electronics'}
-        },
-        ['laser-shooting-speed-2'] = {
-            order = 'e-n-i',
-            effects = {{type = 'gun-speed', ammo_category = 'laser', modifier = 0.2}},
-            icon_size = 256,
-            prerequisites = {'laser-shooting-speed-1'},
-            icons = {
-                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'laser-shooting-speed-2',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
-                    {'chemical-science-pack', 1}
-                },
-                count = 100
-            }
-        },
-        ['modular-armor'] = {
-            order = 'g-a-c',
-            effects = {{type = 'unlock-recipe', recipe = 'modular-armor'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/armor-making.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            },
-            type = 'technology',
-            name = 'modular-armor',
-            prerequisites = {'heavy-armor', 'advanced-electronics'}
-        },
-        ['follower-robot-count-4'] = {
-            order = 'e-p-b-c',
-            effects = {{type = 'maximum-following-robots-count', modifier = 10}},
-            icon_size = 256,
-            prerequisites = {'follower-robot-count-3'},
-            icons = {
-                {icon = '__base__/graphics/technology/follower-robots.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-count.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'follower-robot-count-4',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}
-                },
-                count = 600
-            }
-        },
-        ['military-science-pack'] = {
-            order = 'c-a',
-            effects = {{type = 'unlock-recipe', recipe = 'military-science-pack'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/military-science-pack.png',
-            icon_mipmaps = 4,
-            unit = {time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 30},
-            type = 'technology',
-            name = 'military-science-pack',
-            prerequisites = {'military-2', 'stone-wall'}
-        },
-        ['military-2'] = {
-            order = 'e-a-b',
+        ['stronger-explosives-6'] = {
             effects = {
-                {type = 'unlock-recipe', recipe = 'piercing-rounds-magazine'},
-                {type = 'unlock-recipe', recipe = 'grenade'}
+                {ammo_category = 'rocket', type = 'ammo-damage', modifier = 0.6},
+                {ammo_category = 'grenade', type = 'ammo-damage', modifier = 0.2},
+                {ammo_category = 'landmine', type = 'ammo-damage', modifier = 0.2}
             },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/military.png',
             icon_mipmaps = 4,
-            unit = {time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 20},
             type = 'technology',
-            name = 'military-2',
-            prerequisites = {'military', 'steel-processing', 'logistic-science-pack'}
-        },
-        military = {
-            order = 'e-a-a',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'submachine-gun'}, {type = 'unlock-recipe', recipe = 'shotgun'},
-                {type = 'unlock-recipe', recipe = 'shotgun-shell'}
-            },
-            icon_size = 256,
-            unit = {time = 15, ingredients = {{'automation-science-pack', 1}}, count = 10},
-            type = 'technology',
-            icon = '__base__/graphics/technology/military.png',
-            name = 'military',
-            icon_mipmaps = 4
-        },
-        ['weapon-shooting-speed-5'] = {
-            order = 'e-l-e',
-            effects = {
-                {type = 'gun-speed', ammo_category = 'bullet', modifier = 0.3},
-                {type = 'gun-speed', ammo_category = 'shotgun-shell', modifier = 0.4},
-                {type = 'gun-speed', ammo_category = 'cannon-shell', modifier = 0.8},
-                {type = 'gun-speed', ammo_category = 'rocket', modifier = 0.9}
-            },
-            icon_size = 256,
-            prerequisites = {'weapon-shooting-speed-4'},
+            upgrade = true,
             icons = {
-                {icon = '__base__/graphics/technology/weapon-shooting-speed-3.png', icon_size = 256, icon_mipmaps = 4},
-                {
+                {icon = '__base__/graphics/technology/stronger-explosives-3.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'weapon-shooting-speed-5',
+            order = 'e-l-f',
             unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}
-                },
-                count = 500
-            }
-        },
-        ['automation-3'] = {
-            order = 'a-b-c',
-            effects = {{type = 'unlock-recipe', recipe = 'assembling-machine-3'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/automation-3.png',
-            icon_mipmaps = 4,
-            localised_description = {'technology-description.automation-3'},
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
-                },
-                count = 150
-            },
-            type = 'technology',
-            name = 'automation-3',
-            prerequisites = {'speed-module', 'production-science-pack'}
-        },
-        ['speed-module'] = {
-            order = 'i-c-a',
-            effects = {{type = 'unlock-recipe', recipe = 'speed-module'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/speed-module-1.png',
-            icon_mipmaps = 4,
-            upgrade = true,
-            unit = {time = 30, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50},
-            type = 'technology',
-            name = 'speed-module',
-            prerequisites = {'modules'}
-        },
-        logistics = {
-            order = 'a-f-a',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'underground-belt'}, {type = 'unlock-recipe', recipe = 'splitter'}
-            },
-            icon_size = 256,
-            unit = {time = 15, ingredients = {{'automation-science-pack', 1}}, count = 20},
-            type = 'technology',
-            icon = '__base__/graphics/technology/logistics-1.png',
-            name = 'logistics',
-            icon_mipmaps = 4
-        },
-        ['weapon-shooting-speed-2'] = {
-            order = 'e-l-b',
-            effects = {
-                {type = 'gun-speed', ammo_category = 'bullet', modifier = 0.2},
-                {type = 'gun-speed', ammo_category = 'shotgun-shell', modifier = 0.2}
-            },
-            icon_size = 256,
-            prerequisites = {'weapon-shooting-speed-1'},
-            icons = {
-                {icon = '__base__/graphics/technology/weapon-shooting-speed-1.png', icon_size = 256, icon_mipmaps = 4},
-                {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'weapon-shooting-speed-2',
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 200
-            }
-        },
-        ['belt-immunity-equipment'] = {
-            order = 'g-g-g',
-            effects = {{type = 'unlock-recipe', recipe = 'belt-immunity-equipment'}},
-            icon_size = 256,
-            prerequisites = {'solar-panel-equipment'},
-            icons = {
-                {icon = '__base__/graphics/technology/belt-immunity-equipment.png', icon_size = 256, icon_mipmaps = 4},
-                {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'belt-immunity-equipment',
-            unit = {time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50}
-        },
-        ['laser-shooting-speed-6'] = {
-            order = 'e-n-m',
-            effects = {{type = 'gun-speed', ammo_category = 'laser', modifier = 0.4}},
-            icon_size = 256,
-            prerequisites = {'laser-shooting-speed-5'},
-            icons = {
-                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'laser-shooting-speed-6',
-            unit = {
-                time = 60,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'military-science-pack', 1}, {'utility-science-pack', 1}
                 },
-                count = 350
-            }
-        },
-        ['explosive-rocketry'] = {
-            order = 'e-h',
-            effects = {{type = 'unlock-recipe', recipe = 'explosive-rocket'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/explosive-rocketry.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}
-                },
-                count = 100
+                count = 600,
+                time = 60
             },
-            type = 'technology',
-            name = 'explosive-rocketry',
-            prerequisites = {'rocketry', 'military-3'}
-        },
-        ['electric-energy-distribution-2'] = {
-            order = 'c-e-c',
-            effects = {{type = 'unlock-recipe', recipe = 'substation'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/electric-energy-distribution-2.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 45,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 100
-            },
-            type = 'technology',
-            name = 'electric-energy-distribution-2',
-            prerequisites = {'electric-energy-distribution-1', 'chemical-science-pack'}
-        },
-        ['heavy-armor'] = {
-            order = 'g-a-b',
-            effects = {{type = 'unlock-recipe', recipe = 'heavy-armor'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/armor-making.png',
-            icon_mipmaps = 4,
-            unit = {time = 30, ingredients = {{'automation-science-pack', 1}}, count = 30},
-            type = 'technology',
-            name = 'heavy-armor',
-            prerequisites = {'military', 'steel-processing'}
-        },
-        ['inserter-capacity-bonus-7'] = {
-            order = 'c-o-h',
-            effects = {
-                {type = 'inserter-stack-size-bonus', modifier = 1},
-                {type = 'stack-inserter-capacity-bonus', modifier = 2}
-            },
-            icon_size = 256,
-            prerequisites = {'inserter-capacity-bonus-6'},
-            icons = {
-                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'inserter-capacity-bonus-7',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 600
-            }
-        },
-        ['land-mine'] = {
-            order = 'e-e',
-            effects = {{type = 'unlock-recipe', recipe = 'land-mine'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/land-mine.png',
-            icon_mipmaps = 4,
-            localised_description = {'technology-description.land-mine'},
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
-                },
-                count = 100
-            },
-            type = 'technology',
-            name = 'land-mine',
-            prerequisites = {'explosives', 'military-science-pack'}
-        },
-        ['fusion-reactor-equipment'] = {
-            order = 'g-l',
-            effects = {{type = 'unlock-recipe', recipe = 'fusion-reactor-equipment'}},
-            icon_size = 256,
-            prerequisites = {'utility-science-pack', 'power-armor', 'military-science-pack'},
-            icons = {
-                {icon = '__base__/graphics/technology/fusion-reactor-equipment.png', icon_size = 256, icon_mipmaps = 4},
-                {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'fusion-reactor-equipment',
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 200
-            }
+            prerequisites = {'stronger-explosives-5'},
+            name = 'stronger-explosives-6',
+            icon_size = 256
         },
         ['follower-robot-count-7'] = {
-            order = 'e-p-b-c',
-            effects = {{type = 'maximum-following-robots-count', modifier = 10}},
-            icon_size = 256,
-            prerequisites = {'follower-robot-count-6', 'space-science-pack'},
+            effects = {{modifier = 10, type = 'maximum-following-robots-count'}},
+            icon_mipmaps = 4,
+            max_level = 'infinite',
+            type = 'technology',
+            upgrade = true,
             icons = {
-                {icon = '__base__/graphics/technology/follower-robots.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
+                {icon = '__base__/graphics/technology/follower-robots.png', icon_mipmaps = 4, icon_size = 256}, {
                     icon = '__core__/graphics/icons/technology/constants/constant-count.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
+            order = 'e-p-b-c',
             unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'military-science-pack', 1}, {'production-science-pack', 1}, {'utility-science-pack', 1},
                     {'space-science-pack', 1}
                 },
-                count_formula = '100(L-6)+900'
+                count_formula = '100(L-6)+900',
+                time = 30
             },
-            max_level = 'infinite',
+            prerequisites = {'follower-robot-count-6', 'space-science-pack'},
             name = 'follower-robot-count-7',
-            type = 'technology'
+            icon_size = 256
         },
-        ['fluid-wagon'] = {
-            order = 'c-g-a-b',
-            effects = {{type = 'unlock-recipe', recipe = 'fluid-wagon'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/fluid-wagon.png',
+        optics = {
+            icon = '__base__/graphics/technology/lamp.png',
+            effects = {{recipe = 'small-lamp', type = 'unlock-recipe'}},
             icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 200
-            },
+            icon_size = 256,
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 10, time = 15},
             type = 'technology',
-            name = 'fluid-wagon',
-            prerequisites = {'railway', 'fluid-handling'}
+            name = 'optics',
+            order = 'a-h-a'
         },
-        concrete = {
-            order = 'c-c-c',
+        ['construction-robotics'] = {
+            icon = '__base__/graphics/technology/construction-robotics.png',
             effects = {
-                {type = 'unlock-recipe', recipe = 'concrete'}, {type = 'unlock-recipe', recipe = 'hazard-concrete'},
-                {type = 'unlock-recipe', recipe = 'refined-concrete'},
-                {type = 'unlock-recipe', recipe = 'refined-hazard-concrete'}
+                {recipe = 'roboport', type = 'unlock-recipe'},
+                {recipe = 'logistic-chest-passive-provider', type = 'unlock-recipe'},
+                {recipe = 'logistic-chest-storage', type = 'unlock-recipe'},
+                {recipe = 'construction-robot', type = 'unlock-recipe'},
+                {modifier = 36288000, type = 'ghost-time-to-live'}
             },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/concrete.png',
             icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-k-a',
             unit = {
-                time = 30,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 250
-            },
-            type = 'technology',
-            name = 'concrete',
-            prerequisites = {'advanced-material-processing', 'automation-2'}
-        },
-        ['fluid-handling'] = {
-            order = 'd-a-a',
-            effects = {
-                {type = 'unlock-recipe', recipe = 'storage-tank'}, {type = 'unlock-recipe', recipe = 'pump'},
-                {type = 'unlock-recipe', recipe = 'empty-barrel'},
-                {type = 'unlock-recipe', recipe = 'fill-water-barrel'},
-                {type = 'unlock-recipe', recipe = 'empty-water-barrel'},
-                {type = 'unlock-recipe', recipe = 'fill-sulfuric-acid-barrel'},
-                {type = 'unlock-recipe', recipe = 'empty-sulfuric-acid-barrel'},
-                {type = 'unlock-recipe', recipe = 'fill-crude-oil-barrel'},
-                {type = 'unlock-recipe', recipe = 'empty-crude-oil-barrel'},
-                {type = 'unlock-recipe', recipe = 'fill-heavy-oil-barrel'},
-                {type = 'unlock-recipe', recipe = 'empty-heavy-oil-barrel'},
-                {type = 'unlock-recipe', recipe = 'fill-light-oil-barrel'},
-                {type = 'unlock-recipe', recipe = 'empty-light-oil-barrel'},
-                {type = 'unlock-recipe', recipe = 'fill-petroleum-gas-barrel'},
-                {type = 'unlock-recipe', recipe = 'empty-petroleum-gas-barrel'},
-                {type = 'unlock-recipe', recipe = 'fill-lubricant-barrel'},
-                {type = 'unlock-recipe', recipe = 'empty-lubricant-barrel'}
-            },
-            icon_size = 256,
-            icon = '__base__/graphics/technology/fluid-handling.png',
-            icon_mipmaps = 4,
-            unit = {time = 15, ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50},
-            type = 'technology',
-            name = 'fluid-handling',
-            prerequisites = {'automation-2', 'engine'}
-        },
-        explosives = {
-            order = 'a-e-d',
-            effects = {{type = 'unlock-recipe', recipe = 'explosives'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/explosives.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 15,
-                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
-                count = 100
-            },
-            type = 'technology',
-            name = 'explosives',
-            prerequisites = {'sulfur-processing'}
-        },
-        ['exoskeleton-equipment'] = {
-            order = 'g-h',
-            effects = {{type = 'unlock-recipe', recipe = 'exoskeleton-equipment'}},
-            icon_size = 256,
-            prerequisites = {'advanced-electronics-2', 'electric-engine', 'solar-panel-equipment'},
-            icons = {
-                {icon = '__base__/graphics/technology/exoskeleton-equipment.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            type = 'technology',
-            name = 'exoskeleton-equipment',
-            unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
                 },
-                count = 50
-            }
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'robotics'},
+            name = 'construction-robotics',
+            icon_size = 256
         },
-        ['energy-weapons-damage-4'] = {
-            order = 'e-l-d',
-            effects = {{type = 'ammo-damage', ammo_category = 'laser', modifier = 0.4}},
-            icon_size = 256,
-            prerequisites = {'energy-weapons-damage-3'},
-            icons = {
-                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
+        ['oil-processing'] = {
+            icon = '__base__/graphics/technology/oil-gathering.png',
+            effects = {
+                {recipe = 'pumpjack', type = 'unlock-recipe'}, {recipe = 'oil-refinery', type = 'unlock-recipe'},
+                {recipe = 'chemical-plant', type = 'unlock-recipe'},
+                {recipe = 'basic-oil-processing', type = 'unlock-recipe'},
+                {recipe = 'solid-fuel-from-petroleum-gas', type = 'unlock-recipe'}
             },
             icon_mipmaps = 4,
-            upgrade = true,
             type = 'technology',
-            name = 'energy-weapons-damage-4',
+            order = 'd-a',
             unit = {
-                time = 60,
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'fluid-handling'},
+            name = 'oil-processing',
+            icon_size = 256
+        },
+        ['night-vision-equipment'] = {
+            effects = {{recipe = 'night-vision-equipment', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            icons = {
+                {icon = '__base__/graphics/technology/night-vision-equipment.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'g-g',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 50, time = 15},
+            prerequisites = {'solar-panel-equipment'},
+            name = 'night-vision-equipment',
+            icon_size = 256
+        },
+        ['weapon-shooting-speed-6'] = {
+            effects = {
+                {ammo_category = 'bullet', type = 'gun-speed', modifier = 0.4},
+                {ammo_category = 'shotgun-shell', type = 'gun-speed', modifier = 0.4},
+                {ammo_category = 'cannon-shell', type = 'gun-speed', modifier = 1.5},
+                {ammo_category = 'rocket', type = 'gun-speed', modifier = 1.3}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/weapon-shooting-speed-3.png', icon_mipmaps = 4, icon_size = 256},
+                {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-f',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 600,
+                time = 60
+            },
+            prerequisites = {'weapon-shooting-speed-5'},
+            name = 'weapon-shooting-speed-6',
+            icon_size = 256
+        },
+        ['battery-mk2-equipment'] = {
+            effects = {{recipe = 'battery-mk2-equipment', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            icons = {
+                {icon = '__base__/graphics/technology/battery-mk2-equipment.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-equipment.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'g-i-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 100,
+                time = 30
+            },
+            prerequisites = {'battery-equipment', 'low-density-structure', 'power-armor'},
+            name = 'battery-mk2-equipment',
+            icon_size = 256
+        },
+        ['energy-weapons-damage-3'] = {
+            effects = {{ammo_category = 'laser', type = 'ammo-damage', modifier = 0.3}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-c',
+            unit = {
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
                     {'chemical-science-pack', 1}
                 },
-                count = 400
-            }
-        },
-        ['energy-weapons-damage-5'] = {
-            order = 'e-l-e',
-            effects = {
-                {type = 'ammo-damage', ammo_category = 'laser', modifier = 0.5},
-                {type = 'ammo-damage', ammo_category = 'beam', modifier = 0.4}
+                count = 300,
+                time = 60
             },
-            icon_size = 256,
-            prerequisites = {'energy-weapons-damage-4'},
-            icons = {
-                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'energy-weapons-damage-5',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'military-science-pack', 1}, {'utility-science-pack', 1}
-                },
-                count = 500
-            }
+            prerequisites = {'energy-weapons-damage-2'},
+            name = 'energy-weapons-damage-3',
+            icon_size = 256
         },
         laser = {
-            order = 'a-h-b',
-            icon_mipmaps = 4,
-            icon_size = 256,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
-                },
-                count = 100
-            },
-            type = 'technology',
             icon = '__base__/graphics/technology/laser.png',
             name = 'laser',
-            prerequisites = {'optics', 'battery', 'chemical-science-pack'}
-        },
-        ['effectivity-module-2'] = {
-            order = 'i-g-b',
-            effects = {{type = 'unlock-recipe', recipe = 'effectivity-module-2'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/effectivity-module-2.png',
             icon_mipmaps = 4,
-            upgrade = true,
+            type = 'technology',
             unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
                 },
-                count = 75
+                count = 100,
+                time = 30
             },
-            type = 'technology',
-            name = 'effectivity-module-2',
-            prerequisites = {'effectivity-module', 'advanced-electronics-2'}
-        },
-        destroyer = {
-            order = 'e-p-b-b',
-            effects = {{type = 'unlock-recipe', recipe = 'destroyer-capsule'}},
+            prerequisites = {'optics', 'battery', 'chemical-science-pack'},
             icon_size = 256,
-            icon = '__base__/graphics/technology/destroyer.png',
+            order = 'a-h-b'
+        },
+        ['rocket-control-unit'] = {
+            icon = '__base__/graphics/technology/rocket-control-unit.png',
+            effects = {{recipe = 'rocket-control-unit', type = 'unlock-recipe'}},
             icon_mipmaps = 4,
+            type = 'technology',
+            order = 'k-a',
             unit = {
-                time = 30,
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'utility-science-pack', 1}
+                },
+                count = 300,
+                time = 45
+            },
+            prerequisites = {'utility-science-pack', 'speed-module'},
+            name = 'rocket-control-unit',
+            icon_size = 256
+        },
+        ['inserter-capacity-bonus-3'] = {
+            effects = {{modifier = 1, type = 'stack-inserter-capacity-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-o-d',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 250,
+                time = 30
+            },
+            prerequisites = {'inserter-capacity-bonus-2'},
+            name = 'inserter-capacity-bonus-3',
+            icon_size = 256
+        },
+        ['military-science-pack'] = {
+            icon = '__base__/graphics/technology/military-science-pack.png',
+            effects = {{recipe = 'military-science-pack', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'c-a',
+            unit = {ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}}, count = 30, time = 15},
+            prerequisites = {'military-2', 'stone-wall'},
+            name = 'military-science-pack',
+            icon_size = 256
+        },
+        lubricant = {
+            icon = '__base__/graphics/technology/lubricant.png',
+            effects = {{recipe = 'lubricant', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'b-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1}
+                },
+                count = 50,
+                time = 30
+            },
+            prerequisites = {'advanced-oil-processing'},
+            name = 'lubricant',
+            icon_size = 256
+        },
+        ['logistics-3'] = {
+            icon = '__base__/graphics/technology/logistics-3.png',
+            effects = {
+                {recipe = 'express-transport-belt', type = 'unlock-recipe'},
+                {recipe = 'express-underground-belt', type = 'unlock-recipe'},
+                {recipe = 'express-splitter', type = 'unlock-recipe'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'a-f-c',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}
+                },
+                count = 300,
+                time = 15
+            },
+            prerequisites = {'production-science-pack', 'lubricant'},
+            name = 'logistics-3',
+            icon_size = 256
+        },
+        ['laser-turret'] = {
+            icon = '__base__/graphics/technology/laser-turret.png',
+            effects = {{recipe = 'laser-turret', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'a-j-b',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
+                    {'chemical-science-pack', 1}
+                },
+                count = 150,
+                time = 30
+            },
+            prerequisites = {'laser', 'military-science-pack'},
+            name = 'laser-turret',
+            icon_size = 256
+        },
+        ['laser-shooting-speed-5'] = {
+            effects = {{ammo_category = 'laser', type = 'gun-speed', modifier = 0.4}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/laser-shooting-speed.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-n-l',
+            unit = {
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'military-science-pack', 1}, {'utility-science-pack', 1}
                 },
-                count = 300
+                count = 200,
+                time = 60
             },
-            type = 'technology',
-            name = 'destroyer',
-            prerequisites = {'military-4', 'distractor', 'speed-module'}
+            prerequisites = {'laser-shooting-speed-4'},
+            name = 'laser-shooting-speed-5',
+            icon_size = 256
         },
-        ['worker-robots-storage-2'] = {
-            order = 'c-k-g-b',
-            effects = {{type = 'worker-robot-storage', modifier = 1}},
-            icon_size = 256,
-            prerequisites = {'worker-robots-storage-1'},
+        ['inserter-capacity-bonus-6'] = {
+            effects = {{modifier = 2, type = 'stack-inserter-capacity-bonus'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
             icons = {
-                {icon = '__base__/graphics/technology/worker-robots-storage.png', icon_size = 256, icon_mipmaps = 4}, {
-                    shift = {100, 100},
+                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_mipmaps = 4, icon_size = 256}, {
                     icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
-                }
-            },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'worker-robots-storage-2',
-            unit = {
-                time = 60,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
-                },
-                count = 300
-            }
-        },
-        ['effect-transmission'] = {
-            order = 'i-i',
-            effects = {{type = 'unlock-recipe', recipe = 'beacon'}},
-            icon_size = 256,
-            icon = '__base__/graphics/technology/effect-transmission.png',
-            icon_mipmaps = 4,
-            unit = {
-                time = 30,
-                ingredients = {
-                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
-                    {'production-science-pack', 1}
-                },
-                count = 75
-            },
-            type = 'technology',
-            name = 'effect-transmission',
-            prerequisites = {'advanced-electronics-2', 'production-science-pack'}
-        },
-        ['braking-force-4'] = {
-            order = 'b-f-d',
-            effects = {{type = 'train-braking-force-bonus', modifier = 0.15}},
-            icon_size = 256,
-            prerequisites = {'braking-force-3'},
-            icons = {
-                {icon = '__base__/graphics/technology/braking-force.png', icon_size = 256, icon_mipmaps = 4}, {
                     shift = {100, 100},
-                    icon = '__core__/graphics/icons/technology/constants/constant-braking-force.png',
-                    icon_size = 128,
-                    icon_mipmaps = 3
+                    icon_mipmaps = 3,
+                    icon_size = 128
                 }
             },
-            icon_mipmaps = 4,
-            upgrade = true,
-            type = 'technology',
-            name = 'braking-force-4',
+            order = 'c-o-g',
             unit = {
-                time = 30,
                 ingredients = {
                     {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
                     {'production-science-pack', 1}
                 },
-                count = 350
-            }
+                count = 400,
+                time = 30
+            },
+            prerequisites = {'inserter-capacity-bonus-5'},
+            name = 'inserter-capacity-bonus-6',
+            icon_size = 256
+        },
+        ['inserter-capacity-bonus-2'] = {
+            effects = {
+                {modifier = 1, type = 'inserter-stack-size-bonus'},
+                {modifier = 1, type = 'stack-inserter-capacity-bonus'}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/inserter-capacity.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-capacity.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-o-c',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 250,
+                time = 30
+            },
+            prerequisites = {'inserter-capacity-bonus-1'},
+            name = 'inserter-capacity-bonus-2',
+            icon_size = 256
+        },
+        ['heavy-armor'] = {
+            icon = '__base__/graphics/technology/armor-making.png',
+            effects = {{recipe = 'heavy-armor', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'g-a-b',
+            unit = {ingredients = {{'automation-science-pack', 1}}, count = 30, time = 30},
+            prerequisites = {'military', 'steel-processing'},
+            name = 'heavy-armor',
+            icon_size = 256
+        },
+        ['stronger-explosives-7'] = {
+            effects = {
+                {ammo_category = 'rocket', type = 'ammo-damage', modifier = 0.5},
+                {ammo_category = 'grenade', type = 'ammo-damage', modifier = 0.2},
+                {ammo_category = 'landmine', type = 'ammo-damage', modifier = 0.2}
+            },
+            icon_mipmaps = 4,
+            max_level = 'infinite',
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/stronger-explosives-3.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-f',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
+                },
+                count_formula = '2^(L-7)*1000',
+                time = 60
+            },
+            prerequisites = {'stronger-explosives-6', 'space-science-pack'},
+            name = 'stronger-explosives-7',
+            icon_size = 256
+        },
+        ['physical-projectile-damage-2'] = {
+            effects = {
+                {ammo_category = 'bullet', type = 'ammo-damage', modifier = 0.1},
+                {modifier = 0.1, turret_id = 'gun-turret', type = 'turret-attack'},
+                {ammo_category = 'shotgun-shell', type = 'ammo-damage', modifier = 0.1}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {
+                    icon = '__base__/graphics/technology/physical-projectile-damage-1.png',
+                    icon_mipmaps = 4,
+                    icon_size = 256
+                }, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-b',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 200,
+                time = 30
+            },
+            prerequisites = {'physical-projectile-damage-1'},
+            name = 'physical-projectile-damage-2',
+            icon_size = 256
+        },
+        engine = {
+            icon = '__base__/graphics/technology/engine.png',
+            effects = {{recipe = 'engine-unit', type = 'unlock-recipe'}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            order = 'b-a',
+            unit = {
+                ingredients = {{'automation-science-pack', 1}, {'logistic-science-pack', 1}},
+                count = 100,
+                time = 15
+            },
+            prerequisites = {'steel-processing', 'logistic-science-pack'},
+            name = 'engine',
+            icon_size = 256
+        },
+        ['weapon-shooting-speed-4'] = {
+            effects = {
+                {ammo_category = 'bullet', type = 'gun-speed', modifier = 0.3},
+                {ammo_category = 'shotgun-shell', type = 'gun-speed', modifier = 0.3},
+                {ammo_category = 'rocket', type = 'gun-speed', modifier = 0.7}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/weapon-shooting-speed-2.png', icon_mipmaps = 4, icon_size = 256},
+                {
+                    icon = '__core__/graphics/icons/technology/constants/constant-speed.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-d',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1}
+                },
+                count = 400,
+                time = 60
+            },
+            prerequisites = {'weapon-shooting-speed-3'},
+            name = 'weapon-shooting-speed-4',
+            icon_size = 256
+        },
+        ['energy-weapons-damage-6'] = {
+            effects = {
+                {ammo_category = 'laser', type = 'ammo-damage', modifier = 0.7},
+                {ammo_category = 'beam', type = 'ammo-damage', modifier = 0.6}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-f',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'military-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 600,
+                time = 60
+            },
+            prerequisites = {'energy-weapons-damage-5'},
+            name = 'energy-weapons-damage-6',
+            icon_size = 256
+        },
+        ['energy-weapons-damage-4'] = {
+            effects = {{ammo_category = 'laser', type = 'ammo-damage', modifier = 0.4}},
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/energy-weapons-damage.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-d',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
+                    {'chemical-science-pack', 1}
+                },
+                count = 400,
+                time = 60
+            },
+            prerequisites = {'energy-weapons-damage-3'},
+            name = 'energy-weapons-damage-4',
+            icon_size = 256
+        },
+        ['mining-productivity-4'] = {
+            effects = {{modifier = 0.1, type = 'mining-drill-productivity-bonus'}},
+            icon_mipmaps = 4,
+            max_level = 'infinite',
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/mining-productivity.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-mining-productivity.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'c-k-f-e',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'chemical-science-pack', 1},
+                    {'production-science-pack', 1}, {'utility-science-pack', 1}, {'space-science-pack', 1}
+                },
+                count_formula = '2500*(L - 3)',
+                time = 60
+            },
+            prerequisites = {'mining-productivity-3', 'space-science-pack'},
+            name = 'mining-productivity-4',
+            icon_size = 256
+        },
+        ['stronger-explosives-5'] = {
+            effects = {
+                {ammo_category = 'rocket', type = 'ammo-damage', modifier = 0.5},
+                {ammo_category = 'grenade', type = 'ammo-damage', modifier = 0.2},
+                {ammo_category = 'landmine', type = 'ammo-damage', modifier = 0.2}
+            },
+            icon_mipmaps = 4,
+            type = 'technology',
+            upgrade = true,
+            icons = {
+                {icon = '__base__/graphics/technology/stronger-explosives-3.png', icon_mipmaps = 4, icon_size = 256}, {
+                    icon = '__core__/graphics/icons/technology/constants/constant-damage.png',
+                    shift = {100, 100},
+                    icon_mipmaps = 3,
+                    icon_size = 128
+                }
+            },
+            order = 'e-l-e',
+            unit = {
+                ingredients = {
+                    {'automation-science-pack', 1}, {'logistic-science-pack', 1}, {'military-science-pack', 1},
+                    {'chemical-science-pack', 1}, {'utility-science-pack', 1}
+                },
+                count = 500,
+                time = 60
+            },
+            prerequisites = {'stronger-explosives-4'},
+            name = 'stronger-explosives-5',
+            icon_size = 256
         }
     };
     return _;

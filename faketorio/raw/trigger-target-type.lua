@@ -1,4 +1,4 @@
 do
-    local _ = {['ground-unit'] = {name = 'ground-unit', type = 'trigger-target-type'}};
+    local _ = {['ground-unit'] = {type = 'trigger-target-type', name = 'ground-unit'}};
     return _;
 end

@@ -88,6 +88,7 @@ groups.item = {
     'module',
     'rail-planner',
     'repair-tool',
+    'spidertron-remote',
     'selection-tool',
     'tool',
 }

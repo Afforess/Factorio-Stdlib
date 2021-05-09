@@ -3,7 +3,6 @@
 -- @see string
 -- @usage local string = require('__stdlib__/stdlib/utils/string')
 local String = {}
-getmetatable('').__index = String -- Allow string syntatic sugar to work with this class
 
 String.find = string.find
 String.lower = string.lower
@@ -20,6 +19,7 @@ String.gsub = string.gsub
 String.len = string.len
 String.upper = string.upper
 
+getmetatable('').__index = String -- Allow string syntatic sugar to work with this class
 for k, v in pairs(string) do if not String[k] then String[k] = v end end
 
 local concat = table.concat

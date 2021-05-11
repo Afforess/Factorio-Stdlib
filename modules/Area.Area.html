@@ -138,12 +138,12 @@
     <li class="nav-item">
     <h4>Contents of <strong>Area.Area</strong></h4>
     <ul class="nav">
-    <li class="nav-item"><a href="#Tables"><span class="fragment-hashtag">#</span> Tables</a></li>
     <li class="nav-item"><a href="#Constructor_Methods"><span class="fragment-hashtag">#</span> Constructor Methods </a></li>
     <li class="nav-item"><a href="#Area_Methods"><span class="fragment-hashtag">#</span> Area Methods </a></li>
     <li class="nav-item"><a href="#Position_Conversion_Functions"><span class="fragment-hashtag">#</span> Position Conversion Functions </a></li>
     <li class="nav-item"><a href="#Area_Functions"><span class="fragment-hashtag">#</span> Area Functions </a></li>
     <li class="nav-item"><a href="#Area_Iterators"><span class="fragment-hashtag">#</span> Area Iterators </a></li>
+    <li class="nav-item"><a href="#Metamethods"><span class="fragment-hashtag">#</span> Metamethods </a></li>
     </ul>
     </li>
     </ul>
@@ -187,18 +187,6 @@
     <!-- module content header end -->
 
     <!-- module section list start -->
-    <table class="section-content-list">
-    <thead>
-    <h3><a href="#Tables">Tables</a></h3>
-    <span></span>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="name"><a href="#Metamethods">Metamethods</a></td>
-    <td class="summary">Area tables are returned with these Metamethods attached.</td>
-    </tr>
-    </tbody>
-    </table>
     <table class="section-content-list">
     <thead>
     <h3><a href="#Constructor_Methods">Constructor Methods </a></h3>
@@ -323,7 +311,11 @@
     </tr>
     <tr>
     <td class="name"><a href="#shrink_to_surface_size">shrink_to_surface_size(area, surface)</a></td>
-    <td class="summary">Shrinks an area to the size of the surface if it is bigger</td>
+    <td class="summary">Shrinks an area to the size of the surface if it is bigger.</td>
+    </tr>
+    <tr>
+    <td class="name"><a href="#to_chunk_coords">to_chunk_coords(area)</a></td>
+    <td class="summary">Return the chunk coordinates from an area.</td>
     </tr>
     </tbody>
     </table>
@@ -467,289 +459,23 @@
     </tr>
     </tbody>
     </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Metamethods">Metamethods </a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#Metamethods">Metamethods</a></td>
+    <td class="summary">Area tables are returned with these Metamethods attached.</td>
+    </tr>
+    </tbody>
+    </table>
     <!-- module section list end -->
 
     <br />
 
     <!-- section start -->
-    <h3><span id="Tables" class="section-title"><a href="#Tables">Tables</a></span></h3>
-    <dl class="section-body-container">
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Metamethods" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Metamethods">Metamethods</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Area tables are returned with these Metamethods attached.</p>
-    <p class="section-item-description">
-</p>
-
-    <!-- parameters start -->
-    <strong>Fields:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__class</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__index</em></strong>
-
-    <strong> : </strong>
-
-
-    If key is not found see if there is one available in the Area module.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__tostring</em></strong>
-
-    <strong> : </strong>
-
-
-    Will print a string representation of the area.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__concat</em></strong>
-
-    <strong> : </strong>
-
-
-    calls tostring on both sides of concat.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__add</em></strong>
-
-    <strong> : </strong>
-
-
-    Will adjust if RHS is vector/position, add offset if RHS is number/area
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__sub</em></strong>
-
-    <strong> : </strong>
-
-
-    Will adjust if RHS is vector/position, sub offset if RHS is number/area
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__mul</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__div</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__mod</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__unm</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__eq</em></strong>
-
-    <strong> : </strong>
-
-
-    Is area1 the same as area2.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__lt</em></strong>
-
-    <strong> : </strong>
-
-
-    is the size of area1 less than number/area2.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__le</em></strong>
-
-    <strong> : </strong>
-
-
-    is the size of area1 less than or equal to number/area2.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__len</em></strong>
-
-    <strong> : </strong>
-
-
-    The size of the area.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__call</em></strong>
-
-    <strong> : </strong>
-
-
-    Return a new copy.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__debugline</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    </dl>
     <h3><span id="Constructor_Methods" class="section-title"><a href="#Constructor_Methods">Constructor Methods </a></span></h3>
     <dl class="section-body-container">
     <dt>
@@ -2563,7 +2289,7 @@
     <dd>
     <div class="section-item-body">
 
-    <p class="section-item-summary">Shrinks an area to the size of the surface if it is bigger</p>
+    <p class="section-item-summary">Shrinks an area to the size of the surface if it is bigger.</p>
     <p class="section-item-description">
 </p>
 
@@ -2580,7 +2306,9 @@
 
     <strong><em>area</em></strong>
 
+    <strong> : </strong>
 
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
 
 
 
@@ -2595,7 +2323,9 @@
 
     <strong><em>surface</em></strong>
 
+    <strong> : </strong>
 
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/LuaSurface.html">LuaSurface</a></span>)
 
 
 
@@ -2608,6 +2338,71 @@
     <!-- parameters end -->
 
     <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#to_chunk_coords" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="to_chunk_coords">to_chunk_coords(area)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Return the chunk coordinates from an area.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>area</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">Chunk position coordinates</span>
+    </li>
+    </ul>
     <!-- returns end -->
 
 
@@ -4529,6 +4324,284 @@ prints: (<span class="number">0</span>, <span class="number">0</span>) (<span cl
 
     </dd>
     </dl>
+    <h3><span id="Metamethods" class="section-title"><a href="#Metamethods">Metamethods </a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Metamethods" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Metamethods">Metamethods</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Area tables are returned with these Metamethods attached.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__class</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__index</em></strong>
+
+    <strong> : </strong>
+
+
+    If key is not found see if there is one available in the Area module.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__tostring</em></strong>
+
+    <strong> : </strong>
+
+
+    Will print a string representation of the area.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__concat</em></strong>
+
+    <strong> : </strong>
+
+
+    calls tostring on both sides of concat.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__add</em></strong>
+
+    <strong> : </strong>
+
+
+    Will adjust if RHS is vector/position, add offset if RHS is number/area
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__sub</em></strong>
+
+    <strong> : </strong>
+
+
+    Will adjust if RHS is vector/position, sub offset if RHS is number/area
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__mul</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__div</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__mod</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__unm</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__eq</em></strong>
+
+    <strong> : </strong>
+
+
+    Is area1 the same as area2.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__lt</em></strong>
+
+    <strong> : </strong>
+
+
+    Is the size of area1 less than number/area2.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__le</em></strong>
+
+    <strong> : </strong>
+
+
+    Is the size of area1 less than or equal to number/area2.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__len</em></strong>
+
+    <strong> : </strong>
+
+
+    The size of the area.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__call</em></strong>
+
+    <strong> : </strong>
+
+
+    Return a new copy.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__debugline</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
 
     <!-- section end -->
 
@@ -4543,7 +4616,7 @@ prints: (<span class="number">0</span>, <span class="number">0</span>) (<span cl
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2021-05-09 19:57:01 UTC</i>
+    <i>Last updated 2021-05-11 19:09:47 UTC</i>
     </div>
     </div>
     </div>

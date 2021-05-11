@@ -138,8 +138,8 @@
     <li class="nav-item">
     <h4>Contents of <strong>Area.Position</strong></h4>
     <ul class="nav">
-    <li class="nav-item"><a href="#Tables"><span class="fragment-hashtag">#</span> Tables</a></li>
     <li class="nav-item"><a href="#Constructor_Methods"><span class="fragment-hashtag">#</span> Constructor Methods </a></li>
+    <li class="nav-item"><a href="#Metamethods"><span class="fragment-hashtag">#</span> Metamethods </a></li>
     <li class="nav-item"><a href="#Position_Methods"><span class="fragment-hashtag">#</span> Position Methods </a></li>
     <li class="nav-item"><a href="#Position_Mutate_Methods"><span class="fragment-hashtag">#</span> Position Mutate Methods </a></li>
     <li class="nav-item"><a href="#Position_Conversion_Methods"><span class="fragment-hashtag">#</span> Position Conversion Methods </a></li>
@@ -190,18 +190,6 @@
     <!-- module section list start -->
     <table class="section-content-list">
     <thead>
-    <h3><a href="#Tables">Tables</a></h3>
-    <span></span>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="name"><a href="#Metamethods">Metamethods</a></td>
-    <td class="summary">Position tables are returned with these metamethods attached.</td>
-    </tr>
-    </tbody>
-    </table>
-    <table class="section-content-list">
-    <thead>
     <h3><a href="#Constructor_Methods">Constructor Methods </a></h3>
     <span></span>
     </thead>
@@ -237,6 +225,18 @@
     <tr>
     <td class="name"><a href="#from_pixels">from_pixels(pos)</a></td>
     <td class="summary">Convert position from pixels</td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="section-content-list">
+    <thead>
+    <h3><a href="#Metamethods">Metamethods </a></h3>
+    <span></span>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="name"><a href="#Metamethods">Metamethods</a></td>
+    <td class="summary">Position tables are returned with these metamethods attached.</td>
     </tr>
     </tbody>
     </table>
@@ -462,6 +462,10 @@
     <td class="name"><a href="#to_chunk_area">to_chunk_area(pos)</a></td>
     <td class="summary">Get the chunk area the specified position is in.</td>
     </tr>
+    <tr>
+    <td class="name"><a href="#chunk_position_to_chunk_area">chunk_position_to_chunk_area(pos)</a></td>
+    <td class="summary">Get the chunk area for the specified chunk position.</td>
+    </tr>
     </tbody>
     </table>
     <table class="section-content-list">
@@ -581,283 +585,6 @@
     <br />
 
     <!-- section start -->
-    <h3><span id="Tables" class="section-title"><a href="#Tables">Tables</a></span></h3>
-    <dl class="section-body-container">
-    <dt>
-    <div class="divider divider-custom"></div>
-    <div class="block section-item-header">
-    <a href="#Metamethods" class="fragment-hashtag">#</a>
-    <span class="section-item-title" id="Metamethods">Metamethods</span>
-    </div>
-    </dt>
-    <dd>
-    <div class="section-item-body">
-
-    <p class="section-item-summary">Position tables are returned with these metamethods attached.</p>
-    <p class="section-item-description"> Methods that return a position will return a NEW position without modifying the passed positions.</p>
-
-    <!-- parameters start -->
-    <strong>Fields:</strong>
-
-    <ul>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__class</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__index</em></strong>
-
-    <strong> : </strong>
-
-
-    If key is not found, see if there is one availble in the Position module.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__add</em></strong>
-
-    <strong> : </strong>
-
-
-    Adds two position together. Returns a new position.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__sub</em></strong>
-
-    <strong> : </strong>
-
-
-    Subtracts one position from another. Returns a new position.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__mul</em></strong>
-
-    <strong> : </strong>
-
-
-    Multiply 2 positions. Returns a new position.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__div</em></strong>
-
-    <strong> : </strong>
-
-
-    Divide 2 positions. Returns a new position.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__mod</em></strong>
-
-    <strong> : </strong>
-
-
-    Modulo of 2 positions. Returns a new position.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__unm</em></strong>
-
-    <strong> : </strong>
-
-
-    Unary Minus of a position. Returns a new position.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__len</em></strong>
-
-    <strong> : </strong>
-
-
-    Length of a single position.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__eq</em></strong>
-
-    <strong> : </strong>
-
-
-    Are two positions at the same spot.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__lt</em></strong>
-
-    <strong> : </strong>
-
-
-    Is position1 less than position2.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__le</em></strong>
-
-    <strong> : </strong>
-
-
-    Is position1 less than or equal to position2.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__tostring</em></strong>
-
-    <strong> : </strong>
-
-
-    Returns a string representation of the position
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__concat</em></strong>
-
-    <strong> : </strong>
-
-
-    calls tostring on both sides of concact.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__call</em></strong>
-
-    <strong> : </strong>
-
-
-    copy the position.
-
-    </li>
-
-
-
-
-
-    <li class="section-subitem-li">
-
-    <strong><em>__debugline</em></strong>
-
-
-
-
-
-
-    </li>
-
-
-    </ul>
-
-    <!-- parameters end -->
-
-    <!-- returns start -->
-    <!-- returns end -->
-
-
-    <!-- see also start -->
-    <!-- see also end -->
-
-    <!-- usage start -->
-    <!-- usage end -->
-
-    </dd>
-    </dl>
     <h3><span id="Constructor_Methods" class="section-title"><a href="#Constructor_Methods">Constructor Methods </a></span></h3>
     <dl class="section-body-container">
     <dt>
@@ -1362,6 +1089,283 @@
     <span class="return-text">pos</span>
     </li>
     </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
+    </dl>
+    <h3><span id="Metamethods" class="section-title"><a href="#Metamethods">Metamethods </a></span></h3>
+    <dl class="section-body-container">
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#Metamethods" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="Metamethods">Metamethods</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Position tables are returned with these metamethods attached.</p>
+    <p class="section-item-description"> Methods that return a position will return a NEW position without modifying the passed positions.</p>
+
+    <!-- parameters start -->
+    <strong>Fields:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__class</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__index</em></strong>
+
+    <strong> : </strong>
+
+
+    If key is not found, see if there is one availble in the Position module.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__add</em></strong>
+
+    <strong> : </strong>
+
+
+    Adds two position together. Returns a new position.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__sub</em></strong>
+
+    <strong> : </strong>
+
+
+    Subtracts one position from another. Returns a new position.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__mul</em></strong>
+
+    <strong> : </strong>
+
+
+    Multiply 2 positions. Returns a new position.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__div</em></strong>
+
+    <strong> : </strong>
+
+
+    Divide 2 positions. Returns a new position.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__mod</em></strong>
+
+    <strong> : </strong>
+
+
+    Modulo of 2 positions. Returns a new position.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__unm</em></strong>
+
+    <strong> : </strong>
+
+
+    Unary Minus of a position. Returns a new position.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__len</em></strong>
+
+    <strong> : </strong>
+
+
+    Length of a single position.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__eq</em></strong>
+
+    <strong> : </strong>
+
+
+    Are two positions at the same spot.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__lt</em></strong>
+
+    <strong> : </strong>
+
+
+    Is position1 less than position2.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__le</em></strong>
+
+    <strong> : </strong>
+
+
+    Is position1 less than or equal to position2.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__tostring</em></strong>
+
+    <strong> : </strong>
+
+
+    Returns a string representation of the position
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__concat</em></strong>
+
+    <strong> : </strong>
+
+
+    calls tostring on both sides of concact.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__call</em></strong>
+
+    <strong> : </strong>
+
+
+    copy the position.
+
+    </li>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>__debugline</em></strong>
+
+
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
     <!-- returns end -->
 
 
@@ -4600,6 +4604,65 @@
     <!-- usage end -->
 
     </dd>
+    <dt>
+    <div class="divider divider-custom"></div>
+    <div class="block section-item-header">
+    <a href="#chunk_position_to_chunk_area" class="fragment-hashtag">#</a>
+    <span class="section-item-title" id="chunk_position_to_chunk_area">chunk_position_to_chunk_area(pos)</span>
+    </div>
+    </dt>
+    <dd>
+    <div class="section-item-body">
+
+    <p class="section-item-summary">Get the chunk area for the specified chunk position.</p>
+    <p class="section-item-description">
+</p>
+
+    <!-- parameters start -->
+    <strong>Parameters:</strong>
+
+    <ul>
+
+
+
+
+
+    <li class="section-subitem-li">
+
+    <strong><em>pos</em></strong>
+
+    <strong> : </strong>
+
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#ChunkPosition">ChunkPosition</a></span>)
+
+
+
+
+    </li>
+
+
+    </ul>
+
+    <!-- parameters end -->
+
+    <!-- returns start -->
+    <strong>Returns:</strong>
+    <ul>
+    <li>
+    (<span class="types"><a class="type" href="http://lua-api.factorio.com/latest/Concepts.html#BoundingBox">BoundingBox</a></span>)
+    <span class="return-text">The chunks positions area</span>
+    </li>
+    </ul>
+    <!-- returns end -->
+
+
+    <!-- see also start -->
+    <!-- see also end -->
+
+    <!-- usage start -->
+    <!-- usage end -->
+
+    </dd>
     </dl>
     <h3><span id="Position_Functions" class="section-title"><a href="#Position_Functions">Position Functions </a></span></h3>
     <dl class="section-body-container">
@@ -6349,8 +6412,7 @@ surface.create_entity{name = <span class="string">'flying-text'</span>, text = <
     <div class="section-item-body">
 
     <p class="section-item-summary">A closure which the <a href="../modules/Area.Position.html#increment">increment</a> function returns.</p>
-    <p class="section-item-description"><blockquote><p>Do not call this directly and do not store this in the global object.</p></blockquote>
-</p>
+    <p class="section-item-description"> > Do not call this directly and do not store this in the global object.</p>
 
     <!-- parameters start -->
     <strong>Parameters:</strong>
@@ -6435,7 +6497,7 @@ surface.create_entity{name = <span class="string">'flying-text'</span>, text = <
     <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
     </div>
     <div class="content-footer column col-9 col-sm-12">
-    <i>Last updated 2021-05-09 19:57:01 UTC</i>
+    <i>Last updated 2021-05-11 19:09:47 UTC</i>
     </div>
     </div>
     </div>

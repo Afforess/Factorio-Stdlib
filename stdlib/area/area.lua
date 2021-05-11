@@ -4,11 +4,7 @@
 -- @see Area.Position
 -- @see Concepts.BoundingBox
 -- @see Concepts.Position
-
-local Area = {
-    __class = 'Area',
-    __index = require('__stdlib__/stdlib/core')
-}
+local Area = {__class = 'Area', __index = require('__stdlib__/stdlib/core')}
 setmetatable(Area, Area)
 
 local Position = require('__stdlib__/stdlib/area/position')
@@ -21,15 +17,17 @@ local metatable
 
 --- Constructor Methods
 -- @section Constructors
--- ((
+
 Area.__call = function(_, ...)
-    local t = type((...))
-    if t == 'table' then
+    local type = type((...))
+    if type == 'table' then
+        local t = (...)
         if t.left_top and t.right_bottom then
             return Area.load(...)
+        else
+            return Area.new(...)
         end
-        return Area.new(...)
-    elseif t == 'string' then
+    elseif type == 'string' then
         return Area.from_string(...)
     else
         return Area.construct(...)
@@ -90,11 +88,9 @@ function Area.from_key(area_string)
     local rb = Position.new({x = tab[3], y = tab[4]})
     return new_area(lt, rb)
 end
--- ))
 
 --- Area Methods
 -- @section Methods
---- ((
 
 --- Stores the area for recall later, not deterministic.
 -- Only the last area stored is saved.
@@ -122,12 +118,8 @@ function Area.normalize(area)
     local left_top = Position.new(area.left_top, true)
     local right_bottom = Position.new(area.right_bottom, true)
 
-    if right_bottom.x < left_top.x then
-        left_top.x, right_bottom.x = right_bottom.x, left_top.x
-    end
-    if right_bottom.y < left_top.y then
-        left_top.y, right_bottom.y = right_bottom.y, left_top.y
-    end
+    if right_bottom.x < left_top.x then left_top.x, right_bottom.x = right_bottom.x, left_top.x end
+    if right_bottom.y < left_top.y then left_top.y, right_bottom.y = right_bottom.y, left_top.y end
 
     return new_area(left_top, right_bottom, area.orientation)
 end
@@ -137,12 +129,8 @@ end
 -- @treturn area The area normalized in place
 function Area.normalized(area)
     local lt, rb = area.left_top, area.right_bottom
-    if rb.x < lt.x then
-        lt.x, rb.x = rb.x, lt.x
-    end
-    if rb.y < lt.y then
-        lt.y, rb.y = rb.y, lt.y
-    end
+    if rb.x < lt.x then lt.x, rb.x = rb.x, lt.x end
+    if rb.y < lt.y then lt.y, rb.y = rb.y, lt.y end
     return area
 end
 
@@ -329,7 +317,8 @@ function Area.translate(area, direction, distance)
     direction = direction or 0
     distance = distance or 1
 
-    return new_area(Position.translate(area.left_top, direction, distance), Position.translate(area.right_bottom, direction, distance))
+    return new_area(Position.translate(area.left_top, direction, distance),
+        Position.translate(area.right_bottom, direction, distance))
 end
 
 --- Set an area to the whole size of the surface.
@@ -345,7 +334,10 @@ function Area.to_surface_size(area, surface)
     return area
 end
 
---- Shrinks an area to the size of the surface if it is bigger
+--- Shrinks an area to the size of the surface if it is bigger.
+-- @tparam Concepts.BoundingBox area
+-- @tparam LuaSurface surface
+-- @treturn Concepts.BoundingBox
 function Area.shrink_to_surface_size(area, surface)
     local w, h = surface.map_gen_settings.width, surface.map_gen_settings.height
     if abs(area.left_top.x) > w / 2 then
@@ -358,11 +350,19 @@ function Area.shrink_to_surface_size(area, surface)
     end
     return area
 end
--- ))
+
+--- Return the chunk coordinates from an area.
+-- @tparam Concepts.BoundingBox area
+-- @treturn Concepts.BoundingBox Chunk position coordinates
+function Area.to_chunk_coords(area)
+    return Area.load{
+        left_top = {x = floor(area.left_top.x / 32), y = floor(area.left_top.y / 32)},
+        right_bottom = {x = floor(area.right_bottom.x / 32), y = floor(area.right_bottom.y / 32)}
+    }
+end
 
 --- Position Conversion Functions
 -- @section ConversionFunctions
--- ((
 
 --- Calculates the center of the area and returns the position.
 -- @tparam Concepts.BoundingBox area the area
@@ -373,11 +373,9 @@ function Area.center(area)
 
     return Position.construct_xy(area.left_top.x + (dist_x / 2), area.left_top.y + (dist_y / 2))
 end
--- ))
 
 --- Area Functions
 -- @section Functions
--- ((
 
 --- Return a suitable string for using as a table key
 -- @tparam Concepts.BoundingBox area
@@ -542,9 +540,7 @@ end
 -- @tparam Concepts.BoundingBox area2
 -- @treturn boolean true if areas are the same
 function Area.equals(area1, area2)
-    if not (area1 and area2) then
-        return false
-    end
+    if not (area1 and area2) then return false end
     local ori = area1.orientation or 0 == area2.orientation or 0
     return ori and area1.left_top == area2.left_top and area1.right_bottom == area2.right_bottom
 end
@@ -596,11 +592,7 @@ end
 -- @tparam array positions array of Concepts.Position
 -- @treturn boolean true if the positions are located in the area
 function Area.contains_positions(area, positions)
-    for _, pos in pairs(positions) do
-        if not Position.inside(pos, area) then
-            return false
-        end
-    end
+    for _, pos in pairs(positions) do if not Position.inside(pos, area) then return false end end
     return true
 end
 
@@ -610,9 +602,7 @@ end
 -- @treturn boolean
 function Area.contains_areas(area, areas)
     for _, inner in pairs(areas) do
-        if not Area.contains_positions(area, {Area.unpack_positions(inner)}) then
-            return false
-        end
+        if not Area.contains_positions(area, {Area.unpack_positions(inner)}) then return false end
     end
     return true
 end
@@ -622,18 +612,12 @@ end
 -- @tparam array areas array of Concepts.BoundingBox
 -- @treturn boolean
 function Area.collides_areas(area, areas)
-    for _, inner in pairs(areas) do
-        if not Area.collides(area, inner) then
-            return false
-        end
-    end
+    for _, inner in pairs(areas) do if not Area.collides(area, inner) then return false end end
     return true
 end
--- )) Functions ((--
 
 --- Area Iterators
 -- @section Area Iterators
--- ((
 
 --- Iterates an area.
 -- @usage
@@ -710,9 +694,7 @@ function Area.spiral_iterate(area, as_position)
     end
 
     local function iterator()
-        if index > #positions then
-            return
-        end
+        if index > #positions then return end
         local pos = positions[index]
         index = index + 1
         pos.x = pos.x + center_x
@@ -723,24 +705,19 @@ function Area.spiral_iterate(area, as_position)
     return iterator, area, 0
 end
 
--- ))
---- @section end
-
 --- Area Arrays
 -- @section Area Arrays
 
 function Area.positions(area, inside, step)
     local positions = {}
 
-    for pos in Area.iterate(area, true, inside, step) do
-        positions[#positions + 1] = pos
-    end
+    for pos in Area.iterate(area, true, inside, step) do positions[#positions + 1] = pos end
     return positions
 end
 
---- @section end
+--- Metamethods
+-- @section Metamethods
 
--- (( Metamethods
 local function __add(area1, area2)
     area1, area2 = Area(area1), Area(area2)
     area1.left_top = area1.left_top + area2.left_top
@@ -797,12 +774,11 @@ metatable = {
     __mod = __mod,
     __unm = __unm,
     __eq = Area.equals, -- Is area1 the same as area2.
-    __lt = Area.less_than, --is the size of area1 less than number/area2.
-    __le = Area.less_than_eq, --is the size of area1 less than or equal to number/area2.
+    __lt = Area.less_than, -- Is the size of area1 less than number/area2.
+    __le = Area.less_than_eq, -- Is the size of area1 less than or equal to number/area2.
     __len = Area.size, -- The size of the area.
     __call = Area.new, -- Return a new copy.
     __debugline = [[<Area>{[}left_top={left_top},right_bottom={right_bottom}{]}]]
 }
--- ))
 
 return Area

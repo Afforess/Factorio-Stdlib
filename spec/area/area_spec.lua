@@ -7,6 +7,7 @@ local rs = rawtostring
 
 describe('Area', function ()
     local N = spy.on(Area, 'new')
+    local L = spy.on(Area, 'load')
     local C = spy.on(Area, 'construct')
     local S = spy.on(Area, 'from_string')
     local zero, raw_zero, one
@@ -19,6 +20,7 @@ describe('Area', function ()
         one = {left_top = {x = -1, y = -1}, right_bottom = {x = 1, y = 1}}
         raw_zero = {{0, 0}, {0, 0}}
         N:clear()
+        L:clear()
         C:clear()
         S:clear()
     end)
@@ -58,7 +60,8 @@ describe('Area', function ()
         it('.from_string', function ()
             assert.same(one, A.from_string(str))
             assert.same(one, A.from_string(raw_str))
-            assert.spy(N).was_called(2)
+            assert.spy(N).was_called(1)
+            assert.spy(L).was_called(1)
         end)
 
         it('.from_key', function ()
@@ -68,14 +71,13 @@ describe('Area', function ()
         it('.__call', function ()
             assert.same(one, A{{-1,-1}, {1, 1}})
             assert.spy(N).was_called(1)
+            assert.same(one, A{left_top={x = -1, y = -1}, right_bottom={x=1, y=1}})
+            assert.spy(L).was_called(1)
             assert.same(one, A(-1, -1, 1, 1))
             assert.spy(C).was_called(1)
             assert.same(one, A(str))
             assert.same(one, A(str_key))
             assert.spy(S).was_called(2)
-
-            local a1 = {left_top = {x = 3, y = 3}, right_bottom = {x = 4, y = 4}}
-            assert.not_same(rs(a1), rs(A(a1, true)))
         end)
     end)
 

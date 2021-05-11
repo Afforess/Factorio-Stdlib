@@ -1,3 +1,4 @@
+#! /bin/sh
 echo 'Auto Generating with ldoc'
 rm -rf 'stdlib-docs'
 mkdir -p 'stdlib-docs'

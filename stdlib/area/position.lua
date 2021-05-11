@@ -4,11 +4,7 @@
 -- @see Area.Area
 -- @see Concepts.Position
 -- @see defines.direction
-
-local Position = {
-    __class = 'Position',
-    __index = require('__stdlib__/stdlib/core')
-}
+local Position = {__class = 'Position', __index = require('__stdlib__/stdlib/core')}
 setmetatable(Position, Position)
 
 local Direction = require('__stdlib__/stdlib/area/direction')
@@ -31,20 +27,20 @@ local metatable
 -- @section Constructors
 
 Position.__call = function(_, ...)
-    local t = type((...))
-    if t == 'table' then
+    local type = type((...))
+    if type == 'table' then
+        local t = (...)
         if t.x and t.y then
             return Position.load(...)
+        else
+            return Position.new(...)
         end
-        return Position.new(...)
-    elseif t == 'string' then
+    elseif type == 'string' then
         return Position.from_string(...)
     else
         return Position.construct(...)
     end
 end
-
-
 
 local function new(x, y)
     return setmetatable({x = x, y = y}, metatable)
@@ -416,9 +412,7 @@ end
 function Position.average(...)
     local positions = get_array(...)
     local avg = new(0, 0)
-    for _, pos in ipairs(positions) do
-        Position.add(avg, pos)
-    end
+    for _, pos in ipairs(positions) do Position.add(avg, pos) end
     return Position.divide(avg, #positions)
 end
 
@@ -485,7 +479,8 @@ end
 --- The intersection of 4 positions.
 -- @treturn Concepts.Position a new position
 function Position.intersection(pos1_start, pos1_end, pos2_start, pos2_end)
-    local d = (pos1_start.x - pos1_end.x) * (pos2_start.y - pos2_end.y) - (pos1_start.y - pos1_end.y) * (pos2_start.x - pos2_end.x)
+    local d = (pos1_start.x - pos1_end.x) * (pos2_start.y - pos2_end.y) - (pos1_start.y - pos1_end.y) *
+                  (pos2_start.x - pos2_end.x)
     local a = pos1_start.x * pos1_end.y - pos1_start.y * pos1_end.x
     local b = pos2_start.x * pos2_end.y - pos2_start.y * pos2_end.x
     local x = (a * (pos2_start.x - pos2_end.x) - (pos1_start.x - pos1_end.x) * b) / d
@@ -590,7 +585,7 @@ local function load_area(area)
     local Area = package.loaded[AREA_PATH]
     if not Area then
         local log = log or function()
-            end
+        end
         log('WARNING: Area for Position not found in package.loaded')
     end
     return Area and Area.load(area) or area
@@ -606,7 +601,7 @@ function Position.expand_to_area(pos, radius)
     local left_top = {x = pos.x - radius, y = pos.y - radius}
     local right_bottom = {x = pos.x + radius, y = pos.y + radius}
 
-    return load_area {left_top = left_top, right_bottom = right_bottom}
+    return load_area{left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Expands a position into an area by setting pos to left_top.
@@ -621,7 +616,7 @@ function Position.to_area(pos, width, height)
     local left_top = {x = pos.x, y = pos.y}
     local right_bottom = {x = pos.x + width, y = pos.y + height}
 
-    return load_area {left_top = left_top, right_bottom = right_bottom}
+    return load_area{left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
@@ -632,7 +627,7 @@ function Position.to_tile_area(pos)
     local left_top = {x = x, y = y}
     local right_bottom = {x = x + 1, y = y + 1}
 
-    return load_area {left_top = left_top, right_bottom = right_bottom}
+    return load_area{left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Get the chunk area the specified position is in.
@@ -642,7 +637,16 @@ function Position.to_chunk_area(pos)
     local left_top = {x = floor(pos.x / 32) * 32, y = floor(pos.y / 32) * 32}
     local right_bottom = {x = left_top.x + 32, y = left_top.y + 32}
 
-    return load_area {left_top = left_top, right_bottom = right_bottom}
+    return load_area{left_top = left_top, right_bottom = right_bottom}
+end
+
+--- Get the chunk area for the specified chunk position.
+-- @tparam Concepts.ChunkPosition pos
+-- @treturn Concepts.BoundingBox The chunks positions area
+function Position.chunk_position_to_chunk_area(pos)
+    local left_top = {x = pos.x * 32, y = pos.y * 32}
+    local right_bottom = {left_top.x + 32, left_top.y + 32}
+    return load_area{left_top = left_top, right_bottom = right_bottom}
 end
 
 --- Position Functions
@@ -785,9 +789,7 @@ end
 -- @tparam Concepts.Position pos2
 -- @treturn boolean true if positions are equal
 function Position.equals(pos1, pos2)
-    if not (pos1 and pos2) then
-        return false
-    end
+    if not (pos1 and pos2) then return false end
 
     return abs(pos1.x - pos2.x) < EPSILON and abs(pos1.y - pos2.y) < EPSILON
 end
@@ -899,7 +901,7 @@ function Position.increment(pos, inc_x, inc_y, increment_initial)
 
     --- A closure which the @{increment} function returns.
     -- @function increment_closure
-    --> Do not call this directly and do not store this in the global object.
+    -- > Do not call this directly and do not store this in the global object.
     -- @see increment
     -- @tparam[opt=0] number new_inc_x
     -- @tparam[opt=0] number new_inc_y
@@ -916,9 +918,9 @@ function Position.increment(pos, inc_x, inc_y, increment_initial)
         return new(x, y)
     end
 end
---- @section end
 
--- Metamethods
+--- Metamethods
+-- @section Metamethods
 
 --- Position tables are returned with these metamethods attached.
 -- Methods that return a position will return a NEW position without modifying the passed positions.

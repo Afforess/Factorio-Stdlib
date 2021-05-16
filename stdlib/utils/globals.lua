@@ -49,7 +49,7 @@ local data_traceback = type(debug) == 'table' and debug.getinfo and function()
     end
 rawset(_ENV, 'data_traceback', data_traceback)
 
-local inspect = require('__stdlib__/stdlib/vendor/inspect')
+local inspect = require('__stdlib__/vendor/inspect')
 rawset(_ENV, 'inspect', inspect)
 
 -- Set up faketorio for local testing, defines will already be available in an active mod or busted specs

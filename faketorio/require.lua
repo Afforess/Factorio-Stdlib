@@ -4,12 +4,12 @@ _G.require = function(path)
 end
 
 function _G.package.strip_indentifier()
-    package.cpath = nil
+    package.cpath = ""
     local remove = {}
     for name, value in pairs(package.loaded) do
         if name:find('__stdlib__/') then
             package.loaded[name:gsub('__stdlib__/', '')] = value
-            remove[#remove + 1] = package
+            remove[#remove + 1] = name
         end
     end
     for _, name in ipairs(remove) do

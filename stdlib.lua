@@ -23,7 +23,7 @@
     OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 --]] --
 local STDLIB = {
-    _Version = '2',
+    _VERSION = '2',
     Area = {
         load = function()
             error('Area must be required before position to use this function')

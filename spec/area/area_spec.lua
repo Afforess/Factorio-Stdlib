@@ -1,8 +1,8 @@
 require('spec/setup/busted')()
 
-local Area = require('__stdlib__/stdlib/area/area')
+local Area = require('__stdlib__/util/area')
 local A = Area
-local P = require('__stdlib__/stdlib/area/position')
+local P = require('__stdlib__/util/position')
 local rs = rawtostring
 
 describe('Area', function ()
@@ -27,7 +27,7 @@ describe('Area', function ()
 
     describe('Constructors', function ()
         it('.__index', function ()
-            assert.is.truthy(getmetatable(Area)._VERSION)
+            assert.is.truthy(Area._VERSION)
         end)
 
         describe('.new', function ()

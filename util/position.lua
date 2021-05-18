@@ -4,8 +4,11 @@
 -- @see Area.Area
 -- @see Concepts.Position
 -- @see defines.direction
-local Position = {__class = 'Position'}
-local Metatable = {__index = require('__stdlib__/stdlib')}
+local Position = {}
+local Metatable = {
+    __class = 'Position',
+    __index = require('__stdlib__/stdlib')
+}
 Metatable.__index.Position = Position
 setmetatable(Position, Metatable)
 
@@ -27,8 +30,13 @@ local EPSILON = 1.19e-07
 local metatable
 
 Metatable.__call = function(_, ...)
-    if type((...)) == 'table' then
-        return Position.load(...)
+    local t = ((...))
+    local type = type(t)
+    if type == 'table' then
+        if t.x and t.y then return Position.load(t) end
+        return Position.new(t)
+    elseif type == 'string' then
+        return Position.from_string(t)
     else
         return Position.construct(...)
     end
@@ -54,7 +62,7 @@ end
 -- @tparam number y y-position
 -- @treturn Concepts.Position
 function Position.construct(x, y)
-    return setmetatable({x = x or 0, y = y or 0}, metatable)
+    return setmetatable({x = x or 0, y = y or x or 0}, metatable)
 end
 
 --- Load the metatable into the passed position without creating a new one.
@@ -641,7 +649,7 @@ end
 -- @tparam Concepts.Position pos
 -- @treturn boolean
 function Position.is_position(pos)
-    return Position.is_Position(pos) or (tonumber(pos.x) and tonumber(pos.y))
+    return Position.is_Position(pos) or (tonumber(pos.x) and tonumber(pos.y) and true) or false
 end
 
 --- Is this position {0, 0}.

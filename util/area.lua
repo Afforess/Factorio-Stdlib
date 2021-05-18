@@ -59,8 +59,8 @@ end
 function Area.construct(...)
     local args = type((...)) == 'table' and {select(2, ...)} or {select(1, ...)}
 
-    local lt = Position.construct_xy(args[1] or 0, args[2] or 0)
-    local rb = Position.construct_xy(args[3] or lt.x, args[4] or lt.y)
+    local lt = Position.construct(args[1] or 0, args[2] or 0)
+    local rb = Position.construct(args[3] or lt.x, args[4] or lt.y)
 
     return setmetatable({left_top = lt, right_bottom = rb}, metatable)
 end
@@ -179,7 +179,7 @@ local function right_bottom_center(pos)
     local fx, fy = floor(pos.x), floor(pos.y)
     x = fx == pos.x and (fx - 0.5) or (fx + 0.5)
     y = fy == pos.y and (fy - 0.5) or (fy + 0.5)
-    return Position.construct_xy(x, y)
+    return Position.construct(x, y)
 end
 
 --- Gets the center positions of the tiles where the given area's two positions reside.
@@ -194,8 +194,8 @@ end
 -- @treturn Concepts.BoundingBox the area with left_bottom and right_top included
 function Area.corners(area)
     local lt, rb = area.left_top, area.right_bottom
-    local lb = area.left_bottom or Position.construct_xy(0, 0)
-    local rt = area.right_top or Position.construct_xy(0, 0)
+    local lb = area.left_bottom or Position.construct(0, 0)
+    local rt = area.right_top or Position.construct(0, 0)
     lb.x, lb.y = lt.x, rb.y
     rt.x, rt.y = rb.x, lt.y
     area.left_bottom = lb
@@ -373,7 +373,7 @@ function Area.center(area)
     local dist_x = area.right_bottom.x - area.left_top.x
     local dist_y = area.right_bottom.y - area.left_top.y
 
-    return Position.construct_xy(area.left_top.x + (dist_x / 2), area.left_top.y + (dist_y / 2))
+    return Position.construct(area.left_top.x + (dist_x / 2), area.left_top.y + (dist_y / 2))
 end
 
 --- Area Functions
@@ -654,7 +654,7 @@ function Area.iterate(area, as_position, inside, step)
         else
             return
         end
-        return (as_position and Position.construct_xy(x, y)) or x, (not as_position and y) or nil
+        return (as_position and Position.construct(x, y)) or x, (not as_position and y) or nil
     end
 
     return iterator

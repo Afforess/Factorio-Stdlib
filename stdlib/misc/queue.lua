@@ -2,7 +2,7 @@
 -- Taken from ***Programming in Lua*** [Queues and Double Queues](http://www.lua.org/pil/11.4.html)
 -- and modified to not allow nil values, and returns nil if @{pop_first} or @{pop_last} is used when the queue is empty.
 -- @module Misc.Queue
--- @usage local Queue = require('__stdlib__/stdlib/lists/queue')
+-- @usage local Queue = require('__stdlib__/stdlib/misc/queue')
 -- local q = Queue() -- create a new empty queue
 -- q('my value') -- push a value onto the queue
 -- q() -- pop the last value off the queue

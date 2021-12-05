@@ -1,6 +1,8 @@
 --- Additional lua globals
 -- @module Utils.Globals
 
+_ENV = _ENV or _G
+
 local config = require('__stdlib__/stdlib/config')
 
 local Table = require('__stdlib__/stdlib/utils/table')

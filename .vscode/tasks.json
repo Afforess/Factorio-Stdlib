@@ -5,7 +5,7 @@
             "label": "Run love",
             "type": "shell",
             "isBackground": true,
-            "command": "love /home/nexela/Develop/Lua/Factorio/Factorio-Stdlib/love",
+            "command": "love ${workspaceRoot}/tools/love",
             "group": {
                 "kind": "test",
                 "isDefault": true

@@ -17,8 +17,10 @@ do local defines = {
         success = 2
     },
     build_check_type = {
-        ghost_place = 2,
-        ghost_revive = 3,
+        ghost_revive = 5,
+        blueprint_ghost = 4,
+        script_ghost = 3,
+        manual_ghost = 2,
         manual = 1,
         script = 0
     },

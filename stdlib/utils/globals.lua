@@ -56,6 +56,7 @@ rawset(_ENV, 'inspect', inspect)
 
 -- Set up faketorio for local testing, defines will already be available in an active mod or busted specs
 if not _ENV.defines then
+    ---@diagnostic disable-next-line: deprecated
     _ENV.table.unpack = _ENV.table.unpack or _ENV.unpack
     if _ENV.os and _ENV.os.getenv('LOCAL_LUA_DEBUGGER_VSCODE') == '1' then
         require('__stdlib__/faketorio/require')
@@ -102,7 +103,7 @@ if _ENV.__DebugAdapter then
     end
 else
     _ENV.__DebugAdapter = {
-        print = function()
+        print = function(_msg)
         end,
         stepIgnoreAll = function()
         end,

@@ -66,11 +66,6 @@ if not config.skip_script_protections then -- Protections for post and pre regis
             error('Detected attempt to add the STDLIB event module after using script.on_event')
         end
     end
-    for name in pairs(Event.script) do
-        _G.script[name] = function()
-            error('Detected attempt to register an event using script.' .. name .. ' while using the STDLIB event system ')
-        end
-    end
 end
 
 local bootstrap_events = {

@@ -81,27 +81,8 @@ require('__stdlib__/stdlib/utils/defines/anticolor')
 require('__stdlib__/stdlib/utils/defines/lightcolor')
 require('__stdlib__/stdlib/utils/defines/time')
 
--- Settings Mutates
-if _ENV.settings then
-    function _ENV.settings.get(cat, key)
-        return _ENV.settings[cat][key] and _ENV.settings[cat][key].value
-    end
-    function _ENV.settings.get_startup(key)
-        return _ENV.settings.get('startup', key)
-    end
-end
-
 -- Dubug Adapter Mutates
-if _ENV.__DebugAdapter then
-    if _ENV.__DebugAdapter.attach then
-        -- Add our custom mutate info to the debugadapter.
-        if _ENV.settings and _ENV.settings.get then
-            local object_info = require('__debugadapter__/luaobjectinfo.lua')
-            object_info.expandKeys['LuaSettings']['get'] = {}
-            object_info.expandKeys['LuaSettings']['get_startup'] = {}
-        end
-    end
-else
+if not _ENV.__DebugAdapter then
     _ENV.__DebugAdapter = {
         print = function(_msg)
         end,

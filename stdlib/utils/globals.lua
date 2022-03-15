@@ -109,7 +109,7 @@ else
         end,
         stepIgnore = function()
         end,
-        breakpoint = function()
+        breakpoint = function(_msg)
         end,
         levelPath = function()
         end

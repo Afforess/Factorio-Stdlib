@@ -101,14 +101,14 @@ function Core.help(self)
     end
 
     while (type(tab) == 'table') do
-        build_string(tab)
+        build_string()
 
         local old_meta = tab
         tab = getmetatable(tab)
 
         if tab then
             if tab ~= old_meta then
-                build_string(tab)
+                build_string()
             end
             if type(tab.__index) == 'function' then
                 tab = tab.__parent

@@ -27,16 +27,6 @@
             "cwd": "${workspaceFolder}",
             "internalConsoleOptions": "openOnSessionStart",
             "stopOnEntry": false
-        },
-        {
-            "type": "lua-local",
-            "request": "launch",
-            "name": "Debug Lua Factorio",
-            "program": {
-                "lua": "lua-factorio",
-                "file": "${file}"
-            },
-            "cwd": "${workspaceFolder}"
         }
     ]
 }

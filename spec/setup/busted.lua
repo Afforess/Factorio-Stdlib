@@ -1,7 +1,13 @@
-local raw_require = require
-_G.require = function(path)
-    return raw_require((path:gsub('__%S+__/', '')))
-end
+-- TODO luarocks for faketorio? or Dockerfile?
+-- faketorio needs to be installed in the path somewhere
 
-raw_require('faketorio/globals')
-return raw_require('busted.runner')
+--- Create .factorio_mods symlink to the "mods" folder
+package.path = package.path .. ", ~/.factorio_mods/?.lua"
+
+--- Create a searcher to replace `__modname__` with `modname` then it should attempt to find it with the path from above
+require('faketorio/searchers')
+
+-- Setup the testing environment
+require('faketorio/globals')
+
+return require('busted.runner')

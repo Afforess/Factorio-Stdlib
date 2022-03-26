@@ -56,19 +56,15 @@ rawset(_ENV, 'inspect', inspect)
 
 -- Set up faketorio for local testing, defines will already be available in an active mod or busted specs
 if not _ENV.defines then
-    ---@diagnostic disable-next-line: deprecated
+    --- @diagnostic disable-next-line: deprecated
     _ENV.table.unpack = _ENV.table.unpack or _ENV.unpack
-    if _ENV.os and _ENV.os.getenv('LOCAL_LUA_DEBUGGER_VSCODE') == '1' then
-        require('__stdlib__/faketorio/require')
-        _ENV.package.strip_indentifier()
-    end
     if config.control or config.game then
-        local world = require('__stdlib__/faketorio/world').bootstrap()
+        local world = require('faketorio/world').bootstrap()
         if config.game then
             world.init()
         end
     else
-        require('__stdlib__/faketorio/dataloader')
+        require('faketorio/dataloader')
     end
     _ENV.log = function(msg)
         print(msg)

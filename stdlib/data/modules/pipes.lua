@@ -3,7 +3,6 @@
 
 local Pipes = {}
 local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
---setmetatable(Pipes, {__index = Sprites})
 
 --Define pipe connection pipe pictures, not all entities use these. This function needs some work though.
 function Pipes.pictures(pictures, shift_north, shift_south, shift_west, shift_east, replacements)

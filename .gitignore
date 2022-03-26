@@ -8,6 +8,7 @@ stdlib-docs/
 .temp/
 .trash/
 .history/
+.vscode/
 
 # Exclude the output directory
 .output/

@@ -1,13 +1,4 @@
--- TODO luarocks for faketorio? or Dockerfile?
--- faketorio needs to be installed in the path somewhere
-
---- Create .factorio_mods symlink to the "mods" folder
-package.path = package.path .. ", ~/.factorio_mods/?.lua"
-
---- Create a searcher to replace `__modname__` with `modname` then it should attempt to find it with the path from above
-require('faketorio/searchers')
-
--- Setup the testing environment
-require('faketorio/globals')
-
+-- TODO luarocks for faketorio? or Dockerfile? or Git Submodule?
+-- faketorio needs to be installed on the path somewhere
+require('faketorio')
 return require('busted.runner')

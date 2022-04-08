@@ -79,12 +79,13 @@ require('__stdlib__/stdlib/utils/defines/time')
 
 -- Dubug Adapter Mutates
 if not _ENV.__DebugAdapter then
+    --- @diagnostic disable
     _ENV.__DebugAdapter = {
         print = function(_msg)
         end,
         stepIgnoreAll = function()
         end,
-        stepIgnore = function()
+        stepIgnore = function(_ignore)
         end,
         breakpoint = function(_msg)
         end,
@@ -92,6 +93,7 @@ if not _ENV.__DebugAdapter then
         end
     }
     _ENV.__Profiler = _ENV.DebugAdapter
+    --- @diagnostic enable
 end
 
 --- Require a file that may not exist

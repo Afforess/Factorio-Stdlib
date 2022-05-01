@@ -115,8 +115,8 @@ end
 -- @tparam Concepts.BoundingBox area the area to normalize
 -- @treturn Concepts.BoundingBox a new normalized area
 function Area.normalize(area)
-    local left_top = Position.new(area.left_top, true)
-    local right_bottom = Position.new(area.right_bottom, true)
+    local left_top = Position.new(area.left_top)
+    local right_bottom = Position.new(area.right_bottom)
 
     if right_bottom.x < left_top.x then left_top.x, right_bottom.x = right_bottom.x, left_top.x end
     if right_bottom.y < left_top.y then left_top.y, right_bottom.y = right_bottom.y, left_top.y end

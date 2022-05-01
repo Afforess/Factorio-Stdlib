@@ -195,7 +195,7 @@ end
 function Position.farthest(pos1, positions)
     local x, y = pos1.x, pos1.y
     local closest = 0
-    for i, pos in pairs(positions) do
+    for _, pos in pairs(positions) do
         local distance = Position.distance(pos1, pos)
         if distance > closest then
             x, y = pos.x, pos.y

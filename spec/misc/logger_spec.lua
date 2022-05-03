@@ -76,7 +76,7 @@ describe('Logger', function()
             l.log('foo')
             assert.spy(spyLog).was_called_with('Data/test: foo')
             assert.falsy(l.buffer[1]) --do not buffer in data stage
-            _G["script"] = {mod_name = 'stldlib'}
+            _G["script"] = {mod_name = 'stdlib'}
         end)
 
         it('buffers messages when _G.script is available', function()

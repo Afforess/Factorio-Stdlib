@@ -359,7 +359,7 @@ local function dispatch_event(event, registered)
             success, handler_result = pcall(registered.handler, event, match_result)
         end
     else
-        success, handler_result = pcall(registered.handler, event, nil)
+        success, handler_result = pcall(registered.handler, event, registered.pattern)
     end
 
     -- If the handler errors lets make sure someone notices

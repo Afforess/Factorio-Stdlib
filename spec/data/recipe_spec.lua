@@ -8,8 +8,8 @@ describe('Recipe', function()
     before_each(function()
         require('faketorio/dataloader')
         Recipe = require('__stdlib__/stdlib/data/recipe')
-        Raw = _G.data.raw["recipe"]
-        Rawtech = _G.data.raw["technology"]["steel-processing"]
+        Raw = _G["data"].raw["recipe"]
+        Rawtech = _G["data"].raw["technology"]["steel-processing"]
     end)
 
     after_each(function()
@@ -76,11 +76,11 @@ describe('Recipe', function()
     describe(':change_category', function()
 
         it('should change the category if it exists', function()
-            assert.same(nil, _G.data.raw.recipe["stone-furnace"].category)
+            assert.same(nil, _G["data"].raw.recipe["stone-furnace"].category)
             Recipe("stone-furnace"):change_category("hand-held")
-            assert.same(nil, _G.data.raw.recipe["stone-furnace"].category)
+            assert.same(nil, _G["data"].raw.recipe["stone-furnace"].category)
             Recipe("stone-furnace"):change_category("advanced-crafting")
-            assert.same("advanced-crafting", _G.data.raw.recipe["stone-furnace"].category)
+            assert.same("advanced-crafting", _G["data"].raw.recipe["stone-furnace"].category)
         end)
     end)
 
@@ -103,7 +103,7 @@ describe('Recipe', function()
                 assert.same('Recipe', class.__class)
                 count = count + 1
             end
-            assert.same(table.size(_G.data.raw.recipe), count)
+            assert.same(table.size(_G["data"].raw.recipe), count)
         end)
     end)
 
@@ -112,7 +112,7 @@ describe('Recipe', function()
             Recipe("stone-furnace"):add_unlock("steel-processing")
             log(Rawtech.effects)
             assert.same("stone-furnace", Rawtech.effects[3].recipe)
-            assert.not_truthy(_G.data.raw.recipe["stone-furnace"].enabled)
+            assert.not_truthy(_G["data"].raw.recipe["stone-furnace"].enabled)
         end)
 
         it('should not do anything if the tech doesnt exist', function()

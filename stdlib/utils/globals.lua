@@ -77,25 +77,6 @@ require('__stdlib__/stdlib/utils/defines/anticolor')
 require('__stdlib__/stdlib/utils/defines/lightcolor')
 require('__stdlib__/stdlib/utils/defines/time')
 
--- Dubug Adapter Mutates
-if not _ENV.__DebugAdapter then
-    --- @diagnostic disable
-    _ENV.__DebugAdapter = {
-        print = function(_msg)
-        end,
-        stepIgnoreAll = function()
-        end,
-        stepIgnore = function(_ignore)
-        end,
-        breakpoint = function(_msg)
-        end,
-        levelPath = function()
-        end
-    }
-    _ENV.__Profiler = _ENV.DebugAdapter
-    --- @diagnostic enable
-end
-
 --- Require a file that may not exist
 -- @tparam string module path to the module
 -- @tparam boolean suppress_all suppress all errors, not just file_not_found

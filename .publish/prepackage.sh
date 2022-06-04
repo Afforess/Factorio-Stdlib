@@ -10,5 +10,5 @@ ldoc -ic doc/config.ld -l doc -s doc stdlib
 echo ''
 luacheck ./stdlib
 
-echo ''
-busted .
+# echo ''
+# busted .

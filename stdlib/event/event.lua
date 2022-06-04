@@ -494,7 +494,7 @@ end
 
 -- TODO complete stub
 function Event.raise_event(...)
-    script.raise_event(...) ---@diagnostic disable-line
+    script.raise_event(...)
 end
 
 --- Get event handler.

@@ -1,0 +1,68 @@
+{
+    "completion.requireSeparator": "/",
+    "diagnostics.disable": [],
+    "diagnostics.globals": [
+        "global",
+        "log",
+        "data",
+        "mods",
+        "serpent",
+        "table_size",
+        "util",
+        "localised_print",
+        "__DebugAdapter",
+        "__Profiler"
+    ],
+    "diagnostics.ignoredFiles": "Disable",
+    "diagnostics.libraryFiles": "Opened",
+    "diagnostics.neededFileStatus": {
+        "codestyle-check": "None",
+        "deprecated": "Opened",
+        "different-requires": "Any",
+        "discard-returns": "Opened",
+        "missing-parameter": "Opened",
+        "missing-return": "Opened",
+        "missing-return-value": "Opened",
+        "redefined-local": "Opened",
+        "redundant-parameter": "Opened",
+        "spell-check": "None",
+        "undefined-doc-class": "Opened",
+        "undefined-doc-name": "Opened",
+        "undefined-global": "Opened",
+        "unknown-cast-variable": "Opened"
+    },
+    "diagnostics.severity": {
+        "codestyle-check": "Information",
+        "redefined-local": "Warning",
+        "unused-local": "Information"
+    },
+    "diagnostics.unusedLocalExclude": [
+        "_*_"
+    ],
+    "Lua.misc.parameters": [
+        // "--develop=true",
+        // "--dbgport=11413"
+    ],
+    "runtime.path": [
+        "?.lua",
+        "/home/nexela/Media/Develop/Cpp/factorio/data/core/lualib/?.lua"
+    ],
+    "runtime.pathStrict": true,
+    "runtime.plugin": "/home/nexela/Media/Develop/Lua/libs/factorio-sumneko-plugin/plugin.lua",
+    "runtime.version": "Lua 5.2",
+    "spell.dict": [],
+    "type.castNumberToInteger": false,
+    "type.weakUnionCheck": false,
+    "workspace.checkThirdParty": false,
+    "workspace.ignoreDir": [
+        ".vscode/",
+        "base/scenarios/",
+        "diffed.lua",
+        "config.ld"
+    ],
+    "workspace.library": [
+        "/home/nexela/Media/Develop/Lua/Factorio/.vscode/factorio/",
+        "/home/nexela/Media/Develop/Lua/Factorio/.vscode/factorio-data-api/",
+        "/home/nexela/Media/Develop/Lua/Factorio/.vscode/annotations.lua"
+    ]
+}

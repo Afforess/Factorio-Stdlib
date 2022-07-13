@@ -69,7 +69,7 @@ describe('Logger', function()
         it('uses log() if _G.script is not available', function()
             _G["game"] = nil
             _G["script"] = nil
-            _G["log"] = function() end
+            _G["log"] = function(msg) end
             local spyLog = spy.on(_G, 'log')
 
             local l = Logger.new('test', true, { use_log = true })

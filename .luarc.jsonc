@@ -2,6 +2,7 @@
     "completion.requireSeparator": "/",
     "diagnostics.disable": [],
     "diagnostics.globals": [
+        "it", "describe", "before_each", "after_each", "spy",
         "global",
         "log",
         "data",

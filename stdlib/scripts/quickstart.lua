@@ -65,10 +65,10 @@ function quickstart.on_player_created(event)
 
         local chart_size_multiplier = QS.get('chart_size_multiplier', 0)
         if chart_size_multiplier > 0 then
-            player.force.chart(surface, Area(area, true) * chart_size_multiplier)
+            player.force.chart(surface, Area(area, true) * chart_size_multiplier --[[@as BoundingBox]])
         end
 
-        player.surface.always_day = QS.get('always_day', false)
+        player.surface.always_day = QS.get('always_day', false)--[[@as boolean]]
 
         if QS.get('cheat_mode', false) then
             player.cheat_mode = true
@@ -176,20 +176,20 @@ function quickstart.on_player_created(event)
         if QS.get('chunk_bounds', false) then
             local black = {r = 0, g = 0, b = 0}
             -- Horizontal
-            rendering.draw_line{width = 2, color = black, from = {x = 32, y = 0}, to = {x = -32, y = 0}, surface = surface}
-            rendering.draw_line{width = 2, color = black, from = {x = 32, y = 32}, to = {x = -32, y = 32}, surface = surface}
-            rendering.draw_line{width = 2, color = black, from = {x = 32, y = -32}, to = {x = -32, y = -32}, surface = surface}
+            rendering.draw_line{width = 2.0, color = black, from = {x = 32, y = 0}, to = {x = -32, y = 0}, surface = surface}
+            rendering.draw_line{width = 2.0, color = black, from = {x = 32, y = 32}, to = {x = -32, y = 32}, surface = surface}
+            rendering.draw_line{width = 2.0, color = black, from = {x = 32, y = -32}, to = {x = -32, y = -32}, surface = surface}
             -- Vertical
-            rendering.draw_line{width = 2, color = black, from = {x = 0, y = 32}, to = {x = 0, y = -32}, surface = surface}
-            rendering.draw_line{width = 2, color = black, from = {x = 32, y = 32}, to = {x = 32, y = -32}, surface = surface}
-            rendering.draw_line{width = 2, color = black, from = {x = -32, y = 32}, to = {x = -32, y = -32}, surface = surface}
+            rendering.draw_line{width = 2.0, color = black, from = {x = 0, y = 32}, to = {x = 0, y = -32}, surface = surface}
+            rendering.draw_line{width = 2.0, color = black, from = {x = 32, y = 32}, to = {x = 32, y = -32}, surface = surface}
+            rendering.draw_line{width = 2.0, color = black, from = {x = -32, y = 32}, to = {x = -32, y = -32}, surface = surface}
             -- Center
-            rendering.draw_circle{width = 2, color = black, surface = surface, radius = 1, filled = false, target = {x = 0, y = 0}}
+            rendering.draw_circle{width = 2.0, color = black, surface = surface, radius = 1, filled = false, target = {x = 0, y = 0}}
         end
 
         -- Create proxy blueprint from string, read in the entities and remove it.
         local bpstring
-        local custom_string = QS.get('custom_bp_string', false)
+        local custom_string = QS.get('custom_bp_string', false) --[[@as string]]
         if custom_string then
             bpstring = custom_string
         elseif QS.get('default_bp_string', false) then
@@ -207,7 +207,7 @@ function quickstart.on_player_created(event)
                 else
                     if ent.ghost_type == 'locomotive' then
                         local _, loco = ent.revive()
-                        loco.burner.currently_burning = 'rocket-fuel'
+                        loco.burner.currently_burning = 'rocket-fuel' ---@diagnostic disable-line: assign-type-mismatch
                         loco.burner.remaining_burning_fuel = 222222222
                     else
                         ent.revive()

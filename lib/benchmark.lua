@@ -249,7 +249,7 @@ do ---@block Metamethods
   Benchmark_mt.__len = function(self) return #self.benchmarks end
 end
 
-new(math.ceil, 1.5):set{unit = 'nanoseconds'}:against(math.ceil, 1.5):against(math.ceil, 1.5):against(math.ceil, 1.5):against(math.ceil, 1.5):run(10):print()
+-- new(math.ceil, 1.5):set{unit = 'nanoseconds'}:against(math.ceil, 1.5):against(math.ceil, 1.5):against(math.ceil, 1.5):against(math.ceil, 1.5):run(10):print()
 
 return new
 

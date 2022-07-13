@@ -1,4 +1,3 @@
---- @class Version
 --- Simple version comparison library Modified by Nexela, curisoity for Factorio
 ---
 --- @copyright Kong Inc. Thijs Schreijer [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
@@ -35,7 +34,8 @@
 --- print(version("5.2.0"))                    -- "5.2.0"
 ---
 --- ```
---- @overload fun(version: Version|string):Version
+--- @class Version
+--- @operator call(Version|string):Version
 local Version = {}
 local __call = function(_, version)
     return Version.new(version)
@@ -48,6 +48,7 @@ local VERSION_PATTERN = '^(%d+)%.(%d+)%.(%d+)$'
 --- @return number
 local function as_version_number(version)
     if version.version then return version.version end
+    ---@cast version -Version
     local major, minor, patch = string.match(version, VERSION_PATTERN)
     return (major * 65536 + minor) * 65536 + patch
 end
@@ -196,7 +197,8 @@ end
 --- @param version string|Version A Version object or string of 3 groups of numbers seperated by dots.
 --- @return Version
 function Version.new(version)
-    if version.version then ---@cast version Version
+    if version.version then
+        ---@cast version -string
         local new = {} ---@type Version
         for k, v in pairs(version) do
             new[k] = v
@@ -205,15 +207,17 @@ function Version.new(version)
     end
 
     assert(type(version) == 'string', ('%s is not a string'):format(version))
+    ---@cast version -Version
     local major, minor, patch = string.match(version, VERSION_PATTERN)
+    assert(major and minor and patch, ('%s is not a valid version'):format(version))
 
     --- @class Version
     local v = {
-        major = tonumber(major), ---@type number
-        minor = tonumber(minor), ---@type number
-        patch = tonumber(patch), ---@type number
-        version = (major * 65536 + minor) * 65536 + patch, ---@type number
-        string = version ---@type string
+        major = tonumber(major),
+        minor = tonumber(minor),
+        patch = tonumber(patch),
+        version = (major * 65536 + minor) * 65536 + patch,
+        string = version
     }
 
     return setmetatable(v, version_mt)

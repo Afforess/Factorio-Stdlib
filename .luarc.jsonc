@@ -2,6 +2,8 @@
     "completion.requireSeparator": "/",
     "diagnostics.disable": [],
     "diagnostics.globals": [
+        "describe",
+        "it",
         "global",
         "log",
         "data",

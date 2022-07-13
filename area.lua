@@ -6,7 +6,7 @@ local AreaClass = {}
 local Area = {}
 local area_meta = {}
 
-local Position = require("lib/position")
+local Position = require("position")
 Position.Area = AreaClass
 local as_pos_tuple_any = Position.as_tuple_any ---@diagnostic disable-line: unused-local
 local as_pos_tuple = Position.as_tuple
@@ -133,23 +133,23 @@ do -- Methods
     return self
   end
 
-  function Area:add(other)
+  function Area:add(_other_)
     return self
   end
 
-  function Area:subtract(other)
+  function Area:subtract(_other_)
     return self
   end
 
-  function Area:multiply(other)
+  function Area:multiply(_other_)
     return self
   end
 
-  function Area:divide(other)
+  function Area:divide(_other_)
     return self
   end
 
-  function Area:modulo(other)
+  function Area:modulo(_other_)
     return self
   end
 
@@ -190,7 +190,7 @@ do -- Position Conversions
     return Position.construct_safe(width / 2, height / 2)
   end
 
-  ---TODO Cache
+  ---@todo Cache
   ---@return Position
   ---@nodiscard
   function Area:get_left_bottom()
@@ -198,7 +198,7 @@ do -- Position Conversions
     return Position.construct_safe(lt.x, lt.y + Area.get_height(self))
   end
 
-  ---TODO Cache
+  ---@todo Cache
   ---@return Position
   ---@nodiscard
   function Area:get_right_top()
@@ -434,7 +434,7 @@ do -- AreaClass Constructors
   ---@param lty number
   ---@param rbx number
   ---@param rby number
-  ---@param ori? number
+  ---@param ori? float
   ---@nodiscard
   function AreaClass.construct(ltx, lty, rbx, rby, ori)
     return new(ltx, lty, rbx, rby, ori)
@@ -564,8 +564,8 @@ return AreaClass
 ---@alias FuncTable {[string]: function}
 
 ---@class VectorBox
----@field [1] {[1]: MapVector, [2]: MapVector}
----@field [2] {[1]: MapVector, [2]: MapVector}
+---@field [1] MapVector
+---@field [2] MapVector
 ---@field [3] float?
 
 ---@class AreaArray
@@ -573,4 +573,4 @@ return AreaClass
 ---@field [2] number
 ---@field [3] number
 ---@field [4] number
----@field [5] number?
+---@field [5] float?

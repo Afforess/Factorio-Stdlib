@@ -7,8 +7,8 @@ local PositionClass = {}
 local Position = {}
 local position_meta = {}
 
-local Direction = require("lib/direction")
-local math = require("lib/math")
+local Direction = require("__stdlib__/direction")
+local math = require("__stdlib__/math") --[[@as mathlibext]]
 
 local floor, ceil, round, abs = math.floored, math.ceiled, math.round, math.abs
 local atan2, deg, acos, sqrt = math.atan2, math.deg, math.acos, math.sqrt

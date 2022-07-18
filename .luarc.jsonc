@@ -1,8 +1,13 @@
 {
+    "Lua.misc.parameters": [],
     "completion.requireSeparator": "/",
     "diagnostics.disable": [],
     "diagnostics.globals": [
-        "it", "describe", "before_each", "after_each", "spy",
+        "it",
+        "describe",
+        "before_each",
+        "after_each",
+        "spy",
         "global",
         "log",
         "data",
@@ -40,10 +45,6 @@
     "diagnostics.unusedLocalExclude": [
         "_*_"
     ],
-    "Lua.misc.parameters": [
-        // "--develop=true",
-        // "--dbgport=11413"
-    ],
     "runtime.path": [
         "?.lua",
         "/home/nexela/Media/Develop/Cpp/factorio/data/core/lualib/?.lua"
@@ -51,7 +52,31 @@
     "runtime.pathStrict": true,
     "runtime.plugin": "/home/nexela/Media/Develop/Lua/libs/factorio-sumneko-plugin/plugin.lua",
     "runtime.version": "Lua 5.2",
-    "spell.dict": [],
+    "spell.dict": [
+        "stds",
+        "factorio",
+        "globals",
+        "Profiler",
+        "breakpoint",
+        "stdlib",
+        "ceiled",
+        "lerp",
+        "typeof",
+        "faketorio",
+        "nexela",
+        "libs",
+        "func",
+        "vecbox",
+        "noop",
+        "rjust",
+        "ljust",
+        "alphanum",
+        "prequire",
+        "rawtostring",
+        "metamethods",
+        "uint",
+        "midrange"
+    ],
     "type.castNumberToInteger": false,
     "type.weakUnionCheck": false,
     "workspace.checkThirdParty": false,

@@ -75,7 +75,8 @@
         "rawtostring",
         "metamethods",
         "uint",
-        "midrange"
+        "midrange",
+        "luassert"
     ],
     "type.castNumberToInteger": false,
     "type.weakUnionCheck": false,

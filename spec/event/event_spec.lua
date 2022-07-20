@@ -181,6 +181,7 @@ describe('Event', function ()
             assert.spy(PickyPaul).was.called_with(match.is_table(), nil)
             assert.stub(paul).was.called(1)
 
+            --[[
             -- some math filters affecting arbitrary upvalue
             -- these mostly just test reordering of callees which
             -- is hard to do elegantly using called_with
@@ -197,7 +198,8 @@ describe('Event', function ()
                 up_value = up_value * -1
                 return up_value > 0
             end
-            -- TODO: Use them!
+            ---: Use them!
+            ]]
         end)
     end)
 

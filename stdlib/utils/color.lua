@@ -164,7 +164,7 @@ end
 --- Color Methods
 -- @section Color Methods
 
--- DEPRECATED
+---@deprecated
 function Color.set(color, alpha)
     color = color or { r = 1, g = 1, b = 1 }
     if #color > 0 then

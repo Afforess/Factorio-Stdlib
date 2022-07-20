@@ -78,7 +78,7 @@ function M.new(config_table)
     -- @tparam[opt] Mixed default value to be used if path is nil
     -- @treturn Mixed value at path or nil if not found and no default given
     function Config.get(path, default)
-        if type(path) ~= 'string' or path == "" then
+        if type(path) ~= 'string' or path == '' then
             error('path is invalid', 2)
         end
 
@@ -89,7 +89,7 @@ function M.new(config_table)
             error("path '" .. path .. "' contains the reserved character '" .. c .. "'", 2)
         end
 
-        local pathParts = path:split('.')
+        local pathParts = string.split(path, '.')
         local part = config
         local value = nil
 
@@ -119,7 +119,7 @@ function M.new(config_table)
     -- @tparam ?|nil|Mixed data the value to set the path to. If *nil*, it behaves identical to @{delete|Config.delete()}
     -- @treturn uint 0 on failure or the number of affected paths on success
     function Config.set(path, data)
-        if type(path) ~= 'string' or path == "" then
+        if type(path) ~= 'string' or path == '' then
             error('path is invalid', 2)
         end
 
@@ -130,7 +130,7 @@ function M.new(config_table)
             error("path contains the reserved character '" .. c .. "'", 2)
         end
 
-        local pathParts = path:split('.')
+        local pathParts = string.split(path, '.')
         local part = config
 
         for key = 1, #pathParts - 1, 1 do
@@ -151,7 +151,7 @@ function M.new(config_table)
     -- @tparam string path the config path to delete
     -- @treturn uint 0 on failure or the number of affected paths on success
     function Config.delete(path)
-        if type(path) ~= 'string' or path:is_empty() then
+        if type(path) ~= 'string' or string == '' then
             error('path is invalid', 2)
         end
 
@@ -186,7 +186,7 @@ function M.new(config_table)
     -- @tparam string path the config path to test
     -- @treturn boolean true if the value exists, false otherwise
     function Config.is_set(path)
-        if type(path) ~= 'string' or path:is_empty() then
+        if type(path) ~= 'string' or path == '' then
             error('path is invalid', 2)
         end
 

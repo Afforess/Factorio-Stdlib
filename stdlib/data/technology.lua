@@ -54,7 +54,7 @@ end
 
 function Technology:remove_effect(tech_name, unlock_type, name)
     if self:is_valid('technology') then
-        return self, name, unlock_type -- TODO finish
+        return self, name, unlock_type ---@todo implement
     elseif self:is_valid('recipe') then
         if tech_name then
             local tech = Technology(tech_name)

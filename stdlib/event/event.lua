@@ -492,7 +492,7 @@ function Event.get_event_name(event_name)
     return Event.custom_events[event_name]
 end
 
--- TODO complete stub
+---@todo complete stub
 function Event.raise_event(...)
     script.raise_event(...)
 end

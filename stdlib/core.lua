@@ -28,7 +28,6 @@ local Core = {
         OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     ]],
     __class = 'Core',
-    -- TODO Note what this was for!
     __call = function(t, ...)
         return t:__call(...)
     end,
@@ -52,8 +51,8 @@ function Core.log_and_print(msg)
 end
 
 if script then
-    --- Simple valid check, only available in control stage.
-    --  DEPRECATED
+    ---Simple valid check, only available in control stage.
+    ---@deprecated
     function Core.VALID_FILTER(v)
         return v and v.valid
     end

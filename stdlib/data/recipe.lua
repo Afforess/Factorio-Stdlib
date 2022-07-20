@@ -197,7 +197,7 @@ function Recipe:make_difficult(expensive_energy)
         end
 
         local r_normal, r_expensive = {}, {}
-        for _, ingredient in ipairs(self.results or {self.result}) do
+        for _, ingredient in ipairs(self.results or { self.result }) do
             local this = format(ingredient)
             r_normal[#r_normal + 1] = this
             r_expensive[#r_expensive + 1] = Table.deepcopy(this)
@@ -366,13 +366,13 @@ function Recipe:add_result(normal, expensive, main_product)
         self:convert_results()
         self:set_main_product(main_product, normal, expensive)
 
-    -- if self.normal then
-    --     if normal then
-    --     end
-    --     if expensive then
-    --     end
-    -- elseif normal then
-    -- end
+        -- if self.normal then
+        --     if normal then
+        --     end
+        --     if expensive then
+        --     end
+        -- elseif normal then
+        -- end
     end
     return self
 end
@@ -387,13 +387,13 @@ function Recipe:remove_result(normal, expensive, main_product)
         self:convert_results()
         self:set_main_product(main_product, normal, expensive)
 
-    -- if self.normal then
-    --     if normal then
-    --     end
-    --     if expensive then
-    --     end
-    -- elseif normal then
-    -- end
+        -- if self.normal then
+        --     if normal then
+        --     end
+        --     if expensive then
+        --     end
+        -- elseif normal then
+        -- end
     end
     return self
 end
@@ -412,13 +412,13 @@ function Recipe:replace_result(result_name, normal, expensive, main_product)
             self:remove_result(result_name, expensive and result_name)
             self:set_main_product(main_product, normal, expensive)
 
-        -- if self.normal then
-        --     if normal then
-        --     end
-        --     if expensive then
-        --     end
-        -- elseif normal then
-        -- end
+            -- if self.normal then
+            --     if normal then
+            --     end
+            --     if expensive then
+            --     end
+            -- elseif normal then
+            -- end
         end
     end
     return self

@@ -17,7 +17,7 @@ function Entity.has(entity, field_name)
     assert(field_name, 'missing field name argument')
 
     local status =
-        pcall(
+    pcall(
         function()
             return entity[field_name]
         end
@@ -96,7 +96,7 @@ function Entity.set_data(entity, data)
                 return prev
             end
         end
-        table.insert(entity_category, {entity = entity, data = data})
+        table.insert(entity_category, { entity = entity, data = data })
     end
     return nil
 end

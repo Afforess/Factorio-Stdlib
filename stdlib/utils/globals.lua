@@ -23,32 +23,34 @@ local ignored = {
 }
 
 local traceback = type(debug) == 'table' and debug.traceback or function()
-        return ''
-    end
-    rawset(_ENV, 'traceback', traceback)
+    return ''
+end
+
+rawset(_ENV, 'traceback', traceback)
+
 local data_traceback = type(debug) == 'table' and debug.getinfo and function()
-        local str = {}
-        local level = 1
-        while true do
-            local trace = debug.getinfo(level)
-            if trace then
-                level = level + 1
-                if (trace.what == 'Lua' or trace.what == 'main') and not ignored[trace.name] then
-                    local cur = trace.source:gsub('.*__stdlib__', '__stdlib__'):gsub('.*/Factorio%-Stdlib', '__stdlib__')
-                    cur = cur .. ':' .. (trace.currentline or '0') .. ' in ' .. (trace.name or '???')
-                    str[#str + 1] = cur
-                end
-                if trace.what == 'main' then
-                    break
-                end
-            else
+    local str = {}
+    local level = 1
+    while true do
+        local trace = debug.getinfo(level)
+        if trace then
+            level = level + 1
+            if (trace.what == 'Lua' or trace.what == 'main') and not ignored[trace.name] then
+                local cur = trace.source:gsub('.*__stdlib__', '__stdlib__'):gsub('.*/Factorio%-Stdlib', '__stdlib__')
+                cur = cur .. ':' .. (trace.currentline or '0') .. ' in ' .. (trace.name or '???')
+                str[#str + 1] = cur
+            end
+            if trace.what == 'main' then
                 break
             end
+        else
+            break
         end
-        return ' [' .. table.concat(str, ', ') .. ']'
-    end or function()
-        return ''
     end
+    return ' [' .. table.concat(str, ', ') .. ']'
+end or function()
+    return ''
+end
 rawset(_ENV, 'data_traceback', data_traceback)
 
 local inspect = require('__stdlib__/stdlib/vendor/inspect')
@@ -64,7 +66,7 @@ if not _ENV.defines then
             world.init()
         end
     else
-        require('faketorio/dataloader')
+        require('faketorio/data/data')
     end
     _ENV.log = function(msg)
         print(msg)

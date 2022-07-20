@@ -15,12 +15,23 @@
 
 local Event = require('__stdlib__/stdlib/event/event')
 
+---@class Changes
+---@field map_first table
+---@field any_first table
+---@field mod_first table
+---@field mod_versions table
+---@field mod_last table
+---@field any_last table
+---@field map_last table
+---@field get_file_path function
 local Changes = {
     __class = 'Changes',
     __index = require('__stdlib__/stdlib/core'),
     registered_for_events = false
 }
 setmetatable(Changes, Changes)
+
+local inspect = _ENV.inspect
 
 --[[
     ConfigurationChangedData
@@ -49,9 +60,9 @@ for change_type in pairs(map_changes) do
 end
 
 local function run_if_exists(path)
-    for _, func in pairs(path) do
-        if type(func) == 'function' then
-            func()
+    for _, fun in pairs(path) do
+        if type(fun) == 'function' then
+            fun()
         end
     end
 end
@@ -110,18 +121,18 @@ function Changes.on_mod_changed(this_mod_changes)
 
     local old = this_mod_changes.old_version
     if old then -- Find the last installed version
-        local vers = {}
+        local versions = {}
         for _, path in pairs(Changes.mod_versions) do
-            for ver, func in pairs(path) do
+            for ver, fun in pairs(path) do
                 if not global._changes[ver] then
-                    vers[ver] = this_mod_changes.new_version
-                    func()
+                    versions[ver] = this_mod_changes.new_version
+                    fun()
                     log('Migration completed for version ' .. ver)
                 end
             end
         end
         table.each(
-            vers,
+            versions,
             function(v, k)
                 global._changes[k] = v
             end
@@ -132,10 +143,11 @@ end
 function Changes.dump_data()
     for change_type in pairs(map_changes) do
         if table.size(Changes[change_type]) > 0 then
-            game.write_file(Changes.get_file_path('Changes/' .. change_type .. '.lua'), 'return ' .. inspect(Changes[change_type], {longkeys = true, arraykeys = true}))
+            game.write_file(Changes.get_file_path('Changes/' .. change_type .. '.lua'),
+                'return ' .. inspect(Changes[change_type], { longkeys = true, arraykeys = true }))
         end
     end
-    game.write_file(Changes.get_file_path('Changes/global.lua'), 'return ' .. inspect(global._changes or nil, {longkeys = true, arraykeys = true}))
+    game.write_file(Changes.get_file_path('Changes/global.lua'), 'return ' .. inspect(global._changes or nil, { longkeys = true, arraykeys = true }))
 end
 
 return Changes

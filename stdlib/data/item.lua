@@ -15,7 +15,7 @@ local function make_table(params)
     if not params then
         return Table.keys(data.raw.lab)
     else
-        return type(params) == 'table' and params or {params}
+        return type(params) == 'table' and params or { params }
     end
 end
 

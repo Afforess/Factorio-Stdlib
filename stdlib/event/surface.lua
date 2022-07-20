@@ -9,14 +9,12 @@
 local Event = require('__stdlib__/stdlib/event/event')
 
 local Surface = {
-   __class = 'Surface',
+    __class = 'Surface',
     _new_surface_data = {}
 }
 setmetatable(Surface, require('__stdlib__/stdlib/core'))
+local inspect = _ENV.inspect
 
-local Is = require('__stdlib__/stdlib/utils/is')
--- local Game = require('__stdlib__/stdlib/game')
--- local table = require('__stdlib__/stdlib/utils/table')
 local merge_additional_data = require('__stdlib__/stdlib/event/modules/merge_data')
 
 local function new(index)
@@ -31,8 +29,9 @@ local function new(index)
 end
 
 function Surface.additional_data(...)
-    for _, func_or_table in pairs({...}) do
-        Is.Assert(Is.Table(func_or_table) or Is.Function(func_or_table), 'Must be table or function')
+    for _, func_or_table in pairs { ... } do
+        local typeof = type(func_or_table)
+        assert(typeof == 'table' or typeof == 'string', 'Must be table or function')
         Surface._new_surface_data[#Surface._new_surface_data + 1] = func_or_table
     end
     return Surface
@@ -82,8 +81,8 @@ function Surface.init(event, overwrite)
 end
 
 function Surface.dump_data()
-    game.write_file(Surface.get_file_path('Surface/surface_data.lua'), inspect(Surface._new_surface_data, {longkeys = true, arraykeys = true}))
-    game.write_file(Surface.get_file_path('Surface/global.lua'), inspect(global.surfaces or nil, {longkeys = true, arraykeys = true}))
+    game.write_file(Surface.get_file_path('Surface/surface_data.lua'), inspect(Surface._new_surface_data, { longkeys = true, arraykeys = true }))
+    game.write_file(Surface.get_file_path('Surface/global.lua'), inspect(global.surfaces or nil, { longkeys = true, arraykeys = true }))
 end
 
 function Surface.register_init()

@@ -52,7 +52,8 @@ local anticolors = {
 
 local _mt = {
     __index = function(_, c)
-        return anticolors[c] and {r = anticolors[c]['r'], g = anticolors[c]['g'], b = anticolors[c]['b'], a = anticolors[c]['a'] or 1} or {r = 1, g = 1, b = 1, a = 1}
+        return anticolors[c] and { r = anticolors[c]['r'], g = anticolors[c]['g'], b = anticolors[c]['b'], a = anticolors[c]['a'] or 1 } or
+            { r = 1, g = 1, b = 1, a = 1 }
     end,
     __pairs = function()
         local k = nil
@@ -60,7 +61,7 @@ local _mt = {
         return function()
             local v
             k, v = next(c, k)
-            return k, (v and {r = v['r'], g = v['g'], b = v['b'], a = v['a'] or 1}) or nil
+            return k, (v and { r = v['r'], g = v['g'], b = v['b'], a = v['a'] or 1 }) or nil
         end
     end
 }

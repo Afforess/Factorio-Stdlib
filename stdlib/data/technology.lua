@@ -18,7 +18,7 @@ function Technology:add_effect(effect, unlock_type)
 
     --todo fix for non recipe types
     local add_unlock =
-        function(technology, name)
+    function(technology, name)
         local effects = technology.effects
         effects[#effects + 1] = {
             type = unlock_type,
@@ -38,7 +38,7 @@ function Technology:add_effect(effect, unlock_type)
     elseif self:is_valid('recipe') then
         unlock_type = 'unlock-recipe'
         -- Convert to array and return first valid tech
-        local techs = type(effect) == 'string' and {effect} or effect
+        local techs = type(effect) == 'string' and { effect } or effect
         for _, name in pairs(techs) do
             local tech = Technology(name)
             if tech:is_valid('technology') then
@@ -93,7 +93,7 @@ function Technology:add_pack(new_pack, count)
         if Item(new_pack):is_valid() then
             self.unit.ingredients = self.unit.ingredients or {}
             local ing = self.unit.ingredients
-            ing[#ing + 1] = {new_pack, count}
+            ing[#ing + 1] = { new_pack, count }
         end
     end
     return self

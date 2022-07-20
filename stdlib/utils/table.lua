@@ -26,9 +26,9 @@ for k, v in pairs(table) do if not Table[k] then Table[k] = v end end
 -- @param[opt] ... additional arguments passed to the function
 -- @treturn table a new table containing the keys and mapped values
 function Table.map(tbl, func, ...)
-    local newtbl = {}
-    for k, v in pairs(tbl) do newtbl[k] = func(v, k, ...) end
-    return newtbl
+    local new_tbl = {}
+    for k, v in pairs(tbl) do new_tbl[k] = func(v, k, ...) end
+    return new_tbl
 end
 
 --- Given a filter function, creates a filtered copy of the table
@@ -43,18 +43,18 @@ end
 -- @param[opt] ... additional arguments passed to the function
 -- @treturn table a new table containing the filtered key-value pairs
 function Table.filter(tbl, func, ...)
-    local newtbl = {}
+    local new_tbl = {}
     local add = #tbl > 0
     for k, v in pairs(tbl) do
         if func(v, k, ...) then
             if add then
-                Table.insert(newtbl, v)
+                Table.insert(new_tbl, v)
             else
-                newtbl[k] = v
+                new_tbl[k] = v
             end
         end
     end
-    return newtbl
+    return new_tbl
 end
 
 --- Given a candidate search function, iterates over the table, calling the function
@@ -253,14 +253,14 @@ function Table.merge(tblA, tblB, array_merge, raw)
 end
 
 function Table.array_combine(...)
-    local tables = {...}
+    local tables = { ... }
     local new = {}
     for _, tab in pairs(tables) do for _, v in pairs(tab) do Table.insert(new, v) end end
     return new
 end
 
 function Table.dictionary_combine(...)
-    local tables = {...}
+    local tables = { ... }
     local new = {}
     for _, tab in pairs(tables) do for k, v in pairs(tab) do new[k] = v end end
     return new
@@ -406,21 +406,21 @@ Table.flexcopy = Table.flex_copy
 -- @treturn array an array with a copy of all the values in the table
 function Table.values(tbl, sorted, as_string)
     if not tbl then return {} end
-    local valueset = {}
+    local value_set = {}
     local n = 0
     if as_string then -- checking as_string /before/ looping is faster
         for _, v in pairs(tbl) do
             n = n + 1
-            valueset[n] = tostring(v)
+            value_set[n] = tostring(v)
         end
     else
         for _, v in pairs(tbl) do
             n = n + 1
-            valueset[n] = v
+            value_set[n] = v
         end
     end
     if sorted then
-        table.sort(valueset, function(x, y) -- sorts tables with mixed index types.
+        table.sort(value_set, function(x, y) -- sorts tables with mixed index types.
             local tx = type(x) == 'number'
             local ty = type(y) == 'number'
             if tx == ty then
@@ -432,7 +432,7 @@ function Table.values(tbl, sorted, as_string)
             end
         end)
     end
-    return valueset
+    return value_set
 end
 
 --- Returns a copy of all of the keys in the table.
@@ -442,21 +442,21 @@ end
 -- @treturn array an array with a copy of all the keys in the table
 function Table.keys(tbl, sorted, as_string)
     if not tbl then return {} end
-    local keyset = {}
+    local key_set = {}
     local n = 0
     if as_string then -- checking as_string /before/ looping is faster
         for k, _ in pairs(tbl) do
             n = n + 1
-            keyset[n] = tostring(k)
+            key_set[n] = tostring(k)
         end
     else
         for k, _ in pairs(tbl) do
             n = n + 1
-            keyset[n] = k
+            key_set[n] = k
         end
     end
     if sorted then
-        table.sort(keyset, function(x, y) -- sorts tables with mixed index types.
+        table.sort(key_set, function(x, y) -- sorts tables with mixed index types.
             local tx = type(x) == 'number'
             local ty = type(y) == 'number'
             if tx == ty then
@@ -468,7 +468,7 @@ function Table.keys(tbl, sorted, as_string)
             end
         end)
     end
-    return keyset
+    return key_set
 end
 
 --- Removes keys from a table by setting the values associated with the keys to nil.
@@ -542,11 +542,11 @@ Table.size = _ENV.table_size or _size
 -- @tparam[opt=false] boolean as_bool map to true instead of value
 -- @treturn table the converted table
 function Table.array_to_dictionary(tbl, as_bool)
-    local newtbl = {}
+    local new_tbl = {}
     for _, v in ipairs(tbl) do
-        if type(v) == 'string' or type(v) == 'number' then newtbl[v] = as_bool and true or v end
+        if type(v) == 'string' or type(v) == 'number' then new_tbl[v] = as_bool and true or v end
     end
-    return newtbl
+    return new_tbl
 end
 
 -- Returns an array of unique values from tbl

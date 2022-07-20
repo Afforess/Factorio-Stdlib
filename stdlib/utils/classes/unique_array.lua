@@ -96,7 +96,7 @@ end
 -- @tparam unique_array|string|{string,...} ... strings to initialize the unique array with
 -- @treturn @{unique_array} new
 function M.new(...)
-    return create_class({}):add(type((...)) == 'table' and (...) or {...})
+    return create_class {}:add(type((...)) == 'table' and (...) or { ... })
 end
 
 --- Add a string to the array if it doesn't exist in the array.
@@ -104,7 +104,7 @@ end
 -- @treturn @{unique_array} self
 function M:add(other)
     local class = getmetatable(self)
-    for _, param in ipairs(type(other) == 'table' and other or {other}) do
+    for _, param in ipairs(type(other) == 'table' and other or { other }) do
         if not self[param] then
             add(self, class, param)
         end
@@ -117,7 +117,7 @@ end
 -- @treturn @{unique_array} self
 function M:remove(other)
     local class = getmetatable(self)
-    for _, param in ipairs(type(other) == 'table' and other or {other}) do
+    for _, param in ipairs(type(other) == 'table' and other or { other }) do
         if self[param] then
             remove(self, class, param)
         end
@@ -130,7 +130,7 @@ end
 -- @treturn @{unique_array} self
 function M:toggle(other)
     local class = getmetatable(self)
-    for _, param in ipairs(type(other) == 'table' and other or {other}) do
+    for _, param in ipairs(type(other) == 'table' and other or { other }) do
         if self[param] then
             remove(self, class, param)
         else
@@ -227,7 +227,7 @@ end
 -- @tparam unique_array|string|{string,...} other
 -- @treturn boolean every passed string is in the array
 function M:all(other)
-    local params = type(other) == 'table' and other or {other}
+    local params = type(other) == 'table' and other or { other }
     local count = 0
     for _, param in ipairs(params) do
         if self[param] then
@@ -242,7 +242,7 @@ M.has = M.all
 -- @tparam unique_array|string|{string,...} other
 -- @treturn boolean any passed string is in the array
 function M:any(other)
-    for _, param in ipairs(type(other) == 'table' and other or {other}) do
+    for _, param in ipairs(type(other) == 'table' and other or { other }) do
         if self[param] then
             return true
         end
@@ -254,7 +254,7 @@ end
 -- @tparam unique_array|string|{string,...} other
 -- @treturn boolean no passed strings are in the array
 function M:none(other)
-    for _, param in ipairs(type(other) == 'table' and other or {other}) do
+    for _, param in ipairs(type(other) == 'table' and other or { other }) do
         if self[param] then
             return false
         end

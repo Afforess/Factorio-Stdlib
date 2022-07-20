@@ -83,7 +83,7 @@ function Direction.to_vector(direction, distance)
     elseif direction == Direction.northwest then
         x, y = x - distance, y - distance
     end
-    return {x = x, y = y}
+    return { x = x, y = y }
 end
 
 -- Deprecated

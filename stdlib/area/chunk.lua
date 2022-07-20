@@ -34,7 +34,7 @@ Chunk.to_position = Position.from_chunk_position
 local function load_area(area)
     local Area = package.loaded[AREA_PATH]
     if not Area then
-        local log = log or function() end
+        local log = log or function(_msg_) end
         log('WARNING: Area for Position not found in package.loaded')
     end
     return Area and Area.load(area) or area
@@ -47,9 +47,8 @@ function Chunk.to_area(pos)
     local left_top = Chunk.to_position(pos)
     local right_bottom = Position.add(left_top, 32, 32)
 
-    return load_area {left_top = left_top, right_bottom = right_bottom}
+    return load_area { left_top = left_top, right_bottom = right_bottom }
 end
-
 
 --- Gets the user data that is associated with a chunk.
 -- The user data is stored in the global object and it persists between loads.

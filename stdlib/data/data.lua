@@ -26,6 +26,9 @@ local Data = {
     }
 }
 setmetatable(Data, Data)
+
+local inspect = _ENV.inspect
+local rawtostring = _ENV.rawtostring
 --))
 
 --(( Local Functions ))--
@@ -35,7 +38,7 @@ local function log_trace(self, object, object_type)
     local msg = (self.__class and self.__class or '') .. (self.name and '/' .. self.name or '') .. ' '
     msg = msg .. (object_type and (object_type .. '/') or '') .. tostring(object) .. ' does not exist.'
 
-    local trace = data_traceback()
+    local trace = _ENV.data_traceback()
     log(msg .. trace)
 end
 --)) END Local Functions ((--
@@ -63,7 +66,7 @@ end
 
 function Data:print(...)
     local arr = {}
-    for _, key in pairs({...}) do
+    for _, key in pairs { ... } do
         arr[#arr + 1] = inspect(self[key])
     end
     print(Table.unpack(arr))
@@ -76,25 +79,25 @@ function Data:log(tbl)
         --     return {item.__class, self.__class}
         -- end
         if item == self._object_mt then
-            return {self.__class, tostring(self)}
+            return { self.__class, tostring(self) }
         end
         if path[#path] == 'parent' then
-            return {tostring(item), item.__class}
+            return { tostring(item), item.__class }
         end
         if path[#path] == 'class' then
-            return {self.__class, item.__class}
+            return { self.__class, item.__class }
         end
         if path[#path] == inspect.METATABLE then
-            return {self.__class or item.__class, item.__class}
+            return { self.__class or item.__class, item.__class }
         end
         return item
     end
-    log(inspect(tbl and tbl or self, {process = reduce_spam}))
+    log(inspect(tbl and tbl or self, { process = reduce_spam }))
     return self
 end
 
 function Data:serpent()
-    log(serpent.block(self, {name = self.name, metatostring = false, nocode = true, comment = false}))
+    log(serpent.block(self, { name = self.name, metatostring = false, nocode = true, comment = false }))
     return self
 end
 
@@ -114,8 +117,8 @@ end
 --- Changes the validity of the object if the passed function is true.
 -- @tparam function func the function to test, self is passed as the first paramater
 -- @treturn self
-function Data:continue_if(func, ...)
-    rawset(self, 'valid', (func(self, ...) and rawget(self, '_raw') and self.type) or false)
+function Data:continue_if(fun, ...)
+    rawset(self, 'valid', (fun(self, ...) and rawget(self, '_raw') and self.type) or false)
     return self
 end
 
@@ -223,9 +226,9 @@ end
 -- The object and any additional paramaters are passed to the function.
 -- @tparam function func then function to run.
 -- @treturn self
-function Data:run_function(func, ...)
+function Data:run_function(fun, ...)
     if self:is_valid() then
-        func(self, ...)
+        fun(self, ...)
     end
     return self
 end
@@ -235,9 +238,9 @@ Data.execute = Data.run_function
 -- @tparam function func the function to run. self is passed as the first paramter
 -- @treturn boolean if the object was valid
 -- @treturn the results from the passed function
-function Data:get_function_results(func, ...)
+function Data:get_function_results(fun, ...)
     if self:is_valid() then
-        return true, func(self, ...)
+        return true, fun(self, ...)
     end
 end
 
@@ -384,13 +387,13 @@ function Data:make_icons(...)
     if self:is_valid() then
         if not self.icons then
             if self.icon then
-                self.icons = {{icon = self.icon, icon_size = self.icon_size}}
+                self.icons = { { icon = self.icon, icon_size = self.icon_size } }
                 self.icon = nil
             else
                 self.icons = {}
             end
         end
-        for _, icon in pairs({...}) do
+        for _, icon in pairs { ... } do
             self.icons[#self.icons + 1] = Table.deep_copy(icon)
         end
     end
@@ -422,6 +425,7 @@ function Data:pairs(source, opts)
         local type = type(source)
         source = type == 'string' and data.raw[source] or (assert(type == 'table', 'Source missing') and source)
     end
+    ---@cast source -false
 
     local function _next()
         index, val = next(source, index)
@@ -464,7 +468,7 @@ function Data:get(object, object_type, opts)
         new.overwrite = not new.extended and existing and true or false
     elseif type(object) == 'string' then
         --Get type from object_type, or fluid or item_and_fluid_types
-        local types = (object_type and {object_type}) or (self.__class == 'Item' and groups.item_and_fluid)
+        local types = (object_type and { object_type }) or (self.__class == 'Item' and groups.item_and_fluid)
         if types then
             for _, type in pairs(types) do
                 new._raw = data.raw[type] and data.raw[type][object]

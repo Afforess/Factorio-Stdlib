@@ -22,9 +22,9 @@ local Inspect = require('__stdlib__/stdlib/vendor/inspect')
 local meta = {}
 
 function Queue.__call(_, ...)
-    local queue = {first = 1, last = 0, objects = {}}
+    local queue = { first = 1, last = 0, objects = {} }
     setmetatable(queue, meta)
-    for _, push in pairs({...}) do
+    for _, push in pairs { ... } do
         queue(push)
     end
     return queue
@@ -52,7 +52,7 @@ end
 -- @tparam Queue queue the queue to push an element to
 -- @tparam Mixed value the element to push
 function Queue.push_first(queue, ...)
-    for _, value in pairs({...}) do
+    for _, value in pairs { ... } do
         queue.first = queue.first - 1
         queue.objects[queue.first] = value
     end
@@ -63,7 +63,7 @@ end
 -- @tparam Queue queue the queue to push an element to
 -- @tparam Mixed ... the element(s) to push
 function Queue.push_last(queue, ...)
-    for _, value in pairs({...}) do
+    for _, value in pairs { ... } do
         queue.last = queue.last + 1
         queue.objects[queue.last] = value
     end
@@ -334,7 +334,7 @@ do
     end
 
     meta.__tostring = function(self)
-        return Inspect({first = self.first, last = self.last, objects = self.objects}, {arraykeys = true})
+        return Inspect({ first = self.first, last = self.last, objects = self.objects }, { arraykeys = true })
     end
 
     meta.__add = function(queue1, queue2)

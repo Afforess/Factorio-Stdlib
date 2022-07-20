@@ -7,8 +7,8 @@
 local Event = require('__stdlib__/stdlib/event/event')
 
 local Player = {
-   __class = 'Player',
-   __index = require('__stdlib__/stdlib/core'),
+    __class = 'Player',
+    __index = require('__stdlib__/stdlib/core'),
     _new_player_data = {}
 }
 setmetatable(Player, Player)
@@ -17,6 +17,7 @@ local Game = require('__stdlib__/stdlib/game')
 local table = require('__stdlib__/stdlib/utils/table')
 local merge_additional_data = require('__stdlib__/stdlib/event/modules/merge_data')
 local assert, type = assert, type
+local inspect = _ENV.inspect
 
 -- Return new default player object consiting of index, name, force
 local function new(player_index)
@@ -31,7 +32,7 @@ local function new(player_index)
 end
 
 function Player.additional_data(...)
-    for _, func_or_table in pairs({...}) do
+    for _, func_or_table in pairs { ... } do
         local var_type = type(func_or_table)
         assert(var_type == 'table' or var_type == 'function', 'Must be table or function')
         Player._new_player_data[#Player._new_player_data + 1] = func_or_table
@@ -120,8 +121,8 @@ function Player.update_force(event)
 end
 
 function Player.dump_data()
-    game.write_file(Player.get_file_path('Player/player_data.lua'), 'return ' .. inspect(Player._new_player_data, {longkeys = true, arraykeys = true}))
-    game.write_file(Player.get_file_path('Player/global.lua'), 'return ' .. inspect(global.players or nil, {longkeys = true, arraykeys = true}))
+    game.write_file(Player.get_file_path('Player/player_data.lua'), 'return ' .. inspect(Player._new_player_data, { longkeys = true, arraykeys = true }))
+    game.write_file(Player.get_file_path('Player/global.lua'), 'return ' .. inspect(global.players or nil, { longkeys = true, arraykeys = true }))
 end
 
 function Player.register_init()

@@ -271,7 +271,7 @@ local exponent_multipliers = {
 -- @treturn float
 function String.exponent_number(str)
     if type(str) == 'string' then
-        local value, exp = str:match('([%-+]?[0-9]*%.?[0-9]+)([yzafpnumcdhkMGTPEZY]?)')
+        local value, exp = str:match('([%-+]?[0-9]*%.?[0-9]+)([yzafpnumcdhkMGTPEZY]?)') ---@diagnostic disable-line: spell-check
         exp = exp or ' '
         value = (value or 0) * (exponent_multipliers[exp] or 1)
         return value

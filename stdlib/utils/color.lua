@@ -67,8 +67,8 @@ function Color.copy(color, alpha)
         if color == Color then
             return Color.white()
         elseif getmetatable(color) == metatable then
-            return setmetatable({r = color.r, g = color.g, b = color.b, a = alpha or color.a or 0.5}, metatable)
-        elseif type((next(color))) == "number" then
+            return setmetatable({ r = color.r, g = color.g, b = color.b, a = alpha or color.a or 0.5 }, metatable)
+        elseif type((next(color))) == 'number' then
             return Color.from_array(color, alpha)
         else
             return Color.from_table(color, alpha)
@@ -81,14 +81,14 @@ end
 --- Returns a white Color.
 -- @treturn Color
 function Color.white()
-    local color = {r = 1, g = 1, b = 1, a = 0.5}
+    local color = { r = 1, g = 1, b = 1, a = 0.5 }
     return setmetatable(color, metatable)
 end
 
 --- Returns a black color.
 -- @treturn Color
 function Color.black()
-    local color = {r = 0, g = 0, b = 0, a = 0.5}
+    local color = { r = 0, g = 0, b = 0, a = 0.5 }
     return setmetatable(color, metatable)
 end
 
@@ -113,7 +113,7 @@ end
 -- @tparam[opt=255] float a 0-255 alpha
 -- @treturn Concepts.Color
 function Color.from_params(r, g, b, a)
-    local new = Color.normalize {r = r, g = g or r, b = b or r, a = a or 0.5}
+    local new = Color.normalize { r = r, g = g or r, b = b or r, a = a or 0.5 }
     return setmetatable(new, metatable)
 end
 --- @see Color.from_params
@@ -144,7 +144,7 @@ function Color.from_hex(color, alpha)
     assert(type(color) == 'string', 'missing color hex value')
     local match = color:match('%x?%x?%x%x%x%x%x%x$')
     color = tonumber(match, 16)
-    local new = {r = 0, g = 0, b = 0, a = 1}
+    local new = { r = 0, g = 0, b = 0, a = 1 }
     if #match == 8 then
         new.r = bit32.extract(color, 24, 8) / 255
         new.g = bit32.extract(color, 16, 8) / 255
@@ -166,7 +166,7 @@ end
 
 -- DEPRECATED
 function Color.set(color, alpha)
-    color = color or {r = 1, g = 1, b = 1}
+    color = color or { r = 1, g = 1, b = 1 }
     if #color > 0 then
         color = Color.from_array(color)
     end
@@ -339,7 +339,7 @@ end
 -- @tparam Color color
 -- @treturn array
 function Color.to_array(color)
-    return {color.r, color.g, color.b, color.a}
+    return { color.r, color.g, color.b, color.a }
 end
 
 --- @see Color.to_array
@@ -400,8 +400,8 @@ function Color.is_color(color)
 end
 
 local function get_color_distance(lhs, rhs)
-    local disp = {r = lhs.r - rhs.r, g = lhs.g - rhs.g, b = lhs.b - rhs.b}
-    return (disp.r * disp.r + disp.g * disp.g + disp.b * disp.b)
+    local dist = { r = lhs.r - rhs.r, g = lhs.g - rhs.g, b = lhs.b - rhs.b }
+    return (dist.r * dist.r + dist.g * dist.g + dist.b * dist.b)
 end
 
 --Takes a color and table of colors, finds key of color in table that most closely matches given color
@@ -426,7 +426,7 @@ metatable = {
     __call = Color.copy,
     __add = Color.add,
     __sub = Color.subtract,
-    __mul = Color.multipy,
+    __mul = Color.multiply,
     __div = Color.divide,
     __mod = Color.modulo,
     __unm = Color.unary,
@@ -435,7 +435,7 @@ metatable = {
     __le = Color.less_than_eq,
     __len = Color.len,
     __tostring = Color.to_string,
-    __concat = concat
+    __concat = _ENV.concat
 }
 
 return Color

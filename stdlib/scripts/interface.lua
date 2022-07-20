@@ -15,11 +15,10 @@ local Changes = require('__stdlib__/stdlib/event/changes')
 local Player = require('__stdlib__/stdlib/event/player')
 local Force = require('__stdlib__/stdlib/event/force')
 
-local ignore_defines = Table.invert{'anticolor', 'lightcolor', 'color', 'time'}
+local ignore_defines = Table.invert { 'anticolor', 'lightcolor', 'color', 'time' }
 
 local function write(data, name, keyignore, maxlevel)
-    return
-        serpent.block(data, {comment = false, nocode = true, name = name, keyignore = keyignore, maxlevel = maxlevel})
+    return serpent.block(data, { comment = false, nocode = true, name = name, keyignore = keyignore, maxlevel = maxlevel })
 end
 
 interface['write_global'] = function()

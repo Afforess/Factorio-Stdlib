@@ -64,15 +64,15 @@ if script then
 end
 
 local function no_meta(item, path)
-    if path[#path] == inspect.METATABLE then
-        return {item.__class}
+    if path[#path] == _ENV.inspect.METATABLE then
+        return { item.__class }
     end
     return item
 end
 
 --- Inspect the class
 function Core.inspect(self)
-    return inspect(self, {process = no_meta})
+    return _ENV.inspect(self, { process = no_meta })
 end
 
 --- Help function available on everything.

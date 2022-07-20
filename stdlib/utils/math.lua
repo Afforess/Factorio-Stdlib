@@ -90,7 +90,7 @@ Math.MAX_UINT64 = Math.MAXUINT64
 -- ))
 
 local function tuple(...)
-    return type(...) == 'table' and ... or {...}
+    return type(...) == 'table' and ... or { ... }
 end
 
 function Math.log10(x)

@@ -4,7 +4,7 @@
 -- @see Area.Area
 -- @see Concepts.Position
 -- @see defines.direction
-local Position = {__class = 'Position', __index = require('__stdlib__/stdlib/core')}
+local Position = { __class = 'Position', __index = require('__stdlib__/stdlib/core') }
 setmetatable(Position, Position)
 
 local Direction = require('__stdlib__/stdlib/area/direction')
@@ -17,7 +17,7 @@ local floor, abs, atan2, round_to, round = math.floor, math.abs, math.atan2, mat
 local cos, sin, ceil, sqrt, pi, random = math.cos, math.sin, math.ceil, math.sqrt, math.pi, math.random
 local deg, acos, max, min, is_number = math.deg, math.acos, math.max, math.min, math.is_number
 local split = string.split
-local dirs = defines.direction
+local directions = defines.direction
 
 local AREA_PATH = '__stdlib__/stdlib/area/area'
 local EPSILON = 1.19e-07
@@ -43,7 +43,7 @@ Position.__call = function(_, ...)
 end
 
 local function new(x, y)
-    return setmetatable({x = x, y = y}, metatable)
+    return setmetatable({ x = x, y = y }, metatable)
 end
 
 --- Returns a correctly formated position object.
@@ -60,7 +60,7 @@ end
 -- @treturn Concepts.Position
 function Position.construct(...)
     -- was self was passed as first argument?
-    local args = type((...)) == 'table' and {select(2, ...)} or {select(1, ...)}
+    local args = type((...)) == 'table' and { select(2, ...) } or { select(1, ...) }
     return new(args[1] or 0, args[2] or args[1] or 0)
 end
 
@@ -480,7 +480,7 @@ end
 -- @treturn Concepts.Position a new position
 function Position.intersection(pos1_start, pos1_end, pos2_start, pos2_end)
     local d = (pos1_start.x - pos1_end.x) * (pos2_start.y - pos2_end.y) - (pos1_start.y - pos1_end.y) *
-                  (pos2_start.x - pos2_end.x)
+        (pos2_start.x - pos2_end.x)
     local a = pos1_start.x * pos1_end.y - pos1_start.y * pos1_end.x
     local b = pos2_start.x * pos2_end.y - pos2_start.y * pos2_end.x
     local x = (a * (pos2_start.x - pos2_end.x) - (pos1_start.x - pos1_end.x) * b) / d
@@ -584,7 +584,7 @@ end
 local function load_area(area)
     local Area = package.loaded[AREA_PATH]
     if not Area then
-        local log = log or function()
+        local log = log or function(_msg_)
         end
         log('WARNING: Area for Position not found in package.loaded')
     end
@@ -598,10 +598,10 @@ end
 function Position.expand_to_area(pos, radius)
     radius = radius or 1
 
-    local left_top = {x = pos.x - radius, y = pos.y - radius}
-    local right_bottom = {x = pos.x + radius, y = pos.y + radius}
+    local left_top = { x = pos.x - radius, y = pos.y - radius }
+    local right_bottom = { x = pos.x + radius, y = pos.y + radius }
 
-    return load_area{left_top = left_top, right_bottom = right_bottom}
+    return load_area { left_top = left_top, right_bottom = right_bottom }
 end
 
 --- Expands a position into an area by setting pos to left_top.
@@ -613,10 +613,10 @@ function Position.to_area(pos, width, height)
     width = width or 0
     height = height or width
 
-    local left_top = {x = pos.x, y = pos.y}
-    local right_bottom = {x = pos.x + width, y = pos.y + height}
+    local left_top = { x = pos.x, y = pos.y }
+    local right_bottom = { x = pos.x + width, y = pos.y + height }
 
-    return load_area{left_top = left_top, right_bottom = right_bottom}
+    return load_area { left_top = left_top, right_bottom = right_bottom }
 end
 
 --- Converts a tile position to the @{Concepts.BoundingBox|area} of the tile it is in.
@@ -624,29 +624,29 @@ end
 -- @treturn Concepts.BoundingBox the area of the tile
 function Position.to_tile_area(pos)
     local x, y = floor(pos.x), floor(pos.y)
-    local left_top = {x = x, y = y}
-    local right_bottom = {x = x + 1, y = y + 1}
+    local left_top = { x = x, y = y }
+    local right_bottom = { x = x + 1, y = y + 1 }
 
-    return load_area{left_top = left_top, right_bottom = right_bottom}
+    return load_area { left_top = left_top, right_bottom = right_bottom }
 end
 
 --- Get the chunk area the specified position is in.
 -- @tparam Concepts.Position pos
 -- @treturn Concepts.BoundingBox
 function Position.to_chunk_area(pos)
-    local left_top = {x = floor(pos.x / 32) * 32, y = floor(pos.y / 32) * 32}
-    local right_bottom = {x = left_top.x + 32, y = left_top.y + 32}
+    local left_top = { x = floor(pos.x / 32) * 32, y = floor(pos.y / 32) * 32 }
+    local right_bottom = { x = left_top.x + 32, y = left_top.y + 32 }
 
-    return load_area{left_top = left_top, right_bottom = right_bottom}
+    return load_area { left_top = left_top, right_bottom = right_bottom }
 end
 
 --- Get the chunk area for the specified chunk position.
 -- @tparam Concepts.ChunkPosition pos
 -- @treturn Concepts.BoundingBox The chunks positions area
 function Position.chunk_position_to_chunk_area(pos)
-    local left_top = {x = pos.x * 32, y = pos.y * 32}
-    local right_bottom = {left_top.x + 32, left_top.y + 32}
-    return load_area{left_top = left_top, right_bottom = right_bottom}
+    local left_top = { x = pos.x * 32, y = pos.y * 32 }
+    local right_bottom = { left_top.x + 32, left_top.y + 32 }
+    return load_area { left_top = left_top, right_bottom = right_bottom }
 end
 
 --- Position Functions
@@ -698,7 +698,7 @@ end
 -- @tparam Concepts.Position pos the position to pack
 -- @treturn array
 function Position.pack(pos)
-    return {pos.x, pos.y}
+    return { pos.x, pos.y }
 end
 
 --- Is this position {0, 0}.
@@ -815,9 +815,9 @@ end
 -- @tparam[opt] Concepts.Position pos2
 -- @treturn number the square of the euclidean distance
 function Position.distance_squared(pos1, pos2)
-    local axbx = pos1.x - pos2.x
-    local ayby = pos1.y - pos2.y
-    return axbx * axbx + ayby * ayby
+    local ax_bx = pos1.x - pos2.x
+    local ay_by = pos1.y - pos2.y
+    return ax_bx * ax_bx + ay_by * ay_by
 end
 
 --- Calculates the Euclidean distance between two positions.
@@ -825,9 +825,9 @@ end
 -- @tparam[opt={x=0, y=0}] Concepts.Position pos2
 -- @treturn number the euclidean distance
 function Position.distance(pos1, pos2)
-    local axbx = pos1.x - pos2.x
-    local ayby = pos1.y - pos2.y
-    return (axbx * axbx + ayby * ayby) ^ 0.5
+    local ax_bx = pos1.x - pos2.x
+    local ay_by = pos1.y - pos2.y
+    return (ax_bx * ax_bx + ay_by * ay_by) ^ 0.5
 end
 
 --- Calculates the manhatten distance between two positions.
@@ -848,17 +848,17 @@ function Position.direction_to(pos1, pos2)
     local dy = pos1.y - pos2.y
     if dx ~= 0 then
         if dy == 0 then
-            return dx > 0 and dirs.west or dirs.east
+            return dx > 0 and directions.west or directions.east
         else
             local adx, ady = abs(dx), abs(dy)
             if adx > ady then
-                return dx > 0 and dirs.north or dirs.south
+                return dx > 0 and directions.north or directions.south
             else
-                return dy > 0 and dirs.west or dirs.east
+                return dy > 0 and directions.west or directions.east
             end
         end
     else
-        return dy > 0 and dirs.north or dirs.south
+        return dy > 0 and directions.north or directions.south
     end
 end
 
@@ -939,7 +939,7 @@ metatable = {
     __lt = Position.less_than, -- Is position1 less than position2.
     __le = Position.less_than_eq, -- Is position1 less than or equal to position2.
     __tostring = Position.to_string, -- Returns a string representation of the position
-    __concat = concat, -- calls tostring on both sides of concact.
+    __concat = _ENV.concat, -- calls tostring on both sides of concact.
     __call = Position.new, -- copy the position.
     __debugline = [[<Position>{[}x={x},y={y}{]}]]
 }

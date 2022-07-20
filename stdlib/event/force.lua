@@ -10,11 +10,13 @@
 local Event = require('__stdlib__/stdlib/event/event')
 
 local Force = {
-   __class = 'Force',
-   __index = require('__stdlib__/stdlib/core'),
+    __class = 'Force',
+    __index = require('__stdlib__/stdlib/core'),
     _new_force_data = {}
 }
 setmetatable(Force, Force)
+
+local inspect = _ENV.inspect
 
 local Game = require('__stdlib__/stdlib/game')
 local table = require('__stdlib__/stdlib/utils/table')
@@ -34,7 +36,7 @@ local function new(force_name)
 end
 
 function Force.additional_data(...)
-    for _, func_or_table in pairs({...}) do
+    for _, func_or_table in pairs { ... } do
         local var_type = type(func_or_table)
         assert(var_type == 'table' or var_type == 'function', 'Must be table or function')
         Force._new_force_data[#Force._new_force_data + 1] = func_or_table
@@ -96,8 +98,8 @@ function Force.init(event, overwrite)
 end
 
 function Force.dump_data()
-    game.write_file(Force.get_file_path('Force/force_data.lua'), 'return ' .. inspect(Force._new_force_data, {longkeys = true, arraykeys = true}))
-    game.write_file(Force.get_file_path('Force/global.lua'), 'return ' .. inspect(global.forces or nil, {longkeys = true, arraykeys = true}))
+    game.write_file(Force.get_file_path('Force/force_data.lua'), 'return ' .. inspect(Force._new_force_data, { longkeys = true, arraykeys = true }))
+    game.write_file(Force.get_file_path('Force/global.lua'), 'return ' .. inspect(global.forces or nil, { longkeys = true, arraykeys = true }))
 end
 
 --- When forces are merged, just remove the original forces data

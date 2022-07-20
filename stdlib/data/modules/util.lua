@@ -12,7 +12,7 @@ local table = require('__stdlib__/stdlib/utils/table')
 
 function Util.extend(proto_array)
     Is.Assert.Table(proto_array, 'Missing table or array to extend')
-    data:extend(#proto_array > 0 and proto_array or {proto_array})
+    data:extend(#proto_array > 0 and proto_array or { proto_array })
 end
 
 function Util.disable_control(control)
@@ -67,7 +67,7 @@ end
 -- @usage
 -- require('__stdlib__/stdlib/data/data).util.create_data_globals()
 function Util.create_data_globals(files)
-    STDLIB.create_stdlib_data_globals(files)
+    _ENV.STDLIB.create_stdlib_data_globals(files)
 end
 
 return Util

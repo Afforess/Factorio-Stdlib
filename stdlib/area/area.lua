@@ -4,7 +4,7 @@
 -- @see Area.Position
 -- @see Concepts.BoundingBox
 -- @see Concepts.Position
-local Area = {__class = 'Area', __index = require('__stdlib__/stdlib/core')}
+local Area = { __class = 'Area', __index = require('__stdlib__/stdlib/core') }
 setmetatable(Area, Area)
 
 local Position = require('__stdlib__/stdlib/area/position')
@@ -35,7 +35,7 @@ Area.__call = function(_, ...)
 end
 
 local function new_area(lt, rb, o)
-    return setmetatable({left_top = lt, right_bottom = rb, orientation = o}, metatable)
+    return setmetatable({ left_top = lt, right_bottom = rb, orientation = o }, metatable)
 end
 
 --- Converts an area in either array or table format to an area with a metatable.
@@ -45,7 +45,7 @@ end
 function Area.new(area)
     local left_top = Position.new(area.left_top or area[1])
     local right_bottom = Position.new(area.right_bottom or area[2] or area[1])
-    return setmetatable({left_top = left_top, right_bottom = right_bottom, orientation = area.orientation}, metatable)
+    return setmetatable({ left_top = left_top, right_bottom = right_bottom, orientation = area.orientation }, metatable)
 end
 
 --- Creates an area from number parameters.
@@ -55,12 +55,12 @@ end
 -- @tparam[opt=0] number y2 y-position of right_bottom, second position
 -- @treturn Concepts.BoundingBox the area in a table format
 function Area.construct(...)
-    local args = type((...)) == 'table' and {select(2, ...)} or {select(1, ...)}
+    local args = type((...)) == 'table' and { select(2, ...) } or { select(1, ...) }
 
     local lt = Position.construct_xy(args[1] or 0, args[2] or 0)
     local rb = Position.construct_xy(args[3] or lt.x, args[4] or lt.y)
 
-    return setmetatable({left_top = lt, right_bottom = rb}, metatable)
+    return setmetatable({ left_top = lt, right_bottom = rb }, metatable)
 end
 
 --- Loads the metatable into the passed Area without creating a new one.
@@ -84,8 +84,8 @@ end
 -- @treturn Concepts.BoundingBox
 function Area.from_key(area_string)
     local tab = string.split(area_string, ',', false, tonumber)
-    local lt = Position.new({x = tab[1], y = tab[2]})
-    local rb = Position.new({x = tab[3], y = tab[4]})
+    local lt = Position.new { x = tab[1], y = tab[2] }
+    local rb = Position.new { x = tab[3], y = tab[4] }
     return new_area(lt, rb)
 end
 
@@ -211,10 +211,10 @@ function Area.flip(area)
         return area -- no point flipping a square
     elseif h > w then
         local rad = h / 2 - w / 2
-        return Area.adjust(area, {rad, -rad})
+        return Area.adjust(area, { rad, -rad })
     elseif w > h then
         local rad = w / 2 - h / 2
-        return Area.adjust(area, {-rad, rad})
+        return Area.adjust(area, { -rad, rad })
     end
 end
 
@@ -283,16 +283,16 @@ function Area.adjust(area, amount)
 
     -- shrink or expand on x vector
     if vec.x > 0 then
-        area = Area.expand(area, {vec.x, 0})
+        area = Area.expand(area, { vec.x, 0 })
     elseif vec.x < 0 then
-        area = Area.shrink(area, {abs(vec.x), 0})
+        area = Area.shrink(area, { abs(vec.x), 0 })
     end
 
     -- shrink or expand on y vector
     if vec.y > 0 then
-        area = Area.expand(area, {0, vec.y})
+        area = Area.expand(area, { 0, vec.y })
     elseif vec.y < 0 then
-        area = Area.shrink(area, {0, abs(vec.y)})
+        area = Area.shrink(area, { 0, abs(vec.y) })
     end
 
     return area
@@ -355,9 +355,9 @@ end
 -- @tparam Concepts.BoundingBox area
 -- @treturn Concepts.BoundingBox Chunk position coordinates
 function Area.to_chunk_coords(area)
-    return Area.load{
-        left_top = {x = floor(area.left_top.x / 32), y = floor(area.left_top.y / 32)},
-        right_bottom = {x = floor(area.right_bottom.x / 32), y = floor(area.right_bottom.y / 32)}
+    return Area.load {
+        left_top = { x = floor(area.left_top.x / 32), y = floor(area.left_top.y / 32) },
+        right_bottom = { x = floor(area.right_bottom.x / 32), y = floor(area.right_bottom.y / 32) }
     }
 end
 
@@ -381,7 +381,7 @@ end
 -- @tparam Concepts.BoundingBox area
 -- @return string
 function Area.to_key(area)
-    return table.concat({area.left_top.x, area.left_top.y, area.right_bottom.x, area.right_bottom.y}, ',')
+    return table.concat({ area.left_top.x, area.left_top.y, area.right_bottom.x, area.right_bottom.y }, ',')
 end
 
 --- Converts an area to a string.
@@ -471,14 +471,14 @@ end
 -- @tparam Concepts.BoundingBox area
 -- @treturn array
 function Area.pack(area)
-    return {area.left_top.x, area.left_top.y, area.right_bottom.x, area.right_bottom.y, area.orientation}
+    return { area.left_top.x, area.left_top.y, area.right_bottom.x, area.right_bottom.y, area.orientation }
 end
 
 --- Pack an area into a simple bounding box array
 -- @tparam Concepts.BoundingBox area
 -- @treturn Concepts.BoundingBox simple array
 function Area.pack_positions(area)
-    return {{area.left_top.x, area.left_top.y}, {area.right_bottom.x, area.right_bottom.y}}
+    return { { area.left_top.x, area.left_top.y }, { area.right_bottom.x, area.right_bottom.y } }
 end
 
 --- Gets the properties of the given area.
@@ -602,7 +602,7 @@ end
 -- @treturn boolean
 function Area.contains_areas(area, areas)
     for _, inner in pairs(areas) do
-        if not Area.contains_positions(area, {Area.unpack_positions(inner)}) then return false end
+        if not Area.contains_positions(area, { Area.unpack_positions(inner) }) then return false end
     end
     return true
 end
@@ -682,7 +682,7 @@ function Area.spiral_iterate(area, as_position)
     local index = 1
     for _ = 1, size do
         if -(half_x) <= x and x <= half_x and -(half_y) <= y and y <= half_y then
-            positions[#positions + 1] = {x = x, y = y}
+            positions[#positions + 1] = { x = x, y = y }
         end
         if x == y or (x < 0 and x == -y) or (x > 0 and x == 1 - y) then
             local temp = dx
@@ -766,7 +766,7 @@ metatable = {
     __class = 'area',
     __index = Area, -- If key is not found see if there is one available in the Area module.
     __tostring = Area.to_string, -- Will print a string representation of the area.
-    __concat = concat, -- calls tostring on both sides of concat.
+    __concat = _ENV.concat, -- calls tostring on both sides of concat.
     __add = __add, -- Will adjust if RHS is vector/position, add offset if RHS is number/area
     __sub = __sub, -- Will adjust if RHS is vector/position, sub offset if RHS is number/area
     __mul = __mul,

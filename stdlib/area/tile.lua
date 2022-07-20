@@ -36,9 +36,9 @@ function Tile.adjacent(surface, position, diagonal, tile_name)
     Is.Assert(surface, 'missing surface argument')
     Is.Assert(position, 'missing position argument')
 
-    local offsets = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
+    local offsets = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } }
     if diagonal then
-        offsets = {{0, 1}, {1, 1}, {1, 0}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}
+        offsets = { { 0, 1 }, { 1, 1 }, { 1, 0 }, { -1, 1 }, { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } }
     end
     local adjacent_tiles = {}
     for _, offset in pairs(offsets) do

@@ -7,7 +7,7 @@
 -- -- log files are saved to script-output/modname/log.log by default
 
 local Logger = {
-   __class = 'Logger',
+    __class = 'Logger',
     _loggers = {},
     __call = function(self, ...)
         return self.get(...)
@@ -60,7 +60,6 @@ end
 -- @tparam[opt={...}] options options a table with optional arguments
 -- @return (<span class="types">@{Logger}</span>) the logger instance
 function Logger.new(log_name, debug_mode, options)
-
     local mod_name = script and script.mod_name or 'Data'
     log_name = log_name or 'log'
 
@@ -69,7 +68,7 @@ function Logger.new(log_name, debug_mode, options)
     options = options or {}
 
     local Log = {
-       __class = 'Log',
+        __class = 'Log',
         mod_name = mod_name,
         log_name = log_name,
         debug_mode = debug_mode,
@@ -94,13 +93,13 @@ function Logger.new(log_name, debug_mode, options)
     Log.ever_written = Log.options.force_append
 
     --- Logs a message.
-    -- @tparam string|table msg the message to log. @{table}s will be dumped using [serpent](https://github.com/pkulchenko/serpent) which is included in the official Factorio Lualib
+    -- @tparam string|table msg the message to log. @{table}s will be dumped using [serpent](https://github.com/pkulchenko/serpent)
+    -- which is included in the official Factorio Lualib
     -- @return (<span class="types">@{Logger}</span>) the logger instance
     -- @see https://forums.factorio.com/viewtopic.php?f=25&t=23844 Debugging utilities built in to Factorio
     function Log.log(msg)
-
         if type(msg) ~= 'string' then
-            msg = serpent.block(msg, {comment = false, nocode = true, sparse = true})
+            msg = serpent.block(msg, { comment = false, nocode = true, sparse = true })
         end
 
         if _G.game then

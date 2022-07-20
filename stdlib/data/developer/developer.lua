@@ -12,9 +12,9 @@ local function make_no_controls()
     local controls = {}
     for name in pairs(data.raw['autoplace-control']) do
         if name == 'grass' then
-            controls[name] = {size = 'very-high', frequency = 'very-high', richness = 'very-low'}
+            controls[name] = { size = 'very-high', frequency = 'very-high', richness = 'very-low' }
         else
-            controls[name] = {size = 'none', frequency = 'very-low', richness = 'very-low'}
+            controls[name] = { size = 'none', frequency = 'very-low', richness = 'very-low' }
         end
     end
     return controls
@@ -30,27 +30,27 @@ function Developer.make_test_entities()
     log('Making developer debug entities')
     if not data.raw['electric-energy-interface']['debug-energy-interface'] then
         Data('electric-energy-interface', 'electric-energy-interface'):copy('debug-energy-interface'):set_fields {
-            flags = {'placeable-off-grid'},
+            flags = { 'placeable-off-grid' },
             localised_name = 'Debug source',
             icon = data.raw['item']['electric-energy-interface'].icon,
             collision_mask = {},
-            selection_box = {{0.0, -0.5}, {0.5, 0.5}},
+            selection_box = { { 0.0, -0.5 }, { 0.5, 0.5 } },
             picture = Developer.Sprites.empty_picture()
-        }:remove_fields {'minable', 'collision_box', 'vehicle_impact_sound', 'working_sound'}
+        }:remove_fields { 'minable', 'collision_box', 'vehicle_impact_sound', 'working_sound' }
     end
 
     if not data.raw['electric-pole']['debug-substation'] then
         Data('substation', 'electric-pole'):copy('debug-substation'):set_fields {
             localised_name = 'Debug power substation',
-            flags = {'placeable-off-grid'},
+            flags = { 'placeable-off-grid' },
             icon = data.raw['item']['substation'].icon,
-            selection_box = {{-0.5, -0.5}, {0.0, 0.5}},
+            selection_box = { { -0.5, -0.5 }, { 0.0, 0.5 } },
             collision_mask = {},
             pictures = Developer.Sprites.empty_pictures(),
             maximum_wire_distance = 64,
             supply_area_distance = 64,
             connection_points = Developer.Sprites.empty_connection_points(1)
-        }:remove_fields {'minable', 'collision_box', 'vehicle_impact_sound', 'working_sound'}
+        }:remove_fields { 'minable', 'collision_box', 'vehicle_impact_sound', 'working_sound' }
     end
 
     local gen = data.raw['map-gen-presets']

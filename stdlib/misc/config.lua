@@ -78,7 +78,7 @@ function M.new(config_table)
     -- @tparam[opt] Mixed default value to be used if path is nil
     -- @treturn Mixed value at path or nil if not found and no default given
     function Config.get(path, default)
-        if type(path) ~= 'string' or path:is_empty() then
+        if type(path) ~= 'string' or path == "" then
             error('path is invalid', 2)
         end
 
@@ -119,7 +119,7 @@ function M.new(config_table)
     -- @tparam ?|nil|Mixed data the value to set the path to. If *nil*, it behaves identical to @{delete|Config.delete()}
     -- @treturn uint 0 on failure or the number of affected paths on success
     function Config.set(path, data)
-        if type(path) ~= 'string' or path:is_empty() then
+        if type(path) ~= 'string' or path == "" then
             error('path is invalid', 2)
         end
 

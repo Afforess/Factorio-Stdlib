@@ -7,8 +7,7 @@ local Game = {
     __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Game, Game)
-
-local Is = require('__stdlib__/stdlib/utils/is')
+local inspect = _ENV.inspect
 
 --- Return a valid player object from event, index, string, or userdata
 -- @tparam string|number|LuaPlayer|event mixed
@@ -84,7 +83,7 @@ end
 -- @tparam[opt] mixed value when set is true set key to this value, if not set and key is empty store this
 -- @treturn mixed the chunk value stored at the key or the previous value
 function Game.get_or_set_data(sub_table, index, key, set, value)
-    Is.Assert.String(sub_table, 'sub_table must be a string')
+    assert(type(sub_table) == 'string', 'sub_table must be a string')
     global[sub_table] = global[sub_table] or {}
     local this
     if index then
@@ -114,12 +113,12 @@ function Game.write_statistics()
     local pre = 'Statistics/' .. game.tick .. '/'
     for _, force in pairs(game.forces) do
         local folder = pre .. force.name .. '/'
-        for _, count_type in pairs {'input_counts', 'output_counts'} do
+        for _, count_type in pairs { 'input_counts', 'output_counts' } do
             game.write_file(folder .. 'pollution-' .. count_type .. '.json', game.table_to_json(game.pollution_statistics[count_type]))
             game.write_file(folder .. 'item-' .. count_type .. '.json', game.table_to_json(force.item_production_statistics[count_type]))
-            game.write_file(folder .. 'fluid-' .. count_type .. '.json',game.table_to_json( force.fluid_production_statistics[count_type]))
+            game.write_file(folder .. 'fluid-' .. count_type .. '.json', game.table_to_json(force.fluid_production_statistics[count_type]))
             game.write_file(folder .. 'kill-' .. count_type .. '.json', game.table_to_json(force.kill_count_statistics[count_type]))
-            game.write_file(folder .. 'build-' .. count_type .. '.json',game.table_to_json( force.entity_build_count_statistics[count_type]))
+            game.write_file(folder .. 'build-' .. count_type .. '.json', game.table_to_json(force.entity_build_count_statistics[count_type]))
         end
     end
 end

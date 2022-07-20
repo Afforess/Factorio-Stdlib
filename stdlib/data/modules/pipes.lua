@@ -62,7 +62,7 @@ function Pipes.covers(n, s, w, e)
     end
 
     n =
-        n and
+    n and
         {
             layers = {
                 {
@@ -97,7 +97,7 @@ function Pipes.covers(n, s, w, e)
         } or
         Sprites.empty_picture()
     e =
-        e and
+    e and
         {
             layers = {
                 {
@@ -132,7 +132,7 @@ function Pipes.covers(n, s, w, e)
         } or
         Sprites.empty_picture()
     s =
-        s and
+    s and
         {
             layers = {
                 {
@@ -167,7 +167,7 @@ function Pipes.covers(n, s, w, e)
         } or
         Sprites.empty_picture()
     w =
-        w and
+    w and
         {
             layers = {
                 {
@@ -202,7 +202,7 @@ function Pipes.covers(n, s, w, e)
         } or
         Sprites.empty_picture()
 
-    return {north = n, south = s, east = e, west = w}
+    return { north = n, south = s, east = e, west = w }
 end
 
 return Pipes

@@ -9,7 +9,7 @@ indent_size = 4
 # if indent_style is tab, this is valid
 tab_width = 2
 # none/single/double
-quote_style = double
+quote_style = single
 # keep/remove/remove_table_only/remove_string_only/unambiguous_remove_string_only
 call_arg_parentheses = remove_table_only
 # only support number
@@ -72,7 +72,7 @@ keep_line_after_while_statement = minLine:0
 keep_line_after_repeat_statement = minLine:0
 keep_line_after_for_statement = minLine:0
 keep_line_after_local_or_assign_statement = keepLine
-keep_line_after_function_define_statement = keepLine:1
+keep_line_after_function_define_statement = keepLine
 keep_line_after_expression_statement = keepLine
 
 # [diagnostic]

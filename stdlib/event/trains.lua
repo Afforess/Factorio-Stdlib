@@ -1,5 +1,6 @@
 --- Tools for working with trains.
--- When this module is loaded into a mod, it automatically registers a number of new events in order to keep track of the trains as their locomotives and wagons are moved around.
+-- When this module is loaded into a mod, it automatically registers a number of new events in order to keep track of
+-- the trains as their locomotives and wagons are moved around.
 -- <p>To handle the events, you should use the @{Event} module.
 -- @module Event.Trains
 
@@ -54,7 +55,7 @@ function Trains.find_filtered(criteria)
     -- Apply state filters
     if criteria.state then
         results =
-            table.filter(
+        table.filter(
             results,
             function(train)
                 return train.state == criteria.state
@@ -64,10 +65,10 @@ function Trains.find_filtered(criteria)
 
     -- Lastly, look up the train ids
     results =
-        table.map(
+    table.map(
         results,
         function(train)
-            return {train = train, id = Trains.get_main_locomotive(train).unit_number}
+            return { train = train, id = Trains.get_main_locomotive(train).unit_number }
         end
     )
 
@@ -106,7 +107,7 @@ function Trains._on_locomotive_changed()
         -- If it's not
         if (id ~= derived_id) then
             -- Capture the rename
-            table.insert(renames, {old_id = id, new_id = derived_id, train = train})
+            table.insert(renames, { old_id = id, new_id = derived_id, train = train })
         end
     end
 
@@ -199,7 +200,7 @@ end
 -- @treturn Trains
 function Trains.register_events()
     -- When a locomotive is removed ...
-    local train_remove_events = {defines.events.on_entity_died, defines.events.on_pre_player_mined_item, defines.events.on_robot_pre_mined}
+    local train_remove_events = { defines.events.on_entity_died, defines.events.on_pre_player_mined_item, defines.events.on_robot_pre_mined }
     Event.register(train_remove_events, Trains._on_locomotive_changed, Event.Filters.entity.type, 'locomotive')
 
     -- When a locomotive is added ...

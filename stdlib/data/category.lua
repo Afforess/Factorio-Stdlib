@@ -22,11 +22,11 @@ function Category:create()
     return self
 end
 
-function Category:add()
+function Category:add(_)
     return self
 end
 
-function Category:remove()
+function Category:remove(_)
     return self
 end
 

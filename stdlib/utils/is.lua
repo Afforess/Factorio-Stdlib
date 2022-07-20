@@ -139,7 +139,7 @@ M.falsy = M.Falsy
 -- @treturn boolean
 function M.Empty(var)
     if M.Table(var) then
-        return _G.table_size and _G.table_size(var) == 0 or next(var) == nil
+        return table_size and table_size(var) == 0 or next(var) == nil
     elseif M.String(var) then
         return #string == 0
     end
@@ -380,8 +380,8 @@ setmetatable(
     {
         __index = function(_, k)
             return M[k] and function(_assert)
-                    return M[k](_assert)
-                end or nil
+                return M[k](_assert)
+            end or nil
         end,
         __call = function(_, ...)
             return (...)
@@ -394,8 +394,8 @@ setmetatable(
     {
         __index = function(_, k)
             return M[k] and function(_assert)
-                    return not M[k](_assert)
-                end or nil
+                return not M[k](_assert)
+            end or nil
         end,
         __call = function(_, ...)
             return not (...)
@@ -405,7 +405,7 @@ setmetatable(
 Is.is_not = Is.Not
 
 -- convenience function for un-lambda-ing deferred error messages
-local function safeinvoke(f)
+local function safe_invoke(f)
     local ok, msg = xpcall(f, debug.traceback)
     if not ok then
         -- ensure msg really is a string so there is theoretically no chance
@@ -424,13 +424,14 @@ setmetatable(
     {
         __index = function(_, k)
             return M[k] and function(_assert, _message, _level)
-                    _level = tonumber(_level) or 3
-                    return M[k](_assert) or error(type(_message) == 'function' and safeinvoke(_message) or _message or 'assertion failed', _level)
-                end or nil
+                _level = tonumber(_level) or 3 ---@type integer
+                return M[k](_assert) or error(type(_message) == 'function' and safe_invoke(_message) or _message or 'assertion failed', _level)
+            end or nil
         end,
         __call = function(_, ...)
-            local param = {...}
-            return param[1] or error(type(param[2]) == 'function' and safeinvoke(param[2]) or param[2] or 'assertion failed', tonumber(param[3]) or 3)
+            local param = { ... }
+            local _level = tonumber(param[3]) or 3 --[[@as integer]]
+            return param[1] or error(type(param[2]) == 'function' and safe_invoke(param[2]) or param[2] or 'assertion failed', _level)
         end
     }
 )
@@ -441,13 +442,14 @@ setmetatable(
     {
         __index = function(_, k)
             return M[k] and function(_assert, _message, _level)
-                    _level = tonumber(_level) or 3
-                    return not M[k](_assert) or error(type(_message) == 'function' and safeinvoke(_message) or _message or 'assertion failed', _level)
-                end or nil
+                _level = tonumber(_level) or 3 ---@type integer
+                return not M[k](_assert) or error(type(_message) == 'function' and safe_invoke(_message) or _message or 'assertion failed', _level)
+            end or nil
         end,
         __call = function(_, ...)
-            local param = {...}
-            return not param[1] or error(type(param[2]) == 'function' and safeinvoke(param[2]) or param[2] or 'assertion failed', tonumber(param[3]) or 3)
+            local param = { ... }
+            local _level = tonumber(param[3]) or 3 --[[@as integer]]
+            return not param[1] or error(type(param[2]) == 'function' and safe_invoke(param[2]) or param[2] or 'assertion failed', _level)
         end
     }
 )

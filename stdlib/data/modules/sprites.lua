@@ -43,7 +43,7 @@ function Sprites.empty_pictures()
         height = empty.height,
         line_length = 1,
         frame_count = 1,
-        shift = {0, 0},
+        shift = { 0, 0 },
         animation_speed = 1,
         direction_count = 1
     }
@@ -66,14 +66,14 @@ function Sprites.empty_connection_points(count)
     for i = 1, count or 1, 1 do
         points[i] = {
             shadow = {
-                copper = {0, 0},
-                green = {0, 0},
-                red = {0, 0}
+                copper = { 0, 0 },
+                green = { 0, 0 },
+                red = { 0, 0 }
             },
             wire = {
-                copper = {0, 0},
-                green = {0, 0},
-                red = {0, 0}
+                copper = { 0, 0 },
+                green = { 0, 0 },
+                red = { 0, 0 }
             }
         }
     end

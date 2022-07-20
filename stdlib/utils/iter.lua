@@ -89,7 +89,7 @@ function Iter.wrap(t, start, reverse)
 end
 
 function Iter.tpairs(...)
-    return ipairs(type(...) == 'table' and ... or {...})
+    return ipairs(type(...) == 'table' and ... or { ... })
 end
 
 return Iter

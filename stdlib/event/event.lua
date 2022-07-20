@@ -31,7 +31,7 @@ Event.options = {
     skip_valid = false,
     force_crc = false -- Requires debug_mode to be true
 }
-local Event_options_meta = {__index = Event.options}
+local Event_options_meta = { __index = Event.options }
 
 Event.core_events = {
     on_init = 'on_init',
@@ -40,8 +40,8 @@ Event.core_events = {
     init = 'on_init',
     load = 'on_load',
     configuration_changed = 'on_configuration_changed',
-    init_and_config = {'on_init', 'on_configuration_changed'},
-    init_and_load = {'on_init', 'on_load'}
+    init_and_config = { 'on_init', 'on_configuration_changed' },
+    init_and_load = { 'on_init', 'on_load' }
 }
 
 Event.script = {
@@ -75,10 +75,10 @@ end
 
 local bootstrap_events = {
     on_init = function()
-        Event.dispatch({name = 'on_init'})
+        Event.dispatch { name = 'on_init' }
     end,
     on_load = function()
-        Event.dispatch({name = 'on_load', tick = -1})
+        Event.dispatch { name = 'on_load', tick = -1 }
     end,
     on_configuration_changed = function(event)
         event.name = 'on_configuration_changed'
@@ -160,7 +160,7 @@ function Event.register(event_id, handler, filter, pattern, options)
             Event.script.on_event(event_id, Event.dispatch)
         elseif event_id < 0 then
             --Use negative values to register on_nth_tick
-            Event.script.on_nth_tick(math.abs(event_id), Event.dispatch)
+            Event.script.on_nth_tick(math.abs(event_id)--[[@as uint]] , Event.dispatch)
         end
     end
 
@@ -185,7 +185,7 @@ function Event.register(event_id, handler, filter, pattern, options)
     end
 
     --Finally insert the handler
-    table.insert(registry, {handler = handler, filter = filter, pattern = pattern, options = options})
+    table.insert(registry, { handler = handler, filter = filter, pattern = pattern, options = options })
     return Event
 end
 
@@ -275,7 +275,7 @@ function Event.remove(event_id, handler, filter, pattern)
                 Event.script.on_event(event_id, nil)
             elseif event_id < 0 then
                 -- Use negative values to remove on_nth_tick
-                Event.script.on_nth_tick(math.abs(event_id), nil)
+                Event.script.on_nth_tick(math.abs(event_id)--[[@as uint]] , nil)
             end
         elseif not found_something then
             log('Attempt to deregister already non-registered listener from event: ' .. event_id)
@@ -422,7 +422,7 @@ function Event.dispatch(event)
         end
 
         for _, registered in ipairs(registry) do
-            event.options = setmetatable(event.options, {__index = registered.options})
+            event.options = setmetatable(event.options, { __index = registered.options })
             -- Check for userdata and stop processing this and further handlers if not valid
             -- This is the same behavior as factorio events.
             -- This is done inside the loop as other events can modify the event.

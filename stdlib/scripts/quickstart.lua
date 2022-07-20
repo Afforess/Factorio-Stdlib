@@ -16,7 +16,7 @@
 
 local Event = require('__stdlib__/stdlib/event/event')
 local Area = require('__stdlib__/stdlib/area/area')
-local QS = require('__stdlib__/stdlib/misc/config').new(prequire('config-quickstart') or {})
+local QS = require('__stdlib__/stdlib/misc/config').new(_ENV.prequire('config-quickstart') or {})
 
 if not remote.interfaces['quickstart_script'] then
     local qs_interface = {}
@@ -61,14 +61,14 @@ function quickstart.on_player_created(event)
         local surface = player.surface
         local force = player.force
 
-        local area = Area(QS.get('area_box', {{-100, -100}, {100, 100}})):shrink_to_surface_size(surface)
+        local area = Area(QS.get('area_box', { { -100, -100 }, { 100, 100 } })):shrink_to_surface_size(surface)
 
         local chart_size_multiplier = QS.get('chart_size_multiplier', 0)
         if chart_size_multiplier > 0 then
-            player.force.chart(surface, Area(area, true) * chart_size_multiplier --[[@as BoundingBox]])
+            player.force.chart(surface, Area(area, true) * chart_size_multiplier--[[@as BoundingBox]] )
         end
 
-        player.surface.always_day = QS.get('always_day', false)--[[@as boolean]]
+        player.surface.always_day = QS.get('always_day', false) --[[@as boolean]]
 
         if QS.get('cheat_mode', false) then
             player.cheat_mode = true
@@ -86,9 +86,9 @@ function quickstart.on_player_created(event)
             player.get_inventory(defines.inventory.character_armor).insert(power_armor)
             local grid = player.character.grid
             if grid then
-                for _, eq in pairs(QS.get('equipment', {'fusion-reactor-equipment'})) do
+                for _, eq in pairs(QS.get('equipment', { 'fusion-reactor-equipment' })) do
                     if game.equipment_prototypes[eq] then
-                        grid.put {name = eq}
+                        grid.put { name = eq }
                     end
                 end
             end
@@ -119,15 +119,15 @@ function quickstart.on_player_created(event)
             for x, y in Area(area):spiral_iterate() do
                 if y % 2 == 0 then
                     if x % 2 == 0 then
-                        tiles[#tiles + 1] = {name = floor_tile, position = {x = x, y = y}}
+                        tiles[#tiles + 1] = { name = floor_tile, position = { x = x, y = y } }
                     else
-                        tiles[#tiles + 1] = {name = floor_tile_alt, position = {x = x, y = y}}
+                        tiles[#tiles + 1] = { name = floor_tile_alt, position = { x = x, y = y } }
                     end
                 else
                     if x % 2 ~= 0 then
-                        tiles[#tiles + 1] = {name = floor_tile, position = {x = x, y = y}}
+                        tiles[#tiles + 1] = { name = floor_tile, position = { x = x, y = y } }
                     else
-                        tiles[#tiles + 1] = {name = floor_tile_alt, position = {x = x, y = y}}
+                        tiles[#tiles + 1] = { name = floor_tile_alt, position = { x = x, y = y } }
                     end
                 end
             end
@@ -137,25 +137,25 @@ function quickstart.on_player_created(event)
 
         if QS.get('ore_patches', false) then
             --Top left
-            for x, y in Area {{-37.5, -27.5}, {-33.5, -3.5}}:iterate() do
-                surface.create_entity {name = 'coal', position = {x, y}, amount = 2500}
+            for x, y in Area { { -37.5, -27.5 }, { -33.5, -3.5 } }:iterate() do
+                surface.create_entity { name = 'coal', position = { x, y }, amount = 2500 }
             end
             --Top Right
-            for x, y in Area {{33.5, -27.5}, {37.5, -3.5}}:iterate() do
-                surface.create_entity {name = 'iron-ore', position = {x, y}, amount = 2500}
+            for x, y in Area { { 33.5, -27.5 }, { 37.5, -3.5 } }:iterate() do
+                surface.create_entity { name = 'iron-ore', position = { x, y }, amount = 2500 }
             end
             --Bottom Right
-            for x, y in Area {{33.5, 3.5}, {37.5, 27.5}}:iterate() do
-                surface.create_entity {name = 'copper-ore', position = {x, y}, amount = 2500}
+            for x, y in Area { { 33.5, 3.5 }, { 37.5, 27.5 } }:iterate() do
+                surface.create_entity { name = 'copper-ore', position = { x, y }, amount = 2500 }
             end
             --Bottom Left
-            for x, y in Area {{-37.5, 3.5}, {-33.5, 27.5}}:iterate() do
-                surface.create_entity {name = 'stone', position = {x, y}, amount = 2500}
+            for x, y in Area { { -37.5, 3.5 }, { -33.5, 27.5 } }:iterate() do
+                surface.create_entity { name = 'stone', position = { x, y }, amount = 2500 }
             end
-            surface.create_entity {name = 'crude-oil', position = {-35.5, 1.5}, amount = 32000}
-            surface.create_entity {name = 'crude-oil', position = {-35.5, -1.5}, amount = 32000}
-            surface.create_entity {name = 'crude-oil', position = {35.5, 1.5}, amount = 32000}
-            surface.create_entity {name = 'crude-oil', position = {35.5, -1.5}, amount = 32000}
+            surface.create_entity { name = 'crude-oil', position = { -35.5, 1.5 }, amount = 32000 }
+            surface.create_entity { name = 'crude-oil', position = { -35.5, -1.5 }, amount = 32000 }
+            surface.create_entity { name = 'crude-oil', position = { 35.5, 1.5 }, amount = 32000 }
+            surface.create_entity { name = 'crude-oil', position = { 35.5, -1.5 }, amount = 32000 }
         end
 
         if QS.get('water_tiles', false) then
@@ -165,7 +165,7 @@ function quickstart.on_player_created(event)
                     if x < -4 or x > 4 then
                         water_tiles[#water_tiles + 1] = {
                             name = 'water',
-                            position = {x = x, y = y}
+                            position = { x = x, y = y }
                         }
                     end
                 end
@@ -174,17 +174,17 @@ function quickstart.on_player_created(event)
         end
 
         if QS.get('chunk_bounds', false) then
-            local black = {r = 0, g = 0, b = 0}
+            local black = { r = 0, g = 0, b = 0 }
             -- Horizontal
-            rendering.draw_line{width = 2.0, color = black, from = {x = 32, y = 0}, to = {x = -32, y = 0}, surface = surface}
-            rendering.draw_line{width = 2.0, color = black, from = {x = 32, y = 32}, to = {x = -32, y = 32}, surface = surface}
-            rendering.draw_line{width = 2.0, color = black, from = {x = 32, y = -32}, to = {x = -32, y = -32}, surface = surface}
+            rendering.draw_line { width = 2.0, color = black, from = { x = 32, y = 0 }, to = { x = -32, y = 0 }, surface = surface }
+            rendering.draw_line { width = 2.0, color = black, from = { x = 32, y = 32 }, to = { x = -32, y = 32 }, surface = surface }
+            rendering.draw_line { width = 2.0, color = black, from = { x = 32, y = -32 }, to = { x = -32, y = -32 }, surface = surface }
             -- Vertical
-            rendering.draw_line{width = 2.0, color = black, from = {x = 0, y = 32}, to = {x = 0, y = -32}, surface = surface}
-            rendering.draw_line{width = 2.0, color = black, from = {x = 32, y = 32}, to = {x = 32, y = -32}, surface = surface}
-            rendering.draw_line{width = 2.0, color = black, from = {x = -32, y = 32}, to = {x = -32, y = -32}, surface = surface}
+            rendering.draw_line { width = 2.0, color = black, from = { x = 0, y = 32 }, to = { x = 0, y = -32 }, surface = surface }
+            rendering.draw_line { width = 2.0, color = black, from = { x = 32, y = 32 }, to = { x = 32, y = -32 }, surface = surface }
+            rendering.draw_line { width = 2.0, color = black, from = { x = -32, y = 32 }, to = { x = -32, y = -32 }, surface = surface }
             -- Center
-            rendering.draw_circle{width = 2.0, color = black, surface = surface, radius = 1, filled = false, target = {x = 0, y = 0}}
+            rendering.draw_circle { width = 2.0, color = black, surface = surface, radius = 1, filled = false, target = { x = 0, y = 0 } }
         end
 
         -- Create proxy blueprint from string, read in the entities and remove it.
@@ -196,9 +196,10 @@ function quickstart.on_player_created(event)
             bpstring = quickstart.bpstring
         end
         if bpstring then
-            local bp = surface.create_entity {name = 'item-on-ground', position = {0, 0}, force = force, stack = 'blueprint'}
+            local bp = surface.create_entity { name = 'item-on-ground', position = { 0, 0 }, force = force, stack = 'blueprint' }
             bp.stack.import_stack(bpstring)
-            local revive = bp.stack.build_blueprint {surface = player.surface, force = player.force, position = {0, 2}, force_build = true, skip_fog_of_war = false, by_player = player}
+            local revive = bp.stack.build_blueprint { surface = player.surface, force = player.force, position = { 0, 2 }, force_build = true,
+                skip_fog_of_war = false, by_player = player }
             local count = #revive
             for i, ent in ipairs(revive) do
                 -- put rolling stock at the end.
@@ -219,19 +220,20 @@ function quickstart.on_player_created(event)
 
         if QS.get('setup_power', false) then
             if game.entity_prototypes['debug-energy-interface'] then
-                local es = surface.create_entity {name = 'debug-energy-interface', position = {0, 0}, force = force, raise_built = true}
+                local es = surface.create_entity { name = 'debug-energy-interface', position = { 0, 0 }, force = force, raise_built = true }
                 es.destructible = false
             end
             if game.entity_prototypes['debug-substation'] then
-                local sb = surface.create_entity {name = 'debug-substation', position = {0, 0}, force = force, raise_built = true}
+                local sb = surface.create_entity { name = 'debug-substation', position = { 0, 0 }, force = force, raise_built = true }
                 sb.destructible = false
             end
         end
     end
 end
 
+---@diagnostic disable
 quickstart.bpstring =
-    [[
+[[
 0eNqtnc1v20YQxf8X9ioZnFl++tZDgJ4aoEnRQ2EEikTbRGXJoOikbuD/vZTF+EMZWvP2JSfL0L5Zcn/zdpZDxN+Sz+u75rZrN31y/i1pl9vNLjn/+1uya682i/X+d/39bZOcJ23f3CSzZLO42X/qFu06eZgl7Wb
 V/Jucy8PFLGk2fdu3zWH844f7T5u7m89NN3zh1cj5qD5Lbre7Ycx2sw806My1PMtnyf3wUxbO8iHAqu2a5eEb+jD7QVefdPtBeDPf9dtbS7YYRbPXksOvd/3i8HPyy+/v//j4W2JECU9Rlnfdl2Y1f7z8H8OEMIa
 RozCGZvakudtP/eq6n1LValTV0/cj96sWftXCr5r5VUu/qvpVK79q6let3aoCrJakfllguUT8ssB6ifplgQWT4JcFVkz8CYasmD/BkAXzJxiyXkCCAaruBEMWy51fwEzVnV3ATVV3bgHrr+7MAlBVd14haaXutEI
@@ -250,6 +252,7 @@ t482BsCQhPIkxpXhXEsKWJN6XhDAmiXcmIaxJ4r1JCHOSeHcSwp4k3p+EMCiJdyghLEriPUoIk5J4l1L
 epQLhUk9jc2JsRowNxFglxgoxNo0fy6zvW28dnBxbEmMJrpTgSgmulOBKCa6U4EoJroTgSgiuhOBKCK6E4EoIroTgSgiuhOBKCK4IrAiqCKgIpgikmB2QMAyCieih8TDFx4y/0Pi7G7+k8RzFwxufMfFpGu8NhCM
 RRkj4L2H7xG5DbHLE3kps6UQlQRQwRN1ElGtElUgUp0RNTJTixAmAOHgQ553Tx6yL2eGve52/+GNgs+RL0+0O/7VaSCUb/snA5cP/+AhWDQ==
 ]]
+---@diagnostic enable
 
 function quickstart.register_events()
     Event.register(Event.core_events.on_init, quickstart.on_init)

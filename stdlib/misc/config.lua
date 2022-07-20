@@ -15,6 +15,7 @@ local M = {
 }
 setmetatable(M, M)
 local table = require('__stdlib__/stdlib/utils/table')
+local string = require('__stdlib__/stdlib/utils/string')
 
 -----------------------------------------------------------------------
 --Setup repeated code for use in sub functions here
@@ -162,7 +163,7 @@ function M.new(config_table)
             error("path contains the reserved character '" .. c .. "'", 2)
         end
 
-        local pathParts = path:split('.')
+        local pathParts = string.split(path, '.')
         local part = config
 
         for key = 1, #pathParts - 1, 1 do

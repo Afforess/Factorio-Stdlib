@@ -56,23 +56,6 @@ rawset(_ENV, 'data_traceback', data_traceback)
 local inspect = require('__stdlib__/stdlib/vendor/inspect')
 rawset(_ENV, 'inspect', inspect)
 
--- Set up faketorio for local testing, defines will already be available in an active mod or busted specs
-if not _ENV.defines then
-    --- @diagnostic disable-next-line: deprecated
-    _ENV.table.unpack = _ENV.table.unpack or _ENV.unpack
-    if config.control or config.game then
-        local world = require('faketorio/world').bootstrap()
-        if config.game then
-            world.init()
-        end
-    else
-        require('faketorio/data/data')
-    end
-    _ENV.log = function(msg)
-        print(msg)
-    end
-end
-
 -- Defines Mutates
 require('__stdlib__/stdlib/utils/defines/color')
 require('__stdlib__/stdlib/utils/defines/anticolor')

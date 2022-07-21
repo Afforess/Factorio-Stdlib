@@ -102,7 +102,7 @@ function Resource.get_resource_patch_at(surface, position, type)
     Queue.push_last(search_queue, initial_tile)
 
     while not Queue.is_empty(search_queue) do
-        local current_tile = Queue.pop_first(search_queue)
+        local current_tile = Queue.pop_first(search_queue) --[[@as MapPosition Fix when typed]]
         local current_entities = surface.find_entities_filtered { area = Tile.to_area(current_tile), type = 'resource' }
         local current_tile_index = bitwise_or(bitwise_lshift(bitwise_and(current_tile.x, 0xFFFF), 16), bitwise_and(current_tile.y, 0xFFFF))
         visited_tiles[current_tile_index] = true

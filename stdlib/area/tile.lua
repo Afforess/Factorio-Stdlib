@@ -63,7 +63,7 @@ end
 -- @treturn ?|nil|Mixed the user data **OR** *nil* if it does not exist for the tile and no default_value was set
 function Tile.get_data(surface, tile_pos, default_value)
     surface = Game.get_surface(surface)
-    Is.Assert(surface, 'invalid surface')
+    assert(surface, 'invalid surface')
 
     local key = Position.to_key(Position.floor(tile_pos))
 
@@ -79,7 +79,7 @@ Tile.get = Tile.get_data
 -- @treturn ?|nil|Mixed the previous user data associated with the tile **OR** *nil* if the tile had no previous user data
 function Tile.set_data(surface, tile_pos, value)
     surface = Game.get_surface(surface)
-    Is.Assert.Valid(surface, 'invalid surface')
+    assert(surface, 'invalid surface')
 
     local key = Position.to_key(Position.floor(tile_pos))
 

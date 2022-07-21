@@ -754,9 +754,11 @@ local function __mod(area1, area2)
 end
 
 local function __unm(area)
+    ---@diagnostic disable: assign-type-mismatch
     area = Area.new(area)
     area.left_top = -area.left_top
     area.right_bottom = -area.right_bottom
+    ---@diagnostic enable: assign-type-mismatch
     return area
 end
 

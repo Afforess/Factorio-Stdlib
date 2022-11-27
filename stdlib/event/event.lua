@@ -501,7 +501,7 @@ end
 function Event.get_event_handler(event_id)
     assert(valid_id(event_id), 'event_id is invalid')
     return {
-        script = bootstrap_events(event_id) or (valid_event_id(event_id) and Event.script.get_event_handler(event_id)),
+        script = bootstrap_events[event_id] or (valid_event_id(event_id) and Event.script.get_event_handler(event_id)),
         handlers = Event.registry[event_id]
     }
 end

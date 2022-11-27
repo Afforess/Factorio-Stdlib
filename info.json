@@ -17,13 +17,6 @@
       "tools/**",
       "doc/**",
       "faketorio/**"
-    ],
-    "scripts": {
-      "datestamp": ".publish/datestamp.sh",
-      "prepackage": ".publish/prepackage.sh",
-      "version": ".publish/version.sh",
-      "prepublish": ".publish/prepublish.sh",
-      "publish": ".publish/publish.sh"
-    }
+    ]
   }
 }

@@ -100,7 +100,8 @@ end
 function Recipe:add_ingredient(normal, expensive)
     if self:is_valid() then
         normal, expensive = get_difficulties(normal, expensive)
-
+        self:remove_ingredient (normal, expensive)
+        
         if self.normal then
             if normal then
                 self.normal.ingredients = self.normal.ingredients or {}

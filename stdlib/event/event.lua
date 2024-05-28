@@ -136,7 +136,7 @@ function Event.register(event_id, handler, filter, pattern, options)
     --Recursively handle event id tables
     if Type.Table(event_id) then
         for _, id in pairs(event_id) do
-            Event.register(id, handler)
+            Event.register(id, handler, filter, pattern, options)
         end
         return Event
     end
@@ -206,7 +206,7 @@ function Event.remove(event_id, handler, filter, pattern)
     -- Handle recursion here
     if Type.Table(event_id) then
         for _, id in pairs(event_id) do
-            Event.remove(id, handler)
+            Event.remove(id, handler, filter, pattern)
         end
         return Event
     end

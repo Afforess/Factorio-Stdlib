@@ -1,17 +1,17 @@
 --- Tools for working with `<x,y>` coordinates.
 -- @module Area.Position
--- @usage local Position = require('__stdlib__/stdlib/area/position')
+-- @usage local Position = require('__stdlib2__/stdlib/area/position')
 -- @see Area.Area
 -- @see Concepts.Position
 -- @see defines.direction
-local Position = { __class = 'Position', __index = require('__stdlib__/stdlib/core') }
+local Position = { __class = 'Position', __index = require('__stdlib2__/stdlib/core') }
 setmetatable(Position, Position)
 
-local Direction = require('__stdlib__/stdlib/area/direction')
-local Orientation = require('__stdlib__/stdlib/area/orientation')
+local Direction = require('__stdlib2__/stdlib/area/direction')
+local Orientation = require('__stdlib2__/stdlib/area/orientation')
 
-local string = require('__stdlib__/stdlib/utils/string')
-local math = require('__stdlib__/stdlib/utils/math')
+local string = require('__stdlib2__/stdlib/utils/string')
+local math = require('__stdlib2__/stdlib/utils/math')
 
 local floor, abs, atan2, round_to, round = math.floor, math.abs, math.atan2, math.round_to, math.round
 local cos, sin, ceil, sqrt, pi, random = math.cos, math.sin, math.ceil, math.sqrt, math.pi, math.random
@@ -19,7 +19,7 @@ local deg, acos, max, min, is_number = math.deg, math.acos, math.max, math.min, 
 local split = string.split
 local directions = defines.direction
 
-local AREA_PATH = '__stdlib__/stdlib/area/area'
+local AREA_PATH = '__stdlib2__/stdlib/area/area'
 local EPSILON = 1.19e-07
 
 local metatable

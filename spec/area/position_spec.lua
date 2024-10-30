@@ -1,6 +1,6 @@
 require('spec/setup/busted')()
 
-local Position = require('__stdlib__/stdlib/area/position')
+local Position = require('__stdlib2__/stdlib/area/position')
 local P = Position
 
 describe('Position', function ()

@@ -1,7 +1,7 @@
 --- Fluid
 -- @classmod Data.Fluid
 
-local Data = require('__stdlib__/stdlib/data/data')
+local Data = require('__stdlib2__/stdlib/data/data')
 
 local Fluid = {
     __class = 'Fluid',

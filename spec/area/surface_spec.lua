@@ -1,6 +1,6 @@
 require('spec/setup/busted')()
 
-local Surface = require('__stdlib__/stdlib/area/surface')
+local Surface = require('__stdlib2__/stdlib/area/surface')
 
 describe('Surface Spec', function()
     describe('Surface lookups', function()

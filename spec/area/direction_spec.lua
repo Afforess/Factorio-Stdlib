@@ -1,6 +1,6 @@
 require('spec/setup/busted')()
 
-local Direction = require('__stdlib__/stdlib/area/direction')
+local Direction = require('__stdlib2__/stdlib/area/direction')
 
 describe('Direction Functions', function()
     local d = defines.direction

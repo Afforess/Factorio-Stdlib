@@ -2,7 +2,7 @@
 -- This module registers events
 -- @module Event.Changes
 -- @usage
--- local Changes = require('__stdlib__/stdlib/event/changes')
+-- local Changes = require('__stdlib2__/stdlib/event/changes')
 -- Changes.register('mod_versions', 'path_to_version_file')
 -- @usage
 -- -- version files should return a dictionary of functions indexed by version number.
@@ -13,7 +13,7 @@
 -- Changes.register('any-first', 'path_to_file_1')
 -- Changes.register('any-first', 'path_to_file_2')
 
-local Event = require('__stdlib__/stdlib/event/event')
+local Event = require('__stdlib2__/stdlib/event/event')
 
 ---@class Changes
 ---@field map_first table
@@ -26,7 +26,7 @@ local Event = require('__stdlib__/stdlib/event/event')
 ---@field get_file_path function
 local Changes = {
     __class = 'Changes',
-    __index = require('__stdlib__/stdlib/core'),
+    __index = require('__stdlib2__/stdlib/core'),
     registered_for_events = false
 }
 setmetatable(Changes, Changes)
@@ -44,7 +44,7 @@ local inspect = _ENV.inspect
     old_version :: string: Old version of the mod. May be nil if the mod wasn't previously present (i.e. it was just added).
     new_version :: string: New version of the mod. May be nil if the mod is no longer present (i.e. it was just removed).
 --]]
-local table = require('__stdlib__/stdlib/utils/table')
+local table = require('__stdlib2__/stdlib/utils/table')
 
 local map_changes = {
     ['map_first'] = true,
@@ -92,11 +92,11 @@ end
 function Changes.on_init()
     for _, versions in pairs(Changes.mod_versions) do
         local list = {}
-        local cur_version = game.active_mods[script.mod_name]
+        local cur_version = script.active_mods[script.mod_name]
         for ver in pairs(versions) do
             list[ver] = cur_version
         end
-        global._changes = list
+        storage._changes = list
     end
 end
 
@@ -117,14 +117,14 @@ function Changes.on_configuration_changed(event)
 end
 
 function Changes.on_mod_changed(this_mod_changes)
-    global._changes = global._changes or {}
+    storage._changes = storage._changes or {}
 
     local old = this_mod_changes.old_version
     if old then -- Find the last installed version
         local versions = {}
         for _, path in pairs(Changes.mod_versions) do
             for ver, fun in pairs(path) do
-                if not global._changes[ver] then
+                if not storage._changes[ver] then
                     versions[ver] = this_mod_changes.new_version
                     fun()
                     log('Migration completed for version ' .. ver)
@@ -134,7 +134,7 @@ function Changes.on_mod_changed(this_mod_changes)
         table.each(
             versions,
             function(v, k)
-                global._changes[k] = v
+                storage._changes[k] = v
             end
         )
     end

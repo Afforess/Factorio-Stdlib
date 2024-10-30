@@ -1,24 +1,24 @@
 --- For playing with colors.
 -- @module Utils.Color
--- @usage local Color = require('__stdlib__/stdlib/utils/color')
+-- @usage local Color = require('__stdlib2__/stdlib/utils/color')
 
 local Color = {
     __class = 'Color',
-    __index = require('__stdlib__/stdlib/core')
+    __index = require('__stdlib2__/stdlib/core')
 }
 setmetatable(Color, Color)
 local metatable
 
-local table = require('__stdlib__/stdlib/utils/table')
-local math = require('__stdlib__/stdlib/utils/math')
-local color_list = require('__stdlib__/stdlib/utils/defines/color_list')
+local table = require('__stdlib2__/stdlib/utils/table')
+local math = require('__stdlib2__/stdlib/utils/math')
+local color_list = require('__stdlib2__/stdlib/utils/defines/color_list')
 
 --- @table color @{defines.color}
-Color.color = require('__stdlib__/stdlib/utils/defines/color')
+Color.color = require('__stdlib2__/stdlib/utils/defines/color')
 --- @table anticolor @{defines.anticolor}
-Color.anticolor = require('__stdlib__/stdlib/utils/defines/anticolor')
+Color.anticolor = require('__stdlib2__/stdlib/utils/defines/anticolor')
 --- @table lightcolor @{defines.lightcolor}
-Color.lightcolor = require('__stdlib__/stdlib/utils/defines/lightcolor')
+Color.lightcolor = require('__stdlib2__/stdlib/utils/defines/lightcolor')
 
 --- Color Constructors
 -- @section Color Constructors

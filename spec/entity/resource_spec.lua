@@ -1,8 +1,8 @@
 require('spec/setup/busted')()
 
-local Resource = require('__stdlib__/stdlib/entity/resource')
-local Area = require('__stdlib__/stdlib/area/area')
-local table = require('__stdlib__/stdlib/utils/table')
+local Resource = require('__stdlib2__/stdlib/entity/resource')
+local Area = require('__stdlib2__/stdlib/area/area')
+local table = require('__stdlib2__/stdlib/utils/table')
 
 describe('Resource filtering', function()
     local resources = {}

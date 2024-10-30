@@ -1,19 +1,19 @@
 --- For working with chunks.
 -- A chunk represents a 32 tile<sup>2</sup> on a surface in Factorio.
 -- @module Area.Chunk
--- @usage local Chunk = require('__stdlib__/stdlib/area/chunk')
+-- @usage local Chunk = require('__stdlib2__/stdlib/area/chunk')
 -- @see Concepts.ChunkPosition
 
 local Chunk = {
     __class = 'Chunk',
-    __index = require('__stdlib__/stdlib/core')
+    __index = require('__stdlib2__/stdlib/core')
 }
 setmetatable(Chunk, Chunk)
 
-local Game = require('__stdlib__/stdlib/game')
-local Position = require('__stdlib__/stdlib/area/position')
+local Game = require('__stdlib2__/stdlib/game')
+local Position = require('__stdlib2__/stdlib/area/position')
 
-local AREA_PATH = '__stdlib__/stdlib/area/area'
+local AREA_PATH = '__stdlib2__/stdlib/area/area'
 
 Chunk.__call = Position.__call
 

@@ -1,19 +1,19 @@
 --[[
     A basic interface script, with generic functions
     usage:
-    local interface = require(__stdlib__/stdlib/scripts/interface)
+    local interface = require(__stdlib2__/stdlib/scripts/interface)
     interface.myfunc = function() end
     remote.add_interface(script.mod_name, interface)
     interface.myfunc2 = function() end -- Can even add new functions afterwards!
 ]] --
 local interface = {}
-local Table = require('__stdlib__/stdlib/utils/table')
+local Table = require('__stdlib2__/stdlib/utils/table')
 
-local Event = require('__stdlib__/stdlib/event/event')
-local Game = require('__stdlib__/stdlib/game')
-local Changes = require('__stdlib__/stdlib/event/changes')
-local Player = require('__stdlib__/stdlib/event/player')
-local Force = require('__stdlib__/stdlib/event/force')
+local Event = require('__stdlib2__/stdlib/event/event')
+local Game = require('__stdlib2__/stdlib/game')
+local Changes = require('__stdlib2__/stdlib/event/changes')
+local Player = require('__stdlib2__/stdlib/event/player')
+local Force = require('__stdlib2__/stdlib/event/force')
 
 local ignore_defines = Table.invert { 'anticolor', 'lightcolor', 'color', 'time' }
 

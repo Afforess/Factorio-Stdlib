@@ -1,6 +1,6 @@
 require('spec/setup/busted')()
 
-local table = require('__stdlib__/stdlib/utils/table')
+local table = require('__stdlib2__/stdlib/utils/table')
 
 describe('Table Spec', function()
     describe('table.map', function()

@@ -3,7 +3,7 @@
 -- @classmod unique_array
 -- Adding or removeing values without using the provided methods can break the functionality of this class.
 -- Additional methods exported by requering unique_array are .set and .make_dictionary
--- @usage local Unique_Array = require('__stdlib__/stdlib/utils/classes/unique_array')
+-- @usage local Unique_Array = require('__stdlib2__/stdlib/utils/classes/unique_array')
 -- local my_array = Unique_Array('first')
 -- my_array:add('second')
 -- if my_array['second'] then

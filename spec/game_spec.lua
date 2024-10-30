@@ -1,7 +1,7 @@
 require('spec/setup/busted')()
 
-local Game = require('__stdlib__/stdlib/game')
-local table = require('__stdlib__/stdlib/utils/table')
+local Game = require('__stdlib2__/stdlib/game')
+local table = require('__stdlib2__/stdlib/utils/table')
 
 describe("Game Spec",
     function()
@@ -21,12 +21,12 @@ describe("Game Spec",
                     end
                 }
                 _G.game = { players = { }, connected_players = { }, forces = { } }
-                _G.global = { players = { }, forces = { }}
+                _G.storage = { players = { }, forces = { }}
 
                 setmetatable(game.players, _mt)
-                setmetatable(global.players, _mt)
+                setmetatable(storage.players, _mt)
                 setmetatable(game.forces, _mt)
-                setmetatable(global.forces, _mt)
+                setmetatable(storage.forces, _mt)
             end
         )
 

@@ -1,10 +1,10 @@
 --- The Core module loads some helper functions and globals useful in all stages
 -- of a mods life cycle. All modules have an __index method into core.
 -- @module Core
--- @usage local Core = require('__stdlib__/stdlib/core')
+-- @usage local Core = require('__stdlib2__/stdlib/core')
 
 -- require global helper functions.
-require('__stdlib__/stdlib/utils/globals')
+require('__stdlib2__/stdlib/utils/globals')
 
 local Core = {
     _VERSION = '1.0.0',
@@ -31,10 +31,10 @@ local Core = {
     __call = function(t, ...)
         return t:__call(...)
     end,
-    __config = require('__stdlib__/stdlib/config')
+    __config = require('__stdlib2__/stdlib/config')
 }
 
-Core.Unique_Array = require('__stdlib__/stdlib/utils/classes/unique_array')
+Core.Unique_Array = require('__stdlib2__/stdlib/utils/classes/unique_array')
 Core.String_Array = Core.Unique_Array
 
 --- Prints and logs the msg

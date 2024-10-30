@@ -1,11 +1,11 @@
 --- Functions for working with directions and orientations.
 -- @module Area.Direction
--- @usage local Direction = require('__stdlib__/stdlib/area/direction')
+-- @usage local Direction = require('__stdlib2__/stdlib/area/direction')
 -- @see defines.direction
 
 local Direction = {
     __class = 'Direction',
-    __index = require('__stdlib__/stdlib/core')
+    __index = require('__stdlib2__/stdlib/core')
 }
 setmetatable(Direction, Direction)
 
@@ -31,7 +31,7 @@ Direction.southwest = defines.direction.southwest
 -- @tparam defines.direction direction the direction
 -- @treturn defines.direction the opposite direction
 function Direction.opposite(direction)
-    return (direction + 4) % 8
+    return (direction + 8) % 16
 end
 
 --- Returns the next direction.
@@ -40,7 +40,7 @@ end
 -- @tparam[opt=false] boolean eight_way true to get the next direction in 8-way (note: not many prototypes support 8-way)
 -- @treturn defines.direction the next direction
 function Direction.next(direction, eight_way)
-    return (direction + (eight_way and 1 or 2)) % 8
+    return (direction + (eight_way and 2 or 4)) % 16
 end
 
 --- Returns the previous direction.
@@ -49,14 +49,14 @@ end
 -- @tparam[opt=false] boolean eight_way true to get the previous direction in 8-way (note: not many prototypes support 8-way)
 -- @treturn defines.direction the next direction
 function Direction.previous(direction, eight_way)
-    return (direction + (eight_way and -1 or -2)) % 8
+    return (direction + (eight_way and -2 or -4)) % 16
 end
 
 --- Returns an orientation from a direction.
 -- @tparam defines.direction direction
 -- @treturn float
 function Direction.to_orientation(direction)
-    return direction / 8
+    return direction / 16
 end
 
 --- Returns a vector from a direction.
@@ -88,7 +88,7 @@ end
 
 -- Deprecated
 do
-    local Orientation = require('__stdlib__/stdlib/area/orientation')
+    local Orientation = require('__stdlib2__/stdlib/area/orientation')
     Direction.opposite_direction = Direction.opposite
     Direction.direction_to_orientation = Direction.to_orientation
 
@@ -101,7 +101,7 @@ do
     end
 
     function Direction.next_direction(direction, reverse, eight_way)
-        return (direction + (eight_way and ((reverse and -1) or 1) or ((reverse and -2) or 2))) % 8
+        return (direction + (eight_way and ((reverse and -2) or 2) or ((reverse and -4) or 4))) % 16
     end
 end
 

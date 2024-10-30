@@ -6,7 +6,7 @@ describe('Data', function()
 
     before_each(function()
         require('faketorio/dataloader')
-        Data = require('__stdlib__/stdlib/data/data')
+        Data = require('__stdlib2__/stdlib/data/data')
         Raw = _G["data"].raw["recipe"]
         R = Data("stone-furnace", "recipe")
         F = Data("fake", "fake")

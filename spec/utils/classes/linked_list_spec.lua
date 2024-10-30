@@ -1,6 +1,6 @@
 require('spec/setup/busted')()
 
-local LinkedList = require('__stdlib__/stdlib/utils/classes/linked_list')
+local LinkedList = require('__stdlib2__/stdlib/utils/classes/linked_list')
 local World = require('faketorio/world')
 
 -- bootstrap world for _G.log

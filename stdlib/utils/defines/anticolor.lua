@@ -1,6 +1,6 @@
 --- A defines module for retrieving colors by name.
 -- Extends the Factorio defines table.
--- @usage require('__stdlib__/stdlib/utils/defines/anticolor')
+-- @usage require('__stdlib2__/stdlib/utils/defines/anticolor')
 -- @module defines.anticolor
 -- @see Concepts.Color
 
@@ -26,7 +26,7 @@
 -- @tfield Concepts.Color purple defines.color.white
 -- @tfield Concepts.Color red defines.color.white
 local anticolor = {}
-local colors = require('__stdlib__/stdlib/utils/defines/color_list')
+local colors = require('__stdlib2__/stdlib/utils/defines/color_list')
 
 local anticolors = {
     green = colors.black,

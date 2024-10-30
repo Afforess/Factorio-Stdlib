@@ -1,7 +1,7 @@
 --- Is expression library
 -- @module Utils.Is
 -- @usage
--- local Is = require('__stdlib__/stdlib/utils/is')
+-- local Is = require('__stdlib2__/stdlib/utils/is')
 -- Is.True(true)
 -- Is.Not.True(false)
 -- Is.Assert.True(true)

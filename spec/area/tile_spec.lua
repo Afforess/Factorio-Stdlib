@@ -1,6 +1,6 @@
 require('spec/setup/busted')()
 
-local Tile = require('__stdlib__/stdlib/area/tile')
+local Tile = require('__stdlib2__/stdlib/area/tile')
 
 describe('Tile Spec', function()
     it('should give the correct tile coordinates for a position', function()
@@ -34,7 +34,7 @@ describe('Tile Spec', function()
     end)
 
     it('should verify getting and setting data', function()
-        _G.global = {}
+        _G.storage = {}
         _G.game = { surfaces = { nauvis = { index = 1, __self = 'userdata', valid = true } } }
 
         local tile_pos = { x = 4, y = -6 }

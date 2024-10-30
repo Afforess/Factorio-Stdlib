@@ -1,8 +1,8 @@
 --- Item
 -- @classmod Data.Item
 
-local Data = require('__stdlib__/stdlib/data/data')
-local Table = require('__stdlib__/stdlib/utils/table')
+local Data = require('__stdlib2__/stdlib/data/data')
+local Table = require('__stdlib2__/stdlib/utils/table')
 
 local Item = {
     __class = 'Item',
@@ -21,7 +21,7 @@ end
 
 local function change_inputs(name, lab_names, add)
     lab_names = make_table(lab_names)
-    local Entity = require('__stdlib__/stdlib/data/entity')
+    local Entity = require('__stdlib2__/stdlib/data/entity')
     for _, lab_name in pairs(lab_names) do
         Entity(lab_name, 'lab'):change_lab_inputs(name, add)
     end

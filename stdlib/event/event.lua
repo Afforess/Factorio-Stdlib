@@ -11,9 +11,9 @@
 -- <br>Due to this, great care should be taken when registering events conditionally.
 -- </blockquote>
 -- @module Event.Event
--- @usage local Event = require('__stdlib__/stdlib/event/event')
+-- @usage local Event = require('__stdlib2__/stdlib/event/event')
 
-local config = require('__stdlib__/stdlib/config')
+local config = require('__stdlib2__/stdlib/config')
 config.control = true
 
 local Event = {
@@ -21,8 +21,8 @@ local Event = {
     registry = {}, -- Holds registered events
     custom_events = {}, -- Holds custom event ids
     stop_processing = {}, -- just has to be unique
-    Filters = require('__stdlib__/stdlib/event/modules/event_filters'),
-    __index = require('__stdlib__/stdlib/core')
+    Filters = require('__stdlib2__/stdlib/event/modules/event_filters'),
+    __index = require('__stdlib2__/stdlib/core')
 }
 setmetatable(Event, Event)
 
@@ -51,11 +51,11 @@ Event.script = {
     on_load = script.on_load,
     on_configuration_changed = script.on_configuration_changed,
     generate_event_name = script.generate_event_name,
-    get_event_handler = script.get_event_handler
+    get_event_handler = script.get_event_handler,
 }
 
-local Type = require('__stdlib__/stdlib/utils/type')
-local table = require('__stdlib__/stdlib/utils/table')
+local Type = require('__stdlib2__/stdlib/utils/type')
+local table = require('__stdlib2__/stdlib/utils/table')
 
 local assert, type, tonumber = assert, type, tonumber
 local event_names = table.invert(defines.events)
@@ -64,11 +64,6 @@ if not config.skip_script_protections then -- Protections for post and pre regis
     for _, define in pairs(defines.events) do
         if Event.script.get_event_handler(define) then
             error('Detected attempt to add the STDLIB event module after using script.on_event')
-        end
-    end
-    for name in pairs(Event.script) do
-        _G.script[name] = function()
-            error('Detected attempt to register an event using script.' .. name .. ' while using the STDLIB event system ')
         end
     end
 end
@@ -448,17 +443,17 @@ function Event.dispatch(event)
 end
 
 function Event.register_player(bool)
-    require('__stdlib__/stdlib/event/player').register_events(bool)
+    require('__stdlib2__/stdlib/event/player').register_events(bool)
     return Event
 end
 
 function Event.register_force(bool)
-    require('__stdlib__/stdlib/event/force').register_events(bool)
+    require('__stdlib2__/stdlib/event/force').register_events(bool)
     return Event
 end
 
 function Event.register_surface(bool)
-    require('__stdlib__/stdlib/event/surface').register_events(bool)
+    require('__stdlib2__/stdlib/event/surface').register_events(bool)
     return Event
 end
 
@@ -524,6 +519,6 @@ function Event.set_option(option, bool)
     return Event
 end
 
-Event.dump_data = require('__stdlib__/stdlib/event/modules/dump_event_data')(Event, valid_event_id, id_to_name)
+Event.dump_data = require('__stdlib2__/stdlib/event/modules/dump_event_data')(Event, valid_event_id, id_to_name)
 
 return Event

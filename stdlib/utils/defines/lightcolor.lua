@@ -1,6 +1,6 @@
 --- A defines module for retrieving colors by name.
 -- Extends the Factorio defines table.
--- @usage require('__stdlib__/stdlib/utils/defines/lightcolor')
+-- @usage require('__stdlib2__/stdlib/utils/defines/lightcolor')
 -- @module defines.lightcolor
 -- @see Concepts.Color
 
@@ -17,7 +17,7 @@
 -- @tfield Concepts.Color yellow defines.color.orange
 -- @tfield Concepts.Color pink defines.color.purple
 local lightcolor = {}
-local colors = require('__stdlib__/stdlib/utils/defines/color_list')
+local colors = require('__stdlib2__/stdlib/utils/defines/color_list')
 
 local lightcolors = {
     white = colors.lightgrey,

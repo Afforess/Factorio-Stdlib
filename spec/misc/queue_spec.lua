@@ -1,7 +1,7 @@
 require('spec/setup/busted')()
 
-local Queue = require('__stdlib__/stdlib/misc/queue')
-local table = require('__stdlib__/stdlib/utils/table')
+local Queue = require('__stdlib2__/stdlib/misc/queue')
+local table = require('__stdlib2__/stdlib/utils/table')
 
 describe('Queue', function()
     local queue1
@@ -266,18 +266,18 @@ describe('Queue', function()
     end)
 
     describe('load', function()
-        _G.global = {}
-        --Factorio does not save metatables in global so we need to to re-add them on load ourselves
+        _G.storage = {}
+        --Factorio does not save metatables in storage so we need to to re-add them on load ourselves
         it('should re-add the metatatables', function()
             assert.same(tostring(getmetatable(queue1).__index), tostring(getmetatable(queue2).__index))
             setmetatable(queue1, nil)
             setmetatable(queue2, nil)
             assert.not_truthy(getmetatable(queue1))
-            _G.global.queue1 = queue1
-            _G.global.queue2 = queue2
-            Queue.load(_G.global.queue1)
-            Queue.load(_G.global.queue2)
-            assert.truthy(_G.global.queue1)
+            _G.storage.queue1 = queue1
+            _G.storage.queue2 = queue2
+            Queue.load(_G.storage.queue1)
+            Queue.load(_G.storage.queue2)
+            assert.truthy(_G.storage.queue1)
             assert.same(tostring(getmetatable(queue1).__index), tostring(getmetatable(queue2).__index))
         end)
     end)

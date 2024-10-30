@@ -1,6 +1,6 @@
 require('spec/setup/busted')()
 
-local Unique_Array = require('__stdlib__/stdlib/utils/classes/unique_array')
+local Unique_Array = require('__stdlib2__/stdlib/utils/classes/unique_array')
 local U = Unique_Array
 
 describe('String_array', function()

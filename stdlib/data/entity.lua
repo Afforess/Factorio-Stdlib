@@ -1,7 +1,7 @@
 --- Entity class
 -- @classmod Data.Entity
 
-local Data = require('__stdlib__/stdlib/data/data')
+local Data = require('__stdlib2__/stdlib/data/data')
 
 local Entity = {
     __class = 'Entity',
@@ -11,7 +11,7 @@ local Entity = {
 setmetatable(Entity, Entity)
 
 function Entity:get_minable_item()
-    local Item = require('__stdlib__/stdlib/data/item')
+    local Item = require('__stdlib2__/stdlib/data/item')
     if self:is_valid() then
         local m = self.minable
         return Item(m and (m.result or (m.results and (m.results[1] or m.results.name))), nil, self.options)

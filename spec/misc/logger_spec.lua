@@ -3,7 +3,7 @@ require('spec/setup/busted')()
 _G.script = {
     mod_name = 'stdlib'
 }
-local Logger = require('__stdlib__/stdlib/misc/logger')
+local Logger = require('__stdlib2__/stdlib/misc/logger')
 
 describe('Logger', function()
 

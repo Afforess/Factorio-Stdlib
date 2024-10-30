@@ -1,6 +1,6 @@
 require('spec/setup/busted')()
 
-local Entity = require('__stdlib__/stdlib/entity/entity')
+local Entity = require('__stdlib2__/stdlib/entity/entity')
 
 describe('Entity', function()
     it('an entity should be frozen', function()
@@ -53,7 +53,7 @@ describe('Entity', function()
     end)
 
     it('should verify getting and setting data', function()
-        _G['global'] = {}
+        _G['storage'] = {}
         local entity = { name = 'fast-inserter', valid = true }
         assert.is_nil(Entity.get_data(entity))
 
@@ -76,7 +76,7 @@ describe('Entity', function()
     end)
 
     it('should verify getting and setting data with unit_numbers', function()
-        _G['global'] = {}
+        _G['storage'] = {}
         local entity = { name = 'fast-inserter', valid = true, unit_number = 13}
         assert.is_nil(Entity.get_data(entity))
 
@@ -104,7 +104,7 @@ describe('Entity', function()
     end)
 
     it('should verify data can be deleted', function()
-        _G['global'] = {}
+        _G['storage'] = {}
         local entity = { name = 'fast-inserter', valid = true }
         assert.is_nil(Entity.get_data(entity))
 

@@ -3,12 +3,12 @@
 
 local Util = {
     __class = 'Util',
-    __index = require('__stdlib__/stdlib/core')
+    __index = require('__stdlib2__/stdlib/core')
 }
 setmetatable(Util, Util)
 
-local Is = require('__stdlib__/stdlib/utils/is')
-local table = require('__stdlib__/stdlib/utils/table')
+local Is = require('__stdlib2__/stdlib/utils/is')
+local table = require('__stdlib2__/stdlib/utils/table')
 
 function Util.extend(proto_array)
     Is.Assert.Table(proto_array, 'Missing table or array to extend')
@@ -65,7 +65,7 @@ end
 -- @tparam[opt] table files
 -- @treturn Data
 -- @usage
--- require('__stdlib__/stdlib/data/data).util.create_data_globals()
+-- require('__stdlib2__/stdlib/data/data).util.create_data_globals()
 function Util.create_data_globals(files)
     _ENV.STDLIB.create_stdlib_data_globals(files)
 end

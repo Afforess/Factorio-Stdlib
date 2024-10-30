@@ -1,7 +1,7 @@
 --- Extends Lua 5.2 table.
 -- @module Utils.table
 -- @see table
--- @usage local table = require('__stdlib__/stdlib/utils/table')
+-- @usage local table = require('__stdlib2__/stdlib/utils/table')
 local Table = {}
 
 Table.remove = table.remove

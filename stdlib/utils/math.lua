@@ -1,7 +1,7 @@
 --- Extends Lua 5.2 math.
 -- @module Utils.math
 -- @see math
--- @usage local math = require('__stdlib__/stdlib/utils/math')
+-- @usage local math = require('__stdlib2__/stdlib/utils/math')
 local Math = {}
 
 Math.frexp = math.frexp

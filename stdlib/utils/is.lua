@@ -1,50 +1,29 @@
 --- Is expression library
--- @module Utils.Is
--- @usage
--- local Is = require('__stdlib__/stdlib/utils/is')
+-- local Is = require('__stdlib2__/stdlib/utils/is')
 -- Is.True(true)
 -- Is.Not.True(false)
 -- Is.Assert.True(true)
 -- Is.Assert.Not.True(false)
 
 --- Is Table
--- @section Table
 
 --- Is the test true.
--- @table Is
--- @field Not Is the test not true.
--- @field Assert Assert that the test is true.
--- @field Assert.Not Assert that the test is not true.
 
 --- Is Table Callers
--- @section Callers
 
 --- Is the test truthy
--- @function Is
--- @tparam mixed var
--- @treturn boolean
 local Is = {}
 
 --- Is the test not truthy
--- @function Not
--- @tparam mixed var
--- @treturn boolean
 Is.Not = {}
 
 --- Assert that the test is Truthy
--- @function Assert
--- @tparam mixed var
--- @treturn boolean
 Is.Assert = {}
 
 --- Assert that the test is not Truthy
--- @function Assert.Not
--- @tparam mixed var
--- @treturn boolean
 Is.Assert.Not = {}
 
 --- Functions
--- @section Functions
 
 local M = {}
 
@@ -53,90 +32,94 @@ local floor = math.floor
 local huge = math.huge
 
 --- Returns the var if the passed variable is a table.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return table?
 function M.Table(var)
     return type(var) == 'table' and var
 end
 M.table = M.Table
 
 --- Returns the var if the passed variable is a string.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return string?
 function M.String(var)
     return type(var) == 'string' and var
 end
 M.string = M.String
 
 --- Returns the var if the passed variable is a number.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return number?
 function M.Number(var)
     return type(var) == 'number' and var
 end
 M.number = M.Number
 
+---@param var any? The variable to check
+---@return thread?
 function M.Thread(var)
     return type(var) == 'thread' and var
 end
 M.thread = M.Thread
 
+---@param var any? The variable to check
+---@return userdata?
 function M.Userdata(var)
     return type(var) == 'userdata' and var
 end
 M.userdata = M.Userdata
 
 --- Returns true if the passed variable is nil.
--- @tparam mixed var The variable to check
--- @treturn boolean
+---@param var any? The variable to check
+---@return boolean
 function M.Nil(var)
     return type(var) == 'nil'
 end
 M.is_nil = M.Nil
 
 --- Returns true if the passed variable is a boolean.
--- @tparam mixed var The variable to check
--- @treturn boolean
+---@param var any? The variable to check
+---@return boolean
 function M.Boolean(var)
     return type(var) == 'boolean'
 end
 M.boolean = M.boolean
 
 --- Returns true if the passed variable is true
--- @tparam mixed var The variable to check
--- @treturn boolean
+---@param var any? The variable to check
+---@return boolean
 function M.True(var)
     return var == true
 end
 M.is_true = M.True
 
 --- Returns the var if the passed variable is not nil or false.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return any
 function M.Truthy(var)
     return var or false
 end
 M.truthy = M.Truthy
 
 --- Returns true if the passed variable is false.
--- @tparam mixed var The variable to check
--- @treturn boolean
+---@param var any? The variable to check
+---@return boolean
 function M.False(var)
     return var == false
 end
 M.is_false = M.False
 
 --- Returns true if the passed variable is false or nil.
--- @tparam mixed var The variable to check
--- @treturn boolean
+---@param var any? The variable to check
+---@return boolean
 function M.Falsy(var)
     return not var
 end
 M.falsy = M.Falsy
 
 --- Returns true if the passed variable is nil, an empty table, or an empty string.
--- @tparam mixed var The variable to check
--- @treturn boolean
+---@param var any? The variable to check
+---@return boolean
 function M.Empty(var)
     if M.Table(var) then
         return table_size and table_size(var) == 0 or next(var) == nil
@@ -147,164 +130,166 @@ function M.Empty(var)
 end
 M.empty = M.Empty
 
+---@param var any? The variable to check
+---@return boolean
 function M.None(var)
     return M.Empty(var) or M.False(var) or var == 0 or var ~= var
 end
 M.none = M.None
 
 --- Returns the passed var if it is positive.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return number?
 function M.Positive(var)
     return M.Number(var) and var >= 0 and var
 end
 M.positive = M.Positive
 
 --- Returns the passed var if it is odd.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return number?
 function M.odd(var)
     return M.number(var) and (var % 2 ~= 0) and var
 end
 
 --- Returns the passed var if it is even.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return number?
 function M.even(var)
     return M.number(var) and (var % 2 == 0) and var
 end
 
 --- Returns the passed var if it is negative.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return number?
 function M.Negative(var)
     return M.Number(var) and var < 0 and var
 end
 M.negative = M.Negative
 
 --- Returns the passed var if it is not a number.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return boolean
 function M.NaN(var)
     return var ~= var
 end
 M.nan = M.NaN
 
 --- Returns the passed var if it is finite.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return number?
 function M.Finite(var)
     return M.Number(var) and (var < huge and var > -huge) and var
 end
 M.finite = M.Finite
 
 --- Returns the passed var if it is an int.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return integer?
 function M.Int(var)
     return M.Finite(var) and rawequal(floor(var), var) and var
 end
 M.int = M.Int
 
 --- Returns the passed var if it is an int8.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return int8?
 function M.Int8(var)
     return M.Int(var) and var >= -128 and var <= 127 and var
 end
 M.int8 = M.Int8
 
 --- Returns the passed var if it is an int16.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return int16?
 function M.Int16(var)
     return M.Int(var) and var >= -32768 and var <= 32767 and var
 end
 M.int16 = M.Int16
 
 --- Returns the passed var if it is an int32.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return int32?
 function M.Int32(var)
     return M.Int(var) and var >= -2147483648 and var <= 2147483647 and var
 end
 M.int32 = M.Int32
 
 --- Returns the passed var if it is an unsigned int.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return uint?
 function M.Unsigned(var)
     return Is.Number(var) and (var < huge and var >= 0) and var
 end
 M.unsigned = M.Unsigned
 
 --- Returns the passed var if it is an unsigned int.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return uint?
 function M.UInt(var)
     return M.Unsigned(var) and rawequal(floor(var), var) and var
 end
 M.uint = M.UInt
 
 --- Returns the passed var if it is an unsigned int8.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return uint8?
 function M.UInt8(var)
     return M.UInt(var) and var <= 255 and var
 end
 M.uint8 = M.UInt8
 
 --- Returns the passed var if it is an unsigned int16.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return uint16?
 function M.UInt16(var)
     return M.UInt(var) and var <= 65535 and var
 end
 M.uint16 = M.UInt16
 
 --- Returns the passed var if it is an unsigned int32.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return uint32?
 function M.UInt32(var)
     return M.UInt(var) and var <= 4294967295 and var
 end
 M.uint32 = M.UInt32
 
 --- Returns the passed var if it is a float.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return float?
 function M.Float(var)
     return M.number(var) and var >= 0 and var < 1 and var
 end
 M.float = M.Float
 
 --- Returns the passed var if it is a full position.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@param var any? The variable to check
+---@return Area.Position?
 function M.Position(var)
     return M.Table(var) and (var.x and var.y) and var
 end
 M.position = M.Position
 
 --- Returns the passed var if it is a full area.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@tparam mixed var The variable to check
+---@treturn mixed
 function M.Area(var)
     return M.Table(var) and (M.Position(var.left_top) and M.Position(var.right_bottom)) and var
 end
 M.area = M.Area
 
 --- Returns the passed var if it is a simple position/vector.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@tparam mixed var The variable to check
+---@treturn mixed
 function M.Vector(var)
     return M.Table(var) and ((M.Number(var[1]) and M.Number(var[2])) or M.Position(var)) and var
 end
 M.vector = M.Vector
 
 --- Returns the passed var if it is a simple area/boundingbox.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@tparam mixed var The variable to check
+---@treturn mixed
 function M.BoundingBox(var)
     return M.Table(var) and (M.Vector(var[1]) and M.Vector(var[2]))
 end
@@ -313,8 +298,8 @@ M.bounding_box = M.BoundingBox
 M.Bounding_Box = M.BoundingBox
 
 --- Returns the hex value of the passed var if it is hexadecimal.
--- @tparam mixed var The variable to check
--- @treturn mixed
+---@tparam mixed var The variable to check
+---@treturn mixed
 function M.Hex(var)
     return M.String(var) and var:match('%x%x%x%x%x%x$')
 end
@@ -322,8 +307,8 @@ M.hex = M.Hex
 
 --- Returns true if the passed variable is a single alphbetical word.
 -- Does not allow any special chars
--- @tparam mixed var The variable to check
--- @treturn boolean true if the passed variable is a single alphbetical word
+---@tparam mixed var The variable to check
+---@treturn boolean true if the passed variable is a single alphbetical word
 function M.StrictWord(var)
     return M.String(var) and var:find('^[%a]+$') == 1
 end
@@ -331,8 +316,8 @@ M.strict_word = M.StrictWord
 
 --- Returns true if the passed variable is a single alphbetical word.
 -- Allows _ and - as part of the word
--- @tparam mixed var The variable to check
--- @treturn boolean true if the passed variable is a single alphbetical word
+---@tparam mixed var The variable to check
+---@treturn boolean true if the passed variable is a single alphbetical word
 function M.AlphabetWord(var)
     return M.String(var) and var:find('^[%a%_%-]+$') == 1
 end
@@ -340,8 +325,8 @@ M.Word = M.AlphabetWord
 
 --- Returns true if the passed variable is a single alphbetical word.
 -- Must start with a letter, allows _ and - as part of the word
--- @tparam mixed var The variable to check
--- @treturn boolean true if the passed variable is a single alphbetical word
+---@tparam mixed var The variable to check
+---@treturn boolean true if the passed variable is a single alphbetical word
 function M.AlphanumWord(var)
     return M.String(var) and var:find('^%a+[%w%_%-]*$') == 1
 end
@@ -350,24 +335,24 @@ M.alpha = M.AlphanumWord
 M.alphanumword = M.AlphanumWord
 
 --- Is this a factorio object
--- @tparam LuaObject var The variable to check
--- @treturn mixed the var if this is an LuaObject
+---@tparam LuaObject var The variable to check
+---@treturn mixed the var if this is an LuaObject
 function M.Object(var)
-    return M.Table(var) and var.__self and var
+    return M.Userdata(var) and var
 end
 M.object = M.Object
 
 --- Is this factorio object valid
--- @tparam LuaObject var The variable to check
--- @treturn mixed the var if this is a valid LuaObject
+---@tparam LuaObject var The variable to check
+---@treturn mixed the var if this is a valid LuaObject
 function M.Valid(var)
     return M.Object(var) and var.valid and var
 end
 M.valid = M.Valid
 
 --- Returns true if the passed variable is a callable function.
--- @tparam mixed var The variable to check
--- @treturn boolean true if the passed variable is a callable function
+---@tparam mixed var The variable to check
+---@treturn boolean true if the passed variable is a callable function
 function M.Callable(var)
     return type(var) == 'function' or type((getmetatable(var) or {}).__call) == 'function'
 end

@@ -3,11 +3,11 @@
 
 local Migrate = {
     __class = 'Migrate',
-    __index = require('__stdlib__/stdlib/core')
+    __index = require('__stdlib2__/stdlib/core')
 }
 setmetatable(Migrate, Migrate)
 
-local Is = require('__stdlib__/stdlib/utils/is')
+local Is = require('__stdlib2__/stdlib/utils/is')
 
 --- Migrate a dictionary of recipe -> tech names
 -- @tparam dictionary dictionary

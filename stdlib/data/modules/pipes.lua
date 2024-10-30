@@ -2,7 +2,7 @@
 -- @module Data.Pipes
 
 local Pipes = {}
-local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
+local Sprites = require('__stdlib2__/stdlib/data/modules/sprites')
 
 --Define pipe connection pipe pictures, not all entities use these. This function needs some work though.
 function Pipes.pictures(pictures, shift_north, shift_south, shift_west, shift_east, replacements)

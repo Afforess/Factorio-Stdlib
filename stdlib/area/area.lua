@@ -1,16 +1,16 @@
 --- Tools for working with bounding boxes.
 -- @module Area.Area
--- @usage local Area = require('__stdlib__/stdlib/area/area')
+-- @usage local Area = require('__stdlib2__/stdlib/area/area')
 -- @see Area.Position
 -- @see Concepts.BoundingBox
 -- @see Concepts.Position
-local Area = { __class = 'Area', __index = require('__stdlib__/stdlib/core') }
+local Area = { __class = 'Area', __index = require('__stdlib2__/stdlib/core') }
 setmetatable(Area, Area)
 
-local Position = require('__stdlib__/stdlib/area/position')
+local Position = require('__stdlib2__/stdlib/area/position')
 
-local math = require('__stdlib__/stdlib/utils/math')
-local string = require('__stdlib__/stdlib/utils/string')
+local math = require('__stdlib2__/stdlib/utils/math')
+local string = require('__stdlib2__/stdlib/utils/string')
 local abs, floor, max = math.abs, math.floor, math.max
 
 local metatable

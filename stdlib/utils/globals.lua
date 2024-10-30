@@ -3,11 +3,11 @@
 
 _ENV = _ENV or _G
 
-local config = require('__stdlib__/stdlib/config')
+local config = require('__stdlib2__/stdlib/config')
 
-local Table = require('__stdlib__/stdlib/utils/table')
-local Math = require('__stdlib__/stdlib/utils/math')
-local String = require('__stdlib__/stdlib/utils/string')
+local Table = require('__stdlib2__/stdlib/utils/table')
+local Math = require('__stdlib2__/stdlib/utils/math')
+local String = require('__stdlib2__/stdlib/utils/string')
 
 local STDLIB = {
     Math = Math,
@@ -53,14 +53,14 @@ end or function()
 end
 rawset(_ENV, 'data_traceback', data_traceback)
 
-local inspect = require('__stdlib__/stdlib/vendor/inspect')
+local inspect = require('__stdlib2__/stdlib/vendor/inspect')
 rawset(_ENV, 'inspect', inspect)
 
 -- Defines Mutates
-require('__stdlib__/stdlib/utils/defines/color')
-require('__stdlib__/stdlib/utils/defines/anticolor')
-require('__stdlib__/stdlib/utils/defines/lightcolor')
-require('__stdlib__/stdlib/utils/defines/time')
+require('__stdlib2__/stdlib/utils/defines/color')
+require('__stdlib2__/stdlib/utils/defines/anticolor')
+require('__stdlib2__/stdlib/utils/defines/lightcolor')
+require('__stdlib2__/stdlib/utils/defines/time')
 
 --- Require a file that may not exist
 -- @tparam string module path to the module
@@ -176,7 +176,7 @@ function STDLIB.create_stdlib_globals(files)
             MATH = 'stdlib/utils/math'
         }
     for glob, path in pairs(files) do
-        rawset(_ENV, glob, require('__stdlib__/' .. (path:gsub('%.', '/')))) -- extra () required to emulate select(1)
+        rawset(_ENV, glob, require('__stdlib2__/' .. (path:gsub('%.', '/')))) -- extra () required to emulate select(1)
     end
 end
 

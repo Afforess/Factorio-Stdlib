@@ -3,8 +3,8 @@ require('spec/setup/busted')()
 local World = require('faketorio/world')
 World.init()
 
-local Event = require('__stdlib__/stdlib/event/event')
-local Gui = require('__stdlib__/stdlib/event/gui')
+local Event = require('__stdlib2__/stdlib/event/event')
+local Gui = require('__stdlib2__/stdlib/event/gui')
 
 local test_function = {
     f=function(x) _G.someVariable = x end,

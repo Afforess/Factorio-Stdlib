@@ -1,6 +1,6 @@
 require('spec/setup/busted')()
 
-local Chunk = require('__stdlib__/stdlib/area/chunk')
+local Chunk = require('__stdlib2__/stdlib/area/chunk')
 local C = Chunk
 
 describe('Chunk Spec', function()
@@ -20,7 +20,7 @@ describe('Chunk Spec', function()
     end)
 
     it('should verify getting and setting data', function()
-        _G.global = {}
+        _G.storage = {}
         _G.game = { surfaces = { nauvis = { index = 1, __self = 'userdata', valid = true } } }
 
         local chunk_pos = { x = 4, y = -6 }

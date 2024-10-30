@@ -1,13 +1,13 @@
 require('spec/setup/busted')()
 
 local Recipe, Raw, Rawtech
-local table = require('__stdlib__/stdlib/utils/table')
+local table = require('__stdlib2__/stdlib/utils/table')
 
 describe('Recipe', function()
 
     before_each(function()
         require('faketorio/dataloader')
-        Recipe = require('__stdlib__/stdlib/data/recipe')
+        Recipe = require('__stdlib2__/stdlib/data/recipe')
         Raw = _G["data"].raw["recipe"]
         Rawtech = _G["data"].raw["technology"]["steel-processing"]
     end)

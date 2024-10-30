@@ -1,5 +1,5 @@
 -- Require the event module
-local Event = require('__stdlib__/stdlib/event/event')
+local Event = require('__stdlib2__/stdlib/event/event')
 
 -- Register our hotkeys
 

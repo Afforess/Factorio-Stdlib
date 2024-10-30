@@ -1,7 +1,7 @@
 --- Extends Lua 5.2 string.
 -- @module Utils.string
 -- @see string
--- @usage local string = require('__stdlib__/stdlib/utils/string')
+-- @usage local string = require('__stdlib2__/stdlib/utils/string')
 local String = {}
 
 String.find = string.find

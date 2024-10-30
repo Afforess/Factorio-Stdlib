@@ -1,8 +1,8 @@
 --- Recipe class
 -- @classmod Data.Recipe
 
-local Data = require('__stdlib__/stdlib/data/data')
-local Table = require('__stdlib__/stdlib/utils/table')
+local Data = require('__stdlib2__/stdlib/data/data')
+local Table = require('__stdlib2__/stdlib/utils/table')
 
 local Recipe = {
     __class = 'Recipe',
@@ -19,7 +19,7 @@ setmetatable(Recipe, Recipe)
 
 -- Returns a formated ingredient or prodcut table
 local function format(ingredient, result_count)
-    local Item = require('__stdlib__/stdlib/data/item')
+    local Item = require('__stdlib2__/stdlib/data/item')
     local object
     if type(ingredient) == 'table' then
         if ingredient.valid and ingredient:is_valid() then
@@ -234,7 +234,7 @@ end
 -- @treturn self
 function Recipe:change_category(category_name)
     if self:is_valid() then
-        local Category = require('__stdlib__/stdlib/data/category')
+        local Category = require('__stdlib2__/stdlib/data/category')
         self.category = Category(category_name, 'recipe-category'):is_valid() and category_name or self.category
     end
     return self
@@ -246,7 +246,7 @@ Recipe.set_category = Recipe.change_category
 -- @treturn self
 function Recipe:add_unlock(tech_name)
     if self:is_valid() then
-        local Tech = require('__stdlib__/stdlib/data/technology')
+        local Tech = require('__stdlib2__/stdlib/data/technology')
         Tech.add_effect(self, tech_name) --self is passed as a valid recipe
     end
     return self
@@ -257,7 +257,7 @@ end
 -- @treturn self
 function Recipe:remove_unlock(tech_name)
     if self:is_valid('recipe') then
-        local Tech = require('__stdlib__/stdlib/data/technology')
+        local Tech = require('__stdlib2__/stdlib/data/technology')
         Tech.remove_effect(self, tech_name, 'unlock-recipe')
     end
     return self
@@ -318,7 +318,7 @@ function Recipe:set_main_product(main_product, normal, expensive)
         normal, expensive = get_difficulties(normal, expensive)
         local normal_main, expensive_main
         if main_product then
-            local Item = require('__stdlib__/stdlib/data/item')
+            local Item = require('__stdlib2__/stdlib/data/item')
             if type(main_product) == 'string' and Item(main_product):is_valid() then
                 normal_main = normal and main_product
                 expensive_main = expensive and main_product

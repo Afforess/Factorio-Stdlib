@@ -1,7 +1,7 @@
 require('spec/setup/busted')()
 
-local Inventory = require('__stdlib__/stdlib/entity/inventory')
-local table = require('__stdlib__/stdlib/utils/table')
+local Inventory = require('__stdlib2__/stdlib/entity/inventory')
+local table = require('__stdlib2__/stdlib/utils/table')
 
 describe('Inventory Spec', function()
     local function make_get_contents(inv)
